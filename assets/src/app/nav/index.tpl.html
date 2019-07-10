@@ -587,13 +587,14 @@
                     <div style="margin-top: auto;margin-bottom: auto;">
                         <div style="padding:15px">
                             <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">{{item.username}}</h1>
+                            <h5 style="text-align:left;color:rgba(255,255,255,0.9);font-weight:400;">{{item.username}}</h5>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div style="padding:16px;">
-
+                <!--TODO-->
                 <img style="height:500px;text-align:left" src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{item.id}}">
         
             </div>
@@ -1245,11 +1246,11 @@
                                     <div class="spacing-5"></div>
                                     <span style="font-size:24px;color:white">{{project.title}}</span>
                                 </span>
-                                <span ng-if="item.username" ui-sref="member.activity">
+                                <a ng-if="item.username" href="member/{{item.username}}" ui-sref="member.activity({path:item.username})">
                                     <img ng-src="{{item.avatarUrl}}" style="height:50px;width:50px;border-radius:100%">
                                     <div class="spacing-5"></div>
                                     <span style="font-size:24px;color:white">{{item.username}}</span>
-                                </span>
+                                </a>
                             </h1>
                             <h5 style="color:white" ng-click="memberQRToggle(item)"><i style="color:white" class="fas fa-qrcode"></i> {{item.id}}</h5>
                         </div>

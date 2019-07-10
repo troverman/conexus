@@ -20,7 +20,7 @@ angular.module( 'conexus.tasks', [
 	});
 }])
 
-.controller( 'TasksCtrl', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'ReactionModel', 'TaskModel', 'tasks', function TasksController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, ReactionModel, TaskModel, tasks ) {
+.controller( 'TasksCtrl', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'ReactionModel', 'TaskModel', 'tasks', function TasksController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, ReactionModel, TaskModel, tasks ) {
 	
     $scope.map = {center: {latitude: 35.902023, longitude: -84.1507067 }, zoom: 9};
     $scope.markers = [];
@@ -150,14 +150,26 @@ angular.module( 'conexus.tasks', [
     $scope.filterContent = function(filter) {
         $scope.searchQuery.push({text:filter})
         $rootScope.stateIsLoading = true;
+        $location.search('tags', filter);
+        //$location.search('filter', '{id:\'cool\'}');
+        //TaskModel.getSome({search:$scope.searchQuery, limit:20, skip:0, sort:'createdAt DESC'}).then(function(models){
         TaskModel.getSome({tag:filter, limit:20, skip:0, sort:'createdAt DESC'}).then(function(tasks){
             $rootScope.stateIsLoading = false;
             $scope.selectedTag = filter;
-            tasks.map(function(obj){obj.model = 'TASK'});
+            $scope.tasks = tasks.map(function(obj){
+                if (obj.tags){obj.tags = obj.tags.split(',')}
+                obj.model = 'TASK';
+                return obj;
+            });
             $scope.init();
         });
     };
 
+    //KINDA HACKY? CAN USE STATES.. ETC
+    console.log($location.search())
+    if ($location.search()){
+        $scope.filterContent($location.search().tags);
+    }
 
     $scope.loadMore = function() {
         $scope.skip = $scope.skip + 20;
@@ -181,7 +193,7 @@ angular.module( 'conexus.tasks', [
 
 
 
-    $scope.$watch('searchQuery' ,function(newValue, oldValue){
+    $scope.$watch('searchQueryNEW' ,function(newValue, oldValue){
         if (newValue !== oldValue) {
 
             $rootScope.stateIsLoading = true;

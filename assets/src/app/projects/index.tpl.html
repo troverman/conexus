@@ -80,7 +80,7 @@
                             </p>
                             <h3 style="float:left;margin-top:0px"><a ng-click="$event.stopPropagation()" href="project/{{project.urlTitle}}" ui-sref="project.activity({path:project.urlTitle})">{{project.title}}</a></h3>
                             <div style="clear:both"></div>
-                            <div style="max-height:500px;overflow:scroll">
+                            <div>
                                 <span ng-bind-html="renderContent(project.description)"></span>
                             </div>
                         </div>

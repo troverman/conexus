@@ -13,8 +13,8 @@
                 </div>
             </div>
             <div style="padding:16px;">
-                <div ng-repeat="tag in sortedTagArray" ng-click="$event.stopPropagation()">
-                    <a href="#" ng-click="filterContent(tag.element)"><b>{{tag.element}}</b></a>
+                <div ng-repeat="tag in sortedTagArray" ng-click="$event.stopPropagation();filterContent(tag.element)">
+                    <a><b>{{tag.element}}</b></a>
                 </div>
             </div>
         </div>
@@ -55,6 +55,7 @@
 
         <ul style="padding:0px;" class="member-tabs">
             <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fa fa-filter"></i> Filter</a></li>
+            <li style="float:right;font-size:14px"><a href="#">Sort By Recent <i class="fa fa-angle-down"></i></a></li>
             <div style="clear:both"></div>
         </ul>
         <div class="card">
@@ -95,13 +96,13 @@
                     <div>
                         <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
                         <a style="display:inline;font-weight:600;margin-left:5px" href="member/{{item.user.username}}" ui-sref="member.activity({path:item.user.username})">{{item.user.username}}</a>
-                        <!--TODO: ASSOCIATIONS-->
-                        <p style="font-size:10px;color:gray;margin-left:42px" am-time-ago="item.createdAt"></p>
                     </div>
 
                     <div style="margin-left:42px">
                         <span style="display:inline" ng-bind-html="renderContent(item.content)"></span>
                     </div>
+
+                    <p style="font-size:10px;color:gray;margin-left:42px" am-time-ago="item.createdAt"></p>
 
                 </div>
                 <div class="card-footer">
@@ -309,7 +310,7 @@
 
                     <p><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></p>
 
-                    <p style="color:gray;font-size:10px"><span style="color:gray" am-time-ago="item.createdAt"></span> | {{item.createdAt | date :  "y MM-dd hh:mm.ss a"}}</p>
+                    <p style="color:gray;font-size:10px"><span style="color:gray" am-time-ago="item.createdAt"></span></p><!-- {{item.createdAt | date :  "y MM-dd hh:mm.ss a"}}</p>-->
 
                 </div>
                 <div class="card-footer">

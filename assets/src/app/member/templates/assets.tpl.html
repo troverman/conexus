@@ -65,15 +65,16 @@
                 <div style="margin-top: auto;margin-bottom: auto;">
                     <div style="padding:15px">
                         <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">Balance</h1>
+                        <h5><span style="font-size:11px;color:gray">0x{{member.id}}</span></h5>
                     </div>
                 </div>
             </div>
         </div>
 		<div style="padding:16px;">
 
-			<h5>Balance Lookup <span style="font-size:11px;color:gray">0x{{member.id}}</span></h5>
+			<h5><span style="font-size:11px;color:gray">0x{{member.id}}</span></h5>
 	   		<form ng-submit="lookupBalance()" style="display:flex;flex-direction:row;">
-	        	<input ng-model="balanceLook" style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder="Dimension">
+	        	<input ng-model="balanceLook" style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder="Asset String">
 	        	<div ng-click="lookupBalance()" style="border:0px;float:right" class="btn btn-default">
 	                <a href="#"><h5 style="color:black;text-align:right" class="noselect"> <i class="fa fa-search"></i></h5></a>
 				</div>

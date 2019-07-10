@@ -1078,6 +1078,7 @@ angular.module( 'conexus.nav', [
 
     $rootScope.subNavToggle = function(item){
         $scope.item = item;
+        //$scope.closeAllNav();
         $mdSidenav('subNav').toggle();
     };
 
@@ -1754,6 +1755,8 @@ angular.module( 'conexus.nav', [
                 itemModels.push({text:Object.keys($rootScope.balance)[x]});
             }
 
+            //MAP BALANCE --> itemModels.push()
+
             deferred.resolve(itemModels);
         });
         return deferred.promise;
@@ -1860,6 +1863,7 @@ angular.module( 'conexus.nav', [
 
     //IMPROVE
     $scope.loginToggle = function(){
+        //$scope.closeAllNav();
         $mdSidenav('nav').close();
         $mdSidenav('subNav').close();
         $mdSidenav('action').close();
@@ -1916,6 +1920,7 @@ angular.module( 'conexus.nav', [
 
     //IMPROVE
     $scope.sideNavToggle = function(){
+        //$scope.closeAllNav();
         $mdSidenav('subNav').close();
         $mdSidenav('action').close();
         $mdSidenav('content').close();
@@ -1923,6 +1928,7 @@ angular.module( 'conexus.nav', [
         $mdSidenav('information').close();
         $mdSidenav('item').close();
         $mdSidenav('login').close();
+        $mdSidenav('memberQR').close();
         $mdSidenav('order').close();
         $mdSidenav('project').close();
         $mdSidenav('render').close();

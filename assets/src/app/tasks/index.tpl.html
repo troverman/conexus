@@ -52,8 +52,8 @@
 				    </div>
 				</div>
 	            <div style="padding:16px;">
-	                <div ng-repeat="tag in sortedTagArray" ng-click="$event.stopPropagation()">
-	                    <a href="#" ng-click="filterContent(tag.element)"><b>{{tag.element}}</b></a>
+	                <div ng-repeat="tag in sortedTagArray" ng-click="$event.stopPropagation();filterContent(tag.element)">
+	                    <a><b>{{tag.element}}</b></a>
 	                </div>
 	            </div>
 	        </div>
@@ -68,8 +68,8 @@
 				    </div>
 				</div>
 	            <div style="padding:16px;">
-	                <div ng-repeat="association in sortedAssociationArray" ng-click="$event.stopPropagation()">
-	                    <a href="#" ng-click="filterContent(association.element)"><b>{{association.element}}</b></a>
+	                <div ng-repeat="association in sortedAssociationArray" ng-click="$event.stopPropagation();filterContent(association.element);">
+	                    <a><b>{{association.element}}</b></a>
 	                </div>
 	            </div>
 	        </div>
@@ -84,8 +84,8 @@
 				    </div>
 				</div>
 	            <div style="padding:16px;">
-	                <div ng-repeat="location in sortedLocationsArray" ng-click="$event.stopPropagation()">
-	                    <a href="#" ng-click="filterContent(location.element)"><b>{{location}}</b></a>
+	                <div ng-repeat="location in sortedLocationsArray" ng-click="$event.stopPropagation();filterContent(location.element)">
+	                    <a><b>{{location}}</b></a>
 	                </div>
 	            </div>
 	        </div>

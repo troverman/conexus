@@ -4593,7 +4593,7 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                                    <img ng-click=\"$event.stopPropagation()\" style=\"height:64px;float:left;margin-right:10px;\" ng-src=\"{{item.avatarUrl}}\">\n" +
     "                                    <h3 ng-click=\"$event.stopPropagation()\" style=\"margin-top:0px\">{{item.title}}</h3>\n" +
     "                                </a>\n" +
-    "                                <div style=\"overflow:scroll\"><span ng-bind-html=\"renderContent(item.description)\"></span></div>\n" +
+    "                                <div><span ng-bind-html=\"renderContent(item.description)\"></span></div>\n" +
     "                                <div style=\"clear:both\"></div>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
@@ -5550,7 +5550,7 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "                            </div>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
-    "                    <div style=\"padding:16px;overflow:scroll\">\n" +
+    "                    <div style=\"padding:16px\">\n" +
     "                        <div>\n" +
     "                            <div style=\"float:right;text-align:right\">\n" +
     "                                <a style=\"color:gray;\" ng-click=\"$event.stopPropagation();cardDetailToggle(item)\"><span style=\"color:gray\"></span><i class=\"fa fa-ellipsis-v\"></i></a>\n" +
@@ -5594,7 +5594,7 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "                                    <span ng-if=\"item.location\" style=\"color:gray\"><!--{{item.location.address}} <i class=\"fa fa-map-marker\"></i>--></span>\n" +
     "                                </p>\n" +
     "                                <h3 style=\"margin-top:0px\"><a ng-click=\"$event.stopPropagation();\" href=\"project/{{item.urlTitle}}\" ui-sref=\"project.activity({path:item.urlTitle})\">{{item.title}}</a></h3>\n" +
-    "                                <div style=\"overflow:scroll\">\n" +
+    "                                <div style=\"\">\n" +
     "                                    <span style=\"display:inline\" ng-bind-html=\"renderContent(item.description)\"></span>\n" +
     "                                </div>\n" +
     "                            </div>\n" +
@@ -5820,6 +5820,8 @@ angular.module("item/index.tpl.html", []).run(["$templateCache", function($templ
     "                </div>\n" +
     "            </div>\n" +
     "            <div style=\"padding:16px\">   \n" +
+    "\n" +
+    "                <!--ITEM ITEM ASSOCIATION-->\n" +
     "\n" +
     "                <h5>Component Graph</h5>\n" +
     "                <h5>Single Item</h5>\n" +
@@ -6954,8 +6956,8 @@ angular.module("member/templates/activity.tpl.html", []).run(["$templateCache", 
     "                </div>\n" +
     "            </div>\n" +
     "            <div style=\"padding:16px;\">\n" +
-    "                <div ng-repeat=\"tag in sortedTagArray\" ng-click=\"$event.stopPropagation()\">\n" +
-    "                    <a href=\"#\" ng-click=\"filterContent(tag.element)\"><b>{{tag.element}}</b></a>\n" +
+    "                <div ng-repeat=\"tag in sortedTagArray\" ng-click=\"$event.stopPropagation();filterContent(tag.element)\">\n" +
+    "                    <a><b>{{tag.element}}</b></a>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
@@ -6996,6 +6998,7 @@ angular.module("member/templates/activity.tpl.html", []).run(["$templateCache", 
     "\n" +
     "        <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
     "            <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
+    "            <li style=\"float:right;font-size:14px\"><a href=\"#\">Sort By Recent <i class=\"fa fa-angle-down\"></i></a></li>\n" +
     "            <div style=\"clear:both\"></div>\n" +
     "        </ul>\n" +
     "        <div class=\"card\">\n" +
@@ -7036,13 +7039,13 @@ angular.module("member/templates/activity.tpl.html", []).run(["$templateCache", 
     "                    <div>\n" +
     "                        <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
     "                        <a style=\"display:inline;font-weight:600;margin-left:5px\" href=\"member/{{item.user.username}}\" ui-sref=\"member.activity({path:item.user.username})\">{{item.user.username}}</a>\n" +
-    "                        <!--TODO: ASSOCIATIONS-->\n" +
-    "                        <p style=\"font-size:10px;color:gray;margin-left:42px\" am-time-ago=\"item.createdAt\"></p>\n" +
     "                    </div>\n" +
     "\n" +
     "                    <div style=\"margin-left:42px\">\n" +
     "                        <span style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span>\n" +
     "                    </div>\n" +
+    "\n" +
+    "                    <p style=\"font-size:10px;color:gray;margin-left:42px\" am-time-ago=\"item.createdAt\"></p>\n" +
     "\n" +
     "                </div>\n" +
     "                <div class=\"card-footer\">\n" +
@@ -7250,7 +7253,7 @@ angular.module("member/templates/activity.tpl.html", []).run(["$templateCache", 
     "\n" +
     "                    <p><span style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span></p>\n" +
     "\n" +
-    "                    <p style=\"color:gray;font-size:10px\"><span style=\"color:gray\" am-time-ago=\"item.createdAt\"></span> | {{item.createdAt | date :  \"y MM-dd hh:mm.ss a\"}}</p>\n" +
+    "                    <p style=\"color:gray;font-size:10px\"><span style=\"color:gray\" am-time-ago=\"item.createdAt\"></span></p><!-- {{item.createdAt | date :  \"y MM-dd hh:mm.ss a\"}}</p>-->\n" +
     "\n" +
     "                </div>\n" +
     "                <div class=\"card-footer\">\n" +
@@ -7338,15 +7341,16 @@ angular.module("member/templates/assets.tpl.html", []).run(["$templateCache", fu
     "                <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "                    <div style=\"padding:15px\">\n" +
     "                        <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\">Balance</h1>\n" +
+    "                        <h5><span style=\"font-size:11px;color:gray\">0x{{member.id}}</span></h5>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "		<div style=\"padding:16px;\">\n" +
     "\n" +
-    "			<h5>Balance Lookup <span style=\"font-size:11px;color:gray\">0x{{member.id}}</span></h5>\n" +
+    "			<h5><span style=\"font-size:11px;color:gray\">0x{{member.id}}</span></h5>\n" +
     "	   		<form ng-submit=\"lookupBalance()\" style=\"display:flex;flex-direction:row;\">\n" +
-    "	        	<input ng-model=\"balanceLook\" style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder=\"Dimension\">\n" +
+    "	        	<input ng-model=\"balanceLook\" style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder=\"Asset String\">\n" +
     "	        	<div ng-click=\"lookupBalance()\" style=\"border:0px;float:right\" class=\"btn btn-default\">\n" +
     "	                <a href=\"#\"><h5 style=\"color:black;text-align:right\" class=\"noselect\"> <i class=\"fa fa-search\"></i></h5></a>\n" +
     "				</div>\n" +
@@ -7473,7 +7477,7 @@ angular.module("member/templates/content.tpl.html", []).run(["$templateCache", f
     "                        </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
-    "                <div style=\"padding:16px;overflow:scroll;max-height:500px\">\n" +
+    "                <div style=\"padding:16px;\">\n" +
     "\n" +
     "                    <div style=\"float:right;text-align:right\">\n" +
     "                        <a style=\"color:gray;\" ng-click=\"$event.stopPropagation();tokensToggle(item)\"><span style=\"color:gray\"></span><i class=\"fa fa-ellipsis-v\"></i></a>\n" +
@@ -9009,13 +9013,14 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "                        <div style=\"padding:15px\">\n" +
     "                            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">{{item.username}}</h1>\n" +
+    "                            <h5 style=\"text-align:left;color:rgba(255,255,255,0.9);font-weight:400;\">{{item.username}}</h5>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "\n" +
     "            <div style=\"padding:16px;\">\n" +
-    "\n" +
+    "                <!--TODO-->\n" +
     "                <img style=\"height:500px;text-align:left\" src=\"https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{item.id}}\">\n" +
     "        \n" +
     "            </div>\n" +
@@ -9667,11 +9672,11 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                                    <div class=\"spacing-5\"></div>\n" +
     "                                    <span style=\"font-size:24px;color:white\">{{project.title}}</span>\n" +
     "                                </span>\n" +
-    "                                <span ng-if=\"item.username\" ui-sref=\"member.activity\">\n" +
+    "                                <a ng-if=\"item.username\" href=\"member/{{item.username}}\" ui-sref=\"member.activity({path:item.username})\">\n" +
     "                                    <img ng-src=\"{{item.avatarUrl}}\" style=\"height:50px;width:50px;border-radius:100%\">\n" +
     "                                    <div class=\"spacing-5\"></div>\n" +
     "                                    <span style=\"font-size:24px;color:white\">{{item.username}}</span>\n" +
-    "                                </span>\n" +
+    "                                </a>\n" +
     "                            </h1>\n" +
     "                            <h5 style=\"color:white\" ng-click=\"memberQRToggle(item)\"><i style=\"color:white\" class=\"fas fa-qrcode\"></i> {{item.id}}</h5>\n" +
     "                        </div>\n" +
@@ -11134,9 +11139,9 @@ angular.module("project/templates/assets.tpl.html", []).run(["$templateCache", f
     "    </div>\n" +
     "	<div class=\"card\">\n" +
     "		<div style=\"padding:16px;\">\n" +
-    "			<h5>Balance Lookup <span style=\"font-size:11px;color:gray\">0x{{project.id}}</span></h5>\n" +
+    "			<h5><span style=\"font-size:11px;color:gray\">0x{{project.id}}</span></h5>\n" +
     "	   		<form ng-submit=\"lookupBalance()\" style=\"display:flex;flex-direction:row;\">\n" +
-    "	        	<input ng-model=\"balanceLook\" style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder=\"Dimension\">\n" +
+    "	        	<input ng-model=\"balanceLook\" style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder=\"Asset String\">\n" +
     "	        	<div ng-click=\"lookupBalance()\" style=\"border:0px;float:right\" class=\"btn btn-default\">\n" +
     "	                <a href=\"#\"><h5 style=\"color:black;text-align:right\" class=\"noselect\"> <i class=\"fa fa-search\"></i></h5></a>\n" +
     "				</div>\n" +
@@ -11637,7 +11642,7 @@ angular.module("project/templates/ledger.tpl.html", []).run(["$templateCache", f
   $templateCache.put("project/templates/ledger.tpl.html",
     "<div class=\"row\">\n" +
     "\n" +
-    "	<div class=\"col-sm-2 mobileFix\" style=\"padding-left:0px;padding-right:0px;\">\n" +
+    "	<div class=\"col-sm-3 mobileFix\" style=\"padding-left:0px;padding-right:0px;\">\n" +
     "		<div class=\"card\" ng-click=\"filterToggle('LEDGER', filterSet)\">\n" +
     "			<div style=\"background:url('https://source.unsplash.com/1600x900/?details,notes,explore,wonder,location,connection,asset,finance');height:50px;min-height:50px\" class=\"imageContainerSmall\">\n" +
     "                <div style=\"background:rgba(0,0,0,0.75);height:50px\" class=\"imageContainerSmallDiv\">  \n" +
@@ -11688,23 +11693,30 @@ angular.module("project/templates/ledger.tpl.html", []).run(["$templateCache", f
     "		</div>\n" +
     "	</div>\n" +
     "\n" +
-    "	<div class=\"col-sm-10\" style=\"padding-left:0px;padding-right:0px;\">\n" +
+    "	<div class=\"col-sm-9\" style=\"padding-left:0px;padding-right:0px;\">\n" +
     "\n" +
     "		<div class=\"spacing-5\"></div>\n" +
     "\n" +
+    "		<!--\n" +
     "		<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
     "			<li ng-click=\"selectOverview()\"><a href=\"\">Overview</a></li>\n" +
     "			<li ng-click=\"selectExpense()\"><a href=\"\">Expense</a></li>\n" +
     "			<li ng-click=\"selectRevenue()\"><a href=\"\">Revenue</a></li>\n" +
-    "\n" +
-    "			<!--TODO-->\n" +
     "			<li style=\"float:right\">\n" +
     "				<a ng-click=\"filterToggle('LEDGER', filterSet)\" href=\"#\">\n" +
     "					{{assetSet[0].element}}\n" +
-    "					<!--<span ng-repeat=\"asset in assetSet\">{{asset.element}}</span>-->\n" +
     "					<i class=\"fa fa-question-circle\"></i>\n" +
     "				</a>\n" +
     "			</li>\n" +
+    "		</ul>\n" +
+    "		-->\n" +
+    "\n" +
+    "		<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "			<li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('POSITIONS')\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
+    "	    	<li style=\"float:right\" ng-click=\"selectRevenue()\"><a href=\"\">Revenue</a></li>\n" +
+    "			<li style=\"float:right\" ng-click=\"selectExpense()\"><a href=\"\">Expense</a></li>\n" +
+    "			<li style=\"float:right\" ng-click=\"selectOverview()\"><a href=\"\">Overview</a></li>\n" +
+    "			<div style=\"clear:both\"></div>\n" +
     "		</ul>\n" +
     "\n" +
     "		<div class=\"card mobileFix\">\n" +
@@ -12328,7 +12340,7 @@ angular.module("projects/index.tpl.html", []).run(["$templateCache", function($t
     "                            </p>\n" +
     "                            <h3 style=\"float:left;margin-top:0px\"><a ng-click=\"$event.stopPropagation()\" href=\"project/{{project.urlTitle}}\" ui-sref=\"project.activity({path:project.urlTitle})\">{{project.title}}</a></h3>\n" +
     "                            <div style=\"clear:both\"></div>\n" +
-    "                            <div style=\"max-height:500px;overflow:scroll\">\n" +
+    "                            <div>\n" +
     "                                <span ng-bind-html=\"renderContent(project.description)\"></span>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
@@ -13278,8 +13290,8 @@ angular.module("tasks/index.tpl.html", []).run(["$templateCache", function($temp
     "				    </div>\n" +
     "				</div>\n" +
     "	            <div style=\"padding:16px;\">\n" +
-    "	                <div ng-repeat=\"tag in sortedTagArray\" ng-click=\"$event.stopPropagation()\">\n" +
-    "	                    <a href=\"#\" ng-click=\"filterContent(tag.element)\"><b>{{tag.element}}</b></a>\n" +
+    "	                <div ng-repeat=\"tag in sortedTagArray\" ng-click=\"$event.stopPropagation();filterContent(tag.element)\">\n" +
+    "	                    <a><b>{{tag.element}}</b></a>\n" +
     "	                </div>\n" +
     "	            </div>\n" +
     "	        </div>\n" +
@@ -13294,8 +13306,8 @@ angular.module("tasks/index.tpl.html", []).run(["$templateCache", function($temp
     "				    </div>\n" +
     "				</div>\n" +
     "	            <div style=\"padding:16px;\">\n" +
-    "	                <div ng-repeat=\"association in sortedAssociationArray\" ng-click=\"$event.stopPropagation()\">\n" +
-    "	                    <a href=\"#\" ng-click=\"filterContent(association.element)\"><b>{{association.element}}</b></a>\n" +
+    "	                <div ng-repeat=\"association in sortedAssociationArray\" ng-click=\"$event.stopPropagation();filterContent(association.element);\">\n" +
+    "	                    <a><b>{{association.element}}</b></a>\n" +
     "	                </div>\n" +
     "	            </div>\n" +
     "	        </div>\n" +
@@ -13310,8 +13322,8 @@ angular.module("tasks/index.tpl.html", []).run(["$templateCache", function($temp
     "				    </div>\n" +
     "				</div>\n" +
     "	            <div style=\"padding:16px;\">\n" +
-    "	                <div ng-repeat=\"location in sortedLocationsArray\" ng-click=\"$event.stopPropagation()\">\n" +
-    "	                    <a href=\"#\" ng-click=\"filterContent(location.element)\"><b>{{location}}</b></a>\n" +
+    "	                <div ng-repeat=\"location in sortedLocationsArray\" ng-click=\"$event.stopPropagation();filterContent(location.element)\">\n" +
+    "	                    <a><b>{{location}}</b></a>\n" +
     "	                </div>\n" +
     "	            </div>\n" +
     "	        </div>\n" +

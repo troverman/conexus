@@ -146,6 +146,8 @@ angular.module( 'conexus.member', [
         },
 
         //TODO: DEPRECIATE RESOLVE
+        //TODO:$location.search RESOLVE PARAMS..
+        //INIT FILTER..
         resolve: {
             items: ['member', 'ItemModel', function(member, ItemModel) {
                 return ItemModel.getSome({user:member.id, limit:100, skip:0, sort:'createdAt DESC'});
@@ -162,6 +164,9 @@ angular.module( 'conexus.member', [
         },
 
         //TODO: DEPRECIATE RESOLVE
+        //TODO:$location.search RESOLVE PARAMS..
+        //INIT FILTER..
+        //TODO: BETTER GET...
         resolve: {
             transactionsFrom: ['member', 'TransactionModel', function(member, TransactionModel) {
                 return TransactionModel.getSome({from:member.id, limit:100, skip:0, sort:'createdAt DESC'});
@@ -1323,17 +1328,13 @@ angular.module( 'conexus.member', [
     $scope.init();
 
     $scope.selectAsset = function(asset){
-
         $rootScope.stateIsLoading = true;
-
         //TODO: FILTERS.. 
-
         //COMPLET FILTER
         //SEARCH MODEL
         //SearchModel.search().then(function(transactionModels){
         //    $scope.transactions = transactionModels;
         //});
-
         var query = {
             limit:100,
             skip:0,
@@ -1341,15 +1342,27 @@ angular.module( 'conexus.member', [
             amountSet:asset,
             user: $scope.member.id
         };
-
         console.log(query);
-
+        $location.search('assets',asset)
         TransactionModel.getSome(query).then(function(transactionModels){
             $rootScope.stateIsLoading = false;
             $scope.transactions = transactionModels;
         });
 
     };
+
+
+
+
+
+
+
+
+    //TIME TO REDO THIS WHOLE THING LOL.........
+    //AFTER BETTER QUERIES AND FILTERING..
+
+
+
 
 
     //WORK HERE!! :)
@@ -1685,6 +1698,28 @@ angular.module( 'conexus.member', [
     };
 
     $scope.selectOverview();
+
+
+    //DO IN RESOLVE!
+    //KINDA HACKY? CAN USE STATES.. ETC
+    console.log($location.search());
+    //TYPE.. EXPENSE..? 
+    //have init based on ... location.search
+    if ($location.search()){
+        //if assets..
+        if ($location.search().assets){
+            $scope.selectAsset($location.search().assets);
+        }
+        if ($location.search().type){
+            if ($location.search().type.toLowerCase() == 'overview'){$scope.selectOverview();}
+            if ($location.search().type.toLowerCase() == 'expense'){$scope.selectExpense();}
+            if ($location.search().type.toLowerCase() == 'revenue'){$scope.selectRevenue();}
+        }
+        //if ($location.search().associations){}
+        //if ($location.search().tags){}
+    }
+
+
 
 }])
 
