@@ -4,7 +4,5 @@
  */
 
 module.exports = {
-
   hookTimeout: 10000000,
-
 };

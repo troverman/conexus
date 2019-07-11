@@ -1,9 +1,9 @@
 {
-  "name": "1.0.0",
+  "name": "CRE8",
   "private": true,
-  "version": "0.0.0",
-  "description": "a transparent network",
-  "keywords": [],
+  "version": "0.0.8",
+  "description": "CRE8.XYZ Javascript Client",
+  "keywords": ["CRE8","javascript","Peer","Client"],
   "dependencies": {
     "@google/maps": "^0.5.5",
     "@tensorflow/tfjs-node": "^0.1.19",
@@ -54,5 +54,5 @@
     "url": "git://github.com/troverman/conexus.git"
   },
   "author": "NOVO",
-  "license": ""
+  "license": "MIT"
 }

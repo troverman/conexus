@@ -95,6 +95,8 @@ angular.module( 'conexus', [
             if($rootScope.currentUser.dateOfBirth){$rootScope.currentUser.dateOfBirth = new Date($rootScope.currentUser.dateOfBirth)}
             $rootScope.balance = member.balance;
             $rootScope.reputation = member.reputation;
+            //force update 
+            //reload on -- watch patch possible 
         });
     }
 

@@ -34,6 +34,9 @@ module.exports = {
 	//CAN HANDLE ALL API CALLS..
 	search: function (req, res) {
 
+		console.log(req._sails)
+
+
 		if (!req.query.query){
 
 			//RENDER QUERY

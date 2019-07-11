@@ -37,6 +37,14 @@ angular.module( 'conexus.content', [
 
     $scope.content.tokens = [];
 
+
+    //todo.. attention connection... common model.. like reaction
+    //attention mapping -> 
+        //string to content 
+    //attention:{sum:1000,attention[context]:1,live:1}
+
+
+
     //+Addative Manifolds --> Extra dimensional 
     $scope.content.tokens = [
         'Content+Create',
@@ -53,6 +61,10 @@ angular.module( 'conexus.content', [
         'Reaction+[type]+userId',
     ]; 
 
+
+
+
+
     $scope.marketOutput = [];
     $scope.newContent = {};
     $scope.newReaction = {};
@@ -64,25 +76,11 @@ angular.module( 'conexus.content', [
 
     $scope.tokenFilter = 0;
     $scope.toggleTokenVar = false;
-    $scope.viewTime = 0;
 
     //TODO: VIEWCOUNTER ALL .. plug in for validation
     //viewToken Mechanism.. OnClick
+    //GET A COUNT OF ALL LIVE PPL.. -> THIS WILL BE ONLY YOU
 
-    //SIMILAR TO CREATE TIME
-    //TODO: STORE IN NAV.. 
-    //REPRESENT AS EYE ICON
-    $scope.startDateTime = new Date();
-    $scope.updateCount = function() {
-
-        var currentTime = new Date();
-        $rootScope.viewTime = parseInt((currentTime.getTime() - $scope.startDateTime.getTime()) / 1000);
-        $scope.tokenFilter = (0.04+0.00232*24*$rootScope.viewTime).toFixed(4);
-        $scope.$apply();
-
-    };
-    
-    setInterval($scope.updateCount, 1000);
 
     //TODO: FINALIZE..
     //ERROR: DUPLICATES IN A REPEATOR ARE NOT ALLOWED

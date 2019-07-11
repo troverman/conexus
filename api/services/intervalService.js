@@ -2,100 +2,12 @@ var request = require('request');
 
 module.exports = {
 
-	initOrders: function(req){
-
-		var newOrderArray = [];
-		for (var i = 0; i<10000; i++){
-			var amount = Math.floor(Math.random()*160)+1;
-			var amount1 = 30*((1/10000)*10000*amount+Math.abs(Math.sin(i)+(i*Math.random())/200));
-			var price = amount1/amount;
-			newOrderArray.push({
-				user:'5923b9cc5aac131100cab1c1', //creator | CRE8
-				amountSet:amount,
-				amountSet1:amount1,
-				identiferSet:'CRE8',
-				identiferSet1:'ETH',
-				price:price,
-			});
-			//console.log(price)
-		};
-		
-		//console.log(newOrderArray);
-		//Order.create(newOrderArray).then(function(){
-		//	console.log('DONE', newOrderArray.length)
-		//});
-
-		var newOrderArray1 = [];
-		for (var i = 0; i<10000; i++){
-			var amount = 30*Math.floor(Math.random()*160)+1;
-			var amount1 = 1/30*((10000)*amount/10000 + (10000)*1/10000*Math.abs(Math.sin(i)*1/30*i*Math.random()));
-			var price = amount1/amount;
-			newOrderArray1.push({
-				user:'5923b9cc5aac131100cab1c1', //creator
-				amountSet:amount,
-				amountSet1:amount1,
-				identiferSet:'ETH',
-				identiferSet1:'CRE8',
-				price:price,
-			});
-			//console.log(amount/10000 + 1/10000*Math.abs(Math.sin(i)*1/100*i*Math.random()));
-			//console.log(price)
-			//0.001,0.0011,..0.1,1
-		} 
-
-		//console.log(newOrderArray1);
-		//Order.create(newOrderArray1).then(function(){
-		//	console.log('DONE', newOrderArray1.length)
-		//});
-
-		/*Order.find().limit(10000).skip(0).sort('createdAt DESC').then(function(models){
-			if (models.length > 0){
-	    		var idArray = models.map(function(obj) {return obj.id});
-				Order.destroy(idArray, function(err, model) {
-					console.log(model);
-				});
-    		}
-		});*/
-
-		/*User.find().then(function(models){
-			for (x in models){
-		       	(function(models, x){
-					var url = "https://api.unsplash.com/photos/random?page=1&client_id=b996e9314d68deae5fe37098f096cd6b3b035f5c63989805aa23d4bd8c7358a2&secret=2ddbfdd90eaf2bcfc6f3cec5ec58c677b35cb470dc63d39e0e0372755b59c434%27";
-			        request(url, function (error, response, body) {
-			            var body = JSON.parse(body);
-			            if (body.urls){models[x].coverUrl = body.urls.small;}
-			            User.update({id: models[x].id}, models[x])
-			            .then(function(model){
-			            });
-			        });
-		    	})(models, x)
-		    }
-		});*/
-
-		/*User.find().then(function(models){
-			for (x in models){
-				if(!models[x].coverUrl){
-					var url = "https://api.unsplash.com/photos/random?page=1&client_id=b996e9314d68deae5fe37098f096cd6b3b035f5c63989805aa23d4bd8c7358a2&secret=2ddbfdd90eaf2bcfc6f3cec5ec58c677b35cb470dc63d39e0e0372755b59c434%27";
-			       	(function(models, x){
-				        request(url, function (error, response, body) {
-				        	console.log(body)
-				            models[x].coverUrl = body.urls.full;
-				            User.update({id: models[x].id}, models[x])
-				            .then(function(model){
-				            	console.log(model);
-				            });
-				        });
-			    	})(models, x);
-				}
-			}
-		});*/	
-	},
-
 	//TODO: MOVE OUT OF INTERVAL
 	//TODO: TOKENIZE LOCATION | EXERCISE
 	//TODO: MODULATE TO APP INPUT .. IE INTERVAL CONTRACT.. ON LOGIN OPERAND -- ... 
 	//'''ORACLE''' to APIS -- > CONTINUOUS WEBSOCKET INPUT TO TOKEN LAYER
-	getData: function(req){
+	//APP FOR TIME IN CARDIO..
+	getFitbitData: function(req){
 
 		User.findOne(req.id)
 		.then(function(model) {
@@ -126,7 +38,7 @@ module.exports = {
 	},
 
 	//TODO: RESHAPE | BUILD
-	//FOR THIS TO SCALE (ON MONGO) WE NEED A DATA MODEL 
+	//FOR THIS TO SCALE WE NEED A DATA MODEL 
 	reputationBuild:function(){
 		User.find().then(function(userModels){
 			for (x in userModels){
@@ -187,3 +99,75 @@ module.exports = {
 
 };
 
+module.exports.intervalService = function(){
+
+	//PRE-ALPHA. 
+	setInterval(intervalService.universalTokenProtocolPreAlpha, 8640000);
+	setInterval(intervalService.reputationBuild, 8640000);
+	//intervalService.reputationBuild();
+
+	//POPULATE TOKEN -- ALPHA.. 
+	//COALESE CONGRUENT DATA MAPPINGS.. 
+	//TOKEN IS A MAPPING FROM STRING TO PROTOCOLS (WHICH ARE LOGIC MAPS)
+	setInterval(dataService.traverse, 8640000);
+
+
+	//DATA SERVICE
+	//dataService.getData();
+	//dataService.traverse();
+	//dataService.tensorBuild();
+
+	//DATA POPULATION
+
+	//COFFEE DB
+	//VENUE DB
+	//CHURCH DB
+	//LIBRARY DB
+	//COWORK DB
+	//THRIFTSHOP DB
+	//FOODBANK DB
+
+	//TOWN / COUNTY
+	//PARK DB
+		//CLEAN PARK TASK
+		//COMMUNITY EVENT
+			//MOVIE NIGHT
+				//I AM THE CM THE MAYOR THE X THE Y THE Z 
+
+	//BREAK OUT THE TASKS INTO CONTENT FOR THE CREATES
+
+	//utilService.getNamesWorld();
+
+	//US - utilService.getGeoNamesByParent(6252001, '', 'voetr5', 1);
+	//NC - utilService.getGeoNamesByParent(4482348, '', 'voetr3', -2);
+	//TN - utilService.getGeoNamesByParent(4662168, '', 'voetr1', -100);
+	//INDIA - utilService.getGeoNamesByParent(1269750, '', 'voetr3', -1);
+	//CHINA - utilService.getGeoNamesByParent(1814991, '', 'voetr4', -1);
+	//UK - utilService.getGeoNamesByParent(2635167, '', 'voetr5', -1);
+
+	//35.9606, -83.9207 // knox
+	//35.996948, -78.899017 // durham
+	//40.730610, -73.935242 // nyc; bushwick
+	//37.773972, -122.431297 // BAY AREA
+	//37.5483, -121.9886 //FREEMONT
+	//35.7578° N, 81.8888° //LAKE JAMES STATE PARK
+
+	var geoModel = {
+		username:'troverman',
+		lat:'35.7578',
+		lng:'-81.8888',
+		featureCode:'PRK', //PRK, CH, CTRCM, CMN, S.CAFE, S.SCH, LIBR
+		type:'latlng', //parent, latlng
+		radius:'35',
+		parentId:'4482348'
+	};
+	//utilService.getGeoNames(geoModel);
+
+	//TODO: GOOGLE MAPS & PLACES DB
+	//utilService.googleMaps(model)
+
+	//PURGE FXN
+	//utilService.purge('(historical)');
+
+	
+};

@@ -1,69 +1,8 @@
-var path     = require('path')
-  , url      = require('url')
-  , passport = require('passport');
+var path = require('path');
+var url = require('url');
+var passport = require('passport');
 
-/**
- * Passport Service
- *
- * A painless Passport.js service for your Sails app that is guaranteed to
- * Rock Your Socks™. It takes all the hassle out of setting up Passport.js by
- * encapsulating all the boring stuff in two functions:
- *
- *   passport.endpoint()
- *   passport.callback()
- *
- * The former sets up an endpoint (/auth/:provider) for redirecting a user to a
- * third-party provider for authentication, while the latter sets up a callback
- * endpoint (/auth/:provider/callback) for receiving the response from the
- * third-party provider. All you have to do is define in the configuration which
- * third-party providers you'd like to support. It's that easy!
- *
- * Behind the scenes, the service stores all the data it needs within "Pass-
- * ports". These contain all the information required to associate a local user
- * with a profile from a third-party provider. This even holds true for the good
- * ol' password authentication scheme – the Authentication Service takes care of
- * encrypting passwords and storing them in Passports, allowing you to keep your
- * User model free of bloat.
- */
-
-// Load authentication protocols
 passport.protocols = require('./protocols');
-
-/**
- * Connect a third-party profile to a local user
- *
- * This is where most of the magic happens when a user is authenticating with a
- * third-party provider. What it does, is the following:
- *
- *   1. Given a provider and an identifier, find a matching Passport.
- *   2. From here, the logic branches into two paths.
- *
- *     - A user is not currently logged in:
- *       1. If a Passport wasn't found, create a new user as well as a new
- *          Passport that will be assigned to the user.
- *       2. If a Passport was found, get the user associated with the passport.
- *
- *     - A user is currently logged in:
- *       1. If a Passport wasn't found, create a new Passport and associate it
- *          with the already logged in user (ie. "Connect")
- *       2. If a Passport was found, nothing needs to happen.
- *
- * As you can see, this function handles both "authentication" and "authori-
- * zation" at the same time. This is due to the fact that we pass in
- * `passReqToCallback: true` when loading the strategies, allowing us to look
- * for an existing session in the request and taking action based on that.
- *
- * For more information on auth(entication|rization) in Passport.js, check out:
- * http://passportjs.org/guide/authenticate/
- * http://passportjs.org/guide/authorize/
- *
- * @param {Object}   req
- * @param {Object}   query
- * @param {Object}   profile
- * @param {Function} next
- */
-
-
 
 
 //THIS IS OVERWRITTEN BY MODULAR PROTOCOLS IE LOCAL.JS
@@ -71,8 +10,7 @@ passport.connect = function (req, query, profile, next) {
 
   console.log('CONNECT', query, profile);
 
-  var user = {}
-    , provider;
+  var user = {}, provider;
 
   // Get the authentication provider from the query.
   query.provider = req.param('provider');
@@ -227,17 +165,12 @@ passport.endpoint = function (req, res) {
     , provider   = req.param('provider')
     , options    = {};
 
-  console.log('uh')
   // If a provider doesn't exist for this endpoint, send the user back to the
   // login page
-  if (!strategies.hasOwnProperty(provider)) {
-    return res.redirect('/login');
-  }
+  if (!strategies.hasOwnProperty(provider)) {return res.redirect('/login');}
 
   // Attach scope if it has been set in the config
-  if (strategies[provider].hasOwnProperty('scope')) {
-    options.scope = strategies[provider].scope;
-  }
+  if (strategies[provider].hasOwnProperty('scope')) {options.scope = strategies[provider].scope;}
 
   // Redirect the user to the provider for authentication. When complete,
   // the provider will redirect the user back to the application at
@@ -337,9 +270,7 @@ passport.loadStrategies = function () {
       var protocol = strategies[key].protocol
         , callback = strategies[key].callback;
 
-      if (!callback) {
-        callback = 'auth/' + key + '/callback';
-      }
+      if (!callback) {callback = 'auth/' + key + '/callback';}
 
       Strategy = strategies[key].strategy;
 
@@ -382,15 +313,9 @@ passport.disconnect = function (req, res, next) {
       provider : provider,
       user     : user.id
     }, function (err, passport) {
-      if (err) {
-        return next(err);
-      }
-
+      if (err) {return next(err);}
       Passport.destroy(passport.id, function (error) {
-        if (err) {
-          return next(err);
-        }
-
+        if (err) {return next(err);}
         next(null, user);
       });
   });

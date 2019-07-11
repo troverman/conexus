@@ -76,6 +76,7 @@ module.exports = {
 	},
 
 	update: function(req,res){
+		//TODO: SECURITY
 		var id = req.param('id');
 		var model = {
 			username:req.param('username'),
@@ -86,6 +87,7 @@ module.exports = {
 			firstName:req.param('firstName'),
 			lastName:req.param('lastName'),
 			dateOfBirth: req.param('dateOfBirth'),
+			apps: req.param('apps'),
 			//address: req.param('address'),
 			//eyeColor: req.param('eyeColor'),
 			//gender: req.param('gender'),

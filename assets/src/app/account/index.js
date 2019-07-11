@@ -31,6 +31,32 @@ angular.module( 'conexus.account', [
     $scope.markers = [];
     $scope.selectedTab = 'APPS';
 
+
+    $scope.apps = $scope.currentUser.apps;
+
+    //TODO: DATABASE..
+    //THEN GET FROM USER
+
+    //STATIC
+    $scope.apps = [
+        {title:'Record Attention', content:'Required for Attention Tokenization', information:{isActive:'bool'}},
+        {title:'Record Location', content:'Required for Location Tokenization'},
+        {title:'Notifications', content:'Notifications Settings App'},
+        {title:'Tutorial', content:'Tutorial Intro App'},
+        {title:'Google Passport', content:'Google Passport App'},
+        {title:'Facebook Passport', content:'Facebook Passport App'},
+        {title:'Twitter Passport', content:'Twitter Passport App'},
+        {title:'Phone Number Passport', content:'Phone Number Passport (2FA)'},
+        {title:'Secret Text Passport', content:'Text Password Passport (2FA)'},
+        {title:'Fitbit App', content:'Fitbit Tokenization & Passport'},
+        {title:'Steemit App', content:'Steemit Tokenization & Passport'},
+        {title:'BTC App', content:'BTC App'},
+        {title:'ETH App', content:'ETH App'},
+        {title:'LTC App', content:'LTC App'},
+    ];
+
+    console.log($scope.currentUser)
+
     $scope.selectTab = function(model){$scope.selectedTab = model;};
     $scope.editAccount = function () {UserModel.update($scope.newAccountInformation).then(function(model){$scope.editAccountToggleVar = false;});};
     $scope.editAccountToggle = function () {$scope.editAccountToggleVar = $scope.editAccountToggleVar ? false : true;};

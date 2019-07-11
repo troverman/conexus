@@ -1,5 +1,3 @@
-var validator = require('validator');
-
 /**
  * Local Authentication Protocol
  *
@@ -15,6 +13,8 @@ var validator = require('validator');
  * This method creates a new user from a specified email, username and password
  * and assign the newly created user a local Passport.
  */
+
+ var validator = require('validator');
 
 exports.register = function (req, res, next) {
 
@@ -70,6 +70,8 @@ exports.register = function (req, res, next) {
 
             console.log('CREATE PASSPORT LOCAL');
 
+
+            //TODO: DEPRECIATE?
             //TODO: ORDER CREATE HERE!!!!
             //WOK ON FLOW :)
             if (req.body.order && req.body.order.length > 0){

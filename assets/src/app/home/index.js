@@ -672,6 +672,18 @@ angular.module( 'conexus.home', [
 
     //TODO: IF NO PROJECTS OR W.E TUTORIAL IS TRUE
     //TODO: NEW CONTROLLER
+
+    $scope.hoverIn = function(item){
+        console.log('hover in ', item)
+    }
+
+    $scope.hoverOut = function(item){
+        console.log('hover out ', item)
+    }
+
+
+
+
     $scope.isTutorial = true;
     if ($scope.isTutorial){
 

@@ -41,7 +41,7 @@ var AuthController = {
 
                     //TODO: REPACKAGE FITBIT --> CORE LOGIN PROTOCOL.. && INTERVAL START
                     //'LOGOUT AUTO AFTER X ACTIVITY.. '--> LAST ACTIVITY FLAG FOR USER CARD.. SMART COLOR FADE VS BINARY LOGGED IN :) 
-                    //intervalService.getData(user);
+                    //intervalService.getFitbitData(user);
 
                     console.log('currently logged in user is: ' + req.user.username);
                     res.json(user);

@@ -66,7 +66,8 @@
             <div class="card">
                 <div style="padding:16px;">
                     <div class="row">
-                        <div class="col-sm-3 col-xs-12" style="max-height:50vh;overflow:scroll">
+                        <div class="col-sm-3 col-xs-12" style="max-height:50vh;overflow:auto">
+                            <!--VALUE MAP CONTROLS-->
                             <div style="font-size:14px;font-weight:bold" ng-repeat="item in sortedTagArray track by $index">
                                 <button ng-click="createPosition(item.element)" class="btn btn-default log-btn">{{item.element}}</button>
                             </div>

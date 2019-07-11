@@ -53,6 +53,22 @@ angular.module( 'conexus.nav', [
         $scope.newValidation = {};
         $scope.newContent.associatedModels = [{text: $rootScope.currentUser.username, type:'PROFILE', id:$rootScope.currentUser.id}];
 
+        //IF PERMISSIONS
+        //TODO: LOCATION FILTER BASED ON LOCATION.. DEFAULT -- TOGGLE.. 
+        $scope.getLatLng = function() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    lat = position.coords.latitude; 
+                    lng = position.coords.longitude;
+                    $rootScope.currentUser.location = {
+                        lat:lat,
+                        lng:lng
+                    };
+                });
+            }
+        };
+        //$scope.getLatLng();
+
         //TODO: KINDA HACY
         $rootScope.$watch('currentUser', function(){
             $scope.newTransaction.from = [{text:$rootScope.currentUser.username, id:$rootScope.currentUser.id}];
@@ -1192,12 +1208,41 @@ angular.module( 'conexus.nav', [
                 clearInterval($scope.interval);
             };
 
+
+
+
+
+
+
+            //TODO: UNIFY WITH TIMER
             $scope.updateCount = function() {
+
+
                 //TODO: CREATED AT
                 var currentTime = new Date();
                 $rootScope.taskTime = parseInt((currentTime.getTime() - $scope.startDateTime.getTime()) / 1000);
+
+                //CONTEXT TIME HERE __ IN
+                //context[string]:1
+                $rootScope.timeQ.push({
+                    context:{
+                        string:'TIME!',
+                    },
+                    amount:1
+                });
+
                 $scope.$apply();
+
+
+
             };
+
+
+
+
+
+
+
 
             $mdSidenav('time').toggle();
         }
@@ -1680,7 +1725,9 @@ angular.module( 'conexus.nav', [
     };
 
     //idle fxn
-    $scope.timerFunction = function(time){
+
+    //TODO: LOCATION
+    $scope.timerFunction = function(time, context){
 
         function amountInArray(array, value) {
             return array.reduce(function(n, x){
@@ -1723,7 +1770,8 @@ angular.module( 'conexus.nav', [
                 params:$state.params,
                 string:string,
             },
-            amount:1
+            amount:1,
+            location:$rootScope.currentUser.location,
         });
 
         //get unique keys
