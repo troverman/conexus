@@ -229,6 +229,8 @@ module.exports = {
 		//}
 	//},
 
+	//emailService:function(){},
+
 	purge: function(model){
 		console.log(model)
 		Project.find({title:{contains:model}}).then(function(models){

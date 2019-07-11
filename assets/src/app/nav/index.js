@@ -1764,6 +1764,9 @@ angular.module( 'conexus.nav', [
         }
         string += '+TIME+VIEW';
 
+        var location = '';
+        if ($rootScope.currentUser.location){location=$rootScope.currentUser.location;}
+
         $rootScope.timeQ.push({
             context:{
                 state:$state.current.name, 
@@ -1771,11 +1774,10 @@ angular.module( 'conexus.nav', [
                 string:string,
             },
             amount:1,
-            location:$rootScope.currentUser.location,
+            location:location,
         });
 
         //get unique keys
-
         
         var index = $scope.timeChart.xAxis.categories.indexOf(string);
         if (index == -1){
@@ -1785,13 +1787,15 @@ angular.module( 'conexus.nav', [
         else{
             $scope.timeChart.series[0].data[index] = $rootScope.timeModel.amount;
         }
-
-
-
     };
 
-    $interval(function(){$scope.timerFunction(1)},1000);
-    //$scope.interval = setInterval($scope.timerFunction, 1000);
+    //LOL
+    //IF LOGGED IN AND PERMISIONS
+    if($rootScope.currentUser){
+        //if ($rootScope.currentUser.apps.cre8.recordAttention){
+            $interval(function(){$scope.timerFunction(1)},1000);
+        //}
+    }
 
     //TODO
     $scope.createView = function(){
