@@ -98,59 +98,22 @@
                 <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fa fa-filter"></i> Filter</a></li>
                 <!--<li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fa fa-map-marker"></i> Location</a></li>-->
             </ul>
+
             <div style="clear:both"></div>
 
             <div class="card">
 				<tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search | Filter" ng-model="searchQuery"></tags-input>
 			</div>
 
-	        <!--
-	        <div class="card">
-				<ui-gmap-google-map center="map.center" zoom="map.zoom" options="options"></ui-gmap-google-map>
-			</div>
-			-->
-
 			<div class="card">
 		        <button class="btn btn-default log-btn" ng-click="taskToggle()">+ Task</button>
 		    </div>
-
 
 			<!--TODO: MARKET LOOKUP-->
 			<!--TODO: ASSOCIATIONS-->
 			<!--TODO: COMMENT-->
 			<div ng-repeat="item in tasks">
-				<div class="card" ng-click="cardDetailToggle(item)">
-					<div style="background:url('https://source.unsplash.com/1600x900/?{{item.tags}}')" class="imageContainerSmall">
-	                    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
-	                        <div style="margin-top: auto;margin-bottom: auto;">
-	                            <div class="container">
-	                                <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;"><a ng-click="$event.stopPropagation();" style="color:white" href="task/{{item.id}}" ui-sref="task({id:item.id})">{{item.title}}</a></h1>
-	                            </div>
-	                        </div>
-	                    </div>
-	                </div>
-					<div style="padding:16px;">
-						<div style="float:right;text-align:right">
-                            <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
-		                </div>
-						<p><a ng-click="$event.stopPropagation();" ng-repeat="tag in item.tags track by $index" href="market/{{tag.trim()}}" ui-sref="market({id:tag.trim()})">{{tag.trim()}} </a></p>
-                    	<p><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></p>
-						<span style="color:gray" am-time-ago="item.createdAt"></span>
-					</div>
-					<div class="card-footer">
-						<a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 
-						<a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
-						<a ng-click="$event.stopPropagation();reply(item)"><i class="fa fa-comment-o"></i> comment </a>
-						<a ng-click="$event.stopPropagation();validationToggle(item)"><i class="fa fa-check"></i> validate </a>
-						<a style="padding:0px" class="pull-right" href="task/{{item.id}}" ui-sref="task({id:item.id})"><i class="fa fa-link grey"></i></a>
-					</div>
-					<div ng-show="task.showReply" class="card-footer">
-		                <form role="form" ng-submit="createContent(task)">
-		                    <text-angular ng-model="newContent.content" ta-toolbar="[['bold','italics','p','h1','h2','quote','pre','insertLink', 'html']]"></text-angular>
-		                    <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
-		                </form>
-		            </div>
-				</div>
+				<div ng-include="'templates/cards/taskCard.tpl.html'"></div>
 			</div>
 
 			<div ng-show="tasks.length > 0" class="card" style="text-align:center" ng-click="loadMore()">

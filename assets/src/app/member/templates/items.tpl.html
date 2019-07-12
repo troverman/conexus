@@ -83,6 +83,8 @@
         </div>
 
         <div ng-repeat="item in items">
+            <!--TODO.. MODULAR UPGRADE-->
+            <!--<div ng-include="'templates/cards/itemCard.tpl.html'"></div>-->
             <div class="card" ng-click="cardDetailToggle(item)">
                 <div style="background:url('https://source.unsplash.com/1600x900/?{{item.tags}}')" class="imageContainerSmall">
                     <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
@@ -108,12 +110,6 @@
                     <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
                     <a ng-click="$event.stopPropagation();reply(item)"><i class="fa fa-comment-o"></i> comment </a>
                     <a class="pull-right" style="padding:0px;" href="item/{{item.id}}" ui-sref="item({id:item.id})"><i class="fa fa-link grey"></i></a>
-                </div>
-                <div ng-click="$event.stopPropagation()" ng-show="item.showReply" clas="card-footer">
-                    <form role="form" ng-submit="createContent(item)">
-                        <text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
-                        <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
-                    </form>
                 </div>
             </div>
         </div>
