@@ -53,6 +53,8 @@
 				</div>
 			</div>
 
+
+
 			<!--TODO: ARRAY-->
 			<!--combinatorial market string-->
 			<!--MANIFOLDS ARE NESTED. . . -> INSTRUMENTS IN PROTOCOL.. SPONSOR, DERIVITATIVES-->
@@ -67,8 +69,22 @@
 				<div style="padding:16px;">
 					<h2>Pluralistic Market</h2>
 					<h5>Order Paths and connections between the two markets. Computed Immutable Strucutre. Lattice / Graph.</h5>
+					<highchart config="parallelCoordinates"></highchart>
 				</div>
 			</div>
+
+
+
+			<!--COMBINATORIAL DECOMPOSITIONS BASEDO ON ORDER TYPES
+				BASED ON MARKET COMPUTATION
+			-->
+			<div class="card">
+                <cytoscape graph-options="options" graph-elements="elementsObjCombinatorial" graph-layout="layout" graph-style="style"></cytoscape>
+            </div>
+
+			<!--BASED ON GRAPH SELECTION-->
+			<!--IF BINARY.. SELECTION IS ALREADY HERE??-->
+			<!--CAN RENDER MULTI BOOKS...-->
 			<div class="card">
 				<div style="background:url('https://source.unsplash.com/1600x900/?explore,discover,alpha,asset');min-height:100px" class="imageContainerSmall">
 	                <div style="background:rgba(0,0,0,0.75);height:100px" class="imageContainerSmallDiv">  
@@ -83,6 +99,8 @@
 					<highchart config="bidAskChart"></highchart>
 				</div>
 			</div>
+
+
 		</div>
 
 		<div ng-if="selectedTab =='MANIFOLDS'">

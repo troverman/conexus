@@ -44,6 +44,15 @@ angular.module( 'conexus.market', [
         {title:'+SPONSOR', manifolds:'+ADDRESS'},
     ];
 
+    //HM?
+    $scope.types = [
+        {title:'CONTINUAL'},
+        {title:'DISCRETE'},
+    ];
+
+    //+ traversal.. 
+    //show most relevant
+
     $scope.markets = [];
     $scope.newMarket = {};
     $scope.newOrder = {};

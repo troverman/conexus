@@ -1404,12 +1404,14 @@ angular.module( 'conexus.nav', [
     $scope.createAction = function(item){
         if ($rootScope.currentUser){
             ActionModel.create($scope.newAction).then(function(model) {
+
                 $scope.confirm = $scope.newAction;
                 $scope.confirm.model = 'ACTION';
                 $scope.newAction = {};
                 $mdSidenav('action').close();
                 setTimeout(function () {$mdSidenav('confirm').open()}, 500);
                 setTimeout(function () {$mdSidenav('confirm').close()}, 25000);
+                
             });
         }
         else{$mdSidenav('login').toggle()}
@@ -1660,14 +1662,17 @@ angular.module( 'conexus.nav', [
             console.log($scope.newTransaction);
 
             TransactionModel.create(newTransaction).then(function(model){
-                $scope.confirm = $scope.newTransaction;
+                
+                $scope.confirm = newTransaction;
                 $scope.confirm.model = 'TRANSACTION';
+
                 $scope.newTransaction.amountSet = {};
                 $scope.newTransaction.tags = '';
                 $scope.newTransaction.content = '';
                 $mdSidenav('transaction').close();
                 setTimeout(function () {$mdSidenav('confirm').open()}, 500);
                 setTimeout(function () {$mdSidenav('confirm').close()}, 25000);
+                
             });
 
         }
@@ -2072,6 +2077,7 @@ angular.module( 'conexus.nav', [
         //$scope.closeAllNav();
         $mdSidenav('subNav').close();
         $mdSidenav('action').close();
+        $mdSidenav('cardDetail').close();
         $mdSidenav('content').close();
         $mdSidenav('cre8').close();
         $mdSidenav('information').close();

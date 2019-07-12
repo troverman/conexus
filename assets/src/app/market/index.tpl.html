@@ -3,7 +3,7 @@
     <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
         <div style="margin-top: auto;margin-bottom: auto;">
         	<div class="container">
-	            <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">{{token.string ||  stateParams.id}}</h1>
+	            <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;"><img style="height:64px;padding:15px;" ng-src="http://identicon-1132.appspot.com/{{token.string.split('+').join('') || stateParams.id.split('+').join('')}}?s=8&p=8&f=png"> {{token.string ||  stateParams.id}}</h1>
 	        </div>
         </div>
     </div>
@@ -15,7 +15,7 @@
 
 	<div class="row">
 		 <ul style="padding:0px;margin-top:0px;margin-bottom:0px;" class="member-tabs">
-			<li><a href="#" ng-click="selectTab('INFORMATION')">Information</a></li>
+			<li><a href="#" ng-click="selectTab('INFORMATION')"><i class="fa fa-info"></i> Information</a></li>
             <li><a href="#" ng-click="selectTab('MARKETS')"><i class="fa fa-exchange"></i> Markets</a></li>
             <li><a href="#" ng-click="selectTab('ANALYSIS')"><i class="fas fa-chart-bar"></i> Analysis</a></li>
         </ul>
@@ -36,26 +36,40 @@
 			</div>
 			-->
 			<div style="padding:16px">
-				<p><b>Tokens</b></p>
-	    		<p><b><a href="token/{{token.string}}">{{token.string}}</a></b></p>	
-				<div class="spacing-5"></div>
-				<p style="font-style:italic;color:gray" ng-if="modelToken.model">Associated Action: <a href="{{modelToken.model.toLowerCase()}}/{{modelToken.id}}">{{modelToken.model}}</a></p>
-				<div class="spacing-5"></div>
-				<p style="font-style:italic;color:gray">In Circulation: {{token.information.inCirculation}}</p>
-				<p style="font-style:italic;color:gray">Markets: {{markets.length}}</p>
-				<div class="spacing-5"></div>
-				<p><b>Action</b></p>
-	    		<p><a href="{{modelToken.model.toLowerCase()}}/{{modelToken.id}}">{{modelToken.model.toUpperCase()}}</a></p>
-				<div class="spacing-5"></div>
-	    		<p><b>Protocols <a ng-click="informationToggle()" href=""><i class="fa fa-question-circle"></i></a></b></p>
-	    		<p style="font-style:italic;color:gray">{{markets.protocols}}</p>
-				<div class="spacing-5"></div>
-	    		<p><b>Logic <a ng-click="informationToggle()" href=""><i class="fa fa-question-circle"></i></a></b></p>
-	    		<p style="font-style:italic;color:gray">Transferrable: {{token.logic.transferrable}}</p>
-	    		<p style="font-style:italic;color:gray">Mint: {{token.logic.mint}}</p>
-				<div class="spacing-5"></div>
-	    		<p><b>Manifold Actions <a ng-click="informationToggle()" href=""><i class="fa fa-question-circle"></i></a></b></p>
-        		<cytoscape graph-options="options" graph-elements="elementsObj" graph-layout="layout" graph-style="style"></cytoscape>
+				<div class="row">
+					<div class="col-md-6">
+
+						<div>
+							<h4>Tokens</h4>
+				    		<p><b><a href="token/{{token.string}}">{{token.string}}</a></b></p>	
+							<p style="font-style:italic;color:gray">In Circulation: {{token.information.inCirculation}}</p>
+							<p style="font-style:italic;color:gray">Markets: {{markets.length}}</p>
+						</div>
+
+						<div class="spacing-5"></div>
+
+						<div>
+				    		<h4>Logic & Protocols</h4>
+				    		<p style="font-style:italic;color:gray">{{markets.protocols}}</p>
+				    		<p style="font-style:italic;color:gray">Transferrable: {{token.logic.transferrable}}</p>
+				    		<p style="font-style:italic;color:gray">Mint: {{token.logic.mint}}</p>
+				    		<div ng-if="modelToken.model">
+					    		<p><b>Action</b></p>
+								<p style="font-style:italic;color:gray"><a href="{{modelToken.model.toLowerCase()}}/{{modelToken.id}}">{{modelToken.model.toUpperCase()}}</a></p>
+							</div>
+				    		<p><b>Manifolds Actions</b></p>
+						</div>
+
+						<div class="spacing-5"></div>
+
+						<!--TOP OWNERS??? WOULD BE COOL:)-->
+						<!--GRAPH OF ...-->
+
+			    	</div>
+					<div class="col-md-6">
+        				<cytoscape graph-options="options" graph-elements="elementsObj" graph-layout="layout" graph-style="style"></cytoscape>
+			    	</div>
+		    	</div>
     		</div>
     	</div>	
     </div>
@@ -66,7 +80,7 @@
 		<div class="spacing-5"></div>
 
 		<!--FILTERS-->
-    	<div class="col-sm-3" style="padding-left:0px;padding-right:0px;">
+    	<div class="col-sm-3 mobileFix" style="padding-left:0px;padding-right:0px;">
 	    	<div class="card">
 		    	<div style="background:url('https://source.unsplash.com/1600x900/?lattice,geometry,crystal,code');min-height:50px" class="imageContainerSmall">
 				    <div style="background:rgba(0,0,0,0.75);height:50px" class="imageContainerSmallDiv">  
@@ -78,8 +92,42 @@
 				    </div>
 				</div>
 				<div style="padding:16px">
+					<div ng-repeat="item in manifolds">
+					    <p><a href="market/{{token.string}}{{item.title}}{{item.manifolds}}" ui-sref="market({ id: token.string+item.title+item.manifolds})"><b>{{item.title}}</b></a></p>
+					</div>
 				</div>
 			</div>
+			<div class="card">
+		    	<div style="background:url('https://source.unsplash.com/1600x900/?lattice,geometry,crystal,code');min-height:50px" class="imageContainerSmall">
+				    <div style="background:rgba(0,0,0,0.75);height:50px" class="imageContainerSmallDiv">  
+				        <div style="margin-top: auto;margin-bottom: auto;">
+				        	<div class="container">
+					            <h1 style="text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;">Type</h1>
+					        </div>
+				        </div>
+				    </div>
+				</div>
+				<div style="padding:16px">
+					<div ng-repeat="item in types">
+					    <p><a><b>{{item.title}}</b></a></p>
+					</div>
+				</div>
+			</div>
+			<!--
+			<div class="card">
+		    	<div style="background:url('https://source.unsplash.com/1600x900/?lattice,geometry,crystal,code');min-height:50px" class="imageContainerSmall">
+				    <div style="background:rgba(0,0,0,0.75);height:50px" class="imageContainerSmallDiv">  
+				        <div style="margin-top: auto;margin-bottom: auto;">
+				        	<div class="container">
+					            <h1 style="text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;">Tags</h1>
+					        </div>
+				        </div>
+				    </div>
+				</div>
+				<div style="padding:16px">
+				</div>
+			</div>
+			-->
 		</div>
 
 		<div class="col-md-9" style="padding-left:0px;padding-right:0px;">
@@ -87,8 +135,9 @@
 			<div class="spacing-5"></div>
 
 			<ul style="padding:0px;margin-top:0px;margin-bottom:0px;" class="member-tabs">
-	            <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('MARKETS', filterSet)"><i class="fa fa-filter"></i> Filter</a></li>
-	            <li><a href="#" ng-click="selectTab('MANIFOLD')"><i class="fas fa-infinity"></i> Manifold Actions</a></li>
+	            <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('MARKET', filterSet)"><i class="fa fa-filter"></i> Filter</a></li>
+	            <li><a href="#" ng-click="showManifold = !showManifold"><i class="fas fa-infinity"></i> Manifold Actions</a></li>
+    			<li ng-click="expandSort()" style="float:right;font-size:14px"><a href="#">Sort By Base Volume <i class="fa fa-angle-down"></i></a></li>
 	        </ul>
 
 		   	<div class="card">
@@ -101,13 +150,25 @@
 		    </div>
 
 	        <div class="card"><button class="btn btn-default log-btn" ng-click="orderToggle()">+ Market Order</button></div>
-		    <div class="card" ng-repeat="market in markets" ng-click="cardDetailToggle(market)">
+
+		    <div ng-show="!showManifold" class="card" ng-repeat="market in markets" ng-click="cardDetailToggle(market)">
 			    <div style="background:url('https://source.unsplash.com/1600x900/?{{market.string}}');height:100px;min-height:100px" class="imageContainerSmall">
 			    	<div style="background:rgba(0,0,0,0.75);height:100px" class="imageContainerSmallDiv">  
 				        <div style="margin-top: auto;margin-bottom: auto;">
-				        	<div class="container">
-					            <h1 style="text-align:left;font-size:30px;color:rgba(255,255,255,0.9);font-weight:400;"><a style="color:white" ng-click="$event.stopPropagation();" href="market/{{stateParams.id}}/{{market.string}}" ui-sref="marketPair({ setAlpha: stateParams.id, setBeta:market.string })">{{market.string}}</a></h1>
+				        	<div style="padding:15px">
+
+					            <h1 style="text-align:left;font-size:30px;color:rgba(255,255,255,0.9);font-weight:400;">
+					            	<a style="color:white" ng-click="$event.stopPropagation();" href="market/{{stateParams.id}}/{{market.string}}" ui-sref="marketPair({ setAlpha: stateParams.id, setBeta:market.string })">
+
+
+					            		<span ng-repeat="item in market.string.split(',')">{{item}}</span>
+					            		<!--{{market.string}}-->
+
+
+					            	</a>
+					            </h1>
 					            <h5><a style="color:white" ng-click="$event.stopPropagation();" href="market/{{stateParams.id}}" ui-sref="market({ id: market.string})">Market</a></h5>
+
 					        </div>
 				        </div>
 				    </div>
@@ -126,13 +187,33 @@
 				</div>
 		    </div>
 
+		    <!--MANIFOLD-->
+			<div ng-show="showManifold">
+				<div class="card" ng-repeat="item in manifolds">
+					<div style="background:url('https://source.unsplash.com/1600x900/?lattice,geometry,crystal,code');min-height:100px" class="imageContainerSmall">
+				    	<div style="background:rgba(0,0,0,0.75);height:100px" class="imageContainerSmallDiv">  
+					        <div style="margin-top: auto;margin-bottom: auto;">
+					        	<div class="container">
+						            <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;"><a style="color:white" href="market/{{token.string}}{{item.title}}" ui-sref="market({ id: token.string+item.title})">{{item.title}}</a></h1>
+						        </div>
+					        </div>
+					    </div>
+					</div>
+				    <div style="padding:16px">
+				    	<p><a href="market/{{token.string}}{{item.title}}{{item.manifolds}}" ui-sref="market({ id: token.string+item.title+item.manifolds})">{{item.manifolds}}</a></p>
+				    </div> 
+				</div>
+			</div>
+
 	    </div>
+
     </div>
 
     <!--ANALYSIS-->
 	<div class="row" ng-show="selectedTab=='ANALYSIS'">
 
 		<div class="card">
+
 			<!--
 			<div style="background:url('https://source.unsplash.com/1600x900/?lattice,geometry,crystal,code')" class="imageContainerSmall">
 			    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
@@ -144,27 +225,16 @@
 			    </div>
 			</div>
 			-->
+
 			<div style="padding:16px">
 				<p>Size: {{markets.length}}</p>
 				<p>Rank: {{stateParams.id.split(',').length}}
 				<p>Highest Dimension: 7</p>
 				<p>Nodes: {{graphDataPower.nodes.length}}, Connections: {{graphDataPower.links.length}}</p>
-				<!--CREATE.CAPITAL PDF??-->
-    		</div>
-    	</div>
-    	<div class="card">
-    		<div style="background:url('https://source.unsplash.com/1600x900/?lattice,geometry,crystal,code');min-height:100px" class="imageContainerSmall">
-			    <div style="background:rgba(0,0,0,0.75);height:100px" class="imageContainerSmallDiv">  
-			        <div style="margin-top: auto;margin-bottom: auto;">
-			        	<div class="container">
-				            <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">Lattice Analysis</h1>
-				        </div>
-			        </div>
-			    </div>
-			</div>
-			<div style="padding:16px">
 	    		<p>Computed Lattice Neighborhood</p>
-	    		<!--COMBINITORIALS SERVED FIRST-->
+
+				<!--CREATE.CAPITAL PDF??-->
+				<!--COMBINITORIALS SERVED FIRST-->
 	    		<!--DEPTH OF THE COMBINITORIAL SPACES-->
 	    		<!--COMBINITORIAL & MANIFOLD MAPPING SPACE(S)-->
 				<!--VALUE VECTOR-->
@@ -172,8 +242,8 @@
 			    <!--VALUE MATRIX-->
 				<!--VALUE TENSOR-->
 				<!--VALUE TENSOR NETWORK-->
-        		<cytoscape graph-options="options" graph-elements="elementsObj" graph-layout="layout" graph-style="style"></cytoscape>
-			</div>
+
+    		</div>
     	</div>
 	</div>
 
@@ -201,24 +271,6 @@
 		            <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
 		        </form>
 		    </div>
-		</div>
-	</div>
-
-	<!--MANIFOLD-->
-	<div ng-show="selectedTab=='MANIFOLD'">
-		<div class="card" ng-repeat="item in manifolds">
-			<div style="background:url('https://source.unsplash.com/1600x900/?lattice,geometry,crystal,code');min-height:100px" class="imageContainerSmall">
-		    	<div style="background:rgba(0,0,0,0.75);height:100px" class="imageContainerSmallDiv">  
-			        <div style="margin-top: auto;margin-bottom: auto;">
-			        	<div class="container">
-				            <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;"><a style="color:white" href="market/{{token.string}}{{item.title}}" ui-sref="market({ id: token.string+item.title})">{{item.title}}</a></h1>
-				        </div>
-			        </div>
-			    </div>
-			</div>
-		    <div style="padding:16px">
-		    	<p><a href="market/{{token.string}}{{item.title}}{{item.manifolds}}" ui-sref="market({ id: token.string+item.title+item.manifolds})">{{item.manifolds}}</a></p>
-		    </div> 
 		</div>
 	</div>
 

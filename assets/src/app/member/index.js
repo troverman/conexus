@@ -326,7 +326,10 @@ angular.module( 'conexus.member', [
     //STORE ACTION DATA... AGNOSTIC.. HM -- CREATE IS AN ACTION. CREATE ITEM. CREATE CONTENT - REDUCTION SOOON IN DUE TIME
     titleService.setTitle($scope.member.username + ' | Actions | CRE8.XYZ');
 
-    $scope.actions = actions;
+    $scope.actions = actions.map(function(obj){
+        obj.model = 'ACTION';
+        return obj;
+    });
 
 }])
 

@@ -1683,38 +1683,39 @@
                         </div>
                         <div style="clear:both"></div>
                     </div>
-                    <!--VECTOR.. ie... tags -->
-                    <h5>Tags</h5>
-                    <tags-input min-length="1" placeholder="Tags" ng-model="newTransaction.tags">
-                        <auto-complete min-length="2" source="loadTags($query)"></auto-complete>
-                    </tags-input>
 
-
-
+                    <!--UX... -->
+                    <!--<h5>Associated Items</h5>-->
+                    <!--BUYING AN ITEM WITH PRESET TAGS..-->
+                    <!--TRADE.. 2 BUNDLES TRANSACTIONS-->
+                    <!--SEND TOKEN SET, RECIEVE TOKEN ASSET-->
+                    <!--TRADE POPUP.. ORDER-->
 
 
                     <!--
-                    <h5>Associated Items</h5>
                     <tags-input min-length="1" placeholder="Asset Identifier" ng-model="newTransaction.identifierSet">
                         <auto-complete min-length="1" source="loadAsset($query)"></auto-complete>
                     </tags-input>
                     -->
 
-                    <!--VECTOR.. ie... tags -->
+                    <h5>Tags <a href="#" ng-click="expandAssociations()" style="float:right"><i class="fas fa-bezier-curve"></i> Expand</a></h5>
+                    <tags-input min-length="1" placeholder="Tags" ng-model="newTransaction.tags">
+                        <auto-complete min-length="2" source="loadTags($query)"></auto-complete>
+                    </tags-input>
+
+                    <!--TODO. SELF ASSOCIATION-->
                     <!--TRANSACTION-TRANSACTION VALIDATION-->
-                    <!--BUYING AN ITEM WITH PRESET TAGS..-->
-                    <!--
-                    <div ng-repeat="tag in newTransaction.tags track by $index">                            
-                        <div layout="">
-                            <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{tag.text}}</span></div>
-                            <md-slider step="0.1" flex="" md-discrete="" ng-model="newValidation.validation[tag.text]" step="1" min="-100" max="100" aria-label="{{tag.text}}"></md-slider>
-                            <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{newValidation.validation[tag.text]}}</span></div>
+                    <div ng-if="associationsAreExpanded">
+                        <div style="padding:16px">
+                            <div ng-repeat="tag in newTransaction.tags track by $index">
+                                <div layout="">
+                                    <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{tag.text}}</span></div>
+                                    <md-slider step="0.1" flex="" md-discrete="" ng-model="newValidation.validation[tag.text]" step="1" min="-100" max="100" aria-label="{{tag.text}}"></md-slider>
+                                    <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{newValidation.validation[tag.text]}}</span></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    -->
-
-                    <!--TODO: SELF VALIDATION FOR TRANSACTION TO DO NEXT!-->
-                    <!--DO IT!!-->
 
                     <h5>Description</h5>
                     <textarea style="height:100px;" placeholder="Description" type="text" ng-model="newTransaction.content" class="form-control"></textarea>
@@ -1800,10 +1801,16 @@
             </div>
             <div style="padding:16px;">
                 <div class="spacing-25"></div>
+                <div ng-if="confirm.model == 'ACTION'">
+                    {{confirm}}
+                </div>
                 <div ng-if="confirm.model == 'CONTENT'">
                     <h3>Title: {{confirm.title}}</h3>
                     <p>User: {{confirm.user}}</p>
                     <p>Tags: {{confirm.tags}}</p>
+
+                    <!--RENDER ASSOCIATIONS-->
+                    <!--GRAPH..? ETC-->
                     <p>Associations: {{confirm.associatedModels}}</p>
                     <p>Type: {{confirm.type}}</p>
                     <p>Content: <span style="display:inline" ng-bind-html="renderContent(confirm.content)"></span></p>
@@ -1860,7 +1867,7 @@
                     <p>To: {{confirm.to}}</p>
                     <p>From: {{confirm.from}}</p>
                     <p>{{confirm.tags}}</p>
-                    <span ng-repeat="(key, value) in transaction.amountSet"><p style="font-weight:800">{{value}} <a href="market/{{key}}" ui-sref="market({id:key})">{{key}}</a></p></span>
+                    <span ng-repeat="(key, value) in confirm.amountSet"><p style="font-weight:800">{{value}} <a href="market/{{key}}" ui-sref="market({id:key})">{{key}}</a></p></span>
                     <p><span style="display:inline" ng-bind-html="renderContent(confirm.content)"></span></p>
                 </div>
 
@@ -1987,7 +1994,7 @@
 
             <!--TODO: EYE.. ATTENTION.. VIEW ETC-->
 
-            <a style="padding-left:0px" class="navbar-brand" href="/" ui-sref="home"><span style="font-weight:bold;color:white">CRE8.XYZ</span></a>
+            <a style="padding-left:10px" class="navbar-brand" href="/" ui-sref="home"><span style="font-weight:bold;color:white">CRE8.XYZ</span></a>
         </div>
         <md-progress-linear style="height:2px" ng-if="stateIsLoading" md-mode="indeterminate"></md-progress-linear>
     </div>

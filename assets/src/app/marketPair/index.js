@@ -26,7 +26,7 @@ angular.module( 'conexus.marketPair', [
 	});
 }])
 
-.controller( 'MarketPairCtrl', ['$mdSidenav', '$rootScope', '$scope', '$stateParams', 'contentList', 'mirrorOrders', 'OrderModel', 'orders', 'ReactionModel', 'titleService', function MarketPairController( $mdSidenav, $rootScope, $scope, $stateParams, contentList, mirrorOrders, OrderModel, orders, ReactionModel, titleService ) {
+.controller( 'MarketPairCtrl', ['$mdSidenav', '$rootScope', '$scope', '$stateParams', 'contentList', 'cytoData', 'mirrorOrders', 'OrderModel', 'orders', 'ReactionModel', 'titleService', function MarketPairController( $mdSidenav, $rootScope, $scope, $stateParams, contentList, cytoData, mirrorOrders, OrderModel, orders, ReactionModel, titleService ) {
     
     $scope.stateParams = $stateParams;
     titleService.setTitle('Market | ' + $stateParams.setAlpha + ' | ' +  $stateParams.setBeta  + ' | CRE8.XYZ');
@@ -39,6 +39,137 @@ angular.module( 'conexus.marketPair', [
     $scope.pluralistic = false;
     if ($scope.market.split(',').length > 1 || $scope.market1.split(',').length > 1){$scope.pluralistic = true;}
     $scope.selectedType = 'ONBOOKS';
+
+
+    //DIRECTED GRAPH
+    $scope.layout = {name: 'circle', coolingFactor: 0, animate: true};
+    $scope.options = {
+        pixelRatio: 'auto',
+        maxZoom:10,
+        minZoom:0.1,
+    };
+    $scope.style = [
+        {
+            "selector": "core",
+            "style": {
+                "selection-box-color": "#AAD8FF",
+                "selection-box-border-color": "#8BB0D0",
+                "selection-box-opacity": "0.5"
+            }
+        }, {
+            "selector": "node",
+            "style": {
+                "width": "25",
+                "height": "25",
+                "content": "data(name)",
+                "font-size": "12px",
+                "text-valign": "center",
+                "text-halign": "center",
+                "background-color": "#77828C",
+                "text-outline-color": "#77828C",
+                "text-outline-width": "2px",
+                "color": "#fff",
+                "overlay-padding": "3px",
+                "z-index": "10"
+            }
+        }, {
+            "selector": "node[?attr]",
+            "style": {
+                "shape": "rectangle",
+                "background-color": "#aaa",
+                "text-outline-color": "#aaa",
+                "width": "8px",
+                "height": "8px",
+                "font-size": "3px",
+                "z-index": "1"
+            }
+        }, {
+            "selector": "node[?query]",
+            "style": {
+                "background-clip": "none",
+                "background-fit": "contain"
+            }
+        }, {
+            "selector": "node:selected",
+            "style": {
+                "border-width": "3px",
+                "border-color": "#AAD8FF",
+                "border-opacity": "0.5",
+                "background-color": "#77828C",
+                "text-outline-color": "#77828C"
+            }
+        }, {
+            "selector": "edge",
+            "style": {
+                "curve-style": "bezier",
+                "target-arrow-shape": "triangle",
+                "arrow-scale":"0.75",
+                "source-arrow-shape": "none",
+                "opacity": "0.9",
+                "line-color": "#bbb",
+                "width": "3",
+                "overlay-padding": "3px",
+                'label': 'data(label)'
+            }
+        },
+        {
+            "selector": ".edgeLabelStyle",
+            "style": {
+                "text-background-opacity": 1,
+                "color": "#fff",
+                "font-size": "12px",
+                "text-background-color": "#77828C",
+                "text-background-shape": "roundrectangle",
+                "text-border-color": "#e8e8e8",
+                "text-border-width": 1,
+                "text-border-opacity": 1
+            }
+        },
+        {
+            "selector": ".blue",
+            "style": {
+                "line-color": "#0000ff",
+            }
+        },
+        {
+            "selector": ".red",
+            "style": {
+                "line-color": "#ff0000",
+            }
+        },
+        {
+            "selector": "node.unhighlighted",
+            "style": {
+                "opacity": "0.2"
+            }
+        }, {
+            "selector": "edge.unhighlighted",
+            "style": {
+                "opacity": "0.05"
+            }
+        }, {
+            "selector": ".highlighted",
+            "style": {
+                "z-index": "999999"
+            }
+        }, {
+            "selector": "node.highlighted",
+            "style": {
+                "border-width": "3px",
+                "border-color": "#AAD8FF",
+                "border-opacity": "0.5",
+                "background-color": "#394855",
+                "text-outline-color": "#394855"
+            }
+        }, {
+            "selector": "edge.filtered",
+            "style": {
+                "opacity": "0"
+            }
+        }
+    ];
+
+
 
     //TODO: BETTER
     $scope.mirrorOrders = mirrorOrders;
@@ -109,78 +240,142 @@ angular.module( 'conexus.marketPair', [
         credits:{enabled:false},
     };
 
-    $scope.chartMap = {
-        chart: {
-            polar: true,
-            margin: [30, 30, 30, 30]
-        },
-        series: [{
-            id: 'values',
-            type: 'area',
-            name: 'Values',
-            pointPlacement: 'on',
-            data: [],
-            color: 'rgba(153,0,0,0.3)',
-            fillOpacity: 0.3,
-        },{
-            id: 'values1',
-            type: 'area',
-            name: 'Values',
-            pointPlacement: 'on',
-            data: [],
-            color: 'rgba(0,153,0,0.3)',
-            fillOpacity: 0.3,
-        }],
-        title: {text: ''},
-        xAxis: [{
-            title: {text: null},
-            categories: [],
-            tickmarkPlacement: 'on',
-            lineWidth: 0,
-        },{
-            title: {text: null},
-            categories: [],
-            tickmarkPlacement: 'on',
-            lineWidth: 0,
-        }],
-        yAxis: {
-            title: {text: null},
-            gridLineInterpolation: 'polygon',
-            lineWidth: 0,
-            min: 0,
-        },
-        legend: {enabled: false},
-        tooltip: {},
-        credits:{enabled:false},
+    $scope.elementsObjCombinatorial = {};
+
+
+
+
+
+
+    //JSON
+    //TODO
+    //market = {
+
+        //setAlpha:{
+            //[asset]:volume, price.. 
+        //}
+
+    //}
+
+    $scope.generateGraph = function(model){
+
+        var market = {
+            setAlpha:{},
+            setBeta:{},
+        };
+
+        //TODO: RETURN IMMUT MARKET STRUCTURE
+        //THIS IS TAPE
+        for (x in $stateParams.setAlpha.split(',')){
+            market.setAlpha[$stateParams.setAlpha.split(',')[x]] = 'BUY' //TOTAL ORDER BOOK.... COMPUTED
+        }
+
+        for (x in $stateParams.setBeta.split(',')){
+            market.setBeta[$stateParams.setBeta.split(',')[x]] = 'SELL'//TOTAL ORDER BOOK.... COMPUTED
+        }
+
+        var alphaNode = {
+            group:'nodes',
+            data:{id: Object.keys(market.setAlpha).join(','), name: Object.keys(market.setAlpha).join(',')}
+        };
+        var betaNode = {
+            group:'nodes',
+            data:{id:Object.keys(market.setBeta).join(','), name: Object.keys(market.setBeta).join(',')}
+        };
+        $scope.elementsObjCombinatorial[Object.keys(market.setAlpha).join(',')] = alphaNode;
+        $scope.elementsObjCombinatorial[Object.keys(market.setBeta).join(',')] = betaNode;
+        for (x in Object.keys(market.setBeta)){
+            var edge = {
+                group:'edges',
+                data:{
+                    id: Object.keys(market.setAlpha).join(',')+Object.keys(market.setBeta)[x]+'-'+Object.keys(market.setBeta).join(','), 
+                    source: Object.keys(market.setBeta).join(','), 
+                    target: Object.keys(market.setAlpha).join(','),
+                    label: Object.keys(market.setBeta)[x]+':'+ market.setBeta[Object.keys(market.setBeta)[x]],
+                },
+                classes: ['edgeLabelStyle', 'blue'],
+            };
+            $scope.elementsObjCombinatorial[Object.keys(market.setAlpha).join(',')+Object.keys(market.setBeta)[x]+'-'+Object.keys(market.setBeta).join(',')] = edge;
+        }
+        for (x in Object.keys(market.setAlpha)){
+            var edge = {
+                group:'edges',
+                data:{
+                    id: Object.keys(market.setBeta).join(',')+Object.keys(market.setAlpha)[x]+'-'+Object.keys(market.setAlpha).join(','), 
+                    source: Object.keys(market.setAlpha).join(','), 
+                    target: Object.keys(market.setBeta).join(','),
+                    label: Object.keys(market.setAlpha)[x]+':'+ market.setAlpha[Object.keys(market.setAlpha)[x]],
+                },
+                classes: ['edgeLabelStyle', 'red'],
+            };
+            $scope.elementsObjCombinatorial[Object.keys(market.setBeta).join(',')+Object.keys(market.setAlpha)[x]+'-'+Object.keys(market.setAlpha).join(',')] = edge;
+        }
     };
 
+    console.log(orders)
+    $scope.generateGraph();
 
 
 
+    //TEST
 
+    cytoData.getGraph().then(function(graph){
 
+        $scope.graph = graph;
+        $scope.graph.edges().on('click', function(e){
+            var clickedEdge = e.target;
+            console.log(clickedEdge);
+        });
+       
+    });
+
+    //LOL HIGH CHARTS v_v
+    $scope.$on('cy:node:click', function(ng,cy){
+        console.log(cy.target);
+        //console.log(cy.data)
+        //console.log(cy._private.data)
+    });
+
+    $scope.$on('cy:edge:click', function(ng,cy){
+        console.log(cy.target);
+        console.log(ng)
+        console.log(cy)
+        //uh
+        //console.log(cy.data)
+        //console.log(cy._private);
+
+    });
+
+    $scope.parallelCoordinates = {
+        chart: {
+            zoomType: 'x',
+            type: 'spline',
+            parallelCoordinates: true,
+            parallelAxes: {
+                lineWidth: 2
+            }
+        },
+        legend:{enabled:true},
+        title: {text: null},
+        xAxis: {title: {text: null}},
+        yAxis: {title: {text: null}},
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: [],
+        credits:{enabled:false},
+    };
 
 
     //POPULATE CHART MAP MARKET PLURALITY
     $scope.markets = $scope.market.split(',');
     $scope.markets1 = $scope.market1.split(',');
-    
-    //TODO: REAL ORDERS
-    //TODO: PLURALISTIC
-    if ($scope.markets.length>1){
-        for (x in $scope.markets){
-            $scope.chartMap.xAxis[0].categories.push($scope.markets[x]);
-            $scope.chartMap.series[0].data.push(Math.random()*1);
-        }
-    }
-    if ($scope.markets1.length>1){
-       for (x in $scope.markets1){
-            $scope.chartMap.xAxis[1].categories.push($scope.markets1[x]);
-            $scope.chartMap.series[1].data.push(Math.random()*1);
-        }
-    }
 
-    //POPULATE ORDER BOOK
+
+    //POPULATE!
     if (orders.length == 0){
         for(var i=-100;i<100;i++){
             if (i<0){$scope.bidAskChart.series[0].data.push([i+100000,i*i]);}
@@ -240,14 +435,14 @@ angular.module( 'conexus.marketPair', [
             }
         }
     }
+
     if ($scope.pluralistic){
         for (x in $scope.markets1){
-
             //TODO: POWER SET NOT JUST INDIV MARKETS
             $scope.chart.series.push({
                 id: 'ExchangePrice'+x,
                 type: 'spline',
-                name: 'Exchange Price ' + $stateParams.id + ' | ' + $scope.markets1[x],
+                name: 'Exchange Price ' + $scope.markets[0] + ' | ' + $scope.markets1[x],
                 data: []
             })
             for(var i=0;i<1000;i++){

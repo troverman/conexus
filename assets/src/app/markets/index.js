@@ -24,7 +24,17 @@ angular.module( 'conexus.markets', [
     
     $scope.skip = 0;
     $scope.selectedSort = 'createdAt DESC';
-    $scope.tokens = tokens;
+
+    //TODO DATA MODELS..
+    //SORT BY CONNECTION
+
+    //TOKEN VS MARKET
+
+
+    $scope.tokens = tokens.map(function(obj){
+        obj.model = 'MARKET';
+        return obj;
+    });
 
     $scope.tokensInCirculation = 100000+Math.round(Math.random()*10000);
 
@@ -356,11 +366,5 @@ angular.module( 'conexus.markets', [
         }
     };
     traverse(0, 5);
-
-
-    
-
-
-
 
 }]);

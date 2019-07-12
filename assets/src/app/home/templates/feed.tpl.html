@@ -683,6 +683,12 @@
                         </div>
                     </div>
                     <div style="padding:16px">
+                        <div ng-if="!item.title" style="text-align:right;padding:15px;position:absolute;right:0">
+                            <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(token)">
+                                <i class="fas fa-chevron-down"></i>
+                            </a>
+                            <div style="clear:both"></div>
+                        </div> 
                         <div>
                             <!--TODO: ASSOCIATION AREA-->
                             <a ng-click="$event.stopPropagation()" style="display:inline;font-weight:600;margin-left:5px" href="member/{{item.user.username}}" ui-sref="member.activity({path:item.user.username})">
