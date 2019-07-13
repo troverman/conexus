@@ -34,8 +34,6 @@ angular.module( 'conexus.market', [
         type: 'MARKET',
     }];
 
-    $scope.baseMarkets = [$scope.stateParams.id];
-
     $scope.manifolds = [
         {title:'+CREDIT', manifolds:'+INTEREST'},
         {title:'+DEBT', manifolds:'+TIME'},
@@ -61,36 +59,6 @@ angular.module( 'conexus.market', [
     //TODO: MARKETS FROM ORDERS
     $scope.orders = orders.map(function(obj){
         var elementsObj = {};
-        for (y in Object.keys(obj.setAlpha)){
-            var modelNode = {
-                group:'nodes',
-                data:{id:Object.keys(obj.setAlpha)[y], name:Object.keys(obj.setAlpha)[y]}
-            };
-            if (Object.keys(elementsObj).indexOf(Object.keys(obj.setAlpha)[y]) == -1){
-                elementsObj[Object.keys(obj.setAlpha)[y]] = modelNode;
-            }
-            for (z in Object.keys(obj.setBeta)){
-                var modelNode = {
-                    group:'nodes',
-                    data:{id:Object.keys(obj.setBeta)[z], name:Object.keys(obj.setBeta)[z]}
-                };
-                if (Object.keys(elementsObj).indexOf(Object.keys(obj.setBeta)[z]) == -1){
-                    elementsObj[Object.keys(obj.setBeta)[z]] = modelNode;
-                    var modelEdge = {
-                        group:'edges',
-                        data:{
-                            id:Object.keys(obj.setAlpha)[y]+'-'+Object.keys(obj.setBeta)[z], 
-                            source:Object.keys(obj.setAlpha)[y], 
-                            target:Object.keys(obj.setBeta)[z],
-                            label: obj.setBeta[Object.keys(obj.setBeta)[z]],
-                        },
-                        classes: 'edgeLabelStyle',
-                    };
-                    elementsObj[Object.keys(obj.setAlpha)[y]+'-'+Object.keys(obj.setBeta)[z]] = modelEdge;
-                }
-            }
-        }
-        obj.directedGraph = elementsObj;
         obj.model = 'ORDER';
         return obj
     });
@@ -138,62 +106,95 @@ angular.module( 'conexus.market', [
     //ROTATIONAL ETNSORS
     //MODULATIONS OF IMMUTABLE
     //GET SETS --> SORT BY NUMBER OF SETBETA OBJKEY COUNT
+
+
+
+    //SHOULD BE COMPUTED. 
+    //ORDER.CREATE --> MARKET? 
+    //SAVE THE OBJ
+
+    //MIGHT WANNA DO THIS WITH PAPER. --> HA! ~~ analog is still good for theory
+    //[SETALPHA]
+
+
+    $scope.immutableMarket = {};
+    $scope.immutableMarketPower = {};
     for (x in $scope.orders){
-        //$scope.orders[x].setAlpha
-        if ($scope.orders[x].setBeta){
+
+        //var alphaPossibility = getAllSubsets($scope.orders[x].setAlpha);
+
+        //REFLECTION AND OREDER -- ROTATE OUT
+        var betaPossibility = getAllSubsets(Object.keys($scope.orders[x].setBeta));
+        betaPossibility.shift();
+        betaPossibility.pop();
+
+        //NESTED OBJ
+        //base dimension for reflexivity is dim of obj space my man - you know it, i know it . 
+        //you want to be computationionall sleuth ? -- an obj with indices of huge is untenable -- yeah 
+            //ONLY! --> reflect through a 24EIGHT dimensional object containing high degres connections __ BASE DENSOR WITH DIM 24EIGHT (close.)
+            //ALLOW FOR (MIN) TRAVERSAL to 'EXPAND' -> THE TENSOR BASES  ((VALUE FOR DIM GRIDS))
 
 
-
-            console.log($scope.orders[x].setBeta);
-
-
-
-
-
-
-
-
-
-            //POWER SET.. WITH RESPECT TO HIGH D.. LOOK AT HIGHEST DIM
-            //HIGH DIMS IMMEDIATLY DECOMPOSE 
-            if (Object.keys($scope.orders[x].setBeta).length > 1){
-                if ($scope.markets.indexOf(assetIdentifier) == -1){
-                    $scope.markets.push({
-                        string:Object.keys($scope.orders[x].setBeta).join(','), 
-                        info:{
-                            rate:Math.random(),
-                            dailyChange:Math.random(),
-                            marketDepth:Math.random(),
-                        },
-                        model:'MARKET',
-                    });
-                }
-            }
-
-
-
-            for (y in Object.keys($scope.orders[x].setBeta)){
-                var assetIdentifier = Object.keys($scope.orders[x].setBeta)[y];
-                if ($scope.markets.indexOf(assetIdentifier) == -1){
-                    $scope.markets.push({
-                        string:assetIdentifier, 
-                        info:{
-                            rate:Math.random(),
-                            dailyChange:Math.random(),
-                            marketDepth:Math.random(),
-                        },
-                        model:'MARKET',
-                    });
-                }
-            }
-
-
-
-
-
+        for (y in betaPossibility){
+            $scope.immutableMarketPower[betaPossibility[y].join(',')] = {
+                bids:[],
+                asks:[],
+                computed:true, //COMPUTED FROM HIGH D DECOMPOSITION -_> POSSIBLE TRAVERSAL PATH  (POSSIBLE RECURSIVE DECOMPOSE WITH EACH +1 TRAVERSAL)
+            };
         }
+
+        //IT IS THE POWER SET!! HAH! --> where do we go from here. . ()=> the magic of flow state
+        for (y in Object.keys($scope.orders[x].setBeta)){
+            $scope.immutableMarket[Object.keys($scope.orders[x].setBeta)[y]] = {
+                bids:[],
+                asks:[],
+                computed: false, //CAN DECOMPOSE
+            }
+        }
+        console.log($scope.immutableMarket)
+
+
+
+        //console.log($scope.immutableMarket);
+
+        //POWER SET.. WITH RESPECT TO HIGH D.. LOOK AT HIGHEST DIM
+        //HIGH DIMS IMMEDIATLY DECOMPOSE 
+
+        console.log($scope.orders[x])
+        if (Object.keys($scope.orders[x].setBeta).length > 1){
+            if ($scope.markets.indexOf(assetIdentifier) == -1){
+                $scope.markets.push({
+                    string:Object.keys($scope.orders[x].setBeta).join(','), 
+                    info:{
+                        rate:Math.random(),
+                        dailyChange:Math.random(),
+                        marketDepth:Math.random(),
+                    },
+                    model:'MARKET',
+                });
+            }
+        }
+
+        for (y in Object.keys($scope.orders[x].setBeta)){
+            var assetIdentifier = Object.keys($scope.orders[x].setBeta)[y];
+            if ($scope.markets.indexOf(assetIdentifier) == -1){
+                $scope.markets.push({
+                    string:assetIdentifier, 
+                    info:{
+                        rate:Math.random(),
+                        dailyChange:Math.random(),
+                        marketDepth:Math.random(),
+                    },
+                    model:'MARKET',
+                });
+            }
+        }
+
     }
 
+    //STRING
+    $scope.renderImmutableMarketPower = JSON.stringify($scope.immutableMarketPower, null, 2);
+    $scope.renderImmutableMarket = JSON.stringify($scope.immutableMarket, null, 2);
 
 	$scope.chart = {
         chart: {zoomType: 'x',},
@@ -209,23 +210,6 @@ angular.module( 'conexus.market', [
         legend: {enabled:false},
         credits: {enabled:false},
     };
-
-    //DEFAULT GENERATOR
-    if ($scope.orders.length == 0){
-        //DEPRECIATE TO SUGGESTED MARKETS ETC
-        //$scope.marketString = ['USD', 'ETH', 'BTC', 'STEEM', 'LTC', 'CRE8', 'CRE8+TIME', 'CRE8+TIME+EDUCATION', 'CRE8+TIME+SHELTER', 'CRE8+TIME+FOOD', 'CRE8+TIME+CREATION', 'CRE8+TIME+HEALTH', 'CRE8+TIME+SECURITY', 'CRE8+TIME+REST', 'CRE8+STREAM', 'CRE8+REACT','CRE8+REACT+LIKE','CRE8+REACT+DISLIKE','CRE8+POST','CRE8+VALIDATE','CRE8+VIEW','CRE8+MINE','NOVO','CONEX','DURHAM','ALCOA','MARYVILLE','CHAPEL HILL'];
-        //for (x in $scope.marketString){
-        //    $scope.markets.push({
-        //        string:$scope.marketString[x], 
-        //        info:{
-        //            rate:Math.random(),
-        //            dailyChange:Math.random(),
-        //            marketDepth:Math.random(),
-        //        },
-        //        model:'MARKET'
-        //    });
-        //}
-    }
 
     $scope.selectTab = function(model){
         $scope.selectedTab = model;

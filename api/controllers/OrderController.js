@@ -48,6 +48,13 @@ module.exports = {
 			});
 		}
 
+		//MARKET.. IS ONLY
+		//HIGH COMBINATORIAL..... CAN SEE LOWER BOUDED ORDERS IN TRAVERSAL (AS WE OPEN UP)
+
+
+
+		//CHECK OUT THE OR GETS
+
 		else if(req.query.setAlpha){
 			var query = {};
 			query[ "setAlpha."+req.query.item] = {$gt: 0};

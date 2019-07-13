@@ -357,7 +357,10 @@ angular.module( 'conexus.marketPair', [
         },
         legend:{enabled:true},
         title: {text: null},
-        xAxis: {title: {text: null}},
+        xAxis: {
+            title: {text: null},
+            categories:[],
+        },
         yAxis: {title: {text: null}},
         plotOptions: {
             column: {
@@ -368,6 +371,29 @@ angular.module( 'conexus.marketPair', [
         series: [],
         credits:{enabled:false},
     };
+
+    //setAlpha is the line
+    //setBeta is the coords
+    //..comb decomposition
+
+    for(x in $scope.stateParams.setAlpha.split(',')){
+
+        var data = [];
+
+        //todo: combinatorial
+        for(y in $scope.stateParams.setBeta.split(',')){data.push(Math.random())}
+
+
+        $scope.parallelCoordinates.series.push({
+            name:$scope.stateParams.setAlpha.split(',')[x],
+            data:data
+        });
+    }
+
+    for (x in $stateParams.setBeta.split(',')){
+        //todo: combinatorial
+        $scope.parallelCoordinates.xAxis.categories.push($stateParams.setBeta.split(',')[x])
+    }
 
 
     //POPULATE CHART MAP MARKET PLURALITY

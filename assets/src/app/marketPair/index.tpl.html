@@ -4,13 +4,19 @@
         	<div class="container">
 	        	<div class="row">
 	            	<div class="col-xs-10">
-			            <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;"><a style="color:white" href="market/{{market}}" ui-sref="market({id:market})">{{market}}</a> | <a style="color:white"  href="market/{{market1}}" ui-sref="market({id:market1})">{{market1}}</a></h1>
+			            <h1 style="text-align:left;font-size:30px;color:rgba(255,255,255,0.9);font-weight:400;">
+			            	<span style="word-break:break-word"><a style="color:white;font-weight:700" href="market/{{market}}" ui-sref="market({id:market})">{{market}}</a></span>
+			            	<br>
+			            	<span style="word-break:break-word"><a style="color:white;font-weight:700"  href="market/{{market1}}" ui-sref="market({id:market1})">{{market1}}</a></span>
+			            </h1>
+
 			        	<h5 style="color:white">
 			        		<span style="color:white">{{chart.series[0].data[chart.series[0].data.length-1][1].toFixed(2)}}</span> | 
 			        		<span style="color:green">{{percentChange.toFixed(2)}}%</span> Daily Change | 
 			        		<span style="color:red">{{chart.series[1].data[chart.series[1].data.length-1][1].toFixed(2)}}</span> Daily Trade Volume | 
 			        		<span>{{marketDepth.toFixed(2)}}</span> Total Market Depth
 			        	</h5>
+
 			            <h5 style="color:white">
 			            	Last Trade Price: <span style="color:white">{{chart.series[0].data[chart.series[0].data.length-1][1].toFixed(2)}}</span> | 
 			            	Highest Bid <span style="color:white">{{bidAskChart.series[0].data[bidAskChart.series[0].data.length-1][0].toFixed(2)}}</span> | 
@@ -50,6 +56,18 @@
 	        	-->
 				<div style="padding:16px;">
 					<highchart config="chart"></highchart>
+					<!--<h5 style="">
+		        		<span>{{chart.series[0].data[chart.series[0].data.length-1][1].toFixed(2)}}</span> | 
+		        		<span style="color:green">{{percentChange.toFixed(2)}}%</span> Daily Change | 
+		        		<span style="color:red">{{chart.series[1].data[chart.series[1].data.length-1][1].toFixed(2)}}</span> Daily Trade Volume | 
+		        		<span>{{marketDepth.toFixed(2)}}</span> Total Market Depth
+		        	</h5>
+		            <h5 style="color:white">
+		            	Last Trade Price: <span>{{chart.series[0].data[chart.series[0].data.length-1][1].toFixed(2)}}</span> | 
+		            	Highest Bid <span>{{bidAskChart.series[0].data[bidAskChart.series[0].data.length-1][0].toFixed(2)}}</span> | 
+		            	Lowest Ask <span>{{bidAskChart.series[1].data[0][0].toFixed(2)}}</span>
+		            </h5>
+		        	-->
 				</div>
 			</div>
 
@@ -66,9 +84,17 @@
 			-->
 
 			<div class="card" ng-show="pluralistic">
+				<div style="background:url('https://source.unsplash.com/1600x900/?explore,discover,alpha,asset,lattice,dimension');min-height:100px" class="imageContainerSmall">
+	                <div style="background:rgba(0,0,0,0.75);height:100px" class="imageContainerSmallDiv">  
+	                    <div style="margin-top: auto;margin-bottom: auto;">
+	                        <div style="padding:15px">
+	                            <h2 style="color:white">Pluralistic Market</h2>
+	                            <h5 style="color:white">Order Paths and connections between the two markets. Computed Immutable Strucutre. Lattice / Graph.</h5>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
 				<div style="padding:16px;">
-					<h2>Pluralistic Market</h2>
-					<h5>Order Paths and connections between the two markets. Computed Immutable Strucutre. Lattice / Graph.</h5>
 					<highchart config="parallelCoordinates"></highchart>
 				</div>
 			</div>

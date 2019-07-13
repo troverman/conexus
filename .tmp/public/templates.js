@@ -6451,7 +6451,7 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function($tem
     "			-->\n" +
     "			<div style=\"padding:16px\">\n" +
     "				<div class=\"row\">\n" +
-    "					<div class=\"col-md-6\">\n" +
+    "					<div class=\"col-md-12\">\n" +
     "\n" +
     "						<div>\n" +
     "							<h4>Tokens</h4>\n" +
@@ -6471,7 +6471,7 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function($tem
     "					    		<p><b>Action</b></p>\n" +
     "								<p style=\"font-style:italic;color:gray\"><a href=\"{{modelToken.model.toLowerCase()}}/{{modelToken.id}}\">{{modelToken.model.toUpperCase()}}</a></p>\n" +
     "							</div>\n" +
-    "				    		<p><b>Manifolds Actions</b></p>\n" +
+    "				    		<!--<p><b>Manifolds Actions</b></p>-->\n" +
     "						</div>\n" +
     "\n" +
     "						<div class=\"spacing-5\"></div>\n" +
@@ -6479,8 +6479,59 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function($tem
     "						<!--TOP OWNERS??? WOULD BE COOL:)-->\n" +
     "						<!--GRAPH OF ...-->\n" +
     "\n" +
+    "						<!--NEED (parallel || APROPO) of GRAPH-->\n" +
+    "\n" +
+    "						<!--CONJECTURE; ALL OR PATHS REDUCE TO POWERSET CONTAINED COMBINAORIAL-->\n" +
+    "						<!--DO THE TRAVERSALS NEXT.. uhm..-->\n" +
+    "						<!--BRAID..-->\n" +
+    "						<!--remember eight d depth.. basal tensor to reduce computationals complexity - reflections contain . .\n" +
+    "							a-b-c-d-d-f-g\n" +
+    "								- power set in powerset \n" +
+    "									-eight powers of braids etc\n" +
+    "							alg removes loops first then. .\n" +
+    "						-->\n" +
+    "\n" +
+    "\n" +
+    "						<div style=\"max-height:50vh;overflow:auto\">\n" +
+    "\n" +
+    "				    		<h4>Market Immutable Strucutre</h4>\n" +
+    "		                	<div hljs hljs-language=\"javascript\"  hljs-source=\"renderImmutableMarket\"></div>\n" +
+    "							<div class=\"spacing-5\"></div>\n" +
+    "\n" +
+    "				    		<h5>Power Potientality</h5>\n" +
+    "				    		<p>Potiental of possible connection</p>\n" +
+    "		                	<div hljs hljs-language=\"javascript\"  hljs-source=\"renderImmutableMarketPower\"></div>\n" +
+    "\n" +
+    "		                </div>\n" +
+    "\n" +
+    "						<div class=\"spacing-5\"></div>\n" +
+    "\n" +
+    "		                <div>\n" +
+    "\n" +
+    "		                	<!--TEMP?-->\n" +
+    "							<!--TABLE OF ORDERS-->\n" +
+    "							<!--WERE DOING IMMUTALBE STRUCURE-->\n" +
+    "				    		<h4>Orders</h4>\n" +
+    "							<table class=\"table table-striped table-hover\">\n" +
+    "			                    <thead>\n" +
+    "			                        <tr>\n" +
+    "			                            <th>setAlpha</th>\n" +
+    "			                            <th>setBeta</th>\n" +
+    "			                            <th>Id</th>\n" +
+    "			                        </tr>\n" +
+    "			                    <thead>\n" +
+    "			                    <tbody>\n" +
+    "			                        <tr ng-repeat=\"order in orders\">\n" +
+    "			                            <td>{{order.setAlpha}}</td>\n" +
+    "			                            <td>{{order.setBeta}}</td>\n" +
+    "			                            <td>{{order.id}}</td>\n" +
+    "			                        </tr>\n" +
+    "			                    </tbody>\n" +
+    "			                </table>\n" +
+    "			    		</div>\n" +
+    "\n" +
     "			    	</div>\n" +
-    "					<div class=\"col-md-6\">\n" +
+    "					<div class=\"col-md-12\">\n" +
     "        				<cytoscape graph-options=\"options\" graph-elements=\"elementsObj\" graph-layout=\"layout\" graph-style=\"style\"></cytoscape>\n" +
     "			    	</div>\n" +
     "		    	</div>\n" +
@@ -6571,12 +6622,14 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function($tem
     "				        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "				        	<div style=\"padding:15px\">\n" +
     "\n" +
-    "					            <h1 style=\"text-align:left;font-size:30px;color:rgba(255,255,255,0.9);font-weight:400;\">\n" +
-    "					            	<a style=\"color:white\" ng-click=\"$event.stopPropagation();\" href=\"market/{{stateParams.id}}/{{market.string}}\" ui-sref=\"marketPair({ setAlpha: stateParams.id, setBeta:market.string })\">\n" +
+    "					            <h1 style=\"text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;\">\n" +
+    "					            	<a style=\"color:white;word-break:break-word\" ng-click=\"$event.stopPropagation();\" href=\"market/{{stateParams.id}}/{{market.string}}\" ui-sref=\"marketPair({ setAlpha: stateParams.id, setBeta:market.string })\">\n" +
     "\n" +
     "\n" +
-    "					            		<span ng-repeat=\"item in market.string.split(',')\">{{item}}</span>\n" +
-    "					            		<!--{{market.string}}-->\n" +
+    "					            		<!--<span ng-repeat=\"item in market.string.split(',')\">\n" +
+    "					            			{{item}}<br>\n" +
+    "					            		</span>-->\n" +
+    "					            		{{market.string}}\n" +
     "\n" +
     "\n" +
     "					            	</a>\n" +
@@ -6700,13 +6753,19 @@ angular.module("marketPair/index.tpl.html", []).run(["$templateCache", function(
     "        	<div class=\"container\">\n" +
     "	        	<div class=\"row\">\n" +
     "	            	<div class=\"col-xs-10\">\n" +
-    "			            <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\"><a style=\"color:white\" href=\"market/{{market}}\" ui-sref=\"market({id:market})\">{{market}}</a> | <a style=\"color:white\"  href=\"market/{{market1}}\" ui-sref=\"market({id:market1})\">{{market1}}</a></h1>\n" +
+    "			            <h1 style=\"text-align:left;font-size:30px;color:rgba(255,255,255,0.9);font-weight:400;\">\n" +
+    "			            	<span style=\"word-break:break-word\"><a style=\"color:white;font-weight:700\" href=\"market/{{market}}\" ui-sref=\"market({id:market})\">{{market}}</a></span>\n" +
+    "			            	<br>\n" +
+    "			            	<span style=\"word-break:break-word\"><a style=\"color:white;font-weight:700\"  href=\"market/{{market1}}\" ui-sref=\"market({id:market1})\">{{market1}}</a></span>\n" +
+    "			            </h1>\n" +
+    "\n" +
     "			        	<h5 style=\"color:white\">\n" +
     "			        		<span style=\"color:white\">{{chart.series[0].data[chart.series[0].data.length-1][1].toFixed(2)}}</span> | \n" +
     "			        		<span style=\"color:green\">{{percentChange.toFixed(2)}}%</span> Daily Change | \n" +
     "			        		<span style=\"color:red\">{{chart.series[1].data[chart.series[1].data.length-1][1].toFixed(2)}}</span> Daily Trade Volume | \n" +
     "			        		<span>{{marketDepth.toFixed(2)}}</span> Total Market Depth\n" +
     "			        	</h5>\n" +
+    "\n" +
     "			            <h5 style=\"color:white\">\n" +
     "			            	Last Trade Price: <span style=\"color:white\">{{chart.series[0].data[chart.series[0].data.length-1][1].toFixed(2)}}</span> | \n" +
     "			            	Highest Bid <span style=\"color:white\">{{bidAskChart.series[0].data[bidAskChart.series[0].data.length-1][0].toFixed(2)}}</span> | \n" +
@@ -6746,6 +6805,18 @@ angular.module("marketPair/index.tpl.html", []).run(["$templateCache", function(
     "	        	-->\n" +
     "				<div style=\"padding:16px;\">\n" +
     "					<highchart config=\"chart\"></highchart>\n" +
+    "					<!--<h5 style=\"\">\n" +
+    "		        		<span>{{chart.series[0].data[chart.series[0].data.length-1][1].toFixed(2)}}</span> | \n" +
+    "		        		<span style=\"color:green\">{{percentChange.toFixed(2)}}%</span> Daily Change | \n" +
+    "		        		<span style=\"color:red\">{{chart.series[1].data[chart.series[1].data.length-1][1].toFixed(2)}}</span> Daily Trade Volume | \n" +
+    "		        		<span>{{marketDepth.toFixed(2)}}</span> Total Market Depth\n" +
+    "		        	</h5>\n" +
+    "		            <h5 style=\"color:white\">\n" +
+    "		            	Last Trade Price: <span>{{chart.series[0].data[chart.series[0].data.length-1][1].toFixed(2)}}</span> | \n" +
+    "		            	Highest Bid <span>{{bidAskChart.series[0].data[bidAskChart.series[0].data.length-1][0].toFixed(2)}}</span> | \n" +
+    "		            	Lowest Ask <span>{{bidAskChart.series[1].data[0][0].toFixed(2)}}</span>\n" +
+    "		            </h5>\n" +
+    "		        	-->\n" +
     "				</div>\n" +
     "			</div>\n" +
     "\n" +
@@ -6762,9 +6833,17 @@ angular.module("marketPair/index.tpl.html", []).run(["$templateCache", function(
     "			-->\n" +
     "\n" +
     "			<div class=\"card\" ng-show=\"pluralistic\">\n" +
+    "				<div style=\"background:url('https://source.unsplash.com/1600x900/?explore,discover,alpha,asset,lattice,dimension');min-height:100px\" class=\"imageContainerSmall\">\n" +
+    "	                <div style=\"background:rgba(0,0,0,0.75);height:100px\" class=\"imageContainerSmallDiv\">  \n" +
+    "	                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "	                        <div style=\"padding:15px\">\n" +
+    "	                            <h2 style=\"color:white\">Pluralistic Market</h2>\n" +
+    "	                            <h5 style=\"color:white\">Order Paths and connections between the two markets. Computed Immutable Strucutre. Lattice / Graph.</h5>\n" +
+    "	                        </div>\n" +
+    "	                    </div>\n" +
+    "	                </div>\n" +
+    "	            </div>\n" +
     "				<div style=\"padding:16px;\">\n" +
-    "					<h2>Pluralistic Market</h2>\n" +
-    "					<h5>Order Paths and connections between the two markets. Computed Immutable Strucutre. Lattice / Graph.</h5>\n" +
     "					<highchart config=\"parallelCoordinates\"></highchart>\n" +
     "				</div>\n" +
     "			</div>\n" +

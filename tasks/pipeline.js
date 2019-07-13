@@ -64,7 +64,9 @@ var jsFilesToInject = [
   'bower_components/angularjs-toaster/toaster.min.js',
 
   'bower_components/highcharts/highstock.js',
+  'bower_components/highcharts/modules/parallel-coordinates.js',
   'bower_components/highcharts/highcharts-more.js',
+
   'bower_components/highcharts/indicators/indicators.js',
   
   //'bower_components/highcharts/indicators/bollinger-bands.js',
