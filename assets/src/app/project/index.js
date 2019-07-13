@@ -659,8 +659,8 @@ angular.module( 'conexus.project', [
     $scope.newReaction = {};
     $scope.project = project;
     $scope.searchQuery = [];
-    $scope.transactionsFrom = transactionsFrom;
-    $scope.transactionsTo = transactionsTo;
+    $scope.transactionsFrom = transactionsFrom.map(function(obj){obj.model='TRANSACTION';return obj});
+    $scope.transactionsTo = transactionsTo.map(function(obj){obj.model='TRANSACTION';return obj});
     $scope.transactions = $scope.transactionsFrom.concat($scope.transactionsTo);
 
     $scope.chart = {
@@ -724,7 +724,7 @@ angular.module( 'conexus.project', [
 
         var timeObject = new Date(); 
         var exampleSetExpense = [
-            {to:{title:'Trevor Overman', id:project.id, avatarUrl:project.avatarUrl}, tags:'PAYROLL,HUMAN', content:'PAY TREVOR'},
+            {to:{title:'Trevor Overman', id:project.id, avatarUrl:project.avatarUrl}, tags:'PAYROLL,HUMAN', content:'PAY TREVOR', model:'TRANSACTION',},
             {to:{title:'Hot Shot Programmer', id:project.id, avatarUrl:project.avatarUrl}, content:'PAY PROGRAMMER', tags:'PAYROLL,HUMAN'},
             {to:{title:'Sarah Human', id:project.id, avatarUrl:project.avatarUrl}, content:'PAY SARAH',  tags:'PAYROLL,HUMAN'},
             {to:{title:'David Create', id:project.id, avatarUrl:project.avatarUrl}, content:'PAY DAVID',  tags:'PAYROLL,HUMAN'},

@@ -16,9 +16,14 @@
                 <li><a ng-click="" href="#">Motions</a></li>
             </ul>
         </div>
-        <div class="card" ng-click="">
+        <div class="card" ng-click="cardDetailToggle(task)">
             <div style="background:url('https://source.unsplash.com/1600x900/?explore,discover')" class="imageContainerSmall">
                 <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                    <div style="text-align:right;padding:15px;position:absolute;right:0">
+                        <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(task)">
+                            <i class="fas fa-chevron-down"></i>
+                        </a>
+                    </div>
                     <div style="margin-top: auto;margin-bottom: auto;">
                         <div class="container">
                             <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">{{task.title}}</h1>
@@ -28,9 +33,6 @@
             </div>
             <div class="padding:16px">
                 <div class="col-sm-12" style="padding:16px">
-                    <div style="float:right;text-align:right">
-                        <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(task)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
-                    </div>
                     <p><a ng-repeat="tag in task.tags track by $index" href="market/{{tag.trim()}}" ui-sref="market({id:tag.trim()})"> {{tag.trim()}}<span ng-show="!$last">,</span></a></p>
                     <p><span style="display:inline" ng-bind-html="renderContent(task.content)"></span></p>
                     <p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="task.createdAt"></p>
@@ -40,10 +42,10 @@
             <div style="clear:both"></div>
 
             <div class="card-footer">
-                <a ng-click="$event.stopPropagation();createReaction(task, 'plus')"><i class="fa fa-angle-up"></i> {{task.reactions.plus}} like </a> 
-                <a ng-click="$event.stopPropagation();createReaction(task, 'minus')" ><i class="fa fa-angle-down"></i> {{task.reactions.minus}} dislike </a>
-                <a ng-click="reply(task)"><i class="fa fa-comment-o"></i> comment </a>
-                <a ng-click="validationToggle(task)"><i class="fa fa-check"></i> validate </a>
+                <a ng-click="$event.stopPropagation();createReaction(task, 'plus')"><i class="fas fa-angle-up"></i> {{task.reactions.plus}} like </a> 
+                <a ng-click="$event.stopPropagation();createReaction(task, 'minus')" ><i class="fas fa-angle-down"></i> {{task.reactions.minus}} dislike </a>
+                <a ng-click="reply(task)"><i class="far fa-comment"></i> comment </a>
+                <a ng-click="validationToggle(task)"><i class="fas fa-check"></i> validate </a>
             </div>
 
             <div ng-show="task.showReply" class="card-footer">
@@ -52,7 +54,6 @@
                     <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
                 </form>
             </div>
-
         </div>
     </div>
 
@@ -151,8 +152,6 @@
 
 
                         <!--FIXED TASK VALIDATION-->
-
-
                         <div ng-repeat="validationModel in newTime.validationModels">
 
                             <div layout="">
@@ -246,5 +245,5 @@
             </div>
         </div>
     </div>
-    <div class="spacing-50"></div>
+    <div class="spacing-10"></div>
 </div>

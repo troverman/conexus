@@ -69,8 +69,14 @@
 
 	        	<div style="background:url('https://source.unsplash.com/1600x900/?')" class="imageContainerSmall">
 	                <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+	                	<div style="text-align:right;padding:15px;position:absolute;right:0">
+                            <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
+                                <i class="fas fa-chevron-down"></i>
+                            </a>
+                            <div style="clear:both"></div>
+                        </div>
 	                    <div style="margin-top: auto;margin-bottom: auto;">
-	                        <div class="container">
+	                        <div style="padding:15px">
 	                            <span ng-repeat="(key, value) in item.setAlpha">
 	                                <a style="color:white" href="market/{{key}}" ui-sref="market({id:key})">{{key}}</a>
 	                            </span>
@@ -84,33 +90,26 @@
 	                </div>
 	            </div>
 	            <div style="padding:16px">
-	            	<div style="float:right;text-align:right">
-                        <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
-                    </div> 
-
                     <div class="row">
 	                    <div class="col-xs-2">
 	                        <span ng-repeat="(key, value) in item.setAlpha">
 	                            <p style="font-weight:400">{{value}} <a href="market/{{key}}" ui-sref="market({id:key})">{{key}}</a></p>
 	                        </span>
 	                    </div>
-
 	                    <div class="col-xs-1"><i class="fa fa-exchange"></i></div>
-
 	                    <div class="col-xs-2">
 	                        <span ng-repeat="(key, value) in item.setBeta">
 	                            <p style="font-weight:400">{{value}} <a href="market/{{key}}" ui-sref="market({id:key})">{{key}}</a></p>
 	                        </span>
 	                    </div>
-                    </div>
-                    
+                   	</div>
 					<p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="item.createdAt"></p>
 	            </div>
 	            <div class="card-footer">
-	                <a href="#" ng-click="createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 
-	                <a href="#" ng-click="createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
-	                <a href="#" ng-click="reply(item)"><i class="fa fa-comment-o"></i> comment </a>
-	                <a class="pull-right" style="padding:0px;" href="order/{{item.id}}" ui-sref="order({id:item.id})"><i class="fa fa-link grey"></i></a>
+	                <a href="#" ng-click="createReaction(item, 'plus')"><i class="fas fa-angle-up"></i> {{item.reactions.plus}} like </a> 
+	                <a href="#" ng-click="createReaction(item, 'minus')" ><i class="fas fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
+	                <a href="#" ng-click="reply(item)"><i class="far fa-comment"></i> comment </a>
+	                <a class="pull-right" style="padding:0px;" href="order/{{item.id}}" ui-sref="order({id:item.id})"><i class="fas fa-link grey"></i></a>
 	            </div>
 	        </div>
 		</div>

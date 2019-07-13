@@ -22,6 +22,7 @@ module.exports = {
 			});
 		}
 
+		//lol
 		else if (req.query.project){
 			Task.native(function(err, task) {
 				task.find({"associatedModels.address":{$in :[project]}})

@@ -2,15 +2,19 @@
     <div style="background:url('https://source.unsplash.com/1600x900/?{{item.tags}}');min-height:200px" class="imageContainerSmall">
         <div style="background:rgba(0,0,0,0.75);height:200px" class="imageContainerSmallDiv">
             <div style="text-align:right;padding:15px;position:absolute;right:0">
-                <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(token)">
-                    <!--<i class="fas fa-ellipsis-v"></i>-->
+                <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
                     <i class="fas fa-chevron-down"></i>
                 </a>
-                <div style="clear:both"></div>
             </div>
             <div style="margin-top: auto;margin-bottom: auto;">
                 <div style="padding:15px">
-                    <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;"><a ng-click="$event.stopPropagation();" style="color:white" href="task/{{item.id}}" ui-sref="task({id:item.id})">{{item.title}}</a></h1>
+                    <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">
+                        <a ng-click="$event.stopPropagation();" style="color:white" href="task/{{item.id}}" ui-sref="task({id:item.id})">{{item.title}}</a>
+                    </h1>
+                    <!--VARIABLE-->
+                    <h5 ng-click="$event.stopPropagation()">
+                        <a style="color:white" href="task/{{item.id}}" ui-sref="task({id:item.id})">{{item.id}}</a>
+                    </h5>
                 </div>
             </div>
         </div>

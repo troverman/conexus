@@ -3,7 +3,10 @@
     <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
         <div style="margin-top: auto;margin-bottom: auto;">
         	<div class="container">
-	            <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;"><img style="height:64px;padding:15px;" ng-src="http://identicon-1132.appspot.com/{{token.string.split('+').join('') || stateParams.id.split('+').join('')}}?s=8&p=8&f=png"> {{token.string ||  stateParams.id}}</h1>
+	            <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;word-break: break-word;align-items:center;">
+	            	<img align="left" style="height:64px;padding:15px;" ng-src="http://identicon-1132.appspot.com/{{token.string.split('+').join('') || stateParams.id.split('+').join('')}}?s=8&p=8&f=png"> 
+	            	<span>{{token.string ||  stateParams.id}}</span>
+	            </h1>
 	        </div>
         </div>
     </div>
@@ -22,7 +25,7 @@
     </div>
 
     <!--INFORMATION-->
-    <div class="row" ng-show="selectedTab=='INFORMATION'">
+    <div class="row" ng-if="selectedTab=='INFORMATION'">
         <div class="card">
 	    	<!--
 	    	<div style="background:url('https://source.unsplash.com/1600x900/?lattice,geometry,crystal,code');height:100px;min-height:100px" class="imageContainerSmall">
@@ -126,7 +129,7 @@
     </div>
 
     <!--MARKETS-->
-	<div class="row" ng-show="selectedTab=='MARKETS'">
+	<div class="row" ng-if="selectedTab=='MARKETS'">
 
 		<div class="spacing-5"></div>
 
@@ -263,7 +266,7 @@
     </div>
 
     <!--ANALYSIS-->
-	<div class="row" ng-show="selectedTab=='ANALYSIS'">
+	<div class="row" ng-if="selectedTab=='ANALYSIS'">
 
 		<div class="card">
 

@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-sm-2" style="padding-left:0px;padding-right:0px;">
+    <div class="col-sm-3" style="padding-left:0px;padding-right:0px;">
         <div class="card">
             <div style="padding:16px">
                 <div class="" ng-repeat="channel in channels">
@@ -9,17 +9,15 @@
             <button ng-click="contentToggle()" class="btn btn-default log-btn">+ Channel</button>
         </div>
     </div>
-    <div class="col-sm-10" style="padding-left:0px;padding-right:0px;">
-
+    <div class="col-sm-p" style="padding-left:0px;padding-right:0px;">
         <div class="card" ng-click="contentToggle()">
             <button style="width:100%" class="btn btn-default log-btn">+ Content</button>
         </div>
-
         <div ng-repeat="item in contentList">
             <div class="card">
                 <div style="padding:16px;">
                     <div style="float:right;text-align:right">
-                        <a ng-click="$event.stopPropagation();tokensToggle(item)"><span style="color:gray"><i class="fa fa-ellipsis-v"></i></span></a>
+                        <a ng-click="$event.stopPropagation();tokensToggle(item)"><span style="color:gray"><i class="fa fa-chevron-down"></i></span></a>
                     </div>
                     <div>
                         <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="images/avatar.png">
@@ -29,19 +27,12 @@
                     <div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></div>
                 </div>
                 <div class="card-footer">
-                    <a href="#" ng-click="createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 
-                    <a href="#" ng-click="createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
-                    <a href="#" ng-click="reply(item)"><i class="fa fa-comment-o"></i> comment </a>
-                    <a style="padding:0px" class="pull-right" href="content/{{item.id}}" ui-sref="content({id:item.id})"><i class="fa fa-link grey"></i></a>
-                </div>
-                <div ng-show="item.showReply" class="card-footer">
-                    <form role="form" ng-submit="createContent(item)">
-                        <text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
-                        <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
-                    </form>
+                    <a href="#" ng-click="createReaction(item, 'plus')"><i class="fas fa-angle-up"></i> {{item.reactions.plus}} like </a> 
+                    <a href="#" ng-click="createReaction(item, 'minus')" ><i class="fas fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
+                    <a href="#" ng-click="reply(item)"><i class="far fa-comment"></i> comment </a>
+                    <a style="padding:0px" class="pull-right" href="content/{{item.id}}" ui-sref="content({id:item.id})"><i class="fas fa-link grey"></i></a>
                 </div>
             </div>
         </div>
-
     </div>
 </div>

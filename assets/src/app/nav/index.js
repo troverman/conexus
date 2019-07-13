@@ -1219,11 +1219,6 @@ angular.module( 'conexus.nav', [
             };
 
 
-
-
-
-
-
             //TODO: UNIFY WITH TIMER
             $scope.updateCount = function() {
 
@@ -1246,12 +1241,6 @@ angular.module( 'conexus.nav', [
 
 
             };
-
-
-
-
-
-
 
 
             $mdSidenav('time').toggle();
@@ -1350,20 +1339,42 @@ angular.module( 'conexus.nav', [
 
         $scope.closeAllNav();
         if($rootScope.currentUser){
-            if(newValidation){$scope.newValidation = newValidation;}
-            if(!newValidation){
-                $scope.newValidation = {
-                    validation:{},
-                    user: $rootScope.currentUser.id
-                }
+            $scope.newValidation = {
+                validation:{},
+                user: $rootScope.currentUser.id
+            };
+            if(newValidation){
+
+                //GET ASSOCIATED MDOELS
+                //TODO REDETERMINED CONTEXT.. TAGS.. ETC --> PERSPECTIVE
+                //UX SHOULD DO SET in validation sidebar
+                $scope.newValidation.associatedModels = [
+                    {
+                        text:newValidation.id,
+                        id:newValidation.id,
+                        type:newValidation.model
+                    },
+                    {
+                        text:'PLACEHOLDER',
+                        id:1,
+                        type:'PLACEHOLDER'
+                    }
+                ];
+
+                //TODO
+                $scope.context = [{text:'general'}];
+
+            }
+            else{
+                $scope.context = [{text:'general'}];
             }
 
-            //TODO
-            $scope.context = [{text:'general'}];
 
             //MAP FROM []-->{}
             $scope.$watch('context', function(){
-                for (x in $scope.context){$scope.newValidation.validation[$scope.context[x].text] = 0;}
+                for (x in $scope.context){
+                    $scope.newValidation.validation[$scope.context[x].text] = 0;
+                }
             }, true);
 
             //BRIDGE BTW TASK CONTEXT (SELF DEFINED IN TIME TO PROJ CONTEXT VALIDATED THROUGH TASK) IE
@@ -1660,6 +1671,15 @@ angular.module( 'conexus.nav', [
             //$scope.newTransaction.to = $scope.newTransaction.to[0].id;
 
             console.log($scope.newTransaction);
+
+
+            //SELF VALIDATION HERE! --> TAGS
+
+            
+
+
+
+
 
             TransactionModel.create(newTransaction).then(function(model){
                 

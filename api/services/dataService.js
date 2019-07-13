@@ -549,6 +549,7 @@ module.exports = {
 	        object[stack.shift()] = newValue;
 	    };
 
+	    //:)
 		function powersetDecompose(theArray, obj){
 			//console.log(theArray);
 			//RESTRUCT TO name.. and object list  
@@ -577,6 +578,7 @@ module.exports = {
 			}
 		};
 
+		//:)
 		//TODO: WITH powersetDecompose
 		function identityWalk(identiferSet, num, iterator){
 			num++
@@ -654,6 +656,7 @@ module.exports = {
 
 
 		//TODO: WITH powersetDecompose
+		//:)
 		function train(identiferSet, num, iterator){
 
 			num++

@@ -169,7 +169,7 @@ angular.module( 'conexus.tasks', [
 
     //KINDA HACKY? CAN USE STATES.. ETC
     console.log($location.search())
-    if ($location.search()){
+    if ($location.search().tags){
         $scope.filterContent($location.search().tags);
     }
 

@@ -129,15 +129,11 @@ module.exports = {
 			amount: req.param('amount'),
 			user: req.param('user'),
 			creator: req.param('creator'),
-
 			content: req.param('content'),
 			stream: req.param('stream'),
-
-			type: req.param('type'), // HUMAN ETC 
 			source: req.param('source'), 
 			startTime: req.param('startTime'),
 			associatedModels: req.param('associatedModels'),
-
 			validationModels: req.param('validationModels'),
 			tags: req.param('tags'),
 

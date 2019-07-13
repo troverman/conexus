@@ -2,8 +2,7 @@
 	<div ng-click="$event.stopPropagation();cardDetailToggle(item)" style="background:url('https://source.unsplash.com/1600x900/?{{item.tags}}');min-height:200px" class="imageContainerSmall">
         <div style="background:rgba(0,0,0,0.75);height:200px" class="imageContainerSmallDiv"> 
             <div style="text-align:right;padding:15px;position:absolute;right:0">
-                <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(token)">
-                    <!--<i class="fas fa-ellipsis-v"></i>-->
+                <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
                     <i class="fas fa-chevron-down"></i>
                 </a>
                 <div style="clear:both"></div>
@@ -20,12 +19,13 @@
     	<div style="">
 			<span style="display:inline;height:100%" ng-bind-html="renderContent(item.content)"></span>
 		</div>
+        <!--TODO: ITEM INFORMATION OBJ..-->
     	<h5>{{item.amountSet}} <span ng-repeat="asset in item.identiferSet"><a ng-click="$event.stopPropagation();" href="market/{{asset}}" ui-sref="market({id:asset})">{{asset}}</a></h5>
     </div>
     <div class="card-footer">
-        <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 
-        <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
-        <a ng-click="$event.stopPropagation();reply(item)"><i class="fa fa-comment-o"></i> comment </a>
+        <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fas fa-angle-up"></i> {{item.reactions.plus}} like </a> 
+        <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fas fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
+        <a ng-click="$event.stopPropagation();reply(item)"><i class="far fa-comment"></i> comment </a>
         <a ng-click="$event.stopPropagation();" class="pull-right" style="padding:0px;" href="item/{{item.id}}" ui-sref="item({id:item.id})"><i class="fas fa-link grey"></i></a>
     </div>
 </div>
