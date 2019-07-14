@@ -27,11 +27,11 @@
                             <div style="padding:15px">
                                 <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">Order</h1>
                                 <span ng-repeat="(key, value) in order.setAlpha">
-                                    <a style="color:white" href="market/{{key}}" ui-sref="market({id:key})">{{key}}</a>
+                                    <a style="color:white" href="market/{{key}}" ui-sref="market({id:key})">{{key}} </a>
                                 </span>
                                 <br>
                                 <span ng-repeat="(key, value) in order.setBeta">
-                                    <a style="color:white" href="market/{{key}}" ui-sref="market({id:key})">{{key}}</a>
+                                    <a style="color:white" href="market/{{key}}" ui-sref="market({id:key})">{{key}} </a>
                                 </span>
                                 <h5 style="color:white"><span style="font-size:10px">{{order.type}}</span></h5>
                             </div>
@@ -40,19 +40,14 @@
                 </div>
                 <div style="padding:16px">
 
-                    <div style="float:right;text-align:right">
-                        <a style="color:gray;" ng-click="$event.stopPropagation();tokensToggle(order)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
-                        <div style="clear:both"></div>
-                    </div>  
-
-                    <div class="spacing-10"></div>
+                    <div class="spacing-5"></div>
 
                     <a href="member/{{order.user.username}}" ui-sref="member.activity({path:order.user.username})">
                         <img class="card-avatar" ng-src="{{order.user.avatarUrl}}" src="{{order.user.avatarUrl}}" err-src="/images/avatar.png">
                         <b>{{order.user.username}}</b>
                     </a>
 
-                    <div class="spacing-10"></div>
+                    <div class="spacing-5"></div>
                    
                     <div class="row">
                         <div class="col-sm-6" style="padding:0px">

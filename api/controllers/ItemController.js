@@ -78,13 +78,19 @@ module.exports = {
 			dataHash: req.param('dataHash'),
 			tags: req.param('tags'),
 			location: req.param('location'),
-			//associatedValidations: req.param('associatedValidations'),
 			info: req.param('info'),
 			amountSet: req.param('amountSet'),
 			isGenerator: req.param('isGenerator'),
 			user: req.param('user'),
 			creator: req.param('user'),
 			owner: req.param('owner'),
+
+			//DONT SAVE 
+			//associatedValidations: req.param('associatedValidations'),
+
+			//JSON TO STORE ITEM SPECIFIC DATA.. 
+			data: req.param('data'),
+
 			//PATCH
 			reactions: {plus:0,minus:0},
 		};

@@ -1235,7 +1235,7 @@ angular.module( 'conexus.member', [
             $scope.newReaction.amount = 1;
             $scope.newReaction.type = type;
             $scope.newReaction.user = $rootScope.currentUser.id;
-            var transactionIndex = $scope.time.map(function(obj){return obj.id}).indexOf(item.id);
+            var transactionIndex = $scope.transactions.map(function(obj){return obj.id}).indexOf(item.id);
             if (timeIndex != -1){
                 $scope.newReaction.associatedModels = [{type:'TRANSACTION', id:item.id}];
                 $scope.transactions[transactionIndex].reactions[type]++;
@@ -1345,11 +1345,27 @@ angular.module( 'conexus.member', [
             amountSet:asset,
             user: $scope.member.id
         };
+
         console.log(query);
-        $location.search('assets',asset)
+
+        console.log($location.search().assets)
+
+        //if ($location.search().assets){
+        //    var assetSet = [$location.search().assets];
+        //    assetSet.push(asset);
+        //    $location.search('assets',assetSet);
+        //}
+        //else{
+        //    $location.search('assets',asset);
+        //}
+
         TransactionModel.getSome(query).then(function(transactionModels){
             $rootScope.stateIsLoading = false;
             $scope.transactions = transactionModels;
+
+            $scope.updateGraph();
+
+
         });
 
     };
@@ -1369,167 +1385,175 @@ angular.module( 'conexus.member', [
 
 
     //WORK HERE!! :)
-    $scope.sumFlow = [];
-    $scope.sumFrom = []
-    $scope.sumTo = [];
-    $scope.sumTransactions = [];
-    $scope.transactions = $scope.transactions.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);}).reverse(); 
+    //USD HARD CODED. 
+    //REDO IT
 
-    console.log($scope.transactions);
+    //THERE ARE MORE THAN TRANSACTIONTO POPULATE .... YIk
+    $scope.updateGraph = function(){
+        $scope.sumFlow = [];
+        $scope.sumFrom = []
+        $scope.sumTo = [];
+        $scope.sumTransactions = [];
+        $scope.transactions = $scope.transactions.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);}).reverse(); 
 
-    //FXN TO CHANGE ASSETS --> ||| DEFAUT ASSET SERIES ARE BASED ON RECENT HISTORY... SORTED BY AMOUNT, MAGNITUDE IS RELATIVE
-    console.log($scope.sortedTransactionAssets)
+        console.log($scope.transactions);
 
-    //SERIES FOR EACH ASSET
-    //$scope.multiSum = [];
-    //$scope.transactions.reduce(function(a,b,i) {
-    //    var data = {};
-    //    console.log(a,b,i);
-    //    for (x in Object.keys(b.amountSet)){
-    //        var amount = b.amountSet[Object.keys(b.amountSet)[x]] || 0;
-    //        var sum = parseFloat(a[Object.keys(b.amountSet)[x]][1])+parseFloat(amount);
-    //        data[Object.keys(b.amountSet)[x]] = [new Date(b.createdAt).getTime(), sum];
-    //    }
-    //    return $scope.multiSum[i] = data;
-    //},[[0,0],[0,0]]);
-    //console.log($scope.multiSum);
+        //FXN TO CHANGE ASSETS --> ||| DEFAUT ASSET SERIES ARE BASED ON RECENT HISTORY... SORTED BY AMOUNT, MAGNITUDE IS RELATIVE
+        console.log($scope.sortedTransactionAssets)
 
-    //series for tag, series for asset..
+        //SERIES FOR EACH ASSET
+        //$scope.multiSum = [];
+        //$scope.transactions.reduce(function(a,b,i) {
+        //    var data = {};
+        //    console.log(a,b,i);
+        //    for (x in Object.keys(b.amountSet)){
+        //        var amount = b.amountSet[Object.keys(b.amountSet)[x]] || 0;
+        //        var sum = parseFloat(a[Object.keys(b.amountSet)[x]][1])+parseFloat(amount);
+        //        data[Object.keys(b.amountSet)[x]] = [new Date(b.createdAt).getTime(), sum];
+        //    }
+        //    return $scope.multiSum[i] = data;
+        //},[[0,0],[0,0]]);
+        //console.log($scope.multiSum);
 
-    /*
-    $scope.transactionsByIdentifier = {};
-    $scope.transactions.map(function(obj){
-        for (y in Object.keys(obj.amountSet)){
-            if (!$scope.transactionsByIdentifier[Object.keys(obj.amountSet)]){$scope.transactionsByIdentifier[Object.keys(obj.amountSet)]=[obj];}
-            else{$scope.transactionsByIdentifier[Object.keys(obj.amountSet)].push(obj)}   
-        }
-    });
+        //series for tag, series for asset..
 
-    $scope.transactionsByTags = {};
-    $scope.transactions.map(function(obj){
-        for (y in obj.tags){
-            if (!$scope.transactionsByTags[obj.tags[y].trim().toLowerCase()]){$scope.transactionsByTags[obj.tags[y]]=[obj];}
-            else{$scope.transactionsByTags[obj.tags[y].trim().toLowerCase()].push(obj)}   
-        }
-    });
-
-    //console.log($scope.transactionsByIdentifier);
-    //console.log($scope.transactionsByTags);
-
-    //SERIES FOR EACH TAG
-    for (x in Object.keys($scope.transactionsByTags)){
-        $scope.tagChart.series.push({
-            id: 'Tags '+x,
-            type: 'area',
-            name: Object.keys($scope.transactionsByTags)[x],
-            data: [],
+        /*
+        $scope.transactionsByIdentifier = {};
+        $scope.transactions.map(function(obj){
+            for (y in Object.keys(obj.amountSet)){
+                if (!$scope.transactionsByIdentifier[Object.keys(obj.amountSet)]){$scope.transactionsByIdentifier[Object.keys(obj.amountSet)]=[obj];}
+                else{$scope.transactionsByIdentifier[Object.keys(obj.amountSet)].push(obj)}   
+            }
         });
-        for (y in $scope.transactionsByTags[Object.keys($scope.transactionsByTags)[x]]){
-            var amount = $scope.transactionsByTags[Object.keys($scope.transactionsByTags)[x]][y].amountSet['USD'] || 0;
-            var data = [new Date($scope.transactionsByTags[Object.keys($scope.transactionsByTags)[x]][y].createdAt).getTime(), amount];
-            $scope.tagChart.series[x].data.push(data);
-        }
-    }
 
-    //SERIES FOR EACH ASSET
-    for (x in Object.keys($scope.transactionsByIdentifier)){
-        $scope.assetChart.series.push({
-            id: 'Identifer '+x,
-            type: 'area',
-            name: Object.keys($scope.transactionsByIdentifier)[x],
-            data: [],
+        $scope.transactionsByTags = {};
+        $scope.transactions.map(function(obj){
+            for (y in obj.tags){
+                if (!$scope.transactionsByTags[obj.tags[y].trim().toLowerCase()]){$scope.transactionsByTags[obj.tags[y]]=[obj];}
+                else{$scope.transactionsByTags[obj.tags[y].trim().toLowerCase()].push(obj)}   
+            }
         });
-        for (y in $scope.transactionsByIdentifier[Object.keys($scope.transactionsByIdentifier)[x]]){
-            var amount = $scope.transactionsByIdentifier[Object.keys($scope.transactionsByIdentifier)[x]][y].amountSet[Object.keys($scope.transactionsByIdentifier)[x]] || 0;
-            var data = [new Date($scope.transactionsByIdentifier[Object.keys($scope.transactionsByIdentifier)[x]][y].createdAt).getTime(), amount];
-            $scope.assetChart.series[x].data.push(data);
-        }
-    }
-    */
 
+        //console.log($scope.transactionsByIdentifier);
+        //console.log($scope.transactionsByTags);
 
-    console.log($scope.assetChart);
-    $scope.transactions.reduce(function(a,b,i) {
-
-        if (!b.from){b.from = {id:null}}
-        if (!b.to){b.to = {id:null}}
-
-        if(b.from.id == $scope.member.id){
-            var amount = b.amountSet['USD'] || 0;
-            var diff =  parseFloat(a[1])-parseFloat(amount)
-            var data = [new Date(b.createdAt).getTime(), diff];
-            return $scope.sumTransactions[i] = data;
+        //SERIES FOR EACH TAG
+        for (x in Object.keys($scope.transactionsByTags)){
+            $scope.tagChart.series.push({
+                id: 'Tags '+x,
+                type: 'area',
+                name: Object.keys($scope.transactionsByTags)[x],
+                data: [],
+            });
+            for (y in $scope.transactionsByTags[Object.keys($scope.transactionsByTags)[x]]){
+                var amount = $scope.transactionsByTags[Object.keys($scope.transactionsByTags)[x]][y].amountSet['USD'] || 0;
+                var data = [new Date($scope.transactionsByTags[Object.keys($scope.transactionsByTags)[x]][y].createdAt).getTime(), amount];
+                $scope.tagChart.series[x].data.push(data);
+            }
         }
 
-        if(b.to.id == $scope.member.id){
-            var amount = b.amountSet['USD'] || 0;
-            var sum =  parseFloat(a[1])+parseFloat(amount)
-            var data = [new Date(b.createdAt).getTime(), sum];
-            return $scope.sumTransactions[i] = data;
+        //SERIES FOR EACH ASSET
+        for (x in Object.keys($scope.transactionsByIdentifier)){
+            $scope.assetChart.series.push({
+                id: 'Identifer '+x,
+                type: 'area',
+                name: Object.keys($scope.transactionsByIdentifier)[x],
+                data: [],
+            });
+            for (y in $scope.transactionsByIdentifier[Object.keys($scope.transactionsByIdentifier)[x]]){
+                var amount = $scope.transactionsByIdentifier[Object.keys($scope.transactionsByIdentifier)[x]][y].amountSet[Object.keys($scope.transactionsByIdentifier)[x]] || 0;
+                var data = [new Date($scope.transactionsByIdentifier[Object.keys($scope.transactionsByIdentifier)[x]][y].createdAt).getTime(), amount];
+                $scope.assetChart.series[x].data.push(data);
+            }
         }
+        */
 
-    },[0,0]);
 
-    //sumFrom
-    $scope.transactions.reduce(function(a,b,i) {
+        console.log($scope.assetChart);
+        $scope.transactions.reduce(function(a,b,i) {
 
-        if(b.from.id == $scope.member.id){
-            var amount = b.amountSet['USD'] || 0;
-            var sum =  parseFloat(a[1])+parseFloat(amount)
-            var data = [new Date(b.createdAt).getTime(), sum];
-            return $scope.sumFrom[i] = data
+            if (!b.from){b.from = {id:null}}
+            if (!b.to){b.to = {id:null}}
 
-        }
-        else{
-            var data = [new Date(b.createdAt).getTime(), parseFloat(a[1])];
-            return $scope.sumFrom[i] = data;
-        }
+            if(b.from.id == $scope.member.id){
+                var amount = b.amountSet['USD'] || 0;
+                var diff =  parseFloat(a[1])-parseFloat(amount)
+                var data = [new Date(b.createdAt).getTime(), diff];
+                return $scope.sumTransactions[i] = data;
+            }
 
-    },[0,0]);
+            if(b.to.id == $scope.member.id){
+                var amount = b.amountSet['USD'] || 0;
+                var sum =  parseFloat(a[1])+parseFloat(amount)
+                var data = [new Date(b.createdAt).getTime(), sum];
+                return $scope.sumTransactions[i] = data;
+            }
 
-    //sumTo
-    $scope.transactions.reduce(function(a,b,i) {
+        },[0,0]);
 
-        if(b.to.id == $scope.member.id){
-            var amount = b.amountSet['USD'] || 0;
-            var sum =  parseFloat(a[1])+parseFloat(amount)
-            var data = [new Date(b.createdAt).getTime(), sum];
-            return $scope.sumTo[i] = data;
-        }
-        else{
-            var data = [new Date(b.createdAt).getTime(), parseFloat(a[1])];
-            return $scope.sumTo[i] = data;
-        }
+        //sumFrom
+        $scope.transactions.reduce(function(a,b,i) {
 
-    },[0,0]);
+            if(b.from.id == $scope.member.id){
+                var amount = b.amountSet['USD'] || 0;
+                var sum =  parseFloat(a[1])+parseFloat(amount)
+                var data = [new Date(b.createdAt).getTime(), sum];
+                return $scope.sumFrom[i] = data
 
-    //sumFlow
-    $scope.transactions.reduce(function(a,b,i) {
+            }
+            else{
+                var data = [new Date(b.createdAt).getTime(), parseFloat(a[1])];
+                return $scope.sumFrom[i] = data;
+            }
 
-        if(b.from.id == $scope.member.id){
-            var amount = b.amountSet['USD'] || 0;
-            var sum =  parseFloat(a[1])+parseFloat(amount)
-            var data = [new Date(b.createdAt).getTime(), sum];
-            return $scope.sumFlow[i] = data
-        }
-        if(b.to.id == $scope.member.id){
-            var amount = b.amountSet['USD'] || 0;
-            var sum =  parseFloat(a[1])+parseFloat(amount)
-            var data = [new Date(b.createdAt).getTime(), sum];
-            return $scope.sumFlow[i] = data
-        }
+        },[0,0]);
 
-    },[0,0]);
+        //sumTo
+        $scope.transactions.reduce(function(a,b,i) {
 
-    $scope.chart.series[0].data = $scope.sumTransactions;
-    $scope.chart.series[1].data = $scope.sumFrom;
-    $scope.chart.series[2].data = $scope.sumTo;
-    $scope.chart.series[3].data = $scope.sumFlow;
+            if(b.to.id == $scope.member.id){
+                var amount = b.amountSet['USD'] || 0;
+                var sum =  parseFloat(a[1])+parseFloat(amount)
+                var data = [new Date(b.createdAt).getTime(), sum];
+                return $scope.sumTo[i] = data;
+            }
+            else{
+                var data = [new Date(b.createdAt).getTime(), parseFloat(a[1])];
+                return $scope.sumTo[i] = data;
+            }
 
-    //REDO
-    $scope.startDate = new Date($scope.transactions[0].createdAt);
-    $scope.endDate = new Date($scope.transactions[$scope.transactions.length-1].createdAt);
-    $scope.transactions = $scope.transactions.reverse();
+        },[0,0]);
+
+        //sumFlow
+        $scope.transactions.reduce(function(a,b,i) {
+
+            if(b.from.id == $scope.member.id){
+                var amount = b.amountSet['USD'] || 0;
+                var sum =  parseFloat(a[1])+parseFloat(amount)
+                var data = [new Date(b.createdAt).getTime(), sum];
+                return $scope.sumFlow[i] = data
+            }
+            if(b.to.id == $scope.member.id){
+                var amount = b.amountSet['USD'] || 0;
+                var sum =  parseFloat(a[1])+parseFloat(amount)
+                var data = [new Date(b.createdAt).getTime(), sum];
+                return $scope.sumFlow[i] = data
+            }
+
+        },[0,0]);
+
+        $scope.chart.series[0].data = $scope.sumTransactions;
+        $scope.chart.series[1].data = $scope.sumFrom;
+        $scope.chart.series[2].data = $scope.sumTo;
+        $scope.chart.series[3].data = $scope.sumFlow;
+
+        //REDO
+        $scope.startDate = new Date($scope.transactions[0].createdAt);
+        $scope.endDate = new Date($scope.transactions[$scope.transactions.length-1].createdAt);
+        $scope.transactions = $scope.transactions.reverse();
+    };
+
+    $scope.updateGraph();
 
     $scope.selectExpense = function(){
         $scope.selectedState = 'EXPENSE';

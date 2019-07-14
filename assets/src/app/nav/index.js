@@ -1675,7 +1675,7 @@ angular.module( 'conexus.nav', [
 
             //SELF VALIDATION HERE! --> TAGS
 
-            
+            //VECTOR TAGS  ((((((TAG COMPUTATION FUNCTION TO DO FOR ALL THE SIDEBARS -- RENAME TO CONTEXT))))))
 
 
 

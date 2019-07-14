@@ -509,30 +509,53 @@
                 <form role="form" ng-submit="createItem()">
                     <h5>Title</h5>
                     <input type="text" placeholder="Title" ng-model="newItem.title" class="form-control">
+
+                    <!--TODO: SELF VALIDATION-->
+                    <!--ASSOCIATED VALIDATIONS-->
                     <h5>Tags <a ng-click="informationToggle('TAGS')" href="#"><i class="fa fa-question-circle"></i></a></h5>
                     <tags-input min-length="1" placeholder="Tags" ng-model="newItem.tags">
                         <auto-complete source="loadTags($query)"></auto-complete>
                     </tags-input>
+
+                    <!--UNIFTY TAGS AND ASSOCIATIONS-->
                     <h5>Associations <a ng-click="informationToggle('ASSOCIATION')" href="#"><i class="fa fa-question-circle"></i></a><i style="float:right" class="fas fa-bezier-curve"></i></h5>
                     <tags-input min-length="1" placeholder="Associations" ng-model="newItem.associatedModels">
                         <auto-complete source="loadAssociations($query)"></auto-complete>
                     </tags-input>
+
                     <h5>Location <a ng-click="informationToggle('LOCATION')" href="#"><i class="fa fa-question-circle"></i></a><i style="float:right" class="fas fa-map-marker-alt"></i></h5>
                     <input placeholder="Location" type="text" ng-model="newItem.location" class="form-control">
-                    <h5>Status <a ng-click="informationToggle('STATUS')" href="#"><i class="fa fa-question-circle"></i></a></h5>
-                    <input placeholder="Status" type="text" ng-model="newItem.status" class="form-control">
-            
-                    <h5>Expand</h5>
-                    <md-switch ng-model="tradable" aria-label="tradable"></md-switch>
                     
-                    <div ng-if="tradable">
-                        <!--ORDER MODEL-->
-                        <h5>Is Generator? <a ng-click="informationToggle('ITEMGENERATOR')" href="#"><i class="fa fa-question-circle"></i></a></h5>
-                        <md-switch ng-model="generator" aria-label="generator"></md-switch>
-                        <h5>Identifier <a ng-click="informationToggle('IDENTIFERSET')" href="#"><i class="fa fa-question-circle"></i></a></h5>
+                    <h5>Expand</h5>
+                    <md-switch ng-model="expand" aria-label="tradable"></md-switch>
+                    
+                    <div ng-if="expand">
+
+                        <h5>Abstract Item Generator: <b>{{newItem.isGenerator}}</b><a ng-click="informationToggle('ITEM GENERATOR')" href="#"><i class="fa fa-question-circle"></i></a></h5>
+                        <md-switch ng-model="newItem.isGenerator" aria-label="newItem.isGenerator"></md-switch>
+
+                        <!--VS ASSOCIATED MODELS..-->
+                        <!--TYPE OF ASSOCIATION. 'TYPE' (SHOULD BE OF MODEL TYPE ITEM) (&OR DEPRECIATE CONTENT)--> 
+                        <h5>Item Components <a ng-click="informationToggle('ASSOCIATION')" href="#"><i class="fa fa-question-circle"></i></a><i style="float:right" class="fas fa-bezier-curve"></i></h5>
+                        <tags-input min-length="1" placeholder="Item Components" ng-model="newItem.associatedComponentModels">
+                            <auto-complete source="loadAssociations($query)"></auto-complete>
+                        </tags-input>
+
+                        <!--DATA?-->
+                        <h5>Status <a ng-click="informationToggle('ITEM STATUS')" href="#"><i class="fa fa-question-circle"></i></a></h5>
+                        <input placeholder="Status" type="text" ng-model="newItem.status" class="form-control">
+
+                        <!--ASSOCIATED ORDERS.. CREATE ORDERS HERE-->
+                        <h5>Identifier <a ng-click="informationToggle('ITEM IDENTIFER SET')" href="#"><i class="fa fa-question-circle"></i></a></h5>
                         <input placeholder="IdentiferSet" type="text" ng-model="newItem.identiferSet" class="form-control">
-                        <h5>Delivery Protocol <a ng-click="informationToggle('DELIVERYPROTOCOL')" href="#"><i class="fa fa-question-circle"></i></a></h5>
+
+                        <!--POTIENTALL PART OF ORDER PROCESS AND ORDER ''FUILFUILMENT''-->
+                        <h5>Delivery Protocol <a ng-click="informationToggle('ITEM DELIVERY PROTOCOL')" href="#"><i class="fa fa-question-circle"></i></a></h5>
                         <input type="text" placeholder="Title" ng-model="newItem.delivery" class="form-control">
+
+                        <h5>Item Data <a ng-click="informationToggle('ITEM DATA')" href="#"><i class="fa fa-question-circle"></i></a></h5>
+                        <input type="text" placeholder="Title" ng-model="newItem.data" class="form-control">
+
                     </div>
 
                     <text-angular ng-model="newItem.content" ta-toolbar="[['p','h1','bold','italics','quote','insertLink', 'html']]"></text-angular>

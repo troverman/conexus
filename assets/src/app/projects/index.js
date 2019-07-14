@@ -274,8 +274,11 @@ angular.module( 'conexus.projects', [
 
 
 
-
-
+    //LET's WOWRK ON IT
+    console.log($location.search())
+    if ($location.search().tags){
+        $scope.filterContent($location.search().tags);
+    }
 
 
     //TODO: FILTER!

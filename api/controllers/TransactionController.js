@@ -248,23 +248,53 @@ module.exports = {
 	},
 
 	create: function (req, res) {
+
+
+
+		//TODO: GLOBAL
+		function createValidation(model){
+			//Validation.create({id:model.to}).then(function(validationModels){
+				
+			//});
+		};
+
+		//TODO: GLOBAL
+		function createNotification(model){
+
+		};
+
 		var model = {
 			amountSet: req.param('amountSet'),
 			to: req.param('to'),
 			from: req.param('from'),
-			tags: req.param('tags'),
 			content: req.param('content'),
 			user: req.param('user'),
 			associatedModels: req.param('associatedModels'),
-			//PATCH
+			validationModels: req.param('validationModels'),
+
+			//DEPRECIATE
+			tags: req.param('tags'),
+
+			//PATCH.. BETTER MAPPINGS.. DATA MODEL.. 
 			reactions:{plus:0,minus:0},
+			attention:{general:0},
+
 		};
-		console.log('CREATE TRANSACTION', model)
+		console.log('CREATE TRANSACTION', model);
+
 		Transaction.create(model)
 		.exec(function(err, transaction) {
 			if (err) {return console.log(err);}
 			else {
-				console.log(transaction)
+
+				console.log(transaction);
+
+				//CREATE VALIDATION (IE SELF VALIDATION .. CONTEXT OF TRANSACTION)
+				//SOME CHARTER WHERE THE CREATOR IS WEIGHTED
+				//SOME CHARTER WHERE THE FROM AND TO IS WEIGHTED
+				//IE BUY AN ITEM.. CONTEXTUALIZED VALIDATION
+				//for (x in model.validationModels){createVaidation(model.validationModels[x]);}
+
 
 				//WIP
 				//TODO: OWNER
@@ -272,8 +302,7 @@ module.exports = {
 				//ALSO ASSOCIATEDMODELS
 
 				//TODO: GENERATOR --> IE POS MENU ITEMS
-					//ORRRRRRRRRR --> ACUTAL INVENTOR MANAGEMENT
-						//MB GENERATOR ISNT NEEDED. . . . ?
+
 				for (x in Object.keys(transaction.amountSet)){
 					console.log( Object.keys(transaction.amountSet)[x])
 					Item.find({id:Object.keys(transaction.amountSet)[x]}).then(function(itemModels){
