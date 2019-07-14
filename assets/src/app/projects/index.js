@@ -20,7 +20,7 @@ angular.module( 'conexus.projects', [
 	});
 }])
 
-.controller( 'ProjectsCtrl', ['$rootScope', '$mdSidenav', '$sailsSocket', '$sce', '$scope', 'MemberModel', 'ProjectModel', 'projects', 'SearchModel', function ProjectsController( $rootScope, $mdSidenav, $sailsSocket, $sce, $scope, MemberModel, ProjectModel, projects, SearchModel ) {
+.controller( 'ProjectsCtrl', ['$location', '$rootScope', '$mdSidenav', '$sailsSocket', '$sce', '$scope', 'MemberModel', 'ProjectModel', 'projects', 'SearchModel', function ProjectsController( $location, $rootScope, $mdSidenav, $sailsSocket, $sce, $scope, MemberModel, ProjectModel, projects, SearchModel ) {
 
     $scope.projects = projects.map(function(obj){obj.model = 'PROJECT'; return obj;});
 
