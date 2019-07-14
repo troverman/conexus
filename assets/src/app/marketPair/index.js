@@ -621,6 +621,10 @@ angular.module( 'conexus.marketPair', [
         $scope.orders[index].showReply = !$scope.orders[index].showReply
     };
 
+    $scope.replace = function(model){
+        return model.replace(/,/g, '').replace(/\+/g, '')
+    };
+
     $scope.selectType = function(type){$scope.selectedType = type;};
     
 }]);

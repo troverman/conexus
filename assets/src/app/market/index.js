@@ -343,6 +343,10 @@ angular.module( 'conexus.market', [
         $scope.orders[index].showReply = !$scope.orders[index].showReply
     };
 
+    $scope.replace = function(model){
+        return model.replace(/,/g, '').replace(/\+/g, '')
+    };
+
     $scope.selectTab = function(model){
         $scope.selectedTab = model;
         $scope.renderGraph('grid');

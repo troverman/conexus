@@ -1,3 +1,53 @@
+
+<div class="container" style="padding:0px">
+    <div class="card" ng-click="cardDetailToggle(market)">
+        <div class="imageContainerSmall" style="background:url('https://source.unsplash.com/1600x900/?{{item.tags}}');">
+            <div style="background:rgba(0,0,0,0.75);" class="imageContainerSmallDiv">
+                <div style="text-align:right;padding:15px;position:absolute;right:0">
+                    <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
+                        <i class="fas fa-chevron-down"></i>
+                    </a>
+                </div>
+                <div style="margin-top: auto;margin-bottom: auto;">
+                    <div style="padding:15px">
+                        <h1 style="text-align:left;font-size:30px;color:rgba(255,255,255,0.9);font-weight:400;">
+                            <img style="height:50px;width:50px" ng-src="http://identicon-1132.appspot.com/{{replace(market)}}"/>
+                            <span style="word-break:break-word"><a style="color:white;font-weight:700" href="market/{{market}}" ui-sref="market({id:market})">{{market}}</a></span>
+			            	<br>
+                            <img style="height:50px;width:50px" ng-src="http://identicon-1132.appspot.com/{{replace(market1)}}"/>
+			            	<span style="word-break:break-word"><a style="color:white;font-weight:700"  href="market/{{market1}}" ui-sref="market({id:market1})">{{market1}}</a></span>
+                        </h1>
+                        <h5 style="color:white">
+			        		<span style="color:white">{{chart.series[0].data[chart.series[0].data.length-1][1].toFixed(2)}}</span> | 
+			        		<span style="color:green">{{percentChange.toFixed(2)}}%</span> Daily Change | 
+			        		<span style="color:red">{{chart.series[1].data[chart.series[1].data.length-1][1].toFixed(2)}}</span> Daily Trade Volume | 
+			        		<span>{{marketDepth.toFixed(2)}}</span> Total Market Depth
+			        	</h5>
+			        	<h5 style="color:white">
+			            	Last Trade Price: <span style="color:white">{{chart.series[0].data[chart.series[0].data.length-1][1].toFixed(2)}}</span> | 
+			            	Highest Bid <span style="color:white">{{bidAskChart.series[0].data[bidAskChart.series[0].data.length-1][0].toFixed(2)}}</span> | 
+			            	Lowest Ask <span style="color:white">{{bidAskChart.series[1].data[0][0].toFixed(2)}}</span>
+			            </h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="background-color:white">
+            <div class="member-tab-container container" style="padding-left:0px">
+                <div style="text-align:left">
+                    <ul style="padding:0px;" class="member-tabs">
+                        <li><a ng-click="$event.stopPropagation();selectTab('INFORMATION')">Information</a></li>
+                        <li><a ng-click="$event.stopPropagation();selectTab('MANIFOLDS')">Manifold Actions</a></li>
+                        <li><a ng-click="$event.stopPropagation();selectTab('ORDERS')" >Positions & Trades</a></li>
+                        <li><a ng-click="$event.stopPropagation();" href="market/{{market1}}/{{market}}" ui-sref="marketPair({setAlpha:market1, setBeta:market})"><i class="fa fa-refresh"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--
 <div style="background:url('https://source.unsplash.com/1600x900/?scenic')" class="imageContainerSmall">
     <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
         <div style="margin-top: auto;margin-bottom: auto;">
@@ -9,14 +59,12 @@
 			            	<br>
 			            	<span style="word-break:break-word"><a style="color:white;font-weight:700"  href="market/{{market1}}" ui-sref="market({id:market1})">{{market1}}</a></span>
 			            </h1>
-
 			        	<h5 style="color:white">
 			        		<span style="color:white">{{chart.series[0].data[chart.series[0].data.length-1][1].toFixed(2)}}</span> | 
 			        		<span style="color:green">{{percentChange.toFixed(2)}}%</span> Daily Change | 
 			        		<span style="color:red">{{chart.series[1].data[chart.series[1].data.length-1][1].toFixed(2)}}</span> Daily Trade Volume | 
 			        		<span>{{marketDepth.toFixed(2)}}</span> Total Market Depth
 			        	</h5>
-
 			            <h5 style="color:white">
 			            	Last Trade Price: <span style="color:white">{{chart.series[0].data[chart.series[0].data.length-1][1].toFixed(2)}}</span> | 
 			            	Highest Bid <span style="color:white">{{bidAskChart.series[0].data[bidAskChart.series[0].data.length-1][0].toFixed(2)}}</span> | 
@@ -31,15 +79,20 @@
         </div>
     </div>
 </div>
+-->
 
 <div class="container">
-	<div class="spacing-10"></div>
 	<div class="row">
+
+		<!--
+		<div class="spacing-10"></div>
 		<ul style="padding:0px;margin-top:0px;margin-bottom:0px;" class="member-tabs">
 			<li ng-click="selectTab('INFORMATION')"><a href="#">Information</a></li>
-            <li ng-click="selectTab('MANIFOLDS')"><a href="#">Manifold Actions</a></li><!--ACTIONS ON ITEMS (eyes) protocols .. what manifolds in a market-->
+            <li ng-click="selectTab('MANIFOLDS')"><a href="#">Manifold Actions</a></li>
             <li ng-click="selectTab('ORDERS')"><a href="#">Positions & Trades</a></li>
         </ul>
+    	-->
+        <!--ACTIONS ON ITEMS (eyes) protocols .. what manifolds in a market-->
 
         <div ng-if="selectedTab =='INFORMATION'">
 			<div class="card">

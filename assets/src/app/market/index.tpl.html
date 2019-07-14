@@ -1,21 +1,57 @@
 <style>.ngCytoscape{height: 400px;width:100%;}</style>
+
+<div class="container" style="padding:0px">
+    <div class="card" ng-click="cardDetailToggle(item)">
+        <div class="imageContainerSmall" style="background:url('https://source.unsplash.com/1600x900/?{{token.string || stateParams.id}}')">
+            <div style="background:rgba(0,0,0,0.75);" class="imageContainerSmallDiv">
+                <div style="text-align:right;padding:15px;position:absolute;right:0">
+                    <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
+                        <i class="fas fa-chevron-down"></i>
+                    </a>
+                </div>
+                <div style="margin-top: auto;margin-bottom: auto;">
+                    <div style="padding:15px">
+                        <h1 style="text-align:left;font-size:30px" class="container">
+                            <img style="height:50px;width:50px" src="http://identicon-1132.appspot.com/{{token.string.split('+').join('').split(',').join('') || stateParams.id.split('+').join('').split(',').join('')}}"/>
+                            {{token.string ||  stateParams.id}}
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="background-color:white">
+            <div class="member-tab-container container" style="padding-left:0px">
+                <div style="text-align:left">
+                    <ul style="padding:0px;" class="member-tabs">
+                        <li><a ng-click="$event.stopPropagation();selectTab('INFORMATION')">Activity</a></li>
+                        <li><a ng-click="$event.stopPropagation();selectTab('MARKETS')"><i class="fa fa-exchange"></i> Markets</a></li>
+                        <li><a ng-click="$event.stopPropagation();selectTab('ANALYSIS')"><i class="fas fa-project-diagram"></i> Analysis</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--
 <div style="background:url('https://source.unsplash.com/1600x900/?,geometry')" class="imageContainerSmall">
     <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
         <div style="margin-top: auto;margin-bottom: auto;">
         	<div class="container">
 	            <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;word-break: break-word;align-items:center;">
-	            	<img align="left" style="height:64px;padding:15px;" ng-src="http://identicon-1132.appspot.com/{{token.string.split('+').join('') || stateParams.id.split('+').join('')}}?s=8&p=8&f=png"> 
+	            	<img  style="height:64px;padding:15px;" ng-src="http://identicon-1132.appspot.com/{{token.string.split('+').join('') || stateParams.id.split('+').join('')}}?s=8&p=8&f=png"> 
 	            	<span>{{token.string ||  stateParams.id}}</span>
 	            </h1>
 	        </div>
         </div>
     </div>
 </div>
+-->
 
 <div class="container">
 
+	<!--
 	<div class="spacing-10"></div>
-
 	<div class="row">
 		 <ul style="padding:0px;margin-top:0px;margin-bottom:0px;" class="member-tabs">
 			<li><a href="#" ng-click="selectTab('INFORMATION')"><i class="fa fa-info"></i> Information</a></li>
@@ -23,6 +59,7 @@
             <li><a href="#" ng-click="selectTab('ANALYSIS')"><i class="fas fa-chart-bar"></i> Analysis</a></li>
         </ul>
     </div>
+	-->
 
     <!--INFORMATION-->
     <div class="row" ng-if="selectedTab=='INFORMATION'">

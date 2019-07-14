@@ -113,13 +113,16 @@ module.exports = {
 				.skip(skip)
 				.sort({'createdAt':-1})
 				.toArray(function (err, models) {
-					models = models.map(function(obj){obj.id = obj._id; return obj;});
-					var promises = [];
-					for (x in models){promises.push(User.find({id:models[x].user.toString()}))}
-					Q.all(promises).then((populatedModels)=>{
-						for (x in models){models[x].user = populatedModels[x][0];}
-						res.json(models);
-					});
+					if (models.length != 0){
+						models = models.map(function(obj){obj.id = obj._id; return obj;});
+						var promises = [];
+						for (x in models){promises.push(User.find({id:models[x].user.toString()}))}
+						Q.all(promises).then((populatedModels)=>{
+							for (x in models){models[x].user = populatedModels[x][0];}
+							res.json(models);
+						});
+					}
+					else{res.json(models)}
 				});
 			});
 

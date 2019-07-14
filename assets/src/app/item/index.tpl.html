@@ -1,65 +1,129 @@
 <style>.ngCytoscape{height: 200px;width:100%;}</style>
+
+<div class="container" style="padding:0px">
+    <div class="card" ng-click="cardDetailToggle(item)">
+        <div class="imageContainerSmall" style="background:url('https://source.unsplash.com/1600x900/?{{item.tags}}');">
+            <div style="background:rgba(0,0,0,0.75);" class="imageContainerSmallDiv">
+                <div style="text-align:right;padding:15px;position:absolute;right:0">
+                    <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
+                        <i class="fas fa-chevron-down"></i>
+                    </a>
+                </div>
+                <div style="margin-top: auto;margin-bottom: auto;">
+                    <div style="padding:15px">
+                        <h1 style="text-align:left;" class="container">
+                            <img style="height:50px;width:50px" src="http://identicon-1132.appspot.com/{{item.id}}"/>
+                            {{item.title}}
+                        </h1>
+                        <h5 style="color:white">{{item.id}}</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-show="markers.length>0">
+            <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options">
+                <ui-gmap-marker ng-repeat="marker in markers" coords="marker.coords" options="marker.options" idkey="marker.id">
+                    <ui-gmap-window options="windowOptions" closeClick="closeClick()">
+                        <div>
+                            <div style="font-size: 15px;"><a ng-click="$event.stopPropagation();" href="item/{{market.id}}">{{marker.content}}</a></div>
+                        </div>
+                    </ui-gmap-window>
+                </ui-gmap-marker>
+            </ui-gmap-google-map>
+        </div>
+        <div style="background-color:white">
+            <div class="member-tab-container container" style="padding-left:0px">
+                <div style="text-align:left">
+                    <ul style="padding:0px;" class="member-tabs">
+                        <!--<li><a ng-click="aselectTab('CONTENT')"  href="#">Tokens</a></li>-->
+                        <!--<li><a ng-click="aselectTab('CONTENT')"  href="#">Content</a></li>-->
+                        <!--<li><a ng-click="aselectTab('CONTENT')"  href="#">Stats</a></li>-->
+                        <!--<li><a ng-click="aselectTab('CONTENT')"  href="#">Associations</a></li>-->
+                        <li><a ng-click="$event.stopPropagation();selectTab('ACTIVITY')">Activity</a></li>
+                        <li><a ng-click="$event.stopPropagation();selectTab('ACTIONS')">Actions</a></li>
+                        <!--<li><a ng-click="$event.stopPropagation();selectTab('HISTORY')" >Content</a></li>-->
+                        <!--HISTORY AS TRANSACTIONS? ...-->
+                        <li><a ng-click="$event.stopPropagation();selectTab('HISTORY')" >History</a></li>
+                        <li><a ng-click="$event.stopPropagation();selectTab('COMPONENTS')">Components</a></li>
+                        <li><a ng-click="$event.stopPropagation();selectTab('LIQUIDITY')">Liquidity</a></li>
+                        <li><a ng-click="$event.stopPropagation();orderToggle(null, item);" class="btn btn-default">Purchase</a></li>
+                        <!--<li ng-click="$event.stopPropagation();subNavToggle(item);" style="float:right;margin-top:5px"><a style="color:black"><i class="fa fa-bars"></i></a></li>-->
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <hr style="margin:0px;">
+
+        <div style="padding:16px;">
+            <div>
+                <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
+                <a ng-click="$event.stopPropagation();" style="display:inline" href="member/{{item.user.username}}" ui-sref="member.activity({path:item.user.username})"><span style="font-weight:800">{{item.user.username}}</span></a>
+            </div>
+            <div class="spacing-5"></div>
+            <p><a ng-repeat="tag in item.tags track by $index" ng-click="$event.stopPropagation();filterContent(tag)">{{tag.trim()}} </a></p>
+            <div class="spacing-5"></div>
+            <!--TODO: EMBEDED CONTENT-ASSOCIATED MODEL-->
+            <!--TODO: VT PLUGIN..-->
+            <div ng-click="$event.stopPropagation();"><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></div>
+            <div class="spacing-5"></div>
+            <!--<h4>{{item.amountSet}} <a href="market/{{item.identiferSet}}">{{item.identiferSet}}</a></h4>-->
+            <!--ITEM OWNERSHIP OF TOKENS-->       
+        </div>
+        <div class="card-footer">
+            <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fas fa-angle-up"></i> {{item.reactions.plus}} like </a> 
+            <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fas fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
+            <a ng-click="$event.stopPropagation();reply(item)"><i class="far fa-comment"></i> comment </a>
+        </div>
+    </div>
+</div>
+
+<!--
 <div style="background:url('https://source.unsplash.com/1600x900/?{{item.tags}}')" class="imageContainerSmall">
     <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
         <div style="margin-top: auto;margin-bottom: auto;">
             <div class="container">
                 <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">{{item.title}}</h1>
-                <!--<h5 ng-if="item.isGenerator"><span style="color:green">Generator</span></h5>-->
                 <h5 style="color:white">{{item.id}}</h5>
                 <h5 style="color:white">{{item.createdAt | date}}</h5>
             </div>
         </div>
     </div>
 </div>
+-->
+
 <div class="container">
-	<div class="spacing-10"></div>
 	<div class="row">
 
-        <!--TODO-->
+        <!--
         <ul style="padding:0px;margin-top:0px;margin-bottom:0px;" class="member-tabs">
             <li><a ng-click="selectTab('INFORMATION')" href="#">Information</a></li>
-            <li><a ng-click="actionToggle()" href="#"><!--Create--> Actions</a></li>
-            <!--<li><a ng-click="aselectTab('CONTENT')"  href="#">Tokens</a></li>-->
-            <!--<li><a ng-click="aselectTab('CONTENT')"  href="#">Content</a></li>-->
-            <!--<li><a ng-click="aselectTab('CONTENT')"  href="#">Stats</a></li>-->
+            <li><a ng-click="selectTab('ACTIONS')" href="#">Actions</a></li>
             <li><a ng-click="selectTab('HISTORY')" href="#">History</a></li>
-            <!--<li><a ng-click="aselectTab('CONTENT')"  href="#">Associations</a></li>-->
             <li><a ng-click="selectTab('COMPONENTS')" href="#">Components</a></li>
             <li><a ng-click="selectTab('LIQUIDITY')" href="#">Liquidity</a></li>
         </ul>
+        -->
 
-        <!--INFORMATION-->
-		<div ng-if="selectedTab =='INFORMATION'" class="card" ng-click="cardDetailToggle(item);">
-			<div style="padding:16px;">
-                <div style="float:right;text-align:right">
-                    <i style="" ng-click="$event.stopPropagation();cardDetailToggle(item);" class="fa fa-ellipsis-v"></i>
+        <!--ACTIONS-->
+        <div ng-if="selectedTab =='ACTIONS'"  class="card">
+            <div style="background:url('https://source.unsplash.com/1600x900/?blueprint,code,parts,components,designs')" class="imageContainerSmall">
+                <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                    <div style="margin-top: auto;margin-bottom: auto;">
+                        <div style="padding:15px">
+                            <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">Actions</h1>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
-                    <a ng-click="$event.stopPropagation();" style="display:inline" href="member/{{item.user.username}}" ui-sref="member.activity({path:item.user.username})"><span style="font-weight:800">{{item.user.username}}</span></a>
-                </div>
-                <div class="spacing-10"></div>
-                <p><a ng-repeat="tag in item.tags track by $index" ng-click="$event.stopPropagation();filterContent(tag)">{{tag.trim()}} </a></p>
-                <div class="spacing-10"></div>
-                
-                <!--TODO: EMBEDED CONTENT-ASSOCIATED MODEL-->
-                <!--TODO: VT PLUGIN..-->
-
-		        <div ng-click="$event.stopPropagation();"><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></div>
-				<div class="spacing-10"></div>
-
-
-				<!--<h4>{{item.amountSet}} <a href="market/{{item.identiferSet}}">{{item.identiferSet}}</a></h4>-->
-
-                <!--ITEM OWNERSHIP OF TOKENS-->
-
-			</div>
-            <div class="card-footer">
-                <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 
-                <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
-                <a ng-click="$event.stopPropagation();reply(item)"><i class="fa fa-comment-o"></i> comment </a>
             </div>
-		</div>
+            <div style="padding:16px">   
+
+                <div class="card">
+                    <button type="submit" class="btn btn-default log-btn" ng-click="actionToggle(item)">+ Action</button>
+                </div>
+
+            </div>
+        </div>
+
 
         <!--HISTORY-->
         <div ng-if="selectedTab =='HISTORY'"  class="card">
@@ -170,6 +234,11 @@
                     </div>
                 </div>
                 <div style="padding:16px">
+
+
+                    <div class="card">
+                        <button type="submit" class="btn btn-default log-btn" ng-click="actionToggle(item)">+ Order</button>
+                    </div>
 
                     <div ng-repeat="input in inputVector">
                         <div layout="">
@@ -320,18 +389,8 @@
 
         </div>
 
-        <!--PURCHASE.. CLAIM.. ORDER-->
-        <div class="card">
-            <!--REGISTER POPUP 1ST THEN LOGIN -->
-            <!--ONBOARD FROM ITEM.. IE PURCHASE.. 2ND STAGE DELIVERY-->
-            <button type="submit" class="btn btn-default log-btn" ng-click="orderToggle(null, item)">Purchase Order</button>
-        </div>
-
-
-
-
-
         <!--TODO: LIST REACTIONS.. IE RATINGS IF GENERATOR-->
+        <!--
         <div class="card" ng-repeat="item in contentList">
             <div style="padding:16px">
                 <div>
@@ -354,10 +413,7 @@
                 </form>
             </div>
         </div>
-
-
-
-        
+        -->
 
     </div>
 
