@@ -1,10 +1,10 @@
 <div class="row">
-    <div class="card">
+    <div class="card" ng-if="!isProjectMember">
 		<button class="btn btn-default log-btn" ng-click="createMember()">+ motion to join</button>
     </div>
 </div>
 
-<div class="spacing-10"></div>
+<div class="spacing-5"></div>
 
 <div class="row">
 	<div class="col-lg-4 col-sm-6" ng-repeat="member in members" style="padding-left:10px;padding-right:10px;">

@@ -79,7 +79,7 @@
                 <div style="background:url('https://source.unsplash.com/1600x900/?{{item.tags}}')" class="imageContainerSmall">
                     <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
                         <div style="text-align:right;padding:15px;position:absolute;right:0">
-                            <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(token)">
+                            <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
                                 <i class="fas fa-chevron-down"></i>
                             </a>
                             <div style="clear:both"></div>
@@ -93,9 +93,6 @@
                     </div>
                 </div>
                 <div style="padding:16px;">
-                    <div style="float:right;text-align:right">
-                        <a ng-click="$event.stopPropagation();tokensToggle(item)"><span style="color:gray"><i class="fa fa-ellipsis-v"></i></span></a>
-                    </div>
                     <div ng-bind-html="renderContent(item.content)"></div>
                     <p><span am-time-ago="item.createdAt"></span></p>
                 </div>

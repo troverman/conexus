@@ -11804,7 +11804,7 @@ angular.module("project/templates/charter.tpl.html", []).run(["$templateCache", 
     "                <div style=\"background:url('https://source.unsplash.com/1600x900/?{{item.tags}}')\" class=\"imageContainerSmall\">\n" +
     "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "                        <div style=\"text-align:right;padding:15px;position:absolute;right:0\">\n" +
-    "                            <a style=\"color:white;\" ng-click=\"$event.stopPropagation();cardDetailToggle(token)\">\n" +
+    "                            <a style=\"color:white;\" ng-click=\"$event.stopPropagation();cardDetailToggle(item)\">\n" +
     "                                <i class=\"fas fa-chevron-down\"></i>\n" +
     "                            </a>\n" +
     "                            <div style=\"clear:both\"></div>\n" +
@@ -11818,9 +11818,6 @@ angular.module("project/templates/charter.tpl.html", []).run(["$templateCache", 
     "                    </div>\n" +
     "                </div>\n" +
     "                <div style=\"padding:16px;\">\n" +
-    "                    <div style=\"float:right;text-align:right\">\n" +
-    "                        <a ng-click=\"$event.stopPropagation();tokensToggle(item)\"><span style=\"color:gray\"><i class=\"fa fa-ellipsis-v\"></i></span></a>\n" +
-    "                    </div>\n" +
     "                    <div ng-bind-html=\"renderContent(item.content)\"></div>\n" +
     "                    <p><span am-time-ago=\"item.createdAt\"></span></p>\n" +
     "                </div>\n" +
@@ -12260,12 +12257,12 @@ angular.module("project/templates/ledger.tpl.html", []).run(["$templateCache", f
 angular.module("project/templates/members.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("project/templates/members.tpl.html",
     "<div class=\"row\">\n" +
-    "    <div class=\"card\">\n" +
+    "    <div class=\"card\" ng-if=\"!isProjectMember\">\n" +
     "		<button class=\"btn btn-default log-btn\" ng-click=\"createMember()\">+ motion to join</button>\n" +
     "    </div>\n" +
     "</div>\n" +
     "\n" +
-    "<div class=\"spacing-10\"></div>\n" +
+    "<div class=\"spacing-5\"></div>\n" +
     "\n" +
     "<div class=\"row\">\n" +
     "	<div class=\"col-lg-4 col-sm-6\" ng-repeat=\"member in members\" style=\"padding-left:10px;padding-right:10px;\">\n" +
