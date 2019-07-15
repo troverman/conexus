@@ -1862,80 +1862,82 @@
             <div style="padding:16px;">
                 <div class="spacing-25"></div>
                 <div ng-if="confirm.model == 'ACTION'">
-                    {{confirm}}
+                    <h3>{{confirm.type}}</h3>
+                    <h5>{{confirm.amount}} - {{confirm.associatedModels}}</h5>
+                    <p>{{confirm.user}}</p>
                 </div>
                 <div ng-if="confirm.model == 'CONTENT'">
-                    <h3>Title: {{confirm.title}}</h3>
-                    <p>User: {{confirm.user}}</p>
-                    <p>Tags: {{confirm.tags}}</p>
-
+                    <h3>{{confirm.title}}</h3>
+                    <p>{{confirm.user}}</p>
+                    <p>{{confirm.tags}}</p>
                     <!--RENDER ASSOCIATIONS-->
                     <!--GRAPH..? ETC-->
-                    <p>Associations: {{confirm.associatedModels}}</p>
-                    <p>Type: {{confirm.type}}</p>
-                    <p>Content: <span style="display:inline" ng-bind-html="renderContent(confirm.content)"></span></p>
+                    <p>{{confirm.associatedModels}}</p>
+                    <p>{{confirm.type}}</p>
+                    <p><span style="display:inline" ng-bind-html="renderContent(confirm.content)"></span></p>
                 </div>
+                <!--
                 <div ng-if="confirm.model == 'FOLLOW'">
-                    <p>Follower: {{confirm.follower}}</p>
-                    <p>Following: {{confirm.following}}</p>
+                    <p>{{confirm.follower}}</p>
+                    <p>{{confirm.following}}</p>
                 </div>
+                -->
                 <div ng-if="confirm.model == 'ITEM'">
-                    <h3>Title: {{confirm.title}}</h3>
-                    <p>User: {{confirm.user}}</p>
-                    <p>Tags: {{confirm.tags}}</p>
-                    <p>Associations: {{confirm.associatedModels}}</p>
-                    <p>Location: {{confirm.location}}</p>
-                    <p>Amount Set: {{confirm.amountSet}}</p>
-                    <p>Identifier Set: {{confirm.identifierSet}}</p>
-                    <p>Content: <span style="display:inline" ng-bind-html="renderContent(confirm.content)"></span></p>
+                    <h3>{{confirm.title}}</h3>
+                    <p>{{confirm.user}}</p>
+                    <p>{{confirm.tags}}</p>
+                    <p>{{confirm.associatedModels}}</p>
+                    <p>{{confirm.location}}</p>
+                    <p>{{confirm.amountSet}}</p>
+                    <p>{{confirm.identifierSet}}</p>
+                    <p><span style="display:inline" ng-bind-html="renderContent(confirm.content)"></span></p>
                 </div>
                 <div ng-if="confirm.model == 'ORDER'">
-                    <p>User: {{confirm.user}}</p>
-                    <p>Amount Set Alpha: {{confirm.amountSetAlpha}}</p>
-                    <p>Identifier Set Alpha: {{confirm.identifierSetAlpha}}</p>
-                    <p>Amount Set Beta: {{confirm.amountSetBeta}}</p>
-                    <p>Identifier Set Beta: {{confirm.identifierSetBeta}}</p>
-                    <p>Status: {{confirm.status}}</p>
+                    <p>{{confirm.user}}</p>
+                    <p>{{confirm.amountSetAlpha}}</p>
+                    <p>{{confirm.identifierSetAlpha}}</p>
+                    <p>{{confirm.amountSetBeta}}</p>
+                    <p>{{confirm.identifierSetBeta}}</p>
+                    <p>{{confirm.status}}</p>
                 </div>
                 <div ng-if="confirm.model == 'PROJECT'">
-                    <h3>Title: {{confirm.title}}</h3>
-                    <p>User: {{confirm.user}}</p>
-                    <p>Associations: {{confirm.associatedModels}}</p>
-                    <p>Location: {{confirm.location}}</p>
-                    <p>Description: <span style="display:inline" ng-bind-html="renderContent(confirm.description)"></span></p>
+                    <h3>{{confirm.title}}</h3>
+                    <p>{{confirm.user}}</p>
+                    <p>{{confirm.associatedModels}}</p>
+                    <p>{{confirm.location}}</p>
+                    <p><span style="display:inline" ng-bind-html="renderContent(confirm.description)"></span></p>
                 </div>
                 <div ng-if="confirm.model == 'PROJECTMEMBER'">
-                    <p>User: {{confirm.user}}</p>
-                    <p>Project: {{confirm.project}}</p>
+                    <p>{{confirm.user}}</p>
+                    <p>{{confirm.project}}</p>
                 </div>
                 <div ng-if="confirm.model == 'TASK'">
-                    <h3>Title: {{confirm.title}}</h3>
-                    <p>User: {{confirm.user}}</p>
-                    <p>Associations: {{confirm.associatedModels}}</p>
-                    <p>Location: {{confirm.location}}</p>
-                    <p>Content: <span style="display:inline" ng-bind-html="renderContent(confirm.content)"></span></p>
+                    <h3>{{confirm.title}}</h3>
+                    <p>{{confirm.user}}</p>
+                    <p>{{confirm.associatedModels}}</p>
+                    <p>{{confirm.location}}</p>
+                    <p><span style="display:inline" ng-bind-html="renderContent(confirm.content)"></span></p>
                 </div>
                 <div ng-if="confirm.model == 'TIME'">
-                    <p>Amount: {{confirm.amount}}</p>
-                    <p>User: {{confirm.user}}</p>
-                    <p>Type: {{confirm.type}}</p>
-                    <p>Associations: {{confirm.associatedModels}}</p>
-                    <p>Content: <span style="display:inline" ng-bind-html="renderContent(confirm.content)"></span></p>
+                    <p>{{confirm.amount}}</p>
+                    <p>{{confirm.user}}</p>
+                    <p>{{confirm.type}}</p>
+                    <p>{{confirm.associatedModels}}</p>
+                    <p><span style="display:inline" ng-bind-html="renderContent(confirm.content)"></span></p>
                 </div>
                 <div ng-if="confirm.model == 'TRANSACTION'">
-                    <p>User: {{confirm.user}}</p>
-                    <p>To: {{confirm.to}}</p>
-                    <p>From: {{confirm.from}}</p>
+                    <p>{{confirm.user}}</p>
+                    <p>{{confirm.to}}</p>
+                    <p>{{confirm.from}}</p>
                     <p>{{confirm.tags}}</p>
                     <span ng-repeat="(key, value) in confirm.amountSet"><p style="font-weight:800">{{value}} <a href="market/{{key}}" ui-sref="market({id:key})">{{key}}</a></p></span>
                     <p><span style="display:inline" ng-bind-html="renderContent(confirm.content)"></span></p>
                 </div>
-
                 <div ng-if="confirm.model == 'VALIDATION'">
-                    <p>User: {{confirm.user}}</p>
-                    <p>Content: <span style="display:inline" ng-bind-html="renderContent(confirm.content)"></span></p>
+                    {{confirm}}
+                    <p>{{confirm.user}}</p>
+                    <p><span style="display:inline" ng-bind-html="renderContent(confirm.content)"></span></p>
                 </div>
-
             </div>
         </div>
     </md-sidenav>

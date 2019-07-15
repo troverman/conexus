@@ -123,8 +123,11 @@ angular.module( 'conexus.contentList', [
 
 
     //TODO: COMPLEX QUERIES..
+    $scope.searchQuery = [];
     $scope.filterContent = function(filter) {
+        $scope.searchQuery = [{text:filter}];
         $rootScope.stateIsLoading = true;
+        $location.search('tags', filter);
         ContentModel.getSome({tag:filter, limit:20, skip:0, sort:'createdAt DESC'}).then(function(contentList){
             $rootScope.stateIsLoading = false;
             $scope.selectedTag = filter;
@@ -172,10 +175,10 @@ angular.module( 'conexus.contentList', [
 
 
 
-
-
-
-
+    console.log($location.search())
+    if ($location.search().tags){
+        $scope.filterContent($location.search().tags);
+    }
 
     //TODO: DEPCRECIATE
     $scope.selectType = function(type){$scope.selectedType = type;};

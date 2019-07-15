@@ -8,18 +8,6 @@
 
 <div class="container">
 
-	<div class="spacing-10"></div>
-
-	<!--
-	<div class="row" ng-show="!time.stream">
-		<div class="card">
-		    <div style="padding:16px;">
-		    	<h4><i class="fas fa-eye-slash"></i> No Stream</h4>
-			</div>
-		</div>
-	</div>
-	-->
-
 	<!--TODO: TIME CREATION &+ VALIDATION INFORMATION TYPES..  RETORACTIVE | TIMER | STREAM | API DATA.. ETC -->
 	<!--TODO: BASED MANIFOLD FILTER | IE MULTIPLE TASKS | PARENTS -->
 	<!--TODO: BASED MANIFOLD FILTER | IE MULTIPLE TASKS | PROJECTS | CONTENT | VALIDATIONS | PARENTS -->
@@ -47,15 +35,12 @@
 			</div>
 			<div style="padding:16px" class="col-sm-12">
 
-				
-
 				<a style="font-weight:700" href="member/{{time.user.username}}" ui-sref="member.activity({path:time.user.username})">
 					<img class="card-avatar" ng-src="{{time.user.avatarUrl}}" src="{{time.user.avatarUrl}}" err-src="/images/avatar.png">
 					{{time.user.username}}
 				</a>
                 
                 <!--TODO-->
-                <p><a ng-repeat="tag in time.task.tags track by $index" href="market/{{tag.trim()}}" ui-sref="market({id:tag.trim()})">{{tag.trim()}}<span ng-show="!$last">,</span> </a></p>
 				<p><a ng-repeat="tag in time.tags track by $index" href="market/{{tag.trim()}}" ui-sref="market({id:tag.trim()})">{{tag.trim()}}<span ng-show="!$last">,</span> </a></p>
 
 				<p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="time.createdAt"></p>
@@ -79,6 +64,7 @@
 				<a ng-click="$event.stopPropagation();createReaction(time, 'minus')" ><i class="fas fa-angle-down"></i> {{time.reactions.minus}} dislike </a>
 				<a ng-click="$event.stopPropagation();reply(time)"><i class="far fa-comment"></i> comment </a>
 		       	<a ng-click="$event.stopPropagation();validationToggle(time)"><i class="fas fa-check"></i> validate </a>
+		       	<a ng-click="$event.stopPropagation();"><i class="fas fa-eye"></i> 0 </a>
 			</div>
 		</div>
 	</div>
@@ -102,12 +88,6 @@
 					<a href="#" ng-click="createReaction(item, 'minus')" ><i class="fas fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
 					<a href="#" ng-click="reply(item)"><i class="far fa-comment"></i> comment </a>
 					<a style="padding:0px" class="pull-right" href="content/{{item.id}}" ui-sref="content({id:item.id}")><i class="fas fa-link grey"></i></a>
-				</div>
-				<div ng-show="item.showReply" class="card-footer">
-					<form role="form" ng-submit="newContent(item)">
-						<text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
-						<button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
-					</form>
 				</div>
 			</div>
 	    </div>

@@ -51,12 +51,6 @@ angular.module( 'conexus.time', [
     $scope.newValidation.validation = {}
     $scope.validations = validations;
    
-    //TODO: DEPRECIATE
-    $scope.time.tokens = [];
-    $scope.time.tokens.push('CRE8');
-    $scope.time.tokens.push('CRE8+TIME');
-    $scope.time.tokens.push('CRE8+TIME+'+$scope.time.id);
-
     //VALIDATION IS THE CORE.. 
     //if ($scope.time.task){$scope.time.tokens.push('CRE8+TIME+'+$scope.time.task.title.toUpperCase().replace(/ /g, '-')+'.'+$scope.time.task.id)}
     //if ($scope.time.project){$scope.time.tokens.push('CRE8+TIME+'+$scope.time.project.title.toUpperCase().replace(/ /g, '-')+'.'+$scope.time.project.id)}

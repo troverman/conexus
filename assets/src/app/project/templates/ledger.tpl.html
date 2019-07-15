@@ -79,7 +79,7 @@
 
 		<div class="card mobileFix">
 		    <form ng-submit="search()" style="display:flex;flex-direction:row;">
-		        <tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search | Filter" ng-model="searchQuery"></tags-input>
+		        <tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search" ng-model="searchQuery"></tags-input>
 		        <div ng-click="search()" style="border:0px;float:right" class="btn btn-default">
 		            <a href="#" role="button">
 		                <h5 style="color:black;text-align:right" class="noselect">Search <i class="fa fa-search"></i></h5>
@@ -173,7 +173,7 @@
 				<span ng-repeat="(key, value) in transaction.amountSet"><p style="font-weight:800">{{value}} <a href="market/{{key}}" ui-sref="market({id:key})">{{key}}</a></p></span>
 				<p><a ng-click="$event.stopPropagation();" ng-repeat="tag in transaction.tags" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
 				<p>{{transaction.content}}</p>
-				<p style="color:gray"><span style="color:gray" am-time-ago="transaction.createdAt"></span> | {{transaction.createdAt | date :  "y MM-dd hh:mm.ss a"}}</p>
+				<p style="color:gray"><span style="color:gray" am-time-ago="transaction.createdAt"></span> • {{transaction.createdAt | date :  "y MM-dd hh:mm.ss a"}}</p>
 				<a ng-click="$event.stopPropagation();" href="transaction/{{transaction.id}}" ui-sref="transaction({id:transaction.id})"></a>
 			</div>
 			<div class="card-footer">

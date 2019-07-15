@@ -95,8 +95,9 @@ angular.module( 'conexus.marketPlace', [
     };
 
     $scope.filterContent = function(filter) {
-        $scope.searchQuery.push({text:filter})
+        $scope.searchQuery.push({text:filter});
         $rootScope.stateIsLoading = true;
+        $location.search('tags', filter);
         ItemModel.getSome({tag:filter, limit:20, skip:0, sort:'createdAt DESC'}).then(function(items){
             $rootScope.stateIsLoading = false;
             $scope.selectedTag = filter;
@@ -119,5 +120,9 @@ angular.module( 'conexus.marketPlace', [
         if($rootScope.currentUser){$mdSidenav('content').toggle();}
         else{$mdSidenav('login').toggle()}
     };
+
+    if ($location.search().tags){
+        $scope.filterContent($location.search().tags);
+    }
 
 }]);

@@ -25,6 +25,7 @@
         <span style="color:gray" am-time-ago="item.createdAt"></span>
     </div>
     <div class="card-footer">
+        <a ng-click="$event.stopPropagation();renderToggle(item)" style="color:grey"><i class="fas fa-eye"></i> 0</a>
         <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fas fa-angle-up"></i> {{item.reactions.plus}} like </a> 
         <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fas fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
         <a ng-click="$event.stopPropagation();reply(item)"><i class="far fa-comment"></i> comment </a>

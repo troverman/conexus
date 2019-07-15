@@ -11,8 +11,8 @@
                 </div>
                 <div style="margin-top: auto;margin-bottom: auto;">
                     <div style="padding:15px">
-                        <h1 style="text-align:left;" class="container">
-                            <img style="height:50px;width:50px" src="http://identicon-1132.appspot.com/{{item.id}}"/>
+                        <h1 style="text-align:left;">
+                            <!--<img style="height:50px;width:50px" src="http://identicon-1132.appspot.com/{{item.id}}"/>-->
                             {{item.title}}
                         </h1>
                         <h5 style="color:white">{{item.id}}</h5>
@@ -73,6 +73,10 @@
             <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fas fa-angle-up"></i> {{item.reactions.plus}} like </a> 
             <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fas fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
             <a ng-click="$event.stopPropagation();reply(item)"><i class="far fa-comment"></i> comment </a>
+            <a ng-click="$event.stopPropagation();tokensToggle(content)" style="color:grey" class="pull-right">
+                <i class="fas fa-eye"></i> 
+                <!--Attention: {{order.attention || 0}}, Live: {{order.live || 0}}-->
+            </a>
         </div>
     </div>
 </div>
@@ -383,6 +387,10 @@
                         <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fas fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
                         <a ng-click="$event.stopPropagation();reply(item)"><i class="far fa-comment"></i> comment </a>
                         <a ng-click="$event.stopPropagation();" class="pull-right" style="padding:0px;" href="order/{{item.id}}" ui-sref="order({id:item.id})"><i class="fas fa-link grey"></i></a>
+                    <a style="color:grey" class="pull-right" href="content/{{content.id}}" ui-sref="content({id:content.id})" ng-click="tokensToggle(content)">
+                        <i class="fas fa-eye"></i> 
+                        <!--Attention: {{order.attention || 0}}, Live: {{order.live || 0}}-->
+                    </a>
                     </div>
                 </div>
             </div>

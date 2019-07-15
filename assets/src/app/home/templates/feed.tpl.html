@@ -187,19 +187,20 @@
                         <div class="card" ng-click="cardDetailToggle(item)">
 
                             <div style="background:url('https://source.unsplash.com/1600x900/?{{item.tags}}');min-height:100px" class="imageContainerSmall">
-                                <div style="background:rgba(0,0,0,0.75);height:100px" class="imageContainerSmallDiv">  
+                                <div style="background:rgba(0,0,0,0.75);height:100px" class="imageContainerSmallDiv">
+                                <div style="text-align:right;padding:15px;position:absolute;right:0">
+                                    <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
+                                        <i class="fas fa-chevron-down"></i>
+                                    </a>
+                                </div> 
                                     <div style="margin-top: auto;margin-bottom: auto;">
-                                        <div class="container">
+                                        <div style="padding:15px">
                                             <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;"><a ng-click="$event.stopPropagation()" href="task/{{item.id}}" ui-sref="tasks" style="color:white">{{item.title}}</a></h1>
-                                            <!--<h5><a ng-click="$event.stopPropagation()" href="project/{{item.project.urlTitle}}" style="color:white">{{item.project.title}}</a></h5>-->
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div style="padding:16px;">
-                                <div style="float:right;text-align:right">
-                                    <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
-                                </div>  
                                 <p><a ng-click="$event.stopPropagation()" ng-repeat="tag in item.tags track by $index" href="market/{{tag.trim()}}" ui-sref="market({id:tag.trim()})">{{tag.trim()}} </a></p>
                                 <p><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></p>
                                 <p><button ng-if="true" class="btn btn-default" ng-click="$event.stopPropagation();interested(item)"><i class="fa fa-check"></i> Interested</button></p>
@@ -396,11 +397,18 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div style="text-align:right;padding:15px;position:absolute;right:0">
+                                    <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
+                                        <i class="fas fa-chevron-down"></i>
+                                    </a>
+                                    <div style="clear:both"></div>
+                                </div>  
                                 -->
                                 <div style="padding:16px">
                                     <div style="float:right;text-align:right">
-                                        <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
+                                        <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><span style="color:gray"></span><i class="fa fa-chevron-down"></i></a>
                                     </div>  
+
                                     <div class="row">
                                         <div class="col-xs-2">
                                             <span ng-repeat="(key, value) in item.setAlpha">
@@ -719,11 +727,11 @@
                     <div style="padding:16px;">
                         <div class="row">
                             <div class="col-md-1 col-sm-2 col-xs-2">
-                                <a ng-click="$event.stopPropagation();" href="project/{{item.urlTitle}}" ui-sref="project.activity({path:item.urlTitle})"><img style="width:50px;height:50px;max-width:1000%" ng-src="{{item.avatarUrl}}" err-src="/images/avatar.png"></a>
+                                <a ng-click="$event.stopPropagation();" href="project/{{item.urlTitle}}" ui-sref="project.activity({path:item.urlTitle})"><img style="width:50px;height:50px;max-width:1000%;border-radius:100%" ng-src="{{item.avatarUrl}}" err-src="/images/avatar.png"></a>
                             </div>
                             <div class="col-md-11 col-sm-10 col-xs-10">
                                 <p style="float:right;text-align:right">
-                                    <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
+                                    <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><span style="color:gray"></span><i class="fa fa-chevron-down"></i></a>
                                     <span ng-if="item.location" style="color:gray"></span>
                                 </p>
                                 <h3 style="margin-top:0px"><a ng-click="$event.stopPropagation();" href="project/{{item.urlTitle}}" ui-sref="project.activity({path:item.urlTitle})">{{item.title}}</a></h3>
@@ -740,7 +748,6 @@
                         <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">
                             <div style="text-align:right;padding:15px;position:absolute;right:0">
                                 <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(token)">
-                                    <!--<i class="fas fa-ellipsis-v"></i>-->
                                     <i class="fas fa-chevron-down"></i>
                                 </a>
                                 <div style="clear:both"></div>

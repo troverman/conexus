@@ -109,7 +109,7 @@
                     <span ng-repeat="(key, value) in item.amountSet"><p style="font-weight:800">{{value}} <a ng-click="$event.stopPropagation();" href="market/{{key}}" ui-sref="market({id:key})">{{key}}</a></p></span>
                     <p><a ng-click="$event.stopPropagation();" ng-repeat="tag in item.tags" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
                     <p>{{item.content}}</p>
-                    <p style="color:gray"><span style="color:gray" am-time-ago="item.createdAt"></span> | {{item.createdAt | date :  "y MM-dd hh:mm.ss a"}}</p>
+                    <p style="color:gray"><span style="color:gray" am-time-ago="item.createdAt"></span> • {{item.createdAt | date :  "y MM-dd hh:mm.ss a"}}</p>
                 </div>
                 <div class="card-footer">
                     <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fas fa-angle-up"></i> {{item.reactions.plus}} like </a> 

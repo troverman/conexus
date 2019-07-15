@@ -188,13 +188,6 @@ angular.module( 'conexus.tasks', [
     };
 
 
-
-
-
-
-
-
-
     $scope.$watch('searchQueryNEW' ,function(newValue, oldValue){
         if (newValue !== oldValue) {
 
@@ -217,11 +210,6 @@ angular.module( 'conexus.tasks', [
 
         }
     }, true);
-
-
-
-
-
 
 
 
