@@ -1602,7 +1602,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "    body {overflow-x:hidden}\n" +
     "    pre{padding:0px;background-color:#282c34;border:0px;padding-bottom:15px;margin:0px;border-radius:0px;}\n" +
     "    h4, h5{font-family:'Titillium Web',sans-serif;font-weight:600;}\n" +
-    "    a{font-weight:700;}\n" +
+    "    .developers a {font-weight:700;}\n" +
     "    .bootstrapHack {\n" +
     "        z-index: 3;\n" +
     "        border: 0px;\n" +
@@ -1625,7 +1625,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "    .developersHeader h4 {font-family:'Titillium Web',sans-serif;font-weight:600;}\n" +
     "    .subContents p{margin:0px;}\n" +
     "</style>\n" +
-    "\n" +
+    "<div class=\"developers\">\n" +
     "<div class=\"intro\" style=\"\">\n" +
     "    <div class=\"intro-container\">\n" +
     "        <svg class=\"svg-defs\" viewBox=\"0 0 1920 1080\" viewPort=\"0 0 1920 1080\" preserveAspectRatio=\"xMidYMid slice\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
@@ -4405,8 +4405,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "    </div>\n" +
     "    <div class=\"spacing-50\"></div>\n" +
     "</div>\n" +
-    "\n" +
-    "");
+    "</div>");
 }]);
 
 angular.module("discover/index.tpl.html", []).run(["$templateCache", function($templateCache) {
@@ -5436,7 +5435,7 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                    <div ng-if=\"item.title\" style=\"background:url('https://source.unsplash.com/1600x900/?{{item.tags}}')\" class=\"imageContainerSmall\">\n" +
     "                        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "                            <div style=\"text-align:right;padding:15px;position:absolute;right:0\">\n" +
-    "                                <a style=\"color:white;\" ng-click=\"$event.stopPropagation();cardDetailToggle(token)\">\n" +
+    "                                <a style=\"color:white;\" ng-click=\"$event.stopPropagation();cardDetailToggle(item)\">\n" +
     "                                    <!--<i class=\"fas fa-ellipsis-v\"></i>-->\n" +
     "                                    <i class=\"fas fa-chevron-down\"></i>\n" +
     "                                </a>\n" +
@@ -5451,7 +5450,7 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                    </div>\n" +
     "                    <div style=\"padding:16px\">\n" +
     "                        <div ng-if=\"!item.title\" style=\"text-align:right;padding:15px;position:absolute;right:0\">\n" +
-    "                            <a style=\"color:white;\" ng-click=\"$event.stopPropagation();cardDetailToggle(token)\">\n" +
+    "                            <a style=\"color:white;\" ng-click=\"$event.stopPropagation();cardDetailToggle(item)\">\n" +
     "                                <i class=\"fas fa-chevron-down\"></i>\n" +
     "                            </a>\n" +
     "                            <div style=\"clear:both\"></div>\n" +
@@ -5506,7 +5505,7 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?{{item.tags}}')\" class=\"imageContainerSmall\">\n" +
     "                        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">\n" +
     "                            <div style=\"text-align:right;padding:15px;position:absolute;right:0\">\n" +
-    "                                <a style=\"color:white;\" ng-click=\"$event.stopPropagation();cardDetailToggle(token)\">\n" +
+    "                                <a style=\"color:white;\" ng-click=\"$event.stopPropagation();cardDetailToggle(item)\">\n" +
     "                                    <i class=\"fas fa-chevron-down\"></i>\n" +
     "                                </a>\n" +
     "                                <div style=\"clear:both\"></div>\n" +

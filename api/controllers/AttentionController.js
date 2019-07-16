@@ -62,11 +62,11 @@ module.exports = {
 				console.log('CREATE ATTENTION', model)
 
 				for (x in model.associatedModels){
-
+					
 					if (model.associatedModels[x].type == 'CONTENT'){
 
 						//Content.find({id:associatedModels[x].id}).then(function(contentModel){
-
+							
 							
 						//});
 

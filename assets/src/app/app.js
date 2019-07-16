@@ -106,6 +106,9 @@ angular.module( 'conexus', [
 
     $rootScope.$on('$stateChangeSuccess',function(){
         $rootScope.stateIsLoading = false;
+        
+        $rootScope.associatedModels = [{model:$state.current.url.substring(1).replace(/(^|\s)\S/g, function(t) { return t.toUpperCase() }), id:1}];
+
         window.scrollTo(0, 0);
         //titleService | seoService
         if ($state.current.url.substring(1) !== ''){

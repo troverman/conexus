@@ -1803,13 +1803,7 @@ angular.module( 'conexus.nav', [
         var location = '';
         if ($rootScope.currentUser.location){location=$rootScope.currentUser.location;}
 
-        //TODO
-        function sumObj(models){
-            return models.reduce(function(a, b){
-                //if b.context = 
-                return a + b.amount;
-            }, 0);
-        };
+    
 
         //$rootScope.timeQ[context].map(function(obj){
         //    obj.context.string 
@@ -1825,11 +1819,6 @@ angular.module( 'conexus.nav', [
         //THIS IS SUPER DRAFT 
         //make db call if more than 10 sec or change 
 
-        //ON CONTEXT CHANGE.. CH
-        //var set = $rootScope.timeQ[context].filter(function(obj){
-        //    return obj.context.string == string;
-        //});
-
         $rootScope.timeQ[context].push({
             context:{
                 state:$state.current.name, 
@@ -1841,40 +1830,25 @@ angular.module( 'conexus.nav', [
         });
 
 
-        //if ($rootScope.timeQ[context].length !=0){
-            //console.log($rootScope.timeQ[context][$rootScope.timeQ[context].length - 1].context.string, string)
-            //if (set.length < 10){
-                //if($rootScope.timeQ[context][$rootScope.timeQ[context].length - 1].context.string != string){
-                    //var attentionModel = {
-                        //app: 'HUMAN',
-                        //string: string,
-                        //amount:set.length,
-                        //data: {verion:'PRE ALPHA', ip:{}},
-                        //associatedModels: [],
-                        //creator: $rootScope.currentUser,
-                    //};
-                    //console.log(attentionModel);
-                    //AttentionModel.create(attentionModel);
-                //}
-            //}
+        var set = $rootScope.timeQ[context].filter(function(obj){
+            return obj.context.string == string;
+        });
 
-            //if (set.length >= 10){
-                //$rootScope.timeQ[context] = [];
-                var attentionModel = {
-                    app: 'HUMAN',
-                    string: string,
-                    amount:set.length,
-                    data: {verion:'PRE ALPHA', ip:{}},
-                    associatedModels: [],
-                    creator: $rootScope.currentUser,
-                };
-                //console.log(attentionModel);
-                AttentionModel.create(attentionModel);
-            //}
+        if (set.length >= 10){
+            $rootScope.timeQ[context] = [];
+            var attentionModel = {
+                app: 'HUMAN',
+                string: string,
+                amount:set.length,
+                data: {verion:'PRE ALPHA', ip:{}},
+                associatedModels: $rootScope.associatedModels,
+                creator: $rootScope.currentUser,
+            };
+            //console.log(attentionModel);
+            AttentionModel.create(attentionModel);
         }
 
         //console.log(set.length)
-
         var index = $scope.timeChart.xAxis.categories.indexOf(string);
         if (index == -1){
             $scope.timeChart.xAxis.categories.push(string);

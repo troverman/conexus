@@ -677,7 +677,7 @@
                     <div ng-if="item.title" style="background:url('https://source.unsplash.com/1600x900/?{{item.tags}}')" class="imageContainerSmall">
                         <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
                             <div style="text-align:right;padding:15px;position:absolute;right:0">
-                                <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(token)">
+                                <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
                                     <!--<i class="fas fa-ellipsis-v"></i>-->
                                     <i class="fas fa-chevron-down"></i>
                                 </a>
@@ -692,7 +692,7 @@
                     </div>
                     <div style="padding:16px">
                         <div ng-if="!item.title" style="text-align:right;padding:15px;position:absolute;right:0">
-                            <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(token)">
+                            <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
                                 <i class="fas fa-chevron-down"></i>
                             </a>
                             <div style="clear:both"></div>
@@ -747,7 +747,7 @@
                     <div style="background:url('https://source.unsplash.com/1600x900/?{{item.tags}}')" class="imageContainerSmall">
                         <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">
                             <div style="text-align:right;padding:15px;position:absolute;right:0">
-                                <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(token)">
+                                <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
                                     <i class="fas fa-chevron-down"></i>
                                 </a>
                                 <div style="clear:both"></div>
