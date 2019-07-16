@@ -153,7 +153,7 @@
                             </div> 
 	                        <div style="margin-top: auto;margin-bottom: auto;">
 	                            <div class="container">
-	                                <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;"><a ng-click="$event.stopPropagation();" style="color:white" href="content/{{item.id}}" ui-sref="content({id:item.id})">{{item.title}}</h1>
+	                                <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;"><a ng-click="$event.stopPropagation();" style="color:white" href="content/{{item.id}}" ui-sref="content({id:item.id})">{{item.title}}</a></h1>
 	                            </div>
 	                        </div>
 	                    </div>
@@ -195,7 +195,7 @@
                                     <span ng-if="item.location" style="color:gray"></span>
                                 </p>
                                 <h3 style=""><a ng-click="$event.stopPropagation();" href="project/{{item.urlTitle}}" ui-sref="project.activity({path:item.urlTitle})">{{item.title}}</a></h3>
-                                <div style="overflow:scroll">
+                                <div style="overflow:auto">
                                     <span style="display:inline" ng-bind-html="renderContent(item.description)"></span>
                                 </div>
                             </div>

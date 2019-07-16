@@ -1,5 +1,8 @@
 angular.module('models', [
 	'models.action',
+	'models.app',
+	'models.attention',
+	'models.peer',
 	'models.content',
 	'models.follower',
 	'models.item',

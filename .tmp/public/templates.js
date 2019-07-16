@@ -1056,13 +1056,10 @@ angular.module("apps/index.tpl.html", []).run(["$templateCache", function($templ
     "                    </div>\n" +
     "                </div>\n" +
     "                <div class=\"spacing-25\"></div>\n" +
-    "                <!--<p style=\"color:gray;font-style:italic\">Apps are a set of modular protocols and add to a domain of intentional tokenized systems.</p>-->\n" +
-    "                <!--<p style=\"color:gray;font-style:italic\">Apps are plugins to the string space and add to the domain of intentional tokenized systems.</p>-->\n" +
-    "                <p style=\"color:gray;font-style:italic\">Apps are a set of modular protocols and plugins to the string space. Apps add to the domain of tokenized systems of intention.</p>\n" +
-    "                <!--<p style=\"color:gray;font-style:italic\">By allowing for application design, we capture a larger design space.</p>-->\n" +
-    "                <p style=\"color:gray;font-style:italic\">How can we create an eglatarian world through tokenization?</p>\n" +
-    "                <!--<p style=\"color:gray;font-style:italic\">Apps are a set of modular protocols in which app design itself is modular.</p>-->\n" +
-    "                <p style=\"color:gray;font-style:italic\">See the <a href=\"/developers\" ui-sref=\"developers\"><b>documentation</b></a> to learn more.</p>\n" +
+    "                <p style=\"color:gray;font-style:italic\">Apps are a set of modular protocols and plugins to the string space.</p>\n" +
+    "                <p style=\"color:gray;font-style:italic\">Application Collaboration is governed though <a href=\"/projects\" ui-sref=\"projects\">projects</a>.</p>\n" +
+    "                <p style=\"color:gray;font-style:italic\"><a href=\"/developers\" ui-sref=\"developers\"><b>Developer Documentation</b></a></p>\n" +
+    "                <p style=\"color:gray;font-style:italic\">Help create value.</p>\n" +
     "            </div>\n" +
     "            <div class=\"col-xs-5 col-sm-5\">\n" +
     "                <img src=\"images/app.gif\">\n" +
@@ -1095,14 +1092,26 @@ angular.module("apps/index.tpl.html", []).run(["$templateCache", function($templ
     "        </div>\n" +
     "    </div>\n" +
     "    <div class=\"row\">\n" +
-    "        <div class=\"col-lg-6 col-sm-6\" ng-repeat=\"app in apps\" style=\"padding-left:0px;padding-right:0px;\">\n" +
-    "            <div class=\"card\" ng-click=\"cardDetailToggle(app)\" style=\"height:150px\">\n" +
-    "                <div style=\"padding:16px;\">\n" +
-    "                    <div style=\"float:right\">\n" +
-    "                        <i ng-click=\"cardDetailToggle()\" class=\"fa fa-ellipsis-v\"></i>\n" +
+    "        <div class=\"col-lg-12 col-sm-12\" ng-repeat=\"app in apps\" style=\"padding-left:0px;padding-right:0px;\">\n" +
+    "            <div class=\"card\" ng-click=\"cardDetailToggle(app)\">\n" +
+    "                <div style=\"background:url('https://source.unsplash.com/1600x900/?{{app.title}},code');min-height:100px\" class=\"imageContainerSmall\">\n" +
+    "                    <div style=\"background:rgba(0,0,0,0.75);height:100px\" class=\"imageContainerSmallDiv\">  \n" +
+    "                        <div style=\"text-align:right;padding:15px;position:absolute;right:0\">\n" +
+    "                            <a style=\"color:white;\" ng-click=\"$event.stopPropagation();cardDetailToggle(app)\">\n" +
+    "                                <i class=\"fas fa-chevron-down\"></i>\n" +
+    "                            </a>\n" +
+    "                        </div> \n" +
+    "                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                            <div style=\"padding:15px\">\n" +
+    "                                <h1 style=\"text-align:left;font-size:30px;color:rgba(255,255,255,0.9);font-weight:400;\">\n" +
+    "                                    <a ng-click=\"$event.stopPropagation();\" style=\"color:white\" href=\"app/{{app.title}}\" ui-sref=\"app({id:app.title})\">{{app.title}}</a>\n" +
+    "                                </h1>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
     "                    </div>\n" +
-    "                    <h4><a ng-click=\"$event.stopPropagation();\" href=\"app/{{app.title}}\" ui-sref=\"app({id:app.title})\">{{app.title}}</a></h4>\n" +
-    "                    <p style=\"color:gray\">{{app.description}}</p>\n" +
+    "                </div>\n" +
+    "                <div style=\"padding:16px;\">\n" +
+    "                    {{app.description}}\n" +
     "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
@@ -1317,7 +1326,7 @@ angular.module("content/index.tpl.html", []).run(["$templateCache", function($te
     "				-->\n" +
     "				<div style=\"clear:both\"></div>\n" +
     "				<div class=\"spacing-10\"></div>\n" +
-    "				<div style=\"max-height:5000px;overflow:scroll\" ng-show=\"content.type!='video'\">\n" +
+    "				<div style=\"max-height:5000px;overflow:auto\" ng-show=\"content.type!='video'\">\n" +
     "					<span style=\"display:inline\" ng-bind-html=\"renderContent(content.content)\"></span>\n" +
     "				</div>\n" +
     "		    </div>\n" +
@@ -1716,35 +1725,6 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                        <!--CREATE HERE | CONEX API...-->\n" +
     "                </div>\n" +
     "                <h4><b><a href=\"#CONEXAPI\" du-smooth-scroll>Conex API: Models & Endpoints</a></b></h4>\n" +
-    "\n" +
-    "                <div style=\"padding:16px;font-weight:bold;font-size:12px;\" class=\"subContents\" ng-if=\"false\">\n" +
-    "                    <p><a href=\"#ACTION\" du-smooth-scroll>Action</a></p>\n" +
-    "                    <p><a href=\"#APP\" du-smooth-scroll>App</a></p>\n" +
-    "                    <p><a href=\"#ASSOCIATION\" du-smooth-scroll>Assoication</a></p>\n" +
-    "                    <p><a href=\"#BLOCK\" du-smooth-scroll>Block</a></p>\n" +
-    "                    <p><a href=\"#CONTENT\" du-smooth-scroll>Content</a></p>\n" +
-    "                    <p><a href=\"#DATA\" du-smooth-scroll>Data</a></p>\n" +
-    "                    <p><a href=\"#EVENT\" du-smooth-scroll>Event</a></p>\n" +
-    "                    <p><a href=\"#FOLLOWER\" du-smooth-scroll>Follower</a></p>\n" +
-    "                    <p><a href=\"#ITEM\" du-smooth-scroll>Item</a></p>\n" +
-    "                    <p><a href=\"#LOCATION\" du-smooth-scroll>Location</a></p>\n" +
-    "                    <p><a href=\"#MEMBER\" du-smooth-scroll>Member</a></p>\n" +
-    "                    <p><a href=\"#MOTION\" du-smooth-scroll>Motion</a></p>\n" +
-    "                    <p><a href=\"#NOTIFICATION\" du-smooth-scroll>Notification</a></p>\n" +
-    "                    <p><a href=\"#ORDER\" du-smooth-scroll>Order</a></p>\n" +
-    "                    <p><a href=\"#PASSPORT\" du-smooth-scroll>Passport</a></p>\n" +
-    "                    <p><a href=\"#PROJECT\" du-smooth-scroll>Project</a></p>\n" +
-    "                    <p><a href=\"#PROJECTCHARTER\" du-smooth-scroll>ProjectCharter</a></p>\n" +
-    "                    <p><a href=\"#PROJECTMEMBER\" du-smooth-scroll>ProjectMember</a></p>\n" +
-    "                    <p><a href=\"#PROTOCOL\" du-smooth-scroll>Protocol</a></p>\n" +
-    "                    <p><a href=\"#REACTION\" du-smooth-scroll>Reaction</a></p>\n" +
-    "                    <p><a href=\"#SEARCH\" du-smooth-scroll>Search</a></p>\n" +
-    "                    <p><a href=\"#TASK\" du-smooth-scroll>Task</a></p>\n" +
-    "                    <p><a href=\"#TIME\" du-smooth-scroll>Time</a></p>\n" +
-    "                    <p><a href=\"#TRANSACTION\" du-smooth-scroll>Transaction</a></p>\n" +
-    "                    <p><a href=\"#TX\" du-smooth-scroll>Tx</a></p>\n" +
-    "                    <p><a href=\"#VALIDATION\" du-smooth-scroll>Validation</a></p>\n" +
-    "                </div>\n" +
     "                <h4><b><a href=\"#TOKENIZATION\" du-smooth-scroll>Tokenization Principles & String Interpretation</a></b></h4>\n" +
     "                <h4><b><a href=\"#IDENTITY\" du-smooth-scroll>Identity & Interoperability</a></b></h4>\n" +
     "                <h4><b><a href=\"#VALIDATIONTRAVERSAL\" du-smooth-scroll>Association Exploration & Validation Traversals</a></b></h4>\n" +
@@ -2354,21 +2334,23 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <div class=\"col-sm-1\">\n" +
     "                    <div class=\"modelList\">\n" +
     "                        <p><a href=\"#ACTION\" du-smooth-scroll>Action</a></p>\n" +
-    "                        <!--<p><a href=\"#ATTENTION\" du-smooth-scroll>Attention</a></p>-->\n" +
+    "                        <p><a href=\"#ATTENTION\" du-smooth-scroll>Attention</a></p>\n" +
     "                        <p><a href=\"#APP\" du-smooth-scroll>App</a></p>\n" +
     "                        <p><a href=\"#ASSOCIATION\" du-smooth-scroll>Assoication</a></p>\n" +
     "                        <p><a href=\"#BLOCK\" du-smooth-scroll>Block</a></p>\n" +
     "                        <p><a href=\"#CONTENT\" du-smooth-scroll>Content</a></p>\n" +
+    "                        <p><a href=\"#CONNECTIONMODEL\" du-smooth-scroll>Connection</a></p>\n" +
     "                        <p><a href=\"#DATA\" du-smooth-scroll>Data</a></p>\n" +
     "                        <!--<p><a href=\"#EVENT\" du-smooth-scroll>Event</a></p>-->\n" +
     "                        <p><a href=\"#FOLLOWER\" du-smooth-scroll>Follower</a></p>\n" +
     "                        <p><a href=\"#ITEM\" du-smooth-scroll>Item</a></p>\n" +
     "                        <p><a href=\"#LOCATION\" du-smooth-scroll>Location</a></p>\n" +
     "                        <p><a href=\"#MEMBER\" du-smooth-scroll>Member</a></p>\n" +
-    "                        <p><a href=\"#MOTION\" du-smooth-scroll>Motion</a></p>\n" +
+    "                        <!--<p><a href=\"#MOTION\" du-smooth-scroll>Motion</a></p>-->\n" +
     "                        <p><a href=\"#NOTIFICATION\" du-smooth-scroll>Notification</a></p>\n" +
     "                        <p><a href=\"#ORDER\" du-smooth-scroll>Order</a></p>\n" +
     "                        <p><a href=\"#PASSPORT\" du-smooth-scroll>Passport</a></p>\n" +
+    "                        <p><a href=\"#PEERMODEL\" du-smooth-scroll>Peer</a></p>\n" +
     "                        <p><a href=\"#PROJECT\" du-smooth-scroll>Project</a></p>\n" +
     "                        <p><a href=\"#PROJECTCHARTER\" du-smooth-scroll>ProjectCharter</a></p>\n" +
     "                        <p><a href=\"#PROJECTMEMBER\" du-smooth-scroll>ProjectMember</a></p>\n" +
@@ -2463,6 +2445,42 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    <p><b>get /api/action</b></p>\n" +
     "                    <p><b>getSome</b></p>\n" +
     "                    <p><b>post /api/action</b></p>\n" +
+    "                    <p><b>create</b></p>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <div id=\"ATTENTION\" style=\"background-color:white;min-height:70vh\">\n" +
+    "        <div class=\"container\">\n" +
+    "        <div class=\"spacing-15\"></div>\n" +
+    "            <div class=\"row\">\n" +
+    "                <div class=\"col-sm-6 col-xs-12\">\n" +
+    "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?explore,discover')\" class=\"imageContainerSmall\">\n" +
+    "                        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                                <div class=\"container\">\n" +
+    "                                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Attention</h1>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>             \n" +
+    "                    <div class=\"spacing-15\"></div>\n" +
+    "                    <h4><b>Attention</b></h4>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">This is the Attention Model.</p>\n" +
+    "                    <div class=\"spacing-50\"></div>\n" +
+    "                </div>\n" +
+    "                <div class=\"col-sm-6 col-xs-12\">\n" +
+    "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
+    "                        <div style=\"margin-left:15px;\">\n" +
+    "                            <div class=\"spacing-5\"></div>\n" +
+    "                            <div hljs hljs-language=\"javascript\"  hljs-source=\"actionModel\"></div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                    <p>Websocket Subscribe</p>\n" +
+    "                    <p><b>get /api/attention</b></p>\n" +
+    "                    <p><b>getSome</b></p>\n" +
+    "                    <p><b>post /api/attention</b></p>\n" +
     "                    <p><b>create</b></p>\n" +
     "                </div>\n" +
     "            </div>\n" +
@@ -2661,6 +2679,42 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                    </div>\n" +
     "                    <p>Websocket Subscribe</p>\n" +
     "                    <p><b>get /api/block</b></p>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <div id=\"CONNECTIONMODEL\" style=\"background-color:white;min-height:70vh\">\n" +
+    "        <div class=\"container\">\n" +
+    "        <div class=\"spacing-15\"></div>\n" +
+    "            <div class=\"row\">\n" +
+    "                <div class=\"col-sm-6 col-xs-12\">\n" +
+    "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?explore,discover')\" class=\"imageContainerSmall\">\n" +
+    "                        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                                <div class=\"container\">\n" +
+    "                                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Connection</h1>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>             \n" +
+    "                    <div class=\"spacing-15\"></div>\n" +
+    "                    <h4><b>Connection</b></h4>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">This is the Connection Model. Connections are abstract associations. Connections create charters.</p>\n" +
+    "                    <div class=\"spacing-50\"></div>\n" +
+    "                </div>\n" +
+    "                <div class=\"col-sm-6 col-xs-12\">\n" +
+    "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
+    "                        <div style=\"margin-left:15px;\">\n" +
+    "                            <div class=\"spacing-5\"></div>\n" +
+    "                            <div hljs hljs-language=\"javascript\"  hljs-source=\"actionModel\"></div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                    <p>Websocket Subscribe</p>\n" +
+    "                    <p><b>get /api/connection</b></p>\n" +
+    "                    <p><b>getSome</b></p>\n" +
+    "                    <p><b>post /api/connection</b></p>\n" +
+    "                    <p><b>create</b></p>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
@@ -2971,6 +3025,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "        </div>\n" +
     "    </div>\n" +
     "\n" +
+    "    <!--\n" +
     "    <div id=\"MOTION\" style=\"background-color:white;min-height:70vh\">\n" +
     "        <div class=\"container\">\n" +
     "            <div class=\"spacing-15\"></div>\n" +
@@ -2986,8 +3041,6 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                        </div>\n" +
     "                    </div>\n" +
     "                    <p style=\"color:gray;font-style:italic\">A motion is an action linked to a consensus mechanism useful in group organization. A Containerized Action. A Motion is a Nested Validation .. in creating a motion one is validating an action. On Validation of a Motion (Nested Validation) an Action is created.</p>\n" +
-    "                    <!--COMBINE MOTION AND VALIDATION..-->\n" +
-    "                    <!--VALIDATE YOUR SELF AS A MEMBER .. OTHER MEMBERS VALIDATION THE VALIDATION-->\n" +
     "                </div>\n" +
     "                <div class=\"col-sm-6\">\n" +
     "                    <div class=\"bootstrapHack\" style=\"z-index:auto;\">\n" +
@@ -3002,6 +3055,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
+    "    -->\n" +
     "\n" +
     "    <div id=\"NOTIFICATION\" style=\"background-color:white;min-height:70vh\">\n" +
     "        <div class=\"container\">\n" +
@@ -4512,7 +4566,7 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
     "                            </div> \n" +
     "	                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "	                            <div class=\"container\">\n" +
-    "	                                <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\"><a ng-click=\"$event.stopPropagation();\" style=\"color:white\" href=\"content/{{item.id}}\" ui-sref=\"content({id:item.id})\">{{item.title}}</h1>\n" +
+    "	                                <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\"><a ng-click=\"$event.stopPropagation();\" style=\"color:white\" href=\"content/{{item.id}}\" ui-sref=\"content({id:item.id})\">{{item.title}}</a></h1>\n" +
     "	                            </div>\n" +
     "	                        </div>\n" +
     "	                    </div>\n" +
@@ -4554,7 +4608,7 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
     "                                    <span ng-if=\"item.location\" style=\"color:gray\"></span>\n" +
     "                                </p>\n" +
     "                                <h3 style=\"\"><a ng-click=\"$event.stopPropagation();\" href=\"project/{{item.urlTitle}}\" ui-sref=\"project.activity({path:item.urlTitle})\">{{item.title}}</a></h3>\n" +
-    "                                <div style=\"overflow:scroll\">\n" +
+    "                                <div style=\"overflow:auto\">\n" +
     "                                    <span style=\"display:inline\" ng-bind-html=\"renderContent(item.description)\"></span>\n" +
     "                                </div>\n" +
     "                            </div>\n" +
@@ -10400,15 +10454,19 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                <!--DOING IT TWICE WILL 'DOUBlE' NOW-->\n" +
     "            <div style=\"padding:16px;overflow:auto\">\n" +
     "                <div class=\"spacing-15\"></div>\n" +
-    "                <h4>{{taskTime}}</h4>\n" +
+    "                \n" +
+    "                <h4 ng-if=\"taskTime > 0\">{{taskTime}}</h4>\n" +
     "                <h4>{{timeModel.amount}}</h4>\n" +
     "\n" +
     "                <highchart config=\"timeChart\"></highchart>\n" +
     "\n" +
-    "                <div ng-repeat=\"time in timeQ | orderBy:'-'\">\n" +
+    "                <div ng-repeat=\"time in timeQ.general.slice(0,100) | orderBy:'-'\">\n" +
+    "                    \n" +
+    "\n" +
     "                    <p>{{time.context}} : <b>{{time.amount}}</b></p>\n" +
     "                    <!--LOCATION AS CONTEXT..?-->\n" +
     "                    <p>{{time.location}}</p>\n" +
+    "                    \n" +
     "\n" +
     "                </div>\n" +
     "                <div class=\"spacing-10\"></div>\n" +

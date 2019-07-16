@@ -1,10 +1,18 @@
+//UNIFY APP AND PROJECT LOL
 module.exports = {
     attributes: {
-		type: {type: 'string'},
+
+		title: {type: 'string'},
+		description: {type: 'json'},
+
+		information: {type: 'json'},
         data: {type: 'json'},
-        amount: {type: 'string'},
+
+        protocols: {type: 'json'},
+
         associatedModels: {type: 'json'},
-        user: {model: 'user'},
-        //WEAR, CONSUME, PROTOCOL INPUT INTO ACTIONS.. MANIFOLD SPACE. WITH DIRECTION
+
+        creator: {model: 'user'},
+
     },
 };

@@ -125,35 +125,6 @@
                         <!--CREATE HERE | CONEX API...-->
                 </div>
                 <h4><b><a href="#CONEXAPI" du-smooth-scroll>Conex API: Models & Endpoints</a></b></h4>
-
-                <div style="padding:16px;font-weight:bold;font-size:12px;" class="subContents" ng-if="false">
-                    <p><a href="#ACTION" du-smooth-scroll>Action</a></p>
-                    <p><a href="#APP" du-smooth-scroll>App</a></p>
-                    <p><a href="#ASSOCIATION" du-smooth-scroll>Assoication</a></p>
-                    <p><a href="#BLOCK" du-smooth-scroll>Block</a></p>
-                    <p><a href="#CONTENT" du-smooth-scroll>Content</a></p>
-                    <p><a href="#DATA" du-smooth-scroll>Data</a></p>
-                    <p><a href="#EVENT" du-smooth-scroll>Event</a></p>
-                    <p><a href="#FOLLOWER" du-smooth-scroll>Follower</a></p>
-                    <p><a href="#ITEM" du-smooth-scroll>Item</a></p>
-                    <p><a href="#LOCATION" du-smooth-scroll>Location</a></p>
-                    <p><a href="#MEMBER" du-smooth-scroll>Member</a></p>
-                    <p><a href="#MOTION" du-smooth-scroll>Motion</a></p>
-                    <p><a href="#NOTIFICATION" du-smooth-scroll>Notification</a></p>
-                    <p><a href="#ORDER" du-smooth-scroll>Order</a></p>
-                    <p><a href="#PASSPORT" du-smooth-scroll>Passport</a></p>
-                    <p><a href="#PROJECT" du-smooth-scroll>Project</a></p>
-                    <p><a href="#PROJECTCHARTER" du-smooth-scroll>ProjectCharter</a></p>
-                    <p><a href="#PROJECTMEMBER" du-smooth-scroll>ProjectMember</a></p>
-                    <p><a href="#PROTOCOL" du-smooth-scroll>Protocol</a></p>
-                    <p><a href="#REACTION" du-smooth-scroll>Reaction</a></p>
-                    <p><a href="#SEARCH" du-smooth-scroll>Search</a></p>
-                    <p><a href="#TASK" du-smooth-scroll>Task</a></p>
-                    <p><a href="#TIME" du-smooth-scroll>Time</a></p>
-                    <p><a href="#TRANSACTION" du-smooth-scroll>Transaction</a></p>
-                    <p><a href="#TX" du-smooth-scroll>Tx</a></p>
-                    <p><a href="#VALIDATION" du-smooth-scroll>Validation</a></p>
-                </div>
                 <h4><b><a href="#TOKENIZATION" du-smooth-scroll>Tokenization Principles & String Interpretation</a></b></h4>
                 <h4><b><a href="#IDENTITY" du-smooth-scroll>Identity & Interoperability</a></b></h4>
                 <h4><b><a href="#VALIDATIONTRAVERSAL" du-smooth-scroll>Association Exploration & Validation Traversals</a></b></h4>
@@ -763,21 +734,23 @@ contract Protocol {
                 <div class="col-sm-1">
                     <div class="modelList">
                         <p><a href="#ACTION" du-smooth-scroll>Action</a></p>
-                        <!--<p><a href="#ATTENTION" du-smooth-scroll>Attention</a></p>-->
+                        <p><a href="#ATTENTION" du-smooth-scroll>Attention</a></p>
                         <p><a href="#APP" du-smooth-scroll>App</a></p>
                         <p><a href="#ASSOCIATION" du-smooth-scroll>Assoication</a></p>
                         <p><a href="#BLOCK" du-smooth-scroll>Block</a></p>
                         <p><a href="#CONTENT" du-smooth-scroll>Content</a></p>
+                        <p><a href="#CONNECTIONMODEL" du-smooth-scroll>Connection</a></p>
                         <p><a href="#DATA" du-smooth-scroll>Data</a></p>
                         <!--<p><a href="#EVENT" du-smooth-scroll>Event</a></p>-->
                         <p><a href="#FOLLOWER" du-smooth-scroll>Follower</a></p>
                         <p><a href="#ITEM" du-smooth-scroll>Item</a></p>
                         <p><a href="#LOCATION" du-smooth-scroll>Location</a></p>
                         <p><a href="#MEMBER" du-smooth-scroll>Member</a></p>
-                        <p><a href="#MOTION" du-smooth-scroll>Motion</a></p>
+                        <!--<p><a href="#MOTION" du-smooth-scroll>Motion</a></p>-->
                         <p><a href="#NOTIFICATION" du-smooth-scroll>Notification</a></p>
                         <p><a href="#ORDER" du-smooth-scroll>Order</a></p>
                         <p><a href="#PASSPORT" du-smooth-scroll>Passport</a></p>
+                        <p><a href="#PEERMODEL" du-smooth-scroll>Peer</a></p>
                         <p><a href="#PROJECT" du-smooth-scroll>Project</a></p>
                         <p><a href="#PROJECTCHARTER" du-smooth-scroll>ProjectCharter</a></p>
                         <p><a href="#PROJECTMEMBER" du-smooth-scroll>ProjectMember</a></p>
@@ -872,6 +845,42 @@ contract Protocol {
                     <p><b>get /api/action</b></p>
                     <p><b>getSome</b></p>
                     <p><b>post /api/action</b></p>
+                    <p><b>create</b></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="ATTENTION" style="background-color:white;min-height:70vh">
+        <div class="container">
+        <div class="spacing-15"></div>
+            <div class="row">
+                <div class="col-sm-6 col-xs-12">
+                    <div style="background:url('https://source.unsplash.com/1600x900/?explore,discover')" class="imageContainerSmall">
+                        <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                            <div style="margin-top: auto;margin-bottom: auto;">
+                                <div class="container">
+                                    <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Attention</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>             
+                    <div class="spacing-15"></div>
+                    <h4><b>Attention</b></h4>
+                    <p style="color:gray;font-style:italic">This is the Attention Model.</p>
+                    <div class="spacing-50"></div>
+                </div>
+                <div class="col-sm-6 col-xs-12">
+                    <div class="bootstrapHack" style="z-index:auto;">
+                        <div style="margin-left:15px;">
+                            <div class="spacing-5"></div>
+                            <div hljs hljs-language="javascript"  hljs-source="actionModel"></div>
+                        </div>
+                    </div>
+                    <p>Websocket Subscribe</p>
+                    <p><b>get /api/attention</b></p>
+                    <p><b>getSome</b></p>
+                    <p><b>post /api/attention</b></p>
                     <p><b>create</b></p>
                 </div>
             </div>
@@ -1070,6 +1079,42 @@ contract Protocol {
                     </div>
                     <p>Websocket Subscribe</p>
                     <p><b>get /api/block</b></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="CONNECTIONMODEL" style="background-color:white;min-height:70vh">
+        <div class="container">
+        <div class="spacing-15"></div>
+            <div class="row">
+                <div class="col-sm-6 col-xs-12">
+                    <div style="background:url('https://source.unsplash.com/1600x900/?explore,discover')" class="imageContainerSmall">
+                        <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                            <div style="margin-top: auto;margin-bottom: auto;">
+                                <div class="container">
+                                    <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Connection</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>             
+                    <div class="spacing-15"></div>
+                    <h4><b>Connection</b></h4>
+                    <p style="color:gray;font-style:italic">This is the Connection Model. Connections are abstract associations. Connections create charters.</p>
+                    <div class="spacing-50"></div>
+                </div>
+                <div class="col-sm-6 col-xs-12">
+                    <div class="bootstrapHack" style="z-index:auto;">
+                        <div style="margin-left:15px;">
+                            <div class="spacing-5"></div>
+                            <div hljs hljs-language="javascript"  hljs-source="actionModel"></div>
+                        </div>
+                    </div>
+                    <p>Websocket Subscribe</p>
+                    <p><b>get /api/connection</b></p>
+                    <p><b>getSome</b></p>
+                    <p><b>post /api/connection</b></p>
+                    <p><b>create</b></p>
                 </div>
             </div>
         </div>
@@ -1380,6 +1425,7 @@ contract Protocol {
         </div>
     </div>
 
+    <!--
     <div id="MOTION" style="background-color:white;min-height:70vh">
         <div class="container">
             <div class="spacing-15"></div>
@@ -1395,8 +1441,6 @@ contract Protocol {
                         </div>
                     </div>
                     <p style="color:gray;font-style:italic">A motion is an action linked to a consensus mechanism useful in group organization. A Containerized Action. A Motion is a Nested Validation .. in creating a motion one is validating an action. On Validation of a Motion (Nested Validation) an Action is created.</p>
-                    <!--COMBINE MOTION AND VALIDATION..-->
-                    <!--VALIDATE YOUR SELF AS A MEMBER .. OTHER MEMBERS VALIDATION THE VALIDATION-->
                 </div>
                 <div class="col-sm-6">
                     <div class="bootstrapHack" style="z-index:auto;">
@@ -1411,6 +1455,7 @@ contract Protocol {
             </div>
         </div>
     </div>
+    -->
 
     <div id="NOTIFICATION" style="background-color:white;min-height:70vh">
         <div class="container">

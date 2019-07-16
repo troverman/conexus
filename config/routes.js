@@ -77,12 +77,23 @@ module.exports.routes = {
   'get /auth/:provider/callback': 'AuthController.callback',
   'get /auth/:provider/:action': 'AuthController.callback',
 
-
   /**
    * Action routes
    */
   'get /api/action': 'ActionController.getSome',
   'post /api/action': 'ActionController.create',
+
+  /**
+   * App routes
+   */
+  'get /api/app': 'AppController.getSome',
+  'post /api/app': 'AppController.create',
+
+   /**
+   * Attention routes
+   */
+  'get /api/attention': 'AttentionController.getSome',
+  'post /api/attention': 'AttentionController.create',
 
   /**
    * Content routes
@@ -93,8 +104,9 @@ module.exports.routes = {
   'delete /api/content/:id': 'ContentController.destroy',
 
   /**
-   * Follower routes | MB RELATIONSHIP
+   * Follower routes
    */
+   //TODO: MEMBER-MEMBER ASSOCIATION
   'get /api/follower': 'FollowerController.getSome',
   'get /api/follower/followers/:id': 'FollowerController.getFollowers',
   'get /api/follower/following/:id': 'FollowerController.getFollowing',
@@ -127,6 +139,12 @@ module.exports.routes = {
   'get /api/reaction': 'ReactionController.getSome',
   'post /api/reaction': 'ReactionController.create',
   'delete /api/reaction/:id': 'ReactionController.destroy',
+
+  /**
+   * Peer routes
+   */
+  'get /api/peer': 'PeerController.getSome',
+  'post /api/peer': 'PeerController.create',
 
   /**
    * Project routes

@@ -1542,15 +1542,19 @@
                 <!--DOING IT TWICE WILL 'DOUBlE' NOW-->
             <div style="padding:16px;overflow:auto">
                 <div class="spacing-15"></div>
-                <h4>{{taskTime}}</h4>
+                
+                <h4 ng-if="taskTime > 0">{{taskTime}}</h4>
                 <h4>{{timeModel.amount}}</h4>
 
                 <highchart config="timeChart"></highchart>
 
-                <div ng-repeat="time in timeQ | orderBy:'-'">
+                <div ng-repeat="time in timeQ.general.slice(0,100) | orderBy:'-'">
+                    
+
                     <p>{{time.context}} : <b>{{time.amount}}</b></p>
                     <!--LOCATION AS CONTEXT..?-->
                     <p>{{time.location}}</p>
+                    
 
                 </div>
                 <div class="spacing-10"></div>

@@ -9,15 +9,25 @@ angular.module( 'conexus.app', [
                 controller: 'AppController',
                 templateUrl: 'app/index.tpl.html'
             }
+        },
+        resolve: {
+            app: ['$stateParams', 'ContentModel', function($stateParams, AppModel){
+                return AppModel.getSome({id:$stateParams.id, limit:1, skip:0, sort:'createdAt DESC'});
+            }],
         }
     });
 }])
 
-.controller( 'AppController', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', '$stateParams', 'titleService', function AppController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, $stateParams, titleService ) {
+.controller( 'AppController', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', '$stateParams', 'app', 'titleService', function AppController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, $stateParams, app, titleService ) {
     
-    $scope.app = {title:$stateParams.id, description:'CRE8.XYZ CORE PROTOCOLS; ALL MODELS', manifold:'CRE8+', tags:'CRE8,CORE'};
-    $scope.app.tags = $scope.app.tags.split(',');
-
+    if (app){
+        $scope.app=app;
+    }
+    else{
+        $scope.app = {title:$stateParams.id, description:'CRE8.XYZ CORE PROTOCOLS; ALL MODELS', manifold:'CRE8+', tags:'CRE8,CORE'};
+        $scope.app.tags = $scope.app.tags.split(',');
+    }
+   
     titleService.setTitle($scope.app.title + ' | App | CRE8.XYZ');
 
     //LOOK AT ALL FILES

@@ -9,7 +9,14 @@ angular.module( 'conexus.transparency', [
 				controller: 'TransparencyCtrl',
 				templateUrl: 'transparency/index.tpl.html'
 			}
-		}
+		},
+
+        resolve: {
+            peers: ['PeerModel', function(PeerModel){
+                return PeerModel.getSome({limit:100, skip:0, sort:'createdAt DESC'});
+            }],
+        }
+
 	});
     uiGmapGoogleMapApiProvider.configure({
         key: 'AIzaSyBmbow2vLk6EMs0RT6r8U-umNzlkCNLrVY',
@@ -18,8 +25,9 @@ angular.module( 'conexus.transparency', [
     });
 }])
 
-.controller( 'TransparencyCtrl', ['$scope', function TransparencyController( $scope, titleService ) {
+.controller( 'TransparencyCtrl', ['$scope', 'titleService', 'peers', function TransparencyController( $scope, titleService, peers ) {
     
+    console.log(peers);
     //TODO: REAL DATA
     $scope.peers = [];
     $scope.markers = [];
