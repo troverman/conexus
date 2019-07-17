@@ -174,9 +174,13 @@ angular.module( 'conexus.content', [
 
     //TODO: WEBSOCKET
     $sailsSocket.subscribe('content', function (envelope) {
+        console.log(envelope)
         switch(envelope.verb) {
+            //should be update ..
             case 'created':
-                $scope.contentList.unshift(envelope.data);
+                if ($scope.content.id == envelope.data.id){
+                    $scope.content.attention = envelope.data.attention;
+                }
                 break;
         }
     });

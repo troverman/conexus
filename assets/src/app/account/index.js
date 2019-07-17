@@ -13,7 +13,7 @@ angular.module( 'conexus.account', [
 	});
 }])
 
-.controller( 'AccountCtrl', ['$location', '$rootScope', '$scope', 'titleService', 'Upload', 'UserModel', function AccountController( $location, $rootScope, $scope, titleService, Upload, UserModel ) {
+.controller( 'AccountCtrl', ['$location', '$rootScope', '$scope', 'AttentionModel', 'titleService', 'Upload', 'UserModel', function AccountController( $location, $rootScope, $scope, AttentionModel, titleService, Upload, UserModel ) {
 	
     titleService.setTitle('Account Settings | CRE8.XYZ');
     if(!$rootScope.currentUser){$location.path('/')}
@@ -30,6 +30,21 @@ angular.module( 'conexus.account', [
     };
     $scope.markers = [];
     $scope.selectedTab = 'APPS';
+
+
+
+
+
+
+    //LOL COMPLEX QUERY BETTER FILTERING ETC
+    AttentionModel.getSome({creator:$rootScope.currentUser.id, app:'HUMAN', limit:100, skip:0, sort:'createdAt DESC'}).then(function(humanAttention){
+        $scope.humanAttention = humanAttention;
+    });
+
+    AttentionModel.getSome({creator:$rootScope.currentUser.id, app:'MACHINE', limit:100, skip:0, sort:'createdAt DESC'}).then(function(machineAttention){
+        $scope.machineAttention = machineAttention
+    });
+
 
 
     $scope.apps = $scope.currentUser.apps;

@@ -10,7 +10,8 @@ angular.module('models.attention', ['services', 'sails.io',])
                 skip:model.skip,
                 sort:model.sort,
                 id:model.id,
-                type:model.type,
+                app:model.app,
+                creator:model.creator,
             }
         };
         return $sailsSocket.get(url, query).then(success, error);

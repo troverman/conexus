@@ -107,7 +107,9 @@ angular.module( 'conexus', [
     $rootScope.$on('$stateChangeSuccess',function(){
         $rootScope.stateIsLoading = false;
         
-        $rootScope.associatedModels = [{model:$state.current.url.substring(1).replace(/(^|\s)\S/g, function(t) { return t.toUpperCase() }), id:1}];
+        //if ($state.current.url.split('/').length > 1){
+        //    $rootScope.associatedModels = [{model:$state.current.url.split('/')[0].toUpperCase(), id:$state.current.url.split('/')[1]}];
+        //}
 
         window.scrollTo(0, 0);
         //titleService | seoService

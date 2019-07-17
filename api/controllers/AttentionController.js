@@ -23,6 +23,16 @@ module.exports = {
 			});
 		}
 
+		if(req.query.creator && req.query.app){
+			Attention.find({app:req.query.app,creator:req.query.creator})
+			.limit(limit)
+			.skip(skip)
+			.sort(sort)
+        	.then(function(models) {
+				res.json(models);
+			});
+		}
+
 		//TODO: MODELS//
 
 		//TODO: CREATOR
@@ -40,6 +50,7 @@ module.exports = {
 		
 	},
 
+	//MACHINE ATTENTION BY VALIDATION OF SPECIFIC DATA.. REVIEW THE DATA IN THE BLOCK ... GIVES IT MACHENE ATTENTION.. IE THE MERKLE PROOF (POW)
 	create: function (req, res) {
 		var model = {
 			app: req.param('app'),
@@ -63,19 +74,31 @@ module.exports = {
 
 				for (x in model.associatedModels){
 					
+					//DEPRECIATE MOEL TYPE DISTINCTION ?
 					if (model.associatedModels[x].type == 'CONTENT'){
 
-						//Content.find({id:associatedModels[x].id}).then(function(contentModel){
-							
-							
-						//});
+						//MACHINE ATTENTION BY VALIDATION OF SPECIFIC DATA.. REVIEW THE DATA IN THE BLOCK ... GIVES IT MACHENE ATTENTION.. IE THE REMKLE PROOF
+
+						if (model.app == 'HUMAN'){
+							Content.find({id:model.associatedModels[x].id}).then(function(contentModel){
+								//TODO: MULTI D MAP
+								if (contentModel[0].attention){
+									attentionModel = {
+										general:contentModel[0].attention.general + model.amount
+									};
+								}
+								else{attentionModel = {general:0}}
+
+								Content.update({id:contentModel[0].id}, {attention:attentionModel}).then(function(newContentModel){
+									console.log('LET THERE BE ATTENTION', attentionModel);
+									Content.publishCreate(newContentModel);
+								});
+							});
+						}
 
 					}
 				}
 
-
-
-				Attention.publishCreate(model);
 				res.json(model);
 			}
 		});

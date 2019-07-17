@@ -259,16 +259,7 @@
             <ul style="padding:0px;" class="member-tabs">
                 <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fa fa-filter"></i> Filter</a></li>
                 <li style="float:left;font-size:14px"><a href="#" ng-click="getLatLng()"><i class="fa fa-map-marker"></i> Location</a></li>
-                <li style="float:right;font-size:14px">
-                    <a ng-click="expandSort()" href="#">Sort By Recent <i class="fa fa-angle-down"></i></a>
-                    <div ng-if="sorting" class="dropdown sort-dropdown" style="float:right">
-                        <ul class="dropdown-menu">
-                            <li><a href="#" class="sort-a" ng-click="selectSort('trendingScore DESC')"><h5>Trending</h5></a></li>
-                            <hr class="sort-hr">
-                            <li><a href="#" class="sort-a" ng-click="selectSort('createdAt DESC')"><h5>Date Created</h5></a></li>
-                        </ul>
-                    </div>
-                </li>
+                <li style="float:right;font-size:14px"><a href="#" ng-click="sortToggle()">Sort By Recent <i class="fa fa-angle-down"></i></a></li>
                 <div style="clear:both"></div>
             </ul>
             <div class="card">
@@ -318,9 +309,13 @@
                         -->
                     </div>
                     <div class="card-footer">
+                        <a style="color:grey" href="content/{{item.id}}" ui-sref="content({id:item.id})">
+                            <i class="fas fa-eye"></i> {{item.attention.general || 0}}
+                        </a>
                         <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fas fa-angle-up"></i> {{item.reactions.plus}} like </a> 
                         <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fas fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
                         <a ng-click="$event.stopPropagation();reply(item)"><i class="far fa-comment"></i> comment </a>
+                        <a ng-click="$event.stopPropagation();validationToggle(item)"><i class="fa fa-check"></i> validate </a>
                         <a ng-click="$event.stopPropagation()" style="padding:0px" class="pull-right" href="content/{{item.id}}" ui-sref="content({id:item.id})"><i class="fas fa-link grey"></i></a>
                     </div>
                     <!--TODO: NESTED -->

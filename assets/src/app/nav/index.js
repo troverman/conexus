@@ -321,9 +321,11 @@ angular.module( 'conexus.nav', [
 
     $scope.expandAssets = function(){$scope.assetsAreExpanded = !$scope.assetsAreExpanded;};
     $scope.expandAssociations = function(){$scope.associationsAreExpanded = !$scope.associationsAreExpanded;};
+    $scope.expandAdvancedFilter = function(){$scope.filtersAreExpanded = !$scope.filtersAreExpanded;};
+
 
     //TODO!!!
-    $rootScope.filterToggle = function(type, item){
+    $rootScope.filterToggle = function(type, item, model){
 
         $scope.updatedQuery = [];
 
@@ -337,6 +339,8 @@ angular.module( 'conexus.nav', [
         //NOTIFICATIONS
         $scope.selectedType = 'ALL';
         console.log(type, item);
+
+        $scope.filterBuilder = JSON.stringify($scope.searchQueryNav, undefined, 4)
 
         //TODO: CONTAIN IN NAV -- > AS ROOT SCOPE.. 
         function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
@@ -866,6 +870,8 @@ angular.module( 'conexus.nav', [
             credits:{enabled:false},
         };
 
+        //TODO: FIX CRASH!
+
         var sortable = [];
         for (var dimension in $scope.reputation) {sortable.push([dimension, $scope.reputation[dimension]])}
         sortable.sort(function(a, b) {return b[1] - a[1]});
@@ -881,6 +887,12 @@ angular.module( 'conexus.nav', [
 
     //TODO: RENDER PROJECT TOGGLE
     //$rootScope.reply = function(){};
+
+    $rootScope.sortToggle = function(item){
+        $scope.item = item;
+        $scope.closeAllNav();
+        $mdSidenav('sort').toggle();
+    };
 
     $rootScope.statsToggle = function(item){
 
@@ -1232,16 +1244,19 @@ angular.module( 'conexus.nav', [
 
                 //CONTEXT TIME HERE __ IN
                 //context[string]:1
+                if (!$rootScope.timeQ[context]){
+                    $rootScope.timeQ[context] = [];
+                }
+
                 $rootScope.timeQ[context].push({
                     context:{
                         string:'TIME!',
+                        type:'LIVE',
                     },
                     amount:1
                 });
 
                 $scope.$apply();
-
-
 
             };
 
@@ -1736,7 +1751,8 @@ angular.module( 'conexus.nav', [
         $rootScope.timeModel.amount = 0;
     }
     //HEARTBEAT FXN FROM FRONTEND.. --> CACL ON BACKEND //BLOCK // PEER
-    $rootScope.timeQ = {general:[]};
+    //TODO
+    $rootScope.timeQ = {attention:[], mining:[]};
     //VIEW TIMER.. 
     $scope.timeChart = {
         chart: {zoomType: 'x'},
@@ -1763,7 +1779,7 @@ angular.module( 'conexus.nav', [
     //idle fxn
 
     //TODO: LOCATION
-    $scope.timerFunction = function(time, context){
+    $scope.timerFunction = function(time, context, model){
 
         function amountInArray(array, value) {
             return array.reduce(function(n, x){
@@ -1771,15 +1787,6 @@ angular.module( 'conexus.nav', [
                 return n;
             },0);
         };
-
-        $rootScope.timeModel.amount = $rootScope.timeModel.amount + time;
-        //if last value was same context add -
-        //    if  amount > 10 send to backend
-
-        //token string
-        //NEED ROOTSCOPE OF SELECTED MODEL...
-        //NEED MODEL ID
-        //SHOULD BE A ROOTSCOPE.. CAN CHANGE BASED ON MODEL HOVER . GOOD FOR ATTENTION
 
         //timeQ['general']
         //timeQ['task']
@@ -1793,12 +1800,19 @@ angular.module( 'conexus.nav', [
 
         //INTENTIONAL TIME
 
+        //HUMAN AND MACHINE ARE ONE .. HAVE TO BE ON TO RUN? 
+            //SHOULDNT BE TURNED OFF AND SHOULD RUN IN CONCERT
+
         var string = '';
         string += $state.current.name.toUpperCase().replace('.','+');
         if ($state.params[Object.keys($state.params)[0]]){
             string += '+'+$state.params[Object.keys($state.params)[0]];
         }
-        string += '+TIME+VIEW';
+        string += '+'+model.toUpperCase()+'+ATTENTION';
+
+        //STORE MOST DIMENSIONAL WORD
+            //LONGEST WORD.. +..+..+
+                //THEY ENCODE THE BALANCE FOR LOWER D
 
         var location = '';
         if ($rootScope.currentUser.location){location=$rootScope.currentUser.location;}
@@ -1829,26 +1843,41 @@ angular.module( 'conexus.nav', [
             location:location,
         });
 
-
         var set = $rootScope.timeQ[context].filter(function(obj){
             return obj.context.string == string;
         });
 
+        var associatedModels = null
+        if (string.split('+').length > 1){
+            associatedModels = [{type:string.split('+')[0], id:string.split('+')[1]}]
+        }
+        var attentionModel = {
+            app: model,
+            amount:1, 
+            string: string,
+            data: {verion:'PRE ALPHA', ip:{}, device:{title:navigator.userAgent, id:1, hardwareHash:''}},
+            associatedModels: associatedModels,//$rootScope.associatedModels,
+            creator: $rootScope.currentUser,
+        };
+
         if (set.length >= 10){
+            attentionModel.amount = set.length;
             $rootScope.timeQ[context] = [];
-            var attentionModel = {
-                app: 'HUMAN',
-                string: string,
-                amount:set.length,
-                data: {verion:'PRE ALPHA', ip:{}},
-                associatedModels: $rootScope.associatedModels,
-                creator: $rootScope.currentUser,
-            };
-            //console.log(attentionModel);
             AttentionModel.create(attentionModel);
         }
 
-        //console.log(set.length)
+        if (context == 'mining'){
+            if ($rootScope.timeQ[context].length >= 10){
+                AttentionModel.create(attentionModel);
+            }
+        }
+        if (context == 'attention'){
+            $rootScope.timeModel.amount = $rootScope.timeModel.amount + time;
+        }
+
+
+
+
         var index = $scope.timeChart.xAxis.categories.indexOf(string);
         if (index == -1){
             $scope.timeChart.xAxis.categories.push(string);
@@ -1858,13 +1887,16 @@ angular.module( 'conexus.nav', [
             $scope.timeChart.series[0].data[index] = $rootScope.timeModel.amount;
         }
 
+
+
     };
 
     //LOL
     //IF LOGGED IN AND PERMISIONS
     if($rootScope.currentUser){
         //if ($rootScope.currentUser.apps.cre8.recordAttention){
-            $interval(function(){$scope.timerFunction(1, 'general')},1000);
+            $interval(function(){$scope.timerFunction(1, 'attention', 'HUMAN')}, 1000);
+            $interval(function(){$scope.timerFunction(1, 'mining', 'MACHINE')}, 1000);
         //}
     }
 

@@ -265,7 +265,7 @@
         <div class="md-list-item-text" layout="column" style="height:100%;">
             <div class="spacing-25"></div>
             
-            <div style="background:url('https://source.unsplash.com/1600x900/?sort,code,filter,paint')" class="imageContainerSmall">
+            <div style="background:url('https://source.unsplash.com/1600x900/?{{model.tags}}')" class="imageContainerSmall">
                 <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
                     <div style="margin-top: auto;margin-bottom: auto;">
                         <div style="padding:15px">
@@ -304,8 +304,8 @@
                     <div class="spacing-10"></div>
                     -->
 
-                    <p><b>Tags</b> <i style="float:right" class="fa fa-tags"></i></p>
-                    <tags-input min-length="1" placeholder="Tags" ng-model="searchQueryNav.tags">
+                    <p><b>Context</b> <i style="float:right" class="fa fa-tags"></i></p>
+                    <tags-input min-length="1" placeholder="Context" ng-model="searchQueryNav.tags">
                         <auto-complete source="loadAsset($query)"></auto-complete>
                     </tags-input>
                     <div ng-repeat="item in item.tags.slice(0,10) track by $index">
@@ -313,8 +313,8 @@
                     </div>
                     <div class="spacing-10"></div>
 
-                    <p><b>Associations</b> <i style="float:right" class="fas fa-bezier-curve"></i></p>
-                    <tags-input min-length="1" placeholder="Associations" ng-model="searchQueryNav.associations">
+                    <p><b>Association</b> <i style="float:right" class="fas fa-bezier-curve"></i></p>
+                    <tags-input min-length="1" placeholder="Association" ng-model="searchQueryNav.associations">
                         <auto-complete source="loadAssociation($query)"></auto-complete>
                     </tags-input>
                     <div ng-repeat="item in item.associations.slice(0,10) track by $index">
@@ -322,20 +322,18 @@
                     </div>
                     <div class="spacing-10"></div>
 
-                    <p><b>Locations</b> <i style="float:right" class="fa fa-map-marker"></i> </p>
-                    <tags-input min-length="1" placeholder="Locations" ng-model="searchQueryNav.locations">
+                    <p><b>Location</b> <i style="float:right" class="fa fa-map-marker"></i> </p>
+                    <tags-input min-length="1" placeholder="Location" ng-model="searchQueryNav.locations">
                         <auto-complete source="loadLocation($query)"></auto-complete>
                     </tags-input>
                     <div ng-repeat="item in item.locations.slice(0,10) track by $index">
                         <a href="#" ng-click="selectLocation(item.element)"><b>{{item.element.address}}</b></a>
                     </div>
-
                     <div layout="">
                         <div flex="12" layout="" layout-align="center center"><span class="md-body-1" style="font-size:10px">Distance (km)</span></div>
                         <md-slider step="0.1" flex="" md-discrete="" ng-model="locationFilter.distance" step="1" min="0" max="100" aria-label="general"></md-slider>
                         <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{locationFilter.distance}}</span></div>
                     </div>
-
                     <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options">
                         <ui-gmap-marker ng-repeat="marker in markers track by $index" coords="marker.coords" options="marker.options" idkey="marker.id">
                             <ui-gmap-window options="windowOptions" closeClick="closeClick()">
@@ -345,6 +343,25 @@
                             </ui-gmap-window>
                         </ui-gmap-marker>
                     </ui-gmap-google-map>
+                    <div class="spacing-10"></div>
+
+                    <p ng-click="expandAdvancedFilter()"><a><i class="fa fa-filter"></i> <b>Custom Filter</b></a></p>
+                    <div ng-if="filtersAreExpanded">
+                        <!--
+                        <div style="background:rgba(0,0,0,0.75);height:50px" class="imageContainerSmallDiv">
+                            <div style="background:url('https://source.unsplash.com/1600x900/?{{item.tags}}');min-height:50px" class="imageContainerSmall">
+                                <div style="margin-top: auto;margin-bottom: auto;">
+                                    <div style="padding:15px">
+                                        <h1 style="text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;">Filter Builder</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        -->
+                        <text-angular ng-model="filterBuilder" ta-toolbar="[['p','h1','bold','italics','quote','insertLink', 'html']]"></text-angular>
+                        <button type="submit" class="btn btn-default log-btn" ng-click="">Submit</button>
+                    </div>
+
                 </div>
             
                 <!--LEDGER-->
@@ -1057,7 +1074,6 @@
 
                 <div class="card-footer" ng-show="item.showReply">
                     <form role="form" ng-submit="createContent()">
-                        <textarea froala="toolBarSettings" ng-model="newContent.content"></textarea>
                         <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
                     </form>
                 </div>
@@ -1252,27 +1268,48 @@
             </div>
         </div>
     </md-sidenav>
-
-    <!--
-    <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="sort" md-is-locked-open="false" style="position:fixed;background-color:white;width:70%;max-width:100%">
+    
+    <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="sort" md-is-locked-open="false" style="position:fixed;background-color:white;max-width:100%">
         <div class="md-list-item-text" layout="column" style="height:100%;">
             <div class="spacing-25"></div>
-    
+
             <div style="background:url('https://source.unsplash.com/1600x900/?{{item.tags}}')" class="imageContainerSmall">
                 <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
                     <div style="margin-top: auto;margin-bottom: auto;">
                         <div style="padding:15px">
-                            <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Sort</h1>
+                            <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;"><i class="fas fa-sort-amount-down"></i> Sort</h1>
                         </div>
                     </div>
                 </div>
             </div>
             <div style="padding:16px;">
+
+                <!--LOOP THRU OBJ TYPE KEYS..-->
+                <!--<h2><i class="fas fa-sort-amount-down"></i></h2>-->
+                <!--<h5><a>Trending</a></h5>-->
+                <!--
+                <h5><a ng-click="sortToggle()">Attention</a></h5>
+                <h5><a ng-click="sortToggle()">Reaction</a></h5>
+                <p><a ng-click="sortToggle()">Like</a>, <a ng-click="sortToggle()">Dislike</a></p>
+                <h5><a ng-click="sortToggle()">Date Created: Desc, Asc</a></h5>
+                -->
+
+                <ul class="nav nav-pills nav-stacked contentTyle">
+                    <li ng-click="sortToggle()"><a href="#">Attention</a></li>
+                    <li ng-click="sortToggle()"><a href="#">Reactions</a></li>
+                    <!--<li ng-click="sortToggle()"><a href="#">Like</a>, <a ng-click="sortToggle()">Dislike</a></a></li>-->
+                    <li ng-click="sortToggle()"><a href="#">Creation Date</a></li>
+                </ul>
+
+                <!--<h5><a>Sort By Likes </a></h5>-->
+                <!--<h5><a>Sort By Attention</a></h5>
+                <h5><a>Sort By Time</a></h5>
+                <h5><a>Sort By Members</a></h5>-->
+
             </div>
         </div>
     </md-sidenav>
-    -->
-
+    
     <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="stats" md-is-locked-open="false" style="position:fixed;background-color:white;width:70%;max-width:100%">
         <div class="md-list-item-text" layout="column" style="height:100%;">
             <div class="spacing-25"></div>
@@ -1542,19 +1579,23 @@
                 <!--DOING IT TWICE WILL 'DOUBlE' NOW-->
             <div style="padding:16px;overflow:auto">
                 <div class="spacing-15"></div>
-                
+
+                <ul style="padding:0px;margin-top:0px;margin-bottom:0px;" class="member-tabs">
+                    <li><a ng-click="" href="#">Intentional Time</a></li>
+                    <li><a ng-click="" href="#">Live Attention</a></li>
+                    <li><a ng-click="" href="#">Machine Attention</a></li>
+                </ul>
+    
+                <highchart config="timeChart"></highchart>
+
                 <h4 ng-if="taskTime > 0">{{taskTime}}</h4>
                 <h4>{{timeModel.amount}}</h4>
 
-                <highchart config="timeChart"></highchart>
-
-                <div ng-repeat="time in timeQ.general.slice(0,100) | orderBy:'-'">
+                <div ng-repeat="time in timeQ.attention.slice(0,100) | orderBy:'-'">
                     
-
                     <p>{{time.context}} : <b>{{time.amount}}</b></p>
                     <!--LOCATION AS CONTEXT..?-->
                     <p>{{time.location}}</p>
-                    
 
                 </div>
                 <div class="spacing-10"></div>
