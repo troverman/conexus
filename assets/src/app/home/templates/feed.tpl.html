@@ -708,7 +708,7 @@
                         <p style="font-size:10px;color:gray;margin-left:42px" am-time-ago="item.createdAt"></p>
                     </div>
                     <div class="card-footer">
-                        <a style="color:grey" class="pull-right" href="content/{{item.id}}" ui-sref="content({id:item.id})">
+                        <a style="color:grey" href="content/{{item.id}}" ui-sref="content({id:item.id})">
                             <i class="fas fa-eye"></i> {{item.attention.general || 0}}
                         </a>
                         <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fas fa-angle-up"></i> {{item.reactions.plus}} like </a> 
