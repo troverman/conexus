@@ -94,8 +94,15 @@ module.exports = {
         request(url, function (error, response, body) {
             var body = JSON.parse(body);
             if (body.urls){model.coverUrl = body.urls.small;}
+            model.apps = {
+                cre8:{
+                    recordAttention:true,
+                    tutorial:true
+                }
+            };
             User.update({id: model.id}, model)
             .then(function(model){
+
                 //emailService.sendTemplate('welcome', model.email, 'Welcome To Voetr!', {username: model.username});
                 return next(null, model);
             });

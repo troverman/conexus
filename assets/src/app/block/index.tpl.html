@@ -35,6 +35,15 @@
 					<p style="font-style:italic;color:gray;margin:0px">Nonce 1221514036</p>
 					<p style="font-style:italic;color:gray;margin:0px">Next Block <a href="block/564367" ui-sref="block({id:564367})">564367</a></p>
 				</div>
+				<div class="card-footer">
+                    <a style="color:grey" href="content/{{item.id}}" ui-sref="content({id:item.id})">
+                        <i class="fas fa-eye"></i> {{item.attention.general || 0}}
+                    </a>
+                    <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fas fa-angle-up"></i> {{item.reactions.plus}} like </a> 
+                    <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fas fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
+                    <a ng-click="$event.stopPropagation();reply(item)"><i class="far fa-comment"></i> comment </a>
+                    <a ng-click="$event.stopPropagation();validationToggle(item)"><i class="fa fa-check"></i> validate </a>
+                </div>
 			</div>
 		</div>
 	</div>

@@ -1590,13 +1590,14 @@ angular.module( 'conexus.nav', [
     };
 
     //TODO: MORE ON RENDER
-    $scope.createReaction = function(item, type){
+    $rootScope.createReaction = function(item, type){
         if($rootScope.currentUser){
             $scope.newReaction.amount = 1;
             $scope.newReaction.associatedModels = [{type:item.model, id:item.id}];
             $scope.newReaction.type = type;
             $scope.newReaction.user = $rootScope.currentUser.id;
             $scope.item.reactions[type]++;
+            //UPDATE LOCAL SCOPE..
             ReactionModel.create($scope.newReaction);
         }
         else{$mdSidenav('login').toggle()}
@@ -1894,10 +1895,12 @@ angular.module( 'conexus.nav', [
     //LOL
     //IF LOGGED IN AND PERMISIONS
     if($rootScope.currentUser){
-        //if ($rootScope.currentUser.apps.cre8.recordAttention){
-            $interval(function(){$scope.timerFunction(1, 'attention', 'HUMAN')}, 1000);
-            $interval(function(){$scope.timerFunction(1, 'mining', 'MACHINE')}, 1000);
-        //}
+        if ($rootScope.currentUser.apps){
+            if ($rootScope.currentUser.apps.cre8.recordAttention){
+                $interval(function(){$scope.timerFunction(1, 'attention', 'HUMAN')}, 1000);
+                $interval(function(){$scope.timerFunction(1, 'mining', 'MACHINE')}, 1000);
+            }
+        }
     }
 
     //TODO

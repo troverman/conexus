@@ -52,18 +52,14 @@
 				</div>
 		    </div>
 		    <div class="card-footer">
+		    	<!--Live: {{content.live || 0}}-->
+				<a style="color:grey" href="content/{{content.id}}" ui-sref="content({id:content.id})" ng-click="tokensToggle(content)">
+					<i class="fas fa-eye"></i> {{content.attention.general || 0}}
+				</a>
 		        <a style="padding:5px;color:grey" href="#" ng-click="createReaction(content, 'plus')"><i class="fa fa-angle-up"></i> {{content.reactions.plus}} like </a> 
 		        <a style="padding:5px;color:grey" href="#" ng-click="createReaction(content, 'minus')" ><i class="fa fa-angle-down"></i> {{content.reactions.minus}} dislike </a>
 		       	<a style="padding:5px;color:grey" href="#" ng-click="reply(content)"><i class="fa fa-comment-o"></i> comment </a>
-
-				<!--, Live: {{content.live || 0}}-->
-				<a style="color:grey" class="pull-right" href="content/{{content.id}}" ui-sref="content({id:content.id})" ng-click="tokensToggle(content)">
-					<i class="fas fa-eye"></i> {{content.attention.general || 0}}
-				</a>
-
 				<!--NEED TO MAKE PUBLIC FACING TIMERS.. AKA THE ATTENTION OF CONTENT ? DATA LIVE-->
-
-
 		    </div>
 		    <div ng-show="content.showReply" class="card-footer">
 				<form role="form" ng-submit="createContent(content)">

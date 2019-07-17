@@ -107,7 +107,7 @@ angular.module( 'conexus.home', [
     else{$state.go('home.intro')}
 }])
 
-.controller( 'IntroCtrl', ['$http', '$location', '$mdSidenav', '$rootScope', '$sce', '$scope', 'contentList', 'ContentModel', 'members', 'orders', 'ProjectModel', 'projects', 'ReactionModel', 'SearchModel', 'tasks', 'time', 'titleService', 'transactions', 'UserModel', function HomeController( $http, $location, $mdSidenav, $rootScope, $sce, $scope, contentList, ContentModel, members, orders, ProjectModel, projects, ReactionModel, SearchModel, tasks, time, titleService, transactions, UserModel ) {
+.controller( 'IntroCtrl', ['$http', '$location', '$mdSidenav', '$rootScope', '$sce', '$scope', '$window', 'contentList', 'ContentModel', 'members', 'orders', 'ProjectModel', 'projects', 'ReactionModel', 'SearchModel', 'tasks', 'time', 'titleService', 'toaster', 'transactions', 'UserModel', function HomeController( $http, $location, $mdSidenav, $rootScope, $sce, $scope, $window, contentList, ContentModel, members, orders, ProjectModel, projects, ReactionModel, SearchModel, tasks, time, titleService, toaster, transactions, UserModel ) {
 
     $scope.introObj = [
         {title:'WE CRE8 MULTIDIMENSIONAL VALUE'},
@@ -346,17 +346,55 @@ angular.module( 'conexus.home', [
 
 
     //TODO: ROOTSCOPE
+    $scope.newMember={};
+    $scope.pop = function(title, body){
+        toaster.pop({
+            type:'warning',
+            title: title,
+            body: body,
+            onShowCallback: function (toast) { 
+                var audio = new Audio('audio/ping.mp3');
+                audio.play()
+                .then(function(audio){console.log('dingdong')})
+                .catch(function(err){console.log(err)})
+            }
+        });
+    };
     $scope.registerUser = function(){
 
-        //TODO: FORM VALIDATION
-        if ($scope.newMember.password.length < 8){
+        $scope.valid = true;
 
+        //TODO: FORM VALIDATION
+        if ($scope.newMember.password){
+            if ($scope.newMember.password.length < 8){
+                $scope.pop('ERROR', 'Password must be longer than 8 Characters');
+                $scope.valid = false;
+            }
         }
+        else{
+            $scope.pop('ERROR', 'Password must be longer than 8 Characters');
+            $scope.valid = false;
+        }
+
+        if (!$scope.newMember.username){
+            $scope.pop('ERROR', 'Invalid Username');
+            $scope.valid = false;
+        }
+
+        if (!$scope.newMember.email){
+            $scope.pop('ERROR', 'Invalid Email');
+            $scope.valid = false;
+        }
+
+        console.log($scope.newMember)
+
         var data = JSON.stringify($scope.newMember);
-        if (true){ //valid
+
+        if ($scope.valid){
             $rootScope.stateIsLoading = true;
             $http({method:'POST', url:'/auth/local/register', data:data}).then(function(newModel){
-                $rootScope.currentUser = newModel.data;
+               $rootScope.currentUser = newModel.data;
+                $window.location.reload();
                 $location.path('/');
             });
         }

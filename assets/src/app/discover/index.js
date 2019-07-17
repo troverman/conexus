@@ -136,6 +136,7 @@ angular.module( 'conexus.discover', [
 
 
     //TODO: BETTER | TAG STORAGE
+    //TODO: ASSOCIATION TRAVERSAL
     function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
     $scope.loadAssociations = function(){
         $scope.associations = $scope.activity.map(function(obj){return obj.associatedModels});
@@ -178,6 +179,8 @@ angular.module( 'conexus.discover', [
 
 
 
+    //LET'S GO
+
     //TODO: FILTER!
     $rootScope.$watch('searchQueryNav', function(newValue, oldValue){
         if (newValue !== oldValue) {
@@ -192,36 +195,8 @@ angular.module( 'conexus.discover', [
         if (newValue !== oldValue) {
             console.log('searchQuery', $scope.searchQuery);
             $scope.searchModel = [];
-            //$rootScope.stateIsLoading = true;
-            //TODO:
-            //SearchModel.getSome($scope.searchModel).then(function(projects){
-            //    console.log(projects);
-            //    $rootScope.stateIsLoading = false;
-            //    $scope.projects = projects.map(function(obj){obj.model = 'PROJECT'; return obj;});
-            //});
         }
     }, true);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    //TODO: DEPRECIATE -- NAV
-    $scope.createReaction = function(item, type){
-        if($rootScope.currentUser){}
-        else{$mdSidenav('login').toggle()}
-    };
 
 
 }]);

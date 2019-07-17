@@ -1278,6 +1278,15 @@ angular.module("block/index.tpl.html", []).run(["$templateCache", function($temp
     "					<p style=\"font-style:italic;color:gray;margin:0px\">Nonce 1221514036</p>\n" +
     "					<p style=\"font-style:italic;color:gray;margin:0px\">Next Block <a href=\"block/564367\" ui-sref=\"block({id:564367})\">564367</a></p>\n" +
     "				</div>\n" +
+    "				<div class=\"card-footer\">\n" +
+    "                    <a style=\"color:grey\" href=\"content/{{item.id}}\" ui-sref=\"content({id:item.id})\">\n" +
+    "                        <i class=\"fas fa-eye\"></i> {{item.attention.general || 0}}\n" +
+    "                    </a>\n" +
+    "                    <a ng-click=\"$event.stopPropagation();createReaction(item, 'plus')\"><i class=\"fas fa-angle-up\"></i> {{item.reactions.plus}} like </a> \n" +
+    "                    <a ng-click=\"$event.stopPropagation();createReaction(item, 'minus')\" ><i class=\"fas fa-angle-down\"></i> {{item.reactions.minus}} dislike </a>\n" +
+    "                    <a ng-click=\"$event.stopPropagation();reply(item)\"><i class=\"far fa-comment\"></i> comment </a>\n" +
+    "                    <a ng-click=\"$event.stopPropagation();validationToggle(item)\"><i class=\"fa fa-check\"></i> validate </a>\n" +
+    "                </div>\n" +
     "			</div>\n" +
     "		</div>\n" +
     "	</div>\n" +
@@ -1375,18 +1384,14 @@ angular.module("content/index.tpl.html", []).run(["$templateCache", function($te
     "				</div>\n" +
     "		    </div>\n" +
     "		    <div class=\"card-footer\">\n" +
+    "		    	<!--Live: {{content.live || 0}}-->\n" +
+    "				<a style=\"color:grey\" href=\"content/{{content.id}}\" ui-sref=\"content({id:content.id})\" ng-click=\"tokensToggle(content)\">\n" +
+    "					<i class=\"fas fa-eye\"></i> {{content.attention.general || 0}}\n" +
+    "				</a>\n" +
     "		        <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"createReaction(content, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{content.reactions.plus}} like </a> \n" +
     "		        <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"createReaction(content, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{content.reactions.minus}} dislike </a>\n" +
     "		       	<a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"reply(content)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
-    "\n" +
-    "				<!--, Live: {{content.live || 0}}-->\n" +
-    "				<a style=\"color:grey\" class=\"pull-right\" href=\"content/{{content.id}}\" ui-sref=\"content({id:content.id})\" ng-click=\"tokensToggle(content)\">\n" +
-    "					<i class=\"fas fa-eye\"></i> {{content.attention.general || 0}}\n" +
-    "				</a>\n" +
-    "\n" +
     "				<!--NEED TO MAKE PUBLIC FACING TIMERS.. AKA THE ATTENTION OF CONTENT ? DATA LIVE-->\n" +
-    "\n" +
-    "\n" +
     "		    </div>\n" +
     "		    <div ng-show=\"content.showReply\" class=\"card-footer\">\n" +
     "				<form role=\"form\" ng-submit=\"createContent(content)\">\n" +
@@ -1613,17 +1618,13 @@ angular.module("contentList/index.tpl.html", []).run(["$templateCache", function
     "                        </div>\n" +
     "                    </div>\n" +
     "                    <div class=\"card-footer\">\n" +
-    "\n" +
     "                        <a style=\"color:grey\" href=\"content/{{item.id}}\" ui-sref=\"content({id:item.id})\">\n" +
     "                            <i class=\"fas fa-eye\"></i> {{item.attention.general || 0}}\n" +
     "                        </a>\n" +
-    "\n" +
     "                        <a ng-click=\"$event.stopPropagation();createReaction(item, 'plus')\"><i class=\"fas fa-angle-up\"></i> {{item.reactions.plus}} like </a> \n" +
     "                        <a ng-click=\"$event.stopPropagation();createReaction(item, 'minus')\" ><i class=\"fas fa-angle-down\"></i> {{item.reactions.minus}} dislike </a>\n" +
-    "\n" +
     "                        <a ng-click=\"$event.stopPropagation();reply(item)\"><i class=\"far fa-comment\"></i> comment </a>\n" +
     "                        <a ng-click=\"$event.stopPropagation();validationToggle(item)\"><i class=\"fa fa-check\"></i> validate </a>\n" +
-    "\n" +
     "                        <a><p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"item.createdAt\"></p></a>\n" +
     "                        <a ng-click=\"$event.stopPropagation();\" class=\"pull-right\" style=\"padding:0px;\" href=\"content/{{item.id}}\" ui-sref=\"content({id:item.id})\"><i class=\"fas fa-link grey\"></i></a>\n" +
     "                    </div>\n" +
@@ -4629,7 +4630,7 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
     "			            <div style=\"margin-left:42px\"><span style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span></div>\n" +
     "			        </div>\n" +
     "			        <div class=\"card-footer\">\n" +
-    "			        	<a style=\"color:grey\" class=\"pull-right\" href=\"content/{{item.id}}\" ui-sref=\"content({id:item.id})\">\n" +
+    "			        	<a style=\"color:grey\" href=\"content/{{item.id}}\" ui-sref=\"content({id:item.id})\">\n" +
     "                            <i class=\"fas fa-eye\"></i> {{item.attention.general || 0}}\n" +
     "                        </a>\n" +
     "			            <a ng-click=\"$event.stopPropagation();createReaction(item, 'plus')\"><i class=\"fas fa-angle-up\"></i> {{item.reactions.plus}} like </a> \n" +
@@ -4807,7 +4808,7 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "\n" +
     "    <!--TODO: DYNAMIC TUTORIAL.....-->\n" +
     "    <!--PERHAPS REQUIRE CONSENT ALL TIMES.. SO 1st page-->\n" +
-    "    <div class=\"row\" ng-if=\"currentUser.apps.cre8.tutorial\">\n" +
+    "    <div class=\"row\" ng-if=\"currentUser.apps.cre8.tutorial && isTutorial\">\n" +
     "\n" +
     "        <!--IF NOT INFO-->\n" +
     "        <div ng-show=\"pageNumber == 0\" class=\"card\">\n" +
@@ -5281,7 +5282,7 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "\n" +
     "    <div class=\"spacing-10\"></div>\n" +
     "\n" +
-    "    <div class=\"row\" ng-if=\"!currentUser.apps.cre8.tutorial\">\n" +
+    "    <div class=\"row\" ng-if=\"!isTutorial || !currentUser.apps.cre8.tutorial\">\n" +
     "\n" +
     "        <div class=\"col-md-4 col-sm-12 col-xs-12\" style=\"padding-left:0px;padding-right:0px\">\n" +
     "            <div class=\"member-card\" style=\"margin-left:10px;margin-right:10px;margin-bottom:0px\" ng-click=\"renderReputationToggle(currentUser)\">\n" +
@@ -8866,18 +8867,6 @@ angular.module("members/index.tpl.html", []).run(["$templateCache", function($te
     "            <div class=\"container\">\n" +
     "                <div class=\"row\">\n" +
     "                    <div class=\"col-xs-6\"><h1>Members</h1></div>\n" +
-    "                    <div class=\"col-xs-6\">\n" +
-    "                        <div class=\"dropdown sort-dropdown noselect\" style=\"float:right\">\n" +
-    "                            <a href=\"#\" style=\"color:white\" class=\"dropdown-toggle noselect\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">\n" +
-    "                                <h4 style=\"text-align:right;margin-top:20px\" class=\"noselect\">{{sortText[selectedSort]}} <i class=\"fa fa-angle-down\"></i></h4>\n" +
-    "                            </a>\n" +
-    "                            <ul class=\"dropdown-menu\">\n" +
-    "                                <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('totalWork DESC')\"><h5>Total Reputation</h5></a></li>\n" +
-    "                                <hr class=\"sort-hr\">\n" +
-    "                                <li><a href=\"#\" class=\"sort-a\" ng-click=\"selectSort('createdAt DESC')\"><h5>Date Joined</h5></a></li>\n" +
-    "                            </ul>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
@@ -8890,18 +8879,11 @@ angular.module("members/index.tpl.html", []).run(["$templateCache", function($te
     "\n" +
     "        <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
     "            <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
+    "            <li style=\"float:right;font-size:14px\"><a href=\"#\" ng-click=\"sortToggle()\">Sort By Recent <i class=\"fa fa-angle-down\"></i></a></li>\n" +
     "            <div style=\"clear:both\"></div>\n" +
     "        </ul>\n" +
-    "\n" +
     "        <div class=\"card\">\n" +
-    "            <form ng-submit=\"search()\" style=\"display:flex;flex-direction:row;\">\n" +
-    "                <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder=\"Search | Filter\" ng-model=\"searchQuery\">\n" +
-    "                <div ng-click=\"search()\" style=\"border:0px\" class=\"btn btn-default\" style=\"float:right\">\n" +
-    "                    <a  href=\"#\" role=\"button\">\n" +
-    "                        <h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5>\n" +
-    "                    </a>\n" +
-    "                </div>\n" +
-    "            </form>\n" +
+    "            <tags-input class=\"\" style=\"border:0px;flex-grow:2;\" min-length=\"1\" placeholder=\"Search\" ng-model=\"searchQuery\"></tags-input>\n" +
     "        </div>\n" +
     "        <div class=\"card\">\n" +
     "            <div style=\"padding:16px;\">\n" +
@@ -8912,37 +8894,12 @@ angular.module("members/index.tpl.html", []).run(["$templateCache", function($te
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
-    "\n" +
     "    <div class=\"row\">\n" +
-    "\n" +
     "        <div class=\"col-lg-4 col-sm-6\" ng-repeat=\"item in members\" style=\"padding-left:10px;padding-right:10px;\">\n" +
-    "\n" +
-    "            <div class=\"member-card\" style=\"margin-bottom:10px\" ng-click=\"renderReputationToggle(item)\">\n" +
-    "                <div class=\"member-card-image\" style=\"background-image: url('{{item.coverUrl}}')\">\n" +
-    "                    <a ng-click=\"$event.stopPropagation()\" href=\"member/{{item.username}}\" ui-sref=\"member.activity({path:item.username})\"><img ng-src=\"{{item.avatarUrl}}\" err-src=\"/images/avatar.png\"></a>\n" +
-    "                </div>\n" +
-    "                <div class=\"member-card-info\" style=\"padding:16px;height:auto\">\n" +
-    "                    \n" +
-    "                    <h4 ng-click=\"$event.stopPropagation()\"><a href=\"member/{{item.username}}\" ui-sref=\"member.activity({path:item.username})\">{{item.username}}</a></h4>\n" +
-    "                    \n" +
-    "                    <p style=\"font-size:11px;\" ng-click=\"$event.stopPropagation()\"><a href=\"/member/{{item.username}}/projects\" ui-sref=\"member.projects({path:item.username})\">{{item.projectCount || 0}} Projects</a> | <a href=\"/member/{{item.username}}/followers\" ui-sref=\"member.followers({path:item.username})\">{{item.followerCount || 0}} Followers</a> | <a href=\"/member/{{item.username}}/following\" ui-sref=\"member.following({path:item.username})\">{{item.followingCount || 0}} Following</a>\n" +
-    "                    \n" +
-    "                    <p style=\"color:gray\">Total Reputation | {{item.totalWork || 0}}</p>\n" +
-    "                    <p style=\"color:gray\">{{currentUser.status}} <i style=\"color:#30b257\" class=\"fa fa-circle\"></i> Offline</p>\n" +
-    "                    \n" +
-    "                    <a ng-show=\"!item.isFollowing\" style=\"padding:10px 15px;color:rgb(125,125,125)\" class=\"btn btn-default\" ng-click=\"$event.stopPropagation();follow(item)\">Follow</button></a>\n" +
-    "                    <a ng-show=\"item.isFollowing\" style=\"padding:10px 15px;color:rgb(125,125,125)\" class=\"btn btn-default\" ng-click=\"$event.stopPropagation();follow(item)\">Unfollow</button></a>\n" +
-    "                    <a style=\"padding:10px 15px;color:rgb(125,125,125)\" class=\"btn btn-default\" ng-click=\"$event.stopPropagation();transactionToggle(item)\">Send Tokens</a>\n" +
-    "                    <img ng-click=\"$event.stopPropagation();transactionToggle(item)\" style=\"height:50px;text-align:left\" src=\"https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{item.id}}\">\n" +
-    "\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "\n" +
+    "            <div ng-include=\"'templates/cards/memberCard.tpl.html'\"></div>\n" +
     "        </div>\n" +
     "    </div>\n" +
-    "\n" +
     "    <div class=\"spacing-10\"></div>\n" +
-    "\n" +
     "</div>\n" +
     "\n" +
     "<div ng-click=\"loadMore()\" class=\"container\" style=\"text-align:center\">\n" +
@@ -13338,6 +13295,9 @@ angular.module("search/index.tpl.html", []).run(["$templateCache", function($tem
     "				            <div style=\"margin-left:42px\"><span style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span></div>\n" +
     "				        </div>\n" +
     "				        <div class=\"card-footer\">\n" +
+    "							<a style=\"color:grey\" href=\"content/{{item.id}}\" ui-sref=\"content({id:item.id})\" ng-click=\"tokensToggle(item)\">\n" +
+    "								<i class=\"fas fa-eye\"></i> {{item.attention.general || 0}}\n" +
+    "							</a>\n" +
     "				            <a ng-click=\"$event.stopPropagation();createReaction(item, 'plus')\"><i class=\"fas fa-angle-up\"></i> {{item.reactions.plus}} like </a> \n" +
     "							<a ng-click=\"$event.stopPropagation();createReaction(item, 'minus')\" ><i class=\"fas fa-angle-down\"></i> {{item.reactions.minus}} dislike </a>\n" +
     "				            <a ng-click=\"$event.stopPropagation();reply(item)\"><i class=\"far fa-comment\"></i> comment </a>\n" +
@@ -14019,7 +13979,21 @@ angular.module("templates/cards/itemCard.tpl.html", []).run(["$templateCache", f
 
 angular.module("templates/cards/memberCard.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/cards/memberCard.tpl.html",
-    "");
+    "<div class=\"member-card\" style=\"margin-bottom:10px\" ng-click=\"renderReputationToggle(item)\">\n" +
+    "    <div class=\"member-card-image\" style=\"background-image: url('{{item.coverUrl}}')\">\n" +
+    "        <a ng-click=\"$event.stopPropagation()\" href=\"member/{{item.username}}\" ui-sref=\"member.activity({path:item.username})\"><img ng-src=\"{{item.avatarUrl}}\" err-src=\"/images/avatar.png\"></a>\n" +
+    "    </div>\n" +
+    "    <div class=\"member-card-info\" style=\"padding:16px;height:auto\">\n" +
+    "        <h4 ng-click=\"$event.stopPropagation()\"><a href=\"member/{{item.username}}\" ui-sref=\"member.activity({path:item.username})\">{{item.username}}</a></h4>\n" +
+    "        <p style=\"font-size:11px;\" ng-click=\"$event.stopPropagation()\"><a href=\"/member/{{item.username}}/projects\" ui-sref=\"member.projects({path:item.username})\">{{item.projectCount || 0}} Projects</a> | <a href=\"/member/{{item.username}}/followers\" ui-sref=\"member.followers({path:item.username})\">{{item.followerCount || 0}} Followers</a> | <a href=\"/member/{{item.username}}/following\" ui-sref=\"member.following({path:item.username})\">{{item.followingCount || 0}} Following</a>\n" +
+    "        <p style=\"color:gray\">Total Reputation | {{item.totalWork || 0}}</p>\n" +
+    "        <p style=\"color:gray\">{{currentUser.status}} <i style=\"color:#30b257\" class=\"fa fa-circle\"></i> Offline</p>\n" +
+    "        <a ng-show=\"!item.isFollowing\" style=\"padding:10px 15px;color:rgb(125,125,125)\" class=\"btn btn-default\" ng-click=\"$event.stopPropagation();follow(item)\">Follow</button></a>\n" +
+    "        <a ng-show=\"item.isFollowing\" style=\"padding:10px 15px;color:rgb(125,125,125)\" class=\"btn btn-default\" ng-click=\"$event.stopPropagation();follow(item)\">Unfollow</button></a>\n" +
+    "        <a style=\"padding:10px 15px;color:rgb(125,125,125)\" class=\"btn btn-default\" ng-click=\"$event.stopPropagation();transactionToggle(item)\">Send Tokens</a>\n" +
+    "        <img ng-click=\"$event.stopPropagation();transactionToggle(item)\" style=\"height:50px;text-align:left\" src=\"https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{item.id}}\">\n" +
+    "    </div>\n" +
+    "</div>");
 }]);
 
 angular.module("templates/cards/orderCard.tpl.html", []).run(["$templateCache", function($templateCache) {
@@ -14620,7 +14594,7 @@ angular.module("tx/index.tpl.html", []).run(["$templateCache", function($templat
     "					<p style=\"font-style:italic;color:gray;margin:0px\"><b>Address:</b> <a href=\"#\">caf644ab582c42a56759764a15226ed2a1fa</a></p>\n" +
     "					<p style=\"font-style:italic;color:gray;margin:0px\"><b>Verification Type:</b> <a href=\"\">Proof Of Work</a> (PoeT 141.112)</p>\n" +
     "					<p style=\"font-style:italic;color:gray;margin:0px\"><b>Peer(s):</b> <a href=\"member/troverman\" ui-sref=\"member.activity({path:'troverman'})\">caf644ab582c42a56759764a15226ed2a1fa</a></p>\n" +
-    "\n" +
+    "					<p style=\"font-style:italic;color:gray;margin:0px\"><b>Block</b> <a>564366</a></p>\n" +
     "					<p style=\"font-style:italic;color:gray;margin:0px\">\n" +
     "						<b>Data</b> <br>\n" +
     "						000000000000000000000000caf644ab582c42a56759764a15226ed2a1fa<br>\n" +
@@ -14634,6 +14608,15 @@ angular.module("tx/index.tpl.html", []).run(["$templateCache", function($templat
     "					</p>\n" +
     "					<p style=\"font-style:italic;color:gray;margin:0px\">Function Calls, State Modification</p>\n" +
     "				</div>\n" +
+    "				<div class=\"card-footer\">\n" +
+    "                    <a style=\"color:grey\" href=\"content/{{item.id}}\" ui-sref=\"content({id:item.id})\">\n" +
+    "                        <i class=\"fas fa-eye\"></i> {{item.attention.general || 0}}\n" +
+    "                    </a>\n" +
+    "                    <a ng-click=\"$event.stopPropagation();createReaction(item, 'plus')\"><i class=\"fas fa-angle-up\"></i> {{item.reactions.plus}} like </a> \n" +
+    "                    <a ng-click=\"$event.stopPropagation();createReaction(item, 'minus')\" ><i class=\"fas fa-angle-down\"></i> {{item.reactions.minus}} dislike </a>\n" +
+    "                    <a ng-click=\"$event.stopPropagation();reply(item)\"><i class=\"far fa-comment\"></i> comment </a>\n" +
+    "                    <a ng-click=\"$event.stopPropagation();validationToggle(item)\"><i class=\"fa fa-check\"></i> validate </a>\n" +
+    "                </div>\n" +
     "			</div>\n" +
     "		</div>\n" +
     "	</div>\n" +

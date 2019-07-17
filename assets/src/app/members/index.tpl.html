@@ -4,18 +4,6 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xs-6"><h1>Members</h1></div>
-                    <div class="col-xs-6">
-                        <div class="dropdown sort-dropdown noselect" style="float:right">
-                            <a href="#" style="color:white" class="dropdown-toggle noselect" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                <h4 style="text-align:right;margin-top:20px" class="noselect">{{sortText[selectedSort]}} <i class="fa fa-angle-down"></i></h4>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#" class="sort-a" ng-click="selectSort('totalWork DESC')"><h5>Total Reputation</h5></a></li>
-                                <hr class="sort-hr">
-                                <li><a href="#" class="sort-a" ng-click="selectSort('createdAt DESC')"><h5>Date Joined</h5></a></li>
-                            </ul>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -28,18 +16,11 @@
 
         <ul style="padding:0px;" class="member-tabs">
             <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fa fa-filter"></i> Filter</a></li>
+            <li style="float:right;font-size:14px"><a href="#" ng-click="sortToggle()">Sort By Recent <i class="fa fa-angle-down"></i></a></li>
             <div style="clear:both"></div>
         </ul>
-
         <div class="card">
-            <form ng-submit="search()" style="display:flex;flex-direction:row;">
-                <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder="Search | Filter" ng-model="searchQuery">
-                <div ng-click="search()" style="border:0px" class="btn btn-default" style="float:right">
-                    <a  href="#" role="button">
-                        <h5 style="color:black;text-align:right" class="noselect">Search <i class="fa fa-search"></i></h5>
-                    </a>
-                </div>
-            </form>
+            <tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search" ng-model="searchQuery"></tags-input>
         </div>
         <div class="card">
             <div style="padding:16px;">
@@ -50,37 +31,12 @@
             </div>
         </div>
     </div>
-
     <div class="row">
-
         <div class="col-lg-4 col-sm-6" ng-repeat="item in members" style="padding-left:10px;padding-right:10px;">
-
-            <div class="member-card" style="margin-bottom:10px" ng-click="renderReputationToggle(item)">
-                <div class="member-card-image" style="background-image: url('{{item.coverUrl}}')">
-                    <a ng-click="$event.stopPropagation()" href="member/{{item.username}}" ui-sref="member.activity({path:item.username})"><img ng-src="{{item.avatarUrl}}" err-src="/images/avatar.png"></a>
-                </div>
-                <div class="member-card-info" style="padding:16px;height:auto">
-                    
-                    <h4 ng-click="$event.stopPropagation()"><a href="member/{{item.username}}" ui-sref="member.activity({path:item.username})">{{item.username}}</a></h4>
-                    
-                    <p style="font-size:11px;" ng-click="$event.stopPropagation()"><a href="/member/{{item.username}}/projects" ui-sref="member.projects({path:item.username})">{{item.projectCount || 0}} Projects</a> | <a href="/member/{{item.username}}/followers" ui-sref="member.followers({path:item.username})">{{item.followerCount || 0}} Followers</a> | <a href="/member/{{item.username}}/following" ui-sref="member.following({path:item.username})">{{item.followingCount || 0}} Following</a>
-                    
-                    <p style="color:gray">Total Reputation | {{item.totalWork || 0}}</p>
-                    <p style="color:gray">{{currentUser.status}} <i style="color:#30b257" class="fa fa-circle"></i> Offline</p>
-                    
-                    <a ng-show="!item.isFollowing" style="padding:10px 15px;color:rgb(125,125,125)" class="btn btn-default" ng-click="$event.stopPropagation();follow(item)">Follow</button></a>
-                    <a ng-show="item.isFollowing" style="padding:10px 15px;color:rgb(125,125,125)" class="btn btn-default" ng-click="$event.stopPropagation();follow(item)">Unfollow</button></a>
-                    <a style="padding:10px 15px;color:rgb(125,125,125)" class="btn btn-default" ng-click="$event.stopPropagation();transactionToggle(item)">Send Tokens</a>
-                    <img ng-click="$event.stopPropagation();transactionToggle(item)" style="height:50px;text-align:left" src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{item.id}}">
-
-                </div>
-            </div>
-
+            <div ng-include="'templates/cards/memberCard.tpl.html'"></div>
         </div>
     </div>
-
     <div class="spacing-10"></div>
-
 </div>
 
 <div ng-click="loadMore()" class="container" style="text-align:center">

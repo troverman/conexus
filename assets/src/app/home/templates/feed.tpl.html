@@ -3,7 +3,7 @@
 
     <!--TODO: DYNAMIC TUTORIAL.....-->
     <!--PERHAPS REQUIRE CONSENT ALL TIMES.. SO 1st page-->
-    <div class="row" ng-if="currentUser.apps.cre8.tutorial">
+    <div class="row" ng-if="currentUser.apps.cre8.tutorial && isTutorial">
 
         <!--IF NOT INFO-->
         <div ng-show="pageNumber == 0" class="card">
@@ -477,7 +477,7 @@
 
     <div class="spacing-10"></div>
 
-    <div class="row" ng-if="!currentUser.apps.cre8.tutorial">
+    <div class="row" ng-if="!isTutorial || !currentUser.apps.cre8.tutorial">
 
         <div class="col-md-4 col-sm-12 col-xs-12" style="padding-left:0px;padding-right:0px">
             <div class="member-card" style="margin-left:10px;margin-right:10px;margin-bottom:0px" ng-click="renderReputationToggle(currentUser)">

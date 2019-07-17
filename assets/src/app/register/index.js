@@ -19,7 +19,7 @@ angular.module( 'conexus.register', [
         }
 	});
 }])
-.controller( 'RegisterCtrl', ['$http', '$location', '$rootScope', '$scope', 'contentList', 'tasks', function RegisterController( $http, $location, $rootScope, $scope, contentList, tasks ) {
+.controller( 'RegisterCtrl', ['$http', '$location', '$rootScope', '$scope', 'contentList', 'tasks', 'toaster', function RegisterController( $http, $location, $rootScope, $scope, contentList, tasks, toaster ) {
 	
     if ($rootScope.currentUser){$location.path('/')}
     $rootScope.baseMarkets = [{text:'UNIVERSALTOKEN'}];
@@ -254,14 +254,49 @@ angular.module( 'conexus.register', [
         }
     };
 
+    $scope.pop = function(title, body){
+        toaster.pop({
+            type:'warning',
+            title: title,
+            body: body,
+            onShowCallback: function (toast) { 
+                var audio = new Audio('audio/ping.mp3');
+                audio.play()
+                .then(function(audio){console.log('dingdong')})
+                .catch(function(err){console.log(err)})
+            }
+        });
+    };
     $scope.registerUser = function(){
+        $scope.valid = true;
+        //TODO: FORM VALIDATION
+        if ($scope.newMember.password){
+            if ($scope.newMember.password.length < 8){
+                $scope.pop('ERROR', 'Password must be longer than 8 Characters');
+                $scope.valid = false;
+            }
+        }
+        else{
+            $scope.pop('ERROR', 'Password must be longer than 8 Characters');
+            $scope.valid = false;
+        }
+        if (!$scope.newMember.username){
+            $scope.pop('ERROR', 'Invalid Username');
+            $scope.valid = false;
+        }
+        if (!$scope.newMember.email){
+            $scope.pop('ERROR', 'Invalid Email');
+            $scope.valid = false;
+        }
         $scope.newMember.order = $scope.newOrderNEW;
         var data = JSON.stringify($scope.newMember);
         $rootScope.stateIsLoading = true;
-        $http({method:'POST', url:'/auth/local/register', data:data}).then(function(newModel){
-            $rootScope.currentUser = newModel.data;
-            $location.path('/');
-        });
+        if ($scope.valid){
+            $http({method:'POST', url:'/auth/local/register', data:data}).then(function(newModel){
+                $rootScope.currentUser = newModel.data;
+                $location.path('/');
+            });
+        }
     };
 
     $scope.activity = [].concat.apply([], [$scope.contentList, $scope.tasks]);
