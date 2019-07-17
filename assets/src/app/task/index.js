@@ -54,8 +54,7 @@ angular.module( 'conexus.task', [
 
     $scope.question = false;
     $scope.recordingTime = false;
-    $scope.showContent = false;
-    $scope.showTime = true;
+    $scope.selectedTab = 'TIME';
     $scope.streaming = false;
     $scope.streamingId = null;
     $scope.streamUrl = '';
@@ -153,17 +152,10 @@ angular.module( 'conexus.task', [
         });
     };
 
-    //TODO:..HMM
-    $scope.showTimeToggle = function(){
-        $scope.showContent = false;
-        $scope.showTime = true;
+    $scope.selectTab = function(model){
+        $scope.selectedTab = model;
     };
 
-    //TODO:..HMM
-    $scope.showContentToggle = function(){
-        $scope.showContent = true;
-        $scope.showTime = false;
-    };
 
     $scope.showValidationImplicitToggle = function(){$scope.showValidationImplicitToggleVar = !$scope.showValidationImplicitToggleVar};
 
