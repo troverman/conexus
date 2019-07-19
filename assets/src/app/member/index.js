@@ -1143,17 +1143,6 @@ angular.module( 'conexus.member', [
             data: [],
             visible: false
         }],
-        //plotOptions: {
-        //    area: {
-        //        stacking: 'normal',
-        //        lineColor: '#666666',
-        //        lineWidth: 1,
-        //        marker: {
-        //            lineWidth: 1,
-        //            lineColor: '#666666'
-        //        }
-        //    }
-        //},
         title: {text: ''},
         xAxis: {
             type: 'datetime',
@@ -1172,7 +1161,6 @@ angular.module( 'conexus.member', [
     $scope.assetChart = {
         chart:{zoomType: 'x',},
         series:[],
-        //plotOptions: {area: {stacking: 'normal'}},
         title:{text:''},
         xAxis:{
             type: 'datetime',
@@ -1245,15 +1233,6 @@ angular.module( 'conexus.member', [
         else{$mdSidenav('login').toggle();}
     };
 
-    $scope.reply = function(activity){
-        if ($rootScope.currentUser){
-            //var index = $scope.transactions.map(function(obj){return obj.id}).indexOf(activity.id);
-            //$scope.transactions[index].showReply = !$scope.transactions[index].showReply;
-            $mdSidenav('content').toggle()
-        }
-        else{$mdSidenav('login').toggle()}
-    };
-
     //IMPROVE :)
     function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
     function amountInArray(array, value) {
@@ -1263,6 +1242,9 @@ angular.module( 'conexus.member', [
         },0);
     };
 
+
+
+    //BETTER..
     $scope.loadAssets = function(){
         $scope.transactionAssets = $scope.transactions.map(function(obj){return Object.keys(obj.amountSet);});
         $scope.transactionAssets = [].concat.apply([], $scope.transactionAssets);
@@ -1332,12 +1314,14 @@ angular.module( 'conexus.member', [
 
     $scope.selectAsset = function(asset){
         $rootScope.stateIsLoading = true;
+
         //TODO: FILTERS.. 
         //COMPLET FILTER
         //SEARCH MODEL
         //SearchModel.search().then(function(transactionModels){
         //    $scope.transactions = transactionModels;
         //});
+
         var query = {
             limit:100,
             skip:0,
@@ -1346,8 +1330,41 @@ angular.module( 'conexus.member', [
             user: $scope.member.id
         };
 
-        console.log(query);
+        var query = [
+            {
+                filter:[
+                    {
+                        model:'TRANSACTION',
+                        modelParam:'tags',
+                        query:'TAG QUERY',
+                        association:{
+                            population:true,
+                            depth:1,
+                        },
+                        params:{
+                            limit:100,
+                            skip:0,
+                            sort:'createdAt DESC',
+                        }
+                    }
+                ],
+                params:{
+                    limit:100,
+                    skip:0,
+                    sort:'createdAt DESC',
+                },
+                chain:'OR'
+            },{
+                filter:[],
+                params:{
+                    limit:100,
+                    skip:0,
+                    sort:'createdAt DESC',
+                }
+            }
+        ];
 
+        console.log(query);
         console.log($location.search().assets)
 
         //if ($location.search().assets){
@@ -1362,10 +1379,7 @@ angular.module( 'conexus.member', [
         TransactionModel.getSome(query).then(function(transactionModels){
             $rootScope.stateIsLoading = false;
             $scope.transactions = transactionModels;
-
             $scope.updateGraph();
-
-
         });
 
     };

@@ -1180,8 +1180,8 @@ angular.module( 'conexus.project', [
     $scope.project = project;
 
     //DO BETTER>> ASSIGN MEMBERSHIP IN ROOT PROJ CTRL. ASSIGN PERMISSIONS
-    if ($scope.members.map(function(obj){return obj.user.id}).indexOf($rootScope.currentUser.id) != -1){$scope.isProjectMember = true}
-    else{$scope.isProjectMember = false}
+    //if ($scope.members.map(function(obj){return obj.user.id}).indexOf($rootScope.currentUser.id) != -1){$scope.isProjectMember = true}
+    //else{$scope.isProjectMember = false}
 
 
     $scope.createMember = function() {

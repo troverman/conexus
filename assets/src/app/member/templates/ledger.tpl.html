@@ -92,6 +92,7 @@
 
 		<ul style="padding:0px;" class="member-tabs">
 			<li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('POSITIONS')"><i class="fa fa-filter"></i> Filter</a></li>
+			<!--<li style="float:right;font-size:14px"><a href="#" ng-click="sortToggle()">Sort By Recent <i class="fa fa-angle-down"></i></a></li>-->
 	    	<li style="float:right" ng-click="selectRevenue()"><a href="">Revenue</a></li>
 			<li style="float:right" ng-click="selectExpense()"><a href="">Expense</a></li>
 			<li style="float:right" ng-click="selectOverview()"><a href="">Overview</a></li>
@@ -111,45 +112,26 @@
 
 		<div class="card">
 			<div style="padding:16px;">
-				
 				<div class="row">
 					<div style="padding-left:0px;padding-right:0px;" class="col-xs-6">
 						<div style="padding-left:0px;padding-right:0px;" class="col-sm-6"><md-datepicker style="display:inline" ng-model="startDate" md-placeholder="Start date"></md-datepicker></div>
 	      				<div style="padding-left:0px;padding-right:0px;" class="col-sm-6"><md-datepicker ng-model="endDate" md-placeholder="End date"></md-datepicker></div>
 					</div>
-
 					<!--TODO-->
 					<div style="text-align:right;" class="col-xs-6">
 						<h5>{{sumTransactions[sumTransactions.length-1][1].toFixed(2)}} <a href="#">{{assetSet[0].element}}</a> Balance</h5>
 						<h5>{{sumTo[sumTo.length-1][1].toFixed(2)}} <a href="#">{{assetSet[0].element}}</a> Revenue</h5>
 						<h5>{{sumFrom[sumFrom.length-1][1].toFixed(2)}} <a href="#">{{assetSet[0].element}}</a> Expense</h5>
 					</div>
-
 				</div>
-
 				<div class="col-xs-12">
 					<div ng-if="selectedState == 'OVERVIEW'"><highchart config="chart"></highchart></div>
 					<div ng-if="selectedState == 'EXPENSE' || selectedState == 'REVENUE'"><highchart config="tagChart"></highchart></div>
 					<div ng-if="selectedState == 'EXPENSE' || selectedState == 'REVENUE'"><highchart config="assetChart"></highchart></div>
 				</div>
-
 				<div class="col-xs-12">
 					<highchart config="pie"></highchart>
 				</div>
-
-
-				<!--TODO-->
-				<!--
-				<div class="col-xs-12">
-					<div style="text-align:right;" class="col-xs-6">
-						<h5>{{sumTransactions[sumTransactions.length-1][1].toFixed(2)}} <a href="#">{{assetSet[0].element}}</a> Balance</h5>
-						<h5>{{sumTo[sumTo.length-1][1].toFixed(2)}} <a href="#">{{assetSet[0].element}}</a> Revenue</h5>
-						<h5>{{sumFrom[sumFrom.length-1][1].toFixed(2)}} <a href="#">{{assetSet[0].element}}</a> Expense</h5>
-					</div>
-				</div>
-				-->
-
-
 			</div>
 		</div>
 

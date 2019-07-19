@@ -1895,12 +1895,14 @@ angular.module( 'conexus.nav', [
     //LOL
     //IF LOGGED IN AND PERMISIONS
     if($rootScope.currentUser){
-        if ($rootScope.currentUser.apps){
-            if ($rootScope.currentUser.apps.cre8.recordAttention){
+        //TODO:ROOTSCOPE ISNT LOADED
+        console.log($rootScope.currentUser)
+        //if ($rootScope.currentUser.apps){
+            //if ($rootScope.currentUser.apps.cre8.recordAttention){
                 $interval(function(){$scope.timerFunction(1, 'attention', 'HUMAN')}, 1000);
                 $interval(function(){$scope.timerFunction(1, 'mining', 'MACHINE')}, 1000);
-            }
-        }
+            //}
+        //}
     }
 
     //TODO
@@ -2187,6 +2189,10 @@ angular.module( 'conexus.nav', [
     };
 
     $scope.selectOrderType = function(type){$scope.selectedOrderType = type;};
+    $scope.selectedTab = 'ATTENTION';
+    $scope.selectTab = function(model){
+        $scope.selectedTab = model;
+    };
     $scope.selectType = function(type){$scope.selectedType = type;};
 
 }]);
