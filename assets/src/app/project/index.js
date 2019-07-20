@@ -292,7 +292,7 @@ angular.module( 'conexus.project', [
     if ($scope.project.location){ 
         $scope.map = {
             center: {latitude: $scope.project.location.lat, longitude: $scope.project.location.lng },
-            zoom: 13
+            zoom: 9
         };
         $scope.markers = [{
             id:project.id,

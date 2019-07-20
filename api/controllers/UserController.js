@@ -98,6 +98,10 @@ module.exports = {
 		User.update({id: id}, model)
 		.then(function(model){
 			User.publishUpdate(id, model);
+
+
+			//if model.apps.cre
+
 			res.json(model);
 		});
 	},
