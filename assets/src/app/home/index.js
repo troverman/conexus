@@ -107,7 +107,7 @@ angular.module( 'conexus.home', [
     else{$state.go('home.intro')}
 }])
 
-.controller( 'IntroCtrl', ['$http', '$location', '$mdSidenav', '$rootScope', '$sce', '$scope', '$window', 'contentList', 'ContentModel', 'members', 'orders', 'ProjectModel', 'projects', 'ReactionModel', 'SearchModel', 'tasks', 'time', 'titleService', 'toaster', 'transactions', 'UserModel', function HomeController( $http, $location, $mdSidenav, $rootScope, $sce, $scope, $window, contentList, ContentModel, members, orders, ProjectModel, projects, ReactionModel, SearchModel, tasks, time, titleService, toaster, transactions, UserModel ) {
+.controller( 'IntroCtrl', ['$http', '$location', '$mdSidenav', '$rootScope', '$sce', '$scope', '$state', '$window', 'contentList', 'ContentModel', 'members', 'orders', 'ProjectModel', 'projects', 'ReactionModel', 'SearchModel', 'tasks', 'time', 'titleService', 'toaster', 'transactions', 'UserModel', function HomeController( $http, $location, $mdSidenav, $rootScope, $sce, $scope, $state, $window, contentList, ContentModel, members, orders, ProjectModel, projects, ReactionModel, SearchModel, tasks, time, titleService, toaster, transactions, UserModel ) {
 
     $scope.introObj = [
         {title:'WE CRE8 MULTIDIMENSIONAL VALUE'},
@@ -393,9 +393,10 @@ angular.module( 'conexus.home', [
         if ($scope.valid){
             $rootScope.stateIsLoading = true;
             $http({method:'POST', url:'/auth/local/register', data:data}).then(function(newModel){
-               $rootScope.currentUser = newModel.data;
-                $window.location.reload();
-                $location.path('/');
+                $rootScope.currentUser = newModel.data;
+                $state.go('home.feed');
+                //$window.location.reload();
+                //$location.path('/');
             });
         }
 
@@ -733,7 +734,7 @@ angular.module( 'conexus.home', [
             window.scrollTo(0, 0);
             if (page){$scope.pageNumber = page}
             else{$scope.pageNumber++}
-            if ($scope.pageNumber<0 || $scope.pageNumber>5){$scope.isTutorial = !$scope.isTutorial}
+            if ($scope.pageNumber<0 || $scope.pageNumber>6){$scope.isTutorial = !$scope.isTutorial}
         };
 
         $scope.editAccount = function () {
