@@ -29,7 +29,7 @@ angular.module( 'conexus.transparency', [
     
     console.log(peers);
     //TODO: REAL DATA
-    $scope.peers = [];
+    $scope.peers = peers;
     $scope.markers = [];
     $scope.members = 1000+Math.round(Math.random()*10000);
     $scope.projects = 1000+Math.round(Math.random()*10000);
@@ -90,25 +90,6 @@ angular.module( 'conexus.transparency', [
         plotOptions:{line:{marker:{enabled: false}}}
     };
 
-    for (var i=0; i<200+Math.random()*1000; i++) {
-        $scope.peers.push({
-            id:i,
-            title:'PEER '+parseInt(i+1),
-            location:{
-                lat:Math.round((Math.random()*360 - 180) * 1000)/1000,
-                lng:Math.round((Math.random()*360 - 180) * 1000)/1000,
-            },
-            poet: 10+ Math.random()*10000,
-            device:{
-                title:'iPhone 8', 
-                processor:'A11 Bionic chip with 64-bit architecture',
-            },
-            user:{
-                username:'troverman'
-            },
-        });
-    }
-
     var projects = [];
     var members = [];
     var orders = [];
@@ -117,7 +98,6 @@ angular.module( 'conexus.transparency', [
     var peers = [];
 
     for (var i=0; i<100+Math.random()*1000; i++) {
-
         var date = new Date();
         date.setTime(date.getTime() - (24*60*60*1000*(1000-i)));
         projects.push([date.getTime(), Math.round(5*i*Math.random())]);
@@ -126,7 +106,6 @@ angular.module( 'conexus.transparency', [
         transactions.push([date.getTime(), Math.round(10*i*Math.random())]);
         tokens.push([date.getTime(), Math.round(1000*i*Math.random())]);
         peers.push([date.getTime(), Math.round(1*i*Math.random())]);
-
     }
 
     projects.reduce(function(a,b,i) {
@@ -160,7 +139,6 @@ angular.module( 'conexus.transparency', [
     $scope.chart.series[4].data = tokens;
     $scope.chart.series[5].data = peers;
 
-
     $scope.map = {
         center: {
             latitude: 35.902023, 
@@ -174,8 +152,8 @@ angular.module( 'conexus.transparency', [
             id:$scope.peers[x].id,
             content:$scope.peers[x].title,
             coords:{
-                latitude:$scope.peers[x].location.lat,
-                longitude:$scope.peers[x].location.lng,
+                latitude:$scope.peers[x].info.location.lat,
+                longitude:$scope.peers[x].info.location.lng,
             }
         });
     }

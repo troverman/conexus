@@ -10,6 +10,9 @@ var AuthController = {
         User.update({id: req.user.id}, {loggedIn: false}).then(function(userModel) {
             // Inform other sockets (e.g. connected sockets that are subscribed) that this user is now logged in
             User.publishUpdate(userModel[0].id, userModel[0]);
+
+            //PEER DELETE
+
         });
         console.log(req.user.username + ': logged out');
         req.logout();
@@ -27,12 +30,21 @@ var AuthController = {
                 if (err) {res.redirect('/login');}
                 else {
 
+
+                    //ON AUTH / LOGIN
+
                     user.loggedIn = true;
                     req.session.User = user;
 
                     User.update({id: user.id}, {loggedIn: true}).then(function(userModel) {
 
                         User.publishUpdate(userModel[0].id, userModel[0]);
+
+                    });
+
+
+                    //if user is mining
+                    Peer.find({}).then(function(){
 
                     });
 

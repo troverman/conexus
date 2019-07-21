@@ -96,6 +96,17 @@ module.exports.routes = {
   'post /api/attention': 'AttentionController.create',
 
   /**
+   * Association routes
+   */
+  'get /api/action': 'ActionController.getSome',
+
+  /**
+   * Connection routes
+   */
+  'get /api/connection': 'ConnectionController.getSome',
+  'post /api/connection': 'ConnectionController.create',
+
+  /**
    * Content routes
    */
   'get /api/content': 'ContentController.getSome',

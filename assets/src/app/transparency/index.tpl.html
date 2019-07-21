@@ -50,7 +50,7 @@
 			        <div style="margin-top: auto;margin-bottom: auto;">
 			        	<div class="container">
 				            <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">Peer Network</h1>
-				            <h5 style="color:white">3423 Live Peers</h5>
+				            <h5 style="color:white">{{peers.length}} Live Peers</h5>
 				        </div>
 			        </div>
 			    </div>
@@ -71,15 +71,17 @@
 		                    	<th>Peer</th>
 								<th>Location</th>
 								<th>Device</th>
-								<th>PoET</th>
+								<th>Version</th>
+								<th>Reputation (general)</th>
 							</tr>
 		                </thead>
 		                <tbody>
 		                    <tr ng-repeat="peer in peers">
-		                        <td><a href="member/{{peer.user.username}}" ui-sref="member.activity({path:peer.user.username})">{{peer.title}} <!--| {{peer.user.username}}--></a></td>
-								<td><b>lat:</b> {{peer.location.lat}}, <b>lng:</b> {{peer.location.lng}}</td>
-								<td>{{peer.device.title}}, {{peer.device.processor}}</td>
-								<td>{{peer.poet}}</td>
+		                        <td><a href="member/{{peer.creator.username}}" ui-sref="member.activity({path:peer.creator.username})">{{peer.title}}: {{peer.creator.username}}</a></td>
+								<td><b>lat:</b> {{peer.info.location.lat}}, <b>lng:</b> {{peer.info.location.lng}}</td>
+								<td>{{peer.info.device.title}}, {{peer.info.device.processor}} <!--PROCESSORREP MULTI.. --></td>
+								<td><a href="project/cre8-rust-peer-client" ui-sref="project.activity({path:'cre8-rust-peer-client'})">{{peer.versionHash}}</td>
+								<td>{{peer.reputation.general}}</td>
 		                    </tr>
 		                </tbody>
 		            </table>

@@ -157,6 +157,50 @@
         </div>
     </md-sidenav>
 
+    <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="connection" md-is-locked-open="false" style="position:fixed;background-color:white;width:70%;max-width:100%">
+        <div ng-if="newProject" class="md-list-item-text" layout="column" style="height:100%;">
+            <div class="spacing-25"></div>
+            <div style="background:url('https://source.unsplash.com/1600x900/?code,coordination,government')" class="imageContainerSmall">
+                <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                    <div style="margin-top: auto;margin-bottom: auto;">
+                        <div style="padding:15px">
+                            <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">+ Connection Rule</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="padding:16px">
+
+                <div class="spacing-15"></div>
+                <p style="color:gray;font-style:italic">A Connection Rule defines logic for Data Model Association & Validation <a ng-click="informationToggle('CREATE_CONNECTION_RULE')" href="#"><i class="fa fa-question-circle"></i></a></p>
+                <div class="spacing-10"></div>
+
+                <form role="form" ng-submit="createConnection()">
+
+                    <h5>Title</h5>
+                    <input type="text" placeholder= "Title" ng-model="newConnection.info.title" class="form-control">
+        
+                    <h5>Creator</h5>
+                    <input type="text" placeholder= "Title" ng-model="newConnection.creator" class="form-control">
+
+                    <!--FIX THIS... PROJECT MEMBER :)-->
+                    <h5>Data Model Alpha</h5>
+                    <input type="text" placeholder="Data Model Alpha" ng-model="newConnection.dataModelAlpha" class="form-control">
+
+                    <h5>Data Model Beta</h5>
+                    <input type="text" placeholder="Data Model Beta" ng-model="newConnection.dataModelBeta" class="form-control">
+
+                    <h5>Description</h5>
+                    <text-angular placeholder= "Description" ng-model="newConnection.info.description" ta-toolbar="''"></text-angular>
+                    <button type="submit" class="btn btn-default log-btn" ng-disabled="!newConnection.info.description">create</button>
+
+                </form>
+                    
+            </div>
+        </div>
+    </md-sidenav>
+
+
     <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="content" md-is-locked-open="false" style="position:fixed;background-color:white;width:70%;max-width:100%">
         <div ng-if="newContent" class="md-list-item-text" layout="column" style="height:100%;">
 

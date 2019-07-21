@@ -36,14 +36,16 @@
                         </div>
                     </div>
                 </div>
-                <div class="spacing-25"></div>
-                <p style="color:gray;font-style:italic">Apps are a set of modular protocols and plugins to the string space.</p>
-                <p style="color:gray;font-style:italic">Application Collaboration is governed though <a href="/projects" ui-sref="projects">projects</a>.</p>
-                <p style="color:gray;font-style:italic"><a href="/developers" ui-sref="developers"><b>Developer Documentation</b></a></p>
-                <p style="color:gray;font-style:italic">Help create value.</p>
+                <div class="spacing-10"></div>
+                <div style="padding:16px">
+                    <p style="color:gray;font-style:italic">Apps are a set of modular protocols and plugins to the string space.</p>
+                    <p style="color:gray;font-style:italic">Application collaboration and coordinated is facilitated though <a href="/projects" ui-sref="projects">projects</a>.</p>
+                    <p style="color:gray;font-style:italic"><a href="/developers" ui-sref="developers"><b>Developer Documentation</b></a></p>
+                    <p style="color:gray;font-style:italic">Help create value.</p>
+                </div>
             </div>
             <div class="col-xs-5 col-sm-5">
-                <img src="images/app.gif">
+                <img style="border:3px solid black" src="images/app.gif">
             </div>
 
         </div>
@@ -73,7 +75,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-12 col-sm-12" ng-repeat="app in apps" style="padding-left:0px;padding-right:0px;">
+        <div class="col-lg-6 col-sm-6" ng-repeat="app in apps" style="padding-left:0px;padding-right:0px;">
             <div class="card" ng-click="cardDetailToggle(app)">
                 <div style="background:url('https://source.unsplash.com/1600x900/?{{app.title}},code');min-height:100px" class="imageContainerSmall">
                     <div style="background:rgba(0,0,0,0.75);height:100px" class="imageContainerSmallDiv">  
@@ -91,7 +93,7 @@
                         </div>
                     </div>
                 </div>
-                <div style="padding:16px;">
+                <div style="padding:16px;min-height:100px;max-height:100px">
                     {{app.description}}
                 </div>
             </div>

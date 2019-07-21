@@ -11,7 +11,7 @@ module.exports = {
 
 		console.log('GET CONNECTION', req.query);
 
-		Peer.watch(req);
+		Connection.watch(req);
 
 		if(req.query.id){
 			Connection.find({id:id})
@@ -26,7 +26,7 @@ module.exports = {
 
 		//creator is address.. 
 		if(req.query.creator){
-			Peer.find({creator:creator})
+			Connection.find({creator:creator})
 			.limit(limit)
 			.skip(skip)
 			.sort(sort)
@@ -37,12 +37,12 @@ module.exports = {
 		}
 
 		else{
-			Peer.find({})
+			Connection.find({})
 			.limit(limit)
 			.skip(skip)
 			.sort(sort)
 			.then(function(models) {
-				Peer.subscribe(req, models);
+				Connection.subscribe(req, models);
 				res.json(models);
 			});
 		}
@@ -51,15 +51,14 @@ module.exports = {
 
 	create: function (req, res) {
 		var model = {
-			info: req.param('info'),
-			data: req.param('data'),
-			reputation: {},
-			validiatedBlocks: [],
-			versionHash: 'UNSTABLE PRE-ALPHA',
 			creator: req.param('creator'),
+			dataModelAlpha: req.param('dataModelAlpha'),
+			dataModelBeta: req.param('dataModelBeta'),
+			info: req.param('info'),
 		};
 
-		console.log('CREATE PEER', model);
+		console.log('CREATE CONNECTION', model);
+		
 		Connection.create(model)
 		.exec(function(err, model) {
 			if (err) {return console.log(err);}

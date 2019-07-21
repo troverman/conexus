@@ -112,6 +112,24 @@ module.exports.intervalService = function(){
 	setInterval(dataService.traverse, 8640000);
 
 
+
+
+	//TODO: UPCONVERT FXN LOL NOOO
+
+
+	//Task.find().then(function(taskModels){
+	//	for x in taskModels){
+	//		dataService.buildAssociationFromValidation(taskModels[x]);
+	//	}
+	//});
+
+
+
+
+
+
+
+
 	//DATA SERVICE
 	//dataService.getData();
 	//dataService.traverse();

@@ -126,7 +126,6 @@ module.exports = {
 			//charter is a selection of these -- . connection type creator.. lol extrazzz
 			var defaultCharter = {
 
-
 				validation:{
 					self:{
 						title:{
@@ -159,7 +158,6 @@ module.exports = {
 					},
 
 					//logic for 'MEMBERSHIP' -- GIVE IT SPACE
-					//RETURN IN 2 DAY
 					member:{
 
 					}

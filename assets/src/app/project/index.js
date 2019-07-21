@@ -120,6 +120,9 @@ angular.module( 'conexus.project', [
             motions: ['ContentModel', 'project', function(ContentModel, project){
                 return ContentModel.getSome({project:project.id, limit:100, skip:0, sort:'createdAt DESC'});
             }], 
+            connections: ['ConnectionModel', 'project', function(ConnectionModel, project){
+                return ConnectionModel.getSome({creator:project.id, limit:100, skip:0, sort:'createdAt DESC'});
+            }]
         }
     })
     .state( 'project.ledger', {
@@ -593,7 +596,7 @@ angular.module( 'conexus.project', [
 
 }])
     
-.controller( 'ProjectCharterCtrl', ['$location', '$mdSidenav', '$sailsSocket', '$sce', '$scope', 'ContentModel', 'motions', 'project', 'titleService', function ProjectController( $location, $mdSidenav, $sailsSocket, $sce, $scope, ContentModel, motions, project, titleService ) {
+.controller( 'ProjectCharterCtrl', ['$location', '$mdSidenav', '$sailsSocket', '$sce', '$scope', 'connections', 'ContentModel', 'motions', 'project', 'titleService', function ProjectController( $location, $mdSidenav, $sailsSocket, $sce, $scope, connections, ContentModel, motions, project, titleService ) {
     
     //TODO: DEPRECIATE
     titleService.setTitle(project.title + ' | Charter | CRE8.XYZ');
@@ -603,6 +606,11 @@ angular.module( 'conexus.project', [
     
     $scope.newMotion = {};
     //$scope.motions = motions;  
+
+    $scope.connections = connections;
+
+    console.log(connections);
+        //CONNECTIOS ARE CHARTERS.. 
 
     //TODO: ORG EARNS TOKENS WHEN WE CREATE.. PROTOCOL BALANCE AND REPUTATION
     //TODO: FIRE IS MOTION FOR EACH FILE .. --> LIKE THE CODE.. GIT

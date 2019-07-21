@@ -1,7 +1,7 @@
 angular.module( 'conexus.nav', [
 ])
 
-.controller( 'NavCtrl', ['$http', '$interval', '$location', '$mdSidenav', '$q', '$rootScope', '$sailsSocket', '$sce', '$scope', '$state', '$window', 'ActionModel', 'AttentionModel', 'ContentModel', 'cytoData', 'ItemModel', 'NotificationModel', 'OrderModel', 'ProjectModel', 'ReactionModel', 'SearchModel', 'TaskModel', 'TimeModel', 'toaster', 'TransactionModel', 'ValidationModel', 'UserModel', function NavController( $http, $interval, $location, $mdSidenav, $q, $rootScope, $sailsSocket, $sce, $scope, $state, $window, ActionModel, AttentionModel, ContentModel, cytoData, ItemModel, NotificationModel, OrderModel, ProjectModel, ReactionModel, SearchModel, TaskModel, TimeModel, toaster, TransactionModel, ValidationModel, UserModel ) {
+.controller( 'NavCtrl', ['$http', '$interval', '$location', '$mdSidenav', '$q', '$rootScope', '$sailsSocket', '$sce', '$scope', '$state', '$window', 'ActionModel', 'AttentionModel', 'ConnectionModel', 'ContentModel', 'cytoData', 'ItemModel', 'NotificationModel', 'OrderModel', 'ProjectModel', 'ReactionModel', 'SearchModel', 'TaskModel', 'TimeModel', 'toaster', 'TransactionModel', 'ValidationModel', 'UserModel', function NavController( $http, $interval, $location, $mdSidenav, $q, $rootScope, $sailsSocket, $sce, $scope, $state, $window, ActionModel, AttentionModel, ConnectionModel, ContentModel, cytoData, ItemModel, NotificationModel, OrderModel, ProjectModel, ReactionModel, SearchModel, TaskModel, TimeModel, toaster, TransactionModel, ValidationModel, UserModel ) {
 
     //TODO: ALL!
     //VALIDATE BUNDLES OF TIME.. IE GRANULAR TIME DATA.. POST REQ EVERY 1 SEC? TO MUCH OR NOT
@@ -286,6 +286,19 @@ angular.module( 'conexus.nav', [
         $scope.newProtocol.code = 'function sampleCode(sampleParameter){}';
 
         if($rootScope.currentUser){$mdSidenav('app').toggle();}
+        else{$mdSidenav('login').toggle();}
+    };
+
+     $rootScope.connectionToggle = function(){
+        $scope.closeAllNav();
+        if($rootScope.currentUser){
+            //WHATS A CONNECTION
+            $scope.newConnection = {
+                associatedModels:$rootScope.associatedModels,
+                creator:$rootScope.currentUser.id,
+            };
+            $mdSidenav('connection').toggle();
+        }
         else{$mdSidenav('login').toggle();}
     };
 
@@ -1445,6 +1458,20 @@ angular.module( 'conexus.nav', [
         }
         else{$mdSidenav('login').toggle()}
     };
+
+    $scope.createConnection = function(item) {
+        if ($rootScope.currentUser){
+            ConnectionModel.create($scope.newConnection).then(function(model) {
+                $scope.confirm = $scope.newConnection;
+                $scope.confirm.model = 'CONNECTION';
+                $scope.newConnection = {};
+                $mdSidenav('connection').close();
+                setTimeout(function () {$mdSidenav('confirm').open()}, 500);
+                setTimeout(function () {$mdSidenav('confirm').close()}, 25000);
+            });
+        }
+        else{$mdSidenav('login').toggle()}
+    }
 
     //TODO: ASSOCIATED MODELS
     $scope.createContent = function(item) {

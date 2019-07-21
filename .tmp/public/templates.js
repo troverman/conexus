@@ -1099,14 +1099,16 @@ angular.module("apps/index.tpl.html", []).run(["$templateCache", function($templ
     "                        </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
-    "                <div class=\"spacing-25\"></div>\n" +
-    "                <p style=\"color:gray;font-style:italic\">Apps are a set of modular protocols and plugins to the string space.</p>\n" +
-    "                <p style=\"color:gray;font-style:italic\">Application Collaboration is governed though <a href=\"/projects\" ui-sref=\"projects\">projects</a>.</p>\n" +
-    "                <p style=\"color:gray;font-style:italic\"><a href=\"/developers\" ui-sref=\"developers\"><b>Developer Documentation</b></a></p>\n" +
-    "                <p style=\"color:gray;font-style:italic\">Help create value.</p>\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "                <div style=\"padding:16px\">\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Apps are a set of modular protocols and plugins to the string space.</p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Application collaboration and coordinated is facilitated though <a href=\"/projects\" ui-sref=\"projects\">projects</a>.</p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\"><a href=\"/developers\" ui-sref=\"developers\"><b>Developer Documentation</b></a></p>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Help create value.</p>\n" +
+    "                </div>\n" +
     "            </div>\n" +
     "            <div class=\"col-xs-5 col-sm-5\">\n" +
-    "                <img src=\"images/app.gif\">\n" +
+    "                <img style=\"border:3px solid black\" src=\"images/app.gif\">\n" +
     "            </div>\n" +
     "\n" +
     "        </div>\n" +
@@ -1136,7 +1138,7 @@ angular.module("apps/index.tpl.html", []).run(["$templateCache", function($templ
     "        </div>\n" +
     "    </div>\n" +
     "    <div class=\"row\">\n" +
-    "        <div class=\"col-lg-12 col-sm-12\" ng-repeat=\"app in apps\" style=\"padding-left:0px;padding-right:0px;\">\n" +
+    "        <div class=\"col-lg-6 col-sm-6\" ng-repeat=\"app in apps\" style=\"padding-left:0px;padding-right:0px;\">\n" +
     "            <div class=\"card\" ng-click=\"cardDetailToggle(app)\">\n" +
     "                <div style=\"background:url('https://source.unsplash.com/1600x900/?{{app.title}},code');min-height:100px\" class=\"imageContainerSmall\">\n" +
     "                    <div style=\"background:rgba(0,0,0,0.75);height:100px\" class=\"imageContainerSmallDiv\">  \n" +
@@ -1154,7 +1156,7 @@ angular.module("apps/index.tpl.html", []).run(["$templateCache", function($templ
     "                        </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
-    "                <div style=\"padding:16px;\">\n" +
+    "                <div style=\"padding:16px;min-height:100px;max-height:100px\">\n" +
     "                    {{app.description}}\n" +
     "                </div>\n" +
     "            </div>\n" +
@@ -9005,6 +9007,50 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "        </div>\n" +
     "    </md-sidenav>\n" +
     "\n" +
+    "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"connection\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
+    "        <div ng-if=\"newProject\" class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
+    "            <div class=\"spacing-25\"></div>\n" +
+    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?code,coordination,government')\" class=\"imageContainerSmall\">\n" +
+    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                        <div style=\"padding:15px\">\n" +
+    "                            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">+ Connection Rule</h1>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "            <div style=\"padding:16px\">\n" +
+    "\n" +
+    "                <div class=\"spacing-15\"></div>\n" +
+    "                <p style=\"color:gray;font-style:italic\">A Connection Rule defines logic for Data Model Association & Validation <a ng-click=\"informationToggle('CREATE_CONNECTION_RULE')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></p>\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <form role=\"form\" ng-submit=\"createConnection()\">\n" +
+    "\n" +
+    "                    <h5>Title</h5>\n" +
+    "                    <input type=\"text\" placeholder= \"Title\" ng-model=\"newConnection.info.title\" class=\"form-control\">\n" +
+    "        \n" +
+    "                    <h5>Creator</h5>\n" +
+    "                    <input type=\"text\" placeholder= \"Title\" ng-model=\"newConnection.creator\" class=\"form-control\">\n" +
+    "\n" +
+    "                    <!--FIX THIS... PROJECT MEMBER :)-->\n" +
+    "                    <h5>Data Model Alpha</h5>\n" +
+    "                    <input type=\"text\" placeholder=\"Data Model Alpha\" ng-model=\"newConnection.dataModelAlpha\" class=\"form-control\">\n" +
+    "\n" +
+    "                    <h5>Data Model Beta</h5>\n" +
+    "                    <input type=\"text\" placeholder=\"Data Model Beta\" ng-model=\"newConnection.dataModelBeta\" class=\"form-control\">\n" +
+    "\n" +
+    "                    <h5>Description</h5>\n" +
+    "                    <text-angular placeholder= \"Description\" ng-model=\"newConnection.info.description\" ta-toolbar=\"''\"></text-angular>\n" +
+    "                    <button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newConnection.info.description\">create</button>\n" +
+    "\n" +
+    "                </form>\n" +
+    "                    \n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </md-sidenav>\n" +
+    "\n" +
+    "\n" +
     "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"content\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
     "        <div ng-if=\"newContent\" class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
     "\n" +
@@ -11855,6 +11901,10 @@ angular.module("project/templates/charter.tpl.html", []).run(["$templateCache", 
     "                </div>\n" +
     "            </form>\n" +
     "        </div>\n" +
+    "\n" +
+    "        <div class=\"card\">\n" +
+    "            <button class=\"btn btn-default log-btn\" ng-click=\"connectionToggle()\">+ Connection Rule</button>\n" +
+    "        </div>\n" +
     "        \n" +
     "        <div class=\"card\">\n" +
     "            <button class=\"btn btn-default log-btn\" ng-click=\"contentToggle()\">+ Motion</button>\n" +
@@ -14445,7 +14495,7 @@ angular.module("transparency/index.tpl.html", []).run(["$templateCache", functio
     "			        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "			        	<div class=\"container\">\n" +
     "				            <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\">Peer Network</h1>\n" +
-    "				            <h5 style=\"color:white\">3423 Live Peers</h5>\n" +
+    "				            <h5 style=\"color:white\">{{peers.length}} Live Peers</h5>\n" +
     "				        </div>\n" +
     "			        </div>\n" +
     "			    </div>\n" +
@@ -14466,15 +14516,17 @@ angular.module("transparency/index.tpl.html", []).run(["$templateCache", functio
     "		                    	<th>Peer</th>\n" +
     "								<th>Location</th>\n" +
     "								<th>Device</th>\n" +
-    "								<th>PoET</th>\n" +
+    "								<th>Version</th>\n" +
+    "								<th>Reputation (general)</th>\n" +
     "							</tr>\n" +
     "		                </thead>\n" +
     "		                <tbody>\n" +
     "		                    <tr ng-repeat=\"peer in peers\">\n" +
-    "		                        <td><a href=\"member/{{peer.user.username}}\" ui-sref=\"member.activity({path:peer.user.username})\">{{peer.title}} <!--| {{peer.user.username}}--></a></td>\n" +
-    "								<td><b>lat:</b> {{peer.location.lat}}, <b>lng:</b> {{peer.location.lng}}</td>\n" +
-    "								<td>{{peer.device.title}}, {{peer.device.processor}}</td>\n" +
-    "								<td>{{peer.poet}}</td>\n" +
+    "		                        <td><a href=\"member/{{peer.creator.username}}\" ui-sref=\"member.activity({path:peer.creator.username})\">{{peer.title}}: {{peer.creator.username}}</a></td>\n" +
+    "								<td><b>lat:</b> {{peer.info.location.lat}}, <b>lng:</b> {{peer.info.location.lng}}</td>\n" +
+    "								<td>{{peer.info.device.title}}, {{peer.info.device.processor}} <!--PROCESSORREP MULTI.. --></td>\n" +
+    "								<td><a href=\"project/cre8-rust-peer-client\" ui-sref=\"project.activity({path:'cre8-rust-peer-client'})\">{{peer.versionHash}}</td>\n" +
+    "								<td>{{peer.reputation.general}}</td>\n" +
     "		                    </tr>\n" +
     "		                </tbody>\n" +
     "		            </table>\n" +
