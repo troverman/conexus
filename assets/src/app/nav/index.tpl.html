@@ -442,7 +442,7 @@
 
                 <div ng-if="type=='MANIFOLD'">
 
-                    <h5>+SPONSOR+(ADDRESS)</h5>
+                    <h5>{TOKEN}+[ACTION]+SPONSOR+(ADDRESS)</h5>
                     <h5>+CREDIT+(TIME)</h5>
                     <h5>+FUTURE+(TIME)</h5>
                     <h5>+OPTION+(TIME)</h5>
@@ -534,7 +534,16 @@
 
 
 
-                    <tags-input min-length="1" placeholder="Base Asset" ng-model="baseMarkets">
+
+                    {{baseToken}}
+
+                    <tags-input min-length="1" placeholder="Base Asset" ng-model="baseToken">
+                        <auto-complete source="loadAsset($query)"></auto-complete>
+                    </tags-input>
+
+                    {{baseManifold}}
+
+                    <tags-input min-length="1" placeholder="Manifold" ng-model="baseManifold">
                         <auto-complete source="loadAsset($query)"></auto-complete>
                     </tags-input>
 

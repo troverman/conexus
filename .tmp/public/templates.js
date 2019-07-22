@@ -5744,7 +5744,6 @@ angular.module("home/templates/tutorial.tpl.html", []).run(["$templateCache", fu
     "            </div>\n" +
     "            <div style=\"padding:16px;\">\n" +
     "                <p style=\"color:gray;font-size:12px;font-style:italic\">Select what you believe is worthwile.</p>\n" +
-    "                <p style=\"color:gray;font-size:12px;font-style:italic\">The more detailed your dimensional vote the stronger the effect.</p>\n" +
     "                <div class=\"row\">\n" +
     "                    <div class=\"col-xs-4\"><img src=\"https://source.unsplash.com/900x900/?value,finance,vote\"></div>\n" +
     "                    <div class=\"col-xs-4\"><img src=\"https://source.unsplash.com/900x900/?humananity,city,community\"></div>\n" +
@@ -5756,7 +5755,7 @@ angular.module("home/templates/tutorial.tpl.html", []).run(["$templateCache", fu
     "            <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
     "            <li style=\"float:left;font-size:14px\">\n" +
     "                <a href=\"#\" ng-click=\"filterToggle('MANIFOLD')\"><i class=\"fas fa-infinity\"></i> Manifold</a>\n" +
-    "                <span style=\"font-size:9px;color:gray;maring:0px\">+ONMINT+SPONSOR+(address)</span>\n" +
+    "                <span style=\"font-size:9px;color:gray;maring:0px\">{{baseManifold.text}}</span>\n" +
     "            </li>\n" +
     "            <li style=\"float:right;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('VALUEMAP')\"><i class=\"fa fa-eye\"></i> UNIVERSALTOKEN</a></li>\n" +
     "            <div style=\"clear:both\"></div>\n" +
@@ -5764,15 +5763,40 @@ angular.module("home/templates/tutorial.tpl.html", []).run(["$templateCache", fu
     "        <div class=\"card\">\n" +
     "            <tags-input class=\"\" style=\"border:0px;flex-grow:2;\" min-length=\"1\" placeholder=\"Search\" ng-model=\"searchQueryArray\"></tags-input>\n" +
     "        </div>\n" +
-    "        <div class=\"card\">\n" +
-    "            <div style=\"padding:16px;\">\n" +
-    "                <div class=\"row\">\n" +
-    "                    <div class=\"col-sm-3 col-xs-12\" style=\"max-height:100vh;overflow:auto\">\n" +
-    "                        <div style=\"font-size:14px;font-weight:bold\" ng-repeat=\"item in sortedTagArray track by $index\">\n" +
-    "                            <button ng-click=\"createPosition(item.element)\" class=\"btn btn-default log-btn\">{{item.element}}</button>\n" +
-    "                        </div>\n" +
+    "        <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "            <li style=\"float:left;font-size:14px\"><a href=\"#\">Builder</a></li>\n" +
+    "            <li style=\"float:left;font-size:14px\"><a href=\"#\">Survey</a></li>\n" +
+    "            <li style=\"float:left;font-size:14px\"><a href=\"#\">Questions</a></li>\n" +
+    "            <li style=\"float:left;font-size:14px\"><a href=\"#\">Orders</a></li>\n" +
+    "            <div style=\"clear:both\"></div>\n" +
+    "        </ul>\n" +
+    "\n" +
+    "\n" +
+    "        <div class=\"\" style=\"max-height:100vh;overflow:auto\">\n" +
+    "\n" +
+    "\n" +
+    "            <!--BETTER-->\n" +
+    "            <div class=\"col-sm-3 col-xs-12\" style=\"padding-left:0px;padding-right:0px\">\n" +
+    "                <div class=\"card\">\n" +
+    "                    <div style=\"font-size:14px;font-weight:bold\" ng-repeat=\"item in sortedTagArray track by $index\">\n" +
+    "                        <button ng-click=\"createPosition(item.element)\" class=\"btn btn-default log-btn\">{{item.element}}</button>\n" +
     "                    </div>\n" +
-    "                    <div class=\"col-sm-9 col-xs-12\">\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <div class=\"col-sm-9 col-xs-12\" style=\"padding-left:0px;padding-right:0px\">\n" +
+    "                <div class=\"card\">\n" +
+    "                    <div style=\"padding:16px\">\n" +
+    "\n" +
+    "\n" +
+    "                        <!--<div style=\"font-size:14px;font-weight:bold\" ng-repeat=\"item in sortedTagArray track by $index\" class=\"card\">\n" +
+    "                            <button ng-click=\"createPosition(item.element)\" class=\"btn btn-default log-btn\">{{item.element}}</button>\n" +
+    "                        </div>-->\n" +
+    "\n" +
+    "                        <p>Please Select A Bundle of Valuable Context</p>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
     "                        <div layout=\"\">\n" +
     "                            <div flex=\"35\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\" style=\"color:gray\">Token String <a ng-click=\"informationToggle('VALUEMAP')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></span></div>\n" +
     "                            <div flex=\"65\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\" style=\"color:gray\">Token String / Base Token String <a ng-click=\"informationToggle('VALUEMAP')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></span></div>\n" +
@@ -5782,13 +5806,13 @@ angular.module("home/templates/tutorial.tpl.html", []).run(["$templateCache", fu
     "                            <div class=\"col-xs-12\">\n" +
     "                                <div ng-repeat=\"item in newOrder\">\n" +
     "                                    <div layout=\"\">\n" +
-    "                                        <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"item[0].amount\" step=\"1\" min=\"0\" max=\"100\" aria-label=\"Amount\"></md-slider>\n" +
+    "                                        <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"item[0].amount || 0\" step=\"1\" min=\"0\" max=\"100\" aria-label=\"Amount\"></md-slider>\n" +
     "                                    </div>\n" +
     "                                    <div layout=\"\">\n" +
     "                                        <div flex=\"10\" layout=\"\" layout-align=\"center center\">86400</div>\n" +
     "                                        <div flex=\"25\" layout=\"\" layout-align=\"center center\">\n" +
     "                                            <a>{{item[1].identifier.split('+')[2]}}</a>\n" +
-    "                                            <p style=\"font-size:7px;color:gray\">+ONMINT+SPONSOR+(address)</p>\n" +
+    "                                            <p style=\"font-size:7px;color:gray\">{{baseManifold.text}}</p>\n" +
     "                                        </div>\n" +
     "                                        <div flex=\"5\" layout=\"\" layout-align=\"center center\"><a href=\"#\" ng-click=\"informationToggle('MANIFOLD LOGIC')\"><i class=\"fa fa-exchange\"></i>*</a></div>\n" +
     "                                        <div flex=\"30\" layout=\"\" layout-align=\"center center\">{{1/newOrder.length*item[0].amount/100}}</div>\n" +
@@ -5809,7 +5833,10 @@ angular.module("home/templates/tutorial.tpl.html", []).run(["$templateCache", fu
     "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
+    "\n" +
     "        </div>\n" +
+    "\n" +
+    " \n" +
     "    </div>\n" +
     "\n" +
     "    <div ng-if=\"false\">\n" +
@@ -6153,20 +6180,25 @@ angular.module("home/templates/tutorial.tpl.html", []).run(["$templateCache", fu
     "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
+    "        </div>\n" +
+    "        <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "            <li style=\"float:left;font-size:14px\"><a href=\"#\">Suggested Context</a></li>\n" +
+    "            <li style=\"float:left;font-size:14px\"><a href=\"#\">Current Positions & Value Map</a></li>\n" +
+    "            <li style=\"float:left;font-size:14px\"><a href=\"#\">Value Map Builder</a></li>\n" +
+    "            <div style=\"clear:both\"></div>\n" +
+    "        </ul>\n" +
+    "        <div class=\"card\">\n" +
     "            <div style=\"padding:16px;\">\n" +
     "                <p><b>My Current Positions & Value Map</b> <a ng-click=\"informationToggle('VALUEMAP')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></p>\n" +
     "                <p style=\"color:gray;font-style:italic\">Select and rank what you believe is of value to create positions/orders on the Market</p>\n" +
     "\n" +
     "                <p><b>Suggestions and Information</b></p>\n" +
-    "                <!--<highchart config=\"chart\"></highchart>-->\n" +
     "                <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
     "                    <li ng-if=\"currentUser\" style=\"float:left;font-size:14px\"><a href=\"member/{{currentUser.username}}/followers\" ng-click=\"getMyFollowers()\"><i class=\"fa fa-users\"></i> Following</a></li>\n" +
     "                    <li ng-if=\"currentUser\" style=\"float:left;font-size:14px\"><a href=\"member/{{currentUser.username}}/projects\" ng-click=\"getMyProjects()\"><i class=\"fas fa-project-diagram\"></i> My Projects</a></li>\n" +
     "                    <li ng-if=\"currentUser\" style=\"float:left;font-size:14px\"><a href=\"member/{{currentUser.username}}/projects\" ng-click=\"getMyProjects()\"><i class=\"fas fa-list-ol\"></i> Tasks</a></li>\n" +
     "                    <div style=\"clear:both\"></div>\n" +
     "                </ul>\n" +
-    "\n" +
-    "\n" +
     "            </div>\n" +
     "        </div>\n" +
     "\n" +
@@ -6177,9 +6209,9 @@ angular.module("home/templates/tutorial.tpl.html", []).run(["$templateCache", fu
     "            <li style=\"float:left;font-size:14px\">\n" +
     "                <a href=\"#\" ng-click=\"filterToggle('MANIFOLD', 'UNIVERSALTOKEN')\"><i class=\"fas fa-infinity\"></i> Manifold</a>\n" +
     "                <br>\n" +
-    "                <p style=\"font-size:7px;color:gray\">+ONMINT+SPONSOR+{{currentUser.id}}</p>\n" +
+    "                <p style=\"font-size:7px;color:gray\">{{baseManifold.text}}</p>\n" +
     "            </li>\n" +
-    "            <li style=\"float:right;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('VALUEMAP')\"><i class=\"fa fa-eye\"></i> UNIVERSALTOKEN</a></li>\n" +
+    "            <li style=\"float:right;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('VALUEMAP')\"><i class=\"fa fa-eye\"></i> {{baseToken.text}}</a></li>\n" +
     "            <div style=\"clear:both\"></div>\n" +
     "        </ul>\n" +
     "\n" +
@@ -6192,7 +6224,6 @@ angular.module("home/templates/tutorial.tpl.html", []).run(["$templateCache", fu
     "\n" +
     "        <!--SKETCH UI of this on paper.. analog..-->\n" +
     "\n" +
-    "        <!--WITH UT VM.. TOTAL OF 1-->\n" +
     "        <!--ALWAYS DO RELATIVE VALUE? -->\n" +
     "        <!--BULK ORDER INTERFACE-->\n" +
     "        <!--GENERALIZE TO CREATING ORDERS... more info-->\n" +
@@ -6204,57 +6235,61 @@ angular.module("home/templates/tutorial.tpl.html", []).run(["$templateCache", fu
     "\n" +
     "        <!--MORE INTUITIVE..--> <!--SURVEY?? THIS IS THE SEX-->\n" +
     "\n" +
-    "        <div class=\"row card\">\n" +
-    "            <div class=\"col-sm-3 col-xs-12\" style=\"max-height:100vh;overflow:auto\">\n" +
-    "                <!--sortedsuggestedTokenTags-->\n" +
-    "                <div style=\"font-size:14px;font-weight:bold\" ng-repeat=\"item in sortedTagArray track by $index\">\n" +
-    "                    <button ng-click=\"createPosition(item.element)\" class=\"btn btn-default log-btn\">{{item.element}}</button>\n" +
+    "        <div class=\"\" style=\"max-height:100vh;overflow:auto;\">\n" +
+    "            <div class=\"col-sm-3 col-xs-6\" style=\"padding-left:0px;padding-right:0px;\">\n" +
+    "                <div class=\"card\">\n" +
+    "                    <!--sortedsuggestedTokenTags-->\n" +
+    "                    <div style=\"font-size:14px;font-weight:bold\" ng-repeat=\"item in sortedTagArray track by $index\">\n" +
+    "                        <button ng-click=\"createPosition(item.element)\" class=\"btn btn-default log-btn\">{{item.element}}</button>\n" +
+    "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
-    "            <div class=\"col-sm-9 col-xs-12\">\n" +
+    "            <div class=\"col-sm-9 col-xs-6\" style=\"padding-left:0px;padding-right:0px;\">\n" +
+    "                <div class=\"card\">\n" +
+    "                    <div style=\"padding:16px;\">\n" +
     "\n" +
-    "                <!--INFO ABOUT SELECTED BASE TOKEN-->\n" +
-    "                <!--UT STATIC-->\n" +
-    "                <!--<p style=\"color:gray;font-style:italic\">Universal Token Manifold Position; protocol states that every member mints one Universal Token per day to serve an an eglatarian value position.</p>-->\n" +
-    "                \n" +
-    "                <div class=\"spacing-10\"></div>\n" +
+    "                        <p style=\"color:gray;font-style:italic\">{{baseToken.description}}</p>\n" +
+    "                        \n" +
+    "                        <div class=\"spacing-10\"></div>\n" +
     "\n" +
-    "                <!--VARIABLE PER SLIDER. 4-->\n" +
-    "                <div layout=\"\">\n" +
-    "                    <div flex=\"35\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\" style=\"color:gray\">Token String <a ng-click=\"informationToggle('VALUEMAP')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></span></div>\n" +
-    "                    <div flex=\"65\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\" style=\"color:gray\">Token String / Base Token String <a ng-click=\"informationToggle('VALUEMAP')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></span></div>\n" +
-    "                </div>\n" +
+    "                        <!--VARIABLE PER SLIDER. 4-->\n" +
+    "                        <div layout=\"\">\n" +
+    "                            <div flex=\"35\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\" style=\"color:gray\">Token String <a ng-click=\"informationToggle('VALUEMAP')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></span></div>\n" +
+    "                            <div flex=\"65\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\" style=\"color:gray\">Token String / Base Token String <a ng-click=\"informationToggle('VALUEMAP')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></span></div>\n" +
+    "                        </div>\n" +
     "\n" +
-    "                <div class=\"spacing-10\"></div>\n" +
-    "                \n" +
-    "                <div class=\"row\">\n" +
-    "                    <div class=\"col-xs-12\">\n" +
-    "                        <div ng-repeat=\"item in newOrder\">\n" +
-    "                            <!--TODO: TWO ROWS-->\n" +
-    "                            <div layout=\"\">\n" +
-    "                                <!--SELECTED ABSOLUTE.. OR RELATIVE POSITION ? PERCENTAGES? UPDATE HERE... -->\n" +
-    "                                <div flex=\"10\" layout=\"\" layout-align=\"center center\">3600</div>\n" +
-    "                                <!--SPONSORSHIP MANIFOLD SELECTED..-->\n" +
-    "                                <div flex=\"25\" layout=\"\" layout-align=\"center center\">\n" +
-    "                                    <a>{{item[1].identifier.split('+')[2]}}</a>\n" +
-    "                                    <!--<p style=\"font-size:7px;color:gray\">+ONMINT+SPONSOR+{{currentUser.id}}</p>-->\n" +
+    "                        <div class=\"spacing-10\"></div>\n" +
+    "                        \n" +
+    "                        <div class=\"row\">\n" +
+    "                            <div class=\"col-xs-12\">\n" +
+    "                                <div ng-repeat=\"item in newOrder\">\n" +
+    "                                    <!--TODO: TWO ROWS-->\n" +
+    "                                    <div layout=\"\">\n" +
+    "                                        <!--SELECTED ABSOLUTE.. OR RELATIVE POSITION ? PERCENTAGES? UPDATE HERE... -->\n" +
+    "                                        <div flex=\"10\" layout=\"\" layout-align=\"center center\">3600</div>\n" +
+    "                                        <!--SPONSORSHIP MANIFOLD SELECTED..-->\n" +
+    "                                        <div flex=\"25\" layout=\"\" layout-align=\"center center\">\n" +
+    "                                            <a>{{item[1].identifier.split('+')[2]}}</a>\n" +
+    "                                        </div>\n" +
+    "                                        <!--<div flex=\"15\" layout=\"\" layout-align=\"center center\">{{item[0].amount || 0}}</div>-->\n" +
+    "                                        <!--(BASE)UNIVERSAL TOKEN ABSOLUTE.. OR RELATIVE POSITION ? PERCENTAGES? UPDATE HERE... -->\n" +
+    "                                        <div flex=\"30\" layout=\"\" layout-align=\"center center\">{{1/newOrder.length*item[0].amount/100}}</span></div>\n" +
+    "                                        <div flex=\"30\" layout=\"\" layout-align=\"center center\"><a>Universal Token</a></div>\n" +
+    "                                        <div flex=\"5\" layout=\"\" layout-align=\"center center\"><a ng-click=\"removePosition(item)\"><i class=\"fas fa-remove\"></i></a></div>\n" +
+    "                                    </div>\n" +
+    "                                    <div layout=\"\">\n" +
+    "                                        <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"item[0].amount\" step=\"1\" min=\"0\" max=\"100\" aria-label=\"Amount\"></md-slider>\n" +
+    "                                    </div>\n" +
     "                                </div>\n" +
-    "                                <!--<div flex=\"15\" layout=\"\" layout-align=\"center center\">{{item[0].amount || 0}}</div>-->\n" +
-    "                                <!--(BASE)UNIVERSAL TOKEN ABSOLUTE.. OR RELATIVE POSITION ? PERCENTAGES? UPDATE HERE... -->\n" +
-    "                                <div flex=\"30\" layout=\"\" layout-align=\"center center\">{{1/newOrder.length*item[0].amount/100}}</span></div>\n" +
-    "                                <div flex=\"30\" layout=\"\" layout-align=\"center center\"><a>Universal Token</a></div>\n" +
-    "                                <div flex=\"5\" layout=\"\" layout-align=\"center center\"><a ng-click=\"removePosition(item)\"><i class=\"fas fa-remove\"></i></a></div>\n" +
     "                            </div>\n" +
-    "                            <div layout=\"\">\n" +
-    "                                <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"item[0].amount\" step=\"1\" min=\"0\" max=\"100\" aria-label=\"Amount\"></md-slider>\n" +
+    "                            <div class=\"col-sm-6 col-xs-12\">\n" +
+    "                                <highchart config=\"chartMapTotal\"></highchart>\n" +
+    "                            </div>\n" +
+    "                            <div class=\"col-sm-6 col-xs-12\">\n" +
+    "                                <highchart config=\"pieTotal\"></highchart>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
-    "                    </div>\n" +
-    "                    <div class=\"col-sm-6 col-xs-12\">\n" +
-    "                        <highchart config=\"chartMapTotal\"></highchart>\n" +
-    "                    </div>\n" +
-    "                    <div class=\"col-sm-6 col-xs-12\">\n" +
-    "                        <highchart config=\"pieTotal\"></highchart>\n" +
+    "\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
@@ -6262,65 +6297,15 @@ angular.module("home/templates/tutorial.tpl.html", []).run(["$templateCache", fu
     "\n" +
     "        <!--CURRENT VALUE MAP.. RENDER AND UNIFY WITH SUGGESTIONS AND UPDATE..  -->\n" +
     "        <div class=\"row\" style=\"\">\n" +
+    "\n" +
+    "            <div class=\"col-xs-12\">\n" +
     "            \n" +
-    "            <div ng-repeat=\"item in positions\">\n" +
-    "                <div class=\"col-sm-12\" style=\"padding:0px\">\n" +
-    "                    \n" +
-    "                    <div class=\"card\" ng-click=\"cardDetailToggle(item)\">\n" +
-    "                        <!--\n" +
-    "                        <div style=\"background:url('https://source.unsplash.com/1600x900/?')\" class=\"imageContainerSmall\">\n" +
-    "                            <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                                <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                                    <div class=\"container\">\n" +
-    "                                        <span ng-repeat=\"(key, value) in item.setAlpha\">\n" +
-    "                                            <a style=\"color:white\" href=\"market/{{key}}\">{{key}}</a>\n" +
-    "                                        </span>\n" +
-    "                                        <br>\n" +
-    "                                        <span ng-repeat=\"(key, value) in item.setBeta\">\n" +
-    "                                            <a style=\"color:white\" href=\"market/{{key}}\">{{key}}</a>\n" +
-    "                                        </span>\n" +
-    "                                        <h5 style=\"color:white\"><span style=\"font-size:10px\">{{item.type}}</span></h5>\n" +
-    "                                    </div>\n" +
-    "                                </div>\n" +
-    "                            </div>\n" +
-    "                        </div>\n" +
-    "                        <div style=\"text-align:right;padding:15px;position:absolute;right:0\">\n" +
-    "                            <a style=\"color:white;\" ng-click=\"$event.stopPropagation();cardDetailToggle(item)\">\n" +
-    "                                <i class=\"fas fa-chevron-down\"></i>\n" +
-    "                            </a>\n" +
-    "                            <div style=\"clear:both\"></div>\n" +
-    "                        </div>  \n" +
-    "                        -->\n" +
-    "                        <div style=\"padding:16px\">\n" +
-    "                            <div style=\"float:right;text-align:right\">\n" +
-    "                                <a style=\"color:gray;\" ng-click=\"$event.stopPropagation();cardDetailToggle(item)\"><span style=\"color:gray\"></span><i class=\"fa fa-chevron-down\"></i></a>\n" +
-    "                            </div>  \n" +
-    "\n" +
-    "                            <div class=\"row\">\n" +
-    "                                <div class=\"col-xs-2\">\n" +
-    "                                    <span ng-repeat=\"(key, value) in item.setAlpha\">\n" +
-    "                                        <p style=\"font-weight:400\">{{value}} <a href=\"market/{{key}}\">{{key}}</a></p>\n" +
-    "                                    </span>\n" +
-    "                                </div>\n" +
-    "                                <div class=\"col-xs-1\"><i class=\"fa fa-exchange\"></i></div>\n" +
-    "                                <div class=\"col-xs-2\">\n" +
-    "                                    <span ng-repeat=\"(key, value) in item.setBeta\">\n" +
-    "                                        <p style=\"font-weight:400\">{{value}} <a href=\"market/{{key}}\">{{key}}</a></p>\n" +
-    "                                    </span>\n" +
-    "                                </div>\n" +
-    "                            </div>\n" +
-    "                            <p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"item.createdAt\"></p>\n" +
-    "                        </div>\n" +
-    "                        <div class=\"card-footer\">\n" +
-    "                            <a ng-click=\"$event.stopPropagation();createReaction(item, 'plus')\"><i class=\"fas fa-angle-up\"></i> {{item.reactions.plus}} like </a> \n" +
-    "                            <a ng-click=\"$event.stopPropagation();createReaction(item, 'minus')\" ><i class=\"fas fa-angle-down\"></i> {{item.reactions.minus}} dislike </a>\n" +
-    "                            <a ng-click=\"$event.stopPropagation();reply(item)\"><i class=\"far fa-comment\"></i> comment </a>\n" +
-    "                            <a ng-click=\"$event.stopPropagation();\" class=\"pull-right\" style=\"padding:0px;\" href=\"order/{{item.id}}\"><i class=\"fas fa-link grey\"></i></a>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "\n" +
+    "                <div ng-repeat=\"item in positions\">\n" +
+    "                    <div ng-include=\"'templates/cards/orderCard.tpl.html'\"></div>\n" +
     "                </div>\n" +
+    "\n" +
     "            </div>\n" +
+    "\n" +
     "        </div>\n" +
     "\n" +
     "        <div class=\"spacing-10\"></div>\n" +
@@ -7432,41 +7417,14 @@ angular.module("marketPair/index.tpl.html", []).run(["$templateCache", function(
     "	            </div>\n" +
     "				<div style=\"padding:16px;\">\n" +
     "					<div class=\"card\">\n" +
-    "						<button class=\"btn btn-default log-btn\" ng-click=\"orderToggle()\">+ Market Order</button>\n" +
+    "						<button class=\"btn btn-default log-btn\" ng-click=\"orderToggle({id:market},{id:market1})\">+ Market Order</button>\n" +
     "					</div>\n" +
     "				</div>\n" +
     "			</div>\n" +
     "			\n" +
     "			<!--TODO: Partially Filled Orders | TRADES-->\n" +
-    "			<div ng-repeat=\"order in orders\">\n" +
-    "		        <div class=\"card\">\n" +
-    "		            <div style=\"padding:16px\">\n" +
-    "						<!--<p>Type</p>-->\n" +
-    "		            	<div class=\"row\">\n" +
-    "			            	<div class=\"col-md-2\">\n" +
-    "			            		<a style=\"font-weight:bold\" href=\"market/{{order.identiferSet.join(',')}}\">{{order.identiferSet.join(',')}}</a><br><br>\n" +
-    "			                	<span style=\"\" ng-repeat=\"item in order.amountSet track by $index\">\n" +
-    "									{{order.amountSet[$index]}} <a href=\"market/{{order.identiferSet[$index]}}\">{{order.identiferSet[$index]}}</a><br>\n" +
-    "								</span>\n" +
-    "							</div>\n" +
-    "			            	<div class=\"col-md-1\"><i class=\"fa fa-exchange\"></i></div>\n" +
-    "							<!--<span> | </span>-->\n" +
-    "			            	<div class=\"col-md-2\">\n" +
-    "								<a style=\"font-weight:bold\" href=\"market/{{order.identiferSet1.join(',')}}\">{{order.identiferSet1.join(',')}}</a><br><br>\n" +
-    "								<span style=\"\" ng-repeat=\"item in order.amountSet1 track by $index\">\n" +
-    "									{{order.amountSet1[$index]}} <a href=\"market/{{order.identiferSet1[$index]}}\">{{order.identiferSet1[$index]}}</a><br>\n" +
-    "								</span>\n" +
-    "							</div>\n" +
-    "						</div>\n" +
-    "						<p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"order.createdAt\"></p>\n" +
-    "		            </div>\n" +
-    "		            <div class=\"card-footer\">\n" +
-    "		                <a href=\"#\" ng-click=\"createReaction(order, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{order.reactions.plus}} like </a> \n" +
-    "		                <a href=\"#\" ng-click=\"createReaction(order, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{order.reactions.minus}} dislike </a>\n" +
-    "		                <a href=\"#\" ng-click=\"reply(order)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
-    "		                <a class=\"pull-right\" style=\"padding:0px;\" href=\"order/{{order.id}}\"><i class=\"fa fa-link grey\"></i></a>\n" +
-    "		            </div>\n" +
-    "		        </div>\n" +
+    "			<div ng-repeat=\"item in orders\">\n" +
+    "       			<div ng-include=\"'templates/cards/orderCard.tpl.html'\"></div>\n" +
     "			</div>\n" +
     "		</div>\n" +
     "\n" +
@@ -9566,7 +9524,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "\n" +
     "                <div ng-if=\"type=='MANIFOLD'\">\n" +
     "\n" +
-    "                    <h5>+SPONSOR+(ADDRESS)</h5>\n" +
+    "                    <h5>{TOKEN}+[ACTION]+SPONSOR+(ADDRESS)</h5>\n" +
     "                    <h5>+CREDIT+(TIME)</h5>\n" +
     "                    <h5>+FUTURE+(TIME)</h5>\n" +
     "                    <h5>+OPTION+(TIME)</h5>\n" +
@@ -9658,7 +9616,16 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "\n" +
     "\n" +
     "\n" +
-    "                    <tags-input min-length=\"1\" placeholder=\"Base Asset\" ng-model=\"baseMarkets\">\n" +
+    "\n" +
+    "                    {{baseToken}}\n" +
+    "\n" +
+    "                    <tags-input min-length=\"1\" placeholder=\"Base Asset\" ng-model=\"baseToken\">\n" +
+    "                        <auto-complete source=\"loadAsset($query)\"></auto-complete>\n" +
+    "                    </tags-input>\n" +
+    "\n" +
+    "                    {{baseManifold}}\n" +
+    "\n" +
+    "                    <tags-input min-length=\"1\" placeholder=\"Manifold\" ng-model=\"baseManifold\">\n" +
     "                        <auto-complete source=\"loadAsset($query)\"></auto-complete>\n" +
     "                    </tags-input>\n" +
     "\n" +

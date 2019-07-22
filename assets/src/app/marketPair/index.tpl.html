@@ -212,41 +212,14 @@
 	            </div>
 				<div style="padding:16px;">
 					<div class="card">
-						<button class="btn btn-default log-btn" ng-click="orderToggle()">+ Market Order</button>
+						<button class="btn btn-default log-btn" ng-click="orderToggle({id:market},{id:market1})">+ Market Order</button>
 					</div>
 				</div>
 			</div>
 			
 			<!--TODO: Partially Filled Orders | TRADES-->
-			<div ng-repeat="order in orders">
-		        <div class="card">
-		            <div style="padding:16px">
-						<!--<p>Type</p>-->
-		            	<div class="row">
-			            	<div class="col-md-2">
-			            		<a style="font-weight:bold" href="market/{{order.identiferSet.join(',')}}">{{order.identiferSet.join(',')}}</a><br><br>
-			                	<span style="" ng-repeat="item in order.amountSet track by $index">
-									{{order.amountSet[$index]}} <a href="market/{{order.identiferSet[$index]}}">{{order.identiferSet[$index]}}</a><br>
-								</span>
-							</div>
-			            	<div class="col-md-1"><i class="fa fa-exchange"></i></div>
-							<!--<span> | </span>-->
-			            	<div class="col-md-2">
-								<a style="font-weight:bold" href="market/{{order.identiferSet1.join(',')}}">{{order.identiferSet1.join(',')}}</a><br><br>
-								<span style="" ng-repeat="item in order.amountSet1 track by $index">
-									{{order.amountSet1[$index]}} <a href="market/{{order.identiferSet1[$index]}}">{{order.identiferSet1[$index]}}</a><br>
-								</span>
-							</div>
-						</div>
-						<p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="order.createdAt"></p>
-		            </div>
-		            <div class="card-footer">
-		                <a href="#" ng-click="createReaction(order, 'plus')"><i class="fa fa-angle-up"></i> {{order.reactions.plus}} like </a> 
-		                <a href="#" ng-click="createReaction(order, 'minus')" ><i class="fa fa-angle-down"></i> {{order.reactions.minus}} dislike </a>
-		                <a href="#" ng-click="reply(order)"><i class="fa fa-comment-o"></i> comment </a>
-		                <a class="pull-right" style="padding:0px;" href="order/{{order.id}}"><i class="fa fa-link grey"></i></a>
-		            </div>
-		        </div>
+			<div ng-repeat="item in orders">
+       			<div ng-include="'templates/cards/orderCard.tpl.html'"></div>
 			</div>
 		</div>
 

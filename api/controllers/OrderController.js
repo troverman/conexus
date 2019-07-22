@@ -52,10 +52,7 @@ module.exports = {
 		//HIGH COMBINATORIAL..... CAN SEE LOWER BOUDED ORDERS IN TRAVERSAL (AS WE OPEN UP)
 
 
-
-		//CHECK OUT THE OR GETS
-
-		else if(req.query.setAlpha){
+		else if(req.query.setAlpha && !req.query.setBeta){
 			var query = {};
 			query[ "setAlpha."+req.query.item] = {$gt: 0};
 			Order.native(function(err, order) {
@@ -74,7 +71,7 @@ module.exports = {
 				});
 			});
 		}
-		else if(req.query.setBeta){
+		else if(req.query.setBeta && !req.query.setAlpha){
 			var query = {};
 			query[ "setBeta."+req.query.item] = {$gt: 0};
 			Order.native(function(err, order) {
@@ -90,6 +87,38 @@ module.exports = {
 						for (x in models){models[x].user = populatedModels[x][0];}
 						res.json(models);
 					});
+				});
+			});
+		}
+
+		//MARKETPAIR
+		else if(req.query.setAlpha && req.query.setBeta){
+			
+			var queryAlpha = {};
+			var queryBeta = {};
+			var andQuery = { $and: []};
+
+			queryAlpha[ "setAlpha."+req.query.setAlpha] = {$gt: 0};
+			queryBeta[ "setBeta."+req.query.setBeta] = {$gt: 0};
+			andQuery.$and.push(queryAlpha)
+			andQuery.$and.push(queryBeta)
+
+			console.log(andQuery);
+
+			Order.native(function(err, order) {
+				order.find(andQuery)
+				.limit(limit)
+				.skip(skip)
+				.sort({'createdAt':-1})
+				.toArray(function (err, models) {
+					console.log(models);
+					models = models.map(function(obj){obj.id = obj._id; return obj;});
+					//var promises = [];
+					//for (x in models){promises.push(User.find({id:models[x].user.toString()}))}
+					//Q.all(promises).then((populatedModels)=>{
+					//	for (x in models){models[x].user = populatedModels[x][0];}
+					res.json(models);
+					//});
 				});
 			});
 		}

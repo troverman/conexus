@@ -312,7 +312,7 @@ angular.module( 'conexus.marketPair', [
         }
     };
 
-    console.log(orders)
+    console.log(orders, mirrorOrders)
     $scope.generateGraph();
 
 
@@ -518,10 +518,9 @@ angular.module( 'conexus.marketPair', [
     //bracket? ^ faces a query problem | event sorting? -- limit the query by event logs. good. 
     //bidAskChart[price][amount]
 
-    var orderObj = {}
-    if (orders.length > 0){
-        for (x in orders){
-
+    //var orderObj = {}
+    //if (orders.length > 0){
+        //for (x in orders){
             //TODO: MULTI D SET | Price
             //[a,b,c] = [d,e,f]
             //[1,2,3] = [4,5,6]
@@ -533,58 +532,58 @@ angular.module( 'conexus.marketPair', [
             //[2,2,3] = [5,5,6]
             //SCALABLE ALGEBRA | INTERWOVEN | SETS OF EQUATIONS | MD SET MARKETS AS SYSTEMS OF EQUATIONS
 
-            var price = orders[x].amountSet1/orders[x].amountSet;
-            if(!orderObj[price]){orderObj[price]=0}
-            orderObj[price] += parseFloat(orders[x].amountSet[0]);
+            //var price = orders[x].amountSet1/orders[x].amountSet;
+            //if(!orderObj[price]){orderObj[price]=0}
+            //orderObj[price] += parseFloat(orders[x].amountSet[0]);
+        //}
+    //}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    if(false){
+        //TODO: REFACTOR && REDUCE
+        var mirrorOrderObj = {};
+        if (mirrorOrders.length > 0){
+            for (x in mirrorOrders){
+                var price = mirrorOrders[x].amountSet/mirrorOrders[x].amountSet1;
+                if(!mirrorOrderObj[price]){mirrorOrderObj[price]=0}
+                mirrorOrderObj[price] += parseFloat(mirrorOrders[x].amountSet[0]/price);
+            }
         }
+
+        //TODO: REFACTOR && REDUCE
+        var orderArray = [];
+        for (var item in orderObj) {orderArray.push([parseFloat(item), orderObj[item]]);}
+        var mirrorOrderArray = [];
+        for (var item in mirrorOrderObj) {mirrorOrderArray.push([parseFloat(item), mirrorOrderObj[item]]);}
+
+        //TODO: SUM RENDER
+        //TODO: SORT OBJECTS
+        //TODO: REFACTOR && REDUCE
+        orderArray = orderArray.sort(function(a,b) {return (parseFloat(a[0]) > parseFloat(b[0])) ? 1 : ((parseFloat(b[0]) > parseFloat(a[0])) ? -1 : 0);} ); 
+        mirrorOrderArray = mirrorOrderArray.sort(function(a,b) {return (parseFloat(a[0]) > parseFloat(b[0])) ? 1 : ((parseFloat(b[0]) > parseFloat(a[0])) ? -1 : 0);} ); 
+
+        $scope.sumOrders = [];
+        orderArray.reduce(function(a,b,i) {return $scope.sumOrders[i] = parseFloat(a) + parseFloat(b[1]);}, 0);
+        $scope.sumMirrorOrders = [];
+        mirrorOrderArray.reverse().reduce(function(a,b,i) {return $scope.sumMirrorOrders[i] = parseFloat(a) + parseFloat(b[1]);}, 0);
+
+        for(x in orderArray){$scope.bidAskChart.series[0].data.push([parseFloat(orderArray[x][0]), $scope.sumOrders[x]]);}
+        for(x in mirrorOrderArray){$scope.bidAskChart.series[1].data.push([parseFloat(mirrorOrderArray[x][0]), $scope.sumMirrorOrders[x]]);}
+        $scope.bidAskChart.series[1].data.reverse();
+        $scope.bidAskChart.series.reverse();
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    //TODO: REFACTOR && REDUCE
-    var mirrorOrderObj = {};
-    if (mirrorOrders.length > 0){
-        for (x in mirrorOrders){
-            var price = mirrorOrders[x].amountSet/mirrorOrders[x].amountSet1;
-            if(!mirrorOrderObj[price]){mirrorOrderObj[price]=0}
-            mirrorOrderObj[price] += parseFloat(mirrorOrders[x].amountSet[0]/price);
-        }
-    }
-
-    //TODO: REFACTOR && REDUCE
-    var orderArray = [];
-    for (var item in orderObj) {orderArray.push([parseFloat(item), orderObj[item]]);}
-    var mirrorOrderArray = [];
-    for (var item in mirrorOrderObj) {mirrorOrderArray.push([parseFloat(item), mirrorOrderObj[item]]);}
-
-    //TODO: SUM RENDER
-    //TODO: SORT OBJECTS
-    //TODO: REFACTOR && REDUCE
-    orderArray = orderArray.sort(function(a,b) {return (parseFloat(a[0]) > parseFloat(b[0])) ? 1 : ((parseFloat(b[0]) > parseFloat(a[0])) ? -1 : 0);} ); 
-    mirrorOrderArray = mirrorOrderArray.sort(function(a,b) {return (parseFloat(a[0]) > parseFloat(b[0])) ? 1 : ((parseFloat(b[0]) > parseFloat(a[0])) ? -1 : 0);} ); 
-
-    $scope.sumOrders = [];
-    orderArray.reduce(function(a,b,i) {return $scope.sumOrders[i] = parseFloat(a) + parseFloat(b[1]);}, 0);
-    $scope.sumMirrorOrders = [];
-    mirrorOrderArray.reverse().reduce(function(a,b,i) {return $scope.sumMirrorOrders[i] = parseFloat(a) + parseFloat(b[1]);}, 0);
-
-    for(x in orderArray){$scope.bidAskChart.series[0].data.push([parseFloat(orderArray[x][0]), $scope.sumOrders[x]]);}
-    for(x in mirrorOrderArray){$scope.bidAskChart.series[1].data.push([parseFloat(mirrorOrderArray[x][0]), $scope.sumMirrorOrders[x]]);}
-    $scope.bidAskChart.series[1].data.reverse();
-    $scope.bidAskChart.series.reverse();
-
 
     //TODO: DEPRECIATE -- MOVE TO NAV
     $scope.createReaction = function(item, type){

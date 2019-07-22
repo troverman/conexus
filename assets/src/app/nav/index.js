@@ -587,6 +587,8 @@ angular.module( 'conexus.nav', [
 
 
     $rootScope.orderToggle = function(identiferSetAlpha, identiferSetBeta){
+
+
         $scope.closeAllNav();
         if($rootScope.currentUser){
             $scope.newOrder = {};
@@ -601,6 +603,8 @@ angular.module( 'conexus.nav', [
             }
             $mdSidenav('order').toggle();
         }
+
+
         else{$mdSidenav('login').toggle();}
     };
 
@@ -1484,17 +1488,11 @@ angular.module( 'conexus.nav', [
 
             $scope.newContent.type = $scope.selectedType;
             $scope.newContent.user = $rootScope.currentUser.id;
+            
             if ($scope.newContent.tags){
                 $scope.newContent.tags = $scope.newContent.tags.map(function(obj){
                     return obj.text;
                 }).join(",");
-            }
-
-            //PATCH!!!
-            if ($scope.newContent.associatedModels){
-                for (x in $scope.newContent.associatedModels){
-                    $scope.newContent[$scope.newContent.associatedModels[x].type.toLowerCase()] = $scope.newContent.associatedModels[x].address
-                }
             }
 
             //CONTENT, TASK, TIME, TRANSACTION, ORDER, PROJECT

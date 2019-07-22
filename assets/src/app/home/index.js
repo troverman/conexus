@@ -490,6 +490,8 @@ angular.module( 'conexus.home', [
     //SearchModel.find().then(function(searchModel){
     //});
 
+    $rootScope.baseToken = {text:'UNIVERSAL TOKEN', description:'Universal Token Position; protocol states that every member mints one Universal Token per day to serve an an eglatarian value position.'}
+    $rootScope.baseManifold = {text:'+SPONSOR+ONMINT+'+$rootScope.currentUser.id, description:'Sponsorship On Mint postions have a triggering action potiental \'on mint\' of the specified token root the manifold (ACTION+SPONSOR).'}
 
     $scope.map = {
         center: {latitude: 35.902023, longitude: -84.1507067 },

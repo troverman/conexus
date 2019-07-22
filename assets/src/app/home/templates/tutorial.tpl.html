@@ -118,7 +118,6 @@
             </div>
             <div style="padding:16px;">
                 <p style="color:gray;font-size:12px;font-style:italic">Select what you believe is worthwile.</p>
-                <p style="color:gray;font-size:12px;font-style:italic">The more detailed your dimensional vote the stronger the effect.</p>
                 <div class="row">
                     <div class="col-xs-4"><img src="https://source.unsplash.com/900x900/?value,finance,vote"></div>
                     <div class="col-xs-4"><img src="https://source.unsplash.com/900x900/?humananity,city,community"></div>
@@ -130,7 +129,7 @@
             <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fa fa-filter"></i> Filter</a></li>
             <li style="float:left;font-size:14px">
                 <a href="#" ng-click="filterToggle('MANIFOLD')"><i class="fas fa-infinity"></i> Manifold</a>
-                <span style="font-size:9px;color:gray;maring:0px">+ONMINT+SPONSOR+(address)</span>
+                <span style="font-size:9px;color:gray;maring:0px">{{baseManifold.text}}</span>
             </li>
             <li style="float:right;font-size:14px"><a href="#" ng-click="filterToggle('VALUEMAP')"><i class="fa fa-eye"></i> UNIVERSALTOKEN</a></li>
             <div style="clear:both"></div>
@@ -138,15 +137,40 @@
         <div class="card">
             <tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search" ng-model="searchQueryArray"></tags-input>
         </div>
-        <div class="card">
-            <div style="padding:16px;">
-                <div class="row">
-                    <div class="col-sm-3 col-xs-12" style="max-height:100vh;overflow:auto">
-                        <div style="font-size:14px;font-weight:bold" ng-repeat="item in sortedTagArray track by $index">
-                            <button ng-click="createPosition(item.element)" class="btn btn-default log-btn">{{item.element}}</button>
-                        </div>
+        <ul style="padding:0px;" class="member-tabs">
+            <li style="float:left;font-size:14px"><a href="#">Builder</a></li>
+            <li style="float:left;font-size:14px"><a href="#">Survey</a></li>
+            <li style="float:left;font-size:14px"><a href="#">Questions</a></li>
+            <li style="float:left;font-size:14px"><a href="#">Orders</a></li>
+            <div style="clear:both"></div>
+        </ul>
+
+
+        <div class="" style="max-height:100vh;overflow:auto">
+
+
+            <!--BETTER-->
+            <div class="col-sm-3 col-xs-12" style="padding-left:0px;padding-right:0px">
+                <div class="card">
+                    <div style="font-size:14px;font-weight:bold" ng-repeat="item in sortedTagArray track by $index">
+                        <button ng-click="createPosition(item.element)" class="btn btn-default log-btn">{{item.element}}</button>
                     </div>
-                    <div class="col-sm-9 col-xs-12">
+                </div>
+            </div>
+
+            <div class="col-sm-9 col-xs-12" style="padding-left:0px;padding-right:0px">
+                <div class="card">
+                    <div style="padding:16px">
+
+
+                        <!--<div style="font-size:14px;font-weight:bold" ng-repeat="item in sortedTagArray track by $index" class="card">
+                            <button ng-click="createPosition(item.element)" class="btn btn-default log-btn">{{item.element}}</button>
+                        </div>-->
+
+                        <p>Please Select A Bundle of Valuable Context</p>
+
+
+
                         <div layout="">
                             <div flex="35" layout="" layout-align="center center"><span class="md-body-1" style="color:gray">Token String <a ng-click="informationToggle('VALUEMAP')" href="#"><i class="fa fa-question-circle"></i></a></span></div>
                             <div flex="65" layout="" layout-align="center center"><span class="md-body-1" style="color:gray">Token String / Base Token String <a ng-click="informationToggle('VALUEMAP')" href="#"><i class="fa fa-question-circle"></i></a></span></div>
@@ -156,13 +180,13 @@
                             <div class="col-xs-12">
                                 <div ng-repeat="item in newOrder">
                                     <div layout="">
-                                        <md-slider step="0.1" flex="" md-discrete="" ng-model="item[0].amount" step="1" min="0" max="100" aria-label="Amount"></md-slider>
+                                        <md-slider step="0.1" flex="" md-discrete="" ng-model="item[0].amount || 0" step="1" min="0" max="100" aria-label="Amount"></md-slider>
                                     </div>
                                     <div layout="">
                                         <div flex="10" layout="" layout-align="center center">86400</div>
                                         <div flex="25" layout="" layout-align="center center">
                                             <a>{{item[1].identifier.split('+')[2]}}</a>
-                                            <p style="font-size:7px;color:gray">+ONMINT+SPONSOR+(address)</p>
+                                            <p style="font-size:7px;color:gray">{{baseManifold.text}}</p>
                                         </div>
                                         <div flex="5" layout="" layout-align="center center"><a href="#" ng-click="informationToggle('MANIFOLD LOGIC')"><i class="fa fa-exchange"></i>*</a></div>
                                         <div flex="30" layout="" layout-align="center center">{{1/newOrder.length*item[0].amount/100}}</div>
@@ -183,7 +207,10 @@
                     </div>
                 </div>
             </div>
+
         </div>
+
+ 
     </div>
 
     <div ng-if="false">
@@ -527,20 +554,25 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <ul style="padding:0px;" class="member-tabs">
+            <li style="float:left;font-size:14px"><a href="#">Suggested Context</a></li>
+            <li style="float:left;font-size:14px"><a href="#">Current Positions & Value Map</a></li>
+            <li style="float:left;font-size:14px"><a href="#">Value Map Builder</a></li>
+            <div style="clear:both"></div>
+        </ul>
+        <div class="card">
             <div style="padding:16px;">
                 <p><b>My Current Positions & Value Map</b> <a ng-click="informationToggle('VALUEMAP')" href="#"><i class="fa fa-question-circle"></i></a></p>
                 <p style="color:gray;font-style:italic">Select and rank what you believe is of value to create positions/orders on the Market</p>
 
                 <p><b>Suggestions and Information</b></p>
-                <!--<highchart config="chart"></highchart>-->
                 <ul style="padding:0px;" class="member-tabs">
                     <li ng-if="currentUser" style="float:left;font-size:14px"><a href="member/{{currentUser.username}}/followers" ng-click="getMyFollowers()"><i class="fa fa-users"></i> Following</a></li>
                     <li ng-if="currentUser" style="float:left;font-size:14px"><a href="member/{{currentUser.username}}/projects" ng-click="getMyProjects()"><i class="fas fa-project-diagram"></i> My Projects</a></li>
                     <li ng-if="currentUser" style="float:left;font-size:14px"><a href="member/{{currentUser.username}}/projects" ng-click="getMyProjects()"><i class="fas fa-list-ol"></i> Tasks</a></li>
                     <div style="clear:both"></div>
                 </ul>
-
-
             </div>
         </div>
 
@@ -551,9 +583,9 @@
             <li style="float:left;font-size:14px">
                 <a href="#" ng-click="filterToggle('MANIFOLD', 'UNIVERSALTOKEN')"><i class="fas fa-infinity"></i> Manifold</a>
                 <br>
-                <p style="font-size:7px;color:gray">+ONMINT+SPONSOR+{{currentUser.id}}</p>
+                <p style="font-size:7px;color:gray">{{baseManifold.text}}</p>
             </li>
-            <li style="float:right;font-size:14px"><a href="#" ng-click="filterToggle('VALUEMAP')"><i class="fa fa-eye"></i> UNIVERSALTOKEN</a></li>
+            <li style="float:right;font-size:14px"><a href="#" ng-click="filterToggle('VALUEMAP')"><i class="fa fa-eye"></i> {{baseToken.text}}</a></li>
             <div style="clear:both"></div>
         </ul>
 
@@ -566,7 +598,6 @@
 
         <!--SKETCH UI of this on paper.. analog..-->
 
-        <!--WITH UT VM.. TOTAL OF 1-->
         <!--ALWAYS DO RELATIVE VALUE? -->
         <!--BULK ORDER INTERFACE-->
         <!--GENERALIZE TO CREATING ORDERS... more info-->
@@ -578,57 +609,61 @@
 
         <!--MORE INTUITIVE..--> <!--SURVEY?? THIS IS THE SEX-->
 
-        <div class="row card">
-            <div class="col-sm-3 col-xs-12" style="max-height:100vh;overflow:auto">
-                <!--sortedsuggestedTokenTags-->
-                <div style="font-size:14px;font-weight:bold" ng-repeat="item in sortedTagArray track by $index">
-                    <button ng-click="createPosition(item.element)" class="btn btn-default log-btn">{{item.element}}</button>
+        <div class="" style="max-height:100vh;overflow:auto;">
+            <div class="col-sm-3 col-xs-6" style="padding-left:0px;padding-right:0px;">
+                <div class="card">
+                    <!--sortedsuggestedTokenTags-->
+                    <div style="font-size:14px;font-weight:bold" ng-repeat="item in sortedTagArray track by $index">
+                        <button ng-click="createPosition(item.element)" class="btn btn-default log-btn">{{item.element}}</button>
+                    </div>
                 </div>
             </div>
-            <div class="col-sm-9 col-xs-12">
+            <div class="col-sm-9 col-xs-6" style="padding-left:0px;padding-right:0px;">
+                <div class="card">
+                    <div style="padding:16px;">
 
-                <!--INFO ABOUT SELECTED BASE TOKEN-->
-                <!--UT STATIC-->
-                <!--<p style="color:gray;font-style:italic">Universal Token Manifold Position; protocol states that every member mints one Universal Token per day to serve an an eglatarian value position.</p>-->
-                
-                <div class="spacing-10"></div>
+                        <p style="color:gray;font-style:italic">{{baseToken.description}}</p>
+                        
+                        <div class="spacing-10"></div>
 
-                <!--VARIABLE PER SLIDER. 4-->
-                <div layout="">
-                    <div flex="35" layout="" layout-align="center center"><span class="md-body-1" style="color:gray">Token String <a ng-click="informationToggle('VALUEMAP')" href="#"><i class="fa fa-question-circle"></i></a></span></div>
-                    <div flex="65" layout="" layout-align="center center"><span class="md-body-1" style="color:gray">Token String / Base Token String <a ng-click="informationToggle('VALUEMAP')" href="#"><i class="fa fa-question-circle"></i></a></span></div>
-                </div>
+                        <!--VARIABLE PER SLIDER. 4-->
+                        <div layout="">
+                            <div flex="35" layout="" layout-align="center center"><span class="md-body-1" style="color:gray">Token String <a ng-click="informationToggle('VALUEMAP')" href="#"><i class="fa fa-question-circle"></i></a></span></div>
+                            <div flex="65" layout="" layout-align="center center"><span class="md-body-1" style="color:gray">Token String / Base Token String <a ng-click="informationToggle('VALUEMAP')" href="#"><i class="fa fa-question-circle"></i></a></span></div>
+                        </div>
 
-                <div class="spacing-10"></div>
-                
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div ng-repeat="item in newOrder">
-                            <!--TODO: TWO ROWS-->
-                            <div layout="">
-                                <!--SELECTED ABSOLUTE.. OR RELATIVE POSITION ? PERCENTAGES? UPDATE HERE... -->
-                                <div flex="10" layout="" layout-align="center center">3600</div>
-                                <!--SPONSORSHIP MANIFOLD SELECTED..-->
-                                <div flex="25" layout="" layout-align="center center">
-                                    <a>{{item[1].identifier.split('+')[2]}}</a>
-                                    <!--<p style="font-size:7px;color:gray">+ONMINT+SPONSOR+{{currentUser.id}}</p>-->
+                        <div class="spacing-10"></div>
+                        
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div ng-repeat="item in newOrder">
+                                    <!--TODO: TWO ROWS-->
+                                    <div layout="">
+                                        <!--SELECTED ABSOLUTE.. OR RELATIVE POSITION ? PERCENTAGES? UPDATE HERE... -->
+                                        <div flex="10" layout="" layout-align="center center">3600</div>
+                                        <!--SPONSORSHIP MANIFOLD SELECTED..-->
+                                        <div flex="25" layout="" layout-align="center center">
+                                            <a>{{item[1].identifier.split('+')[2]}}</a>
+                                        </div>
+                                        <!--<div flex="15" layout="" layout-align="center center">{{item[0].amount || 0}}</div>-->
+                                        <!--(BASE)UNIVERSAL TOKEN ABSOLUTE.. OR RELATIVE POSITION ? PERCENTAGES? UPDATE HERE... -->
+                                        <div flex="30" layout="" layout-align="center center">{{1/newOrder.length*item[0].amount/100}}</span></div>
+                                        <div flex="30" layout="" layout-align="center center"><a>Universal Token</a></div>
+                                        <div flex="5" layout="" layout-align="center center"><a ng-click="removePosition(item)"><i class="fas fa-remove"></i></a></div>
+                                    </div>
+                                    <div layout="">
+                                        <md-slider step="0.1" flex="" md-discrete="" ng-model="item[0].amount" step="1" min="0" max="100" aria-label="Amount"></md-slider>
+                                    </div>
                                 </div>
-                                <!--<div flex="15" layout="" layout-align="center center">{{item[0].amount || 0}}</div>-->
-                                <!--(BASE)UNIVERSAL TOKEN ABSOLUTE.. OR RELATIVE POSITION ? PERCENTAGES? UPDATE HERE... -->
-                                <div flex="30" layout="" layout-align="center center">{{1/newOrder.length*item[0].amount/100}}</span></div>
-                                <div flex="30" layout="" layout-align="center center"><a>Universal Token</a></div>
-                                <div flex="5" layout="" layout-align="center center"><a ng-click="removePosition(item)"><i class="fas fa-remove"></i></a></div>
                             </div>
-                            <div layout="">
-                                <md-slider step="0.1" flex="" md-discrete="" ng-model="item[0].amount" step="1" min="0" max="100" aria-label="Amount"></md-slider>
+                            <div class="col-sm-6 col-xs-12">
+                                <highchart config="chartMapTotal"></highchart>
+                            </div>
+                            <div class="col-sm-6 col-xs-12">
+                                <highchart config="pieTotal"></highchart>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-sm-6 col-xs-12">
-                        <highchart config="chartMapTotal"></highchart>
-                    </div>
-                    <div class="col-sm-6 col-xs-12">
-                        <highchart config="pieTotal"></highchart>
+
                     </div>
                 </div>
             </div>
@@ -636,65 +671,15 @@
 
         <!--CURRENT VALUE MAP.. RENDER AND UNIFY WITH SUGGESTIONS AND UPDATE..  -->
         <div class="row" style="">
+
+            <div class="col-xs-12">
             
-            <div ng-repeat="item in positions">
-                <div class="col-sm-12" style="padding:0px">
-                    
-                    <div class="card" ng-click="cardDetailToggle(item)">
-                        <!--
-                        <div style="background:url('https://source.unsplash.com/1600x900/?')" class="imageContainerSmall">
-                            <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
-                                <div style="margin-top: auto;margin-bottom: auto;">
-                                    <div class="container">
-                                        <span ng-repeat="(key, value) in item.setAlpha">
-                                            <a style="color:white" href="market/{{key}}">{{key}}</a>
-                                        </span>
-                                        <br>
-                                        <span ng-repeat="(key, value) in item.setBeta">
-                                            <a style="color:white" href="market/{{key}}">{{key}}</a>
-                                        </span>
-                                        <h5 style="color:white"><span style="font-size:10px">{{item.type}}</span></h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div style="text-align:right;padding:15px;position:absolute;right:0">
-                            <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
-                                <i class="fas fa-chevron-down"></i>
-                            </a>
-                            <div style="clear:both"></div>
-                        </div>  
-                        -->
-                        <div style="padding:16px">
-                            <div style="float:right;text-align:right">
-                                <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><span style="color:gray"></span><i class="fa fa-chevron-down"></i></a>
-                            </div>  
-
-                            <div class="row">
-                                <div class="col-xs-2">
-                                    <span ng-repeat="(key, value) in item.setAlpha">
-                                        <p style="font-weight:400">{{value}} <a href="market/{{key}}">{{key}}</a></p>
-                                    </span>
-                                </div>
-                                <div class="col-xs-1"><i class="fa fa-exchange"></i></div>
-                                <div class="col-xs-2">
-                                    <span ng-repeat="(key, value) in item.setBeta">
-                                        <p style="font-weight:400">{{value}} <a href="market/{{key}}">{{key}}</a></p>
-                                    </span>
-                                </div>
-                            </div>
-                            <p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="item.createdAt"></p>
-                        </div>
-                        <div class="card-footer">
-                            <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fas fa-angle-up"></i> {{item.reactions.plus}} like </a> 
-                            <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fas fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
-                            <a ng-click="$event.stopPropagation();reply(item)"><i class="far fa-comment"></i> comment </a>
-                            <a ng-click="$event.stopPropagation();" class="pull-right" style="padding:0px;" href="order/{{item.id}}"><i class="fas fa-link grey"></i></a>
-                        </div>
-                    </div>
-
+                <div ng-repeat="item in positions">
+                    <div ng-include="'templates/cards/orderCard.tpl.html'"></div>
                 </div>
+
             </div>
+
         </div>
 
         <div class="spacing-10"></div>
