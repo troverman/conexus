@@ -5793,7 +5793,7 @@ angular.module("home/templates/tutorial.tpl.html", []).run(["$templateCache", fu
     "                            <button ng-click=\"createPosition(item.element)\" class=\"btn btn-default log-btn\">{{item.element}}</button>\n" +
     "                        </div>-->\n" +
     "\n" +
-    "                        <p>Please Select A Bundle of Valuable Context</p>\n" +
+    "                        <!--<p>Please Select A Bundle of Valuable Context</p>-->\n" +
     "\n" +
     "\n" +
     "\n" +
