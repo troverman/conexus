@@ -2048,8 +2048,8 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
-    "                <div id=\"LANUGAGE\">\n" +
-    "                    <h4><b>LANUGAGE</b></h4>\n" +
+    "                <div id=\"LANGUAGE\">\n" +
+    "                    <h4><b>LANGUAGE</b></h4>\n" +
     "                    <p style=\"color:gray;font-style:italic\">Vital to navigation of the token domain are language protocols and operators that define logic and interpretation</p>\n" +
     "\n" +
     "                    `oplus, otimes, odot, triangle, RR`\n" +
@@ -6596,13 +6596,14 @@ angular.module("item/index.tpl.html", []).run(["$templateCache", function($templ
     "            <!--ITEM OWNERSHIP OF TOKENS-->       \n" +
     "        </div>\n" +
     "        <div class=\"card-footer\">\n" +
-    "            <a ng-click=\"$event.stopPropagation();createReaction(item, 'plus')\"><i class=\"fas fa-angle-up\"></i> {{item.reactions.plus}} like </a> \n" +
-    "            <a ng-click=\"$event.stopPropagation();createReaction(item, 'minus')\" ><i class=\"fas fa-angle-down\"></i> {{item.reactions.minus}} dislike </a>\n" +
-    "            <a ng-click=\"$event.stopPropagation();reply(item)\"><i class=\"far fa-comment\"></i> comment </a>\n" +
-    "            <a ng-click=\"$event.stopPropagation();tokensToggle(content)\" style=\"color:grey\" class=\"pull-right\">\n" +
+    "             <a ng-click=\"$event.stopPropagation();tokensToggle(content)\" style=\"color:grey\">\n" +
     "                <i class=\"fas fa-eye\"></i> \n" +
     "                <!--Attention: {{order.attention || 0}}, Live: {{order.live || 0}}-->\n" +
     "            </a>\n" +
+    "            <a ng-click=\"$event.stopPropagation();createReaction(item, 'plus')\"><i class=\"fas fa-angle-up\"></i> {{item.reactions.plus}} like </a> \n" +
+    "            <a ng-click=\"$event.stopPropagation();createReaction(item, 'minus')\" ><i class=\"fas fa-angle-down\"></i> {{item.reactions.minus}} dislike </a>\n" +
+    "            <a ng-click=\"$event.stopPropagation();reply(item)\"><i class=\"far fa-comment\"></i> comment </a>\n" +
+    "           \n" +
     "        </div>\n" +
     "    </div>\n" +
     "</div>\n" +
@@ -6767,7 +6768,7 @@ angular.module("item/index.tpl.html", []).run(["$templateCache", function($templ
     "\n" +
     "\n" +
     "                    <div class=\"card\">\n" +
-    "                        <button type=\"submit\" class=\"btn btn-default log-btn\" ng-click=\"actionToggle(item)\">+ Order</button>\n" +
+    "                        <button type=\"submit\" class=\"btn btn-default log-btn\" ng-click=\"orderToggle(item)\">+ Order</button>\n" +
     "                    </div>\n" +
     "\n" +
     "                    <div ng-repeat=\"input in inputVector\">\n" +
@@ -6909,14 +6910,13 @@ angular.module("item/index.tpl.html", []).run(["$templateCache", function($templ
     "\n" +
     "                    </div>\n" +
     "                    <div class=\"card-footer\">\n" +
+    "                        <a style=\"color:grey\" ng-click=\"tokensToggle(content)\">\n" +
+    "                            <i class=\"fas fa-eye\"></i> \n" +
+    "                        </a>\n" +
     "                        <a ng-click=\"$event.stopPropagation();createReaction(item, 'plus')\"><i class=\"fas fa-angle-up\"></i> {{item.reactions.plus}} like </a> \n" +
     "                        <a ng-click=\"$event.stopPropagation();createReaction(item, 'minus')\" ><i class=\"fas fa-angle-down\"></i> {{item.reactions.minus}} dislike </a>\n" +
     "                        <a ng-click=\"$event.stopPropagation();reply(item)\"><i class=\"far fa-comment\"></i> comment </a>\n" +
     "                        <a ng-click=\"$event.stopPropagation();\" class=\"pull-right\" style=\"padding:0px;\" href=\"order/{{item.id}}\" ui-sref=\"order({id:item.id})\"><i class=\"fas fa-link grey\"></i></a>\n" +
-    "                    <a style=\"color:grey\" class=\"pull-right\" href=\"content/{{content.id}}\" ui-sref=\"content({id:content.id})\" ng-click=\"tokensToggle(content)\">\n" +
-    "                        <i class=\"fas fa-eye\"></i> \n" +
-    "                        <!--Attention: {{order.attention || 0}}, Live: {{order.live || 0}}-->\n" +
-    "                    </a>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
@@ -7127,7 +7127,7 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function($tem
     "		                	<div hljs hljs-language=\"javascript\"  hljs-source=\"renderImmutableMarket\"></div>\n" +
     "							<div class=\"spacing-5\"></div>\n" +
     "\n" +
-    "				    		<h5>Power Potientality</h5>\n" +
+    "				    		<h5>Potiental Connection</h5>\n" +
     "				    		<p>Potiental of possible connection</p>\n" +
     "		                	<div hljs hljs-language=\"javascript\"  hljs-source=\"renderImmutableMarketPower\"></div>\n" +
     "\n" +
@@ -7762,7 +7762,7 @@ angular.module("markets/index.tpl.html", []).run(["$templateCache", function($te
     "        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "        	<div class=\"container\">\n" +
     "	            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Markets</h1>\n" +
-    "	            <h5 style=\"color:white\">{{tokensInCirculation}} tokens in circulation </h5>\n" +
+    "	            <h5 style=\"color:white\">{{tokenCount}} tokens in circulation </h5>\n" +
     "	        </div>\n" +
     "        </div>\n" +
     "    </div>\n" +

@@ -50,8 +50,6 @@ function generate(model) {return 100;};
 
 module.exports = {
 
-
-
 	buildAssociatedModels:function(model){
 
 
@@ -452,7 +450,958 @@ module.exports = {
 
 	},
 
+	buildStringSpace: function(){
 
+		//TODO ASSOCIATION WALK VS PARENT
+		function projectAssociations(id, path){
+			var deferred = Q.defer();
+			Project.find({id:id}).then(function(models){
+				if (models.length == 1){
+					path = path.toUpperCase().replace(/ /g,'_') + '+' + models[0].title.toUpperCase().replace(/ /g,'_');
+					if (models[0].parent){
+						projectAssociations(models[0].parent, path).then(function(path){deferred.resolve(path)});
+					}
+					else{deferred.resolve(path);}
+				}
+				else{deferred.resolve(path);}
+			});
+			return deferred.promise;
+		};
+
+		console.log('GENERATE STRING SPACE!');
+		//WALK THE THE ASSOCIATIONS :) 
+		//LET'S START! 
+		//PROJECTMEMBER
+		var promises = [
+			//ACTION
+			Content.find().limit(100).skip(0).sort('createdAt DESC'),
+			//FOLLOW
+			Item.find().limit(100).skip(0).sort('createdAt DESC'),
+			//Order.find().limit(100).skip(0).sort('createdAt DESC'),
+			Project.find().limit(1000).skip(0).sort('createdAt DESC'),
+			//Reaction.find().limit(100).skip(0).sort('createdAt DESC'),
+			Task.find().limit(100).skip(0).sort('createdAt DESC').populate('project'),
+			Time.find().limit(100).skip(0).sort('createdAt DESC').populate('task'),
+			Transaction.find().limit(100).skip(0).sort('createdAt DESC'),
+			User.find().limit(100).skip(0).sort('createdAt DESC'),
+			Validation.find().limit(100).skip(0).sort('createdAt DESC')
+		];
+		var type = [
+			//ACTION
+			'CONTENT',
+			'ITEM',
+			//FOLLOW
+			//'ORDER',
+			'PROJECT',
+			//'REACTION',
+			'TASK',
+			'TIME',
+			'TRANSACTION',
+			'USER',
+			'VALIDATION',
+		];
+		Q.all(promises)
+		.then(function(data){
+			console.log('LOAD!');
+			var tokenSet = [];
+			for (x in data){
+				for (y in data[x]){
+					console.log(x,y, type[x])
+
+					if (type[x] == 'CONTENT'){
+
+						//CONTENT
+						var contentBaseModel = {
+							string: 'CRE8+CONTENT',
+							information:{
+								inCirculation:Math.floor(10000*Math.random()),
+								markets: 0,
+							},
+							protocols:[
+								'BASE',
+								'CONTENT'
+							],
+							logic:{
+								transferrable:true, 
+								mint:'ONCREATECONTENT'
+							}
+						};
+
+						//DEPRECIATE?
+						var contentNFTModel = {
+							string: data[x][y].id,
+							information:{
+								inCirculation:1,
+								markets: 0,
+							},
+							protocols:[
+								'BASE',
+								'CONTENT'
+							],
+							logic:{
+								transferrable:true, 
+								mint:'ONCREATECONTENT'
+							}
+						};
+
+						//DEPRECIATE?
+						var humanReadableContentNFTModel = {
+							string: 'CRE8+CONTENT+'+data[x][y].id,
+							information:{
+								inCirculation:1,
+								markets: 0,
+							},
+							protocols:[
+								'BASE',
+								'CONTENT'
+							],
+							logic:{
+								transferrable:true, 
+								mint:'ONCREATECONTENT'
+							}
+						};
+
+						tokenSet.push(contentBaseModel);
+						tokenSet.push(contentNFTModel);
+						tokenSet.push(humanReadableContentNFTModel);
+
+						if (data[x][y].type){
+
+							//CONTENT TYPE
+							//CONTENT+TYPE
+							var contentTypeModel = {
+								string: 'CRE8+CONTENT+'+data[x][y].type.toUpperCase(),
+								information:{
+									inCirculation:Math.floor(1000*Math.random()),
+									markets: 0,
+								},
+								protocols:[
+									'BASE', 
+									'CONTENT'
+								],
+								logic:{
+									transferrable:true, 
+									mint:'ONCREATE'+data[x][y].type.toUpperCase()
+								}
+							};
+
+							//DEPRECIATE?
+							//CONTENT+TYPE+ID
+							var humanReadableContentTypeNFTModel = {
+								string: 'CRE8+CONTENT+'+data[x][y].type.toUpperCase()+'+'+data[x][y].id,
+								information:{
+									inCirculation:1,
+									markets: 0,
+								},
+								protocols:[
+									'BASE',
+									'CONTENT'
+								],
+								logic:{
+									transferrable:true,
+									mint:'ONCREATECONTENT'
+								}
+							};
+
+							tokenSet.push(contentTypeModel);
+							tokenSet.push(humanReadableContentTypeNFTModel);
+
+						}
+
+						//TODO: ASSOCIATION WALK
+						//TODO: SYMMETRY FROM OTHER MODEL PERSPECTIVE
+
+					}
+
+					if (type[x] == 'ITEM'){
+
+						var itemBaseModel = {
+							string: 'ITEM',
+							information:{
+								inCirculation:Math.floor(10000*Math.random()),
+								markets: 0,
+							},
+							protocols:[
+								'BASE'
+							],
+							logic:{
+								transferrable:true, 
+								mint:'ONCREATEITEM'
+							}
+						};
+
+						var createItemBaseModel = {
+							string: 'CRE8+ITEM',
+							information:{
+								inCirculation:Math.floor(10000*Math.random()),
+								markets: 0,
+							},
+							protocols:[
+								'BASE'
+							],
+							logic:{
+								transferrable:true, 
+								mint:'ONCREATEITEM'
+							}
+						};
+
+						var humanReadableItemNFTModel = {
+							string: 'ITEM+'+data[x][y].id,
+							information:{
+								inCirculation:1,
+								markets: 0,
+							},
+							protocols:[
+								'BASE'
+							],
+							logic:{
+								transferrable:true, 
+								mint:'ONCREATECONTENT'
+							}
+						};
+
+						tokenSet.push(itemBaseModel);
+						tokenSet.push(createItemBaseModel);
+						tokenSet.push(humanReadableItemNFTModel);
+
+					}
+
+					if (type[x] == 'ORDER'){
+
+						//ORDER
+						var orderBaseModel = {
+							string: 'CRE8+ORDER',
+							information:{
+								inCirculation:Math.floor(10000*Math.random()),
+								markets: 0,
+							},
+							protocols:[
+								'BASE',
+								'CRE8',
+								'ORDER',
+							],
+							logic:{
+								transferrable:true, 
+								mint:'ONCREATEORDER'
+							}
+						};
+
+						//ORDER NFT
+						var humanReadableOrderNFTModel = {
+							string: 'CRE8+ORDER+'+data[x][y].id,
+							information:{
+								inCirculation:1,
+								markets: 0,
+							},
+							protocols:[
+								'BASE',
+								'CRE8',
+								'ORDER',
+							],
+							logic:{
+								transferrable:true, 
+								mint:'ONCREATEORDER'
+							}
+						};
+
+						//TODO PAIR ENCODING. 
+
+						tokenSet.push(orderBaseModel);
+						tokenSet.push(humanReadableOrderNFTModel);
+							
+					}
+
+					//CHERRY ON TOP
+					//ASSOCIATIONS
+					//PROJET --> TASK --> TIME LINKAGE
+					//PROJECT --> PROJECT LINKAGE
+					if (type[x] == 'PROJECT'){
+
+						var projectBaseModel = {
+							string: 'CRE8+PROJECT',
+							information:{
+								inCirculation:Math.floor(10000*Math.random()),
+								markets: 0,
+							},
+							protocols:[
+								'BASE',
+								'PROJECT'
+							],
+							logic:{
+								transferrable:true, 
+								mint:'ONCREATEPROJECT'
+							}
+						};
+
+						//GOES TO PROJECT
+						var projectTitleModel = {
+							string: 'PROJECT+'+data[x][y].title.replace(/ /g,'_').toUpperCase(),
+							information:{
+								inCirculation:Math.floor(10000*Math.random()),
+								markets: 0,
+							},
+							protocols:[
+								'BASE',
+								'PROJECT'
+							],
+							logic:{
+								transferrable:true, 
+								mint:'ONCREATEPROJECT, PROJECTMEMBER PERMISSIONS'
+							}
+						};
+
+						//DEPRECIATE -- SAMPLE
+						var projectPrelimModel = {
+							string: 'PROJECT+'+data[x][y].title.replace(/ /g,'_').toUpperCase()+'+CONTENT',
+							information:{
+								inCirculation:Math.floor(10000*Math.random()),
+								markets: 0,
+							},
+							protocols:[
+								'BASE',
+								'PROJECT'
+							],
+							logic:{
+								transferrable:true, 
+								mint:'ONCREATEPROJECTCONTENT -- VALIDATION APPROVAL'
+							}
+						};
+
+						tokenSet.push(projectBaseModel);
+						tokenSet.push(projectTitleModel);
+						tokenSet.push(projectPrelimModel);
+
+						//STRING SPACE SHOULD BE HUMAN READABLE --> ??? OR ID?
+						//console.log(data[x][y].title)
+						//DEPRECIATED?
+						//console.log('PARENT', data[x][y].parent);
+						//console.log(data[x][y].associatedModels);
+						//STRUCURE INTO PROMISE TO RETURN
+						if (data[x][y].parent){
+							projectAssociations(data[x][y].parent, data[x][y].title).then(function(projectModel){
+								
+								//console.log(projectModel);
+								var projectAssociationModel = {
+									string: 'PROJECT+'+projectModel.toUpperCase(),
+									information:{
+										inCirculation:Math.floor(10000*Math.random()),
+										markets: 0,
+									},
+									protocols:[
+										'BASE',
+										'ASSOCIATION'
+									],
+									logic:{
+										transferrable:true, 
+										mint:'ONCREATEPROJECT'
+									}
+								};
+
+								//DO BETTER
+								Token.find({string:projectAssociationModel.string}).then(function(aTokenModel){
+									if (aTokenModel.length == 0){
+										Token.create(projectAssociationModel).then(function(){
+											console.log(projectAssociationModel)
+										});
+									}
+									else{
+										Token.update({id:aTokenModel[0].id}, projectAssociationModel).then(function(){
+											console.log('UPDATE', projectAssociationModel)
+										});
+									}
+								});
+
+							});
+						}
+
+
+					}
+
+					//COULD ENCODE MORE EFFECTILY?? 
+					//MOST LIKEY DESCRETIZE 
+					//TODO: RECIEVER? 
+					if (type[x] == 'REACTION'){
+
+						//REACTION
+						var reactionBaseModel = {
+							string: 'REACTION',
+							information:{
+								inCirculation:Math.floor(10000*Math.random()),
+								markets: 0,
+							},
+							protocols:[
+								'BASE'
+							],
+							logic:{
+								transferrable:true, 
+								mint:'ONCREATEREACTION'
+							}
+						};
+
+						var reactionCreateModel = {
+							string: 'CRE8+REACTION',
+							information:{
+								inCirculation:Math.floor(10000*Math.random()),
+								markets: 0,
+							},
+							protocols:[
+								'BASE'
+							],
+							logic:{
+								transferrable:true, 
+								mint:'ONCREATEREACTION'
+							}
+						};
+
+						var reactionReceiveModel = {
+							string: 'RECEIVE+REACTION',
+							information:{
+								inCirculation:Math.floor(10000*Math.random()),
+								markets: 0,
+							},
+							protocols:[
+								'BASE'
+							],
+							logic:{
+								transferrable:true, 
+								mint:'ONCREATEREACTION'
+							}
+						};
+
+						//REACTION+LIKE
+						var reactionTypeBaseModel = {
+							string: 'REACTION+'+data[x][y].type.toUpperCase(),
+							information:{
+								inCirculation:Math.floor(10000*Math.random()),
+								markets: 0,
+							},
+							protocols:[
+								'BASE'
+							],
+							logic:{
+								transferrable:true, 
+								mint:'ONCREATEREACTION'
+							}
+						};
+
+						//REACTION+CREATE+LIKE
+						var reactionTypeCreateModel = {
+							string: 'REACTION+CREATE+'+data[x][y].type.toUpperCase(),
+							information:{
+								inCirculation:Math.floor(10000*Math.random()),
+								markets: 0,
+							},
+							protocols:[
+								'BASE'
+							],
+							logic:{
+								transferrable:true, 
+								mint:'ONCREATEREACTION'
+							}
+						};
+
+						//REACTION+RECEIVE+LIKE
+						var reactionTypeReceiveModel = {
+							string: 'REACTION+RECEIVE+'+data[x][y].type.toUpperCase(),
+							information:{
+								inCirculation:Math.floor(10000*Math.random()),
+								markets: 0,
+							},
+							protocols:[
+								'BASE'
+							],
+							logic:{
+								transferrable:true, 
+								mint:'ONCREATEREACTION'
+							}
+						};
+
+						//REACTION NFT
+						var humanReadableReactionNFTModel = {
+							string: 'REACTION+'+data[x][y].id,
+							information:{
+								inCirculation:1,
+								markets: 0,
+							},
+							protocols:[
+								'BASE'
+							],
+							logic:{
+								transferrable:true, 
+								mint:'ONCREATEREACTION'
+							}
+						};
+
+						tokenSet.push(reactionBaseModel);
+						tokenSet.push(reactionReceiveModel);
+						tokenSet.push(reactionRevieveModel);
+						tokenSet.push(reactionTypeBaseModel);
+						tokenSet.push(reactionTypeCreateModel);
+						tokenSet.push(reactionTypeReceiveModel);
+
+						tokenSet.push(humanReadableReactionNFTModel);
+
+						//CAN WE SIMPLIFY? NOT REALLY
+						if (data[x][y].associatedModels){
+							for (z in data[x][y].associatedModels){
+
+								//SYMMETRY HERE
+
+								//REACTION TYPE
+								//REACTION+CONTENT
+								var reactionAssociationTypeModel = {
+									string: 'REACTION+'+data[x][y].associatedModels[z].type.toUpperCase(),
+									information:{
+										inCirculation:Math.floor(100*Math.random()),
+										markets: 0,
+									},
+									protocols:[
+										'BASE'
+									],
+									logic:{
+										transferrable:true, 
+										mint:'ONCREATEREACTION'
+									}
+								};
+
+								//REACTION ADDRESS
+								//REACTION+ADDRESS
+								var reactionAssociationAddressModel = {
+									string: 'REACTION+'+data[x][y].associatedModels[z].id,
+									information:{
+										inCirculation:Math.floor(100*Math.random()),
+										markets: 0,
+									},
+									protocols:[
+										'BASE'
+									],
+									logic:{
+										transferrable:true, 
+										mint:'ONCREATEREACTION'
+									}
+								};
+
+								//REACTION TYPE ADDRESS
+								//REACTION+CONTENT+ADDRESS
+								var reactionAssociationTypeAddressModel = {
+									string: 'REACTION+'+data[x][y].associatedModels[z].type.toUpperCase()+'+'+data[x][y].associatedModels[z].id,
+									information:{
+										inCirculation:Math.floor(100*Math.random()),
+										markets: 0,
+									},
+									protocols:[
+										'BASE'
+									],
+									logic:{
+										transferrable:true, 
+										mint:'ONCREATEREACTION'
+									}
+								};
+
+								//REACTION TYPE ADDRESS
+								//REACTION+LIKE+ADDRESS
+								var reactionAssociationType1AddressModel = {
+									string: 'REACTION+'+data[x][y].type.toUpperCase()+'+'+data[x][y].associatedModels[z].id,
+									information:{
+										inCirculation:Math.floor(100*Math.random()),
+										markets: 0,
+									},
+									protocols:[
+										'BASE'
+									],
+									logic:{
+										transferrable:true, 
+										mint:'ONCREATEREACTION'
+									}
+								};
+
+								//REACTION TYPE TYPE
+								//REACTION+CONTENT+LIKE
+								var reactionAssociationTypeTypeModel = {
+									string: 'REACTION+'+data[x][y].associatedModels[z].type.toUpperCase()+'+'+data[x][y].type,
+									information:{
+										inCirculation:Math.floor(100*Math.random()),
+										markets: 0,
+									},
+									protocols:[
+										'BASE'
+									],
+									logic:{
+										transferrable:true, 
+										mint:'ONCREATEREACTION'
+									}
+								};
+
+								//REACTION ASSOICATION
+								//REACTION+CONTENT+LIKE+ADDRESS
+								var reactionAssociationTypeTypeAddressModel = {
+									string: 'REACTION+'+data[x][y].associatedModels[z].type+'+'+data[x][y].type.toUpperCase()+'+'+data[x][y].associatedModels[z].id,
+									information:{
+										inCirculation:Math.floor(100*Math.random()),
+										markets: 0,
+									},
+									protocols:[
+										'BASE'
+									],
+									logic:{
+										transferrable:true, 
+										mint:'ONCREATEREACTION'
+									}
+								};
+
+								//for (n in ['CREATE','RECEIVE']){
+
+								//}
+								//TODO: CREATOR AND RECIEVER OF THE REACTION..
+								//REACTION+CREATE
+								//REACTION+RECIEVE
+
+								tokenSet.push(reactionAssociationTypeModel);
+								tokenSet.push(reactionAssociationAddressModel);
+								tokenSet.push(reactionAssociationTypeAddressModel);
+								tokenSet.push(reactionAssociationType1AddressModel);
+								tokenSet.push(reactionAssociationTypeTypeModel);
+								tokenSet.push(reactionAssociationTypeTypeAddressModel);
+
+							}
+						}
+
+					}
+
+					if (type[x] == 'TASK'){
+						//TASK
+						var taskBaseModel = {
+							string: 'CRE8+TASK',
+							information:{
+								inCirculation:Math.floor(10000*Math.random()),
+								markets: 0,
+							},
+							protocols:[
+								'BASE'
+							],
+							logic:{
+								transferrable:true, 
+								mint:'ONCREATETASK'
+							}
+						};
+
+						var humanReadableTaskNFTModel = {
+							string: 'CRE8+TASK+'+data[x][y].id,
+							information:{
+								inCirculation:1,
+								markets: 0,
+							},
+							protocols:[
+								'BASE'
+							],
+							logic:{
+								transferrable:true, 
+								mint:'ONCREATETASK'
+							}
+						};
+
+						tokenSet.push(taskBaseModel);
+						tokenSet.push(humanReadableTaskNFTModel);
+
+						//TODO ASSOCIATION . . .
+						//NOT YET !
+					}
+
+					//TYPE.. VIEW
+					//TYPE.. DATA APIS.. TIME.. STREAM.. ETC
+					if (type[x] == 'TIME'){
+
+						//TIME
+						var timeBaseModel = {
+							string: 'CRE8+TIME',
+							information:{
+								inCirculation:Math.floor(10000*Math.random()),
+								markets: 0,
+							},
+							protocols:[
+								'BASE'
+							],
+							logic:{
+								transferrable:true, 
+								mint:'ONCREATETIME'
+							}
+						};
+
+						//TIME NFT
+						var humanReadableTimeNFTModel = {
+							string: 'CRE8+TIME+'+data[x][y].id,
+							information:{
+								inCirculation:1,
+								markets: 0,
+							},
+							protocols:[
+								'BASE'
+							],
+							logic:{
+								transferrable:true, 
+								mint:'ONCREATETIME'
+							}
+						};
+
+						//TODO: ASSOCIATIONS
+						//TODO: TAGS
+
+						tokenSet.push(timeBaseModel);
+						tokenSet.push(humanReadableTimeNFTModel);
+						
+					}
+
+					//IMPORTANT
+					if (type[x] == 'TRANSACTION'){
+
+						//TRANSACTION
+						var transactionBaseModel = {
+							string: 'TRANSACTION',
+							information:{
+								inCirculation:Math.floor(10000*Math.random()),
+								markets: 0,
+							},
+							protocols:[
+								'BASE'
+								],
+							logic:{
+								transferrable:true, 
+								mint:'ONCREATETRANSACTION'
+							}
+						};
+
+						//TRANSACTION
+						var createTransactionBaseModel = {
+							string: 'CRE8+TRANSACTION',
+							information:{
+								inCirculation:Math.floor(10000*Math.random()),
+								markets: 0,
+							},
+							protocols:[
+								'BASE'
+								],
+							logic:{
+								transferrable:true, 
+								mint:'ONCREATETRANSACTION'
+							}
+						};
+
+						//TEST
+						var recieveTransactionBaseModel = {
+							string: 'RECIEVE+TRANSACTION',
+							information:{
+								inCirculation:Math.floor(10000*Math.random()),
+								markets: 0,
+							},
+							protocols:[
+								'BASE'
+							],
+							logic:{
+								transferrable:true, 
+								mint:'ONCREATETRANSACTION'
+							}
+						};
+
+						var transactionBaseModelAsset = {
+							string: 'CRE8+TRANSACTION+'+data[x][y].asset,
+							information:{
+								inCirculation:Math.floor(10000*Math.random()),
+								markets: 0,
+							},
+							protocols:[
+								'BASE'
+							],
+							logic:{
+								transferrable:true, 
+								mint:'ONCREATETRANSACTION'
+							}
+						};
+
+						var transactionBaseModelAssetRecieve = {
+							string: 'RECIEVE+TRANSACTION+'+data[x][y].asset,
+							information:{
+								inCirculation:Math.floor(10000*Math.random()),
+								markets: 0,
+							},
+							protocols:[
+								'BASE'
+							],
+							logic:{
+								transferrable:true, 
+								mint:'ONCREATETRANSACTION'
+							}
+						};
+
+						var humanReadableTransactionNFTModel = {
+							string: 'CRE8+TRANSACTION+'+data[x][y].id,
+							information:{
+								inCirculation:1,
+								markets: 0,
+							},
+							protocols:[
+								'BASE'
+							],
+							logic:{
+								transferrable:true, 
+								mint:'ONCREATETRANSACTION'
+							}
+						};
+
+						var humanReadableTransactionRecieveNFTModel = {
+							string: 'RECIEVE+TRANSACTION+'+data[x][y].id,
+							information:{
+								inCirculation:1,
+								markets: 0,
+							},
+							protocols:[
+								'BASE'
+							],
+							logic:{
+								transferrable:true, 
+								mint:'ONCREATETRANSACTION'
+							}
+						};
+
+						//TODO: TAGS
+						//TODO: ASSETS
+						//TODO: SENDER
+						//TODO: RECIEVER
+						//TODO: CREATOR
+
+						tokenSet.push(transactionBaseModel);
+						tokenSet.push(createTransactionBaseModel);
+						tokenSet.push(recieveTransactionBaseModel);
+						tokenSet.push(transactionBaseModelAsset);
+						tokenSet.push(transactionBaseModelAssetRecieve);
+						tokenSet.push(humanReadableTransactionNFTModel);
+						tokenSet.push(humanReadableTransactionRecieveNFTModel);
+
+					}
+
+					if (type[x] == 'VALIDATION'){
+						//CREATEING ASSOCIATIONS :)
+
+						//VALIDATION
+						var validationBaseModel = {
+							string: 'CRE8+VALIDATION',
+							information:{
+								inCirculation:Math.floor(10000*Math.random()),
+								markets:0,
+							},
+							protocols:[
+								'BASE'
+							],
+							logic:{
+								transferrable:true, 
+								mint:'ONCREATEVALIDATION'
+							}
+						};
+
+						//VALIDATION NFT
+						var humanReadableValidationNFTModel = {
+							string: 'CRE8+VALIDATION+'+data[x][y].id,
+							information:{
+								inCirculation:1,
+								markets:0,
+							},
+							protocols:[
+								'BASE'
+							],
+							logic:{
+								transferrable:true, 
+								mint:'ONCREATEVALIDATION'
+							}
+						};
+
+						tokenSet.push(validationBaseModel);
+						tokenSet.push(humanReadableValidationNFTModel);
+						//ASSOCIATIONS
+						//TYPE
+						//COMPOUND
+						//TAGS..??
+					}
+
+					if (type[x] == 'USER'){
+						var humanReadableUserNFTModel = {
+							string: data[x][y].id,
+							information:{
+								inCirculation:0,
+								markets:0,
+							},
+							protocols:[
+								'BASE',
+								'MEMBER'
+							],
+							logic:{
+								transferrable:true, 
+								mint:'ONMEMBERCREATE'
+							}
+						};
+						tokenSet.push(humanReadableUserNFTModel);
+					}
+				}
+			}
+
+			//LOAD APPS 
+			//MANIFOLDS??
+			//SPECIAL CASE.. LOAD IN EXTRA PROTOCOLS
+			
+			//TOKEN VS MARKET (COMBINATORIAL TOKEN)
+
+			var universalTokenModel = {
+				string: 'UNIVERSALTOKEN',
+				information:{
+					inCirculation:0,
+					markets: 0,
+				},
+				protocols:[
+					'UNIVERSALTOKEN'
+				],
+				logic:{
+					transferrable:true, 
+					mint:'DAILY'
+				}
+			};
+			tokenSet.push(universalTokenModel);
+
+			//PROTOCOLS
+			//BASE, CONTENT, TIME, PROJECT, MEMBER
+				//MEMBER
+					//Address+
+					//on create of token string --> look up appropiate protocol;
+						//tokenstring --> protocol mapping
+					//simple search pattern match 
+					//mint operations for address & address+ 
+						//address == creator, transferrable, true
+
+			//ASSOCIATIONS ARE A CHALLANGE
+				//TOKEN LINKAGE -- LING STRING
+
+			//remove dups
+			var tokenSet_uniq = _.uniq(tokenSet, 'string'); 
+
+			//REPUTATION MANIFOLD
+			console.log(tokenSet_uniq)
+
+			async.eachSeries(tokenSet_uniq, function (token, nextIteration){ 
+				Token.find({string:token.string}).then(function(aTokenModel){
+					if (aTokenModel.length == 0){
+						Token.create(token).then(function(){
+							console.log(token)
+							process.nextTick(nextIteration);
+						});
+					}
+					else{
+						Token.update({id:aTokenModel[0].id}, token).then(function(){
+							console.log('UPDATE', token)
+							process.nextTick(nextIteration);
+						});
+					}
+				});
+			});	
+
+		});
+	},
 
 	initOrders: function(req){
 
@@ -1085,21 +2034,6 @@ module.exports = {
 			});
 		};
 
-		//TODO ASSOCIATION WALK VS PARENT
-		function projectAssociations(id, path){
-			var deferred = Q.defer();
-			Project.find({id:id}).then(function(models){
-				if (models.length == 1){
-					path = path.toUpperCase().replace(/ /g,'_') + '+' + models[0].title.toUpperCase().replace(/ /g,'_');
-					if (models[0].parent){
-						projectAssociations(models[0].parent, path).then(function(path){deferred.resolve(path)});
-					}
-					else{deferred.resolve(path);}
-				}
-				else{deferred.resolve(path);}
-			});
-			return deferred.promise;
-		};
 		
 		//UNIFICATION OF INFORMATION AND VALUE -- IMBUED TOKENIZED INFORMATION -- CHECK THIS UNIVERSAL MAPPING 
 		//STRING DATA ENCODING.. HOPEFULLY HUMAN READABLE --> PROMULAGATING EFFECTS OF EXCHANGE 
@@ -1107,941 +2041,6 @@ module.exports = {
 		//CREATE PROJECT --> TIME
 			//TIME --> TASK
 			//TASK --> PROJ LINKAGES
-
-		function generateStringSpace(){
-
-			console.log('GENERATE STRING SPACE!');
-			//WALK THE THE ASSOCIATIONS :) 
-			//LET'S START! 
-			//PROJECTMEMBER
-			var promises = [
-				//ACTION
-				Content.find().limit(100).skip(0).sort('createdAt DESC'),
-				//FOLLOW
-				Item.find().limit(100).skip(0).sort('createdAt DESC'),
-				Order.find().limit(100).skip(0).sort('createdAt DESC'),
-				Project.find().limit(1000).skip(0).sort('createdAt DESC'),
-				//Reaction.find().limit(100).skip(0).sort('createdAt DESC'),
-				Task.find().limit(100).skip(0).sort('createdAt DESC').populate('project'),
-				Time.find().limit(100).skip(0).sort('createdAt DESC').populate('task'),
-				Transaction.find().limit(100).skip(0).sort('createdAt DESC'),
-				User.find().limit(100).skip(0).sort('createdAt DESC'),
-				Validation.find().limit(100).skip(0).sort('createdAt DESC')
-			];
-			var type = [
-				//ACTION
-				'CONTENT',
-				'ITEM',
-				//FOLLOW
-				'ORDER',
-				'PROJECT',
-				//'REACTION',
-				'TASK',
-				'TIME',
-				'TRANSACTION',
-				'USER',
-				'VALIDATION',
-			];
-			Q.all(promises)
-			.then(function(data){
-				console.log('LOAD!');
-				var tokenSet = [];
-				for (x in data){
-					for (y in data[x]){
-						console.log(x,y)
-
-						if (type[x] == 'CONTENT'){
-
-							//CONTENT
-							var contentBaseModel = {
-								string: 'CRE8+CONTENT',
-								information:{
-									inCirculation:Math.floor(10000*Math.random()),
-									markets: 0,
-								},
-								protocols:[
-									'BASE',
-									'CONTENT'
-								],
-								logic:{
-									transferrable:true, 
-									mint:'ONCREATECONTENT'
-								}
-							};
-
-							//DEPRECIATE?
-							var contentNFTModel = {
-								string: data[x][y].id,
-								information:{
-									inCirculation:1,
-									markets: 0,
-								},
-								protocols:[
-									'BASE',
-									'CONTENT'
-								],
-								logic:{
-									transferrable:true, 
-									mint:'ONCREATECONTENT'
-								}
-							};
-
-							//DEPRECIATE?
-							var humanReadableContentNFTModel = {
-								string: 'CRE8+CONTENT+'+data[x][y].id,
-								information:{
-									inCirculation:1,
-									markets: 0,
-								},
-								protocols:[
-									'BASE',
-									'CONTENT'
-								],
-								logic:{
-									transferrable:true, 
-									mint:'ONCREATECONTENT'
-								}
-							};
-
-							tokenSet.push(contentBaseModel);
-							tokenSet.push(contentNFTModel);
-							tokenSet.push(humanReadableContentNFTModel);
-
-							if (data[x][y].type){
-
-								//CONTENT TYPE
-								//CONTENT+TYPE
-								var contentTypeModel = {
-									string: 'CRE8+CONTENT+'+data[x][y].type.toUpperCase(),
-									information:{
-										inCirculation:Math.floor(1000*Math.random()),
-										markets: 0,
-									},
-									protocols:[
-										'BASE', 
-										'CONTENT'
-									],
-									logic:{
-										transferrable:true, 
-										mint:'ONCREATE'+data[x][y].type.toUpperCase()
-									}
-								};
-
-								//DEPRECIATE?
-								//CONTENT+TYPE+ID
-								var humanReadableContentTypeNFTModel = {
-									string: 'CRE8+CONTENT+'+data[x][y].type.toUpperCase()+'+'+data[x][y].id,
-									information:{
-										inCirculation:1,
-										markets: 0,
-									},
-									protocols:[
-										'BASE',
-										'CONTENT'
-									],
-									logic:{
-										transferrable:true,
-										mint:'ONCREATECONTENT'
-									}
-								};
-
-								tokenSet.push(contentTypeModel);
-								tokenSet.push(humanReadableContentTypeNFTModel);
-
-							}
-
-							//TODO: ASSOCIATION WALK
-							//TODO: SYMMETRY FROM OTHER MODEL PERSPECTIVE
-
-						}
-
-						if (type[x] == 'ITEM'){
-
-							var itemBaseModel = {
-								string: 'ITEM',
-								information:{
-									inCirculation:Math.floor(10000*Math.random()),
-									markets: 0,
-								},
-								protocols:[
-									'BASE'
-								],
-								logic:{
-									transferrable:true, 
-									mint:'ONCREATEITEM'
-								}
-							};
-
-							var createItemBaseModel = {
-								string: 'CRE8+ITEM',
-								information:{
-									inCirculation:Math.floor(10000*Math.random()),
-									markets: 0,
-								},
-								protocols:[
-									'BASE'
-								],
-								logic:{
-									transferrable:true, 
-									mint:'ONCREATEITEM'
-								}
-							};
-
-							var humanReadableItemNFTModel = {
-								string: 'ITEM+'+data[x][y].id,
-								information:{
-									inCirculation:1,
-									markets: 0,
-								},
-								protocols:[
-									'BASE'
-								],
-								logic:{
-									transferrable:true, 
-									mint:'ONCREATECONTENT'
-								}
-							};
-
-							tokenSet.push(itemBaseModel);
-							tokenSet.push(createItemBaseModel);
-							tokenSet.push(humanReadableItemNFTModel);
-
-						}
-
-						if (type[x] == 'ORDER'){
-
-							//ORDER
-							var orderBaseModel = {
-								string: 'CRE8+ORDER',
-								information:{
-									inCirculation:Math.floor(10000*Math.random()),
-									markets: 0,
-								},
-								protocols:[
-									'BASE',
-									'CRE8',
-									'ORDER',
-								],
-								logic:{
-									transferrable:true, 
-									mint:'ONCREATEORDER'
-								}
-							};
-
-							//ORDER NFT
-							var humanReadableOrderNFTModel = {
-								string: 'CRE8+ORDER+'+data[x][y].id,
-								information:{
-									inCirculation:1,
-									markets: 0,
-								},
-								protocols:[
-									'BASE',
-									'CRE8',
-									'ORDER',
-								],
-								logic:{
-									transferrable:true, 
-									mint:'ONCREATEORDER'
-								}
-							};
-
-							//TODO PAIR ENCODING. 
-
-							tokenSet.push(orderBaseModel);
-							tokenSet.push(humanReadableOrderNFTModel);
-								
-						}
-
-						//CHERRY ON TOP
-						//ASSOCIATIONS
-						//PROJET --> TASK --> TIME LINKAGE
-						//PROJECT --> PROJECT LINKAGE
-						if (type[x] == 'PROJECT'){
-
-							var projectBaseModel = {
-								string: 'CRE8+PROJECT',
-								information:{
-									inCirculation:Math.floor(10000*Math.random()),
-									markets: 0,
-								},
-								protocols:[
-									'BASE',
-									'PROJECT'
-								],
-								logic:{
-									transferrable:true, 
-									mint:'ONCREATEPROJECT'
-								}
-							};
-
-							//GOES TO PROJECT
-							var projectTitleModel = {
-								string: 'PROJECT+'+data[x][y].title.replace(/ /g,'_').toUpperCase(),
-								information:{
-									inCirculation:Math.floor(10000*Math.random()),
-									markets: 0,
-								},
-								protocols:[
-									'BASE',
-									'PROJECT'
-								],
-								logic:{
-									transferrable:true, 
-									mint:'ONCREATEPROJECT, PROJECTMEMBER PERMISSIONS'
-								}
-							};
-
-							//DEPRECIATE -- SAMPLE
-							var projectPrelimModel = {
-								string: 'PROJECT+'+data[x][y].title.replace(/ /g,'_').toUpperCase()+'+CONTENT',
-								information:{
-									inCirculation:Math.floor(10000*Math.random()),
-									markets: 0,
-								},
-								protocols:[
-									'BASE',
-									'PROJECT'
-								],
-								logic:{
-									transferrable:true, 
-									mint:'ONCREATEPROJECTCONTENT -- VALIDATION APPROVAL'
-								}
-							};
-
-							tokenSet.push(projectBaseModel);
-							tokenSet.push(projectTitleModel);
-							tokenSet.push(projectPrelimModel);
-
-							//STRING SPACE SHOULD BE HUMAN READABLE --> ??? OR ID?
-							//console.log(data[x][y].title)
-							//DEPRECIATED?
-							//console.log('PARENT', data[x][y].parent);
-							//console.log(data[x][y].associatedModels);
-
-							//STRUCURE INTO PROMISE TO RETURN
-							projectAssociations(data[x][y].parent, data[x][y].title).then(function(projectModel){
-								
-								//console.log(projectModel);
-								var projectAssociationModel = {
-									string: 'PROJECT+'+projectModel.toUpperCase(),
-									information:{
-										inCirculation:Math.floor(10000*Math.random()),
-										markets: 0,
-									},
-									protocols:[
-										'BASE',
-										'ASSOCIATION'
-									],
-									logic:{
-										transferrable:true, 
-										mint:'ONCREATEPROJECT'
-									}
-								};
-
-								//DO BETTER
-								Token.find({string:projectAssociationModel.string}).then(function(aTokenModel){
-									if (aTokenModel.length == 0){
-										Token.create(projectAssociationModel).then(function(){
-											console.log(projectAssociationModel)
-										});
-									}
-									else{
-										Token.update({id:aTokenModel[0].id}, projectAssociationModel).then(function(){
-											console.log('UPDATE', projectAssociationModel)
-										});
-									}
-								});
-
-							});
-
-						}
-
-						//COULD ENCODE MORE EFFECTILY?? 
-						//MOST LIKEY DESCRETIZE 
-						//TODO: RECIEVER? 
-						if (type[x] == 'REACTION'){
-
-							//REACTION
-							var reactionBaseModel = {
-								string: 'REACTION',
-								information:{
-									inCirculation:Math.floor(10000*Math.random()),
-									markets: 0,
-								},
-								protocols:[
-									'BASE'
-								],
-								logic:{
-									transferrable:true, 
-									mint:'ONCREATEREACTION'
-								}
-							};
-
-							var reactionCreateModel = {
-								string: 'CRE8+REACTION',
-								information:{
-									inCirculation:Math.floor(10000*Math.random()),
-									markets: 0,
-								},
-								protocols:[
-									'BASE'
-								],
-								logic:{
-									transferrable:true, 
-									mint:'ONCREATEREACTION'
-								}
-							};
-
-							var reactionReceiveModel = {
-								string: 'RECEIVE+REACTION',
-								information:{
-									inCirculation:Math.floor(10000*Math.random()),
-									markets: 0,
-								},
-								protocols:[
-									'BASE'
-								],
-								logic:{
-									transferrable:true, 
-									mint:'ONCREATEREACTION'
-								}
-							};
-
-							//REACTION+LIKE
-							var reactionTypeBaseModel = {
-								string: 'REACTION+'+data[x][y].type.toUpperCase(),
-								information:{
-									inCirculation:Math.floor(10000*Math.random()),
-									markets: 0,
-								},
-								protocols:[
-									'BASE'
-								],
-								logic:{
-									transferrable:true, 
-									mint:'ONCREATEREACTION'
-								}
-							};
-
-							//REACTION+CREATE+LIKE
-							var reactionTypeCreateModel = {
-								string: 'REACTION+CREATE+'+data[x][y].type.toUpperCase(),
-								information:{
-									inCirculation:Math.floor(10000*Math.random()),
-									markets: 0,
-								},
-								protocols:[
-									'BASE'
-								],
-								logic:{
-									transferrable:true, 
-									mint:'ONCREATEREACTION'
-								}
-							};
-
-							//REACTION+RECEIVE+LIKE
-							var reactionTypeReceiveModel = {
-								string: 'REACTION+RECEIVE+'+data[x][y].type.toUpperCase(),
-								information:{
-									inCirculation:Math.floor(10000*Math.random()),
-									markets: 0,
-								},
-								protocols:[
-									'BASE'
-								],
-								logic:{
-									transferrable:true, 
-									mint:'ONCREATEREACTION'
-								}
-							};
-
-							//REACTION NFT
-							var humanReadableReactionNFTModel = {
-								string: 'REACTION+'+data[x][y].id,
-								information:{
-									inCirculation:1,
-									markets: 0,
-								},
-								protocols:[
-									'BASE'
-								],
-								logic:{
-									transferrable:true, 
-									mint:'ONCREATEREACTION'
-								}
-							};
-
-							tokenSet.push(reactionBaseModel);
-							tokenSet.push(reactionReceiveModel);
-							tokenSet.push(reactionRevieveModel);
-							tokenSet.push(reactionTypeBaseModel);
-							tokenSet.push(reactionTypeCreateModel);
-							tokenSet.push(reactionTypeReceiveModel);
-
-							tokenSet.push(humanReadableReactionNFTModel);
-
-							//CAN WE SIMPLIFY? NOT REALLY
-							if (data[x][y].associatedModels){
-								for (z in data[x][y].associatedModels){
-
-									//SYMMETRY HERE
-
-									//REACTION TYPE
-									//REACTION+CONTENT
-									var reactionAssociationTypeModel = {
-										string: 'REACTION+'+data[x][y].associatedModels[z].type.toUpperCase(),
-										information:{
-											inCirculation:Math.floor(100*Math.random()),
-											markets: 0,
-										},
-										protocols:[
-											'BASE'
-										],
-										logic:{
-											transferrable:true, 
-											mint:'ONCREATEREACTION'
-										}
-									};
-
-									//REACTION ADDRESS
-									//REACTION+ADDRESS
-									var reactionAssociationAddressModel = {
-										string: 'REACTION+'+data[x][y].associatedModels[z].id,
-										information:{
-											inCirculation:Math.floor(100*Math.random()),
-											markets: 0,
-										},
-										protocols:[
-											'BASE'
-										],
-										logic:{
-											transferrable:true, 
-											mint:'ONCREATEREACTION'
-										}
-									};
-
-									//REACTION TYPE ADDRESS
-									//REACTION+CONTENT+ADDRESS
-									var reactionAssociationTypeAddressModel = {
-										string: 'REACTION+'+data[x][y].associatedModels[z].type.toUpperCase()+'+'+data[x][y].associatedModels[z].id,
-										information:{
-											inCirculation:Math.floor(100*Math.random()),
-											markets: 0,
-										},
-										protocols:[
-											'BASE'
-										],
-										logic:{
-											transferrable:true, 
-											mint:'ONCREATEREACTION'
-										}
-									};
-
-									//REACTION TYPE ADDRESS
-									//REACTION+LIKE+ADDRESS
-									var reactionAssociationType1AddressModel = {
-										string: 'REACTION+'+data[x][y].type.toUpperCase()+'+'+data[x][y].associatedModels[z].id,
-										information:{
-											inCirculation:Math.floor(100*Math.random()),
-											markets: 0,
-										},
-										protocols:[
-											'BASE'
-										],
-										logic:{
-											transferrable:true, 
-											mint:'ONCREATEREACTION'
-										}
-									};
-
-									//REACTION TYPE TYPE
-									//REACTION+CONTENT+LIKE
-									var reactionAssociationTypeTypeModel = {
-										string: 'REACTION+'+data[x][y].associatedModels[z].type.toUpperCase()+'+'+data[x][y].type,
-										information:{
-											inCirculation:Math.floor(100*Math.random()),
-											markets: 0,
-										},
-										protocols:[
-											'BASE'
-										],
-										logic:{
-											transferrable:true, 
-											mint:'ONCREATEREACTION'
-										}
-									};
-
-									//REACTION ASSOICATION
-									//REACTION+CONTENT+LIKE+ADDRESS
-									var reactionAssociationTypeTypeAddressModel = {
-										string: 'REACTION+'+data[x][y].associatedModels[z].type+'+'+data[x][y].type.toUpperCase()+'+'+data[x][y].associatedModels[z].id,
-										information:{
-											inCirculation:Math.floor(100*Math.random()),
-											markets: 0,
-										},
-										protocols:[
-											'BASE'
-										],
-										logic:{
-											transferrable:true, 
-											mint:'ONCREATEREACTION'
-										}
-									};
-
-									//for (n in ['CREATE','RECEIVE']){
-
-									//}
-									//TODO: CREATOR AND RECIEVER OF THE REACTION..
-									//REACTION+CREATE
-									//REACTION+RECIEVE
-
-									tokenSet.push(reactionAssociationTypeModel);
-									tokenSet.push(reactionAssociationAddressModel);
-									tokenSet.push(reactionAssociationTypeAddressModel);
-									tokenSet.push(reactionAssociationType1AddressModel);
-									tokenSet.push(reactionAssociationTypeTypeModel);
-									tokenSet.push(reactionAssociationTypeTypeAddressModel);
-
-								}
-							}
-
-						}
-
-						if (type[x] == 'TASK'){
-							//TASK
-							var taskBaseModel = {
-								string: 'CRE8+TASK',
-								information:{
-									inCirculation:Math.floor(10000*Math.random()),
-									markets: 0,
-								},
-								protocols:[
-									'BASE'
-								],
-								logic:{
-									transferrable:true, 
-									mint:'ONCREATETASK'
-								}
-							};
-
-							var humanReadableTaskNFTModel = {
-								string: 'CRE8+TASK+'+data[x][y].id,
-								information:{
-									inCirculation:1,
-									markets: 0,
-								},
-								protocols:[
-									'BASE'
-								],
-								logic:{
-									transferrable:true, 
-									mint:'ONCREATETASK'
-								}
-							};
-
-							tokenSet.push(taskBaseModel);
-							tokenSet.push(humanReadableTaskNFTModel);
-
-							//TODO ASSOCIATION . . .
-							//NOT YET !
-						}
-
-						//TYPE.. VIEW
-						//TYPE.. DATA APIS.. TIME.. STREAM.. ETC
-						if (type[x] == 'TIME'){
-
-							//TIME
-							var timeBaseModel = {
-								string: 'CRE8+TIME',
-								information:{
-									inCirculation:Math.floor(10000*Math.random()),
-									markets: 0,
-								},
-								protocols:[
-									'BASE'
-								],
-								logic:{
-									transferrable:true, 
-									mint:'ONCREATETIME'
-								}
-							};
-
-							//TIME NFT
-							var humanReadableTimeNFTModel = {
-								string: 'CRE8+TIME+'+data[x][y].id,
-								information:{
-									inCirculation:1,
-									markets: 0,
-								},
-								protocols:[
-									'BASE'
-								],
-								logic:{
-									transferrable:true, 
-									mint:'ONCREATETIME'
-								}
-							};
-
-							//TODO: ASSOCIATIONS
-							//TODO: TAGS
-
-							tokenSet.push(timeBaseModel);
-							tokenSet.push(humanReadableTimeNFTModel);
-							
-						}
-
-						//IMPORTANT
-						if (type[x] == 'TRANSACTION'){
-
-							//TRANSACTION
-							var transactionBaseModel = {
-								string: 'TRANSACTION',
-								information:{
-									inCirculation:Math.floor(10000*Math.random()),
-									markets: 0,
-								},
-								protocols:[
-									'BASE'
-									],
-								logic:{
-									transferrable:true, 
-									mint:'ONCREATETRANSACTION'
-								}
-							};
-
-							//TRANSACTION
-							var createTransactionBaseModel = {
-								string: 'CRE8+TRANSACTION',
-								information:{
-									inCirculation:Math.floor(10000*Math.random()),
-									markets: 0,
-								},
-								protocols:[
-									'BASE'
-									],
-								logic:{
-									transferrable:true, 
-									mint:'ONCREATETRANSACTION'
-								}
-							};
-
-							//TEST
-							var recieveTransactionBaseModel = {
-								string: 'RECIEVE+TRANSACTION',
-								information:{
-									inCirculation:Math.floor(10000*Math.random()),
-									markets: 0,
-								},
-								protocols:[
-									'BASE'
-								],
-								logic:{
-									transferrable:true, 
-									mint:'ONCREATETRANSACTION'
-								}
-							};
-
-							var transactionBaseModelAsset = {
-								string: 'CRE8+TRANSACTION+'+data[x][y].asset,
-								information:{
-									inCirculation:Math.floor(10000*Math.random()),
-									markets: 0,
-								},
-								protocols:[
-									'BASE'
-								],
-								logic:{
-									transferrable:true, 
-									mint:'ONCREATETRANSACTION'
-								}
-							};
-
-							var transactionBaseModelAssetRecieve = {
-								string: 'RECIEVE+TRANSACTION+'+data[x][y].asset,
-								information:{
-									inCirculation:Math.floor(10000*Math.random()),
-									markets: 0,
-								},
-								protocols:[
-									'BASE'
-								],
-								logic:{
-									transferrable:true, 
-									mint:'ONCREATETRANSACTION'
-								}
-							};
-
-							var humanReadableTransactionNFTModel = {
-								string: 'CRE8+TRANSACTION+'+data[x][y].id,
-								information:{
-									inCirculation:1,
-									markets: 0,
-								},
-								protocols:[
-									'BASE'
-								],
-								logic:{
-									transferrable:true, 
-									mint:'ONCREATETRANSACTION'
-								}
-							};
-
-							var humanReadableTransactionRecieveNFTModel = {
-								string: 'RECIEVE+TRANSACTION+'+data[x][y].id,
-								information:{
-									inCirculation:1,
-									markets: 0,
-								},
-								protocols:[
-									'BASE'
-								],
-								logic:{
-									transferrable:true, 
-									mint:'ONCREATETRANSACTION'
-								}
-							};
-
-							//TODO: TAGS
-							//TODO: ASSETS
-							//TODO: SENDER
-							//TODO: RECIEVER
-							//TODO: CREATOR
-
-							tokenSet.push(transactionBaseModel);
-							tokenSet.push(createTransactionBaseModel);
-							tokenSet.push(recieveTransactionBaseModel);
-							tokenSet.push(transactionBaseModelAsset);
-							tokenSet.push(transactionBaseModelAssetRecieve);
-							tokenSet.push(humanReadableTransactionNFTModel);
-							tokenSet.push(humanReadableTransactionRecieveNFTModel);
-
-						}
-
-						if (type[x] == 'VALIDATION'){
-							//CREATEING ASSOCIATIONS :)
-
-							//VALIDATION
-							var validationBaseModel = {
-								string: 'CRE8+VALIDATION',
-								information:{
-									inCirculation:Math.floor(10000*Math.random()),
-									markets:0,
-								},
-								protocols:[
-									'BASE'
-								],
-								logic:{
-									transferrable:true, 
-									mint:'ONCREATEVALIDATION'
-								}
-							};
-
-							//VALIDATION NFT
-							var humanReadableValidationNFTModel = {
-								string: 'CRE8+VALIDATION+'+data[x][y].id,
-								information:{
-									inCirculation:1,
-									markets:0,
-								},
-								protocols:[
-									'BASE'
-								],
-								logic:{
-									transferrable:true, 
-									mint:'ONCREATEVALIDATION'
-								}
-							};
-
-							tokenSet.push(validationBaseModel);
-							tokenSet.push(humanReadableValidationNFTModel);
-							//ASSOCIATIONS
-							//TYPE
-							//COMPOUND
-							//TAGS..??
-						}
-
-						if (type[x] == 'USER'){
-							var humanReadableUserNFTModel = {
-								string: data[x][y].id,
-								information:{
-									inCirculation:0,
-									markets:0,
-								},
-								protocols:[
-									'BASE',
-									'MEMBER'
-								],
-								logic:{
-									transferrable:true, 
-									mint:'ONMEMBERCREATE'
-								}
-							};
-							tokenSet.push(humanReadableUserNFTModel);
-						}
-					}
-				}
-
-				//LOAD APPS 
-				//MANIFOLDS??
-				//SPECIAL CASE.. LOAD IN EXTRA PROTOCOLS
-				
-				//TOKEN VS MARKET (COMBINATORIAL TOKEN)
-
-				var universalTokenModel = {
-					string: 'UNIVERSALTOKEN',
-					information:{
-						inCirculation:0,
-						markets: 0,
-					},
-					protocols:[
-						'UNIVERSALTOKEN'
-					],
-					logic:{
-						transferrable:true, 
-						mint:'DAILY'
-					}
-				};
-				tokenSet.push(universalTokenModel);
-
-				//PROTOCOLS
-				//BASE, CONTENT, TIME, PROJECT, MEMBER
-					//MEMBER
-						//Address+
-						//on create of token string --> look up appropiate protocol;
-							//tokenstring --> protocol mapping
-						//simple search pattern match 
-						//mint operations for address & address+ 
-							//address == creator, transferrable, true
-
-				//ASSOCIATIONS ARE A CHALLANGE
-					//TOKEN LINKAGE -- LING STRING
-
-				//remove dups
-				var tokenSet_uniq = _.uniq(tokenSet, 'string'); 
-
-				//REPUTATION MANIFOLD
-				console.log(tokenSet_uniq)
-
-				async.eachSeries(tokenSet_uniq, function (token, nextIteration){ 
-					Token.find({string:token.string}).then(function(aTokenModel){
-						if (aTokenModel.length == 0){
-							Token.create(token).then(function(){
-								console.log(token)
-								process.nextTick(nextIteration);
-							});
-						}
-						else{
-							Token.update({id:aTokenModel[0].id}, token).then(function(){
-								console.log('UPDATE', token)
-								process.nextTick(nextIteration);
-							});
-						}
-					});
-				});	
-
-			});
-		};
 
 		//WERKIN
 		function modification(){
@@ -2300,9 +2299,8 @@ module.exports = {
 
 		};
 
-		modification();
-		//generateStringSpace();
-
+		//modification();
+		
 		//train('A', 0, 8);
 		//train('A', 0, 3);
 		//VALUE MATRIX | 2ND ORDER

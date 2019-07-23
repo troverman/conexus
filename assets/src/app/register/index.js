@@ -36,7 +36,6 @@ angular.module( 'conexus.register', [
             $scope.pop('ERROR', 'Invalid Email');
             $scope.valid = false;
         }
-        $scope.newMember.order = $scope.newOrderNEW;
         var data = JSON.stringify($scope.newMember);
         $rootScope.stateIsLoading = true;
         if ($scope.valid){

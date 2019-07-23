@@ -936,7 +936,7 @@ angular.module( 'conexus.developers', [
         },
         protocols:[
             'STRUCTURE',
-            'LANUGAGE',
+            'LANGUAGE',
             'CONGRUENCE',
             'MANIFOLD',
         ],

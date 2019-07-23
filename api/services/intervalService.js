@@ -109,9 +109,9 @@ module.exports.intervalService = function(){
 	//POPULATE TOKEN -- ALPHA.. 
 	//COALESE CONGRUENT DATA MAPPINGS.. 
 	//TOKEN IS A MAPPING FROM STRING TO PROTOCOLS (WHICH ARE LOGIC MAPS)
-	setInterval(dataService.traverse, 8640000);
+	setInterval(dataService.buildStringSpace, 8640000);
 
-
+	dataService.buildStringSpace();
 
 
 	//TODO: UPCONVERT FXN LOL NOOO
@@ -122,12 +122,6 @@ module.exports.intervalService = function(){
 	//		dataService.buildAssociationFromValidation(taskModels[x]);
 	//	}
 	//});
-
-
-
-
-
-
 
 
 	//DATA SERVICE

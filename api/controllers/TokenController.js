@@ -45,7 +45,16 @@ module.exports = {
 			.sort(sort)
 			.then(function(models) {
 				Token.subscribe(req, models);
-				res.json(models);
+
+				//TODO...
+				//Token.find({}).count()
+				//var numRecords = await Token.count();
+				Token.count().then(function(numRecords){
+					var returnObj = {data:models, info:{count:numRecords}};
+					console.log(returnObj)
+					res.json(returnObj);
+				});
+				
 			});
 		}
 

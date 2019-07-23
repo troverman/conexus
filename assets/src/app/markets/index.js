@@ -31,10 +31,11 @@ angular.module( 'conexus.markets', [
     //TOKEN VS MARKET
 
 
-    $scope.tokens = tokens.map(function(obj){
+    $scope.tokens = tokens.data.map(function(obj){
         obj.model = 'MARKET';
         return obj;
     });
+    $scope.tokenCount = tokens.info.count;
 
     $scope.tokensInCirculation = 100000+Math.round(Math.random()*10000);
 
@@ -266,7 +267,7 @@ angular.module( 'conexus.markets', [
         links:[]
     };
 
-    $scope.tokensMap = tokens.map(function(obj){return obj.string})
+    $scope.tokensMap = tokens.data.map(function(obj){return obj.string})
 
     var powerSet = getAllSubsets($scope.tokensMap.slice(0,4));
     powerSet.shift();
