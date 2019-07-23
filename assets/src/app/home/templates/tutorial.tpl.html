@@ -1,3 +1,19 @@
+
+<style>
+    .valueMapButton{
+        margin: 2px;
+        padding: 0 5px;
+        display: inline-block;
+        float: left;
+        font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
+        height: 40px;
+        line-height: 40px;
+        border: 2px solid #acacac;
+        border-radius: 3px;
+        background: rgba(0,43,85,1);
+        color: white;
+    }
+</style>
 <!--TODO: DYNAMIC TUTORIAL.....-->
 <div class="row">
 
@@ -136,23 +152,6 @@
                 </div>
             </div>
         </div>
-
-        <ul style="padding:0px;" class="member-tabs">
-            <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fa fa-filter"></i> Filter</a></li>
-
-            <li style="float:left;font-size:14px">
-                <a href="#" ng-click="filterToggle('VALUEMAP')">
-                    <i class="fas fa-coins"></i> Base Token <span style="font-size:10px;color:gray">{{baseToken.text}}</span>
-                </a>
-            </li>
-            <li style="float:left;font-size:14px">
-                <a href="#" ng-click="filterToggle('MANIFOLD', 'UNIVERSALTOKEN')"><i class="fas fa-infinity"></i> Manifold <span style="font-size:10px;color:gray">{{baseManifold.text}}</span></a>
-            </li>
-            <div style="clear:both"></div>
-        </ul>
-        <div class="card">
-            <tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search" ng-model="searchQueryArray"></tags-input>
-        </div>
         
         <!--
         <ul style="padding:0px;" class="member-tabs">
@@ -164,18 +163,54 @@
         </ul>
         -->
 
-        <div class="" style="max-height:100vh;overflow:auto">
+        <div class="">
 
             <!--BETTER-->
-            <div class="col-sm-3 col-xs-4" style="padding-left:0px;padding-right:0px">
+            <!--
+            <div class="col-sm-3 col-xs-4 mobileFix" style="padding-left:0px;padding-right:0px">
                 <div class="card">
                     <div style="font-size:14px;font-weight:bold" ng-repeat="item in sortedTagArray track by $index">
                         <button ng-click="createPosition(item.element)" class="btn btn-default log-btn">{{item.element}}</button>
                     </div>
                 </div>
             </div>
+            -->
+            <div class="col-sm-3 mobileFix" style="padding-left:0px;padding-right:0px;">
+                <div class="card" ng-click="filterToggle('DISCOVER', filterSet)">
+                    <div style="background:url('https://source.unsplash.com/1600x900/?details,notes,exolore,wonder,connection');min-height:50px" class="imageContainerSmall">
+                        <div style="background:rgba(0,0,0,0.75);height:50px" class="imageContainerSmallDiv">  
+                            <div style="margin-top: auto;margin-bottom: auto;">
+                                <div class="container">
+                                    <h1 style="text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;">Context</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="padding:16px;">
+                        <div ng-repeat="item in sortedTagArray track by $index" ng-click="$event.stopPropagation();filterContent(tag.element)">
+                            <a><b>{{item.element}}</b></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-            <div class="col-sm-9 col-xs-8" style="padding-left:0px;padding-right:0px">
+            <div class="col-sm-9 col-xs-12" style="padding-left:0px;padding-right:0px">
+
+                <ul style="padding:0px;" class="member-tabs">
+                    <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fa fa-filter"></i> Filter</a></li>
+                    <li style="float:left;font-size:14px">
+                        <a href="#" ng-click="filterToggle('VALUEMAP')">
+                            <i class="fas fa-coins"></i> Base Token <span style="font-size:10px;color:gray">{{baseToken.text}}</span>
+                        </a>
+                    </li>
+                    <li style="float:left;font-size:14px">
+                        <a href="#" ng-click="filterToggle('MANIFOLD', 'UNIVERSALTOKEN')"><i class="fas fa-infinity"></i> Manifold <span style="font-size:10px;color:gray">{{baseManifold.text}}</span></a>
+                    </li>
+                    <div style="clear:both"></div>
+                </ul>
+                <div class="card">
+                    <tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search" ng-model="searchQueryArray"></tags-input>
+                </div>
 
                 <div class="card">
 
@@ -195,9 +230,26 @@
                         </div>
                     </div>
 
+                    <div class="col-xs-12">
+                        <div class="" style="font-size:14px;font-weight:bold">
+                            <!--<div ng-repeat="item in sortedTagArray track by $index">
+                                <span ng-click="createPosition(item.element)">{{item.element}}</span>
+                            </div>-->
+                            <div class="spacing-10"></div>
+
+                            <span ng-click="createPosition(item.element)" ng-repeat="item in sortedTagArray track by $index">
+                                <p class="valueMapButton">{{item.element}}</p>
+                            </span>
+
+                            <div class="spacing-10"></div>
+
+                        </div>
+                    </div>
+
                     <div class="col-sm-6 col-xs-12">
                         <highchart config="chartMapTotal"></highchart>
                     </div>
+
                     <div class="col-sm-6 col-xs-12">
                         <highchart config="pieTotal"></highchart>
                     </div>
@@ -206,67 +258,49 @@
 
                 <div class="card">
 
-                     <div style="background:url('https://source.unsplash.com/1600x900/?love,art,geometry');min-height:50px" class="imageContainerSmall">
-                            <div style="background:rgba(0,0,0,0.75);height:50px" class="imageContainerSmallDiv">  
-                                <div style="margin-top: auto;margin-bottom: auto;padding:15px;">
-                                    <div class="row" style="text-align:center">
-                                        <div class="col-xs-6">
-                                            <span style="color:white">
-                                                Token Set Alpha
-                                            </span>
-                                        </div>
-                                        <div class="col-xs-6">
-                                            <span style="color:white">
-                                                Token Set Beta
-                                            </span>
-                                        </div>
+                    <div style="background:url('https://source.unsplash.com/1600x900/?love,art,geometry');min-height:50px" class="imageContainerSmall">
+                        <div style="background:rgba(0,0,0,0.75);height:50px" class="imageContainerSmallDiv">  
+                            <div style="margin-top: auto;margin-bottom: auto;padding:15px;">
+                                <div class="row" style="text-align:center">
+                                    <div class="col-xs-6">
+                                        <span style="color:white">
+                                            Token Set Alpha
+                                        </span>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <span style="color:white">
+                                            Token Set Beta
+                                        </span>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
+                    </div>
 
                     <div style="padding:16px">
-
-                        <!--
-                        <div style="font-size:14px;font-weight:bold" ng-repeat="item in sortedTagArray track by $index" class="card">
-                            <button ng-click="createPosition(item.element)" class="btn btn-default log-btn">{{item.element}}</button>
-                        </div>
-                        -->
-                        <!--
-                        <p>Please Select A Bundle of Valuable Context</p>
-                        -->
 
                         <div class="spacing-10"></div>
 
                         <div class="row">
-
                             <div class="col-xs-12">
                                 <div ng-repeat="item in newOrder">
-
                                     <div style="text-align:center" class="row">
-
                                         <div class="col-md-5">
                                             <span>{{1/newOrder.length*item[0].amount/100}}</span> 
                                             <a href="#" ng-click="cardDetailToggle(baseToken)">{{baseToken.text}}</a>
                                         </div>
-
                                         <div class="col-md-1">
                                             <a href="#" ng-click="informationToggle('MANIFOLD LOGIC')"><i class="fa fa-exchange"></i>*</a>
                                         </div>
-
                                         <div class="col-md-5">
                                             <span>86400</span>
                                             <a href="#" ng-click="cardDetailToggle(baseToken)">{{item[1].identifier.split('+')[2]}}</a>
                                             <p style="font-size:7px;color:gray">{{baseManifold.text}}</p>
                                         </div>
-
                                         <div class="col-md-1">
                                             <a href="#" ng-click="removePosition(item)"><i class="fas fa-remove"></i></a>
                                         </div>
-
                                     </div>
-
                                     <div layout="">
                                         <md-slider step="0.1" flex="" md-discrete="" ng-model="item[0].amount" step="1" min="0" max="100" aria-label="Amount"></md-slider>
                                     </div>
@@ -276,12 +310,10 @@
                                 </div>
                             </div>
                         </div>
-
+                        <button ng-click="orderToggle()" style="width:100%" class="btn btn-default log-btn">CREATE POSITION</button>
                     </div>
                 </div>
-
             </div>
-
         </div>
 
  
@@ -459,21 +491,22 @@
             <button class="btn btn-default log-btn" ng-click="projectToggle()">+ PROJECT</button>
         </div>
         -->
-
-        <div ng-repeat="item in projects">
-            <div class="card" ng-click="cardDetailToggle(item)">
-                <div style="padding:16px;">
-                    <div ng-click="$event.stopPropagation()"style="float:right">
-                        <button ng-click="$event.stopPropagation()" ng-if="(item.isMember != 'PENDING' || item.isMember == false) && item.isMember != true" class="btn btn-default" ng-click="join(item);">Join</button>
-                        <button ng-click="$event.stopPropagation()" ng-if="item.isMember == 'PENDING'" class="btn btn-default" ng-click="join(item);">Cancel Request</button>
-                        <button ng-click="$event.stopPropagation()" ng-if="item.isMember == true" class="btn btn-default" ng-click="join(item);">Leave</button>
+        <div style="max-height:70vh;overflow:auto">
+            <div ng-repeat="item in projects">
+                <div class="card" ng-click="cardDetailToggle(item)">
+                    <div style="padding:16px;">
+                        <div ng-click="$event.stopPropagation()"style="float:right">
+                            <button ng-click="$event.stopPropagation()" ng-if="(item.isMember != 'PENDING' || item.isMember == false) && item.isMember != true" class="btn btn-default" ng-click="join(item);">Join</button>
+                            <button ng-click="$event.stopPropagation()" ng-if="item.isMember == 'PENDING'" class="btn btn-default" ng-click="join(item);">Cancel Request</button>
+                            <button ng-click="$event.stopPropagation()" ng-if="item.isMember == true" class="btn btn-default" ng-click="join(item);">Leave</button>
+                        </div>
+                        <a ng-click="$event.stopPropagation()" href="/project/{{item.urlTitle}}" ui-sref="project.activity({path:item.urlTitle})">
+                            <img ng-click="$event.stopPropagation()" style="height:64px;float:left;margin-right:10px;" ng-src="{{item.avatarUrl}}">
+                            <h3 ng-click="$event.stopPropagation()" style="margin-top:0px">{{item.title}}</h3>
+                        </a>
+                        <div><span ng-bind-html="renderContent(item.description)"></span></div>
+                        <div style="clear:both"></div>
                     </div>
-                    <a ng-click="$event.stopPropagation()" href="/project/{{item.urlTitle}}" ui-sref="project.activity({path:item.urlTitle})">
-                        <img ng-click="$event.stopPropagation()" style="height:64px;float:left;margin-right:10px;" ng-src="{{item.avatarUrl}}">
-                        <h3 ng-click="$event.stopPropagation()" style="margin-top:0px">{{item.title}}</h3>
-                    </a>
-                    <div><span ng-bind-html="renderContent(item.description)"></span></div>
-                    <div style="clear:both"></div>
                 </div>
             </div>
         </div>
@@ -519,43 +552,39 @@
             <tags-input class="" min-length="1" placeholder="Search" ng-model="searchQuery"></tags-input>
         </div>
 
-        <!--
-        <div class="card">
-            <button class="btn btn-default log-btn" ng-click="taskToggle()">+ TASK</button>
-        </div>
-        -->
-           
         <!--ACTIVE FILTERS-->
-        <div ng-repeat="item in tasks" class="col-md-12 col-sm-12 col-xs-12" style="padding:0px">
-            <div class="card" ng-click="cardDetailToggle(item)">
+        <div style="max-height:70vh;overflow:auto">
+            <div ng-repeat="item in tasks" class="col-xs-12" style="padding:0px">
+                <div class="card" ng-click="cardDetailToggle(item)">
 
-                <div style="background:url('https://source.unsplash.com/1600x900/?{{item.tags}}');min-height:100px" class="imageContainerSmall">
-                    <div style="background:rgba(0,0,0,0.75);height:100px" class="imageContainerSmallDiv">
-                        <div style="text-align:right;padding:15px;position:absolute;right:0">
-                            <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
-                                <i class="fas fa-chevron-down"></i>
-                            </a>
-                        </div> 
-                        <div style="margin-top: auto;margin-bottom: auto;">
-                            <div style="padding:15px">
-                                <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;"><a ng-click="$event.stopPropagation()" href="task/{{item.id}}" ui-sref="tasks" style="color:white">{{item.title}}</a></h1>
+                    <div style="background:url('https://source.unsplash.com/1600x900/?{{item.tags}}');min-height:100px" class="imageContainerSmall">
+                        <div style="background:rgba(0,0,0,0.75);height:100px" class="imageContainerSmallDiv">
+                            <div style="text-align:right;padding:15px;position:absolute;right:0">
+                                <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
+                                    <i class="fas fa-chevron-down"></i>
+                                </a>
+                            </div> 
+                            <div style="margin-top: auto;margin-bottom: auto;">
+                                <div style="padding:15px">
+                                    <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;"><a ng-click="$event.stopPropagation()" href="task/{{item.id}}" ui-sref="tasks" style="color:white">{{item.title}}</a></h1>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div style="padding:16px;">
-                    <div ng-click="$event.stopPropagation()"style="float:right">
-                        <button class="btn btn-default" ng-click="$event.stopPropagation();interested(item)"><i class="fa fa-check"></i> Interested</button>
+                    <div style="padding:16px;">
+                        <div ng-click="$event.stopPropagation()"style="float:right">
+                            <button class="btn btn-default" ng-click="$event.stopPropagation();interested(item)"><i class="fa fa-check"></i> Interested</button>
+                        </div>
+                        <p><a ng-click="$event.stopPropagation()" ng-repeat="tag in item.tags track by $index" href="market/{{tag.trim()}}" ui-sref="market({id:tag.trim()})">{{tag.trim()}} </a></p>
+                        <p><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></p>
+                        <span style="color:gray" am-time-ago="item.createdAt"></span>
                     </div>
-                    <p><a ng-click="$event.stopPropagation()" ng-repeat="tag in item.tags track by $index" href="market/{{tag.trim()}}" ui-sref="market({id:tag.trim()})">{{tag.trim()}} </a></p>
-                    <p><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></p>
-                    <span style="color:gray" am-time-ago="item.createdAt"></span>
-                </div>
-                <div class="card-footer">
-                    <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fas fa-angle-up"></i> {{item.reactions.plus}} like </a> 
-                    <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fas fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
-                    <a ng-click="$event.stopPropagation();reply(item)" href="task/{{item.id}}" ui-sref="task({id:item.id})"><i class="far fa-comment"></i> comment </a>
-                    <a ng-click="$event.stopPropagation();reply(item)" href="task/{{item.id}}" ui-sref="task({id:item.id})" style="padding:0px" class="pull-right"><i class="fas fa-link grey"></i></a>
+                    <div class="card-footer">
+                        <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fas fa-angle-up"></i> {{item.reactions.plus}} like </a> 
+                        <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fas fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
+                        <a ng-click="$event.stopPropagation();reply(item)" href="task/{{item.id}}" ui-sref="task({id:item.id})"><i class="far fa-comment"></i> comment </a>
+                        <a ng-click="$event.stopPropagation();reply(item)" href="task/{{item.id}}" ui-sref="task({id:item.id})" style="padding:0px" class="pull-right"><i class="fas fa-link grey"></i></a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -592,8 +621,8 @@
                 <highchart config="totalMap"></highchart>
             </div>
         </div>
-        <div class="">
-            <div class="col-lg-4 col-sm-6" ng-repeat="item in members" style="padding-left:10px;padding-right:10px;">
+        <div style="max-height:70vh;overflow:auto">
+            <div class="col-sm-6" ng-repeat="item in members" style="padding-left:10px;padding-right:10px;">
                 <div class="member-card" style="margin-bottom:10px" ng-click="renderReputationToggle(item)">
                     <div class="member-card-image" style="background-image: url('{{item.coverUrl}}')">
                         <a ng-click="$event.stopPropagation()" href="member/{{item.username}}" ui-sref="member.activity({path:item.username})"><img ng-src="{{item.avatarUrl}}" err-src="/images/avatar.png"></a>
@@ -652,21 +681,7 @@
 
         <!--BASE DIMENSION VIEWER.. -->
         <!--SUGGESTED MANIFOLDS..-->
-        <ul style="padding:0px;" class="member-tabs">
-            <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fa fa-filter"></i> Filter</a></li>
-            <li style="float:left;font-size:14px">
-                <a href="#" ng-click="filterToggle('MANIFOLD', 'UNIVERSALTOKEN')"><i class="fas fa-infinity"></i> Manifold</a>
-                <br>
-                <p style="font-size:7px;color:gray">{{baseManifold.text}}</p>
-            </li>
-            <li style="float:right;font-size:14px"><a href="#" ng-click="filterToggle('VALUEMAP')"><i class="fa fa-eye"></i> {{baseToken.text}}</a></li>
-            <div style="clear:both"></div>
-        </ul>
-
-        <div class="card">
-            <tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search" ng-model="valueMapQuery"></tags-input>
-        </div>
-       
+      
         <!--DISCOVE MODULE-->
         <!--VALUE MAP PACKAGES-->  
 
@@ -684,43 +699,124 @@
         <!--MORE INTUITIVE..--> <!--SURVEY?? THIS IS THE SEX-->
 
         <div class="" style="max-height:100vh;overflow:auto;">
-            <div class="col-sm-3 col-xs-6" style="padding-left:0px;padding-right:0px;">
+
+            <div class="col-sm-3 mobileFix" style="padding-left:0px;padding-right:0px;">
+                <div class="card" ng-click="filterToggle('DISCOVER', filterSet)">
+                    <div style="background:url('https://source.unsplash.com/1600x900/?details,notes,exolore,wonder,connection');min-height:50px" class="imageContainerSmall">
+                        <div style="background:rgba(0,0,0,0.75);height:50px" class="imageContainerSmallDiv">  
+                            <div style="margin-top: auto;margin-bottom: auto;">
+                                <div class="container">
+                                    <h1 style="text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;">Context</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="padding:16px;">
+                        <div ng-repeat="item in sortedTagArray track by $index" ng-click="$event.stopPropagation();filterContent(tag.element)">
+                            <a><b>{{item.element}}</b></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--<div class="col-sm-3 col-xs-6" style="padding-left:0px;padding-right:0px;">
                 <div class="card">
-                    <!--sortedsuggestedTokenTags-->
                     <div style="font-size:14px;font-weight:bold" ng-repeat="item in sortedTagArray track by $index">
                         <button ng-click="createPosition(item.element)" class="btn btn-default log-btn">{{item.element}}</button>
                     </div>
                 </div>
-            </div>
-            <div class="col-sm-9 col-xs-6" style="padding-left:0px;padding-right:0px;">
+            </div>-->
+
+
+            <div class="col-sm-9 col-xs-12" style="padding-left:0px;padding-right:0px;">
+
+                <ul style="padding:0px;" class="member-tabs">
+                    <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fa fa-filter"></i> Filter</a></li>
+                    <li style="float:left;font-size:14px">
+                        <a href="#" ng-click="filterToggle('VALUEMAP')">
+                            <i class="fas fa-coins"></i> Base Token <span style="font-size:10px;color:gray">{{baseToken.text}}</span>
+                        </a>
+                    </li>
+                    <li style="float:left;font-size:14px">
+                        <a href="#" ng-click="filterToggle('MANIFOLD', 'UNIVERSALTOKEN')"><i class="fas fa-infinity"></i> Manifold <span style="font-size:10px;color:gray">{{baseManifold.text}}</span></a>
+                    </li>
+                    <div style="clear:both"></div>
+                </ul>
+
                 <div class="card">
-                    <div style="padding:16px;">
+                    <tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search" ng-model="valueMapQuery"></tags-input>
+                </div>
+               
 
-                        <p style="color:gray;font-style:italic">{{baseToken.description}}</p>
-                        
-                        <div class="spacing-10"></div>
-
-                        <!--VARIABLE PER SLIDER. 4-->
-                        <div layout="">
-                            <div flex="35" layout="" layout-align="center center"><span class="md-body-1" style="color:gray">Token String <a ng-click="informationToggle('VALUEMAP')" href="#"><i class="fa fa-question-circle"></i></a></span></div>
-                            <div flex="65" layout="" layout-align="center center"><span class="md-body-1" style="color:gray">Token String / Base Token String <a ng-click="informationToggle('VALUEMAP')" href="#"><i class="fa fa-question-circle"></i></a></span></div>
+                <div class="card">
+                    
+                    <div style="background:url('https://source.unsplash.com/1600x900/?love,art,geometry');min-height:150px;" class="imageContainerSmall">
+                        <div style="background:rgba(0,0,0,0.75);height:150px;" class="imageContainerSmallDiv">  
+                            <div style="text-align:right;padding:15px;position:absolute;right:0">
+                                <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><i class="fas fa-universal-access"></i></a>
+                            </div> 
+                            <div style="margin-top: auto;margin-bottom: auto;padding:15px;">
+                                <h4 style="text-align:left;color:rgba(255,255,255,0.9);font-weight:400;">{{baseToken.text}}</h4>
+                                <h5 style="color:white;">Manifold: {{baseManifold.text}}</h5>
+                                <h5 style="color:white;">Continual Position</h5>
+                            </div>
                         </div>
+                    </div>
 
+                    <div class="spacing-10"></div>
+
+                    <div class="col-xs-12">
+                        <p style="color:gray;font-style:italic">{{baseToken.description}}</p>
+                        <p style="color:gray;font-style:italic">{{baseManifold.description}}</p>
+                        <p style="color:gray;font-style:italic">Continual Position</p>
+                    </div>
+
+                    <div class="spacing-10"></div>
+
+                    <div class="col-xs-12">
+                        <div class="" style="font-size:14px;font-weight:bold">
+                            <span ng-click="createPosition(item.element)" ng-repeat="item in sortedTagArray track by $index">
+                                <p class="valueMapButton">{{item.element}}</p>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="spacing-10"></div>
+
+                    <div class="col-sm-6 col-xs-12"><highchart config="chartMapTotal"></highchart></div>
+                    <div class="col-sm-6 col-xs-12"><highchart config="pieTotal"></highchart></div>
+
+                </div>
+
+                <div class="card">
+                    <div style="background:url('https://source.unsplash.com/1600x900/?love,art,geometry');min-height:50px" class="imageContainerSmall">
+                        <div style="background:rgba(0,0,0,0.75);height:50px" class="imageContainerSmallDiv">  
+                            <div style="margin-top: auto;margin-bottom: auto;padding:15px;">
+                                <div class="row" style="text-align:center">
+                                    <div class="col-xs-6">
+                                        <span style="color:white">
+                                            Token Set Alpha
+                                        </span>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <span style="color:white">
+                                            Token Set Beta
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="padding:16px;">    
                         <div class="spacing-10"></div>
-                        
                         <div class="row">
                             <div class="col-xs-12">
                                 <div ng-repeat="item in newOrder">
-                                    <!--TODO: TWO ROWS-->
                                     <div layout="">
-                                        <!--SELECTED ABSOLUTE.. OR RELATIVE POSITION ? PERCENTAGES? UPDATE HERE... -->
                                         <div flex="10" layout="" layout-align="center center">3600</div>
-                                        <!--SPONSORSHIP MANIFOLD SELECTED..-->
                                         <div flex="25" layout="" layout-align="center center">
                                             <a>{{item[1].identifier.split('+')[2]}}</a>
                                         </div>
-                                        <!--<div flex="15" layout="" layout-align="center center">{{item[0].amount || 0}}</div>-->
-                                        <!--(BASE)UNIVERSAL TOKEN ABSOLUTE.. OR RELATIVE POSITION ? PERCENTAGES? UPDATE HERE... -->
                                         <div flex="30" layout="" layout-align="center center">{{1/newOrder.length*item[0].amount/100}}</span></div>
                                         <div flex="30" layout="" layout-align="center center"><a>Universal Token</a></div>
                                         <div flex="5" layout="" layout-align="center center"><a ng-click="removePosition(item)"><i class="fas fa-remove"></i></a></div>
@@ -730,21 +826,17 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-6 col-xs-12">
-                                <highchart config="chartMapTotal"></highchart>
-                            </div>
-                            <div class="col-sm-6 col-xs-12">
-                                <highchart config="pieTotal"></highchart>
-                            </div>
                         </div>
-
+                        <button ng-click="orderToggle()" style="width:100%" class="btn btn-default log-btn">CREATE POSITION</button>
                     </div>
                 </div>
             </div>
+
         </div>
 
         <!--CURRENT VALUE MAP.. RENDER AND UNIFY WITH SUGGESTIONS AND UPDATE..  -->
-        <div class="row" style="">
+        <!--TODO.. TABS-->
+        <div class="row" ng-if="selectedTab =='POSITIONS'">
             <div class="col-xs-12">
                 <div ng-repeat="item in positions">
                     <div ng-include="'templates/cards/orderCard.tpl.html'"></div>
@@ -781,7 +873,14 @@
     </div>
 
     <div class="">
-        <div class="col-xs-9" style="padding-left:0px;padding-right:0px">
+        <!--
+        <div class="col-xs-3" style="padding-left:0px;padding-right:0px">
+            <div ng-if="pageNumber > 0" class="card" ng-click="changePage()" style="text-align:center">
+                <button ng-disabled="!consentAgreement" style="width:100%" class="btn btn-default log-btn"><i class="fa fa-arrow-left"></i> BACK </button>
+            </div>
+        </div>
+        -->
+        <div class="col-xs-6" style="padding-left:0px;padding-right:0px">
             <div class="card" ng-click="changePage()" style="text-align:center">
                 <button ng-disabled="!consentAgreement" style="width:100%" class="btn btn-default log-btn">CONTINUE <i class="fa fa-arrow-right"></i></button>
             </div>
