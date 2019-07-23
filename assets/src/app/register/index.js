@@ -8,43 +8,62 @@ angular.module( 'conexus.register', [
 				controller: 'RegisterCtrl',
 				templateUrl: 'register/index.tpl.html'
 			}
-		},
-        resolve:{
-            contentList: ['ContentModel', function(ContentModel){
-                return ContentModel.getSome({limit:10, skip:0, sort:'createdAt DESC'});
-            }],
-            tasks: ['TaskModel', function(TaskModel){
-                return TaskModel.getSome({limit:10, skip:0, sort:'createdAt DESC'});
-            }],
-        }
+		}
 	});
 }])
-.controller( 'RegisterCtrl', ['$http', '$location', '$rootScope', '$scope', 'contentList', 'tasks', 'toaster', function RegisterController( $http, $location, $rootScope, $scope, contentList, tasks, toaster ) {
+.controller( 'RegisterCtrl', ['$http', '$location', '$rootScope', '$scope', 'toaster', function RegisterController( $http, $location, $rootScope, $scope, contentList, tasks, toaster ) {
 	
     if ($rootScope.currentUser){$location.path('/')}
-    $rootScope.baseMarkets = [{text:'UNIVERSALTOKEN'}];
-    $rootScope.showMap = true;
-
-    //var promises = [
-        //ContentModel.getSome({limit:10, skip:0, sort:'createdAt DESC'})
-        //TaskModel.getSome({limit:10, skip:0, sort:'createdAt DESC'})
-    //];
-    //var query = ...
-
-    $scope.contentList = contentList;
 	$scope.newMember = {};
-    $scope.newMember.avatarUrl = 'https://source.unsplash.com/256x256/?community,sharing,new,code';
 
-	$scope.newOrder = [];
-    $scope.newOrderNEW = [];
-    $scope.pageNumber = 0; //-1
-	$scope.showIntro = true;
-	$scope.showValue = false;
-	$scope.showDaily = false;
-	$scope.showPersonal = false;
-	$scope.showFinal = false;
-	$scope.tasks = tasks;
+    $scope.registerUser = function(){
+        $scope.valid = true;
+        if ($scope.newMember.password){
+            if ($scope.newMember.password.length < 8){
+                $scope.pop('ERROR', 'Password must be longer than 8 Characters');
+                $scope.valid = false;
+            }
+        }
+        else{
+            $scope.pop('ERROR', 'Password must be longer than 8 Characters');
+            $scope.valid = false;
+        }
+        if (!$scope.newMember.username){
+            $scope.pop('ERROR', 'Invalid Username');
+            $scope.valid = false;
+        }
+        if (!$scope.newMember.email){
+            $scope.pop('ERROR', 'Invalid Email');
+            $scope.valid = false;
+        }
+        $scope.newMember.order = $scope.newOrderNEW;
+        var data = JSON.stringify($scope.newMember);
+        $rootScope.stateIsLoading = true;
+        if ($scope.valid){
+            $http({method:'POST', url:'/auth/local/register', data:data}).then(function(newModel){
+                $rootScope.currentUser = newModel.data;
+                $location.path('/');
+            });
+        }
+    };
 
+    $scope.pop = function(title, body){
+        toaster.pop({
+            type:'warning',
+            title: title,
+            body: body,
+            onShowCallback: function (toast) { 
+                var audio = new Audio('audio/ping.mp3');
+                audio.play()
+                .then(function(audio){console.log('dingdong')})
+                .catch(function(err){console.log(err)})
+            }
+        });
+    };
+
+
+    //VALUE MAP CONTROLS
+    /*
 	$scope.dailyTimeValue = [
 		{text:'Rest', percentage: 33.333},
 		{text:'Work', percentage: 25},
@@ -52,7 +71,6 @@ angular.module( 'conexus.register', [
 		{text:'Learning', percentage: 8.333},
 		{text:'Exercise', percentage: 8.333},
 	];
-
 	$scope.chartMapTime = {
         chart: {
             polar: true,
@@ -83,7 +101,6 @@ angular.module( 'conexus.register', [
         tooltip:{shared: true,},
         credits:{enabled:false},
     };
-
     $scope.chartMapTime.series.push({
         id: 'values',
         type: 'area',
@@ -92,14 +109,11 @@ angular.module( 'conexus.register', [
         data: [],
         fillOpacity: 0.3,
     });
-    
-    //PERFORMANCE....
     $scope.updateChartTime = function(){
         $scope.chartMapTime.xAxis.categories = $scope.dailyTimeValue.map(function(obj){return obj.text});
         $scope.chartMapTime.series[0].data = $scope.dailyTimeValue.map(function(obj){return obj.percentage});
     };
     $scope.updateChartTime();
-
     $scope.chartMapTotal = {
         chart: {
             polar: true,
@@ -137,14 +151,11 @@ angular.module( 'conexus.register', [
         tooltip:{shared: true,},
         credits:{enabled:false},
     };
-
-    //PERFORMANCE....
     $scope.updateChartTotal = function(){
         $scope.chartMapTotal.xAxis.categories = $scope.newOrder.map(function(obj){return obj[1].identifier.split('+')[2]});
         $scope.chartMapTotal.series[0].data = $scope.newOrder.map(function(obj){return obj[0].amount});
         console.log($scope.chartMapTotal)
     };
-
     $scope.pieTotal = {
         chart: {},
         series: [{
@@ -167,27 +178,20 @@ angular.module( 'conexus.register', [
         yAxis: {title: {text: null}},
         credits:{enabled:false},
     };
-
     $scope.updatePieTotal = function(){
         var data = $scope.newOrder.map(function(obj){return {name: obj[1].identifier.split('+')[2], y:obj[0].amount}})
         $scope.pieTotal.series[0].data = data;
-        console.log( $scope.pieTotal)
     };
-
     $scope.removePosition = function(model){
         var index = $scope.newOrder.map(function(obj){return obj[0].identifier}).indexOf(model[0].identifier);
         if (index != -1){$scope.newOrder.splice(index, 1)}
     };
-
-    console.log($scope.chartMapTotal, $scope.pieTotal);
-
     $scope.$watch('newOrder', function(newValue, oldValue){
         if (oldValue != newValue){
             $scope.updateChartTotal();
             $scope.updatePieTotal();
         }
     }, true);
-
     $scope.$watch('dailyTimeValue', function(newValue, oldValue){
         if (newValue != oldValue){
             $scope.dailyTimeValue.map(function(obj){if(!obj.percentage){obj.percentage=0} return obj});
@@ -206,7 +210,6 @@ angular.module( 'conexus.register', [
             $scope.updateChartTime();
         }
     }, true);
-    
     $scope.changePage = function(model){
         window.scrollTo(0, 0);
         if (typeof model === 'number'){$scope.pageNumber = model;} 
@@ -214,112 +217,27 @@ angular.module( 'conexus.register', [
         else if (model == 'BACK'){$scope.pageNumber--;}
         else{$scope.pageNumber++}
     };
-
-
-    //WORK!
 	$scope.createPosition = function(model){
         if($scope.newOrder.map(function(obj){return obj[1].identifier.split('+')[2]}).indexOf(model) == -1){
-
-            //OBJ OR ARRAY?
-            console.log(model, $scope.newOrder)
             var setAlpha = {
                 'UNIVERSALTOKEN':1
             };
             var setBeta = {};
             setBeta['CRE8+TIME+'+model.toUpperCase()+'+ONMINT+SPONSOR+[ADDRESS]'] = 86400;
-
         	$scope.newOrderNEW.push({
                 setAlpha:setAlpha,
                 setBeta:setBeta,
                 type:'ONBOOK',
                 status:'CONTINUAL'
             });
-
-            //$scope.newOrderLIST.push({
-            //    order:[
-            //        [{string:'UNIVERSALTOKEN',amount:1}],
-            //        [{string:model+'+[ADDRESS]+SPONSOR',amount:3600}]
-            //    ],
-            //    type:'ONBOOK',
-            //    status:'CONTINUAL'
-            //});
-
             $scope.newOrder.push(
                 [
                     {amount:1, identifier:'UNIVERSALTOKEN'}, 
                     {amount:86400, identifier:'CRE8+TIME+'+model.toUpperCase()+'+ONMINT+SPONSOR+[ADDRESS]'}
                 ]
             );
-
         }
     };
-
-    $scope.pop = function(title, body){
-        toaster.pop({
-            type:'warning',
-            title: title,
-            body: body,
-            onShowCallback: function (toast) { 
-                var audio = new Audio('audio/ping.mp3');
-                audio.play()
-                .then(function(audio){console.log('dingdong')})
-                .catch(function(err){console.log(err)})
-            }
-        });
-    };
-    $scope.registerUser = function(){
-        $scope.valid = true;
-        //TODO: FORM VALIDATION
-        if ($scope.newMember.password){
-            if ($scope.newMember.password.length < 8){
-                $scope.pop('ERROR', 'Password must be longer than 8 Characters');
-                $scope.valid = false;
-            }
-        }
-        else{
-            $scope.pop('ERROR', 'Password must be longer than 8 Characters');
-            $scope.valid = false;
-        }
-        if (!$scope.newMember.username){
-            $scope.pop('ERROR', 'Invalid Username');
-            $scope.valid = false;
-        }
-        if (!$scope.newMember.email){
-            $scope.pop('ERROR', 'Invalid Email');
-            $scope.valid = false;
-        }
-        $scope.newMember.order = $scope.newOrderNEW;
-        var data = JSON.stringify($scope.newMember);
-        $rootScope.stateIsLoading = true;
-        if ($scope.valid){
-            $http({method:'POST', url:'/auth/local/register', data:data}).then(function(newModel){
-                $rootScope.currentUser = newModel.data;
-                $location.path('/');
-            });
-        }
-    };
-
-    $scope.activity = [].concat.apply([], [$scope.contentList, $scope.tasks]);
-
-    $scope.loadTags = function(){
-        $scope.tags = $scope.activity.map(function(obj){
-            var returnObj = {};
-            if(obj.tags){obj.tags = obj.tags.split(',')}
-            returnObj = obj.tags;
-            return returnObj;
-        });
-        $scope.tags = [].concat.apply([], $scope.tags);
-        $scope.tags = $scope.tags.filter(function(e){return e});
-        function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
-        $scope.sortedTagArray = [];
-        for (x in $scope.tags){
-            var amount = countInArray($scope.tags, $scope.tags[x]);
-            if ($scope.sortedTagArray.map(function(obj){return obj.element}).indexOf($scope.tags[x]) == -1){
-                $scope.sortedTagArray.push({amount:amount, element:$scope.tags[x]})
-            }
-        }
-        $scope.sortedTagArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
-    };
-    $scope.loadTags();
+    */
 
 }]);

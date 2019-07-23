@@ -6505,6 +6505,7 @@ angular.module("home/templates/tutorial.tpl.html", []).run(["$templateCache", fu
     "            </div>\n" +
     "        </div>\n" +
     "        -->\n" +
+    "        <div class=\"col-xs-3\" style=\"padding-left:0px;padding-right:0px\"></div>\n" +
     "        <div class=\"col-xs-6\" style=\"padding-left:0px;padding-right:0px\">\n" +
     "            <div class=\"card\" ng-click=\"changePage()\" style=\"text-align:center\">\n" +
     "                <button ng-disabled=\"!consentAgreement\" style=\"width:100%\" class=\"btn btn-default log-btn\">CONTINUE <i class=\"fa fa-arrow-right\"></i></button>\n" +
@@ -6968,8 +6969,9 @@ angular.module("login/index.tpl.html", []).run(["$templateCache", function($temp
     "    </div>\n" +
     "</div>\n" +
     "\n" +
+    "<div class=\"spacing-25\"></div>\n" +
+    "\n" +
     "<div class=\"container\">\n" +
-    "    <div class=\"spacing-25\"></div>\n" +
     "    <div class=\"row\">\n" +
     "        <div class=\"col-md-10 col-md-offset-1\">\n" +
     "            <div class=\"login-form\">\n" +
@@ -13261,20 +13263,19 @@ angular.module("reaction/index.tpl.html", []).run(["$templateCache", function($t
 
 angular.module("register/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("register/index.tpl.html",
-    "<div style=\"background:url('https://source.unsplash.com/1600x900/?love,art,geometry')\" class=\"imageContainerSmall\">\n" +
+    "<div style=\"background:url('https://source.unsplash.com/1600x900/?explore,discover')\" class=\"imageContainerSmall\">\n" +
     "    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "            <div class=\"container\">\n" +
-    "                <h1 class=\"imageContainerSmallDivH1\">Join Our Community</h1>\n" +
+    "                <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Join Our Community!</h1>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "</div>\n" +
     "\n" +
+    "<!--\n" +
     "<div class=\"container\" ng-if=\"showMap\">\n" +
     "    <div class=\"row\">\n" +
-    "\n" +
-    "        <!--DEPRECIATE?-->\n" +
     "        <div ng-show=\"pageNumber == 0\">\n" +
     "            <div class=\"card\">\n" +
     "                <div style=\"background:url('https://source.unsplash.com/1600x900/?creative,geometry,technology,rockets')\" class=\"imageContainerSmall\">\n" +
@@ -13292,8 +13293,6 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
-    "\n" +
-    "        <!--TODO: REORDER? - MOVE TO TUTORIAL-->\n" +
     "        <div ng-show=\"pageNumber == 1\">\n" +
     "            <div class=\"card\">\n" +
     "                <div style=\"background:url('https://source.unsplash.com/1600x900/?love,art,geometry')\" class=\"imageContainerSmall\">\n" +
@@ -13330,41 +13329,18 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "                <div style=\"padding:16px;\">\n" +
     "                    <div class=\"row\">\n" +
     "                        <div class=\"col-sm-3 col-xs-12\" style=\"max-height:50vh;overflow:auto\">\n" +
-    "                            <!--VALUE MAP CONTROLS-->\n" +
     "                            <div style=\"font-size:14px;font-weight:bold\" ng-repeat=\"item in sortedTagArray track by $index\">\n" +
     "                                <button ng-click=\"createPosition(item.element)\" class=\"btn btn-default log-btn\">{{item.element}}</button>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
     "                        <div class=\"col-sm-9 col-xs-12\">\n" +
-    "\n" +
-    "\n" +
-    "                             <!--VARIABLE PER SLIDER. 4-->\n" +
     "                            <div layout=\"\">\n" +
     "                                <div flex=\"35\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\" style=\"color:gray\">Token String <a ng-click=\"informationToggle('VALUEMAP')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></span></div>\n" +
     "                                <div flex=\"65\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\" style=\"color:gray\">Token String / Base Token String <a ng-click=\"informationToggle('VALUEMAP')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></span></div>\n" +
     "                            </div>\n" +
-    "\n" +
     "                            <div class=\"spacing-10\"></div>\n" +
-    "\n" +
     "                            <div class=\"row\">\n" +
     "                                <div class=\"col-xs-12\">\n" +
-    "                                    <!--\n" +
-    "                                    <div>\n" +
-    "                                        <p style=\"color:gray;margin:0px;font-size:12px\"><b>What is this?</b></p>\n" +
-    "                                        <p style=\"font-style:italic;color:gray;margin:0px;font-size:12px\">We start defining your value map though understanding statements of preference. This is used to coordinate orders on CRE8's Multi Dimensional Token Market.</p>\n" +
-    "                                        <p style=\"font-style:italic;color:gray;margin:0px;font-size:12px\">We present a context of discovery for tokenization actions. Actions are manifest though projects, tasks, time, content, and a variety of other protocol actions are represented on CRE8's network.</p>\n" +
-    "                                    </div>\n" +
-    "                                    -->\n" +
-    "                                    <!--\n" +
-    "                                    <div ng-repeat=\"item in newOrder\">\n" +
-    "                                        <div layout=\"\">\n" +
-    "                                            <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{item[1].identifier.split('+')[2]}}</span></div>\n" +
-    "                                            <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"item[0].amount\" step=\"1\" min=\"0\" max=\"100\" aria-label=\"Amount\"></md-slider>\n" +
-    "                                            <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{item[0].amount || 0}}</span></div>\n" +
-    "                                        </div>\n" +
-    "                                    </div>\n" +
-    "                                    -->\n" +
-    "\n" +
     "                                    <div ng-repeat=\"item in newOrder\">\n" +
     "                                    \n" +
     "                                        <div layout=\"\">\n" +
@@ -13384,13 +13360,7 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "                                            <div flex=\"30\" layout=\"\" layout-align=\"center center\"><a>Universal Token</a></div>\n" +
     "                                            <div flex=\"5\" layout=\"\" layout-align=\"center center\"><a href=\"#\" ng-click=\"removePosition(item)\"><i class=\"fas fa-remove\"></i></a></div>\n" +
     "                                        </div>\n" +
-    "\n" +
-    "                                        <!--<div>\n" +
-    "                                            <a>{{item[1].identifier.split('+')[2]}}</a>\n" +
-    "                                            <p style=\"font-size:7px;color:gray\">+ONMINT+SPONSOR+(address)</p>\n" +
-    "                                        </div>-->\n" +
     "                                    </div>\n" +
-    "\n" +
     "                                </div>\n" +
     "                            </div>\n" +
     "                            <div class=\"row\">\n" +
@@ -13409,7 +13379,6 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "                <button type=\"submit\" style=\"width:100%\" ng-click=\"changePage('FORWARD')\" class=\"btn btn-default log-btn\">Continue <i class=\"fa fa-arrow-right\"></i></button>\n" +
     "            </div>\n" +
     "        </div>\n" +
-    "\n" +
     "        <div ng-show=\"false\">\n" +
     "            <div class=\"card\">\n" +
     "                <div style=\"background:url('https://source.unsplash.com/1600x900/?rest,exercise,work,play')\" class=\"imageContainerSmall\">\n" +
@@ -13455,7 +13424,6 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "                <button type=\"submit\" style=\"width:100%\" ng-click=\"changePage('FORWARD')\" class=\"btn btn-default log-btn\">Continue <i class=\"fa fa-arrow-right\"></i></button>\n" +
     "            </div>\n" +
     "        </div>\n" +
-    "\n" +
     "        <div ng-show=\"pageNumber == 2\">\n" +
     "            <div class=\"card\">\n" +
     "                <div style=\"background:url('https://source.unsplash.com/1600x900/?information,genetics,dna,human,personal,passport,identity')\" class=\"imageContainerSmall\">\n" +
@@ -13478,10 +13446,6 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "            </div>\n" +
     "            <div class=\"card\">\n" +
     "                <div style=\"padding:16px;\">\n" +
-    "                    <!--\n" +
-    "                    <div style=\"padding:0px\" class=\"col-xs-12\"><h5>Avatar Url</h5><input type=\"text\" ng-model=\"newMember.avatarUrl\" placeholder=\"Avatar Url\" class=\"form-control\"></div>\n" +
-    "                    <div style=\"padding:0px\" class=\"col-xs-12\"><h5>Cover Url</h5><input type=\"text\" ng-model=\"newMember.coverUrl\" placeholder=\"Cover Url\" class=\"form-control\"></div>\n" +
-    "                    -->\n" +
     "                    <div style=\"padding:0px\" class=\"col-xs-4\"><h5>First Name</h5><input type=\"text\" ng-disabled=\"!consentAgreement\" ng-model=\"newMember.firstName\" placeholder=\"First Name\" class=\"form-control\"></div>\n" +
     "                    <div style=\"padding:0px\" class=\"col-xs-4\"><h5>Last Name</h5><input type=\"text\" ng-disabled=\"!consentAgreement\" ng-model=\"newMember.lastName\" placeholder=\"Last Name\" class=\"form-control\"></div>\n" +
     "                    <div style=\"padding:0px\" class=\"col-xs-4\"><h5>Date Of Birth</h5><input type=\"date\" ng-disabled=\"!consentAgreement\" ng-model=\"newMember.dateOfBirth\" placeholder=\"Date of Birth\" class=\"form-control\"></div>\n" +
@@ -13497,9 +13461,7 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "                <div class=\"col-md-2 col-sm-2 col-xs-3\"  style=\"padding:0px\"><button type=\"submit\" style=\"width:100%\" ng-click=\"changePage('BACK')\" class=\"btn btn-default log-btn\"><i class=\"fa fa-arrow-left\"></i> Back</button></div>\n" +
     "                <div class=\"col-md-10 col-sm-10 col-xs-9\" style=\"padding:0px\"><button type=\"submit\" style=\"width:100%\" ng-click=\"changePage('FORWARD')\" class=\"btn btn-default log-btn\">Continue <i class=\"fa fa-arrow-right\"></i></button></div>\n" +
     "            </div>\n" +
-    "\n" +
     "        </div>\n" +
-    "\n" +
     "        <div ng-show=\"pageNumber == 3\">\n" +
     "            <div class=\"card\">\n" +
     "                <div style=\"background:url('https://source.unsplash.com/1600x900/?egalitarian,sharing,love,creative,world,community,awesome')\" class=\"imageContainerSmall\">\n" +
@@ -13525,9 +13487,6 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "                                    <h5 ng-show=\"newMember.dateOfBirth\">{{newMember.dateOfBirth}}</h5>\n" +
     "                                    <h5 ng-show=\"newMember.email\"><i class=\"fas fa-envelope\"></i> {{newMember.email}}</h5>\n" +
     "                                    <h5 ng-show=\"newMember.phoneNumber\"><i class=\"fas fa-phone\"></i> {{newMember.phoneNumber}}</h5>\n" +
-    "                                    <!--\n" +
-    "                                    <p style=\"color:gray\">{{currentUser.id}}<img style=\"height:50px;text-align:left\" src=\"https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{currentUser.id}}\"></p>\n" +
-    "                                    -->\n" +
     "                                </div>\n" +
     "                                <div ng-show=\"false\" class=\"member-card-social\">\n" +
     "                                    <a ng-show=\"false\" href=\"{{currentUser.socialAccounts.facebook.profileUrl}}\" target=\"_blank\"><i class=\"fa fa-facebook facebook-icon\"></i></a>\n" +
@@ -13558,7 +13517,6 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "\n" +
     "    </div>\n" +
     "</div>\n" +
-    "\n" +
     "<div class=\"container\">\n" +
     "    <div class=\"spacing-25\"></div>\n" +
     "    <div class=\"row\">\n" +
@@ -13579,8 +13537,32 @@ angular.module("register/index.tpl.html", []).run(["$templateCache", function($t
     "        </div>\n" +
     "    </div>\n" +
     "</div>\n" +
+    "-->\n" +
     "\n" +
-    "<div class=\"spacing-50\"></div>");
+    "<div class=\"spacing-25\"></div>\n" +
+    "\n" +
+    "<div class=\"container\">\n" +
+    "    <div class=\"row\">\n" +
+    "        <div class=\"col-md-10 col-md-offset-1\">\n" +
+    "            <div class=\"\">\n" +
+    "                <form role=\"form\">\n" +
+    "                    <div class=\"form-group\"><input class=\"form-control\" name=\"email\" ng-model=\"newMember.email\" placeholder=\"Email\" title=\"email\" type=\"email\"><i class=\"fa fa-envelope\" autocomplete=\"email\"></i></div>\n" +
+    "                    <div class=\"form-group\"><input class=\"form-control\" name=\"username\" ng-model=\"newMember.username\" placeholder=\"Username\" title=\"username\" type=\"text\" autocomplete=\"username\"><i class=\"fa fa-user\"></i></div>\n" +
+    "                    <div class=\"form-group\"><input class=\"form-control\" name=\"password\" ng-model=\"newMember.password\" placeholder=\"Password\" title=\"password\" type=\"password\" autocomplete=\"new-password\"><i class=\"fa fa-lock\"></i></div>\n" +
+    "                    <button class=\"btn btn-default log-btn\" ng-click=\"registerUser()\">Sign up</button>    \n" +
+    "                    <br><br>\n" +
+    "                    <div class=\"social-log\">\n" +
+    "                        <a href=\"/login\" ui-sref=\"login\"><h5 style=\"color: gray;font-style: italic;\"><b>Already A Member?</b></h5></a>\n" +
+    "                    </div>\n" +
+    "                </form>\n" +
+    "                <div class=\"selfClear\"></div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div class=\"spacing-25\"></div>\n" +
+    "");
 }]);
 
 angular.module("search/index.tpl.html", []).run(["$templateCache", function($templateCache) {
