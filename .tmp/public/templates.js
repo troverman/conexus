@@ -5637,7 +5637,7 @@ angular.module("home/templates/tutorial.tpl.html", []).run(["$templateCache", fu
     "                    </a>\n" +
     "                </div> \n" +
     "                <div style=\"margin-top: auto;margin-bottom: auto;padding:15px\">\n" +
-    "                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Welcome to CRE8 {{currentUser.username}}!</h1>\n" +
+    "                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Welcome to CRE8!</h1>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
@@ -5689,7 +5689,7 @@ angular.module("home/templates/tutorial.tpl.html", []).run(["$templateCache", fu
     "                    <div class=\"card\" style=\"margin-top:0px;\">\n" +
     "                        <div style=\"background:url('https://source.unsplash.com/1600x900/?personal,energy,joyful,humuan,data,code')\" class=\"imageContainerSmall\">\n" +
     "                            <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                                <div class=\"container\" style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                                <div style=\"padding:15px;margin-top: auto;margin-bottom: auto;\">\n" +
     "                                    <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\">Information</h1>\n" +
     "                                    <h5><a style=\"color:white\" href=\"/account\"  ui-sref=\"account\"><i class=\"fas fa-passport\"></i> Account Settings</a></h5>\n" +
     "                                </div>\n" +
@@ -5737,31 +5737,11 @@ angular.module("home/templates/tutorial.tpl.html", []).run(["$templateCache", fu
     "                        <div style=\"clear:both\"></div>\n" +
     "                    </div> \n" +
     "                    <div style=\"margin-top: auto;margin-bottom: auto;padding:15px;\">\n" +
-    "                        <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;font-size:35px\">Your Personal Value</h1>\n" +
+    "                        <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;font-size:35px\">Create Your Value Map</h1>\n" +
     "                        <p style=\"color:white;\">What do you believe is valuable?</p>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
-    "            <div style=\"padding:16px;\">\n" +
-    "                <p style=\"color:gray;font-size:12px;font-style:italic\">Select what you believe is worthwile.</p>\n" +
-    "                <div class=\"row\">\n" +
-    "                    <div class=\"col-xs-4\"><img src=\"https://source.unsplash.com/900x900/?value,finance,vote\"></div>\n" +
-    "                    <div class=\"col-xs-4\"><img src=\"https://source.unsplash.com/900x900/?humananity,city,community\"></div>\n" +
-    "                    <div class=\"col-xs-4\"><img src=\"https://source.unsplash.com/900x900/?code,love,joy\"></div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "        <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
-    "            <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
-    "            <li style=\"float:left;font-size:14px\">\n" +
-    "                <a href=\"#\" ng-click=\"filterToggle('MANIFOLD')\"><i class=\"fas fa-infinity\"></i> Manifold</a>\n" +
-    "                <span style=\"font-size:9px;color:gray;maring:0px\">{{baseManifold.text}}</span>\n" +
-    "            </li>\n" +
-    "            <li style=\"float:right;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('VALUEMAP')\"><i class=\"fa fa-eye\"></i> UNIVERSALTOKEN</a></li>\n" +
-    "            <div style=\"clear:both\"></div>\n" +
-    "        </ul>\n" +
-    "        <div class=\"card\">\n" +
-    "            <tags-input class=\"\" style=\"border:0px;flex-grow:2;\" min-length=\"1\" placeholder=\"Search\" ng-model=\"searchQueryArray\"></tags-input>\n" +
     "        </div>\n" +
     "        <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
     "            <li style=\"float:left;font-size:14px\"><a href=\"#\">Builder</a></li>\n" +
@@ -5770,13 +5750,50 @@ angular.module("home/templates/tutorial.tpl.html", []).run(["$templateCache", fu
     "            <li style=\"float:left;font-size:14px\"><a href=\"#\">Orders</a></li>\n" +
     "            <div style=\"clear:both\"></div>\n" +
     "        </ul>\n" +
+    "        <div class=\"card\">\n" +
+    "            <div style=\"padding:16px;\">\n" +
+    "                <p style=\"color:gray;font-size:12px;font-style:italic\">Select what you believe is worthwile.</p>\n" +
+    "                <p style=\"color:gray;font-size:12px;font-style:italic\">Creating a value map furthers a self-empowering mechanism. We create value; though sharing our values and relating them we create value in ourselves, in what we do, and within each other.</p>\n" +
     "\n" +
+    "                <div class=\"row\">\n" +
+    "                    <div class=\"col-xs-4\"><img src=\"https://source.unsplash.com/900x900/?value,finance,vote\"></div>\n" +
+    "                    <div class=\"col-xs-4\"><img src=\"https://source.unsplash.com/900x900/?humananity,city,community\"></div>\n" +
+    "                    <div class=\"col-xs-4\"><img src=\"https://source.unsplash.com/900x900/?code,love,joy\"></div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "            <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
+    "\n" +
+    "            <li style=\"float:left;font-size:14px\">\n" +
+    "                <a href=\"#\" ng-click=\"filterToggle('VALUEMAP')\">\n" +
+    "                    <i class=\"fas fa-coins\"></i> Base Token <span style=\"font-size:10px;color:gray\">{{baseToken.text}}</span>\n" +
+    "                </a>\n" +
+    "            </li>\n" +
+    "            <li style=\"float:left;font-size:14px\">\n" +
+    "                <a href=\"#\" ng-click=\"filterToggle('MANIFOLD', 'UNIVERSALTOKEN')\"><i class=\"fas fa-infinity\"></i> Manifold <span style=\"font-size:10px;color:gray\">{{baseManifold.text}}</span></a>\n" +
+    "            </li>\n" +
+    "            <div style=\"clear:both\"></div>\n" +
+    "        </ul>\n" +
+    "        <div class=\"card\">\n" +
+    "            <tags-input class=\"\" style=\"border:0px;flex-grow:2;\" min-length=\"1\" placeholder=\"Search\" ng-model=\"searchQueryArray\"></tags-input>\n" +
+    "        </div>\n" +
+    "        \n" +
+    "        <!--\n" +
+    "        <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "            <li style=\"float:left;font-size:14px\"><a href=\"#\">Builder</a></li>\n" +
+    "            <li style=\"float:left;font-size:14px\"><a href=\"#\">Survey</a></li>\n" +
+    "            <li style=\"float:left;font-size:14px\"><a href=\"#\">Questions</a></li>\n" +
+    "            <li style=\"float:left;font-size:14px\"><a href=\"#\">Orders</a></li>\n" +
+    "            <div style=\"clear:both\"></div>\n" +
+    "        </ul>\n" +
+    "        -->\n" +
     "\n" +
     "        <div class=\"\" style=\"max-height:100vh;overflow:auto\">\n" +
     "\n" +
-    "\n" +
     "            <!--BETTER-->\n" +
-    "            <div class=\"col-sm-3 col-xs-12\" style=\"padding-left:0px;padding-right:0px\">\n" +
+    "            <div class=\"col-sm-3 col-xs-4\" style=\"padding-left:0px;padding-right:0px\">\n" +
     "                <div class=\"card\">\n" +
     "                    <div style=\"font-size:14px;font-weight:bold\" ng-repeat=\"item in sortedTagArray track by $index\">\n" +
     "                        <button ng-click=\"createPosition(item.element)\" class=\"btn btn-default log-btn\">{{item.element}}</button>\n" +
@@ -5784,54 +5801,111 @@ angular.module("home/templates/tutorial.tpl.html", []).run(["$templateCache", fu
     "                </div>\n" +
     "            </div>\n" +
     "\n" +
-    "            <div class=\"col-sm-9 col-xs-12\" style=\"padding-left:0px;padding-right:0px\">\n" +
+    "            <div class=\"col-sm-9 col-xs-8\" style=\"padding-left:0px;padding-right:0px\">\n" +
+    "\n" +
     "                <div class=\"card\">\n" +
-    "                    <div style=\"padding:16px\">\n" +
     "\n" +
-    "\n" +
-    "                        <!--<div style=\"font-size:14px;font-weight:bold\" ng-repeat=\"item in sortedTagArray track by $index\" class=\"card\">\n" +
-    "                            <button ng-click=\"createPosition(item.element)\" class=\"btn btn-default log-btn\">{{item.element}}</button>\n" +
-    "                        </div>-->\n" +
-    "\n" +
-    "                        <!--<p>Please Select A Bundle of Valuable Context</p>-->\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "                        <div layout=\"\">\n" +
-    "                            <div flex=\"35\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\" style=\"color:gray\">Token String <a ng-click=\"informationToggle('VALUEMAP')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></span></div>\n" +
-    "                            <div flex=\"65\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\" style=\"color:gray\">Token String / Base Token String <a ng-click=\"informationToggle('VALUEMAP')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></span></div>\n" +
+    "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?love,art,geometry');min-height:150px;\" class=\"imageContainerSmall\">\n" +
+    "                        <div style=\"background:rgba(0,0,0,0.75);height:150px;\" class=\"imageContainerSmallDiv\">  \n" +
+    "                            <div style=\"text-align:right;padding:15px;position:absolute;right:0\">\n" +
+    "                                <a style=\"color:white;\" ng-click=\"$event.stopPropagation();cardDetailToggle(item)\">\n" +
+    "                                    <i class=\"fas fa-universal-access\"></i>\n" +
+    "                                </a>\n" +
+    "                                <div style=\"clear:both\"></div>\n" +
+    "                            </div> \n" +
+    "                            <div style=\"margin-top: auto;margin-bottom: auto;padding:15px;\">\n" +
+    "                                <h4 style=\"text-align:left;color:rgba(255,255,255,0.9);font-weight:400;\">{{baseToken.text}}</h4>\n" +
+    "                                <h5 style=\"color:white;\">Manifold: {{baseManifold.text}}</h5>\n" +
+    "                                <h5 style=\"color:white;\">Continual Position</h5>\n" +
+    "                            </div>\n" +
     "                        </div>\n" +
-    "                        <div class=\"spacing-10\"></div>\n" +
-    "                        <div class=\"row\">\n" +
-    "                            <div class=\"col-xs-12\">\n" +
-    "                                <div ng-repeat=\"item in newOrder\">\n" +
-    "                                    <div layout=\"\">\n" +
-    "                                        <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"item[0].amount || 0\" step=\"1\" min=\"0\" max=\"100\" aria-label=\"Amount\"></md-slider>\n" +
-    "                                    </div>\n" +
-    "                                    <div layout=\"\">\n" +
-    "                                        <div flex=\"10\" layout=\"\" layout-align=\"center center\">86400</div>\n" +
-    "                                        <div flex=\"25\" layout=\"\" layout-align=\"center center\">\n" +
-    "                                            <a>{{item[1].identifier.split('+')[2]}}</a>\n" +
-    "                                            <p style=\"font-size:7px;color:gray\">{{baseManifold.text}}</p>\n" +
+    "                    </div>\n" +
+    "\n" +
+    "                    <div class=\"col-sm-6 col-xs-12\">\n" +
+    "                        <highchart config=\"chartMapTotal\"></highchart>\n" +
+    "                    </div>\n" +
+    "                    <div class=\"col-sm-6 col-xs-12\">\n" +
+    "                        <highchart config=\"pieTotal\"></highchart>\n" +
+    "                    </div>\n" +
+    "\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"card\">\n" +
+    "\n" +
+    "                     <div style=\"background:url('https://source.unsplash.com/1600x900/?love,art,geometry');min-height:50px\" class=\"imageContainerSmall\">\n" +
+    "                            <div style=\"background:rgba(0,0,0,0.75);height:50px\" class=\"imageContainerSmallDiv\">  \n" +
+    "                                <div style=\"margin-top: auto;margin-bottom: auto;padding:15px;\">\n" +
+    "                                    <div class=\"row\" style=\"text-align:center\">\n" +
+    "                                        <div class=\"col-xs-6\">\n" +
+    "                                            <span style=\"color:white\">\n" +
+    "                                                Token Set Alpha\n" +
+    "                                            </span>\n" +
     "                                        </div>\n" +
-    "                                        <div flex=\"5\" layout=\"\" layout-align=\"center center\"><a href=\"#\" ng-click=\"informationToggle('MANIFOLD LOGIC')\"><i class=\"fa fa-exchange\"></i>*</a></div>\n" +
-    "                                        <div flex=\"30\" layout=\"\" layout-align=\"center center\">{{1/newOrder.length*item[0].amount/100}}</div>\n" +
-    "                                        <div flex=\"30\" layout=\"\" layout-align=\"center center\"><a>Universal Token</a></div>\n" +
-    "                                        <div flex=\"5\" layout=\"\" layout-align=\"center center\"><a href=\"#\" ng-click=\"removePosition(item)\"><i class=\"fas fa-remove\"></i></a></div>\n" +
+    "                                        <div class=\"col-xs-6\">\n" +
+    "                                            <span style=\"color:white\">\n" +
+    "                                                Token Set Beta\n" +
+    "                                            </span>\n" +
+    "                                        </div>\n" +
     "                                    </div>\n" +
     "                                </div>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
+    "\n" +
+    "\n" +
+    "                    <div style=\"padding:16px\">\n" +
+    "\n" +
+    "                        <!--\n" +
+    "                        <div style=\"font-size:14px;font-weight:bold\" ng-repeat=\"item in sortedTagArray track by $index\" class=\"card\">\n" +
+    "                            <button ng-click=\"createPosition(item.element)\" class=\"btn btn-default log-btn\">{{item.element}}</button>\n" +
+    "                        </div>\n" +
+    "                        -->\n" +
+    "                        <!--\n" +
+    "                        <p>Please Select A Bundle of Valuable Context</p>\n" +
+    "                        -->\n" +
+    "\n" +
+    "                        <div class=\"spacing-10\"></div>\n" +
+    "\n" +
     "                        <div class=\"row\">\n" +
-    "                            <div class=\"col-sm-6 col-xs-12\">\n" +
-    "                                <highchart config=\"chartMapTotal\"></highchart>\n" +
-    "                            </div>\n" +
-    "                            <div class=\"col-sm-6 col-xs-12\">\n" +
-    "                                <highchart config=\"pieTotal\"></highchart>\n" +
+    "\n" +
+    "                            <div class=\"col-xs-12\">\n" +
+    "                                <div ng-repeat=\"item in newOrder\">\n" +
+    "\n" +
+    "                                    <div style=\"text-align:center\" class=\"row\">\n" +
+    "\n" +
+    "                                        <div class=\"col-md-5\">\n" +
+    "                                            <span>{{1/newOrder.length*item[0].amount/100}}</span> \n" +
+    "                                            <a href=\"#\" ng-click=\"cardDetailToggle(baseToken)\">{{baseToken.text}}</a>\n" +
+    "                                        </div>\n" +
+    "\n" +
+    "                                        <div class=\"col-md-1\">\n" +
+    "                                            <a href=\"#\" ng-click=\"informationToggle('MANIFOLD LOGIC')\"><i class=\"fa fa-exchange\"></i>*</a>\n" +
+    "                                        </div>\n" +
+    "\n" +
+    "                                        <div class=\"col-md-5\">\n" +
+    "                                            <span>86400</span>\n" +
+    "                                            <a href=\"#\" ng-click=\"cardDetailToggle(baseToken)\">{{item[1].identifier.split('+')[2]}}</a>\n" +
+    "                                            <p style=\"font-size:7px;color:gray\">{{baseManifold.text}}</p>\n" +
+    "                                        </div>\n" +
+    "\n" +
+    "                                        <div class=\"col-md-1\">\n" +
+    "                                            <a href=\"#\" ng-click=\"removePosition(item)\"><i class=\"fas fa-remove\"></i></a>\n" +
+    "                                        </div>\n" +
+    "\n" +
+    "                                    </div>\n" +
+    "\n" +
+    "                                    <div layout=\"\">\n" +
+    "                                        <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"item[0].amount\" step=\"1\" min=\"0\" max=\"100\" aria-label=\"Amount\"></md-slider>\n" +
+    "                                    </div>\n" +
+    "                                    <!--\n" +
+    "                                    <div style=\"text-align:center\"><p style=\"font-size:9px\">{{reputation[key] || 0}} | {{reputation[key]*notification.newValidation.validation[key]}} | Multiplicative Charter</p></div>\n" +
+    "                                    -->\n" +
+    "                                </div>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
+    "\n" +
     "                    </div>\n" +
     "                </div>\n" +
+    "\n" +
     "            </div>\n" +
     "\n" +
     "        </div>\n" +
@@ -6297,15 +6371,11 @@ angular.module("home/templates/tutorial.tpl.html", []).run(["$templateCache", fu
     "\n" +
     "        <!--CURRENT VALUE MAP.. RENDER AND UNIFY WITH SUGGESTIONS AND UPDATE..  -->\n" +
     "        <div class=\"row\" style=\"\">\n" +
-    "\n" +
     "            <div class=\"col-xs-12\">\n" +
-    "            \n" +
     "                <div ng-repeat=\"item in positions\">\n" +
     "                    <div ng-include=\"'templates/cards/orderCard.tpl.html'\"></div>\n" +
     "                </div>\n" +
-    "\n" +
     "            </div>\n" +
-    "\n" +
     "        </div>\n" +
     "\n" +
     "        <div class=\"spacing-10\"></div>\n" +
@@ -6313,23 +6383,25 @@ angular.module("home/templates/tutorial.tpl.html", []).run(["$templateCache", fu
     "    </div>\n" +
     "\n" +
     "    <!--IF NO CONTENT.. ETC-->\n" +
-    "    <div ng-if=\"pageNumber == 6\" class=\"card\" ng-click=\"\">\n" +
-    "        <div style=\"background:url('https://source.unsplash.com/1600x900/?business,service,civic,create,art,movies,action')\" class=\"imageContainerSmall\">\n" +
-    "            <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                <div style=\"text-align:right;padding:15px;position:absolute;right:0\">\n" +
-    "                    <a style=\"color:white;\" ng-click=\"$event.stopPropagation();cardDetailToggle(item)\">\n" +
-    "                        <i class=\"fas fa-plus\"></i>\n" +
-    "                    </a>\n" +
-    "                </div> \n" +
-    "                <div class=\"container\" style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Let's Create!</h1>\n" +
-    "                    <p style=\"color:white;\">My First Post</p>\n" +
+    "    <div ng-if=\"pageNumber == 6\" ng-click=\"\">\n" +
+    "        <div class=\"card\">\n" +
+    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?business,service,civic,create,art,movies,action')\" class=\"imageContainerSmall\">\n" +
+    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                    <div style=\"text-align:right;padding:15px;position:absolute;right:0\">\n" +
+    "                        <a style=\"color:white;\" ng-click=\"$event.stopPropagation();cardDetailToggle(item)\">\n" +
+    "                            <i class=\"fas fa-plus\"></i>\n" +
+    "                        </a>\n" +
+    "                    </div> \n" +
+    "                    <div class=\"container\" style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                        <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Let's Create!</h1>\n" +
+    "                        <p style=\"color:white;\">My First Post</p>\n" +
+    "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
-    "        </div>\n" +
-    "        <div style=\"padding:16px;\">\n" +
-    "            <div class=\"card\">\n" +
-    "                <button ng-click=\"contentToggle()\" style=\"width:100%\" class=\"btn btn-default log-btn\">+ CONTENT</button>\n" +
+    "            <div style=\"padding:16px;\">\n" +
+    "                <div class=\"card\">\n" +
+    "                    <button ng-click=\"contentToggle()\" style=\"width:100%\" class=\"btn btn-default log-btn\">+ CONTENT</button>\n" +
+    "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
