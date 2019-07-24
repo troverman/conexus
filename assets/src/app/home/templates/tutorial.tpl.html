@@ -14,10 +14,11 @@
         color: white;
     }
 </style>
-<!--TODO: DYNAMIC TUTORIAL.....-->
+
+<div class="spacing-10"></div>
+
 <div class="row">
 
-    <!--IF NOT INFO-->
     <div ng-show="pageNumber == 0">
         <div class="card">
             <div style="background:url('https://source.unsplash.com/1600x900/?settings')" class="imageContainerSmall">
@@ -134,7 +135,7 @@
                                 <div style="clear:both"></div><div class="spacing-10"></div>
 
                                 <div style="padding:0px;text-align:center"  class="col-xs-12">
-                                    <a href="/account" ui-sref="account"><b><i class="fas fa-passport"></i> More Apps & Account Settings<b></a>
+                                    <a href="/account" ui-sref="account"><b><i class="fas fa-passport"></i> More Apps & Account Settings</b></a>
                                 </div>
 
                                 <div style="clear:both"></div><div class="spacing-10"></div>
@@ -147,12 +148,16 @@
                
             </div>
         </div>
-
     </div>
 
-    <!--IF NO ORDERS | VALUE MAP-->
     <div ng-show="pageNumber == 1">
-        <!--VALUE MAP TEMPLATE PLZ-->
+
+
+        <!--MANIFOLD BUILDER.. VERB.. MAIN VERBS.. APPS-->
+        <!--APPS AS TOKEN VERBS-->
+        <!--CREATE+TIME+CHILL-->
+        <!--CREATE+TRANSACTION+CHILL-->
+
         <div class="card" ng-click="cardDetailExpand()">
             <div style="background:url('https://source.unsplash.com/1600x900/?love,art,geometry')" class="imageContainerSmall">
                 <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
@@ -170,47 +175,28 @@
             </div>
         </div>
         <ul style="padding:0px;" class="member-tabs">
-            <li style="float:left;font-size:14px"><a href="#">Builder</a></li>
-            <li style="float:left;font-size:14px"><a href="#">Survey</a></li>
-            <li style="float:left;font-size:14px"><a href="#">Questions</a></li>
-            <li style="float:left;font-size:14px"><a href="#">Orders</a></li>
+            <li style="float:left;font-size:14px"><a ng-click="selectTab('QUESTIONS')" href="#"><i class="fas fa-question"></i> Questions</a></li>
+            <li style="float:left;font-size:14px"><a ng-click="selectTab('BUILDER')" href="#"><i class="fas fa-funnel-dollar"></i> Trending Positions</a></li>
+            <li style="float:left;font-size:14px"><a ng-click="selectTab('BUILDER')" href="#"><i class="fas fa-cubes"></i> Builder</a></li>
+            <li style="float:left;font-size:14px"><a ng-click="selectTab('ORDERS')" href="#"><i class="fas fa-poll"></i> Orders</a></li>
             <div style="clear:both"></div>
         </ul>
-        <div class="card">
-            <div style="padding:16px;">
-                <p style="color:gray;font-size:12px;font-style:italic">Select what you believe is worthwile.</p>
-                <p style="color:gray;font-size:12px;font-style:italic">Creating a value map furthers a self-empowering mechanism. We create value; though sharing our values and relating them we create value in ourselves, in what we do, and within each other.</p>
+    
+        <div ng-if="selectedTab =='BUILDER'" class="">
 
-                <div class="row">
-                    <div class="col-xs-4"><img src="https://source.unsplash.com/900x900/?value,finance,vote"></div>
-                    <div class="col-xs-4"><img src="https://source.unsplash.com/900x900/?humananity,city,community"></div>
-                    <div class="col-xs-4"><img src="https://source.unsplash.com/900x900/?code,love,joy"></div>
-                </div>
-            </div>
-        </div>
-        
-        <!--
-        <ul style="padding:0px;" class="member-tabs">
-            <li style="float:left;font-size:14px"><a href="#">Builder</a></li>
-            <li style="float:left;font-size:14px"><a href="#">Survey</a></li>
-            <li style="float:left;font-size:14px"><a href="#">Questions</a></li>
-            <li style="float:left;font-size:14px"><a href="#">Orders</a></li>
-            <div style="clear:both"></div>
-        </ul>
-        -->
+            <div class="card">
+                <div style="padding:16px;">
+                    <p style="color:gray;font-size:12px;font-style:italic">Select what you believe is worthwile.</p>
+                    <p style="color:gray;font-size:12px;font-style:italic">Creating a value map furthers a self-empowering mechanism. We create value; though sharing our values and relating them we create value in ourselves, in what we do, and within each other.</p>
 
-        <div class="">
-
-            <!--BETTER-->
-            <!--
-            <div class="col-sm-3 col-xs-4 mobileFix" style="padding-left:0px;padding-right:0px">
-                <div class="card">
-                    <div style="font-size:14px;font-weight:bold" ng-repeat="item in sortedTagArray track by $index">
-                        <button ng-click="createPosition(item.element)" class="btn btn-default log-btn">{{item.element}}</button>
+                    <div class="row">
+                        <div class="col-xs-4"><img src="https://source.unsplash.com/900x900/?value,finance,vote"></div>
+                        <div class="col-xs-4"><img src="https://source.unsplash.com/900x900/?humananity,city,community"></div>
+                        <div class="col-xs-4"><img src="https://source.unsplash.com/900x900/?code,love,joy"></div>
                     </div>
                 </div>
             </div>
-            -->
+
             <div class="col-sm-3 mobileFix" style="padding-left:0px;padding-right:0px;">
                 <div class="card" ng-click="filterToggle('DISCOVER', filterSet)">
                     <div style="background:url('https://source.unsplash.com/1600x900/?details,notes,exolore,wonder,connection');min-height:50px" class="imageContainerSmall">
@@ -240,7 +226,10 @@
                         </a>
                     </li>
                     <li style="float:left;font-size:14px">
-                        <a href="#" ng-click="filterToggle('MANIFOLD', 'UNIVERSALTOKEN')"><i class="fas fa-infinity"></i> Manifold <span style="font-size:10px;color:gray">{{baseManifold.text}}</span></a>
+                        <a href="#" ng-click="filterToggle('VALUEMAP')"><i class="fas fa-infinity"></i> Manifold <span style="font-size:10px;color:gray">{{baseManifold.text}}</span></a>
+                    </li>
+                    <li style="float:left;font-size:14px">
+                        <a href="#" ng-click="filterToggle('VALUEMAP')"><i class="fas fa-dna"></i> Type <span style="font-size:10px;color:gray">{{orderType.text}}</span></a>
                     </li>
                     <div style="clear:both"></div>
                 </ul>
@@ -261,25 +250,33 @@
                             <div style="margin-top: auto;margin-bottom: auto;padding:15px;">
                                 <h4 style="text-align:left;color:rgba(255,255,255,0.9);font-weight:400;">{{baseToken.text}}</h4>
                                 <h5 style="color:white;">Manifold: {{baseManifold.text}}</h5>
-                                <h5 style="color:white;">Continual Position</h5>
+                                <h5 style="color:white;">Type: {{orderType.text}} Position</h5>
                             </div>
                         </div>
                     </div>
 
                     <div class="col-xs-12">
-                        <div class="" style="font-size:14px;font-weight:bold">
-                            <!--<div ng-repeat="item in sortedTagArray track by $index">
-                                <span ng-click="createPosition(item.element)">{{item.element}}</span>
-                            </div>-->
-                            <div class="spacing-10"></div>
 
+                        <div class="spacing-10"></div>
+
+                        <p style="color:gray;font-style:italic">{{baseToken.description}}</p>
+                        <p style="color:gray;font-style:italic">{{baseManifold.description}}</p>
+                        <p style="color:gray;font-style:italic">{{orderType.description}}</p>
+
+                        <div class="spacing-10"></div>
+
+                        <p style="color:gray;font-style:italic;font-weight:bold">Select the following context of interest to you.</p>
+
+                        <div class="spacing-10"></div>
+
+                        <div class="" style="font-size:14px;font-weight:bold">
                             <span ng-click="createPosition(item.element)" ng-repeat="item in sortedTagArray track by $index">
                                 <p class="valueMapButton">{{item.element}}</p>
                             </span>
-
-                            <div class="spacing-10"></div>
-
                         </div>
+
+                        <div class="spacing-10"></div>
+
                     </div>
 
                     <div class="col-sm-6 col-xs-12">
@@ -352,136 +349,115 @@
             </div>
         </div>
 
+        <div ng-if="selectedTab =='QUESTIONS'" class="">
+
+            <div class="card">
+                <div style="padding:16px;">
+                    <p style="color:gray;font-size:12px;font-style:italic">Select what you believe is worthwile.</p>
+                    <p style="color:gray;font-size:12px;font-style:italic">Creating a value map furthers a self-empowering mechanism. We create value; though sharing our values and relating them we create value in ourselves, in what we do, and within each other.</p>
+
+                    <div class="row">
+                        <div class="col-xs-4"><img src="https://source.unsplash.com/900x900/?value,finance,vote"></div>
+                        <div class="col-xs-4"><img src="https://source.unsplash.com/900x900/?humananity,city,community"></div>
+                        <div class="col-xs-4"><img src="https://source.unsplash.com/900x900/?code,love,joy"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12" style="padding-left:0px;padding-right:0px">
+                <div class="card">
+                    <div style="background:url('https://source.unsplash.com/1600x900/?love,art,geometry');min-height:150px;" class="imageContainerSmall">
+                        <div style="background:rgba(0,0,0,0.75);height:150px;" class="imageContainerSmallDiv">  
+                            <div style="text-align:right;padding:15px;position:absolute;right:0">
+                                <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
+                                    <i class="fas fa-universal-access"></i>
+                                </a>
+                                <div style="clear:both"></div>
+                            </div> 
+                            <div style="margin-top: auto;margin-bottom: auto;padding:15px;">
+                                <h4 style="text-align:left;color:rgba(255,255,255,0.9);font-weight:400;">Value Map Questions & Survey</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="padding:16px">
+
+                        SURVEY QUESTIONS
+
+                        <p>TIME</p>
+
+                        <div class="card">
+                            <div style="background:url('https://source.unsplash.com/1600x900/?rest,exercise,work,play')" class="imageContainerSmall">
+                                <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                                    <div style="margin-top: auto;margin-bottom: auto;padding:15px;">
+                                        <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;font-size:35px">A Valuable Day</h1>
+                                        <p style="color:white;">How would an ideal day look to you?</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p style="font-style:italic;color:gray;margin:0px;font-size:12px">Thinking about an archetypal idealized day - a discrete universe of time. Tell us how a human would thirve. All Intentional Time is a Tokenized Event.</p>
+
+
+                        <p>TASKS</p>
+                        <p>PROJECTS</p>
+                        <p>TRANSACTIONS</p>
+                        <p>ACTIONS</p>
+                        <p>CONTENT</p>
+
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div ng-if="selectedTab =='ORDERS'" class="">
+
+            <div class="card">
+                <div style="padding:16px;">
+                    <p style="color:gray;font-size:12px;font-style:italic">Your Orders on the Multidimensional Token Market</p>
+                    <p style="color:gray;font-size:12px;font-style:italic">These Discrete Market positions codify your value map and create relation in value; a self-empowering mechanism.</p>
+
+                    <div class="row">
+                        <div class="col-xs-4"><img src="https://source.unsplash.com/900x900/?value,finance,vote"></div>
+                        <div class="col-xs-4"><img src="https://source.unsplash.com/900x900/?humananity,city,community"></div>
+                        <div class="col-xs-4"><img src="https://source.unsplash.com/900x900/?code,love,joy"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12" style="padding-left:0px;padding-right:0px">
+                <div class="card">
+                    <div style="background:url('https://source.unsplash.com/1600x900/?love,art,geometry');min-height:150px;" class="imageContainerSmall">
+                        <div style="background:rgba(0,0,0,0.75);height:150px;" class="imageContainerSmallDiv">  
+                            <div style="text-align:right;padding:15px;position:absolute;right:0">
+                                <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
+                                    <i class="fas fa-universal-access"></i>
+                                </a>
+                                <div style="clear:both"></div>
+                            </div> 
+                            <div style="margin-top: auto;margin-bottom: auto;padding:15px;">
+                                <h4 style="text-align:left;color:rgba(255,255,255,0.9);font-weight:400;">Discrete Orders</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="padding:16px">
+
+                        {{newOrder}}
+                        {{newOrderNEW}}
+
+                        <div class="col-xs-12">
+                            <div ng-repeat="item in positions">
+                                <div ng-include="'templates/cards/orderCard.tpl.html'"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
  
-    </div>
-
-    <div ng-if="false">
-        <div class="card">
-            <div style="background:url('https://source.unsplash.com/1600x900/?rest,exercise,work,play')" class="imageContainerSmall">
-                <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
-                    <div style="margin-top: auto;margin-bottom: auto;padding:15px;">
-                        <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;font-size:35px">A Valuable Day</h1>
-                        <p style="color:white;">How would an ideal day look to you?</p>
-                    </div>
-                </div>
-            </div>
-            <div style="padding:16px;">
-                <p style="color:gray;font-size:12px;font-style:italic">A day well spent. Striving for universal adaptation and reflectivity, your dimensional vote can be encompassing of all aspects of the human experience.</p>
-                <img style="max-height:200px" src="https://images.unsplash.com/photo-1531502774286-5e4e8e94879f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60">
-                <img style="max-height:200px" src="https://images.unsplash.com/photo-1468322638156-074863f9362e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60">
-                <img style="max-height:200px" src="https://images.unsplash.com/photo-1504246979673-176ed6740840?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60">
-            </div>
-        </div>
-        <div class="card">
-            <tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search" ng-model="dailyTimeValue"></tags-input>
-        </div>
-        <div class="card">
-            <div style="padding:16px;">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div ng-show="false">
-                            <p style="font-style:italic;color:gray;margin:0px;font-size:12px">Thinking about an archetypal idealized day - a discrete universe of time. Tell us how a human would thirve. All Intentional Time is a Tokenized Event.</p>
-                        </div>
-                        <div ng-repeat="item in dailyTimeValue">
-                            <div layout="">
-                                <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{item.text}}</span></div>
-                                <md-slider step="0.1" flex="" md-discrete="" ng-model="item.percentage" step="1" min="0" max="100" aria-label="{{tag.text}}"></md-slider>
-                                <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{item.percentage.toFixed(3) || 0}}%</span></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!--IF NO PROJECTS-->
-    <!--
-    <div ng-if="pageNumber == 100" class="card" ng-click="">
-        <div style="background:url('https://source.unsplash.com/1600x900/?coordination,cities,city,community,work')" class="imageContainerSmall">
-            <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
-                <div style="margin-top: auto;margin-bottom: auto;padding:15px">
-                    <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Permissions</h1>
-                    <p style="color:white;">Tokenize!</p>
-                </div>
-            </div>
-        </div>
-        <div style="padding:16px;">
-
-            <div class="card" ng-click="cardDetailToggle(app)">
-                <div style="background:url('https://source.unsplash.com/1600x900/?attention,intention,code)" class="imageContainerSmall">
-                    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
-                        <div style="text-align:right;padding:15px;position:absolute;right:0">
-                            <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
-                                <i class="fas fa-chevron-down"></i>
-                            </a>
-                        </div>
-                        <div style="margin-top: auto;margin-bottom: auto;">
-                            <div style="padding:15px">
-                                <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;"><i class="fas fa-map-marker"></i> Client Mining</h1>
-                                <h5 style="color:white">CRE8</h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div style="padding:16px;">
-                    <span style="font-size:10px;color:gray">Runs a CRE8 node that powers the network. Machine attention is tokenized.</span>
-                    <div ng-click="$event.stopPropagation();"><md-switch ng-change="editAccount()" ng-model="newAccountInformation.apps.cre8.peerMining" aria-label="Location Attention"></md-switch></div>
-                </div>
-            </div>
-
-            <div class="card" ng-click="cardDetailToggle(app)">
-                <div style="background:url('https://source.unsplash.com/1600x900/?attention,intention,code)" class="imageContainerSmall">
-                    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
-                        <div style="text-align:right;padding:15px;position:absolute;right:0">
-                            <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
-                                <i class="fas fa-chevron-down"></i>
-                            </a>
-                        </div>
-                        <div style="margin-top: auto;margin-bottom: auto;">
-                            <div style="padding:15px">
-                                <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;"><i class="fas fa-eye"></i> Record Attention</h1>
-                                <h5 style="color:white">CRE8</h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div style="padding:16px;">
-                    <span style="font-size:10px;color:gray">Required for Attention Tokenization</span>
-                    <div ng-click="$event.stopPropagation();"><md-switch ng-change="editAccount()" ng-model="newAccountInformation.apps.cre8.recordAttention" aria-label="Record Attention"></md-switch></div>
-                </div>
-            </div>
-
-            <div class="card" ng-click="cardDetailToggle(app)">
-                <div style="background:url('https://source.unsplash.com/1600x900/?attention,intention,code)" class="imageContainerSmall">
-                    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
-                        <div style="text-align:right;padding:15px;position:absolute;right:0">
-                            <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
-                                <i class="fas fa-chevron-down"></i>
-                            </a>
-                        </div>
-                        <div style="margin-top: auto;margin-bottom: auto;">
-                            <div style="padding:15px">
-                                <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;"><i class="fas fa-map-marker"></i> Record Location</h1>
-                                <h5 style="color:white">CRE8</h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div style="padding:16px;">
-                    <span style="font-size:10px;color:gray">Required for Location Tokenization</span>
-                    <div ng-click="$event.stopPropagation();"><md-switch ng-change="editAccount()" ng-model="newAccountInformation.apps.cre8.recordLocation" aria-label="Location Attention"></md-switch></div>
-                </div>
-            </div>
-           
-           
-        </div>
-    </div>
-    -->
-    
-    <!--IF NO PROJECTS-->
     <div ng-if="pageNumber == 2">
         <div class="card" ng-click="cardDetailExpand()">
             <div style="background:url('https://source.unsplash.com/1600x900/?coordination,cities,city,community,work')" class="imageContainerSmall">
@@ -521,12 +497,6 @@
         <div class="card">
             <tags-input class="" min-length="1" placeholder="Search " ng-model="searchQuery"></tags-input>
         </div>
-
-        <!--
-        <div class="card">
-            <button class="btn btn-default log-btn" ng-click="projectToggle()">+ PROJECT</button>
-        </div>
-        -->
         
         <div style="max-height:70vh;overflow:auto">
             <div ng-repeat="item in projects">
@@ -549,7 +519,6 @@
         </div>
     </div>
 
-    <!--IF NO TASKS / TIME-->
     <div ng-if="pageNumber == 3">
 
         <div class="card" ng-click="cardDetailExpand()">
@@ -610,12 +579,9 @@
                     </div>
                     <div style="padding:16px;">
 
-
                         <div ng-click="$event.stopPropagation()" style="float:right">
-
                             <button ng-click="$event.stopPropagation();interested(item)" ng-if="item.isAssociated == false" class="btn btn-default"><i class="fas fa-check"></i> Interested</button>
                             <button ng-click="$event.stopPropagation();interested(item)" ng-if="item.isAssociated == true" class="btn btn-default"><i class="fas fa-remove"></i> Cancel Interest</button>
-
                         </div>
 
                         <p><a ng-click="$event.stopPropagation()" ng-repeat="tag in item.tags track by $index" href="market/{{tag.trim()}}" ui-sref="market({id:tag.trim()})">{{tag.trim()}} </a></p>
@@ -633,7 +599,6 @@
         </div>
     </div>
 
-    <!--IF NO FOLLOWING-->
     <div ng-if="pageNumber == 4">
 
         <div class="card" ng-click="cardDetailExpand()">
@@ -681,10 +646,8 @@
                 </div>
             </div>
         </div>
-
     </div>
 
-    <!--...-->
     <div ng-if="pageNumber == 5">
         <div class="card" ng-click="cardDetailExpand()">
             <div style="background:url('https://source.unsplash.com/1600x900/?math,geometry,fractal,data,finance')" class="imageContainerSmall">
@@ -729,28 +692,8 @@
 
                 <div class="spacing-10"></div>
 
-
             </div>
         </div>
-
-        <!--BASE DIMENSION VIEWER.. -->
-        <!--SUGGESTED MANIFOLDS..-->
-      
-        <!--DISCOVE MODULE-->
-        <!--VALUE MAP PACKAGES-->  
-
-        <!--SKETCH UI of this on paper.. analog..-->
-
-        <!--ALWAYS DO RELATIVE VALUE? -->
-        <!--BULK ORDER INTERFACE-->
-        <!--GENERALIZE TO CREATING ORDERS... more info-->
-
-        <!--MANIFOLD BUILDER.. VERB.. MAIN VERBS.. APPS-->
-        <!--APPS AS TOKEN VERBS-->
-        <!--CREATE+TIME+CHILL-->
-        <!--CREATE+TRANSACTION+CHILL-->
-
-        <!--MORE INTUITIVE..--> <!--SURVEY?? THIS IS THE SEX-->
 
         <div class="" style="max-height:100vh;overflow:auto;">
 
@@ -773,15 +716,6 @@
                 </div>
             </div>
 
-            <!--<div class="col-sm-3 col-xs-6" style="padding-left:0px;padding-right:0px;">
-                <div class="card">
-                    <div style="font-size:14px;font-weight:bold" ng-repeat="item in sortedTagArray track by $index">
-                        <button ng-click="createPosition(item.element)" class="btn btn-default log-btn">{{item.element}}</button>
-                    </div>
-                </div>
-            </div>-->
-
-
             <div class="col-sm-9 col-xs-12" style="padding-left:0px;padding-right:0px;">
 
                 <ul style="padding:0px;" class="member-tabs">
@@ -801,7 +735,6 @@
                     <tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search" ng-model="valueMapQuery"></tags-input>
                 </div>
                
-
                 <div class="card">
                     
                     <div style="background:url('https://source.unsplash.com/1600x900/?love,art,geometry');min-height:150px;" class="imageContainerSmall">
@@ -889,7 +822,6 @@
         </div>
 
         <!--CURRENT VALUE MAP.. RENDER AND UNIFY WITH SUGGESTIONS AND UPDATE..  -->
-        <!--TODO.. TABS-->
         <div class="row" ng-if="selectedTab =='POSITIONS'">
             <div class="col-xs-12">
                 <div ng-repeat="item in positions">
@@ -899,10 +831,8 @@
         </div>
 
         <div class="spacing-10"></div>
-
     </div>
 
-    <!--IF NO CONTENT.. ETC-->
     <div ng-if="pageNumber == 6" ng-click="">
         <div class="card">
             <div style="background:url('https://source.unsplash.com/1600x900/?business,service,civic,create,art,movies,action')" class="imageContainerSmall">

@@ -498,6 +498,7 @@ angular.module( 'conexus.home', [
 
     $rootScope.baseToken = {text:'UNIVERSAL TOKEN', description:'Universal Token Position; protocol where every member creates one Universal Token per day to serve an an eglatarian value position.'}
     $rootScope.baseManifold = {text:'+SPONSOR+ONMINT+'+$rootScope.currentUser.id, description:'Sponsorship On Mint postions have a triggering action potiental \'on mint\' of the specified token root the manifold (TOKEN+SPONSOR).'}
+    $rootScope.orderType = {text:'Continual', description:'Continual Market Orders will fill as long as there is liquidity. Useful for token protocols with ongoing minting logic'}
 
     $scope.map = {
         center: {latitude: 35.902023, longitude: -84.1507067 },
@@ -733,7 +734,6 @@ angular.module( 'conexus.home', [
                     lat = position.coords.latitude; 
                     lng = position.coords.longitude;
 
-                    //TODO: QUERY UPDATE ~~~~~~ OUTSIDE OF FXN ?? USE QUERY?.. made model parameter
                     //$scope.searchQuery = [{text:'Current Location, 1mi | '+lng.toFixed(3)+', '+lat.toFixed(3), type:'LOCATION', query:{coordinates:[lng,lat]}}];
                     $scope.map = {
                         center: {latitude: lat, longitude: lng},
@@ -765,7 +765,6 @@ angular.module( 'conexus.home', [
                             if (index == -1){obj.isMember = false;}
                             return obj;
                         });
-
 
                     });
                     $scope.$apply();
@@ -882,6 +881,12 @@ angular.module( 'conexus.home', [
                     .catch(function(err){console.log(err)})
                 }
             });
+        };
+
+        //$scope.selectedTab = 'QUESTIONS';
+        $scope.selectedTab = 'BUILDER';
+        $scope.selectTab = function(model){
+            $scope.selectedTab = model;
         };
 
         $scope.totalMap = {
