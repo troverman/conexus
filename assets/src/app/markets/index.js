@@ -47,7 +47,7 @@ angular.module( 'conexus.markets', [
         $rootScope.stateIsLoading = true;
         TokenModel.getSome({search:$scope.searchQuery, limit:20, skip:$scope.skip, sort:'createdAt DESC'}).then(function(tokens){
             $rootScope.stateIsLoading = false;
-            Array.prototype.push.apply($scope.tokens, tokens);
+            Array.prototype.push.apply($scope.tokens, tokens.data.map(function(obj){obj.model = 'MARKET';return obj;}));
         });
     };
 

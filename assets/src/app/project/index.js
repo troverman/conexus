@@ -607,7 +607,10 @@ angular.module( 'conexus.project', [
     $scope.newMotion = {};
     //$scope.motions = motions;  
 
-    $scope.connections = connections;
+    $scope.connections = connections.map(function(obj){
+        obj.type = "CHARTER";
+        return obj;
+    });
 
     console.log(connections);
         //CONNECTIOS ARE CHARTERS.. 
@@ -634,9 +637,7 @@ angular.module( 'conexus.project', [
         {title:'Motion to Create Order', type:'CREATE ORDER', content:'Resolution to the Question: Should NOVO Create a Position in the Market', reactions:{plus:0, minus:0}, id:1},
         {title:'Motion to Associate Project', type:'CREATE PROJECT ASSOCIATION', content:'Resolution to the Question: Should NOVO Associate PROJECT as a Parent Organization', reactions:{plus:0, minus:0}, id:1},
         {title:'Motion to Create Transaction',  type:'CREATE TRANSACTION', content:'Resolution to the Question: Should NOVO Send 1 CRE8 to PROJECT', reactions:{plus:0, minus:0}, id:1},
-        //SPACE TO VALIDATE TASKS AND TIME? --> DONT NEED THE VEHICLE REALLY
         {title:'Motion to Associate Task', type:'CREATE TASK ASSOCIATION', content:'Resolution to the Question: Should NOVO Associate PROJECT as a Parent Organization', reactions:{plus:0, minus:0}, id:1},
-        //{title:'Motion to Create Item', type:'ITEM', content:'CREATE' id:1},
         {title:'Motion to Update File',  type:'UPDATE FILES | COMMIT | PULL REQUEST', content:'{git commit message} // ++ function(model){var creation = true}', reactions:{plus:0, minus:0}, id:1},
     ];  
 

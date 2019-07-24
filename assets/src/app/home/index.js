@@ -93,6 +93,12 @@ angular.module( 'conexus.home', [
             memberProjects: ['$rootScope', 'MemberModel', function($rootScope, MemberModel) {
                 return MemberModel.getSome({user:$rootScope.currentUser.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
+
+            //SELF ASSOCIATION TO TASK WHEN INTERACT. YEP!
+            memberTasks: ['$rootScope', 'TaskModel', function($rootScope, TaskModel) {
+                return TaskModel.getSome({user:$rootScope.currentUser.id, limit:100, skip:0, sort:'createdAt DESC'});
+            }],
+
             positions: ['$rootScope', 'OrderModel', function($rootScope, OrderModel) {
                 return OrderModel.getSome({user:$rootScope.currentUser.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
@@ -462,7 +468,7 @@ angular.module( 'conexus.home', [
     //WATCHERS
 }])
 
-.controller( 'FeedCtrl', ['$mdSidenav', '$location', '$rootScope', '$sce', '$scope', 'contentList', 'ContentModel', 'FollowerModel', 'followers', 'MemberModel', 'members', 'memberProjects', 'orders', 'positions', 'ProjectModel', 'projects', 'ReactionModel', 'SearchModel', 'tasks', 'time', 'titleService', 'toaster', 'transactions', 'UserModel', function HomeController( $mdSidenav, $location, $rootScope, $sce, $scope, contentList, ContentModel, FollowerModel, followers, MemberModel, members, memberProjects, orders, positions, ProjectModel, projects, ReactionModel, SearchModel, tasks, time, titleService, toaster, transactions, UserModel ) {
+.controller( 'FeedCtrl', ['$mdSidenav', '$location', '$rootScope', '$sce', '$scope', 'contentList', 'ContentModel', 'FollowerModel', 'followers', 'MemberModel', 'members', 'memberProjects', 'memberTasks', 'orders', 'positions', 'ProjectModel', 'projects', 'ReactionModel', 'SearchModel', 'tasks', 'time', 'titleService', 'toaster', 'transactions', 'UserModel', 'ValidationModel', function HomeController( $mdSidenav, $location, $rootScope, $sce, $scope, contentList, ContentModel, FollowerModel, followers, MemberModel, members, memberProjects, memberTasks, orders, positions, ProjectModel, projects, ReactionModel, SearchModel, tasks, time, titleService, toaster, transactions, UserModel, ValidationModel ) {
 	
     $scope.toolBarSettings = {toolbarButtons: ['fullscreen', 'bold', 'italic', 'underline', 'fontFamily', 'fontSize', 'insertLink', 'insertImage', 'insertTable', 'undo', 'redo', 'html']};
 
@@ -534,17 +540,18 @@ angular.module( 'conexus.home', [
     $scope.activity = $scope.activity.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
     $scope.activity = $scope.activity.slice(0,100); 
 
+    $scope.suggestedTokens = []
     $scope.discover = function(){
-        //LOOK AT MY PROJECTS
-        $scope.memberProjects = memberProjects;
-        $scope.memberProjects = $scope.memberProjects.map(function(obj){
+
+        $scope.memberProjects = memberProjects.map(function(obj){
             obj.project.model = 'PROJECT';
             if (obj.project.tags){obj.project.tags = obj.project.tags.split(',')}
             return obj.project
         });
-        //LOOK AT MY FOLLOWERS
+
+        $scope.memberTasks = memberTasks.map(function(obj){obj.model = 'TASK';return obj});
+
         $scope.followers = followers;
-        //LOOK AT THE PEOPLE I FOLLOW
         $scope.followers = $scope.followers.map(function(obj){return obj.followed});    
 
         $scope.members.map(function(obj){
@@ -561,67 +568,43 @@ angular.module( 'conexus.home', [
             return obj;
         });
 
-        //TODO!:
-        //QUERY WORK -- FEED BUILDER
-        //IS THERE A MAX..? 100
-        //DONT DO ON FRONTEND?
+        console.log(memberTasks);
+
+        $scope.tasks.map(function(obj){
+            var index = $scope.memberTasks.map(function(obj1){return obj1.id}).indexOf(obj.id);
+            if (index != -1){obj.isAssociated = true;}
+            if (index == -1){obj.isAssociated = false;}
+            return obj;
+        });
+
         $scope.searchQueryFeed = [];
-        for (x in $scope.followers){
-            //hmm
-            $scope.searchQueryFeed.push({type:'MEMBER', id:$scope.followers[x].id, text:$scope.followers[x].username})
-            //returns member feeds
-        }
-
-        for (x in $scope.memberProjects){
-            $scope.searchQueryFeed.push({type:'PROJECT', id:$scope.memberProjects[x].id, text:$scope.memberProjects[x].title})
-            //returns project feeds
-        }
-
-        //console.log($scope.followers,$scope.searchQueryFeed);
-
-        //projects(validation tags are tokens, 
-        //tasks(validation tags), 
-        //members(following) --> members reputation(projects,tasks,..)
-
-        //time(validation tags), reaction
+        for (x in $scope.followers){$scope.searchQueryFeed.push({type:'MEMBER', id:$scope.followers[x].id, text:$scope.followers[x].username})}
+        for (x in $scope.memberProjects){$scope.searchQueryFeed.push({type:'PROJECT', id:$scope.memberProjects[x].id, text:$scope.memberProjects[x].title})}
+        for (x in $scope.memberTasks){$scope.searchQueryFeed.push({type:'TASK', id:$scope.memberTasks[x].id, text:$scope.memberTasks[x].title})}
 
         //ORDERS
-
         //LOOK AT MY TIME
-        //LOOK AT MY TASKS
         //LOOK AT MY ACTIONS (RE)
         //LOOK AT MY ORDERS (CURRENT MAPS)
-
-        //LOOK AT THE PEOPLE I FOLLOW
-
         //LOOK AT THE PEOPLE I FOLLOW'S PROJECTS
         //console.log($scope.followers, $scope.memberProjects);
-
         //LOOK AT THE PEOPLE I FOLLOW'S REPUTATION && SKILLS
-
         //GET CUSTOM FEED SORTS BASED ON PROJECTS; FOLLOWING
         //BUILD QUERY
 
         //potientally compute some,
         $scope.positions = positions;
 
-        //TEMP
-        $scope.suggestedTokens = [];
-        //TAGS AND CATIGORIZATION
-
         //FOLLOWERS .. VERBS
-        for (x in $scope.followers){
-            $scope.suggestedTokens.push({token:'CRE8+FOLLOW+'+$scope.followers[x].id})
-        }
+        //for (x in $scope.followers){$scope.suggestedTokens.push({token:'CRE8+FOLLOW+'+$scope.followers[x].id})}
+        //TODO: STRING REPLACE URLTITLE
+        for (x in $scope.memberProjects){$scope.suggestedTokens.push({token:$scope.memberProjects[x].urlTitle})}
 
-        for (x in $scope.memberProjects){
-            $scope.suggestedTokens.push({token:$scope.memberProjects[x].urlTitle})
-        }
-
-        //FACTOR
+        //FACTOR: ASSOCIATION IS BASE
         $scope.suggestedTokenTags = $scope.memberProjects.map(function(obj){
             return obj.tags;
         });
+
         $scope.suggestedTokenTags = [].concat.apply([], $scope.suggestedTokenTags);
         $scope.suggestedTokenTags = $scope.suggestedTokenTags.filter(function(e){return e});
         function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
@@ -714,15 +697,8 @@ angular.module( 'conexus.home', [
     //TODO: IF NO PROJECTS OR W.E TUTORIAL IS TRUE
     //TODO: NEW CONTROLLER
 
-    $scope.hoverIn = function(item){
-        console.log('hover in ', item)
-    }
-
-    $scope.hoverOut = function(item){
-        console.log('hover out ', item)
-    }
-
-
+    $scope.hoverIn = function(item){console.log('hover in ', item)}
+    $scope.hoverOut = function(item){console.log('hover out ', item)}
 
 
     $scope.isTutorial = true;
@@ -803,6 +779,11 @@ angular.module( 'conexus.home', [
         //$scope.createMember = function(){
         $scope.join = function(model){
             
+            //$scope.newValidation = {
+            //    user:$rootScope.currentUser.id,
+            //    project:model.id,
+            //};
+
             $scope.newMember = {
                 user:$rootScope.currentUser.id,
                 project:model.id,
@@ -810,54 +791,57 @@ angular.module( 'conexus.home', [
 
             var index = $scope.projects.map(function(obj){return obj.id}).indexOf($scope.newMember.project);
 
-            //NEW MEMBER PROJECT ASSOCIATION
-            //NEW MOTION TO VALIDATE MEMBER ASSOCIATION
-            console.log(model.isMember);
-
             if (model.isMember == false){
+                //ValidationModel.create($scope.newMember).then(function(model) {});
                 MemberModel.create($scope.newMember).then(function(model) {
-                //    $rootScope.confirm = $scope.newMember;
-                //    $rootScope.confirm.modelType = 'PROJECTMEMBER';
-                    $scope.projects[index].isMember = 'PENDING'; // TRUE; FALSE
+                    $scope.projects[index].isMember = 'PENDING';
                     $scope.newMember = {};
                     $scope.pop('Request to Join','You requested to join.. ' +model.title+' .. pending validation');
-                //    setTimeout(function () {$mdSidenav('confirm').open()}, 500);
-                //    setTimeout(function () {$mdSidenav('confirm').close()}, 5000);
                 });
             }
-
             else if (model.isMember == 'PENDING'){
                 $scope.projects[index].isMember = false;
                 $scope.pop('Request canceled','You canceled your request to join.. ' +model.title);
             }
-
             else if (model.isMember == true){
                 $scope.pop('Project Left','You left ' +model.title);
                 $scope.projects[index].isMember = false;
-            }
-            
-            //if not already in .. for next page anyway. --> ASSOCIATION 'FILTER' vs search query master. 
-            //$scope.searchQuery.push({text:model.title});
-            //project, project+task,project+category
-
-            //$scope.chart.series = [{
-            //    id: 'values',
-            //    type: 'area',
-            //    name: 'Values',
-            //    pointPlacement: 'on',
-            //    data: [0.2, 0.15, 0.15, 0.10, 0.15, 0.15, 0.1],
-            //    color: 'rgba(153,0,0,0.3)',
-            //    fillOpacity: 0.3,
-            //}
-            //$scope.chart.xAxis.categories = [];
+            }            
         };
 
         $scope.interested = function(model){
-            $scope.pop('Associated Task!', 'You are now associated with '+ model.title + '. Schedule some intentional time!');
+
+            var validationModel = {
+                user:$rootScope.currentUser.id,
+                type:'HUMAN',
+                validation:{general:100},
+                associatedModels:[
+                    {type:'MEMBER', id:$rootScope.currentUser.id},
+                    {type:'TASK', id:model.id},
+                ],
+            };
+
+            var index = $scope.tasks.map(function(obj){return obj.id}).indexOf(model.id);
+
+            if (model.isAssociated == false){
+                ValidationModel.create(validationModel).then(function(newValidation){
+                    $scope.tasks[index].isAssociated = true;
+                    $scope.pop('Associated Task!', 'You are now associated with '+ model.title + '. Schedule some intentional time!');
+                });
+            }
+
+            else if (model.isAssociated == true){
+                $scope.tasks[index].isAssociated = false;
+                $scope.pop('Removed Association!', 'It\'s all good!');
+            }
+
+            //SAVE FOR FILTER & NEW VALUE MAP
+
         };
 
         $scope.follow = function(model){
 
+            //newValidation = {}
             $scope.newFollower = {
                 followed:model.id,
                 follower:$rootScope.currentUser.id,
@@ -867,40 +851,34 @@ angular.module( 'conexus.home', [
 
             if (!model.isFollowing){
                 FollowerModel.create($scope.newFollower).then(function(followerModel) {
-                    //$rootScope.confirm = $scope.newFollower;
-                    //$rootScope.confirm.modelType = 'FOLLOW';
                     var index = $scope.members.map(function(obj){return obj.id}).indexOf($scope.newFollower.followed);
                     $scope.members[index].isFollowing = true;
+                    $scope.members[index].followerCount++;
                     $scope.pop('Following!', 'You are now follwing '+ model.username);
                     $scope.newFollower = {};
-                    //RECOMPUTE VALUE MAP POPULATION //  SMART FILTERS ETC
-                   // setTimeout(function () {$mdSidenav('confirm').open()}, 500);
-                   // setTimeout(function () {$mdSidenav('confirm').close()}, 5000);
                 });
             }
 
-            //UNFOLLOW
             if (model.isFollowing){
-                //DROP BY ID; GET FOLLOWER MODEL ID // DELETE JUST //UPDATES A BINARY FLAG
-                //FollowerModel.delete($scope.newFollower).then(function(followerModel){
-                    $scope.pop('Unfollowed!', 'You Unfollowed '+ model.username);
-                    var index = $scope.members.map(function(obj){return obj.id}).indexOf($scope.newFollower.followed);
-                    $scope.members[index].isFollowing = false;
-                //});
+                //UPDATE VALIDATION TO .. ZERO... CHARTER TO DELETE ASSOCIATION
+                var index = $scope.members.map(function(obj){return obj.id}).indexOf($scope.newFollower.followed);
+                $scope.members[index].isFollowing = false;
+                $scope.members[index].followerCount--;
+                $scope.pop('Unfollowed!', 'You Unfollowed '+ model.username);
+                $scope.newFollower = {};
             }
 
-            //UPDATE GRAPH
         };
 
         $scope.pop = function(title, body){
             toaster.pop({
-                type:'success',//info, wait, success, warning
+                type:'success',
                 title: title,
                 body: body,
                 onShowCallback: function (toast) { 
                     var audio = new Audio('audio/ping.mp3');
                     audio.play()
-                    .then(function(audio){console.log('dingdong')})
+                    .then(function(audio){})
                     .catch(function(err){console.log(err)})
                 }
             });
@@ -952,12 +930,6 @@ angular.module( 'conexus.home', [
             for (var dimension in groupObject) {sortable.push([dimension, groupObject[dimension]])}
             sortable.sort(function(a, b) {return b[1] - a[1]});
             for (x in sortable){
-                if (x < 100){
-                    //$scope.pieMap.series[0].data.push({
-                    //    name: sortable[x][0],
-                    //    y: sortable[x][1],
-                    //});
-                }
                 if (x < 250){
                     $scope.totalMap.xAxis.categories.push(sortable[x][0]);
                     $scope.totalMap.series[0].data.push(sortable[x][1]);
@@ -1092,8 +1064,6 @@ angular.module( 'conexus.home', [
         $scope.newOrder = [];
         $scope.newOrderNEW = [];
         $scope.createPosition = function(model){
-
-
             if($scope.newOrder.map(function(obj){return obj[1].identifier.split('+')[2]}).indexOf(model) == -1){
                 var setAlpha = {'UNIVERSALTOKEN':1};
                 var setBeta = {};
@@ -1108,9 +1078,7 @@ angular.module( 'conexus.home', [
                     {amount:1, identifier:'UNIVERSALTOKEN'}, 
                     {amount:3600, identifier:'CRE8+TIME+'+model.toUpperCase()+'+ONMINT+SPONSOR+'+$rootScope.currentUser.id}
                 ]);
-            }
-
-            
+            }   
         };
 
         $scope.removePosition = function(model){
@@ -1133,16 +1101,6 @@ angular.module( 'conexus.home', [
 
 
    
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1286,15 +1244,6 @@ angular.module( 'conexus.home', [
                     if (obj.tags){obj.tags = obj.tags.split(',');}
                 });
             });
-            /*
-            ContentModel.getSome('search', $scope.searchQuery, 0, 20, 'createdAt DESC').then(function(models){
-                $rootScope.stateIsLoading = false;
-                $scope.activity = models.map(function(obj){
-                    obj.model = 'CONTENT';
-                    return obj;
-                });
-            });
-            */
         }
     }, true);
     //WATCHERS

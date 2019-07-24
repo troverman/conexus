@@ -70,7 +70,7 @@ module.exports = {
 			if (err) {return console.log(err);}
 			else {
 
-				console.log('CREATE ATTENTION', model)
+				//console.log('CREATE ATTENTION', model)
 
 				for (x in model.associatedModels){
 					
@@ -88,7 +88,7 @@ module.exports = {
 								else{attentionModel = {general:0}}
 
 								Content.update({id:contentModel[0].id}, {attention:attentionModel}).then(function(newContentModel){
-									console.log('LET THERE BE ATTENTION', attentionModel);
+									//console.log('LET THERE BE ATTENTION', attentionModel);
 									Content.publishCreate(newContentModel);
 								});
 							});
@@ -101,7 +101,7 @@ module.exports = {
 								if (taskModel[0].attention){attentionModel = {general:taskModel[0].attention.general + model.amount};}
 								else{attentionModel = {general:0}}
 								Task.update({id:taskModel[0].id}, {attention:attentionModel}).then(function(newTaskModel){
-									console.log('LET THERE BE ATTENTION', attentionModel);
+									//console.log('LET THERE BE ATTENTION', attentionModel);
 									Task.publishCreate(newTaskModel);
 								});
 							});

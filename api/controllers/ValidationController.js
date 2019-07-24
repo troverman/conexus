@@ -232,14 +232,10 @@ module.exports = {
 			//CAN ONLY CREATE VALIDATION FOR MY USER.ID (OFC)
 			//if req.session.id == userModels[0].id
 
-
-			//TODO: ABSTRACT BASED ON ASSOCIATED MODEL TYPES 
-
 			//BUILD USER REPUTATION
 			var reputation = {};
 
 			//for (x in Object.keys(model.validation)){
-				//IF THE USER HAS REP IN THE CONTEXT
 				//if (userModels[0].reputation[Object.keys(model.validation)[x]]){
 					//TODO: GENERAL REP
 					//if (Object.keys(model.validation)[x] == 'general'){
@@ -248,9 +244,7 @@ module.exports = {
 					//else{
 					//	reputation[Object.keys(model.validation)[x]] = userModels[0].reputation[Object.keys(model.validation)[x]];
 					//}
-
 				//}
-				//ELSE THE REPUTATION IS ZERO
 				//else{reputation[Object.keys(model.validation)[x]] = 0;}
 			//}
 
@@ -268,132 +262,74 @@ module.exports = {
 					Validation.publishCreate(validation);
 					res.json(validation);
 
-
-
-
-
-
-
-
-
-					//BUILD AND UPDATE OR CREATE AN ASSOCIATION THAT REFLECT NEW VALIDATION
 					function associationBuild(model){
 						var deferred = Q.defer();
-
-						//TODO: QUERY..
-						//TODO: master getSome.....
 						Validation.find({
 							associationModels:[
 								model.associationModels[0],
 								model.associationModels[1]
 							]
 						}).then(function(validationModels){
-
 							var associationModel = {
 								context: {},
 								associationModels: validation.associationModels,
-								//type.. --> charter.. 
 							};
-
-
-
+							//TEMP SIMPLE SUM
 							for (x in validationModels){
-
-								//TEMP SIMPLE SUM
 								for (y in Object.keys(validationModels[x].validation)){
 									 var context = Object.keys(validationModels[x].validation)[y];
 									 associationModel.context[context] += validationModels[x].validation[context];
 								}
-
-
-								//TODO: ALL MATH .. ETC CAN BE AFFECTED BY PROJECT CHARTER.. 
-									//IF PROJECT IS IN ASSOCIATED MODELS
-
-								//TODO: MATH! :)
-								//MATH ON VALIDATION-VALIDATION--..-- PROPOGATION
-								//are there any VALIDATIONS???? CONNECTED
-								//DATA-DATA-VALIDATION
-								//Validation.find({associationModel:validationModels[x].id}).then(function(validationModels){
-									//if (validationModels.length == 0){}
-									//else{
-									//	for (x in validationModels){
-									//		associationBuild(validationModels[x])
-									//	}
-									//}
-								//});
-
-								//if (validationModel.type == 'VALIDATION'){
-								//	associationBuild(model).then(function(){
-								//		deferred.resolve(validationModels)
-								//	});
-								//}
-								//else{//deferred.resolve(validationModels)//}
-
 							}
-
 							//TEMP. SIMPLE AVERAGE
 							for (x in Object.keys(associationModel.context)){
 								var context = Object.keys(associationModel.context)[x];
 						 		associationModel.context[context] = associationModel.context[context] / Object.keys(associationModel).length;
 						 	}
-
 						 	deferred.resolve(associationModel)
-
-
 						});
 						return deferred.promise;
 					};
 
-					//associationBuild(validation).then(function(associationModel){
-						//TODO..
-						//assosiatedModels 1 & 2
-						Association.find({}).then((associationModels)=>{
-							if (associationModels.length == 0){
-								Association.create(associationModel).then((newAssociationModel)=>{
-									Association.publishCreate(newAssociationModel);
+					var andQuery = { 
+						$and: [
+							{"associatedModels.id":{$in:[validation.associatedModels[0].id]}},
+							{"associatedModels.id":{$in:[validation.associatedModels[1].id]}}
+						]
+					};
+
+					Association.native(function(err, association) {			
+						association.find(andQuery).limit(100000).skip(0).sort({'createdAt':-1})
+						.toArray(function (err, associationModels) {
+							if (associationModels.length != 0){
+								associationModels = associationModels.map(function(obj){obj.id = obj._id; return obj;});
+								//Association.update({id:associationModels[0].id}, updatedModel).then((newAssociationModel)=>{
+								//	Association.publishUpdate(newAssociationModel);
+								//	console.log('UPDATE ASSOCIATION', newAssociationModel)
+								//});
+							}
+							else{
+								Association.create(validation).then((newAssociationModel)=>{
 									console.log('CREATE ASSOCIATION', newAssociationModel)
 								});
 							}
-							else{
-								var updatedModel = associationModels[0];
-								Association.update({id:associationModels[0].id}, updatedModel).then((newAssociationModel)=>{
-									Association.publishUpdate(newAssociationModel);
-									console.log('UPDATE ASSOCIATION', newAssociationModel)
-								});
-							}
 						});
-					//});
-
-
-
-
-
-
-
-
-
-
-
-
-
-					//SEND NOTIFICATION BASED ON NEW VALIDATION.. 
-					//BASED ON RULES ASSOCIATED MODELS .. AND NOTIFICATION SETTINGS 
-					//TODO: VALIDATION NOTIFICATION
-					var notificationModel = {
-						user: userModels[0].user,
-						type: 'VALIDATION',
-						title: 'New Validation',
-						content:'New Validation for associatedModels',
-						info:{user: userModels[0], associationModels:[]},
-						priority:75,
-					};
-
-					console.log('CREATE NOTIFICATION', notificationModel)
-
-					Notification.create(notificationModel).then(function(notification){
-						Notification.publishCreate(follower[0]);
 					});
 
+					//SEND NOTIFICATION, BASED ON RULES ASSOCIATED MODELS .. AND NOTIFICATION SETTINGS 
+					//TODO: VALIDATION NOTIFICATION
+					//var notificationModel = {
+					//	user: userModels[0].user,
+					//	type: 'VALIDATION',
+					//	title: 'New Validation',
+					//	content:'New Validation for associatedModels',
+					//	info:{user: userModels[0], associationModels:[]},
+					//	priority:75,
+					//};
+					//console.log('CREATE NOTIFICATION', notificationModel)
+					//Notification.create(notificationModel).then(function(notification){
+					//	Notification.publishCreate(follower[0]);
+					//});
 
 				}
 			});

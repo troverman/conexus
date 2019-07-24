@@ -102,21 +102,17 @@ module.exports = {
 module.exports.intervalService = function(){
 
 	//PRE-ALPHA. 
-	setInterval(intervalService.universalTokenProtocolPreAlpha, 8640000);
-	setInterval(intervalService.reputationBuild, 8640000);
+	//setInterval(intervalService.universalTokenProtocolPreAlpha, 8640000);
+	//setInterval(intervalService.reputationBuild, 8640000);
 	//intervalService.reputationBuild();
 
 	//POPULATE TOKEN -- ALPHA.. 
 	//COALESE CONGRUENT DATA MAPPINGS.. 
 	//TOKEN IS A MAPPING FROM STRING TO PROTOCOLS (WHICH ARE LOGIC MAPS)
-	setInterval(dataService.buildStringSpace, 8640000);
-
-	dataService.buildStringSpace();
-
+	//setInterval(dataService.buildStringSpace, 3600);
 
 	//TODO: UPCONVERT FXN LOL NOOO
-
-
+	
 	//Task.find().then(function(taskModels){
 	//	for x in taskModels){
 	//		dataService.buildAssociationFromValidation(taskModels[x]);

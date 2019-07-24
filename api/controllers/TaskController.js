@@ -78,6 +78,40 @@ module.exports = {
 			});
 		}
 
+		//WE ARE GETTING BY ASSOCIATION -- THIS IS THE MODEL
+			//ASSOCIATED VS CREATOR.. 
+		else if (req.query.user){
+
+			var member = req.query.user;
+			var andQuery = { 
+				$and: [
+					{"associatedModels.id":{$in :[member]}},
+					{"associatedModels.type":{$in :['MEMBER']}},
+					{"associatedModels.type":{$in :['TASK']}}
+				]
+			};
+			var promises = [];
+			
+			Association.native(function(err, association) {			
+				association.find(andQuery).limit(limit).skip(skip).sort({'createdAt':-1})
+				.toArray(function (err, associationModels) {
+					associationModels = associationModels.map(function(obj){obj.id = obj._id;return obj;});
+					for(x in associationModels){
+						for (y in associationModels[x].associatedModels){
+							if (associationModels[x].associatedModels[y].type == 'TASK'){
+								promises.push(Task.find({id:associationModels[x].associatedModels[y].id}).then(function(task){return task[0]}));
+							}
+						}
+					}
+					Q.all(promises).then((populatedModels)=>{
+						console.log(populatedModels)
+						res.json(populatedModels);
+					});
+				});
+			});
+
+		}
+
 		else{
 			Task.find({})
 			.limit(limit)

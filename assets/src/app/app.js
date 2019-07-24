@@ -28,6 +28,7 @@ angular.module( 'conexus', [
     'conexus.apps',
     'conexus.association',
     'conexus.block',
+    'conexus.connection',
     'conexus.content',
     'conexus.contentList',
     'conexus.developers',

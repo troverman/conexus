@@ -12,6 +12,7 @@ module.exports.routes = {
   'get /apps': 'HomeController.index',
   'get /association/:id': 'HomeController.index',
   'get /block/:id': 'HomeController.index',
+  'get /connection/:id': 'HomeController.index',
   'get /content': 'HomeController.index',
   'get /content/:id': 'HomeController.index',
   'get /developers': 'HomeController.index',
