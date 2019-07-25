@@ -36,7 +36,6 @@ module.exports = {
 
 		console.log(req._sails)
 
-
 		if (!req.query.query){
 
 			//RENDER QUERY

@@ -1322,7 +1322,59 @@ angular.module( 'conexus.member', [
         //    $scope.transactions = transactionModels;
         //});
 
-        var query = {
+        //is evertrhing an association? ...
+        var newQuery = [
+            {
+                filter:[
+                    {
+                        model:'TRANSACTION',
+                        modelParam:'amountSet.'+asset,
+                        query:JSON.stringify({$gt:0}),
+                    }
+                ],
+                chain:'AND',
+                params:{}
+            },
+            {
+                filter:[
+                    {
+                        model:'TRANSACTION',
+                        modelParam:'to',
+                        query: $scope.member.id,
+                        chain:'OR'
+                    },
+                    {
+                        model:'TRANSACTION',
+                        modelParam:'from',
+                        query: $scope.member.id,
+                        chain:'OR'
+                    }
+                ],
+                params:{}
+            },
+            //works boi
+            //{
+            //    filter:[
+            //        {
+            //            model:'TRANSACTION',
+            //            modelParam:'tags',
+            //            query: 'tip,service,hairstylist',
+            //            chain:'AND'
+            //        }
+            //    ],
+            //    params:{}
+            //},
+            {
+                filter:[],
+                params:{
+                    limit:100,
+                    skip:0,
+                    sort:'createdAt DESC'
+                }
+            }
+        ];
+
+        var oldQuery = {
             limit:100,
             skip:0,
             sort:'createdAt DESC',
@@ -1330,41 +1382,7 @@ angular.module( 'conexus.member', [
             user: $scope.member.id
         };
 
-        var query = [
-            {
-                filter:[
-                    {
-                        model:'TRANSACTION',
-                        modelParam:'tags',
-                        query:'TAG QUERY',
-                        association:{
-                            population:true,
-                            depth:1,
-                        },
-                        params:{
-                            limit:100,
-                            skip:0,
-                            sort:'createdAt DESC',
-                        }
-                    }
-                ],
-                params:{
-                    limit:100,
-                    skip:0,
-                    sort:'createdAt DESC',
-                },
-                chain:'OR'
-            },{
-                filter:[],
-                params:{
-                    limit:100,
-                    skip:0,
-                    sort:'createdAt DESC',
-                }
-            }
-        ];
-
-        console.log(query);
+        //console.log(query);
         console.log($location.search().assets)
 
         //if ($location.search().assets){
@@ -1376,26 +1394,17 @@ angular.module( 'conexus.member', [
         //    $location.search('assets',asset);
         //}
 
-        TransactionModel.getSome(query).then(function(transactionModels){
+        TransactionModel.getSome(oldQuery, newQuery).then(function(transactionModels){
             $rootScope.stateIsLoading = false;
             $scope.transactions = transactionModels;
-            $scope.updateGraph();
+            //$scope.updateGraph();
         });
 
     };
 
 
-
-
-
-
-
-
     //TIME TO REDO THIS WHOLE THING LOL.........
     //AFTER BETTER QUERIES AND FILTERING..
-
-
-
 
 
     //WORK HERE!! :)

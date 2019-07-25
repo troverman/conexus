@@ -6058,6 +6058,8 @@ angular.module("home/templates/tutorial.tpl.html", []).run(["$templateCache", fu
     "                        <p>TRANSACTIONS</p>\n" +
     "                        <p>ACTIONS</p>\n" +
     "                        <p>CONTENT</p>\n" +
+    "                        <p>APPS</p>\n" +
+    "                        <p>QUESTION PACKS; JSON INPUT | JSON OUTPUT</p>\n" +
     "\n" +
     "\n" +
     "                    </div>\n" +

@@ -2,7 +2,8 @@ angular.module('models.transaction', ['services', 'sails.io',])
 
 .service('TransactionModel', ['$sailsSocket', 'utils', function($sailsSocket, utils) {
 
-    this.getSome = function(model) {
+    //messy halfupgrade
+    this.getSome = function(model, queryNew) {
         var url = utils.prepareUrl('transaction');
         var query = {
             params:{
@@ -15,8 +16,14 @@ angular.module('models.transaction', ['services', 'sails.io',])
                 to:model.to,
                 amountSet:model.amountSet,
                 user:model.user,
+                query:queryNew,
             }
         };
+
+
+
+        console.log(query)
+
         return $sailsSocket.get(url, query).then(success, error);
     };
 

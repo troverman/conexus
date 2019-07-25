@@ -25,13 +25,109 @@ module.exports = {
 			return deferred.promise;
 		};
 
-		var limit = parseInt(req.query.limit);
-		var skip = parseInt(req.query.skip);
-		var sort = req.query.sort;
+		function parseQuery(queryModel){
 
-		console.log('GET TRANSACTION',req.query)
+			var mongoQuery = {
+				$or:[],
+				$and:[]
+			};
+
+			for (x in queryModel){
+
+				if (queryModel[x].chain){
+					var topBool = null;
+					if (queryModel[x].chain == 'AND'){topBool = '$and';}
+					if (queryModel[x].chain == 'OR'){topBool = '$or';}
+				}
+
+				if (queryModel[x].filter){
+
+					for (y in queryModel[x].filter){
+
+						var queryObj = {};
+
+						//HACK AF --> WE LOSE THE OBJ IF IT IS NOT STRINGIFIED..
+						var obj = {};
+						if (queryModel[x].filter[y].query.includes('{')){obj = JSON.parse(queryModel[x].filter[y].query);}
+						else{obj = queryModel[x].filter[y].query}
+
+						//nested issue..
+						console.log(queryModel[x].filter[y].query)
+						queryObj[queryModel[x].filter[y].modelParam] = obj;
+
+						if (!queryModel[x].filter[y].chain){
+							mongoQuery[topBool].push(queryObj);
+						}
+
+						if (queryModel[x].filter[y].chain){
+							if (queryModel[x].filter[y].chain == 'AND'){
+								if (topBool){
+									var index = mongoQuery[topBool].map(function(obj){return Object.keys(obj)[0]}).indexOf('$and');
+									if (index ==-1){mongoQuery[topBool].push({$and:[queryObj]});}
+									else{mongoQuery[topBool][index]['$and'].push(queryObj);}
+								}
+							}
+							if (queryModel[x].filter[y].chain == 'OR'){
+								if (topBool){
+									var index = mongoQuery[topBool].map(function(obj){return Object.keys(obj)[0]}).indexOf('$or');
+									if (index ==-1){mongoQuery[topBool].push({$or:[queryObj]});}
+									else{mongoQuery[topBool][index]['$or'].push(queryObj);}
+								}
+							}
+						}
+					}
+				}
+			}
+
+			//console.log(JSON.stringify(mongoQuery, null, 4));
+
+			if (mongoQuery.$or.length == 0){ delete mongoQuery.$or}
+			if (mongoQuery.$and.length == 0){ delete mongoQuery.$and}
+
+			return mongoQuery
+
+		};
+
+		var limit = parseInt(req.query.limit) || 1;
+		var skip = parseInt(req.query.skip) || 0;
+		var sort = req.query.sort || 'createdAt DESC';
 		
 		Transaction.watch(req);
+
+		if (req.query.query){
+			var querySet = Object.values(req.query.query);
+			for (x in querySet){querySet[x] = JSON.parse(querySet[x]);}
+			var mongoQuery = parseQuery(querySet);
+			
+			//console.log(mongoQuery)
+			console.log(JSON.stringify(mongoQuery, null, 4));
+
+			Transaction.native(function(err, transaction) {
+				transaction.find(mongoQuery)
+				.limit(4)
+				.skip(0)
+				.sort({'createdAt':-1})
+				.toArray(function (err, models) {
+					console.log(models)
+				});
+			});
+
+		}
+
+		//console.log('GET TRANSACTION',req.query)
+		
+
+
+
+
+
+
+
+
+
+
+		//DEPRECIATE BELOW
+
 
 		if(req.query.project){
 			var project = req.query.project;
@@ -171,7 +267,10 @@ module.exports = {
 		//&& FROM , TO
 		else if(req.query.amountSet && req.query.user){
 
-			console.log('dude complex query lol');
+
+			//console.log(req.query)
+
+			//console.log('dude complex query lol');
 
 			var amountSet = req.query.amountSet;
 			//TEMP | TODO COMPLEX
@@ -191,7 +290,8 @@ module.exports = {
 			andQuery.$and.push(query)
 			andQuery.$and.push(orQuery)
 
-			console.log(query);
+			console.log(JSON.stringify(andQuery, null, 4));
+
 			Transaction.native(function(err, transaction) {
 				transaction.find(andQuery)
 				.limit(limit)
@@ -202,7 +302,7 @@ module.exports = {
 						obj.id = obj._id;
 						return obj;
 					});
-					console.log(models)
+					//console.log(models)
 					var promises = [];
 					for (x in models){
 						promises.push(getTo(models[x]));

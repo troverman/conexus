@@ -337,50 +337,52 @@ angular.module( 'conexus.projects', [
             });
 
             for (x in searchQueryTemp){
-                $scope.searchModel.push({
-                    filter:[
-                        {
-                            model:'PROJECT', //ASSOCIATION.. :)
-                            modelParam:'tags',
-                            query: searchQueryTemp[x],
-                            queryParam:'contains',
-                            params:{
-                                limit:100,
-                                skip:0,
-                                sort:'createdAt DESC',
-                            },
-                            chain: 'OR',
-                        },{
-                            model:'PROJECT',
-                            modelParam:'title',
-                            query: searchQueryTemp[x],
-                            queryParam:'contains',
-                            params:{
-                                limit:100,
-                                skip:0,
-                                sort:'createdAt DESC',
-                            },
-                            chain: 'OR',
-                        },{
-                            model:'PROJECT',
-                            modelParam:'description',
-                            query: searchQueryTemp[x],
-                            queryParam:'contains',
-                            params:{
-                                limit:100,
-                                skip:0,
-                                sort:'createdAt DESC',
-                            },
-                            chain: 'OR',
-                        }
-                    ],
-                    params:{
-                        limit:100,
-                        skip:0,
-                        sort:'createdAt DESC',
-                    },
-                    chain:'OR'
-                });
+                $scope.searchModel.push(
+                    {
+                        filter:[
+                            {
+                                model:'PROJECT', //ASSOCIATION.. :)
+                                modelParam:'tags',
+                                query: searchQueryTemp[x],
+                                queryParam:'contains',
+                                params:{
+                                    limit:100,
+                                    skip:0,
+                                    sort:'createdAt DESC',
+                                },
+                                chain: 'OR',
+                            },{
+                                model:'PROJECT',
+                                modelParam:'title',
+                                query: searchQueryTemp[x],
+                                queryParam:'contains',
+                                params:{
+                                    limit:100,
+                                    skip:0,
+                                    sort:'createdAt DESC',
+                                },
+                                chain: 'OR',
+                            },{
+                                model:'PROJECT',
+                                modelParam:'description',
+                                query: searchQueryTemp[x],
+                                queryParam:'contains',
+                                params:{
+                                    limit:100,
+                                    skip:0,
+                                    sort:'createdAt DESC',
+                                },
+                                chain: 'OR',
+                            }
+                        ],
+                        params:{
+                            limit:100,
+                            skip:0,
+                            sort:'createdAt DESC',
+                        },
+                        chain:'OR'
+                    }
+                );
             }
 
             console.log($scope.searchModel)
