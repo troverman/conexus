@@ -1,34 +1,8 @@
 /**
  * SearchController
-
-	var query = [{
-	    filter:[{
-	        model:'Association, Task, Project',
-	        modelParam:'association, id, location, query, tag, ...',
-	        query:'query',
-	        association:{
-	            population:'boolean',
-	            depth:'integer',
-	        },
-	        params:{
-	            limit:'integer',
-	            skip:'integer',
-	            sort:'modelParam sortParam',
-	        },
-	        chain:'logic [\'AND\',\'OR\']',
-	    }],
-	    params:{
-	        limit:'integer',
-	        skip:'integer',
-	        sort:'modelParam sortParam',
-	    },
-	    chain:'logic [\'AND\',\'OR\']'
-	}];
-
 */
+var Q = require('q');
 
-
-//BY THE 7TH... COMPLEX QUERY. ASSOCIATION 
 module.exports = {
 
 	//CAN HANDLE ALL API CALLS..
@@ -38,87 +12,25 @@ module.exports = {
 
 		if (!req.query.query){
 
-			//RENDER QUERY
-			var querySet = Object.values(req.query);
-			for (x in querySet){querySet[x] = JSON.parse(querySet[x])}
-
-			//TODO
-			var mongoQuery = {};
-			mongoQuery.$or = [];
-			function parseQueryMongo(querySet){
-
-				console.log('QUERY LEGNTH', querySet.length);
-
-				for (x in querySet){
-					var query = querySet[x];
-
-					//LAYER AND / OR LOGIC.. 
-					if (query.chain){
-						if (query.chain == 'AND'){
-							//mongoQuery.$and = [];
-						}
-						if (query.chain == 'OR'){
-							//mongoQuery.$or = [];
-						}
-					}
-
-					if (query.filter){parseQuery(query.filter)}
-
-					if (!query.filter){
-
-						//if different model and AND == null
-						//console.log(query.model, query.modelParam, query.query, query.queryParam);
-
-						var mongoObj = {};
-						var queryDecoration = '';
-						if (query.queryParam == 'contains'){
-							queryDecoration = new RegExp(".*" + query.query + ".*i");
-						}
-
-						if (query.queryParam == 'equals'){
-							queryDecoration = query.query;
-						}
-						console.log(query.modelParam);
-						mongoObj[query.modelParam] = queryDecoration;
-						mongoQuery.$or.push(mongoObj);
-						console.log(mongoQuery);
-					}
-
+			function parseQueryMongo(querySet){};
+			function parseQueryOrbit(querySet){};
+	
+			function getSome(model){	
+				var deferred = Q.defer();
+				if (model.dataModel = 'PROJECT'){
+					Project.native(function(err, project) {
+						project.find(model.query).limit(model.limit).skip(model.skip)
+						.toArray(function (err, models) {
+							if (models){
+								models = models.map(function(obj){obj.id = obj._id; obj.model='PROJECT'; return obj;});
+								deferred.resolve(models)
+							}
+							else{deferred.resolve([])}
+						});
+					});
+					return deferred.promise;
 				}
-
-				//cb(mongoQuery);
 			};
-
-			function parseQueryOrbit(querySet){}
-
-			parseQueryMongo(querySet);
-
-			//parseQuery(querySet, function(mongoQuery){
-			
-			//REDUCE MODELS
-			//REDUCE MODEL PARAMS
-			//REDUCE TO DISCRETE AND OR
-
-			Project.native(function(err, project) {
-				var query = {
-					$or: [
-						{"title": /.*starbuck.*/i},
-						{"tags": /.*coffee.*/i},
-					]
-				};
-				project.find(mongoQuery)
-				.limit(200)
-				.skip(0)
-				.toArray(function (err, models) {
-					if (models){
-						console.log(models.length)
-						models = models.map(function(obj){obj.id = obj._id; obj.model='PROJECT'; return obj;});
-					}
-					res.json(models);
-				});
-			});
-
-			//});
 
 		}
 

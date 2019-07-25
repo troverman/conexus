@@ -25,40 +25,35 @@ module.exports = {
 			return deferred.promise;
 		};
 
+		//RATING: SILVER
 		function parseQuery(queryModel){
-
+			//THINK
+			var mongoQuery = {
+				filter:{
+					$or:[],
+					$and:[]
+				},
+				params:{
+					limit:1,
+					skip:0,
+					sort:{'createdAt':-1}
+				}
+			};
 			var mongoQuery = {
 				$or:[],
 				$and:[]
 			};
-
 			for (x in queryModel){
-
 				if (queryModel[x].chain){
 					var topBool = null;
 					if (queryModel[x].chain == 'AND'){topBool = '$and';}
 					if (queryModel[x].chain == 'OR'){topBool = '$or';}
 				}
-
 				if (queryModel[x].filter){
-
 					for (y in queryModel[x].filter){
-
 						var queryObj = {};
-
-						//HACK AF --> WE LOSE THE OBJ IF IT IS NOT STRINGIFIED..
-						var obj = {};
-						if (queryModel[x].filter[y].query.includes('{')){obj = JSON.parse(queryModel[x].filter[y].query);}
-						else{obj = queryModel[x].filter[y].query}
-
-						//nested issue..
-						console.log(queryModel[x].filter[y].query)
-						queryObj[queryModel[x].filter[y].modelParam] = obj;
-
-						if (!queryModel[x].filter[y].chain){
-							mongoQuery[topBool].push(queryObj);
-						}
-
+						queryObj[queryModel[x].filter[y].modelParam] = queryModel[x].filter[y].query;
+						if (!queryModel[x].filter[y].chain){mongoQuery[topBool].push(queryObj);}
 						if (queryModel[x].filter[y].chain){
 							if (queryModel[x].filter[y].chain == 'AND'){
 								if (topBool){
@@ -78,14 +73,9 @@ module.exports = {
 					}
 				}
 			}
-
-			//console.log(JSON.stringify(mongoQuery, null, 4));
-
 			if (mongoQuery.$or.length == 0){ delete mongoQuery.$or}
 			if (mongoQuery.$and.length == 0){ delete mongoQuery.$and}
-
 			return mongoQuery
-
 		};
 
 		var limit = parseInt(req.query.limit) || 1;
@@ -95,40 +85,46 @@ module.exports = {
 		Transaction.watch(req);
 
 		if (req.query.query){
-			var querySet = Object.values(req.query.query);
-			for (x in querySet){querySet[x] = JSON.parse(querySet[x]);}
+			var querySet = JSON.parse(req.query.query);
 			var mongoQuery = parseQuery(querySet);
-			
-			//console.log(mongoQuery)
 			console.log(JSON.stringify(mongoQuery, null, 4));
-
 			Transaction.native(function(err, transaction) {
 				transaction.find(mongoQuery)
-				.limit(4)
+				.limit(1000)
 				.skip(0)
 				.sort({'createdAt':-1})
 				.toArray(function (err, models) {
-					console.log(models)
+					models = models.map(function(obj){obj.id = obj._id; return obj;});
+
+
+
+					//console.log(models)
+					//var promises = [];
+					//for (x in models){
+					//	promises.push(getTo(models[x]));
+					//	promises.push(getFrom(models[x]));
+					//}
+					//Q.all(promises).then((populatedModels)=>{
+					//	var sum = 0;
+					//	connsole.log(populatedModels)
+					//	for (x in models){
+					//		console.log(x)
+					//		models[x].to = populatedModels[sum];sum++
+					//		models[x].from = populatedModels[sum];sum++;
+					//	}
+					//	res.json(models);
+					//});
+
+
 				});
 			});
-
 		}
 
 		//console.log('GET TRANSACTION',req.query)
 		
 
 
-
-
-
-
-
-
-
-
 		//DEPRECIATE BELOW
-
-
 		if(req.query.project){
 			var project = req.query.project;
 			Transaction.find({project:project})
@@ -230,6 +226,7 @@ module.exports = {
 		}
 
 		//LOL
+		//DEPRECIATE
 		else if(req.query.amountSet && !req.query.user){
 			var amountSet = req.query.amountSet;
 			//TEMP | TODO COMPLEX
@@ -241,10 +238,7 @@ module.exports = {
 				.skip(skip)
 				.sort({'createdAt':-1})
 				.toArray(function (err, models) {
-					models = models.map(function(obj){
-						obj.id = obj._id;
-						return obj;
-					});
+					models = models.map(function(obj){obj.id = obj._id;return obj;});
 					var promises = [];
 					for (x in models){
 						promises.push(getTo(models[x]));
@@ -253,10 +247,8 @@ module.exports = {
 					Q.all(promises).then((populatedModels)=>{
 						var sum = 0;
 						for (x in models){
-							models[x].to = populatedModels[sum];
-							sum++
-							models[x].from = populatedModels[sum];
-							sum++;
+							models[x].to = populatedModels[sum];sum++
+							models[x].from = populatedModels[sum];sum++;
 						}
 						res.json(models);
 					});
@@ -264,21 +256,12 @@ module.exports = {
 			});
 		}
 
-		//&& FROM , TO
+		//DEPRECIATE
 		else if(req.query.amountSet && req.query.user){
 
-
-			//console.log(req.query)
-
-			//console.log('dude complex query lol');
-
 			var amountSet = req.query.amountSet;
-			//TEMP | TODO COMPLEX
 			var query = {};
 			query[ "amountSet."+req.query.amountSet] = {$gt: 0};
-			//query.user = req.query.user
-
-			//HAAA! IT WORKED
 			var andQuery = { $and: []};
 			var orQuery = {$or:
 				[
@@ -290,19 +273,13 @@ module.exports = {
 			andQuery.$and.push(query)
 			andQuery.$and.push(orQuery)
 
-			console.log(JSON.stringify(andQuery, null, 4));
-
 			Transaction.native(function(err, transaction) {
 				transaction.find(andQuery)
 				.limit(limit)
 				.skip(skip)
 				.sort({'createdAt':-1})
 				.toArray(function (err, models) {
-					models = models.map(function(obj){
-						obj.id = obj._id;
-						return obj;
-					});
-					//console.log(models)
+					models = models.map(function(obj){obj.id = obj._id;return obj;});
 					var promises = [];
 					for (x in models){
 						promises.push(getTo(models[x]));
@@ -311,10 +288,8 @@ module.exports = {
 					Q.all(promises).then((populatedModels)=>{
 						var sum = 0;
 						for (x in models){
-							models[x].to = populatedModels[sum];
-							sum++
-							models[x].from = populatedModels[sum];
-							sum++;
+							models[x].to = populatedModels[sum];sum++
+							models[x].from = populatedModels[sum];sum++;
 						}
 						res.json(models);
 					});

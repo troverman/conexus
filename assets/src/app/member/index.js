@@ -1312,6 +1312,8 @@ angular.module( 'conexus.member', [
     };
     $scope.init();
 
+
+    //TODO FRONTEND QUERY BUILDING
     $scope.selectAsset = function(asset){
         $rootScope.stateIsLoading = true;
 
@@ -1329,7 +1331,7 @@ angular.module( 'conexus.member', [
                     {
                         model:'TRANSACTION',
                         modelParam:'amountSet.'+asset,
-                        query:JSON.stringify({$gt:0}),
+                        query:{$gt:0}
                     }
                 ],
                 chain:'AND',
@@ -1394,7 +1396,7 @@ angular.module( 'conexus.member', [
         //    $location.search('assets',asset);
         //}
 
-        TransactionModel.getSome(oldQuery, newQuery).then(function(transactionModels){
+        TransactionModel.getSome(oldQuery, JSON.stringify(newQuery)).then(function(transactionModels){
             $rootScope.stateIsLoading = false;
             $scope.transactions = transactionModels;
             //$scope.updateGraph();
@@ -1723,30 +1725,6 @@ angular.module( 'conexus.member', [
         }
         console.log($scope.pie.series[0].data)
     };
-
-    //COMPLEX QUERY
-    //COMBINE ALL HERE
-    $scope.selectFilter = function(tag){
-
-        //COMPOUND QUERY
-        //FROM, TO, BOTH, TAG, ASSET
-
-        $scope.searchQuery.push({text:tag, type:'TAG'});
-
-        var query = {
-            member:$scope.member.id, 
-            tag:tag, 
-            from:$scope.member.id, 
-            to:$scope.member.id,
-            identifer:$scope.identifer
-        };
-
-        TransactionModel.getSome({query:query, limit:20, skip:0, sort:'createdAt DESC'}).then(function(transactions){
-            $scope.transactions = transactions;
-        });
-
-    };
-
     $scope.selectOverview();
 
 
