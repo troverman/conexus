@@ -255,15 +255,12 @@ angular.module( 'conexus.task', [
     //TODO: HMMMMMMMMMMMM.. a 'handhold' --> !!!
     $scope.$watch('timeTags', function(newValue, oldValue){
         if (newValue !== oldValue) {
-
             for (x in $scope.newTime.validationModels){
                 for (y in $scope.timeTags){
                     $scope.newTime.validationModels[x].validation[$scope.timeTags[y].text] = 100;
                 }
             }
-
             console.log( $scope.newTime.validationModels)
-
         }
     }, true);
 

@@ -9,7 +9,7 @@
 <!--FILTER SORT-->
 
 <div class="row">
-	<div class="col-lg-4 col-sm-6" ng-repeat="member in members" style="padding-left:10px;padding-right:10px;">
+	<div class="col-sm-6" ng-repeat="member in members" style="padding-left:10px;padding-right:10px;">
 		<div class="member-card" ng-click="renderReputationToggle(member)" style="margin-bottom:10px">
 		    <div class="member-card-image" style="background-image: url('{{member.user.coverUrl}}')">
 		        <a ng-click="$event.stopPropagation()" href="member/{{member.user.username}}" ui-sref="member.activity({path:member.user.username})"><img ng-src="{{member.user.avatarUrl}}" err-src="/images/avatar.png"></a>

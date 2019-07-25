@@ -10,6 +10,7 @@ angular.module('models.transaction', ['services', 'sails.io',])
                 limit:model.limit,
                 skip:model.skip,
                 sort:model.sort,
+                
                 id:model.id,
                 from:model.from,
                 project:model.project,
@@ -19,10 +20,6 @@ angular.module('models.transaction', ['services', 'sails.io',])
                 query:queryNew,
             }
         };
-
-
-
-        console.log(query)
 
         return $sailsSocket.get(url, query).then(success, error);
     };

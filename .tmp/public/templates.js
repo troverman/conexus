@@ -4533,7 +4533,7 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
     "				    <div style=\"background:rgba(0,0,0,0.75);height:50px\" class=\"imageContainerSmallDiv\">  \n" +
     "				        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "                        	<div style=\"padding:15px\">\n" +
-    "					            <h1 style=\"text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;\">Tags</h1>\n" +
+    "					            <h1 style=\"text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;\">Context</h1>\n" +
     "					        </div>\n" +
     "				        </div>\n" +
     "				    </div>\n" +
@@ -5358,7 +5358,7 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "                <!--\n" +
     "                <p style=\"font-style:italic;margin:0px;color:gray\">App specific interoperable validation protocols allow for value validation though Machine Learning & Artificial Intelligence. Information and Intention create emergent intelligence in programatic value.</p>\n" +
     "                -->\n" +
-    "                <p style=\"font-style:italic;margin:0px;color:gray\">The <a href=\"/transparency\" ui-sref=\"transparency\"><b>Decentralized Network</b></a> is you! Decentralized peers support the network.</p>\n" +
+    "                <p style=\"font-style:italic;margin:0px;color:gray\">The <a href=\"/transparency\" ui-sref=\"transparency\"><b>Decentralized Network</b></a> is you! Decentralized peers create the network.</p>\n" +
     "                <!--<p style=\"font-style:italic;margin:0px;color:gray\">Finding congruence with human and machine consensus.</p>-->\n" +
     "            </div>\n" +
     "            <div class=\"col-md-6 mobileHide\" style=\"text-align:center\">\n" +
@@ -8496,7 +8496,7 @@ angular.module("member/templates/followers.tpl.html", []).run(["$templateCache",
   $templateCache.put("member/templates/followers.tpl.html",
     "<div class=\"spacing-5\"></div>\n" +
     "<div class=\"row\">\n" +
-    "	<div class=\"col-lg-4 col-sm-6\" ng-repeat=\"member in followers\">\n" +
+    "	<div class=\"col-sm-6\" ng-repeat=\"member in followers\">\n" +
     "		<div class=\"member-card\" ng-click=\"renderReputationToggle(member)\">\n" +
     "		    <div class=\"member-card-image\" style=\"background-image: url('{{member.follower.coverUrl}}')\">\n" +
     "		        <a ng-click=\"$event.stopPropagation();\" href=\"member/{{member.follower.username}}\" ui-sref=\"member.activity({path:member.follower.username})\">\n" +
@@ -8525,7 +8525,7 @@ angular.module("member/templates/following.tpl.html", []).run(["$templateCache",
   $templateCache.put("member/templates/following.tpl.html",
     "<div class=\"spacing-5\"></div>\n" +
     "<div class=\"row\">\n" +
-    "	<div class=\"col-lg-4 col-sm-6\" ng-repeat=\"member in following\">\n" +
+    "	<div class=\"col-sm-6\" ng-repeat=\"member in following\">\n" +
     "		<div class=\"member-card\" ng-click=\"renderReputationToggle(member)\">\n" +
     "		    <div class=\"member-card-image\" style=\"background-image: url('{{member.followed.coverUrl}}')\">\n" +
     "		        <a ng-click=\"$event.stopPropagation();\" href=\"member/{{member.followed.username}}\" ui-sref=\"member.activity({path:member.followed.username})\">\n" +
@@ -9255,7 +9255,7 @@ angular.module("members/index.tpl.html", []).run(["$templateCache", function($te
     "        </div>\n" +
     "    </div>\n" +
     "    <div class=\"row\">\n" +
-    "        <div class=\"col-lg-4 col-sm-6\" ng-repeat=\"item in members\" style=\"padding-left:10px;padding-right:10px;\">\n" +
+    "        <div class=\"col-sm-6\" ng-repeat=\"item in members\" style=\"padding-left:10px;padding-right:10px;\">\n" +
     "            <div ng-include=\"'templates/cards/memberCard.tpl.html'\"></div>\n" +
     "        </div>\n" +
     "    </div>\n" +
@@ -9581,7 +9581,266 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "\n" +
     "\n" +
     "    <!-- I AM GOING TO BUILD THIS!!!-->\n" +
-    "    \n" +
+    "    <md-sidenav class=\"md-sidenav-left md-whiteframe-z2\" md-component-id=\"filter\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;max-width:100%\">\n" +
+    "        <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
+    "            <div class=\"spacing-25\"></div>\n" +
+    "            \n" +
+    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?{{model.tags}}')\" class=\"imageContainerSmall\">\n" +
+    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                        <div style=\"padding:15px\">\n" +
+    "                            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Filter</h1>\n" +
+    "                            <h5 style=\"color:white\">\n" +
+    "                            <!--CONTEXT-->\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <div style=\"padding:16px;\">\n" +
+    "\n" +
+    "                <!--DISCOVER-->\n" +
+    "                <div ng-if=\"type=='DISCOVER'\">\n" +
+    "\n" +
+    "                    <!--\n" +
+    "                    <p><b>Model</b></p>\n" +
+    "                    <ul class=\"nav nav-pills nav-justified contentTyle\">\n" +
+    "                        <li ng-class=\"{active: selectedType=='AUDIO'}\" ng-click=\"selectType('AUDIO')\"><a href=\"#\">Content</a></li>\n" +
+    "                        <li ng-class=\"{active: selectedType=='VIDEO'}\" ng-click=\"selectType('VIDEO')\"><a href=\"#\">Items</a></li>\n" +
+    "                        <li ng-class=\"{active: selectedType=='VIDEO'}\" ng-click=\"selectType('VIDEO')\"><a href=\"#\">Orders</a></li>\n" +
+    "                        <li ng-class=\"{active: selectedType=='IMAGE'}\" ng-click=\"selectType('IMAGE')\"><a href=\"#\">Project</a></li>\n" +
+    "                        <li ng-class=\"{active: selectedType=='LINK'}\" ng-click=\"selectType('LINK')\"><a href=\"#\">Task</a></li>\n" +
+    "                        <li ng-class=\"{active: selectedType=='MOTION'}\" ng-click=\"selectType('MOTION')\"><a href=\"#\">Time</a></li>\n" +
+    "                        <li ng-class=\"{active: selectedType=='POST'}\" ng-click=\"selectType('POST')\"><a href=\"#\">Transaction</a></li>\n" +
+    "                    </ul>\n" +
+    "                    -->\n" +
+    "\n" +
+    "                    <p><b>Context</b> <i style=\"float:right\" class=\"fa fa-tags\"></i></p>\n" +
+    "                    <div>\n" +
+    "                        <tags-input min-length=\"1\" placeholder=\"Context\" ng-model=\"searchQueryNav.tags\">\n" +
+    "                            <auto-complete source=\"loadAsset($query)\"></auto-complete>\n" +
+    "                        </tags-input>\n" +
+    "                        <div ng-repeat=\"item in item.tags.slice(0,10) track by $index\">\n" +
+    "                            <a href=\"#\" ng-click=\"selectTag(item.element)\"><b>{{item.element}}</b></a>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "\n" +
+    "                    <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                    <p><b>Association</b> <i style=\"float:right\" class=\"fas fa-bezier-curve\"></i></p>\n" +
+    "                    <div>\n" +
+    "                        <tags-input min-length=\"1\" placeholder=\"Association\" ng-model=\"searchQueryNav.associations\">\n" +
+    "                            <auto-complete source=\"loadAssociation($query)\"></auto-complete>\n" +
+    "                        </tags-input>\n" +
+    "                        <div ng-repeat=\"item in item.associations.slice(0,10) track by $index\">\n" +
+    "                            <a href=\"#\" ng-click=\"selectAssociation(item.element)\"><b>{{item.element}}</b></a>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "\n" +
+    "                    <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                    <p><b>Location</b> <i style=\"float:right\" class=\"fa fa-map-marker\"></i></p>\n" +
+    "                    <div>\n" +
+    "                        <tags-input min-length=\"1\" placeholder=\"Location\" ng-model=\"searchQueryNav.locations\">\n" +
+    "                            <auto-complete source=\"loadLocation($query)\"></auto-complete>\n" +
+    "                        </tags-input>\n" +
+    "                        <div ng-repeat=\"item in item.locations.slice(0,10) track by $index\">\n" +
+    "                            <a href=\"#\" ng-click=\"selectLocation(item.element)\"><b>{{item.element.address}}</b></a>\n" +
+    "                        </div>\n" +
+    "                        <div layout=\"\">\n" +
+    "                            <div flex=\"12\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\" style=\"font-size:10px\">Distance (km)</span></div>\n" +
+    "                            <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"locationFilter.distance\" step=\"1\" min=\"0\" max=\"100\" aria-label=\"general\"></md-slider>\n" +
+    "                            <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{locationFilter.distance}}</span></div>\n" +
+    "                        </div>\n" +
+    "                        <ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\">\n" +
+    "                            <ui-gmap-marker ng-repeat=\"marker in markers track by $index\" coords=\"marker.coords\" options=\"marker.options\" idkey=\"marker.id\">\n" +
+    "                                <ui-gmap-window options=\"windowOptions\" closeClick=\"closeClick()\">\n" +
+    "                                    <div>\n" +
+    "                                        <div style=\"font-size: 15px;\"><a href=\"#\">{{marker.content}}</a></div>\n" +
+    "                                    </div>\n" +
+    "                                </ui-gmap-window>\n" +
+    "                            </ui-gmap-marker>\n" +
+    "                        </ui-gmap-google-map>\n" +
+    "                    </div>\n" +
+    "\n" +
+    "                    <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                    <p ng-click=\"expandAdvancedFilter()\"><a><i class=\"fa fa-filter\"></i> <b>Custom Filter</b></a></p>\n" +
+    "                    <div ng-if=\"filtersAreExpanded\">\n" +
+    "                        <!--\n" +
+    "                        <div style=\"background:rgba(0,0,0,0.75);height:50px\" class=\"imageContainerSmallDiv\">\n" +
+    "                            <div style=\"background:url('https://source.unsplash.com/1600x900/?{{item.tags}}');min-height:50px\" class=\"imageContainerSmall\">\n" +
+    "                                <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                                    <div style=\"padding:15px\">\n" +
+    "                                        <h1 style=\"text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;\">Filter Builder</h1>\n" +
+    "                                    </div>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                        -->\n" +
+    "                        <text-angular ng-model=\"filterBuilder\" ta-toolbar=\"[['p','h1','bold','italics','quote','insertLink', 'html']]\"></text-angular>\n" +
+    "                        <button type=\"submit\" class=\"btn btn-default log-btn\" ng-click=\"\">Submit</button>\n" +
+    "                    </div>\n" +
+    "\n" +
+    "                </div>\n" +
+    "            \n" +
+    "                <!--LEDGER-->\n" +
+    "                <!--DO ITTTT-->\n" +
+    "                <!--AND VECTOR / SELF-TRANSACTION ASSOCIATIONS-->\n" +
+    "                <div ng-if=\"type=='LEDGER'\">\n" +
+    "\n" +
+    "                    <p><b>Asset Set</b></p>\n" +
+    "                    <tags-input min-length=\"1\" placeholder=\"Asset Set\" ng-model=\"selectedAssets\">\n" +
+    "                        <auto-complete source=\"loadAsset($query)\"></auto-complete>\n" +
+    "                    </tags-input>\n" +
+    "                    <div ng-repeat=\"asset in item.assets.slice(0,10) track by $index\">\n" +
+    "                        <a href=\"#\" ng-click=\"selectAsset(asset.element)\"><b>{{asset.element}}</b></a>\n" +
+    "                    </div>\n" +
+    "                    <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                    <!--RELATED-->\n" +
+    "                    <p><b>Context</b></p>\n" +
+    "                    <tags-input min-length=\"1\" placeholder=\"Context\" ng-model=\"selectedTags\">\n" +
+    "                        <auto-complete source=\"loadTags($query)\"></auto-complete>\n" +
+    "                    </tags-input>\n" +
+    "                    <div ng-repeat=\"asset in item.tags.slice(0,10) track by $index\">\n" +
+    "                        <a href=\"#\" ng-click=\"selectTag(asset.element)\"><b>{{asset.element}}</b></a>\n" +
+    "                    </div>\n" +
+    "                    <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                    <p><b>Associations</b></p>\n" +
+    "                    <tags-input min-length=\"1\" placeholder=\"Associations\" ng-model=\"selectedAssociations\">\n" +
+    "                        <auto-complete source=\"loadAssociation($query)\"></auto-complete>\n" +
+    "                    </tags-input>\n" +
+    "                    <div ng-repeat=\"asset in item.associations.slice(0,10) track by $index\">\n" +
+    "                        <a href=\"#\" ng-click=\"selectTag(asset.element)\"><b>{{asset.element}}</b></a>\n" +
+    "                    </div>\n" +
+    "                    <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div ng-if=\"type=='MANIFOLD'\">\n" +
+    "\n" +
+    "                    <h5>{TOKEN}+[ACTION]+SPONSOR+(ADDRESS)</h5>\n" +
+    "                    <h5>+CREDIT+(TIME)</h5>\n" +
+    "                    <h5>+FUTURE+(TIME)</h5>\n" +
+    "                    <h5>+OPTION+(TIME)</h5>\n" +
+    "\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <!--MARKET-->\n" +
+    "                <div ng-if=\"type=='MARKET'\">\n" +
+    "\n" +
+    "                    <!--\n" +
+    "                    <tags-input min-length=\"1\" placeholder=\"Base Asset\" ng-model=\"baseMarkets\">\n" +
+    "                        <auto-complete source=\"loadAsset($query)\"></auto-complete>\n" +
+    "                    </tags-input>\n" +
+    "                    -->\n" +
+    "\n" +
+    "                    <p><b>Models</b></p>\n" +
+    "                    <p ng-repeat=\"manifold in manifolds\">\n" +
+    "                        <a ng-click=\"\">{{manifold}}</a>\n" +
+    "                    </p>\n" +
+    "\n" +
+    "                    <tags-input min-length=\"1\" placeholder=\"Asset\" ng-model=\"markets\">\n" +
+    "                        <auto-complete source=\"loadAsset($query)\"></auto-complete>\n" +
+    "                    </tags-input>\n" +
+    "\n" +
+    "                    <!--IDK-->\n" +
+    "                    <div layout=\"\">\n" +
+    "                        <div flex=\"12\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\" style=\"font-size:10px\">Volume</span></div>\n" +
+    "                        <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"locationFilter.distance\" step=\"1\" min=\"0\" max=\"100\" aria-label=\"general\"></md-slider>\n" +
+    "                        <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\"></span></div>\n" +
+    "                    </div>\n" +
+    "\n" +
+    "                    <!--IDK-->\n" +
+    "                    <div layout=\"\">\n" +
+    "                        <div flex=\"12\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\" style=\"font-size:10px\">Combinitorial</span></div>\n" +
+    "                        <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"locationFilter.distance\" step=\"1\" min=\"0\" max=\"100\" aria-label=\"general\"></md-slider>\n" +
+    "                        <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\"></span></div>\n" +
+    "                    </div>\n" +
+    "\n" +
+    "\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div ng-if=\"type=='NOTIFICATION'\">\n" +
+    "\n" +
+    "                    <ul class=\"nav nav-pills nav-justified contentTyle\">\n" +
+    "                        <li ng-class=\"{active: selectedType=='ALL'}\" ng-click=\"selectType('ALL')\"><a href=\"#\">All</a></li>\n" +
+    "                        <li ng-class=\"{active: selectedType=='READ'}\" ng-click=\"selectType('READ')\"><a href=\"#\">Read</a></li>\n" +
+    "                        <li ng-class=\"{active: selectedType=='UNREAD'}\" ng-click=\"selectType('UNREAD')\"><a href=\"#\">Unread</a></li>\n" +
+    "                    </ul>\n" +
+    "                    <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                    <p><b>Tags</b></p>\n" +
+    "                    <tags-input min-length=\"1\" placeholder=\"Tags\" ng-model=\"searchQueryNav.tags\">\n" +
+    "                        <auto-complete source=\"loadAsset($query)\"></auto-complete>\n" +
+    "                    </tags-input>\n" +
+    "                    <div ng-repeat=\"item in item.tags.slice(0,10) track by $index\">\n" +
+    "                        <a href=\"#\" ng-click=\"selectTag(item)\">{{item}}</a>\n" +
+    "                    </div>\n" +
+    "                    <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                    <p><b>Type</b></p>\n" +
+    "                    <tags-input min-length=\"1\" placeholder=\"Type\" ng-model=\"searchQueryNav.type\">\n" +
+    "                        <auto-complete source=\"loadType($query)\"></auto-complete>\n" +
+    "                    </tags-input>\n" +
+    "                    <div ng-repeat=\"item in item.type.slice(0,10) track by $index\">\n" +
+    "                        <a href=\"#\" ng-click=\"selectTypeFilter(item)\">{{item}}</a>\n" +
+    "                    </div>\n" +
+    "                    <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                    <p><b>Priority</b></p>\n" +
+    "                    <div layout=\"\">\n" +
+    "                        <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"priorityFilter.priority\" step=\"1\" min=\"0\" max=\"100\" aria-label=\"general\"></md-slider>\n" +
+    "                    </div>\n" +
+    "                    <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <!--POSTIONS | MAP-->\n" +
+    "                <div ng-if=\"type=='POSITIONS'\">\n" +
+    "                    <p><b>Positions</b></p>\n" +
+    "                    <tags-input min-length=\"1\" placeholder=\"Base Asset\" ng-model=\"baseMarkets\">\n" +
+    "                        <auto-complete source=\"loadAsset($query)\"></auto-complete>\n" +
+    "                    </tags-input>\n" +
+    "                    <tags-input min-length=\"1\" placeholder=\"Asset\" ng-model=\"markets\">\n" +
+    "                        <auto-complete source=\"loadAsset($query)\"></auto-complete>\n" +
+    "                    </tags-input>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div ng-if=\"type=='VALUEMAP'\">\n" +
+    "\n" +
+    "                    <tags-input min-length=\"1\" placeholder=\"Base Asset\" ng-model=\"baseToken\">\n" +
+    "                        <auto-complete source=\"loadAsset($query)\"></auto-complete>\n" +
+    "                    </tags-input>\n" +
+    "                    <h5>{{baseToken.text}}</h5>\n" +
+    "                    <p>{{baseToken.description}}</p>\n" +
+    "                    <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                    <tags-input min-length=\"1\" placeholder=\"Manifold\" ng-model=\"baseManifold\">\n" +
+    "                        <auto-complete source=\"loadAsset($query)\"></auto-complete>\n" +
+    "                    </tags-input>\n" +
+    "                    <h5>{{baseManifold.text}}</h5>\n" +
+    "                    <p>{{baseManifold.description}}</p>\n" +
+    "                    <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                    <h5>{{orderType.text}}</h5>\n" +
+    "                    <p>{{orderType.description}}</p>\n" +
+    "                    <ul class=\"nav nav-pills nav-stacked contentType\">\n" +
+    "                        <li ng-class=\"{active: orderType.text=='Continual'}\" ng-click=\"selectType('CONTINUAL')\"><a href=\"#\">Continual on Books</a></li>\n" +
+    "                        <li ng-class=\"{active: selectedType=='DISCRETE'}\" ng-click=\"selectType('DISCRETE')\"><a href=\"#\">Discrete on Books</a></li>\n" +
+    "                        <li ng-class=\"{active: selectedType=='FOK'}\" ng-click=\"selectType('FOK')\"><a href=\"#\">Fill or Kill</a></li>\n" +
+    "                        <li ng-class=\"{active: selectedType=='IOC'}\" ng-click=\"selectType('IOC')\"><a href=\"#\">Immediate or Cancel</a></li>\n" +
+    "                        <li ng-class=\"{active: selectedType=='LIMIT'}\" ng-click=\"selectType('LIMIT')\"><a href=\"#\">Limit</a></li>\n" +
+    "                    </ul>\n" +
+    "                    <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                </div>\n" +
+    "\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </md-sidenav>\n" +
     "\n" +
     "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"item\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
     "        <div ng-if=\"newItem\" class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
@@ -10377,18 +10636,18 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                <!--<h2><i class=\"fas fa-sort-amount-down\"></i></h2>-->\n" +
     "                <!--<h5><a>Trending</a></h5>-->\n" +
     " \n" +
-    "                <h4 ng-click=\"sortToggle()\" class=\"nav-links\"><a href=\"#\"><i class=\"fas fa-eye\"></i> Attention <i class=\"fas fa-chevron-down\"></i></a></h4>\n" +
+    "                <h4 ng-click=\"selectSort('ATTENTION', 'DESC', '24h')\" class=\"nav-links\"><a href=\"#\"><i class=\"fas fa-eye\"></i> Attention <i class=\"fas fa-chevron-down\"></i></a></h4>\n" +
     "                \n" +
     "                <!--PAST 24 HOURS-->\n" +
     "                <!--ALL TIME..ETC-->\n" +
-    "                <h5 ng-click=\"sortToggle()\" class=\"nav-links\"><a href=\"#\">Past 24 Hours</a></h5>\n" +
-    "                <h5 ng-click=\"sortToggle()\" class=\"nav-links\"><a href=\"#\">Past Month</a></h5>\n" +
-    "                <h5 ng-click=\"sortToggle()\" class=\"nav-links\"><a href=\"#\">Past Year</a></h5>\n" +
-    "                <h5 ng-click=\"sortToggle()\" class=\"nav-links\"><a href=\"#\">All Time</a></h5>\n" +
+    "                <h5 ng-click=\"selectSort('ATTENTION', 'DESC', '24h')\" class=\"nav-links\"><a href=\"#\">Past 24 Hours</a></h5>\n" +
+    "                <h5 ng-click=\"selectSort('ATTENTION', 'DESC', '1m')\" class=\"nav-links\"><a href=\"#\">Past Month</a></h5>\n" +
+    "                <h5 ng-click=\"selectSort('ATTENTION', 'DESC', '1y')\" class=\"nav-links\"><a href=\"#\">Past Year</a></h5>\n" +
+    "                <h5 ng-click=\"selectSort('ATTENTION', 'DESC', 'all')\" class=\"nav-links\"><a href=\"#\">All Time</a></h5>\n" +
     "\n" +
-    "                <h4 ng-click=\"sortToggle()\" class=\"nav-links\"><a href=\"#\"><i class=\"fas fa-thumbs-up\"></i>  Reactions <i class=\"fas fa-chevron-down\"></i></a></h4>\n" +
+    "                <h4 ng-click=\"selectSort('REACTION', 'DESC', 'all')\" class=\"nav-links\"><a href=\"#\"><i class=\"fas fa-thumbs-up\"></i>  Reactions <i class=\"fas fa-chevron-down\"></i></a></h4>\n" +
     "                \n" +
-    "                <h4 ng-click=\"sortToggle()\" class=\"nav-links\"><a href=\"#\">Creation Date</a></h4>\n" +
+    "                <h4 ng-click=\"selectSort('createdAt', 'DESC', null)\" class=\"nav-links\"><a href=\"#\">Creation Date</a></h4>\n" +
     "            \n" +
     "            </div>\n" +
     "        </div>\n" +
@@ -10869,58 +11128,33 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                        <div style=\"clear:both\"></div>\n" +
     "                    </div>\n" +
     "\n" +
-    "                    <!--UX... -->\n" +
     "                    <!--<h5>Associated Items</h5>-->\n" +
-    "                    <!--BUYING AN ITEM WITH PRESET TAGS..-->\n" +
+    "                    <!--BUYING AN ITEM WITH PRESET CONTEXT..-->\n" +
     "                    <!--TRADE.. 2 BUNDLES TRANSACTIONS-->\n" +
     "                    <!--SEND TOKEN SET, RECIEVE TOKEN ASSET-->\n" +
     "                    <!--TRADE POPUP.. ORDER-->\n" +
     "\n" +
-    "                    <!--\n" +
-    "                    <tags-input min-length=\"1\" placeholder=\"Asset Identifier\" ng-model=\"newTransaction.identifierSet\">\n" +
-    "                        <auto-complete min-length=\"1\" source=\"loadAsset($query)\"></auto-complete>\n" +
-    "                    </tags-input>\n" +
-    "                    -->\n" +
-    "\n" +
-    "                    <h5>Context <a ng-if=\"newTransaction.tags.length > 0\" href=\"#\" ng-click=\"expandAssociations()\" style=\"float:right\"><i class=\"fas fa-bezier-curve\"></i> Expand</a></h5>\n" +
-    "                    <tags-input min-length=\"1\" placeholder=\"Tags\" ng-model=\"newTransaction.tags\">\n" +
+    "                    <h5>Context <a ng-if=\"newTransaction.context.length > 0\" href=\"#\" ng-click=\"expandAssociations()\" style=\"float:right\"><i class=\"fas fa-bezier-curve\"></i> Expand</a></h5>\n" +
+    "                    <tags-input min-length=\"1\" placeholder=\"Context\" ng-model=\"newTransaction.context\">\n" +
     "                        <auto-complete min-length=\"2\" source=\"loadTags($query)\"></auto-complete>\n" +
     "                    </tags-input>\n" +
     "\n" +
-    "                    <!--TODO. SELF ASSOCIATION-->\n" +
-    "                    <!--TRANSACTION-TRANSACTION VALIDATION-->\n" +
     "                    <div ng-if=\"associationsAreExpanded\">\n" +
     "                        <div style=\"padding:16px\">\n" +
-    "                            <div ng-repeat=\"tag in newTransaction.tags track by $index\">\n" +
+    "                            <div ng-repeat=\"context in newTransaction.context track by $index\">\n" +
     "                                <div layout=\"\">\n" +
-    "                                    <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{tag.text}}</span></div>\n" +
-    "                                    <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"newTransaction.validation[tag.text]\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"{{tag.text}}\"></md-slider>\n" +
-    "                                    <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{newTransaction.validation[tag.text]}}</span></div>\n" +
+    "                                    <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{context.text}}</span></div>\n" +
+    "                                    <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"newTransaction.validationModels[0].validation[context.text]\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"{{context.text}}\"></md-slider>\n" +
+    "                                    <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{newTransaction.validationModels[0].validation[context.text]}}</span></div>\n" +
     "                                </div>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
-    "\n" +
-    "                        <!--\n" +
-    "                        <div ng-repeat=\"validationModel in newTime.validationModels\">\n" +
-    "                            <div ng-repeat=\"tag in timeTags track by $index\">\n" +
-    "                                <div layout=\"\">\n" +
-    "                                    <div flex=\"15\" layout=\"\" layout-align=\"center center\"><span style=\"color:gray\" class=\"md-body-1\">{{tag.text}}</span></div>\n" +
-    "                                    <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"validationModel.validation[tag.text]\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"{{tag.text}}\"></md-slider>\n" +
-    "                                    <div flex=\"15\" layout=\"\" layout-align=\"center center\"><span style=\"color:gray\" class=\"md-body-1\">{{validationModel.validation[tag.text]}} | {{reputation[tag.text] || 0}}</span></div>\n" +
-    "                                </div>\n" +
-    "                            </div>\n" +
-    "                        </div>\n" +
-    "                        -->\n" +
-    "\n" +
     "                    </div>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
     "\n" +
     "                    <h5>Description</h5>\n" +
     "                    <textarea style=\"height:100px;\" placeholder=\"Description\" type=\"text\" ng-model=\"newTransaction.content\" class=\"form-control\"></textarea>\n" +
     "                    <button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newTransaction.amountSet\">create</button>\n" +
+    "\n" +
     "                </form>\n" +
     "            </div>\n" +
     "        </div>\n" +
@@ -12599,7 +12833,7 @@ angular.module("project/templates/members.tpl.html", []).run(["$templateCache", 
     "<!--FILTER SORT-->\n" +
     "\n" +
     "<div class=\"row\">\n" +
-    "	<div class=\"col-lg-4 col-sm-6\" ng-repeat=\"member in members\" style=\"padding-left:10px;padding-right:10px;\">\n" +
+    "	<div class=\"col-sm-6\" ng-repeat=\"member in members\" style=\"padding-left:10px;padding-right:10px;\">\n" +
     "		<div class=\"member-card\" ng-click=\"renderReputationToggle(member)\" style=\"margin-bottom:10px\">\n" +
     "		    <div class=\"member-card-image\" style=\"background-image: url('{{member.user.coverUrl}}')\">\n" +
     "		        <a ng-click=\"$event.stopPropagation()\" href=\"member/{{member.user.username}}\" ui-sref=\"member.activity({path:member.user.username})\"><img ng-src=\"{{member.user.avatarUrl}}\" err-src=\"/images/avatar.png\"></a>\n" +
@@ -13860,8 +14094,6 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "\n" +
     "                        <div class=\"spacing-5\"></div>\n" +
     "\n" +
-    "\n" +
-    "\n" +
     "                        <!--FIXED TASK VALIDATION-->\n" +
     "                        <div ng-repeat=\"validationModel in newTime.validationModels\">\n" +
     "\n" +
@@ -13880,8 +14112,6 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "                            </div>\n" +
     "\n" +
     "                        </div>\n" +
-    "\n" +
-    "                        \n" +
     "\n" +
     "                    </div>\n" +
     "\n" +
@@ -13995,7 +14225,7 @@ angular.module("tasks/index.tpl.html", []).run(["$templateCache", function($temp
     "				    <div style=\"background:rgba(0,0,0,0.75);height:50px\" class=\"imageContainerSmallDiv\">  \n" +
     "				        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "			        		<div style=\"padding:15px;\">\n" +
-    "					            <h1 style=\"text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;\">Tags</h1>\n" +
+    "					            <h1 style=\"text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;\">Context</h1>\n" +
     "					        </div>\n" +
     "				        </div>\n" +
     "				    </div>\n" +

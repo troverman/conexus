@@ -1,6 +1,6 @@
 <div class="spacing-5"></div>
 <div class="row">
-	<div class="col-lg-4 col-sm-6" ng-repeat="member in following">
+	<div class="col-sm-6" ng-repeat="member in following">
 		<div class="member-card" ng-click="renderReputationToggle(member)">
 		    <div class="member-card-image" style="background-image: url('{{member.followed.coverUrl}}')">
 		        <a ng-click="$event.stopPropagation();" href="member/{{member.followed.username}}" ui-sref="member.activity({path:member.followed.username})">

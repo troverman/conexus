@@ -905,11 +905,17 @@ angular.module( 'conexus.nav', [
     //TODO: RENDER PROJECT TOGGLE
     //$rootScope.reply = function(){};
 
+    $rootScope.selectSort = function(type, detail, direction){
+        $mdSidenav('sort').toggle();
+    };
+
     $rootScope.sortToggle = function(item){
         $scope.item = item;
         $scope.closeAllNav();
         $mdSidenav('sort').toggle();
     };
+
+
 
     $rootScope.statsToggle = function(item){
 
@@ -1315,6 +1321,8 @@ angular.module( 'conexus.nav', [
 
     $rootScope.transactionToggle = function(item, asset){
 
+        $scope.closeAllNav();
+
         $scope.addAssetToTransaction = function(model){
             if($scope.newTransaction.identifierSet){$scope.newTransaction.identifierSet.push({text:model})}
             else{
@@ -1322,48 +1330,50 @@ angular.module( 'conexus.nav', [
                 $scope.newTransaction.identifierSet.push({text:model})
             }
         };
-
-        $scope.closeAllNav();
        
         if($rootScope.currentUser){
+
             if (item){
                 if(item.model=='PROJECT'){$scope.newTransaction.to = [{text:item.title, address:item.id, id:item.id}];}
                 else{$scope.newTransaction.to = [{text:item.username, address:item.id, id:item.id}];}
             }
 
-            console.log(item, $scope.newTransaction);
+            if (!$scope.newTransaction){$scope.newTransaction = {}}
 
-            if (!$scope.newTransaction){
-                $scope.newTransaction = {}
-            }
             if (asset){
                 $scope.newTransaction.identifierSet = [];
                 $scope.newTransaction.identifierSet.push({text:asset});
                 $scope.newTransaction.amountSet = {};
                 $scope.newTransaction.amountSet[asset] = 1;
-
             }
 
             $scope.sortedBalances = [];
+
             for (var key in $rootScope.balance) {
                 if(!isNaN($rootScope.balance[key])){$scope.sortedBalances.push([key, $rootScope.balance[key]]);}
             }
+
             $scope.sortedBalances.sort(function(a, b) {
                 return b[1] - a[1];
             });
 
+            $scope.newTransaction.validationModels = [{
+                validation:{},
+                associatedModels:[]
+            }];
 
+            console.log(item, $scope.newTransaction);
 
+            $scope.$watch('newTransaction.context', function(newValue, oldValue){
+                if (newValue !== oldValue) {
+                    for (x in $scope.newTransaction.context){
+                        $scope.newTransaction.validationModels[0].validation[$scope.newTransaction.context[x].text] = 100;
+                    }
+                }
+            }, true);
 
-            //if (!$scope.newTransaction.content){$scope.newTransaction.content = 'TEST'}
-            //TODO:
-            //if (!$scope.newTransaction.identifierSet){
-                //$scope.newTransaction.identifierSet = [{text:'CRE8'}];
-                //$scope.newTransaction.amountSet = {};
-                //$scope.newTransaction.amountSet['CRE8'] = 1;
-                //$scope.newTransaction.tags = [{text:'tag'},{text:'tag1'}];
-            //}
             $mdSidenav('transaction').toggle();
+
         }
 
         else{$mdSidenav('login').toggle();}
@@ -1697,8 +1707,9 @@ angular.module( 'conexus.nav', [
         if ($rootScope.currentUser){
 
             $scope.newTransaction.user = $rootScope.currentUser.id
-            if ($scope.newTransaction.tags){
-                $scope.newTransaction.tags = $scope.newTransaction.tags.map(function(obj){
+            if ($scope.newTransaction.context){
+                console.log($scope.newTransaction.context)
+                $scope.newTransaction.context = $scope.newTransaction.context.map(function(obj){
                     return obj.text
                 }).join(",");
             }
@@ -1709,19 +1720,10 @@ angular.module( 'conexus.nav', [
             newTransaction.from = newTransaction.from[0].id;
             newTransaction.to = newTransaction.to[0].id;
             
-            //$scope.newTransaction.from = $scope.newTransaction.from[0].id;
-            //$scope.newTransaction.to = $scope.newTransaction.to[0].id;
-
             console.log($scope.newTransaction);
 
-
             //SELF VALIDATION HERE! --> TAGS
-
             //VECTOR TAGS  ((((((TAG COMPUTATION FUNCTION TO DO FOR ALL THE SIDEBARS -- RENAME TO CONTEXT))))))
-
-
-
-
 
             TransactionModel.create(newTransaction).then(function(model){
                 

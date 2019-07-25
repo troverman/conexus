@@ -324,18 +324,69 @@ module.exports = {
 
 	create: function (req, res) {
 
-
-
 		//TODO: GLOBAL
+
+		//IMPLICIT VALIDATIONS REPLACE 'user'? what about 'creator'
+		//DEPRECAITE TO.. FROM????? --> VALIDATION / ASSOCIATION IS MAIN DATA MODEL ...
+		//MEMBER->TRANSACTION
+		//TRANSACTION->PROJECT
+		//TRANSACTION<->TRANSACTION ?
+
 		function createValidation(model){
-			//Validation.create({id:model.to}).then(function(validationModels){
-				
-			//});
+
+			console.log(model);
+
+			for (x in model.validationModels){
+				model.validationModels[x].validation;
+				var validationModel = {
+					associatedModels:[
+						{type:'TRANSACTION',id:model.id},
+						{type:'TRANSACTION',id:model.id}
+					],
+					validation:model.validationModels[x].validation,
+					user: model.user,
+					creator:model.user,
+					type:'HUMAN',
+					parameters:{connctionType:'SELF'}
+				};
+
+				Validation.create(validationModel).then(function(newValidationModel){
+					
+					console.log('CREATE VALIDATION', newValidationModel)
+
+					//ONLY FOR SELF VALIDATION
+					//MACHINE VALIDATION SOON
+					Association.create(validationModel).then((newAssociationModel)=>{
+						console.log('CREATE ASSOCIATION', newAssociationModel)
+					});
+
+					//UPDATE TRANSACTION WITH COMPUTED CONTEXT??? OKAY :)
+
+				});
+
+			}
+
+			//CREATE VALIDATION (IE SELF VALIDATION .. CONTEXT OF TRANSACTION)
+			//SOME CHARTER WHERE THE CREATOR IS WEIGHTED
+			//SOME CHARTER WHERE THE FROM AND TO IS WEIGHTED
+			//IE BUY AN ITEM.. CONTEXTUALIZED VALIDATION
+
 		};
 
 		//TODO: GLOBAL
+		//TODO: IMPROVE NOTIFICATION STORAGE
 		function createNotification(model){
-
+			var notificationModel = {
+				user: model.to,
+				type: 'TRANSACTION',
+				title: 'New Transaction',
+				content:model.from+' sent you '+model.amountSet,
+				info:{transaction:model},
+				priority:77,
+			};
+			Notification.create(notificationModel).then(function(notification){
+				Notification.publishCreate(notification);
+			});
 		};
 
 		var model = {
@@ -345,92 +396,45 @@ module.exports = {
 			content: req.param('content'),
 			user: req.param('user'),
 			associatedModels: req.param('associatedModels'),
+
+			//SHOULDNT STORE.
 			validationModels: req.param('validationModels'),
-
+			
 			//DEPRECIATE
-			tags: req.param('tags'),
+			tags: req.param('context'),
 
-			//PATCH.. BETTER MAPPINGS.. DATA MODEL.. 
+			//PATCH.. BETTER MAPPINGS
 			reactions:{plus:0,minus:0},
 			attention:{general:0},
-
 		};
+
 		console.log('CREATE TRANSACTION', model);
 
 		Transaction.create(model)
-		.exec(function(err, transaction) {
+		.exec(function(err, transactionModel) {
 			if (err) {return console.log(err);}
 			else {
-
-				console.log(transaction);
-
-				//CREATE VALIDATION (IE SELF VALIDATION .. CONTEXT OF TRANSACTION)
-				//SOME CHARTER WHERE THE CREATOR IS WEIGHTED
-				//SOME CHARTER WHERE THE FROM AND TO IS WEIGHTED
-				//IE BUY AN ITEM.. CONTEXTUALIZED VALIDATION
-				//for (x in model.validationModels){createVaidation(model.validationModels[x]);}
-
-
-				//WIP
-				//TODO: OWNER
-				//IF ITEM MODEL...... FRONTENT SHOULD HANDLE THIS? ... HM 
-				//ALSO ASSOCIATEDMODELS
-
-				//TODO: GENERATOR --> IE POS MENU ITEMS
-
-				for (x in Object.keys(transaction.amountSet)){
-					console.log( Object.keys(transaction.amountSet)[x])
-					Item.find({id:Object.keys(transaction.amountSet)[x]}).then(function(itemModels){
+	
+				//TODO: ITEM INTERACTION
+				//ITEM ACTIONS.. ATTENTION TOKEN RIGHTS | CONTENT AS ITEM.. ADD VIEWOWNER?
+				//IF GENERATOR
+				//CONTENT OWNERSHIP? --> CONTENT AND ITEM .. VIEWTOKEN RIGHTS.. 
+				for (x in Object.keys(transactionModel.amountSet)){
+					Item.find({id:Object.keys(transactionModel.amountSet)[x]}).then(function(itemModels){
 						if (itemModels.length!=0){
-							//REMOVE USER
-							Item.update({id:itemModels[0].id}, {user:transaction.to, owner:transaction.to}).then(function(updatedItemModel){
-								//GENERATOR ON TRANSACTION :^)
+							Item.update({id:itemModels[0].id}, {user:transactionModel.to, owner:transactionModel.to}).then(function(updatedItemModel){
 								console.log('UPDATED: ITEM OWNERSHIP TRANSFERRED', updatedItemModel);
 							});
 						}
 					});
-
-					//CONTENT OWNERSHIP? --> CONTENT AND ITEM .. VIEWTOKEN RIGHTS.. 
-						//CONTENT AS ITEM.. ADD VIEWOWNER? .. mm
-						//Content.find()
 				}
-				
 
-				//for (x in Object.keys(amountSet)){
+				transactionModel.validationModels = req.param('validationModels');
 
-				//}
-
-				//for (x in associatedModels){
-				//	if (associatedModels[x].type == 'ITEM'){
-						//ASSOCIATED AND SEND
-						//FIND OWNER IS SENDER // owner: transaction.from
-				//		Item.find({id:associatedModels[x].address}).then(function(itemModels){
-							//if > 0
-				//			itemModels[0].owner = transaction.to;
-				//			Item.update({id:itemModels[0].id},{owner:itemModels[0].owner}).then(function(itemModel){
-				//				console.log('ITEM OWNER UPDATED');
-				//				Item.publishUpdate(itemModel);
-				//			});
-				//		});
-				//	}	
-				//}
-
-				Transaction.publishCreate(transaction);
-				res.json(transaction);
-
-				//COULD BE LISTENER..? MM . . NOTIFICATION SERVICE
-				var notificationModel = {
-					user: model.to,
-					type: 'TRANSACTION',
-					title: 'New Transaction',
-					content:model.from+' sent you '+model.amountSet,
-					info:{transaction:transaction},
-					priority:77,
-				};
-
-				Notification.create(notificationModel).then(function(notification){
-					Notification.publishCreate(notification);
-				});
+				createValidation(transactionModel);
+				createNotification(transactionModel);
+				Transaction.publishCreate(transactionModel);
+				res.json(transactionModel);
 
 			}
 		});
