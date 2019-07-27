@@ -32,8 +32,8 @@
 	    </div>
 	    <div ng-repeat="token in tokens track by $index" style="padding:0px">
 	    	<div class="card" ng-click="cardDetailToggle(token)">
-	    		<div style="background:url('https://source.unsplash.com/1600x900/?lattice,geometry,crystal,code');height:100px;min-height:100px" class="imageContainerSmall">
-				    <div style="background:rgba(0,0,0,0.75);height:100px" class="imageContainerSmallDiv">  
+	    		<div style="background:url('https://source.unsplash.com/1600x900/?lattice,geometry,crystal,code');min-height:auto" class="imageContainerSmall">
+				    <div style="background:rgba(0,0,0,0.75);height:auto" class="imageContainerSmallDiv">  
 					    <div style="text-align:right;padding:15px;position:absolute;right:0">
 	                        <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(token)"><span style="color:gray"></span><i class="fas fa-chevron-down"></i></a>
 	                        <div style="clear:both"></div>

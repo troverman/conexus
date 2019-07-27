@@ -120,13 +120,16 @@
 
 						<div style="max-height:50vh;overflow:auto">
 
-				    		<h4>Market Immutable Strucutre</h4>
+				    		<h4>Market Immutable Structure</h4>
 		                	<div hljs hljs-language="javascript"  hljs-source="renderImmutableMarket"></div>
 							<div class="spacing-5"></div>
 
 				    		<h5>Potiental Connection</h5>
-				    		<p>Potiental of possible connection</p>
 		                	<div hljs hljs-language="javascript"  hljs-source="renderImmutableMarketPower"></div>
+
+				    		<h4>Market Immutable Structure New</h4>
+		                	<div hljs hljs-language="javascript"  hljs-source="renderImmutableMarketNEW"></div>
+
 
 		                </div>
 
@@ -242,7 +245,15 @@
 
 	        <div class="card"><button class="btn btn-default log-btn" ng-click="orderToggle()">+ Market Order</button></div>
 
+	        <!--{{market}}-->
+		    <!--
+		    <div ng-show="!showManifold" class="card" ng-repeat="(key, value) in market" ng-click="cardDetailToggle(item)">
+		    	{{key}} {{value}}
+		    </div>
+			-->
+
 		    <div ng-show="!showManifold" class="card" ng-repeat="market in markets" ng-click="cardDetailToggle(market)">
+			  
 			    <div style="background:url('https://source.unsplash.com/1600x900/?{{market.string}}');height:100px;min-height:100px" class="imageContainerSmall">
 			    	<div style="background:rgba(0,0,0,0.75);height:100px" class="imageContainerSmallDiv">  
 				        <div style="margin-top: auto;margin-bottom: auto;">
@@ -250,14 +261,7 @@
 
 					            <h1 style="text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;">
 					            	<a style="color:white;word-break:break-word" ng-click="$event.stopPropagation();" href="market/{{stateParams.id}}/{{market.string}}" ui-sref="marketPair({ setAlpha: stateParams.id, setBeta:market.string })">
-
-
-					            		<!--<span ng-repeat="item in market.string.split(',')">
-					            			{{item}}<br>
-					            		</span>-->
 					            		{{market.string}}
-
-
 					            	</a>
 					            </h1>
 					            <h5><a style="color:white" ng-click="$event.stopPropagation();" href="market/{{stateParams.id}}" ui-sref="market({ id: market.string})">Market</a></h5>
@@ -269,15 +273,26 @@
 		    	<div style="padding:16px;">
 					<div class="row">
 			    		<div class="col-sm-12">
+
+
+
 			    			<a ng-click="$event.stopPropagation();" href="market/{{stateParams.id}}/{{market.string}}" ui-sref="marketPair({ setAlpha: stateParams.id, setBeta:market.string })">Connection</a>
 							<p style="color:gray;font-size:10px">{{market.info.rate}}</p>
 			    			<p style="color:gray;font-size:10px">{{market.info.dailyChange}} 24/hr Change</p>
 							<p style="color:gray;font-size:10px">{{market.info.marketDepth}} {{stateParams.id}} Depth</p>
 							<p style="color:gray;font-size:10px">{{token.string.split(',').length || stateParams.id.split(',').length}} - {{market.string.split(',').length}}</p>
 							<!--<cytoscape graph-options="options" graph-elements="elementsObj" graph-layout="layout" graph-style="style"></cytoscape>-->
+
+
+
 						</div>
 			    	</div>
 				</div>
+
+
+
+
+
 		    </div>
 
 		    <!--MANIFOLD-->

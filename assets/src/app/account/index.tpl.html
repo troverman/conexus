@@ -195,7 +195,7 @@
                             </div>
 					        <div style="margin-top: auto;margin-bottom: auto;">
 					        	<div style="padding:15px">
-						            <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;"><i class="fas fa-eye"></i> Record Attention</h1>
+						            <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;"><i class="fas fa-eye"></i> Attention Tokenization</h1>
 						            <h5 style="color:white">CRE8</h5>
 						        </div>
 					        </div>
@@ -217,7 +217,7 @@
                             </div>
 					        <div style="margin-top: auto;margin-bottom: auto;">
 					        	<div style="padding:15px">
-						            <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;"><i class="fas fa-map-marker"></i> Record Location</h1>
+						            <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;"><i class="fas fa-map-marker"></i> Location Tokenization</h1>
 						            <h5 style="color:white">CRE8</h5>
 						        </div>
 					        </div>
@@ -290,7 +290,7 @@
 					</div>
 	                <div style="padding:16px;">
 						<span style="font-size:10px;color:gray">Google Passport App</span>
-						<div ng-click="$event.stopPropagation();"><md-switch ng-change="editAccount()" ng-model="newAccountInformation.apps.googlePassport" aria-label="BTC"></md-switch></div>
+						<div ng-click="$event.stopPropagation();"><md-switch ng-change="editAccount()" ng-model="newAccountInformation.apps.googlePassport" aria-label="Google Passport"></md-switch></div>
 					</div>
 				</div>
 
@@ -311,7 +311,7 @@
 					</div>
 	                <div style="padding:16px;">
 						<span style="font-size:10px;color:gray">Facebook Passport App</span>
-						<div ng-click="$event.stopPropagation();"><md-switch ng-change="editAccount()" ng-model="newAccountInformation.apps.facebookPassport" aria-label="BTC"></md-switch></div>
+						<div ng-click="$event.stopPropagation();"><md-switch ng-change="editAccount()" ng-model="newAccountInformation.apps.facebookPassport" aria-label="Facebook Passport"></md-switch></div>
 					</div>
 				</div>
 
@@ -332,7 +332,7 @@
 					</div>
 	                <div style="padding:16px;">
 						<span style="font-size:10px;color:gray">Twitter Passport App</span>
-						<div ng-click="$event.stopPropagation();"><md-switch ng-change="editAccount()" ng-model="newAccountInformation.apps.twitterPassport" aria-label="BTC"></md-switch></div>
+						<div ng-click="$event.stopPropagation();"><md-switch ng-change="editAccount()" ng-model="newAccountInformation.apps.twitterPassport" aria-label="Twitter Passport"></md-switch></div>
 					</div>
 				</div>
 
@@ -353,7 +353,7 @@
 					</div>
 	                <div style="padding:16px;">
 						<span style="font-size:10px;color:gray">Phone Number Passport (2FA)</span>
-						<div ng-click="$event.stopPropagation();"><md-switch ng-change="editAccount()" ng-model="newAccountInformation.apps.phoneNumber" aria-label="BTC"></md-switch></div>
+						<div ng-click="$event.stopPropagation();"><md-switch ng-change="editAccount()" ng-model="newAccountInformation.apps.phoneNumber" aria-label="Phone Passport"></md-switch></div>
 					</div>
 				</div>
 
@@ -373,8 +373,8 @@
 					    </div>
 					</div>
 	                <div style="padding:16px;">
-						<span style="font-size:10px;color:gray">Text Password Passport (2FA)</span>
-						<div ng-click="$event.stopPropagation();"><md-switch ng-change="editAccount()" ng-model="newAccountInformation.apps.password" aria-label="BTC"></md-switch></div>
+						<span style="font-size:10px;color:gray">Text Password Passport (2FA) [default]</span>
+						<div ng-click="$event.stopPropagation();"><md-switch ng-change="editAccount()" ng-model="newAccountInformation.apps.password" aria-label="Password Passport"></md-switch></div>
 					</div>
 				</div>
 
@@ -395,7 +395,7 @@
 					</div>
 	                <div style="padding:16px;">
 						<span style="font-size:10px;color:gray">Fitbit Tokenization & Passport</span>
-						<div ng-click="$event.stopPropagation();"><md-switch ng-change="editAccount()" ng-model="newAccountInformation.apps.fitbit" aria-label="BTC"></md-switch></div>
+						<div ng-click="$event.stopPropagation();"><md-switch ng-change="editAccount()" ng-model="newAccountInformation.apps.fitbit" aria-label="Fitbit"></md-switch></div>
 					</div>
 				</div>
 
@@ -416,7 +416,7 @@
 					</div>
 	                <div style="padding:16px;">
 						<span style="font-size:10px;color:gray">Steemit Tokenization & Passport</span>
-						<div ng-click="$event.stopPropagation();"><md-switch ng-change="editAccount()" ng-model="newAccountInformation.apps.steemit" aria-label="BTC"></md-switch></div>
+						<div ng-click="$event.stopPropagation();"><md-switch ng-change="editAccount()" ng-model="newAccountInformation.apps.steemit" aria-label="Steemit"></md-switch></div>
 					</div>
 				</div>
 
@@ -464,7 +464,7 @@
 					</div>
 	                <div style="padding:16px;">
 						<span style="font-size:10px;color:gray">ETH App</span>
-						<div ng-click="$event.stopPropagation();"><md-switch ng-change="editAccount()" ng-model="newAccountInformation.apps.eth" aria-label="BTC"></md-switch></div>
+						<div ng-click="$event.stopPropagation();"><md-switch ng-change="editAccount()" ng-model="newAccountInformation.apps.eth" aria-label="ETH"></md-switch></div>
 						<input placeholder="Address" type="text"  ng-model="walletAddress" class="form-control">
 						<input placeholder="Secret" type="text"  ng-model="walletAddress" class="form-control">
 					</div>

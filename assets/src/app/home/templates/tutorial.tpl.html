@@ -343,7 +343,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button ng-click="orderToggle()" style="width:100%" class="btn btn-default log-btn">CREATE POSITION</button>
+                        <button ng-if="newOrder.length > 0" ng-click="orderToggle()" style="width:100%" class="btn btn-default log-btn">CREATE POSITION</button>
                     </div>
                 </div>
             </div>
@@ -816,7 +816,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button ng-click="orderToggle()" style="width:100%" class="btn btn-default log-btn">CREATE POSITION</button>
+                        <button ng-if="newOrder.length > 0" ng-click="orderToggle()" style="width:100%" class="btn btn-default log-btn">CREATE POSITION</button>
                     </div>
                 </div>
             </div>

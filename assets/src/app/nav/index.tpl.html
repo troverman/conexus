@@ -499,7 +499,7 @@
                     </ul>
                     <div class="spacing-10"></div>
 
-                    <p><b>Tags</b></p>
+                    <p><b>Context</b></p>
                     <tags-input min-length="1" placeholder="Tags" ng-model="searchQueryNav.tags">
                         <auto-complete source="loadAsset($query)"></auto-complete>
                     </tags-input>
@@ -594,13 +594,11 @@
                     <input type="text" placeholder="Title" ng-model="newItem.title" class="form-control">
 
                     <!--TODO: SELF VALIDATION-->
-                    <!--ASSOCIATED VALIDATIONS-->
-                    <h5>Tags <a ng-click="informationToggle('TAGS')" href="#"><i class="fa fa-question-circle"></i></a></h5>
+                    <h5>Context <a ng-click="informationToggle('TAGS')" href="#"><i class="fa fa-question-circle"></i></a></h5>
                     <tags-input min-length="1" placeholder="Tags" ng-model="newItem.tags">
                         <auto-complete source="loadTags($query)"></auto-complete>
                     </tags-input>
 
-                    <!--UNIFTY TAGS AND ASSOCIATIONS-->
                     <h5>Associations <a ng-click="informationToggle('ASSOCIATION')" href="#"><i class="fa fa-question-circle"></i></a><i style="float:right" class="fas fa-bezier-curve"></i></h5>
                     <tags-input min-length="1" placeholder="Associations" ng-model="newItem.associatedModels">
                         <auto-complete source="loadAssociations($query)"></auto-complete>
@@ -872,7 +870,7 @@
                             <div ng-repeat="market in identiferSetAlpha track by $index">
                                 <div class="col-sm-12">
                                     <h5>{{market.text}} Amount | Available {{balance[market.text] || 0}}</h5>
-                                    <input placeholder="{{market.text}} Amount" type="number" ng-model="newOrder.setAlpha[market.text]" class="form-control">
+                                    <input placeholder="{{market.text}} Amount" type="number" step="0.000000001" ng-model="newOrder.setAlpha[market.text]" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -890,7 +888,10 @@
                         </div>
                         <div class="col-sm-6 form-group">
                             <div ng-repeat="market in identiferSetBeta track by $index">
-                                <div class="col-sm-12"><h5>{{market.text}} Amount</h5><input placeholder="{{market.text}} Amount" type="number" ng-model="newOrder.setBeta[[market.text]]" class="form-control"></div>
+                                <div class="col-sm-12">
+                                    <h5>{{market.text}} Amount</h5>
+                                    <input placeholder="{{market.text}} Amount" type="number" step="0.000000001" ng-model="newOrder.setBeta[[market.text]]" class="form-control">
+                                </div>
                             </div>
                         </div>
                         <div class="col-sm-12" style="padding:20px;">
@@ -944,7 +945,7 @@
                 <form role="form" ng-submit="createProject()">
                     <h5>Title</h5>
                     <input type="text" placeholder= "Title" ng-model="newProject.title" class="form-control">
-                    <h5>Tags</h5>
+                    <h5>Context</h5>
                     <tags-input min-length="1" placeholder="Tags" ng-model="newProject.tags">
                         <auto-complete source="loadTags($query)"></auto-complete>
                     </tags-input>
@@ -1126,7 +1127,7 @@
                 </div>
 
                 <div ng-if="item.tags" class="spacing-5"></div>
-                <p ng-if="item.tags"><b>Tags</b></p> 
+                <p ng-if="item.tags"><b>Context</b></p> 
                 <p ng-if="item.tags"><a ng-repeat="tag in item.tags track by $index" href="market/{{tag.trim()}}"> {{tag.trim()}}<span ng-show="!$last">,</span></a></p>
                 
                 <div class="spacing-5"></div>
@@ -1493,7 +1494,7 @@
                 <form role="form" ng-submit="createTask()">
                     <h5>Title</h5>
                     <input type="text" placeholder="Title" ng-model="newTask.title" class="form-control">
-                    <h5>Tags</h5>
+                    <h5>Context</h5>
                     <tags-input min-length="1" placeholder="Tags" ng-model="newTask.tags">
                         <auto-complete source="loadTags($query)"></auto-complete>
                     </tags-input>

@@ -13,6 +13,8 @@ angular.module( 'conexus.market', [
         
         //TODO: DEPRECIATE RESOLVE
         resolve:{
+
+            //TEMP COMBINED WITH ORDERS
             orders: ['$stateParams', 'OrderModel', function($stateParams, OrderModel) {
                 return OrderModel.getSome({market:$stateParams.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
@@ -46,17 +48,23 @@ angular.module( 'conexus.market', [
         {title:'+SPONSOR', manifolds:'+ADDRESS'},
     ];
 
+    $scope.market = orders.market;
+
+    console.log($scope.market)
+
     $scope.markets = [];
     $scope.newMarket = {};
     $scope.newOrder = {};
     $scope.newOrder.identiferSet = $scope.stateParams.id;
 
     //TODO: MARKETS FROM ORDERS
-    $scope.orders = orders.map(function(obj){
+    $scope.orders = orders.data.map(function(obj){
         var elementsObj = {};
         obj.model = 'ORDER';
         return obj
     });
+
+
     //TODO: GLOBAL OBJ
     $scope.options = {
         textureOnViewport:true,
@@ -276,7 +284,6 @@ angular.module( 'conexus.market', [
     //HIGH DIM HAVE PERMUTATIONS --> LOWER
 
     //group together into immutable obj 
-    //SHOULD WORK ON MARKET PAIR.
 
     //COMBINATORIAL WANT FOR ASK
     //COMPLEX IN MULTID WORLD
@@ -428,9 +435,11 @@ angular.module( 'conexus.market', [
         //POWER SET.. WITH RESPECT TO HIGH D.. LOOK AT HIGHEST DIM
         //HIGH DIMS IMMEDIATLY DECOMPOSE 
 
+
+        //DOESNT WORK :P
         console.log($scope.orders[x])
         if (Object.keys($scope.orders[x].setBeta).length > 1){
-            if ($scope.markets.indexOf(assetIdentifier) == -1){
+            if ($scope.markets.map(function(obj){return obj.string}).indexOf(assetIdentifier) == -1){
                 $scope.markets.push({
                     string:Object.keys($scope.orders[x].setBeta).join(','), 
                     info:{
@@ -445,7 +454,7 @@ angular.module( 'conexus.market', [
 
         for (y in Object.keys($scope.orders[x].setBeta)){
             var assetIdentifier = Object.keys($scope.orders[x].setBeta)[y];
-            if ($scope.markets.indexOf(assetIdentifier) == -1){
+            if ($scope.markets.map(function(obj){return obj.string}).indexOf(assetIdentifier) == -1){
                 $scope.markets.push({
                     string:assetIdentifier, 
                     info:{
@@ -463,8 +472,7 @@ angular.module( 'conexus.market', [
     //STRING
     $scope.renderImmutableMarketPower = JSON.stringify($scope.immutableMarketPower, null, 2);
     $scope.renderImmutableMarket = JSON.stringify($scope.immutableMarket, null, 2);
-
-
+    $scope.renderImmutableMarketNEW = JSON.stringify($scope.market, null, 2);
 
 
 

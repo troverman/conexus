@@ -2,7 +2,7 @@
 <div class="container" style="padding:0px">
     <div class="card" ng-click="cardDetailToggle(market)">
         <div class="imageContainerSmall" style="background:url('https://source.unsplash.com/1600x900/?{{item.tags}}');">
-            <div style="background:rgba(0,0,0,0.75);" class="imageContainerSmallDiv">
+            <div style="background:rgba(0,0,0,0.75);height:auto" class="imageContainerSmallDiv">
                 <div style="text-align:right;padding:15px;position:absolute;right:0">
                     <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
                         <i class="fas fa-chevron-down"></i>
@@ -179,6 +179,43 @@
 				</div>
 			</div>
 
+			<!--TODO REDUCE AND COMPUTE..-->
+			<div class="card">
+				<div style="padding:16px">
+					<div class="col-md-6">
+						<h5>Bids</h5>
+		                <table class="table table-striped table-hover">
+							<thead>
+								<th>Set Alpha</th>
+								<th>Set Beta</th>
+							</thead>
+							<tbody>
+								<tr ng-repeat="item in orders">
+									 <td><span ng-repeat="(key, value) in item.setAlpha"><a href="market/{{key}}" ui-sref="market({id:key})"><b>{{key}}</b> <b>{{value}}</b> </a></span></td>
+		 							 <td><span ng-repeat="(key, value) in item.setBeta"><a href="market/{{key}}" ui-sref="market({id:key})"><b>{{key}}</b> <b>{{value}}</b> </a></span></td>
+								</tr>
+							</tbody>
+		                </table>
+		            </div>
+		            <div class="col-md-6">
+						<h5>Asks</h5>
+		                <table class="table table-striped table-hover">
+							<thead>
+								<th>Set Alpha</th>
+								<th>Set Beta</th>
+							</thead>
+							<tbody>
+								<tr ng-repeat="item in mirrorOrders">
+									 <td><span ng-repeat="(key, value) in item.setAlpha"><a href="market/{{key}}" ui-sref="market({id:key})"><b>{{key}}</b> <b>{{value}}</b> </a></span></td>
+		 							 <td><span ng-repeat="(key, value) in item.setBeta"><a href="market/{{key}}" ui-sref="market({id:key})"><b>{{key}}</b> <b>{{value}}</b> </a></span></td>
+								</tr>
+							</tbody>
+		                </table>
+		            </div>
+	            </div>
+
+			</div>
+
 
 		</div>
 
@@ -218,7 +255,13 @@
 			</div>
 			
 			<!--TODO: Partially Filled Orders | TRADES-->
+			<!--<div class="card"><h5>{{market}} - {{market1}}</h5></div>-->
 			<div ng-repeat="item in orders">
+       			<div ng-include="'templates/cards/orderCard.tpl.html'"></div>
+			</div>
+
+			<!--<div class="card"><h5>{{market1}} - {{market}}</h5></div>-->
+			<div ng-repeat="item in mirrorOrders">
        			<div ng-include="'templates/cards/orderCard.tpl.html'"></div>
 			</div>
 		</div>
