@@ -7410,7 +7410,7 @@ angular.module("marketPair/index.tpl.html", []).run(["$templateCache", function(
   $templateCache.put("marketPair/index.tpl.html",
     "<div class=\"container\" style=\"padding:0px\">\n" +
     "    <div class=\"card\" ng-click=\"cardDetailToggle(market)\">\n" +
-    "        <div class=\"imageContainerSmall\" style=\"background:url('https://source.unsplash.com/1600x900/?{{item.tags}}');\">\n" +
+    "        <div class=\"imageContainerSmall\" style=\"background:url('https://source.unsplash.com/1600x900/?{{item.tags}}');min-height:auto\">\n" +
     "            <div style=\"background:rgba(0,0,0,0.75);height:auto\" class=\"imageContainerSmallDiv\">\n" +
     "                <div style=\"text-align:right;padding:15px;position:absolute;right:0\">\n" +
     "                    <a style=\"color:white;\" ng-click=\"$event.stopPropagation();cardDetailToggle(item)\">\n" +
@@ -10133,6 +10133,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                <h4 class=\"nav-links\" style=\"padding:4px;\"><a href=\"/market\" ui-sref=\"markets\">Market</a></h4>\n" +
     "                <h4 class=\"nav-links\" style=\"padding:4px;\"><a href=\"/marketplace\" ui-sref=\"marketPlace\">Marketplace</a></h4>\n" +
     "                <h4 class=\"nav-links\" style=\"padding:4px;\"><a href=\"/projects\" ui-sref=\"projects\">Projects</a></h4>\n" +
+    "                <h4 class=\"nav-links\" style=\"padding:4px;\"><a href=\"/tasks\" ui-sref=\"tasks\">Tasks</a></h4>\n" +
     "                <h4 ng-show=\"currentUser\" class=\"nav-links\" style=\"padding:8px;\">\n" +
     "                    <a href=\"/notifications\" ui-sref=\"notifications\"> <span ng-if=\"notificationCount > 0\" class=\"label label-danger\">{{notificationCount}}</span> Notifications</a>\n" +
     "                </h4>\n" +

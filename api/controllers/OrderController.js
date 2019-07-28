@@ -13,6 +13,12 @@ module.exports = {
 
 
 		//SAVE MARKET?? :)
+		//LINK TO TOKEN 'STRUCT'
+
+		//CREATE THE TENSOR OBJ..
+		//HUGELY HIGH DIM
+		//BUILD UP -- HIGHEST DIM CONNECTION IS BASE
+			//SORT ASSETS.. 
 		function buildMarket(baseMarket, orders){
 
 
@@ -33,6 +39,8 @@ module.exports = {
 				//THESE ARE DOODLES IN NO WAY OPTIMUM
 				//asks
 				if (setAlpha.indexOf(baseMarket) == -1){
+
+					//LINK IN ORDERS AND ORDER OBJ ID. && SORT
 					var array = [];
 					for (y in setAlpha.split(',')){array.push(1/(orders[x].setAlpha[setAlpha.split(',')[y]]/orders[x].setBeta[baseMarket]))}
 					if (!market[setAlpha]){market[setAlpha] = [array];}
@@ -44,7 +52,14 @@ module.exports = {
 					var array = [];
 					for (y in setBeta.split(',')){array.push(orders[x].setBeta[setBeta.split(',')[y]]/orders[x].setAlpha[baseMarket])}
 					if (!market[setBeta]){market[setBeta] = [array];}
-					else{market[setBeta].push(array)}
+					else{
+						market[setBeta].push(array);
+
+						//multidim lol
+						//square tensor for operations
+				        //market[setBeta] = market[setBeta].sort()
+
+					}
 				}
 
 			}
