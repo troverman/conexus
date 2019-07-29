@@ -16,8 +16,8 @@
 		        	<a ng-click="$event.stopPropagation();" href="/member/{{member.follower.username}}/followers" ui-sref="member.followers({path:member.follower.username})">{{member.follower.followerCount || 0}} Followers</a> | 
 		        	<a ng-click="$event.stopPropagation();" href="/member/{{member.follower.username}}/following" ui-sref="member.following({path:member.follower.username})">{{member.follower.followingCount || 0}} Following</a>
 		        </p>
-		        <p style="color:gray">Total Reputation | {{member.followed.totalWork}}</p>
-		        <p style="color:gray">{{member.followed.status}} Offline</p>
+		        <p style="color:gray">Total Reputation | {{member.follower.totalWork}}</p>
+		        <p style="color:gray">{{member.follower.status}} Offline</p>
 		    </div>
 		</div>
 	</div>

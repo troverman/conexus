@@ -8570,8 +8570,8 @@ angular.module("member/templates/followers.tpl.html", []).run(["$templateCache",
     "		        	<a ng-click=\"$event.stopPropagation();\" href=\"/member/{{member.follower.username}}/followers\" ui-sref=\"member.followers({path:member.follower.username})\">{{member.follower.followerCount || 0}} Followers</a> | \n" +
     "		        	<a ng-click=\"$event.stopPropagation();\" href=\"/member/{{member.follower.username}}/following\" ui-sref=\"member.following({path:member.follower.username})\">{{member.follower.followingCount || 0}} Following</a>\n" +
     "		        </p>\n" +
-    "		        <p style=\"color:gray\">Total Reputation | {{member.followed.totalWork}}</p>\n" +
-    "		        <p style=\"color:gray\">{{member.followed.status}} Offline</p>\n" +
+    "		        <p style=\"color:gray\">Total Reputation | {{member.follower.totalWork}}</p>\n" +
+    "		        <p style=\"color:gray\">{{member.follower.status}} Offline</p>\n" +
     "		    </div>\n" +
     "		</div>\n" +
     "	</div>\n" +

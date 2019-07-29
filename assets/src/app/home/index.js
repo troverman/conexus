@@ -556,7 +556,13 @@ angular.module( 'conexus.home', [
         $scope.followers = $scope.followers.map(function(obj){return obj.followed});    
 
         $scope.members.map(function(obj){
-            var index = $scope.followers.map(function(obj1){return obj1.id}).indexOf(obj.id);
+            console.log($scope.followers)
+            var index = $scope.followers.map(function(obj1){
+                //bug with undef followers
+                if (obj1){
+                    return obj1.id;
+                }
+            }).indexOf(obj.id);
             if (index != -1){obj.isFollowing = true;}
             if (index == -1){obj.isFollowing = false;}
             return obj;
@@ -579,7 +585,11 @@ angular.module( 'conexus.home', [
         });
 
         $scope.searchQueryFeed = [];
-        for (x in $scope.followers){$scope.searchQueryFeed.push({type:'MEMBER', id:$scope.followers[x].id, text:$scope.followers[x].username})}
+        for (x in $scope.followers){
+            if ($scope.followers[x]){
+                $scope.searchQueryFeed.push({type:'MEMBER', id:$scope.followers[x].id, text:$scope.followers[x].username});
+            }
+        }
         for (x in $scope.memberProjects){$scope.searchQueryFeed.push({type:'PROJECT', id:$scope.memberProjects[x].id, text:$scope.memberProjects[x].title})}
         for (x in $scope.memberTasks){$scope.searchQueryFeed.push({type:'TASK', id:$scope.memberTasks[x].id, text:$scope.memberTasks[x].title})}
 

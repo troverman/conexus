@@ -39,6 +39,11 @@ module.exports = {
 
 	//TODO: RESHAPE | BUILD
 	//FOR THIS TO SCALE WE NEED A DATA MODEL 
+	//REDO THIS LOL
+	//SINGLE MAPPING
+	//FRONT END DOES THAT DATA MODIFYING
+		//IE IMMUTABLE MANIFOLD
+			//IMMUTABLE+ (&or CREATECORE DEFINED REPUTTION+)
 	reputationBuild:function(){
 		User.find().then(function(userModels){
 			for (x in userModels){
@@ -77,6 +82,8 @@ module.exports = {
 	},
 
 	//DAILY RUN
+	//DOCUMENT NICELY.
+	//MAKE APP LIKE
 	universalTokenProtocolPreAlpha:function(){
 		User.find().then(function(userModels){
 			for (x in userModels){
@@ -97,6 +104,13 @@ module.exports = {
 		});
 	},
 
+
+
+	//get time created today eight6400-time;
+	//APP SPECIFIC 'DEAMON' -- MAKE DIS AN APP :)
+	//WELL DOCUMENT UNIVERSAL TOKEN
+	//privacyTokenProtocolPreAlpha
+
 };
 
 module.exports.intervalService = function(){
@@ -111,7 +125,21 @@ module.exports.intervalService = function(){
 	//TOKEN IS A MAPPING FROM STRING TO PROTOCOLS (WHICH ARE LOGIC MAPS)
 	//setInterval(dataService.buildStringSpace, 3600);
 
-	//TODO: UPCONVERT FXN LOL NOOO
+
+
+
+	//CONNECTION | (VALIDATION - ASSOCIATION)
+
+	//DATA 
+	//MASSAGE TIME :)
+	//utilService.tagsToAssociation('PROJECT', 2)
+	utilService.tagsToAssociation('TRANSACTION', 2)
+
+
+
+
+
+
 	
 	//Task.find().then(function(taskModels){
 	//	for x in taskModels){

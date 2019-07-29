@@ -53,6 +53,7 @@ module.exports = {
 	//MACHINE ATTENTION BY VALIDATION OF SPECIFIC DATA.. REVIEW THE DATA IN THE BLOCK ... GIVES IT MACHENE ATTENTION.. IE THE MERKLE PROOF (POW)
 	create: function (req, res) {
 		var model = {
+			//app vs type vs :o
 			app: req.param('app'),
 			string: req.param('string'),
 			amount: req.param('amount'),

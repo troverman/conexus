@@ -231,6 +231,83 @@ module.exports = {
 
 	//emailService:function(){},
 
+	//HELPER LEGACY DATA CONVERT
+
+	//layer this later into getsome complex query tag - context pop
+	//self charters.. ie task nxt
+	tagsToAssociation: function(dataModel, limit){
+
+		//traa=nsaction!
+
+		var promise = ''
+
+		if (dataModel = 'CONTENT'){promise = Content.find({}).limit(limit).skip(0).sort('createdAt DESC')}
+		if (dataModel = 'ITEM'){promise = Item.find({}).limit(limit).skip(0).sort('createdAt DESC')}
+		if (dataModel = 'PROJECT'){promise = Project.find({}).limit(limit).skip(0).sort('createdAt DESC')}
+		if (dataModel = 'TASK'){promise = Task.find({}).limit(limit).skip(0).sort('createdAt DESC')}
+		if (dataModel = 'TIME'){promise = Task.find({}).limit(limit).skip(0).sort('createdAt DESC')}
+		if (dataModel = 'TRANSACTION'){promise = Transaction.find({}).limit(limit).skip(0).sort('createdAt DESC')}
+
+		promise.then(function(models){
+
+			for (x in models){
+
+				var validationModel = {
+
+					//dont need to double store this for self.. 
+					associatedModels:[
+						{type:dataModel, id:models[x].id},
+						{type:dataModel, id:models[x].id},
+					],
+
+					context:{general:100},
+					validation:{general:100},
+
+					parameters:{type:'SELF', connection:'CRE8COREPROJECTSELF'},
+					type:'HUMAN',
+
+					creator:models[x].user,
+					user:models[x].user,
+
+					content:'SELF IMPLICIT ASSOCIATION',
+
+					//APP DATA..
+					reactions: {plus:0,minus:0},
+					attention:{general:0}
+				};
+
+				if (models[x].tags){
+					var context = models[x].tags.split(',');
+
+					//TODO.. UNIFY DATA STRUCT.. LOL - IT OK
+					for (y in context){
+						//should be 0 - 1 
+						validationModel.context[context[y]] = 100
+						validationModel.validation[context[y]] = 100 
+					}
+
+				}
+
+				console.log(validationModel)
+
+				//Validation.create(validationModel).then(function(newValidationModel){
+
+					//STRUCUTRE BETTER> : )
+					//STRUCT WITH CONNECTION : )
+					//NO WORRIES : P
+
+					//Association.create(newValidationModel);
+
+				//});
+
+			}
+
+		});
+
+
+	},
+
+
 	purge: function(model){
 		console.log(model)
 		Project.find({title:{contains:model}}).then(function(models){
