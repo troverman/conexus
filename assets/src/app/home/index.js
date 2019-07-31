@@ -361,8 +361,8 @@ angular.module( 'conexus.home', [
             onShowCallback: function (toast) { 
                 var audio = new Audio('audio/ping.mp3');
                 audio.play()
-                .then(function(audio){console.log('dingdong')})
-                .catch(function(err){console.log(err)})
+                .then(function(audio){console.log('POP', 'dingdong')})
+                .catch(function(err){console.log('ERR POP', err)})
             }
         });
     };
@@ -392,7 +392,7 @@ angular.module( 'conexus.home', [
             $scope.valid = false;
         }
 
-        console.log($scope.newMember)
+        console.log('NEW MEMBER', $scope.newMember)
 
         var data = JSON.stringify($scope.newMember);
 
@@ -424,7 +424,7 @@ angular.module( 'conexus.home', [
     //WATCHERS
     //PERHAPS IN NAV ROOT... --> SEARCH MODEL MASED ON URL
     $rootScope.$watch('searchQueryNav' ,function(newValue, oldValue){
-        console.log($scope.searchQuery);
+        console.log('SEARCH QUERY NAV', $scope.searchQuery);
         if (newValue !== oldValue) {
             $scope.searchQuery = [];
             for(x in Object.keys($rootScope.searchQuery)){
@@ -556,7 +556,6 @@ angular.module( 'conexus.home', [
         $scope.followers = $scope.followers.map(function(obj){return obj.followed});    
 
         $scope.members.map(function(obj){
-            console.log($scope.followers)
             var index = $scope.followers.map(function(obj1){
                 //bug with undef followers
                 if (obj1){
@@ -574,8 +573,6 @@ angular.module( 'conexus.home', [
             if (index == -1){obj.isMember = false;}
             return obj;
         });
-
-        console.log(memberTasks);
 
         $scope.tasks.map(function(obj){
             var index = $scope.memberTasks.map(function(obj1){return obj1.id}).indexOf(obj.id);
@@ -713,7 +710,6 @@ angular.module( 'conexus.home', [
 
         $scope.pageNumber = 0;
         $scope.newAccountInformation = $rootScope.currentUser;
-        console.log($scope.newAccountInformation, $rootScope.currentUser)
 
         $scope.changePage = function(page){
             window.scrollTo(0, 0);
@@ -724,7 +720,7 @@ angular.module( 'conexus.home', [
 
         $scope.editAccount = function () {
             UserModel.update($scope.newAccountInformation).then(function(model){
-                console.log(model);
+                console.log('EDIT USER', model);
             });
             $scope.pop('Saved!', 'Account Updated');
         };
@@ -852,7 +848,7 @@ angular.module( 'conexus.home', [
                 follower:$rootScope.currentUser.id,
             };
 
-            console.log(model, $scope.newFollower);
+            console.log('CREATE MEMBER-MEMBER ASSOCIATION', $scope.newFollower, model);
 
             if (!model.isFollowing){
                 FollowerModel.create($scope.newFollower).then(function(followerModel) {
@@ -884,7 +880,7 @@ angular.module( 'conexus.home', [
                     var audio = new Audio('audio/ping.mp3');
                     audio.play()
                     .then(function(audio){})
-                    .catch(function(err){console.log(err)})
+                    .catch(function(err){console.log('POP ERR', err)})
                 }
             });
         };
@@ -1038,7 +1034,6 @@ angular.module( 'conexus.home', [
         $scope.updateChartTotal = function(){
             $scope.chartMapTotal.xAxis.categories = $scope.newOrder.map(function(obj){return obj[1].identifier.split('+')[2]});
             $scope.chartMapTotal.series[0].data = $scope.newOrder.map(function(obj){return obj[0].amount});
-            console.log($scope.chartMapTotal)
         };
 
         $scope.pieTotal = {
@@ -1067,7 +1062,6 @@ angular.module( 'conexus.home', [
         $scope.updatePieTotal = function(){
             var data = $scope.newOrder.map(function(obj){return {name: obj[1].identifier.split('+')[2], y:obj[0].amount}})
             $scope.pieTotal.series[0].data = data;
-            console.log( $scope.pieTotal)
         };
 
         //TODO: VM CONTROLS ETC
@@ -1228,7 +1222,7 @@ angular.module( 'conexus.home', [
 
     //WATCHERS
     $rootScope.$watch('searchQueryNav', function(newValue, oldValue){
-        console.log($scope.searchQuery);
+        console.log('SEARCH QUERY', $scope.searchQuery);
         if (newValue !== oldValue) {
             $scope.searchQuery = [];
             for(x in Object.keys($rootScope.searchQueryNav)){

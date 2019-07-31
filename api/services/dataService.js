@@ -471,22 +471,24 @@ module.exports = {
 		console.log('GENERATE STRING SPACE!');
 		//WALK THE THE ASSOCIATIONS :) 
 		//LET'S START! 
-		//PROJECTMEMBER
+
 		var promises = [
+			//ASSOCIATION
 			//ACTION
-			Content.find().limit(100).skip(0).sort('createdAt DESC'),
+			Content.find().limit(100000).skip(0).sort('createdAt DESC'),
 			//FOLLOW
-			Item.find().limit(100).skip(0).sort('createdAt DESC'),
+			Item.find().limit(100000).skip(0).sort('createdAt DESC'),
 			//Order.find().limit(100).skip(0).sort('createdAt DESC'),
-			Project.find().limit(1000).skip(0).sort('createdAt DESC'),
+			Project.find().limit(100000).skip(0).sort('createdAt DESC'),
 			//Reaction.find().limit(100).skip(0).sort('createdAt DESC'),
-			Task.find().limit(100).skip(0).sort('createdAt DESC').populate('project'),
-			Time.find().limit(100).skip(0).sort('createdAt DESC').populate('task'),
-			Transaction.find().limit(100).skip(0).sort('createdAt DESC'),
-			User.find().limit(100).skip(0).sort('createdAt DESC'),
-			Validation.find().limit(100).skip(0).sort('createdAt DESC')
+			Task.find().limit(100000).skip(0).sort('createdAt DESC').populate('project'),
+			Time.find().limit(100000).skip(0).sort('createdAt DESC').populate('task'),
+			Transaction.find().limit(100000).skip(0).sort('createdAt DESC'),
+			User.find().limit(100000).skip(0).sort('createdAt DESC'),
+			Validation.find().limit(100000).skip(0).sort('createdAt DESC')
 		];
 		var type = [
+			//'ASSOCIATION',
 			//ACTION
 			'CONTENT',
 			'ITEM',
@@ -514,16 +516,16 @@ module.exports = {
 						var contentBaseModel = {
 							string: 'CRE8+CONTENT',
 							information:{
-								inCirculation:Math.floor(10000*Math.random()),
+								inCirculation:data[x].length,
 								markets: 0,
 							},
 							protocols:[
-								'BASE',
+								'CRE8', 
 								'CONTENT'
 							],
 							logic:{
 								transferrable:true, 
-								mint:'ONCREATECONTENT'
+								mint:'createContent'
 							}
 						};
 
@@ -535,12 +537,12 @@ module.exports = {
 								markets: 0,
 							},
 							protocols:[
-								'BASE',
+								'CRE8', 
 								'CONTENT'
 							],
 							logic:{
 								transferrable:true, 
-								mint:'ONCREATECONTENT'
+								mint:'createContent'
 							}
 						};
 
@@ -552,12 +554,12 @@ module.exports = {
 								markets: 0,
 							},
 							protocols:[
-								'BASE',
+								'CRE8',
 								'CONTENT'
 							],
 							logic:{
 								transferrable:true, 
-								mint:'ONCREATECONTENT'
+								mint:'createContent'
 							}
 						};
 
@@ -568,20 +570,19 @@ module.exports = {
 						if (data[x][y].type){
 
 							//CONTENT TYPE
-							//CONTENT+TYPE
 							var contentTypeModel = {
 								string: 'CRE8+CONTENT+'+data[x][y].type.toUpperCase(),
 								information:{
-									inCirculation:Math.floor(1000*Math.random()),
+									inCirculation:1,//data[x].filter(function(obj){return obj.type}).length,
 									markets: 0,
 								},
 								protocols:[
-									'BASE', 
+									'CRE8', 
 									'CONTENT'
 								],
 								logic:{
 									transferrable:true, 
-									mint:'ONCREATE'+data[x][y].type.toUpperCase()
+									mint:'createContent'
 								}
 							};
 
@@ -594,12 +595,12 @@ module.exports = {
 									markets: 0,
 								},
 								protocols:[
-									'BASE',
+									'CRE8',
 									'CONTENT'
 								],
 								logic:{
 									transferrable:true,
-									mint:'ONCREATECONTENT'
+									mint:'createContent'
 								}
 							};
 
@@ -615,33 +616,19 @@ module.exports = {
 
 					if (type[x] == 'ITEM'){
 
-						var itemBaseModel = {
-							string: 'ITEM',
-							information:{
-								inCirculation:Math.floor(10000*Math.random()),
-								markets: 0,
-							},
-							protocols:[
-								'BASE'
-							],
-							logic:{
-								transferrable:true, 
-								mint:'ONCREATEITEM'
-							}
-						};
-
 						var createItemBaseModel = {
 							string: 'CRE8+ITEM',
 							information:{
-								inCirculation:Math.floor(10000*Math.random()),
+								inCirculation:data[x].length,
 								markets: 0,
 							},
 							protocols:[
-								'BASE'
+								'CRE8',
+								'ITEM'
 							],
 							logic:{
 								transferrable:true, 
-								mint:'ONCREATEITEM'
+								mint:'createItem'
 							}
 						};
 
@@ -652,11 +639,12 @@ module.exports = {
 								markets: 0,
 							},
 							protocols:[
-								'BASE'
+								'CRE8',
+								'ITEM'
 							],
 							logic:{
 								transferrable:true, 
-								mint:'ONCREATECONTENT'
+								mint:'createItem'
 							}
 						};
 
@@ -672,17 +660,16 @@ module.exports = {
 						var orderBaseModel = {
 							string: 'CRE8+ORDER',
 							information:{
-								inCirculation:Math.floor(10000*Math.random()),
+								inCirculation:data[x].length,
 								markets: 0,
 							},
 							protocols:[
-								'BASE',
 								'CRE8',
 								'ORDER',
 							],
 							logic:{
 								transferrable:true, 
-								mint:'ONCREATEORDER'
+								mint:'createOrder'
 							}
 						};
 
@@ -694,13 +681,12 @@ module.exports = {
 								markets: 0,
 							},
 							protocols:[
-								'BASE',
 								'CRE8',
 								'ORDER',
 							],
 							logic:{
 								transferrable:true, 
-								mint:'ONCREATEORDER'
+								mint:'createOrder'
 							}
 						};
 
@@ -720,7 +706,7 @@ module.exports = {
 						var projectBaseModel = {
 							string: 'CRE8+PROJECT',
 							information:{
-								inCirculation:Math.floor(10000*Math.random()),
+								inCirculation:data[x].length,
 								markets: 0,
 							},
 							protocols:[
@@ -734,10 +720,11 @@ module.exports = {
 						};
 
 						//GOES TO PROJECT
+						//based on charter
 						var projectTitleModel = {
 							string: 'PROJECT+'+data[x][y].title.replace(/ /g,'_').toUpperCase(),
 							information:{
-								inCirculation:Math.floor(10000*Math.random()),
+								inCirculation:1,
 								markets: 0,
 							},
 							protocols:[
@@ -751,10 +738,11 @@ module.exports = {
 						};
 
 						//DEPRECIATE -- SAMPLE
+						//TODO ASSOCIATIONS
 						var projectPrelimModel = {
 							string: 'PROJECT+'+data[x][y].title.replace(/ /g,'_').toUpperCase()+'+CONTENT',
 							information:{
-								inCirculation:Math.floor(10000*Math.random()),
+								inCirculation:0,
 								markets: 0,
 							},
 							protocols:[
@@ -781,10 +769,11 @@ module.exports = {
 							projectAssociations(data[x][y].parent, data[x][y].title).then(function(projectModel){
 								
 								//console.log(projectModel);
+								//based on charter
 								var projectAssociationModel = {
 									string: 'PROJECT+'+projectModel.toUpperCase(),
 									information:{
-										inCirculation:Math.floor(10000*Math.random()),
+										inCirculation:0,
 										markets: 0,
 									},
 									protocols:[
@@ -822,49 +811,52 @@ module.exports = {
 					//TODO: RECIEVER? 
 					if (type[x] == 'REACTION'){
 
-						//REACTION
-						var reactionBaseModel = {
+						var reactionCreateModel = {
 							string: 'REACTION',
 							information:{
-								inCirculation:Math.floor(10000*Math.random()),
+								inCirculation:data[x].length,
 								markets: 0,
 							},
 							protocols:[
-								'BASE'
+								'CRE8',
+								'REACTION'
 							],
 							logic:{
 								transferrable:true, 
-								mint:'ONCREATEREACTION'
+								mint:'createReaction'
 							}
 						};
 
 						var reactionCreateModel = {
 							string: 'CRE8+REACTION',
 							information:{
-								inCirculation:Math.floor(10000*Math.random()),
+								inCirculation:data[x].length,
 								markets: 0,
 							},
 							protocols:[
-								'BASE'
+								'CRE8',
+								'REACTION'
 							],
 							logic:{
 								transferrable:true, 
-								mint:'ONCREATEREACTION'
+								mint:'createReaction'
 							}
 						};
 
+						//VERB?
 						var reactionReceiveModel = {
 							string: 'RECEIVE+REACTION',
 							information:{
-								inCirculation:Math.floor(10000*Math.random()),
+								inCirculation:data[x].length,
 								markets: 0,
 							},
 							protocols:[
-								'BASE'
+								'CRE8',
+								'REACTION'
 							],
 							logic:{
 								transferrable:true, 
-								mint:'ONCREATEREACTION'
+								mint:'createReaction'
 							}
 						};
 
@@ -872,15 +864,16 @@ module.exports = {
 						var reactionTypeBaseModel = {
 							string: 'REACTION+'+data[x][y].type.toUpperCase(),
 							information:{
-								inCirculation:Math.floor(10000*Math.random()),
+								inCirculation:0,
 								markets: 0,
 							},
 							protocols:[
-								'BASE'
+								'CRE8',
+								'REACTION'
 							],
 							logic:{
 								transferrable:true, 
-								mint:'ONCREATEREACTION'
+								mint:'createReaction'
 							}
 						};
 
@@ -888,15 +881,16 @@ module.exports = {
 						var reactionTypeCreateModel = {
 							string: 'REACTION+CREATE+'+data[x][y].type.toUpperCase(),
 							information:{
-								inCirculation:Math.floor(10000*Math.random()),
+								inCirculation:0,
 								markets: 0,
 							},
 							protocols:[
-								'BASE'
+								'CRE8',
+								'REACTION'
 							],
 							logic:{
 								transferrable:true, 
-								mint:'ONCREATEREACTION'
+								mint:'createReaction'
 							}
 						};
 
@@ -904,15 +898,16 @@ module.exports = {
 						var reactionTypeReceiveModel = {
 							string: 'REACTION+RECEIVE+'+data[x][y].type.toUpperCase(),
 							information:{
-								inCirculation:Math.floor(10000*Math.random()),
+								inCirculation:0,
 								markets: 0,
 							},
 							protocols:[
-								'BASE'
+								'CRE8',
+								'REACTION'
 							],
 							logic:{
 								transferrable:true, 
-								mint:'ONCREATEREACTION'
+								mint:'createReaction'
 							}
 						};
 
@@ -924,11 +919,12 @@ module.exports = {
 								markets: 0,
 							},
 							protocols:[
-								'BASE'
+								'CRE8',
+								'REACTION'
 							],
 							logic:{
 								transferrable:true, 
-								mint:'ONCREATEREACTION'
+								mint:'createReaction'
 							}
 						};
 
@@ -952,11 +948,12 @@ module.exports = {
 								var reactionAssociationTypeModel = {
 									string: 'REACTION+'+data[x][y].associatedModels[z].type.toUpperCase(),
 									information:{
-										inCirculation:Math.floor(100*Math.random()),
+										inCirculation:1,
 										markets: 0,
 									},
 									protocols:[
-										'BASE'
+										'CRE8',
+										'REACTION'
 									],
 									logic:{
 										transferrable:true, 
@@ -969,11 +966,12 @@ module.exports = {
 								var reactionAssociationAddressModel = {
 									string: 'REACTION+'+data[x][y].associatedModels[z].id,
 									information:{
-										inCirculation:Math.floor(100*Math.random()),
+										inCirculation:1,
 										markets: 0,
 									},
 									protocols:[
-										'BASE'
+										'CRE8',
+										'REACTION'
 									],
 									logic:{
 										transferrable:true, 
@@ -986,15 +984,16 @@ module.exports = {
 								var reactionAssociationTypeAddressModel = {
 									string: 'REACTION+'+data[x][y].associatedModels[z].type.toUpperCase()+'+'+data[x][y].associatedModels[z].id,
 									information:{
-										inCirculation:Math.floor(100*Math.random()),
+										inCirculation:1,
 										markets: 0,
 									},
 									protocols:[
-										'BASE'
+										'CRE8',
+										'REACTION'
 									],
 									logic:{
 										transferrable:true, 
-										mint:'ONCREATEREACTION'
+										mint:'createReaction'
 									}
 								};
 
@@ -1003,15 +1002,16 @@ module.exports = {
 								var reactionAssociationType1AddressModel = {
 									string: 'REACTION+'+data[x][y].type.toUpperCase()+'+'+data[x][y].associatedModels[z].id,
 									information:{
-										inCirculation:Math.floor(100*Math.random()),
+										inCirculation:1,
 										markets: 0,
 									},
 									protocols:[
-										'BASE'
+										'CRE8',
+										'REACTION'
 									],
 									logic:{
 										transferrable:true, 
-										mint:'ONCREATEREACTION'
+										mint:'createReaction'
 									}
 								};
 
@@ -1020,15 +1020,16 @@ module.exports = {
 								var reactionAssociationTypeTypeModel = {
 									string: 'REACTION+'+data[x][y].associatedModels[z].type.toUpperCase()+'+'+data[x][y].type,
 									information:{
-										inCirculation:Math.floor(100*Math.random()),
+										inCirculation:1,
 										markets: 0,
 									},
 									protocols:[
-										'BASE'
+										'CRE8',
+										'REACTION'
 									],
 									logic:{
 										transferrable:true, 
-										mint:'ONCREATEREACTION'
+										mint:'createReaction'
 									}
 								};
 
@@ -1041,11 +1042,12 @@ module.exports = {
 										markets: 0,
 									},
 									protocols:[
-										'BASE'
+										'CRE8',
+										'REACTION'
 									],
 									logic:{
 										transferrable:true, 
-										mint:'ONCREATEREACTION'
+										mint:'createReaction'
 									}
 								};
 
@@ -1073,15 +1075,16 @@ module.exports = {
 						var taskBaseModel = {
 							string: 'CRE8+TASK',
 							information:{
-								inCirculation:Math.floor(10000*Math.random()),
+								inCirculation:data[x].length,
 								markets: 0,
 							},
 							protocols:[
-								'BASE'
+								'CRE8',
+								'TASK'
 							],
 							logic:{
 								transferrable:true, 
-								mint:'ONCREATETASK'
+								mint:'createTask'
 							}
 						};
 
@@ -1092,11 +1095,12 @@ module.exports = {
 								markets: 0,
 							},
 							protocols:[
-								'BASE'
+								'CRE8',
+								'TASK'
 							],
 							logic:{
 								transferrable:true, 
-								mint:'ONCREATETASK'
+								mint:'createTask'
 							}
 						};
 
@@ -1109,21 +1113,25 @@ module.exports = {
 
 					//TYPE.. VIEW
 					//TYPE.. DATA APIS.. TIME.. STREAM.. ETC
+
+					//FIX THIS!!!!!!!!
+					//:) POPULATOR
 					if (type[x] == 'TIME'){
 
 						//TIME
 						var timeBaseModel = {
 							string: 'CRE8+TIME',
 							information:{
-								inCirculation:Math.floor(10000*Math.random()),
+								inCirculation:data[x].length,
 								markets: 0,
 							},
 							protocols:[
-								'BASE'
+								'CRE8',
+								'TIME'
 							],
 							logic:{
 								transferrable:true, 
-								mint:'ONCREATETIME'
+								mint:'createTime'
 							}
 						};
 
@@ -1135,11 +1143,12 @@ module.exports = {
 								markets: 0,
 							},
 							protocols:[
-								'BASE'
+								'CRE8',
+								'TIME'
 							],
 							logic:{
 								transferrable:true, 
-								mint:'ONCREATETIME'
+								mint:'createTime'
 							}
 						};
 
@@ -1158,15 +1167,16 @@ module.exports = {
 						var transactionBaseModel = {
 							string: 'TRANSACTION',
 							information:{
-								inCirculation:Math.floor(10000*Math.random()),
+								inCirculation:data[x].length,
 								markets: 0,
 							},
 							protocols:[
-								'BASE'
-								],
+								'CRE8',
+								'TRANSACTION'
+							],
 							logic:{
 								transferrable:true, 
-								mint:'ONCREATETRANSACTION'
+								mint:'createTransaction'
 							}
 						};
 
@@ -1174,15 +1184,16 @@ module.exports = {
 						var createTransactionBaseModel = {
 							string: 'CRE8+TRANSACTION',
 							information:{
-								inCirculation:Math.floor(10000*Math.random()),
+								inCirculation:data[x].length,
 								markets: 0,
 							},
 							protocols:[
-								'BASE'
-								],
+								'CRE8',
+								'TRANSACTION'
+							],
 							logic:{
 								transferrable:true, 
-								mint:'ONCREATETRANSACTION'
+								mint:'createTransaction'
 							}
 						};
 
@@ -1190,45 +1201,48 @@ module.exports = {
 						var recieveTransactionBaseModel = {
 							string: 'RECIEVE+TRANSACTION',
 							information:{
-								inCirculation:Math.floor(10000*Math.random()),
+								inCirculation:data[x].length,
 								markets: 0,
 							},
 							protocols:[
-								'BASE'
+								'CRE8',
+								'TRANSACTION'
 							],
 							logic:{
 								transferrable:true, 
-								mint:'ONCREATETRANSACTION'
+								mint:'createTransaction'
 							}
 						};
 
 						var transactionBaseModelAsset = {
 							string: 'CRE8+TRANSACTION+'+data[x][y].asset,
 							information:{
-								inCirculation:Math.floor(10000*Math.random()),
+								inCirculation:0,
 								markets: 0,
 							},
 							protocols:[
-								'BASE'
+								'CRE8',
+								'TRANSACTION'
 							],
 							logic:{
 								transferrable:true, 
-								mint:'ONCREATETRANSACTION'
+								mint:'createTransaction'
 							}
 						};
 
 						var transactionBaseModelAssetRecieve = {
 							string: 'RECIEVE+TRANSACTION+'+data[x][y].asset,
 							information:{
-								inCirculation:Math.floor(10000*Math.random()),
+								inCirculation:0,
 								markets: 0,
 							},
 							protocols:[
-								'BASE'
+								'CRE8',
+								'TRANSACTION'
 							],
 							logic:{
 								transferrable:true, 
-								mint:'ONCREATETRANSACTION'
+								mint:'createTransaction'
 							}
 						};
 
@@ -1239,11 +1253,12 @@ module.exports = {
 								markets: 0,
 							},
 							protocols:[
-								'BASE'
+								'CRE8',
+								'TRANSACTION'
 							],
 							logic:{
 								transferrable:true, 
-								mint:'ONCREATETRANSACTION'
+								mint:'createTransaction'
 							}
 						};
 
@@ -1254,11 +1269,12 @@ module.exports = {
 								markets: 0,
 							},
 							protocols:[
-								'BASE'
+								'CRE8',
+								'TRANSACTION'
 							],
 							logic:{
 								transferrable:true, 
-								mint:'ONCREATETRANSACTION'
+								mint:'createTransaction'
 							}
 						};
 
@@ -1285,15 +1301,16 @@ module.exports = {
 						var validationBaseModel = {
 							string: 'CRE8+VALIDATION',
 							information:{
-								inCirculation:Math.floor(10000*Math.random()),
+								inCirculation:data[x].length,
 								markets:0,
 							},
 							protocols:[
-								'BASE'
+								'CRE8',
+								'VALIDATION'
 							],
 							logic:{
 								transferrable:true, 
-								mint:'ONCREATEVALIDATION'
+								mint:'createValidation'
 							}
 						};
 
@@ -1305,11 +1322,12 @@ module.exports = {
 								markets:0,
 							},
 							protocols:[
-								'BASE'
+								'CRE8',
+								'VALIDATION'
 							],
 							logic:{
 								transferrable:true, 
-								mint:'ONCREATEVALIDATION'
+								mint:'createValidation'
 							}
 						};
 
@@ -1329,12 +1347,12 @@ module.exports = {
 								markets:0,
 							},
 							protocols:[
-								'BASE',
+								'CRE8',
 								'MEMBER'
 							],
 							logic:{
 								transferrable:true, 
-								mint:'ONMEMBERCREATE'
+								mint:'createTransactionByMember'
 							}
 						};
 						tokenSet.push(humanReadableUserNFTModel);
@@ -1382,6 +1400,11 @@ module.exports = {
 
 			//REPUTATION MANIFOLD
 			console.log(tokenSet_uniq)
+
+
+			//UPDATE USERS BALANCE
+
+
 
 			async.eachSeries(tokenSet_uniq, function (token, nextIteration){ 
 				Token.find({string:token.string}).then(function(aTokenModel){

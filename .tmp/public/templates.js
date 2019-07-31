@@ -4794,34 +4794,56 @@ angular.module("footer/index.tpl.html", []).run(["$templateCache", function($tem
     "            </div>\n" +
     "        	-->\n" +
     "\n" +
+    "        	<div ng-if=\"false\">\n" +
     "			<div style=\"float:right\"><a href=\"/\" ui-sref=\"home\"><img src=\"images/hyper.gif\"></a></div>\n" +
-    "\n" +
-    "			<!--\n" +
-    "			<div style=\"float:right\"><a href=\"/\"><img src=\"https://media1.tenor.com/images/d74ec678a0777a81e1374577e969d906/tenor.gif?itemid=12984711\"></a></div>\n" +
-    "			-->\n" +
     "\n" +
     "			<a style=\"font-weight:bold;font-size:15px;color:white;font-family:Helvetica Neue,Helvetica,Arial,sans-serif\" href=\"/\" ui-sref=\"home\">CRE8.XYZ</a>\n" +
     "			<br>\n" +
-    "			<!--TODO: AUDIT-->\n" +
     "			<a href=\"/about\" ui-sref=\"about\">About</a>\n" +
     "			<a href=\"/discover\" ui-sref=\"discover\">Discover</a>\n" +
     "			\n" +
     "			<a href=\"/market\" ui-sref=\"markets\">Market</a>\n" +
+    "\n" +
     "			<!--<a href=\"/marketplace\" ui-sref=\"marketPlace\">Marketplace</a>-->\n" +
-    "			\n" +
     "			<!--<a href=\"/members\" ui-sref=\"members\">Members</a>-->\n" +
-    "			<!--<a href=\"/transparency\" ui-sref=\"transparency\">Peers</a>-->\n" +
     "\n" +
     "			<a href=\"/projects\" ui-sref=\"projects\">Projects</a>\n" +
     "			<a href=\"/tasks\" ui-sref=\"tasks\">Tasks</a>\n" +
     "			<a href=\"/transparency\" ui-sref=\"transparency\">Transparency</a>\n" +
+    "			</div>\n" +
+    "\n" +
+    "			<!--\n" +
+    "			<div>\n" +
+    "				<div style=\"float:right\"><a href=\"/\" ui-sref=\"home\"><img style=\"height:100px\" src=\"images/hyper.gif\"></a></div>\n" +
+    "				<a style=\"font-weight:bold;font-size:15px;color:white;font-family:Helvetica Neue,Helvetica,Arial,sans-serif\" href=\"/\" ui-sref=\"home\">CRE8.XYZ</a>\n" +
+    "				<br>\n" +
+    "\n" +
+    "				<a href=\"/about\" ui-sref=\"about\">About</a>\n" +
+    "				<br>\n" +
+    "\n" +
+    "				<a href=\"/discover\" ui-sref=\"discover\">Discover</a>\n" +
+    "				<br>\n" +
+    "				\n" +
+    "				<a href=\"/market\" ui-sref=\"markets\">Market</a>\n" +
+    "				<a href=\"/marketplace\" ui-sref=\"marketPlace\">Marketplace</a>\n" +
+    "				<a href=\"/members\" ui-sref=\"members\">Members</a>\n" +
+    "				<a href=\"/projects\" ui-sref=\"projects\">Projects</a>\n" +
+    "				<a href=\"/tasks\" ui-sref=\"tasks\">Tasks</a>\n" +
+    "				<br>\n" +
+    "\n" +
+    "				<a href=\"/transparency\" ui-sref=\"transparency\">Peer Network</a>\n" +
+    "			</div>\n" +
+    "			-->\n" +
+    "\n" +
     "\n" +
     "		</div>\n" +
+    "\n" +
     "		<!--\n" +
     "		<div class=\"sub-footer\">\n" +
     "			Terms Privacy Social etc\n" +
     "		</div>\n" +
     "		-->\n" +
+    "\n" +
     "	</div>	\n" +
     "</div>");
 }]);
@@ -5829,7 +5851,7 @@ angular.module("home/templates/tutorial.tpl.html", []).run(["$templateCache", fu
     "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
-    "        \n" +
+    "\n" +
     "        <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
     "            <li style=\"float:left;font-size:14px\"><a ng-click=\"selectTab('QUESTIONS')\" href=\"#\"><i class=\"fas fa-question\"></i> Questions</a></li>\n" +
     "            <li style=\"float:left;font-size:14px\"><a ng-click=\"selectTab('BUILDER')\" href=\"#\"><i class=\"fas fa-funnel-dollar\"></i> Trending Positions</a></li>\n" +
@@ -5846,9 +5868,9 @@ angular.module("home/templates/tutorial.tpl.html", []).run(["$templateCache", fu
     "                    <p style=\"color:gray;font-size:12px;font-style:italic\">Creating a value map furthers a self-empowering mechanism. We create value; though sharing our values and relating them we create value in ourselves, in what we do, and within each other.</p>\n" +
     "\n" +
     "                    <div class=\"row\">\n" +
-    "                        <div class=\"col-xs-4\"><img src=\"https://source.unsplash.com/900x900/?value,finance,vote\"></div>\n" +
-    "                        <div class=\"col-xs-4\"><img src=\"https://source.unsplash.com/900x900/?humananity,city,community\"></div>\n" +
-    "                        <div class=\"col-xs-4\"><img src=\"https://source.unsplash.com/900x900/?code,love,joy\"></div>\n" +
+    "                        <div class=\"col-xs-4\"><img ng-src=\"https://source.unsplash.com/900x900/?value,finance,vote\"></div>\n" +
+    "                        <div class=\"col-xs-4\"><img ng-src=\"https://source.unsplash.com/900x900/?humananity,city,community\"></div>\n" +
+    "                        <div class=\"col-xs-4\"><img ng-src=\"https://source.unsplash.com/900x900/?code,love,joy\"></div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
@@ -5945,7 +5967,7 @@ angular.module("home/templates/tutorial.tpl.html", []).run(["$templateCache", fu
     "\n" +
     "                </div>\n" +
     "\n" +
-    "                <div class=\"card\">\n" +
+    "                <div class=\"card\" ng-if=\"newOrder.length > 0\" >\n" +
     "\n" +
     "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?love,art,geometry');min-height:50px\" class=\"imageContainerSmall\">\n" +
     "                        <div style=\"background:rgba(0,0,0,0.75);height:50px\" class=\"imageContainerSmallDiv\">  \n" +
@@ -5999,7 +6021,7 @@ angular.module("home/templates/tutorial.tpl.html", []).run(["$templateCache", fu
     "                                </div>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
-    "                        <button ng-if=\"newOrder.length > 0\" ng-click=\"orderSetToggle(newOrder)\" style=\"width:100%\" class=\"btn btn-default log-btn\">CREATE POSITION</button>\n" +
+    "                        <button ng-click=\"orderSetToggle(newOrder)\" style=\"width:100%\" class=\"btn btn-default log-btn\">CREATE POSITION</button>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
@@ -6013,9 +6035,9 @@ angular.module("home/templates/tutorial.tpl.html", []).run(["$templateCache", fu
     "                    <p style=\"color:gray;font-size:12px;font-style:italic\">Creating a value map furthers a self-empowering mechanism. We create value; though sharing our values and relating them we create value in ourselves, in what we do, and within each other.</p>\n" +
     "\n" +
     "                    <div class=\"row\">\n" +
-    "                        <div class=\"col-xs-4\"><img src=\"https://source.unsplash.com/900x900/?value,finance,vote\"></div>\n" +
-    "                        <div class=\"col-xs-4\"><img src=\"https://source.unsplash.com/900x900/?humananity,city,community\"></div>\n" +
-    "                        <div class=\"col-xs-4\"><img src=\"https://source.unsplash.com/900x900/?code,love,joy\"></div>\n" +
+    "                        <div class=\"col-xs-4\"><img ng-src=\"https://source.unsplash.com/900x900/?value,finance,vote\"></div>\n" +
+    "                        <div class=\"col-xs-4\"><img ng-src=\"https://source.unsplash.com/900x900/?humananity,city,community\"></div>\n" +
+    "                        <div class=\"col-xs-4\"><img ng-src=\"https://source.unsplash.com/900x900/?code,love,joy\"></div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
@@ -6076,9 +6098,9 @@ angular.module("home/templates/tutorial.tpl.html", []).run(["$templateCache", fu
     "                    <p style=\"color:gray;font-size:12px;font-style:italic\">These Discrete Market positions codify your value map and create relation in value; a self-empowering mechanism.</p>\n" +
     "\n" +
     "                    <div class=\"row\">\n" +
-    "                        <div class=\"col-xs-4\"><img src=\"https://source.unsplash.com/900x900/?value,finance,vote\"></div>\n" +
-    "                        <div class=\"col-xs-4\"><img src=\"https://source.unsplash.com/900x900/?humananity,city,community\"></div>\n" +
-    "                        <div class=\"col-xs-4\"><img src=\"https://source.unsplash.com/900x900/?code,love,joy\"></div>\n" +
+    "                        <div class=\"col-xs-4\"><img ng-src=\"https://source.unsplash.com/900x900/?value,finance,vote\"></div>\n" +
+    "                        <div class=\"col-xs-4\"><img ng-src=\"https://source.unsplash.com/900x900/?humananity,city,community\"></div>\n" +
+    "                        <div class=\"col-xs-4\"><img ng-src=\"https://source.unsplash.com/900x900/?code,love,joy\"></div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
@@ -6433,7 +6455,7 @@ angular.module("home/templates/tutorial.tpl.html", []).run(["$templateCache", fu
     "\n" +
     "                </div>\n" +
     "\n" +
-    "                <div class=\"card\">\n" +
+    "                <div class=\"card\" ng-if=\"newOrder.length > 0\" >\n" +
     "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?love,art,geometry');min-height:50px\" class=\"imageContainerSmall\">\n" +
     "                        <div style=\"background:rgba(0,0,0,0.75);height:50px\" class=\"imageContainerSmallDiv\">  \n" +
     "                            <div style=\"margin-top: auto;margin-bottom: auto;padding:15px;\">\n" +
@@ -6472,7 +6494,7 @@ angular.module("home/templates/tutorial.tpl.html", []).run(["$templateCache", fu
     "                                </div>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
-    "                        <button ng-if=\"newOrder.length > 0\" ng-click=\"orderSetToggle(newOrder)\" style=\"width:100%\" class=\"btn btn-default log-btn\">CREATE POSITION</button>\n" +
+    "                        <button ng-click=\"orderSetToggle(newOrder)\" style=\"width:100%\" class=\"btn btn-default log-btn\">CREATE POSITION</button>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +

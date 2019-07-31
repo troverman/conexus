@@ -15,7 +15,6 @@ angular.module( 'conexus.nav', [
     //STATE CHANGE LOGIC
     $rootScope.$on("$stateChangeStart", function() {
         //VIEW GENERATION
-        $scope.createView();
         $scope.closeAllNav();
     });
     
@@ -247,7 +246,7 @@ angular.module( 'conexus.nav', [
         $sailsSocket.subscribe('notification', function (envelope) {
             switch(envelope.verb) {
                 case 'created':
-                    console.log(envelope)
+                    console.log('SOCKET NOTIRICATION', envelope)
                     //TODO: HAS TO BE BETTER THAN SOCKET CHECK; SOCKET ROOMS? 
                     if ($rootScope.currentUser.id == envelope.data.user){
                         $rootScope.notificationCount++;
@@ -313,7 +312,7 @@ angular.module( 'conexus.nav', [
 
             $scope.newContent.associatedModels.push({text:'SELF', type:'CONTENT', id:'SELF'})
 
-            console.log($scope.newContent);
+            console.log('CONTENT TOGGLE', $scope.newContent);
 
             $mdSidenav('content').toggle();
         }
@@ -351,7 +350,7 @@ angular.module( 'conexus.nav', [
         $scope.type = type;
         //NOTIFICATIONS
         $scope.selectedType = 'ALL';
-        console.log(type, item);
+        console.log('FILTER TOGGLE', type, item);
 
         $scope.filterBuilder = JSON.stringify($scope.searchQueryNav, undefined, 4)
 
@@ -435,7 +434,7 @@ angular.module( 'conexus.nav', [
                 });
             }
 
-            console.log(item, $rootScope.searchQueryNav, $rootScope.searchQuery);
+            console.log('SELECT ASSET', item, $rootScope.searchQueryNav, $rootScope.searchQuery);
 
         };
 
@@ -454,7 +453,7 @@ angular.module( 'conexus.nav', [
                 });
             }
 
-            console.log(item, $rootScope.searchQueryNav, $rootScope.searchQuery);
+            console.log('SELECT ASSOCIATION', item, $rootScope.searchQueryNav, $rootScope.searchQuery);
 
         };
 
@@ -474,13 +473,12 @@ angular.module( 'conexus.nav', [
                 });
             }
 
-            console.log(item, $rootScope.searchQueryNav, $rootScope.searchQuery);
+            console.log('SELECT LOCATION', item, $rootScope.searchQueryNav, $rootScope.searchQuery);
 
         };
 
         $scope.selectTag = function(item){
 
-            console.log(item);
             var selectedLimit = 100;
             var selectedSkip = 0;
             var selectedSort = 'createdAt DESC';
@@ -536,7 +534,7 @@ angular.module( 'conexus.nav', [
 
 
 
-            console.log(item, $rootScope.searchQueryNav, $rootScope.searchQuery);
+            console.log('SELECT TAG', item, $rootScope.searchQueryNav, $rootScope.searchQuery);
 
         };
 
@@ -552,7 +550,7 @@ angular.module( 'conexus.nav', [
                 });
             }
 
-            console.log(item, $rootScope.searchQueryNav, $rootScope.searchQuery);
+            console.log('selectTypeFilter', item, $rootScope.searchQueryNav, $rootScope.searchQuery);
 
         };
 
@@ -612,7 +610,7 @@ angular.module( 'conexus.nav', [
         $scope.closeAllNav();
         if($rootScope.currentUser){
 
-            console.log(orderSet)
+            console.log('orderSetToggle', orderSet)
 
         }
 
@@ -633,7 +631,8 @@ angular.module( 'conexus.nav', [
     //TODO
     $rootScope.renderToggle = function(item, type){
         $scope.closeAllNav();
-        console.log(item);
+
+        console.log('renderToggle', item);
 
         if (item.model == 'MARKET'){
             $scope.bidAskChart = {
@@ -693,7 +692,7 @@ angular.module( 'conexus.nav', [
         function populateChildren(contentList, depth, limit){
             contentList.forEach(function(content) {
                 ContentModel.getSome({contentModel:content.id, limit:100, skip:0, sort:'createdAt DESC'}).then(function(contentList){
-                    console.log(contentList)
+                    console.log('populateChildren', contentList)
                     if (contentList.length > 0){
                         depth++ 
                         content.children = contentList;
@@ -705,7 +704,7 @@ angular.module( 'conexus.nav', [
         }
         //TODO TYPE.. 
         ContentModel.getSome({contentModel:item.id, limit:100, skip:0, sort:'createdAt DESC'}).then(function(contentList){
-            console.log(contentList)
+            console.log('populateChildren', contentList)
             populateChildren(contentList, 0, 5);
         });
         $mdSidenav('render').toggle();
@@ -744,7 +743,7 @@ angular.module( 'conexus.nav', [
     $scope.renderGraph  = function(model){
         if (!model){model = 'circle'}
         cytoData.getGraph().then(function(graph){
-            console.log($scope.directedGraphElements)
+            console.log('renderGraph', $scope.directedGraphElements)
             $scope.graph = graph;
             $scope.graph.json($scope.directedGraphElements);
             $scope.graph.layout({
@@ -1183,8 +1182,9 @@ angular.module( 'conexus.nav', [
         $scope.closeAllNav();
         if($rootScope.currentUser){
 
+            $scope.newTime = {};
+
             if (!$scope.newTime.recordingTime){
-                $scope.newTime = {};
                 $scope.newTime.startTime = new Date();
                 $scope.newTime.startTime.setMilliseconds(0);
                 $scope.newTime.endTime = new Date();
@@ -1216,7 +1216,7 @@ angular.module( 'conexus.nav', [
                         user: $rootScope.currentUser.id,
                     };
                     ContentModel.create($scope.newContent).then(function(contentModel){
-                        console.log('create', contentModel)
+                        console.log('CREATE STREAMING CONTENT', contentModel)
                         $scope.streamingId = contentModel.id;
                     });
                 }
@@ -1235,6 +1235,7 @@ angular.module( 'conexus.nav', [
 
             //HMM VS CREATE TIME
             $scope.submit = function() {
+
                 if($scope.recordingTime === false) return false;
                 $scope.recordingTime = false; $scope.streaming = false;
                 var timeModel = {
@@ -1250,28 +1251,45 @@ angular.module( 'conexus.nav', [
                         return obj.text
                     }).join(",");
                 }
-                TimeModel.create(timeModel).then(function(model){
-                    $scope.time.unshift(model);
+
+                $rootScope.stateIsLoading = true;
+
+                TimeModel.create(timeModel).then(function(newTime){
                     $scope.timeContent = '';
+
+                    //TODO BACKEND.. GENERALIZE CONTENT ASSOCIATION :)
+                        //CREATE CONTENT ON BACKED FOR ALL DATA? 
+                            //MODEL-CONTENT ASSOC
                     if ($scope.streamingId){
                         var update = {};
                         update.id = $scope.streamingId;
-                        update.time = model.id;
-                        update.parent = model.id;
+                        update.time = newTime.id;
+                        update.parent = newTime.id;
                         update.parentModel = 'time';
                         ContentModel.update(update).then(function(contentModel){
                             consooe.log(contentModel)
                         });
                     }
-                }); 
-                $rootScope.taskTime=0;
-                clearInterval($scope.interval);
-            };
 
+                    $rootScope.stateIsLoading = false;
+
+                    //TODO UPDATE CONFIRM POPUP
+                    $scope.confirm = $scope.newTime;
+                    $scope.confirm.model = 'TIME';
+                    $scope.newTime = {};
+                    $mdSidenav('time').close();
+                    setTimeout(function () {$mdSidenav('confirm').open()}, 500);
+                    setTimeout(function () {$mdSidenav('confirm').close()}, 25000);
+                      
+                    $rootScope.taskTime=0;
+                    clearInterval($scope.interval);
+
+                }); 
+
+            };
 
             //TODO: UNIFY WITH TIMER
             $scope.updateCount = function(amount, context) {
-
 
                 //TODO: CREATED AT
                 var currentTime = new Date();
@@ -1291,7 +1309,7 @@ angular.module( 'conexus.nav', [
                     amount:1
                 });
 
-                $scope.$apply();
+                //$scope.$apply();
 
             };
 
@@ -1374,7 +1392,7 @@ angular.module( 'conexus.nav', [
                 associatedModels:[]
             }];
 
-            console.log(item, $scope.newTransaction);
+            console.log('CREATE TRANSACTION', item, $scope.newTransaction);
 
             $scope.$watch('newTransaction.context', function(newValue, oldValue){
                 if (newValue !== oldValue) {
@@ -1518,7 +1536,7 @@ angular.module( 'conexus.nav', [
             }
 
             //CONTENT, TASK, TIME, TRANSACTION, ORDER, PROJECT
-            console.log($scope.newContent);
+            console.log('CREATE CONTENT', $scope.newContent);
 
             ContentModel.create($scope.newContent).then(function(model) {
                 $scope.confirm = $scope.newContent;
@@ -1582,7 +1600,7 @@ angular.module( 'conexus.nav', [
                 $scope.newOrder.amountSet1.push($scope.newOrder.setBeta[Object.keys($scope.newOrder.setBeta)[x]]);
             }
             
-            console.log($scope.newOrder);
+            console.log('CREATE ORDER', $scope.newOrder);
 
             OrderModel.create($scope.newOrder).then(function(model) {
                 $scope.confirm = $scope.newOrder;
@@ -1621,7 +1639,7 @@ angular.module( 'conexus.nav', [
                 }
             }
 
-            console.log($scope.newProject);
+            console.log('CREATE PROJECT', $scope.newProject);
 
             ProjectModel.create($scope.newProject).then(function(model) {
                 $scope.confirm = $scope.newProject;
@@ -1670,7 +1688,7 @@ angular.module( 'conexus.nav', [
             }
 
 
-            console.log($scope.newTask);
+            console.log('CREATE TASK', $scope.newTask);
             TaskModel.create($scope.newTask).then(function(model) {
                 $scope.confirm = $scope.newTask;
                 $scope.confirm.model = 'TASK';
@@ -1702,7 +1720,7 @@ angular.module( 'conexus.nav', [
 
 
             }
-            console.log($scope.newTime);
+            console.log('CREATE TIME', $scope.newTime);
             TimeModel.create($scope.newTime).then(function(model){
                 $scope.confirm = $scope.newTime;
                 $scope.confirm.model = 'TIME';
@@ -1720,7 +1738,7 @@ angular.module( 'conexus.nav', [
 
             $scope.newTransaction.user = $rootScope.currentUser.id
             if ($scope.newTransaction.context){
-                console.log($scope.newTransaction.context)
+                //console.log($scope.newTransaction.context)
                 $scope.newTransaction.context = $scope.newTransaction.context.map(function(obj){
                     return obj.text
                 }).join(",");
@@ -1732,7 +1750,7 @@ angular.module( 'conexus.nav', [
             newTransaction.from = newTransaction.from[0].id;
             newTransaction.to = newTransaction.to[0].id;
             
-            console.log($scope.newTransaction);
+            console.log('CREATE TRANSACTION', $scope.newTransaction);
 
             //SELF VALIDATION HERE! --> TAGS
             //VECTOR TAGS  ((((((TAG COMPUTATION FUNCTION TO DO FOR ALL THE SIDEBARS -- RENAME TO CONTEXT))))))
@@ -1764,7 +1782,7 @@ angular.module( 'conexus.nav', [
             if (item){$scope.newValidation = item;}           
             if ($scope.newValidation.associatedModels){
                 
-                console.log($scope.newValidation);
+                console.log('CREATE VALIDATION', $scope.newValidation);
 
                 $rootScope.stateIsLoading = true;
                 ValidationModel.create($scope.newValidation).then(function(model) {
@@ -1935,7 +1953,7 @@ angular.module( 'conexus.nav', [
     //IF LOGGED IN AND PERMISIONS
     if($rootScope.currentUser){
         //TODO:ROOTSCOPE ISNT LOADED
-        console.log($rootScope.currentUser)
+        console.log('STARTING ATTENTION', $rootScope.currentUser)
         //if ($rootScope.currentUser.apps){
             //if ($rootScope.currentUser.apps.cre8.recordAttention){
                 $interval(function(){$scope.timerFunction(1, 'attention', 'HUMAN')}, 1000);
@@ -1944,33 +1962,7 @@ angular.module( 'conexus.nav', [
         //}
     }
 
-    //TODO
-    $scope.createView = function(){
-        if ($rootScope.currentUser){
-            //TODO: BACKEND TIMER.. ? 
-            //TODO: BETTER SECURITY..
-            //AKA CONNECT TO CHAIN WHEN START AND WHEN END NOT FRONTEND TIMER 
-            //-- MAKE TWO CALLS WITH TIME STAMP. 
-            $scope.timer = {};
-            $rootScope.timeModel = {
-                type: 'VIEW',
-                user: $rootScope.currentUser.id,
-                associatedModels: [{type: 'URL', id:window.location.href}],
-                amount: 0
-            };
-            
-            if ($rootScope.timeModel.amount != 0){
-                clearInterval($scope.timer);
-                $rootScope.timeModel.amount = $rootScope.timeModel.amount/1000
-                console.log($rootScope.timeModel.amount)
-                //TimeModel.create($rootScope.timeModel).then(function(){
-                //    $rootScope.timeModel = {};
-                //    console.log('SURE')
-                //});
-            }
-        }
-    };
-
+ 
     //TODO: TEST
     $scope.invertMarket = function() {
         var temp = $scope.newOrder.identiferSetAlpha;
@@ -1985,7 +1977,7 @@ angular.module( 'conexus.nav', [
         //TODO: PROJECT AND MEMBER .. 
         //TOOD: SEARCH QUERY .. 
         UserModel.getSome({search:query, limit:1000, skip:0, sort:'createdAt DESC'}).then(function(userModels){
-            console.log(userModels);
+            console.log('USERS: LOAD ADDRESS', userModels);
             userModels.map(function(obj){
                 obj.text = obj.username;
                 return obj;
@@ -2024,10 +2016,10 @@ angular.module( 'conexus.nav', [
         //];
 
         $scope.balance = $rootScope.balance;
-        console.log($rootScope.balance, $scope.balance);
+        console.log('LOAD ASSET', $rootScope.balance, $scope.balance);
 
         ItemModel.getSome({user:$rootScope.currentUser.id, limit:10, skip:0, sort:'createdAt DESC'}).then(function(itemModels){
-            console.log(itemModels)
+            console.log('LOAD ASSET ITEMS', itemModels)
             
             //TODO: ALLOW FOR TITLE.. ETC.. USE TOKEN DATA MODEL HERE.. 
             itemModels.map(function(obj){
@@ -2072,7 +2064,7 @@ angular.module( 'conexus.nav', [
                 return obj;
             }); */
 
-            console.log(query)
+            console.log('loadAssociationsOld', query)
             ProjectModel.getSome({search:query, limit:10, skip:0, sort:'createdAt DESC'}).then(function(projectSearchModels){
                 projectSearchModels.map(function(obj){
                     obj.type='PROJECT';
@@ -2087,7 +2079,7 @@ angular.module( 'conexus.nav', [
                     });
                     //searchModels = [].concat.apply([], [userSearchModels, projectSearchModels, taskSearchModels]);
                     searchModels = [].concat.apply([], [projectSearchModels, taskSearchModels])
-                    console.log(searchModels);
+                    console.log('loadAssociationsOld', searchModels);
                     deferred.resolve(searchModels);
                 });
             });
@@ -2098,7 +2090,7 @@ angular.module( 'conexus.nav', [
 
     $scope.loadAssociationsTask = function(query){
         var deferred = $q.defer();
-        console.log(query);
+        console.log('loadAssociationsTask', query);
         TaskModel.getSome({search:query, limit:10, skip:0, sort:'createdAt DESC'}).then(function(taskSearchModels){
             taskSearchModels = taskSearchModels.map(function(obj){
                 obj.type='TASK';
@@ -2127,7 +2119,7 @@ angular.module( 'conexus.nav', [
 
     //TODO! IMPORTANT
     $scope.loadTags = function(query){
-        console.log(query);
+        console.log('loadTags', query);
         var deferred = $q.defer();
         //SearchModel.search(query).then(function(searchModels){
         //UserModel.getSome({search:query, limit:10, skip:0, sort:'createdAt DESC'}).then(function(searchModels){
@@ -2190,8 +2182,8 @@ angular.module( 'conexus.nav', [
             onShowCallback: function (toast) { 
                 var audio = new Audio('audio/ping.mp3');
                 audio.play()
-                .then(function(audio){console.log(audio)})
-                .catch(function(err){console.log(err)})
+                .then(function(audio){console.log('POP', 'dingdong')})
+                .catch(function(err){console.log('POP ERR:', err)})
             }
         });
     };

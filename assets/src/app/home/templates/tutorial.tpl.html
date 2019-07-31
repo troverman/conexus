@@ -174,7 +174,7 @@
                 </div>
             </div>
         </div>
-        
+
         <ul style="padding:0px;" class="member-tabs">
             <li style="float:left;font-size:14px"><a ng-click="selectTab('QUESTIONS')" href="#"><i class="fas fa-question"></i> Questions</a></li>
             <li style="float:left;font-size:14px"><a ng-click="selectTab('BUILDER')" href="#"><i class="fas fa-funnel-dollar"></i> Trending Positions</a></li>
@@ -191,9 +191,9 @@
                     <p style="color:gray;font-size:12px;font-style:italic">Creating a value map furthers a self-empowering mechanism. We create value; though sharing our values and relating them we create value in ourselves, in what we do, and within each other.</p>
 
                     <div class="row">
-                        <div class="col-xs-4"><img src="https://source.unsplash.com/900x900/?value,finance,vote"></div>
-                        <div class="col-xs-4"><img src="https://source.unsplash.com/900x900/?humananity,city,community"></div>
-                        <div class="col-xs-4"><img src="https://source.unsplash.com/900x900/?code,love,joy"></div>
+                        <div class="col-xs-4"><img ng-src="https://source.unsplash.com/900x900/?value,finance,vote"></div>
+                        <div class="col-xs-4"><img ng-src="https://source.unsplash.com/900x900/?humananity,city,community"></div>
+                        <div class="col-xs-4"><img ng-src="https://source.unsplash.com/900x900/?code,love,joy"></div>
                     </div>
                 </div>
             </div>
@@ -290,7 +290,7 @@
 
                 </div>
 
-                <div class="card">
+                <div class="card" ng-if="newOrder.length > 0" >
 
                     <div style="background:url('https://source.unsplash.com/1600x900/?love,art,geometry');min-height:50px" class="imageContainerSmall">
                         <div style="background:rgba(0,0,0,0.75);height:50px" class="imageContainerSmallDiv">  
@@ -344,7 +344,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button ng-if="newOrder.length > 0" ng-click="orderSetToggle(newOrder)" style="width:100%" class="btn btn-default log-btn">CREATE POSITION</button>
+                        <button ng-click="orderSetToggle(newOrder)" style="width:100%" class="btn btn-default log-btn">CREATE POSITION</button>
                     </div>
                 </div>
             </div>
@@ -358,9 +358,9 @@
                     <p style="color:gray;font-size:12px;font-style:italic">Creating a value map furthers a self-empowering mechanism. We create value; though sharing our values and relating them we create value in ourselves, in what we do, and within each other.</p>
 
                     <div class="row">
-                        <div class="col-xs-4"><img src="https://source.unsplash.com/900x900/?value,finance,vote"></div>
-                        <div class="col-xs-4"><img src="https://source.unsplash.com/900x900/?humananity,city,community"></div>
-                        <div class="col-xs-4"><img src="https://source.unsplash.com/900x900/?code,love,joy"></div>
+                        <div class="col-xs-4"><img ng-src="https://source.unsplash.com/900x900/?value,finance,vote"></div>
+                        <div class="col-xs-4"><img ng-src="https://source.unsplash.com/900x900/?humananity,city,community"></div>
+                        <div class="col-xs-4"><img ng-src="https://source.unsplash.com/900x900/?code,love,joy"></div>
                     </div>
                 </div>
             </div>
@@ -421,9 +421,9 @@
                     <p style="color:gray;font-size:12px;font-style:italic">These Discrete Market positions codify your value map and create relation in value; a self-empowering mechanism.</p>
 
                     <div class="row">
-                        <div class="col-xs-4"><img src="https://source.unsplash.com/900x900/?value,finance,vote"></div>
-                        <div class="col-xs-4"><img src="https://source.unsplash.com/900x900/?humananity,city,community"></div>
-                        <div class="col-xs-4"><img src="https://source.unsplash.com/900x900/?code,love,joy"></div>
+                        <div class="col-xs-4"><img ng-src="https://source.unsplash.com/900x900/?value,finance,vote"></div>
+                        <div class="col-xs-4"><img ng-src="https://source.unsplash.com/900x900/?humananity,city,community"></div>
+                        <div class="col-xs-4"><img ng-src="https://source.unsplash.com/900x900/?code,love,joy"></div>
                     </div>
                 </div>
             </div>
@@ -778,7 +778,7 @@
 
                 </div>
 
-                <div class="card">
+                <div class="card" ng-if="newOrder.length > 0" >
                     <div style="background:url('https://source.unsplash.com/1600x900/?love,art,geometry');min-height:50px" class="imageContainerSmall">
                         <div style="background:rgba(0,0,0,0.75);height:50px" class="imageContainerSmallDiv">  
                             <div style="margin-top: auto;margin-bottom: auto;padding:15px;">
@@ -817,7 +817,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button ng-if="newOrder.length > 0" ng-click="orderSetToggle(newOrder)" style="width:100%" class="btn btn-default log-btn">CREATE POSITION</button>
+                        <button ng-click="orderSetToggle(newOrder)" style="width:100%" class="btn btn-default log-btn">CREATE POSITION</button>
                     </div>
                 </div>
             </div>

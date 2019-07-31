@@ -1,10 +1,11 @@
 /**
- * TimeController
+ * TimeController | TIME PROTOCOL
  */
 var Q = require('q');
 
 module.exports = {
 
+	//STANDARDIZE GET
 	getSome: function(req, res) {
 
 		//TODO: COMPLEX QUERIES..
@@ -123,7 +124,8 @@ module.exports = {
 
 
 		//TIME CENTRIC
-		function createValidation(validationModel, userModel){
+		//TODO: REDUCE TO ONE OBJ PARAM
+		function createValidation(model, validationModel){
 
 			//TODO: CHARTER / CONNETION
 			//UNIFY STRUCT
@@ -131,10 +133,10 @@ module.exports = {
 			//(TIME <--> TASK) <~~> PROJ . . .association chains
 
 			var newValidation = {
-				content:'TIME '+ time.id + ' VALIDATION',
+				content:'TIME '+ model.id + ' VALIDATION',
 				reputation: {},
 				associatedModels: [
-					{type:'TIME', id:time.id},
+					{type:'TIME', id:model.id},
 					validationModel.associatedModels[0]
 				],
 
@@ -146,8 +148,8 @@ module.exports = {
 				validation:{},
 
 				//UNIFY AND ALLOW FOR PROJECT TO CREATE
-				user: userModel[0].id,
-				creator: userModel[0].id,
+				user: model.user.id,
+				creator: model.user.id,
 
 				//APPS - DATA
 				reactions: {plus:0,minus:0},
@@ -158,7 +160,7 @@ module.exports = {
 			//UNIFY .validation and .context
 			for (y in Object.keys(validationModel.validation)){
 				var context = Object.keys(model.validationModel.validation)[y];
-				model.validationModel.reputation[context] = userModel[0].reputation[context] || 0;
+				model.validationModel.reputation[context] = model.user.reputation[context] || 0;
 			}
 
 			Validation.create(newValidation).then(function(newValidationModel){
@@ -257,7 +259,6 @@ module.exports = {
 
 		};
 
-
 		//PROJECTMEMBER TO PROJECT-MEMBER
 		//REQUEST TO VALIDATE NOTIFICATION
 		//CREATE NOTIFICATION
@@ -276,6 +277,100 @@ module.exports = {
 			//});
 		};
 
+		function mintTokens(model){
+
+			//GET PROTOCOL????????
+			//STATIC CODE
+
+			var timeProtocolTokens = getProtocolTokens(model);
+
+			for (x in timeProtocolTokens){
+
+				var tokenString = timeProtocolTokens[x];
+
+				Token.find({string:tokenString}).then(function(tokenModels){
+
+					if (tokenModels.length == 0){
+
+						var newTokenModel = {
+							string:tokenString,
+							protocols:['CRE8','TIME'],
+							information:{
+								inCirculation:model.amount,
+								markets:0
+							},
+							logic:{
+								transferrable:true, 
+								mint:'CREATE TIME'
+							}
+						};
+
+						Token.create(newTokenModel).then(function(){console.log('TOKEN CREATED');});
+
+						model.user.balance[tokenString] = parseFloat(model.amount);
+						User.update({id:model.user.id}, {balance:model.user.balance}).then(function(user){});
+
+					}
+
+					else{
+
+						tokenModels[0].information.inCirculation = parseInt(tokenModels[0].information.inCirculation) + parseFloat(model.amount); 
+
+						Token.update({id:tokenModels[0].id}, {information:tokenModels[0].information}).then(function(){console.log('TOKEN UPDATED')});
+
+						if (model.user.balance[tokenString]){model.user.balance[tokenString] = parseInt(model.user.balance[tokenString]) + parseFloat(model.amount);}
+						else{model.user.balance[tokenString] = parseFloat(model.amount);}
+
+						//DEPRECIATE REPUTATION
+
+						User.update({id:model.user.id}, {balance:model.user.balance}).then(function(user){});
+
+					}
+
+				});
+
+			}
+
+			//UPDATE BALANCE AND REP ETC
+			//UPDATE TOTAL WORK
+			//ALWAYS UPDATE BALANCE MAPPING
+			model.user.totalWork = parseInt(model.user.totalWork) + parseInt(model.amount);
+			User.update({id:model.user.id}, {totalWork:model.user.totalWork}).then(function(user){});
+
+		};
+
+
+		//HMM
+		//TODO: SUPERSET REP
+
+		//FACTOR TO RETURN TOKEN MODEL 
+
+		function getProtocolTokens(model){
+
+
+			//TODO VALIDATION..
+			//TODO: (LONG FORM) ASSOCIATION
+
+			//CHECK CONNECTION .. IE PROJECT TOKS
+
+			//DEPRECIATE TAGS
+			//SHOULD BE DB.. AAND OR LOGIC.. AND OR CODE
+			//ENCODE MODEL
+			var timeProtocolTokens = ['CRE8', 'CRE8+TIME', 'CRE8+TIME+'+model.id];
+
+			if (model.tags){
+				for (x in model.tags.split(',')){
+
+					timeProtocolTokens.push(model.tags.split(',')[x].toUpperCase());
+					timeProtocolTokens.push('CRE8+TIME+'+model.tags.split(',')[x].toUpperCase());
+					
+				}
+			}
+
+			return timeProtocolTokens;
+
+		};
+
 
 		//TODO: SECURITY - PERMISSIONS.. AUTH
 		var model = {
@@ -292,60 +387,56 @@ module.exports = {
 
 			//UNIFY
 			user: req.param('user'),
-			creator: req.param('creator'),
+			creator: req.param('user'),
 			
 			//DEPRECIATE - IS COMPUTED 
 			tags: req.param('tags'),
+			model: 'TIME',
+
 
 			//TODO: APP - DATA
 			reactions: {plus:0,minus:0},
 			attention:{general:0}
 		};
 
-		console.log('CREATE TIME', model)
+		//TODO: BETTER SOON - && SECURITY
+		User.find({id:model.user}).then(function(userModel){
 
-		Time.create(model)
-		.exec(function(err, time) {
-			if (err) {return console.log(err);}
-			else {
+			console.log('CREATE TIME', model)
 
-				Time.publishCreate(time);
-				res.json(time);
+			Time.create(model)
+			.exec(function(err, time) {
+				if (err) {return console.log(err);}
+				else {
 
-				User.find({id:model.user}).then(function(userModel){
-					
-					//UPDATE TOTAL WORK
-					//ALWAYS UPDATE BALANCE MAPPING
-					userModel[0].totalWork = parseInt(userModel[0].totalWork) + parseInt(model.amount);
-					User.update({id:model.user}, {totalWork:userModel[0].totalWork}).then(function(user){});
-
-					//HMM
-					//JSON.PARSE?
-					var validationModels = req.param('associatedModels');
-
-					for (x in validationModels){
-						createValidation(validationModels[x], userModel);
-					}
-
-					console.log(model.validationModels);
-
-					for (x in time.associatedModels){
-						if (time.associatedModels[x].type == 'PROJECT'){createNotification(timeModel, userModel)}
-					}
-
-				});
-
-			}
-		});
-	},
-
-	update: function(req, res) {
-		var id = req.param('id');
-		//var model = {};
-		//Time.update({id: id}, model).exec(function afterwards(err, updated){
-		//  if (err) {return;}
-		//});
-	},
+					time.user = userModel[0];
 	
+					//JSON.PARSE?
+					var validationModels = req.param('associatedValidations');
+
+					//CREATE VALIDATIONS
+					for (x in validationModels){createValidation(time, validationModels[x]);}
+
+					//CREATE NOTIFICATIONS
+					for (x in time.associatedModels){
+						if (time.associatedModels[x].type == 'PROJECT'){createNotification(time)}
+					}
+
+
+					Time.publishCreate(time);
+
+					//MINT TOKENS
+					mintTokens(time);
+
+					res.json(time);
+
+				}
+
+			});
+
+		});
+
+	}
+
 };
 

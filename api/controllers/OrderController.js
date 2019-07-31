@@ -371,6 +371,7 @@ module.exports = {
 				Order.publishCreate(order);
 
 				//OFC THIS IS BETA
+				//DO ORDER CREATE PROTOCOL
 				for (x in Object.keys(order.setAlpha)){
 					Token.find({string:Object.keys(order.setAlpha)[x]}).then(function(tokenModels){
 						if (tokenModels.length == 0){
