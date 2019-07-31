@@ -12,7 +12,7 @@
                 <div style="margin-top: auto;margin-bottom: auto;">
                     <div style="padding:15px">
                         <h1 style="text-align:left;font-size:30px" class="container">
-                            <img style="height:50px;width:50px" src="http://identicon-1132.appspot.com/{{token.string.split('+').join('').split(',').join('') || stateParams.id.split('+').join('').split(',').join('')}}"/>
+                            <img style="height:50px;width:50px" src="http://identicon-1132.appspot.com/{{token.string.split('+').join('').split(',').join('').split(' ').join('') || stateParams.id.split('+').join('').split(',').join('')}}"/>
                             {{token.string ||  stateParams.id}}
                         </h1>
                     </div>

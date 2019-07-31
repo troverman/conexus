@@ -588,7 +588,6 @@ angular.module( 'conexus.nav', [
 
     $rootScope.orderToggle = function(identiferSetAlpha, identiferSetBeta){
 
-
         $scope.closeAllNav();
         if($rootScope.currentUser){
             $scope.newOrder = {};
@@ -606,6 +605,19 @@ angular.module( 'conexus.nav', [
 
 
         else{$mdSidenav('login').toggle();}
+    };
+
+    $rootScope.orderSetToggle = function(orderSet){
+        
+        $scope.closeAllNav();
+        if($rootScope.currentUser){
+
+            console.log(orderSet)
+
+        }
+
+        else{$mdSidenav('login').toggle();}
+
     };
 
     $rootScope.projectToggle = function(){

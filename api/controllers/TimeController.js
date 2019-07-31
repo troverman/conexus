@@ -121,24 +121,185 @@ module.exports = {
 
 	create: function (req, res) {
 
-		//TODO: SECURITY
-		//PERMISSIONS.. AUTH
 
+		//TIME CENTRIC
+		function createValidation(validationModel, userModel){
+
+			//TODO: CHARTER / CONNETION
+			//UNIFY STRUCT
+			//IS THIS HYPERGRAPH (NO)
+			//(TIME <--> TASK) <~~> PROJ . . .association chains
+
+			var newValidation = {
+				content:'TIME '+ time.id + ' VALIDATION',
+				reputation: {},
+				associatedModels: [
+					{type:'TIME', id:time.id},
+					validationModel.associatedModels[0]
+				],
+
+				type:'HUMAN',
+				parameters:{charter:'STANDARD MULTIPLICATIVE'},
+
+				//UNIFT CONTEXT AND VALIDATION
+				context:{},
+				validation:{},
+
+				//UNIFY AND ALLOW FOR PROJECT TO CREATE
+				user: userModel[0].id,
+				creator: userModel[0].id,
+
+				//APPS - DATA
+				reactions: {plus:0,minus:0},
+				attention:{general:0}
+
+			};
+
+			//UNIFY .validation and .context
+			for (y in Object.keys(validationModel.validation)){
+				var context = Object.keys(model.validationModel.validation)[y];
+				model.validationModel.reputation[context] = userModel[0].reputation[context] || 0;
+			}
+
+			Validation.create(newValidation).then(function(newValidationModel){
+				
+				console.log('CREATE VALIDATION', newValidationModel);
+
+				//COMPUTE ASSOCIATION HERE
+				var newAssociationModel = {}; 
+
+				//FIND ALL VALIDATIONS FOR SPECIFIC ASSOCIATED MODELS
+				Validation.native(function(err, validation) {
+
+					console.log(validationModel);
+
+					validation.find({
+						$and : [
+							{"associatedModels.id": {$in :[newValidationModel.associatedModels[0].id]}},
+							{"associatedModels.id": {$in :[newValidationModel.associatedModels[1].id]}},
+						]
+					})
+					.limit(1000)
+					.skip(0)
+					.sort({'createdAt':-1})
+					.toArray(function (err, validationModels) {
+						
+						Association.native(function(err, association) {
+							association.find({
+								$and : [
+									{"associatedModels.id": {$in :[validationModels[0].associatedModels[0].id]}},
+									{"associatedModels.id": {$in :[validationModels[0].associatedModels[1].id]}},
+								]
+							})
+							.limit(1000)
+							.skip(0)
+							.sort({'createdAt':-1})
+							.toArray(function (err, associationModels) {
+
+								if (associationModels.length == 0){
+
+									var newAssociationModel = {
+
+										associatedModels: validationModels[0].associatedModels,
+										type: validationModels[0].type,
+										charterParams: validationModels[0].charterParams,
+
+										creator: validationModels[0].creator,
+										user: validationModels[0].user,
+
+										reactions: validationModels[0].reactions,
+
+									};
+
+									//CHARTER - CONNECTION HERE
+									for (x in validationModels){newAssociationModel.context = validationModels[x].validation;}
+
+									Association.create(newAssociationModel).then(function(association){
+										console.log('CREATED ASSOCIATION', association);
+										Association.publishCreate(association);
+									});
+
+								}
+
+								else{
+
+									var newAssociationModel = {
+
+										associatedModels: validationModels[0].associatedModels,
+										type: validationModels[0].type,
+										charterParams: validationModels[0].charterParams,
+
+										creator: validationModels[0].creator,
+										user: validationModels[0].user,
+
+										reactions: validationModels[0].reactions,
+									};
+
+									//CHARTER - CONNECTION HERE
+									for (x in validationModels){newAssociationModel.context = validationModels[x].validation;}
+
+									Association.update({id:associationModels[0]._id, newAssociationModel}).then(function(association){
+										console.log('UPDATED ASSOCIATION', association);
+										Association.publishCreate(association);
+									});
+
+								}
+
+							});
+
+						});
+						
+					});
+
+				});
+				
+			});
+
+		};
+
+
+		//PROJECTMEMBER TO PROJECT-MEMBER
+		//REQUEST TO VALIDATE NOTIFICATION
+		//CREATE NOTIFICATION
+		function createNotification(model){
+			//ProjectMember.find({project:time.associatedModels.address}).then(function(projectMembers){
+				//for (x in projectMembers){
+					//var notificationModel = {
+					//	user: projectMembers[x],
+					//	type: 'Request to Validate',
+					//	content:'New Time, '+userModel.username +' is requesting validation for '+time,
+					//};
+					//Notification.create(notificationModel).then(function(notification){
+					//	Notification.publishCreate(follower[0]);
+					//});
+				//}
+			//});
+		};
+
+
+		//TODO: SECURITY - PERMISSIONS.. AUTH
 		var model = {
 
 			amount: req.param('amount'),
-			user: req.param('user'),
-			creator: req.param('creator'),
+
 			content: req.param('content'),
+
 			stream: req.param('stream'),
 			source: req.param('source'), 
 			startTime: req.param('startTime'),
+
 			associatedModels: req.param('associatedModels'),
-			validationModels: req.param('validationModels'),
+
+			//UNIFY
+			user: req.param('user'),
+			creator: req.param('creator'),
+			
+			//DEPRECIATE - IS COMPUTED 
 			tags: req.param('tags'),
 
-			//TODO: BETTER
+			//TODO: APP - DATA
 			reactions: {plus:0,minus:0},
+			attention:{general:0}
 		};
 
 		console.log('CREATE TIME', model)
@@ -154,187 +315,22 @@ module.exports = {
 				User.find({id:model.user}).then(function(userModel){
 					
 					//UPDATE TOTAL WORK
+					//ALWAYS UPDATE BALANCE MAPPING
 					userModel[0].totalWork = parseInt(userModel[0].totalWork) + parseInt(model.amount);
 					User.update({id:model.user}, {totalWork:userModel[0].totalWork}).then(function(user){});
-					
-					for (x in model.validationModels){
 
-						model.validationModels[x].content = 'TIME '+ time.id + ' VALIDATION';
+					//HMM
+					//JSON.PARSE?
+					var validationModels = req.param('associatedModels');
 
-						//BASED ON PROJECT.. LOOK UP CHARTER.. AND TYPE OF REP CONTEXT INTERACTION
-						//LOOK UP FOR TOKEN STRINGS.. LONG FORM
-						//BINARY MODELS VS ASSOCIATED MODELS? --> META VALIDATION MODE
-						//ASSOCIATION BETWEEEN ASSOCIATION AND MODEL
-						//(TIME <--> TASK) <~~> PROJ . . .association chains
-
-						//SELF VALIDATION (TIME <--> TIME)
-						//for (x in time.tags.split(',')){
-						//	console.log('self dimension', time.tags.split(',')[x]);
-						//}
-
-						model.validationModels[x].reputation = {};
-						model.validationModels[x].associatedModels.push({type:'TIME', address:time.id});
-
-						// = [
-						//	{type:'TIME', address:time.id},
-							//{type:'TASK', address:time.id},
-							//{type:'PROJECT', address:time.id},
-						//];
-
-						model.validationModels[x].type = 'HUMAN'//'MULTIPLICATIVE';
-						model.validationModels[x].charterParams = 'STANDARD MULTIPLICATIVE';
-
-						model.validationModels[x].user = userModel[0].id;
-						model.validationModels[x].creator = userModel[0].id;
-						model.validationModels[x].reactions = {plus:0,minus:0};
-
-						for (y in Object.keys(model.validationModels[x].validation)){
-							var context = Object.keys(model.validationModels[x].validation)[y];
-							model.validationModels[x].reputation[context] = userModel[0].reputation[context] || 0;
-						}
-
-						Validation.create(model.validationModels[x]).then(function(validationModel){
-							
-							console.log('CREATED IMPLICIT VALIDATION', validationModel);
-
-							//COMPUTE ASSOCIATION HERE
-							var newAssociationModel = {}; 
-
-							//FIND ALL VALIDATIONS FOR SPECIFIC ASSOCIATED MODELS
-							Validation.native(function(err, validation) {
-
-								//{ type: 'TASK', address: '5ba1cf2f3196c813001703d9' },
-     							//{ type: 'TIME', address: '5cd04c968a9ee163d906048f' },
-
-     							//META ASSOCIATION IS COMPUTED THOUGH VALIDATION WALK.. 
-     							//IE ASSOCIATION <--> VALIDATION
-     							//CREATE ASSOCIATION FOR VALIDATION
-     							//IE ASSOCIAED MODLES ARE an ASSOCIATION ID
-     								//I THINK ILL GET TO THIS ON NEXT ITERATION
-     										//CATEGORY THEORY 
-     									//Association.find({})
-     									//RECURSIVE ASSOCIATIONS
-
-     							console.log(validationModel);
-
-
-     							//DEPRECIATE ASSOCIATED MODELS FOR ASSOCIATIONS :)
-								//WE ARE LEARNING PATIENCE AND THE ABILITY TO NOT BE OVERWHELMED
-
-								validation.find({
-									$and : [
-										{"associatedModels.address": {$in :[validationModel.associatedModels[0].address]}},
-										{"associatedModels.address": {$in :[validationModel.associatedModels[1].address]}},
-									]
-								})
-								.limit(1000)
-								.skip(0)
-								.sort({'createdAt':-1})
-								.toArray(function (err, validationModels) {
-
-									console.log('in it', validationModels.length);
-									
-									Association.native(function(err, association) {
-
-										association.find({
-											$and : [
-												{"associatedModels.address": {$in :[validationModels[0].associatedModels[0].address]}},
-												{"associatedModels.address": {$in :[validationModels[0].associatedModels[1].address]}},
-											]
-										})
-										.limit(1000)
-										.skip(0)
-										.sort({'createdAt':-1})
-										.toArray(function (err, associationModels) {
-
-											if (associationModels.length == 0){
-
-												//COMPUTE ASSOCIATION MODEL...
-												//NEEDS TO BE RECURSIVE . LOL THIS WONT BE YET. :) 
-												//THERE IS !!! NO PROBLEM WITH REWRITING !!
-
-												//COMPUTE 
-												var newAssociationModel = {
-													associatedModels: validationModels[0].associatedModels,
-													type: validationModels[0].type,
-													charterParams: validationModels[0].charterParams,
-													creator: validationModels[0].creator,
-
-													reactions: validationModels[0].reactions,
-													user: validationModels[0].user,
-												};
-
-												for (x in validationModels){
-													newAssociationModel.context = validationModels[x].validation;
-													//DO AVERAGE --> AND RECURSIVE .. LET's CATEGORY THEORY THIS BITCH 
-												}
-
-												Association.create(newAssociationModel).then(function(association){
-													console.log('CREATED ASSOCIATION', association);
-													Association.publishCreate(association);
-
-													//UPDATE ASSOCIATE MODELS WITH THE ASSOCIATION ID !! 
-
-												});
-
-											}
-
-											else{
-
-												var newAssociationModel = {
-													associatedModels: validationModels[0].associatedModels,
-													type: validationModels[0].type,
-													charterParams: validationModels[0].charterParams,
-													creator: validationModels[0].creator,
-
-													reactions: validationModels[0].reactions,
-													user: validationModels[0].user,
-												};
-
-												//COMPUTE 
-												for (x in validationModels){
-													newAssociationModel.context = validationModels[x].validation;
-												}
-
-												Association.update({id:associationModels[0]._id, newAssociationModel}).then(function(association){
-													console.log('UPDATED ASSOCIATION', association);
-													Association.publishCreate(association);
-												});
-
-											}
-
-										});
-
-									});
-									
-								});
-
-							});
-							
-						});
-
+					for (x in validationModels){
+						createValidation(validationModels[x], userModel);
 					}
 
 					console.log(model.validationModels);
 
-					//REQUEST TO VALIDATE NOTIFICATION
-					//CREATE NOTIFICATION
-					//WHICH PROJECTS FOR MULTI ASSOCIATION
 					for (x in time.associatedModels){
-						if (time.associatedModels[x].type == 'PROJECT'){
-							//ProjectMember.find({project:time.associatedModels.address}).then(function(projectMembers){
-								//for (x in projectMembers){
-									//var notificationModel = {
-									//	user: projectMembers[x],
-									//	type: 'Request to Validate',
-									//	content:'New Time, '+userModel.username +' is requesting validation for '+time,
-									//};
-									//Notification.create(notificationModel).then(function(notification){
-									//	Notification.publishCreate(follower[0]);
-									//});
-								//}
-							//});
-						}
+						if (time.associatedModels[x].type == 'PROJECT'){createNotification(timeModel, userModel)}
 					}
 
 				});

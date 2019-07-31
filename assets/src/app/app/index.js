@@ -27,6 +27,9 @@ angular.module( 'conexus.app', [
         $scope.app = {title:$stateParams.id, description:'CRE8.XYZ CORE PROTOCOLS; ALL MODELS', manifold:'CRE8+', tags:'CRE8,CORE'};
         $scope.app.tags = $scope.app.tags.split(',');
     }
+
+    $scope.app.model = 'APP';
+
    
     titleService.setTitle($scope.app.title + ' | App | CRE8.XYZ');
 

@@ -346,22 +346,81 @@ module.exports = {
 
 	create: function (req, res) {
 		var model = {
+
 			setAlpha: req.param('setAlpha'),
 			setBeta: req.param('setBeta'),
+			
 			status: req.param('status'),
 			type: req.param('type'),
+
 			creator: req.param('user'),
 			user: req.param('user'),
+
+			//DATA - APPS
 			reactions:{plus:0,minus:0},
+			attention:{general:0}
+
 		};
 		console.log('CREATE ORDER', model);
 		Order.create(model)
 		.exec(function(err, order) {
 			if (err) {return console.log(err);}
 			else {
+
 				console.log(order);
 				Order.publishCreate(order);
+
+				//OFC THIS IS BETA
+				for (x in Object.keys(order.setAlpha)){
+					Token.find({string:Object.keys(order.setAlpha)[x]}).then(function(tokenModels){
+						if (tokenModels.length == 0){
+							var newTokenModel = {
+								string:Object.keys(order.setAlpha)[x],
+								information:{
+									markets:1,
+									inCirculation:1
+								},
+								protocols:['CREATE'],
+								logic:{
+									transferrable:true, 
+									mint:''
+								}
+							};
+							Token.create(newTokenModel).then(function(){console.log('TOKEN CREATED');});
+						}
+						else{
+							tokenModels[0].information.markets++; 
+							Token.update({id:tokenModels[0].id}, {information:tokenModels[0].information}).then(function(){console.log('TOKEN UPDATED')});
+						}
+					});
+				}
+
+				for (x in Object.keys(order.setBeta)){
+					Token.find({string:Object.keys(order.setBeta)[x]}).then(function(tokenModels){
+						if (tokenModels.length == 0){
+							var newTokenModel = {
+								string:Object.keys(order.setBeta)[x],
+								information:{
+									markets:1,
+									inCirculation:1
+								},
+								protocols:['CREATE'],
+								logic:{
+									transferrable:true, 
+									mint:''
+								}
+							};
+							Token.create(newTokenModel).then(function(){console.log('TOKEN CREATED');});
+						}
+						else{
+							tokenModels[0].information.markets++; 
+							Token.update({id:tokenModels[0].id}, {information:tokenModels[0].information}).then(function(){console.log('TOKEN UPDATED')});
+						}
+					});
+				}
+
 				res.json(order);
+
 			}
 		});
 	},

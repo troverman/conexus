@@ -22,7 +22,10 @@ module.exports = {
         //REACTIONS \\ info
         reactions: {type: 'json'},
         //TODO:DEPRECIATE
+        
         user: {model: 'user'},
+        creator: {type: 'string'},
+
     },
 
 };

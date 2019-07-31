@@ -174,6 +174,7 @@
                 </div>
             </div>
         </div>
+        
         <ul style="padding:0px;" class="member-tabs">
             <li style="float:left;font-size:14px"><a ng-click="selectTab('QUESTIONS')" href="#"><i class="fas fa-question"></i> Questions</a></li>
             <li style="float:left;font-size:14px"><a ng-click="selectTab('BUILDER')" href="#"><i class="fas fa-funnel-dollar"></i> Trending Positions</a></li>
@@ -343,7 +344,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button ng-if="newOrder.length > 0" ng-click="orderToggle()" style="width:100%" class="btn btn-default log-btn">CREATE POSITION</button>
+                        <button ng-if="newOrder.length > 0" ng-click="orderSetToggle(newOrder)" style="width:100%" class="btn btn-default log-btn">CREATE POSITION</button>
                     </div>
                 </div>
             </div>
@@ -411,7 +412,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
         <div ng-if="selectedTab =='ORDERS'" class="">
 
@@ -458,6 +458,7 @@
                 </div>
             </div>
         </div>
+
     </div>
  
     <div ng-if="pageNumber == 2">
@@ -816,7 +817,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button ng-if="newOrder.length > 0" ng-click="orderToggle()" style="width:100%" class="btn btn-default log-btn">CREATE POSITION</button>
+                        <button ng-if="newOrder.length > 0" ng-click="orderSetToggle(newOrder)" style="width:100%" class="btn btn-default log-btn">CREATE POSITION</button>
                     </div>
                 </div>
             </div>

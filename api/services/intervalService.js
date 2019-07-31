@@ -133,11 +133,12 @@ module.exports.intervalService = function(){
 	//DATA 
 	//MASSAGE TIME :)
 	//utilService.tagsToAssociation('PROJECT', 2)
-	utilService.tagsToAssociation('TRANSACTION', 2)
+	//utilService.tagsToAssociation('TRANSACTION', 2)
 
 
 
-
+	//remove null
+	//remove depreciated data.. :)
 
 
 	

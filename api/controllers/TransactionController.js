@@ -343,7 +343,11 @@ module.exports = {
 						{type:'TRANSACTION',id:model.id},
 						{type:'TRANSACTION',id:model.id}
 					],
+
+					//TODO: UPDATE .validation to .context
 					validation:model.validationModels[x].validation,
+					context:model.validationModels[x].validation,
+
 					user: model.user,
 					creator:model.user,
 					type:'HUMAN',
@@ -390,22 +394,30 @@ module.exports = {
 		};
 
 		var model = {
+
 			amountSet: req.param('amountSet'),
+
 			to: req.param('to'),
 			from: req.param('from'),
+
+			//HM -- ASSOCIATED?
 			content: req.param('content'),
-			user: req.param('user'),
+
+			//ITEMS OR?? HM --> COULD CODIFY FROM TO ETC IN 
 			associatedModels: req.param('associatedModels'),
 
-			//SHOULDNT STORE.
-			validationModels: req.param('validationModels'),
+			//UNIFY
+			user: req.param('user'),
+			creator: req.param('user'),
 			
 			//DEPRECIATE
 			tags: req.param('context'),
 
+			//APPS - DATA
 			//PATCH.. BETTER MAPPINGS
 			reactions:{plus:0,minus:0},
 			attention:{general:0},
+
 		};
 
 		console.log('CREATE TRANSACTION', model);
@@ -429,6 +441,7 @@ module.exports = {
 					});
 				}
 
+				//HMM
 				transactionModel.validationModels = req.param('validationModels');
 
 				createValidation(transactionModel);

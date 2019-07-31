@@ -237,8 +237,6 @@ module.exports = {
 	//self charters.. ie task nxt
 	tagsToAssociation: function(dataModel, limit){
 
-		//traa=nsaction!
-
 		var promise = ''
 
 		if (dataModel = 'CONTENT'){promise = Content.find({}).limit(limit).skip(0).sort('createdAt DESC')}

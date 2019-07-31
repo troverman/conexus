@@ -2055,9 +2055,7 @@ angular.module( 'conexus.member', [
         $scope.populateMarkets();
     },true);
 
-    $scope.addMarket = function(type){
-        //basemarket; market
-    };
+    $scope.addMarket = function(type){};
 
     $scope.createReaction = function(item, type){
         if($rootScope.currentUser){
@@ -2073,13 +2071,12 @@ angular.module( 'conexus.member', [
     };
 
     $scope.reply = function(activity){
-        if ($rootScope.currentUser){
-            //var index = $scope.orders.map(function(obj){return obj.id}).indexOf(item.id);
-            //$scope.orders[index].showReply = !$scope.orders[index].showReply
-            $mdSidenav('content').toggle();
-        }
+        if ($rootScope.currentUser){$mdSidenav('content').toggle();}
         else{$mdSidenav('login').toggle()}
     };
+
+    $scope.selectedTab = 'POSITIONS';
+    $scope.selectTab = function(model){$scope.selectedTab = model};
 
 }])
 

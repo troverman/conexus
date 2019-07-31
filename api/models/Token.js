@@ -24,6 +24,9 @@ module.exports = {
 
 		//VOLUME, DESCRIPTION
 		information:{type:'json'},
+
+		//BETA!!!
+		//connections:{type:'string'},
 		
     },
 

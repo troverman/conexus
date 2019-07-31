@@ -93,6 +93,8 @@ angular.module( 'conexus.apps', [
 
     ];
 
+    $scope.apps.map(function(obj){obj.model = 'APP'; return obj});
+
     //TODO: BETTER | TAG STORAGE
     $scope.loadTags = function(){
         $scope.tags = $scope.apps.map(function(obj){
