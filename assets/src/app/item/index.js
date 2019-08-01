@@ -40,7 +40,7 @@ angular.module( 'conexus.item', [
 
     //VERBS FOR THE ITEM ARE?? 
     $scope.actions = actions;
-    $scope.orders = orders.map(function(obj){
+    $scope.orders = orders.data.map(function(obj){
         var elementsObj = {};
         for (y in Object.keys(obj.setAlpha)){
             var modelNode = {

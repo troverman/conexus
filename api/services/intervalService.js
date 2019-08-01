@@ -88,17 +88,17 @@ module.exports = {
 		User.find().then(function(userModels){
 			for (x in userModels){
 				if(!userModels[x].balance){userModels[x].balance = {}}
-				if(!userModels[x].balance['UNIVERSALTOKEN']){userModels[x].balance['UNIVERSALTOKEN'] = 0}
-				userModels[x].balance['UNIVERSALTOKEN'] = userModels[x].balance['UNIVERSALTOKEN'] + 1;
+				if(!userModels[x].balance['UNIVERSAL']){userModels[x].balance['UNIVERSAL'] = 0}
+				userModels[x].balance['UNIVERSAL'] = userModels[x].balance['UNIVERSAL'] + 1;
 				User.update({id:userModels[x].id}, {balance: userModels[x].balance}).then(function(userModel){
-					console.log('updated', userModel[0].username, userModel[0].balance['UNIVERSALTOKEN'])
+					console.log('UPDATED', userModel[0].username, userModel[0].balance['UNIVERSAL'])
 				});	
 			}
-			Token.find({string:'UNIVERSALTOKEN'}).then(function(tokenModels){
+			Token.find({string:'UNIVERSAL'}).then(function(tokenModels){
 				if (!tokenModels[0].information.inCirculation){tokenModels[0].information.inCirculation = 0;}
 				tokenModels[0].information.inCirculation = parseInt(tokenModels[0].information.inCirculation) + parseInt(userModels.length);
 				Token.update({id:tokenModels[0].id}, tokenModels[0]).then(function(tokenModel){
-					console.log('updated', tokenModel)
+					console.log('UPDATED', tokenModel)
 				});
 			});
 		});
@@ -114,6 +114,10 @@ module.exports = {
 };
 
 module.exports.intervalService = function(){
+
+
+
+	//TODO!!! REMOVE THE PRE
 
 	//PRE-ALPHA. 
 	//setInterval(intervalService.universalTokenProtocolPreAlpha, 8640000);
