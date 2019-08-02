@@ -4794,7 +4794,6 @@ angular.module("footer/index.tpl.html", []).run(["$templateCache", function($tem
     "            </div>\n" +
     "        	-->\n" +
     "\n" +
-    "        	<div ng-if=\"false\">\n" +
     "			<div style=\"float:right\"><a href=\"/\" ui-sref=\"home\"><img src=\"images/hyper.gif\"></a></div>\n" +
     "\n" +
     "			<a style=\"font-weight:bold;font-size:15px;color:white;font-family:Helvetica Neue,Helvetica,Arial,sans-serif\" href=\"/\" ui-sref=\"home\">CRE8.XYZ</a>\n" +
@@ -4810,7 +4809,6 @@ angular.module("footer/index.tpl.html", []).run(["$templateCache", function($tem
     "			<a href=\"/projects\" ui-sref=\"projects\">Projects</a>\n" +
     "			<a href=\"/tasks\" ui-sref=\"tasks\">Tasks</a>\n" +
     "			<a href=\"/transparency\" ui-sref=\"transparency\">Transparency</a>\n" +
-    "			</div>\n" +
     "\n" +
     "			<!--\n" +
     "			<div>\n" +
@@ -7275,16 +7273,11 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function($tem
     "			<ul style=\"padding:0px;margin-top:0px;margin-bottom:0px;\" class=\"member-tabs\">\n" +
     "	            <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('MARKET', filterSet)\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
     "	            <li><a href=\"#\" ng-click=\"showManifold = !showManifold\"><i class=\"fas fa-infinity\"></i> Manifold Actions</a></li>\n" +
-    "    			<li ng-click=\"expandSort()\" style=\"float:right;font-size:14px\"><a href=\"#\">Sort By Base Volume <i class=\"fa fa-angle-down\"></i></a></li>\n" +
+    "    			<li ng-click=\"sortToggle()\" style=\"float:right;font-size:14px\"><a href=\"#\">Sort By Base Volume <i class=\"fa fa-angle-down\"></i></a></li>\n" +
     "	        </ul>\n" +
     "\n" +
     "		   	<div class=\"card\">\n" +
-    "		        <form ng-submit=\"search()\" style=\"display:flex;flex-direction:row;\">\n" +
-    "		            <tags-input class=\"\" style=\"border:0px;flex-grow:2;\" min-length=\"1\" placeholder=\"Search\" ng-model=\"searchQuery\"></tags-input>\n" +
-    "		            <div ng-click=\"search()\" style=\"border:0px\" class=\"btn btn-default\" style=\"float:right\">\n" +
-    "		                <a href=\"#\" role=\"button\"><h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5></a>\n" +
-    "		            </div>\n" +
-    "		        </form>\n" +
+    "	            <tags-input style=\"border:0px;flex-grow:2;\" placeholder=\"Search\" ng-model=\"searchQuery\"></tags-input>\n" +
     "		    </div>\n" +
     "\n" +
     "	        <div class=\"card\"><button class=\"btn btn-default log-btn\" ng-click=\"orderToggle()\">+ Market Order</button></div>\n" +
@@ -12107,11 +12100,13 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function($te
     "                <div style=\"background:rgba(0,0,0,0.75);\" class=\"imageContainerSmallDiv\">  \n" +
     "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "                        <div style=\"padding:15px\">\n" +
-    "                            <h1 style=\"text-align:left;\"><img style=\"height:50px;width:50px;border-radius:100%\" src=\"{{project.avatarUrl}}\"/>\n" +
+    "                            <h1 style=\"text-align:left;\">\n" +
+    "                                <img style=\"height:50px;width:50px;border-radius:100%\" ng-src=\"{{project.avatarUrl}}\"/>\n" +
     "                                {{project.title}}\n" +
     "                            </h1>\n" +
     "                            <h5 ng-show=\"project.parent\">\n" +
-    "                                <a ng-click=\"$event.stopPropagation();\" style=\"color:white\" href=\"project/{{project.parent.urlTitle}}\" ui-sref=\"project.activity({path:project.parent.urlTitle})\">{{project.parent.title}}</a></h5>\n" +
+    "                                <a ng-click=\"$event.stopPropagation();\" style=\"color:white\" href=\"project/{{project.parent.urlTitle}}\" ui-sref=\"project.activity({path:project.parent.urlTitle})\">{{project.parent.title}}</a>\n" +
+    "                            </h5>\n" +
     "                            <!--\n" +
     "                            <h5 ng-show=\"projectNavigation\"><span ng-show=\"projectNavigation\" style=\"color:white;text-transform:capitalize;\">{{projectNavigation}}</span></h5>\n" +
     "                            -->\n" +

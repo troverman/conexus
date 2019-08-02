@@ -231,16 +231,11 @@
 			<ul style="padding:0px;margin-top:0px;margin-bottom:0px;" class="member-tabs">
 	            <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('MARKET', filterSet)"><i class="fa fa-filter"></i> Filter</a></li>
 	            <li><a href="#" ng-click="showManifold = !showManifold"><i class="fas fa-infinity"></i> Manifold Actions</a></li>
-    			<li ng-click="expandSort()" style="float:right;font-size:14px"><a href="#">Sort By Base Volume <i class="fa fa-angle-down"></i></a></li>
+    			<li ng-click="sortToggle()" style="float:right;font-size:14px"><a href="#">Sort By Base Volume <i class="fa fa-angle-down"></i></a></li>
 	        </ul>
 
 		   	<div class="card">
-		        <form ng-submit="search()" style="display:flex;flex-direction:row;">
-		            <tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search" ng-model="searchQuery"></tags-input>
-		            <div ng-click="search()" style="border:0px" class="btn btn-default" style="float:right">
-		                <a href="#" role="button"><h5 style="color:black;text-align:right" class="noselect">Search <i class="fa fa-search"></i></h5></a>
-		            </div>
-		        </form>
+	            <tags-input style="border:0px;flex-grow:2;" placeholder="Search" ng-model="searchQuery"></tags-input>
 		    </div>
 
 	        <div class="card"><button class="btn btn-default log-btn" ng-click="orderToggle()">+ Market Order</button></div>

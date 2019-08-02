@@ -8,11 +8,13 @@
                 <div style="background:rgba(0,0,0,0.75);" class="imageContainerSmallDiv">  
                     <div style="margin-top: auto;margin-bottom: auto;">
                         <div style="padding:15px">
-                            <h1 style="text-align:left;"><img style="height:50px;width:50px;border-radius:100%" src="{{project.avatarUrl}}"/>
+                            <h1 style="text-align:left;">
+                                <img style="height:50px;width:50px;border-radius:100%" ng-src="{{project.avatarUrl}}"/>
                                 {{project.title}}
                             </h1>
                             <h5 ng-show="project.parent">
-                                <a ng-click="$event.stopPropagation();" style="color:white" href="project/{{project.parent.urlTitle}}" ui-sref="project.activity({path:project.parent.urlTitle})">{{project.parent.title}}</a></h5>
+                                <a ng-click="$event.stopPropagation();" style="color:white" href="project/{{project.parent.urlTitle}}" ui-sref="project.activity({path:project.parent.urlTitle})">{{project.parent.title}}</a>
+                            </h5>
                             <!--
                             <h5 ng-show="projectNavigation"><span ng-show="projectNavigation" style="color:white;text-transform:capitalize;">{{projectNavigation}}</span></h5>
                             -->
