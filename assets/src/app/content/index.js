@@ -36,7 +36,8 @@ angular.module( 'conexus.content', [
     else{titleService.setTitle('Content | CRE8.XYZ')}
 
     $scope.content.tokens = [];
-
+    
+    console.log(content)
 
     //todo.. attention connection... common model.. like reaction
     //attention mapping -> 

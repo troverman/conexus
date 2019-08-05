@@ -1,7 +1,7 @@
 angular.module( 'conexus.nav', [
 ])
 
-.controller( 'NavCtrl', ['$http', '$interval', '$location', '$mdSidenav', '$q', '$rootScope', '$sailsSocket', '$sce', '$scope', '$state', '$window', 'ActionModel', 'AttentionModel', 'ConnectionModel', 'ContentModel', 'cytoData', 'ItemModel', 'NotificationModel', 'OrderModel', 'ProjectModel', 'ReactionModel', 'SearchModel', 'TaskModel', 'TimeModel', 'toaster', 'TransactionModel', 'ValidationModel', 'UserModel', function NavController( $http, $interval, $location, $mdSidenav, $q, $rootScope, $sailsSocket, $sce, $scope, $state, $window, ActionModel, AttentionModel, ConnectionModel, ContentModel, cytoData, ItemModel, NotificationModel, OrderModel, ProjectModel, ReactionModel, SearchModel, TaskModel, TimeModel, toaster, TransactionModel, ValidationModel, UserModel ) {
+.controller( 'NavCtrl', ['$http', '$interval', '$location', '$mdSidenav', '$q', '$rootScope', '$sailsSocket', '$sce', '$scope', '$state', '$window', 'ActionModel', 'AttentionModel', 'AppModel', 'ConnectionModel', 'ContentModel', 'cytoData', 'ItemModel', 'NotificationModel', 'OrderModel', 'ProjectModel', 'ReactionModel', 'SearchModel', 'TaskModel', 'TimeModel', 'toaster', 'TransactionModel', 'ValidationModel', 'UserModel', function NavController( $http, $interval, $location, $mdSidenav, $q, $rootScope, $sailsSocket, $sce, $scope, $state, $window, ActionModel, AttentionModel, AppModel, ConnectionModel, ContentModel, cytoData, ItemModel, NotificationModel, OrderModel, ProjectModel, ReactionModel, SearchModel, TaskModel, TimeModel, toaster, TransactionModel, ValidationModel, UserModel ) {
 
     //TODO: ALL!
     //VALIDATE BUNDLES OF TIME.. IE GRANULAR TIME DATA.. POST REQ EVERY 1 SEC? TO MUCH OR NOT
@@ -310,7 +310,13 @@ angular.module( 'conexus.nav', [
                 user:$rootScope.currentUser.id,
             };
 
-            $scope.newContent.associatedModels.push({text:'SELF', type:'CONTENT', id:'SELF'})
+            $scope.newContent.associatedModels.push({
+                type:'CONTENT',
+                text:'Self',
+                context:{
+                    general:100
+                }
+            });
 
             console.log('CONTENT TOGGLE', $scope.newContent);
 
@@ -561,6 +567,15 @@ angular.module( 'conexus.nav', [
         $scope.closeAllNav();
         if($rootScope.currentUser){
             $scope.newItem = {};
+            $scope.newItem.associatedModels = [
+                {
+                    type:'ITEM',
+                    text:'Self',
+                    context:{
+                        general:100
+                    }
+                }
+            ];
             $mdSidenav('item').toggle();
         }
         else{$mdSidenav('login').toggle();}
@@ -1166,10 +1181,19 @@ angular.module( 'conexus.nav', [
             //UX KEEP CONTEXT THE SAME UNLESS CHECKED
             $scope.newTask.associatedModels = $rootScope.associatedModels;
 
+            $scope.associatedModels.associatedModels.push({
+                type:'CONTENT',
+                text:'Self',
+                context:{
+                    general:100
+                }
+            });
+            
             $scope.newTask.validationModels = [{
                 validation:{general:100},
                 associatedModels:[]
             }];
+
 
             //WATCHER .. TAGS .. ASSOCIATED MODEL.. BUILD validationModels
 
@@ -1495,6 +1519,23 @@ angular.module( 'conexus.nav', [
                 $scope.confirm.model = 'ACTION';
                 $scope.newAction = {};
                 $mdSidenav('action').close();
+                setTimeout(function () {$mdSidenav('confirm').open()}, 500);
+                setTimeout(function () {$mdSidenav('confirm').close()}, 25000);
+                
+            });
+        }
+        else{$mdSidenav('login').toggle()}
+    };
+
+   $scope.createApp = function(item){
+        if ($rootScope.currentUser){
+            AppModel.create($scope.newApp).then(function(model) {
+
+                $scope.confirm = $scope.newAction;
+                $scope.confirm.model = 'APP';
+                $scope.newApp = {};
+                $mdSidenav('app').close();
+
                 setTimeout(function () {$mdSidenav('confirm').open()}, 500);
                 setTimeout(function () {$mdSidenav('confirm').close()}, 25000);
                 

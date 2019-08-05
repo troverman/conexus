@@ -13,6 +13,12 @@
 </div>
 <div class="container">
     <div class="spacing-10"></div>
+
+    <ul style="padding:0px;" class="member-tabs">
+        <li><a ng-click="$event.stopPropagation();selectTab('INFORMATION')">Information</a></li>
+        <li><a ng-click="$event.stopPropagation();selectTab('MANIFOLDS')">Protocols</a></li>
+    </ul>
+
     <div class="row">
         <div class="card" ng-click="$event.stopPropagation();cardDetailToggle(app);">
             <div style="padding:16px;">

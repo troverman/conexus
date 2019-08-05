@@ -287,51 +287,53 @@ module.exports = {
 
 			//ASYNC SCOPING IS THE FIX IT SEEMS
 			for (x in timeProtocolTokens){
-
 				var tokenString = timeProtocolTokens[x];
-
 				console.log(tokenString);
 
-				Token.find({string:tokenString}).then(function(tokenModels){
+				(function(tokenString) {
 
-					if (tokenModels.length == 0){
+					Token.find({string:tokenString}).then(function(tokenModels){
 
-						var newTokenModel = {
-							string:tokenString,
-							protocols:['CRE8','TIME'], 
-							information:{
-								inCirculation:model.amount,
-								markets:0
-							},
-							logic:{
-								transferrable:true, 
-								mint:'CREATE TIME'
-							}
-						};
+						if (tokenModels.length == 0){
 
-						Token.create(newTokenModel).then(function(){console.log('TOKEN CREATED');});
+							var newTokenModel = {
+								string:tokenString,
+								protocols:['CRE8','TIME'], 
+								information:{
+									inCirculation:model.amount,
+									markets:0
+								},
+								logic:{
+									transferrable:true, 
+									mint:'CREATE TIME'
+								}
+							};
 
-						model.user.balance[tokenString] = parseFloat(model.amount);
-						User.update({id:model.user.id}, {balance:model.user.balance}).then(function(user){});
+							Token.create(newTokenModel).then(function(model){console.log('TOKEN CREATED', model);});
 
-					}
+							model.user.balance[tokenString] = parseFloat(model.amount);
+							User.update({id:model.user.id}, {balance:model.user.balance}).then(function(user){});
 
-					else{
+						}
 
-						tokenModels[0].information.inCirculation = parseInt(tokenModels[0].information.inCirculation) + parseFloat(model.amount); 
+						else{
 
-						Token.update({id:tokenModels[0].id}, {information:tokenModels[0].information}).then(function(){console.log('TOKEN UPDATED')});
+							tokenModels[0].information.inCirculation = parseInt(tokenModels[0].information.inCirculation) + parseFloat(model.amount); 
 
-						if (model.user.balance[tokenString]){model.user.balance[tokenString] = parseInt(model.user.balance[tokenString]) + parseFloat(model.amount);}
-						else{model.user.balance[tokenString] = parseFloat(model.amount);}
+							Token.update({id:tokenModels[0].id}, {information:tokenModels[0].information}).then(function(model){console.log('TOKEN UPDATED', model)});
 
-						//DEPRECIATE REPUTATION
+							if (model.user.balance[tokenString]){model.user.balance[tokenString] = parseInt(model.user.balance[tokenString]) + parseFloat(model.amount);}
+							else{model.user.balance[tokenString] = parseFloat(model.amount);}
 
-						User.update({id:model.user.id}, {balance:model.user.balance}).then(function(user){});
+							//DEPRECIATE REPUTATION
 
-					}
+							User.update({id:model.user.id}, {balance:model.user.balance}).then(function(user){});
 
-				});
+						}
+
+					});
+
+				})(tokenString);
 
 			}
 

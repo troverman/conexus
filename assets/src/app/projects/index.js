@@ -78,19 +78,20 @@ angular.module( 'conexus.projects', [
             navigator.geolocation.getCurrentPosition(function (position) {
                 $rootScope.stateIsLoading = false;
 
-                lat = position.coords.latitude; 
-                lng = position.coords.longitude;
-                $rootScope.currentUser.location = {
-                    lat:lat,
-                    lng:lng
-                };
-                
+                $scope.lat = position.coords.latitude; 
+                $scope.lng = position.coords.longitude;
+                if ($rootScope.currentUser){
+                    $rootScope.currentUser.location = {
+                        lat:lat,
+                        lng:lng
+                    };
+                }
                 $scope.map = {
                     center: {latitude: lat, longitude: lng},
                     zoom: 14
                 };
 
-                ProjectModel.getSome({location:[lng,lat], limit:1000, skip:0}).then(function(projects){
+                ProjectModel.getSome({location:[$scope.lng,$scope.lat], limit:1000, skip:0}).then(function(projects){
                     $scope.projects = projects.map(function(obj){
                         obj.model = 'PROJECT';
                         return obj;

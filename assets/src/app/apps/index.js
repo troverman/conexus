@@ -22,8 +22,8 @@ angular.module( 'conexus.apps', [
 
 .controller( 'AppsController', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'AppModel', 'apps', 'ReactionModel', function AppsController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, AppModel, apps, ReactionModel ) {
     
-    //$scope.apps = apps;
 
+    //IS APP PROJ.. YA (CAN BE CUZ PROJ IS APP)
     //APPS AS PROTOCOLS.. 
     $scope.apps = [
 
@@ -93,7 +93,11 @@ angular.module( 'conexus.apps', [
 
     ];
 
+    //$scope.apps = apps;
+
     $scope.apps.map(function(obj){obj.model = 'APP'; return obj});
+
+
 
     //TODO: BETTER | TAG STORAGE
     $scope.loadTags = function(){
