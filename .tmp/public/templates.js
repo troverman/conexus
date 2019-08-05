@@ -4491,8 +4491,8 @@ angular.module("discover/index.tpl.html", []).run(["$templateCache", function($t
     "<div style=\"background:url('https://source.unsplash.com/1600x900/?explore,discover')\" class=\"imageContainerSmall\">\n" +
     "    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "        	<div class=\"container\">\n" +
-    "            	<h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Discover</h1>\n" +
+    "        	<div class=\"container\" style=\"text-align:center\">\n" +
+    "            	<h1 style=\"font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Discover</h1>\n" +
     "            	<h5 ng-if=\"true\">\n" +
     "            		<b><a style=\"color:white\" href=\"/apps\" ui-sref=\"apps\">Apps</a></b>\n" +
     "            		<b><a style=\"color:white\" href=\"/content\" ui-sref=\"contentList\">Content</a></b>\n" +
@@ -4789,27 +4789,42 @@ angular.module("footer/index.tpl.html", []).run(["$templateCache", function($tem
     "		<div class=\"footer-links\" style=\"padding:3px;float:none\">\n" +
     "\n" +
     "			<!--\n" +
-    "			<div style=\"background:url('https://source.unsplash.com/1600x900/?code,pattern,art,forest');height:100vh\" class=\"imageContainerSmall\">\n" +
-    "                <div style=\"background:rgba(0,0,0,0.75);height:100vh\" class=\"imageContainerSmallDiv\"></div>\n" +
-    "            </div>\n" +
-    "        	-->\n" +
-    "\n" +
     "			<div style=\"float:right\"><a href=\"/\" ui-sref=\"home\"><img src=\"images/hyper.gif\"></a></div>\n" +
-    "\n" +
     "			<a style=\"font-weight:bold;font-size:15px;color:white;font-family:Helvetica Neue,Helvetica,Arial,sans-serif\" href=\"/\" ui-sref=\"home\">CRE8.XYZ</a>\n" +
     "			<br>\n" +
     "			<a href=\"/about\" ui-sref=\"about\">About</a>\n" +
     "			<a href=\"/discover\" ui-sref=\"discover\">Discover</a>\n" +
-    "			\n" +
     "			<a href=\"/market\" ui-sref=\"markets\">Market</a>\n" +
-    "\n" +
-    "			<!--<a href=\"/marketplace\" ui-sref=\"marketPlace\">Marketplace</a>-->\n" +
-    "			<!--<a href=\"/members\" ui-sref=\"members\">Members</a>-->\n" +
-    "\n" +
     "			<a href=\"/projects\" ui-sref=\"projects\">Projects</a>\n" +
     "			<a href=\"/tasks\" ui-sref=\"tasks\">Tasks</a>\n" +
     "			<a href=\"/transparency\" ui-sref=\"transparency\">Transparency</a>\n" +
+    "			-->\n" +
     "\n" +
+    "			<div style=\"text-align:center\">\n" +
+    "				<a href=\"/\" ui-sref=\"home\"><img src=\"images/hyper.gif\"></a>\n" +
+    "				<div class=\"spacing-5\"></div>\n" +
+    "				<a style=\"font-weight:bold;font-size:15px;color:white;font-family:Helvetica Neue,Helvetica,Arial,sans-serif\" href=\"/\" ui-sref=\"home\">CRE8.XYZ</a>\n" +
+    "				<div class=\"spacing-5\"></div>\n" +
+    "				<a href=\"/about\" ui-sref=\"about\">About</a>\n" +
+    "				<a href=\"/apps\" ui-sref=\"apps\">Apps</a>\n" +
+    "				<a href=\"/developers\" ui-sref=\"developers\">Developers</a>\n" +
+    "				<a href=\"/transparency\" ui-sref=\"transparency\">Peer Network</a>\n" +
+    "				<div class=\"spacing-5\"></div>\n" +
+    "				<a href=\"/discover\" ui-sref=\"discover\">Discover</a>\n" +
+    "				<a href=\"/market\" ui-sref=\"markets\">Market</a>\n" +
+    "				<a href=\"/marketplace\" ui-sref=\"marketPlace\">Marketplace</a>\n" +
+    "				<a href=\"/members\" ui-sref=\"members\">Members</a>\n" +
+    "				<a href=\"/projects\" ui-sref=\"projects\">Projects</a>\n" +
+    "				<a href=\"/tasks\" ui-sref=\"tasks\">Tasks</a>\n" +
+    "				<div class=\"spacing-5\"></div>\n" +
+    "				<a ng-if=\"!currentUser\"  href=\"/login\" ui-sref=\"login\">Login</a>\n" +
+    "				<a ng-if=\"!currentUser\"  href=\"/register\" ui-sref=\"register\">Register</a>\n" +
+    "				\n" +
+    "				<a ng-if=\"currentUser\" href=\"/notifications\" ui-sref=\"notifications\">Notifications</a>\n" +
+    "				<a ng-if=\"currentUser\" href=\"/account\" ui-sref=\"account\">Settings</a>\n" +
+    "				<a ng-if=\"currentUser\" href=\"/logout\">Logout</a>\n" +
+    "\n" +
+    "			</div>\n" +
     "			<!--\n" +
     "			<div>\n" +
     "				<div style=\"float:right\"><a href=\"/\" ui-sref=\"home\"><img style=\"height:100px\" src=\"images/hyper.gif\"></a></div>\n" +
@@ -4842,6 +4857,7 @@ angular.module("footer/index.tpl.html", []).run(["$templateCache", function($tem
     "		</div>\n" +
     "		-->\n" +
     "\n" +
+    "		<div class=\"spacing-15\"></div>\n" +
     "	</div>	\n" +
     "</div>");
 }]);
@@ -7709,9 +7725,9 @@ angular.module("marketPlace/index.tpl.html", []).run(["$templateCache", function
     "<div style=\"background:url('https://source.unsplash.com/1600x900/?{{searchQueryString}}')\" class=\"imageContainerSmall\">\n" +
     "    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "        	<div class=\"container\">\n" +
-    "	            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Marketplace</h1>\n" +
-    "	            <h5 style=\"color:white\" ng-if=\"selectedTag!=''\">{{selectedTag}}</h5>\n" +
+    "        	<div class=\"container\" style=\"text-align:center;\">\n" +
+    "	            <h1 style=\"font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Marketplace</h1>\n" +
+    "	            <h5 style=\"color:white\">{{itemCount}} {{selectedTag}}</h5>\n" +
     "	        </div>\n" +
     "	    </div>\n" +
     "    </div>\n" +
@@ -7852,8 +7868,8 @@ angular.module("markets/index.tpl.html", []).run(["$templateCache", function($te
     "<div style=\"background:url('https://source.unsplash.com/1600x900/?,geometry')\" class=\"imageContainerSmall\">\n" +
     "    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "        	<div class=\"container\">\n" +
-    "	            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Markets</h1>\n" +
+    "        	<div class=\"container\" style=\"text-align:center\">\n" +
+    "	            <h1 style=\"font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Markets</h1>\n" +
     "	            <h5 style=\"color:white\">{{tokenCount}} tokens in circulation </h5>\n" +
     "	        </div>\n" +
     "        </div>\n" +
@@ -9427,10 +9443,9 @@ angular.module("members/index.tpl.html", []).run(["$templateCache", function($te
     "<div style=\"background:url('https://source.unsplash.com/1600x900/?community');overflow:visible\" class=\"imageContainerSmall\">\n" +
     "    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "            <div class=\"container\">\n" +
-    "                <div class=\"row\">\n" +
-    "                    <div class=\"col-xs-6\"><h1>Members</h1></div>\n" +
-    "                </div>\n" +
+    "            <div class=\"container\" style=\"text-align:center\">\n" +
+    "                <h1>Members</h1>\n" +
+    "                <h5 style=\"color:white\">{{memberCount}}</h5>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
@@ -13420,12 +13435,9 @@ angular.module("projects/index.tpl.html", []).run(["$templateCache", function($t
     "<div style=\"background:url('https://source.unsplash.com/1600x900/?community');overflow:visible\" class=\"imageContainerSmall\">\n" +
     "    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "            <div class=\"container\">\n" +
-    "                <div class=\"row\">\n" +
-    "                    <div class=\"col-xs-6\">\n" +
-    "                        <h1>Projects</h1>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
+    "            <div class=\"container\" style=\"text-align:center\">\n" +
+    "                <h1>Projects</h1>\n" +
+    "                <h5 style=\"color:white\">{{projectCount}}</h5>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
@@ -14407,13 +14419,9 @@ angular.module("tasks/index.tpl.html", []).run(["$templateCache", function($temp
     "<div style=\"background:url('https://source.unsplash.com/1600x900/?community');overflow:visible\" class=\"imageContainerSmall\">\n" +
     "    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "        	<div class=\"container\">\n" +
-    "		        <div class=\"row\">\n" +
-    "					<div class=\"col-xs-6\">\n" +
-    "						<h1>Tasks</h1>\n" +
-    "			            <h5 style=\"color:white\" ng-if=\"selectedTag!=''\">{{selectedTag}}</h5>\n" +
-    "					</div>\n" +
-    "				</div>\n" +
+    "        	<div class=\"container\" style=\"text-align:center\">\n" +
+    "				<h1>Tasks</h1>\n" +
+    "	            <h5 style=\"color:white\">{{taskCount}} {{selectedTag}}</h5>\n" +
     "        	</div>\n" +
     "        </div>\n" +
     "    </div>\n" +

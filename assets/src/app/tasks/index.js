@@ -32,11 +32,12 @@ angular.module( 'conexus.tasks', [
 	$scope.selectedTag = '';
     $scope.searchQuery = [];
 
-    $scope.tasks = tasks.map(function(obj){
+    $scope.tasks = tasks.data.map(function(obj){
         obj.model = 'TASK';
         if (obj.tags){obj.tags = obj.tags.split(',')}
         return obj;
     });
+    $scope.taskCount = tasks.info.count;
 
     //TODO: DEPRECIATE
     $scope.createReaction = function(item, type){
@@ -158,11 +159,13 @@ angular.module( 'conexus.tasks', [
         TaskModel.getSome({tag:filter, limit:20, skip:0, sort:'createdAt DESC'}).then(function(tasks){
             $rootScope.stateIsLoading = false;
             $scope.selectedTag = filter;
-            $scope.tasks = tasks.map(function(obj){
+            $scope.tasks = tasks.data.map(function(obj){
                 if (obj.tags){obj.tags = obj.tags.split(',')}
                 obj.model = 'TASK';
                 return obj;
             });
+            $scope.taskCount = tasks.info.count;
+
             $scope.init();
         });
     };

@@ -73,8 +73,11 @@ module.exports = {
 			.populate('project')
 			.populate('user')
 			.then(function(models) {
-				Task.subscribe(req, models);
-				res.json(models);
+				Task.count({tags:{contains: tag}}).then(function(numRecords){
+					Task.subscribe(req, models);
+					var returnObj = {data:models, info:{count:numRecords}};
+					res.json(returnObj);
+				});
 			});
 		}
 
@@ -120,8 +123,14 @@ module.exports = {
 			.populate('user')
 			.populate('project')
 			.then(function(models) {
-				Task.subscribe(req, models);
-				res.json(models);
+
+				Task.count().then(function(numRecords){
+					Task.subscribe(req, models);
+					var returnObj = {data:models, info:{count:numRecords}};
+					//console.log(returnObj)
+					res.json(returnObj);
+				});
+
 			});
 		}
 	},

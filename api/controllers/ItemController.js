@@ -33,8 +33,13 @@ module.exports = {
 			.sort(sort)
 			.populate('user') //TODO: OWNER
 			.then(function(models) {
-				Item.subscribe(req, models);
-				res.json(models);
+
+				Item.count({tags:{contains: tag}}).then(function(numRecords){
+					Item.subscribe(req, models);
+					var returnObj = {data:models, info:{count:numRecords}};
+					res.json(returnObj);
+				});
+
 			});
 		}
 
@@ -60,7 +65,13 @@ module.exports = {
 			.sort(sort)
 			.populate('user')  //TODO: OWNER
 			.then(function(models){
-				res.json(models)
+
+				Item.count().then(function(numRecords){
+					Item.subscribe(req, models);
+					var returnObj = {data:models, info:{count:numRecords}};
+					res.json(returnObj);
+				});
+
 			});
 		}
 		

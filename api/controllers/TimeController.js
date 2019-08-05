@@ -284,10 +284,13 @@ module.exports = {
 
 			var timeProtocolTokens = getProtocolTokens(model);
 
+
+			//ASYNC SCOPING IS THE FIX IT SEEMS
 			for (x in timeProtocolTokens){
 
 				var tokenString = timeProtocolTokens[x];
 
+				console.log(tokenString)
 				Token.find({string:tokenString}).then(function(tokenModels){
 
 					if (tokenModels.length == 0){

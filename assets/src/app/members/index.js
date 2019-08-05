@@ -26,10 +26,11 @@ angular.module( 'conexus.members', [
 
 .controller( 'MembersCtrl', ['$rootScope', '$sailsSocket', '$sce', '$scope', 'FollowerModel', 'followers', 'members', 'SearchModel', 'toaster', 'UserModel', function MembersController( $rootScope, $sailsSocket, $sce, $scope, FollowerModel, followers, members, SearchModel, toaster, UserModel ) {
 	
-    $scope.members = members.map(function(obj){
+    $scope.members = members.data.map(function(obj){
         obj.model = 'MEMBER';
         return obj;
     });
+    $scope.memberCount = members.info.count;
     
     $scope.selectedSort = 'createdAt DESC';
     $scope.skip = 0;

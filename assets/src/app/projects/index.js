@@ -22,7 +22,8 @@ angular.module( 'conexus.projects', [
 
 .controller( 'ProjectsCtrl', ['$location', '$rootScope', '$mdSidenav', '$sailsSocket', '$sce', '$scope', 'MemberModel', 'ProjectModel', 'projects', 'SearchModel', function ProjectsController( $location, $rootScope, $mdSidenav, $sailsSocket, $sce, $scope, MemberModel, ProjectModel, projects, SearchModel ) {
 
-    $scope.projects = projects.map(function(obj){obj.model = 'PROJECT'; return obj;});
+    $scope.projects = projects.data.map(function(obj){obj.model = 'PROJECT'; return obj;});
+    $scope.projectCount = projects.info.count;
 
     $rootScope.associatedModels = [];
 
@@ -94,6 +95,7 @@ angular.module( 'conexus.projects', [
                         obj.model = 'PROJECT';
                         return obj;
                     });
+                    //$scope.projectCount = projects.info.count;
                     $scope.markers = [];
                     $scope.populateMap();
                     $scope.init();

@@ -12,7 +12,7 @@ a:focus{text-decoration: none}
 body {
     position: relative;
     margin:0;
-    padding-bottom:150px;
+    padding-bottom:335px;
     min-height: 100%;
     background-color:#e9ebee;
 }
@@ -172,7 +172,6 @@ tags-input .autocomplete .suggestion-item.selected{background-color:#002a56;}
 
 .footer img{
     height:50px;
-    float:right;
 }
 
 .footer-links{

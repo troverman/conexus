@@ -133,18 +133,40 @@ angular.module( 'conexus.home', [
     $scope.selectedTime = Math.floor(Math.random()*92);
     vid[0].currentTime = $scope.selectedTime;
 
+    $scope.contentList = contentList.map(function(obj){
+        obj.model = 'CONTENT';
+        if (obj.tags){obj.tags = obj.tags.split(',')}
+        return obj;
+    });
     $scope.map = {
         center: {latitude: 35.902023, longitude: -84.1507067 },
         zoom: 9
     };
     $scope.markers = [];
-    $scope.contentList = contentList;
-    $scope.projects = projects;
     $scope.newReaction = {};
+    $scope.projects = projects.data.map(function(obj){
+        obj.model = 'PROJECT';
+        if (obj.tags){obj.tags = obj.tags.split(',')}
+        return obj;
+    });
     $scope.searchResults = [];
     $scope.sorting = false;
-    $scope.tasks = tasks;
-    $scope.time = time;
+    $scope.tasks = tasks.data.map(function(obj){
+        obj.model = 'TASK';
+        if (obj.tags){obj.tags = obj.tags.split(',')}
+        return obj;
+    });
+    $scope.time = time.map(function(obj){
+        obj.model = 'TIME';
+        if (obj.tags){obj.tags = obj.tags.split(',')}
+        if (obj.task){if (obj.task.tags){obj.task.tags = obj.task.tags.split(',')}}
+        return obj;
+    });
+
+    $scope.activity = [].concat.apply([], [$scope.contentList, $scope.projects, $scope.tasks, $scope.time]);
+    $scope.activity = $scope.activity.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
+    $scope.activity = $scope.activity.slice(0,100);
+    
 
     //NEED TO REDUCE QUERIES
     var promises = [
@@ -196,32 +218,6 @@ angular.module( 'conexus.home', [
             });
         }
     };
-
-    $scope.contentList = $scope.contentList.map(function(obj){
-        obj.model = 'CONTENT';
-        if (obj.tags){obj.tags = obj.tags.split(',')}
-        return obj;
-    });
-    $scope.projects = $scope.projects.map(function(obj){
-        obj.model = 'PROJECT';
-        if (obj.tags){obj.tags = obj.tags.split(',')}
-        return obj;
-    });
-    $scope.tasks = $scope.tasks.map(function(obj){
-        obj.model = 'TASK';
-        if (obj.tags){obj.tags = obj.tags.split(',')}
-        return obj;
-    });
-    $scope.time = $scope.time.map(function(obj){
-        obj.model = 'TIME';
-        if (obj.tags){obj.tags = obj.tags.split(',')}
-        if (obj.task){if (obj.task.tags){obj.task.tags = obj.task.tags.split(',')}}
-        return obj;
-    });
-    
-    $scope.activity = [].concat.apply([], [$scope.contentList, $scope.projects, $scope.tasks, $scope.time]);
-    $scope.activity = $scope.activity.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
-    $scope.activity = $scope.activity.slice(0,100);
     
     $scope.chart = {
         chart: {polar: true},
@@ -512,16 +508,16 @@ angular.module( 'conexus.home', [
         if (obj.tags){obj.tags = obj.tags.split(',')}
         return obj;
     });
-    $scope.projects = projects.map(function(obj){
+    $scope.projects = projects.data.map(function(obj){
         obj.model = 'PROJECT';
         if (obj.tags){obj.tags = obj.tags.split(',')}
         return obj;
     });
-    $scope.members = members;
+    $scope.members = members.data;
     $scope.newContent = {};
     $scope.newReaction = {};
     $scope.searchResults = [];
-    $scope.tasks = tasks.map(function(obj){
+    $scope.tasks = tasks.data.map(function(obj){
         obj.model = 'TASK';
         if (obj.tags){obj.tags = obj.tags.split(',')}
         return obj;

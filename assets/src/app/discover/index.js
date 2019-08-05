@@ -56,12 +56,12 @@ angular.module( 'conexus.discover', [
         if (obj.tags){obj.tags = obj.tags.split(',')}
         return obj;
     });
-	$scope.projects = projects.map(function(obj){
+	$scope.projects = projects.data.map(function(obj){
         obj.model='PROJECT';
         if (obj.tags){obj.tags = obj.tags.split(',')}
         return obj;
     });
-    $scope.tasks = tasks.map(function(obj){
+    $scope.tasks = tasks.data.map(function(obj){
         obj.model='TASK';
         if (obj.tags){obj.tags = obj.tags.split(',')}
         return obj;

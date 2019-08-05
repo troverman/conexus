@@ -49,8 +49,11 @@ module.exports = {
 			.skip(skip)
 			.sort(sort)
 			.then(function(models) {
-				User.subscribe(req, models);
-				res.json(models);
+				User.count().then(function(numRecords){
+					User.subscribe(req, models);
+					var returnObj = {data:models, info:{count:numRecords}};
+					res.json(returnObj);
+				});
 			});
 		}
 

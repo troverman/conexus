@@ -25,10 +25,11 @@ angular.module( 'conexus.marketPlace', [
     $scope.newItem = {};
     $scope.newReaction = {};
     $scope.stateParams = $stateParams;
-    $scope.items = items.map(function(obj){
+    $scope.items = items.data.map(function(obj){
         obj.model = 'ITEM';
         return obj;
     });
+    $scope.itemCount = items.info.count;
     $scope.searchQuery = [];
     $scope.selectedSort = 'createdAt DESC';
     $scope.selectedTag = '';
@@ -101,8 +102,9 @@ angular.module( 'conexus.marketPlace', [
         ItemModel.getSome({tag:filter, limit:20, skip:0, sort:'createdAt DESC'}).then(function(items){
             $rootScope.stateIsLoading = false;
             $scope.selectedTag = filter;
-            $scope.items = items;
-            $scope.loadTags()
+            $scope.items = items.data;
+            $scope.itemCount = items.info.count;
+            $scope.loadTags();
         });
     };
 

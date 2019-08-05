@@ -119,8 +119,11 @@ module.exports = {
 			.skip(skip)
 			.sort(sort)
 			.then(function(models) {
-				Project.subscribe(req, models);
-				res.json(models);
+				Project.count({tags:{contains: tag}}).then(function(numRecords){
+					Project.subscribe(req, models);
+					var returnObj = {data:models, info:{count:numRecords}};
+					res.json(returnObj);
+				});
 			});
 		}
 
@@ -130,8 +133,11 @@ module.exports = {
 			.skip(skip)
 			.sort(sort)
 			.then(function(models) {
-				Project.subscribe(req, models);
-				res.json(models);
+				Project.count().then(function(numRecords){
+					Project.subscribe(req, models);
+					var returnObj = {data:models, info:{count:numRecords}};
+					res.json(returnObj);
+				});
 			});
 		}
 	},
