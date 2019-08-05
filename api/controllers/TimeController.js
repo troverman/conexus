@@ -290,14 +290,15 @@ module.exports = {
 
 				var tokenString = timeProtocolTokens[x];
 
-				console.log(tokenString)
+				console.log(tokenString);
+
 				Token.find({string:tokenString}).then(function(tokenModels){
 
 					if (tokenModels.length == 0){
 
 						var newTokenModel = {
 							string:tokenString,
-							protocols:['CRE8','TIME'],
+							protocols:['CRE8','TIME'], 
 							information:{
 								inCirculation:model.amount,
 								markets:0
