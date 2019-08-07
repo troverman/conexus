@@ -135,12 +135,12 @@ svg {
 @media only screen and (max-width: 460px) {
 	//.intro-container {zoom: 0.35}
 	//body{zoom: 0.88}
-	.main-container{zoom:0.88;}
+	//.main-container{zoom:0.88;}
 }
 @media only screen and (max-width: 410px) {
 	//.intro-container {zoom: 0.325}
 	//.intro-container {zoom: 0.55}
-	.main-container{zoom:0.75;}
+	//.main-container{zoom:0.75;}
 }
 
 @media only screen and (max-width: 788px) {

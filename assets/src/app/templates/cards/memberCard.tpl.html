@@ -1,15 +1,58 @@
- <div class="member-card" style="margin-bottom:10px" ng-click="renderReputationToggle(item)">
-    <div class="member-card-image" style="background-image: url('{{item.coverUrl}}')">
-        <a ng-click="$event.stopPropagation()" href="member/{{item.username}}" ui-sref="member.activity({path:item.username})"><img ng-src="{{item.avatarUrl}}" err-src="/images/avatar.png"></a>
+ 
+<!--TODO: FACTOR INTO GOOD DESIGN-->
+
+
+<!--
+<div class="card">
+    <div ng-click="$event.stopPropagation();cardDetailToggle(item)" style="background:url('{{item.coverUrl}}');min-height:100px" class="imageContainerSmall">
+        <div style="background:rgba(0,0,0,0.75);height:100px" class="imageContainerSmallDiv"> 
+            <div style="text-align:right;padding:15px;position:absolute;right:0">
+                <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
+                    <i class="fas fa-chevron-down"></i>
+                </a>
+            </div> 
+            <div style="margin-top: auto;margin-bottom: auto;">
+                <div style="padding:15px">
+                    <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;"><a style="color:white" ng-click="$event.stopPropagation();" href="item/{{item.id}}" ui-sref="item({id:item.id})"><img ng-src="{{item.avatarUrl}}" err-src="/images/avatar.png"></a></h1>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="member-card-info" style="padding:16px;height:auto">
-        <h4 ng-click="$event.stopPropagation()"><a href="member/{{item.username}}" ui-sref="member.activity({path:item.username})">{{item.username}}</a></h4>
-        <p style="font-size:11px;" ng-click="$event.stopPropagation()"><a href="/member/{{item.username}}/projects" ui-sref="member.projects({path:item.username})">{{item.projectCount || 0}} Projects</a> | <a href="/member/{{item.username}}/followers" ui-sref="member.followers({path:item.username})">{{item.followerCount || 0}} Followers</a> | <a href="/member/{{item.username}}/following" ui-sref="member.following({path:item.username})">{{item.followingCount || 0}} Following</a>
-        <p style="color:gray">Total Reputation | {{item.totalWork || 0}}</p>
+</div>
+-->
+
+
+ <div class="member-card" style="margin-bottom:10px;background-color:white" ng-click="renderReputationToggle(item)">
+    <div style="text-align:right;padding:15px;position:absolute;right:0;margin-right:10px">
+        <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
+            <i class="fas fa-chevron-down"></i>
+        </a>
+    </div> 
+    <div class="member-card-image" style="background-image: url('{{item.coverUrl}}')">
+        <a ng-click="$event.stopPropagation()" href="member/{{item.username}}" ui-sref="member.activity({path:item.username})">
+            <img ng-src="{{item.avatarUrl}}" err-src="/images/avatar.png">
+        </a>
+    </div>
+    <div class="member-card-info">
+        <h3 ng-click="$event.stopPropagation()">
+            <a href="member/{{item.username}}" ui-sref="member.activity({path:item.username})">{{item.username}}</a>
+        </h3>
+        <p style="font-size:8px;" ng-click="$event.stopPropagation();memberQRToggle(item);"><a style="color:gray"><i class="fas fa-qrcode"></i> {{item.id}}</a></p>
+        <div class="spacing-5"></div>
+        <p style="font-size:11px;" ng-click="$event.stopPropagation()">
+            <a href="member/{{item.username}}/projects" ui-sref="member.projects({path:item.username})">{{item.projectCount || 0}} Projects</a> | 
+            <a href="member/{{item.username}}/followers" ui-sref="member.followers({path:item.username})">{{item.followerCount || 0}} Followers</a> | 
+            <a href="member/{{item.username}}/following" ui-sref="member.following({path:item.username})">{{item.followingCount || 0}} Following</a>
+            <p style="color:gray">Total Reputation | {{item.totalWork || 0}}
+        </p>
         <p style="color:gray">{{currentUser.status}} <i style="color:#30b257" class="fa fa-circle"></i> Offline</p>
-        <a ng-show="!item.isFollowing" style="padding:10px 15px;color:rgb(125,125,125)" class="btn btn-default" ng-click="$event.stopPropagation();follow(item)">Follow</button></a>
-        <a ng-show="item.isFollowing" style="padding:10px 15px;color:rgb(125,125,125)" class="btn btn-default" ng-click="$event.stopPropagation();follow(item)">Unfollow</button></a>
-        <a style="padding:10px 15px;color:rgb(125,125,125)" class="btn btn-default" ng-click="$event.stopPropagation();transactionToggle(item)">Send Tokens</a>
-        <img ng-click="$event.stopPropagation();transactionToggle(item)" style="height:50px;text-align:left" src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{item.id}}">
+
+    </div>
+    <hr style="margin:0px;">
+    <div style="padding:16px;">
+        <a ng-show="!item.isFollowing" style="padding:10px 15px;color:rgb(125,125,125);float:left" class="btn btn-default" ng-click="$event.stopPropagation();follow(item)">Follow</button></a>
+        <a ng-show="item.isFollowing" style="padding:10px 15px;color:rgb(125,125,125);float:left" class="btn btn-default" ng-click="$event.stopPropagation();follow(item)">Unfollow</button></a>
+        <a style="padding:10px 15px;color:rgb(125,125,125);float:right" class="btn btn-default" ng-click="$event.stopPropagation();transactionToggle(item)">Send Tokens</a>
+        <div style="clear:both"></div>
     </div>
 </div>

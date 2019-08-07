@@ -7,7 +7,7 @@
 		        	<img ng-src="{{member.followed.avatarUrl}}" err-src="/images/avatar.png">
 		        </a>
 		    </div>
-            <div class="member-card-info" style="padding:16px;height:auto">
+            <div class="member-card-info">
 		        <h4>
 		        	<a ng-click="$event.stopPropagation();" href="member/{{member.followed.username}}" ui-sref="member.activity({path:member.followed.username})">{{member.followed.username}}</a>
 		        </h4>

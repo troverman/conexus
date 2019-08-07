@@ -7,11 +7,9 @@
             <div ng-class="{'col-sm-9 col-xs-8': markers.length > 0}" class="imageContainerSmall" style="background:url('https://source.unsplash.com/1600x900/?{{project.tags}}');">
                 <div style="background:rgba(0,0,0,0.75);" class="imageContainerSmallDiv">  
                     <div style="margin-top: auto;margin-bottom: auto;">
-                        <div style="padding:15px">
-                            <h1 style="text-align:left;">
-                                <img style="height:50px;width:50px;border-radius:100%" ng-src="{{project.avatarUrl}}"/>
-                                {{project.title}}
-                            </h1>
+                        <div style="padding:15px;text-align:center">
+                            <img style="height:50px;width:50px;border-radius:100%" ng-src="{{project.avatarUrl}}"/>
+                            <h1>{{project.title}}</h1>
                             <h5 ng-show="project.parent">
                                 <a ng-click="$event.stopPropagation();" style="color:white" href="project/{{project.parent.urlTitle}}" ui-sref="project.activity({path:project.parent.urlTitle})">{{project.parent.title}}</a>
                             </h5>
@@ -38,7 +36,7 @@
 
         <div style="background-color:white">
             <div class="member-tab-container container" style="padding-left:0px">
-                <div style="text-align:left">
+                <div style="text-align:center">
                     <ul style="padding:0px;" class="member-tabs subNav">
                         <!--TODO.. MODEL ORGANIZATION.. LEDGER: [ASSETS.. POSTIONS], MOTIONS (VALIDATIONS), (ACTIONS?)-->
                         <li><a ng-click="$event.stopPropagation();" href="project/{{project.urlTitle}}" ui-sref="project.activity">Activity</a></li>

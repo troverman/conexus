@@ -1,5 +1,5 @@
 <style>.ngCytoscape{height: 400px;width:100%;}</style>
-
+<div class="spacing-10"></div>
 <div class="container" style="padding:0px">
     <div class="card" ng-click="cardDetailToggle(item)">
         <div class="imageContainerSmall" style="background:url('https://source.unsplash.com/1600x900/?{{token.string || stateParams.id}}')">
@@ -25,6 +25,7 @@
                     <ul style="padding:0px;" class="member-tabs">
                         <li><a ng-click="$event.stopPropagation();selectTab('INFORMATION')">Activity</a></li>
                         <li><a ng-click="$event.stopPropagation();selectTab('MARKETS')"><i class="fa fa-exchange"></i> Markets</a></li>
+                        <li><a ng-click="$event.stopPropagation();selectTab('POSITIONS')"><i class="fas fa-bezier-curve"></i> Positions</a></li>
                         <li><a ng-click="$event.stopPropagation();selectTab('ANALYSIS')"><i class="fas fa-project-diagram"></i> Analysis</a></li>
                     </ul>
                 </div>

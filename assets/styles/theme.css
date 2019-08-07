@@ -349,21 +349,32 @@ tags-input .autocomplete .suggestion-item.selected{background-color:#002a56;}
 .member-card:hover{box-shadow: 0 1px 3px 0 rgba(0,0,0,.6), 0 1px 1px 0 rgba(0,0,0,.42), 0 2px 1px -1px rgba(0,0,0,.36)}
 
 .member-card-image {
+    padding:16px;
+    text-align:center;
     height: 100px;
     background: center center no-repeat;
     background-size: cover;
 }
 
+//.member-card-image img{
+//    position:absolute;
+//    left: 7%;
+//    top:13%;
+//    margin: 0 auto;
+//    background: #fff;
+//    padding: 0.25em;
+//    width:10em;
+//    height:10em;
+//    border-radius: 100em;
+//}
+
 .member-card-image img{
-    position:absolute;
-    left: 7%;
-    top:13%;
-    margin: 0 auto;
     background: #fff;
     padding: 0.25em;
-    width:10em;
-    height:10em;
-    border-radius: 100em;
+    width:100px;
+    height:100px;
+    border-radius: 100%;
+    margin: 0 auto;
 }
 
 .member-card-social {
@@ -375,13 +386,12 @@ tags-input .autocomplete .suggestion-item.selected{background-color:#002a56;}
 }
 
 .member-card-info {
-    padding:10px;
-    height: 100px;
+    padding:16px;
+    padding-top:24px;
+    height: auto;
     background: white;
-    text-align: right;
-    padding-right:5%;
-    padding-left:50%;
-    overflow:hidden;
+    text-align: center;
+    overflow:auto;
 }
 
 .member-card-info h4{

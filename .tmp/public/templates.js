@@ -1611,22 +1611,6 @@ angular.module("contentList/index.tpl.html", []).run(["$templateCache", function
     "        <!--TODO FILTER BUTTON-->\n" +
     "        <div ng-show=\"sortedTagArray.length > 0\" class=\"col-sm-3 mobileFix\" style=\"padding-left:0px;padding-right:0px;\">\n" +
     "            <div class=\"card\" ng-click=\"filterToggle('DISCOVER')\">\n" +
-    "                <div style=\"background:url('https://source.unsplash.com/1600x900/?details,notes,explore,wonder,connection,create,content,creation');height:50px;min-height:50px\" class=\"imageContainerSmall\">\n" +
-    "                    <div style=\"background:rgba(0,0,0,0.75);height:50px\" class=\"imageContainerSmallDiv\">  \n" +
-    "                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                            <div style=\"padding:15px\">\n" +
-    "                                <h1 style=\"text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;\">Tags</h1>\n" +
-    "                            </div>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "                <div style=\"padding:16px;\">\n" +
-    "                    <div ng-repeat=\"tag in sortedTagArray\" ng-click=\"$event.stopPropagation()\">\n" +
-    "                        <a ng-click=\"filterContent(tag.element)\"><b>{{tag.element}}</b></a>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "            <div class=\"card\" ng-click=\"filterToggle('DISCOVER')\">\n" +
     "                <div style=\"background:url('https://source.unsplash.com/1600x900/?details,notes,explore,wonder,connection,create');height:50px;min-height:50px\" class=\"imageContainerSmall\">\n" +
     "                    <div style=\"background:rgba(0,0,0,0.75);height:50px\" class=\"imageContainerSmallDiv\">  \n" +
     "                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
@@ -1639,6 +1623,22 @@ angular.module("contentList/index.tpl.html", []).run(["$templateCache", function
     "                <div style=\"padding:16px;\">\n" +
     "                    <div ng-repeat=\"association in sortedAssociationArray\" ng-click=\"$event.stopPropagation()\">\n" +
     "                        <a ng-click=\"filterContent(tag.element)\"><b>{{association.element}}</b></a>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "            <div class=\"card\" ng-click=\"filterToggle('DISCOVER')\">\n" +
+    "                <div style=\"background:url('https://source.unsplash.com/1600x900/?details,notes,explore,wonder,connection,create,content,creation');height:50px;min-height:50px\" class=\"imageContainerSmall\">\n" +
+    "                    <div style=\"background:rgba(0,0,0,0.75);height:50px\" class=\"imageContainerSmallDiv\">  \n" +
+    "                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                            <div style=\"padding:15px\">\n" +
+    "                                <h1 style=\"text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;\">Context</h1>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "                <div style=\"padding:16px;\">\n" +
+    "                    <div ng-repeat=\"tag in sortedTagArray\" ng-click=\"$event.stopPropagation()\">\n" +
+    "                        <a ng-click=\"filterContent(tag.element)\"><b>{{tag.element}}</b></a>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
@@ -7110,7 +7110,7 @@ angular.module("login/index.tpl.html", []).run(["$templateCache", function($temp
 angular.module("market/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("market/index.tpl.html",
     "<style>.ngCytoscape{height: 400px;width:100%;}</style>\n" +
-    "\n" +
+    "<div class=\"spacing-10\"></div>\n" +
     "<div class=\"container\" style=\"padding:0px\">\n" +
     "    <div class=\"card\" ng-click=\"cardDetailToggle(item)\">\n" +
     "        <div class=\"imageContainerSmall\" style=\"background:url('https://source.unsplash.com/1600x900/?{{token.string || stateParams.id}}')\">\n" +
@@ -7136,6 +7136,7 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function($tem
     "                    <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
     "                        <li><a ng-click=\"$event.stopPropagation();selectTab('INFORMATION')\">Activity</a></li>\n" +
     "                        <li><a ng-click=\"$event.stopPropagation();selectTab('MARKETS')\"><i class=\"fa fa-exchange\"></i> Markets</a></li>\n" +
+    "                        <li><a ng-click=\"$event.stopPropagation();selectTab('POSITIONS')\"><i class=\"fas fa-bezier-curve\"></i> Positions</a></li>\n" +
     "                        <li><a ng-click=\"$event.stopPropagation();selectTab('ANALYSIS')\"><i class=\"fas fa-project-diagram\"></i> Analysis</a></li>\n" +
     "                    </ul>\n" +
     "                </div>\n" +
@@ -8647,7 +8648,7 @@ angular.module("member/templates/followers.tpl.html", []).run(["$templateCache",
     "		        	<img ng-src=\"{{member.follower.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
     "		        </a>\n" +
     "		    </div>\n" +
-    "            <div class=\"member-card-info\" style=\"padding:16px;height:auto\">\n" +
+    "            <div class=\"member-card-info\">\n" +
     "		        <h4>\n" +
     "		        	<a ng-click=\"$event.stopPropagation();\" href=\"member/{{member.follower.username}}\" ui-sref=\"member.activity({path:member.follower.username})\">{{member.follower.username}}</a>\n" +
     "		        </h4>\n" +
@@ -8676,7 +8677,7 @@ angular.module("member/templates/following.tpl.html", []).run(["$templateCache",
     "		        	<img ng-src=\"{{member.followed.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
     "		        </a>\n" +
     "		    </div>\n" +
-    "            <div class=\"member-card-info\" style=\"padding:16px;height:auto\">\n" +
+    "            <div class=\"member-card-info\">\n" +
     "		        <h4>\n" +
     "		        	<a ng-click=\"$event.stopPropagation();\" href=\"member/{{member.followed.username}}\" ui-sref=\"member.activity({path:member.followed.username})\">{{member.followed.username}}</a>\n" +
     "		        </h4>\n" +
@@ -10300,16 +10301,25 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "        </div>\n" +
     "    </md-sidenav>\n" +
     "\n" +
-    "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"memberQR\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
+    "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"memberQR\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:black;color:white;width:70%;max-width:100%\">\n" +
     "        <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
     "            <div class=\"spacing-25\"></div>\n" +
     "            \n" +
     "            <div style=\"background:url('https://source.unsplash.com/1600x900/?connect,pattern')\" class=\"imageContainerSmall\">\n" +
     "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                        <div style=\"padding:15px\">\n" +
-    "                            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">{{item.username || item.title}}</h1>\n" +
-    "                            <h5 style=\"text-align:left;color:rgba(255,255,255,0.9);font-weight:400;\">{{item.id}}</h5>\n" +
+    "                        <div style=\"padding:15px;text-align:center;\">\n" +
+    "                            <h1>\n" +
+    "                                <a style=\"display:inline;font-weight:600;margin-left:5px;color:white\" href=\"member/{{item.username}}\" ui-sref=\"member.activity({path:item.user.username})\">\n" +
+    "                                    <img class=\"card-avatar\" ng-src=\"{{item.avatarUrl}}\" src=\"{{item.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
+    "                                    {{item.username || item.title}}\n" +
+    "                                </a>\n" +
+    "                            </h1>\n" +
+    "                            <h5 style=\"color:white\">\n" +
+    "                                <span style=\"color:white;font-size:10px;\">\n" +
+    "                                     {{item.id}}</a>\n" +
+    "                                </span>\n" +
+    "                            </h5>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
@@ -10319,13 +10329,13 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                <!--TODO-->\n" +
     "\n" +
     "\n" +
-    "                <div style=\"width:256px;text-align:center\">\n" +
-    "                    <span style=\"font-size:10px;\">SCAN ME</span>\n" +
+    "                <div style=\"text-align:center\">\n" +
+    "                    <span style=\"font-size:12px;\">SCAN ME</span>\n" +
     "                    <br>\n" +
-    "                    <img style=\"height:100%;width:256px;\" src=\"https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{item.id}}\">\n" +
+    "                    <img style=\"height:100%;width:50vh;border:12px solid #c5c5c5;border-radius:100%\" src=\"https://chart.googleapis.com/chart?chs=500x500&cht=qr&chl={{item.id}}\">\n" +
     "                    <br>\n" +
-    "                    <span style=\"font-size:10px;\">CRE8.XYZ</span><br>\n" +
-    "                    <span style=\"font-size:10px;\">{{item.id}}</span>\n" +
+    "                    <span style=\"font-size:12px;\">CRE8.XYZ</span>\n" +
+    "                    <br>\n" +
     "                </div>\n" +
     "        \n" +
     "            </div>\n" +
@@ -10763,7 +10773,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "            <div style=\"background: url('{{item.user.coverUrl}}')\" class=\"imageContainerSmall\">\n" +
     "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                        <div style=\"padding:15px\">\n" +
+    "                        <div style=\"padding:15px;text-align:center\">\n" +
     "                            <h1>\n" +
     "                                <a style=\"display:inline;font-weight:600;margin-left:5px;color:white\" href=\"member/{{item.user.username}}\" ui-sref=\"member.activity({path:item.user.username})\">\n" +
     "                                    <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
@@ -10789,7 +10799,7 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                </div>\n" +
     "            </div>\n" +
     "\n" +
-    "            <div style=\"padding:16px;\">\n" +
+    "            <div style=\"padding:16px;text-align:center\">\n" +
     "\n" +
     "                <p style=\"font-size:13px;\">\n" +
     "                    <a href=\"member/{{item.user.username}}/projects\" ui-sref=\"member.projects({path:item.user.username})\">{{item.user.projectCount || 0}} Projects</a> | \n" +
@@ -12212,11 +12222,9 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function($te
     "            <div ng-class=\"{'col-sm-9 col-xs-8': markers.length > 0}\" class=\"imageContainerSmall\" style=\"background:url('https://source.unsplash.com/1600x900/?{{project.tags}}');\">\n" +
     "                <div style=\"background:rgba(0,0,0,0.75);\" class=\"imageContainerSmallDiv\">  \n" +
     "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                        <div style=\"padding:15px\">\n" +
-    "                            <h1 style=\"text-align:left;\">\n" +
-    "                                <img style=\"height:50px;width:50px;border-radius:100%\" ng-src=\"{{project.avatarUrl}}\"/>\n" +
-    "                                {{project.title}}\n" +
-    "                            </h1>\n" +
+    "                        <div style=\"padding:15px;text-align:center\">\n" +
+    "                            <img style=\"height:50px;width:50px;border-radius:100%\" ng-src=\"{{project.avatarUrl}}\"/>\n" +
+    "                            <h1>{{project.title}}</h1>\n" +
     "                            <h5 ng-show=\"project.parent\">\n" +
     "                                <a ng-click=\"$event.stopPropagation();\" style=\"color:white\" href=\"project/{{project.parent.urlTitle}}\" ui-sref=\"project.activity({path:project.parent.urlTitle})\">{{project.parent.title}}</a>\n" +
     "                            </h5>\n" +
@@ -12243,7 +12251,7 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function($te
     "\n" +
     "        <div style=\"background-color:white\">\n" +
     "            <div class=\"member-tab-container container\" style=\"padding-left:0px\">\n" +
-    "                <div style=\"text-align:left\">\n" +
+    "                <div style=\"text-align:center\">\n" +
     "                    <ul style=\"padding:0px;\" class=\"member-tabs subNav\">\n" +
     "                        <!--TODO.. MODEL ORGANIZATION.. LEDGER: [ASSETS.. POSTIONS], MOTIONS (VALIDATIONS), (ACTIONS?)-->\n" +
     "                        <li><a ng-click=\"$event.stopPropagation();\" href=\"project/{{project.urlTitle}}\" ui-sref=\"project.activity\">Activity</a></li>\n" +
@@ -14447,7 +14455,7 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "\n" +
     "            </div>\n" +
     "        </div>\n" +
-    "        <div class=\"card\" ng-repeat=\"item in time\" ng-click=\"renderToggle(item)\">\n" +
+    "        <div class=\"card\" ng-repeat=\"item in time\" ng-click=\"cardDetailToggle(item)\">\n" +
     "\n" +
     "            <!--TODO: TEMPLATE TIME CARD-->\n" +
     "            <!--TODO: REMOVE INLINE STYLE-->\n" +
@@ -14455,7 +14463,7 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "\n" +
     "            <div style=\"padding:16px;\">\n" +
     "                <div style=\"float:right;text-align:right\">\n" +
-    "                    <a style=\"color:gray;\" ng-click=\"$event.stopPropagation();cardDetailToggle(time)\"><span style=\"color:gray\"></span><i class=\"fa fa-chevron-down\"></i></a>\n" +
+    "                    <a style=\"color:gray;\" ng-click=\"$event.stopPropagation();cardDetailToggle(item)\"><span style=\"color:gray\"></span><i class=\"fa fa-chevron-down\"></i></a>\n" +
     "                </div>\n" +
     "                <div ng-click=\"$event.stopPropagation();\">\n" +
     "                    <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
@@ -14705,7 +14713,6 @@ angular.module("templates/cards/itemCard.tpl.html", []).run(["$templateCache", f
     "                <a style=\"color:white;\" ng-click=\"$event.stopPropagation();cardDetailToggle(item)\">\n" +
     "                    <i class=\"fas fa-chevron-down\"></i>\n" +
     "                </a>\n" +
-    "                <div style=\"clear:both\"></div>\n" +
     "            </div> \n" +
     "            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "                <div style=\"padding:15px\">\n" +
@@ -14733,19 +14740,61 @@ angular.module("templates/cards/itemCard.tpl.html", []).run(["$templateCache", f
 
 angular.module("templates/cards/memberCard.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/cards/memberCard.tpl.html",
-    "<div class=\"member-card\" style=\"margin-bottom:10px\" ng-click=\"renderReputationToggle(item)\">\n" +
-    "    <div class=\"member-card-image\" style=\"background-image: url('{{item.coverUrl}}')\">\n" +
-    "        <a ng-click=\"$event.stopPropagation()\" href=\"member/{{item.username}}\" ui-sref=\"member.activity({path:item.username})\"><img ng-src=\"{{item.avatarUrl}}\" err-src=\"/images/avatar.png\"></a>\n" +
+    "<!--TODO: FACTOR INTO GOOD DESIGN-->\n" +
+    "\n" +
+    "\n" +
+    "<!--\n" +
+    "<div class=\"card\">\n" +
+    "    <div ng-click=\"$event.stopPropagation();cardDetailToggle(item)\" style=\"background:url('{{item.coverUrl}}');min-height:100px\" class=\"imageContainerSmall\">\n" +
+    "        <div style=\"background:rgba(0,0,0,0.75);height:100px\" class=\"imageContainerSmallDiv\"> \n" +
+    "            <div style=\"text-align:right;padding:15px;position:absolute;right:0\">\n" +
+    "                <a style=\"color:white;\" ng-click=\"$event.stopPropagation();cardDetailToggle(item)\">\n" +
+    "                    <i class=\"fas fa-chevron-down\"></i>\n" +
+    "                </a>\n" +
+    "            </div> \n" +
+    "            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                <div style=\"padding:15px\">\n" +
+    "                    <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\"><a style=\"color:white\" ng-click=\"$event.stopPropagation();\" href=\"item/{{item.id}}\" ui-sref=\"item({id:item.id})\"><img ng-src=\"{{item.avatarUrl}}\" err-src=\"/images/avatar.png\"></a></h1>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
     "    </div>\n" +
-    "    <div class=\"member-card-info\" style=\"padding:16px;height:auto\">\n" +
-    "        <h4 ng-click=\"$event.stopPropagation()\"><a href=\"member/{{item.username}}\" ui-sref=\"member.activity({path:item.username})\">{{item.username}}</a></h4>\n" +
-    "        <p style=\"font-size:11px;\" ng-click=\"$event.stopPropagation()\"><a href=\"/member/{{item.username}}/projects\" ui-sref=\"member.projects({path:item.username})\">{{item.projectCount || 0}} Projects</a> | <a href=\"/member/{{item.username}}/followers\" ui-sref=\"member.followers({path:item.username})\">{{item.followerCount || 0}} Followers</a> | <a href=\"/member/{{item.username}}/following\" ui-sref=\"member.following({path:item.username})\">{{item.followingCount || 0}} Following</a>\n" +
-    "        <p style=\"color:gray\">Total Reputation | {{item.totalWork || 0}}</p>\n" +
+    "</div>\n" +
+    "-->\n" +
+    "\n" +
+    "\n" +
+    " <div class=\"member-card\" style=\"margin-bottom:10px;background-color:white\" ng-click=\"renderReputationToggle(item)\">\n" +
+    "    <div style=\"text-align:right;padding:15px;position:absolute;right:0;margin-right:10px\">\n" +
+    "        <a style=\"color:white;\" ng-click=\"$event.stopPropagation();cardDetailToggle(item)\">\n" +
+    "            <i class=\"fas fa-chevron-down\"></i>\n" +
+    "        </a>\n" +
+    "    </div> \n" +
+    "    <div class=\"member-card-image\" style=\"background-image: url('{{item.coverUrl}}')\">\n" +
+    "        <a ng-click=\"$event.stopPropagation()\" href=\"member/{{item.username}}\" ui-sref=\"member.activity({path:item.username})\">\n" +
+    "            <img ng-src=\"{{item.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
+    "        </a>\n" +
+    "    </div>\n" +
+    "    <div class=\"member-card-info\">\n" +
+    "        <h3 ng-click=\"$event.stopPropagation()\">\n" +
+    "            <a href=\"member/{{item.username}}\" ui-sref=\"member.activity({path:item.username})\">{{item.username}}</a>\n" +
+    "        </h3>\n" +
+    "        <p style=\"font-size:8px;\" ng-click=\"$event.stopPropagation();memberQRToggle(item);\"><a style=\"color:gray\"><i class=\"fas fa-qrcode\"></i> {{item.id}}</a></p>\n" +
+    "        <div class=\"spacing-5\"></div>\n" +
+    "        <p style=\"font-size:11px;\" ng-click=\"$event.stopPropagation()\">\n" +
+    "            <a href=\"member/{{item.username}}/projects\" ui-sref=\"member.projects({path:item.username})\">{{item.projectCount || 0}} Projects</a> | \n" +
+    "            <a href=\"member/{{item.username}}/followers\" ui-sref=\"member.followers({path:item.username})\">{{item.followerCount || 0}} Followers</a> | \n" +
+    "            <a href=\"member/{{item.username}}/following\" ui-sref=\"member.following({path:item.username})\">{{item.followingCount || 0}} Following</a>\n" +
+    "            <p style=\"color:gray\">Total Reputation | {{item.totalWork || 0}}\n" +
+    "        </p>\n" +
     "        <p style=\"color:gray\">{{currentUser.status}} <i style=\"color:#30b257\" class=\"fa fa-circle\"></i> Offline</p>\n" +
-    "        <a ng-show=\"!item.isFollowing\" style=\"padding:10px 15px;color:rgb(125,125,125)\" class=\"btn btn-default\" ng-click=\"$event.stopPropagation();follow(item)\">Follow</button></a>\n" +
-    "        <a ng-show=\"item.isFollowing\" style=\"padding:10px 15px;color:rgb(125,125,125)\" class=\"btn btn-default\" ng-click=\"$event.stopPropagation();follow(item)\">Unfollow</button></a>\n" +
-    "        <a style=\"padding:10px 15px;color:rgb(125,125,125)\" class=\"btn btn-default\" ng-click=\"$event.stopPropagation();transactionToggle(item)\">Send Tokens</a>\n" +
-    "        <img ng-click=\"$event.stopPropagation();transactionToggle(item)\" style=\"height:50px;text-align:left\" src=\"https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{item.id}}\">\n" +
+    "\n" +
+    "    </div>\n" +
+    "    <hr style=\"margin:0px;\">\n" +
+    "    <div style=\"padding:16px;\">\n" +
+    "        <a ng-show=\"!item.isFollowing\" style=\"padding:10px 15px;color:rgb(125,125,125);float:left\" class=\"btn btn-default\" ng-click=\"$event.stopPropagation();follow(item)\">Follow</button></a>\n" +
+    "        <a ng-show=\"item.isFollowing\" style=\"padding:10px 15px;color:rgb(125,125,125);float:left\" class=\"btn btn-default\" ng-click=\"$event.stopPropagation();follow(item)\">Unfollow</button></a>\n" +
+    "        <a style=\"padding:10px 15px;color:rgb(125,125,125);float:right\" class=\"btn btn-default\" ng-click=\"$event.stopPropagation();transactionToggle(item)\">Send Tokens</a>\n" +
+    "        <div style=\"clear:both\"></div>\n" +
     "    </div>\n" +
     "</div>");
 }]);
