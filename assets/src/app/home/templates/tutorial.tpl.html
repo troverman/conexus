@@ -55,7 +55,7 @@
                             <h4 ng-click="$event.stopPropagation()"><a href="member/{{currentUser.username}}" ui-sref="member.activity({path:currentUser.username})">{{currentUser.username}}</a></h4>
                             <p style="color:gray"><i style="color:#30b257" class="fa fa-circle"></i> {{currentUser.status}} Creating Account</p>
                             <p style="color:gray"><b>Total Reputation</b>: {{currentUser.totalWork}}</p>
-                            <p style="color:gray">{{currentUser.id}}<img style="height:50px;text-align:left" ng-src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{currentUser.id}}"></p>
+                            <p style="font-size:12px;" ng-click="$event.stopPropagation();memberQRToggle(currentUser);"><a style="color:gray"><i class="fas fa-qrcode"></i> {{currentUser.id}}</a></p>
                         </div>
                         <div ng-show="false" class="member-card-social">
                             <a ng-show="false" href="{{currentUser.socialAccounts.facebook.profileUrl}}" target="_blank"><i class="fa fa-facebook facebook-icon"></i></a>

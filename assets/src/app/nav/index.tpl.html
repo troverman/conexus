@@ -866,30 +866,20 @@
                 <h4 ng-show="!currentUser" ng-click="loginToggle()" class="nav-links" style="padding:4px;"><a>Login</a></h4>
                 <h4 ng-show="!currentUser" class="nav-links" style="padding:4px;"><a href="/register" ui-sref="register">Register</a></h4>
 
-                <!--only about, discover, market...-->
-                <!--better for logged in-->
-
-                <!--
-                <h2 ng-show="!currentUser" class="nav-links" style="padding:16px;"><a href="/about"><i ng-if="false" style="color:white" class="fas fa-plus"></i> About</a></h2>
-                <h2 ng-show="currentUser" ng-click="cre8Toggle()" class="nav-links" style="padding:12px;"><a><i ng-if="false" style="color:white" class="fas fa-plus"></i> CRE8</a></h2>
-                <h2 class="nav-links" style="padding:12px;"><i ng-if="false" style="color:white" class="fas fa-globe"></i> <a href="/discover">Discover</a></h2>
-                <h2 class="nav-links" style="padding:12px;"><a href="/market"><i ng-if="false" style="color:white" class="fas fa-poll-h"></i> Market</a></h2>
-                <h2 class="nav-links" style="padding:12px;"><a href="/marketplace"><i ng-if="false" style="color:white" class="fas fa-circle-notch"></i> Marketplace</a></h2>
-                <h2 class="nav-links" style="padding:12px;"><a href="/projects"><i ng-if="false" style="color:white" class="fas fa-users"></i> Projects</a></h2>
-                <h2 ng-show="currentUser" class="nav-links" style="padding:12px;"><a href="/notifications"><i ng-if="false" style="color:white" class="fas fa-envelope"></i> <span ng-if="notificationCount > 0" class="label label-danger">{{notificationCount}}</span> Notifications</a></h2>
-                <h2 ng-show="currentUser" class="nav-links" style="padding:12px;"><a href="/account"><i ng-if="false" style="color:white" class="fas fa-cogs"></i> Settings</a></h2>
-                <h2 ng-show="currentUser" class="nav-links" style="padding:12px;"><a href="/logout"><i ng-if="false" style="color:white" class="fas fa-sign-out-alt"></i> Logout</a></h2>
-                <h2 ng-click="loginToggle()" ng-show="!currentUser" class="nav-links" style="padding:12px;"><a><i ng-if="false" style="color:white" class="fas fa-sign-in-alt"></i> Login</a></h2>
-                <h2 ng-show="!currentUser" class="nav-links" style="padding:12px;"><a href="/register"><i ng-if="false" style="color:white" class="fas fa-user-plus"></i> Register</a></h2>
-                -->
-
                 <div class="spacing-15"></div>
                 <div style="background:url('https://source.unsplash.com/1600x900/?code,pattern,art,forest');height:100vh" class="imageContainerSmall">
-                    <div style="background:rgba(0,0,0,0.75);height:100vh" class="imageContainerSmallDiv"></div>
+                    <div style="background:rgba(0,0,0,0.75);height:100vh" class="imageContainerSmallDiv">
+                        <div style="">
+                            <!--<div style="padding:15px">
+                                <a href="/" ui-sref="home"><img style="height:50px" src="images/hypercube.gif"></a>
+                                <div class="spacing-5"></div>
+                                <a style="font-weight:bold;font-size:15px;color:white;font-family:Helvetica Neue,Helvetica,Arial,sans-serif" href="/" ui-sref="home">CRE8.XYZ</a>
+                            </div>-->
+                        </div>
+                    </div>
                 </div>
 
             </div>
-
         </div>
     </md-sidenav>
 

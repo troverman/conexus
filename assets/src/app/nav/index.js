@@ -1181,13 +1181,13 @@ angular.module( 'conexus.nav', [
             //UX KEEP CONTEXT THE SAME UNLESS CHECKED
             $scope.newTask.associatedModels = $rootScope.associatedModels;
 
-            $scope.associatedModels.associatedModels.push({
-                type:'CONTENT',
-                text:'Self',
-                context:{
-                    general:100
-                }
-            });
+            //$scope.associatedModels.associatedModels.push({
+            //    type:'CONTENT',
+            //    text:'Self',
+            //    context:{
+            //        general:100
+            //    }
+            //});
             
             $scope.newTask.validationModels = [{
                 validation:{general:100},

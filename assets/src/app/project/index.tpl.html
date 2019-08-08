@@ -1,10 +1,10 @@
-<style>.angular-google-map-container { height: 200px;} </style>
+<style>.angular-google-map-container { height: 150px;} </style>
 
 <div class="container" style="padding:0px">
     <div class="card" ng-click="subNavToggle(project)">
         
         <div class="row" style="margin:0px">
-            <div ng-class="{'col-sm-9 col-xs-8': markers.length > 0}" class="imageContainerSmall" style="background:url('https://source.unsplash.com/1600x900/?{{project.tags}}');">
+            <div class="imageContainerSmall" style="background:url('https://source.unsplash.com/1600x900/?{{project.tags}}');">
                 <div style="background:rgba(0,0,0,0.75);" class="imageContainerSmallDiv">  
                     <div style="margin-top: auto;margin-bottom: auto;">
                         <div style="padding:15px;text-align:center">
@@ -20,7 +20,7 @@
                     </div>
                 </div>
             </div>
-            <div class"col-sm-3 col-xs-4" ng-show="markers.length>0">
+            <div ng-show="markers.length>0">
                 <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options">
                     <ui-gmap-marker ng-repeat="marker in markers" coords="marker.coords" options="marker.options" idkey="marker.id">
                         <ui-gmap-window options="windowOptions" closeClick="closeClick()">
@@ -32,8 +32,6 @@
                 </ui-gmap-google-map>
             </div>
         </div>
-
-
         <div style="background-color:white">
             <div class="member-tab-container container" style="padding-left:0px">
                 <div style="text-align:center">
@@ -57,7 +55,7 @@
                     <li style="float:right;margin:5px"><a style="color:black"><i class="fa fa-bars"></i></a></li>
                     <li ng-click="$event.stopPropagation();filterToggle('DISCOVER');" style="float:left;margin:5px"><a style="color:black"><i class="fa fa-filter"></i></a></li>
                     <li>
-                        <form ng-click="$event.stopPropagation();" style="display:flex;flex-direction:row;float:left;width:80%">
+                        <form ng-click="$event.stopPropagation();" style="display:flex;flex-direction:row;float:left;width:70%">
                             <tags-input style="border:0px;flex-grow:2;height:40px;margin-top: -7px;margin-bottom: 3px;" placeholder="Search" ng-model="searchQuery"></tags-input>
                         </form>
                     </li>
