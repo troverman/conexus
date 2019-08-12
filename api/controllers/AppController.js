@@ -40,6 +40,17 @@ module.exports = {
 	},
 
 	create: function (req, res) {
+
+		function mintTokens(model){
+			var protocolTokens = getProtocolTokens(model);
+		};
+
+		//hmm
+		function getProtocolTokens(model){
+			var protocolTokens = ['APP', 'CRE8+APP', 'CRE8+APP+'+model.title.toUpperCase()];
+			return protocolTokens;
+		};
+
 		var model = {
 
 			title: req.param('title'),

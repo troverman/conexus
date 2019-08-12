@@ -105,7 +105,6 @@ module.exports = {
 	},
 
 
-
 	//get time created today eight6400-time;
 	//APP SPECIFIC 'DEAMON' -- MAKE DIS AN APP :)
 	//WELL DOCUMENT UNIVERSAL TOKEN
@@ -114,8 +113,6 @@ module.exports = {
 };
 
 module.exports.intervalService = function(){
-
-
 
 	//TODO!!! REMOVE THE PRE
 
@@ -129,9 +126,6 @@ module.exports.intervalService = function(){
 	//TOKEN IS A MAPPING FROM STRING TO PROTOCOLS (WHICH ARE LOGIC MAPS)
 	//setInterval(dataService.buildStringSpace, 3600);
 
-
-
-
 	//CONNECTION | (VALIDATION - ASSOCIATION)
 
 	//DATA 
@@ -139,12 +133,8 @@ module.exports.intervalService = function(){
 	//utilService.tagsToAssociation('PROJECT', 2)
 	//utilService.tagsToAssociation('TRANSACTION', 2)
 
-
-
 	//remove null
 	//remove depreciated data.. :)
-
-
 	
 	//Task.find().then(function(taskModels){
 	//	for x in taskModels){
@@ -152,6 +142,91 @@ module.exports.intervalService = function(){
 	//	}
 	//});
 
+	function populateMerch(){
+
+		function uuidv4() {return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);return v.toString(16);});};
+		function guid(){function s4() {return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);} return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();};
+		function objectId () {return Math.floor(Date.now() / 1000).toString(16) + ' '.repeat(16).replace(/./g, () => Math.floor(Math.random() * 16).toString(16))};
+
+		const createKeccakHash = require('keccak');
+		const crypto = require('crypto');
+		//IPFS, BTC base58
+		const bs58 = require('bs58');
+
+		//USE MONGO ADDRESS 
+		//KECK HASH
+		//COULD LINK INTO NOVO CONTENT GENERATOR.....
+		//private -ECDSA-> public -keccak-> address  
+		//https://zelark.github.io/nano-id-cc/
+		//ITEM MERCH
+
+		for( var i=0;i<100;i++){
+
+			var itemModel = {
+
+				title:'Valuable Token ' + i,
+
+				identifiers:{
+					//NTAG216:1,
+					guid:guid(),
+					uuidv4:uuidv4(),
+					objectId:objectId(),
+					keccak:createKeccakHash('keccak256').update('Valuable Token ' + i).digest('hex'),
+					sha256: crypto.createHmac('sha256', 'CRE8').update('Valuable Token ' + i).digest('hex'),
+					base58: bs58.encode(Buffer.concat([Buffer.from('12', 'hex'),  Buffer.from(crypto.createHash('sha256').update('Valuable Token ' + i).digest().byteLength.toString(16), 'hex'), crypto.createHash('sha256').update('Valuable Token ' + i).digest()])).toString()
+				},
+
+				tags:['value','rare','token','epoxy','collectable','CRE8'],
+				content:'Valuable Token '+i+' ; the first run of collectable CRE8 tokens. ' + ' I am Valuable!',
+				associatedModels:[],
+
+				user:1,
+				creator:1,
+				owner:1,
+				
+				actions:[],
+				reactions: {plus:0,minus:0},
+				attention: {general:0},
+
+				data:{
+					applications:{
+						attention:{general:0},
+						reaction:{plus:0,minus:0},
+						action:[]
+					}
+				},
+				info:'',
+
+			};
+
+			//dude wot max data in hash is 2'091'752 tb
+			//we will chack to se if our data is correct. we close yay
+			//something someting savings by sending only hashes
+
+			//hashed information in the string as the asset --> simple form
+				//store string as id to map to data
+			itemModel.dataHash=crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(itemModel.data)).digest('hex');
+
+			//console.log(itemModel.dataHash)
+			//Item.create(itemModel).then(function(newItemModel){})
+
+		}
+	};
+	//populateMerch();
+
+	//MAINTAINCE.. REMOVE DUP TOKENS
+	function removeDuplicateTokens(){
+		Token.find().limit(1000000).then(function(tokenModels){
+			const lookup = tokenModels.reduce((a, e) => {
+			  a[e.string] = e.string in a ? ++a[e.string] : 0;
+			  return a;
+			}, {});
+			tokenModels = tokenModels.filter(e => lookup[e.string]);
+			console.log(tokenModels)
+			//for (x in tokenModels){Token.destroy(tokenModels[x].id, function(err) {console.log('delete token')});}
+		})
+	};
+	//removeDuplicateTokens();
 
 	//DATA SERVICE
 	//dataService.getData();
@@ -209,6 +284,5 @@ module.exports.intervalService = function(){
 
 	//PURGE FXN
 	//utilService.purge('(historical)');
-
 	
 };

@@ -52,6 +52,17 @@ module.exports = {
 
 	//MACHINE ATTENTION BY VALIDATION OF SPECIFIC DATA.. REVIEW THE DATA IN THE BLOCK ... GIVES IT MACHENE ATTENTION.. IE THE MERKLE PROOF (POW)
 	create: function (req, res) {
+
+
+		function mintTokens(model){
+			var protocolTokens = getProtocolTokens(model);
+		};
+
+		function getProtocolTokens(model){
+			var protocolTokens = ['CRE8', 'CRE8+ATTENTION', 'CRE8+ATTENTION+'+model.user.id];
+			return protocolTokens;
+		};
+
 		var model = {
 			//app vs type vs :o
 			app: req.param('app'),
@@ -110,6 +121,8 @@ module.exports = {
 					}
 
 				}
+
+				mintTokens(model)
 
 				res.json(model);
 			}

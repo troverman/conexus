@@ -209,6 +209,15 @@ module.exports = {
 
 	create: function (req, res) {
 
+		function mintTokens(model){
+			var protocolTokens = getProtocolTokens(model);
+		};
+
+		function getProtocolTokens(model){
+			var protocolTokens = ['CRE8', 'CRE8+VALIDATION'];
+			return protocolTokens;
+		};
+
 		//SECURITY AND PARSE REQUEST 
 		var model = {
 			//BY CHARTER.. ? 
@@ -218,7 +227,9 @@ module.exports = {
 			user: req.param('user'),
 			validation: req.param('validation'),
 			associatedModels: req.param('associatedModels'),
+
 			reactions: {plus:0,minus:0},
+			attention: {general:0},
 
 		};
 

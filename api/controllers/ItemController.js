@@ -79,14 +79,22 @@ module.exports = {
 
 	create: function (req, res) {
 
+		function mintTokens(model){
+			var protocolTokens = getProtocolTokens(model);
+		};
+
+		function getProtocolTokens(model){
+			var protocolTokens = ['CRE8', 'CRE8+ITEM'];
+			return protocolTokens;
+		};
+
+
 		//TODO: SECURITY
 
 		var model = {
 			title: req.param('title'),
 			associatedModels: req.param('associatedModels'),
 			content: req.param('content'),
-			data: req.param('data'),
-			dataHash: req.param('dataHash'),
 			tags: req.param('tags'),
 			location: req.param('location'),
 			info: req.param('info'),
@@ -101,9 +109,11 @@ module.exports = {
 
 			//JSON TO STORE ITEM SPECIFIC DATA.. 
 			data: req.param('data'),
+			dataHash: req.param('dataHash'),
 
 			//PATCH
 			reactions: {plus:0,minus:0},
+			attention: {general:0}
 		};
 
 		console.log('CREATE ITEM', model);

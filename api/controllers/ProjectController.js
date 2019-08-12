@@ -168,6 +168,24 @@ module.exports = {
 	},
 
 	create: function (req, res) {
+
+
+
+
+
+		function mintTokens(model){
+			var protocolTokens = getProtocolTokens(model);
+		};
+
+		//FACTOR TO RETURN ENTIER TOKEN MODEL
+		function getProtocolTokens(model){
+			//give all (init) project tokens to creator-->1?
+			var protocolTokens = ['CRE8', 'CRE8+PROJECT', model.title.toUpperCase()];
+			return protocolTokens;
+		};
+
+
+
 		var model = {
 			title: req.param('title'),
 			tags: req.param('tags'),
@@ -235,6 +253,8 @@ module.exports = {
 				ProjectMember.create(projectMemberModel).then(function(){
 					console.log('PROJECTMEMBERCREATE')
 				});
+
+				mintTokens(project);
 
 			}
 		});

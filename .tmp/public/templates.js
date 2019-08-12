@@ -5294,7 +5294,7 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
 
 angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("home/templates/intro.tpl.html",
-    "<div class=\"intro\" style=\"\">\n" +
+    "<div class=\"intro\" style=\"margin-top:-50px\">\n" +
     "    <div class=\"intro-container\">\n" +
     "        <svg class=\"svg-defs\" viewBox=\"0 0 1920 1080\" viewPort=\"0 0 1920 1080\" preserveAspectRatio=\"xMidYMid slice\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
     "            <symbol id=\"intro-desktop-text\">\n" +

@@ -8,10 +8,6 @@ module.exports = {
 
 	getSome: function(req, res) {
 
-
-
-
-
 		//SAVE MARKET?? :)
 		//LINK TO TOKEN 'STRUCT'
 
@@ -345,8 +341,77 @@ module.exports = {
 	},
 
 	create: function (req, res) {
+
+		//DEPRECIATE TOKEN IN FAVOR OF ASSET
+		//REORG.. 
+		function mintTokens(order){
+
+			for (x in Object.keys(order.setAlpha)){
+				Token.find({string:Object.keys(order.setAlpha)[x]}).then(function(tokenModels){
+					if (tokenModels.length == 0){
+						var newTokenModel = {
+							string:Object.keys(order.setAlpha)[x],
+							information:{markets:1, inCirculation:1},
+							protocols:['CRE8', 'ORDER'],
+							logic:{transferrable:true, mint:''}
+						};
+						Token.create(newTokenModel).then(function(){console.log('TOKEN CREATED');});
+					}
+					else{
+						tokenModels[0].information.markets++; 
+						Token.update({id:tokenModels[0].id}, {information:tokenModels[0].information}).then(function(){console.log('TOKEN UPDATED')});
+					}
+				});
+			}
+
+			for (x in Object.keys(order.setBeta)){
+				Token.find({string:Object.keys(order.setBeta)[x]}).then(function(tokenModels){
+					if (tokenModels.length == 0){
+						var newTokenModel = {
+							string:Object.keys(order.setBeta)[x],
+							information:{markets:1, inCirculation:1},
+							protocols:['CRE8', 'ORDER'],
+							logic:{transferrable:true, mint:''}
+						};
+						Token.create(newTokenModel).then(function(){console.log('TOKEN CREATED');});
+					}
+					else{
+						tokenModels[0].information.markets++; 
+						Token.update({id:tokenModels[0].id}, {information:tokenModels[0].information}).then(function(){console.log('TOKEN UPDATED')});
+					}
+				});
+			}
+
+		};
+
+		//ORDERVS ASSOCIATION
+		function getProtocolTokens(model){
+			var protocolTokens = ['CRE8', 'CRE8+ORDER'];
+			return protocolTokens;
+		};
+
+
+		//TODO
+		//ASSET ASSOCIATION....:)
+		//CONNECTION? (ORDER RULZ)
+		function createMarket(order){
+			var marketModel = {
+				setAlpha:order.setAlpha,
+				setBeta:order.setBeta,
+				rank:1
+			};
+
+			//GET ALL ORDERS WITH setAlpha and beta
+				//return bookzzz
+
+		};
+
+
 		var model = {
 
+			//BLOCK..
+
+			//DATA -- MODEL (APP)
 			setAlpha: req.param('setAlpha'),
 			setBeta: req.param('setBeta'),
 			
@@ -356,7 +421,7 @@ module.exports = {
 			creator: req.param('user'),
 			user: req.param('user'),
 
-			//DATA - APPS
+			//DATA - ASSOCIATED APP(S)
 			reactions:{plus:0,minus:0},
 			attention:{general:0}
 
@@ -367,59 +432,18 @@ module.exports = {
 			if (err) {return console.log(err);}
 			else {
 
-				console.log(order);
 				Order.publishCreate(order);
 
-				//OFC THIS IS BETA
-				//DO ORDER CREATE PROTOCOL
-				for (x in Object.keys(order.setAlpha)){
-					Token.find({string:Object.keys(order.setAlpha)[x]}).then(function(tokenModels){
-						if (tokenModels.length == 0){
-							var newTokenModel = {
-								string:Object.keys(order.setAlpha)[x],
-								information:{
-									markets:1,
-									inCirculation:1
-								},
-								protocols:['CREATE'],
-								logic:{
-									transferrable:true, 
-									mint:''
-								}
-							};
-							Token.create(newTokenModel).then(function(){console.log('TOKEN CREATED');});
-						}
-						else{
-							tokenModels[0].information.markets++; 
-							Token.update({id:tokenModels[0].id}, {information:tokenModels[0].information}).then(function(){console.log('TOKEN UPDATED')});
-						}
-					});
-				}
+				//CREATE TOKENS ON ORDER!!
+				//(ASSET)
+				mintTokens(order);
 
-				for (x in Object.keys(order.setBeta)){
-					Token.find({string:Object.keys(order.setBeta)[x]}).then(function(tokenModels){
-						if (tokenModels.length == 0){
-							var newTokenModel = {
-								string:Object.keys(order.setBeta)[x],
-								information:{
-									markets:1,
-									inCirculation:1
-								},
-								protocols:['CREATE'],
-								logic:{
-									transferrable:true, 
-									mint:''
-								}
-							};
-							Token.create(newTokenModel).then(function(){console.log('TOKEN CREATED');});
-						}
-						else{
-							tokenModels[0].information.markets++; 
-							Token.update({id:tokenModels[0].id}, {information:tokenModels[0].information}).then(function(){console.log('TOKEN UPDATED')});
-						}
-					});
-				}
+				//CREATE MARKET ON ORDER!
+				//(ASSET-ASSET ASSOCIATION)
+				//createMarket(order);
+					//COMPUTE ORDER BOOK????
 
+				console.log(order)
 				res.json(order);
 
 			}

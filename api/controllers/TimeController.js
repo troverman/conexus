@@ -287,6 +287,7 @@ module.exports = {
 
 			//ASYNC SCOPING IS THE FIX IT SEEMS
 			for (x in timeProtocolTokens){
+
 				var tokenString = timeProtocolTokens[x];
 				console.log(tokenString);
 
@@ -299,17 +300,12 @@ module.exports = {
 							var newTokenModel = {
 								string:tokenString,
 								protocols:['CRE8','TIME'], 
-								information:{
-									inCirculation:model.amount,
-									markets:0
-								},
-								logic:{
-									transferrable:true, 
-									mint:'CREATE TIME'
-								}
+								information:{inCirculation:model.amount, markets:0},
+								//ENCODE?
+								logic:{transferrable:true, mint:'CREATE TIME'}
 							};
 
-							Token.create(newTokenModel).then(function(model){console.log('TOKEN CREATED', model);});
+							Token.create(newTokenModel).then(function(model){console.log('TOKEN CREATED', model.string);});
 
 							model.user.balance[tokenString] = parseFloat(model.amount);
 							User.update({id:model.user.id}, {balance:model.user.balance}).then(function(user){});
@@ -326,7 +322,6 @@ module.exports = {
 							else{model.user.balance[tokenString] = parseFloat(model.amount);}
 
 							//DEPRECIATE REPUTATION
-
 							User.update({id:model.user.id}, {balance:model.user.balance}).then(function(user){});
 
 						}
@@ -344,7 +339,6 @@ module.exports = {
 			User.update({id:model.user.id}, {totalWork:model.user.totalWork}).then(function(user){});
 
 		};
-
 
 		//HMM
 		//TODO: SUPERSET REP
@@ -377,7 +371,6 @@ module.exports = {
 
 		};
 
-
 		//TODO: SECURITY - PERMISSIONS.. AUTH
 		var model = {
 
@@ -399,10 +392,10 @@ module.exports = {
 			tags: req.param('tags'),
 			model: 'TIME',
 
-
 			//TODO: APP - DATA
 			reactions: {plus:0,minus:0},
 			attention:{general:0}
+			
 		};
 
 		//TODO: BETTER SOON - && SECURITY

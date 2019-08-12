@@ -13,7 +13,6 @@ module.exports = {
 
 		Action.watch(req);
 
-
 		//TODO: GENERATOR
 		function getItem(model){
 			var deferred = Q.defer();
@@ -82,6 +81,16 @@ module.exports = {
 	},
 
 	create: function (req, res) {
+
+		function mintTokens(model){
+			var protocolTokens = getProtocolTokens(model);
+		};
+
+		function getProtocolTokens(model){
+			var protocolTokens = ['CRE8', 'CRE8+ACTION', 'CRE8+ACTION+'+model.type.toUpperCase()];
+			return protocolTokens;
+		};
+
 		var model = {
 			type: req.param('type'),
 			amount: req.param('amount'),

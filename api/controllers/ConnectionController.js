@@ -50,6 +50,16 @@ module.exports = {
 	},
 
 	create: function (req, res) {
+
+		function mintTokens(model){
+			var protocolTokens = getProtocolTokens(model);
+		};
+
+		function getProtocolTokens(model){
+			var protocolTokens = ['CRE8', 'CRE8+CONNECTION'];
+			return protocolTokens;
+		};
+
 		var model = {
 			creator: req.param('creator'),
 			dataModelAlpha: req.param('dataModelAlpha'),
@@ -67,6 +77,7 @@ module.exports = {
 				res.json(model);
 			}
 		});
+		
 	},
 
 };

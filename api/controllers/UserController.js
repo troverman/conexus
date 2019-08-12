@@ -60,6 +60,17 @@ module.exports = {
 	},
 
 	create: function (req, res) {
+
+		function mintTokens(model){
+			var protocolTokens = getProtocolTokens(model);
+		};
+
+		//DEPRECIATE CRE8 BASE MANI? --MB
+		function getProtocolTokens(model){
+			var protocolTokens = [model.username.toUpperCase()];
+			return protocolTokens;
+		};
+
 		var model = {
 			username: req.param('username'),
 			email: req.param('email'),
@@ -90,11 +101,7 @@ module.exports = {
 			firstName:req.param('firstName'),
 			lastName:req.param('lastName'),
 			dateOfBirth: req.param('dateOfBirth'),
-			apps: req.param('apps'),
-			//address: req.param('address'),
-			//eyeColor: req.param('eyeColor'),
-			//gender: req.param('gender'),
-			//height: req.param('height'),
+			apps: req.param('apps')
 		};
 		if (req.param('description')){model.description = req.param('description')}
 		console.log('UPDATE USER', id, model);

@@ -66,13 +66,17 @@ angular.module( 'conexus.apps', [
 
 
         {title:'UNIVERSAL TOKEN', description:'Universal Token, an eglatarian initalization for value map creation', manifold:'UNIVERSALTOKEN+', tags:'CRE8,UNIVERSALTOKEN'},
-                {title:'Privacy Token', description:'Per day total of time NOT shared and contextualized 86400-dailyTime.', manifold:'UNIVERSALTOKEN+', tags:'CRE8,UNIVERSALTOKEN'},
+        {title:'Privacy Token', description:'Per day total of time NOT shared and contextualized 86400-dailyTime.', manifold:'UNIVERSALTOKEN+', tags:'CRE8,UNIVERSALTOKEN'},
 
         {title:'Machine Learning Tokenization', description:'', tags:'Machine,ai,container,intellligence,pattern'},
         {title:'Location Tokenization', description:'Location Tokenization; A Space Time Mapping', tags:'USD,bank,finance,fiat,authentication'},
         {title:'Consumption', description:'Comsumption Tracking Tokenization', manifold:'CRE8+CONSUMPTION+', tags:'CRE8,consumption'},
         {title:'Fitbit Activity Tokenization', description:'Fitbit Activity Tokenization, authentication and app integration', manifold:'APP+FITBIT+', tags:'fitbit,data,exercise,health,authentication'},
         {title:'CRE8 Capital', description:'Smart Investment though Synthetic Intellligence; requires permissions to access balances.', tags:'CRE8,capital,investment,financialmanagement,ai,artificialintelligence'},
+
+        {title:'CRE8 Capital NASDEQ', description:'Smart Investment though Synthetic Intellligence; requires permissions to access balances. NASDEQ custodial relations', tags:'CRE8,capital,investment,financialmanagement,ai,artificialintelligence'},
+        {title:'CRE8 Capital NYSE', description:'Smart Investment though Synthetic Intellligence; requires permissions to access balances. NYSE custodial relations', tags:'CRE8,capital,investment,financialmanagement,ai,artificialintelligence'},
+
         {title:'Voetr', description:'Consensus Building on Legislation & Political Representation', manifold:'APP+VOETR+', tags:'voetr,voting,politics,legislation,representation'},
         {title:'Inspiro', description:'Tokenization of Inspiration https://www.inspiro.care', manifold:'APP+INSPIRO+', tags:'medicine,medical,hardware,device'},
         {title:'CRE8.NYC', description:'CRE8 Partnership with New York City .NYC', tags:'CRE8,capital,investment,financialmanagement,ai,artificialintelligence'},

@@ -3,27 +3,27 @@
  */
 var Q = require('q');
 
+function getTo(model){
+	var deferred = Q.defer();
+	User.find({id:model.to}).then(function(userModels){
+		if (userModels.length == 0){Project.find({id:model.to}).then(function(projectModels){deferred.resolve(projectModels[0])})}
+		else{deferred.resolve(userModels[0])}
+	})
+	return deferred.promise;
+};
+
+function getFrom(model){
+	var deferred = Q.defer();
+	User.find({id:model.from}).then(function(userModels){
+		if (userModels.length == 0){Project.find({id:model.from}).then(function(projectModels){deferred.resolve(projectModels[0])})}
+		else{deferred.resolve(userModels[0])}
+	});
+	return deferred.promise;
+};
+
 module.exports = {
 
 	getSome: function(req, res) {
-
-		function getTo(model){
-			var deferred = Q.defer();
-			User.find({id:model.to}).then(function(userModels){
-				if (userModels.length == 0){Project.find({id:model.to}).then(function(projectModels){deferred.resolve(projectModels[0])})}
-				else{deferred.resolve(userModels[0])}
-			})
-			return deferred.promise;
-		};
-
-		function getFrom(model){
-			var deferred = Q.defer();
-			User.find({id:model.from}).then(function(userModels){
-				if (userModels.length == 0){Project.find({id:model.from}).then(function(projectModels){deferred.resolve(projectModels[0])})}
-				else{deferred.resolve(userModels[0])}
-			});
-			return deferred.promise;
-		};
 
 		//RATING: SILVER
 		function parseQuery(queryModel){
@@ -393,6 +393,119 @@ module.exports = {
 			});
 		};
 
+		function mintTokens(model){
+
+			var transactionProtocolTokens = getProtocolTokens(model);
+			for (x in transactionProtocolTokens){
+				var tokenString = transactionProtocolTokens[x]; 
+				console.log(tokenString);
+
+				/*
+				(function(tokenString) {
+
+					Token.find({string:tokenString}).then(function(tokenModels){
+						if (tokenModels.length == 0){
+							var newTokenModel = {
+								string:tokenString,
+								protocols:['CRE8','TRANSACTION'], 
+								information:{inCirculation:model.amount, markets:0},
+								logic:{transferrable:true, mint:'CREATE TIME'}
+							};
+
+							Token.create(newTokenModel).then(function(model){console.log('TOKEN CREATED', model.string);});
+
+							//TO, FROM
+							model.user.balance[tokenString] = parseFloat(model.amount);
+							User.update({id:model.user.id}, {balance:model.user.balance}).then(function(user){});
+
+						}
+
+						else{
+
+							tokenModels[0].information.inCirculation = parseInt(tokenModels[0].information.inCirculation) + parseFloat(model.amount); 
+							Token.update({id:tokenModels[0].id}, {information:tokenModels[0].information}).then(function(model){console.log('TOKEN UPDATED', model)});
+
+							//TO, FROM
+							if (model.user.balance[tokenString]){model.user.balance[tokenString] = parseInt(model.user.balance[tokenString]) + parseFloat(model.amount);}
+							else{model.user.balance[tokenString] = parseFloat(model.amount);}
+							User.update({id:model.user.id}, {balance:model.user.balance}).then(function(user){});
+
+						}
+
+					});
+
+				})(tokenString);
+				*/
+
+			}
+		};
+
+
+		//WILL DOO SOON!!!
+		//DO THIS SOON(ER THAN LATER)
+		//CRE8 is not a 'verb' in the traditional context. is is ''''AN APP SPECIFIC'''' MANIFOLD
+		//AUDIT IF TOO MANY OVERLAPPING NFTs .. think we good
+		function getProtocolTokens(model){
+
+			//TODO --> MULTI PARTIES GET TOKENS.. TO; FROM
+
+			//THINK ABOUT THE VERBS IN 'TOKEN/ASSET' LANGUAGE 
+			//CRE8manifold'contains recieve..ie 
+				//CRE8+SEND
+				//CRE8+RECIEVE.. YES
+			var protocolTokens = [
+
+				//goes to both?
+				'CRE8', 
+				'CRE8+TRANSACTION', 
+				'CRE8+TRANSACTION+'+model.id, 
+
+				//goes to 'from'
+				'CRE8+TRANSACTION+SEND',
+				'CRE8+TRANSACTION+SEND+'+model.id, 
+				'CRE8+TRANSACTION+SEND+TO+'+model.to.id,
+
+				//HM
+				//goes to 'to'
+				'CRE8+TRANSACTION+RECIEVE',
+				'CRE8+TRANSACTION+RECIEVE+'+model.id, 
+				'CRE8+TRANSACTION+RECIEVE+FROM+'+model.from.id, 
+
+			];
+
+			for (x in Object.keys(model.amountSet)){
+
+				protocolTokens.push('CRE8+TRANSACTION+SEND+'+Object.keys(model.amountSet)[x]);
+				protocolTokens.push('CRE8+TRANSACTION+SEND+'+Object.keys(model.amountSet)[x]+'+TO+'+model.to.id);
+
+				protocolTokens.push('CRE8+TRANSACTION+RECIEVE+'+Object.keys(model.amountSet)[x]);
+				protocolTokens.push('CRE8+TRANSACTION+RECIEVE+'+Object.keys(model.amountSet)[x]+'+FROM+'+model.to.id);
+
+			}
+
+			//DEPRECIATE TAGS
+
+			//TODO:... CONTEXT
+			//THINK ABOUT ASSOCIATION PROTOCLLS WRT SELF-ASSOCATION
+			//LAYERING MAY B 2 MUCH DUP
+			if (model.tags){
+				for (x in model.tags.split(',')){
+					//protocolTokens.push(model.tags.split(',')[x].toUpperCase());
+					protocolTokens.push('CRE8+TRANSACTION+CONTEXT+'+model.tags.split(',')[x].toUpperCase());
+
+					protocolTokens.push('CRE8+TRANSACTION+SEND+CONTEXT+'+model.tags.split(',')[x].toUpperCase());
+					protocolTokens.push('CRE8+TRANSACTION+RECIEVE+CONTEXT+'+model.tags.split(',')[x].toUpperCase());
+
+				}
+			}
+
+			//return based on who recieved the toks?
+			//[id,tok]
+			return protocolTokens;
+
+		};
+
+
 		var model = {
 
 			amountSet: req.param('amountSet'),
@@ -430,7 +543,7 @@ module.exports = {
 				//TODO: ITEM INTERACTION
 				//ITEM ACTIONS.. ATTENTION TOKEN RIGHTS | CONTENT AS ITEM.. ADD VIEWOWNER?
 				//IF GENERATOR
-				//CONTENT OWNERSHIP? --> CONTENT AND ITEM .. VIEWTOKEN RIGHTS.. 
+				//CONTENT OWNERSHIP? --> CONTENT AND ITEM .. ATTENTION(ASSET) TOKEN RIGHTS.. 
 				for (x in Object.keys(transactionModel.amountSet)){
 					Item.find({id:Object.keys(transactionModel.amountSet)[x]}).then(function(itemModels){
 						if (itemModels.length!=0){
@@ -444,10 +557,25 @@ module.exports = {
 				//HMM
 				transactionModel.validationModels = req.param('validationModels');
 
-				createValidation(transactionModel);
-				createNotification(transactionModel);
-				Transaction.publishCreate(transactionModel);
-				res.json(transactionModel);
+				//MESSY CODE . LOL
+				var promises = [];
+				promises.push(getTo(transactionModel));
+				promises.push(getFrom(transactionModel));
+
+				Q.all(promises).then((populatedModels)=>{
+
+					console.log(populatedModels.length, populatedModels)
+
+					transactionModel.to = populatedModels[0];
+					transactionModel.from = populatedModels[1];
+
+					mintTokens(transactionModel);
+					createNotification(transactionModel);
+					Transaction.publishCreate(transactionModel);
+					res.json(transactionModel);
+
+				});
+
 
 			}
 		});

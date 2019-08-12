@@ -137,6 +137,49 @@ module.exports = {
 
 	//TODO
 	create: function (req, res) {
+
+		//TODO ASSOIATION..
+		function getProtocolTokens(model){
+			var protocolTokens = ['CRE8', 'CRE8+TASK', 'CRE8+TSK+'+model.id];
+			if (model.tags){
+				for (x in model.tags.split(',')){
+					protocolTokens.push(model.tags.split(',')[x].toUpperCase());
+					protocolTokens.push('CRE8+TASK+'+model.tags.split(',')[x].toUpperCase());
+				}
+			}
+			return protocolTokens;
+		};
+
+		function mintTokens(model){
+			var taskProtocolTokens = getProtocolTokens(model);
+			for (x in timeProtocolTokens){
+				var tokenString = taskProtocolTokens[x];
+				(function(tokenString) {
+					Token.find({string:tokenString}).then(function(tokenModels){
+						if (tokenModels.length == 0){
+							var newTokenModel = {
+								string:tokenString,
+								protocols:['CRE8','TASK'], 
+								information:{inCirculation:model.amount, markets:0},
+								logic:{transferrable:true, mint:'CREATE TASK'}
+							};
+							Token.create(newTokenModel).then(function(model){console.log('TOKEN CREATED', model.string);});
+							model.user.balance[tokenString] = parseFloat(model.amount);
+							User.update({id:model.user.id}, {balance:model.user.balance}).then(function(user){});
+						}
+						else{
+							tokenModels[0].information.inCirculation = parseInt(tokenModels[0].information.inCirculation) + parseFloat(model.amount); 
+							Token.update({id:tokenModels[0].id}, {information:tokenModels[0].information}).then(function(model){console.log('TOKEN UPDATED', model)});
+							if (model.user.balance[tokenString]){model.user.balance[tokenString] = parseInt(model.user.balance[tokenString]) + parseFloat(model.amount);}
+							else{model.user.balance[tokenString] = parseFloat(model.amount);}
+							User.update({id:model.user.id}, {balance:model.user.balance}).then(function(user){});
+						}
+					});
+
+				})(tokenString);
+			}
+		};
+
 		var model = {
 
 			title: req.param('title'),
@@ -163,6 +206,9 @@ module.exports = {
 
 				User.find({id:model.user}).then(function(userModel){
 
+					task.user = userModel[0];
+					
+					mintTokens(task);
 					Task.publishCreate(task);
 					res.json(task);
 

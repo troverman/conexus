@@ -1375,6 +1375,9 @@ angular.module( 'conexus.nav', [
 
     $rootScope.transactionToggle = function(item, asset){
 
+        //TEMP HAK?
+        $scope.newTransaction = {};
+
         $scope.closeAllNav();
 
         $scope.addAssetToTransaction = function(model){
@@ -1387,12 +1390,12 @@ angular.module( 'conexus.nav', [
        
         if($rootScope.currentUser){
 
+            $scope.newTransaction.from = [{text:$rootScope.currentUser.username, address:$rootScope.currentUser.id, id:$rootScope.currentUser.id}];
+
             if (item){
                 if(item.model=='PROJECT'){$scope.newTransaction.to = [{text:item.title, address:item.id, id:item.id}];}
                 else{$scope.newTransaction.to = [{text:item.username, address:item.id, id:item.id}];}
             }
-
-            if (!$scope.newTransaction){$scope.newTransaction = {}}
 
             if (asset){
                 $scope.newTransaction.identifierSet = [];
@@ -1407,9 +1410,7 @@ angular.module( 'conexus.nav', [
                 if(!isNaN($rootScope.balance[key])){$scope.sortedBalances.push([key, $rootScope.balance[key]]);}
             }
 
-            $scope.sortedBalances.sort(function(a, b) {
-                return b[1] - a[1];
-            });
+            $scope.sortedBalances.sort(function(a, b) {return b[1] - a[1];});
 
             $scope.newTransaction.validationModels = [{
                 validation:{},

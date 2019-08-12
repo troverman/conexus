@@ -209,6 +209,16 @@ module.exports = {
 	},
 
 	create: function (req, res) {
+
+		function mintTokens(model){
+			var protocolTokens = getProtocolTokens(model);
+		};
+
+		function getProtocolTokens(model){
+			var protocolTokens = ['CRE8', 'CRE8+CONTENT', model.id, 'CRE8+CONTENT+'+model.id ];
+			return protocolTokens;
+		};
+
 		var model = {
 
 			title: req.param('title'),
@@ -237,6 +247,7 @@ module.exports = {
 
 			//PATCH
 			reactions: {plus:0, minus:0},
+			attention: {general:0}
 
 		};
 
