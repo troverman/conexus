@@ -4,6 +4,14 @@
 
 module.exports = {
 
+
+	//TEST | WIP | PLAYGROUND
+	structure: function(req, res) {},
+	language: function(req, res) {},
+	congruence: function(req, res) {},
+	manifold: function(req, res) {},
+
+
 	getSome: function(req, res) {
 
 		var limit = parseInt(req.query.limit) || 1;

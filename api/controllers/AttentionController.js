@@ -59,7 +59,7 @@ module.exports = {
 		};
 
 		function getProtocolTokens(model){
-			var protocolTokens = ['CRE8', 'CRE8+ATTENTION', 'CRE8+ATTENTION+'+model.user.id];
+			var protocolTokens = ['CRE8', 'CRE8+ATTENTION']//, 'CRE8+ATTENTION+'+model.user.id];
 			return protocolTokens;
 		};
 
@@ -122,7 +122,7 @@ module.exports = {
 
 				}
 
-				mintTokens(model)
+				//mintTokens(model)
 
 				res.json(model);
 			}

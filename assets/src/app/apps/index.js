@@ -33,7 +33,10 @@ angular.module( 'conexus.apps', [
         {title:'LANGUAGE', description:'CRE8 CORE LANGUAGE APP', tags:'CRE8,CORE,LANGUAGE'},
         {title:'CONGURENCE', description:'CRE8 CORE CONGURENCE APP', tags:'CRE8,CORE,CONGURENCE'},
         {title:'MANIFOLD', description:'CRE8 CORE MANIFOLD APP', tags:'CRE8,CORE,MANIFOLD'},
+
         {title:'CONNECTION', description:'CRE8 CORE CONNECTION APP', tags:'CRE8,CORE,MANIFOLD,CONNECTION,ASSOCIATION'},
+
+        {title:'ASSOCIATION', description:'CRE8 CORE ASSOCIATION APP', tags:'CRE8,CORE,MANIFOLD,CONNECTION,ASSOCIATION'},
 
         {title:'CREDIT', description:'Credit Manifold', manifold:'+CREDIT+[INTEREST], +CREDIT+[ISSUE]+[TIMEDOMAIN]+[INTERESTASSETSET]+[INTERESTSET]', tags:'CRE8,CORE,MANIFOLD,CREDIT'},
         {title:'FUTURE', description:'Future Manifold App', manifold:'+FUTURE+[ASSETSET]+[DATE]', tags:'CRE8,CORE,MANIFOLD,FUTURE'},
