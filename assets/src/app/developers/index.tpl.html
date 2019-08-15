@@ -728,10 +728,46 @@ contract Protocol {
                 </div>
             </div>
         </div>
+    </div>
+
+    <div id="QUERYLANGUAGE" style="background-color:white;">
+        <div class="spacing-15"></div>
         <div class="container">
-            <div class="spacing-15"></div>
             <div class="row">
-                <div class="col-sm-1">
+                <div class="col-sm-6">
+                    <div style="background:url('https://source.unsplash.com/1600x900/?explore,discover,code')" class="imageContainerSmall">
+                        <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                            <div style="margin-top: auto;margin-bottom: auto;">
+                                <div class="container">
+                                    <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Query Language</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>     
+                    <div>
+                        <p style="color:gray;font-style:italic">Filter & Search Parameters<p>
+                        <p style="color:gray;font-style:italic">CRE8 Core Querying Language is recursive and compouding. Querys can be composed for deep programatic specification.</p>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="bootstrapHack" style="z-index:auto;">
+                        <div style="margin-left:15px;">
+                            <div class="spacing-5"></div>
+                        <div hljs hljs-language="javascript"  hljs-source="metaModel"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="spacing-15"></div>
+    </div>
+
+    <!--TODO: SIDEBAR-->
+    <div id="MODELS" style="background-color:white;">
+        <div class="spacing-15">
+        <div class="container">
+            <div class="row">
+                 <div class="col-xs-12" style="text-align:left">
                     <div class="modelList">
                         <p><a href="#ACTION" du-smooth-scroll>Action</a></p>
                         <p><a href="#ATTENTION" du-smooth-scroll>Attention</a></p>
@@ -741,12 +777,10 @@ contract Protocol {
                         <p><a href="#CONTENT" du-smooth-scroll>Content</a></p>
                         <p><a href="#CONNECTIONMODEL" du-smooth-scroll>Connection</a></p>
                         <p><a href="#DATA" du-smooth-scroll>Data</a></p>
-                        <!--<p><a href="#EVENT" du-smooth-scroll>Event</a></p>-->
                         <p><a href="#FOLLOWER" du-smooth-scroll>Follower</a></p>
                         <p><a href="#ITEM" du-smooth-scroll>Item</a></p>
                         <p><a href="#LOCATION" du-smooth-scroll>Location</a></p>
                         <p><a href="#MEMBER" du-smooth-scroll>Member</a></p>
-                        <!--<p><a href="#MOTION" du-smooth-scroll>Motion</a></p>-->
                         <p><a href="#NOTIFICATION" du-smooth-scroll>Notification</a></p>
                         <p><a href="#ORDER" du-smooth-scroll>Order</a></p>
                         <p><a href="#PASSPORT" du-smooth-scroll>Passport</a></p>
@@ -764,45 +798,14 @@ contract Protocol {
                         <p><a href="#VALIDATION" du-smooth-scroll>Validation</a></p>
                     </div>
                 </div>
-                <div class="col-sm-5">
-                    <div>
-
-                        <h5>Filter & Search Parameters</h5>
-                        <!--SEARCH MODEL-->
-                        <!--<p style="color:gray;font-style:italic">Every model can be filtered & sorted by each model param: {DESC, ASC}</p>-->
-                        <!--META MODEL.. ID, AssociatedModels, ([Content], Location, Tags), Creator .. etc -->
-
-                    </div>
-                    <div class="spacing-50"></div>
-                    <!--
-                    <div style="background:url('https://source.unsplash.com/1600x900/?explore,discover')" class="imageContainerSmall">
-                        <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
-                            <div style="margin-top: auto;margin-bottom: auto;">
-                                <div class="container">
-                                    <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">Models & Endpoints</h1>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="spacing-50"></div>
-                    -->
-                </div>
-                <div class="col-sm-6">
-                    <div class="bootstrapHack" style="z-index:auto;">
-                        <div style="margin-left:15px;">
-                            <div class="spacing-5"></div>
-                        <div hljs hljs-language="javascript"  hljs-source="metaModel"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="spacing-15"></div>
+           </div>
         </div>
+        <div class="spacing-15"></div>
     </div>
 
     <div id="ACTION" style="background-color:white;min-height:70vh">
-        <div class="container">
         <div class="spacing-15"></div>
+        <div class="container">
             <div class="row">
                 <!--
                 <div class="col-xs-12">
@@ -828,7 +831,6 @@ contract Protocol {
                         </div>
                     </div>             
                     <div class="spacing-15"></div>
-                    <h4><b>Action</b></h4>
                     <p style="color:gray;font-style:italic">This is the Action Model. Agnositic Data Model. Supplies Model Inheritance. Vector actions upon items with direction (type) and quantity. `A_t circ I`</p>
 
                     <p style="color:gray;font-style:italic">Permissions.. Authentatication.. etc</p>
@@ -1100,7 +1102,7 @@ contract Protocol {
                     </div>             
                     <div class="spacing-15"></div>
                     <h4><b>Connection</b></h4>
-                    <p style="color:gray;font-style:italic">This is the Connection Model. Connections are abstract associations. Connections create charters.</p>
+                    <p style="color:gray;font-style:italic">This is the Connection Model. Connections are abstract associations. Connections create charters. A set of connections form a Charter</p>
                     <div class="spacing-50"></div>
                 </div>
                 <div class="col-sm-6 col-xs-12">

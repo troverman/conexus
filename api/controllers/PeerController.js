@@ -58,7 +58,6 @@ module.exports = {
 			versionHash: 'UNSTABLE PRE-ALPHA',
 			creator: req.param('creator'),
 		};
-
 		console.log('CREATE PEER', model);
 		Peer.create(model)
 		.exec(function(err, model) {
@@ -68,6 +67,10 @@ module.exports = {
 				res.json(model);
 			}
 		});
+	},
+
+	update: function (req, res) {
+
 	},
 
 };

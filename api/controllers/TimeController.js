@@ -277,6 +277,9 @@ module.exports = {
 			//});
 		};
 
+
+		//REMOVE 'STRING' APPARENTlY ie what is saved is 
+		//'CRE8+TIME+GOOD' vs CRE8+TIME+GOOD
 		function mintTokens(model){
 
 			//GET PROTOCOL????????
@@ -307,8 +310,12 @@ module.exports = {
 
 							Token.create(newTokenModel).then(function(model){console.log('TOKEN CREATED', model.string);});
 
+
 							model.user.balance[tokenString] = parseFloat(model.amount);
-							User.update({id:model.user.id}, {balance:model.user.balance}).then(function(user){});
+							//PERHAPS NEW MODEL
+							User.update({id:model.user.id}, {balance:model.user.balance}).then(function(user){
+								console.log('USER BALANCE UPDATED', user);
+							});
 
 						}
 
@@ -322,7 +329,9 @@ module.exports = {
 							else{model.user.balance[tokenString] = parseFloat(model.amount);}
 
 							//DEPRECIATE REPUTATION
-							User.update({id:model.user.id}, {balance:model.user.balance}).then(function(user){});
+							User.update({id:model.user.id}, {balance:model.user.balance}).then(function(user){
+								console.log('USER BALANCE UPDATED', user);
+							});
 
 						}
 

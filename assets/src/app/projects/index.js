@@ -80,14 +80,15 @@ angular.module( 'conexus.projects', [
 
                 $scope.lat = position.coords.latitude; 
                 $scope.lng = position.coords.longitude;
+                
                 if ($rootScope.currentUser){
                     $rootScope.currentUser.location = {
-                        lat:lat,
-                        lng:lng
+                        lat:$scope.lat,
+                        lng:$scope.lng
                     };
                 }
                 $scope.map = {
-                    center: {latitude: lat, longitude: lng},
+                    center: {latitude: $scope.lat, longitude: $scope.lng},
                     zoom: 14
                 };
 

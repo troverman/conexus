@@ -13,7 +13,6 @@ module.exports = {
 
 		App.watch(req);
 
-
 		//WRITE PARSER.. LOL
 
 		if(req.query.id){
@@ -58,7 +57,7 @@ module.exports = {
 			information: req.param('information'),
 			data: req.param('data'),
 
-			protocols: req.param('data'),
+			protocols: req.param('protocols'),
 
 			associatedModels: req.param('associatedModels'),
 			creator: req.param('creator'),

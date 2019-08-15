@@ -1,6 +1,62 @@
+<!--
 <style>
     pre{padding:0px;background-color:#282c34;border:0px;padding-bottom:15px;margin:0px;border-radius:0px;}
 </style>
+<div class="container" style="padding:0px">
+    <div class="card" ng-click="cardDetailToggle(task)">
+        <div class="imageContainerSmall" style="background:url('https://source.unsplash.com/1600x900/?{{task.tags}}');">
+            <div style="background:rgba(0,0,0,0.75);" class="imageContainerSmallDiv">
+                <div style="text-align:right;padding:15px;position:absolute;right:0">
+                    <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(task)">
+                        <i class="fas fa-chevron-down"></i>
+                    </a>
+                </div>
+                <div style="margin-top: auto;margin-bottom: auto;">
+                    <div style="padding:15px">
+                        <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">{{app.title}}</h1>
+                        <h5 style="color:white">{{task.id}}</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-show="markers.length>0">
+            <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options">
+                <ui-gmap-marker ng-repeat="marker in markers" coords="marker.coords" options="marker.options" idkey="marker.id">
+                    <ui-gmap-window options="windowOptions" closeClick="closeClick()">
+                        <div>
+                            <div style="font-size: 15px;"><a ng-click="$event.stopPropagation();" href="task/{{task.id}}">{{marker.content}}</a></div>
+                        </div>
+                    </ui-gmap-window>
+                </ui-gmap-marker>
+            </ui-gmap-google-map>
+        </div>
+        <div style="background-color:white">
+            <div class="member-tab-container container" style="padding-left:0px">
+                <div style="text-align:left">
+                    <ul style="padding:0px;" class="member-tabs">
+                        <li><a ng-click="$event.stopPropagation();selectTab('INFORMATION')">Information</a></li>
+                        <li><a ng-click="$event.stopPropagation();selectTab('PROTOCOLS')">Protocols</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <hr style="margin:0px;">
+        <div style="padding:16px;">
+            <p><a ng-repeat="tag in task.tags track by $index" ng-click="$event.stopPropagation();filterContent(tag)">{{tag.trim()}} </a></p>
+            <div class="spacing-5"></div>
+            <div ng-click="$event.stopPropagation();"><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></div>
+            <div class="spacing-5"></div> 
+        </div>
+        <div class="card-footer">
+            <a ng-click="$event.stopPropagation();" style="color:grey"><i class="fas fa-eye"></i>  {{task.attention.general || 0}}</a>
+            <a ng-click="$event.stopPropagation();createReaction(task, 'plus')"><i class="fas fa-angle-up"></i> {{task.reactions.plus}} like </a> 
+            <a ng-click="$event.stopPropagation();createReaction(task, 'minus')" ><i class="fas fa-angle-down"></i> {{task.reactions.minus}} dislike </a>
+            <a ng-click="$event.stopPropagation();reply(task)"><i class="far fa-comment"></i> comment </a>
+        </div>
+    </div>
+</div>
+-->
+
 <div style="background:url('https://source.unsplash.com/1600x900/?{{app.tags}}')" class="imageContainerSmall">
     <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
         <div style="margin-top: auto;margin-bottom: auto;">
@@ -15,8 +71,8 @@
     <div class="spacing-10"></div>
 
     <ul style="padding:0px;" class="member-tabs">
-        <li><a ng-click="$event.stopPropagation();selectTab('INFORMATION')">Information</a></li>
-        <li><a ng-click="$event.stopPropagation();selectTab('MANIFOLDS')">Protocols</a></li>
+        <li ng-click="$event.stopPropagation();selectTab('INFORMATION')"><a>Information</a></li>
+        <li ng-click="$event.stopPropagation();selectTab('PROTOCOLS')"><a>Protocols</a></li>
     </ul>
 
     <div class="row">
@@ -27,36 +83,69 @@
                 </div>
 
 
-                <!--PROTOCOLS.. VIEWS.. (REACT ELEMETS RENDERED FROM CHAIN)-->
-                <!--GLOBAL ELEMENTS.. NAV.. MEMBER NAV (ADDITIONAL TABS..).. PROJECT PLUGIN..-->
-                <!--UI EXTENSIONS-->
-                <!--UI INTEROP-->
-                <!--OWN LANGUAGE TO COMPILE TO AGNOSTIC FRONTEND JS.. NATIVE APP?? .. GOTTA-->
+                <div ng-show="selectedTab=='INFORMATION'">
 
-                <!--
-                <div>
-                    <img class="card-avatar" ng-src="{{app.user.avatarUrl}}" src="{{app.user.avatarUrl}}" err-src="/images/avatar.png">
-                    <a style="display:inline" href="member/{{app.user.username}}"><span style="font-weight:800">{{app.user.username}}</span></a>
+                    <h5>Asset Manifold</h5>
+                    <a href="market/{{app.manifold}}" ui-sref="market({id:app.manifold})"></a>
+
+                    <div class="spacing-10"></div>
+                    <h5>Context</h5>
+                    <p><a ng-repeat="tag in app.tags.split(',') track by $index" ng-click="$event.stopPropagation();">{{tag}} </a></p>
+                    <div class="spacing-10"></div>
+
+                    <!--Fixed for core?-->
+                    <div ng-if="currentUser" ng-click="$event.stopPropagation();">
+                        <p><b>Enable</b></p>
+                        <md-switch ng-model="recordAttention" aria-label="Record Attention"></md-switch>
+                        <div class="spacing-10"></div>
+                    </div>
+
+                    <!--<div>
+                        <img class="card-avatar" ng-src="{{app.user.avatarUrl}}" src="{{app.user.avatarUrl}}" err-src="/images/avatar.png">
+                        <a style="display:inline" href="member/{{app.user.username}}"><span style="font-weight:800">{{app.user.username}}</span></a>
+                    </div>-->
+
+                    <div><span style="display:inline" ng-bind-html="renderContent(app.description)"></span></div>
+                    <div class="spacing-10"></div>
+
                 </div>
-                -->
 
-                <!--
-                <div class="spacing-10"></div>
-                <p><a ng-repeat="tag in app.tags track by $index" ng-click="$event.stopPropagation();filterContent(tag)">{{tag}} </a></p>
-                <div class="spacing-10"></div>
-                -->
+                <div ng-show="selectedTab=='PROTOCOLS'">
+                    <!--CODE.. FRONTEND TEMPLATING.. && BACKEND-->
+                    <!--INHERITANCE; VERB APPS REQUIRE ITEMS ETC-->
+                    <ul style="padding:0px;" class="member-tabs">
+                        <li ng-click="$event.stopPropagation();selectTab('PROTOCOLS-UI')"><a>UI Extensions</a></li>
+                        <li ng-click="$event.stopPropagation();selectTab('PROTOCOLS-PROTOCOLS')"><a>Protocols</a></li>
+                    </ul>
+                    <div hljs hljs-language="javascript" hljs-source="app.protocols"></div>
+                    <!--UI EXTENSIONS-->
 
-                <!--Fixed for core?-->
-                <p><b>Enable</b></p>
-                <md-switch ng-model="recordAttention" aria-label="Record Attention"></md-switch>
-                <div class="spacing-10"></div>
-                <div><span style="display:inline" ng-bind-html="renderContent(app.description)"></span></div>
-                <div class="spacing-10"></div>
+                    <!--OWN LANGUAGE TO COMPILE TO AGNOSTIC FRONTEND JS.. NATIVE APP?? .. GOTTA-->
+                    <!--WRAPPERS TO WRITE TO REACT ETC-->
+                    <!--PROTOCOLS.. VIEWS.. (REACT ELEMETS RENDERED FROM CHAIN)-->
+                    <!--GLOBAL ELEMENTS.. NAV.. MEMBER NAV (ADDITIONAL TABS..).. PROJECT PLUGIN..-->
 
-                <!--INHERITANCE; VERB APPS REQUIRE ITEMS ETC-->
-                <div hljs hljs-language="javascript" hljs-source="app.protocols"></div>
+                    <!--GITHUB INPUT-->
 
-                <!--CODE.. FRONTEND TEMPLATING.. && BACKEND-->
+                    <!--
+                    JS(ON) Classes
+                    {
+                        string:"New Contract",
+                        onCall:function(){
+
+                        },
+                        onMyAction:function(){
+
+                        },
+                        @decorators
+                        @isProjectMember
+                        identityFunction:function(){
+
+                        }
+                    }
+                    -->
+
+                </div>
 
             </div>
             <!--CONETENT..? -->
@@ -67,5 +156,6 @@
             </div>
         </div>
     </div>
+
     <div class="spacing-50"></div>
 </div>

@@ -11,26 +11,20 @@ angular.module( 'conexus.app', [
             }
         },
         resolve: {
-            app: ['$stateParams', 'ContentModel', function($stateParams, AppModel){
+            app: ['$stateParams', 'AppModel', function($stateParams, AppModel){
                 return AppModel.getSome({id:$stateParams.id, limit:1, skip:0, sort:'createdAt DESC'});
             }],
         }
     });
 }])
 
-.controller( 'AppController', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', '$stateParams', 'app', 'titleService', function AppController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, $stateParams, app, titleService ) {
+.controller( 'AppController', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', '$stateParams', 'app', 'titleService', function AppController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, $stateParams, app, titleService ) {
     
-    if (app){
-        $scope.app=app;
-    }
-    else{
-        $scope.app = {title:$stateParams.id, description:'CRE8.XYZ CORE PROTOCOLS; ALL MODELS', manifold:'CRE8+', tags:'CRE8,CORE'};
-        $scope.app.tags = $scope.app.tags.split(',');
-    }
-
+    $scope.app = app;
+    if(!$scope.app){$location.path('/')}
     $scope.app.model = 'APP';
+    $scope.app.protocols = JSON.stringify($scope.app.protocols, null, 4);
 
-   
     titleService.setTitle($scope.app.title + ' | App | CRE8.XYZ');
 
     //LOOK AT ALL FILES
@@ -38,23 +32,7 @@ angular.module( 'conexus.app', [
     //UNIFY MODEL(S) ?
     //.git repo.. etc
 
-    $scope.app.protocols = JSON.stringify([
-        {
-            string:'STRUCUTRE',
-        },
-        {
-            string:'LANGUAGE',
-        },
-        {
-            string:'PROJECT',
-        },
-        {
-            string:'TASK',
-        },
-        {
-            string:'TIME',
-        }
-    ], null, 4);
-
+    $scope.selectedTab = 'INFORMATION';
+    $scope.selectTab = function(model){$scope.selectedTab = model;};
 
 }]);

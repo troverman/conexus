@@ -1136,6 +1136,7 @@ angular.module( 'conexus.home', [
 
     //TODO SERVER | CHAIN
     $scope.lookupBalance = function(){
+        console.log('LOOKUP BALANCE')
         //$scope.balanceLook = $scope.balanceLook.toLowerCase();
         if ($scope.balance[$scope.balanceLook]){$scope.balanceLookupValue = $scope.balance[$scope.balanceLook]}
         if (!$scope.balance[$scope.balanceLook]){$scope.balanceLookupValue = 0}

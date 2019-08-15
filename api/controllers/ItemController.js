@@ -5,7 +5,9 @@
 module.exports = {
 
 	getSome: function(req, res) {
-		
+
+		var mongodb = require('mongodb');
+
 		var limit = parseInt(req.query.limit) || 1;
 		var skip = parseInt(req.query.skip) || 0;
 		var sort = req.query.sort || 'createdAt DESC';
@@ -13,16 +15,28 @@ module.exports = {
 		console.log('GET ITEM', req.query);
 
 		if(req.query.id){
+
+			//LOL WOW
 			var id = req.query.id;
-			Item.find({id:id})
-			.limit(limit)
-			.skip(skip)
-			.sort(sort)
-			.populate('user')  //TODO: OWNER
-			.then(function(models){
-				Item.subscribe(req, models);
-				res.json(models[0])
+			var query = {};
+			if (mongodb.ObjectID.isValid(id)){query = { "_id": { $eq: mongodb.ObjectID(id) } }}
+			else{query = { dataHash: id}}
+			//console.dir(query, {depth: null, colors: true});
+			Item.native(function(err, item) {
+				item.find(query).limit(limit).skip(skip).sort({'createdAt':-1})
+				.toArray(function (err, models) {
+					if (models.length > 0){
+						var itemModel = models[0];
+						itemModel.id = itemModel._id;
+						User.find({id:itemModel.user.toString()}).then(function(userModel){
+							itemModel.user = userModel[0];
+							res.json(itemModel);
+						});
+					}
+					else{res.json([]);}
+				});
 			});
+
 		}
 
 		else if (req.query.tag){

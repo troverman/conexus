@@ -29,7 +29,9 @@
         <div class="col-md-8 col-sm-12 col-xs-12" style="padding-left:0px;padding-right:0px">
             <div class="card" style="margin-top:0px">
                 <div style="padding:16px;">
-                    <span style="text-align:left;float:right"><a href="#"><span style="font-size:11px;color:gray">0x{{currentUser.id}}</span><img style="height:50px;" ng-src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{currentUser.id}}"></a></span>
+
+                    <!--<span style="text-align:left;float:right"><a href="#"><span style="font-size:11px;color:gray">0x{{currentUser.id}}</span><img style="height:50px;" ng-src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{currentUser.id}}"></a></span>-->
+
                     <h4><a href="member/{{currentUser.username}}" ui-sref="member.activity({path:currentUser.username})">{{currentUser.username}}</a></h4>
                     <p style="font-size:13px;">
                         <a href="member/{{currentUser.username}}/positions" ui-sref="member.positions({path:currentUser.username})"><i class="fas fa-globe"></i> Value Map</a> | 
@@ -39,9 +41,9 @@
                     </p>
                     <div class="row">
                         <div class="col-xs-12">
-                            <h5>Balance Lookup <br><span style="font-size:11px;color:gray">0x{{currentUser.id}}</span></h5>
+                            <h5>Balance Lookup <br><span style="font-size:11px;color:gray">{{currentUser.id}}</span></h5>
                             <form ng-submit="lookupBalance()" style="display:flex;flex-direction:row;">
-                                <input ng-model="balanceLook" style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder="Dimension">
+                                <input ng-model="balanceLook" style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder="Asset">
                                 <div ng-click="lookupBalance()" style="border:0px;float:right" class="btn btn-default">
                                     <a href="#"><h5 style="color:black;text-align:right" class="noselect"> <i class="fa fa-search"></i></h5></a>
                                 </div>

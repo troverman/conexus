@@ -21,13 +21,8 @@ angular.module( 'conexus.apps', [
 }])
 
 .controller( 'AppsController', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'AppModel', 'apps', 'ReactionModel', function AppsController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, AppModel, apps, ReactionModel ) {
-    
 
-    //IS APP PROJ.. YA (CAN BE CUZ PROJ IS APP)
-    //APPS AS PROTOCOLS.. 
     $scope.apps = [
-
-        //{title:'CRE8 CORE', description:'CRE8.XYZ CORE PROTOCOLS; ALL MODELS', manifold:'CRE8+', tags:'CRE8,CORE'},
         
         {title:'STRUCTURE', description:'CRE8 CORE STRUCTURE APP', tags:'CRE8,CORE,STRUCTURE'},
         {title:'LANGUAGE', description:'CRE8 CORE LANGUAGE APP', tags:'CRE8,CORE,LANGUAGE'},
@@ -47,26 +42,12 @@ angular.module( 'conexus.apps', [
 
         {title:'RELATION', description:'Data Association', protocols:''},
         {title:'VALIDATION', description:'Creation of consensus based data associations', protocols:''},
-        //{title:'ASSOCIATION', description:'CREATE CORE PROTOCOLS; ALL MODELS', protocols:''},
 
         {title:'ITEM', description:'Item.', protocols:''},
         {title:'CONTENT', description:'Content.', protocols:''},
 
-        //{title:'CRE8 CORE FOLLOWER', description:'CREATE CORE PROTOCOLS; ALL MODELS', protocols:''},
-        //{title:'CRE8 CORE MEMBER', description:'CREATE CORE PROTOCOLS; ALL MODELS', protocols:''},
-        //{title:'CRE8 CORE NOTIFICATION', description:'CREATE CORE PROTOCOLS; ALL MODELS', protocols:''},
-        //{title:'CRE8 CORE ORDER', description:'CREATE CORE PROTOCOLS; ALL MODELS', protocols:''},
-        //{title:'CRE8 CORE PASSPORT', description:'CREATE CORE PROTOCOLS; ALL MODELS', protocols:''},
-        //{title:'CRE8 CORE PROJECT', description:'CREATE CORE PROTOCOLS; ALL MODELS', protocols:''},
-        //{title:'CRE8 CORE PROJECT PROTOCOL', description:'CREATE CORE PROTOCOLS; ALL MODELS', protocols:''},
-        //{title:'CRE8 CORE REACTION  ', description:'CREATE CORE PROTOCOLS; ALL MODELS', protocols:''},
-        //{title:'CRE8 CORE TIME', description:'CREATE CORE PROTOCOLS; ALL MODELS', protocols:''},
-
         {title:'ACTION', description:'CREATE CORE PROTOCOLS; ALL MODELS', protocols:''},
         {title:'TRANSACTION', description:'CREATE CORE PROTOCOLS; ALL MODELS', protocols:''},
-
-        //ITEM APPS UTILITIZE THE ACTION MODEL.. HAVE MANIFOLDS SUCH AS WEAR, USE, CONSUME --> WATER AS ITEM :) YAY :)) +
-
 
         {title:'UNIVERSAL TOKEN', description:'Universal Token, an eglatarian initalization for value map creation', manifold:'UNIVERSALTOKEN+', tags:'CRE8,UNIVERSALTOKEN'},
         {title:'Privacy Token', description:'Per day total of time NOT shared and contextualized 86400-dailyTime.', manifold:'UNIVERSALTOKEN+', tags:'CRE8,UNIVERSALTOKEN'},
@@ -100,10 +81,9 @@ angular.module( 'conexus.apps', [
 
     ];
 
-    //$scope.apps = apps;
+    $scope.apps = apps;
 
     $scope.apps.map(function(obj){obj.model = 'APP'; return obj});
-
 
 
     //TODO: BETTER | TAG STORAGE
@@ -123,12 +103,9 @@ angular.module( 'conexus.apps', [
             }
         }
         $scope.sortedTagArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
-    }
+    };
     $scope.loadTags();
 
     $scope.filterSet = {tags: $scope.sortedTagArray};
-
-    //TODO: SEARCH
-    //TODO: COMPLEX QUERY
 
 }]);

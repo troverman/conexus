@@ -25,6 +25,8 @@ module.exports = {
         owner: {type: 'string'},
         creator: {type: 'string'},
 
+        dataHash: {type: 'string'},
+
         //DEPRECIATE
         user: {model: 'user'},
 

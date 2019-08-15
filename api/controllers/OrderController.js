@@ -15,8 +15,10 @@ module.exports = {
 		//HUGELY HIGH DIM
 		//BUILD UP -- HIGHEST DIM CONNECTION IS BASE
 			//SORT ASSETS.. 
-		function buildMarket(baseMarket, orders){
 
+
+
+		function buildMarketV1(baseMarket, orders){
 
 			//CAN REFRESH A COUPLE TIMES
 			//FINALIZE DATA STRUCT :)
@@ -64,8 +66,31 @@ module.exports = {
 
 		};
 
+		function buildMarket(baseMarket, orders){
+			var market = {};
+			for (x in orders){
+				var setAlpha = Object.keys(orders[x].setAlpha).join(',');
+				if (setAlpha.indexOf(baseMarket) == -1){
+					var array = [];
+					for (y in setAlpha.split(',')){array.push(1/(orders[x].setAlpha[setAlpha.split(',')[y]]/orders[x].setBeta[baseMarket]))}
+					if (!market[setAlpha]){market[setAlpha] = [array];}
+					else{market[setAlpha].push(array)}
+				}
+				if (setBeta.indexOf(baseMarket) == -1){
+					var array = [];
+					for (y in setBeta.split(',')){array.push(orders[x].setBeta[setBeta.split(',')[y]]/orders[x].setAlpha[baseMarket])}
+					if (!market[setBeta]){market[setBeta] = [array];}
+					else{market[setBeta].push(array);}
+				}
 
+			}
+			return market;
 
+			//SET OF ORDERS WHERE ORDER M 
+			//Set of Orders O Where Market M is
+			//:p
+			//..
+		};
 
 
 		var limit = parseInt(req.query.limit) || 1;
@@ -76,20 +101,7 @@ module.exports = {
 
 		Order.watch(req);
 
-
 		//buildMarket();
-
-
-
-
-
-
-
-
-
-
-
-
 
 		if(req.query.id){
 			Order.find({id:req.query.id})
@@ -160,12 +172,6 @@ module.exports = {
 		}
 
 
-
-
-
-
-
-
 		//?? 
 		else if(req.query.setBeta && !req.query.setAlpha){
 			var query = {};
@@ -186,10 +192,6 @@ module.exports = {
 				});
 			});
 		}
-
-
-
-
 
 
 		//MARKETPAIR
@@ -244,11 +246,6 @@ module.exports = {
 				});
 			});
 		}
-
-
-
-
-
 
 
 
@@ -323,9 +320,6 @@ module.exports = {
 				});
 			});
 
-
-
-
 		}
 
 		else{
@@ -384,12 +378,11 @@ module.exports = {
 
 		};
 
-		//ORDERVS ASSOCIATION
+		//ORDERS ASSOCIATION
 		function getProtocolTokens(model){
 			var protocolTokens = ['CRE8', 'CRE8+ORDER'];
 			return protocolTokens;
 		};
-
 
 		//TODO
 		//ASSET ASSOCIATION....:)
@@ -405,6 +398,19 @@ module.exports = {
 				//return bookzzz
 
 		};
+
+
+		//TOKEN(ASSET) VS MARKET VS MARKETPAIR
+		//SINGLE - COMBINATORIAL - 
+
+		//take your time trev 
+
+		//well see ya again soon 
+
+		//ORDER 
+			//=> {}={}
+		//MARKET
+			//=? SUM (SET)
 
 
 		var model = {

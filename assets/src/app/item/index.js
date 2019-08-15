@@ -33,7 +33,7 @@ angular.module( 'conexus.item', [
 .controller( 'ItemCtrl', [ '$rootScope', '$location', '$mdSidenav', '$scope', 'actions', 'ContentModel', 'item', 'OrderModel', 'orders', 'ReactionModel', 'titleService', 'transactions', function ItemController( $rootScope, $location, $mdSidenav, $scope, actions, ContentModel, item, OrderModel, orders, ReactionModel, titleService, transactions ) {
    
     $scope.item = item;
-    if(!$scope.item){$location.path('/')}
+    if($scope.item.length == 0){$location.path('/')}
     $scope.item.model = 'ITEM';
     if ($scope.item.tags){$scope.item.tags = $scope.item.tags.split(',')}
     titleService.setTitle($scope.item.title+' | Item | CRE8.XYZ');

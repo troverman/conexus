@@ -44,6 +44,8 @@ module.exports = {
 	//FRONT END DOES THAT DATA MODIFYING
 		//IE IMMUTABLE MANIFOLD
 			//IMMUTABLE+ (&or CREATECORE DEFINED REPUTTION+)
+
+	//THIS IS ANCIENT. DELETE IT (ON STREAM)
 	reputationBuild:function(){
 		User.find().then(function(userModels){
 			for (x in userModels){
@@ -150,6 +152,7 @@ module.exports.intervalService = function(){
 
 		const createKeccakHash = require('keccak');
 		const crypto = require('crypto');
+		
 		//IPFS, BTC base58
 		const bs58 = require('bs58');
 
@@ -160,30 +163,38 @@ module.exports.intervalService = function(){
 		//https://zelark.github.io/nano-id-cc/
 		//ITEM MERCH
 
-		for( var i=0;i<100;i++){
+		for( var i=1;i<=100;i++){
 
 			var itemModel = {
 
-				title:'Valuable Token ' + i,
+				title:'I AM VALUABLE ' + i,
 
 				identifiers:{
-					//NTAG216:1,
+					NTAG216:null,
 					guid:guid(),
 					uuidv4:uuidv4(),
 					objectId:objectId(),
 					keccak:createKeccakHash('keccak256').update('Valuable Token ' + i).digest('hex'),
 					sha256: crypto.createHmac('sha256', 'CRE8').update('Valuable Token ' + i).digest('hex'),
-					base58: bs58.encode(Buffer.concat([Buffer.from('12', 'hex'),  Buffer.from(crypto.createHash('sha256').update('Valuable Token ' + i).digest().byteLength.toString(16), 'hex'), crypto.createHash('sha256').update('Valuable Token ' + i).digest()])).toString()
+					base58: bs58.encode(Buffer.concat([Buffer.from('12', 'hex'),  Buffer.from(crypto.createHash('sha256').update('Valuable Token ' + i).digest().byteLength.toString(16), 'hex'), crypto.createHash('sha256').update('Valuable Token ' + i).digest()])).toString(),
 				},
 
-				tags:['value','rare','token','epoxy','collectable','CRE8'],
-				content:'Valuable Token '+i+' ; the first run of collectable CRE8 tokens. ' + ' I am Valuable!',
-				associatedModels:[],
-
-				user:1,
-				creator:1,
-				owner:1,
+				tags:['value','rare','token','epoxy','collectable','CRE8', i, 'valuable' + i, 'IAMVALUALBE'],
+				content:'<h5>Valuable Token '+i+'</h5><p>The first run of collectable CRE8 token assets.</p> ' + '<img src=\"https://i.imgur.com/G6BEYgy.png\"\/>',
 				
+				associatedModels:[
+					{type:'MEMBER', id:'569f0edcd3e4c517075be5d6'}
+				],
+				
+				location:null,
+
+				user:'569f0edcd3e4c517075be5d6',
+				creator:'569f0edcd3e4c517075be5d6',
+				owner:'569f0edcd3e4c517075be5d6',
+
+				model:'ITEM',
+				type:'I AM VALUABLE',
+
 				actions:[],
 				reactions: {plus:0,minus:0},
 				attention: {general:0},
@@ -192,10 +203,22 @@ module.exports.intervalService = function(){
 					applications:{
 						attention:{general:0},
 						reaction:{plus:0,minus:0},
-						action:[]
+						action:['USE'],
+						item:{
+							isGenerator:false,
+							type:'ITEM',
+							verbs:['USE'],
+							owner:'569f0edcd3e4c517075be5d6',
+							type:'I AM VALUABLE'
+						},
+						location:null,
 					}
 				},
-				info:'',
+				info:{
+					isGenerator:false,
+					type:'I AM VALUABLE',
+					verbs:['USE'],
+				},
 
 			};
 
@@ -205,14 +228,25 @@ module.exports.intervalService = function(){
 
 			//hashed information in the string as the asset --> simple form
 				//store string as id to map to data
-			itemModel.dataHash=crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(itemModel.data)).digest('hex');
+			itemModel.dataHash=crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(itemModel)).digest('hex');
+			itemModel.identifiers.dataHash=crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(itemModel)).digest('hex');
 
-			//console.log(itemModel.dataHash)
-			//Item.create(itemModel).then(function(newItemModel){})
+			//console.log(itemModel);
+			//Item.create(itemModel).then(function(newItemModel){});
 
 		}
+
+		Item.find({}).sort('createdAt DESC').limit(100).then(function(itemModels){
+			for (x in itemModels.reverse()){
+				console.log('https://www.cre8.xyz/item/'+itemModels[x].id)
+				//Item.destroy(itemModels[x].id, function(err) {})
+			}
+		});
+
 	};
 	//populateMerch();
+
+
 
 	//MAINTAINCE.. REMOVE DUP TOKENS
 	function removeDuplicateTokens(){
@@ -227,6 +261,86 @@ module.exports.intervalService = function(){
 		})
 	};
 	//removeDuplicateTokens();
+
+	function populateApps(){
+		var apps = [    
+	        {title:'STRUCTURE', description:'CRE8 CORE STRUCTURE APP', tags:'CRE8,CORE,STRUCTURE'},
+	        {title:'LANGUAGE', description:'CRE8 CORE LANGUAGE APP', tags:'CRE8,CORE,LANGUAGE'},
+	        {title:'CONGURENCE', description:'CRE8 CORE CONGURENCE APP', tags:'CRE8,CORE,CONGURENCE'},
+	        {title:'MANIFOLD', description:'CRE8 CORE MANIFOLD APP', tags:'CRE8,CORE,MANIFOLD'},
+	        {title:'CONNECTION', description:'CRE8 CORE CONNECTION APP', tags:'CRE8,CORE,MANIFOLD,CONNECTION,ASSOCIATION'},
+	        {title:'ASSOCIATION', description:'CRE8 CORE ASSOCIATION APP', tags:'CRE8,CORE,MANIFOLD,CONNECTION,ASSOCIATION'},
+	        {title:'CREDIT', description:'Credit Manifold', manifold:'+CREDIT+[INTEREST], +CREDIT+[ISSUE]+[TIMEDOMAIN]+[INTERESTASSETSET]+[INTERESTSET]', tags:'CRE8,CORE,MANIFOLD,CREDIT'},
+	        {title:'FUTURE', description:'Future Manifold App', manifold:'+FUTURE+[ASSETSET]+[DATE]', tags:'CRE8,CORE,MANIFOLD,FUTURE'},
+	        {title:'OPTION', description:'Option Manifold APP', manifold:'+OPTION+[ASSETSET]+[PRICESET]+[TIMEALPHA]+[TIMEBETA] ', tags:'CRE8,CORE,MANIFOLD,OPTION'},
+	        {title:'SPONSOR', description:'Sponsor Manifold APP', manifold:'+SPONSOR+[NAMESPACE]', tags:'CRE8,CORE,MANIFOLD,SPONSOR'},
+	        {title:'ATTENTION', description:'CREATE CORE PROTOCOLS; ALL MODELS', protocols:''},
+	        {title:'RELATION', description:'Data Association', protocols:''},
+	        {title:'VALIDATION', description:'Creation of consensus based data associations', protocols:''},
+	        {title:'ITEM', description:'Item.', protocols:''},
+	        {title:'CONTENT', description:'Content.', protocols:''},
+	        {title:'ACTION', description:'CREATE CORE PROTOCOLS; ALL MODELS', protocols:''},
+	        {title:'TRANSACTION', description:'CREATE CORE PROTOCOLS; ALL MODELS', protocols:''},
+	        {title:'Universal Token', description:'Universal Token, an eglatarian initalization for value map creation', manifold:'UNIVERSALTOKEN+', tags:'CRE8,UNIVERSALTOKEN'},
+	        {title:'Privacy Token', description:'Per day total of time NOT shared and contextualized 86400-dailyTime.', manifold:'UNIVERSALTOKEN+', tags:'CRE8,UNIVERSALTOKEN'},
+	        {title:'Machine Learning Tokenization', description:'', tags:'Machine,ai,container,intellligence,pattern'},
+	        {title:'Location Tokenization', description:'Location Tokenization; A Space Time Mapping', tags:'USD,bank,finance,fiat,authentication'},
+	        {title:'Consumption', description:'Comsumption Tracking Tokenization', manifold:'CRE8+CONSUMPTION+', tags:'CRE8,consumption'},
+	        {title:'Fitbit Activity Tokenization', description:'Fitbit Activity Tokenization, authentication and app integration', manifold:'APP+FITBIT+', tags:'fitbit,data,exercise,health,authentication'},
+	        {title:'CRE8 Capital', description:'Smart Investment though Synthetic Intellligence; requires permissions to access balances.', tags:'CRE8,capital,investment,financialmanagement,ai,artificialintelligence'},
+	        {title:'CRE8 Capital NASDEQ', description:'Smart Investment though Synthetic Intellligence; requires permissions to access balances. NASDEQ custodial relations', tags:'CRE8,capital,investment,financialmanagement,ai,artificialintelligence'},
+	        {title:'CRE8 Capital NYSE', description:'Smart Investment though Synthetic Intellligence; requires permissions to access balances. NYSE custodial relations', tags:'CRE8,capital,investment,financialmanagement,ai,artificialintelligence'},
+	        {title:'Voetr', description:'Consensus Building on Legislation & Political Representation', manifold:'APP+VOETR+', tags:'voetr,voting,politics,legislation,representation'},
+	        {title:'Inspiro', description:'Tokenization of Inspiration https://www.inspiro.care', manifold:'APP+INSPIRO+', tags:'medicine,medical,hardware,device'},
+	        {title:'CRE8.NYC', description:'CRE8 Partnership with New York City .NYC', tags:'CRE8,capital,investment,financialmanagement,ai,artificialintelligence'},
+	        {title:'CRE8.CITY', description:'CRE8 Partnership with CITY', tags:'CRE8,capital,investment,financialmanagement,ai,artificialintelligence'},
+	        {title:'Delivery', description:'2nd Stage Delivery Protocol', tags:'CRE8,capital,investment,financialmanagement,ai,artificialintelligence'},
+	        {title:'USD Tokenization', description:'USD Tokenization, manages custodial relationships with affiliate banks and institutions.', manifold:'USD', tags:'USD,bank,finance,fiat,authentication'},
+	        {title:'ETH Tokenization', description:'ETH Activity Tokenization, manages custodial relationships', manifold:'ETH', tags:'ETH,crypto,finance'},
+	        {title:'ETH20 Tokenization', description:'ETH ERC 20 Tokenization, manages custodial relationships', manifold:'ETH20', tags:'ETH,crypto,finance,token,ERC20'},
+	        {title:'ETH721 Tokenization', description:'ETH ERC 721 Tokenization, manages custodial relationships', manifold:'ETH721', tags:'ETH,crypto,finance,token,ERC721,NFT'},
+	        {title:'BTC Tokenization', description:'BTC Tokenization, manages custodial relationships', manifold:'BTC', tags:'BTC,crypto,finance'},
+	        {title:'LTC Tokenization', description:'LTC Tokenization, manages custodial relationships', manifold:'LTC', tags:'LTC,crypto,finance'},
+	        {title:'XRP Tokenization', description:'XRP Tokenization, manages custodial relationships', manifold:'XRP', tags:'XRP,crypto,finance'},
+	        {title:'TRON Tokenization', description:'TRON Tokenization, manages custodial relationships', manifold:'TRON', tags:'TRON,crypto,finance'},
+	        {title:'STEEM Activity Tokenization', description:'STEEM Activity Tokenization, authentication and app integration', manifold:'STEEM+', tags:'STEEM,activity,app,authentication'},
+	        {title:'Github', description:'Github Activity Tokenization, authentication and app integration', manifold:'GITHUB+', tags:'github,activity,app,authentication'},
+	        {title:'Gitcoin App', description:'Gitcoin Activity Tokenization, authentication and app integration', manifold:'GITCOIN+', tags:'gitcoin,activity,app,authentication'},
+	        {title:'CRATER', description:'virtual; augmented reality; crater uprising', manifold:'CRATER+', tags:'gitcoin,activity,app,authentication'},
+	    ];
+
+	    for (x in apps){
+	    	var appModel = {
+	    		title:apps[x].title,
+	    		description:apps[x].description,
+	    		tags:apps[x].tags,
+	    		creator:'569f0edcd3e4c517075be5d6',
+	    		information:{},
+	    		data:{},
+	    		manifold: apps[x].manifold,
+	    		protocols:[
+	    			'function(){}',
+	    			'function(){}'
+	    		],
+	    		associatedValidations:[
+	    			{
+	    				context:[
+	    					{type:'tag', score:100},
+	    				],
+	    				data:[
+	    					{type:'APP', id:'self', direction:false},//[]},
+	    				],
+	    				connection:'connection',
+	    			}
+	    		]
+	    	};
+	    	App.create(appModel).then(function(){console.log('CREATED APP')})
+		}
+	};
+	//populateApps();
+	
+
+
 
 	//DATA SERVICE
 	//dataService.getData();

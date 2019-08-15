@@ -603,7 +603,11 @@ angular.module( 'conexus.nav', [
 
         $scope.closeAllNav();
         if($rootScope.currentUser){
-            $scope.newOrder = {};
+            $scope.newOrder = {
+                //iden
+            };
+
+            //LOL TBD
             if (identiferSetAlpha){
                 $scope.identiferSetAlpha = [{text:identiferSetAlpha.id}];
             }
@@ -613,6 +617,8 @@ angular.module( 'conexus.nav', [
                 $scope.newOrder.setBeta = {};
                 $scope.newOrder.setBeta[identiferSetBeta.id] = 1
             }
+
+
             $mdSidenav('order').toggle();
         }
 
