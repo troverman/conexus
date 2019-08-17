@@ -699,7 +699,45 @@ angular.module( 'conexus.home', [
 
     $scope.hoverIn = function(item){console.log('hover in ', item)}
     $scope.hoverOut = function(item){console.log('hover out ', item)}
+    
+    $scope.selectedTab = 'INFORMATION';
+    $scope.selectTab = function(model){$scope.selectedTab = model;};
 
+    $scope.balanceChart = {
+        chart: {
+            zoomType: 'x',
+            height: 200,
+        },
+        series: [{
+            id: 'Reputation',
+            type: 'column',
+            name: 'Reputation',
+            data: []
+        }],
+        title: {text: ''},
+        xAxis: {
+            crosshair: true,
+            gridLineWidth: 0.5,
+            gridLineColor: 'grey',
+            title: {text: null},
+            categories: [],
+        },
+        legend: {enabled: false},
+        yAxis: {title: {text: null}},
+        credits:{enabled:false},
+    };
+    $scope.renderBalances = function(){
+        var sortable = [];
+        for (var context in $rootScope.currentUser.balance) {sortable.push([context, $scope.reputation[context]])}
+        sortable.sort(function(a, b) {return b[1] - a[1]});
+        for (x in sortable){
+            if (x < 100){
+                $scope.balanceChart.xAxis.categories.push(sortable[x][0]);
+                $scope.balanceChart.series[0].data.push(sortable[x][1]);
+            }
+        }
+    };
+    $scope.renderBalances();
 
     $scope.isTutorial = true;
     if ($scope.isTutorial){
@@ -711,7 +749,10 @@ angular.module( 'conexus.home', [
             window.scrollTo(0, 0);
             if (page){$scope.pageNumber = page}
             else{$scope.pageNumber++}
-            if ($scope.pageNumber<0 || $scope.pageNumber>6){$scope.isTutorial = !$scope.isTutorial}
+            if ($scope.pageNumber<0 || $scope.pageNumber>6){
+                $scope.isTutorial = !$scope.isTutorial;
+                $scope.selectedTab = 'INFORMATION';
+            }
         };
 
         $scope.editAccount = function () {
@@ -883,9 +924,8 @@ angular.module( 'conexus.home', [
 
         //$scope.selectedTab = 'QUESTIONS';
         $scope.selectedTab = 'BUILDER';
-        $scope.selectTab = function(model){
-            $scope.selectedTab = model;
-        };
+        $scope.selectTab = function(model){$scope.selectedTab = model;};
+
 
         $scope.totalMap = {
             chart: {zoomType: 'x'},

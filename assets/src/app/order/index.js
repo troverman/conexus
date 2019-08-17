@@ -32,6 +32,13 @@ angular.module( 'conexus.order', [
     $scope.newReaction = {};
     $scope.order = order;
 
+    //TODO: PROTOCOL
+    $scope.order.tokens = [];
+
+    //TODO: FIX
+    $rootScope.associatedModels = [{type:'ORDER', address:order.id}];
+
+
     titleService.setTitle('Order | ' + $scope.order.id + ' | CRE8.XYZ');
 
     $scope.orders = orders;
@@ -166,97 +173,106 @@ angular.module( 'conexus.order', [
 
     //HMM
     $scope.selectedTab = 'INFORMATION';
-    $scope.selectTab = function(model){
-        $scope.selectedTab = model;
-    };
+    $scope.selectTab = function(model){$scope.selectedTab = model;};
 
     $scope.elementsObj = {};
-    for (y in Object.keys(order.setAlpha)){
-        var modelNode = {
-            group:'nodes',
-            data:{id:Object.keys(order.setAlpha)[y], name:Object.keys(order.setAlpha)[y]}
-        };
-        if (Object.keys($scope.elementsObj).indexOf(Object.keys(order.setAlpha)[y]) == -1){
-            $scope.elementsObj[Object.keys(order.setAlpha)[y]] = modelNode;
-        }
-        for (z in Object.keys(order.setBeta)){
-            var modelNode = {
-                group:'nodes',
-                data:{id:Object.keys(order.setBeta)[z], name:Object.keys(order.setBeta)[z]}
-            };
-            if (Object.keys($scope.elementsObj).indexOf(Object.keys(order.setBeta)[z]) == -1){
-                $scope.elementsObj[Object.keys(order.setBeta)[z]] = modelNode;
-                var modelEdge = {
-                    group:'edges',
-                    data:{
-                        id: Object.keys(order.setAlpha)[y]+'-'+Object.keys(order.setBeta)[z], 
-                        source: Object.keys(order.setAlpha)[y], 
-                        target: Object.keys(order.setBeta)[z], 
-                        label: order.setBeta[Object.keys(order.setBeta)[z]],
-                    },
-                    classes: 'edgeLabelStyle',
-                };
-                $scope.elementsObj[Object.keys(order.setAlpha)[y]+'-'+Object.keys(order.setBeta)[z]] = modelEdge;
-            }
-        }
-    }
-
-
     $scope.elementsObjCombinatorial = {};
 
-
-    var alphaNode = {
-        group:'nodes',
-        data:{id: Object.keys(order.setAlpha).join(','), name: Object.keys(order.setAlpha).join(',')}
-    };
-    var betaNode = {
-        group:'nodes',
-        data:{id:Object.keys(order.setBeta).join(','), name: Object.keys(order.setBeta).join(',')}
-    };
-
-    $scope.elementsObjCombinatorial[Object.keys(order.setAlpha).join(',')] = alphaNode;
-    $scope.elementsObjCombinatorial[Object.keys(order.setBeta).join(',')] = betaNode;
-
-    for (x in Object.keys(order.setBeta)){
-        var edge = {
-            group:'edges',
-            data:{
-                id: Object.keys(order.setAlpha).join(',')+Object.keys(order.setBeta)[x]+'-'+Object.keys(order.setBeta).join(','), 
-                source: Object.keys(order.setBeta).join(','), 
-                target: Object.keys(order.setAlpha).join(','),
-                label: Object.keys(order.setBeta)[x]+':'+ order.setBeta[Object.keys(order.setBeta)[x]],
-            },
-            classes: ['edgeLabelStyle', 'blue'],
+    $scope.populateGraph = function(){
+        var alphaNode = {
+            group:'nodes',
+            data:{id: Object.keys(order.setAlpha).join(','), name: Object.keys(order.setAlpha).join(',')}
         };
-        $scope.elementsObjCombinatorial[Object.keys(order.setAlpha).join(',')+Object.keys(order.setBeta)[x]+'-'+Object.keys(order.setBeta).join(',')] = edge;
-    }
-
-    for (x in Object.keys(order.setAlpha)){
-        var edge = {
-            group:'edges',
-            data:{
-                id: Object.keys(order.setBeta).join(',')+Object.keys(order.setAlpha)[x]+'-'+Object.keys(order.setAlpha).join(','), 
-                source: Object.keys(order.setAlpha).join(','), 
-                target: Object.keys(order.setBeta).join(','),
-                label: Object.keys(order.setAlpha)[x]+':'+ order.setAlpha[Object.keys(order.setAlpha)[x]],
-            },
-            classes: ['edgeLabelStyle', 'red'],
+        var betaNode = {
+            group:'nodes',
+            data:{id:Object.keys(order.setBeta).join(','), name: Object.keys(order.setBeta).join(',')}
         };
-        $scope.elementsObjCombinatorial[Object.keys(order.setBeta).join(',')+Object.keys(order.setAlpha)[x]+'-'+Object.keys(order.setAlpha).join(',')] = edge;
-    }
+
+        $scope.elementsObjCombinatorial[Object.keys(order.setAlpha).join(',')] = alphaNode;
+        $scope.elementsObjCombinatorial[Object.keys(order.setBeta).join(',')] = betaNode;
+
+        for (x in Object.keys(order.setBeta)){
+            var edge = {
+                group:'edges',
+                data:{
+                    id: Object.keys(order.setAlpha).join(',')+Object.keys(order.setBeta)[x]+'-'+Object.keys(order.setBeta).join(','), 
+                    source: Object.keys(order.setBeta).join(','), 
+                    target: Object.keys(order.setAlpha).join(','),
+                    label: Object.keys(order.setBeta)[x]+':'+ order.setBeta[Object.keys(order.setBeta)[x]],
+                },
+                classes: ['edgeLabelStyle', 'blue'],
+            };
+            $scope.elementsObjCombinatorial[Object.keys(order.setAlpha).join(',')+Object.keys(order.setBeta)[x]+'-'+Object.keys(order.setBeta).join(',')] = edge;
+        }
+
+        for (x in Object.keys(order.setAlpha)){
+            var edge = {
+                group:'edges',
+                data:{
+                    id: Object.keys(order.setBeta).join(',')+Object.keys(order.setAlpha)[x]+'-'+Object.keys(order.setAlpha).join(','), 
+                    source: Object.keys(order.setAlpha).join(','), 
+                    target: Object.keys(order.setBeta).join(','),
+                    label: Object.keys(order.setAlpha)[x]+':'+ order.setAlpha[Object.keys(order.setAlpha)[x]],
+                },
+                classes: ['edgeLabelStyle', 'red'],
+            };
+            $scope.elementsObjCombinatorial[Object.keys(order.setBeta).join(',')+Object.keys(order.setAlpha)[x]+'-'+Object.keys(order.setAlpha).join(',')] = edge;
+        }
+    };
+    $scope.populateGraph();
+
+    $scope.populateGraph2 = function(){
+        for (y in Object.keys(order.setAlpha)){
+            var modelNode = {
+                group:'nodes',
+                data:{id:Object.keys(order.setAlpha)[y], name:Object.keys(order.setAlpha)[y]}
+            };
+            if (Object.keys($scope.elementsObj).indexOf(Object.keys(order.setAlpha)[y]) == -1){
+                $scope.elementsObj[Object.keys(order.setAlpha)[y]] = modelNode;
+            }
+            for (z in Object.keys(order.setBeta)){
+                var modelNode = {
+                    group:'nodes',
+                    data:{id:Object.keys(order.setBeta)[z], name:Object.keys(order.setBeta)[z]}
+                };
+                if (Object.keys($scope.elementsObj).indexOf(Object.keys(order.setBeta)[z]) == -1){
+                    $scope.elementsObj[Object.keys(order.setBeta)[z]] = modelNode;
+                    var modelEdge = {
+                        group:'edges',
+                        data:{
+                            id: Object.keys(order.setAlpha)[y]+'-'+Object.keys(order.setBeta)[z], 
+                            source: Object.keys(order.setAlpha)[y], 
+                            target: Object.keys(order.setBeta)[z], 
+                            label: order.setBeta[Object.keys(order.setBeta)[z]],
+                        },
+                        classes: 'edgeLabelStyle',
+                    };
+                    $scope.elementsObj[Object.keys(order.setAlpha)[y]+'-'+Object.keys(order.setBeta)[z]] = modelEdge;
+                }
+            }
+        }
+    };
+    $scope.populateGraph2();
 
 
-    //TODO: PROTOCOL
-    $scope.order.tokens = [
-        'CREATE+ORDER',
-        'CREATE+ORDER+'+$scope.order.identiferSet, 
-        'CREATE+ORDER+'+$scope.order.identiferSet1, 
-        'CREATE+ORDER+'+$scope.order.identiferSet+'-'+$scope.order.identiferSet1, 
-        $scope.order.id,
-    ];
 
-    //TODO: FIX
-    $rootScope.associatedModels = [{type:'ORDER', address:order.id}];
+
+
+    function getAllSubsets(theArray) {
+      return theArray.reduce(function (subsets, value) {
+        return subsets.concat(subsets.map(function (set) {
+          return [value].concat(set);
+        }));
+      }, [[]]);
+    };
+
+    function powerSetDecompose(array){
+
+        //for (x in array){
+        //    if array.length = 1
+        //}
+
+    };
 
     //TODO: DEPRECIATE
     $scope.createReaction = function(item, type){
@@ -277,20 +293,5 @@ angular.module( 'conexus.order', [
         }
         else{$mdSidenav('login').toggle();}
     };
-
-    //TODO: DEPRECIATE
-    $scope.reply = function(item){
-        var index = $scope.contentList.map(function(obj){return obj.id}).indexOf(item.id);
-        $scope.contentList[index].showReply = !$scope.contentList[index].showReply
-    };
-
-    //TODO: WEBSOCKET
-    $sailsSocket.subscribe('content', function (envelope) {
-        switch(envelope.verb) {
-            case 'created':
-                $scope.contentList.unshift(envelope.data);
-                break;
-        }
-    });
 
 }]);

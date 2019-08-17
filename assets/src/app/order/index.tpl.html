@@ -1,19 +1,10 @@
 <div class="container">
 
-    <div class="spacing-10"></div>
-
-    <div class="row">
-        <ul style="padding:0px;" class="member-tabs">
-            <li><a ng-click="selectTab('INFORMATION')" href="#">Information</a></li>
-            <li><a ng-click="selectTab('ORDERS')" href="#">Orders</a></li>
-            <li><a ng-click="selectTab('TRANSACTIONS')" href="#">Transactions (Trades)</a></li>
-        </ul>
-    </div>
 
     <div class="row">
 
         <!--INFORMATION-->
-        <div ng-if="selectedTab =='INFORMATION'">
+        <div>
             <div class="card" ng-click="">
                 <div style="background:url('https://source.unsplash.com/1600x900/?explore,discover')" class="imageContainerSmall">
                     <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv"> 
@@ -38,7 +29,20 @@
                         </div>
                     </div>
                 </div>
-                <div style="padding:16px">
+                <div style="background-color:white">
+                <div class="member-tab-container container" style="padding-left:0px">
+                    <div style="text-align:left">
+                        <ul style="padding:0px;" class="member-tabs">
+                            <li><a ng-click="selectTab('INFORMATION')" href="#">Information</a></li>
+                            <li><a ng-click="selectTab('ORDERS')" href="#">Orders</a></li>
+                            <li><a ng-click="selectTab('TRANSACTIONS')" href="#">Transactions</a></li>
+                            <li><a ng-click="$event.stopPropagation();selectTab('CONTENT')">Content</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <hr style="margin:0px;">
+                <div ng-if="selectedTab =='INFORMATION'" style="padding:16px">
 
                     <div class="spacing-5"></div>
 
@@ -122,7 +126,7 @@
                 <div class="card-footer">
                     <a ng-click="createReaction(order, 'plus')"><i class="fa fa-angle-up"></i> {{order.reactions.plus}} like </a> 
                     <a ng-click="createReaction(order, 'plus')" ><i class="fa fa-angle-down"></i> {{order.reactions.minus}} dislike </a>
-                    <a ng-click="reply(order)"><i class="fa fa-comment-o"></i> comment </a>
+                    <a ng-click="contentToggle(order)"><i class="fa fa-comment-o"></i> comment </a>
                 </div>
                 <div ng-click="$event.stopPropagation();" ng-show="order.showReply" class="card-footer">
                     <form role="form" ng-submit="createContent(order)">

@@ -315,26 +315,47 @@ angular.module( 'conexus.task', [
         //TODO: CREATED AT
         var currentTime = new Date();
         $rootScope.taskTime = parseInt((currentTime.getTime() - $scope.startDateTime.getTime()) / 1000);
-
         //COULD UPDATE HERE? --> DONT WANT TO OVERLOAD WITH CALLS. FINE? 
-
         //TimeModel.update()? --> PERHAPS BACKEND TIMER .. ? SUBMIT KILLS THE TIMER ? 
-
         $scope.$apply();
     };
 
 
 
 
+     //TODO!!!
+    $scope.directedGraphElements = {};
+    $scope.renderAssociations = function(item){
 
+        $scope.item = item;
+        $scope.assoicationFilter = [{text:$scope.item.associatedModels[0].address}];
 
-
-
-
-
-
-
-
+        for (x in $scope.item.associatedModels){
+            var nodeModel = {
+                group:'nodes',
+                data:{
+                    id:$scope.item.associatedModels[x].address,
+                    type:$scope.item.associatedModels[x].address,
+                    name:$scope.item.associatedModels[x].address
+                }
+            }; 
+            $scope.directedGraphElements[$scope.item.associatedModels[x].address] = nodeModel;
+            if (x > 0){
+                var edgeModel = {
+                    group:'edges',
+                    classes:'unbundled-bezier',
+                    data:{
+                        id:$scope.item.associatedModels[0].address+'-'+$scope.item.associatedModels[x].address,
+                        source:$scope.item.associatedModels[0].address,
+                        target:$scope.item.associatedModels[x].address
+                    }
+                };
+                $scope.directedGraphElements[$scope.item.associatedModels[0].address+'-'+$scope.item.associatedModels[x].address] = edgeModel;
+            }
+        }
+    
+    };
+    $scope.renderAssociations(task)
 
 
     //TODO: BROWSER STREAM WEBRTC

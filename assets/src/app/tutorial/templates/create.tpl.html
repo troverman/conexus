@@ -1,0 +1,21 @@
+<div class="card">
+    <div style="background:url('https://source.unsplash.com/1600x900/?business,service,civic,create,art,movies,action')" class="imageContainerSmall">
+        <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+            <div style="text-align:right;padding:15px;position:absolute;right:0">
+                <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
+                    <i class="fas fa-plus"></i>
+                </a>
+            </div> 
+            <div class="container" style="margin-top: auto;margin-bottom: auto;">
+                <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Let's Create!</h1>
+                <p style="color:white;">My First Post</p>
+            </div>
+        </div>
+    </div>
+    <div style="padding:16px;">
+        <div class="card">
+            <button ng-click="contentToggle()" style="width:100%" class="btn btn-default log-btn">+ CONTENT</button>
+        </div>
+    </div>
+</div>
+<div ng-include="'tutorial/templates/controls.tpl.html'"></div>

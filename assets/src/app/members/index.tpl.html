@@ -38,7 +38,7 @@
     <div class="spacing-10"></div>
 </div>
 
-<div ng-click="loadMore()" class="container" style="text-align:center">
+<div ng-if="skip + 100 > memberCount" ng-click="loadMore()" class="container" style="text-align:center">
     <button style="width:100%" class="btn btn-default log-btn">MORE <i class="fa fa-angle-down"></i></button>
 </div>
 

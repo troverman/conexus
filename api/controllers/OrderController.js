@@ -90,6 +90,7 @@ module.exports = {
 			//Set of Orders O Where Market M is
 			//:p
 			//..
+			
 		};
 
 
@@ -300,21 +301,20 @@ module.exports = {
 				.skip(skip)
 				.sort({'createdAt':-1})
 				.toArray(function (err, models) {
+					console.log(models)
 					if (models.length != 0){
 						models = models.map(function(obj){obj.id = obj._id; return obj;});
 
 
-						var market = buildMarket(item, models);
+						//var market = buildMarket(item, models);
+						res.json({data:models,market:[]});
 
-
-						var promises = [];
-						for (x in models){promises.push(User.find({id:models[x].user.toString()}))}
-						Q.all(promises).then((populatedModels)=>{
-							for (x in models){models[x].user = populatedModels[x][0];}
-
-							var returnObj = 
-							res.json({data:models,market:market});
-						});
+						//var promises = [];
+						//for (x in models){promises.push(User.find({id:models[x].user.toString()}))}
+						//Q.all(promises).then((populatedModels)=>{
+						//	for (x in models){models[x].user = populatedModels[x][0];}
+						//	res.json({data:models,market:market});
+						//});
 					}
 					else{res.json({data:[],market:{}})}
 				});

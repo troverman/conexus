@@ -42,7 +42,7 @@
 				        	<div style="padding:15px">
 					            <h1 style="text-align:left;font-size:25px;color:rgba(255,255,255,0.9);font-weight:400;">
 					            	<a ng-click="$event.stopPropagation();" href="market/{{token.string}}" style="color:white;word-break:break-word" ui-sref="market({id:token.string})">
-					            		<img style="height:64px;padding:15px;" ng-src="http://identicon-1132.appspot.com/{{token.string.split('+').join('').split(',').join('').split(' ').join('')}}?s=8&p=8&f=png">
+					            		<img style="height:64px;padding:15px;" ng-src="http://identicon-1132.appspot.com/{{token.id}}?s=8&p=8&f=png">
 					            		<span>{{token.string}}</span>
 					            	</a>
 					            </h1>

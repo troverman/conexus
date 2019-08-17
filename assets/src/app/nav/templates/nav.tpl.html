@@ -1,0 +1,84 @@
+<md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="nav" md-is-locked-open="false" style="position:fixed;background-color:black">
+    <div class="md-list-item-text" layout="column" style="height:100%;text-align:center">
+        
+        <div class="spacing-25"></div>
+
+        <!--
+        <div ng-if="!currentUser && false">
+            <div style="background:url('https://source.unsplash.com/1600x900/?explode,erupt,action,create')" class="imageContainerSmall">
+                <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                    <div style="margin-top: auto;margin-bottom: auto;">
+                        <div style="padding:15px" style="width:100%">
+                            <h1 style="font-size:14px;color:rgba(255,255,255,0.9);font-weight:400;">
+                                <img src="images/3.gif" style="height:50px;width:50px;border-radius:100%">
+                                <div class="spacing-5"></div>
+                                <a style="font-size:24px;color:white" href="/" ui-sref="home">CRE8.XYZ</a>
+                            </h1>
+                            <h5 style="color:white;font-size:12px;">EMPOWERING LOCAL COMMUNITIES</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        -->
+
+        <div ng-if="currentUser">
+            <div style="background:url('https://source.unsplash.com/1600x900/?explode,erupt,action,create')" class="imageContainerSmall">
+                <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                    <div style="margin-top: auto;margin-bottom: auto;">
+                        <div style="padding:15px" style="width:100%">
+                            <h1 style="font-size:14px;color:rgba(255,255,255,0.9);font-weight:400;">
+                                <img src="{{currentUser.avatarUrl}}" style="height:50px;width:50px;border-radius:100%">
+                                <div class="spacing-5"></div>
+                                <a style="font-size:24px;color:white" href="member/{{currentUser.username}}" ui-sref="member.activity({path:currentUser.username})">{{currentUser.username}}</a>
+                            </h1>
+                            <h5 style="color:white;font-size:12px;"><a href="#" ng-click="memberQRToggle(currentUser)" style="color:white"><i style="color:white" class="fas fa-qrcode"></i> {{currentUser.id}}</a></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <form style="padding:16px;" role="search" action="/search/" onSubmit="location.href = 'search/' + document.getElementById('search-link').value; return false;">
+                <div class="form-group">
+                    <input class="form-control" style="margin-top:3px;border-radius:3px;" ng-keyup="keyPress(searchValue)" ng-model="searchValue" id="search-link" size="40" type="text" placeholder="Search">
+                </div>
+            </form>
+        </div>
+
+        <div style="min-height:500px;max-height:100vh;overflow:hidden">
+            <h4 ng-show="!currentUser" class="nav-links" style="padding:4px;"><a href="/about" ui-sref="about">About</a></h4>
+            <!--<h4 ng-show="!currentUser" class="nav-links" style="padding:4px;"><a href="/apps" ui-sref="apps">Apps</a></h4>
+            <h4 ng-show="!currentUser" class="nav-links" style="padding:4px;"><a href="/developers" ui-sref="developers">developers</a></h4>-->
+
+            <h4 ng-show="currentUser" class="nav-links" ng-click="cre8Toggle()" style="padding:8px;"><a>CRE8</a></h4>
+            <h4 class="nav-links" style="padding:4px;"><a href="/discover" ui-sref="discover">Discover</a></h4>
+            <h4 class="nav-links" style="padding:4px;"><a href="/market" ui-sref="markets">Market</a></h4>
+            <h4 class="nav-links" style="padding:4px;"><a href="/marketplace" ui-sref="marketPlace">Marketplace</a></h4>
+            <h4 class="nav-links" style="padding:4px;"><a href="/projects" ui-sref="projects">Projects</a></h4>
+            <h4 class="nav-links" style="padding:4px;"><a href="/tasks" ui-sref="tasks">Tasks</a></h4>
+            <h4 ng-show="currentUser" class="nav-links" style="padding:8px;">
+                <a href="/notifications" ui-sref="notifications"> <span ng-if="notificationCount > 0" class="label label-danger">{{notificationCount}}</span> Notifications</a>
+            </h4>
+            <h4 ng-show="currentUser" class="nav-links" style="padding:4px;"><a href="/account" ui-sref="account">Settings</a></h4>
+            <h4 ng-show="currentUser" class="nav-links" style="padding:4px;"><a href="/logout">Logout</a></h4>
+            <h4 ng-show="!currentUser" ng-click="loginToggle()" class="nav-links" style="padding:4px;"><a>Login</a></h4>
+            <h4 ng-show="!currentUser" class="nav-links" style="padding:4px;"><a href="/register" ui-sref="register">Register</a></h4>
+
+            <div class="spacing-15"></div>
+            <div style="background:url('https://source.unsplash.com/1600x900/?code,pattern,art,forest');height:100vh" class="imageContainerSmall">
+                <div style="background:rgba(0,0,0,0.75);height:100vh" class="imageContainerSmallDiv">
+                    <div style="">
+                        <!--<div style="padding:15px">
+                            <a href="/" ui-sref="home"><img style="height:50px" src="images/hypercube.gif"></a>
+                            <div class="spacing-5"></div>
+                            <a style="font-weight:bold;font-size:15px;color:white;font-family:Helvetica Neue,Helvetica,Arial,sans-serif" href="/" ui-sref="home">CRE8.XYZ</a>
+                        </div>-->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</md-sidenav>

@@ -18,13 +18,15 @@ angular.module( 'conexus.nav', [
         $scope.closeAllNav();
     });
     
+    $rootScope.consentAgreement = false;
+    
     //INITALIZE LOCAL VARIABLES
     $scope.associationsAreExpanded = false;
     $scope.chart = {};
     $scope.confirm = {};
 
     //ROOTSCOPE..
-    $scope.directedGraphStyle = [
+    $rootScope.directedGraphStyle = [
         {
             "selector": "core",
             "style": {
@@ -173,14 +175,14 @@ angular.module( 'conexus.nav', [
             }
         }
     ];
-    $scope.directedGraphElements = {};
-    $scope.directedGraphOptions = {
+    $rootScope.directedGraphOptions = {
         textureOnViewport:true,
         pixelRatio: 'auto',
         motionBlur: false,
         hideEdgesOnViewport:true
     };
-    $scope.directedGraphLayout = {name: 'cola'};
+    $rootScope.directedGraphLayout = {name: 'cola'};
+    $scope.directedGraphElements = {};
 
     $scope.inputVector = [];
     $scope.map = {center: {latitude: 35.902023, longitude: -84.1507067 }, zoom: 9};
@@ -313,10 +315,12 @@ angular.module( 'conexus.nav', [
             $scope.newContent.associatedModels.push({
                 type:'CONTENT',
                 text:'Self',
-                context:{
-                    general:100
-                }
+                context:[
+                    {text:'general', score:100}
+                ]
             });
+
+
 
             console.log('CONTENT TOGGLE', $scope.newContent);
 
@@ -338,7 +342,13 @@ angular.module( 'conexus.nav', [
     };
 
     $scope.expandAssets = function(){$scope.assetsAreExpanded = !$scope.assetsAreExpanded;};
-    $scope.expandAssociations = function(){$scope.associationsAreExpanded = !$scope.associationsAreExpanded;};
+
+    $scope.expandAssociations = function(model){
+
+        $scope.associationsAreExpanded = !$scope.associationsAreExpanded;
+        
+    };
+
     $scope.expandAdvancedFilter = function(){$scope.filtersAreExpanded = !$scope.filtersAreExpanded;};
 
 
@@ -567,15 +577,23 @@ angular.module( 'conexus.nav', [
         $scope.closeAllNav();
         if($rootScope.currentUser){
             $scope.newItem = {};
+
             $scope.newItem.associatedModels = [
                 {
                     type:'ITEM',
                     text:'Self',
-                    context:{
-                        general:100
-                    }
+                    context:[
+                        {text:'general', score:100}
+                    ]
                 }
             ];
+
+            //$scope.$watch('newItem.associatedModels', function(newValue, oldValue){
+            //    if (newValue !== oldValue) {
+            //        //ADD SCORE
+            //    }
+            //}, true);
+
             $mdSidenav('item').toggle();
         }
         else{$mdSidenav('login').toggle();}
@@ -890,15 +908,15 @@ angular.module( 'conexus.nav', [
         $scope.closeAllNav();
 
         $scope.item = item;
-        if (item.reputation){$scope.reputation = item.reputation;$scope.item.user = item}
-        if (item.user){$scope.reputation = item.user.reputation}
+        if ($scope.item.reputation){$scope.reputation = $scope.item.reputation;$scope.item.user = item}
+        if ($scope.item.user){$scope.reputation = $scope.item.user.reputation}
 
         //DEPRECIATE
         if ($scope.item.project){
             $scope.reputationFilter = [{text:$scope.item.project.title}];
         }
 
-        $scope.chart = {
+        $scope.reputationChart = {
             chart: {zoomType: 'x'},
             series: [{
                 id: 'Reputation',
@@ -927,8 +945,8 @@ angular.module( 'conexus.nav', [
 
         for (x in sortable){
             if (x < 100){
-                $scope.chart.xAxis.categories.push(sortable[x][0]);
-                $scope.chart.series[0].data.push(sortable[x][1]);
+                $scope.reputationChart.xAxis.categories.push(sortable[x][0]);
+                $scope.reputationChart.series[0].data.push(sortable[x][1]);
             }
         }
         $mdSidenav('renderReputation').toggle();
@@ -2038,31 +2056,13 @@ angular.module( 'conexus.nav', [
     //TODO! IMPORTANT
     $scope.loadAsset = function(query){
         var deferred = $q.defer();
+
         //SEND ITEMS? --> SEND CONTENT OWNERSHIP? DIFFERENCE.. HMM
         //CONTENT HAS RIGHTS TO VIEW TOKEN
         //PROTOCOL SPECIFIC IDENTIFER SEARCH
         //GET MY ITEMS TO SEND
-
         //SHOULD BE TOP ASSETS THAT YOU HAVE
-        //return [
-        //    {text:'CRE8'},
-        //    {text:'BTC'},
-        //    {text:'BCH'},
-        //    {text:'ETH'},
-        //    {text:'LTC'},
-        //    {text:'USD'},
-        //    {text:'STEEM'},
-        //    {text:'NOVO'},
-        //    {text:'TIME'},
-        //    {text:'TIME+ATTENTION'},
-        //    {text:'CONTENT'},
-        //    {text:'CONSUMPTION'},
-        //    {text:'REST'},
-        //    {text:'MARKETING'},
-        //    {text:'SHELTER'},
-        //    {text:'UNIVERSAL'},
-        //];
-
+ 
         $scope.balance = $rootScope.balance;
         console.log('LOAD ASSET', $rootScope.balance, $scope.balance);
 
@@ -2072,7 +2072,6 @@ angular.module( 'conexus.nav', [
             //TODO: ALLOW FOR TITLE.. ETC.. USE TOKEN DATA MODEL HERE.. 
             itemModels.map(function(obj){
                 obj.type='ITEM';
-                //obj.text=obj.title+' '+obj.id;
                 obj.text=obj.id;
                 return obj;
             });
@@ -2080,20 +2079,10 @@ angular.module( 'conexus.nav', [
             for (x in Object.keys($rootScope.balance)){
                 itemModels.push({text:Object.keys($rootScope.balance)[x]});
             }
-
             //MAP BALANCE --> itemModels.push()
-
             deferred.resolve(itemModels);
         });
         return deferred.promise;
-
-
-        //var itemModels = []
-        //for (x in Object.keys($rootScope.balance)){
-        //    itemModels.push({text:Object.keys($rootScope.balance)[x]});
-        //}
-        //return itemModels;
-
 
     };
 
@@ -2172,7 +2161,8 @@ angular.module( 'conexus.nav', [
         //SearchModel.search(query).then(function(searchModels){
         //UserModel.getSome({search:query, limit:10, skip:0, sort:'createdAt DESC'}).then(function(searchModels){
         //    console.log(searchModels);
-            searchModels = [{text:'TAG'}, {text:'TAG2'}]
+            //searchModels = [{text:'TAG'}, {text:'TAG2'}]
+            var searchModels = [];
             deferred.resolve(searchModels);
         //});
         return deferred.promise;

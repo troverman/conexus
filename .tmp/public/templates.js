@@ -1,4 +1,4 @@
-angular.module("templates-app", ["about/index.tpl.html", "account/index.tpl.html", "action/index.tpl.html", "app/index.tpl.html", "apps/index.tpl.html", "association/index.tpl.html", "block/index.tpl.html", "connection/index.tpl.html", "content/index.tpl.html", "content/templates/content.tpl.html", "contentList/index.tpl.html", "developers/index.tpl.html", "discover/index.tpl.html", "footer/index.tpl.html", "home/index.tpl.html", "home/templates/feed.tpl.html", "home/templates/intro.tpl.html", "home/templates/tutorial.tpl.html", "item/index.tpl.html", "login/index.tpl.html", "market/index.tpl.html", "marketPair/index.tpl.html", "marketPlace/index.tpl.html", "markets/index.tpl.html", "member/index.tpl.html", "member/templates/about.tpl.html", "member/templates/actions.tpl.html", "member/templates/activity.tpl.html", "member/templates/assets.tpl.html", "member/templates/content.tpl.html", "member/templates/followers.tpl.html", "member/templates/following.tpl.html", "member/templates/items.tpl.html", "member/templates/ledger.tpl.html", "member/templates/positions.tpl.html", "member/templates/projects.tpl.html", "member/templates/tasks.tpl.html", "member/templates/time.tpl.html", "members/index.tpl.html", "nav/index.tpl.html", "notifications/index.tpl.html", "order/index.tpl.html", "project/index.tpl.html", "project/templates/about.tpl.html", "project/templates/activity.tpl.html", "project/templates/assets.tpl.html", "project/templates/channels.tpl.html", "project/templates/charter.tpl.html", "project/templates/content.tpl.html", "project/templates/items.tpl.html", "project/templates/ledger.tpl.html", "project/templates/members.tpl.html", "project/templates/positions.tpl.html", "project/templates/projects.tpl.html", "project/templates/settings.tpl.html", "project/templates/tasks.tpl.html", "project/templates/time.tpl.html", "projects/index.tpl.html", "reaction/index.tpl.html", "register/index.tpl.html", "search/index.tpl.html", "task/index.tpl.html", "tasks/index.tpl.html", "templates/cards/actionCard.tpl.html", "templates/cards/appCard.tpl.html", "templates/cards/contentCard.tpl.html", "templates/cards/itemCard.tpl.html", "templates/cards/memberCard.tpl.html", "templates/cards/orderCard.tpl.html", "templates/cards/projectCard.tpl.html", "templates/cards/taskCard.tpl.html", "templates/cards/timeCard.tpl.html", "templates/cards/transactionCard.tpl.html", "templates/cards/validationCard.tpl.html", "time/index.tpl.html", "token/index.tpl.html", "transaction/index.tpl.html", "transparency/index.tpl.html", "tx/index.tpl.html", "validation/index.tpl.html", "view/index.tpl.html"]);
+angular.module("templates-app", ["about/index.tpl.html", "account/index.tpl.html", "action/index.tpl.html", "app/index.tpl.html", "apps/index.tpl.html", "association/index.tpl.html", "block/index.tpl.html", "connection/index.tpl.html", "content/index.tpl.html", "content/templates/content.tpl.html", "contentList/index.tpl.html", "developers/index.tpl.html", "discover/index.tpl.html", "footer/index.tpl.html", "home/index.tpl.html", "home/templates/feed.tpl.html", "home/templates/intro.tpl.html", "item/index.tpl.html", "login/index.tpl.html", "market/index.tpl.html", "marketPair/index.tpl.html", "marketPlace/index.tpl.html", "markets/index.tpl.html", "member/index.tpl.html", "member/templates/about.tpl.html", "member/templates/actions.tpl.html", "member/templates/activity.tpl.html", "member/templates/assets.tpl.html", "member/templates/content.tpl.html", "member/templates/followers.tpl.html", "member/templates/following.tpl.html", "member/templates/items.tpl.html", "member/templates/ledger.tpl.html", "member/templates/positions.tpl.html", "member/templates/projects.tpl.html", "member/templates/tasks.tpl.html", "member/templates/time.tpl.html", "members/index.tpl.html", "nav/index.tpl.html", "nav/templates/cardDetail.tpl.html", "nav/templates/confirm.tpl.html", "nav/templates/create.tpl.html", "nav/templates/createAction.tpl.html", "nav/templates/createApp.tpl.html", "nav/templates/createConnection.tpl.html", "nav/templates/createContent.tpl.html", "nav/templates/createItem.tpl.html", "nav/templates/createOrder.tpl.html", "nav/templates/createProject.tpl.html", "nav/templates/createTask.tpl.html", "nav/templates/createTime.tpl.html", "nav/templates/createTransaction.tpl.html", "nav/templates/createValidation.tpl.html", "nav/templates/filter.tpl.html", "nav/templates/information.tpl.html", "nav/templates/login.tpl.html", "nav/templates/market.tpl.html", "nav/templates/nav.tpl.html", "nav/templates/qr.tpl.html", "nav/templates/register.tpl.html", "nav/templates/render.tpl.html", "nav/templates/renderReputation.tpl.html", "nav/templates/renderValidation.tpl.html", "nav/templates/sort.tpl.html", "nav/templates/stats.tpl.html", "nav/templates/subNav.tpl.html", "nav/templates/timer.tpl.html", "nav/templates/tokens.tpl.html", "notifications/index.tpl.html", "order/index.tpl.html", "project/index.tpl.html", "project/templates/about.tpl.html", "project/templates/activity.tpl.html", "project/templates/assets.tpl.html", "project/templates/channels.tpl.html", "project/templates/charter.tpl.html", "project/templates/content.tpl.html", "project/templates/items.tpl.html", "project/templates/ledger.tpl.html", "project/templates/members.tpl.html", "project/templates/positions.tpl.html", "project/templates/projects.tpl.html", "project/templates/settings.tpl.html", "project/templates/tasks.tpl.html", "project/templates/time.tpl.html", "projects/index.tpl.html", "reaction/index.tpl.html", "register/index.tpl.html", "search/index.tpl.html", "task/index.tpl.html", "tasks/index.tpl.html", "templates/cards/actionCard.tpl.html", "templates/cards/appCard.tpl.html", "templates/cards/contentCard.tpl.html", "templates/cards/itemCard.tpl.html", "templates/cards/memberCard.tpl.html", "templates/cards/orderCard.tpl.html", "templates/cards/projectCard.tpl.html", "templates/cards/taskCard.tpl.html", "templates/cards/timeCard.tpl.html", "templates/cards/transactionCard.tpl.html", "templates/cards/validationCard.tpl.html", "time/index.tpl.html", "token/index.tpl.html", "transaction/index.tpl.html", "transparency/index.tpl.html", "tutorial/index.tpl.html", "tutorial/templates/controls.tpl.html", "tutorial/templates/create.tpl.html", "tutorial/templates/intro.tpl.html", "tutorial/templates/members.tpl.html", "tutorial/templates/projects.tpl.html", "tutorial/templates/tasks.tpl.html", "tutorial/templates/updateValueMap.tpl.html", "tutorial/templates/valueMap.tpl.html", "tutorial/templates/valueMapBuilder.tpl.html", "tutorial/templates/valueMapOrders.tpl.html", "tutorial/templates/valueMapQuestions.tpl.html", "tx/index.tpl.html", "validation/index.tpl.html", "view/index.tpl.html"]);
 
 angular.module("about/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("about/index.tpl.html",
@@ -5020,7 +5020,7 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "<div class=\"container\">\n" +
     "\n" +
     "    <div ng-if=\"currentUser.apps.cre8.tutorial && isTutorial\">\n" +
-    "        <div ng-include=\"'home/templates/tutorial.tpl.html'\"></div>\n" +
+    "        <div ng-include=\"'tutorial/index.tpl.html'\"></div>\n" +
     "    </div>\n" +
     "\n" +
     "    <div class=\"spacing-10\"></div>\n" +
@@ -5044,30 +5044,54 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "        </div>\n" +
     "\n" +
     "        <!--REPUTATION / BALANCE MAPPING && VALUE MAP-->\n" +
+    "        <!--APP INPUT-->\n" +
     "        <div class=\"col-md-8 col-sm-12 col-xs-12\" style=\"padding-left:0px;padding-right:0px\">\n" +
+    "            <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "                <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"selectTab('INFORMATION')\"><i class=\"fas fa-passport\"></i> Information</a></li>\n" +
+    "                <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"selectTab('SUGGESTIONS')\"><i class=\"fas fa-exclamation\"></i><i class=\"fas fa-question\"></i> Suggestions</a></li>\n" +
+    "                <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"selectTab('VALUEMAP')\"><i class=\"fas fa-globe\"></i> Value Map</a></li>\n" +
+    "                <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"selectTab('BALANCES')\"><i class=\"fas fa-universal-access\"></i> Balances</a></li>\n" +
+    "                <div style=\"clear:both\"></div>\n" +
+    "            </ul>\n" +
     "            <div class=\"card\" style=\"margin-top:0px\">\n" +
     "                <div style=\"padding:16px;\">\n" +
     "\n" +
     "                    <!--<span style=\"text-align:left;float:right\"><a href=\"#\"><span style=\"font-size:11px;color:gray\">0x{{currentUser.id}}</span><img style=\"height:50px;\" ng-src=\"https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{currentUser.id}}\"></a></span>-->\n" +
+    "                    <div ng-show=\"selectedTab =='INFORMATION'\">\n" +
+    "                        <h4><a href=\"member/{{currentUser.username}}\" ui-sref=\"member.activity({path:currentUser.username})\">{{currentUser.username}}</a></h4>\n" +
+    "                        <p style=\"font-size:12px;\" ng-click=\"$event.stopPropagation();memberQRToggle(currentUser);\"><a style=\"color:gray\"><i class=\"fas fa-qrcode\"></i> {{currentUser.id}}</a></p>\n" +
+    "                        <p style=\"font-size:13px;\">\n" +
+    "                            <!--<a href=\"member/{{currentUser.username}}/positions\" ui-sref=\"member.positions({path:currentUser.username})\"><i class=\"fas fa-globe\"></i> Value Map</a> | -->\n" +
+    "                            <a href=\"member/{{currentUser.username}}/projects\" ui-sref=\"member.projects({path:currentUser.username})\">{{currentUser.projectCount || 0}} Projects</a> | \n" +
+    "                            <a href=\"member/{{currentUser.username}}/followers\" ui-sref=\"member.followers({path:currentUser.username})\">{{currentUser.followerCount || 0}} Followers</a> | \n" +
+    "                            <a href=\"member/{{currentUser.username}}/following\" ui-sref=\"member.following({path:currentUser.username})\">{{currentUser.followingCount || 0}} Following</a>\n" +
+    "                        </p>\n" +
+    "                    </div>\n" +
+    "                    <div ng-show=\"selectedTab =='SUGGESTIONS'\">\n" +
+    "                        <img src=\"https://cdn.dribbble.com/users/32512/screenshots/4787574/light_ai_design_by_gleb.gif\"/>\n" +
+    "                        <p style=\"color:gray;font-style:italic\">Coming Soon</p>\n" +
+    "                    </div>\n" +
+    "                    <div ng-show=\"selectedTab =='VALUEMAP'\">\n" +
+    "                        <p style=\"color:gray;font-style:italic\">Coming Soon</p>\n" +
+    "                        <!--RENDER ORDERS-->\n" +
+    "                    </div>\n" +
     "\n" +
-    "                    <h4><a href=\"member/{{currentUser.username}}\" ui-sref=\"member.activity({path:currentUser.username})\">{{currentUser.username}}</a></h4>\n" +
-    "                    <p style=\"font-size:13px;\">\n" +
-    "                        <a href=\"member/{{currentUser.username}}/positions\" ui-sref=\"member.positions({path:currentUser.username})\"><i class=\"fas fa-globe\"></i> Value Map</a> | \n" +
-    "                        <a href=\"member/{{currentUser.username}}/projects\" ui-sref=\"member.projects({path:currentUser.username})\">{{currentUser.projectCount || 0}} Projects</a> | \n" +
-    "                        <a href=\"member/{{currentUser.username}}/followers\" ui-sref=\"member.followers({path:currentUser.username})\">{{currentUser.followerCount || 0}} Followers</a> | \n" +
-    "                        <a href=\"member/{{currentUser.username}}/following\" ui-sref=\"member.following({path:currentUser.username})\">{{currentUser.followingCount || 0}} Following</a>\n" +
-    "                    </p>\n" +
-    "                    <div class=\"row\">\n" +
-    "                        <div class=\"col-xs-12\">\n" +
-    "                            <h5>Balance Lookup <br><span style=\"font-size:11px;color:gray\">{{currentUser.id}}</span></h5>\n" +
-    "                            <form ng-submit=\"lookupBalance()\" style=\"display:flex;flex-direction:row;\">\n" +
-    "                                <input ng-model=\"balanceLook\" style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder=\"Asset\">\n" +
-    "                                <div ng-click=\"lookupBalance()\" style=\"border:0px;float:right\" class=\"btn btn-default\">\n" +
-    "                                    <a href=\"#\"><h5 style=\"color:black;text-align:right\" class=\"noselect\"> <i class=\"fa fa-search\"></i></h5></a>\n" +
+    "                    <div ng-show=\"selectedTab =='BALANCES'\">\n" +
+    "                        <div class=\"row\">\n" +
+    "                            <div>\n" +
+    "                                <highchart config=\"balanceChart\"></highchart>\n" +
+    "                            </div>\n" +
+    "                            <div class=\"col-xs-12\">\n" +
+    "                                <h5>Balance Lookup <br><span style=\"font-size:11px;color:gray\">{{currentUser.id}}</span></h5>\n" +
+    "                                <form ng-submit=\"lookupBalance()\" style=\"display:flex;flex-direction:row;\">\n" +
+    "                                    <input ng-model=\"balanceLook\" style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder=\"Asset\">\n" +
+    "                                    <div ng-click=\"lookupBalance()\" style=\"border:0px;float:right\" class=\"btn btn-default\">\n" +
+    "                                        <a href=\"#\"><h5 style=\"color:black;text-align:right\" class=\"noselect\"> <i class=\"fa fa-search\"></i></h5></a>\n" +
+    "                                    </div>\n" +
+    "                                </form>\n" +
+    "                                <div ng-show=\"balanceLookupValue !== undefined\">\n" +
+    "                                    <h5><a href=\"market/{{balanceLook}}\" ui-sref=\"market({id:balanceLook})\">{{balanceLook}}</a> | {{balanceLookupValue}}</h5>\n" +
     "                                </div>\n" +
-    "                            </form>\n" +
-    "                            <div ng-show=\"balanceLookupValue !== undefined\">\n" +
-    "                                <h5><a href=\"market/{{balanceLook}}\" ui-sref=\"market({id:balanceLook})\">{{balanceLook}}</a> | {{balanceLookupValue}}</h5>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
@@ -5086,61 +5110,10 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "\n" +
     "            <!--DISCOVERABILITY AREA HERE-->\n" +
     "            <!--PAST 24HR TIME CONTEXT-->\n" +
-    "\n" +
     "            <!--REPUTATION-->\n" +
-    "            <!--\n" +
-    "            <div class=\"card\">\n" +
-    "                <div style=\"background:url('https://source.unsplash.com/1600x900/?details,notes,exolire,wonder,value,science,forest,code');min-height:50px\" class=\"imageContainerSmall\">\n" +
-    "                    <div style=\"background:rgba(0,0,0,0.75);height:50px\" class=\"imageContainerSmallDiv\">  \n" +
-    "                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                            <div class=\"container\">\n" +
-    "                                <h1 style=\"text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;\"><i class=\"fas fa-user\"></i> Balance and Reputation</h1>\n" +
-    "                            </div>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "                <div style=\"padding:16px;\">\n" +
-    "                    <highchart config=\"totalMap\"></highchart>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "            -->\n" +
-    "\n" +
     "            <!--PAST SUMMARY; UPCOMING SCHEDULE-->\n" +
-    "            <!--\n" +
-    "            <div class=\"card\">\n" +
-    "                <div style=\"background:url('https://source.unsplash.com/1600x900/?details,notes,exolire,wonder,value,science,forest,code');min-height:50px\" class=\"imageContainerSmall\">\n" +
-    "                    <div style=\"background:rgba(0,0,0,0.75);height:50px\" class=\"imageContainerSmallDiv\">  \n" +
-    "                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                            <div class=\"container\">\n" +
-    "                                <h1 style=\"text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;\"><i class=\"fas fa-eye\"></i> 24hr Summary & Upcoming</h1>\n" +
-    "                            </div>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "                <div style=\"padding:16px;\">\n" +
-    "                    <highchart config=\"totalMap\"></highchart>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "            -->\n" +
-    "\n" +
     "            <!--VALUE MAP-->\n" +
-    "            <!--\n" +
-    "            <div class=\"card\">\n" +
-    "                <div style=\"background:url('https://source.unsplash.com/1600x900/?details,notes,exolire,wonder,value,science,forest,code');min-height:50px\" class=\"imageContainerSmall\">\n" +
-    "                    <div style=\"background:rgba(0,0,0,0.75);height:50px\" class=\"imageContainerSmallDiv\">  \n" +
-    "                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                            <div class=\"container\">\n" +
-    "                                <h1 style=\"text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;\"><i class=\"fas fa-globe\"></i> My Value Map</h1>\n" +
-    "                            </div>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "                <div style=\"padding:16px;\">\n" +
-    "                    <highchart config=\"totalMap\"></highchart>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "            -->\n" +
-    "\n" +
+    "           \n" +
     "            <div class=\"card\" ng-if=\"sortedTagArray.length > 0\" ng-click=\"filterToggle('DISCOVER', filterSet)\">\n" +
     "                <div style=\"background:url('https://source.unsplash.com/1600x900/?details,notes,exolore,wonder,connection');min-height:50px\" class=\"imageContainerSmall\">\n" +
     "                    <div style=\"background:rgba(0,0,0,0.75);height:50px\" class=\"imageContainerSmallDiv\">  \n" +
@@ -5837,893 +5810,6 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "<div class=\"spacing-50\"></div>");
 }]);
 
-angular.module("home/templates/tutorial.tpl.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("home/templates/tutorial.tpl.html",
-    "<style>\n" +
-    "    .valueMapButton{\n" +
-    "        margin: 2px;\n" +
-    "        padding: 0 5px;\n" +
-    "        display: inline-block;\n" +
-    "        float: left;\n" +
-    "        font: 14px \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n" +
-    "        height: 40px;\n" +
-    "        line-height: 40px;\n" +
-    "        border: 2px solid #acacac;\n" +
-    "        border-radius: 3px;\n" +
-    "        background: rgba(0,43,85,1);\n" +
-    "        color: white;\n" +
-    "    }\n" +
-    "</style>\n" +
-    "\n" +
-    "<div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "<div class=\"row\">\n" +
-    "\n" +
-    "    <div ng-show=\"pageNumber == 0\">\n" +
-    "        <div class=\"card\">\n" +
-    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?settings')\" class=\"imageContainerSmall\">\n" +
-    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                    <div style=\"text-align:right;padding:15px;position:absolute;right:0\">\n" +
-    "                        <a style=\"color:white;\" ng-click=\"$event.stopPropagation();cardDetailToggle(item)\">\n" +
-    "                            <i class=\"fas fa-globe\"></i>\n" +
-    "                        </a>\n" +
-    "                    </div> \n" +
-    "                    <div style=\"margin-top: auto;margin-bottom: auto;padding:15px\">\n" +
-    "                        <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Welcome to CRE8!</h1>\n" +
-    "                        <h5 style=\"color:white\">Let's get started {{currentUser.username}}.</h5>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "\n" +
-    "        <div style=\"padding:16px;\">\n" +
-    "            <div class=\"row\">\n" +
-    "                <div class=\"col-xs-12\" style=\"padding-right:10px;padding-left:10px\">\n" +
-    "                    <div class=\"member-card\" ng-click=\"renderReputationToggle(currentUser)\">\n" +
-    "                        <!--<div style=\"text-align:right;padding:15px;position:absolute;right:0\">\n" +
-    "                            <a style=\"color:white;\" ng-click=\"$event.stopPropagation();cardDetailToggle(item)\">\n" +
-    "                                <i class=\"fas fa-chevron-down\"></i>\n" +
-    "                            </a>\n" +
-    "                        </div>--> \n" +
-    "                        <div class=\"member-card-image\" style=\"background-image: url('{{currentUser.coverUrl}}')\">\n" +
-    "                            <a href=\"#\">\n" +
-    "                                <img ng-src=\"{{currentUser.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
-    "                            </a>\n" +
-    "                        </div>\n" +
-    "                        <div style=\"clear:both\"></div>\n" +
-    "                        <div class=\"member-card-info\" style=\"height:auto;padding-left:0%\">\n" +
-    "                            <h4 ng-click=\"$event.stopPropagation()\"><a href=\"member/{{currentUser.username}}\" ui-sref=\"member.activity({path:currentUser.username})\">{{currentUser.username}}</a></h4>\n" +
-    "                            <p style=\"color:gray\"><i style=\"color:#30b257\" class=\"fa fa-circle\"></i> {{currentUser.status}} Creating Account</p>\n" +
-    "                            <p style=\"color:gray\"><b>Total Reputation</b>: {{currentUser.totalWork}}</p>\n" +
-    "                            <p style=\"font-size:12px;\" ng-click=\"$event.stopPropagation();memberQRToggle(currentUser);\"><a style=\"color:gray\"><i class=\"fas fa-qrcode\"></i> {{currentUser.id}}</a></p>\n" +
-    "                        </div>\n" +
-    "                        <div ng-show=\"false\" class=\"member-card-social\">\n" +
-    "                            <a ng-show=\"false\" href=\"{{currentUser.socialAccounts.facebook.profileUrl}}\" target=\"_blank\"><i class=\"fa fa-facebook facebook-icon\"></i></a>\n" +
-    "                            <a ng-show=\"false\" href=\"{{currentUser.socialAccounts.facebook.profileUrl}}\" target=\"_blank\"><i class=\"fa fa-instagram\"></i></a>\n" +
-    "                            <a ng-show=\"false\" href=\"{{currentUser.socialAccounts.twitter.profileUrl}}\" target=\"_blank\"><i class=\"fa fa-twitter twitter-icon\"></i></a>\n" +
-    "                            <a ng-show=\"false\" href=\"{{currentUser.socialAccounts.google.profileUrl}}\" target=\"_blank\"><i class=\"fa fa-google google-icon\"></i></a>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "               \n" +
-    "                    <div style=\"padding:16px;text-align:center\">\n" +
-    "                        <p style=\"color:gray;font-style:italic\">All information given to the CRE8 NETWORK comes from a place of mutual consent. <a ng-click=\"informationToggle('INFORMATION SHARING CONSENT')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></p> \n" +
-    "                        <div layout=\"row\" layout-align=\"center center\" flex=\"100\">\n" +
-    "                            <p><md-switch style=\"\" ng-model=\"consentAgreement\" aria-label=\"Consent Agreement\"></md-switch></p>\n" +
-    "                        </div>\n" +
-    "                        <p><b>I agree.</b></p>\n" +
-    "                    </div>\n" +
-    "\n" +
-    "                    <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                </div>\n" +
-    "                <div class=\"col-xs-12\" style=\"padding-right:0px;padding-left:0px\">\n" +
-    "                    <div class=\"card\" style=\"margin-top:0px;\">\n" +
-    "                        <div style=\"background:url('https://source.unsplash.com/1600x900/?personal,energy,joyful,humuan,data,code')\" class=\"imageContainerSmall\">\n" +
-    "                            <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                                <div style=\"padding:15px;margin-top: auto;margin-bottom: auto;\">\n" +
-    "                                    <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\">Account Information</h1>\n" +
-    "                                    <h5><a style=\"color:white\" href=\"/account\"  ui-sref=\"account\"><i class=\"fas fa-passport\"></i> Settings</a></h5>\n" +
-    "                                </div>\n" +
-    "                            </div>\n" +
-    "                        </div>\n" +
-    "                        <div style=\"padding:16px;\">\n" +
-    "                            <form role=\"form\" ng-submit=\"editAccount()\">\n" +
-    "                                <div style=\"padding:0px\" class=\"col-xs-6\">\n" +
-    "                                    <h5><i class=\"fas fa-link\"></i> Avatar URL</h5>\n" +
-    "                                    <input type=\"text\" ng-model=\"newAccountInformation.avatarUrl\" placeholder=\"Avatar Url\" class=\"form-control\">\n" +
-    "                                </div>\n" +
-    "                                <div style=\"padding:0px\" class=\"col-xs-6\"><h5><i class=\"fas fa-link\"></i> Cover URL</h5><input type=\"text\" ng-model=\"newAccountInformation.coverUrl\" placeholder=\"Cover Url\" class=\"form-control\"></div>\n" +
-    "                                <div style=\"padding:0px\" class=\"col-xs-12\"><h5><i class=\"fas fa-user\"></i> Username</h5><input type=\"text\" ng-model=\"newAccountInformation.username\" placeholder=\"Username\" class=\"form-control\"></div>\n" +
-    "                                <div style=\"padding:0px\" class=\"col-xs-6\"><h5><i class=\"fas fa-envelope\"></i> Email</h5><input type=\"text\" ng-model=\"newAccountInformation.email\" placeholder=\"Email\" class=\"form-control\"></div>\n" +
-    "                                <div style=\"padding:0px\" class=\"col-xs-6\"><h5><i class=\"fas fa-phone\"></i> Phone Number</h5><input type=\"text\" ng-model=\"newAccountInformation.phoneNumber\" placeholder=\"Phone Number\" class=\"form-control\"></div>\n" +
-    "                                <div style=\"padding:0px\" class=\"col-xs-4\"><h5><i class=\"fas fa-info\"></i> First Name</h5><input type=\"text\" ng-model=\"newAccountInformation.firstName\" placeholder=\"First Name\" class=\"form-control\"></div>\n" +
-    "                                <div style=\"padding:0px\" class=\"col-xs-4\"><h5><i class=\"fas fa-info\"></i> Last Name</h5><input type=\"text\" ng-model=\"newAccountInformation.lastName\" placeholder=\"Last Name\" class=\"form-control\"></div>\n" +
-    "                                <div style=\"padding:0px\" class=\"col-xs-4\"><h5><i class=\"fas fa-birthday-cake\"></i> Date Of Birth</h5><input type=\"date\" ng-model=\"newAccountInformation.dateOfBirth\" placeholder=\"Date of Birth\" class=\"form-control\"></div>\n" +
-    "\n" +
-    "                                <div style=\"clear:both\"></div><div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                                <div style=\"padding:0px;text-align:center\"  class=\"col-xs-12\">\n" +
-    "                                    <h5><i style=\"color:#2ab995\" class=\"fas fa-seedling\"></i> Client Mining</h5>\n" +
-    "                                    <span style=\"font-size:10px;color:gray\">Run a CRE8 node that powers the network. Machine attention is tokenized.</span>\n" +
-    "                                    <div ng-click=\"$event.stopPropagation();\">\n" +
-    "                                        <div layout=\"row\" layout-align=\"center center\" flex=\"100\">\n" +
-    "                                            <md-switch ng-change=\"editAccount()\" ng-model=\"newAccountInformation.apps.cre8.peerMining\" aria-label=\"Location Attention\"></md-switch>\n" +
-    "                                        </div>\n" +
-    "                                    </div>\n" +
-    "                                </div>\n" +
-    "\n" +
-    "                                <div style=\"padding:0px;text-align:center\"  class=\"col-xs-6\">\n" +
-    "                                    <h5><i style=\"color:#2ab995\" class=\"fas fa-eye\"></i> Attention Tokenization</h5>\n" +
-    "                                    <span style=\"font-size:10px;color:gray\">Required for Attention Tokenization</span>\n" +
-    "                                    <div ng-click=\"$event.stopPropagation();\">\n" +
-    "                                        <div layout=\"row\" layout-align=\"center center\" flex=\"100\">\n" +
-    "                                            <md-switch ng-change=\"editAccount()\" ng-model=\"newAccountInformation.apps.cre8.recordAttention\" aria-label=\"Record Attention\"></md-switch>\n" +
-    "                                        </div>\n" +
-    "                                    </div>\n" +
-    "                                </div>\n" +
-    "\n" +
-    "                                <div style=\"padding:0px;text-align:center\"  class=\"col-xs-6\">\n" +
-    "                                    <h5><i style=\"color:#2ab995\" class=\"fas fa-map-marker\"></i> Location Tokenization</h5>\n" +
-    "                                    <span style=\"font-size:10px;color:gray\">Required for Location Tokenization</span>\n" +
-    "                                    <div ng-click=\"$event.stopPropagation();\">\n" +
-    "                                        <div layout=\"row\" layout-align=\"center center\" flex=\"100\">\n" +
-    "                                            <md-switch ng-change=\"editAccount()\" ng-model=\"newAccountInformation.apps.cre8.recordLocation\" aria-label=\"Location Attention\"></md-switch>\n" +
-    "                                        </div>\n" +
-    "                                    </div>\n" +
-    "                                </div>\n" +
-    "\n" +
-    "                                <div style=\"clear:both\"></div><div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                                <div style=\"padding:0px;text-align:center\"  class=\"col-xs-12\">\n" +
-    "                                    <a href=\"/account\" ui-sref=\"account\"><b><i class=\"fas fa-passport\"></i> More Apps & Account Settings</b></a>\n" +
-    "                                </div>\n" +
-    "\n" +
-    "                                <div style=\"clear:both\"></div><div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                                <button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!consentAgreement\">Update Account</button>\n" +
-    "                            </form>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "               \n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
-    "\n" +
-    "    <div ng-show=\"pageNumber == 1\">\n" +
-    "\n" +
-    "\n" +
-    "        <!--MANIFOLD BUILDER.. VERB.. MAIN VERBS.. APPS-->\n" +
-    "        <!--APPS AS TOKEN VERBS-->\n" +
-    "        <!--CREATE+TIME+CHILL-->\n" +
-    "        <!--CREATE+TRANSACTION+CHILL-->\n" +
-    "\n" +
-    "        <div class=\"card\" ng-click=\"cardDetailExpand()\">\n" +
-    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?love,art,geometry')\" class=\"imageContainerSmall\">\n" +
-    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                    <div style=\"text-align:right;padding:15px;position:absolute;right:0\">\n" +
-    "                        <a style=\"color:white;\" ng-click=\"$event.stopPropagation();cardDetailToggle(item)\">\n" +
-    "                            <i class=\"fas fa-universal-access\"></i>\n" +
-    "                        </a>\n" +
-    "                        <div style=\"clear:both\"></div>\n" +
-    "                    </div> \n" +
-    "                    <div style=\"margin-top: auto;margin-bottom: auto;padding:15px;\">\n" +
-    "                        <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;font-size:35px\">Create Your Value Map</h1>\n" +
-    "                        <p style=\"color:white;\">What do you believe is valuable?</p>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "\n" +
-    "        <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
-    "            <li style=\"float:left;font-size:14px\"><a ng-click=\"selectTab('QUESTIONS')\" href=\"#\"><i class=\"fas fa-question\"></i> Questions</a></li>\n" +
-    "            <li style=\"float:left;font-size:14px\"><a ng-click=\"selectTab('BUILDER')\" href=\"#\"><i class=\"fas fa-funnel-dollar\"></i> Trending Positions</a></li>\n" +
-    "            <li style=\"float:left;font-size:14px\"><a ng-click=\"selectTab('BUILDER')\" href=\"#\"><i class=\"fas fa-cubes\"></i> Builder</a></li>\n" +
-    "            <li style=\"float:left;font-size:14px\"><a ng-click=\"selectTab('ORDERS')\" href=\"#\"><i class=\"fas fa-poll\"></i> Orders</a></li>\n" +
-    "            <div style=\"clear:both\"></div>\n" +
-    "        </ul>\n" +
-    "    \n" +
-    "        <div ng-if=\"selectedTab =='BUILDER'\" class=\"\">\n" +
-    "\n" +
-    "            <div class=\"card\">\n" +
-    "                <div style=\"padding:16px;\">\n" +
-    "                    <p style=\"color:gray;font-size:12px;font-style:italic\">Select what you believe is worthwile.</p>\n" +
-    "                    <p style=\"color:gray;font-size:12px;font-style:italic\">Creating a value map furthers a self-empowering mechanism. We create value; though sharing our values and relating them we create value in ourselves, in what we do, and within each other.</p>\n" +
-    "\n" +
-    "                    <div class=\"row\">\n" +
-    "                        <div class=\"col-xs-4\"><img ng-src=\"https://source.unsplash.com/900x900/?value,finance,vote\"></div>\n" +
-    "                        <div class=\"col-xs-4\"><img ng-src=\"https://source.unsplash.com/900x900/?humananity,city,community\"></div>\n" +
-    "                        <div class=\"col-xs-4\"><img ng-src=\"https://source.unsplash.com/900x900/?code,love,joy\"></div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "\n" +
-    "            <div class=\"col-sm-3 mobileFix\" style=\"padding-left:0px;padding-right:0px;\">\n" +
-    "                <div class=\"card\" ng-click=\"filterToggle('DISCOVER', filterSet)\">\n" +
-    "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?details,notes,exolore,wonder,connection');min-height:50px\" class=\"imageContainerSmall\">\n" +
-    "                        <div style=\"background:rgba(0,0,0,0.75);height:50px\" class=\"imageContainerSmallDiv\">  \n" +
-    "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                                <div class=\"container\">\n" +
-    "                                    <h1 style=\"text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;\">Context</h1>\n" +
-    "                                </div>\n" +
-    "                            </div>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                    <div style=\"padding:16px;\">\n" +
-    "                        <div ng-repeat=\"item in sortedTagArray track by $index\" ng-click=\"$event.stopPropagation();filterContent(tag.element)\">\n" +
-    "                            <a><b>{{item.element}}</b></a>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "\n" +
-    "            <div class=\"col-sm-9 col-xs-12\" style=\"padding-left:0px;padding-right:0px\">\n" +
-    "\n" +
-    "                <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
-    "                    <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
-    "                    <li style=\"float:left;font-size:14px\">\n" +
-    "                        <a href=\"#\" ng-click=\"filterToggle('VALUEMAP')\">\n" +
-    "                            <i class=\"fas fa-coins\"></i> Base Token <span style=\"font-size:10px;color:gray\">{{baseToken.text}}</span>\n" +
-    "                        </a>\n" +
-    "                    </li>\n" +
-    "                    <li style=\"float:left;font-size:14px\">\n" +
-    "                        <a href=\"#\" ng-click=\"filterToggle('VALUEMAP')\"><i class=\"fas fa-infinity\"></i> Manifold <span style=\"font-size:10px;color:gray\">{{baseManifold.text}}</span></a>\n" +
-    "                    </li>\n" +
-    "                    <li style=\"float:left;font-size:14px\">\n" +
-    "                        <a href=\"#\" ng-click=\"filterToggle('VALUEMAP')\"><i class=\"fas fa-dna\"></i> Type <span style=\"font-size:10px;color:gray\">{{orderType.text}}</span></a>\n" +
-    "                    </li>\n" +
-    "                    <div style=\"clear:both\"></div>\n" +
-    "                </ul>\n" +
-    "                <div class=\"card\">\n" +
-    "                    <tags-input class=\"\" style=\"border:0px;flex-grow:2;\" min-length=\"1\" placeholder=\"Search\" ng-model=\"searchQueryArray\"></tags-input>\n" +
-    "                </div>\n" +
-    "\n" +
-    "                <div class=\"card\">\n" +
-    "\n" +
-    "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?love,art,geometry');min-height:150px;\" class=\"imageContainerSmall\">\n" +
-    "                        <div style=\"background:rgba(0,0,0,0.75);height:150px;\" class=\"imageContainerSmallDiv\">  \n" +
-    "                            <div style=\"text-align:right;padding:15px;position:absolute;right:0\">\n" +
-    "                                <a style=\"color:white;\" ng-click=\"$event.stopPropagation();cardDetailToggle(item)\">\n" +
-    "                                    <i class=\"fas fa-universal-access\"></i>\n" +
-    "                                </a>\n" +
-    "                                <div style=\"clear:both\"></div>\n" +
-    "                            </div> \n" +
-    "                            <div style=\"margin-top: auto;margin-bottom: auto;padding:15px;\">\n" +
-    "                                <h4 style=\"text-align:left;color:rgba(255,255,255,0.9);font-weight:400;\">{{baseToken.text}}</h4>\n" +
-    "                                <h5 style=\"color:white;\">Manifold: {{baseManifold.text}}</h5>\n" +
-    "                                <h5 style=\"color:white;\">Type: {{orderType.text}} Position</h5>\n" +
-    "                            </div>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "\n" +
-    "                    <div class=\"col-xs-12\">\n" +
-    "\n" +
-    "                        <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                        <p style=\"color:gray;font-style:italic\">{{baseToken.description}}</p>\n" +
-    "                        <p style=\"color:gray;font-style:italic\">{{baseManifold.description}}</p>\n" +
-    "                        <p style=\"color:gray;font-style:italic\">{{orderType.description}}</p>\n" +
-    "\n" +
-    "                        <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                        <p style=\"color:gray;font-style:italic;font-weight:bold\">Select the following context of interest to you.</p>\n" +
-    "\n" +
-    "                        <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                        <div class=\"\" style=\"font-size:14px;font-weight:bold\">\n" +
-    "                            <span ng-click=\"createPosition(item.element)\" ng-repeat=\"item in sortedTagArray track by $index\">\n" +
-    "                                <p class=\"valueMapButton\">{{item.element}}</p>\n" +
-    "                            </span>\n" +
-    "                        </div>\n" +
-    "\n" +
-    "                        <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                    </div>\n" +
-    "\n" +
-    "                    <div class=\"col-sm-6 col-xs-12\">\n" +
-    "                        <highchart config=\"chartMapTotal\"></highchart>\n" +
-    "                    </div>\n" +
-    "\n" +
-    "                    <div class=\"col-sm-6 col-xs-12\">\n" +
-    "                        <highchart config=\"pieTotal\"></highchart>\n" +
-    "                    </div>\n" +
-    "\n" +
-    "                </div>\n" +
-    "\n" +
-    "                <div class=\"card\" ng-if=\"newOrder.length > 0\" >\n" +
-    "\n" +
-    "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?love,art,geometry');min-height:50px\" class=\"imageContainerSmall\">\n" +
-    "                        <div style=\"background:rgba(0,0,0,0.75);height:50px\" class=\"imageContainerSmallDiv\">  \n" +
-    "                            <div style=\"margin-top: auto;margin-bottom: auto;padding:15px;\">\n" +
-    "                                <div class=\"row\" style=\"text-align:center\">\n" +
-    "                                    <div class=\"col-xs-6\">\n" +
-    "                                        <span style=\"color:white\">\n" +
-    "                                            Token Set Alpha\n" +
-    "                                        </span>\n" +
-    "                                    </div>\n" +
-    "                                    <div class=\"col-xs-6\">\n" +
-    "                                        <span style=\"color:white\">\n" +
-    "                                            Token Set Beta\n" +
-    "                                        </span>\n" +
-    "                                    </div>\n" +
-    "                                </div>\n" +
-    "                            </div>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "\n" +
-    "                    <div style=\"padding:16px\">\n" +
-    "\n" +
-    "                        <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                        <div class=\"row\">\n" +
-    "                            <div class=\"col-xs-12\">\n" +
-    "                                <div ng-repeat=\"item in newOrder\">\n" +
-    "                                    <div style=\"text-align:center\" class=\"row\">\n" +
-    "                                        <div class=\"col-md-5\">\n" +
-    "                                            <span>{{1/newOrder.length*item[0].amount/100}}</span> \n" +
-    "                                            <a href=\"#\" ng-click=\"cardDetailToggle(baseToken)\">{{baseToken.text}}</a>\n" +
-    "                                        </div>\n" +
-    "                                        <div class=\"col-md-1\">\n" +
-    "                                            <a href=\"#\" ng-click=\"informationToggle('MANIFOLD LOGIC')\"><i class=\"fa fa-exchange\"></i>*</a>\n" +
-    "                                        </div>\n" +
-    "                                        <div class=\"col-md-5\">\n" +
-    "                                            <span>86400</span>\n" +
-    "                                            <a href=\"#\" ng-click=\"cardDetailToggle(baseToken)\">{{item[1].identifier.split('+')[2]}}</a>\n" +
-    "                                            <p style=\"font-size:7px;color:gray\">{{baseManifold.text}}</p>\n" +
-    "                                        </div>\n" +
-    "                                        <div class=\"col-md-1\">\n" +
-    "                                            <a href=\"#\" ng-click=\"removePosition(item)\"><i class=\"fas fa-remove\"></i></a>\n" +
-    "                                        </div>\n" +
-    "                                    </div>\n" +
-    "                                    <div layout=\"\">\n" +
-    "                                        <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"item[0].amount\" step=\"1\" min=\"0\" max=\"100\" aria-label=\"Amount\"></md-slider>\n" +
-    "                                    </div>\n" +
-    "                                    <!--\n" +
-    "                                    <div style=\"text-align:center\"><p style=\"font-size:9px\">{{reputation[key] || 0}} | {{reputation[key]*notification.newValidation.validation[key]}} | Multiplicative Charter</p></div>\n" +
-    "                                    -->\n" +
-    "                                </div>\n" +
-    "                            </div>\n" +
-    "                        </div>\n" +
-    "                        <button ng-click=\"orderSetToggle(newOrder)\" style=\"width:100%\" class=\"btn btn-default log-btn\">CREATE POSITION</button>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "\n" +
-    "        <div ng-if=\"selectedTab =='QUESTIONS'\" class=\"\">\n" +
-    "\n" +
-    "            <div class=\"card\">\n" +
-    "                <div style=\"padding:16px;\">\n" +
-    "                    <p style=\"color:gray;font-size:12px;font-style:italic\">Select what you believe is worthwile.</p>\n" +
-    "                    <p style=\"color:gray;font-size:12px;font-style:italic\">Creating a value map furthers a self-empowering mechanism. We create value; though sharing our values and relating them we create value in ourselves, in what we do, and within each other.</p>\n" +
-    "\n" +
-    "                    <div class=\"row\">\n" +
-    "                        <div class=\"col-xs-4\"><img ng-src=\"https://source.unsplash.com/900x900/?value,finance,vote\"></div>\n" +
-    "                        <div class=\"col-xs-4\"><img ng-src=\"https://source.unsplash.com/900x900/?humananity,city,community\"></div>\n" +
-    "                        <div class=\"col-xs-4\"><img ng-src=\"https://source.unsplash.com/900x900/?code,love,joy\"></div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "\n" +
-    "            <div class=\"col-xs-12\" style=\"padding-left:0px;padding-right:0px\">\n" +
-    "                <div class=\"card\">\n" +
-    "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?love,art,geometry');min-height:150px;\" class=\"imageContainerSmall\">\n" +
-    "                        <div style=\"background:rgba(0,0,0,0.75);height:150px;\" class=\"imageContainerSmallDiv\">  \n" +
-    "                            <div style=\"text-align:right;padding:15px;position:absolute;right:0\">\n" +
-    "                                <a style=\"color:white;\" ng-click=\"$event.stopPropagation();cardDetailToggle(item)\">\n" +
-    "                                    <i class=\"fas fa-universal-access\"></i>\n" +
-    "                                </a>\n" +
-    "                                <div style=\"clear:both\"></div>\n" +
-    "                            </div> \n" +
-    "                            <div style=\"margin-top: auto;margin-bottom: auto;padding:15px;\">\n" +
-    "                                <h4 style=\"text-align:left;color:rgba(255,255,255,0.9);font-weight:400;\">Value Map Questions & Survey</h4>\n" +
-    "                            </div>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                    <div style=\"padding:16px\">\n" +
-    "\n" +
-    "                        SURVEY QUESTIONS\n" +
-    "\n" +
-    "                        <p>TIME</p>\n" +
-    "\n" +
-    "                        <div class=\"card\">\n" +
-    "                            <div style=\"background:url('https://source.unsplash.com/1600x900/?rest,exercise,work,play')\" class=\"imageContainerSmall\">\n" +
-    "                                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                                    <div style=\"margin-top: auto;margin-bottom: auto;padding:15px;\">\n" +
-    "                                        <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;font-size:35px\">A Valuable Day</h1>\n" +
-    "                                        <p style=\"color:white;\">How would an ideal day look to you?</p>\n" +
-    "                                    </div>\n" +
-    "                                </div>\n" +
-    "                            </div>\n" +
-    "                        </div>\n" +
-    "\n" +
-    "                        <p style=\"font-style:italic;color:gray;margin:0px;font-size:12px\">Thinking about an archetypal idealized day - a discrete universe of time. Tell us how a human would thirve. All Intentional Time is a Tokenized Event.</p>\n" +
-    "\n" +
-    "\n" +
-    "                        <p>TASKS</p>\n" +
-    "                        <p>PROJECTS</p>\n" +
-    "                        <p>TRANSACTIONS</p>\n" +
-    "                        <p>ACTIONS</p>\n" +
-    "                        <p>CONTENT</p>\n" +
-    "                        <p>APPS</p>\n" +
-    "                        <p>QUESTION PACKS; JSON INPUT | JSON OUTPUT</p>\n" +
-    "\n" +
-    "\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "        <div ng-if=\"selectedTab =='ORDERS'\" class=\"\">\n" +
-    "\n" +
-    "            <div class=\"card\">\n" +
-    "                <div style=\"padding:16px;\">\n" +
-    "                    <p style=\"color:gray;font-size:12px;font-style:italic\">Your Orders on the Multidimensional Token Market</p>\n" +
-    "                    <p style=\"color:gray;font-size:12px;font-style:italic\">These Discrete Market positions codify your value map and create relation in value; a self-empowering mechanism.</p>\n" +
-    "\n" +
-    "                    <div class=\"row\">\n" +
-    "                        <div class=\"col-xs-4\"><img ng-src=\"https://source.unsplash.com/900x900/?value,finance,vote\"></div>\n" +
-    "                        <div class=\"col-xs-4\"><img ng-src=\"https://source.unsplash.com/900x900/?humananity,city,community\"></div>\n" +
-    "                        <div class=\"col-xs-4\"><img ng-src=\"https://source.unsplash.com/900x900/?code,love,joy\"></div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "\n" +
-    "            <div class=\"col-xs-12\" style=\"padding-left:0px;padding-right:0px\">\n" +
-    "                <div class=\"card\">\n" +
-    "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?love,art,geometry');min-height:150px;\" class=\"imageContainerSmall\">\n" +
-    "                        <div style=\"background:rgba(0,0,0,0.75);height:150px;\" class=\"imageContainerSmallDiv\">  \n" +
-    "                            <div style=\"text-align:right;padding:15px;position:absolute;right:0\">\n" +
-    "                                <a style=\"color:white;\" ng-click=\"$event.stopPropagation();cardDetailToggle(item)\">\n" +
-    "                                    <i class=\"fas fa-universal-access\"></i>\n" +
-    "                                </a>\n" +
-    "                                <div style=\"clear:both\"></div>\n" +
-    "                            </div> \n" +
-    "                            <div style=\"margin-top: auto;margin-bottom: auto;padding:15px;\">\n" +
-    "                                <h4 style=\"text-align:left;color:rgba(255,255,255,0.9);font-weight:400;\">Discrete Orders</h4>\n" +
-    "                            </div>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                    <div style=\"padding:16px\">\n" +
-    "\n" +
-    "                        {{newOrder}}\n" +
-    "                        {{newOrderNEW}}\n" +
-    "\n" +
-    "                        <div class=\"col-xs-12\">\n" +
-    "                            <div ng-repeat=\"item in positions\">\n" +
-    "                                <div ng-include=\"'templates/cards/orderCard.tpl.html'\"></div>\n" +
-    "                            </div>\n" +
-    "                        </div>\n" +
-    "\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "\n" +
-    "    </div>\n" +
-    " \n" +
-    "    <div ng-if=\"pageNumber == 2\">\n" +
-    "        <div class=\"card\" ng-click=\"cardDetailExpand()\">\n" +
-    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?coordination,cities,city,community,work')\" class=\"imageContainerSmall\">\n" +
-    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                    <div style=\"text-align:right;padding:15px;position:absolute;right:0\">\n" +
-    "                        <a style=\"color:white;\" ng-click=\"$event.stopPropagation();cardDetailToggle(item)\">\n" +
-    "                            <i class=\"fas fa-users\"></i> \n" +
-    "                        </a>\n" +
-    "                    </div> \n" +
-    "                    <div style=\"margin-top: auto;margin-bottom: auto;padding:15px;\">\n" +
-    "                        <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;font-size:35px\">Projects</h1>\n" +
-    "                        <p style=\"color:white;\">The CRE8 Network is globally present. Our members coordinate around all types of shared initiatives. Get Involved.</p>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "\n" +
-    "            <!--INTERESTING DESCRIPTION HERE-->\n" +
-    "            <!--\n" +
-    "            <div style=\"padding:16px;\">\n" +
-    "                <p style=\"color:gray;font-size:12px;font-style:italic\">Select what you believe is worthwile.</p>\n" +
-    "                <p style=\"color:gray;font-size:12px;font-style:italic\">The more detailed your dimensional vote the stronger the effect.</p>\n" +
-    "                <div class=\"row\">\n" +
-    "                    <div class=\"col-xs-4\"><img src=\"https://source.unsplash.com/900x900/?value,finance,vote\"></div>\n" +
-    "                    <div class=\"col-xs-4\"><img src=\"https://source.unsplash.com/900x900/?humananity,city,community\"></div>\n" +
-    "                    <div class=\"col-xs-4\"><img src=\"https://source.unsplash.com/900x900/?code,love,joy\"></div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "            -->\n" +
-    "        </div>\n" +
-    "        <ul style=\"padding:0px;margin-bottom:0px\" class=\"member-tabs\">\n" +
-    "            <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
-    "            <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"getLatLng()\"><i class=\"fa fa-map-marker\"></i> Location</a></li>\n" +
-    "            <li style=\"float:right;font-size:14px\"><a href=\"#\" ng-click=\"sortToggle()\">Sort By Recent <i class=\"fa fa-angle-down\"></i></a></li>\n" +
-    "            <div style=\"clear:both\"></div>\n" +
-    "        </ul>\n" +
-    "\n" +
-    "        <div class=\"card\">\n" +
-    "            <tags-input class=\"\" min-length=\"1\" placeholder=\"Search \" ng-model=\"searchQuery\"></tags-input>\n" +
-    "        </div>\n" +
-    "        \n" +
-    "        <div style=\"max-height:70vh;overflow:auto\">\n" +
-    "            <div ng-repeat=\"item in projects\">\n" +
-    "                <div class=\"card\" ng-click=\"cardDetailToggle(item)\">\n" +
-    "                    <div style=\"padding:16px;\">\n" +
-    "                        <div ng-click=\"$event.stopPropagation()\"style=\"float:right\">\n" +
-    "                            <button ng-click=\"$event.stopPropagation();join(item);\" ng-if=\"(item.isMember != 'PENDING' || item.isMember == false) && item.isMember != true\" class=\"btn btn-default\">Join</button>\n" +
-    "                            <button ng-click=\"$event.stopPropagation();join(item);\" ng-if=\"item.isMember == 'PENDING'\" class=\"btn btn-default\">Cancel Request</button>\n" +
-    "                            <button ng-click=\"$event.stopPropagation();join(item);\" ng-if=\"item.isMember == true\" class=\"btn btn-default\">Leave</button>\n" +
-    "                        </div>\n" +
-    "                        <a ng-click=\"$event.stopPropagation()\" href=\"/project/{{item.urlTitle}}\" ui-sref=\"project.activity({path:item.urlTitle})\">\n" +
-    "                            <img ng-click=\"$event.stopPropagation()\" style=\"height:64px;float:left;margin-right:10px;\" ng-src=\"{{item.avatarUrl}}\">\n" +
-    "                            <h3 ng-click=\"$event.stopPropagation()\" style=\"margin-top:0px\">{{item.title}}</h3>\n" +
-    "                        </a>\n" +
-    "                        <div><span ng-bind-html=\"renderContent(item.description)\"></span></div>\n" +
-    "                        <div style=\"clear:both\"></div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
-    "\n" +
-    "    <div ng-if=\"pageNumber == 3\">\n" +
-    "\n" +
-    "        <div class=\"card\" ng-click=\"cardDetailExpand()\">\n" +
-    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?business,service,civic,create,art,movies,action')\" class=\"imageContainerSmall\">\n" +
-    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                    <div style=\"text-align:right;padding:15px;position:absolute;right:0\">\n" +
-    "                        <a style=\"color:white;\" ng-click=\"$event.stopPropagation();cardDetailToggle(item)\">\n" +
-    "                            <i class=\"fas fa-layer-group\"></i> \n" +
-    "                        </a>\n" +
-    "                    </div> \n" +
-    "                    <div style=\"margin-top: auto;margin-bottom: auto;padding:15px;\">\n" +
-    "                        <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;font-size:35px\">Tasks</h1>\n" +
-    "                        <p style=\"color:white;\">Coordinate with Intention. Get Involved.</p>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "            <!--\n" +
-    "            <div style=\"padding:16px;\">\n" +
-    "                <p style=\"color:gray;font-size:12px;font-style:italic\">Select what you believe is worthwile.</p>\n" +
-    "                <p style=\"color:gray;font-size:12px;font-style:italic\">The more detailed your dimensional vote the stronger the effect.</p>\n" +
-    "                <div class=\"row\">\n" +
-    "                    <div class=\"col-xs-4\"><img src=\"https://source.unsplash.com/900x900/?value,finance,vote\"></div>\n" +
-    "                    <div class=\"col-xs-4\"><img src=\"https://source.unsplash.com/900x900/?humananity,city,community\"></div>\n" +
-    "                    <div class=\"col-xs-4\"><img src=\"https://source.unsplash.com/900x900/?code,love,joy\"></div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "            -->\n" +
-    "        </div>\n" +
-    "\n" +
-    "        <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
-    "            <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
-    "            <li style=\"float:right;font-size:14px\"><a href=\"#\" ng-click=\"sortToggle()\">Sort By Recent <i class=\"fa fa-angle-down\"></i></a></li>\n" +
-    "            <div style=\"clear:both\"></div>\n" +
-    "        </ul>\n" +
-    "\n" +
-    "        <div class=\"card\">\n" +
-    "            <tags-input class=\"\" min-length=\"1\" placeholder=\"Search\" ng-model=\"searchQuery\"></tags-input>\n" +
-    "        </div>\n" +
-    "\n" +
-    "        <!--ACTIVE FILTERS-->\n" +
-    "        <div style=\"max-height:70vh;overflow:auto\">\n" +
-    "            <div ng-repeat=\"item in tasks\" class=\"col-xs-12\" style=\"padding:0px\">\n" +
-    "                <div class=\"card\" ng-click=\"cardDetailToggle(item)\">\n" +
-    "\n" +
-    "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?{{item.tags}}');min-height:100px\" class=\"imageContainerSmall\">\n" +
-    "                        <div style=\"background:rgba(0,0,0,0.75);height:100px\" class=\"imageContainerSmallDiv\">\n" +
-    "                            <div style=\"text-align:right;padding:15px;position:absolute;right:0\">\n" +
-    "                                <a style=\"color:white;\" ng-click=\"$event.stopPropagation();cardDetailToggle(item)\">\n" +
-    "                                    <i class=\"fas fa-chevron-down\"></i>\n" +
-    "                                </a>\n" +
-    "                            </div> \n" +
-    "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                                <div style=\"padding:15px\">\n" +
-    "                                    <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\"><a ng-click=\"$event.stopPropagation()\" href=\"task/{{item.id}}\" ui-sref=\"tasks\" style=\"color:white\">{{item.title}}</a></h1>\n" +
-    "                                </div>\n" +
-    "                            </div>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                    <div style=\"padding:16px;\">\n" +
-    "\n" +
-    "                        <div ng-click=\"$event.stopPropagation()\" style=\"float:right\">\n" +
-    "                            <button ng-click=\"$event.stopPropagation();interested(item)\" ng-if=\"item.isAssociated == false\" class=\"btn btn-default\"><i class=\"fas fa-check\"></i> Interested</button>\n" +
-    "                            <button ng-click=\"$event.stopPropagation();interested(item)\" ng-if=\"item.isAssociated == true\" class=\"btn btn-default\"><i class=\"fas fa-remove\"></i> Cancel Interest</button>\n" +
-    "                        </div>\n" +
-    "\n" +
-    "                        <p><a ng-click=\"$event.stopPropagation()\" ng-repeat=\"tag in item.tags track by $index\" href=\"market/{{tag.trim()}}\" ui-sref=\"market({id:tag.trim()})\">{{tag.trim()}} </a></p>\n" +
-    "                        <p><span style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span></p>\n" +
-    "                        <span style=\"color:gray\" am-time-ago=\"item.createdAt\"></span>\n" +
-    "                    </div>\n" +
-    "                    <div class=\"card-footer\">\n" +
-    "                        <a ng-click=\"$event.stopPropagation();createReaction(item, 'plus')\"><i class=\"fas fa-angle-up\"></i> {{item.reactions.plus}} like </a> \n" +
-    "                        <a ng-click=\"$event.stopPropagation();createReaction(item, 'minus')\" ><i class=\"fas fa-angle-down\"></i> {{item.reactions.minus}} dislike </a>\n" +
-    "                        <a ng-click=\"$event.stopPropagation();reply(item)\" href=\"task/{{item.id}}\" ui-sref=\"task({id:item.id})\"><i class=\"far fa-comment\"></i> comment </a>\n" +
-    "                        <a ng-click=\"$event.stopPropagation();reply(item)\" href=\"task/{{item.id}}\" ui-sref=\"task({id:item.id})\" style=\"padding:0px\" class=\"pull-right\"><i class=\"fas fa-link grey\"></i></a>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
-    "\n" +
-    "    <div ng-if=\"pageNumber == 4\">\n" +
-    "\n" +
-    "        <div class=\"card\" ng-click=\"cardDetailExpand()\">\n" +
-    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?friendship,skills,engineering,code,computer,technology,value,fintech')\" class=\"imageContainerSmall\">\n" +
-    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                    <div style=\"text-align:right;padding:15px;position:absolute;right:0\">\n" +
-    "                        <a style=\"color:white;\" ng-click=\"$event.stopPropagation();cardDetailToggle(item)\">\n" +
-    "                            <i class=\"fas fa-chart-bar\"></i>\n" +
-    "                        </a>\n" +
-    "                    </div> \n" +
-    "                    <div style=\"margin-top: auto;margin-bottom: auto;padding:15px\">\n" +
-    "                        <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Members</h1>\n" +
-    "                        <p style=\"color:white;\">CRE8's Community encompasses a wide breadth of skill, interests, and known intention.</p>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "        <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
-    "            <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
-    "            <li style=\"float:right;font-size:14px\"><a href=\"#\" ng-click=\"sortToggle()\">Sort <i class=\"fa fa-angle-down\"></i></a></li>\n" +
-    "            <div style=\"clear:both\"></div>\n" +
-    "        </ul>\n" +
-    "        <div class=\"card\">\n" +
-    "            <tags-input class=\"\" style=\"border:0px;flex-grow:2;\" min-length=\"1\" placeholder=\"Search\" ng-model=\"searchQuery\"></tags-input>\n" +
-    "        </div>\n" +
-    "        <div class=\"card\">\n" +
-    "            <div style=\"padding:16px;\">\n" +
-    "                <highchart config=\"totalMap\"></highchart>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "        <div style=\"max-height:70vh;overflow:auto\">\n" +
-    "            <div class=\"col-sm-6\" ng-repeat=\"item in members\" style=\"padding-left:10px;padding-right:10px;\">\n" +
-    "                <div class=\"member-card\" style=\"margin-bottom:10px\" ng-click=\"renderReputationToggle(item)\">\n" +
-    "                    <div class=\"member-card-image\" style=\"background-image: url('{{item.coverUrl}}')\">\n" +
-    "                        <a ng-click=\"$event.stopPropagation()\" href=\"member/{{item.username}}\" ui-sref=\"member.activity({path:item.username})\"><img ng-src=\"{{item.avatarUrl}}\" err-src=\"/images/avatar.png\"></a>\n" +
-    "                    </div>\n" +
-    "                    <div class=\"member-card-info\" style=\"padding:16px;height:auto\">\n" +
-    "                        <h4><a href=\"member/{{item.username}}\" ui-sref=\"member.activity({path:item.username})\">{{item.username}}</a></h4>\n" +
-    "                        <p style=\"font-size:13px;\"><a href=\"/member/{{item.username}}/projects\" ui-sref=\"member.projects({path:item.username})\">{{item.projectCount || 0}} Projects</a> | <a href=\"/member/{{item.username}}/followers\" ui-sref=\"member.followers({path:item.username})\">{{item.followerCount || 0}} Followers</a> | <a href=\"/member/{{item.username}}/following\" ui-sref=\"member.following({path:item.username})\">{{item.followingCount || 0}} Following</a>\n" +
-    "                        <p style=\"color:gray\">Total Reputation | {{item.totalWork}}</p>\n" +
-    "                        <p style=\"color:gray\">{{currentUser.status}} Offline</p>\n" +
-    "                        <button ng-show=\"!item.isFollowing\" class=\"btn btn-default\" ng-click=\"$event.stopPropagation();follow(item);\">Follow</button>\n" +
-    "                        <button ng-show=\"item.isFollowing\" class=\"btn btn-default\" ng-click=\"$event.stopPropagation();follow(item);\">Unfollow</button>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
-    "\n" +
-    "    <div ng-if=\"pageNumber == 5\">\n" +
-    "        <div class=\"card\" ng-click=\"cardDetailExpand()\">\n" +
-    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?math,geometry,fractal,data,finance')\" class=\"imageContainerSmall\">\n" +
-    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                    <div style=\"text-align:right;padding:15px;position:absolute;right:0\">\n" +
-    "                        <a style=\"color:white;\" ng-click=\"$event.stopPropagation();cardDetailToggle(item)\">\n" +
-    "                            <i class=\"fas fa-universal-access\"></i>\n" +
-    "                        </a>\n" +
-    "                    </div> \n" +
-    "                    <div style=\"margin-top: auto;margin-bottom: auto;padding:15px\">\n" +
-    "                        <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Update Your Value Map</h1>\n" +
-    "                        <p style=\"color:white;\">Now that we know more about you</p>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "        <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
-    "            <li style=\"float:left;font-size:14px\"><a href=\"#\">Suggested Context</a></li>\n" +
-    "            <li style=\"float:left;font-size:14px\"><a href=\"#\">Current Positions & Value Map</a></li>\n" +
-    "            <li style=\"float:left;font-size:14px\"><a href=\"#\">Value Map Builder</a></li>\n" +
-    "            <div style=\"clear:both\"></div>\n" +
-    "        </ul>\n" +
-    "        <div class=\"card\">\n" +
-    "            <div style=\"padding:16px;\">\n" +
-    "\n" +
-    "                <p><b>Suggestions and Information</b></p>\n" +
-    "\n" +
-    "                <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
-    "                    <li ng-if=\"currentUser\" style=\"float:left;font-size:14px\"><a href=\"member/{{currentUser.username}}/followers\" ng-click=\"getMyFollowers()\"><i class=\"fa fa-users\"></i> Following</a></li>\n" +
-    "                    <li ng-if=\"currentUser\" style=\"float:left;font-size:14px\"><a href=\"member/{{currentUser.username}}/projects\" ng-click=\"getMyProjects()\"><i class=\"fas fa-project-diagram\"></i> My Projects</a></li>\n" +
-    "                    <li ng-if=\"currentUser\" style=\"float:left;font-size:14px\"><a href=\"member/{{currentUser.username}}/projects\" ng-click=\"getMyProjects()\"><i class=\"fas fa-list-ol\"></i> Tasks</a></li>\n" +
-    "                    <div style=\"clear:both\"></div>\n" +
-    "                </ul>\n" +
-    "\n" +
-    "                <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                <div class=\"\" style=\"font-size:14px;font-weight:bold\">\n" +
-    "                    <span ng-click=\"createPosition(item.element)\" ng-repeat=\"item in suggestedTokens track by $index\">\n" +
-    "                        <p class=\"valueMapButton\">{{item.token}}</p>\n" +
-    "                    </span>\n" +
-    "                </div>\n" +
-    "\n" +
-    "                <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "\n" +
-    "        <div class=\"\" style=\"max-height:100vh;overflow:auto;\">\n" +
-    "\n" +
-    "            <div class=\"col-sm-3 mobileFix\" style=\"padding-left:0px;padding-right:0px;\">\n" +
-    "                <div class=\"card\" ng-click=\"filterToggle('DISCOVER', filterSet)\">\n" +
-    "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?details,notes,exolore,wonder,connection');min-height:50px\" class=\"imageContainerSmall\">\n" +
-    "                        <div style=\"background:rgba(0,0,0,0.75);height:50px\" class=\"imageContainerSmallDiv\">  \n" +
-    "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                                <div class=\"container\">\n" +
-    "                                    <h1 style=\"text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;\">Context</h1>\n" +
-    "                                </div>\n" +
-    "                            </div>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                    <div style=\"padding:16px;\">\n" +
-    "                        <div ng-repeat=\"item in sortedTagArray track by $index\" ng-click=\"$event.stopPropagation();filterContent(tag.element)\">\n" +
-    "                            <a><b>{{item.element}}</b></a>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "\n" +
-    "            <div class=\"col-sm-9 col-xs-12\" style=\"padding-left:0px;padding-right:0px;\">\n" +
-    "\n" +
-    "                <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
-    "                    <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
-    "                    <li style=\"float:left;font-size:14px\">\n" +
-    "                        <a href=\"#\" ng-click=\"filterToggle('VALUEMAP')\">\n" +
-    "                            <i class=\"fas fa-coins\"></i> Base Token <span style=\"font-size:10px;color:gray\">{{baseToken.text}}</span>\n" +
-    "                        </a>\n" +
-    "                    </li>\n" +
-    "                    <li style=\"float:left;font-size:14px\">\n" +
-    "                        <a href=\"#\" ng-click=\"filterToggle('MANIFOLD', 'UNIVERSALTOKEN')\"><i class=\"fas fa-infinity\"></i> Manifold <span style=\"font-size:10px;color:gray\">{{baseManifold.text}}</span></a>\n" +
-    "                    </li>\n" +
-    "                    <div style=\"clear:both\"></div>\n" +
-    "                </ul>\n" +
-    "\n" +
-    "                <div class=\"card\">\n" +
-    "                    <tags-input class=\"\" style=\"border:0px;flex-grow:2;\" min-length=\"1\" placeholder=\"Search\" ng-model=\"valueMapQuery\"></tags-input>\n" +
-    "                </div>\n" +
-    "               \n" +
-    "                <div class=\"card\">\n" +
-    "                    \n" +
-    "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?love,art,geometry');min-height:150px;\" class=\"imageContainerSmall\">\n" +
-    "                        <div style=\"background:rgba(0,0,0,0.75);height:150px;\" class=\"imageContainerSmallDiv\">  \n" +
-    "                            <div style=\"text-align:right;padding:15px;position:absolute;right:0\">\n" +
-    "                                <a style=\"color:white;\" ng-click=\"$event.stopPropagation();cardDetailToggle(item)\"><i class=\"fas fa-universal-access\"></i></a>\n" +
-    "                            </div> \n" +
-    "                            <div style=\"margin-top: auto;margin-bottom: auto;padding:15px;\">\n" +
-    "                                <h4 style=\"text-align:left;color:rgba(255,255,255,0.9);font-weight:400;\">{{baseToken.text}}</h4>\n" +
-    "                                <h5 style=\"color:white;\">Manifold: {{baseManifold.text}}</h5>\n" +
-    "                                <h5 style=\"color:white;\">Continual Position</h5>\n" +
-    "                            </div>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "\n" +
-    "                    <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                    <div class=\"col-xs-12\">\n" +
-    "                        <p style=\"color:gray;font-style:italic\">{{baseToken.description}}</p>\n" +
-    "                        <p style=\"color:gray;font-style:italic\">{{baseManifold.description}}</p>\n" +
-    "                        <p style=\"color:gray;font-style:italic\">Continual Position</p>\n" +
-    "                    </div>\n" +
-    "\n" +
-    "                    <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                    <div class=\"col-xs-12\">\n" +
-    "                        <div class=\"\" style=\"font-size:14px;font-weight:bold\">\n" +
-    "                            <span ng-click=\"createPosition(item.element)\" ng-repeat=\"item in sortedTagArray track by $index\">\n" +
-    "                                <p class=\"valueMapButton\">{{item.element}}</p>\n" +
-    "                            </span>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "\n" +
-    "                    <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                    <div class=\"col-sm-6 col-xs-12\"><highchart config=\"chartMapTotal\"></highchart></div>\n" +
-    "                    <div class=\"col-sm-6 col-xs-12\"><highchart config=\"pieTotal\"></highchart></div>\n" +
-    "\n" +
-    "                </div>\n" +
-    "\n" +
-    "                <div class=\"card\" ng-if=\"newOrder.length > 0\" >\n" +
-    "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?love,art,geometry');min-height:50px\" class=\"imageContainerSmall\">\n" +
-    "                        <div style=\"background:rgba(0,0,0,0.75);height:50px\" class=\"imageContainerSmallDiv\">  \n" +
-    "                            <div style=\"margin-top: auto;margin-bottom: auto;padding:15px;\">\n" +
-    "                                <div class=\"row\" style=\"text-align:center\">\n" +
-    "                                    <div class=\"col-xs-6\">\n" +
-    "                                        <span style=\"color:white\">\n" +
-    "                                            Token Set Alpha\n" +
-    "                                        </span>\n" +
-    "                                    </div>\n" +
-    "                                    <div class=\"col-xs-6\">\n" +
-    "                                        <span style=\"color:white\">\n" +
-    "                                            Token Set Beta\n" +
-    "                                        </span>\n" +
-    "                                    </div>\n" +
-    "                                </div>\n" +
-    "                            </div>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                    <div style=\"padding:16px;\">    \n" +
-    "                        <div class=\"spacing-10\"></div>\n" +
-    "                        <div class=\"row\">\n" +
-    "                            <div class=\"col-xs-12\">\n" +
-    "                                <div ng-repeat=\"item in newOrder\">\n" +
-    "                                    <div layout=\"\">\n" +
-    "                                        <div flex=\"10\" layout=\"\" layout-align=\"center center\">3600</div>\n" +
-    "                                        <div flex=\"25\" layout=\"\" layout-align=\"center center\">\n" +
-    "                                            <a>{{item[1].identifier.split('+')[2]}}</a>\n" +
-    "                                        </div>\n" +
-    "                                        <div flex=\"30\" layout=\"\" layout-align=\"center center\">{{1/newOrder.length*item[0].amount/100}}</span></div>\n" +
-    "                                        <div flex=\"30\" layout=\"\" layout-align=\"center center\"><a>Universal Token</a></div>\n" +
-    "                                        <div flex=\"5\" layout=\"\" layout-align=\"center center\"><a ng-click=\"removePosition(item)\"><i class=\"fas fa-remove\"></i></a></div>\n" +
-    "                                    </div>\n" +
-    "                                    <div layout=\"\">\n" +
-    "                                        <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"item[0].amount\" step=\"1\" min=\"0\" max=\"100\" aria-label=\"Amount\"></md-slider>\n" +
-    "                                    </div>\n" +
-    "                                </div>\n" +
-    "                            </div>\n" +
-    "                        </div>\n" +
-    "                        <button ng-click=\"orderSetToggle(newOrder)\" style=\"width:100%\" class=\"btn btn-default log-btn\">CREATE POSITION</button>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "\n" +
-    "        </div>\n" +
-    "\n" +
-    "        <!--CURRENT VALUE MAP.. RENDER AND UNIFY WITH SUGGESTIONS AND UPDATE..  -->\n" +
-    "        <div class=\"row\" ng-if=\"selectedTab =='POSITIONS'\">\n" +
-    "            <div class=\"col-xs-12\">\n" +
-    "                <div ng-repeat=\"item in positions\">\n" +
-    "                    <div ng-include=\"'templates/cards/orderCard.tpl.html'\"></div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "\n" +
-    "        <div class=\"spacing-10\"></div>\n" +
-    "    </div>\n" +
-    "\n" +
-    "    <div ng-if=\"pageNumber == 6\" ng-click=\"\">\n" +
-    "        <div class=\"card\">\n" +
-    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?business,service,civic,create,art,movies,action')\" class=\"imageContainerSmall\">\n" +
-    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                    <div style=\"text-align:right;padding:15px;position:absolute;right:0\">\n" +
-    "                        <a style=\"color:white;\" ng-click=\"$event.stopPropagation();cardDetailToggle(item)\">\n" +
-    "                            <i class=\"fas fa-plus\"></i>\n" +
-    "                        </a>\n" +
-    "                    </div> \n" +
-    "                    <div class=\"container\" style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                        <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Let's Create!</h1>\n" +
-    "                        <p style=\"color:white;\">My First Post</p>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "            <div style=\"padding:16px;\">\n" +
-    "                <div class=\"card\">\n" +
-    "                    <button ng-click=\"contentToggle()\" style=\"width:100%\" class=\"btn btn-default log-btn\">+ CONTENT</button>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
-    "\n" +
-    "    <div class=\"\">\n" +
-    "        <!--\n" +
-    "        <div class=\"col-xs-3\" style=\"padding-left:0px;padding-right:0px\">\n" +
-    "            <div ng-if=\"pageNumber > 0\" class=\"card\" ng-click=\"changePage()\" style=\"text-align:center\">\n" +
-    "                <button ng-disabled=\"!consentAgreement\" style=\"width:100%\" class=\"btn btn-default log-btn\"><i class=\"fa fa-arrow-left\"></i> BACK </button>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "        -->\n" +
-    "        <!--<div class=\"col-xs-3\" style=\"padding-left:0px;padding-right:0px\"></div>-->\n" +
-    "        <div class=\"col-xs-6\" style=\"padding-left:0px;padding-right:0px\">\n" +
-    "            <div class=\"card\" ng-click=\"changePage()\" style=\"text-align:center\">\n" +
-    "                <button ng-disabled=\"!consentAgreement\" style=\"width:100%\" class=\"btn btn-default log-btn\">CONTINUE <i class=\"fa fa-arrow-right\"></i></button>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "        <div class=\"col-xs-6\" style=\"padding-left:0px;padding-right:0px\">\n" +
-    "            <div class=\"card\" ng-click=\"changePage(-1)\" style=\"text-align:center\">\n" +
-    "                <button ng-disabled=\"!consentAgreement\" style=\"width:100%\" class=\"btn btn-default log-btn\">SKIP <i class=\"fa fa-angle-double-right\"></i></button>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
-    "\n" +
-    "</div>\n" +
-    "");
-}]);
-
 angular.module("item/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("item/index.tpl.html",
     "<style>.ngCytoscape{height: 200px;width:100%;}</style>\n" +
@@ -7288,7 +6374,7 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function($tem
     "					<div class=\"col-md-12\">\n" +
     "\n" +
     "						<div>\n" +
-    "							<h4>Tokens</h4>\n" +
+    "							<h4>Assets</h4>\n" +
     "				    		<p><b><a href=\"token/{{token.string}}\">{{token.string}}</a></b></p>	\n" +
     "							<p style=\"font-style:italic;color:gray\">In Circulation: {{token.information.inCirculation}}</p>\n" +
     "							<p style=\"font-style:italic;color:gray\">Markets: {{markets.length}}</p>\n" +
@@ -7328,16 +6414,15 @@ angular.module("market/index.tpl.html", []).run(["$templateCache", function($tem
     "\n" +
     "						<div style=\"max-height:50vh;overflow:auto\">\n" +
     "\n" +
-    "				    		<h4>Market Immutable Structure</h4>\n" +
+    "				    		<h4>Immutable Structure</h4>\n" +
     "		                	<div hljs hljs-language=\"javascript\"  hljs-source=\"renderImmutableMarket\"></div>\n" +
+    "		                	<div hljs hljs-language=\"javascript\"  hljs-source=\"renderImmutableMarketNEW\"></div>\n" +
     "							<div class=\"spacing-5\"></div>\n" +
     "\n" +
     "				    		<h4>Potiental Connection</h4>\n" +
     "		                	<div hljs hljs-language=\"javascript\"  hljs-source=\"renderImmutableMarketPower\"></div>\n" +
     "\n" +
-    "		                	<!--TBD-->\n" +
-    "		                	<div hljs hljs-language=\"javascript\"  hljs-source=\"renderImmutableMarketNEW\"></div>\n" +
-    "\n" +
+    "		                	\n" +
     "\n" +
     "		                </div>\n" +
     "\n" +
@@ -8053,7 +7138,7 @@ angular.module("markets/index.tpl.html", []).run(["$templateCache", function($te
     "				        	<div style=\"padding:15px\">\n" +
     "					            <h1 style=\"text-align:left;font-size:25px;color:rgba(255,255,255,0.9);font-weight:400;\">\n" +
     "					            	<a ng-click=\"$event.stopPropagation();\" href=\"market/{{token.string}}\" style=\"color:white;word-break:break-word\" ui-sref=\"market({id:token.string})\">\n" +
-    "					            		<img style=\"height:64px;padding:15px;\" ng-src=\"http://identicon-1132.appspot.com/{{token.string.split('+').join('').split(',').join('').split(' ').join('')}}?s=8&p=8&f=png\">\n" +
+    "					            		<img style=\"height:64px;padding:15px;\" ng-src=\"http://identicon-1132.appspot.com/{{token.id}}?s=8&p=8&f=png\">\n" +
     "					            		<span>{{token.string}}</span>\n" +
     "					            	</a>\n" +
     "					            </h1>\n" +
@@ -9678,7 +8763,7 @@ angular.module("members/index.tpl.html", []).run(["$templateCache", function($te
     "    <div class=\"spacing-10\"></div>\n" +
     "</div>\n" +
     "\n" +
-    "<div ng-click=\"loadMore()\" class=\"container\" style=\"text-align:center\">\n" +
+    "<div ng-if=\"skip + 100 > memberCount\" ng-click=\"loadMore()\" class=\"container\" style=\"text-align:center\">\n" +
     "    <button style=\"width:100%\" class=\"btn btn-default log-btn\">MORE <i class=\"fa fa-angle-down\"></i></button>\n" +
     "</div>\n" +
     "\n" +
@@ -9701,177 +8786,14 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "\n" +
     "<div ng-controller=\"NavCtrl\">\n" +
     "\n" +
-    "    <!--TODO: NG-IF-->\n" +
+    "    <!--TODO: BETTER IF-->\n" +
+    "    <!--TODO: LOOP THROUGH INITALITIZED APPS AND TEMPLTES HERE : ) -->\n" +
     "\n" +
-    "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"action\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
-    "        <div ng-if=\"newAction\" class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
-    "            <div class=\"spacing-25\"></div>\n" +
-    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?explode,erupt,action,create')\" class=\"imageContainerSmall\">\n" +
-    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                        <div style=\"padding:15px\">\n" +
-    "                            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Create Action</h1>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "\n" +
-    "            <div style=\"padding:16px\">\n" +
-    "                <div class=\"spacing-15\"></div>\n" +
-    "                <p style=\"color:gray;font-style:italic\">Create action.. Verbs in our Value Language <a ng-click=\"informationToggle('CREATEACTION')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></p>\n" +
-    "                <div class=\"spacing-10\"></div>\n" +
-    "                <form role=\"form\" ng-submit=\"createAction()\">\n" +
-    "                    <div class=\"row\">\n" +
-    "                        <div class=\"col-md-6\">\n" +
-    "                            <h5>Action</h5>\n" +
-    "                            <input type=\"text\" placeholder=\"Action\" ng-model=\"newAction.type\" class=\"form-control\">\n" +
-    "                        </div>\n" +
-    "                        <div class=\"col-md-6\">\n" +
-    "                            <h5>Amount</h5>\n" +
-    "                            <input type=\"text\" placeholder=\"Amount\" ng-model=\"newAction.amount\" class=\"form-control\">\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "\n" +
-    "                    <h5>Associated Models</h5>\n" +
-    "                    <tags-input min-length=\"1\" placeholder=\"Item\" ng-model=\"newAction.associatedModels\">\n" +
-    "                        <auto-complete source=\"loadItems($query)\"></auto-complete>\n" +
-    "                    </tags-input>\n" +
-    "                    <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newAction.type\">create</button>\n" +
-    "                </form>\n" +
-    "            </div>\n" +
-    "\n" +
-    "        </div>\n" +
-    "    </md-sidenav>\n" +
-    "\n" +
-    "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"app\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
-    "        <div ng-if=\"newContent\" class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
-    "            <div class=\"spacing-25\"></div>\n" +
-    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?explode,erupt,action,create')\" class=\"imageContainerSmall\">\n" +
-    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                        <div style=\"padding:15px\">\n" +
-    "                            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Create App</h1>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "            <div style=\"padding:16px\">\n" +
-    "                <div class=\"spacing-15\"></div>\n" +
-    "                <p style=\"color:gray;font-style:italic\">Create App.. <a ng-click=\"informationToggle('CREATEAPP')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></p>\n" +
-    "\n" +
-    "                <div class=\"spacing-10\"></div>\n" +
-    "                <form role=\"form\" ng-submit=\"createApp()\">\n" +
-    "\n" +
-    "                    <h5>App Title</h5>\n" +
-    "                    <input type=\"text\" placeholder=\"App Title\" ng-model=\"newApp.title\" class=\"form-control\">\n" +
-    "\n" +
-    "                    <h5>App Associated Models</h5>\n" +
-    "                    <tags-input min-length=\"1\" placeholder=\"Associated Models\" ng-model=\"newApp.associatedModels\">\n" +
-    "                        <auto-complete source=\"loadItems($query)\"></auto-complete>\n" +
-    "                    </tags-input>\n" +
-    "\n" +
-    "                    <h5>App Context</h5>\n" +
-    "                    <tags-input min-length=\"1\" placeholder=\"Context\" ng-model=\"newApp.context\">\n" +
-    "                        <auto-complete source=\"loadItems($query)\"></auto-complete>\n" +
-    "                    </tags-input>\n" +
-    "\n" +
-    "                    <h5>App Description</h5>\n" +
-    "                    <text-angular ng-model=\"newApp.description\" ta-toolbar=\"[['p','h1','bold','italics','quote','ol','ul','insertLink','insertImage','html']]\"></text-angular>\n" +
-    "\n" +
-    "                    <hr>\n" +
-    "\n" +
-    "                    <!--ngRepeat-->\n" +
-    "                    <p style=\"color:gray;font-style:italic\">Create a set of Protocols.. <a ng-click=\"informationToggle('CREATEPROTOCOL')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></p>\n" +
-    "\n" +
-    "                    <h5>Accociated Protocols</h5>\n" +
-    "                    <tags-input min-length=\"1\" placeholder=\"Accociated Protocols\" ng-model=\"newApp.protocol.associatedProtocols\">\n" +
-    "                        <auto-complete source=\"loadItems($query)\"></auto-complete>\n" +
-    "                    </tags-input>\n" +
-    "                    <h5>Protocol Title</h5>\n" +
-    "                    <input type=\"text\" placeholder=\"Protocol Title\" ng-model=\"newApp.protocol.title\" class=\"form-control\">\n" +
-    "                    <h5>Protocol Code</h5>\n" +
-    "                    <text-angular ng-model=\"newApp.protocol.code\" ta-toolbar=\"[['p','h1','bold','italics','quote','ol','ul','insertLink','insertImage','html']]\"></text-angular>\n" +
-    "                    <!--ngRepeat-->\n" +
-    "\n" +
-    "                    <div class=\"spacing-5\"></div>\n" +
-    "\n" +
-    "                    <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newApp.title\">create</button\n" +
-    "                        >\n" +
-    "                </form>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "    </md-sidenav>\n" +
+    "    <div ng-if=\"newAction\" ng-include=\"'nav/templates/createAction.tpl.html'\"></div>\n" +
+    "    <div ng-include=\"'nav/templates/createApp.tpl.html'\"></div>\n" +
     "\n" +
     "    <!--contentDetail, memberDetail, orderDetail, itemDetail, ... --> \n" +
-    "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"cardDetail\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:black;max-width:100%\">\n" +
-    "        <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
-    "            <div class=\"spacing-25\"></div>\n" +
-    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?explode,erupt,action,create')\" class=\"imageContainerSmall\">\n" +
-    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                        <div style=\"padding:15px\" style=\"width:100%\">\n" +
-    "\n" +
-    "                            <!--TODO.. SPECIFIC DETAILS-->\n" +
-    "                            <h1 style=\"text-align:left;font-size:14px;color:rgba(255,255,255,0.9);font-weight:400;\">\n" +
-    "\n" +
-    "                                <!--TODO..LINK-->\n" +
-    "                                <span ng-if=\"item.model != 'TIME'\">\n" +
-    "                                    <span style=\"font-size:24px;color:white\" ng-if=\"item.title\">{{item.title}}</span>\n" +
-    "                                    <span style=\"font-size:24px;color:white\" ng-if=\"!item.title\">{{item.model}}</span>\n" +
-    "                                </span>\n" +
-    "                                <span ng-if=\"item.model == 'TIME'\">\n" +
-    "                                    <span style=\"font-size:24px;color:white\">{{item.amount}} seconds</span>\n" +
-    "                                </span>\n" +
-    "                                <br>\n" +
-    "\n" +
-    "                                <!--ui-sref-->\n" +
-    "                                <span style=\"font-size:10px;color:white\"><a style=\"color:white\">{{item.model}}</a></span>\n" +
-    "                                <span style=\"font-size:10px;color:white\"><a style=\"color:white\" href=\"{{item.model.toLowerCase()}}/{{item.id}}\">{{item.id}}</a></span>\n" +
-    "\n" +
-    "                                <!--\n" +
-    "                                <a ng-if=\"item.model == 'CONTENT'\" href=\"content/{{item.id}}\" style=\"color:white\">{{item.title}}</a>\n" +
-    "                                <a ng-if=\"item.model == 'ITEM'\" href=\"item/{{item.id}}\" style=\"color:white\">{{item.title}}</a>\n" +
-    "                                <a ng-if=\"item.model == 'MARKET'\" href=\"market/{{item.string}}\" style=\"color:white\">{{item.string}}</a>\n" +
-    "                                <a ng-if=\"item.model == 'ORDER'\" href=\"order/{{item.id}} style=\"color:white\"\">{{item.title}}</a>\n" +
-    "                                <a ng-if=\"item.model == 'PROJECT'\" href=\"project/{{item.urlTitle}}\" style=\"color:white\">{{item.title}}</a>\n" +
-    "                                <a ng-if=\"item.model == 'TASK'\" href=\"task/{{item.id}}\" style=\"color:white\">{{item.title}}</a>\n" +
-    "                                <a ng-if=\"item.model == 'TIME'\" href=\"time/{{item.id}}\" style=\"color:white\">{{item.amount}} Seconds</a>\n" +
-    "                                <a ng-if=\"item.model == 'TRANSACTION'\" href=\"transaction/{{item.id}}\" style=\"color:white\">Transaction</a>\n" +
-    "                                -->\n" +
-    "\n" +
-    "                            </h1>\n" +
-    "\n" +
-    "                        \n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "            <div style=\"padding:16px\">\n" +
-    "                <div class=\"spacing-15\"></div>\n" +
-    "                <h4 ng-click=\"renderToggle(item)\" class=\"nav-links\"><a>Information <i style=\"float:right\" class=\"fas fa-info\"></i></a></h4>\n" +
-    "                <h4 ng-if=\"item.model=='ITEM'\" ng-click=\"actionToggle(item)\" class=\"nav-links\">\n" +
-    "                    <!--LOOK AT ITEM ACTION POTIENTAL..-->\n" +
-    "                    <a>Create Action <i style=\"float:right\" class=\"fas fa-atom\"></i></a>\n" +
-    "                </h4>\n" +
-    "\n" +
-    "                <!--COMPONENTS.. HISTORY-->\n" +
-    "\n" +
-    "                <h4 ng-if=\"item.model=='ITEM'\" ng-click=\"\" class=\"nav-links\">\n" +
-    "                    <!--TODO: OWNER-->\n" +
-    "                    <a ng-if=\"currentUser.id == item.user.id\" ng-click=\"transactionToggle(null, item.id)\">Send Item <i style=\"float:right\" class=\"fas fa-paper-plane\"></i></a>\n" +
-    "                    <a ng-if=\"currentUser.id != item.user.id\" ng-click=\"orderToggle(item)\">Purchase Item <i style=\"float:right\" class=\"fas fa-shopping-cart\"></i></a>\n" +
-    "                </h4>\n" +
-    "                <h4 ng-if=\"item.model=='ITEM'\" ng-click=\"renderMarketToggle(item)\" class=\"nav-links\">\n" +
-    "                    <a ng-if=\"currentUser.id == item.user.id\">Liquidity <i style=\"float:right\" class=\"fas fa-exchange-alt\"></i></a>\n" +
-    "                </h4>\n" +
-    "                <h4 ng-if=\"item.model=='PROJECT'\" ng-click=\"\" class=\"nav-links\"><a>Request To Join <i style=\"float:right\" class=\"fas fa-users\"></i></a></h4>\n" +
-    "                <h4 ng-click=\"renderValidationToggle(item)\" class=\"nav-links\"><a>Associations <i style=\"float:right\" class=\"fas fa-bezier-curve\"></i></a></h4>\n" +
-    "                <h4 ng-click=\"statsToggle(item)\" class=\"nav-links\"><a>Stats <i style=\"float:right\" class=\"fa fa-eye\"></i></a></h4>\n" +
-    "                <!--token action potiental-->\n" +
-    "                <h4 ng-click=\"tokensToggle(item)\" class=\"nav-links\"><a>Tokens <i style=\"float:right\" class=\"fas fa-coins\"></i></a></h4>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "    </md-sidenav>\n" +
+    "    <div ng-include=\"'nav/templates/cardDetail.tpl.html'\"></div>\n" +
     "\n" +
     "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"connection\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
     "        <div ng-if=\"newProject\" class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
@@ -9916,1955 +8838,48 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "        </div>\n" +
     "    </md-sidenav>\n" +
     "\n" +
+    "    <div ng-if=\"newContent\" ng-include=\"'nav/templates/createContent.tpl.html'\"></div>\n" +
     "\n" +
-    "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"content\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
-    "        <div ng-if=\"newContent\" class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
-    "\n" +
-    "            <div class=\"spacing-25\"></div>\n" +
-    "\n" +
-    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?create,code,paint')\" class=\"imageContainerSmall\">\n" +
-    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                        <div style=\"padding:15px\">\n" +
-    "                            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Create Content</h1>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "\n" +
-    "            <div style=\"padding:16px\">\n" +
-    "                <div class=\"spacing-15\"></div>\n" +
-    "                <p style=\"color:gray;font-style:italic\">Create content. Well developed content earns more tokens. <a ng-click=\"informationToggle('CREATECONTENT')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></p>\n" +
-    "                <div class=\"spacing-10\"></div>\n" +
-    "                <form role=\"form\" ng-submit=\"createContent()\">\n" +
-    "                    <h5>Title</h5>\n" +
-    "                    <input type=\"text\" placeholder=\"Title\" ng-model=\"newContent.title\" class=\"form-control\">\n" +
-    "                    \n" +
-    "                    <!--TAGS ARE COMPUTED SELF ASSOCATION-->\n" +
-    "\n" +
-    "                    <h5>Associations <a ng-click=\"informationToggle('ASSOCIATIONS')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a><a href=\"#\" ng-click=\"expandAssociations()\" style=\"float:right\"><i class=\"fas fa-bezier-curve\"></i> Expand</a></h5>\n" +
-    "                    <tags-input min-length=\"1\" placeholder=\"Associations\" ng-model=\"newContent.associatedModels\">\n" +
-    "                        <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
-    "                    </tags-input>\n" +
-    "\n" +
-    "                    <div ng-if=\"true\">\n" +
-    "                        <div class=\"row\">\n" +
-    "                            <div class=\"col-md-4 col-sm-6\" ng-repeat=\"association in newContent.associatedModels track by $index\">\n" +
-    "                                <h5>{{association.text}}</h5>\n" +
-    "                                <tags-input min-length=\"1\" placeholder=\"Context\" ng-model=\"newContent.context\">\n" +
-    "                                    <auto-complete source=\"loadTags($query)\"></auto-complete>\n" +
-    "                                </tags-input>                               \n" +
-    "                                <div ng-repeat=\"tag in newContent.context track by $index\">\n" +
-    "                                    <div layout=\"\">\n" +
-    "                                        <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{tag.text}}</span></div>\n" +
-    "                                        <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"newValidation.validation[tag.text]\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"{{tag.text}}\"></md-slider>\n" +
-    "                                        <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{newValidation.validation[tag.text]}} | {{reputation[tag.text] || 0}}</span></div>\n" +
-    "                                    </div>\n" +
-    "                                </div>\n" +
-    "                            </div>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "\n" +
-    "                    <ul class=\"nav nav-pills nav-justified contentTyle\">\n" +
-    "                        <li ng-class=\"{active: selectedType=='AUDIO'}\" ng-click=\"selectType('AUDIO')\"><a href=\"#\">Audio</a></li>\n" +
-    "                        <li ng-class=\"{active: selectedType=='IMAGE'}\" ng-click=\"selectType('IMAGE')\"><a href=\"#\">Image</a></li>\n" +
-    "                        <li ng-class=\"{active: selectedType=='LINK'}\" ng-click=\"selectType('LINK')\"><a href=\"#\">Link</a></li>\n" +
-    "                        <li ng-class=\"{active: selectedType=='MOTION'}\" ng-click=\"selectType('MOTION')\"><a href=\"#\">Motion</a></li>\n" +
-    "                        <li ng-class=\"{active: selectedType=='POST'}\" ng-click=\"selectType('POST')\"><a href=\"#\">Post</a></li>\n" +
-    "                        <li ng-class=\"{active: selectedType=='VIDEO'}\" ng-click=\"selectType('VIDEO')\"><a href=\"#\">Video</a></li>\n" +
-    "                    </ul>\n" +
-    "                    <text-angular ng-model=\"newContent.content\" ta-toolbar=\"[['p','h1','bold','italics','quote','ol','ul','insertLink','insertImage','html']]\"></text-angular>\n" +
-    "                    <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newContent.content\">create</button>\n" +
-    "                </form>\n" +
-    "            </div>\n" +
-    "\n" +
-    "        </div>\n" +
-    "    </md-sidenav>\n" +
-    "\n" +
-    "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"cre8\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:black;max-width:100%\">\n" +
-    "        <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;text-align:center;\">\n" +
-    "            <div class=\"spacing-25\"></div>\n" +
-    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?explode,erupt,action,create')\" class=\"imageContainerSmall\">\n" +
-    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                        <div style=\"padding:15px\">\n" +
-    "                            <h1 style=\"font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">CRE8</h1>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "            <div style=\"min-height:500px;max-height:100vh;overflow:hidden;\">\n" +
-    "                <div style=\"padding:16px;\">\n" +
-    "                    <h2 ng-click=\"actionToggle()\" class=\"nav-links\" style=\"padding:4px;\"><a>Action</a></h2>\n" +
-    "                    <h2 ng-click=\"contentToggle()\" class=\"nav-links\" style=\"padding:4px;\"><a>Content</a></h2>\n" +
-    "                    <h2 ng-click=\"itemToggle()\" class=\"nav-links\" style=\"padding:4px;\"><a>Item</a></h2>\n" +
-    "                    <h2 ng-click=\"orderToggle()\" class=\"nav-links\" style=\"padding:4px;\"><a>Order</a></h2>\n" +
-    "                    <h2 ng-click=\"projectToggle()\" class=\"nav-links\" style=\"padding:4px;\"><a>Project</a></h2>\n" +
-    "                    <h2 ng-click=\"taskToggle()\" class=\"nav-links\" style=\"padding:4px;\"><a>Task</a></h2>\n" +
-    "                    <h2 ng-click=\"timeToggle()\" class=\"nav-links\" style=\"padding:4px;\"><a>Time</a></h2>\n" +
-    "                    <h2 ng-click=\"transactionToggle()\" class=\"nav-links\" style=\"padding:4px;\"><a>Transaction</a></h2>\n" +
-    "                    <h2 ng-click=\"validationToggle()\" class=\"nav-links\" style=\"padding:4px;\"><a>Validation</a></h2>\n" +
-    "                    <!--\n" +
-    "                    <h4 ng-click=\"actionToggle()\" class=\"nav-links\" style=\"padding:0px;\"><a>+ Action</a></h2>\n" +
-    "                    <h4 ng-click=\"contentToggle()\" class=\"nav-links\" style=\"padding:0px;\"><a>+ Content</a></h2>\n" +
-    "                    <h4 ng-click=\"itemToggle()\" class=\"nav-links\" style=\"padding:0px;\"><a>+ Item</a></h2>\n" +
-    "                    <h4 ng-click=\"orderToggle()\" class=\"nav-links\" style=\"padding:0px;\"><a>+ Order</a></h2>\n" +
-    "                    <h4 ng-click=\"projectToggle()\" class=\"nav-links\" style=\"padding:0px;\"><a>+ Project</a></h2>\n" +
-    "                    <h4 ng-click=\"taskToggle()\" class=\"nav-links\" style=\"padding:0px;\"><a>+ Task</a></h2>\n" +
-    "                    <h4 ng-click=\"timeToggle()\" class=\"nav-links\" style=\"padding:0px;\"><a>+ Time</a></h2>\n" +
-    "                    <h4 ng-click=\"transactionToggle()\" class=\"nav-links\" style=\"padding:0px;\"><a>+ Transaction</a></h2>\n" +
-    "                    <h4 ng-click=\"validationToggle()\" class=\"nav-links\" style=\"padding:0px;\"><a>+ Validation</a></h2>\n" +
-    "                    -->\n" +
-    "                </div>\n" +
-    "                <div style=\"background:url('https://source.unsplash.com/1600x900/?code,pattern,art,forest');height:100vh\" class=\"imageContainerSmall\"><div style=\"background:rgba(0,0,0,0.75);height:100vh\" class=\"imageContainerSmallDiv\"></div></div>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "    </md-sidenav>\n" +
-    "\n" +
-    "\n" +
+    "    <div ng-include=\"'nav/templates/create.tpl.html'\"></div>\n" +
     "\n" +
     "    <!-- I AM GOING TO BUILD THIS!!!-->\n" +
-    "    <md-sidenav class=\"md-sidenav-left md-whiteframe-z2\" md-component-id=\"filter\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;max-width:100%\">\n" +
-    "        <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
-    "            <div class=\"spacing-25\"></div>\n" +
-    "            \n" +
-    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?{{model.tags}}')\" class=\"imageContainerSmall\">\n" +
-    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                        <div style=\"padding:15px\">\n" +
-    "                            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Filter</h1>\n" +
-    "                            <h5 style=\"color:white\">\n" +
-    "                            <!--CONTEXT-->\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
+    "    <div ng-include=\"'nav/templates/filter.tpl.html'\"></div>\n" +
     "\n" +
-    "            <div style=\"padding:16px;\">\n" +
-    "\n" +
-    "                <!--DISCOVER-->\n" +
-    "                <div ng-if=\"type=='DISCOVER'\">\n" +
-    "\n" +
-    "                    <!--\n" +
-    "                    <p><b>Model</b></p>\n" +
-    "                    <ul class=\"nav nav-pills nav-justified contentTyle\">\n" +
-    "                        <li ng-class=\"{active: selectedType=='AUDIO'}\" ng-click=\"selectType('AUDIO')\"><a href=\"#\">Content</a></li>\n" +
-    "                        <li ng-class=\"{active: selectedType=='VIDEO'}\" ng-click=\"selectType('VIDEO')\"><a href=\"#\">Items</a></li>\n" +
-    "                        <li ng-class=\"{active: selectedType=='VIDEO'}\" ng-click=\"selectType('VIDEO')\"><a href=\"#\">Orders</a></li>\n" +
-    "                        <li ng-class=\"{active: selectedType=='IMAGE'}\" ng-click=\"selectType('IMAGE')\"><a href=\"#\">Project</a></li>\n" +
-    "                        <li ng-class=\"{active: selectedType=='LINK'}\" ng-click=\"selectType('LINK')\"><a href=\"#\">Task</a></li>\n" +
-    "                        <li ng-class=\"{active: selectedType=='MOTION'}\" ng-click=\"selectType('MOTION')\"><a href=\"#\">Time</a></li>\n" +
-    "                        <li ng-class=\"{active: selectedType=='POST'}\" ng-click=\"selectType('POST')\"><a href=\"#\">Transaction</a></li>\n" +
-    "                    </ul>\n" +
-    "                    -->\n" +
-    "\n" +
-    "                    <p><b>Context</b> <i style=\"float:right\" class=\"fa fa-tags\"></i></p>\n" +
-    "                    <div>\n" +
-    "                        <tags-input min-length=\"1\" placeholder=\"Context\" ng-model=\"searchQueryNav.tags\">\n" +
-    "                            <auto-complete source=\"loadAsset($query)\"></auto-complete>\n" +
-    "                        </tags-input>\n" +
-    "                        <div ng-repeat=\"item in item.tags.slice(0,10) track by $index\">\n" +
-    "                            <a href=\"#\" ng-click=\"selectTag(item.element)\"><b>{{item.element}}</b></a>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "\n" +
-    "                    <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                    <p><b>Association</b> <i style=\"float:right\" class=\"fas fa-bezier-curve\"></i></p>\n" +
-    "                    <div>\n" +
-    "                        <tags-input min-length=\"1\" placeholder=\"Association\" ng-model=\"searchQueryNav.associations\">\n" +
-    "                            <auto-complete source=\"loadAssociation($query)\"></auto-complete>\n" +
-    "                        </tags-input>\n" +
-    "                        <div ng-repeat=\"item in item.associations.slice(0,10) track by $index\">\n" +
-    "                            <a href=\"#\" ng-click=\"selectAssociation(item.element)\"><b>{{item.element}}</b></a>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "\n" +
-    "                    <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                    <p><b>Location</b> <i style=\"float:right\" class=\"fa fa-map-marker\"></i></p>\n" +
-    "                    <div>\n" +
-    "                        <tags-input min-length=\"1\" placeholder=\"Location\" ng-model=\"searchQueryNav.locations\">\n" +
-    "                            <auto-complete source=\"loadLocation($query)\"></auto-complete>\n" +
-    "                        </tags-input>\n" +
-    "                        <div ng-repeat=\"item in item.locations.slice(0,10) track by $index\">\n" +
-    "                            <a href=\"#\" ng-click=\"selectLocation(item.element)\"><b>{{item.element.address}}</b></a>\n" +
-    "                        </div>\n" +
-    "                        <div layout=\"\">\n" +
-    "                            <div flex=\"12\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\" style=\"font-size:10px\">Distance (km)</span></div>\n" +
-    "                            <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"locationFilter.distance\" step=\"1\" min=\"0\" max=\"100\" aria-label=\"general\"></md-slider>\n" +
-    "                            <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{locationFilter.distance}}</span></div>\n" +
-    "                        </div>\n" +
-    "                        <ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\">\n" +
-    "                            <ui-gmap-marker ng-repeat=\"marker in markers track by $index\" coords=\"marker.coords\" options=\"marker.options\" idkey=\"marker.id\">\n" +
-    "                                <ui-gmap-window options=\"windowOptions\" closeClick=\"closeClick()\">\n" +
-    "                                    <div>\n" +
-    "                                        <div style=\"font-size: 15px;\"><a href=\"#\">{{marker.content}}</a></div>\n" +
-    "                                    </div>\n" +
-    "                                </ui-gmap-window>\n" +
-    "                            </ui-gmap-marker>\n" +
-    "                        </ui-gmap-google-map>\n" +
-    "                    </div>\n" +
-    "\n" +
-    "                    <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                    <p ng-click=\"expandAdvancedFilter()\"><a><i class=\"fa fa-filter\"></i> <b>Custom Filter</b></a></p>\n" +
-    "                    <div ng-if=\"filtersAreExpanded\">\n" +
-    "                        <!--\n" +
-    "                        <div style=\"background:rgba(0,0,0,0.75);height:50px\" class=\"imageContainerSmallDiv\">\n" +
-    "                            <div style=\"background:url('https://source.unsplash.com/1600x900/?{{item.tags}}');min-height:50px\" class=\"imageContainerSmall\">\n" +
-    "                                <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                                    <div style=\"padding:15px\">\n" +
-    "                                        <h1 style=\"text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;\">Filter Builder</h1>\n" +
-    "                                    </div>\n" +
-    "                                </div>\n" +
-    "                            </div>\n" +
-    "                        </div>\n" +
-    "                        -->\n" +
-    "                        <text-angular ng-model=\"filterBuilder\" ta-toolbar=\"[['p','h1','bold','italics','quote','insertLink', 'html']]\"></text-angular>\n" +
-    "                        <button type=\"submit\" class=\"btn btn-default log-btn\" ng-click=\"\">Submit</button>\n" +
-    "                    </div>\n" +
-    "\n" +
-    "                </div>\n" +
-    "            \n" +
-    "                <!--LEDGER-->\n" +
-    "                <!--DO ITTTT-->\n" +
-    "                <!--AND VECTOR / SELF-TRANSACTION ASSOCIATIONS-->\n" +
-    "                <div ng-if=\"type=='LEDGER'\">\n" +
-    "\n" +
-    "                    <p><b>Asset Set</b></p>\n" +
-    "                    <tags-input min-length=\"1\" placeholder=\"Asset Set\" ng-model=\"selectedAssets\">\n" +
-    "                        <auto-complete source=\"loadAsset($query)\"></auto-complete>\n" +
-    "                    </tags-input>\n" +
-    "                    <div ng-repeat=\"asset in item.assets.slice(0,10) track by $index\">\n" +
-    "                        <a href=\"#\" ng-click=\"selectAsset(asset.element)\"><b>{{asset.element}}</b></a>\n" +
-    "                    </div>\n" +
-    "                    <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                    <!--RELATED-->\n" +
-    "                    <p><b>Context</b></p>\n" +
-    "                    <tags-input min-length=\"1\" placeholder=\"Context\" ng-model=\"selectedTags\">\n" +
-    "                        <auto-complete source=\"loadTags($query)\"></auto-complete>\n" +
-    "                    </tags-input>\n" +
-    "                    <div ng-repeat=\"asset in item.tags.slice(0,10) track by $index\">\n" +
-    "                        <a href=\"#\" ng-click=\"selectTag(asset.element)\"><b>{{asset.element}}</b></a>\n" +
-    "                    </div>\n" +
-    "                    <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                    <p><b>Associations</b></p>\n" +
-    "                    <tags-input min-length=\"1\" placeholder=\"Associations\" ng-model=\"selectedAssociations\">\n" +
-    "                        <auto-complete source=\"loadAssociation($query)\"></auto-complete>\n" +
-    "                    </tags-input>\n" +
-    "                    <div ng-repeat=\"asset in item.associations.slice(0,10) track by $index\">\n" +
-    "                        <a href=\"#\" ng-click=\"selectTag(asset.element)\"><b>{{asset.element}}</b></a>\n" +
-    "                    </div>\n" +
-    "                    <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                </div>\n" +
-    "\n" +
-    "                <div ng-if=\"type=='MANIFOLD'\">\n" +
-    "\n" +
-    "                    <h5>{TOKEN}+[ACTION]+SPONSOR+(ADDRESS)</h5>\n" +
-    "                    <h5>+CREDIT+(TIME)</h5>\n" +
-    "                    <h5>+FUTURE+(TIME)</h5>\n" +
-    "                    <h5>+OPTION+(TIME)</h5>\n" +
-    "\n" +
-    "                </div>\n" +
-    "\n" +
-    "                <!--MARKET-->\n" +
-    "                <div ng-if=\"type=='MARKET'\">\n" +
-    "\n" +
-    "                    <!--\n" +
-    "                    <tags-input min-length=\"1\" placeholder=\"Base Asset\" ng-model=\"baseMarkets\">\n" +
-    "                        <auto-complete source=\"loadAsset($query)\"></auto-complete>\n" +
-    "                    </tags-input>\n" +
-    "                    -->\n" +
-    "\n" +
-    "                    <p><b>Models</b></p>\n" +
-    "                    <p ng-repeat=\"manifold in manifolds\">\n" +
-    "                        <a ng-click=\"\">{{manifold}}</a>\n" +
-    "                    </p>\n" +
-    "\n" +
-    "                    <tags-input min-length=\"1\" placeholder=\"Asset\" ng-model=\"markets\">\n" +
-    "                        <auto-complete source=\"loadAsset($query)\"></auto-complete>\n" +
-    "                    </tags-input>\n" +
-    "\n" +
-    "                    <!--IDK-->\n" +
-    "                    <div layout=\"\">\n" +
-    "                        <div flex=\"12\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\" style=\"font-size:10px\">Volume</span></div>\n" +
-    "                        <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"locationFilter.distance\" step=\"1\" min=\"0\" max=\"100\" aria-label=\"general\"></md-slider>\n" +
-    "                        <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\"></span></div>\n" +
-    "                    </div>\n" +
-    "\n" +
-    "                    <!--IDK-->\n" +
-    "                    <div layout=\"\">\n" +
-    "                        <div flex=\"12\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\" style=\"font-size:10px\">Combinitorial</span></div>\n" +
-    "                        <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"locationFilter.distance\" step=\"1\" min=\"0\" max=\"100\" aria-label=\"general\"></md-slider>\n" +
-    "                        <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\"></span></div>\n" +
-    "                    </div>\n" +
-    "\n" +
-    "\n" +
-    "                </div>\n" +
-    "\n" +
-    "                <div ng-if=\"type=='NOTIFICATION'\">\n" +
-    "\n" +
-    "                    <ul class=\"nav nav-pills nav-justified contentTyle\">\n" +
-    "                        <li ng-class=\"{active: selectedType=='ALL'}\" ng-click=\"selectType('ALL')\"><a href=\"#\">All</a></li>\n" +
-    "                        <li ng-class=\"{active: selectedType=='READ'}\" ng-click=\"selectType('READ')\"><a href=\"#\">Read</a></li>\n" +
-    "                        <li ng-class=\"{active: selectedType=='UNREAD'}\" ng-click=\"selectType('UNREAD')\"><a href=\"#\">Unread</a></li>\n" +
-    "                    </ul>\n" +
-    "                    <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                    <p><b>Context</b></p>\n" +
-    "                    <tags-input min-length=\"1\" placeholder=\"Tags\" ng-model=\"searchQueryNav.tags\">\n" +
-    "                        <auto-complete source=\"loadAsset($query)\"></auto-complete>\n" +
-    "                    </tags-input>\n" +
-    "                    <div ng-repeat=\"item in item.tags.slice(0,10) track by $index\">\n" +
-    "                        <a href=\"#\" ng-click=\"selectTag(item)\">{{item}}</a>\n" +
-    "                    </div>\n" +
-    "                    <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                    <p><b>Type</b></p>\n" +
-    "                    <tags-input min-length=\"1\" placeholder=\"Type\" ng-model=\"searchQueryNav.type\">\n" +
-    "                        <auto-complete source=\"loadType($query)\"></auto-complete>\n" +
-    "                    </tags-input>\n" +
-    "                    <div ng-repeat=\"item in item.type.slice(0,10) track by $index\">\n" +
-    "                        <a href=\"#\" ng-click=\"selectTypeFilter(item)\">{{item}}</a>\n" +
-    "                    </div>\n" +
-    "                    <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                    <p><b>Priority</b></p>\n" +
-    "                    <div layout=\"\">\n" +
-    "                        <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"priorityFilter.priority\" step=\"1\" min=\"0\" max=\"100\" aria-label=\"general\"></md-slider>\n" +
-    "                    </div>\n" +
-    "                    <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                </div>\n" +
-    "\n" +
-    "                <!--POSTIONS | MAP-->\n" +
-    "                <div ng-if=\"type=='POSITIONS'\">\n" +
-    "                    <p><b>Positions</b></p>\n" +
-    "                    <tags-input min-length=\"1\" placeholder=\"Base Asset\" ng-model=\"baseMarkets\">\n" +
-    "                        <auto-complete source=\"loadAsset($query)\"></auto-complete>\n" +
-    "                    </tags-input>\n" +
-    "                    <tags-input min-length=\"1\" placeholder=\"Asset\" ng-model=\"markets\">\n" +
-    "                        <auto-complete source=\"loadAsset($query)\"></auto-complete>\n" +
-    "                    </tags-input>\n" +
-    "                </div>\n" +
-    "\n" +
-    "                <div ng-if=\"type=='VALUEMAP'\">\n" +
-    "\n" +
-    "                    <tags-input min-length=\"1\" placeholder=\"Base Asset\" ng-model=\"baseToken\">\n" +
-    "                        <auto-complete source=\"loadAsset($query)\"></auto-complete>\n" +
-    "                    </tags-input>\n" +
-    "                    <h5>{{baseToken.text}}</h5>\n" +
-    "                    <p>{{baseToken.description}}</p>\n" +
-    "                    <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                    <tags-input min-length=\"1\" placeholder=\"Manifold\" ng-model=\"baseManifold\">\n" +
-    "                        <auto-complete source=\"loadAsset($query)\"></auto-complete>\n" +
-    "                    </tags-input>\n" +
-    "                    <h5>{{baseManifold.text}}</h5>\n" +
-    "                    <p>{{baseManifold.description}}</p>\n" +
-    "                    <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                    <h5>{{orderType.text}}</h5>\n" +
-    "                    <p>{{orderType.description}}</p>\n" +
-    "                    <ul class=\"nav nav-pills nav-stacked contentType\">\n" +
-    "                        <li ng-class=\"{active: orderType.text=='Continual'}\" ng-click=\"selectType('CONTINUAL')\"><a href=\"#\">Continual on Books</a></li>\n" +
-    "                        <li ng-class=\"{active: selectedType=='DISCRETE'}\" ng-click=\"selectType('DISCRETE')\"><a href=\"#\">Discrete on Books</a></li>\n" +
-    "                        <li ng-class=\"{active: selectedType=='FOK'}\" ng-click=\"selectType('FOK')\"><a href=\"#\">Fill or Kill</a></li>\n" +
-    "                        <li ng-class=\"{active: selectedType=='IOC'}\" ng-click=\"selectType('IOC')\"><a href=\"#\">Immediate or Cancel</a></li>\n" +
-    "                        <li ng-class=\"{active: selectedType=='LIMIT'}\" ng-click=\"selectType('LIMIT')\"><a href=\"#\">Limit</a></li>\n" +
-    "                    </ul>\n" +
-    "                    <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                </div>\n" +
-    "\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "    </md-sidenav>\n" +
-    "\n" +
-    "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"item\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
-    "        <div ng-if=\"newItem\" class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
-    "\n" +
-    "            <div class=\"spacing-25\"></div>\n" +
-    "            \n" +
-    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?connect,pattern,scrap,assortment,clothes')\" class=\"imageContainerSmall\">\n" +
-    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                        <div style=\"padding:15px\">\n" +
-    "                            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Create Item</h1>\n" +
-    "                            <h5 style=\"color:white\">Sharing Creates Abundance</h5>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "\n" +
-    "            <div style=\"padding:16px\">\n" +
-    "                <div class=\"spacing-15\"></div>\n" +
-    "                <p style=\"color:gray;font-style:italic\">Items connect Token Protocols with information and applications logic such as 2nd Stage delivery consumption. Items can be acted upon. <a ng-click=\"informationToggle('CREATEITEM')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></p>\n" +
-    "                <div class=\"spacing-10\"></div>\n" +
-    "                <form role=\"form\" ng-submit=\"createItem()\">\n" +
-    "                    <h5>Title</h5>\n" +
-    "                    <input type=\"text\" placeholder=\"Title\" ng-model=\"newItem.title\" class=\"form-control\">\n" +
-    "                    <div class=\"spacing-5\"></div>\n" +
-    "\n" +
-    "                    <!--TODO: SELF VALIDATION-->\n" +
-    "                    <h5>Associations <a ng-click=\"informationToggle('ASSOCIATION')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a><i style=\"float:right\" class=\"fas fa-bezier-curve\"></i></h5>\n" +
-    "                    <tags-input min-length=\"1\" placeholder=\"Associations\" ng-model=\"newItem.associatedModels\">\n" +
-    "                        <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
-    "                    </tags-input>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "                    <div class=\"row\">\n" +
-    "                        <div class=\"col-md-4 col-sm-6\" ng-repeat=\"association in newItem.associatedModels\">\n" +
-    "                            <h5>\n" +
-    "                                {{association.text}} Context \n" +
-    "                                <a ng-click=\"informationToggle('TAGS')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a>\n" +
-    "                                <a ng-if=\"true\" href=\"#\" ng-click=\"expandAssociations()\" style=\"float:right\">\n" +
-    "                                    <i class=\"fas fa-bezier-curve\"></i> Expand\n" +
-    "                                </a>\n" +
-    "                            </h5>\n" +
-    "                            <tags-input min-length=\"1\" placeholder=\"Context\" ng-model=\"newItem.associatedModels[$index]\">\n" +
-    "                                <auto-complete source=\"loadTags($query)\"></auto-complete>\n" +
-    "                            </tags-input>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                    <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "\n" +
-    "                    <h5>Location <a ng-click=\"informationToggle('LOCATION')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a><i style=\"float:right\" class=\"fas fa-map-marker-alt\"></i></h5>\n" +
-    "                    <input placeholder=\"Location\" type=\"text\" ng-model=\"newItem.location\" class=\"form-control\">\n" +
-    "                    \n" +
-    "                    <h5>More Information</h5>\n" +
-    "                    <md-switch ng-model=\"expand\" aria-label=\"tradable\"></md-switch>\n" +
-    "                    \n" +
-    "                    <div ng-if=\"expand\">\n" +
-    "\n" +
-    "                        <h5>Abstract Item Generator: <b>{{newItem.isGenerator}}</b><a ng-click=\"informationToggle('ITEM GENERATOR')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
-    "                        <md-switch ng-model=\"newItem.isGenerator\" aria-label=\"newItem.isGenerator\"></md-switch>\n" +
-    "\n" +
-    "                        <!--VS ASSOCIATED MODELS..-->\n" +
-    "                        <!--TYPE OF ASSOCIATION. 'TYPE' (SHOULD BE OF MODEL TYPE ITEM) (&OR DEPRECIATE CONTENT)--> \n" +
-    "                        <h5>Item Components <a ng-click=\"informationToggle('ASSOCIATION')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a><i style=\"float:right\" class=\"fas fa-bezier-curve\"></i></h5>\n" +
-    "                        <tags-input min-length=\"1\" placeholder=\"Item Components\" ng-model=\"newItem.associatedComponentModels\">\n" +
-    "                            <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
-    "                        </tags-input>\n" +
-    "\n" +
-    "                        <!--DATA?-->\n" +
-    "                        <h5>Status <a ng-click=\"informationToggle('ITEM STATUS')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
-    "                        <input placeholder=\"Status\" type=\"text\" ng-model=\"newItem.status\" class=\"form-control\">\n" +
-    "\n" +
-    "                        <!--ASSOCIATED ORDERS.. CREATE ORDERS HERE-->\n" +
-    "                        <h5>Identifier <a ng-click=\"informationToggle('ITEM IDENTIFER SET')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
-    "                        <input placeholder=\"IdentiferSet\" type=\"text\" ng-model=\"newItem.identiferSet\" class=\"form-control\">\n" +
-    "\n" +
-    "                        <!--POTIENTALL PART OF ORDER PROCESS AND ORDER ''FUILFUILMENT''-->\n" +
-    "                        <h5>Delivery Protocol <a ng-click=\"informationToggle('ITEM DELIVERY PROTOCOL')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
-    "                        <input type=\"text\" placeholder=\"Title\" ng-model=\"newItem.delivery\" class=\"form-control\">\n" +
-    "\n" +
-    "                        <h5>Item Data <a ng-click=\"informationToggle('ITEM DATA')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
-    "                        <input type=\"text\" placeholder=\"Title\" ng-model=\"newItem.data\" class=\"form-control\">\n" +
-    "\n" +
-    "                    </div>\n" +
-    "                    <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                    <text-angular ng-model=\"newItem.content\" ta-toolbar=\"[['p','h1','bold','italics','quote','insertLink', 'html']]\"></text-angular>\n" +
-    "\n" +
-    "                    <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newItem.title\">create</button>\n" +
-    "                </form>\n" +
-    "            </div>\n" +
-    "\n" +
-    "        </div>\n" +
-    "    </md-sidenav>\n" +
-    "\n" +
-    "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"login\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
-    "        <div ng-if=\"!currentUser\" class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
-    "            <div class=\"spacing-25\"></div>\n" +
-    "            \n" +
-    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?connect,pattern')\" class=\"imageContainerSmall\">\n" +
-    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                        <div style=\"padding:15px\">\n" +
-    "                            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Login</h1>\n" +
-    "                            <h5 style=\"color:white\">Welcome back!</h5>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "\n" +
-    "            <div class=\"spacing-25\"></div>\n" +
-    "\n" +
-    "            <div class=\"col-xs-12\">\n" +
-    "                <div class=\"login-form\">\n" +
-    "                    <form role=\"form\">\n" +
-    "                        <div class=\"form-group\">\n" +
-    "                            <input class=\"form-control\" name=\"identifier\" placeholder=\"Email or Username\" title=\"Username\" type=\"text\" ng-model=\"newLogin.identifier\" autocomplete=\"username\"> \n" +
-    "                            <i class=\"fa fa-user\"></i>\n" +
-    "                        </div>\n" +
-    "                        <div class=\"form-group log-status\">\n" +
-    "                            <input class=\"form-control\" type=\"password\" name=\"password\" placeholder=\"Password\" title=\"password\" autocomplete=\"current-password\" ng-model=\"newLogin.password\"> \n" +
-    "                            <i class=\"fa fa-lock\"></i>\n" +
-    "                        </div>\n" +
-    "                        <div class=\"align-right\">\n" +
-    "                            <button class=\"btn btn-default log-btn\" ng-click=\"login()\">Sign in</button>\n" +
-    "                        </div>\n" +
-    "                        <br><br>\n" +
-    "                        <div class=\"social-log\">\n" +
-    "                            <a style=\"text-align:center\" href=\"/register\" ui-sref=\"register\"><h5 style=\"color:gray;font-style:italic\">Not A Member Yet?</h5></a>\n" +
-    "                        </div>\n" +
-    "                    </form>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "            \n" +
-    "        </div>\n" +
-    "    </md-sidenav>\n" +
-    "\n" +
-    "      <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"market\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
-    "        <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
-    "            <div class=\"spacing-25\"></div>\n" +
-    "            \n" +
-    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?connect,pattern')\" class=\"imageContainerSmall\">\n" +
-    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                        <div style=\"padding:15px\">\n" +
-    "                            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">{{item.id}}</h1>\n" +
-    "                            <h5 style=\"text-align:left;color:rgba(255,255,255,0.9);font-weight:400;\">Market</h5>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "\n" +
-    "            <div style=\"padding:16px;\">\n" +
-    "                <!--TODO-->\n" +
-    "                LIQUIDITY\n" +
-    "            </div>\n" +
+    "    <div ng-if=\"newItem\" ng-include=\"'nav/templates/createItem.tpl.html'\"></div>\n" +
     "    \n" +
-    "        </div>\n" +
-    "    </md-sidenav>\n" +
-    "\n" +
-    "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"memberQR\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:black;color:white;width:70%;max-width:100%\">\n" +
-    "        <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
-    "            <div class=\"spacing-25\"></div>\n" +
-    "            \n" +
-    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?connect,pattern')\" class=\"imageContainerSmall\">\n" +
-    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                        <div style=\"padding:15px;text-align:center;\">\n" +
-    "                            <h1>\n" +
-    "                                <a style=\"display:inline;font-weight:600;margin-left:5px;color:white\" href=\"member/{{item.username}}\" ui-sref=\"member.activity({path:item.user.username})\">\n" +
-    "                                    <img class=\"card-avatar\" ng-src=\"{{item.avatarUrl}}\" src=\"{{item.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
-    "                                    {{item.username || item.title}}\n" +
-    "                                </a>\n" +
-    "                            </h1>\n" +
-    "                            <h5 style=\"color:white\">\n" +
-    "                                <span style=\"color:white;font-size:10px;\">\n" +
-    "                                     {{item.id}}</a>\n" +
-    "                                </span>\n" +
-    "                            </h5>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "\n" +
-    "            <div style=\"padding:16px;\">\n" +
-    "                <!--TODO-->\n" +
-    "\n" +
-    "\n" +
-    "                <div style=\"text-align:center\">\n" +
-    "                    <span style=\"font-size:12px;\">SCAN ME</span>\n" +
-    "                    <br>\n" +
-    "                    <img style=\"height:100%;width:50vh;border:12px solid #c5c5c5;border-radius:100%\" src=\"https://chart.googleapis.com/chart?chs=500x500&cht=qr&chl={{item.id}}\">\n" +
-    "                    <br>\n" +
-    "                    <span style=\"font-size:12px;\">CRE8.XYZ</span>\n" +
-    "                    <br>\n" +
-    "                </div>\n" +
-    "        \n" +
-    "            </div>\n" +
-    "        \n" +
-    "        </div>\n" +
-    "    </md-sidenav>\n" +
-    "\n" +
-    "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"nav\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:black\">\n" +
-    "        <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;text-align:center\">\n" +
-    "            \n" +
-    "            <div class=\"spacing-25\"></div>\n" +
-    "\n" +
-    "            <!--\n" +
-    "            <div ng-if=\"!currentUser && false\">\n" +
-    "                <div style=\"background:url('https://source.unsplash.com/1600x900/?explode,erupt,action,create')\" class=\"imageContainerSmall\">\n" +
-    "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                            <div style=\"padding:15px\" style=\"width:100%\">\n" +
-    "                                <h1 style=\"font-size:14px;color:rgba(255,255,255,0.9);font-weight:400;\">\n" +
-    "                                    <img src=\"images/3.gif\" style=\"height:50px;width:50px;border-radius:100%\">\n" +
-    "                                    <div class=\"spacing-5\"></div>\n" +
-    "                                    <a style=\"font-size:24px;color:white\" href=\"/\" ui-sref=\"home\">CRE8.XYZ</a>\n" +
-    "                                </h1>\n" +
-    "                                <h5 style=\"color:white;font-size:12px;\">EMPOWERING LOCAL COMMUNITIES</h5>\n" +
-    "                            </div>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "            -->\n" +
-    "\n" +
-    "            <div ng-if=\"currentUser\">\n" +
-    "                <div style=\"background:url('https://source.unsplash.com/1600x900/?explode,erupt,action,create')\" class=\"imageContainerSmall\">\n" +
-    "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                            <div style=\"padding:15px\" style=\"width:100%\">\n" +
-    "                                <h1 style=\"font-size:14px;color:rgba(255,255,255,0.9);font-weight:400;\">\n" +
-    "                                    <img src=\"{{currentUser.avatarUrl}}\" style=\"height:50px;width:50px;border-radius:100%\">\n" +
-    "                                    <div class=\"spacing-5\"></div>\n" +
-    "                                    <a style=\"font-size:24px;color:white\" href=\"member/{{currentUser.username}}\" ui-sref=\"member.activity({path:currentUser.username})\">{{currentUser.username}}</a>\n" +
-    "                                </h1>\n" +
-    "                                <h5 style=\"color:white;font-size:12px;\"><a href=\"#\" ng-click=\"memberQRToggle(currentUser)\" style=\"color:white\"><i style=\"color:white\" class=\"fas fa-qrcode\"></i> {{currentUser.id}}</a></h5>\n" +
-    "                            </div>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "\n" +
-    "            <div>\n" +
-    "                <form style=\"padding:16px;\" role=\"search\" action=\"/search/\" onSubmit=\"location.href = 'search/' + document.getElementById('search-link').value; return false;\">\n" +
-    "                    <div class=\"form-group\">\n" +
-    "                        <input class=\"form-control\" style=\"margin-top:3px;border-radius:3px;\" ng-keyup=\"keyPress(searchValue)\" ng-model=\"searchValue\" id=\"search-link\" size=\"40\" type=\"text\" placeholder=\"Search\">\n" +
-    "                    </div>\n" +
-    "                </form>\n" +
-    "            </div>\n" +
-    "\n" +
-    "            <div style=\"min-height:500px;max-height:100vh;overflow:hidden\">\n" +
-    "                <h4 ng-show=\"!currentUser\" class=\"nav-links\" style=\"padding:4px;\"><a href=\"/about\" ui-sref=\"about\">About</a></h4>\n" +
-    "                <!--<h4 ng-show=\"!currentUser\" class=\"nav-links\" style=\"padding:4px;\"><a href=\"/apps\" ui-sref=\"apps\">Apps</a></h4>\n" +
-    "                <h4 ng-show=\"!currentUser\" class=\"nav-links\" style=\"padding:4px;\"><a href=\"/developers\" ui-sref=\"developers\">developers</a></h4>-->\n" +
-    "\n" +
-    "                <h4 ng-show=\"currentUser\" class=\"nav-links\" ng-click=\"cre8Toggle()\" style=\"padding:8px;\"><a>CRE8</a></h4>\n" +
-    "                <h4 class=\"nav-links\" style=\"padding:4px;\"><a href=\"/discover\" ui-sref=\"discover\">Discover</a></h4>\n" +
-    "                <h4 class=\"nav-links\" style=\"padding:4px;\"><a href=\"/market\" ui-sref=\"markets\">Market</a></h4>\n" +
-    "                <h4 class=\"nav-links\" style=\"padding:4px;\"><a href=\"/marketplace\" ui-sref=\"marketPlace\">Marketplace</a></h4>\n" +
-    "                <h4 class=\"nav-links\" style=\"padding:4px;\"><a href=\"/projects\" ui-sref=\"projects\">Projects</a></h4>\n" +
-    "                <h4 class=\"nav-links\" style=\"padding:4px;\"><a href=\"/tasks\" ui-sref=\"tasks\">Tasks</a></h4>\n" +
-    "                <h4 ng-show=\"currentUser\" class=\"nav-links\" style=\"padding:8px;\">\n" +
-    "                    <a href=\"/notifications\" ui-sref=\"notifications\"> <span ng-if=\"notificationCount > 0\" class=\"label label-danger\">{{notificationCount}}</span> Notifications</a>\n" +
-    "                </h4>\n" +
-    "                <h4 ng-show=\"currentUser\" class=\"nav-links\" style=\"padding:4px;\"><a href=\"/account\" ui-sref=\"account\">Settings</a></h4>\n" +
-    "                <h4 ng-show=\"currentUser\" class=\"nav-links\" style=\"padding:4px;\"><a href=\"/logout\">Logout</a></h4>\n" +
-    "                <h4 ng-show=\"!currentUser\" ng-click=\"loginToggle()\" class=\"nav-links\" style=\"padding:4px;\"><a>Login</a></h4>\n" +
-    "                <h4 ng-show=\"!currentUser\" class=\"nav-links\" style=\"padding:4px;\"><a href=\"/register\" ui-sref=\"register\">Register</a></h4>\n" +
-    "\n" +
-    "                <div class=\"spacing-15\"></div>\n" +
-    "                <div style=\"background:url('https://source.unsplash.com/1600x900/?code,pattern,art,forest');height:100vh\" class=\"imageContainerSmall\">\n" +
-    "                    <div style=\"background:rgba(0,0,0,0.75);height:100vh\" class=\"imageContainerSmallDiv\">\n" +
-    "                        <div style=\"\">\n" +
-    "                            <!--<div style=\"padding:15px\">\n" +
-    "                                <a href=\"/\" ui-sref=\"home\"><img style=\"height:50px\" src=\"images/hypercube.gif\"></a>\n" +
-    "                                <div class=\"spacing-5\"></div>\n" +
-    "                                <a style=\"font-weight:bold;font-size:15px;color:white;font-family:Helvetica Neue,Helvetica,Arial,sans-serif\" href=\"/\" ui-sref=\"home\">CRE8.XYZ</a>\n" +
-    "                            </div>-->\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "    </md-sidenav>\n" +
-    "\n" +
-    "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"order\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
-    "        <div ng-if=\"newOrder\" class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
-    "            <div class=\"spacing-25\"></div>\n" +
-    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?connections,network,pattern')\" class=\"imageContainerSmall\">\n" +
-    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                        <div style=\"padding:15px\">\n" +
-    "                            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Create Order</h1>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "            <div style=\"padding:16px\">\n" +
-    "                <div class=\"spacing-15\"></div>\n" +
-    "                <p style=\"color:gray;font-style:italic\">An Order creates a position in our Value Matrix (MultiDimensional Token Market) <a ng-click=\"informationToggle('CREATEORDER')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></p>\n" +
-    "                <div class=\"spacing-10\"></div>\n" +
-    "                <div class=\"spacing-10\"></div>\n" +
-    "                <form role=\"form\" ng-submit=\"createOrder()\">\n" +
-    "                    <div class=\"row\">\n" +
-    "                        <div class=\"col-sm-6 form-group\">\n" +
-    "                            <h5>\n" +
-    "                                <span ng-show=\"!identiferSetAlpha\">Asset Identifer Set α</span>\n" +
-    "                                <span ng-repeat=\"market in identiferSetAlpha track by $index\">{{market.text}} </span> \n" +
-    "                                <a ng-click=\"informationToggle('IDENTIFERSETALPHA')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a>\n" +
-    "                            </h5>\n" +
-    "                            <tags-input min-length=\"1\" placeholder=\"Asset Identifer Set α\" ng-model=\"identiferSetAlpha\">\n" +
-    "                                <auto-complete source=\"loadTags($query)\"></auto-complete>\n" +
-    "                            </tags-input>\n" +
-    "                        </div>\n" +
-    "                        <div class=\"col-sm-6 form-group\">\n" +
-    "                            <div ng-repeat=\"market in identiferSetAlpha track by $index\">\n" +
-    "                                <div class=\"col-sm-12\">\n" +
-    "                                    <h5>{{market.text}} Amount | Available {{balance[market.text] || 0}}</h5>\n" +
-    "                                    <input placeholder=\"{{market.text}} Amount\" type=\"number\" step=\"0.000000001\" ng-model=\"newOrder.setAlpha[market.text]\" class=\"form-control\">\n" +
-    "                                </div>\n" +
-    "                            </div>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                    <div class=\"row\">\n" +
-    "                        <div class=\"col-sm-6 form-group\">\n" +
-    "                            <h5>\n" +
-    "                                <span ng-show=\"!identiferSetBeta\">Asset Identifer Set β</span>\n" +
-    "                                <span ng-repeat=\"market in identiferSetBeta track by $index\">{{market.text}} </span> \n" +
-    "                                <a ng-click=\"informationToggle('IDENTIFERSETBETA')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a>\n" +
-    "                            </h5>\n" +
-    "                            <tags-input min-length=\"1\" placeholder=\"Asset Identifer Set β\" ng-model=\"identiferSetBeta\">\n" +
-    "                                <auto-complete source=\"loadTags($query)\"></auto-complete>\n" +
-    "                            </tags-input>\n" +
-    "                        </div>\n" +
-    "                        <div class=\"col-sm-6 form-group\">\n" +
-    "                            <div ng-repeat=\"market in identiferSetBeta track by $index\">\n" +
-    "                                <div class=\"col-sm-12\">\n" +
-    "                                    <h5>{{market.text}} Amount</h5>\n" +
-    "                                    <input placeholder=\"{{market.text}} Amount\" type=\"number\" step=\"0.000000001\" ng-model=\"newOrder.setBeta[[market.text]]\" class=\"form-control\">\n" +
-    "                                </div>\n" +
-    "                            </div>\n" +
-    "                        </div>\n" +
-    "                        <div class=\"col-sm-12\" style=\"padding:20px;\">\n" +
-    "                            <p ng-show=\"!inverted\" style=\"font-weight:800;\">\n" +
-    "                                Sell <span ng-repeat=\"market in identiferSetAlpha\">{{newOrder.setAlpha[market.text]}} {{market.text}} </span> \n" +
-    "                                for <span ng-repeat=\"market in identiferSetBeta\">{{newOrder.setBeta[market.text]}} {{market.text}} </span> | \n" +
-    "                                Buy <span ng-repeat=\"market in identiferSetBeta\">{{newOrder.setBeta[market.text]}} {{market.text}} </span> \n" +
-    "                                with <span ng-repeat=\"market in identiferSetAlpha\">{{newOrder.setAlpha[market.text]}} {{market.text}} </span>\n" +
-    "                            </p>\n" +
-    "                            <p ng-show=\"inverted\" style=\"font-weight:800;\">\n" +
-    "                                Buy <span ng-repeat=\"market in identiferSetAlpha\">{{newOrder.setAlpha[market.text]}} {{market.text}} </span> \n" +
-    "                                with <span ng-repeat=\"market in identiferSetBeta\">{{newOrder.setBeta[market.text]}} {{market.text}} </span> | \n" +
-    "                                Sell <span ng-repeat=\"market in identiferSetBeta\">{{newOrder.setBeta[market.text]}} {{market.text}} </span> \n" +
-    "                                for <span ng-repeat=\"market in identiferSetAlpha\">{{newOrder.setAlpha[market.text]}} {{market.text}} </span>\n" +
-    "                            </p>\n" +
-    "                        </div>\n" +
-    "                        <div class=\"col-sm-12\" style=\"marking:10px\">\n" +
-    "                            <ul class=\"nav nav-pills nav-justified contentType\">\n" +
-    "                                <li ng-class=\"{active: selectedOrderType=='ONBOOKS'}\" ng-click=\"selectOrderType('ONBOOKS')\"><a href=\"#\">Market onBooks <i ng-click=\"informationToggle('ONBOOKSORDER')\" class=\"fa fa-question-circle\"></i></a></li>\n" +
-    "                                <li ng-class=\"{active: selectedOrderType=='FILLORKILL'}\" ng-click=\"selectOrderType('FILLORKILL')\"><a href=\"#\">Market Fill Or Kill <i ng-click=\"informationToggle('FILLORKILL')\" class=\"fa fa-question-circle\"></i></a></li>\n" +
-    "                                <li ng-class=\"{active: selectedOrderType=='IMMEDIATEORCANCEL'}\" ng-click=\"selectOrderType('IMMEDIATEORCANCEL')\"><a href=\"#\">Immediate or Cancel <i ng-click=\"informationToggle('IMMEDIATEORCANCEL')\" class=\"fa fa-question-circle\"></i></a></li>\n" +
-    "                                <li ng-class=\"{active: selectedOrderType=='LIMIT'}\" ng-click=\"selectOrderType('LIMIT')\"><a href=\"#\"> Limit <i ng-click=\"informationToggle('LIMIT')\" class=\"fa fa-question-circle\"></i></a></li>\n" +
-    "                            </ul>\n" +
-    "                        </div>\n" +
-    "                        <div class=\"spacing-10\"></div>\n" +
-    "                        <button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newOrder.setAlpha\">create</button>\n" +
-    "                    </div>\n" +
-    "                </form>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "    </md-sidenav>\n" +
-    "\n" +
-    "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"project\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
-    "        <div ng-if=\"newProject\" class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
-    "            <div class=\"spacing-25\"></div>\n" +
-    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?code,coordination,government')\" class=\"imageContainerSmall\">\n" +
-    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                        <div style=\"padding:15px\">\n" +
-    "                            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Create Project</h1>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "            <div style=\"padding:16px\">\n" +
-    "\n" +
-    "                <div class=\"spacing-15\"></div>\n" +
-    "                <p style=\"color:gray;font-style:italic\">A Project is a Self-Governing collective of individuals. <a ng-click=\"informationToggle('CREATEPROJECT')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></p>\n" +
-    "                <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                <form role=\"form\" ng-submit=\"createProject()\">\n" +
-    "                    <h5>Title</h5>\n" +
-    "                    <input type=\"text\" placeholder= \"Title\" ng-model=\"newProject.title\" class=\"form-control\">\n" +
-    "                    <h5>Context</h5>\n" +
-    "                    <tags-input min-length=\"1\" placeholder=\"Tags\" ng-model=\"newProject.tags\">\n" +
-    "                        <auto-complete source=\"loadTags($query)\"></auto-complete>\n" +
-    "                    </tags-input>\n" +
-    "                    <h5>Associations <a ng-click=\"informationToggle('ASSOCIATIONS')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
-    "                    <tags-input min-length=\"1\" placeholder=\"Associations\" ng-model=\"newProject.associatedModels\">\n" +
-    "                        <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
-    "                    </tags-input>\n" +
-    "                    <h5>Location</h5>\n" +
-    "                    <input type=\"text\" placeholder=\"Location\" ng-model=\"newProject.location\" class=\"form-control\">\n" +
-    "                    <h5>Description</h5>\n" +
-    "                    <text-angular placeholder= \"Description\" ng-model=\"newProject.description\" ta-toolbar=\"''\"></text-angular>\n" +
-    "                    <button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newProject.title\">create</button>\n" +
-    "                </form>\n" +
-    "                    \n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "    </md-sidenav>\n" +
-    "\n" +
-    "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"register\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
-    "        <div ng-if=\"!currentUser\" class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
-    "            <div class=\"spacing-25\"></div>\n" +
-    "            \n" +
-    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?connect,pattern')\" class=\"imageContainerSmall\">\n" +
-    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                        <div style=\"padding:15px\">\n" +
-    "                            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Register</h1>\n" +
-    "                            <h5 style=\"color:white\">Welcome to our Community!</h5>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "\n" +
-    "            <div class=\"spacing-25\"></div>\n" +
-    "\n" +
-    "            <div class=\"col-xs-12\">\n" +
-    "                <div class=\"login-form\">\n" +
-    "                    <form role=\"form\">\n" +
-    "                        <div class=\"form-group\"><input class=\"form-control\" name=\"email\" ng-model=\"newMember.email\" placeholder=\"Email\" title=\"email\" type=\"email\"><i class=\"fa fa-envelope\" autocomplete=\"email\"></i></div>\n" +
-    "                        <div class=\"form-group\"><input class=\"form-control\" name=\"username\" ng-model=\"newMember.username\" placeholder=\"Username\" title=\"username\" type=\"text\" autocomplete=\"username\"><i class=\"fa fa-user\"></i></div>\n" +
-    "                        <div class=\"form-group\"><input class=\"form-control\" name=\"password\" ng-model=\"newMember.password\" placeholder=\"Password\" title=\"password\" type=\"password\" autocomplete=\"new-password\"><i class=\"fa fa-lock\"></i></div>\n" +
-    "                        <button class=\"btn btn-default log-btn\" ng-click=\"registerUser()\">Sign up</button>    \n" +
-    "                        <br><br>\n" +
-    "                        <div class=\"social-log\">\n" +
-    "                            <a href=\"/login\"><h5 style=\"color: gray;font-style: italic;\">Already A Member?</h5></a>\n" +
-    "                        </div>\n" +
-    "                    </form>\n" +
-    "                </div>\n" +
-    "                <div class=\"selfClear\"></div>\n" +
-    "            </div>\n" +
-    "            \n" +
-    "        </div>\n" +
-    "    </md-sidenav>\n" +
-    "\n" +
-    "\n" +
-    "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"render\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:95%;max-width:100%\">\n" +
-    "        <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
-    "            <div class=\"spacing-25\"></div>\n" +
-    "            <div ng-hide=\"item.model == 'CONTENT' && !item.title\" style=\"background:url('https://source.unsplash.com/1600x900/?{{item.tags}}')\" class=\"imageContainerSmall\">\n" +
-    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                        <div style=\"width:100%;padding:15px\">\n" +
-    "                            <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\">\n" +
-    "                                <a ng-if=\"item.model == 'CONTENT'\" href=\"content/{{item.id}}\" style=\"color:white\">{{item.title}}</a>\n" +
-    "                                <a ng-if=\"item.model == 'ITEM'\" href=\"item/{{item.id}}\" style=\"color:white\">{{item.title}}</a>\n" +
-    "                                <a ng-if=\"item.model == 'MARKET'\" href=\"market/{{item.string}}\" style=\"color:white\">{{item.string}}</a>\n" +
-    "                                <a ng-if=\"item.model == 'ORDER'\" href=\"order/{{item.id}} style=\"color:white\"\">{{item.title}}</a>\n" +
-    "                                <a ng-if=\"item.model == 'PROJECT'\" href=\"project/{{item.urlTitle}}\" style=\"color:white\">{{item.title}}</a>\n" +
-    "                                <a ng-if=\"item.model == 'TASK'\" href=\"task/{{item.id}}\" style=\"color:white\">{{item.title}}</a>\n" +
-    "                                <a ng-if=\"item.model == 'TIME'\" href=\"time/{{item.id}}\" style=\"color:white\">{{item.amount}} Seconds</a>\n" +
-    "                                <a ng-if=\"item.model == 'TRANSACTION'\" href=\"transaction/{{item.id}}\" style=\"color:white\">Transaction</a>\n" +
-    "                            </h1>\n" +
-    "                            <h5 style=\"color:white\"><a style=\"color:white\" href=\"{{item.model.toLowerCase()}}/{{item.id}}\">{{item.id}}</a></h5>\n" +
-    "                            <!--<h5 style=\"color:white\"><span am-time-ago=\"item.createdAt\"></span></h5>-->\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "\n" +
-    "            <div style=\"padding:16px;\">\n" +
-    "\n" +
-    "                <div class=\"spacing-15\"></div>\n" +
-    "\n" +
-    "                <div ng-if=\"item.model == 'CONTENT'\">\n" +
-    "                    <a ng-if=\"item.user\" style=\"display:inline;font-weight:600;margin-left:5px\" href=\"member/{{item.user.username}}\">\n" +
-    "                        <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
-    "                        {{item.user.username}}\n" +
-    "                    </a>\n" +
-    "                </div>\n" +
-    "\n" +
-    "                <div ng-if=\"item.model == 'ITEM'\">\n" +
-    "                    <a ng-if=\"item.user\" style=\"display:inline;font-weight:600;margin-left:5px\" href=\"member/{{item.user.username}}\">\n" +
-    "                        <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
-    "                        {{item.user.username}}\n" +
-    "                    </a>\n" +
-    "                </div>\n" +
-    "\n" +
-    "                <!--TODO-->\n" +
-    "                <div ng-if=\"item.model == 'MARKET'\">\n" +
-    "                    <highchart config=\"bidAskChart\"></highchart>\n" +
-    "                </div>\n" +
-    "\n" +
-    "                <div ng-if=\"item.model == 'ORDER'\">\n" +
-    "                    <a ng-if=\"item.user\" style=\"display:inline;font-weight:600;margin-left:5px\" href=\"member/{{item.user.username}}\">\n" +
-    "                        <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
-    "                        {{item.user.username}}\n" +
-    "                    </a>\n" +
-    "                </div>\n" +
-    "\n" +
-    "                <div ng-if=\"item.model == 'PROJECT'\">\n" +
-    "\n" +
-    "                    <div ng-if=\"item.location\">\n" +
-    "                        <p><b>Location</b></p>\n" +
-    "                        <p ng-if=\"item.location.address\"><b>Address</b>: {{item.location.address}}</p>\n" +
-    "                        <p ng-if=\"item.location.lat\"><b>Latitude</b>: {{item.location.lat}}, <b>Longitude</b>: {{item.location.lng}}</p>\n" +
-    "                    </div>\n" +
-    "\n" +
-    "                    <div class=\"spacing-5\"></div>\n" +
-    "\n" +
-    "                    <p><b>Associations</b></p>\n" +
-    "                    <p><b>Members</b>: <a>{{item.memberCount || 0}}</a>, <b>Tasks</b>: <a>{{item.taskCount || 0}}</a>, <b>Time</b>: <a>{{item.timeCount||0 }}</a></p>\n" +
-    "                    \n" +
-    "                    <div class=\"spacing-5\"></div>\n" +
-    "\n" +
-    "                    <p><b>Manifolds</b></p> \n" +
-    "                    <p><a href=\"market/{{item.urlTitle.toUpperCase()}}\">{{item.urlTitle.toUpperCase()}}+</a>, <a href=\"{{market/item.urlTitle.toUpperCase()}}+TASK+\">{{item.urlTitle.toUpperCase()}}+TASK+</a>, <a href=\"market/project/{{item.urlTitle.toUpperCase()}}+TIME+\">{{item.urlTitle.toUpperCase()}}+TIME+</a></p>\n" +
-    "                    <div class=\"spacing-5\"></div>\n" +
-    "\n" +
-    "                </div>\n" +
-    "\n" +
-    "                <div ng-if=\"item.model == 'TASK'\">\n" +
-    "                    <a ng-if=\"item.user\" style=\"display:inline;font-weight:600;margin-left:5px\" href=\"member/{{item.user.username}}\">\n" +
-    "                        <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
-    "                        {{item.user.username}}\n" +
-    "                    </a>\n" +
-    "                </div>\n" +
-    "\n" +
-    "                <div ng-if=\"item.model == 'TIME'\">\n" +
-    "                    <a ng-if=\"item.user\" style=\"display:inline;font-weight:600;margin-left:5px\" href=\"member/{{item.user.username}}\">\n" +
-    "                        <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
-    "                        {{item.user.username}}\n" +
-    "                    </a>\n" +
-    "                </div>\n" +
-    "\n" +
-    "                <div ng-if=\"item.model == 'TRANSACTION'\">\n" +
-    "                    <div style=\"display:inline\">\n" +
-    "                        <span ng-if=\"item.from.username\">\n" +
-    "                            <a ng-click=\"$event.stopPropagation()\"  style=\"display:inline;font-weight:600;margin-left:5px\" href=\"member/{{item.from.username}}\">\n" +
-    "                                <img class=\"card-avatar\" ng-src=\"{{item.from.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
-    "                                {{item.from.username}}\n" +
-    "                            </a>\n" +
-    "                        </span>\n" +
-    "                        <span ng-if=\"item.from.title\">\n" +
-    "                            <a ng-click=\"$event.stopPropagation()\"  style=\"display:inline;font-weight:600;margin-left:5px\" href=\"project/{{item.from.urlTitle}}\">\n" +
-    "                                <img class=\"card-avatar\" ng-src=\"{{item.from.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
-    "                                {{item.from.title}}\n" +
-    "                            </a>\n" +
-    "                        </span>\n" +
-    "                    </div>\n" +
-    "                    <div style=\"display:inline;padding-left:5px;padding-right:5px;\">\n" +
-    "                        <i class=\"fa fa-arrow-right\"></i>\n" +
-    "                    </div>\n" +
-    "                    <div style=\"display:inline\">\n" +
-    "                        <span ng-if=\"item.to.username\">\n" +
-    "                            <a ng-click=\"$event.stopPropagation()\"  style=\"display:inline;font-weight:600;margin-left:5px\" href=\"member/{{item.to.username}}\">\n" +
-    "                                <img class=\"card-avatar\" ng-src=\"{{item.to.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
-    "                                {{item.to.username}}\n" +
-    "                            </a>\n" +
-    "                        </span>\n" +
-    "                        <span ng-if=\"item.to.title\">\n" +
-    "                            <a ng-click=\"$event.stopPropagation()\"  style=\"display:inline;font-weight:600;margin-left:5px\" href=\"project/{{item.to.urlTitle}}\">\n" +
-    "                                <img class=\"card-avatar\" ng-src=\"{{item.to.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
-    "                                {{item.to.title}}\n" +
-    "                            </a>\n" +
-    "                        </span>\n" +
-    "                    </div>\n" +
-    "                    <div class=\"spacing-5\"></div>\n" +
-    "                    <span ng-repeat=\"(key, value) in item.amountSet track by $index\"><p style=\"font-weight:800\">{{value}} <a ng-click=\"$event.stopPropagation();\" href=\"market/{{key}}\">{{key}}</a></p></span>\n" +
-    "                </div>\n" +
-    "\n" +
-    "                <div ng-if=\"item.tags\" class=\"spacing-5\"></div>\n" +
-    "                <p ng-if=\"item.tags\"><b>Context</b></p> \n" +
-    "                <p ng-if=\"item.tags\"><a ng-repeat=\"tag in item.tags track by $index\" href=\"market/{{tag.trim()}}\"> {{tag.trim()}}<span ng-show=\"!$last\">,</span></a></p>\n" +
-    "                \n" +
-    "                <div class=\"spacing-5\"></div>\n" +
-    "                \n" +
-    "                <span style=\"color:gray\" am-time-ago=\"item.createdAt\"></span>\n" +
-    "                \n" +
-    "                <div class=\"spacing-10\"></div>\n" +
-    "                \n" +
-    "                <span ng-if=\"item.content\" style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span>\n" +
-    "\n" +
-    "            </div>\n" +
-    "\n" +
-    "            <div style=\"background-color:#f9f9f9;height:100%\">\n" +
-    "                <div class=\"card-footer\">\n" +
-    "                    <a href=\"#\" ng-click=\"createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.reactions.plus}} like </a> \n" +
-    "                    <a href=\"#\" ng-click=\"createReaction(item, 'minus')\"><i class=\"fa fa-angle-down\"></i> {{item.reactions.minus}} dislike </a>\n" +
-    "                    <a href=\"#\" ng-click=\"reply(validation)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
-    "                    <a ng-if=\"item.model == 'TASK'|| item.model == 'TIME'\" href=\"#\" ng-click=\"validationToggle(item)\"><i class=\"fa fa-check\"></i> validate </a>\n" +
-    "                </div>\n" +
-    "\n" +
-    "                <div class=\"card-footer\" ng-show=\"item.showReply\">\n" +
-    "                    <form role=\"form\" ng-submit=\"createContent()\">\n" +
-    "                        <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newContent.content\">create</button>\n" +
-    "                    </form>\n" +
-    "                </div>\n" +
-    "\n" +
-    "                <!--RENDER ASSOCIATED TIME-->\n" +
-    "                <!--RENDER ASSOCIATED CONTENT-->\n" +
-    "                <div ng-include=\"'content/content.tpl.html'\" ng-repeat=\"content in content.children track by content.id\"></div>\n" +
-    "\n" +
-    "            </div>\n" +
-    "\n" +
-    "        </div>\n" +
-    "    </md-sidenav>\n" +
-    "\n" +
-    "    <!--RENDER MEMBER...-->\n" +
-    "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"renderReputation\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
-    "        <div ng-if=\"true\" class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
-    "\n" +
-    "            <div class=\"spacing-25\"></div>\n" +
-    "\n" +
-    "            <div style=\"background: url('{{item.user.coverUrl}}')\" class=\"imageContainerSmall\">\n" +
-    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                        <div style=\"padding:15px;text-align:center\">\n" +
-    "                            <h1>\n" +
-    "                                <a style=\"display:inline;font-weight:600;margin-left:5px;color:white\" href=\"member/{{item.user.username}}\" ui-sref=\"member.activity({path:item.user.username})\">\n" +
-    "                                    <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
-    "                                    {{item.user.username}}\n" +
-    "                                </a>\n" +
-    "                                <!--\n" +
-    "                                <a>\n" +
-    "                                    <span style=\"color:white;font-size:10px;\">0x{{item.user.id}}</span>\n" +
-    "                                    <span ng-if=\"item.project\" style=\"color:gray;font-size:10px;\">, 0x{{item.id}}</span>\n" +
-    "                                </a>\n" +
-    "                                -->\n" +
-    "                            </h1>\n" +
-    "                            <h5 style=\"color:white\">\n" +
-    "                                <span style=\"color:white;font-size:10px;\">\n" +
-    "                                    <a href=\"#\" style=\"color:white\" ng-click=\"memberQRToggle(item.user)\"> <i style=\"color:white\" class=\"fas fa-qrcode\"></i> 0x{{item.user.id}}</a>\n" +
-    "                                </span>\n" +
-    "                                <span ng-if=\"item.project\" style=\"color:gray;font-size:10px;\">\n" +
-    "                                    <a href=\"#\" style=\"color:white\">, 0x{{item.id}}</a>\n" +
-    "                                </span>\n" +
-    "                            </h5>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "\n" +
-    "            <div style=\"padding:16px;text-align:center\">\n" +
-    "\n" +
-    "                <p style=\"font-size:13px;\">\n" +
-    "                    <a href=\"member/{{item.user.username}}/projects\" ui-sref=\"member.projects({path:item.user.username})\">{{item.user.projectCount || 0}} Projects</a> | \n" +
-    "                    <a href=\"member/{{item.user.username}}/followers\" ui-sref=\"member.followers({path:item.user.username})\">{{item.user.followerCount || 0}} Followers</a> | \n" +
-    "                    <a href=\"member/{{item.user.username}}/following\" ui-sref=\"member.following({path:item.user.username})\">{{item.user.followingCount || 0}} Following</a>\n" +
-    "                </p>\n" +
-    "\n" +
-    "                <div class=\"spacing-5\"></div>\n" +
-    "\n" +
-    "                <div ng-if=\"currentUser.id != item.user.id\">\n" +
-    "                    <img ng-click=\"memberQRToggle(item.user)\" style=\"height:50px;text-align:left\" src=\"https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{item.user.id}}\">\n" +
-    "                    <a style=\"padding:10px 15px;color:rgb(125,125,125)\" class=\"btn btn-default\" ng-click=\"$event.stopPropagation();transactionToggle()\">Send Tokens</a>\n" +
-    "                    <a style=\"padding:10px 15px;color:rgb(125,125,125)\" class=\"btn btn-default\" ng-click=\"$event.stopPropagation();transactionToggle()\">Follow</button></a>\n" +
-    "                </div>\n" +
-    "\n" +
-    "                <div class=\"spacing-5\"></div>\n" +
-    "\n" +
-    "                <!--<h3>Reputation</h3>-->\n" +
-    "                <!--IF PRE SELECTED FILTER-->\n" +
-    "                <h4>{{item.project.title}}</h4>\n" +
-    "                <!--<tags-input min-length=\"1\" max-tags=\"1\" placeholder=\"Manifold Filter\" ng-model=\"reputationFilter\">\n" +
-    "                    <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
-    "                </tags-input>-->\n" +
-    "                <div class=\"spacing-5\"></div>\n" +
-    "                \n" +
-    "                <highchart config=\"chart\"></highchart>\n" +
-    "                \n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "    </md-sidenav>\n" +
-    "\n" +
-    "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"renderValidation\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:90%;max-width:100%;overflow-x:hidden\">\n" +
-    "        <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
-    "            <div class=\"spacing-25\"></div>\n" +
-    "        \n" +
-    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?{{item.tags}}')\" class=\"imageContainerSmall\">\n" +
-    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                        <div style=\"padding:15px;width:100%\">\n" +
-    "                            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Associations</h1>\n" +
-    "                            <h5 style=\"color:white\">\n" +
-    "\n" +
-    "                                <span ng-if=\"item.model != 'TIME'\">{{item.title}}</span>\n" +
-    "                                <span ng-if=\"item.model == 'TIME'\">\n" +
-    "                                    <span style=\"font-size:10px;color:white\"> \n" +
-    "                                        {{item.amount}} seconds {{(item.amount/60).toFixed(2)}} minutes, {{(item.amount/3600).toFixed(2)}} hours\n" +
-    "                                    </span>\n" +
-    "                                </span>\n" +
-    "\n" +
-    "                            </h5>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "\n" +
-    "            <div style=\"padding:16px;\">\n" +
-    "\n" +
-    "                <div class=\"spacing-15\"></div>\n" +
-    "\n" +
-    "                <p style=\"color:gray;font-style:italic\">Validations create value linkages. They form the mechanisms by which data is associated & given relation. <a ng-click=\"informationToggle('VALIDATION')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></p>\n" +
-    "               \n" +
-    "                <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                <h5>Filter</h5>\n" +
-    "                <tags-input min-length=\"1\" max-tags=\"1\" placeholder=\"Associations\" ng-model=\"assoicationFilter\">\n" +
-    "                    <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
-    "                </tags-input>\n" +
-    "\n" +
-    "                <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                <!--TODO-->\n" +
-    "                <div class=\"row\">\n" +
-    "                    <div class=\"col-sm-3\">\n" +
-    "                        <div style=\"max-height:500px;overflow:auto\">\n" +
-    "                            <div ng-repeat=\"association in item.associatedModels\">\n" +
-    "                                <p ng-click=\"filterAssociation()\"><b>{{association.address}}</b></p>\n" +
-    "                            </div>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                    <div class=\"col-sm-9\">\n" +
-    "\n" +
-    "                        <!--\n" +
-    "                        <button class=\"btn btn-raised btn-default\" ng-click=\"renderGraph('random')\">Random</button>\n" +
-    "                        <button class=\"btn btn-raised btn-default\" ng-click=\"renderGraph('circle')\">Circle</button>\n" +
-    "                        <button class=\"btn btn-raised btn-default\" ng-click=\"renderGraph('concentric')\">Concentric</button>\n" +
-    "                        <button class=\"btn btn-raised btn-default\" ng-click=\"renderGraph('grid')\">Grid</button>\n" +
-    "                        <button class=\"btn btn-raised btn-default\" ng-click=\"renderGraph('cose')\">Cose</button>\n" +
-    "                        <button class=\"btn btn-raised btn-default\" ng-click=\"renderGraph('breadthfirst')\">Breadth First</button>\n" +
-    "                        -->\n" +
-    "                        \n" +
-    "                        <cytoscape graph-ready=\"graphReady\" graph-options=\"directedGraphOptions\" graph-elements=\"directedGraphElements\" graph-layout=\"directedGraphLayout\" graph-style=\"directedGraphStyle\"></cytoscape>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "                \n" +
-    "                <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                <highchart config=\"validationColumnRender\"></highchart>\n" +
-    "\n" +
-    "                <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                <!--TODO MOBILE-->\n" +
-    "                <table class=\"table table-striped table-hover\">\n" +
-    "                    <thead>\n" +
-    "                        <tr>\n" +
-    "                            <th>Member</th>\n" +
-    "                            <th>Models</th>\n" +
-    "                            <th>Dimension</th>\n" +
-    "                            <th>Validation Score</th>\n" +
-    "                            <th>Id</th>\n" +
-    "                        </tr>\n" +
-    "                    <thead>\n" +
-    "                    <tbody>\n" +
-    "                        <tr ng-repeat=\"validation in validations\">\n" +
-    "                            <td>\n" +
-    "                                <a href=\"member/{{validation.user.username}}\" ui-sref=\"member.activity({path:validation.user.username})\">\n" +
-    "                                    <img class=\"card-avatar\" ng-src=\"{{validation.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
-    "                                    <span style=\"font-weight:700\">{{validation.user.username}}</span>\n" +
-    "                                </a>\n" +
-    "                            </td>\n" +
-    "\n" +
-    "                            <td>\n" +
-    "\n" +
-    "                                <span ng-if=\"validation.associatedModels[0].type=='PROJECT'\"><a href=\"project/{{validation.associatedModels[0].info.urlTitle}}\">{{validation.associatedModels[0].info.title}}</a></span>\n" +
-    "                                <span ng-if=\"validation.associatedModels[0].type=='TASK'\"><a href=\"task/{{validation.associatedModels[0].address}}\">{{validation.associatedModels[0].info.title}}</a></span>\n" +
-    "                                <span ng-if=\"validation.associatedModels[0].type=='TIME'\"><a href=\"time/{{validation.associatedModels[0].address}}\">{{validation.associatedModels[0].info.amount}} Seconds</a></span>\n" +
-    "\n" +
-    "                                <i class=\"fa fa-arrows-h\"></i> \n" +
-    "\n" +
-    "                                <span ng-if=\"validation.associatedModels[1].type=='PROJECT'\"><a href=\"project/{{validation.associatedModels[0].info.urlTitle}}\">{{validation.associatedModels[1].info.title}}</a></span>\n" +
-    "                                <span ng-if=\"validation.associatedModels[1].type=='TASK'\"><a href=\"task/{{validation.associatedModels[0].address}}\">{{validation.associatedModels[1].info.title}}</a></span>\n" +
-    "                                <span ng-if=\"validation.associatedModels[1].type=='TIME'\"><a href=\"time/{{validation.associatedModels[0].address}}\">{{validation.associatedModels[1].info.amount}} Seconds</a></span>\n" +
-    "\n" +
-    "                            </td>\n" +
-    "\n" +
-    "                            <td>General</td>\n" +
-    "                            <td>{{validation.validation.general}}</td>\n" +
-    "                            <td><a href=\"validation/{{validation.id}}\" ui-sref=\"validation({id:validation.id})\">{{validation.id}}</a></td>\n" +
-    "\n" +
-    "                        </tr>\n" +
-    "                    </tbody>\n" +
-    "                </table>\n" +
-    "\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "    </md-sidenav>\n" +
+    "    <div ng-if=\"!currentUser\" ng-include=\"'nav/templates/login.tpl.html'\"></div>\n" +
+    "\n" +
+    "    <!--TODO..-->\n" +
+    "    <div ng-include=\"'nav/templates/market.tpl.html'\"></div>\n" +
+    "\n" +
+    "    <div ng-include=\"'nav/templates/qr.tpl.html'\"></div>\n" +
+    "    <div ng-include=\"'nav/templates/nav.tpl.html'\"></div>\n" +
+    "\n" +
+    "    <div ng-if=\"newOrder\" ng-include=\"'nav/templates/createOrder.tpl.html'\"></div>\n" +
+    "    <div ng-if=\"newProject\" ng-include=\"'nav/templates/createProject.tpl.html'\"></div>\n" +
+    "\n" +
+    "    <div ng-include=\"'nav/templates/register.tpl.html'\"></div>\n" +
+    "    <div ng-include=\"'nav/templates/render.tpl.html'\"></div>\n" +
+    "    <div ng-include=\"'nav/templates/renderReputation.tpl.html'\"></div>\n" +
+    "    <div ng-include=\"'nav/templates/renderValidation.tpl.html'\"></div>\n" +
+    "    <div ng-include=\"'nav/templates/sort.tpl.html'\"></div>\n" +
+    "    <div ng-include=\"'nav/templates/stats.tpl.html'\"></div>\n" +
+    "    <div ng-include=\"'nav/templates/subNav.tpl.html'\"></div>\n" +
+    "\n" +
+    "    <div ng-if=\"newTask\" ng-include=\"'nav/templates/createTask.tpl.html'\"></div>\n" +
+    "    <div ng-if=\"newTime\" ng-include=\"'nav/templates/createTime.tpl.html'\"></div>\n" +
     "    \n" +
-    "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"sort\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:black;max-width:100%\">\n" +
-    "        <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
-    "            <div class=\"spacing-25\"></div>\n" +
-    "\n" +
-    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?{{item.tags}}')\" class=\"imageContainerSmall\">\n" +
-    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                        <div style=\"padding:15px\">\n" +
-    "                            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Sort</h1>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "            <div style=\"padding:16px;\">\n" +
-    "\n" +
-    "                <!--LOOP THRU OBJ TYPE KEYS..-->\n" +
-    "                <!--<h2><i class=\"fas fa-sort-amount-down\"></i></h2>-->\n" +
-    "                <!--<h5><a>Trending</a></h5>-->\n" +
-    " \n" +
-    "                <h4 ng-click=\"selectSort('ATTENTION', 'DESC', '24h')\" class=\"nav-links\"><a href=\"#\"><i class=\"fas fa-eye\"></i> Attention <i class=\"fas fa-chevron-down\"></i></a></h4>\n" +
-    "                \n" +
-    "                <!--PAST 24 HOURS-->\n" +
-    "                <!--ALL TIME..ETC-->\n" +
-    "                <h5 ng-click=\"selectSort('ATTENTION', 'DESC', '24h')\" class=\"nav-links\"><a href=\"#\">Past 24 Hours</a></h5>\n" +
-    "                <h5 ng-click=\"selectSort('ATTENTION', 'DESC', '1m')\" class=\"nav-links\"><a href=\"#\">Past Month</a></h5>\n" +
-    "                <h5 ng-click=\"selectSort('ATTENTION', 'DESC', '1y')\" class=\"nav-links\"><a href=\"#\">Past Year</a></h5>\n" +
-    "                <h5 ng-click=\"selectSort('ATTENTION', 'DESC', 'all')\" class=\"nav-links\"><a href=\"#\">All Time</a></h5>\n" +
-    "\n" +
-    "                <h4 ng-click=\"selectSort('REACTION', 'DESC', 'all')\" class=\"nav-links\"><a href=\"#\"><i class=\"fas fa-thumbs-up\"></i>  Reactions <i class=\"fas fa-chevron-down\"></i></a></h4>\n" +
-    "                \n" +
-    "                <h4 ng-click=\"selectSort('createdAt', 'DESC', null)\" class=\"nav-links\"><a href=\"#\">Creation Date</a></h4>\n" +
-    "            \n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "    </md-sidenav>\n" +
-    "    \n" +
-    "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"stats\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
-    "        <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
-    "            <div class=\"spacing-25\"></div>\n" +
-    "        \n" +
-    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?{{item.tags}}')\" class=\"imageContainerSmall\">\n" +
-    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                        <div style=\"padding:15px\">\n" +
-    "                            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Stats</h1>\n" +
-    "                            <h5 style=\"text-align:left;font-size:14px;color:rgba(255,255,255,0.9);font-weight:400;\">\n" +
-    "                                <span ng-if=\"item.model != 'TIME'\">\n" +
-    "                                    <span style=\"font-size:16px;color:white\" ng-if=\"item.title\">{{item.title}}</span>\n" +
-    "                                    <span style=\"font-size:16px;color:white\" ng-if=\"!item.title\">{{item.model}}</span>\n" +
-    "                                </span>\n" +
-    "                                <span ng-if=\"item.model == 'TIME'\">\n" +
-    "                                    <span style=\"font-size:16px;color:white\">{{item.amount}} seconds</span>\n" +
-    "                                </span>\n" +
-    "                                <br>\n" +
-    "                                <span style=\"font-size:10px;color:white\">{{item.id}}</span>\n" +
-    "                            </h5>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "\n" +
-    "            <div style=\"padding:16px;\">\n" +
-    "                <highchart config=\"chart\"></highchart>\n" +
-    "            </div>\n" +
-    "\n" +
-    "        </div>\n" +
-    "    </md-sidenav>\n" +
-    "\n" +
-    "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"subNav\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:black\">\n" +
-    "        <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;text-align:center;\">\n" +
-    "            \n" +
-    "            <div class=\"spacing-25\"></div>\n" +
-    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?explode,erupt,action,create')\" class=\"imageContainerSmall\">\n" +
-    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                        <div style=\"padding:15px\" style=\"width:100%\">\n" +
-    "                            <h1 style=\"font-size:14px;color:rgba(255,255,255,0.9);font-weight:400;\">\n" +
-    "                                <a ng-if=\"item.title\" href=\"project/{{item.title}}\" ui-sref=\"project.activity({path:item.urlTitle})\">\n" +
-    "                                    <img ng-src=\"{{item.avatarUrl}}\" style=\"height:50px;width:50px;border-radius:100%\">\n" +
-    "                                    <div class=\"spacing-5\"></div>\n" +
-    "                                    <span style=\"font-size:24px;color:white\">{{project.title}}</span>\n" +
-    "                                </span>\n" +
-    "                                <a ng-if=\"item.username\" href=\"member/{{item.username}}\" ui-sref=\"member.activity({path:item.username})\">\n" +
-    "                                    <img ng-src=\"{{item.avatarUrl}}\" style=\"height:50px;width:50px;border-radius:100%\">\n" +
-    "                                    <div class=\"spacing-5\"></div>\n" +
-    "                                    <span style=\"font-size:24px;color:white\">{{item.username}}</span>\n" +
-    "                                </a>\n" +
-    "                            </h1>\n" +
-    "                            <h5 style=\"color:white\" ng-click=\"memberQRToggle(item)\"><i style=\"color:white\" class=\"fas fa-qrcode\"></i> {{item.id}}</h5>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "\n" +
-    "            <div style=\"padding:16px\">\n" +
-    "                <div class=\"spacing-15\"></div>\n" +
-    "                <div ng-if=\"item.title\">\n" +
-    "                    <h4 class=\"nav-links\"><a href=\"project/{{item.urlTitle}}/about\" ui-sref=\"project.about({path:item.urlTitle})\">About</a></h4>\n" +
-    "                    <h4 class=\"nav-links\"><a href=\"project/{{item.urlTitle}}/assets\" ui-sref=\"project.assets({path:item.urlTitle})\">Assets</a></h4>\n" +
-    "                    <h4 class=\"nav-links\"><a href=\"project/{{item.urlTitle}}/content\" ui-sref=\"project.content({path:item.urlTitle})\">Content</a></h4>\n" +
-    "                    <h4 class=\"nav-links\"><a href=\"project/{{item.urlTitle}}/items\" ui-sref=\"project.items({path:item.urlTitle})\">Items</a></h4>\n" +
-    "                    <h4 class=\"nav-links\"><a href=\"project/{{item.urlTitle}}/ledger\" ui-sref=\"project.ledger({path:item.urlTitle})\">Ledger</a></h4>\n" +
-    "                    <h4 class=\"nav-links\"><a href=\"project/{{item.urlTitle}}/members\" ui-sref=\"project.members({path:item.urlTitle})\">{{item.memberCount}} Members</a></h4>\n" +
-    "                    <h4 class=\"nav-links\"><a href=\"project/{{item.urlTitle}}/charter\" ui-sref=\"project.charter({path:item.urlTitle})\">Motions</a></h4>\n" +
-    "                    <h4 class=\"nav-links\"><a href=\"project/{{item.urlTitle}}/positions\" ui-sref=\"project.positions({path:item.urlTitle})\">Positions</a></h4>\n" +
-    "                    <h4 class=\"nav-links\"><a href=\"project/{{item.urlTitle}}/projects\" ui-sref=\"project.projects({path:item.urlTitle})\">Projects</a></h4>\n" +
-    "                    <h4 class=\"nav-links\"><a href=\"project/{{item.urlTitle}}/tasks\" ui-sref=\"project.tasks({path:item.urlTitle})\">Tasks</a></h4>\n" +
-    "                    <h4 class=\"nav-links\"><a href=\"project/{{item.urlTitle}}/time\" ui-sref=\"project.time({path:item.urlTitle})\">Time</a></h4>\n" +
-    "                    <!--<h4 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}/charter\">Validations</a></h4>-->\n" +
-    "                </div>\n" +
-    "                <div ng-if=\"item.username\">\n" +
-    "                    <h4 class=\"nav-links\"><a href=\"member/{{item.username}}/about\" ui-sref=\"member.about({path:item.username})\">About</a></h4>\n" +
-    "                    <h4 class=\"nav-links\"><a href=\"member/{{item.username}}/actions\" ui-sref=\"member.actions({path:item.username})\">Actions</a></h4>\n" +
-    "                    <h4 class=\"nav-links\"><a href=\"member/{{item.username}}/assets\" ui-sref=\"member.assets({path:item.username})\">Assets</a></h4>\n" +
-    "                    <h4 class=\"nav-links\"><a href=\"member/{{item.username}}/content\" ui-sref=\"member.content({path:item.username})\">Content</a></h4>\n" +
-    "                    <h4 class=\"nav-links\"><a href=\"member/{{item.username}}/followers\" ui-sref=\"member.followers({path:item.username})\">{{item.followerCount}} Followers</a></h4>\n" +
-    "                    <h4 class=\"nav-links\"><a href=\"member/{{item.username}}/following\" ui-sref=\"member.following({path:item.username})\">{{item.followingCount}} Following</a></h4>\n" +
-    "                    <h4 class=\"nav-links\"><a href=\"member/{{item.username}}/items\" ui-sref=\"member.items({path:item.username})\">Items</a></h4>\n" +
-    "                    <h4 class=\"nav-links\"><a href=\"member/{{item.username}}/ledger\" ui-sref=\"member.ledger({path:item.username})\">Ledger</a></h4>\n" +
-    "                    <h4 class=\"nav-links\"><a href=\"member/{{item.username}}/positions\" ui-sref=\"member.positions({path:item.username})\">Positions</a></h4>\n" +
-    "                    <h4 class=\"nav-links\"><a href=\"member/{{item.username}}/projects\" ui-sref=\"member.projects({path:item.username})\">{{item.projectCount}} Projects</a></h4>\n" +
-    "                    <h4 class=\"nav-links\"><a href=\"member/{{item.username}}/tasks\" ui-sref=\"member.tasks({path:item.username})\">Tasks</a></h4>\n" +
-    "                    <h4 class=\"nav-links\"><a href=\"member/{{item.username}}/time\" ui-sref=\"member.time({path:item.username})\">Time</a></h4>\n" +
-    "                </div>\n" +
-    "\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "    </md-sidenav>\n" +
-    "\n" +
-    "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"task\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
-    "        <div ng-if=\"newTask\" class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
-    "            <div class=\"spacing-25\"></div>\n" +
-    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?code')\" class=\"imageContainerSmall\">\n" +
-    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                        <div style=\"padding:15px\">\n" +
-    "                            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Create Task</h1>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "\n" +
-    "            <div style=\"padding:16px\">\n" +
-    "                <div class=\"spacing-15\"></div>\n" +
-    "                <p style=\"color:gray;font-style:italic\">Tasks are an abstraction of intentional time, they create linkages between Time & Token Protocols. <a ng-click=\"informationToggle('CREATETASK')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></p>\n" +
-    "                <div class=\"spacing-10\"></div>\n" +
-    "                <form role=\"form\" ng-submit=\"createTask()\">\n" +
-    "                    <h5>Title</h5>\n" +
-    "                    <input type=\"text\" placeholder=\"Title\" ng-model=\"newTask.title\" class=\"form-control\">\n" +
-    "                    <h5>Associations <a ng-click=\"informationToggle('ASSOCIATIONS')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
-    "                    <tags-input min-length=\"1\" placeholder=\"Associations\" ng-model=\"newTask.associatedModels\">\n" +
-    "                        <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
-    "                    </tags-input>\n" +
-    "                    <h5>Context</h5>\n" +
-    "                    <tags-input min-length=\"1\" placeholder=\"Context\" ng-model=\"newTask.tags\">\n" +
-    "                        <auto-complete source=\"loadTags($query)\"></auto-complete>\n" +
-    "                    </tags-input>\n" +
-    "                    <h5>Location</h5>\n" +
-    "                    <input type=\"text\" placeholder=\"Location\" ng-model=\"newTask.location\" class=\"form-control\">\n" +
-    "                    <text-angular ng-model=\"newTask.content\" ta-toolbar=\"[['p','h1','bold','italics','quote','insertLink', 'html']]\"></text-angular>\n" +
-    "                    <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newTask.title\">create</button>\n" +
-    "                </form>\n" +
-    "            </div>\n" +
-    "\n" +
-    "        </div>\n" +
-    "    </md-sidenav>\n" +
-    "\n" +
-    "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"time\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
-    "        <div ng-if=\"newTime\" class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
-    "            <div class=\"spacing-25\"></div>\n" +
-    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?time')\" class=\"imageContainerSmall\">\n" +
-    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                        <div style=\"padding:15px\">\n" +
-    "                            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Create Time</h1>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "\n" +
-    "            <div style=\"padding:16px\">\n" +
-    "                <div class=\"spacing-15\"></div>\n" +
-    "                <p style=\"color:gray;font-style:italic\">Time & Intention unite. Token Protocols propogate value interactions. <a ng-click=\"informationToggle('CREATETIME')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></p>\n" +
-    "                <div class=\"spacing-10\"></div>\n" +
-    "                <form role=\"form\" ng-submit=\"createTime()\">\n" +
-    "\n" +
-    "                    <!--SELF CONTEXT-->\n" +
-    "                    <!--IMPLICIT VALIDATION W CONTEXT FOR TAGS-->\n" +
-    "                    <h5>Task <a ng-click=\"informationToggle('ASSOCIATIONS')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
-    "                    <tags-input min-length=\"1\" placeholder=\"Associations\" ng-model=\"newTime.associatedModels\">\n" +
-    "                        <auto-complete source=\"loadAssociationsTask($query)\"></auto-complete>\n" +
-    "                    </tags-input>\n" +
-    "\n" +
-    "                    <div ng-if=\"!newTime.associatedModels.length\">\n" +
-    "                        <h5>Context <a ng-click=\"informationToggle('TAGS')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
-    "                        <tags-input min-length=\"1\" placeholder=\"Tags\" ng-model=\"newTime.tags\">\n" +
-    "                            <auto-complete source=\"loadTags($query)\"></auto-complete>\n" +
-    "                        </tags-input>\n" +
-    "                    </div>\n" +
-    "        \n" +
-    "                    <!--TODO-->\n" +
-    "                    <!--FOR X IN TAGS-->\n" +
-    "                    <div ng-repeat=\"model in newTime.associatedModels\">\n" +
-    "                        <div class=\"col-sm-12\">\n" +
-    "\n" +
-    "                            <h5>Context <a ng-click=\"informationToggle('TAGS')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
-    "                            <tags-input min-length=\"1\" placeholder=\"Tags\" ng-model=\"newTime.tags\">\n" +
-    "                                <auto-complete source=\"loadTags($query)\"></auto-complete>\n" +
-    "                            </tags-input>\n" +
-    "\n" +
-    "                            <div class=\"spacing-5\"></div>\n" +
-    "\n" +
-    "                            <div ng-repeat=\"tag in newTime.tags track by $index\">\n" +
-    "                                <div layout=\"\">\n" +
-    "                                    <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{tag.text}}</span></div>\n" +
-    "                                    <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"newValidation.validation[tag.text]\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"{{tag.text}}\"></md-slider>\n" +
-    "                                    <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{newValidation.validation[tag.text]}} | {{reputation[tag.text] || 0}}</span></div>\n" +
-    "                                </div>\n" +
-    "                            </div>\n" +
-    "\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "\n" +
-    "                    <ul class=\"nav nav-pills nav-justified contentTyle\">\n" +
-    "                        <li ng-class=\"{active: newTime.type=='RETROACTIVE'}\" ng-click=\"selectTypeTime('RETROACTIVE')\"><a href=\"#\">RETROACTIVE OR PLANNED</a></li>\n" +
-    "                        <li ng-class=\"{active: newTime.type=='LIVE'}\" ng-click=\"selectTypeTime('LIVE')\"><a href=\"#\">LIVE</a></li>\n" +
-    "                    </ul>\n" +
-    "\n" +
-    "                    <div ng-if=\"newTime.type == 'LIVE'\">\n" +
-    "\n" +
-    "                        <div ng-show=\"!recordingTime\">\n" +
-    "                            <div ng-show=\"!streaming\">\n" +
-    "                                <h3>Streaming?</h3>\n" +
-    "                                <a class=\"btn btn-default log-btn\" ng-click=\"startStreaming()\">Yes</a>\n" +
-    "                                <div class=\"spacing-5\"></div>\n" +
-    "                                <a class=\"btn btn-default log-btn\" ng-click=\"startTime()\">No</a>\n" +
-    "                            </div>\n" +
-    "                            <div ng-show=\"streaming\">\n" +
-    "                                <input type=\"text\" placeholder=\"Link\" ng-model=\"streamUrl\" class=\"form-control\">\n" +
-    "                                <input type=\"text\" placeholder=\"IFPS SECRET\" ng-model=\"timeContent\" class=\"form-control\">\n" +
-    "                                <input type=\"text\" placeholder=\"IFPS KEY\" ng-model=\"timeContent\" class=\"form-control\">\n" +
-    "                                <a style=\"width:100%;\" class=\"btn btn-default log-btn\" ng-click=\"startTime()\">Start Stream</a>\n" +
-    "                                <a style=\"width:100%;\" class=\"btn btn-default log-btn\" ng-click=\"cancelStreaming()\">Back</a>\n" +
-    "                            </div>\n" +
-    "                        </div>\n" +
-    "                        <div ng-show=\"recordingTime\">\n" +
-    "                            <h3>{{taskTime}}</h3>\n" +
-    "                            <div ng-if=\"streaming\"> <div ng-bind-html=\"renderStream(streamUrl)\"></div></div>\n" +
-    "                            <div class=\"spacing-5\"></div>\n" +
-    "                            <div class=\"spacing-5\"></div>\n" +
-    "                            <text-angular ng-model=\"newTime.content\" ta-toolbar=\"[['p','h1','bold','italics','quote','insertLink', 'html']]\"></text-angular>\n" +
-    "                            <div class=\"spacing-5\"></div>\n" +
-    "                            <a ng-click=\"submit()\" style=\"width:100%\" class=\"btn btn-default log-btn\">create</a>\n" +
-    "                        </div>            \n" +
-    "\n" +
-    "                    </div>\n" +
-    "\n" +
-    "                    <div ng-if=\"newTime.type == 'RETROACTIVE'\">\n" +
-    "\n" +
-    "                        <div class=\"row\">\n" +
-    "                            <div class=\"col-sm-6\">\n" +
-    "                                <h5>Start Time</h5>\n" +
-    "                                <input type=\"datetime-local\" step=\"1\" placeholder=\"Start Time\" ng-model=\"newTime.startTime\" class=\"form-control\">\n" +
-    "                            </div>\n" +
-    "                            <div class=\"col-sm-6\">     \n" +
-    "                                <h5>End Time</h5>\n" +
-    "                                <input type=\"datetime-local\" step=\"1\" placeholder=\"Start Time\" ng-model=\"newTime.endTime\" class=\"form-control\">\n" +
-    "                            </div>\n" +
-    "                        </div>\n" +
-    "\n" +
-    "                        <h5>Amount</h5>\n" +
-    "                        <input type=\"number\" step=\"1\" placeholder=\"Amount\" ng-model=\"newTime.amount\" class=\"form-control\">\n" +
-    "                        \n" +
-    "                        <text-angular ng-model=\"newTime.content\" ta-toolbar=\"[['p','h1','bold','italics','quote','insertLink', 'html']]\"></text-angular>\n" +
-    "                        <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newTime.amount\">create</button>\n" +
-    "\n" +
-    "                    </div>\n" +
-    "\n" +
-    "\n" +
-    "                </form>\n" +
-    "            </div>\n" +
-    "\n" +
-    "        </div>\n" +
-    "    </md-sidenav>\n" +
-    "\n" +
-    "    <md-sidenav class=\"md-sidenav-left md-whiteframe-z2\" md-component-id=\"timer\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
-    "        <div ng-if=\"newTime\" class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
-    "            <div class=\"spacing-25\"></div>\n" +
-    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?time')\" class=\"imageContainerSmall\">\n" +
-    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                        <div style=\"padding:15px\">\n" +
-    "                            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Time</h1>\n" +
-    "                            <h5 style=\"color:white\">Pay Attention!</h5>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "\n" +
-    "            <!--LOCATION.. (TASK) TIMER.. ATTENTION-->\n" +
-    "            <!--ADD CONTEXT???-->\n" +
-    "            <!--CREATE TIME SHOULD SPIN OFF A NEW INTERVAL WITH ID..-->\n" +
-    "                <!--DOING IT TWICE WILL 'DOUBlE' NOW-->\n" +
-    "            <div style=\"padding:16px;overflow:auto\">\n" +
-    "\n" +
-    "                <ul style=\"padding:0px;margin-top:0px;margin-bottom:0px;\" class=\"member-tabs\">\n" +
-    "                    <li ng-if=\"taskTime > 0\"><a ng-click=\"selectTab('TASK')\" href=\"#\">Intentional Time</a></li>\n" +
-    "                    <li><a ng-click=\"selectTab('ATTENTION')\" ng-click=\"\" href=\"#\">Live Attention</a></li>\n" +
-    "                    <li><a ng-click=\"selectTab('MACHINE')\" href=\"#\">Machine Attention</a></li>\n" +
-    "                </ul>\n" +
-    "\n" +
-    "                <div class=\"spacing-15\"></div>\n" +
-    "\n" +
-    "                <div ng-if=\"selectedTab=='TASK'\">\n" +
-    "                    <!--IF MULTI TASKS-->\n" +
-    "                    <h4 ng-if=\"taskTime > 0\">{{taskTime}}</h4>\n" +
-    "                </div>\n" +
-    "    \n" +
-    "                <div ng-if=\"selectedTab=='ATTENTION'\">\n" +
-    "                    <highchart config=\"timeChart\"></highchart>\n" +
-    "                    <h4>{{timeModel.amount}}</h4>\n" +
-    "                    <div ng-repeat=\"time in timeQ.attention.slice(0,100) | orderBy:'-'\">\n" +
-    "                        <p>{{time.context}} : <b>{{time.amount}}</b></p>\n" +
-    "                        <!--LOCATION AS CONTEXT..?-->\n" +
-    "                        <p>{{time.location}}</p>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "\n" +
-    "                <div ng-if=\"selectedTab=='MACHINE'\">\n" +
-    "\n" +
-    "                    <div ng-repeat=\"time in timeQ.mining.slice(0,100) | orderBy:'-'\">\n" +
-    "                        <p>{{time.context}} : <b>{{time.amount}}</b></p>\n" +
-    "                        <!--LOCATION AS CONTEXT..?-->\n" +
-    "                        <p>{{time.location}}</p>\n" +
-    "                    </div>\n" +
-    "\n" +
-    "                </div>\n" +
-    "\n" +
-    "                <div class=\"spacing-10\"></div>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "    </md-sidenav>\n" +
-    "\n" +
-    "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"tokens\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%;overflow-x:hidden\">\n" +
-    "        <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
-    "            <div class=\"spacing-25\"></div>\n" +
-    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?{{item.tags}}')\" class=\"imageContainerSmall\">\n" +
-    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                        <div style=\"padding:15px\">\n" +
-    "                            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Tokens</h1>\n" +
-    "                            <h5 style=\"color:white\">{{item.id}}</h5>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "\n" +
-    "            <div style=\"padding:16px;\">\n" +
-    "\n" +
-    "                <div class=\"spacing-15\"></div>\n" +
-    "\n" +
-    "                <h4 style=\"\">Protocols <a ng-click=\"informationToggle('PROTOCOLS', 'GENERAL', item)\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h4>\n" +
-    "\n" +
-    "                <!--REPEAT IN item.protocols-->\n" +
-    "                <p>\n" +
-    "                    <!--<a ng-repeat=\"protocol in item.protocols\" href=\"#\"></a>-->\n" +
-    "                    <a ng-click=\"informationToggle('PROTOCOLS')\" href=\"#\">Content Protocol</a>, \n" +
-    "                    <a ng-click=\"informationToggle('PROTOCOLS')\" href=\"#\">Data Protocol</a>,\n" +
-    "                    <a ng-click=\"informationToggle('PROTOCOLS')\" href=\"#\">Project Protocol</a>, \n" +
-    "                    <a ng-click=\"informationToggle('PROTOCOLS')\" href=\"#\">Reaction Protocol</a>,\n" +
-    "                    <a ng-click=\"informationToggle('PROTOCOLS')\" href=\"#\">Task Protocol</a>, \n" +
-    "                    <a ng-click=\"informationToggle('PROTOCOLS')\" href=\"#\">Time Protocol</a>, \n" +
-    "                    <a ng-click=\"informationToggle('PROTOCOLS')\" href=\"#\">Validation Protocol</a>\n" +
-    "                </p>\n" +
-    "\n" +
-    "                <div class=\"spacing-5\"></div>\n" +
-    "\n" +
-    "                <!--Token Space-->\n" +
-    "                <tags-input min-length=\"1\" ng-model=\"tokenFilter\" placeholder=\"Token Manifold\"></tags-input>\n" +
-    "\n" +
-    "                <!--TODO: MOBILE-->\n" +
-    "                <table class=\"table table-striped table-hover\">\n" +
-    "                    <!--<thead>\n" +
-    "                        <tr><th>Manifold and Action Table</th></tr>\n" +
-    "                    </thead>-->\n" +
-    "                    <tbody>\n" +
-    "                        <tr ng-repeat=\"token in tokens\">\n" +
-    "                            <td><a href=\"market/{{token}}\" ui-sref=\"market({id:token})\">{{token}}</a></td>\n" +
-    "                        </tr>\n" +
-    "                    </tbody>\n" +
-    "                </table>\n" +
-    "\n" +
-    "                <!--<div class=\"spacing-10\"></div>\n" +
-    "                <h3 style=\"\">Tokens Earned</h3>-->\n" +
-    "                <!--<highchart config=\"tokensEarned\"></highchart>-->\n" +
-    "\n" +
-    "                <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                <h3 style=\"\">Market Liquidity<h3>\n" +
-    "                <h5>Equality Traverse <a ng-click=\"informationToggle('MARKETLIQUIDITY')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
-    "\n" +
-    "                <div class=\"spacing-15\"></div>\n" +
-    "\n" +
-    "                <!--TODO: WEIGHT THE INPUT (SLIDER) ; absolute || % -->\n" +
-    "\n" +
-    "                <h4>Asset Input</h4>\n" +
-    "                <tags-input min-length=\"1\" ng-model=\"inputVector\" placeholder=\"Input\"></tags-input>\n" +
-    "               \n" +
-    "                <div class=\"spacing-15\"></div>\n" +
-    "\n" +
-    "                <h4>Desired Output</h4>\n" +
-    "                <tags-input min-length=\"1\" ng-model=\"outputVector\" placeholder=\"Output\"></tags-input>\n" +
-    "                \n" +
-    "                <div class=\"spacing-15\"></div>\n" +
-    "\n" +
-    "                <button ng-click=\"marketTraverse();\" type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\">+ Lookup</button>\n" +
-    "                \n" +
-    "                <div class=\"spacing-15\"></div>\n" +
-    "\n" +
-    "                <div ng-show=\"outputMatix.length > 0\" >\n" +
-    "\n" +
-    "\n" +
-    "                    <!--TRAVERSAL GRAPH?-->\n" +
-    "                    <!--TODO MOBILE-->\n" +
-    "                    <table class=\"table table-striped table-hover\">\n" +
-    "                        <tbody>\n" +
-    "                            <tr ng-repeat=\"token in inputVector track by $index\">\n" +
-    "                                <td><a href=\"market/{{token.text}}\" ui-sref=\"market({id:token.text})\">{{token.text}}</a></td>\n" +
-    "                            </tr>\n" +
-    "                        </tbody>\n" +
-    "                    </table>\n" +
-    "\n" +
-    "                    <div class=\"spacing-15\"></div>\n" +
-    "\n" +
-    "                    <div style=\"text-align:center\"><img src=\"https://i.stack.imgur.com/PnXIo.png\"/></div>\n" +
-    "\n" +
-    "                    <div class=\"spacing-15\"></div>\n" +
-    "\n" +
-    "                    <!--TODO MOBILE-->\n" +
-    "                    <table class=\"table table-striped table-hover\">\n" +
-    "                        <thead>\n" +
-    "                            <tr>\n" +
-    "                                <th>Identifer</th>\n" +
-    "                                <th>Value</th>\n" +
-    "                            </tr>\n" +
-    "                        </thead>\n" +
-    "                        <tbody>\n" +
-    "                            <tr ng-repeat=\"assetVector in outputMatix track by $index\">\n" +
-    "                                <td><a href=\"market/{{assetVector.identifer}}\" ui-sref=\"market({id:assetVector.identifer})\">{{assetVector.identifer}}</a></td>\n" +
-    "                                <td>{{assetVector.value}}</td>\n" +
-    "                            </tr>\n" +
-    "                        </tbody>\n" +
-    "                    </table>\n" +
-    "                    <div class=\"spacing-15\"></div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "    </md-sidenav>\n" +
-    "\n" +
-    "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"transaction\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
-    "        <div ng-if=\"newTransaction\" class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
-    "            <div class=\"spacing-25\"></div>\n" +
-    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?transaction,trade')\" class=\"imageContainerSmall\">\n" +
-    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                        <div style=\"padding:15px\">\n" +
-    "                            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Create Transaction</h1>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "            <div style=\"padding:16px;\">\n" +
-    "                <div class=\"spacing-15\"></div>\n" +
-    "                <p style=\"color:gray;font-style:italic\">Send tokens to any address; double check that the information is correct before sending. All transactions are final. <a ng-click=\"informationToggle('CREATETRANSACTION')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></p>\n" +
-    "                <div class=\"spacing-10\"></div>\n" +
-    "                <form role=\"form\" ng-submit=\"createTransaction()\">\n" +
-    "                    <h5>Address From</h5>\n" +
-    "                    <tags-input min-length=\"1\" max-tags=\"1\" placeholder=\"From\" ng-model=\"newTransaction.from\">\n" +
-    "                        <auto-complete min-length=\"2\" source=\"loadAddress($query)\"></auto-complete>\n" +
-    "                    </tags-input>\n" +
-    "                    <h5>Address To</h5>\n" +
-    "                    <tags-input min-length=\"1\" max-tags=\"1\" placeholder=\"To\" ng-model=\"newTransaction.to\">\n" +
-    "                        <auto-complete min-length=\"2\" source=\"loadAddress($query)\" max-results-to-show=\"1000\" highlight-matched-text=\"true\"></auto-complete>\n" +
-    "                    </tags-input>\n" +
-    "\n" +
-    "                    <h5>Asset <a href=\"#\" ng-click=\"expandAssets()\" style=\"float:right\"><i class=\"fas fa-coins\"></i> My Assets</a></h5>\n" +
-    "                    <tags-input min-length=\"1\" placeholder=\"Asset Identifier\" ng-model=\"newTransaction.identifierSet\">\n" +
-    "                        <auto-complete min-length=\"1\" highlight-matched-text=\"true\" load-on-empty=\"true\" max-results-to-show=\"1000\" source=\"loadAsset($query)\"></auto-complete>\n" +
-    "                    </tags-input>\n" +
-    "\n" +
-    "                    <div class=\"row\" ng-if=\"assetsAreExpanded\">\n" +
-    "                        <!--MY MANIFOLDS-->\n" +
-    "                        <div class=\"spacing-10\"></div>\n" +
-    "                        <div class=\"col-xs-4\" ng-repeat=\"asset in sortedBalances\">\n" +
-    "                            <p>\n" +
-    "                                <!--<img style=\"height:32px;border-radius:100%;\" src=\"https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{asset[0]}}\">-->\n" +
-    "\n" +
-    "                                <img style=\"border-radius:100%;height:32px;padding-right:5px;\" ng-src=\"http://identicon-1132.appspot.com/{{asset[0]}}?s=8&p=8&f=png\">\n" +
-    "                                <a href=\"#\" ng-click=\"addAssetToTransaction(asset[0])\"><b>{{asset[0]}}</b>: {{asset[1]}}</a>\n" +
-    "                            </p>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "\n" +
-    "                    <div class=\"\">\n" +
-    "                        <div class=\"col-sm-12\" ng-repeat=\"asset in newTransaction.identifierSet\">\n" +
-    "                            <h5>{{asset.text}} Amount | Available {{balance[asset.text] || 0}} <span style=\"text-align:right;float:right\"><a ng-click=\"informationToggle('IDENTIFERSET')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></span></h5>\n" +
-    "                            <input placeholder=\"{{asset.text}} Amount\" type=\"number\" step=\"any\" ng-model=\"newTransaction.amountSet[asset.text]\" class=\"form-control\">\n" +
-    "                        </div>\n" +
-    "                        <div style=\"clear:both\"></div>\n" +
-    "                    </div>\n" +
-    "\n" +
-    "                    <!--<h5>Associated Items</h5>-->\n" +
-    "                    <!--BUYING AN ITEM WITH PRESET CONTEXT..-->\n" +
-    "                    <!--TRADE.. 2 BUNDLES TRANSACTIONS-->\n" +
-    "                    <!--SEND TOKEN SET, RECIEVE TOKEN ASSET-->\n" +
-    "                    <!--TRADE POPUP.. ORDER-->\n" +
-    "\n" +
-    "                    <h5>Context <a ng-if=\"newTransaction.context.length > 0\" href=\"#\" ng-click=\"expandAssociations()\" style=\"float:right\"><i class=\"fas fa-bezier-curve\"></i> Expand</a></h5>\n" +
-    "                    <tags-input min-length=\"1\" placeholder=\"Context\" ng-model=\"newTransaction.context\">\n" +
-    "                        <auto-complete min-length=\"2\" source=\"loadTags($query)\"></auto-complete>\n" +
-    "                    </tags-input>\n" +
-    "\n" +
-    "                    <div ng-if=\"associationsAreExpanded\">\n" +
-    "                        <div style=\"padding:16px\">\n" +
-    "                            <div ng-repeat=\"context in newTransaction.context track by $index\">\n" +
-    "                                <div layout=\"\">\n" +
-    "                                    <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{context.text}}</span></div>\n" +
-    "                                    <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"newTransaction.validationModels[0].validation[context.text]\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"{{context.text}}\"></md-slider>\n" +
-    "                                    <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{newTransaction.validationModels[0].validation[context.text]}}</span></div>\n" +
-    "                                </div>\n" +
-    "                            </div>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "\n" +
-    "                    <h5>Description</h5>\n" +
-    "                    <textarea style=\"height:100px;\" placeholder=\"Description\" type=\"text\" ng-model=\"newTransaction.content\" class=\"form-control\"></textarea>\n" +
-    "                    <button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newTransaction.amountSet\">create</button>\n" +
-    "\n" +
-    "                </form>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "    </md-sidenav>\n" +
-    "\n" +
-    "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"validation\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
-    "        <div ng-if=\"newValidation\" class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
-    "            <div class=\"spacing-25\"></div>\n" +
-    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?code,consensus')\" class=\"imageContainerSmall\">\n" +
-    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                        <div style=\"padding:15px\">\n" +
-    "                            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Create Validation</h1>\n" +
-    "                            <h5 style=\"color:white\">\n" +
-    "                            </h5>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "            <div style=\"padding:16px\">\n" +
-    "                <div class=\"spacing-15\"></div>\n" +
-    "                <p style=\"color:gray;font-style:italic\">Validations create value linkages. They form the mechanisms by which data is associated & given relation. <a ng-click=\"informationToggle('VALIDATION')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></p>\n" +
-    "                <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                <h5>Connection</h5>\n" +
-    "                <tags-input min-length=\"1\" placeholder=\"Associations\" ng-model=\"newValidation.associatedModels\">\n" +
-    "                    <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
-    "                </tags-input>\n" +
-    "\n" +
-    "                <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                <h5>Context</h5>\n" +
-    "                <tags-input min-length=\"1\" placeholder=\"Context\" ng-model=\"context\">\n" +
-    "                    <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
-    "                </tags-input>\n" +
-    "\n" +
-    "\n" +
-    "                <div ng-repeat=\"(key, value) in newValidation.validation track by $index\">\n" +
-    "                    <div layout=\"\">\n" +
-    "                        <div flex=\"10\" layout=\"\" layout-align=\"center center\">\n" +
-    "                            <p><b>{{key}}</b></p>\n" +
-    "                        </div>\n" +
-    "                        <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"newValidation.validation[key]\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"{{key}}\"></md-slider>\n" +
-    "                        <div flex=\"10\" layout=\"\" layout-align=\"center center\">\n" +
-    "                            <p class=\"md-body-1\">{{newValidation.validation[key]}}</p>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "\n" +
-    "                    <!--CHARTER LOGIC HERE-->\n" +
-    "                    <div style=\"text-align:center\"><p style=\"font-size:9px\">{{reputation[key] || 0}} | {{reputation[key]*newValidation.validation[key]}} | Multiplicative Charter</p></div>\n" +
-    "\n" +
-    "\n" +
-    "                </div>\n" +
-    "\n" +
-    "                <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                <h5>Content</h5>\n" +
-    "                <!--AssociatedContent...?-->\n" +
-    "                <text-angular style=\"height:200px\" ng-model=\"newValidation.content\" ta-toolbar=\"''\"></text-angular>\n" +
-    "\n" +
-    "                <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                <button ng-click=\"createValidation()\" type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\">create</button>\n" +
-    "\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "    </md-sidenav>\n" +
+    "    <div ng-include=\"'nav/templates/timer.tpl.html'\"></div>\n" +
+    "    <div ng-include=\"'nav/templates/tokens.tpl.html'\"></div>\n" +
+    "\n" +
+    "    <div ng-if=\"newTransaction\" ng-include=\"'nav/templates/createTransaction.tpl.html'\"></div>\n" +
+    "    <div ng-if=\"newValidation\" ng-include=\"'nav/templates/createValidation.tpl.html'\"></div>\n" +
     "\n" +
     "    <!--TODO!!-->\n" +
-    "    <md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"confirm\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
-    "        <div mg-if=\"confirm\" class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
-    "            <div class=\"spacing-25\"></div>\n" +
-    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?{{confirm.tags}}')\" class=\"imageContainerSmall\">\n" +
-    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                        <div style=\"padding:15px\">\n" +
-    "                            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Success!</h1>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "            <div style=\"padding:16px;\">\n" +
-    "                <div class=\"spacing-25\"></div>\n" +
-    "                <div ng-if=\"confirm.model == 'ACTION'\">\n" +
-    "                    <h3>{{confirm.type}}</h3>\n" +
-    "                    <h5>{{confirm.amount}} - {{confirm.associatedModels}}</h5>\n" +
-    "                    <p>{{confirm.user}}</p>\n" +
-    "                </div>\n" +
-    "                <div ng-if=\"confirm.model == 'CONTENT'\">\n" +
-    "                    <h3>{{confirm.title}}</h3>\n" +
-    "                    <p>{{confirm.user}}</p>\n" +
-    "                    <p>{{confirm.tags}}</p>\n" +
-    "                    <!--RENDER ASSOCIATIONS-->\n" +
-    "                    <!--GRAPH..? ETC-->\n" +
-    "                    <p>{{confirm.associatedModels}}</p>\n" +
-    "                    <p>{{confirm.type}}</p>\n" +
-    "                    <p><span style=\"display:inline\" ng-bind-html=\"renderContent(confirm.content)\"></span></p>\n" +
-    "                </div>\n" +
-    "                <!--\n" +
-    "                <div ng-if=\"confirm.model == 'FOLLOW'\">\n" +
-    "                    <p>{{confirm.follower}}</p>\n" +
-    "                    <p>{{confirm.following}}</p>\n" +
-    "                </div>\n" +
-    "                -->\n" +
-    "                <div ng-if=\"confirm.model == 'ITEM'\">\n" +
-    "                    <h3>{{confirm.title}}</h3>\n" +
-    "                    <p>{{confirm.user}}</p>\n" +
-    "                    <p>{{confirm.tags}}</p>\n" +
-    "                    <p>{{confirm.associatedModels}}</p>\n" +
-    "                    <p>{{confirm.location}}</p>\n" +
-    "                    <p>{{confirm.amountSet}}</p>\n" +
-    "                    <p>{{confirm.identifierSet}}</p>\n" +
-    "                    <p><span style=\"display:inline\" ng-bind-html=\"renderContent(confirm.content)\"></span></p>\n" +
-    "                </div>\n" +
-    "                <div ng-if=\"confirm.model == 'ORDER'\">\n" +
-    "                    <p>{{confirm.user}}</p>\n" +
-    "                    <p>{{confirm.amountSetAlpha}}</p>\n" +
-    "                    <p>{{confirm.identifierSetAlpha}}</p>\n" +
-    "                    <p>{{confirm.amountSetBeta}}</p>\n" +
-    "                    <p>{{confirm.identifierSetBeta}}</p>\n" +
-    "                    <p>{{confirm.status}}</p>\n" +
-    "                </div>\n" +
-    "                <div ng-if=\"confirm.model == 'PROJECT'\">\n" +
-    "                    <h3>{{confirm.title}}</h3>\n" +
-    "                    <p>{{confirm.user}}</p>\n" +
-    "                    <p>{{confirm.associatedModels}}</p>\n" +
-    "                    <p>{{confirm.location}}</p>\n" +
-    "                    <p><span style=\"display:inline\" ng-bind-html=\"renderContent(confirm.description)\"></span></p>\n" +
-    "                </div>\n" +
-    "                <div ng-if=\"confirm.model == 'PROJECTMEMBER'\">\n" +
-    "                    <p>{{confirm.user}}</p>\n" +
-    "                    <p>{{confirm.project}}</p>\n" +
-    "                </div>\n" +
-    "                <div ng-if=\"confirm.model == 'TASK'\">\n" +
-    "                    <h3>{{confirm.title}}</h3>\n" +
-    "                    <p>{{confirm.user}}</p>\n" +
-    "                    <p>{{confirm.associatedModels}}</p>\n" +
-    "                    <p>{{confirm.location}}</p>\n" +
-    "                    <p><span style=\"display:inline\" ng-bind-html=\"renderContent(confirm.content)\"></span></p>\n" +
-    "                </div>\n" +
-    "                <div ng-if=\"confirm.model == 'TIME'\">\n" +
-    "                    <p>{{confirm.amount}}</p>\n" +
-    "                    <p>{{confirm.user}}</p>\n" +
-    "                    <p>{{confirm.type}}</p>\n" +
-    "                    <p>{{confirm.associatedModels}}</p>\n" +
-    "                    <p><span style=\"display:inline\" ng-bind-html=\"renderContent(confirm.content)\"></span></p>\n" +
-    "                </div>\n" +
-    "                <div ng-if=\"confirm.model == 'TRANSACTION'\">\n" +
-    "                    <p>{{confirm.user}}</p>\n" +
-    "                    <p>{{confirm.to}}</p>\n" +
-    "                    <p>{{confirm.from}}</p>\n" +
-    "                    <p>{{confirm.tags}}</p>\n" +
-    "                    <span ng-repeat=\"(key, value) in confirm.amountSet\"><p style=\"font-weight:800\">{{value}} <a href=\"market/{{key}}\" ui-sref=\"market({id:key})\">{{key}}</a></p></span>\n" +
-    "                    <p><span style=\"display:inline\" ng-bind-html=\"renderContent(confirm.content)\"></span></p>\n" +
-    "                </div>\n" +
-    "                <div ng-if=\"confirm.model == 'VALIDATION'\">\n" +
-    "                    {{confirm}}\n" +
-    "                    <p>{{confirm.user}}</p>\n" +
-    "                    <p><span style=\"display:inline\" ng-bind-html=\"renderContent(confirm.content)\"></span></p>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "    </md-sidenav>\n" +
+    "    <div ng-if=\"confirm\" ng-include=\"'nav/templates/confirm.tpl.html'\"></div>\n" +
     "\n" +
     "    <!--TODO: PROPER COLLAPSE ORDER-->\n" +
-    "    <md-sidenav class=\"md-sidenav-left md-whiteframe-z2\" md-component-id=\"information\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;max-width:100%;\">\n" +
-    "        <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
-    "            <div class=\"spacing-25\"></div>\n" +
-    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?code')\" class=\"imageContainerSmall\">\n" +
-    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                        <div style=\"padding:15px\">\n" +
-    "                            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Information</h1>\n" +
-    "                            <h5 style=\"color:white\">{{informationType}}</h5>\n" +
-    "                            <!--\n" +
-    "                            <h5 ng-if=\"informationType == 'CREATECONTENT'\" style=\"color:white\"></h5>\n" +
-    "                            <h5 ng-if=\"informationType == 'CREATECONTENT'\" style=\"color:white\"></h5>\n" +
-    "                            <h5 ng-if=\"informationType == 'CREATECONTENT'\" style=\"color:white\"></h5>\n" +
-    "                            <h5 ng-if=\"informationType == 'CREATECONTENT'\" style=\"color:white\"></h5>\n" +
-    "                            <h5 ng-if=\"informationType == 'CREATECONTENT'\" style=\"color:white\"></h5>\n" +
-    "                            <h5 ng-if=\"informationType == 'CREATECONTENT'\" style=\"color:white\"></h5>\n" +
-    "                            <h5 ng-if=\"informationType == 'CREATECONTENT'\" style=\"color:white\"></h5>\n" +
-    "                            -->\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "            <div style=\"padding:16px;\">\n" +
-    "                <div class=\"spacing-25\"></div>\n" +
-    "                <div ng-if=\"informationType == 'CREATEACTION'\">\n" +
-    "                    <p>Actions are a verb in the string Language. Actions extend items, and act as verbs upon items. 'USE+ITEM'</p>\n" +
-    "                </div>\n" +
-    "                <div ng-if=\"informationType == 'CREATECONTENT'\">\n" +
-    "                    <p>Content is art; content can funnel attention, energy, and value. You can CREATE content. Content can be associated recursivly. Triggering Motions to validate where appropiate.</p>\n" +
-    "                </div>\n" +
-    "                <div ng-if=\"informationType == 'CREATEITEM'\">\n" +
-    "                    <p>Items are moments of information. They convey complex information, transend the string domain, and carry within them the ability of application input. Providing more functionality and carrying with them additional ancillar protocol inputs. Creating rich ownership of (items as) assets and liabilities[defined by protocol]. The Marketplace is supported by Deventalized Physically Validated Delivery (PVD) Protocols.</p>\n" +
-    "                </div>\n" +
-    "                <div ng-if=\"informationType == 'CREATEORDER'\">\n" +
-    "                    <p>Orders create the core of realational value. The are the linkages between assets which are weighted by the OrderBook i.e. Prices at which people are willing to by and sell respectively.</p>\n" +
-    "                </div>\n" +
-    "                <div ng-if=\"informationType == 'CREATEPROJECT'\">\n" +
-    "                    <p>Projects are Organization. They are the mechanism by which we are able to coordinate as a group around shared goals. Projects can own assests and are consequently shared by their members. Decision making is disintermediated democratically though wieghted voting though motions. Projects connect to Tasks and to Time.</p>\n" +
-    "                </div>\n" +
-    "                <div ng-if=\"informationType == 'CREATETASK'\">\n" +
-    "                    <p>Tasks act as a 'Bridge,' provide context to time, and shape broader the objectives of projects through the clear statement of responsibility.</p>\n" +
-    "                </div>\n" +
-    "                <div ng-if=\"informationType == 'CREATETIME'\">\n" +
-    "                    <p>Time is a core unit of value. Within the template of scarcity, time as intention manifests as value. Albeit not necessarily finanite, linearly it's tells a compelling narrative. Information on how we spend our time intuitivly creates shared value. Information as income.</p>\n" +
-    "                </div>\n" +
-    "                <div ng-if=\"informationType == 'CREATETRANSACTION'\">\n" +
-    "                    <p>Transactions allow for the exchange and transfer of tokens. They contain tags, content, and and amountSet. Transaction logic is governed by the TRANSACTION protocol.</p>\n" +
-    "                </div>\n" +
-    "                <div ng-if=\"informationType == 'CREATEVALIDATION'\">\n" +
-    "                </div>\n" +
-    "                <div ng-if=\"informationType == 'TOKEN'\">\n" +
-    "                    <p>The UniversalToken onMint Market Postion Signifies that the creator of the instrument will transfer UniversalToken onMint of the specified asset.</p>\n" +
-    "                    <p>Each Memeber is given 1 Universal Token per second</p>\n" +
-    "                </div>  \n" +
-    "                <div ng-if=\"informationType == 'IDENTIFERSET'\">\n" +
-    "                </div>\n" +
-    "                <!--DEP-->\n" +
-    "                <div ng-if=\"informationType == 'IDENTIFERALPHA'\"></div>\n" +
-    "                <div ng-if=\"informationType == 'IDENTIFERSETBETA'\"></div>\n" +
-    "                <div ng-if=\"informationType == 'MARKETLIQUIDITY'\">\n" +
-    "                    <p style=\"color:gray;font-style:italic\">Enter your desired output for tokens based on liquidy in the MultiMarket. The CRE8 network will perform matching operations and create a series of orders which fulfill the token conversion. The perspective we look at the multimarket gives us traversing rules and computationally efficient conversion paths. Through the assistance of tensor-based neural networks we create a hyper-vector perspective formed though relations of the aggregate of our value maps.</p>\n" +
-    "                    `{({}_1, =, alpha_1A,+,beta_1B,=,gamma_1C),({}_2, =, alpha_2A,+,beta_2B,=,gamma_2C),(vdots,,,,,,),({}_n, =, delta_nA,+,epsilon_nB,=,zeta_nC):}`\n" +
-    "                </div>\n" +
-    "                <div ng-if=\"informationType == 'ASSOCIATIONS'\">\n" +
-    "                    <p>Associations are computed though validation traversal.</p>\n" +
-    "                </div>\n" +
-    "                <div ng-if=\"informationType == 'PROTOCOLS'\">\n" +
-    "                    <p>Protocols create plugins to the string space; they create token action potientals though the interplay and interaction of data.</p>\n" +
-    "                    <p>A bundle of protocols create an Application.</p>\n" +
-    "                </div>\n" +
-    "                <div ng-if=\"informationType == 'VALUEMAP'\">\n" +
-    "                    <p>Value Map Controls</p>\n" +
-    "                </div>\n" +
-    "                <div ng-if=\"informationType == 'VALIDATION'\">\n" +
-    "                    <p>Validations create linkages within the CRE8 ecosystem. Validations allow for context-specific consensus. CRE8 supports multiple validation types including human validated proof of work (HVpoW), probabilistic trained validation (PtV), and modular app-specific validation. The connections and validation intention within CRE8 is rich. Validations allow for recursive layering.</p>\n" +
-    "                    <!--VALIDATION IMAGE-->\n" +
-    "                    <p>Associations are computed though validation traversal.</p>\n" +
-    "                    <p>`A = sum_(i=0)^n sum_(i=0)^n V_{i_{a-z}`</p>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "    </md-sidenav>\n" +
+    "    <div ng-include=\"'nav/templates/information.tpl.html'\"></div>\n" +
     "\n" +
     "    <div class=\"navbar navbar-inverse navbar-fixed-top header\" role=\"navigation\">\n" +
     "        <div class=\"container\">\n" +
@@ -11876,25 +8891,22 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "                <span class=\"icon-bar\"></span>\n" +
     "            </button>\n" +
     "\n" +
-    "            <!--TODO: CREATE TIME TO ENGINEER; CONTEXT; TASK; PAUSE; MULTID; CONTROLLER..-->\n" +
     "            <div ng-click=\"timerToggle()\" ng-if=\"taskTime\" class=\"nav-links\" style=\"float:left;margin-top:13px;margin-right:15px;font-size:18px\">\n" +
     "                <a ng-if=\"taskTime == 0\"><i style=\"color:red\" class=\"fa fa-circle\"></i></a>\n" +
     "                <a ng-if=\"taskTime > 0\"><i style=\"color:red\" class=\"fa fa-pause\"></i></a>\n" +
     "                <a ng-if=\"taskTime > 0\">{{taskTime}}</a>\n" +
     "            </div>\n" +
     "\n" +
-    "            <!--TODO: MULTI DIMENSIONAL TIMER-->\n" +
-    "            <!--TODO: LOCATION DIM TIMER RECORD-->\n" +
     "            <div ng-click=\"timerToggle()\" ng-if=\"currentUser && currentUser.apps.cre8.recordAttention\" class=\"nav-links\" style=\"float:left;margin-top:13px;margin-right:15px;font-size:18px\">\n" +
     "                <a><i style=\"color:#2ab995\" class=\"fa fa-eye\"></i></a>\n" +
     "            </div>\n" +
     "\n" +
     "            <!--TODO: LOCATION DIM TIMER RECORD-->\n" +
-    "            <!--<div ng-click=\"timerToggle()\" ng-if=\"currentUser && currentUser.apps.cre8.recordLocation\" class=\"nav-links\" style=\"float:left;margin-top:13px;margin-right:15px;font-size:18px\">\n" +
+    "            <!--\n" +
+    "            <div ng-click=\"timerToggle()\" ng-if=\"currentUser && currentUser.apps.cre8.recordLocation\" class=\"nav-links\" style=\"float:left;margin-top:13px;margin-right:15px;font-size:18px\">\n" +
     "                <a><i style=\"color:#2ab995\" class=\"fa fa-map-marker\"></i></a>\n" +
-    "            </div>-->\n" +
-    "\n" +
-    "            <!--TODO: EYE.. ATTENTION.. VIEW ETC-->\n" +
+    "            </div>\n" +
+    "            -->\n" +
     "\n" +
     "            <a style=\"padding-left:10px\" class=\"navbar-brand\" href=\"/\" ui-sref=\"home\"><span style=\"font-weight:bold;color:white\">CRE8.XYZ</span></a>\n" +
     "        </div>\n" +
@@ -11902,6 +8914,2309 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "    </div>\n" +
     "\n" +
     "</div>");
+}]);
+
+angular.module("nav/templates/cardDetail.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("nav/templates/cardDetail.tpl.html",
+    "<md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"cardDetail\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:black;max-width:100%\">\n" +
+    "    <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
+    "        <div class=\"spacing-25\"></div>\n" +
+    "        <div style=\"background:url('https://source.unsplash.com/1600x900/?explode,erupt,action,create')\" class=\"imageContainerSmall\">\n" +
+    "            <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                    <div style=\"padding:15px\" style=\"width:100%\">\n" +
+    "\n" +
+    "                        <!--TODO.. SPECIFIC DETAILS-->\n" +
+    "                        <h1 style=\"text-align:left;font-size:14px;color:rgba(255,255,255,0.9);font-weight:400;\">\n" +
+    "\n" +
+    "                            <!--TODO..LINK-->\n" +
+    "                            <span ng-if=\"item.model != 'TIME'\">\n" +
+    "                                <span style=\"font-size:24px;color:white\" ng-if=\"item.title\">{{item.title}}</span>\n" +
+    "                                <span style=\"font-size:24px;color:white\" ng-if=\"!item.title\">{{item.model}}</span>\n" +
+    "                            </span>\n" +
+    "                            <span ng-if=\"item.model == 'TIME'\">\n" +
+    "                                <span style=\"font-size:24px;color:white\">{{item.amount}} seconds</span>\n" +
+    "                            </span>\n" +
+    "                            <br>\n" +
+    "\n" +
+    "                            <!--ui-sref-->\n" +
+    "                            <span style=\"font-size:10px;color:white\"><a style=\"color:white\">{{item.model}}</a></span>\n" +
+    "                            <span style=\"font-size:10px;color:white\"><a style=\"color:white\" href=\"{{item.model.toLowerCase()}}/{{item.id}}\">{{item.id}}</a></span>\n" +
+    "\n" +
+    "                            <!--\n" +
+    "                            <a ng-if=\"item.model == 'CONTENT'\" href=\"content/{{item.id}}\" style=\"color:white\">{{item.title}}</a>\n" +
+    "                            <a ng-if=\"item.model == 'ITEM'\" href=\"item/{{item.id}}\" style=\"color:white\">{{item.title}}</a>\n" +
+    "                            <a ng-if=\"item.model == 'MARKET'\" href=\"market/{{item.string}}\" style=\"color:white\">{{item.string}}</a>\n" +
+    "                            <a ng-if=\"item.model == 'ORDER'\" href=\"order/{{item.id}} style=\"color:white\"\">{{item.title}}</a>\n" +
+    "                            <a ng-if=\"item.model == 'PROJECT'\" href=\"project/{{item.urlTitle}}\" style=\"color:white\">{{item.title}}</a>\n" +
+    "                            <a ng-if=\"item.model == 'TASK'\" href=\"task/{{item.id}}\" style=\"color:white\">{{item.title}}</a>\n" +
+    "                            <a ng-if=\"item.model == 'TIME'\" href=\"time/{{item.id}}\" style=\"color:white\">{{item.amount}} Seconds</a>\n" +
+    "                            <a ng-if=\"item.model == 'TRANSACTION'\" href=\"transaction/{{item.id}}\" style=\"color:white\">Transaction</a>\n" +
+    "                            -->\n" +
+    "\n" +
+    "                        </h1>\n" +
+    "\n" +
+    "                    \n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "        <div style=\"padding:16px\">\n" +
+    "            <div class=\"spacing-15\"></div>\n" +
+    "            <h4 ng-click=\"renderToggle(item)\" class=\"nav-links\"><a>Information <i style=\"float:right\" class=\"fas fa-info\"></i></a></h4>\n" +
+    "            <h4 ng-if=\"item.model=='ITEM'\" ng-click=\"actionToggle(item)\" class=\"nav-links\">\n" +
+    "                <!--LOOK AT ITEM ACTION POTIENTAL..-->\n" +
+    "                <a>Create Action <i style=\"float:right\" class=\"fas fa-atom\"></i></a>\n" +
+    "            </h4>\n" +
+    "\n" +
+    "            <!--COMPONENTS.. HISTORY-->\n" +
+    "\n" +
+    "            <h4 ng-if=\"item.model=='ITEM'\" ng-click=\"\" class=\"nav-links\">\n" +
+    "                <!--TODO: OWNER-->\n" +
+    "                <a ng-if=\"currentUser.id == item.user.id\" ng-click=\"transactionToggle(null, item.id)\">Send Item <i style=\"float:right\" class=\"fas fa-paper-plane\"></i></a>\n" +
+    "                <a ng-if=\"currentUser.id != item.user.id\" ng-click=\"orderToggle(item)\">Purchase Item <i style=\"float:right\" class=\"fas fa-shopping-cart\"></i></a>\n" +
+    "            </h4>\n" +
+    "            <h4 ng-if=\"item.model=='ITEM'\" ng-click=\"renderMarketToggle(item)\" class=\"nav-links\">\n" +
+    "                <a ng-if=\"currentUser.id == item.user.id\">Liquidity <i style=\"float:right\" class=\"fas fa-exchange-alt\"></i></a>\n" +
+    "            </h4>\n" +
+    "            <h4 ng-if=\"item.model=='PROJECT'\" ng-click=\"\" class=\"nav-links\"><a>Request To Join <i style=\"float:right\" class=\"fas fa-users\"></i></a></h4>\n" +
+    "            <h4 ng-click=\"renderValidationToggle(item)\" class=\"nav-links\"><a>Associations <i style=\"float:right\" class=\"fas fa-bezier-curve\"></i></a></h4>\n" +
+    "            <h4 ng-click=\"statsToggle(item)\" class=\"nav-links\"><a>Stats <i style=\"float:right\" class=\"fa fa-eye\"></i></a></h4>\n" +
+    "            <!--token action potiental-->\n" +
+    "            <h4 ng-click=\"tokensToggle(item)\" class=\"nav-links\"><a>Tokens <i style=\"float:right\" class=\"fas fa-coins\"></i></a></h4>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</md-sidenav>");
+}]);
+
+angular.module("nav/templates/confirm.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("nav/templates/confirm.tpl.html",
+    "<md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"confirm\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
+    "    <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
+    "        <div class=\"spacing-25\"></div>\n" +
+    "        <div style=\"background:url('https://source.unsplash.com/1600x900/?{{confirm.tags}}')\" class=\"imageContainerSmall\">\n" +
+    "            <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                    <div style=\"padding:15px\">\n" +
+    "                        <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Success!</h1>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "        <div style=\"padding:16px;\">\n" +
+    "            <div class=\"spacing-25\"></div>\n" +
+    "            <div ng-if=\"confirm.model == 'ACTION'\">\n" +
+    "                <h3>{{confirm.type}}</h3>\n" +
+    "                <h5>{{confirm.amount}} - {{confirm.associatedModels}}</h5>\n" +
+    "                <p>{{confirm.user}}</p>\n" +
+    "            </div>\n" +
+    "            <div ng-if=\"confirm.model == 'CONTENT'\">\n" +
+    "                <h3>{{confirm.title}}</h3>\n" +
+    "                <p>{{confirm.user}}</p>\n" +
+    "                <p>{{confirm.tags}}</p>\n" +
+    "                <!--RENDER ASSOCIATIONS-->\n" +
+    "                <!--GRAPH..? ETC-->\n" +
+    "                <p>{{confirm.associatedModels}}</p>\n" +
+    "                <p>{{confirm.type}}</p>\n" +
+    "                <p><span style=\"display:inline\" ng-bind-html=\"renderContent(confirm.content)\"></span></p>\n" +
+    "            </div>\n" +
+    "            <!--\n" +
+    "            <div ng-if=\"confirm.model == 'FOLLOW'\">\n" +
+    "                <p>{{confirm.follower}}</p>\n" +
+    "                <p>{{confirm.following}}</p>\n" +
+    "            </div>\n" +
+    "            -->\n" +
+    "            <div ng-if=\"confirm.model == 'ITEM'\">\n" +
+    "                <h3>{{confirm.title}}</h3>\n" +
+    "                <p>{{confirm.user}}</p>\n" +
+    "                <p>{{confirm.tags}}</p>\n" +
+    "                <p>{{confirm.associatedModels}}</p>\n" +
+    "                <p>{{confirm.location}}</p>\n" +
+    "                <p>{{confirm.amountSet}}</p>\n" +
+    "                <p>{{confirm.identifierSet}}</p>\n" +
+    "                <p><span style=\"display:inline\" ng-bind-html=\"renderContent(confirm.content)\"></span></p>\n" +
+    "            </div>\n" +
+    "            <div ng-if=\"confirm.model == 'ORDER'\">\n" +
+    "                <p>{{confirm.user}}</p>\n" +
+    "                <p>{{confirm.amountSetAlpha}}</p>\n" +
+    "                <p>{{confirm.identifierSetAlpha}}</p>\n" +
+    "                <p>{{confirm.amountSetBeta}}</p>\n" +
+    "                <p>{{confirm.identifierSetBeta}}</p>\n" +
+    "                <p>{{confirm.status}}</p>\n" +
+    "            </div>\n" +
+    "            <div ng-if=\"confirm.model == 'PROJECT'\">\n" +
+    "                <h3>{{confirm.title}}</h3>\n" +
+    "                <p>{{confirm.user}}</p>\n" +
+    "                <p>{{confirm.associatedModels}}</p>\n" +
+    "                <p>{{confirm.location}}</p>\n" +
+    "                <p><span style=\"display:inline\" ng-bind-html=\"renderContent(confirm.description)\"></span></p>\n" +
+    "            </div>\n" +
+    "            <div ng-if=\"confirm.model == 'PROJECTMEMBER'\">\n" +
+    "                <p>{{confirm.user}}</p>\n" +
+    "                <p>{{confirm.project}}</p>\n" +
+    "            </div>\n" +
+    "            <div ng-if=\"confirm.model == 'TASK'\">\n" +
+    "                <h3>{{confirm.title}}</h3>\n" +
+    "                <p>{{confirm.user}}</p>\n" +
+    "                <p>{{confirm.associatedModels}}</p>\n" +
+    "                <p>{{confirm.location}}</p>\n" +
+    "                <p><span style=\"display:inline\" ng-bind-html=\"renderContent(confirm.content)\"></span></p>\n" +
+    "            </div>\n" +
+    "            <div ng-if=\"confirm.model == 'TIME'\">\n" +
+    "                <p>{{confirm.amount}}</p>\n" +
+    "                <p>{{confirm.user}}</p>\n" +
+    "                <p>{{confirm.type}}</p>\n" +
+    "                <p>{{confirm.associatedModels}}</p>\n" +
+    "                <p><span style=\"display:inline\" ng-bind-html=\"renderContent(confirm.content)\"></span></p>\n" +
+    "            </div>\n" +
+    "            <div ng-if=\"confirm.model == 'TRANSACTION'\">\n" +
+    "                <p>{{confirm.user}}</p>\n" +
+    "                <p>{{confirm.to}}</p>\n" +
+    "                <p>{{confirm.from}}</p>\n" +
+    "                <p>{{confirm.tags}}</p>\n" +
+    "                <span ng-repeat=\"(key, value) in confirm.amountSet\"><p style=\"font-weight:800\">{{value}} <a href=\"market/{{key}}\" ui-sref=\"market({id:key})\">{{key}}</a></p></span>\n" +
+    "                <p><span style=\"display:inline\" ng-bind-html=\"renderContent(confirm.content)\"></span></p>\n" +
+    "            </div>\n" +
+    "            <div ng-if=\"confirm.model == 'VALIDATION'\">\n" +
+    "                {{confirm}}\n" +
+    "                <p>{{confirm.user}}</p>\n" +
+    "                <p><span style=\"display:inline\" ng-bind-html=\"renderContent(confirm.content)\"></span></p>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</md-sidenav>");
+}]);
+
+angular.module("nav/templates/create.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("nav/templates/create.tpl.html",
+    "<md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"cre8\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:black;max-width:100%\">\n" +
+    "    <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;text-align:center;\">\n" +
+    "        <div class=\"spacing-25\"></div>\n" +
+    "        <div style=\"background:url('https://source.unsplash.com/1600x900/?explode,erupt,action,create')\" class=\"imageContainerSmall\">\n" +
+    "            <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                    <div style=\"padding:15px\">\n" +
+    "                        <h1 style=\"font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">CRE8</h1>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "        <div style=\"min-height:500px;max-height:100vh;overflow:hidden;\">\n" +
+    "            <div style=\"padding:16px;\">\n" +
+    "                <h2 ng-click=\"actionToggle()\" class=\"nav-links\" style=\"padding:4px;\"><a>Action</a></h2>\n" +
+    "                <h2 ng-click=\"contentToggle()\" class=\"nav-links\" style=\"padding:4px;\"><a>Content</a></h2>\n" +
+    "                <h2 ng-click=\"itemToggle()\" class=\"nav-links\" style=\"padding:4px;\"><a>Item</a></h2>\n" +
+    "                <h2 ng-click=\"orderToggle()\" class=\"nav-links\" style=\"padding:4px;\"><a>Order</a></h2>\n" +
+    "                <h2 ng-click=\"projectToggle()\" class=\"nav-links\" style=\"padding:4px;\"><a>Project</a></h2>\n" +
+    "                <h2 ng-click=\"taskToggle()\" class=\"nav-links\" style=\"padding:4px;\"><a>Task</a></h2>\n" +
+    "                <h2 ng-click=\"timeToggle()\" class=\"nav-links\" style=\"padding:4px;\"><a>Time</a></h2>\n" +
+    "                <h2 ng-click=\"transactionToggle()\" class=\"nav-links\" style=\"padding:4px;\"><a>Transaction</a></h2>\n" +
+    "                <h2 ng-click=\"validationToggle()\" class=\"nav-links\" style=\"padding:4px;\"><a>Validation</a></h2>\n" +
+    "                <!--\n" +
+    "                <h4 ng-click=\"actionToggle()\" class=\"nav-links\" style=\"padding:0px;\"><a>+ Action</a></h2>\n" +
+    "                <h4 ng-click=\"contentToggle()\" class=\"nav-links\" style=\"padding:0px;\"><a>+ Content</a></h2>\n" +
+    "                <h4 ng-click=\"itemToggle()\" class=\"nav-links\" style=\"padding:0px;\"><a>+ Item</a></h2>\n" +
+    "                <h4 ng-click=\"orderToggle()\" class=\"nav-links\" style=\"padding:0px;\"><a>+ Order</a></h2>\n" +
+    "                <h4 ng-click=\"projectToggle()\" class=\"nav-links\" style=\"padding:0px;\"><a>+ Project</a></h2>\n" +
+    "                <h4 ng-click=\"taskToggle()\" class=\"nav-links\" style=\"padding:0px;\"><a>+ Task</a></h2>\n" +
+    "                <h4 ng-click=\"timeToggle()\" class=\"nav-links\" style=\"padding:0px;\"><a>+ Time</a></h2>\n" +
+    "                <h4 ng-click=\"transactionToggle()\" class=\"nav-links\" style=\"padding:0px;\"><a>+ Transaction</a></h2>\n" +
+    "                <h4 ng-click=\"validationToggle()\" class=\"nav-links\" style=\"padding:0px;\"><a>+ Validation</a></h2>\n" +
+    "                -->\n" +
+    "            </div>\n" +
+    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?code,pattern,art,forest');height:100vh\" class=\"imageContainerSmall\"><div style=\"background:rgba(0,0,0,0.75);height:100vh\" class=\"imageContainerSmallDiv\"></div></div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</md-sidenav>\n" +
+    "");
+}]);
+
+angular.module("nav/templates/createAction.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("nav/templates/createAction.tpl.html",
+    "<md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"action\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
+    "    <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
+    "        <div class=\"spacing-25\"></div>\n" +
+    "        <div style=\"background:url('https://source.unsplash.com/1600x900/?explode,erupt,action,create')\" class=\"imageContainerSmall\">\n" +
+    "            <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                    <div style=\"padding:15px\">\n" +
+    "                        <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Create Action</h1>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <div style=\"padding:16px\">\n" +
+    "            <div class=\"spacing-15\"></div>\n" +
+    "            <p style=\"color:gray;font-style:italic\">Create action.. Verbs in our Value Language <a ng-click=\"informationToggle('CREATEACTION')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></p>\n" +
+    "            <div class=\"spacing-10\"></div>\n" +
+    "            <form role=\"form\" ng-submit=\"createAction()\">\n" +
+    "                <div class=\"row\">\n" +
+    "                    <div class=\"col-md-6\">\n" +
+    "                        <h5>Action</h5>\n" +
+    "                        <input type=\"text\" placeholder=\"Action\" ng-model=\"newAction.type\" class=\"form-control\">\n" +
+    "                    </div>\n" +
+    "                    <div class=\"col-md-6\">\n" +
+    "                        <h5>Amount</h5>\n" +
+    "                        <input type=\"text\" placeholder=\"Amount\" ng-model=\"newAction.amount\" class=\"form-control\">\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <h5>Associated Models</h5>\n" +
+    "                <tags-input min-length=\"1\" placeholder=\"Item\" ng-model=\"newAction.associatedModels\">\n" +
+    "                    <auto-complete source=\"loadItems($query)\"></auto-complete>\n" +
+    "                </tags-input>\n" +
+    "                <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newAction.type\">create</button>\n" +
+    "            </form>\n" +
+    "        </div>\n" +
+    "\n" +
+    "    </div>\n" +
+    "</md-sidenav>\n" +
+    "");
+}]);
+
+angular.module("nav/templates/createApp.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("nav/templates/createApp.tpl.html",
+    "<md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"app\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
+    "    <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
+    "        <div class=\"spacing-25\"></div>\n" +
+    "        <div style=\"background:url('https://source.unsplash.com/1600x900/?explode,erupt,action,create')\" class=\"imageContainerSmall\">\n" +
+    "            <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                    <div style=\"padding:15px\">\n" +
+    "                        <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Create App</h1>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "        <div style=\"padding:16px\">\n" +
+    "            <div class=\"spacing-15\"></div>\n" +
+    "            <p style=\"color:gray;font-style:italic\">Create App.. <a ng-click=\"informationToggle('CREATEAPP')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></p>\n" +
+    "\n" +
+    "            <div class=\"spacing-10\"></div>\n" +
+    "            <form role=\"form\" ng-submit=\"createApp()\">\n" +
+    "\n" +
+    "                <h5>App Title</h5>\n" +
+    "                <input type=\"text\" placeholder=\"App Title\" ng-model=\"newApp.title\" class=\"form-control\">\n" +
+    "\n" +
+    "                <h5>App Associated Models</h5>\n" +
+    "                <tags-input min-length=\"1\" placeholder=\"Associated Models\" ng-model=\"newApp.associatedModels\">\n" +
+    "                    <auto-complete source=\"loadItems($query)\"></auto-complete>\n" +
+    "                </tags-input>\n" +
+    "\n" +
+    "                <h5>App Context</h5>\n" +
+    "                <tags-input min-length=\"1\" placeholder=\"Context\" ng-model=\"newApp.context\">\n" +
+    "                    <auto-complete source=\"loadItems($query)\"></auto-complete>\n" +
+    "                </tags-input>\n" +
+    "\n" +
+    "                <h5>App Description</h5>\n" +
+    "                <text-angular ng-model=\"newApp.description\" ta-toolbar=\"[['p','h1','bold','italics','quote','ol','ul','insertLink','insertImage','html']]\"></text-angular>\n" +
+    "\n" +
+    "                <hr>\n" +
+    "\n" +
+    "                <!--ngRepeat-->\n" +
+    "                <p style=\"color:gray;font-style:italic\">Create a set of Protocols.. <a ng-click=\"informationToggle('CREATEPROTOCOL')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></p>\n" +
+    "\n" +
+    "                <h5>Accociated Protocols</h5>\n" +
+    "                <tags-input min-length=\"1\" placeholder=\"Accociated Protocols\" ng-model=\"newApp.protocol.associatedProtocols\">\n" +
+    "                    <auto-complete source=\"loadItems($query)\"></auto-complete>\n" +
+    "                </tags-input>\n" +
+    "                <h5>Protocol Title</h5>\n" +
+    "                <input type=\"text\" placeholder=\"Protocol Title\" ng-model=\"newApp.protocol.title\" class=\"form-control\">\n" +
+    "                <h5>Protocol Code</h5>\n" +
+    "                <text-angular ng-model=\"newApp.protocol.code\" ta-toolbar=\"[['p','h1','bold','italics','quote','ol','ul','insertLink','insertImage','html']]\"></text-angular>\n" +
+    "                <!--ngRepeat-->\n" +
+    "\n" +
+    "                <div class=\"spacing-5\"></div>\n" +
+    "\n" +
+    "                <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newApp.title\">create</button\n" +
+    "                    >\n" +
+    "            </form>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</md-sidenav>");
+}]);
+
+angular.module("nav/templates/createConnection.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("nav/templates/createConnection.tpl.html",
+    "");
+}]);
+
+angular.module("nav/templates/createContent.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("nav/templates/createContent.tpl.html",
+    "<md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"content\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
+    "    <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
+    "\n" +
+    "        <div class=\"spacing-25\"></div>\n" +
+    "\n" +
+    "        <div style=\"background:url('https://source.unsplash.com/1600x900/?create,code,paint')\" class=\"imageContainerSmall\">\n" +
+    "            <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                    <div style=\"padding:15px\">\n" +
+    "                        <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Create Content</h1>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <div style=\"padding:16px\">\n" +
+    "\n" +
+    "            <div class=\"spacing-15\"></div>\n" +
+    "\n" +
+    "            <p style=\"color:gray;font-style:italic\">Create content. Well developed content earns more tokens. <a ng-click=\"informationToggle('CREATECONTENT')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></p>\n" +
+    "\n" +
+    "            <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "            <form role=\"form\" ng-submit=\"createContent()\">\n" +
+    "                <h5>Title</h5>\n" +
+    "                <input type=\"text\" placeholder=\"Title\" ng-model=\"newContent.title\" class=\"form-control\">\n" +
+    "                \n" +
+    "\n" +
+    "                <h5>Associations <a ng-click=\"informationToggle('ASSOCIATIONS')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a><a href=\"#\" ng-click=\"expandAssociations()\" style=\"float:right\"><i class=\"fas fa-bezier-curve\"></i> Expand</a></h5>\n" +
+    "                <tags-input min-length=\"1\" placeholder=\"Associations\" ng-model=\"newContent.associatedModels\">\n" +
+    "                    <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
+    "                </tags-input>\n" +
+    "\n" +
+    "                <div class=\"row\">\n" +
+    "                    <div class=\"col-md-12 col-sm-12\" ng-repeat=\"association in newContent.associatedModels\">\n" +
+    "                        <h5>{{association.text}} Association Context</h5>\n" +
+    "                        <tags-input min-length=\"1\" placeholder=\"Context\" ng-model=\"association.context\">\n" +
+    "                            <auto-complete source=\"loadTags($query)\"></auto-complete>\n" +
+    "                        </tags-input>                               \n" +
+    "                        <div ng-repeat=\"context in association.context\">\n" +
+    "                            <div layout=\"\">\n" +
+    "                                <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{context.text}}</span></div>\n" +
+    "                                <md-slider \n" +
+    "                                    ng-model=\"context.score\"  \n" +
+    "                                    step=\"0.1\" \n" +
+    "                                    flex=\"\" \n" +
+    "                                    md-discrete=\"\" \n" +
+    "                                    min=\"-100\" \n" +
+    "                                    max=\"100\">\n" +
+    "                                </md-slider>\n" +
+    "                                <div flex=\"10\" layout=\"\" layout-align=\"center center\">\n" +
+    "                                    <p class=\"md-body-1\">{{context.score}}</p>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                            <div style=\"text-align:center\"><p style=\"font-size:9px\">{{context.score}} | {{currentUser.reputation[context.text]*context.score}} | Multiplicative Charter</p></div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <!--HMM-->\n" +
+    "                <ul class=\"nav nav-pills nav-justified contentTyle\">\n" +
+    "                    <li ng-class=\"{active: selectedType=='AUDIO'}\" ng-click=\"selectType('AUDIO')\"><a href=\"#\">Audio</a></li>\n" +
+    "                    <li ng-class=\"{active: selectedType=='IMAGE'}\" ng-click=\"selectType('IMAGE')\"><a href=\"#\">Image</a></li>\n" +
+    "                    <li ng-class=\"{active: selectedType=='LINK'}\" ng-click=\"selectType('LINK')\"><a href=\"#\">Link</a></li>\n" +
+    "                    <li ng-class=\"{active: selectedType=='POST'}\" ng-click=\"selectType('POST')\"><a href=\"#\">Post</a></li>\n" +
+    "                    <li ng-class=\"{active: selectedType=='VIDEO'}\" ng-click=\"selectType('VIDEO')\"><a href=\"#\">Video</a></li>\n" +
+    "                </ul>\n" +
+    "    \n" +
+    "                <text-angular ng-model=\"newContent.content\" ta-toolbar=\"[['p','h1','bold','italics','quote','ol','ul','insertLink','insertImage','html']]\"></text-angular>\n" +
+    "\n" +
+    "                <div ng-if=\"selectedType!='POST'\">\n" +
+    "                    <input type=\"text\" placeholder=\"Link\" ng-model=\"newContent.link\" class=\"form-control\">\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newContent.content\">create</button>\n" +
+    "\n" +
+    "            </form>\n" +
+    "        </div>\n" +
+    "\n" +
+    "    </div>\n" +
+    "</md-sidenav>");
+}]);
+
+angular.module("nav/templates/createItem.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("nav/templates/createItem.tpl.html",
+    "<style type=\"text/css\">.angular-google-map-container{height: 200px;}</style>\n" +
+    "\n" +
+    "<md-sidenav \n" +
+    "    class=\"md-sidenav-right md-whiteframe-z2\" \n" +
+    "    md-component-id=\"item\" \n" +
+    "    md-is-locked-open=\"false\" \n" +
+    "    style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
+    "\n" +
+    "    <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
+    "\n" +
+    "        <div class=\"spacing-25\"></div>\n" +
+    "        \n" +
+    "        <div style=\"background:url('https://source.unsplash.com/1600x900/?connect,pattern,scrap,assortment,clothes')\" class=\"imageContainerSmall\">\n" +
+    "            <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                    <div style=\"padding:15px\">\n" +
+    "                        <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Create Item</h1>\n" +
+    "                        <h5 style=\"color:white\">Sharing Creates Abundance</h5>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <div class=\"spacing-15\"></div>\n" +
+    "\n" +
+    "        <div style=\"padding:16px\">\n" +
+    "\n" +
+    "            <p style=\"color:gray;font-style:italic\">Items connect Token Protocols with information and applications logic such as 2nd Stage delivery consumption. Items can be acted upon. <a ng-click=\"informationToggle('CREATEITEM')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></p>\n" +
+    "\n" +
+    "            <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "            <form role=\"form\" ng-submit=\"createItem()\">\n" +
+    "\n" +
+    "                <h5>Title</h5>\n" +
+    "                <input type=\"text\" placeholder=\"Title\" ng-model=\"newItem.title\" class=\"form-control\">\n" +
+    "                <div class=\"spacing-5\"></div>\n" +
+    "\n" +
+    "\n" +
+    "                <!--CREATE (MULTI)-VALIDATION FORM-->\n" +
+    "\n" +
+    "                <!--template-->\n" +
+    "                <div>\n" +
+    "\n" +
+    "                    <!--TODO: SELF VALIDATION-->\n" +
+    "                    <h5>Associations <a ng-click=\"informationToggle('ASSOCIATION')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a><i style=\"float:right\" class=\"fas fa-bezier-curve\"></i></h5>\n" +
+    "                    <tags-input min-length=\"1\" placeholder=\"Associations\" ng-model=\"newItem.associatedModels\">\n" +
+    "                        <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
+    "                    </tags-input>\n" +
+    "\n" +
+    "                    <div class=\"row\">\n" +
+    "                        <div class=\"col-md-12 col-sm-12\" ng-repeat=\"association in newItem.associatedModels\">\n" +
+    "                            <h5>\n" +
+    "                                {{association.text}} Association Context \n" +
+    "                                <a ng-click=\"informationToggle('TAGS')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a>\n" +
+    "                                <a href=\"#\" ng-click=\"expandAssociations(association)\" style=\"float:right\">\n" +
+    "                                    <i class=\"fas fa-bezier-curve\"></i> Expand\n" +
+    "                                </a>\n" +
+    "                            </h5>\n" +
+    "\n" +
+    "                            <!--CONNECTION TYPE-->\n" +
+    "\n" +
+    "                            <tags-input min-length=\"1\" placeholder=\"Context\" ng-model=\"association.context\">\n" +
+    "                                <auto-complete source=\"loadTags($query)\"></auto-complete>\n" +
+    "                            </tags-input>\n" +
+    "                            <div ng-repeat=\"context in association.context\">\n" +
+    "                                <div layout=\"\">\n" +
+    "                                    <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{context.text}}</span></div>\n" +
+    "                                    <md-slider \n" +
+    "                                        ng-model=\"context.score\"  \n" +
+    "                                        step=\"0.1\" \n" +
+    "                                        flex=\"\" \n" +
+    "                                        md-discrete=\"\" \n" +
+    "                                        min=\"-100\" \n" +
+    "                                        max=\"100\">\n" +
+    "                                    </md-slider>\n" +
+    "                                    <div flex=\"10\" layout=\"\" layout-align=\"center center\">\n" +
+    "                                        <p class=\"md-body-1\">{{context.score}}</p>\n" +
+    "                                    </div>\n" +
+    "                                </div>\n" +
+    "\n" +
+    "                                <div style=\"text-align:center\"><p style=\"font-size:9px\">{{context.score}} | {{currentUser.reputation[context.text]*context.score}} | Multiplicative Charter</p></div>\n" +
+    "\n" +
+    "                            </div>\n" +
+    "\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <div class=\"\">\n" +
+    "\n" +
+    "                    <h5>Location <a ng-click=\"informationToggle('LOCATION')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a><i style=\"float:right\" class=\"fas fa-map-marker-alt\"></i></h5>\n" +
+    "                    <input placeholder=\"Location\" type=\"text\" ng-model=\"newItem.location\" class=\"form-control\">\n" +
+    "\n" +
+    "                    <div class=\"card\">\n" +
+    "                        <ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\">\n" +
+    "                            <ui-gmap-marker ng-repeat=\"marker in markers\" coords=\"marker.coords\" options=\"marker.options\" idkey=\"marker.id\">\n" +
+    "                                <ui-gmap-window options=\"windowOptions\" closeClick=\"closeClick()\">\n" +
+    "                                    <div style=\"font-size: 15px;\"><a href=\"project/{{marker.url}}\" ui-sref=\"project.activity({path:marker.url})\">{{marker.content}}</a></div>\n" +
+    "                                </ui-gmap-window>\n" +
+    "                            </ui-gmap-marker>\n" +
+    "                        </ui-gmap-google-map>\n" +
+    "                    </div>\n" +
+    "\n" +
+    "                </div>\n" +
+    "                \n" +
+    "                <h5>More Information</h5>\n" +
+    "                <md-switch ng-model=\"expand\" aria-label=\"tradable\"></md-switch>\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <div ng-if=\"expand\">\n" +
+    "\n" +
+    "                    <h4>Apps</h4>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Actions, Componets, Data, Delivery, Generator, Status</p>\n" +
+    "                    <!--VS ASSOCIATED MODELS..-->\n" +
+    "                    <!--TYPE OF ASSOCIATION. 'TYPE' (SHOULD BE OF MODEL TYPE ITEM) (&OR DEPRECIATE CONTENT)--> \n" +
+    "                    <h5>Components <a ng-click=\"informationToggle('ASSOCIATION')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a><i style=\"float:right\" class=\"fas fa-bezier-curve\"></i></h5>\n" +
+    "                    <tags-input min-length=\"1\" placeholder=\"Item Components\" ng-model=\"newItem.associatedComponentModels\">\n" +
+    "                        <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
+    "                    </tags-input>\n" +
+    "\n" +
+    "                    <h5>Generator: <b>{{newItem.isGenerator}}</b><a ng-click=\"informationToggle('ITEM GENERATOR')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                    <md-switch ng-model=\"newItem.isGenerator\" aria-label=\"newItem.isGenerator\"></md-switch>\n" +
+    "\n" +
+    "                    <h5>Item Status <a ng-click=\"informationToggle('ITEM STATUS')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                    <input placeholder=\"Status\" type=\"text\" ng-model=\"newItem.status\" class=\"form-control\">\n" +
+    "\n" +
+    "                    <h5>Associated Actions <a ng-click=\"informationToggle('ITEM ACTIONS')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                    <tags-input min-length=\"1\" placeholder=\"Associated Actions\" ng-model=\"newItem.deliveryProtocol\">\n" +
+    "                        <auto-complete></auto-complete>\n" +
+    "                    </tags-input>\n" +
+    "\n" +
+    "\n" +
+    "                    <h5>Associated Orders <a ng-click=\"informationToggle('ITEM IDENTIFER SET')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                    <tags-input min-length=\"1\" placeholder=\"Associated Orders\" ng-model=\"newItem.deliveryProtocol\">\n" +
+    "                        <auto-complete></auto-complete>\n" +
+    "                    </tags-input>\n" +
+    "\n" +
+    "\n" +
+    "                    <!--POTIENTALL PART OF ORDER PROCESS AND ORDER ''FUILFUILMENT''-->\n" +
+    "                    <h5>Delivery Protocol <a ng-click=\"informationToggle('ITEM DELIVERY PROTOCOL')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                    <tags-input min-length=\"1\" placeholder=\"Delivery Protocol\" ng-model=\"newItem.deliveryProtocol\">\n" +
+    "                        <auto-complete></auto-complete>\n" +
+    "                    </tags-input>\n" +
+    "\n" +
+    "                    <h5>JSON Data <a ng-click=\"informationToggle('ITEM DATA')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                    <input type=\"text\" placeholder=\"JSON Data\" ng-model=\"newItem.data\" class=\"form-control\">\n" +
+    "\n" +
+    "                </div>\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <text-angular ng-model=\"newItem.content\" ta-toolbar=\"[['p','h1','bold','italics','quote','insertLink', 'html']]\"></text-angular>\n" +
+    "\n" +
+    "                <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newItem.title\">create</button>\n" +
+    "            </form>\n" +
+    "\n" +
+    "        </div>\n" +
+    "\n" +
+    "    </div>\n" +
+    "\n" +
+    "</md-sidenav>");
+}]);
+
+angular.module("nav/templates/createOrder.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("nav/templates/createOrder.tpl.html",
+    "<md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"order\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
+    "    <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
+    "        <div class=\"spacing-25\"></div>\n" +
+    "        <div style=\"background:url('https://source.unsplash.com/1600x900/?connections,network,pattern')\" class=\"imageContainerSmall\">\n" +
+    "            <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                    <div style=\"padding:15px\">\n" +
+    "                        <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Create Order</h1>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "        <div style=\"padding:16px\">\n" +
+    "            <div class=\"spacing-15\"></div>\n" +
+    "            <p style=\"color:gray;font-style:italic\">An Order creates a position in our Value Matrix (MultiDimensional Token Market) <a ng-click=\"informationToggle('CREATEORDER')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></p>\n" +
+    "            <div class=\"spacing-10\"></div>\n" +
+    "            <div class=\"spacing-10\"></div>\n" +
+    "            <form role=\"form\" ng-submit=\"createOrder()\">\n" +
+    "                <div class=\"row\">\n" +
+    "                    <div class=\"col-sm-6 form-group\">\n" +
+    "                        <h5>\n" +
+    "                            <span ng-show=\"!identiferSetAlpha\">Asset Identifer Set α</span>\n" +
+    "                            <span ng-repeat=\"market in identiferSetAlpha track by $index\">{{market.text}} </span> \n" +
+    "                            <a ng-click=\"informationToggle('IDENTIFERSETALPHA')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a>\n" +
+    "                        </h5>\n" +
+    "                        <tags-input min-length=\"1\" placeholder=\"Asset Identifer Set α\" ng-model=\"identiferSetAlpha\">\n" +
+    "                            <auto-complete source=\"loadTags($query)\"></auto-complete>\n" +
+    "                        </tags-input>\n" +
+    "                    </div>\n" +
+    "                    <div class=\"col-sm-6 form-group\">\n" +
+    "                        <div ng-repeat=\"market in identiferSetAlpha track by $index\">\n" +
+    "                            <div class=\"col-sm-12\">\n" +
+    "                                <h5>{{market.text}} Amount | Available {{balance[market.text] || 0}}</h5>\n" +
+    "                                <input placeholder=\"{{market.text}} Amount\" type=\"number\" step=\"0.000000001\" ng-model=\"newOrder.setAlpha[market.text]\" class=\"form-control\">\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "                <div class=\"row\">\n" +
+    "                    <div class=\"col-sm-6 form-group\">\n" +
+    "                        <h5>\n" +
+    "                            <span ng-show=\"!identiferSetBeta\">Asset Identifer Set β</span>\n" +
+    "                            <span ng-repeat=\"market in identiferSetBeta track by $index\">{{market.text}} </span> \n" +
+    "                            <a ng-click=\"informationToggle('IDENTIFERSETBETA')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a>\n" +
+    "                        </h5>\n" +
+    "                        <tags-input min-length=\"1\" placeholder=\"Asset Identifer Set β\" ng-model=\"identiferSetBeta\">\n" +
+    "                            <auto-complete source=\"loadTags($query)\"></auto-complete>\n" +
+    "                        </tags-input>\n" +
+    "                    </div>\n" +
+    "                    <div class=\"col-sm-6 form-group\">\n" +
+    "                        <div ng-repeat=\"market in identiferSetBeta track by $index\">\n" +
+    "                            <div class=\"col-sm-12\">\n" +
+    "                                <h5>{{market.text}} Amount</h5>\n" +
+    "                                <input placeholder=\"{{market.text}} Amount\" type=\"number\" step=\"0.000000001\" ng-model=\"newOrder.setBeta[[market.text]]\" class=\"form-control\">\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                    <div class=\"col-sm-12\" style=\"padding:20px;\">\n" +
+    "                        <p ng-show=\"!inverted\" style=\"font-weight:800;\">\n" +
+    "                            Sell <span ng-repeat=\"market in identiferSetAlpha\">{{newOrder.setAlpha[market.text]}} {{market.text}} </span> \n" +
+    "                            for <span ng-repeat=\"market in identiferSetBeta\">{{newOrder.setBeta[market.text]}} {{market.text}} </span> | \n" +
+    "                            Buy <span ng-repeat=\"market in identiferSetBeta\">{{newOrder.setBeta[market.text]}} {{market.text}} </span> \n" +
+    "                            with <span ng-repeat=\"market in identiferSetAlpha\">{{newOrder.setAlpha[market.text]}} {{market.text}} </span>\n" +
+    "                        </p>\n" +
+    "                        <p ng-show=\"inverted\" style=\"font-weight:800;\">\n" +
+    "                            Buy <span ng-repeat=\"market in identiferSetAlpha\">{{newOrder.setAlpha[market.text]}} {{market.text}} </span> \n" +
+    "                            with <span ng-repeat=\"market in identiferSetBeta\">{{newOrder.setBeta[market.text]}} {{market.text}} </span> | \n" +
+    "                            Sell <span ng-repeat=\"market in identiferSetBeta\">{{newOrder.setBeta[market.text]}} {{market.text}} </span> \n" +
+    "                            for <span ng-repeat=\"market in identiferSetAlpha\">{{newOrder.setAlpha[market.text]}} {{market.text}} </span>\n" +
+    "                        </p>\n" +
+    "                    </div>\n" +
+    "                    <div class=\"col-sm-12\" style=\"marking:10px\">\n" +
+    "                        <ul class=\"nav nav-pills nav-justified contentType\">\n" +
+    "                            <li ng-class=\"{active: selectedOrderType=='ONBOOKS'}\" ng-click=\"selectOrderType('ONBOOKS')\"><a href=\"#\">Market onBooks <i ng-click=\"informationToggle('ONBOOKSORDER')\" class=\"fa fa-question-circle\"></i></a></li>\n" +
+    "                            <li ng-class=\"{active: selectedOrderType=='FILLORKILL'}\" ng-click=\"selectOrderType('FILLORKILL')\"><a href=\"#\">Market Fill Or Kill <i ng-click=\"informationToggle('FILLORKILL')\" class=\"fa fa-question-circle\"></i></a></li>\n" +
+    "                            <li ng-class=\"{active: selectedOrderType=='IMMEDIATEORCANCEL'}\" ng-click=\"selectOrderType('IMMEDIATEORCANCEL')\"><a href=\"#\">Immediate or Cancel <i ng-click=\"informationToggle('IMMEDIATEORCANCEL')\" class=\"fa fa-question-circle\"></i></a></li>\n" +
+    "                            <li ng-class=\"{active: selectedOrderType=='LIMIT'}\" ng-click=\"selectOrderType('LIMIT')\"><a href=\"#\"> Limit <i ng-click=\"informationToggle('LIMIT')\" class=\"fa fa-question-circle\"></i></a></li>\n" +
+    "                        </ul>\n" +
+    "                    </div>\n" +
+    "                    <div class=\"spacing-10\"></div>\n" +
+    "                    <button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newOrder.setAlpha\">create</button>\n" +
+    "                </div>\n" +
+    "            </form>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</md-sidenav>");
+}]);
+
+angular.module("nav/templates/createProject.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("nav/templates/createProject.tpl.html",
+    "<md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"project\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
+    "    <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
+    "        <div class=\"spacing-25\"></div>\n" +
+    "        <div style=\"background:url('https://source.unsplash.com/1600x900/?code,coordination,government')\" class=\"imageContainerSmall\">\n" +
+    "            <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                    <div style=\"padding:15px\">\n" +
+    "                        <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Create Project</h1>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "        <div style=\"padding:16px\">\n" +
+    "\n" +
+    "            <div class=\"spacing-15\"></div>\n" +
+    "            <p style=\"color:gray;font-style:italic\">A Project is a Self-Governing collective of individuals. <a ng-click=\"informationToggle('CREATEPROJECT')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></p>\n" +
+    "            <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "            <form role=\"form\" ng-submit=\"createProject()\">\n" +
+    "                <h5>Title</h5>\n" +
+    "                <input type=\"text\" placeholder= \"Title\" ng-model=\"newProject.title\" class=\"form-control\">\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "                <!--TODO-->\n" +
+    "                <h5>Context</h5>\n" +
+    "                <tags-input min-length=\"1\" placeholder=\"Context\" ng-model=\"newProject.tags\">\n" +
+    "                    <auto-complete source=\"loadTags($query)\"></auto-complete>\n" +
+    "                </tags-input>\n" +
+    "                <h5>Associations <a ng-click=\"informationToggle('ASSOCIATIONS')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                <tags-input min-length=\"1\" placeholder=\"Associations\" ng-model=\"newProject.associatedModels\">\n" +
+    "                    <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
+    "                </tags-input>\n" +
+    "\n" +
+    "\n" +
+    "                <h5>Location</h5>\n" +
+    "                <input type=\"text\" placeholder=\"Location\" ng-model=\"newProject.location\" class=\"form-control\">\n" +
+    "\n" +
+    "\n" +
+    "                <h5>Description</h5>\n" +
+    "                <text-angular placeholder= \"Description\" ng-model=\"newProject.description\" ta-toolbar=\"''\"></text-angular>\n" +
+    "                <button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newProject.title\">create</button>\n" +
+    "            </form>\n" +
+    "                \n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</md-sidenav>");
+}]);
+
+angular.module("nav/templates/createTask.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("nav/templates/createTask.tpl.html",
+    "<md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"task\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
+    "    <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
+    "        <div class=\"spacing-25\"></div>\n" +
+    "        <div style=\"background:url('https://source.unsplash.com/1600x900/?code')\" class=\"imageContainerSmall\">\n" +
+    "            <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                    <div style=\"padding:15px\">\n" +
+    "                        <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Create Task</h1>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <div style=\"padding:16px\">\n" +
+    "            <div class=\"spacing-15\"></div>\n" +
+    "            <p style=\"color:gray;font-style:italic\">Tasks are an abstraction of intentional time, they create linkages between Time & Token Protocols. <a ng-click=\"informationToggle('CREATETASK')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></p>\n" +
+    "            <div class=\"spacing-10\"></div>\n" +
+    "            <form role=\"form\" ng-submit=\"createTask()\">\n" +
+    "                <h5>Title</h5>\n" +
+    "                <input type=\"text\" placeholder=\"Title\" ng-model=\"newTask.title\" class=\"form-control\">\n" +
+    "                <h5>Associations <a ng-click=\"informationToggle('ASSOCIATIONS')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                <tags-input min-length=\"1\" placeholder=\"Associations\" ng-model=\"newTask.associatedModels\">\n" +
+    "                    <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
+    "                </tags-input>\n" +
+    "                <h5>Context</h5>\n" +
+    "                <tags-input min-length=\"1\" placeholder=\"Context\" ng-model=\"newTask.tags\">\n" +
+    "                    <auto-complete source=\"loadTags($query)\"></auto-complete>\n" +
+    "                </tags-input>\n" +
+    "                <h5>Location</h5>\n" +
+    "                <input type=\"text\" placeholder=\"Location\" ng-model=\"newTask.location\" class=\"form-control\">\n" +
+    "                <text-angular ng-model=\"newTask.content\" ta-toolbar=\"[['p','h1','bold','italics','quote','insertLink', 'html']]\"></text-angular>\n" +
+    "                <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newTask.title\">create</button>\n" +
+    "            </form>\n" +
+    "        </div>\n" +
+    "\n" +
+    "    </div>\n" +
+    "</md-sidenav>");
+}]);
+
+angular.module("nav/templates/createTime.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("nav/templates/createTime.tpl.html",
+    "<md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"time\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
+    "    <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
+    "        <div class=\"spacing-25\"></div>\n" +
+    "        <div style=\"background:url('https://source.unsplash.com/1600x900/?time')\" class=\"imageContainerSmall\">\n" +
+    "            <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                    <div style=\"padding:15px\">\n" +
+    "                        <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Create Time</h1>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <div style=\"padding:16px\">\n" +
+    "            <div class=\"spacing-15\"></div>\n" +
+    "            <p style=\"color:gray;font-style:italic\">Time & Intention unite. Token Protocols propogate value interactions. <a ng-click=\"informationToggle('CREATETIME')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></p>\n" +
+    "            <div class=\"spacing-10\"></div>\n" +
+    "            <form role=\"form\" ng-submit=\"createTime()\">\n" +
+    "\n" +
+    "                <!--SELF CONTEXT-->\n" +
+    "                <!--IMPLICIT VALIDATION W CONTEXT FOR TAGS-->\n" +
+    "                <h5>Task <a ng-click=\"informationToggle('ASSOCIATIONS')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                <tags-input min-length=\"1\" placeholder=\"Associations\" ng-model=\"newTime.associatedModels\">\n" +
+    "                    <auto-complete source=\"loadAssociationsTask($query)\"></auto-complete>\n" +
+    "                </tags-input>\n" +
+    "\n" +
+    "                <div ng-if=\"!newTime.associatedModels.length\">\n" +
+    "                    <h5>Context <a ng-click=\"informationToggle('TAGS')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                    <tags-input min-length=\"1\" placeholder=\"Tags\" ng-model=\"newTime.tags\">\n" +
+    "                        <auto-complete source=\"loadTags($query)\"></auto-complete>\n" +
+    "                    </tags-input>\n" +
+    "                </div>\n" +
+    "    \n" +
+    "                <!--TODO-->\n" +
+    "                <!--FOR X IN TAGS-->\n" +
+    "                <div ng-repeat=\"model in newTime.associatedModels\">\n" +
+    "                    <div class=\"col-sm-12\">\n" +
+    "\n" +
+    "                        <h5>Context <a ng-click=\"informationToggle('TAGS')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                        <tags-input min-length=\"1\" placeholder=\"Tags\" ng-model=\"newTime.tags\">\n" +
+    "                            <auto-complete source=\"loadTags($query)\"></auto-complete>\n" +
+    "                        </tags-input>\n" +
+    "\n" +
+    "                        <div class=\"spacing-5\"></div>\n" +
+    "\n" +
+    "                        <div ng-repeat=\"tag in newTime.tags track by $index\">\n" +
+    "                            <div layout=\"\">\n" +
+    "                                <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{tag.text}}</span></div>\n" +
+    "                                <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"newValidation.validation[tag.text]\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"{{tag.text}}\"></md-slider>\n" +
+    "                                <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{newValidation.validation[tag.text]}} | {{reputation[tag.text] || 0}}</span></div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <ul class=\"nav nav-pills nav-justified contentTyle\">\n" +
+    "                    <li ng-class=\"{active: newTime.type=='RETROACTIVE'}\" ng-click=\"selectTypeTime('RETROACTIVE')\"><a href=\"#\">RETROACTIVE OR PLANNED</a></li>\n" +
+    "                    <li ng-class=\"{active: newTime.type=='LIVE'}\" ng-click=\"selectTypeTime('LIVE')\"><a href=\"#\">LIVE</a></li>\n" +
+    "                </ul>\n" +
+    "\n" +
+    "                <div ng-if=\"newTime.type == 'LIVE'\">\n" +
+    "\n" +
+    "                    <div ng-show=\"!recordingTime\">\n" +
+    "                        <div ng-show=\"!streaming\">\n" +
+    "                            <h3>Streaming?</h3>\n" +
+    "                            <a class=\"btn btn-default log-btn\" ng-click=\"startStreaming()\">Yes</a>\n" +
+    "                            <div class=\"spacing-5\"></div>\n" +
+    "                            <a class=\"btn btn-default log-btn\" ng-click=\"startTime()\">No</a>\n" +
+    "                        </div>\n" +
+    "                        <div ng-show=\"streaming\">\n" +
+    "                            <input type=\"text\" placeholder=\"Link\" ng-model=\"streamUrl\" class=\"form-control\">\n" +
+    "                            <input type=\"text\" placeholder=\"IFPS SECRET\" ng-model=\"timeContent\" class=\"form-control\">\n" +
+    "                            <input type=\"text\" placeholder=\"IFPS KEY\" ng-model=\"timeContent\" class=\"form-control\">\n" +
+    "                            <a style=\"width:100%;\" class=\"btn btn-default log-btn\" ng-click=\"startTime()\">Start Stream</a>\n" +
+    "                            <a style=\"width:100%;\" class=\"btn btn-default log-btn\" ng-click=\"cancelStreaming()\">Back</a>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                    <div ng-show=\"recordingTime\">\n" +
+    "                        <h3>{{taskTime}}</h3>\n" +
+    "                        <div ng-if=\"streaming\"> <div ng-bind-html=\"renderStream(streamUrl)\"></div></div>\n" +
+    "                        <div class=\"spacing-5\"></div>\n" +
+    "                        <div class=\"spacing-5\"></div>\n" +
+    "                        <text-angular ng-model=\"newTime.content\" ta-toolbar=\"[['p','h1','bold','italics','quote','insertLink', 'html']]\"></text-angular>\n" +
+    "                        <div class=\"spacing-5\"></div>\n" +
+    "                        <a ng-click=\"submit()\" style=\"width:100%\" class=\"btn btn-default log-btn\">create</a>\n" +
+    "                    </div>            \n" +
+    "\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div ng-if=\"newTime.type == 'RETROACTIVE'\">\n" +
+    "\n" +
+    "                    <div class=\"row\">\n" +
+    "                        <div class=\"col-sm-6\">\n" +
+    "                            <h5>Start Time</h5>\n" +
+    "                            <input type=\"datetime-local\" step=\"1\" placeholder=\"Start Time\" ng-model=\"newTime.startTime\" class=\"form-control\">\n" +
+    "                        </div>\n" +
+    "                        <div class=\"col-sm-6\">     \n" +
+    "                            <h5>End Time</h5>\n" +
+    "                            <input type=\"datetime-local\" step=\"1\" placeholder=\"Start Time\" ng-model=\"newTime.endTime\" class=\"form-control\">\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "\n" +
+    "                    <h5>Amount</h5>\n" +
+    "                    <input type=\"number\" step=\"1\" placeholder=\"Amount\" ng-model=\"newTime.amount\" class=\"form-control\">\n" +
+    "                    \n" +
+    "                    <text-angular ng-model=\"newTime.content\" ta-toolbar=\"[['p','h1','bold','italics','quote','insertLink', 'html']]\"></text-angular>\n" +
+    "                    <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newTime.amount\">create</button>\n" +
+    "\n" +
+    "                </div>\n" +
+    "\n" +
+    "\n" +
+    "            </form>\n" +
+    "        </div>\n" +
+    "\n" +
+    "    </div>\n" +
+    "</md-sidenav>\n" +
+    "");
+}]);
+
+angular.module("nav/templates/createTransaction.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("nav/templates/createTransaction.tpl.html",
+    "<md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"transaction\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
+    "    <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
+    "        <div class=\"spacing-25\"></div>\n" +
+    "        <div style=\"background:url('https://source.unsplash.com/1600x900/?transaction,trade')\" class=\"imageContainerSmall\">\n" +
+    "            <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                    <div style=\"padding:15px\">\n" +
+    "                        <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Create Transaction</h1>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "        <div style=\"padding:16px;\">\n" +
+    "            <div class=\"spacing-15\"></div>\n" +
+    "            <p style=\"color:gray;font-style:italic\">Send tokens to any address; double check that the information is correct before sending. All transactions are final. <a ng-click=\"informationToggle('CREATETRANSACTION')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></p>\n" +
+    "            <div class=\"spacing-10\"></div>\n" +
+    "            <form role=\"form\" ng-submit=\"createTransaction()\">\n" +
+    "                <h5>Address From</h5>\n" +
+    "                <tags-input min-length=\"1\" max-tags=\"1\" placeholder=\"From\" ng-model=\"newTransaction.from\">\n" +
+    "                    <auto-complete min-length=\"2\" source=\"loadAddress($query)\"></auto-complete>\n" +
+    "                </tags-input>\n" +
+    "                <h5>Address To</h5>\n" +
+    "                <tags-input min-length=\"1\" max-tags=\"1\" placeholder=\"To\" ng-model=\"newTransaction.to\">\n" +
+    "                    <auto-complete min-length=\"2\" source=\"loadAddress($query)\" max-results-to-show=\"1000\" highlight-matched-text=\"true\"></auto-complete>\n" +
+    "                </tags-input>\n" +
+    "\n" +
+    "                <h5>Asset <a href=\"#\" ng-click=\"expandAssets()\" style=\"float:right\"><i class=\"fas fa-coins\"></i> My Assets</a></h5>\n" +
+    "                <tags-input min-length=\"1\" placeholder=\"Asset Identifier\" ng-model=\"newTransaction.identifierSet\">\n" +
+    "                    <auto-complete min-length=\"1\" highlight-matched-text=\"true\" load-on-empty=\"true\" max-results-to-show=\"1000\" source=\"loadAsset($query)\"></auto-complete>\n" +
+    "                </tags-input>\n" +
+    "\n" +
+    "                <div class=\"row\" ng-if=\"assetsAreExpanded\">\n" +
+    "                    <!--MY MANIFOLDS-->\n" +
+    "                    <div class=\"spacing-10\"></div>\n" +
+    "                    <div class=\"col-xs-4\" ng-repeat=\"asset in sortedBalances\">\n" +
+    "                        <p>\n" +
+    "                            <!--<img style=\"height:32px;border-radius:100%;\" src=\"https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{asset[0]}}\">-->\n" +
+    "\n" +
+    "                            <img style=\"border-radius:100%;height:32px;padding-right:5px;\" ng-src=\"http://identicon-1132.appspot.com/{{asset[0]}}?s=8&p=8&f=png\">\n" +
+    "                            <a href=\"#\" ng-click=\"addAssetToTransaction(asset[0])\"><b>{{asset[0]}}</b>: {{asset[1]}}</a>\n" +
+    "                        </p>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"\">\n" +
+    "                    <div class=\"col-sm-12\" ng-repeat=\"asset in newTransaction.identifierSet\">\n" +
+    "                        <h5>{{asset.text}} Amount | Available {{balance[asset.text] || 0}} <span style=\"text-align:right;float:right\"><a ng-click=\"informationToggle('IDENTIFERSET')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></span></h5>\n" +
+    "                        <input placeholder=\"{{asset.text}} Amount\" type=\"number\" step=\"any\" ng-model=\"newTransaction.amountSet[asset.text]\" class=\"form-control\">\n" +
+    "                    </div>\n" +
+    "                    <div style=\"clear:both\"></div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <!--<h5>Associated Items</h5>-->\n" +
+    "                <!--BUYING AN ITEM WITH PRESET CONTEXT..-->\n" +
+    "                <!--TRADE.. 2 BUNDLES TRANSACTIONS-->\n" +
+    "                <!--SEND TOKEN SET, RECIEVE TOKEN ASSET-->\n" +
+    "                <!--TRADE POPUP.. ORDER-->\n" +
+    "\n" +
+    "                <h5>Context <a ng-if=\"newTransaction.context.length > 0\" href=\"#\" ng-click=\"expandAssociations()\" style=\"float:right\"><i class=\"fas fa-bezier-curve\"></i> Expand</a></h5>\n" +
+    "                <tags-input min-length=\"1\" placeholder=\"Context\" ng-model=\"newTransaction.context\">\n" +
+    "                    <auto-complete min-length=\"2\" source=\"loadTags($query)\"></auto-complete>\n" +
+    "                </tags-input>\n" +
+    "\n" +
+    "                <div ng-if=\"associationsAreExpanded\">\n" +
+    "                    <div style=\"padding:16px\">\n" +
+    "                        <div ng-repeat=\"context in newTransaction.context track by $index\">\n" +
+    "                            <div layout=\"\">\n" +
+    "                                <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{context.text}}</span></div>\n" +
+    "                                <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"newTransaction.validationModels[0].validation[context.text]\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"{{context.text}}\"></md-slider>\n" +
+    "                                <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{newTransaction.validationModels[0].validation[context.text]}}</span></div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <h5>Description</h5>\n" +
+    "                <textarea style=\"height:100px;\" placeholder=\"Description\" type=\"text\" ng-model=\"newTransaction.content\" class=\"form-control\"></textarea>\n" +
+    "                <button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newTransaction.amountSet\">create</button>\n" +
+    "\n" +
+    "            </form>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</md-sidenav>");
+}]);
+
+angular.module("nav/templates/createValidation.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("nav/templates/createValidation.tpl.html",
+    "<md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"validation\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
+    "    <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
+    "        <div class=\"spacing-25\"></div>\n" +
+    "        <div style=\"background:url('https://source.unsplash.com/1600x900/?code,consensus')\" class=\"imageContainerSmall\">\n" +
+    "            <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                    <div style=\"padding:15px\">\n" +
+    "                        <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Create Validation</h1>\n" +
+    "                        <h5 style=\"color:white\">\n" +
+    "                        </h5>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "        <div style=\"padding:16px\">\n" +
+    "            <div class=\"spacing-15\"></div>\n" +
+    "            <p style=\"color:gray;font-style:italic\">Validations create value linkages. They form the mechanisms by which data is associated & given relation. <a ng-click=\"informationToggle('VALIDATION')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></p>\n" +
+    "            <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "            <h5>Connection</h5>\n" +
+    "            <tags-input min-length=\"1\" placeholder=\"Associations\" ng-model=\"newValidation.associatedModels\">\n" +
+    "                <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
+    "            </tags-input>\n" +
+    "\n" +
+    "            <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "            <h5>Context</h5>\n" +
+    "            <tags-input min-length=\"1\" placeholder=\"Context\" ng-model=\"context\">\n" +
+    "                <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
+    "            </tags-input>\n" +
+    "\n" +
+    "\n" +
+    "            <div ng-repeat=\"(key, value) in newValidation.validation track by $index\">\n" +
+    "                <div layout=\"\">\n" +
+    "                    <div flex=\"10\" layout=\"\" layout-align=\"center center\">\n" +
+    "                        <p><b>{{key}}</b></p>\n" +
+    "                    </div>\n" +
+    "                    <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"newValidation.validation[key]\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"{{key}}\"></md-slider>\n" +
+    "                    <div flex=\"10\" layout=\"\" layout-align=\"center center\">\n" +
+    "                        <p class=\"md-body-1\">{{newValidation.validation[key]}}</p>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <!--CHARTER LOGIC HERE-->\n" +
+    "                <div style=\"text-align:center\"><p style=\"font-size:9px\">{{reputation[key] || 0}} | {{reputation[key]*newValidation.validation[key]}} | Multiplicative Charter</p></div>\n" +
+    "\n" +
+    "\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "            <h5>Content</h5>\n" +
+    "            <!--AssociatedContent...?-->\n" +
+    "            <text-angular style=\"height:200px\" ng-model=\"newValidation.content\" ta-toolbar=\"''\"></text-angular>\n" +
+    "\n" +
+    "            <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "            <button ng-click=\"createValidation()\" type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\">create</button>\n" +
+    "\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</md-sidenav>");
+}]);
+
+angular.module("nav/templates/filter.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("nav/templates/filter.tpl.html",
+    "<md-sidenav class=\"md-sidenav-left md-whiteframe-z2\" md-component-id=\"filter\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;max-width:100%\">\n" +
+    "    <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
+    "        <div class=\"spacing-25\"></div>\n" +
+    "        \n" +
+    "        <div style=\"background:url('https://source.unsplash.com/1600x900/?{{model.tags}}')\" class=\"imageContainerSmall\">\n" +
+    "            <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                    <div style=\"padding:15px\">\n" +
+    "                        <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Filter</h1>\n" +
+    "                        <h5 style=\"color:white\">\n" +
+    "                        <!--CONTEXT-->\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <div style=\"padding:16px;\">\n" +
+    "\n" +
+    "            <!--DISCOVER-->\n" +
+    "            <div ng-if=\"type=='DISCOVER'\">\n" +
+    "\n" +
+    "                <!--\n" +
+    "                <p><b>Model</b></p>\n" +
+    "                <ul class=\"nav nav-pills nav-justified contentTyle\">\n" +
+    "                    <li ng-class=\"{active: selectedType=='AUDIO'}\" ng-click=\"selectType('AUDIO')\"><a href=\"#\">Content</a></li>\n" +
+    "                    <li ng-class=\"{active: selectedType=='VIDEO'}\" ng-click=\"selectType('VIDEO')\"><a href=\"#\">Items</a></li>\n" +
+    "                    <li ng-class=\"{active: selectedType=='VIDEO'}\" ng-click=\"selectType('VIDEO')\"><a href=\"#\">Orders</a></li>\n" +
+    "                    <li ng-class=\"{active: selectedType=='IMAGE'}\" ng-click=\"selectType('IMAGE')\"><a href=\"#\">Project</a></li>\n" +
+    "                    <li ng-class=\"{active: selectedType=='LINK'}\" ng-click=\"selectType('LINK')\"><a href=\"#\">Task</a></li>\n" +
+    "                    <li ng-class=\"{active: selectedType=='MOTION'}\" ng-click=\"selectType('MOTION')\"><a href=\"#\">Time</a></li>\n" +
+    "                    <li ng-class=\"{active: selectedType=='POST'}\" ng-click=\"selectType('POST')\"><a href=\"#\">Transaction</a></li>\n" +
+    "                </ul>\n" +
+    "                -->\n" +
+    "\n" +
+    "                <p><b>Context</b> <i style=\"float:right\" class=\"fa fa-tags\"></i></p>\n" +
+    "                <div>\n" +
+    "                    <tags-input min-length=\"1\" placeholder=\"Context\" ng-model=\"searchQueryNav.tags\">\n" +
+    "                        <auto-complete source=\"loadAsset($query)\"></auto-complete>\n" +
+    "                    </tags-input>\n" +
+    "                    <div ng-repeat=\"item in item.tags.slice(0,10) track by $index\">\n" +
+    "                        <a href=\"#\" ng-click=\"selectTag(item.element)\"><b>{{item.element}}</b></a>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <p><b>Association</b> <i style=\"float:right\" class=\"fas fa-bezier-curve\"></i></p>\n" +
+    "                <div>\n" +
+    "                    <tags-input min-length=\"1\" placeholder=\"Association\" ng-model=\"searchQueryNav.associations\">\n" +
+    "                        <auto-complete source=\"loadAssociation($query)\"></auto-complete>\n" +
+    "                    </tags-input>\n" +
+    "                    <div ng-repeat=\"item in item.associations.slice(0,10) track by $index\">\n" +
+    "                        <a href=\"#\" ng-click=\"selectAssociation(item.element)\"><b>{{item.element}}</b></a>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <p><b>Location</b> <i style=\"float:right\" class=\"fa fa-map-marker\"></i></p>\n" +
+    "                <div>\n" +
+    "                    <tags-input min-length=\"1\" placeholder=\"Location\" ng-model=\"searchQueryNav.locations\">\n" +
+    "                        <auto-complete source=\"loadLocation($query)\"></auto-complete>\n" +
+    "                    </tags-input>\n" +
+    "                    <div ng-repeat=\"item in item.locations.slice(0,10) track by $index\">\n" +
+    "                        <a href=\"#\" ng-click=\"selectLocation(item.element)\"><b>{{item.element.address}}</b></a>\n" +
+    "                    </div>\n" +
+    "                    <div layout=\"\">\n" +
+    "                        <div flex=\"12\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\" style=\"font-size:10px\">Distance (km)</span></div>\n" +
+    "                        <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"locationFilter.distance\" step=\"1\" min=\"0\" max=\"100\" aria-label=\"general\"></md-slider>\n" +
+    "                        <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{locationFilter.distance}}</span></div>\n" +
+    "                    </div>\n" +
+    "                    <ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\">\n" +
+    "                        <ui-gmap-marker ng-repeat=\"marker in markers track by $index\" coords=\"marker.coords\" options=\"marker.options\" idkey=\"marker.id\">\n" +
+    "                            <ui-gmap-window options=\"windowOptions\" closeClick=\"closeClick()\">\n" +
+    "                                <div>\n" +
+    "                                    <div style=\"font-size: 15px;\"><a href=\"#\">{{marker.content}}</a></div>\n" +
+    "                                </div>\n" +
+    "                            </ui-gmap-window>\n" +
+    "                        </ui-gmap-marker>\n" +
+    "                    </ui-gmap-google-map>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <p ng-click=\"expandAdvancedFilter()\"><a><i class=\"fa fa-filter\"></i> <b>Custom Filter</b></a></p>\n" +
+    "                <div ng-if=\"filtersAreExpanded\">\n" +
+    "                    <!--\n" +
+    "                    <div style=\"background:rgba(0,0,0,0.75);height:50px\" class=\"imageContainerSmallDiv\">\n" +
+    "                        <div style=\"background:url('https://source.unsplash.com/1600x900/?{{item.tags}}');min-height:50px\" class=\"imageContainerSmall\">\n" +
+    "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                                <div style=\"padding:15px\">\n" +
+    "                                    <h1 style=\"text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;\">Filter Builder</h1>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                    -->\n" +
+    "                    <text-angular ng-model=\"filterBuilder\" ta-toolbar=\"[['p','h1','bold','italics','quote','insertLink', 'html']]\"></text-angular>\n" +
+    "                    <button type=\"submit\" class=\"btn btn-default log-btn\" ng-click=\"\">Submit</button>\n" +
+    "                </div>\n" +
+    "\n" +
+    "            </div>\n" +
+    "        \n" +
+    "            <!--LEDGER-->\n" +
+    "            <!--DO ITTTT-->\n" +
+    "            <!--AND VECTOR / SELF-TRANSACTION ASSOCIATIONS-->\n" +
+    "            <div ng-if=\"type=='LEDGER'\">\n" +
+    "\n" +
+    "                <p><b>Asset Set</b></p>\n" +
+    "                <tags-input min-length=\"1\" placeholder=\"Asset Set\" ng-model=\"selectedAssets\">\n" +
+    "                    <auto-complete source=\"loadAsset($query)\"></auto-complete>\n" +
+    "                </tags-input>\n" +
+    "                <div ng-repeat=\"asset in item.assets.slice(0,10) track by $index\">\n" +
+    "                    <a href=\"#\" ng-click=\"selectAsset(asset.element)\"><b>{{asset.element}}</b></a>\n" +
+    "                </div>\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <!--RELATED-->\n" +
+    "                <p><b>Context</b></p>\n" +
+    "                <tags-input min-length=\"1\" placeholder=\"Context\" ng-model=\"selectedTags\">\n" +
+    "                    <auto-complete source=\"loadTags($query)\"></auto-complete>\n" +
+    "                </tags-input>\n" +
+    "                <div ng-repeat=\"asset in item.tags.slice(0,10) track by $index\">\n" +
+    "                    <a href=\"#\" ng-click=\"selectTag(asset.element)\"><b>{{asset.element}}</b></a>\n" +
+    "                </div>\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <p><b>Associations</b></p>\n" +
+    "                <tags-input min-length=\"1\" placeholder=\"Associations\" ng-model=\"selectedAssociations\">\n" +
+    "                    <auto-complete source=\"loadAssociation($query)\"></auto-complete>\n" +
+    "                </tags-input>\n" +
+    "                <div ng-repeat=\"asset in item.associations.slice(0,10) track by $index\">\n" +
+    "                    <a href=\"#\" ng-click=\"selectTag(asset.element)\"><b>{{asset.element}}</b></a>\n" +
+    "                </div>\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <div ng-if=\"type=='MANIFOLD'\">\n" +
+    "\n" +
+    "                <h5>{TOKEN}+[ACTION]+SPONSOR+(ADDRESS)</h5>\n" +
+    "                <h5>+CREDIT+(TIME)</h5>\n" +
+    "                <h5>+FUTURE+(TIME)</h5>\n" +
+    "                <h5>+OPTION+(TIME)</h5>\n" +
+    "\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <!--MARKET-->\n" +
+    "            <div ng-if=\"type=='MARKET'\">\n" +
+    "\n" +
+    "                <!--\n" +
+    "                <tags-input min-length=\"1\" placeholder=\"Base Asset\" ng-model=\"baseMarkets\">\n" +
+    "                    <auto-complete source=\"loadAsset($query)\"></auto-complete>\n" +
+    "                </tags-input>\n" +
+    "                -->\n" +
+    "\n" +
+    "                <p><b>Models</b></p>\n" +
+    "                <p ng-repeat=\"manifold in manifolds\">\n" +
+    "                    <a ng-click=\"\">{{manifold}}</a>\n" +
+    "                </p>\n" +
+    "\n" +
+    "                <tags-input min-length=\"1\" placeholder=\"Asset\" ng-model=\"markets\">\n" +
+    "                    <auto-complete source=\"loadAsset($query)\"></auto-complete>\n" +
+    "                </tags-input>\n" +
+    "\n" +
+    "                <!--IDK-->\n" +
+    "                <div layout=\"\">\n" +
+    "                    <div flex=\"12\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\" style=\"font-size:10px\">Volume</span></div>\n" +
+    "                    <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"locationFilter.distance\" step=\"1\" min=\"0\" max=\"100\" aria-label=\"general\"></md-slider>\n" +
+    "                    <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\"></span></div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <!--IDK-->\n" +
+    "                <div layout=\"\">\n" +
+    "                    <div flex=\"12\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\" style=\"font-size:10px\">Combinitorial</span></div>\n" +
+    "                    <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"locationFilter.distance\" step=\"1\" min=\"0\" max=\"100\" aria-label=\"general\"></md-slider>\n" +
+    "                    <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\"></span></div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <div ng-if=\"type=='NOTIFICATION'\">\n" +
+    "\n" +
+    "                <ul class=\"nav nav-pills nav-justified contentTyle\">\n" +
+    "                    <li ng-class=\"{active: selectedType=='ALL'}\" ng-click=\"selectType('ALL')\"><a href=\"#\">All</a></li>\n" +
+    "                    <li ng-class=\"{active: selectedType=='READ'}\" ng-click=\"selectType('READ')\"><a href=\"#\">Read</a></li>\n" +
+    "                    <li ng-class=\"{active: selectedType=='UNREAD'}\" ng-click=\"selectType('UNREAD')\"><a href=\"#\">Unread</a></li>\n" +
+    "                </ul>\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <p><b>Context</b></p>\n" +
+    "                <tags-input min-length=\"1\" placeholder=\"Tags\" ng-model=\"searchQueryNav.tags\">\n" +
+    "                    <auto-complete source=\"loadAsset($query)\"></auto-complete>\n" +
+    "                </tags-input>\n" +
+    "                <div ng-repeat=\"item in item.tags.slice(0,10) track by $index\">\n" +
+    "                    <a href=\"#\" ng-click=\"selectTag(item)\">{{item}}</a>\n" +
+    "                </div>\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <p><b>Type</b></p>\n" +
+    "                <tags-input min-length=\"1\" placeholder=\"Type\" ng-model=\"searchQueryNav.type\">\n" +
+    "                    <auto-complete source=\"loadType($query)\"></auto-complete>\n" +
+    "                </tags-input>\n" +
+    "                <div ng-repeat=\"item in item.type.slice(0,10) track by $index\">\n" +
+    "                    <a href=\"#\" ng-click=\"selectTypeFilter(item)\">{{item}}</a>\n" +
+    "                </div>\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <p><b>Priority</b></p>\n" +
+    "                <div layout=\"\">\n" +
+    "                    <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"priorityFilter.priority\" step=\"1\" min=\"0\" max=\"100\" aria-label=\"general\"></md-slider>\n" +
+    "                </div>\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <!--POSTIONS | MAP-->\n" +
+    "            <div ng-if=\"type=='POSITIONS'\">\n" +
+    "                <p><b>Positions</b></p>\n" +
+    "                <tags-input min-length=\"1\" placeholder=\"Base Asset\" ng-model=\"baseMarkets\">\n" +
+    "                    <auto-complete source=\"loadAsset($query)\"></auto-complete>\n" +
+    "                </tags-input>\n" +
+    "                <tags-input min-length=\"1\" placeholder=\"Asset\" ng-model=\"markets\">\n" +
+    "                    <auto-complete source=\"loadAsset($query)\"></auto-complete>\n" +
+    "                </tags-input>\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <div ng-if=\"type=='VALUEMAP'\">\n" +
+    "\n" +
+    "                <tags-input min-length=\"1\" placeholder=\"Base Asset\" ng-model=\"baseToken\">\n" +
+    "                    <auto-complete source=\"loadAsset($query)\"></auto-complete>\n" +
+    "                </tags-input>\n" +
+    "                <h5>{{baseToken.text}}</h5>\n" +
+    "                <p>{{baseToken.description}}</p>\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <tags-input min-length=\"1\" placeholder=\"Manifold\" ng-model=\"baseManifold\">\n" +
+    "                    <auto-complete source=\"loadAsset($query)\"></auto-complete>\n" +
+    "                </tags-input>\n" +
+    "                <h5>{{baseManifold.text}}</h5>\n" +
+    "                <p>{{baseManifold.description}}</p>\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <h5>{{orderType.text}}</h5>\n" +
+    "                <p>{{orderType.description}}</p>\n" +
+    "                <ul class=\"nav nav-pills nav-stacked contentType\">\n" +
+    "                    <li ng-class=\"{active: orderType.text=='Continual'}\" ng-click=\"selectType('CONTINUAL')\"><a href=\"#\">Continual on Books</a></li>\n" +
+    "                    <li ng-class=\"{active: selectedType=='DISCRETE'}\" ng-click=\"selectType('DISCRETE')\"><a href=\"#\">Discrete on Books</a></li>\n" +
+    "                    <li ng-class=\"{active: selectedType=='FOK'}\" ng-click=\"selectType('FOK')\"><a href=\"#\">Fill or Kill</a></li>\n" +
+    "                    <li ng-class=\"{active: selectedType=='IOC'}\" ng-click=\"selectType('IOC')\"><a href=\"#\">Immediate or Cancel</a></li>\n" +
+    "                    <li ng-class=\"{active: selectedType=='LIMIT'}\" ng-click=\"selectType('LIMIT')\"><a href=\"#\">Limit</a></li>\n" +
+    "                </ul>\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "            </div>\n" +
+    "\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</md-sidenav>");
+}]);
+
+angular.module("nav/templates/information.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("nav/templates/information.tpl.html",
+    "<md-sidenav class=\"md-sidenav-left md-whiteframe-z2\" md-component-id=\"information\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;max-width:100%;\">\n" +
+    "    <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
+    "        <div class=\"spacing-25\"></div>\n" +
+    "        <div style=\"background:url('https://source.unsplash.com/1600x900/?code')\" class=\"imageContainerSmall\">\n" +
+    "            <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                    <div style=\"padding:15px\">\n" +
+    "                        <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Information</h1>\n" +
+    "                        <h5 style=\"color:white\">{{informationType}}</h5>\n" +
+    "                        <!--\n" +
+    "                        <h5 ng-if=\"informationType == 'CREATECONTENT'\" style=\"color:white\"></h5>\n" +
+    "                        <h5 ng-if=\"informationType == 'CREATECONTENT'\" style=\"color:white\"></h5>\n" +
+    "                        <h5 ng-if=\"informationType == 'CREATECONTENT'\" style=\"color:white\"></h5>\n" +
+    "                        <h5 ng-if=\"informationType == 'CREATECONTENT'\" style=\"color:white\"></h5>\n" +
+    "                        <h5 ng-if=\"informationType == 'CREATECONTENT'\" style=\"color:white\"></h5>\n" +
+    "                        <h5 ng-if=\"informationType == 'CREATECONTENT'\" style=\"color:white\"></h5>\n" +
+    "                        <h5 ng-if=\"informationType == 'CREATECONTENT'\" style=\"color:white\"></h5>\n" +
+    "                        -->\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "        <div style=\"padding:16px;\">\n" +
+    "            <div class=\"spacing-25\"></div>\n" +
+    "            <div ng-if=\"informationType == 'CREATEACTION'\">\n" +
+    "                <p>Actions are a verb in the string Language. Actions extend items, and act as verbs upon items. 'USE+ITEM'</p>\n" +
+    "            </div>\n" +
+    "            <div ng-if=\"informationType == 'CREATECONTENT'\">\n" +
+    "                <p>Content is art; content can funnel attention, energy, and value. You can CREATE content. Content can be associated recursivly. Triggering Motions to validate where appropiate.</p>\n" +
+    "            </div>\n" +
+    "            <div ng-if=\"informationType == 'CREATEITEM'\">\n" +
+    "                <p>Items are moments of information. They convey complex information, transend the string domain, and carry within them the ability of application input. Providing more functionality and carrying with them additional ancillar protocol inputs. Creating rich ownership of (items as) assets and liabilities[defined by protocol]. The Marketplace is supported by Deventalized Physically Validated Delivery (PVD) Protocols.</p>\n" +
+    "            </div>\n" +
+    "            <div ng-if=\"informationType == 'CREATEORDER'\">\n" +
+    "                <p>Orders create the core of realational value. The are the linkages between assets which are weighted by the OrderBook i.e. Prices at which people are willing to by and sell respectively.</p>\n" +
+    "            </div>\n" +
+    "            <div ng-if=\"informationType == 'CREATEPROJECT'\">\n" +
+    "                <p>Projects are Organization. They are the mechanism by which we are able to coordinate as a group around shared goals. Projects can own assests and are consequently shared by their members. Decision making is disintermediated democratically though wieghted voting though motions. Projects connect to Tasks and to Time.</p>\n" +
+    "            </div>\n" +
+    "            <div ng-if=\"informationType == 'CREATETASK'\">\n" +
+    "                <p>Tasks act as a 'Bridge,' provide context to time, and shape broader the objectives of projects through the clear statement of responsibility.</p>\n" +
+    "            </div>\n" +
+    "            <div ng-if=\"informationType == 'CREATETIME'\">\n" +
+    "                <p>Time is a core unit of value. Within the template of scarcity, time as intention manifests as value. Albeit not necessarily finanite, linearly it's tells a compelling narrative. Information on how we spend our time intuitivly creates shared value. Information as income.</p>\n" +
+    "            </div>\n" +
+    "            <div ng-if=\"informationType == 'CREATETRANSACTION'\">\n" +
+    "                <p>Transactions allow for the exchange and transfer of tokens. They contain tags, content, and and amountSet. Transaction logic is governed by the TRANSACTION protocol.</p>\n" +
+    "            </div>\n" +
+    "            <div ng-if=\"informationType == 'CREATEVALIDATION'\">\n" +
+    "            </div>\n" +
+    "            <div ng-if=\"informationType == 'TOKEN'\">\n" +
+    "                <p>The UniversalToken onMint Market Postion Signifies that the creator of the instrument will transfer UniversalToken onMint of the specified asset.</p>\n" +
+    "                <p>Each Memeber is given 1 Universal Token per second</p>\n" +
+    "            </div>  \n" +
+    "            <div ng-if=\"informationType == 'IDENTIFERSET'\">\n" +
+    "            </div>\n" +
+    "            <!--DEP-->\n" +
+    "            <div ng-if=\"informationType == 'IDENTIFERALPHA'\"></div>\n" +
+    "            <div ng-if=\"informationType == 'IDENTIFERSETBETA'\"></div>\n" +
+    "            <div ng-if=\"informationType == 'MARKETLIQUIDITY'\">\n" +
+    "                <p style=\"color:gray;font-style:italic\">Enter your desired output for tokens based on liquidy in the MultiMarket. The CRE8 network will perform matching operations and create a series of orders which fulfill the token conversion. The perspective we look at the multimarket gives us traversing rules and computationally efficient conversion paths. Through the assistance of tensor-based neural networks we create a hyper-vector perspective formed though relations of the aggregate of our value maps.</p>\n" +
+    "                `{({}_1, =, alpha_1A,+,beta_1B,=,gamma_1C),({}_2, =, alpha_2A,+,beta_2B,=,gamma_2C),(vdots,,,,,,),({}_n, =, delta_nA,+,epsilon_nB,=,zeta_nC):}`\n" +
+    "            </div>\n" +
+    "            <div ng-if=\"informationType == 'ASSOCIATIONS'\">\n" +
+    "                <p>Associations are computed though validation traversal.</p>\n" +
+    "            </div>\n" +
+    "            <div ng-if=\"informationType == 'PROTOCOLS'\">\n" +
+    "                <p>Protocols create plugins to the string space; they create token action potientals though the interplay and interaction of data.</p>\n" +
+    "                <p>A bundle of protocols create an Application.</p>\n" +
+    "            </div>\n" +
+    "            <div ng-if=\"informationType == 'VALUEMAP'\">\n" +
+    "                <p>Value Map Controls</p>\n" +
+    "            </div>\n" +
+    "            <div ng-if=\"informationType == 'VALIDATION'\">\n" +
+    "                <p>Validations create linkages within the CRE8 ecosystem. Validations allow for context-specific consensus. CRE8 supports multiple validation types including human validated proof of work (HVpoW), probabilistic trained validation (PtV), and modular app-specific validation. The connections and validation intention within CRE8 is rich. Validations allow for recursive layering.</p>\n" +
+    "                <!--VALIDATION IMAGE-->\n" +
+    "                <p>Associations are computed though validation traversal.</p>\n" +
+    "                <p>`A = sum_(i=0)^n sum_(i=0)^n V_{i_{a-z}`</p>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</md-sidenav>");
+}]);
+
+angular.module("nav/templates/login.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("nav/templates/login.tpl.html",
+    "<md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"login\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
+    "    <div ng-if=\"!currentUser\" class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
+    "        <div class=\"spacing-25\"></div>\n" +
+    "        \n" +
+    "        <div style=\"background:url('https://source.unsplash.com/1600x900/?connect,pattern')\" class=\"imageContainerSmall\">\n" +
+    "            <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                    <div style=\"padding:15px\">\n" +
+    "                        <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Login</h1>\n" +
+    "                        <h5 style=\"color:white\">Welcome back!</h5>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <div class=\"spacing-25\"></div>\n" +
+    "\n" +
+    "        <div class=\"col-xs-12\">\n" +
+    "            <div class=\"login-form\">\n" +
+    "                <form role=\"form\">\n" +
+    "                    <div class=\"form-group\">\n" +
+    "                        <input class=\"form-control\" name=\"identifier\" placeholder=\"Email or Username\" title=\"Username\" type=\"text\" ng-model=\"newLogin.identifier\" autocomplete=\"username\"> \n" +
+    "                        <i class=\"fa fa-user\"></i>\n" +
+    "                    </div>\n" +
+    "                    <div class=\"form-group log-status\">\n" +
+    "                        <input class=\"form-control\" type=\"password\" name=\"password\" placeholder=\"Password\" title=\"password\" autocomplete=\"current-password\" ng-model=\"newLogin.password\"> \n" +
+    "                        <i class=\"fa fa-lock\"></i>\n" +
+    "                    </div>\n" +
+    "                    <div class=\"align-right\">\n" +
+    "                        <button class=\"btn btn-default log-btn\" ng-click=\"login()\">Sign in</button>\n" +
+    "                    </div>\n" +
+    "                    <br><br>\n" +
+    "                    <div class=\"social-log\">\n" +
+    "                        <a style=\"text-align:center\" href=\"/register\" ui-sref=\"register\"><h5 style=\"color:gray;font-style:italic\">Not A Member Yet?</h5></a>\n" +
+    "                    </div>\n" +
+    "                </form>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "        \n" +
+    "    </div>\n" +
+    "</md-sidenav>");
+}]);
+
+angular.module("nav/templates/market.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("nav/templates/market.tpl.html",
+    "<md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"market\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
+    "    <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
+    "        <div class=\"spacing-25\"></div>\n" +
+    "        \n" +
+    "        <div style=\"background:url('https://source.unsplash.com/1600x900/?connect,pattern')\" class=\"imageContainerSmall\">\n" +
+    "            <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                    <div style=\"padding:15px\">\n" +
+    "                        <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">{{item.id}}</h1>\n" +
+    "                        <h5 style=\"text-align:left;color:rgba(255,255,255,0.9);font-weight:400;\">Market</h5>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <div style=\"padding:16px;\">\n" +
+    "            <!--TODO-->\n" +
+    "            LIQUIDITY\n" +
+    "        </div>\n" +
+    "\n" +
+    "    </div>\n" +
+    "</md-sidenav>");
+}]);
+
+angular.module("nav/templates/nav.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("nav/templates/nav.tpl.html",
+    "<md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"nav\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:black\">\n" +
+    "    <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;text-align:center\">\n" +
+    "        \n" +
+    "        <div class=\"spacing-25\"></div>\n" +
+    "\n" +
+    "        <!--\n" +
+    "        <div ng-if=\"!currentUser && false\">\n" +
+    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?explode,erupt,action,create')\" class=\"imageContainerSmall\">\n" +
+    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                        <div style=\"padding:15px\" style=\"width:100%\">\n" +
+    "                            <h1 style=\"font-size:14px;color:rgba(255,255,255,0.9);font-weight:400;\">\n" +
+    "                                <img src=\"images/3.gif\" style=\"height:50px;width:50px;border-radius:100%\">\n" +
+    "                                <div class=\"spacing-5\"></div>\n" +
+    "                                <a style=\"font-size:24px;color:white\" href=\"/\" ui-sref=\"home\">CRE8.XYZ</a>\n" +
+    "                            </h1>\n" +
+    "                            <h5 style=\"color:white;font-size:12px;\">EMPOWERING LOCAL COMMUNITIES</h5>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "        -->\n" +
+    "\n" +
+    "        <div ng-if=\"currentUser\">\n" +
+    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?explode,erupt,action,create')\" class=\"imageContainerSmall\">\n" +
+    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                        <div style=\"padding:15px\" style=\"width:100%\">\n" +
+    "                            <h1 style=\"font-size:14px;color:rgba(255,255,255,0.9);font-weight:400;\">\n" +
+    "                                <img src=\"{{currentUser.avatarUrl}}\" style=\"height:50px;width:50px;border-radius:100%\">\n" +
+    "                                <div class=\"spacing-5\"></div>\n" +
+    "                                <a style=\"font-size:24px;color:white\" href=\"member/{{currentUser.username}}\" ui-sref=\"member.activity({path:currentUser.username})\">{{currentUser.username}}</a>\n" +
+    "                            </h1>\n" +
+    "                            <h5 style=\"color:white;font-size:12px;\"><a href=\"#\" ng-click=\"memberQRToggle(currentUser)\" style=\"color:white\"><i style=\"color:white\" class=\"fas fa-qrcode\"></i> {{currentUser.id}}</a></h5>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <div>\n" +
+    "            <form style=\"padding:16px;\" role=\"search\" action=\"/search/\" onSubmit=\"location.href = 'search/' + document.getElementById('search-link').value; return false;\">\n" +
+    "                <div class=\"form-group\">\n" +
+    "                    <input class=\"form-control\" style=\"margin-top:3px;border-radius:3px;\" ng-keyup=\"keyPress(searchValue)\" ng-model=\"searchValue\" id=\"search-link\" size=\"40\" type=\"text\" placeholder=\"Search\">\n" +
+    "                </div>\n" +
+    "            </form>\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <div style=\"min-height:500px;max-height:100vh;overflow:hidden\">\n" +
+    "            <h4 ng-show=\"!currentUser\" class=\"nav-links\" style=\"padding:4px;\"><a href=\"/about\" ui-sref=\"about\">About</a></h4>\n" +
+    "            <!--<h4 ng-show=\"!currentUser\" class=\"nav-links\" style=\"padding:4px;\"><a href=\"/apps\" ui-sref=\"apps\">Apps</a></h4>\n" +
+    "            <h4 ng-show=\"!currentUser\" class=\"nav-links\" style=\"padding:4px;\"><a href=\"/developers\" ui-sref=\"developers\">developers</a></h4>-->\n" +
+    "\n" +
+    "            <h4 ng-show=\"currentUser\" class=\"nav-links\" ng-click=\"cre8Toggle()\" style=\"padding:8px;\"><a>CRE8</a></h4>\n" +
+    "            <h4 class=\"nav-links\" style=\"padding:4px;\"><a href=\"/discover\" ui-sref=\"discover\">Discover</a></h4>\n" +
+    "            <h4 class=\"nav-links\" style=\"padding:4px;\"><a href=\"/market\" ui-sref=\"markets\">Market</a></h4>\n" +
+    "            <h4 class=\"nav-links\" style=\"padding:4px;\"><a href=\"/marketplace\" ui-sref=\"marketPlace\">Marketplace</a></h4>\n" +
+    "            <h4 class=\"nav-links\" style=\"padding:4px;\"><a href=\"/projects\" ui-sref=\"projects\">Projects</a></h4>\n" +
+    "            <h4 class=\"nav-links\" style=\"padding:4px;\"><a href=\"/tasks\" ui-sref=\"tasks\">Tasks</a></h4>\n" +
+    "            <h4 ng-show=\"currentUser\" class=\"nav-links\" style=\"padding:8px;\">\n" +
+    "                <a href=\"/notifications\" ui-sref=\"notifications\"> <span ng-if=\"notificationCount > 0\" class=\"label label-danger\">{{notificationCount}}</span> Notifications</a>\n" +
+    "            </h4>\n" +
+    "            <h4 ng-show=\"currentUser\" class=\"nav-links\" style=\"padding:4px;\"><a href=\"/account\" ui-sref=\"account\">Settings</a></h4>\n" +
+    "            <h4 ng-show=\"currentUser\" class=\"nav-links\" style=\"padding:4px;\"><a href=\"/logout\">Logout</a></h4>\n" +
+    "            <h4 ng-show=\"!currentUser\" ng-click=\"loginToggle()\" class=\"nav-links\" style=\"padding:4px;\"><a>Login</a></h4>\n" +
+    "            <h4 ng-show=\"!currentUser\" class=\"nav-links\" style=\"padding:4px;\"><a href=\"/register\" ui-sref=\"register\">Register</a></h4>\n" +
+    "\n" +
+    "            <div class=\"spacing-15\"></div>\n" +
+    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?code,pattern,art,forest');height:100vh\" class=\"imageContainerSmall\">\n" +
+    "                <div style=\"background:rgba(0,0,0,0.75);height:100vh\" class=\"imageContainerSmallDiv\">\n" +
+    "                    <div style=\"\">\n" +
+    "                        <!--<div style=\"padding:15px\">\n" +
+    "                            <a href=\"/\" ui-sref=\"home\"><img style=\"height:50px\" src=\"images/hypercube.gif\"></a>\n" +
+    "                            <div class=\"spacing-5\"></div>\n" +
+    "                            <a style=\"font-weight:bold;font-size:15px;color:white;font-family:Helvetica Neue,Helvetica,Arial,sans-serif\" href=\"/\" ui-sref=\"home\">CRE8.XYZ</a>\n" +
+    "                        </div>-->\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</md-sidenav>");
+}]);
+
+angular.module("nav/templates/qr.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("nav/templates/qr.tpl.html",
+    "<md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"memberQR\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:black;color:white;width:70%;max-width:100%\">\n" +
+    "    <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
+    "        <div class=\"spacing-25\"></div>\n" +
+    "        \n" +
+    "        <div style=\"background:url('https://source.unsplash.com/1600x900/?connect,pattern')\" class=\"imageContainerSmall\">\n" +
+    "            <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                    <div style=\"padding:15px;text-align:center;\">\n" +
+    "                        <h1>\n" +
+    "                            <a style=\"display:inline;font-weight:600;margin-left:5px;color:white\" href=\"member/{{item.username}}\" ui-sref=\"member.activity({path:item.user.username})\">\n" +
+    "                                <img class=\"card-avatar\" ng-src=\"{{item.avatarUrl}}\" src=\"{{item.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
+    "                                {{item.username || item.title}}\n" +
+    "                            </a>\n" +
+    "                        </h1>\n" +
+    "                        <h5 style=\"color:white\">\n" +
+    "                            <span style=\"color:white;font-size:10px;\">\n" +
+    "                                 {{item.id}}</a>\n" +
+    "                            </span>\n" +
+    "                        </h5>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <div style=\"padding:16px;\">\n" +
+    "            <!--TODO-->\n" +
+    "\n" +
+    "\n" +
+    "            <div style=\"text-align:center\">\n" +
+    "                <span style=\"font-size:12px;\">SCAN ME</span>\n" +
+    "                <br>\n" +
+    "                <img style=\"height:100%;width:50vh;border:12px solid #c5c5c5;border-radius:100%\" src=\"https://chart.googleapis.com/chart?chs=500x500&cht=qr&chl={{item.id}}\">\n" +
+    "                <br>\n" +
+    "                <span style=\"font-size:12px;\">CRE8.XYZ</span>\n" +
+    "                <br>\n" +
+    "            </div>\n" +
+    "    \n" +
+    "        </div>\n" +
+    "    \n" +
+    "    </div>\n" +
+    "</md-sidenav>");
+}]);
+
+angular.module("nav/templates/register.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("nav/templates/register.tpl.html",
+    "<!--createMember-->\n" +
+    "<md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"register\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
+    "    <div ng-if=\"!currentUser\" class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
+    "        <div class=\"spacing-25\"></div>\n" +
+    "        \n" +
+    "        <div style=\"background:url('https://source.unsplash.com/1600x900/?connect,pattern')\" class=\"imageContainerSmall\">\n" +
+    "            <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                    <div style=\"padding:15px\">\n" +
+    "                        <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Register</h1>\n" +
+    "                        <h5 style=\"color:white\">Welcome to our Community!</h5>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <div class=\"spacing-25\"></div>\n" +
+    "\n" +
+    "        <div class=\"col-xs-12\">\n" +
+    "            <div class=\"login-form\">\n" +
+    "                <form role=\"form\">\n" +
+    "                    <div class=\"form-group\"><input class=\"form-control\" name=\"email\" ng-model=\"newMember.email\" placeholder=\"Email\" title=\"email\" type=\"email\"><i class=\"fa fa-envelope\" autocomplete=\"email\"></i></div>\n" +
+    "                    <div class=\"form-group\"><input class=\"form-control\" name=\"username\" ng-model=\"newMember.username\" placeholder=\"Username\" title=\"username\" type=\"text\" autocomplete=\"username\"><i class=\"fa fa-user\"></i></div>\n" +
+    "                    <div class=\"form-group\"><input class=\"form-control\" name=\"password\" ng-model=\"newMember.password\" placeholder=\"Password\" title=\"password\" type=\"password\" autocomplete=\"new-password\"><i class=\"fa fa-lock\"></i></div>\n" +
+    "                    <button class=\"btn btn-default log-btn\" ng-click=\"registerUser()\">Sign up</button>    \n" +
+    "                    <br><br>\n" +
+    "                    <div class=\"social-log\">\n" +
+    "                        <a href=\"/login\"><h5 style=\"color: gray;font-style: italic;\">Already A Member?</h5></a>\n" +
+    "                    </div>\n" +
+    "                </form>\n" +
+    "            </div>\n" +
+    "            <div class=\"selfClear\"></div>\n" +
+    "        </div>\n" +
+    "        \n" +
+    "    </div>\n" +
+    "</md-sidenav>");
+}]);
+
+angular.module("nav/templates/render.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("nav/templates/render.tpl.html",
+    "<md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"render\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:95%;max-width:100%\">\n" +
+    "    <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
+    "        <div class=\"spacing-25\"></div>\n" +
+    "        <div ng-hide=\"item.model == 'CONTENT' && !item.title\" style=\"background:url('https://source.unsplash.com/1600x900/?{{item.tags}}')\" class=\"imageContainerSmall\">\n" +
+    "            <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                    <div style=\"width:100%;padding:15px\">\n" +
+    "                        <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\">\n" +
+    "                            <a ng-if=\"item.model == 'CONTENT'\" href=\"content/{{item.id}}\" style=\"color:white\">{{item.title}}</a>\n" +
+    "                            <a ng-if=\"item.model == 'ITEM'\" href=\"item/{{item.id}}\" style=\"color:white\">{{item.title}}</a>\n" +
+    "                            <a ng-if=\"item.model == 'MARKET'\" href=\"market/{{item.string}}\" style=\"color:white\">{{item.string}}</a>\n" +
+    "                            <a ng-if=\"item.model == 'ORDER'\" href=\"order/{{item.id}} style=\"color:white\"\">{{item.title}}</a>\n" +
+    "                            <a ng-if=\"item.model == 'PROJECT'\" href=\"project/{{item.urlTitle}}\" style=\"color:white\">{{item.title}}</a>\n" +
+    "                            <a ng-if=\"item.model == 'TASK'\" href=\"task/{{item.id}}\" style=\"color:white\">{{item.title}}</a>\n" +
+    "                            <a ng-if=\"item.model == 'TIME'\" href=\"time/{{item.id}}\" style=\"color:white\">{{item.amount}} Seconds</a>\n" +
+    "                            <a ng-if=\"item.model == 'TRANSACTION'\" href=\"transaction/{{item.id}}\" style=\"color:white\">Transaction</a>\n" +
+    "                        </h1>\n" +
+    "                        <h5 style=\"color:white\"><a style=\"color:white\" href=\"{{item.model.toLowerCase()}}/{{item.id}}\">{{item.id}}</a></h5>\n" +
+    "                        <!--<h5 style=\"color:white\"><span am-time-ago=\"item.createdAt\"></span></h5>-->\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <div style=\"padding:16px;\">\n" +
+    "\n" +
+    "            <div class=\"spacing-15\"></div>\n" +
+    "\n" +
+    "            <div ng-if=\"item.model == 'CONTENT'\">\n" +
+    "                <a ng-if=\"item.user\" style=\"display:inline;font-weight:600;margin-left:5px\" href=\"member/{{item.user.username}}\">\n" +
+    "                    <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
+    "                    {{item.user.username}}\n" +
+    "                </a>\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <div ng-if=\"item.model == 'ITEM'\">\n" +
+    "                <a ng-if=\"item.user\" style=\"display:inline;font-weight:600;margin-left:5px\" href=\"member/{{item.user.username}}\">\n" +
+    "                    <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
+    "                    {{item.user.username}}\n" +
+    "                </a>\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <!--TODO-->\n" +
+    "            <div ng-if=\"item.model == 'MARKET'\">\n" +
+    "                <highchart config=\"bidAskChart\"></highchart>\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <div ng-if=\"item.model == 'ORDER'\">\n" +
+    "                <a ng-if=\"item.user\" style=\"display:inline;font-weight:600;margin-left:5px\" href=\"member/{{item.user.username}}\">\n" +
+    "                    <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
+    "                    {{item.user.username}}\n" +
+    "                </a>\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <div ng-if=\"item.model == 'PROJECT'\">\n" +
+    "\n" +
+    "                <div ng-if=\"item.location\">\n" +
+    "                    <p><b>Location</b></p>\n" +
+    "                    <p ng-if=\"item.location.address\"><b>Address</b>: {{item.location.address}}</p>\n" +
+    "                    <p ng-if=\"item.location.lat\"><b>Latitude</b>: {{item.location.lat}}, <b>Longitude</b>: {{item.location.lng}}</p>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"spacing-5\"></div>\n" +
+    "\n" +
+    "                <p><b>Associations</b></p>\n" +
+    "                <p><b>Members</b>: <a>{{item.memberCount || 0}}</a>, <b>Tasks</b>: <a>{{item.taskCount || 0}}</a>, <b>Time</b>: <a>{{item.timeCount||0 }}</a></p>\n" +
+    "                \n" +
+    "                <div class=\"spacing-5\"></div>\n" +
+    "\n" +
+    "                <p><b>Manifolds</b></p> \n" +
+    "                <p><a href=\"market/{{item.urlTitle.toUpperCase()}}\">{{item.urlTitle.toUpperCase()}}+</a>, <a href=\"{{market/item.urlTitle.toUpperCase()}}+TASK+\">{{item.urlTitle.toUpperCase()}}+TASK+</a>, <a href=\"market/project/{{item.urlTitle.toUpperCase()}}+TIME+\">{{item.urlTitle.toUpperCase()}}+TIME+</a></p>\n" +
+    "                <div class=\"spacing-5\"></div>\n" +
+    "\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <div ng-if=\"item.model == 'TASK'\">\n" +
+    "                <a ng-if=\"item.user\" style=\"display:inline;font-weight:600;margin-left:5px\" href=\"member/{{item.user.username}}\">\n" +
+    "                    <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
+    "                    {{item.user.username}}\n" +
+    "                </a>\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <div ng-if=\"item.model == 'TIME'\">\n" +
+    "                <a ng-if=\"item.user\" style=\"display:inline;font-weight:600;margin-left:5px\" href=\"member/{{item.user.username}}\">\n" +
+    "                    <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
+    "                    {{item.user.username}}\n" +
+    "                </a>\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <div ng-if=\"item.model == 'TRANSACTION'\">\n" +
+    "                <div style=\"display:inline\">\n" +
+    "                    <span ng-if=\"item.from.username\">\n" +
+    "                        <a ng-click=\"$event.stopPropagation()\"  style=\"display:inline;font-weight:600;margin-left:5px\" href=\"member/{{item.from.username}}\">\n" +
+    "                            <img class=\"card-avatar\" ng-src=\"{{item.from.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
+    "                            {{item.from.username}}\n" +
+    "                        </a>\n" +
+    "                    </span>\n" +
+    "                    <span ng-if=\"item.from.title\">\n" +
+    "                        <a ng-click=\"$event.stopPropagation()\"  style=\"display:inline;font-weight:600;margin-left:5px\" href=\"project/{{item.from.urlTitle}}\">\n" +
+    "                            <img class=\"card-avatar\" ng-src=\"{{item.from.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
+    "                            {{item.from.title}}\n" +
+    "                        </a>\n" +
+    "                    </span>\n" +
+    "                </div>\n" +
+    "                <div style=\"display:inline;padding-left:5px;padding-right:5px;\">\n" +
+    "                    <i class=\"fa fa-arrow-right\"></i>\n" +
+    "                </div>\n" +
+    "                <div style=\"display:inline\">\n" +
+    "                    <span ng-if=\"item.to.username\">\n" +
+    "                        <a ng-click=\"$event.stopPropagation()\"  style=\"display:inline;font-weight:600;margin-left:5px\" href=\"member/{{item.to.username}}\">\n" +
+    "                            <img class=\"card-avatar\" ng-src=\"{{item.to.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
+    "                            {{item.to.username}}\n" +
+    "                        </a>\n" +
+    "                    </span>\n" +
+    "                    <span ng-if=\"item.to.title\">\n" +
+    "                        <a ng-click=\"$event.stopPropagation()\"  style=\"display:inline;font-weight:600;margin-left:5px\" href=\"project/{{item.to.urlTitle}}\">\n" +
+    "                            <img class=\"card-avatar\" ng-src=\"{{item.to.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
+    "                            {{item.to.title}}\n" +
+    "                        </a>\n" +
+    "                    </span>\n" +
+    "                </div>\n" +
+    "                <div class=\"spacing-5\"></div>\n" +
+    "                <span ng-repeat=\"(key, value) in item.amountSet track by $index\"><p style=\"font-weight:800\">{{value}} <a ng-click=\"$event.stopPropagation();\" href=\"market/{{key}}\">{{key}}</a></p></span>\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <div ng-if=\"item.tags\" class=\"spacing-5\"></div>\n" +
+    "            <p ng-if=\"item.tags\"><b>Context</b></p> \n" +
+    "            <p ng-if=\"item.tags\"><a ng-repeat=\"tag in item.tags track by $index\" href=\"market/{{tag.trim()}}\"> {{tag.trim()}}<span ng-show=\"!$last\">,</span></a></p>\n" +
+    "            \n" +
+    "            <div class=\"spacing-5\"></div>\n" +
+    "            \n" +
+    "            <span style=\"color:gray\" am-time-ago=\"item.createdAt\"></span>\n" +
+    "            \n" +
+    "            <div class=\"spacing-10\"></div>\n" +
+    "            \n" +
+    "            <span ng-if=\"item.content\" style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span>\n" +
+    "\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <div style=\"background-color:#f9f9f9;height:100%\">\n" +
+    "            <div class=\"card-footer\">\n" +
+    "                <a href=\"#\" ng-click=\"createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.reactions.plus}} like </a> \n" +
+    "                <a href=\"#\" ng-click=\"createReaction(item, 'minus')\"><i class=\"fa fa-angle-down\"></i> {{item.reactions.minus}} dislike </a>\n" +
+    "                <a href=\"#\" ng-click=\"reply(validation)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "                <a ng-if=\"item.model == 'TASK'|| item.model == 'TIME'\" href=\"#\" ng-click=\"validationToggle(item)\"><i class=\"fa fa-check\"></i> validate </a>\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <div class=\"card-footer\" ng-show=\"item.showReply\">\n" +
+    "                <form role=\"form\" ng-submit=\"createContent()\">\n" +
+    "                    <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newContent.content\">create</button>\n" +
+    "                </form>\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <!--RENDER ASSOCIATED TIME-->\n" +
+    "            <!--RENDER ASSOCIATED CONTENT-->\n" +
+    "            <div ng-include=\"'content/content.tpl.html'\" ng-repeat=\"content in content.children track by content.id\"></div>\n" +
+    "\n" +
+    "        </div>\n" +
+    "\n" +
+    "    </div>\n" +
+    "</md-sidenav>");
+}]);
+
+angular.module("nav/templates/renderReputation.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("nav/templates/renderReputation.tpl.html",
+    "<!--RENDER MEMBER...-->\n" +
+    "<md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"renderReputation\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
+    "    <div ng-if=\"true\" class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
+    "\n" +
+    "        <div class=\"spacing-25\"></div>\n" +
+    "\n" +
+    "        <div style=\"background: url('{{item.user.coverUrl}}')\" class=\"imageContainerSmall\">\n" +
+    "            <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                    <div style=\"padding:15px;text-align:center\">\n" +
+    "                        <h1>\n" +
+    "                            <a style=\"display:inline;font-weight:600;margin-left:5px;color:white\" href=\"member/{{item.user.username}}\" ui-sref=\"member.activity({path:item.user.username})\">\n" +
+    "                                <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
+    "                                {{item.user.username}}\n" +
+    "                            </a>\n" +
+    "                            <!--\n" +
+    "                            <a>\n" +
+    "                                <span style=\"color:white;font-size:10px;\">0x{{item.user.id}}</span>\n" +
+    "                                <span ng-if=\"item.project\" style=\"color:gray;font-size:10px;\">, 0x{{item.id}}</span>\n" +
+    "                            </a>\n" +
+    "                            -->\n" +
+    "                        </h1>\n" +
+    "                        <h5 style=\"color:white\">\n" +
+    "                            <span style=\"color:white;font-size:10px;\">\n" +
+    "                                <a href=\"#\" style=\"color:white\" ng-click=\"memberQRToggle(item.user)\"> <i style=\"color:white\" class=\"fas fa-qrcode\"></i> 0x{{item.user.id}}</a>\n" +
+    "                            </span>\n" +
+    "                            <span ng-if=\"item.project\" style=\"color:gray;font-size:10px;\">\n" +
+    "                                <a href=\"#\" style=\"color:white\">, 0x{{item.id}}</a>\n" +
+    "                            </span>\n" +
+    "                        </h5>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <div style=\"padding:16px;text-align:center\">\n" +
+    "\n" +
+    "            <p style=\"font-size:13px;\">\n" +
+    "                <a href=\"member/{{item.user.username}}/projects\" ui-sref=\"member.projects({path:item.user.username})\">{{item.user.projectCount || 0}} Projects</a> | \n" +
+    "                <a href=\"member/{{item.user.username}}/followers\" ui-sref=\"member.followers({path:item.user.username})\">{{item.user.followerCount || 0}} Followers</a> | \n" +
+    "                <a href=\"member/{{item.user.username}}/following\" ui-sref=\"member.following({path:item.user.username})\">{{item.user.followingCount || 0}} Following</a>\n" +
+    "            </p>\n" +
+    "\n" +
+    "            <div class=\"spacing-5\"></div>\n" +
+    "\n" +
+    "            <div ng-if=\"currentUser.id != item.user.id\">\n" +
+    "                <img ng-click=\"memberQRToggle(item.user)\" style=\"height:50px;text-align:left\" src=\"https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{item.user.id}}\">\n" +
+    "                <a style=\"padding:10px 15px;color:rgb(125,125,125)\" class=\"btn btn-default\" ng-click=\"$event.stopPropagation();transactionToggle()\">Send Tokens</a>\n" +
+    "                <a style=\"padding:10px 15px;color:rgb(125,125,125)\" class=\"btn btn-default\" ng-click=\"$event.stopPropagation();transactionToggle()\">Follow</button></a>\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <div class=\"spacing-5\"></div>\n" +
+    "\n" +
+    "            <!--<h3>Reputation</h3>-->\n" +
+    "            <!--IF PRE SELECTED FILTER-->\n" +
+    "            <h4>{{item.project.title}}</h4>\n" +
+    "            <!--<tags-input min-length=\"1\" max-tags=\"1\" placeholder=\"Manifold Filter\" ng-model=\"reputationFilter\">\n" +
+    "                <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
+    "            </tags-input>-->\n" +
+    "            <div class=\"spacing-5\"></div>\n" +
+    "            \n" +
+    "            <!--FIX CRASH-->\n" +
+    "            <!--<highchart config=\"reputationChart\"></highchart>-->\n" +
+    "            \n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</md-sidenav>");
+}]);
+
+angular.module("nav/templates/renderValidation.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("nav/templates/renderValidation.tpl.html",
+    "<md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"renderValidation\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:90%;max-width:100%;overflow-x:hidden\">\n" +
+    "    <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
+    "        <div class=\"spacing-25\"></div>\n" +
+    "    \n" +
+    "        <div style=\"background:url('https://source.unsplash.com/1600x900/?{{item.tags}}')\" class=\"imageContainerSmall\">\n" +
+    "            <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                    <div style=\"padding:15px;width:100%\">\n" +
+    "                        <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Associations</h1>\n" +
+    "                        <h5 style=\"color:white\">\n" +
+    "\n" +
+    "                            <span ng-if=\"item.model != 'TIME'\">{{item.title}}</span>\n" +
+    "                            <span ng-if=\"item.model == 'TIME'\">\n" +
+    "                                <span style=\"font-size:10px;color:white\"> \n" +
+    "                                    {{item.amount}} seconds {{(item.amount/60).toFixed(2)}} minutes, {{(item.amount/3600).toFixed(2)}} hours\n" +
+    "                                </span>\n" +
+    "                            </span>\n" +
+    "\n" +
+    "                        </h5>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <div style=\"padding:16px;\">\n" +
+    "\n" +
+    "            <div class=\"spacing-15\"></div>\n" +
+    "\n" +
+    "            <p style=\"color:gray;font-style:italic\">Validations create value linkages. They form the mechanisms by which data is associated & given relation. <a ng-click=\"informationToggle('VALIDATION')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></p>\n" +
+    "           \n" +
+    "            <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "            <h5>Filter</h5>\n" +
+    "            <tags-input min-length=\"1\" max-tags=\"1\" placeholder=\"Associations\" ng-model=\"assoicationFilter\">\n" +
+    "                <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
+    "            </tags-input>\n" +
+    "\n" +
+    "            <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "            <!--TODO-->\n" +
+    "            <div class=\"row\">\n" +
+    "                <div class=\"col-sm-3\">\n" +
+    "                    <div style=\"max-height:500px;overflow:auto\">\n" +
+    "                        <div ng-repeat=\"association in item.associatedModels\">\n" +
+    "                            <p ng-click=\"filterAssociation()\"><b>{{association.address}}</b></p>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "                <div class=\"col-sm-9\">\n" +
+    "\n" +
+    "                    <!--\n" +
+    "                    <button class=\"btn btn-raised btn-default\" ng-click=\"renderGraph('random')\">Random</button>\n" +
+    "                    <button class=\"btn btn-raised btn-default\" ng-click=\"renderGraph('circle')\">Circle</button>\n" +
+    "                    <button class=\"btn btn-raised btn-default\" ng-click=\"renderGraph('concentric')\">Concentric</button>\n" +
+    "                    <button class=\"btn btn-raised btn-default\" ng-click=\"renderGraph('grid')\">Grid</button>\n" +
+    "                    <button class=\"btn btn-raised btn-default\" ng-click=\"renderGraph('cose')\">Cose</button>\n" +
+    "                    <button class=\"btn btn-raised btn-default\" ng-click=\"renderGraph('breadthfirst')\">Breadth First</button>\n" +
+    "                    -->\n" +
+    "                    \n" +
+    "                    <cytoscape graph-ready=\"graphReady\" graph-options=\"directedGraphOptions\" graph-elements=\"directedGraphElements\" graph-layout=\"directedGraphLayout\" graph-style=\"directedGraphStyle\"></cytoscape>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "            \n" +
+    "            <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "            <!--<highchart config=\"validationColumnRender\"></highchart>-->\n" +
+    "\n" +
+    "            <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "            <!--TODO MOBILE-->\n" +
+    "            <table class=\"table table-striped table-hover\">\n" +
+    "                <thead>\n" +
+    "                    <tr>\n" +
+    "                        <th>Member</th>\n" +
+    "                        <th>Models</th>\n" +
+    "                        <th>Dimension</th>\n" +
+    "                        <th>Validation Score</th>\n" +
+    "                        <th>Id</th>\n" +
+    "                    </tr>\n" +
+    "                <thead>\n" +
+    "                <tbody>\n" +
+    "                    <tr ng-repeat=\"validation in validations\">\n" +
+    "                        <td>\n" +
+    "                            <a href=\"member/{{validation.user.username}}\" ui-sref=\"member.activity({path:validation.user.username})\">\n" +
+    "                                <img class=\"card-avatar\" ng-src=\"{{validation.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
+    "                                <span style=\"font-weight:700\">{{validation.user.username}}</span>\n" +
+    "                            </a>\n" +
+    "                        </td>\n" +
+    "\n" +
+    "                        <td>\n" +
+    "\n" +
+    "                            <span ng-if=\"validation.associatedModels[0].type=='PROJECT'\"><a href=\"project/{{validation.associatedModels[0].info.urlTitle}}\">{{validation.associatedModels[0].info.title}}</a></span>\n" +
+    "                            <span ng-if=\"validation.associatedModels[0].type=='TASK'\"><a href=\"task/{{validation.associatedModels[0].address}}\">{{validation.associatedModels[0].info.title}}</a></span>\n" +
+    "                            <span ng-if=\"validation.associatedModels[0].type=='TIME'\"><a href=\"time/{{validation.associatedModels[0].address}}\">{{validation.associatedModels[0].info.amount}} Seconds</a></span>\n" +
+    "\n" +
+    "                            <i class=\"fa fa-arrows-h\"></i> \n" +
+    "\n" +
+    "                            <span ng-if=\"validation.associatedModels[1].type=='PROJECT'\"><a href=\"project/{{validation.associatedModels[0].info.urlTitle}}\">{{validation.associatedModels[1].info.title}}</a></span>\n" +
+    "                            <span ng-if=\"validation.associatedModels[1].type=='TASK'\"><a href=\"task/{{validation.associatedModels[0].address}}\">{{validation.associatedModels[1].info.title}}</a></span>\n" +
+    "                            <span ng-if=\"validation.associatedModels[1].type=='TIME'\"><a href=\"time/{{validation.associatedModels[0].address}}\">{{validation.associatedModels[1].info.amount}} Seconds</a></span>\n" +
+    "\n" +
+    "                        </td>\n" +
+    "\n" +
+    "                        <td>General</td>\n" +
+    "                        <td>{{validation.validation.general}}</td>\n" +
+    "                        <td><a href=\"validation/{{validation.id}}\" ui-sref=\"validation({id:validation.id})\">{{validation.id}}</a></td>\n" +
+    "\n" +
+    "                    </tr>\n" +
+    "                </tbody>\n" +
+    "            </table>\n" +
+    "\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</md-sidenav>");
+}]);
+
+angular.module("nav/templates/sort.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("nav/templates/sort.tpl.html",
+    "<md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"sort\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:black;max-width:100%\">\n" +
+    "    <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
+    "        <div class=\"spacing-25\"></div>\n" +
+    "\n" +
+    "        <div style=\"background:url('https://source.unsplash.com/1600x900/?{{item.tags}}')\" class=\"imageContainerSmall\">\n" +
+    "            <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                    <div style=\"padding:15px\">\n" +
+    "                        <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Sort</h1>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "        <div style=\"padding:16px;\">\n" +
+    "\n" +
+    "            <!--LOOP THRU OBJ TYPE KEYS..-->\n" +
+    "            <!--<h2><i class=\"fas fa-sort-amount-down\"></i></h2>-->\n" +
+    "            <!--<h5><a>Trending</a></h5>-->\n" +
+    "\n" +
+    "            <h4 ng-click=\"selectSort('ATTENTION', 'DESC', '24h')\" class=\"nav-links\"><a href=\"#\"><i class=\"fas fa-eye\"></i> Attention <i class=\"fas fa-chevron-down\"></i></a></h4>\n" +
+    "            \n" +
+    "            <!--PAST 24 HOURS-->\n" +
+    "            <!--ALL TIME..ETC-->\n" +
+    "            <h5 ng-click=\"selectSort('ATTENTION', 'DESC', '24h')\" class=\"nav-links\"><a href=\"#\">Past 24 Hours</a></h5>\n" +
+    "            <h5 ng-click=\"selectSort('ATTENTION', 'DESC', '1m')\" class=\"nav-links\"><a href=\"#\">Past Month</a></h5>\n" +
+    "            <h5 ng-click=\"selectSort('ATTENTION', 'DESC', '1y')\" class=\"nav-links\"><a href=\"#\">Past Year</a></h5>\n" +
+    "            <h5 ng-click=\"selectSort('ATTENTION', 'DESC', 'all')\" class=\"nav-links\"><a href=\"#\">All Time</a></h5>\n" +
+    "\n" +
+    "            <h4 ng-click=\"selectSort('REACTION', 'DESC', 'all')\" class=\"nav-links\"><a href=\"#\"><i class=\"fas fa-thumbs-up\"></i>  Reactions <i class=\"fas fa-chevron-down\"></i></a></h4>\n" +
+    "            \n" +
+    "            <h4 ng-click=\"selectSort('createdAt', 'DESC', null)\" class=\"nav-links\"><a href=\"#\">Creation Date</a></h4>\n" +
+    "        \n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</md-sidenav>\n" +
+    "");
+}]);
+
+angular.module("nav/templates/stats.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("nav/templates/stats.tpl.html",
+    "<md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"stats\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
+    "    <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
+    "        <div class=\"spacing-25\"></div>\n" +
+    "    \n" +
+    "        <div style=\"background:url('https://source.unsplash.com/1600x900/?{{item.tags}}')\" class=\"imageContainerSmall\">\n" +
+    "            <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                    <div style=\"padding:15px\">\n" +
+    "                        <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Stats</h1>\n" +
+    "                        <h5 style=\"text-align:left;font-size:14px;color:rgba(255,255,255,0.9);font-weight:400;\">\n" +
+    "                            <span ng-if=\"item.model != 'TIME'\">\n" +
+    "                                <span style=\"font-size:16px;color:white\" ng-if=\"item.title\">{{item.title}}</span>\n" +
+    "                                <span style=\"font-size:16px;color:white\" ng-if=\"!item.title\">{{item.model}}</span>\n" +
+    "                            </span>\n" +
+    "                            <span ng-if=\"item.model == 'TIME'\">\n" +
+    "                                <span style=\"font-size:16px;color:white\">{{item.amount}} seconds</span>\n" +
+    "                            </span>\n" +
+    "                            <br>\n" +
+    "                            <span style=\"font-size:10px;color:white\">{{item.id}}</span>\n" +
+    "                        </h5>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <div style=\"padding:16px;\">\n" +
+    "            <highchart config=\"chart\"></highchart>\n" +
+    "        </div>\n" +
+    "\n" +
+    "    </div>\n" +
+    "</md-sidenav>\n" +
+    "");
+}]);
+
+angular.module("nav/templates/subNav.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("nav/templates/subNav.tpl.html",
+    "<md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"subNav\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:black\">\n" +
+    "    <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;text-align:center;\">\n" +
+    "        \n" +
+    "        <div class=\"spacing-25\"></div>\n" +
+    "        <div style=\"background:url('https://source.unsplash.com/1600x900/?explode,erupt,action,create')\" class=\"imageContainerSmall\">\n" +
+    "            <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                    <div style=\"padding:15px\" style=\"width:100%\">\n" +
+    "                        <h1 style=\"font-size:14px;color:rgba(255,255,255,0.9);font-weight:400;\">\n" +
+    "                            <a ng-if=\"item.title\" href=\"project/{{item.title}}\" ui-sref=\"project.activity({path:item.urlTitle})\">\n" +
+    "                                <img ng-src=\"{{item.avatarUrl}}\" style=\"height:50px;width:50px;border-radius:100%\">\n" +
+    "                                <div class=\"spacing-5\"></div>\n" +
+    "                                <span style=\"font-size:24px;color:white\">{{project.title}}</span>\n" +
+    "                            </span>\n" +
+    "                            <a ng-if=\"item.username\" href=\"member/{{item.username}}\" ui-sref=\"member.activity({path:item.username})\">\n" +
+    "                                <img ng-src=\"{{item.avatarUrl}}\" style=\"height:50px;width:50px;border-radius:100%\">\n" +
+    "                                <div class=\"spacing-5\"></div>\n" +
+    "                                <span style=\"font-size:24px;color:white\">{{item.username}}</span>\n" +
+    "                            </a>\n" +
+    "                        </h1>\n" +
+    "                        <h5 style=\"color:white\" ng-click=\"memberQRToggle(item)\"><i style=\"color:white\" class=\"fas fa-qrcode\"></i> {{item.id}}</h5>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <div style=\"padding:16px\">\n" +
+    "            <div class=\"spacing-15\"></div>\n" +
+    "            <div ng-if=\"item.title\">\n" +
+    "                <h4 class=\"nav-links\"><a href=\"project/{{item.urlTitle}}/about\" ui-sref=\"project.about({path:item.urlTitle})\">About</a></h4>\n" +
+    "                <h4 class=\"nav-links\"><a href=\"project/{{item.urlTitle}}/assets\" ui-sref=\"project.assets({path:item.urlTitle})\">Assets</a></h4>\n" +
+    "                <h4 class=\"nav-links\"><a href=\"project/{{item.urlTitle}}/content\" ui-sref=\"project.content({path:item.urlTitle})\">Content</a></h4>\n" +
+    "                <h4 class=\"nav-links\"><a href=\"project/{{item.urlTitle}}/items\" ui-sref=\"project.items({path:item.urlTitle})\">Items</a></h4>\n" +
+    "                <h4 class=\"nav-links\"><a href=\"project/{{item.urlTitle}}/ledger\" ui-sref=\"project.ledger({path:item.urlTitle})\">Ledger</a></h4>\n" +
+    "                <h4 class=\"nav-links\"><a href=\"project/{{item.urlTitle}}/members\" ui-sref=\"project.members({path:item.urlTitle})\">{{item.memberCount}} Members</a></h4>\n" +
+    "                <h4 class=\"nav-links\"><a href=\"project/{{item.urlTitle}}/charter\" ui-sref=\"project.charter({path:item.urlTitle})\">Motions</a></h4>\n" +
+    "                <h4 class=\"nav-links\"><a href=\"project/{{item.urlTitle}}/positions\" ui-sref=\"project.positions({path:item.urlTitle})\">Positions</a></h4>\n" +
+    "                <h4 class=\"nav-links\"><a href=\"project/{{item.urlTitle}}/projects\" ui-sref=\"project.projects({path:item.urlTitle})\">Projects</a></h4>\n" +
+    "                <h4 class=\"nav-links\"><a href=\"project/{{item.urlTitle}}/tasks\" ui-sref=\"project.tasks({path:item.urlTitle})\">Tasks</a></h4>\n" +
+    "                <h4 class=\"nav-links\"><a href=\"project/{{item.urlTitle}}/time\" ui-sref=\"project.time({path:item.urlTitle})\">Time</a></h4>\n" +
+    "                <!--<h4 class=\"nav-links\"><a href=\"project/{{project.urlTitle}}/charter\">Validations</a></h4>-->\n" +
+    "            </div>\n" +
+    "            <div ng-if=\"item.username\">\n" +
+    "                <h4 class=\"nav-links\"><a href=\"member/{{item.username}}/about\" ui-sref=\"member.about({path:item.username})\">About</a></h4>\n" +
+    "                <h4 class=\"nav-links\"><a href=\"member/{{item.username}}/actions\" ui-sref=\"member.actions({path:item.username})\">Actions</a></h4>\n" +
+    "                <h4 class=\"nav-links\"><a href=\"member/{{item.username}}/assets\" ui-sref=\"member.assets({path:item.username})\">Assets</a></h4>\n" +
+    "                <h4 class=\"nav-links\"><a href=\"member/{{item.username}}/content\" ui-sref=\"member.content({path:item.username})\">Content</a></h4>\n" +
+    "                <h4 class=\"nav-links\"><a href=\"member/{{item.username}}/followers\" ui-sref=\"member.followers({path:item.username})\">{{item.followerCount}} Followers</a></h4>\n" +
+    "                <h4 class=\"nav-links\"><a href=\"member/{{item.username}}/following\" ui-sref=\"member.following({path:item.username})\">{{item.followingCount}} Following</a></h4>\n" +
+    "                <h4 class=\"nav-links\"><a href=\"member/{{item.username}}/items\" ui-sref=\"member.items({path:item.username})\">Items</a></h4>\n" +
+    "                <h4 class=\"nav-links\"><a href=\"member/{{item.username}}/ledger\" ui-sref=\"member.ledger({path:item.username})\">Ledger</a></h4>\n" +
+    "                <h4 class=\"nav-links\"><a href=\"member/{{item.username}}/positions\" ui-sref=\"member.positions({path:item.username})\">Positions</a></h4>\n" +
+    "                <h4 class=\"nav-links\"><a href=\"member/{{item.username}}/projects\" ui-sref=\"member.projects({path:item.username})\">{{item.projectCount}} Projects</a></h4>\n" +
+    "                <h4 class=\"nav-links\"><a href=\"member/{{item.username}}/tasks\" ui-sref=\"member.tasks({path:item.username})\">Tasks</a></h4>\n" +
+    "                <h4 class=\"nav-links\"><a href=\"member/{{item.username}}/time\" ui-sref=\"member.time({path:item.username})\">Time</a></h4>\n" +
+    "            </div>\n" +
+    "\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</md-sidenav>");
+}]);
+
+angular.module("nav/templates/timer.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("nav/templates/timer.tpl.html",
+    "<md-sidenav class=\"md-sidenav-left md-whiteframe-z2\" md-component-id=\"timer\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
+    "    <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
+    "        <div class=\"spacing-25\"></div>\n" +
+    "        <div style=\"background:url('https://source.unsplash.com/1600x900/?time')\" class=\"imageContainerSmall\">\n" +
+    "            <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                    <div style=\"padding:15px\">\n" +
+    "                        <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Time</h1>\n" +
+    "                        <h5 style=\"color:white\">Pay Attention!</h5>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <!--LOCATION.. (TASK) TIMER.. ATTENTION-->\n" +
+    "        <!--ADD CONTEXT???-->\n" +
+    "        <!--CREATE TIME SHOULD SPIN OFF A NEW INTERVAL WITH ID..-->\n" +
+    "            <!--DOING IT TWICE WILL 'DOUBlE' NOW-->\n" +
+    "        <div style=\"padding:16px;overflow:auto\">\n" +
+    "\n" +
+    "            <ul style=\"padding:0px;margin-top:0px;margin-bottom:0px;\" class=\"member-tabs\">\n" +
+    "                <li ng-if=\"taskTime > 0\"><a ng-click=\"selectTab('TASK')\" href=\"#\">Intentional Time</a></li>\n" +
+    "                <li><a ng-click=\"selectTab('ATTENTION')\" ng-click=\"\" href=\"#\">Live Attention</a></li>\n" +
+    "                <li><a ng-click=\"selectTab('MACHINE')\" href=\"#\">Machine Attention</a></li>\n" +
+    "            </ul>\n" +
+    "\n" +
+    "            <div class=\"spacing-15\"></div>\n" +
+    "\n" +
+    "            <div ng-if=\"selectedTab=='TASK'\">\n" +
+    "                <!--IF MULTI TASKS-->\n" +
+    "                <h4 ng-if=\"taskTime > 0\">{{taskTime}}</h4>\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <div ng-if=\"selectedTab=='ATTENTION'\">\n" +
+    "                <highchart config=\"timeChart\"></highchart>\n" +
+    "                <h4>{{timeModel.amount}}</h4>\n" +
+    "                <div ng-repeat=\"time in timeQ.attention.slice(0,100) | orderBy:'-'\">\n" +
+    "                    <p>{{time.context}} : <b>{{time.amount}}</b></p>\n" +
+    "                    <!--LOCATION AS CONTEXT..?-->\n" +
+    "                    <p>{{time.location}}</p>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <div ng-if=\"selectedTab=='MACHINE'\">\n" +
+    "\n" +
+    "                <div ng-repeat=\"time in timeQ.mining.slice(0,100) | orderBy:'-'\">\n" +
+    "                    <p>{{time.context}} : <b>{{time.amount}}</b></p>\n" +
+    "                    <!--LOCATION AS CONTEXT..?-->\n" +
+    "                    <p>{{time.location}}</p>\n" +
+    "                </div>\n" +
+    "\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <div class=\"spacing-10\"></div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</md-sidenav>");
+}]);
+
+angular.module("nav/templates/tokens.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("nav/templates/tokens.tpl.html",
+    "<md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"tokens\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%;overflow-x:hidden\">\n" +
+    "    <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
+    "        <div class=\"spacing-25\"></div>\n" +
+    "        <div style=\"background:url('https://source.unsplash.com/1600x900/?{{item.tags}}')\" class=\"imageContainerSmall\">\n" +
+    "            <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                    <div style=\"padding:15px\">\n" +
+    "                        <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Tokens</h1>\n" +
+    "                        <h5 style=\"color:white\">{{item.id}}</h5>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <div style=\"padding:16px;\">\n" +
+    "\n" +
+    "            <div class=\"spacing-15\"></div>\n" +
+    "\n" +
+    "            <h4 style=\"\">Protocols <a ng-click=\"informationToggle('PROTOCOLS', 'GENERAL', item)\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h4>\n" +
+    "\n" +
+    "            <!--REPEAT IN item.protocols-->\n" +
+    "            <p>\n" +
+    "                <!--<a ng-repeat=\"protocol in item.protocols\" href=\"#\"></a>-->\n" +
+    "                <a ng-click=\"informationToggle('PROTOCOLS')\" href=\"#\">Content Protocol</a>, \n" +
+    "                <a ng-click=\"informationToggle('PROTOCOLS')\" href=\"#\">Data Protocol</a>,\n" +
+    "                <a ng-click=\"informationToggle('PROTOCOLS')\" href=\"#\">Project Protocol</a>, \n" +
+    "                <a ng-click=\"informationToggle('PROTOCOLS')\" href=\"#\">Reaction Protocol</a>,\n" +
+    "                <a ng-click=\"informationToggle('PROTOCOLS')\" href=\"#\">Task Protocol</a>, \n" +
+    "                <a ng-click=\"informationToggle('PROTOCOLS')\" href=\"#\">Time Protocol</a>, \n" +
+    "                <a ng-click=\"informationToggle('PROTOCOLS')\" href=\"#\">Validation Protocol</a>\n" +
+    "            </p>\n" +
+    "\n" +
+    "            <div class=\"spacing-5\"></div>\n" +
+    "\n" +
+    "            <!--Token Space-->\n" +
+    "            <tags-input min-length=\"1\" ng-model=\"tokenFilter\" placeholder=\"Token Manifold\"></tags-input>\n" +
+    "\n" +
+    "            <!--TODO: MOBILE-->\n" +
+    "            <table class=\"table table-striped table-hover\">\n" +
+    "                <!--<thead>\n" +
+    "                    <tr><th>Manifold and Action Table</th></tr>\n" +
+    "                </thead>-->\n" +
+    "                <tbody>\n" +
+    "                    <tr ng-repeat=\"token in tokens\">\n" +
+    "                        <td><a href=\"market/{{token}}\" ui-sref=\"market({id:token})\">{{token}}</a></td>\n" +
+    "                    </tr>\n" +
+    "                </tbody>\n" +
+    "            </table>\n" +
+    "\n" +
+    "            <!--<div class=\"spacing-10\"></div>\n" +
+    "            <h3 style=\"\">Tokens Earned</h3>-->\n" +
+    "\n" +
+    "            <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "            <h3 style=\"\">Market Liquidity<h3>\n" +
+    "            <h5>Equality Traverse <a ng-click=\"informationToggle('MARKETLIQUIDITY')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "\n" +
+    "            <div class=\"spacing-15\"></div>\n" +
+    "\n" +
+    "            <!--TODO: WEIGHT THE INPUT (SLIDER) ; absolute || % -->\n" +
+    "\n" +
+    "            <h4>Asset Input</h4>\n" +
+    "            <tags-input min-length=\"1\" ng-model=\"inputVector\" placeholder=\"Input\"></tags-input>\n" +
+    "           \n" +
+    "            <div class=\"spacing-15\"></div>\n" +
+    "\n" +
+    "            <h4>Desired Output</h4>\n" +
+    "            <tags-input min-length=\"1\" ng-model=\"outputVector\" placeholder=\"Output\"></tags-input>\n" +
+    "            \n" +
+    "            <div class=\"spacing-15\"></div>\n" +
+    "\n" +
+    "            <button ng-click=\"marketTraverse();\" type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\">+ Lookup</button>\n" +
+    "            \n" +
+    "            <div class=\"spacing-15\"></div>\n" +
+    "\n" +
+    "            <div ng-show=\"outputMatix.length > 0\" >\n" +
+    "\n" +
+    "\n" +
+    "                <!--TRAVERSAL GRAPH?-->\n" +
+    "                <!--TODO MOBILE-->\n" +
+    "                <table class=\"table table-striped table-hover\">\n" +
+    "                    <tbody>\n" +
+    "                        <tr ng-repeat=\"token in inputVector track by $index\">\n" +
+    "                            <td><a href=\"market/{{token.text}}\" ui-sref=\"market({id:token.text})\">{{token.text}}</a></td>\n" +
+    "                        </tr>\n" +
+    "                    </tbody>\n" +
+    "                </table>\n" +
+    "\n" +
+    "                <div class=\"spacing-15\"></div>\n" +
+    "\n" +
+    "                <div style=\"text-align:center\"><img src=\"https://i.stack.imgur.com/PnXIo.png\"/></div>\n" +
+    "\n" +
+    "                <div class=\"spacing-15\"></div>\n" +
+    "\n" +
+    "                <!--TODO MOBILE-->\n" +
+    "                <table class=\"table table-striped table-hover\">\n" +
+    "                    <thead>\n" +
+    "                        <tr>\n" +
+    "                            <th>Identifer</th>\n" +
+    "                            <th>Value</th>\n" +
+    "                        </tr>\n" +
+    "                    </thead>\n" +
+    "                    <tbody>\n" +
+    "                        <tr ng-repeat=\"assetVector in outputMatix track by $index\">\n" +
+    "                            <td><a href=\"market/{{assetVector.identifer}}\" ui-sref=\"market({id:assetVector.identifer})\">{{assetVector.identifer}}</a></td>\n" +
+    "                            <td>{{assetVector.value}}</td>\n" +
+    "                        </tr>\n" +
+    "                    </tbody>\n" +
+    "                </table>\n" +
+    "                <div class=\"spacing-15\"></div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</md-sidenav>\n" +
+    "");
 }]);
 
 angular.module("notifications/index.tpl.html", []).run(["$templateCache", function($templateCache) {
@@ -12104,20 +11419,11 @@ angular.module("order/index.tpl.html", []).run(["$templateCache", function($temp
   $templateCache.put("order/index.tpl.html",
     "<div class=\"container\">\n" +
     "\n" +
-    "    <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "    <div class=\"row\">\n" +
-    "        <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
-    "            <li><a ng-click=\"selectTab('INFORMATION')\" href=\"#\">Information</a></li>\n" +
-    "            <li><a ng-click=\"selectTab('ORDERS')\" href=\"#\">Orders</a></li>\n" +
-    "            <li><a ng-click=\"selectTab('TRANSACTIONS')\" href=\"#\">Transactions (Trades)</a></li>\n" +
-    "        </ul>\n" +
-    "    </div>\n" +
     "\n" +
     "    <div class=\"row\">\n" +
     "\n" +
     "        <!--INFORMATION-->\n" +
-    "        <div ng-if=\"selectedTab =='INFORMATION'\">\n" +
+    "        <div>\n" +
     "            <div class=\"card\" ng-click=\"\">\n" +
     "                <div style=\"background:url('https://source.unsplash.com/1600x900/?explore,discover')\" class=\"imageContainerSmall\">\n" +
     "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\"> \n" +
@@ -12142,7 +11448,20 @@ angular.module("order/index.tpl.html", []).run(["$templateCache", function($temp
     "                        </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
-    "                <div style=\"padding:16px\">\n" +
+    "                <div style=\"background-color:white\">\n" +
+    "                <div class=\"member-tab-container container\" style=\"padding-left:0px\">\n" +
+    "                    <div style=\"text-align:left\">\n" +
+    "                        <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "                            <li><a ng-click=\"selectTab('INFORMATION')\" href=\"#\">Information</a></li>\n" +
+    "                            <li><a ng-click=\"selectTab('ORDERS')\" href=\"#\">Orders</a></li>\n" +
+    "                            <li><a ng-click=\"selectTab('TRANSACTIONS')\" href=\"#\">Transactions</a></li>\n" +
+    "                            <li><a ng-click=\"$event.stopPropagation();selectTab('CONTENT')\">Content</a></li>\n" +
+    "                        </ul>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <hr style=\"margin:0px;\">\n" +
+    "                <div ng-if=\"selectedTab =='INFORMATION'\" style=\"padding:16px\">\n" +
     "\n" +
     "                    <div class=\"spacing-5\"></div>\n" +
     "\n" +
@@ -12226,7 +11545,7 @@ angular.module("order/index.tpl.html", []).run(["$templateCache", function($temp
     "                <div class=\"card-footer\">\n" +
     "                    <a ng-click=\"createReaction(order, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{order.reactions.plus}} like </a> \n" +
     "                    <a ng-click=\"createReaction(order, 'plus')\" ><i class=\"fa fa-angle-down\"></i> {{order.reactions.minus}} dislike </a>\n" +
-    "                    <a ng-click=\"reply(order)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "                    <a ng-click=\"contentToggle(order)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
     "                </div>\n" +
     "                <div ng-click=\"$event.stopPropagation();\" ng-show=\"order.showReply\" class=\"card-footer\">\n" +
     "                    <form role=\"form\" ng-submit=\"createContent(order)\">\n" +
@@ -14379,6 +13698,8 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "                        <!--<li><a ng-click=\"$event.stopPropagation();selectTab('TIME')\">Activity</a></li>-->\n" +
     "                        <li><a ng-click=\"$event.stopPropagation();selectTab('TIME')\">Time</a></li>\n" +
     "                        <li><a ng-click=\"$event.stopPropagation();selectTab('CONTENT')\">Content</a></li>\n" +
+    "                        <li><a ng-click=\"$event.stopPropagation();selectTab('ASSOCIATIONS')\">Associations</a></li>\n" +
+    "\n" +
     "                        <!--\n" +
     "                        <li><a ng-click=\"$event.stopPropagation();selectTab('HISTORY')\" >History</a></li>\n" +
     "                        <li><a ng-click=\"$event.stopPropagation();selectTab('ASSOCIATIONS')\">Associations</a></li>\n" +
@@ -14403,76 +13724,12 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "    </div>\n" +
     "</div>\n" +
     "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
     "<div class=\"container\">\n" +
     "\n" +
     "    <!--TODO: ELUCIDATE TOKENS MINTING PER ACTION, TOKENS MINTED TOTAL-->\n" +
     "    <!--TODO: ASSOCIATION SORTED BY MOST VALIDATIONS-->\n" +
     "    <!--TODO: ATTENTION MODEL-->\n" +
-    "    <!--\n" +
-    "    <div class=\"row\">\n" +
-    "\n" +
-    "        <div ng-if=\"currentUser.id == task.user\">\n" +
-    "            <ul style=\"padding:0px;margin-top:0px;margin-bottom:0px;\" class=\"member-tabs\">\n" +
-    "                <li><a ng-click=\"\" href=\"#\">Current</a></li>\n" +
-    "                <li><a ng-click=\"\" href=\"#\">History</a></li>\n" +
-    "                <li><a ng-click=\"\" href=\"#\">Motions</a></li>\n" +
-    "            </ul>\n" +
-    "        </div>\n" +
-    "\n" +
-    "        <div class=\"card\" ng-click=\"cardDetailToggle(task)\">\n" +
-    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?explore,discover')\" class=\"imageContainerSmall\">\n" +
-    "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                    <div style=\"text-align:right;padding:15px;position:absolute;right:0\">\n" +
-    "                        <a style=\"color:white;\" ng-click=\"$event.stopPropagation();cardDetailToggle(task)\">\n" +
-    "                            <i class=\"fas fa-chevron-down\"></i>\n" +
-    "                        </a>\n" +
-    "                    </div>\n" +
-    "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                        <div class=\"container\">\n" +
-    "                            <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\">{{task.title}}</h1>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "            <div class=\"padding:16px\">\n" +
-    "                <div class=\"col-sm-12\" style=\"padding:16px\">\n" +
-    "                    <p><a ng-repeat=\"tag in task.tags track by $index\" href=\"market/{{tag.trim()}}\" ui-sref=\"market({id:tag.trim()})\"> {{tag.trim()}}<span ng-show=\"!$last\">,</span></a></p>\n" +
-    "                    <p><span style=\"display:inline\" ng-bind-html=\"renderContent(task.content)\"></span></p>\n" +
-    "                    <p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"task.createdAt\"></p>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "\n" +
-    "            <div style=\"clear:both\"></div>\n" +
-    "\n" +
-    "            <div class=\"card-footer\">\n" +
-    "                <a ng-click=\"$event.stopPropagation();\" style=\"color:grey\"><i class=\"fas fa-eye\"></i>  {{task.attention.general || 0}}</a>\n" +
-    "                <a ng-click=\"$event.stopPropagation();createReaction(task, 'plus')\"><i class=\"fas fa-angle-up\"></i> {{task.reactions.plus}} like </a> \n" +
-    "                <a ng-click=\"$event.stopPropagation();createReaction(task, 'minus')\" ><i class=\"fas fa-angle-down\"></i> {{task.reactions.minus}} dislike </a>\n" +
-    "                <a ng-click=\"$event.stopPropagation();reply(task)\"><i class=\"far fa-comment\"></i> comment </a>\n" +
-    "                <a ng-click=\"$event.stopPropagation();validationToggle(task)\"><i class=\"fas fa-check\"></i> validate </a>\n" +
-    "            </div>\n" +
-    "\n" +
-    "        </div>\n" +
-    "    </div>\n" +
-    "\n" +
-    "    <div class=\"spacing-5\"></div>\n" +
-    "\n" +
-    "    <div style=\"row\">\n" +
-    "        <ul style=\"padding:0px;margin-top:0px;margin-bottom:0px;\" class=\"member-tabs\">\n" +
-    "            <li><a ng-click=\"showContentToggle()\" href=\"#\">Content</a></li>\n" +
-    "            <li><a ng-click=\"showTimeToggle()\" href=\"#\">Time</a></li>\n" +
-    "        </ul>\n" +
-    "    </div>\n" +
-    "    -->\n" +
-    "\n" +
-    "\n" +
+    "  \n" +
     "    <div class=\"row\" ng-show=\"selectedTab =='TIME'\">\n" +
     "\n" +
     "        <!--TODO: STREAM | IFPS-->\n" +
@@ -14649,6 +13906,81 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
+    "\n" +
+    "    <div class=\"row\" ng-show=\"selectedTab =='ASSOCIATIONS'\">\n" +
+    "        <div class=\"card\">\n" +
+    "            <div style=\"padding:16px;\">\n" +
+    "\n" +
+    "                <h5>Filter</h5>\n" +
+    "                <tags-input min-length=\"1\" max-tags=\"1\" placeholder=\"Associations\" ng-model=\"assoicationFilter\">\n" +
+    "                    <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
+    "                </tags-input>\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <!--TODO-->\n" +
+    "                <div class=\"row\">\n" +
+    "                    <div class=\"col-sm-3\">\n" +
+    "                        <div style=\"max-height:500px;overflow:auto\">\n" +
+    "                            <div ng-repeat=\"association in item.associatedModels\">\n" +
+    "                                <p ng-click=\"filterAssociation()\"><b>{{association.address}}</b></p>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                    <div class=\"col-sm-9\">\n" +
+    "                        <cytoscape graph-ready=\"graphReady\" graph-options=\"directedGraphOptions\" graph-elements=\"directedGraphElements\" graph-layout=\"directedGraphLayout\" graph-style=\"directedGraphStyle\"></cytoscape>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "                \n" +
+    "                <!--<div class=\"spacing-10\"></div>\n" +
+    "                <highchart config=\"validationColumnRender\"></highchart>\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "                <table class=\"table table-striped table-hover\">\n" +
+    "                    <thead>\n" +
+    "                        <tr>\n" +
+    "                            <th>Member</th>\n" +
+    "                            <th>Models</th>\n" +
+    "                            <th>Dimension</th>\n" +
+    "                            <th>Validation Score</th>\n" +
+    "                            <th>Id</th>\n" +
+    "                        </tr>\n" +
+    "                    <thead>\n" +
+    "                    <tbody>\n" +
+    "                        <tr ng-repeat=\"validation in validations\">\n" +
+    "                            <td>\n" +
+    "                                <a href=\"member/{{validation.user.username}}\" ui-sref=\"member.activity({path:validation.user.username})\">\n" +
+    "                                    <img class=\"card-avatar\" ng-src=\"{{validation.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
+    "                                    <span style=\"font-weight:700\">{{validation.user.username}}</span>\n" +
+    "                                </a>\n" +
+    "                            </td>\n" +
+    "\n" +
+    "                            <td>\n" +
+    "\n" +
+    "                                <span ng-if=\"validation.associatedModels[0].type=='PROJECT'\"><a href=\"project/{{validation.associatedModels[0].info.urlTitle}}\">{{validation.associatedModels[0].info.title}}</a></span>\n" +
+    "                                <span ng-if=\"validation.associatedModels[0].type=='TASK'\"><a href=\"task/{{validation.associatedModels[0].address}}\">{{validation.associatedModels[0].info.title}}</a></span>\n" +
+    "                                <span ng-if=\"validation.associatedModels[0].type=='TIME'\"><a href=\"time/{{validation.associatedModels[0].address}}\">{{validation.associatedModels[0].info.amount}} Seconds</a></span>\n" +
+    "\n" +
+    "                                <i class=\"fa fa-arrows-h\"></i> \n" +
+    "\n" +
+    "                                <span ng-if=\"validation.associatedModels[1].type=='PROJECT'\"><a href=\"project/{{validation.associatedModels[0].info.urlTitle}}\">{{validation.associatedModels[1].info.title}}</a></span>\n" +
+    "                                <span ng-if=\"validation.associatedModels[1].type=='TASK'\"><a href=\"task/{{validation.associatedModels[0].address}}\">{{validation.associatedModels[1].info.title}}</a></span>\n" +
+    "                                <span ng-if=\"validation.associatedModels[1].type=='TIME'\"><a href=\"time/{{validation.associatedModels[0].address}}\">{{validation.associatedModels[1].info.amount}} Seconds</a></span>\n" +
+    "\n" +
+    "                            </td>\n" +
+    "\n" +
+    "                            <td>General</td>\n" +
+    "                            <td>{{validation.validation.general}}</td>\n" +
+    "                            <td><a href=\"validation/{{validation.id}}\" ui-sref=\"validation({id:validation.id})\">{{validation.id}}</a></td>\n" +
+    "\n" +
+    "                        </tr>\n" +
+    "                    </tbody>\n" +
+    "                </table>\n" +
+    "                -->\n" +
+    "\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "\n" +
     "    <div class=\"spacing-10\"></div>\n" +
     "</div>\n" +
     "");
@@ -15498,6 +14830,946 @@ angular.module("transparency/index.tpl.html", []).run(["$templateCache", functio
     "<div class=\"spacing-50\"></div>\n" +
     "\n" +
     "");
+}]);
+
+angular.module("tutorial/index.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("tutorial/index.tpl.html",
+    "<style>\n" +
+    "    .valueMapButton{\n" +
+    "        margin: 2px;\n" +
+    "        padding: 0 5px;\n" +
+    "        display: inline-block;\n" +
+    "        float: left;\n" +
+    "        font: 14px \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n" +
+    "        height: 40px;\n" +
+    "        line-height: 40px;\n" +
+    "        border: 2px solid #acacac;\n" +
+    "        border-radius: 3px;\n" +
+    "        background: rgba(0,43,85,1);\n" +
+    "        color: white;\n" +
+    "    }\n" +
+    "</style>\n" +
+    "\n" +
+    "<div class=\"row\">\n" +
+    "\n" +
+    "    <div ng-show=\"pageNumber == 0\">\n" +
+    "        <div ng-include=\"'tutorial/templates/intro.tpl.html'\"></div>\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <div ng-show=\"pageNumber == 1\">\n" +
+    "        <div ng-include=\"'tutorial/templates/valueMap.tpl.html'\"></div>\n" +
+    "    </div>\n" +
+    " \n" +
+    "    <div ng-if=\"pageNumber == 2\">\n" +
+    "        <div ng-include=\"'tutorial/templates/projects.tpl.html'\"></div>\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <div ng-if=\"pageNumber == 3\">\n" +
+    "        <div ng-include=\"'tutorial/templates/tasks.tpl.html'\"></div>\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <div ng-if=\"pageNumber == 4\">\n" +
+    "        <div ng-include=\"'tutorial/templates/members.tpl.html'\"></div>\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <div ng-if=\"pageNumber == 5\">\n" +
+    "        <div ng-include=\"'tutorial/templates/updateValueMap.tpl.html'\"></div>\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <div ng-if=\"pageNumber == 6\" ng-click=\"\">\n" +
+    "        <div ng-include=\"'tutorial/templates/create.tpl.html'\"></div>\n" +
+    "    </div>\n" +
+    "    \n" +
+    "</div>\n" +
+    "");
+}]);
+
+angular.module("tutorial/templates/controls.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("tutorial/templates/controls.tpl.html",
+    "<div class=\"\">\n" +
+    "    <div class=\"col-xs-6\" style=\"padding-left:0px;padding-right:0px\">\n" +
+    "        <div class=\"card\" ng-click=\"changePage()\" style=\"text-align:center\">\n" +
+    "            <button style=\"width:100%\" class=\"btn btn-default log-btn\">CONTINUE <i class=\"fa fa-arrow-right\"></i></button>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "    <div class=\"col-xs-6\" style=\"padding-left:0px;padding-right:0px\">\n" +
+    "        <div class=\"card\" ng-click=\"changePage(-1)\" style=\"text-align:center\">\n" +
+    "            <button style=\"width:100%\" class=\"btn btn-default log-btn\">SKIP <i class=\"fa fa-angle-double-right\"></i></button>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>");
+}]);
+
+angular.module("tutorial/templates/create.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("tutorial/templates/create.tpl.html",
+    "<div class=\"card\">\n" +
+    "    <div style=\"background:url('https://source.unsplash.com/1600x900/?business,service,civic,create,art,movies,action')\" class=\"imageContainerSmall\">\n" +
+    "        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "            <div style=\"text-align:right;padding:15px;position:absolute;right:0\">\n" +
+    "                <a style=\"color:white;\" ng-click=\"$event.stopPropagation();cardDetailToggle(item)\">\n" +
+    "                    <i class=\"fas fa-plus\"></i>\n" +
+    "                </a>\n" +
+    "            </div> \n" +
+    "            <div class=\"container\" style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Let's Create!</h1>\n" +
+    "                <p style=\"color:white;\">My First Post</p>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "    <div style=\"padding:16px;\">\n" +
+    "        <div class=\"card\">\n" +
+    "            <button ng-click=\"contentToggle()\" style=\"width:100%\" class=\"btn btn-default log-btn\">+ CONTENT</button>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "<div ng-include=\"'tutorial/templates/controls.tpl.html'\"></div>\n" +
+    "");
+}]);
+
+angular.module("tutorial/templates/intro.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("tutorial/templates/intro.tpl.html",
+    "<div class=\"card\">\n" +
+    "    <div style=\"background:url('https://source.unsplash.com/1600x900/?settings')\" class=\"imageContainerSmall\">\n" +
+    "        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "            <div style=\"text-align:right;padding:15px;position:absolute;right:0\">\n" +
+    "                <a style=\"color:white;\" ng-click=\"$event.stopPropagation();cardDetailToggle(item)\">\n" +
+    "                    <i class=\"fas fa-globe\"></i>\n" +
+    "                </a>\n" +
+    "            </div> \n" +
+    "            <div style=\"margin-top: auto;margin-bottom: auto;padding:15px\">\n" +
+    "                <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Welcome to CRE8!</h1>\n" +
+    "                <h5 style=\"color:white\">{{currentUser.username}}, let's get started.</h5>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div style=\"padding:16px;\">\n" +
+    "    <div class=\"row\">\n" +
+    "        <div class=\"col-xs-12\" style=\"padding-right:10px;padding-left:10px\">\n" +
+    "            <div class=\"member-card\" ng-click=\"renderReputationToggle(currentUser)\">\n" +
+    "                <!--<div style=\"text-align:right;padding:15px;position:absolute;right:0\">\n" +
+    "                    <a style=\"color:white;\" ng-click=\"$event.stopPropagation();cardDetailToggle(item)\">\n" +
+    "                        <i class=\"fas fa-chevron-down\"></i>\n" +
+    "                    </a>\n" +
+    "                </div>--> \n" +
+    "                <div class=\"member-card-image\" style=\"background-image: url('{{currentUser.coverUrl}}')\">\n" +
+    "                    <a href=\"#\">\n" +
+    "                        <img ng-src=\"{{currentUser.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
+    "                    </a>\n" +
+    "                </div>\n" +
+    "                <div style=\"clear:both\"></div>\n" +
+    "                <div class=\"member-card-info\" style=\"height:auto;padding-left:0%\">\n" +
+    "                    <h4 ng-click=\"$event.stopPropagation()\"><a href=\"member/{{currentUser.username}}\" ui-sref=\"member.activity({path:currentUser.username})\">{{currentUser.username}}</a></h4>\n" +
+    "                    <p style=\"color:gray\"><i style=\"color:#30b257\" class=\"fa fa-circle\"></i> {{currentUser.status}} Creating Account</p>\n" +
+    "                    <p style=\"color:gray\"><b>Total Reputation</b>: {{currentUser.totalWork}}</p>\n" +
+    "                    <p style=\"font-size:12px;\" ng-click=\"$event.stopPropagation();memberQRToggle(currentUser);\"><a style=\"color:gray\"><i class=\"fas fa-qrcode\"></i> {{currentUser.id}}</a></p>\n" +
+    "                </div>\n" +
+    "                <div ng-show=\"false\" class=\"member-card-social\">\n" +
+    "                    <a ng-show=\"false\" href=\"{{currentUser.socialAccounts.facebook.profileUrl}}\" target=\"_blank\"><i class=\"fa fa-facebook facebook-icon\"></i></a>\n" +
+    "                    <a ng-show=\"false\" href=\"{{currentUser.socialAccounts.facebook.profileUrl}}\" target=\"_blank\"><i class=\"fa fa-instagram\"></i></a>\n" +
+    "                    <a ng-show=\"false\" href=\"{{currentUser.socialAccounts.twitter.profileUrl}}\" target=\"_blank\"><i class=\"fa fa-twitter twitter-icon\"></i></a>\n" +
+    "                    <a ng-show=\"false\" href=\"{{currentUser.socialAccounts.google.profileUrl}}\" target=\"_blank\"><i class=\"fa fa-google google-icon\"></i></a>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "       \n" +
+    "            <div style=\"padding:16px;text-align:center\">\n" +
+    "                <p style=\"color:gray;font-style:italic\">All information given to CRE8 comes from a place of <b>mutual consent</b>.<p>\n" +
+    "                <p style=\"font-size:11px\"><a ng-click=\"informationToggle('INFORMATION SHARING CONSENT')\" href=\"#\"> <i class=\"fa fa-question-circle\"></i> Learn More</a></p> \n" +
+    "                <div layout=\"row\" layout-align=\"center center\" flex=\"100\">\n" +
+    "                    <p><md-switch style=\"\" ng-model=\"consentAgreement\" aria-label=\"Consent Agreement\"></md-switch></p>\n" +
+    "                </div>\n" +
+    "                <p><b>I agree.</b></p>\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "        </div>\n" +
+    "        <div ng-if=\"consentAgreement\" class=\"col-xs-12\" style=\"padding-right:0px;padding-left:0px\">\n" +
+    "            <div class=\"card\" style=\"margin-top:0px;\">\n" +
+    "                <div style=\"background:url('https://source.unsplash.com/1600x900/?personal,energy,joyful,humuan,data,code')\" class=\"imageContainerSmall\">\n" +
+    "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                        <div style=\"padding:15px;margin-top: auto;margin-bottom: auto;\">\n" +
+    "                            <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\">Share With Us</h1>\n" +
+    "                            <h5><a style=\"color:white\" href=\"/account\"  ui-sref=\"account\"><i class=\"fas fa-passport\"></i> Account Information & Settings</a></h5>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "                <div style=\"padding:16px;\">\n" +
+    "                    <form role=\"form\" ng-submit=\"editAccount()\">\n" +
+    "                        <div style=\"padding:0px\" class=\"col-xs-6\">\n" +
+    "                            <h5><i class=\"fas fa-link\"></i> Avatar URL</h5>\n" +
+    "                            <input type=\"text\" ng-model=\"newAccountInformation.avatarUrl\" placeholder=\"Avatar Url\" class=\"form-control\">\n" +
+    "                        </div>\n" +
+    "                        <div style=\"padding:0px\" class=\"col-xs-6\"><h5><i class=\"fas fa-link\"></i> Cover URL</h5><input type=\"text\" ng-model=\"newAccountInformation.coverUrl\" placeholder=\"Cover Url\" class=\"form-control\"></div>\n" +
+    "                        <div style=\"padding:0px\" class=\"col-xs-12\"><h5><i class=\"fas fa-user\"></i> Username</h5><input type=\"text\" ng-model=\"newAccountInformation.username\" placeholder=\"Username\" class=\"form-control\"></div>\n" +
+    "                        <div style=\"padding:0px\" class=\"col-xs-6\"><h5><i class=\"fas fa-envelope\"></i> Email</h5><input type=\"text\" ng-model=\"newAccountInformation.email\" placeholder=\"Email\" class=\"form-control\"></div>\n" +
+    "                        <div style=\"padding:0px\" class=\"col-xs-6\"><h5><i class=\"fas fa-phone\"></i> Phone Number</h5><input type=\"text\" ng-model=\"newAccountInformation.phoneNumber\" placeholder=\"Phone Number\" class=\"form-control\"></div>\n" +
+    "                        <div style=\"padding:0px\" class=\"col-xs-4\"><h5><i class=\"fas fa-info\"></i> First Name</h5><input type=\"text\" ng-model=\"newAccountInformation.firstName\" placeholder=\"First Name\" class=\"form-control\"></div>\n" +
+    "                        <div style=\"padding:0px\" class=\"col-xs-4\"><h5><i class=\"fas fa-info\"></i> Last Name</h5><input type=\"text\" ng-model=\"newAccountInformation.lastName\" placeholder=\"Last Name\" class=\"form-control\"></div>\n" +
+    "                        <div style=\"padding:0px\" class=\"col-xs-4\"><h5><i class=\"fas fa-birthday-cake\"></i> Date Of Birth</h5><input type=\"date\" ng-model=\"newAccountInformation.dateOfBirth\" placeholder=\"Date of Birth\" class=\"form-control\"></div>\n" +
+    "\n" +
+    "                        <div style=\"clear:both\"></div><div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                        <div style=\"padding:0px;text-align:center\"  class=\"col-xs-12\">\n" +
+    "                            <h5><i style=\"color:#2ab995\" class=\"fas fa-seedling\"></i> Client Mining</h5>\n" +
+    "                            <span style=\"font-size:10px;color:gray\">Run a CRE8 node that powers the network. Machine attention is tokenized.</span>\n" +
+    "                            <div ng-click=\"$event.stopPropagation();\">\n" +
+    "                                <div layout=\"row\" layout-align=\"center center\" flex=\"100\">\n" +
+    "                                    <md-switch ng-change=\"editAccount()\" ng-model=\"newAccountInformation.apps.cre8.peerMining\" aria-label=\"Location Attention\"></md-switch>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "\n" +
+    "                        <div style=\"padding:0px;text-align:center\"  class=\"col-xs-6\">\n" +
+    "                            <h5><i style=\"color:#2ab995\" class=\"fas fa-eye\"></i> Attention Tokenization</h5>\n" +
+    "                            <span style=\"font-size:10px;color:gray\">Required for Attention Tokenization</span>\n" +
+    "                            <div ng-click=\"$event.stopPropagation();\">\n" +
+    "                                <div layout=\"row\" layout-align=\"center center\" flex=\"100\">\n" +
+    "                                    <md-switch ng-change=\"editAccount()\" ng-model=\"newAccountInformation.apps.cre8.recordAttention\" aria-label=\"Record Attention\"></md-switch>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "\n" +
+    "                        <div style=\"padding:0px;text-align:center\"  class=\"col-xs-6\">\n" +
+    "                            <h5><i style=\"color:#2ab995\" class=\"fas fa-map-marker\"></i> Location Tokenization</h5>\n" +
+    "                            <span style=\"font-size:10px;color:gray\">Required for Location Tokenization</span>\n" +
+    "                            <div ng-click=\"$event.stopPropagation();\">\n" +
+    "                                <div layout=\"row\" layout-align=\"center center\" flex=\"100\">\n" +
+    "                                    <md-switch ng-change=\"editAccount()\" ng-model=\"newAccountInformation.apps.cre8.recordLocation\" aria-label=\"Location Attention\"></md-switch>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "\n" +
+    "                        <div style=\"clear:both\"></div><div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                        <div style=\"padding:0px;text-align:center\"  class=\"col-xs-12\">\n" +
+    "                            <a href=\"/account\" ui-sref=\"account\"><b><i class=\"fas fa-passport\"></i> More Apps & Account Settings</b></a>\n" +
+    "                        </div>\n" +
+    "\n" +
+    "                        <div style=\"clear:both\"></div><div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                        <button type=\"submit\" class=\"btn btn-default log-btn\">Save Information</button>\n" +
+    "                    </form>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "       \n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div ng-if=\"consentAgreement\" ng-include=\"'tutorial/templates/controls.tpl.html'\"></div>\n" +
+    "");
+}]);
+
+angular.module("tutorial/templates/members.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("tutorial/templates/members.tpl.html",
+    "<div class=\"card\" ng-click=\"cardDetailExpand()\">\n" +
+    "    <div style=\"background:url('https://source.unsplash.com/1600x900/?friendship,skills,engineering,code,computer,technology,value,fintech')\" class=\"imageContainerSmall\">\n" +
+    "        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "            <div style=\"text-align:right;padding:15px;position:absolute;right:0\">\n" +
+    "                <a style=\"color:white;\" ng-click=\"$event.stopPropagation();cardDetailToggle(item)\">\n" +
+    "                    <i class=\"fas fa-chart-bar\"></i>\n" +
+    "                </a>\n" +
+    "            </div> \n" +
+    "            <div style=\"margin-top: auto;margin-bottom: auto;padding:15px\">\n" +
+    "                <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Members</h1>\n" +
+    "                <p style=\"color:white;\">CRE8's Community encompasses a wide breadth of skill, interests, and known intention.</p>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "    <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
+    "    <li style=\"float:right;font-size:14px\"><a href=\"#\" ng-click=\"sortToggle()\">Sort <i class=\"fa fa-angle-down\"></i></a></li>\n" +
+    "    <div style=\"clear:both\"></div>\n" +
+    "</ul>\n" +
+    "<div class=\"card\">\n" +
+    "    <tags-input class=\"\" style=\"border:0px;flex-grow:2;\" min-length=\"1\" placeholder=\"Search\" ng-model=\"searchQuery\"></tags-input>\n" +
+    "</div>\n" +
+    "<div class=\"card\">\n" +
+    "    <div style=\"padding:16px;\">\n" +
+    "        <highchart config=\"totalMap\"></highchart>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "<div style=\"max-height:70vh;overflow:auto\">\n" +
+    "    <div class=\"col-sm-6\" ng-repeat=\"item in members\" style=\"padding-left:10px;padding-right:10px;\">\n" +
+    "        <div class=\"member-card\" style=\"margin-bottom:10px\" ng-click=\"renderReputationToggle(item)\">\n" +
+    "            <div class=\"member-card-image\" style=\"background-image: url('{{item.coverUrl}}')\">\n" +
+    "                <a ng-click=\"$event.stopPropagation()\" href=\"member/{{item.username}}\" ui-sref=\"member.activity({path:item.username})\"><img ng-src=\"{{item.avatarUrl}}\" err-src=\"/images/avatar.png\"></a>\n" +
+    "            </div>\n" +
+    "            <div class=\"member-card-info\" style=\"padding:16px;height:auto\">\n" +
+    "                <h4><a href=\"member/{{item.username}}\" ui-sref=\"member.activity({path:item.username})\">{{item.username}}</a></h4>\n" +
+    "                <p style=\"font-size:13px;\"><a href=\"/member/{{item.username}}/projects\" ui-sref=\"member.projects({path:item.username})\">{{item.projectCount || 0}} Projects</a> | <a href=\"/member/{{item.username}}/followers\" ui-sref=\"member.followers({path:item.username})\">{{item.followerCount || 0}} Followers</a> | <a href=\"/member/{{item.username}}/following\" ui-sref=\"member.following({path:item.username})\">{{item.followingCount || 0}} Following</a>\n" +
+    "                <p style=\"color:gray\">Total Reputation | {{item.totalWork}}</p>\n" +
+    "                <p style=\"color:gray\">{{currentUser.status}} Offline</p>\n" +
+    "                <button ng-show=\"!item.isFollowing\" class=\"btn btn-default\" ng-click=\"$event.stopPropagation();follow(item);\">Follow</button>\n" +
+    "                <button ng-show=\"item.isFollowing\" class=\"btn btn-default\" ng-click=\"$event.stopPropagation();follow(item);\">Unfollow</button>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "<div ng-include=\"'tutorial/templates/controls.tpl.html'\"></div>\n" +
+    "");
+}]);
+
+angular.module("tutorial/templates/projects.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("tutorial/templates/projects.tpl.html",
+    "<div class=\"card\" ng-click=\"cardDetailExpand()\">\n" +
+    "    <div style=\"background:url('https://source.unsplash.com/1600x900/?coordination,cities,city,community,work')\" class=\"imageContainerSmall\">\n" +
+    "        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "            <div style=\"text-align:right;padding:15px;position:absolute;right:0\">\n" +
+    "                <a style=\"color:white;\" ng-click=\"$event.stopPropagation();cardDetailToggle(item)\">\n" +
+    "                    <i class=\"fas fa-users\"></i> \n" +
+    "                </a>\n" +
+    "            </div> \n" +
+    "            <div style=\"margin-top: auto;margin-bottom: auto;padding:15px;\">\n" +
+    "                <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;font-size:35px\">Projects</h1>\n" +
+    "                <p style=\"color:white;\">The CRE8 Network is globally present. Our members coordinate around all types of shared initiatives. Get Involved.</p>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <!--INTERESTING DESCRIPTION HERE-->\n" +
+    "    <!--\n" +
+    "    <div style=\"padding:16px;\">\n" +
+    "        <p style=\"color:gray;font-size:12px;font-style:italic\">Select what you believe is worthwile.</p>\n" +
+    "        <p style=\"color:gray;font-size:12px;font-style:italic\">The more detailed your dimensional vote the stronger the effect.</p>\n" +
+    "        <div class=\"row\">\n" +
+    "            <div class=\"col-xs-4\"><img src=\"https://source.unsplash.com/900x900/?value,finance,vote\"></div>\n" +
+    "            <div class=\"col-xs-4\"><img src=\"https://source.unsplash.com/900x900/?humananity,city,community\"></div>\n" +
+    "            <div class=\"col-xs-4\"><img src=\"https://source.unsplash.com/900x900/?code,love,joy\"></div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "    -->\n" +
+    "</div>\n" +
+    "<ul style=\"padding:0px;margin-bottom:0px\" class=\"member-tabs\">\n" +
+    "    <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
+    "    <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"getLatLng()\"><i class=\"fa fa-map-marker\"></i> Location</a></li>\n" +
+    "    <li style=\"float:right;font-size:14px\"><a href=\"#\" ng-click=\"sortToggle()\">Sort By Recent <i class=\"fa fa-angle-down\"></i></a></li>\n" +
+    "    <div style=\"clear:both\"></div>\n" +
+    "</ul>\n" +
+    "\n" +
+    "<div class=\"card\">\n" +
+    "    <tags-input class=\"\" min-length=\"1\" placeholder=\"Search \" ng-model=\"searchQuery\"></tags-input>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div style=\"max-height:70vh;overflow:auto\">\n" +
+    "    <div ng-repeat=\"item in projects\">\n" +
+    "        <div class=\"card\" ng-click=\"cardDetailToggle(item)\">\n" +
+    "            <div style=\"padding:16px;\">\n" +
+    "                <div ng-click=\"$event.stopPropagation()\"style=\"float:right\">\n" +
+    "                    <button ng-click=\"$event.stopPropagation();join(item);\" ng-if=\"(item.isMember != 'PENDING' || item.isMember == false) && item.isMember != true\" class=\"btn btn-default\">Join</button>\n" +
+    "                    <button ng-click=\"$event.stopPropagation();join(item);\" ng-if=\"item.isMember == 'PENDING'\" class=\"btn btn-default\">Cancel Request</button>\n" +
+    "                    <button ng-click=\"$event.stopPropagation();join(item);\" ng-if=\"item.isMember == true\" class=\"btn btn-default\">Leave</button>\n" +
+    "                </div>\n" +
+    "                <a ng-click=\"$event.stopPropagation()\" href=\"/project/{{item.urlTitle}}\" ui-sref=\"project.activity({path:item.urlTitle})\">\n" +
+    "                    <img ng-click=\"$event.stopPropagation()\" style=\"height:64px;float:left;margin-right:10px;\" ng-src=\"{{item.avatarUrl}}\">\n" +
+    "                    <h3 ng-click=\"$event.stopPropagation()\" style=\"margin-top:0px\">{{item.title}}</h3>\n" +
+    "                </a>\n" +
+    "                <div><span ng-bind-html=\"renderContent(item.description)\"></span></div>\n" +
+    "                <div style=\"clear:both\"></div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "<div ng-include=\"'tutorial/templates/controls.tpl.html'\"></div>\n" +
+    "");
+}]);
+
+angular.module("tutorial/templates/tasks.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("tutorial/templates/tasks.tpl.html",
+    "<div class=\"card\" ng-click=\"cardDetailExpand()\">\n" +
+    "    <div style=\"background:url('https://source.unsplash.com/1600x900/?business,service,civic,create,art,movies,action')\" class=\"imageContainerSmall\">\n" +
+    "        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "            <div style=\"text-align:right;padding:15px;position:absolute;right:0\">\n" +
+    "                <a style=\"color:white;\" ng-click=\"$event.stopPropagation();cardDetailToggle(item)\">\n" +
+    "                    <i class=\"fas fa-layer-group\"></i> \n" +
+    "                </a>\n" +
+    "            </div> \n" +
+    "            <div style=\"margin-top: auto;margin-bottom: auto;padding:15px;\">\n" +
+    "                <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;font-size:35px\">Tasks</h1>\n" +
+    "                <p style=\"color:white;\">Coordinate with Intention. Get Involved.</p>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "    <!--\n" +
+    "    <div style=\"padding:16px;\">\n" +
+    "        <p style=\"color:gray;font-size:12px;font-style:italic\">Select what you believe is worthwile.</p>\n" +
+    "        <p style=\"color:gray;font-size:12px;font-style:italic\">The more detailed your dimensional vote the stronger the effect.</p>\n" +
+    "        <div class=\"row\">\n" +
+    "            <div class=\"col-xs-4\"><img src=\"https://source.unsplash.com/900x900/?value,finance,vote\"></div>\n" +
+    "            <div class=\"col-xs-4\"><img src=\"https://source.unsplash.com/900x900/?humananity,city,community\"></div>\n" +
+    "            <div class=\"col-xs-4\"><img src=\"https://source.unsplash.com/900x900/?code,love,joy\"></div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "    -->\n" +
+    "</div>\n" +
+    "\n" +
+    "<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "    <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
+    "    <li style=\"float:right;font-size:14px\"><a href=\"#\" ng-click=\"sortToggle()\">Sort By Recent <i class=\"fa fa-angle-down\"></i></a></li>\n" +
+    "    <div style=\"clear:both\"></div>\n" +
+    "</ul>\n" +
+    "\n" +
+    "<div class=\"card\">\n" +
+    "    <tags-input class=\"\" min-length=\"1\" placeholder=\"Search\" ng-model=\"searchQuery\"></tags-input>\n" +
+    "</div>\n" +
+    "\n" +
+    "<!--ACTIVE FILTERS-->\n" +
+    "<div style=\"max-height:70vh;overflow:auto\">\n" +
+    "    <div ng-repeat=\"item in tasks\" class=\"col-xs-12\" style=\"padding:0px\">\n" +
+    "        <div class=\"card\" ng-click=\"cardDetailToggle(item)\">\n" +
+    "\n" +
+    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?{{item.tags}}');min-height:100px\" class=\"imageContainerSmall\">\n" +
+    "                <div style=\"background:rgba(0,0,0,0.75);height:100px\" class=\"imageContainerSmallDiv\">\n" +
+    "                    <div style=\"text-align:right;padding:15px;position:absolute;right:0\">\n" +
+    "                        <a style=\"color:white;\" ng-click=\"$event.stopPropagation();cardDetailToggle(item)\">\n" +
+    "                            <i class=\"fas fa-chevron-down\"></i>\n" +
+    "                        </a>\n" +
+    "                    </div> \n" +
+    "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                        <div style=\"padding:15px\">\n" +
+    "                            <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\"><a ng-click=\"$event.stopPropagation()\" href=\"task/{{item.id}}\" ui-sref=\"tasks\" style=\"color:white\">{{item.title}}</a></h1>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "            <div style=\"padding:16px;\">\n" +
+    "\n" +
+    "                <div ng-click=\"$event.stopPropagation()\" style=\"float:right\">\n" +
+    "                    <button ng-click=\"$event.stopPropagation();interested(item)\" ng-if=\"item.isAssociated == false\" class=\"btn btn-default\"><i class=\"fas fa-check\"></i> Interested</button>\n" +
+    "                    <button ng-click=\"$event.stopPropagation();interested(item)\" ng-if=\"item.isAssociated == true\" class=\"btn btn-default\"><i class=\"fas fa-remove\"></i> Cancel Interest</button>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <p><a ng-click=\"$event.stopPropagation()\" ng-repeat=\"tag in item.tags track by $index\" href=\"market/{{tag.trim()}}\" ui-sref=\"market({id:tag.trim()})\">{{tag.trim()}} </a></p>\n" +
+    "                <p><span style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span></p>\n" +
+    "                <span style=\"color:gray\" am-time-ago=\"item.createdAt\"></span>\n" +
+    "            </div>\n" +
+    "            <div class=\"card-footer\">\n" +
+    "                <a ng-click=\"$event.stopPropagation();createReaction(item, 'plus')\"><i class=\"fas fa-angle-up\"></i> {{item.reactions.plus}} like </a> \n" +
+    "                <a ng-click=\"$event.stopPropagation();createReaction(item, 'minus')\" ><i class=\"fas fa-angle-down\"></i> {{item.reactions.minus}} dislike </a>\n" +
+    "                <a ng-click=\"$event.stopPropagation();reply(item)\" href=\"task/{{item.id}}\" ui-sref=\"task({id:item.id})\"><i class=\"far fa-comment\"></i> comment </a>\n" +
+    "                <a ng-click=\"$event.stopPropagation();reply(item)\" href=\"task/{{item.id}}\" ui-sref=\"task({id:item.id})\" style=\"padding:0px\" class=\"pull-right\"><i class=\"fas fa-link grey\"></i></a>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "<div ng-include=\"'tutorial/templates/controls.tpl.html'\"></div>\n" +
+    "");
+}]);
+
+angular.module("tutorial/templates/updateValueMap.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("tutorial/templates/updateValueMap.tpl.html",
+    "<div class=\"card\" ng-click=\"cardDetailExpand()\">\n" +
+    "    <div style=\"background:url('https://source.unsplash.com/1600x900/?math,geometry,fractal,data,finance')\" class=\"imageContainerSmall\">\n" +
+    "        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "            <div style=\"text-align:right;padding:15px;position:absolute;right:0\">\n" +
+    "                <a style=\"color:white;\" ng-click=\"$event.stopPropagation();cardDetailToggle(item)\">\n" +
+    "                    <i class=\"fas fa-universal-access\"></i>\n" +
+    "                </a>\n" +
+    "            </div> \n" +
+    "            <div style=\"margin-top: auto;margin-bottom: auto;padding:15px\">\n" +
+    "                <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Update Your Value Map</h1>\n" +
+    "                <p style=\"color:white;\">Now that we know more about you</p>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "    <li style=\"float:left;font-size:14px\"><a href=\"#\">Suggested Context</a></li>\n" +
+    "    <li style=\"float:left;font-size:14px\"><a href=\"#\">Current Positions & Value Map</a></li>\n" +
+    "    <li style=\"float:left;font-size:14px\"><a href=\"#\">Value Map Builder</a></li>\n" +
+    "    <div style=\"clear:both\"></div>\n" +
+    "</ul>\n" +
+    "<div class=\"card\">\n" +
+    "    <div style=\"padding:16px;\">\n" +
+    "\n" +
+    "        <p><b>Suggestions and Information</b></p>\n" +
+    "\n" +
+    "        <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "            <li ng-if=\"currentUser\" style=\"float:left;font-size:14px\"><a href=\"member/{{currentUser.username}}/followers\" ng-click=\"getMyFollowers()\"><i class=\"fa fa-users\"></i> Following</a></li>\n" +
+    "            <li ng-if=\"currentUser\" style=\"float:left;font-size:14px\"><a href=\"member/{{currentUser.username}}/projects\" ng-click=\"getMyProjects()\"><i class=\"fas fa-project-diagram\"></i> My Projects</a></li>\n" +
+    "            <li ng-if=\"currentUser\" style=\"float:left;font-size:14px\"><a href=\"member/{{currentUser.username}}/projects\" ng-click=\"getMyProjects()\"><i class=\"fas fa-list-ol\"></i> Tasks</a></li>\n" +
+    "            <div style=\"clear:both\"></div>\n" +
+    "        </ul>\n" +
+    "\n" +
+    "        <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "        <div class=\"\" style=\"font-size:14px;font-weight:bold\">\n" +
+    "            <span ng-click=\"createPosition(item.element)\" ng-repeat=\"item in suggestedTokens track by $index\">\n" +
+    "                <p class=\"valueMapButton\">{{item.token}}</p>\n" +
+    "            </span>\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div class=\"\" style=\"max-height:100vh;overflow:auto;\">\n" +
+    "\n" +
+    "    <div class=\"col-sm-3 mobileFix\" style=\"padding-left:0px;padding-right:0px;\">\n" +
+    "        <div class=\"card\" ng-click=\"filterToggle('DISCOVER', filterSet)\">\n" +
+    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?details,notes,exolore,wonder,connection');min-height:50px\" class=\"imageContainerSmall\">\n" +
+    "                <div style=\"background:rgba(0,0,0,0.75);height:50px\" class=\"imageContainerSmallDiv\">  \n" +
+    "                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                        <div class=\"container\">\n" +
+    "                            <h1 style=\"text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;\">Context</h1>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "            <div style=\"padding:16px;\">\n" +
+    "                <div ng-repeat=\"item in sortedTagArray track by $index\" ng-click=\"$event.stopPropagation();filterContent(tag.element)\">\n" +
+    "                    <a><b>{{item.element}}</b></a>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <div class=\"col-sm-9 col-xs-12\" style=\"padding-left:0px;padding-right:0px;\">\n" +
+    "\n" +
+    "        <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "            <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
+    "            <li style=\"float:left;font-size:14px\">\n" +
+    "                <a href=\"#\" ng-click=\"filterToggle('VALUEMAP')\">\n" +
+    "                    <i class=\"fas fa-coins\"></i> Base Token <span style=\"font-size:10px;color:gray\">{{baseToken.text}}</span>\n" +
+    "                </a>\n" +
+    "            </li>\n" +
+    "            <li style=\"float:left;font-size:14px\">\n" +
+    "                <a href=\"#\" ng-click=\"filterToggle('MANIFOLD', 'UNIVERSALTOKEN')\"><i class=\"fas fa-infinity\"></i> Manifold <span style=\"font-size:10px;color:gray\">{{baseManifold.text}}</span></a>\n" +
+    "            </li>\n" +
+    "            <div style=\"clear:both\"></div>\n" +
+    "        </ul>\n" +
+    "\n" +
+    "        <div class=\"card\">\n" +
+    "            <tags-input class=\"\" style=\"border:0px;flex-grow:2;\" min-length=\"1\" placeholder=\"Search\" ng-model=\"valueMapQuery\"></tags-input>\n" +
+    "        </div>\n" +
+    "       \n" +
+    "        <div class=\"card\">\n" +
+    "            \n" +
+    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?love,art,geometry');min-height:150px;\" class=\"imageContainerSmall\">\n" +
+    "                <div style=\"background:rgba(0,0,0,0.75);height:150px;\" class=\"imageContainerSmallDiv\">  \n" +
+    "                    <div style=\"text-align:right;padding:15px;position:absolute;right:0\">\n" +
+    "                        <a style=\"color:white;\" ng-click=\"$event.stopPropagation();cardDetailToggle(item)\"><i class=\"fas fa-universal-access\"></i></a>\n" +
+    "                    </div> \n" +
+    "                    <div style=\"margin-top: auto;margin-bottom: auto;padding:15px;\">\n" +
+    "                        <h4 style=\"text-align:left;color:rgba(255,255,255,0.9);font-weight:400;\">{{baseToken.text}}</h4>\n" +
+    "                        <h5 style=\"color:white;\">Manifold: {{baseManifold.text}}</h5>\n" +
+    "                        <h5 style=\"color:white;\">Continual Position</h5>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "            <div class=\"col-xs-12\">\n" +
+    "                <p style=\"color:gray;font-style:italic\">{{baseToken.description}}</p>\n" +
+    "                <p style=\"color:gray;font-style:italic\">{{baseManifold.description}}</p>\n" +
+    "                <p style=\"color:gray;font-style:italic\">Continual Position</p>\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "            <div class=\"col-xs-12\">\n" +
+    "                <div class=\"\" style=\"font-size:14px;font-weight:bold\">\n" +
+    "                    <span ng-click=\"createPosition(item.element)\" ng-repeat=\"item in sortedTagArray track by $index\">\n" +
+    "                        <p class=\"valueMapButton\">{{item.element}}</p>\n" +
+    "                    </span>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "            <div class=\"col-sm-6 col-xs-12\"><highchart config=\"chartMapTotal\"></highchart></div>\n" +
+    "            <div class=\"col-sm-6 col-xs-12\"><highchart config=\"pieTotal\"></highchart></div>\n" +
+    "\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <div class=\"card\" ng-if=\"newOrder.length > 0\" >\n" +
+    "            <div style=\"background:url('https://source.unsplash.com/1600x900/?love,art,geometry');min-height:50px\" class=\"imageContainerSmall\">\n" +
+    "                <div style=\"background:rgba(0,0,0,0.75);height:50px\" class=\"imageContainerSmallDiv\">  \n" +
+    "                    <div style=\"margin-top: auto;margin-bottom: auto;padding:15px;\">\n" +
+    "                        <div class=\"row\" style=\"text-align:center\">\n" +
+    "                            <div class=\"col-xs-6\">\n" +
+    "                                <span style=\"color:white\">\n" +
+    "                                    Token Set Alpha\n" +
+    "                                </span>\n" +
+    "                            </div>\n" +
+    "                            <div class=\"col-xs-6\">\n" +
+    "                                <span style=\"color:white\">\n" +
+    "                                    Token Set Beta\n" +
+    "                                </span>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "            <div style=\"padding:16px;\">    \n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "                <div class=\"row\">\n" +
+    "                    <div class=\"col-xs-12\">\n" +
+    "                        <div ng-repeat=\"item in newOrder\">\n" +
+    "                            <div layout=\"\">\n" +
+    "                                <div flex=\"10\" layout=\"\" layout-align=\"center center\">3600</div>\n" +
+    "                                <div flex=\"25\" layout=\"\" layout-align=\"center center\">\n" +
+    "                                    <a>{{item[1].identifier.split('+')[2]}}</a>\n" +
+    "                                </div>\n" +
+    "                                <div flex=\"30\" layout=\"\" layout-align=\"center center\">{{1/newOrder.length*item[0].amount/100}}</span></div>\n" +
+    "                                <div flex=\"30\" layout=\"\" layout-align=\"center center\"><a>Universal Token</a></div>\n" +
+    "                                <div flex=\"5\" layout=\"\" layout-align=\"center center\"><a ng-click=\"removePosition(item)\"><i class=\"fas fa-remove\"></i></a></div>\n" +
+    "                            </div>\n" +
+    "                            <div layout=\"\">\n" +
+    "                                <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"item[0].amount\" step=\"1\" min=\"0\" max=\"100\" aria-label=\"Amount\"></md-slider>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "                <button ng-click=\"orderSetToggle(newOrder)\" style=\"width:100%\" class=\"btn btn-default log-btn\">CREATE POSITION</button>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "\n" +
+    "</div>\n" +
+    "\n" +
+    "<!--CURRENT VALUE MAP.. RENDER AND UNIFY WITH SUGGESTIONS AND UPDATE..  -->\n" +
+    "<div class=\"row\" ng-if=\"selectedTab =='POSITIONS'\">\n" +
+    "    <div class=\"col-xs-12\">\n" +
+    "        <div ng-repeat=\"item in positions\">\n" +
+    "            <div ng-include=\"'templates/cards/orderCard.tpl.html'\"></div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "<div ng-include=\"'tutorial/templates/controls.tpl.html'\"></div>\n" +
+    "");
+}]);
+
+angular.module("tutorial/templates/valueMap.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("tutorial/templates/valueMap.tpl.html",
+    "<!--MANIFOLD BUILDER.. VERB.. MAIN VERBS.. APPS-->\n" +
+    "<!--APPS AS TOKEN VERBS-->\n" +
+    "<!--CREATE+TIME+CHILL-->\n" +
+    "<!--CREATE+TRANSACTION+CHILL-->\n" +
+    "<div class=\"card\" ng-click=\"cardDetailExpand()\">\n" +
+    "    <div style=\"background:url('https://source.unsplash.com/1600x900/?love,art,geometry')\" class=\"imageContainerSmall\">\n" +
+    "        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "            <div style=\"text-align:right;padding:15px;position:absolute;right:0\">\n" +
+    "                <a style=\"color:white;\" ng-click=\"$event.stopPropagation();cardDetailToggle(item)\">\n" +
+    "                    <i class=\"fas fa-universal-access\"></i>\n" +
+    "                </a>\n" +
+    "                <div style=\"clear:both\"></div>\n" +
+    "            </div> \n" +
+    "            <div style=\"margin-top: auto;margin-bottom: auto;padding:15px;\">\n" +
+    "                <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;font-size:35px\">Create Your Value Map</h1>\n" +
+    "                <p style=\"color:white;\">What do you believe is valuable?</p>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "    <li style=\"float:left;font-size:14px\"><a ng-click=\"selectTab('QUESTIONS')\" href=\"#\"><i class=\"fas fa-question\"></i> Questions</a></li>\n" +
+    "    <li style=\"float:left;font-size:14px\"><a ng-click=\"selectTab('BUILDER')\" href=\"#\"><i class=\"fas fa-funnel-dollar\"></i> Trending Positions</a></li>\n" +
+    "    <li style=\"float:left;font-size:14px\"><a ng-click=\"selectTab('BUILDER')\" href=\"#\"><i class=\"fas fa-cubes\"></i> Builder</a></li>\n" +
+    "    <li style=\"float:left;font-size:14px\"><a ng-click=\"selectTab('ORDERS')\" href=\"#\"><i class=\"fas fa-poll\"></i> Orders</a></li>\n" +
+    "    <div style=\"clear:both\"></div>\n" +
+    "</ul>\n" +
+    "\n" +
+    "<div ng-if=\"selectedTab =='BUILDER'\" class=\"\">\n" +
+    "    <div ng-include=\"'tutorial/templates/valueMapBuilder.tpl.html'\"></div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div ng-if=\"selectedTab =='QUESTIONS'\" class=\"\">\n" +
+    "    <div ng-include=\"'tutorial/templates/valueMapQuestions.tpl.html'\"></div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div ng-if=\"selectedTab =='ORDERS'\" class=\"\">\n" +
+    "    <div ng-include=\"'tutorial/templates/valueMapOrders.tpl.html'\"></div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div ng-include=\"'tutorial/templates/controls.tpl.html'\"></div>\n" +
+    "");
+}]);
+
+angular.module("tutorial/templates/valueMapBuilder.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("tutorial/templates/valueMapBuilder.tpl.html",
+    "<div class=\"card\">\n" +
+    "    <div style=\"padding:16px;\">\n" +
+    "        <p style=\"color:gray;font-size:12px;font-style:italic\">Select what you believe is worthwile.</p>\n" +
+    "        <p style=\"color:gray;font-size:12px;font-style:italic\">Creating a value map furthers a self-empowering mechanism. We create value; though sharing our values and relating them we create value in ourselves, in what we do, and within each other.</p>\n" +
+    "\n" +
+    "        <div class=\"row\">\n" +
+    "            <div class=\"col-xs-4\"><img ng-src=\"https://source.unsplash.com/900x900/?value,finance,vote\"></div>\n" +
+    "            <div class=\"col-xs-4\"><img ng-src=\"https://source.unsplash.com/900x900/?humananity,city,community\"></div>\n" +
+    "            <div class=\"col-xs-4\"><img ng-src=\"https://source.unsplash.com/900x900/?code,love,joy\"></div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div class=\"col-sm-3 mobileFix\" style=\"padding-left:0px;padding-right:0px;\">\n" +
+    "    <div class=\"card\" ng-click=\"filterToggle('DISCOVER', filterSet)\">\n" +
+    "        <div style=\"background:url('https://source.unsplash.com/1600x900/?details,notes,exolore,wonder,connection');min-height:50px\" class=\"imageContainerSmall\">\n" +
+    "            <div style=\"background:rgba(0,0,0,0.75);height:50px\" class=\"imageContainerSmallDiv\">  \n" +
+    "                <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                    <div class=\"container\">\n" +
+    "                        <h1 style=\"text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;\">Context</h1>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "        <div style=\"padding:16px;\">\n" +
+    "            <div ng-repeat=\"item in sortedTagArray track by $index\" ng-click=\"$event.stopPropagation();filterContent(tag.element)\">\n" +
+    "                <a><b>{{item.element}}</b></a>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div class=\"col-sm-9 col-xs-12\" style=\"padding-left:0px;padding-right:0px\">\n" +
+    "\n" +
+    "    <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "        <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
+    "        <li style=\"float:left;font-size:14px\">\n" +
+    "            <a href=\"#\" ng-click=\"filterToggle('VALUEMAP')\">\n" +
+    "                <i class=\"fas fa-coins\"></i> Base Token <span style=\"font-size:10px;color:gray\">{{baseToken.text}}</span>\n" +
+    "            </a>\n" +
+    "        </li>\n" +
+    "        <li style=\"float:left;font-size:14px\">\n" +
+    "            <a href=\"#\" ng-click=\"filterToggle('VALUEMAP')\"><i class=\"fas fa-infinity\"></i> Manifold <span style=\"font-size:10px;color:gray\">{{baseManifold.text}}</span></a>\n" +
+    "        </li>\n" +
+    "        <li style=\"float:left;font-size:14px\">\n" +
+    "            <a href=\"#\" ng-click=\"filterToggle('VALUEMAP')\"><i class=\"fas fa-dna\"></i> Type <span style=\"font-size:10px;color:gray\">{{orderType.text}}</span></a>\n" +
+    "        </li>\n" +
+    "        <div style=\"clear:both\"></div>\n" +
+    "    </ul>\n" +
+    "    <div class=\"card\">\n" +
+    "        <tags-input class=\"\" style=\"border:0px;flex-grow:2;\" min-length=\"1\" placeholder=\"Search\" ng-model=\"searchQueryArray\"></tags-input>\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <div class=\"card\">\n" +
+    "\n" +
+    "        <div style=\"background:url('https://source.unsplash.com/1600x900/?love,art,geometry');min-height:150px;\" class=\"imageContainerSmall\">\n" +
+    "            <div style=\"background:rgba(0,0,0,0.75);height:150px;\" class=\"imageContainerSmallDiv\">  \n" +
+    "                <div style=\"text-align:right;padding:15px;position:absolute;right:0\">\n" +
+    "                    <a style=\"color:white;\" ng-click=\"$event.stopPropagation();cardDetailToggle(item)\">\n" +
+    "                        <i class=\"fas fa-universal-access\"></i>\n" +
+    "                    </a>\n" +
+    "                    <div style=\"clear:both\"></div>\n" +
+    "                </div> \n" +
+    "                <div style=\"margin-top: auto;margin-bottom: auto;padding:15px;\">\n" +
+    "                    <h4 style=\"text-align:left;color:rgba(255,255,255,0.9);font-weight:400;\">{{baseToken.text}}</h4>\n" +
+    "                    <h5 style=\"color:white;\">Manifold: {{baseManifold.text}}</h5>\n" +
+    "                    <h5 style=\"color:white;\">Type: {{orderType.text}} Position</h5>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <div class=\"col-xs-12\">\n" +
+    "\n" +
+    "            <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "            <p style=\"color:gray;font-style:italic\">{{baseToken.description}}</p>\n" +
+    "            <p style=\"color:gray;font-style:italic\">{{baseManifold.description}}</p>\n" +
+    "            <p style=\"color:gray;font-style:italic\">{{orderType.description}}</p>\n" +
+    "\n" +
+    "            <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "            <p style=\"color:gray;font-style:italic;font-weight:bold\">Select the following context of interest to you.</p>\n" +
+    "\n" +
+    "            <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "            <div class=\"\" style=\"font-size:14px;font-weight:bold\">\n" +
+    "                <span ng-click=\"createPosition(item.element)\" ng-repeat=\"item in sortedTagArray track by $index\">\n" +
+    "                    <p class=\"valueMapButton\">{{item.element}}</p>\n" +
+    "                </span>\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <div class=\"col-sm-6 col-xs-12\">\n" +
+    "            <highchart config=\"chartMapTotal\"></highchart>\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <div class=\"col-sm-6 col-xs-12\">\n" +
+    "            <highchart config=\"pieTotal\"></highchart>\n" +
+    "        </div>\n" +
+    "\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <div class=\"card\" ng-if=\"newOrder.length > 0\" >\n" +
+    "\n" +
+    "        <div style=\"background:url('https://source.unsplash.com/1600x900/?love,art,geometry');min-height:50px\" class=\"imageContainerSmall\">\n" +
+    "            <div style=\"background:rgba(0,0,0,0.75);height:50px\" class=\"imageContainerSmallDiv\">  \n" +
+    "                <div style=\"margin-top: auto;margin-bottom: auto;padding:15px;\">\n" +
+    "                    <div class=\"row\" style=\"text-align:center\">\n" +
+    "                        <div class=\"col-xs-6\">\n" +
+    "                            <span style=\"color:white\">\n" +
+    "                                Token Set Alpha\n" +
+    "                            </span>\n" +
+    "                        </div>\n" +
+    "                        <div class=\"col-xs-6\">\n" +
+    "                            <span style=\"color:white\">\n" +
+    "                                Token Set Beta\n" +
+    "                            </span>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <div style=\"padding:16px\">\n" +
+    "\n" +
+    "            <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "            <div class=\"row\">\n" +
+    "                <div class=\"col-xs-12\">\n" +
+    "                    <div ng-repeat=\"item in newOrder\">\n" +
+    "                        <div style=\"text-align:center\" class=\"row\">\n" +
+    "                            <div class=\"col-md-5\">\n" +
+    "                                <span>{{1/newOrder.length*item[0].amount/100}}</span> \n" +
+    "                                <a href=\"#\" ng-click=\"cardDetailToggle(baseToken)\">{{baseToken.text}}</a>\n" +
+    "                            </div>\n" +
+    "                            <div class=\"col-md-1\">\n" +
+    "                                <a href=\"#\" ng-click=\"informationToggle('MANIFOLD LOGIC')\"><i class=\"fa fa-exchange\"></i>*</a>\n" +
+    "                            </div>\n" +
+    "                            <div class=\"col-md-5\">\n" +
+    "                                <span>86400</span>\n" +
+    "                                <a href=\"#\" ng-click=\"cardDetailToggle(baseToken)\">{{item[1].identifier.split('+')[2]}}</a>\n" +
+    "                                <p style=\"font-size:7px;color:gray\">{{baseManifold.text}}</p>\n" +
+    "                            </div>\n" +
+    "                            <div class=\"col-md-1\">\n" +
+    "                                <a href=\"#\" ng-click=\"removePosition(item)\"><i class=\"fas fa-remove\"></i></a>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                        <div layout=\"\">\n" +
+    "                            <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"item[0].amount\" step=\"1\" min=\"0\" max=\"100\" aria-label=\"Amount\"></md-slider>\n" +
+    "                        </div>\n" +
+    "                        <!--\n" +
+    "                        <div style=\"text-align:center\"><p style=\"font-size:9px\">{{reputation[key] || 0}} | {{reputation[key]*notification.newValidation.validation[key]}} | Multiplicative Charter</p></div>\n" +
+    "                        -->\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "            <button ng-click=\"orderSetToggle(newOrder)\" style=\"width:100%\" class=\"btn btn-default log-btn\">CREATE POSITION</button>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>");
+}]);
+
+angular.module("tutorial/templates/valueMapOrders.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("tutorial/templates/valueMapOrders.tpl.html",
+    "<div class=\"card\">\n" +
+    "    <div style=\"padding:16px;\">\n" +
+    "        <p style=\"color:gray;font-size:12px;font-style:italic\">Your Orders on the Multidimensional Token Market</p>\n" +
+    "        <p style=\"color:gray;font-size:12px;font-style:italic\">These Discrete Market positions codify your value map and create relation in value; a self-empowering mechanism.</p>\n" +
+    "\n" +
+    "        <div class=\"row\">\n" +
+    "            <div class=\"col-xs-4\"><img ng-src=\"https://source.unsplash.com/900x900/?value,finance,vote\"></div>\n" +
+    "            <div class=\"col-xs-4\"><img ng-src=\"https://source.unsplash.com/900x900/?humananity,city,community\"></div>\n" +
+    "            <div class=\"col-xs-4\"><img ng-src=\"https://source.unsplash.com/900x900/?code,love,joy\"></div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div class=\"col-xs-12\" style=\"padding-left:0px;padding-right:0px\">\n" +
+    "    <div class=\"card\">\n" +
+    "        <div style=\"background:url('https://source.unsplash.com/1600x900/?love,art,geometry');min-height:150px;\" class=\"imageContainerSmall\">\n" +
+    "            <div style=\"background:rgba(0,0,0,0.75);height:150px;\" class=\"imageContainerSmallDiv\">  \n" +
+    "                <div style=\"text-align:right;padding:15px;position:absolute;right:0\">\n" +
+    "                    <a style=\"color:white;\" ng-click=\"$event.stopPropagation();cardDetailToggle(item)\">\n" +
+    "                        <i class=\"fas fa-universal-access\"></i>\n" +
+    "                    </a>\n" +
+    "                    <div style=\"clear:both\"></div>\n" +
+    "                </div> \n" +
+    "                <div style=\"margin-top: auto;margin-bottom: auto;padding:15px;\">\n" +
+    "                    <h4 style=\"text-align:left;color:rgba(255,255,255,0.9);font-weight:400;\">Discrete Orders</h4>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "        <div style=\"padding:16px\">\n" +
+    "\n" +
+    "            {{newOrder}}\n" +
+    "            {{newOrderNEW}}\n" +
+    "\n" +
+    "            <div class=\"col-xs-12\">\n" +
+    "                <div ng-repeat=\"item in positions\">\n" +
+    "                    <div ng-include=\"'templates/cards/orderCard.tpl.html'\"></div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>");
+}]);
+
+angular.module("tutorial/templates/valueMapQuestions.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("tutorial/templates/valueMapQuestions.tpl.html",
+    "<div class=\"card\">\n" +
+    "    <div style=\"padding:16px;\">\n" +
+    "        <p style=\"color:gray;font-size:12px;font-style:italic\">Select what you believe is worthwile.</p>\n" +
+    "        <p style=\"color:gray;font-size:12px;font-style:italic\">Creating a value map furthers a self-empowering mechanism. We create value; though sharing our values and relating them we create value in ourselves, in what we do, and within each other.</p>\n" +
+    "\n" +
+    "        <div class=\"row\">\n" +
+    "            <div class=\"col-xs-4\"><img ng-src=\"https://source.unsplash.com/900x900/?value,finance,vote\"></div>\n" +
+    "            <div class=\"col-xs-4\"><img ng-src=\"https://source.unsplash.com/900x900/?humananity,city,community\"></div>\n" +
+    "            <div class=\"col-xs-4\"><img ng-src=\"https://source.unsplash.com/900x900/?code,love,joy\"></div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div class=\"col-xs-12\" style=\"padding-left:0px;padding-right:0px\">\n" +
+    "    <div class=\"card\">\n" +
+    "        <div style=\"background:url('https://source.unsplash.com/1600x900/?love,art,geometry');min-height:150px;\" class=\"imageContainerSmall\">\n" +
+    "            <div style=\"background:rgba(0,0,0,0.75);height:150px;\" class=\"imageContainerSmallDiv\">  \n" +
+    "                <div style=\"text-align:right;padding:15px;position:absolute;right:0\">\n" +
+    "                    <a style=\"color:white;\" ng-click=\"$event.stopPropagation();cardDetailToggle(item)\">\n" +
+    "                        <i class=\"fas fa-universal-access\"></i>\n" +
+    "                    </a>\n" +
+    "                    <div style=\"clear:both\"></div>\n" +
+    "                </div> \n" +
+    "                <div style=\"margin-top: auto;margin-bottom: auto;padding:15px;\">\n" +
+    "                    <h4 style=\"text-align:left;color:rgba(255,255,255,0.9);font-weight:400;\">Value Map Questions & Survey</h4>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "        <div style=\"padding:16px\">\n" +
+    "\n" +
+    "            SURVEY QUESTIONS\n" +
+    "\n" +
+    "            <p>TIME</p>\n" +
+    "\n" +
+    "            <div class=\"card\">\n" +
+    "                <div style=\"background:url('https://source.unsplash.com/1600x900/?rest,exercise,work,play')\" class=\"imageContainerSmall\">\n" +
+    "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "                        <div style=\"margin-top: auto;margin-bottom: auto;padding:15px;\">\n" +
+    "                            <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;font-size:35px\">A Valuable Day</h1>\n" +
+    "                            <p style=\"color:white;\">How would an ideal day look to you?</p>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <p style=\"font-style:italic;color:gray;margin:0px;font-size:12px\">Thinking about an archetypal idealized day - a discrete universe of time. Tell us how a human would thirve. All Intentional Time is a Tokenized Event.</p>\n" +
+    "\n" +
+    "\n" +
+    "            <p>TASKS</p>\n" +
+    "            <p>PROJECTS</p>\n" +
+    "            <p>TRANSACTIONS</p>\n" +
+    "            <p>ACTIONS</p>\n" +
+    "            <p>CONTENT</p>\n" +
+    "            <p>APPS</p>\n" +
+    "            <p>QUESTION PACKS; JSON INPUT | JSON OUTPUT</p>\n" +
+    "\n" +
+    "\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>");
 }]);
 
 angular.module("tx/index.tpl.html", []).run(["$templateCache", function($templateCache) {
