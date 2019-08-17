@@ -266,13 +266,31 @@ angular.module( 'conexus.order', [
       }, [[]]);
     };
 
-    function powerSetDecompose(array){
+    $scope.setAlpha = Object.keys($scope.order.setAlpha);
+    $scope.setBeta = Object.keys($scope.order.setBeta);
 
-        //for (x in array){
-        //    if array.length = 1
-        //}
+    $scope.alphaPower = getAllSubsets($scope.setAlpha);
+    $scope.alphaPower.shift();
+    $scope.betaPower = getAllSubsets($scope.setBeta);
+    $scope.betaPower.shift();
+    //build tensor
+    //tierate dim
+
+    function powerSetDecompose(array, tensor, iteration){
+        
+        for (x in array){
+            tensor.push(array[x])
+            if (array.length != 1){
+                iteration++
+                //powerSetDecompose(array, tensor, iteration);
+            }
+        }
+        //lol
+        console.log(tensor)
+
 
     };
+    powerSetDecompose($scope.betaPower, [], 0);
 
     //TODO: DEPRECIATE
     $scope.createReaction = function(item, type){
