@@ -303,24 +303,28 @@ angular.module( 'conexus.nav', [
         else{$mdSidenav('login').toggle();}
     };
 
-    $rootScope.contentToggle = function(){
+    $rootScope.contentToggle = function(item){
         $scope.closeAllNav();
         if($rootScope.currentUser){
 
-            $scope.newContent = {
-                associatedModels:$rootScope.associatedModels,
-                user:$rootScope.currentUser.id,
-            };
-
-            $scope.newContent.associatedModels.push({
+            $scope.newContent.associatedModels = [{
                 type:'CONTENT',
                 text:'Self',
                 context:[
-                    {text:'general', score:100}
+                    {text:'self', score:100}
                 ]
-            });
+            }];
 
-
+            if (item){
+                $scope.newContent.associatedModels.push({
+                    type:item.model, 
+                    id:item.id, 
+                    text:item.model+'+'+item.id, 
+                    context:[
+                        {text:'self', score:100}
+                    ]
+                });
+            }
 
             console.log('CONTENT TOGGLE', $scope.newContent);
 
@@ -583,7 +587,7 @@ angular.module( 'conexus.nav', [
                     type:'ITEM',
                     text:'Self',
                     context:[
-                        {text:'general', score:100}
+                        {text:'self', score:100}
                     ]
                 }
             ];
@@ -1214,7 +1218,7 @@ angular.module( 'conexus.nav', [
             //});
             
             $scope.newTask.validationModels = [{
-                validation:{general:100},
+                validation:{self:100},
                 associatedModels:[]
             }];
 
@@ -1459,50 +1463,39 @@ angular.module( 'conexus.nav', [
 
     };
 
-    $rootScope.validationToggle = function(newValidation){
+    $rootScope.validationToggle = function(item){
 
         $scope.closeAllNav();
         if($rootScope.currentUser){
+
+
             $scope.newValidation = {
                 validation:{},
-                user: $rootScope.currentUser.id
+                user: $rootScope.currentUser.id,
+                associatedModels:[],
             };
-            if(newValidation){
+
+            if(item){
 
                 //GET ASSOCIATED MDOELS
                 //TODO REDETERMINED CONTEXT.. TAGS.. ETC --> PERSPECTIVE
                 //UX SHOULD DO SET in validation sidebar
                 $scope.newValidation.associatedModels = [
                     {
-                        text:newValidation.id,
-                        id:newValidation.id,
-                        type:newValidation.model
-                    },
-                    {
-                        text:'PLACEHOLDER',
-                        id:1,
-                        type:'PLACEHOLDER'
+                        text:item.id,
+                        id:item.id,
+                        type:item.model,
+                        context: [{text:'self', score:100}]
                     }
                 ];
 
-                //TODO
-                $scope.context = [{text:'general'}];
-
             }
-            else{
-                $scope.context = [{text:'general'}];
-            }
-
-
-            //MAP FROM []-->{}
+            
             $scope.$watch('context', function(){
                 for (x in $scope.context){
                     $scope.newValidation.validation[$scope.context[x].text] = 0;
                 }
             }, true);
-
-            //BRIDGE BTW TASK CONTEXT (SELF DEFINED IN TIME TO PROJ CONTEXT VALIDATED THROUGH TASK) IE
-            //IF NOT CONTEXT VALIDATED IN TASK <-> PROJ IT IS 0. 
 
             $mdSidenav('validation').toggle();
         }
@@ -1589,7 +1582,7 @@ angular.module( 'conexus.nav', [
 
             //RENDER | nested Reply
             if(item){
-                $scope.newContent.associatedModels.push({type:'CONTENT', id:content.id});
+
             }
 
             $scope.newContent.type = $scope.selectedType;

@@ -10,36 +10,43 @@
             <p><b>Avatar</b></p>
             <img style="height:50px;width:50px" src="{{project.avatarUrl}}">
             <p>{{project.avatarUrl}}</p>
-            <div class="spacing-5"></div>
+            <div class="spacing-10"></div>
 
             <p><b>Title</b></p>
             <p>{{project.title}}</p>
-            <div class="spacing-5"></div>
+            <div class="spacing-10"></div>
 			
             <p><b>Description</b></p>
             <p><span style="display:inline" ng-bind-html="renderContent(project.description)"></span></p>
-            <div class="spacing-5"></div>
+            <div class="spacing-10"></div>
 
             <p><b>Wallet Address</b></p>
             <p><a ng-click="transactionToggle()"><img style="height:50px;text-align:left" src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{project.id}}"> {{project.id}}</a></p>
-            <div class="spacing-5"></div>
+            <div class="spacing-10"></div>
 
             <div ng-if="project.location">
                 <p><b>Location</b></p>
-                <p><b>Latitude</b>: {{project.location.lat}}, <b>Longitude</b>: {{project.location.lng}}</p>
-                <p><b>Address</b>: {{project.location.address}}</p>
+                <p ng-if='project.location.lat'><b>Latitude</b>: {{project.location.lat}}, <b>Longitude</b>: {{project.location.lng}}</p>
+                <p ng-if='project.location.address'><b>Address</b>: {{project.location.address}}</p>
+                <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options">
+                    <ui-gmap-marker ng-repeat="marker in markers" coords="marker.coords" options="marker.options" idkey="marker.id">
+                        <ui-gmap-window options="windowOptions" closeClick="closeClick()">
+                            <div style="font-size: 15px;"><a href="project/{{marker.url}}" ui-sref="project.activity({path:marker.url})">{{marker.content}}</a></div>
+                        </ui-gmap-window>
+                    </ui-gmap-marker>
+                </ui-gmap-google-map>
             </div>
-            <div class="spacing-5"></div>
+            <div class="spacing-10"></div>
 
             <p><b>Associations</b></p>
             <p><b>Members</b>: <a>{{project.memberCount || 0}}</a> | <b>Tasks</b>: <a>{{project.taskCount || 0}}</a> | <b>Time</b>: <a>{{project.timeCount||0 }}</a></p>
-            <div class="spacing-5"></div>
+            <div class="spacing-10"></div>
 
             <!--TODO-->
             <p><b>Project Charter</b></p>
-            <p>Reputation & Verification Dimensions</p>
-            <p>Validation Types</p>
-            <div class="spacing-5"></div>
+            <p>Connections</p>
+            {{project.connections}}
+            <div class="spacing-10"></div>
 
             <p><b>Manifolds</b></p> 
             <p>
@@ -47,7 +54,10 @@
                 <a href="market/{{project.urlTitle.toUpperCase()}}+TASK+">{{project.urlTitle.toUpperCase()}}+TASK+</a>, 
                 <a href="{{market/project.urlTitle.toUpperCase()}}+TIME+">{{project.urlTitle.toUpperCase()}}+TIME+</a>
             </p>
-            <div class="spacing-5"></div>
+            <div class="spacing-10"></div>
+
+            <!--APPS-->
+            <!--APPS-->
 
         </div>
     </div>

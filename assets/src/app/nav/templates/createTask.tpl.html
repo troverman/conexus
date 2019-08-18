@@ -1,3 +1,4 @@
+<style type="text/css">.angular-google-map-container{height: 200px;}</style>
 <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="task" md-is-locked-open="false" style="position:fixed;background-color:white;width:70%;max-width:100%">
     <div class="md-list-item-text" layout="column" style="height:100%;">
         <div class="spacing-25"></div>
@@ -28,6 +29,16 @@
                 </tags-input>
                 <h5>Location</h5>
                 <input type="text" placeholder="Location" ng-model="newTask.location" class="form-control">
+                <div class="">
+                    <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options">
+                        <ui-gmap-marker ng-repeat="marker in markers" coords="marker.coords" options="marker.options" idkey="marker.id">
+                            <ui-gmap-window options="windowOptions" closeClick="closeClick()">
+                                <div style="font-size: 15px;"><a href="project/{{marker.url}}" ui-sref="project.activity({path:marker.url})">{{marker.content}}</a></div>
+                            </ui-gmap-window>
+                        </ui-gmap-marker>
+                    </ui-gmap-google-map>
+                </div>
+                <h5>Content</h5>
                 <text-angular ng-model="newTask.content" ta-toolbar="[['p','h1','bold','italics','quote','insertLink', 'html']]"></text-angular>
                 <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newTask.title">create</button>
             </form>

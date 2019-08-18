@@ -94,7 +94,7 @@
                     <h5>Location <a ng-click="informationToggle('LOCATION')" href="#"><i class="fa fa-question-circle"></i></a><i style="float:right" class="fas fa-map-marker-alt"></i></h5>
                     <input placeholder="Location" type="text" ng-model="newItem.location" class="form-control">
 
-                    <div class="card">
+                    <div class="">
                         <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options">
                             <ui-gmap-marker ng-repeat="marker in markers" coords="marker.coords" options="marker.options" idkey="marker.id">
                                 <ui-gmap-window options="windowOptions" closeClick="closeClick()">
@@ -105,7 +105,7 @@
                     </div>
 
                 </div>
-                
+
                 <div class="spacing-10"></div>
                 <h5>More Information</h5>
                 <md-switch ng-model="expand" aria-label="tradable"></md-switch>

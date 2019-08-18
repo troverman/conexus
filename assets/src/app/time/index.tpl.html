@@ -63,7 +63,7 @@
 		       	<a ng-click="$event.stopPropagation();"><i class="fas fa-eye"></i> {{time.attention.general || 0}} </a>
 				<a ng-click="$event.stopPropagation();createReaction(time, 'plus')"><i class="fas fa-angle-up"></i> {{time.reactions.plus}} like </a> 
 				<a ng-click="$event.stopPropagation();createReaction(time, 'minus')" ><i class="fas fa-angle-down"></i> {{time.reactions.minus}} dislike </a>
-				<a ng-click="$event.stopPropagation();reply(time)"><i class="far fa-comment"></i> comment </a>
+				<a ng-click="$event.stopPropagation();contentToggle(time)"><i class="far fa-comment"></i> comment </a>
 		       	<a ng-click="$event.stopPropagation();validationToggle(time)"><i class="fas fa-check"></i> validate </a>
 			</div>
 		</div>

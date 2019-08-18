@@ -5,11 +5,11 @@
 
         <!--INFORMATION-->
         <div>
-            <div class="card" ng-click="">
+            <div class="card" ng-click="cardDetailToggle(order)">
                 <div style="background:url('https://source.unsplash.com/1600x900/?explore,discover')" class="imageContainerSmall">
                     <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv"> 
                         <div style="text-align:right;padding:15px;position:absolute;right:0">
-                            <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
+                            <a style="color:white;" ng-click="$event.stopPropagation();">
                                 <i class="fas fa-chevron-down"></i>
                             </a>
                             <div style="clear:both"></div>
@@ -17,13 +17,15 @@
                         <div style="margin-top: auto;margin-bottom: auto;">
                             <div style="padding:15px">
                                 <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">Order</h1>
-                                <span ng-repeat="(key, value) in order.setAlpha">
-                                    <a style="color:white" href="market/{{key}}" ui-sref="market({id:key})">{{key}} </a>
-                                </span>
-                                <br>
-                                <span ng-repeat="(key, value) in order.setBeta">
-                                    <a style="color:white" href="market/{{key}}" ui-sref="market({id:key})">{{key}} </a>
-                                </span>
+                                <h5>
+                                    <span ng-repeat="(key, value) in order.setAlpha">
+                                        <a style="color:white" href="market/{{key}}" ui-sref="market({id:key})">{{key}} </a>
+                                    </span>
+                                    <br>
+                                    <span ng-repeat="(key, value) in order.setBeta">
+                                        <a style="color:white" href="market/{{key}}" ui-sref="market({id:key})">{{key}} </a>
+                                    </span>
+                                </h5>
                                 <h5 style="color:white"><span style="font-size:10px">{{order.type}}</span></h5>
                             </div>
                         </div>
@@ -33,10 +35,11 @@
                 <div class="member-tab-container container" style="padding-left:0px">
                     <div style="text-align:left">
                         <ul style="padding:0px;" class="member-tabs">
-                            <li><a ng-click="selectTab('INFORMATION')" href="#">Information</a></li>
-                            <li><a ng-click="selectTab('ORDERS')" href="#">Orders</a></li>
-                            <li><a ng-click="selectTab('TRANSACTIONS')" href="#">Transactions</a></li>
+                            <li><a ng-click="$event.stopPropagation();selectTab('INFORMATION')" href="#">Information</a></li>
                             <li><a ng-click="$event.stopPropagation();selectTab('CONTENT')">Content</a></li>
+                            <li><a ng-click="$event.stopPropagation();selectTab('LIQUIDITY')" href="#">Liquidity</a></li>
+                            <li><a ng-click="$event.stopPropagation();selectTab('ORDERS')" href="#">Orders</a></li>
+                            <li><a ng-click="$event.stopPropagation();selectTab('TRANSACTIONS')" href="#">Transactions</a></li>
                         </ul>
                     </div>
                 </div>
@@ -115,6 +118,35 @@
                     </div>
 
                     <div class="spacing-10"></div>
+                    
+
+                    <cytoscape graph-options="options" graph-elements="elementsObj" graph-layout="layout" graph-style="style"></cytoscape>
+                    <cytoscape graph-options="options" graph-elements="elementsObjCombinatorial" graph-layout="layout" graph-style="style"></cytoscape>
+
+                    <p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="order.createdAt"></p>
+
+                </div>
+                <div class="card-footer">
+                    <a ng-click="$event.stopPropagation();createReaction(order, 'plus')"><i class="fa fa-angle-up"></i> {{order.reactions.plus}} like </a> 
+                    <a ng-click="$event.stopPropagation();createReaction(order, 'plus')" ><i class="fa fa-angle-down"></i> {{order.reactions.minus}} dislike </a>
+                    <a ng-click="$event.stopPropagation();contentToggle(order)"><i class="fa fa-comment-o"></i> comment </a>
+                </div>
+            </div>
+        </div>
+
+        <div ng-if="selectedTab =='LIQUIDITY'">
+            <div class="card">
+                <div style="background:url('https://source.unsplash.com/1600x900/?explore,discover')" class="imageContainerSmall">
+                    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                        <div style="margin-top: auto;margin-bottom: auto;">
+                            <div style="padding:15px">
+                                <h2 style="color:white">Liquidity</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="padding:16px">   
+                    
                     <h4>Associated Markets</h4>
                     <h5>Power Set</h5>
                     <p>Order fuilfilment paths</p>
@@ -128,27 +160,10 @@
                         </div>
                     </div>
 
-                    </div>
-                    <cytoscape graph-options="options" graph-elements="elementsObj" graph-layout="layout" graph-style="style"></cytoscape>
-                    <cytoscape graph-options="options" graph-elements="elementsObjCombinatorial" graph-layout="layout" graph-style="style"></cytoscape>
-
-                    <p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="order.createdAt"></p>
-
-                </div>
-
-                <div class="card-footer">
-                    <a ng-click="createReaction(order, 'plus')"><i class="fa fa-angle-up"></i> {{order.reactions.plus}} like </a> 
-                    <a ng-click="createReaction(order, 'plus')" ><i class="fa fa-angle-down"></i> {{order.reactions.minus}} dislike </a>
-                    <a ng-click="contentToggle(order)"><i class="fa fa-comment-o"></i> comment </a>
-                </div>
-                <div ng-click="$event.stopPropagation();" ng-show="order.showReply" class="card-footer">
-                    <form role="form" ng-submit="createContent(order)">
-                        <text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
-                        <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
-                    </form>
                 </div>
             </div>
         </div>
+
 
         <!--TODO: Partially Filled Orders -->
         <!--ORDERS-->
@@ -165,8 +180,11 @@
                     </div>
                 </div>
                 <div style="padding:16px">   
+                    <!--
                     <h5>Status</h5>
                     <h5>Filled Orders</h5>
+                    -->
+                    <h5>Matching..</h5>
                 </div>
             </div>
             <div class="card" ng-repeat="item in order.tokens">
@@ -189,7 +207,7 @@
                 <div class="card-footer">
                     <a ng-click="createReaction(order, 'plus')"><i class="fa fa-angle-up"></i> {{order.reactions.plus}} like </a> 
                     <a ng-click="createReaction(order, 'plus')" ><i class="fa fa-angle-down"></i> {{order.reactions.minus}} dislike </a>
-                    <a ng-click="reply(order)"><i class="fa fa-comment-o"></i> comment </a>
+                    <a ng-click="contentToggle(order)"><i class="fa fa-comment-o"></i> comment </a>
                     <a style="color:grey" class="pull-right" href="order/{{item.id}}" ui-sref="order({id:item.id})"><i class="fa fa-link grey"></i></a>
                 </div>
             </div>
@@ -208,9 +226,7 @@
                     </div>
                 </div>
                 <div style="padding:16px">  
-                    <h5>Two Transactions on a Trade</h5>
-                    <h5>Seller to Eskrow, Buyer to Eskrow, Eskrow to Engine, Engine to Seller, Engine to Buyer</h5>
-                    <h5>Seller to Buyer, Buyer to Seller</h5>
+                    <h5>No Transactions</h5>
                 </div>
             </div>
         </div>
@@ -218,11 +234,6 @@
     </div>
         
     <div ng-if="selectedTab =='CONTENT'">
-        <div class="row">
-            <div class="card">
-                <button class="btn btn-default log-btn" ng-click="contentToggle()">+ Order Content</button>
-            </div>
-        </div>
         <div class="row">
             <div class="card" ng-repeat="item in contentList">
                 <div style="padding:16px">

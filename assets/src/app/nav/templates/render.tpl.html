@@ -58,6 +58,17 @@
                     <p><b>Location</b></p>
                     <p ng-if="item.location.address"><b>Address</b>: {{item.location.address}}</p>
                     <p ng-if="item.location.lat"><b>Latitude</b>: {{item.location.lat}}, <b>Longitude</b>: {{item.location.lng}}</p>
+                    <style type="text/css">.angular-google-map-container{height: 200px;}</style>
+                    <div class="">
+                        <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options">
+                            <ui-gmap-marker ng-repeat="marker in markers" coords="marker.coords" options="marker.options" idkey="marker.id">
+                                <ui-gmap-window options="windowOptions" closeClick="closeClick()">
+                                    <div style="font-size: 15px;"><a href="project/{{marker.url}}" ui-sref="project.activity({path:marker.url})">{{marker.content}}</a></div>
+                                </ui-gmap-window>
+                            </ui-gmap-marker>
+                        </ui-gmap-google-map>
+                    </div>
+
                 </div>
 
                 <div class="spacing-5"></div>

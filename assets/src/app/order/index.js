@@ -36,7 +36,12 @@ angular.module( 'conexus.order', [
     $scope.order.tokens = [];
 
     //TODO: FIX
-    $rootScope.associatedModels = [{type:'ORDER', address:order.id}];
+    $rootScope.associatedModels = [{
+        type:'ORDER', 
+        id:order.id, 
+        text:'ORDER+'+ $scope.order.id,
+        context:[{text:'general', score:100}]
+    }];
 
 
     titleService.setTitle('Order | ' + $scope.order.id + ' | CRE8.XYZ');
