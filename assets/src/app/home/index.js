@@ -415,8 +415,6 @@ angular.module( 'conexus.home', [
     };
 
 
-
-
     //WATCHERS
     //PERHAPS IN NAV ROOT... --> SEARCH MODEL MASED ON URL
     $rootScope.$watch('searchQueryNav' ,function(newValue, oldValue){
@@ -549,19 +547,21 @@ angular.module( 'conexus.home', [
         $scope.memberTasks = memberTasks.map(function(obj){obj.model = 'TASK';return obj});
 
         $scope.followers = followers;
-        $scope.followers = $scope.followers.map(function(obj){return obj.followed});    
+        if ($scope.followers ){
+            $scope.followers = $scope.followers.map(function(obj){return obj.followed});    
+            $scope.members.map(function(obj){
+                var index = $scope.followers.map(function(obj1){
+                    //bug with undef followers
+                    if (obj1){
+                        return obj1.id;
+                    }
+                }).indexOf(obj.id);
+                if (index != -1){obj.isFollowing = true;}
+                if (index == -1){obj.isFollowing = false;}
+                return obj;
+            });
+        }
 
-        $scope.members.map(function(obj){
-            var index = $scope.followers.map(function(obj1){
-                //bug with undef followers
-                if (obj1){
-                    return obj1.id;
-                }
-            }).indexOf(obj.id);
-            if (index != -1){obj.isFollowing = true;}
-            if (index == -1){obj.isFollowing = false;}
-            return obj;
-        });
 
         $scope.projects.map(function(obj){
             var index = $scope.memberProjects.map(function(obj1){return obj1.id}).indexOf(obj.id);

@@ -2,6 +2,7 @@
 * Follower.js
 */
 
+//DEPRECIATE!
 module.exports = {
 
 	attributes: {
@@ -24,30 +25,6 @@ module.exports = {
             });
         }
     },
-    
-    getFollowers: function(followed_model) {
-        return Follower.find()
-        .sort({createdAt: 'desc'})
-        .populate('followed')
-        .populate('follower')
-        .limit(1000)
-        .where({followed: followed_model})
-        .then(function (model) {
-            return [model];
-        });
-    },
-
-    getFollowing: function(follower_model) {
-        return Follower.find()
-        .sort({createdAt: 'desc'})
-        .populate('followed')
-        .populate('follower')
-        .limit(1000)
-        .where({follower: follower_model})
-        .then(function (model) {
-            return [model];
-        });
-    }
 
 };
 

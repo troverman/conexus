@@ -13,6 +13,7 @@ angular.module( 'conexus.connection', [
 	});
 }])
 
-.controller( 'ConnectionCtrl', ['$sce', '$scope', function ConnectionController( $sce, $scope ) {
+.controller( 'ConnectionCtrl', ['$sce', '$scope', 'titleService', function ConnectionController( $sce, $scope, titleService ) {
+    titleService.setTitle('Connection | CRE8.XYZ');
 
 }]);

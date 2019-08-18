@@ -257,7 +257,7 @@ module.exports.intervalService = function(){
 			}, {});
 			tokenModels = tokenModels.filter(e => lookup[e.string]);
 			console.log(tokenModels)
-			//for (x in tokenModels){Token.destroy(tokenModels[x].id, function(err) {console.log('delete token')});}
+			for (x in tokenModels){Token.destroy(tokenModels[x].id, function(err) {console.log('delete token')});}
 		})
 	};
 	//removeDuplicateTokens();

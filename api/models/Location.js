@@ -1,22 +1,9 @@
 module.exports = {
-
-    //DB OF LOCATIONS
-    //MAPPING OF LOCATIONS --> LAT LNG ? 
-
     attributes: {
-
-        lat: {
-            type: 'string',
-            required: true
-        },
-        lng: {
-            type: 'string',
-            required: true
-        },
-        user: {
-            model: 'user',
-            required: true
-        }
-        
-    },
+        lat:{type: 'string'},
+        lng:{type: 'string'},
+        creator:{type: 'string'},
+        data:{type: 'json'},
+        dataHash:{type: 'string'}
+    }
 };

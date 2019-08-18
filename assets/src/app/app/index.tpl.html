@@ -150,9 +150,9 @@
             </div>
             <!--CONETENT..? -->
             <div class="card-footer">
-                <a href="#" ng-click="createReaction(app, 'plus')"><i class="fa fa-angle-up"></i> {{app.reactions.plus}} like </a> 
-                <a href="#" ng-click="createReaction(app, 'minus')" ><i class="fa fa-angle-down"></i> {{app.reactions.minus}} dislike </a>
-                <a href="#" ng-click="reply(app)"><i class="fa fa-comment-o"></i> comment </a>
+                <a ng-click="$event.stopPropagation();createReaction(app, 'plus')"><i class="fa fa-angle-up"></i> {{app.reactions.plus}} like </a> 
+                <a ng-click="$event.stopPropagation();createReaction(app, 'minus')" ><i class="fa fa-angle-down"></i> {{app.reactions.minus}} dislike </a>
+                <a ng-click="$event.stopPropagation();contentToggle(app)"><i class="fa fa-comment-o"></i> comment </a>
             </div>
         </div>
     </div>

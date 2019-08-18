@@ -314,7 +314,7 @@
                         </a>
                         <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fas fa-angle-up"></i> {{item.reactions.plus}} like </a> 
                         <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fas fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
-                        <a ng-click="$event.stopPropagation();reply(item)"><i class="far fa-comment"></i> comment </a>
+                        <a ng-click="$event.stopPropagation();contentToggle(item)"><i class="far fa-comment"></i> comment </a>
                         <a ng-click="$event.stopPropagation();validationToggle(item)"><i class="fa fa-check"></i> validate </a>
                         <a ng-click="$event.stopPropagation()" style="padding:0px" class="pull-right" href="content/{{item.id}}" ui-sref="content({id:item.id})"><i class="fas fa-link grey"></i></a>
                     </div>
@@ -381,7 +381,7 @@
                     <div class="card-footer">
                         <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fas fa-angle-up"></i> {{item.reactions.plus}} like </a> 
                         <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fas fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
-                        <a ng-click="$event.stopPropagation();reply(item)"><i class="far fa-comment"></i> comment </a>
+                        <a ng-click="$event.stopPropagation();contentToggle(item)"><i class="far fa-comment"></i> comment </a>
                         <a ng-click="$event.stopPropagation();validationToggle(item)"><i class="fas fa-check"></i> validate </a>
                         <a style="padding:0px" class="pull-right" href="task/{{item.id}}" ui-sref="task({id:item.id})"><i class="fas fa-link grey"></i></a>
                     </div>
@@ -431,7 +431,7 @@
                     <div class="card-footer">
                         <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fas fa-angle-up"></i> {{item.reactions.plus}} like </a> 
                         <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fas fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
-                        <a ng-click="$event.stopPropagation();reply(item)"><i class="far fa-comment"></i> comment </a>
+                        <a ng-click="$event.stopPropagation();contentToggle(item)"><i class="far fa-comment"></i> comment </a>
                         <a ng-click="$event.stopPropagation();validationToggle(item)"><i class="fas fa-check"></i> validate </a>
                         <a ng-click="$event.stopPropagation()" style="padding:0px" class="pull-right" href="time/{{item.id}}" ui-sref="time({id:item.id})"><i class="fas fa-link grey"></i></a>
                     </div>

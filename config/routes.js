@@ -132,6 +132,13 @@ module.exports.routes = {
   'post /api/item': 'ItemController.create',
   'delete /api/item/:id': 'ItemController.destroy',
 
+
+  /**
+   * Location routes
+   */
+  'get /api/location': 'ItemController.get',
+  'post /api/location': 'ItemController.create',
+
   /**
    * Notification routes
    */

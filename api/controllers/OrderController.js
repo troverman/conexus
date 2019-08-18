@@ -16,8 +16,6 @@ module.exports = {
 		//BUILD UP -- HIGHEST DIM CONNECTION IS BASE
 			//SORT ASSETS.. 
 
-
-
 		function buildMarketV1(baseMarket, orders){
 
 			//CAN REFRESH A COUPLE TIMES
@@ -349,7 +347,7 @@ module.exports = {
 							protocols:['CRE8', 'ORDER'],
 							logic:{transferrable:true, mint:''}
 						};
-						Token.create(newTokenModel).then(function(){console.log('TOKEN CREATED');});
+						Token.create(newTokenModel).then(function(){console.log('TOKEN CREATED', newTokenModel);});
 					}
 					else{
 						tokenModels[0].information.markets++; 
@@ -367,7 +365,7 @@ module.exports = {
 							protocols:['CRE8', 'ORDER'],
 							logic:{transferrable:true, mint:''}
 						};
-						Token.create(newTokenModel).then(function(){console.log('TOKEN CREATED');});
+						Token.create(newTokenModel).then(function(){console.log('TOKEN CREATED', newTokenModel);});
 					}
 					else{
 						tokenModels[0].information.markets++; 

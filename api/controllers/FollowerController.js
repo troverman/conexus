@@ -16,9 +16,10 @@ module.exports = {
 
 	//DEPRECIATE
 	getFollowers: function(req, res) {
-		var followedId = req.param('id');
-		Follower.getFollowers(followedId)
-		.spread(function(models) {
+		Follower.find({followed:req.param('id')})
+		.populate('follower')
+		.populate('followed')
+		.then(function(models) {
 			Follower.watch(req);
 			Follower.subscribe(req, models);
 			res.json(models);
@@ -26,9 +27,10 @@ module.exports = {
 	},
 
 	getFollowing: function(req, res) {
-		var followerId = req.param('id');
-		Follower.getFollowing(followerId)
-		.spread(function(models) {
+		Follower.find({follower:req.param('id')})
+		.populate('follower')
+		.populate('followed')
+		.then(function(models) {
 			Follower.watch(req);
 			Follower.subscribe(req, models);
 			res.json(models);

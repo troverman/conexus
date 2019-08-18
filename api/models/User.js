@@ -1,5 +1,3 @@
-var request = require('request');
-
 module.exports = {
     attributes: {
 
@@ -79,7 +77,10 @@ module.exports = {
 
     },
 
+    //TODO
     afterCreate: function(model, next){
+
+        var request = require('request');
 
         //var coverUrlArray = ['images/congress.jpg', 'images/congress1.jpg', 'images/crowd.jpg', 'images/capitol.jpg', 'images/capitol1.jpg', 'images/bokeh.jpg', 'images/metro.jpg', 'images/natural.jpg' ,'images/nature.jpg'];
         //var randInt = Math.floor(Math.random() * (coverUrlArray.length + 1));
@@ -103,7 +104,7 @@ module.exports = {
             User.update({id: model.id}, model)
             .then(function(model){
 
-                //emailService.sendTemplate('welcome', model.email, 'Welcome To Voetr!', {username: model.username});
+                //emailService.sendTemplate('welcome', model.email, 'Welcome To CREATE!', {username: model.username});
                 return next(null, model);
             });
         });
