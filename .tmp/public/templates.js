@@ -14280,6 +14280,7 @@ angular.module("templates/cards/transactionCard.tpl.html", []).run(["$templateCa
     "        </p>\n" +
     "    </div>\n" +
     "    <div class=\"card-footer\">\n" +
+    "        <a style=\"color:grey\" href=\"transaction/{{item.id}}\" ui-sref=\"content({id:item.id})\" ng-click=\"\"><i class=\"fas fa-eye\"></i> {{item.attention.general || 0}}</a>\n" +
     "        <a ng-click=\"$event.stopPropagation();createReaction(item, 'plus')\"><i class=\"fas fa-angle-up\"></i> {{item.reactions.plus}} like </a> \n" +
     "        <a ng-click=\"$event.stopPropagation();createReaction(item, 'plus')\" ><i class=\"fas fa-angle-down\"></i> {{item.reactions.minus}} dislike </a>\n" +
     "        <a ng-click=\"$event.stopPropagation();contentToggle(item)\"><i class=\"far fa-comment\"></i> comment </a>\n" +

@@ -88,6 +88,32 @@ angular.module( 'conexus.discover', [
     };
 
     $scope.shuffleActivity = function(){
+
+
+        //HERE!
+        $scope.searchQuery = {
+            associations:[
+                {text:'CRE8'}
+            ],
+            locations:[
+                {text:'My Location - 5 km'}
+            ],
+            context:[
+                {text:'Art'},
+                {text:'City'}
+            ],
+        };
+
+        $scope.sortedTagArray
+
+        var length = Math.floor(Math.random()*10)
+        var randomContext = $scope.shuffleArray($scope.sortedTagArray).slice(0, length);
+
+        randomContext = randomContext.map(function(obj){
+            obj.text = obj
+            return obj;
+        });
+
         $scope.activity = $scope.shuffleArray($scope.activity);
     };
     
@@ -119,7 +145,7 @@ angular.module( 'conexus.discover', [
         locations:[
             {text:'My Location - 5 km'}
         ],
-        tags:[
+        context:[
             {text:'Art'},
             {text:'City'}
         ],
