@@ -2,11 +2,11 @@
 <style>.ngCytoscape{height: 400px;width:100%;}</style>
 
 <div class="container" style="padding:0px">
-    <div class="card" ng-click="cardDetailToggle(item)">
+    <div class="card" ng-click="cardDetailToggle(market)">
         <div class="imageContainerSmall" style="background:url('https://source.unsplash.com/1600x900/?{{token.string || stateParams.id}}')">
             <div style="background:rgba(0,0,0,0.75);" class="imageContainerSmallDiv">
                 <div style="text-align:right;padding:15px;position:absolute;right:0">
-                    <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
+                    <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(market)">
                         <i class="fas fa-chevron-down"></i>
                     </a>
                 </div>
@@ -65,7 +65,7 @@
 							<hr>
 
 							<div>
-					    		<p><b><a href="token/{{token.string}}">{{token.string}}</a></b></p>	
+					    		<p><b><a ng-click="$event.stopPropagation();cardDetailToggle(token)">{{token.string}}</a></b></p>	
 								<p style="font-style:italic;color:gray">In Circulation: {{token.information.inCirculation}}</p>
 								<h5>Logic & Protocols</h5>
 					    		<p style="font-style:italic;color:gray">{{markets.protocols}}</p>

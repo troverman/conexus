@@ -27,6 +27,7 @@ angular.module( 'conexus', [
     'conexus.app',
     'conexus.apps',
     'conexus.association',
+    'conexus.attention',
     'conexus.block',
     'conexus.connection',
     'conexus.content',
@@ -59,7 +60,6 @@ angular.module( 'conexus', [
     'conexus.transparency',
     'conexus.tx',
     'conexus.validation',
-    'conexus.view'
 ])
 .config(['$locationProvider', '$mdThemingProvider', '$stateProvider', '$urlRouterProvider', function myAppConfig ( $locationProvider, $mdThemingProvider, $stateProvider, $urlRouterProvider ) {
     //$mdThemingProvider.theme('default').primaryPalette('blue-grey').accentPalette('blue')

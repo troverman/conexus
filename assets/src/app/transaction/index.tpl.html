@@ -67,6 +67,7 @@
             </div>
 
             <div class="card-footer">
+                <a ng-click="$event.stopPropagation();" style="color:grey"><i class="fas fa-eye"></i>  {{transaction.attention.general || 0}}</a>
                 <a ng-click="$event.stopPropagation();createReaction(transaction, 'plus')"><i class="fas fa-angle-up"></i> {{transaction.reactions.plus}} like </a> 
                 <a ng-click="$event.stopPropagation();createReaction(transaction, 'minus')" ><i class="fas fa-angle-down"></i> {{transaction.reactions.minus}} dislike </a>
                 <a ng-click="$event.stopPropagation();contentToggle(transaction);" style="padding:5px;color:grey"><i class="far fa-comment"></i> comment </a>

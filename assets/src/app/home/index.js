@@ -398,7 +398,7 @@ angular.module( 'conexus.home', [
 
 }])
 
-.controller( 'FeedCtrl', ['$mdSidenav', '$location', '$rootScope', '$sce', '$scope', 'contentList', 'ContentModel', 'FollowerModel', 'followers', 'MemberModel', 'members', 'memberProjects', 'memberTasks', 'orders', 'positions', 'ProjectModel', 'projects', 'ReactionModel', 'SearchModel', 'tasks', 'time', 'titleService', 'toaster', 'transactions', 'UserModel', 'ValidationModel', function HomeController( $mdSidenav, $location, $rootScope, $sce, $scope, contentList, ContentModel, FollowerModel, followers, MemberModel, members, memberProjects, memberTasks, orders, positions, ProjectModel, projects, ReactionModel, SearchModel, tasks, time, titleService, toaster, transactions, UserModel, ValidationModel ) {
+.controller( 'FeedCtrl', ['$mdSidenav', '$location', '$rootScope', '$sce', '$scope', 'contentList', 'ContentModel', 'FollowerModel', 'followers', 'MemberModel', 'members', 'memberProjects', 'memberTasks', 'orders', 'PeerModel', 'positions', 'ProjectModel', 'projects', 'ReactionModel', 'SearchModel', 'tasks', 'time', 'titleService', 'toaster', 'transactions', 'UserModel', 'ValidationModel', function HomeController( $mdSidenav, $location, $rootScope, $sce, $scope, contentList, ContentModel, FollowerModel, followers, MemberModel, members, memberProjects, memberTasks, orders, PeerModel, positions, ProjectModel, projects, ReactionModel, SearchModel, tasks, time, titleService, toaster, transactions, UserModel, ValidationModel ) {
 	
     //NEED TO REDUCE QUERIES
     //GET FEED
@@ -703,6 +703,39 @@ angular.module( 'conexus.home', [
                 console.log('EDIT USER', model);
             });
             $scope.pop('Saved!', 'Account Updated');
+
+
+            //TODO: STRONG STRUCT
+            //IF BROWER MINING.. CREATE PEER :) (INIT PROCESS..)
+            
+            //var peer = currentUser.apps.map(function(obj){return obj.title}).indexOf('PEER') != -10
+            //get peer. if you know have. create. 
+            //link peer to machiene attention
+            var peer = true;
+            if (peer){
+                var peerModel = {
+                    version:'UNSTABLE PRE-ALPHA',
+
+                    //data - information
+                    info:{
+                        location:{
+                            lat:1,
+                            lng:1
+                        },
+                        device:{
+                            title:1,
+                            processor:1,
+                            hash:1,
+                        }
+                    },
+                    reputation:{general:1},
+                    hash:1,
+                    versionHash:1,
+                };
+                //PeerModel.create(peerModel).then(function(){
+
+                //});
+            }
         };
 
         //TODO DEPRECIATE.. PUT IN NAV
@@ -759,11 +792,6 @@ angular.module( 'conexus.home', [
         //TODO: ROOTSCOPE
         //$scope.createMember = function(){
         $scope.join = function(model){
-            
-            //$scope.newValidation = {
-            //    user:$rootScope.currentUser.id,
-            //    project:model.id,
-            //};
 
             $scope.newMember = {
                 user:$rootScope.currentUser.id,
@@ -868,7 +896,6 @@ angular.module( 'conexus.home', [
         //$scope.selectedTab = 'QUESTIONS';
         $scope.selectedTab = 'BUILDER';
         $scope.selectTab = function(model){$scope.selectedTab = model;};
-
 
         $scope.totalMap = {
             chart: {zoomType: 'x'},

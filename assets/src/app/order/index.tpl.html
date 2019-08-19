@@ -1,9 +1,7 @@
 <div class="container">
 
-
     <div class="row">
 
-        <!--INFORMATION-->
         <div>
             <div class="card" ng-click="cardDetailToggle(order)">
                 <div style="background:url('https://source.unsplash.com/1600x900/?explore,discover')" class="imageContainerSmall">
@@ -14,14 +12,16 @@
                             </a>
                             <div style="clear:both"></div>
                         </div>
-                        <div style="margin-top: auto;margin-bottom: auto;">
+                        <div style="margin-top: auto;margin-bottom: auto;text-align:center">
                             <div style="padding:15px">
-                                <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">Order</h1>
+                                <h1 style="font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">Order</h1>
+                                <h5 style="color:white">{{order.id}}</h5>
                                 <h5>
                                     <span ng-repeat="(key, value) in order.setAlpha">
                                         <a style="color:white" href="market/{{key}}" ui-sref="market({id:key})">{{key}} </a>
                                     </span>
-                                    <br>
+                                </h5>
+                                <h5>
                                     <span ng-repeat="(key, value) in order.setBeta">
                                         <a style="color:white" href="market/{{key}}" ui-sref="market({id:key})">{{key}} </a>
                                     </span>
@@ -33,12 +33,14 @@
                 </div>
                 <div style="background-color:white">
                 <div class="member-tab-container container" style="padding-left:0px">
-                    <div style="text-align:left">
+                    <div style="text-align:center">
                         <ul style="padding:0px;" class="member-tabs">
                             <li><a ng-click="$event.stopPropagation();selectTab('INFORMATION')">Information</a></li>
                             <li><a ng-click="$event.stopPropagation();selectTab('CONTENT')">Content</a></li>
                             <li><a ng-click="$event.stopPropagation();selectTab('LIQUIDITY')">Liquidity</a></li>
                             <li><a ng-click="$event.stopPropagation();selectTab('ORDERS')">Orders</a></li>
+                            <!--<li><a ng-click="$event.stopPropagation();selectTab('STATS')">Stats</a></li>
+                            <li><a ng-click="$event.stopPropagation();selectTab('TOKENS')">Tokens</a></li>-->
                             <li><a ng-click="$event.stopPropagation();selectTab('TRANSACTIONS')">Transactions</a></li>
                         </ul>
                     </div>
@@ -119,7 +121,6 @@
 
                     <div class="spacing-10"></div>
                     
-
                     <cytoscape graph-options="options" graph-elements="elementsObj" graph-layout="layout" graph-style="style"></cytoscape>
                     <cytoscape graph-options="options" graph-elements="elementsObjCombinatorial" graph-layout="layout" graph-style="style"></cytoscape>
 
@@ -146,12 +147,10 @@
                     </div>
                 </div>
                 <div style="padding:16px">   
-                    
                     <h4>Associated Markets</h4>
                     <h5>Power Set</h5>
                     <p>Order fuilfilment paths</p>
                     <p>{{alphaPower.length}} - {{betaPower.length}}</p>
-
                     <div ng-repeat="itemAlpha in alphaPower">
                         <div ng-repeat="itemBeta in betaPower">
                             <a href="market/{{itemAlpha.join(',')}}/{{itemBeta.join(',')}}" ui-sref="marketPair({setAlpha:itemAlpha.join(','), setBeta:itemBeta.join(',')})">
@@ -159,15 +158,10 @@
                             </a>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
 
-
-        <!--TODO: Partially Filled Orders -->
-        <!--ORDERS-->
-        <!--ORDER->ORDER ASSOCIATION; IE SUB ORDER; IE TAKER TRADE-->
         <div ng-if="selectedTab =='ORDERS'">
             <div class="card">
                 <div style="background:url('https://source.unsplash.com/1600x900/?explore,discover')" class="imageContainerSmall">
@@ -180,10 +174,6 @@
                     </div>
                 </div>
                 <div style="padding:16px">   
-                    <!--
-                    <h5>Status</h5>
-                    <h5>Filled Orders</h5>
-                    -->
                     <h5>Matching..</h5>
                 </div>
             </div>
@@ -213,7 +203,6 @@
             </div>
         </div>
 
-        <!--TRANSACTIONS-->
         <div ng-if="selectedTab =='TRANSACTIONS'">
             <div class="card">
                 <div style="background:url('https://source.unsplash.com/1600x900/?explore,discover')" class="imageContainerSmall">

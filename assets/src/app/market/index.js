@@ -27,8 +27,6 @@ angular.module( 'conexus.market', [
 
 .controller( 'MarketCtrl', [ '$rootScope', '$scope', '$stateParams', 'cytoData', 'OrderModel', 'orders', 'titleService', 'token', function MarketController( $rootScope, $scope, $stateParams, cytoData, OrderModel, orders, titleService, token ) {
    
-
-
     //VALIDATION (ORDER), ASSOCIATION (LIQUIDITY)//
 
         //connection type and scalar... 
@@ -67,10 +65,11 @@ angular.module( 'conexus.market', [
     ];
 
     //weird/
-    $scope.market = orders.market;
-
-    console.log($scope.market)
-
+    //$scope.market = orders.market;
+    $scope.market = token[0];
+    $scope.market.model = 'MARKET';
+    console.log($scope.market);
+    
     $scope.markets = [];
     $scope.newMarket = {};
     $scope.newOrder = {};

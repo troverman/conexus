@@ -9,9 +9,9 @@
                         <i class="fas fa-chevron-down"></i>
                     </a>
                 </div>
-                <div style="margin-top: auto;margin-bottom: auto;">
+                <div style="margin-top: auto;margin-bottom: auto;text-align:center">
                     <div style="padding:15px">
-                        <h1 style="text-align:left;">
+                        <h1>
                             <!--<img style="height:50px;width:50px" src="http://identicon-1132.appspot.com/{{item.id}}"/>-->
                             {{item.title}}
                         </h1>
@@ -33,21 +33,24 @@
         </div>
         <div style="background-color:white">
             <div class="member-tab-container container" style="padding-left:0px">
-                <div style="text-align:left">
+                <div style="text-align:center">
                     <ul style="padding:0px;" class="member-tabs">
-                        <!--<li><a ng-click="aselectTab('CONTENT')" href="#">Tokens</a></li>-->
-                        <!--<li><a ng-click="aselectTab('CONTENT')" href="#">Content</a></li>-->
-                        <!--<li><a ng-click="aselectTab('CONTENT')" href="#">Stats</a></li>-->
-                        <!--<li><a ng-click="aselectTab('CONTENT')" href="#">Associations</a></li>-->
-                        <li><a ng-click="$event.stopPropagation();selectTab('APPS')">Apps</a></li>
+
+                      
+
+                        <!--<li><a ng-click="$event.stopPropagation();selectTab('APPS')">Apps</a></li>-->
+                        <!--INFORMATION -->
                         <li><a ng-click="$event.stopPropagation();selectTab('ACTIVITY')">Activity</a></li>
                         <li><a ng-click="$event.stopPropagation();selectTab('ACTIONS')">Actions</a></li>
-                        <!--<li><a ng-click="$event.stopPropagation();selectTab('HISTORY')" >Content</a></li>-->
-                        <li><a ng-click="$event.stopPropagation();selectTab('HISTORY')" >History</a></li>
+                        <li><a ng-click="aselectTab('ASSOCIATIONS')" href="#">Associations</a></li>
+                        <li><a ng-click="aselectTab('CONTENT')" href="#">Content</a></li>
                         <li><a ng-click="$event.stopPropagation();selectTab('COMPONENTS')">Components</a></li>
+
+                        <li><a ng-click="$event.stopPropagation();selectTab('HISTORY')" >History</a></li>
                         <li><a ng-click="$event.stopPropagation();selectTab('LIQUIDITY')">Liquidity</a></li>
+                        <li><a ng-click="aselectTab('STATS')" href="#">Stats</a></li>
+                        <li><a ng-click="aselectTab('TOKENS')" href="#">Tokens</a></li>
                         <li><a ng-click="$event.stopPropagation();orderToggle(null, item);" class="btn btn-default">Purchase</a></li>
-                        <!--<li ng-click="$event.stopPropagation();subNavToggle(item);" style="float:right;margin-top:5px"><a style="color:black"><i class="fa fa-bars"></i></a></li>-->
                     </ul>
                 </div>
             </div>

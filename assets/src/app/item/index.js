@@ -414,6 +414,16 @@ angular.module( 'conexus.item', [
         });
     };
     //getOrderTraverse($scope.item.identiferSet);
+
+
+
+
+
+
+
+
+
+    
     
     
 }]);

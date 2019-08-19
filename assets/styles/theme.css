@@ -49,6 +49,8 @@ tags-input .autocomplete .suggestion-item.selected{background-color:#002a56;}
 #about-section1{background-color:white}
 #about-section2{color:white;background-color:black;}
 
+.angular-google-map-container { height: 400px; }
+
 .avatar {
     position:absolute;
     top:6.4em;

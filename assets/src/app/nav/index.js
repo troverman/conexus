@@ -943,16 +943,16 @@ angular.module( 'conexus.nav', [
 
         //TODO: FIX CRASH!
 
-        var sortable = [];
-        for (var dimension in $scope.reputation) {sortable.push([dimension, $scope.reputation[dimension]])}
-        sortable.sort(function(a, b) {return b[1] - a[1]});
+        //var sortable = [];
+        //for (var dimension in $scope.reputation) {sortable.push([dimension, $scope.reputation[dimension]])}
+        //sortable.sort(function(a, b) {return b[1] - a[1]});
 
-        for (x in sortable){
-            if (x < 100){
-                $scope.reputationChart.xAxis.categories.push(sortable[x][0]);
-                $scope.reputationChart.series[0].data.push(sortable[x][1]);
-            }
-        }
+        //for (x in sortable){
+        //    if (x < 100){
+        //        $scope.reputationChart.xAxis.categories.push(sortable[x][0]);
+        //        $scope.reputationChart.series[0].data.push(sortable[x][1]);
+        //    }
+        //}
         $mdSidenav('renderReputation').toggle();
     };
 

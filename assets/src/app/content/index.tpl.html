@@ -30,11 +30,11 @@
             <div class="member-tab-container container" style="padding-left:0px">
                 <div style="text-align:left">
                     <ul style="padding:0px;" class="member-tabs">
-                        <li><a ng-click="aselectTab('CONTENT')"  href="#">Content</a></li>
-                        <li><a ng-click="aselectTab('CONTENT')"  href="#">Associations</a></li>
-                        <li><a ng-click="aselectTab('CONTENT')"  href="#">Stats</a></li>
-                        <li><a ng-click="aselectTab('CONTENT')"  href="#">Tokens</a></li>
-                        <li><a ng-click="aselectTab('CONTENT')"  href="#">Liquidity</a></li>
+                        <li><a ng-click="$event.stopPropagation();selectTab('CONTENT')" href="#">Content</a></li>
+                        <li><a ng-click="selectTab('ASSOCIATIONS');$event.stopPropagation();renderValidationToggle(content);" >Associations</a></li>
+                        <li><a ng-click="selectTab('STATS');$event.stopPropagation();statsToggle(content);">Stats</a></li>
+                        <li><a ng-click="selectTab('TOKENS');$event.stopPropagation();tokensToggle(content);">Tokens</a></li>
+                        <li><a ng-click="$event.stopPropagation();selectTab('LIQUIDITY')">Liquidity</a></li>
                     </ul>
                 </div>
             </div>

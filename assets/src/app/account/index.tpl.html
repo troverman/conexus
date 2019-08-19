@@ -8,9 +8,31 @@
     </div>
 </div>
 
+<div class="spacing-10"></div>
+
 <div class="container">
-	<div class="spacing-15"></div>
+
+	<!--
 	<div class="row">
+		<div class="card">
+		    <div style="background:url('https://source.unsplash.com/1600x900/?settings')" class="imageContainerSmall">
+		        <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+		            <div style="text-align:right;padding:15px;position:absolute;right:0">
+		                <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
+		                    <i class="fas fa-globe"></i>
+		                </a>
+		            </div> 
+		            <div style="margin-top: auto;margin-bottom: auto;padding:15px">
+		                <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Account Settings</h1>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+	</div>
+	-->
+	
+	<div class="row">
+
 		<div class="col-sm-4 col-xs-12" style="padding-right:5px;padding-left:10px">
 			<div class="member-card">
 			    <div ng-click="editAccountToggle()" class="member-card-image" style="background-image: url('{{currentUser.coverUrl}}')">
@@ -18,99 +40,104 @@
 			        	<img ng-src="{{currentUser.avatarUrl}}" err-src="/images/avatar.png">
 			        </a>
 			    </div>
-			    <a ng-click="editAccountToggle()" href="#" style="float:right;padding-right:5px;">
+			    <!--<a ng-click="editAccountToggle()" href="#" style="float:right;padding-right:5px;">
 		        	<p><i class="fa fa-upload"></i></p>
-				</a>
+				</a>-->
 				<div style="clear:both"></div>
-			    <div class="member-card-info" style="height:auto;padding-left:0%">
+			    <div class="member-card-info" style="height:auto;">
 			        <h4><a href="member/{{currentUser.username}}" ui-sref="member.activity({path:currentUser.username})">{{currentUser.username}}</a></h4>
+                   	
+                   	<p style="font-size:8px;" ng-click="$event.stopPropagation();memberQRToggle(currentUser);"><a style="color:gray"><i class="fas fa-qrcode"></i> {{currentUser.id}}</a></p>
+                    <p style="font-size:11px">
+                    	<a href="/member/{{currentUser.username}}/projects" ui-sref="member.projects({path:currentUser.username})">{{currentUser.projectCount || 0}} Projects</a> | 
+                    	<a href="/member/{{currentUser.username}}/followers" ui-sref="member.followers({path:currentUser.username})">{{currentUser.followerCount || 0}} Followers</a> | 
+                    	<a href="/member/{{currentUser.username}}/following" ui-sref="member.following({path:currentUser.username})">{{currentUser.followingCount || 0}} Following</a>
+                    </p>
+                    <p style="font-size:11px" style="color:gray">
+			        	<a href="#" ng-click="renderReputationToggle(currentUser)">{{currentUser.totalWork}} Reputation</a>
+			        </p>
+                   	<div class="spacing-5"></div>
 			        <p style="color:gray"> <i style="color:#30b257" class="fa fa-circle"></i> {{currentUser.status}} Editing Account</p>
-			        <p style="color:gray"><b>Total Reputation</b>: {{currentUser.totalWork}}</p>
+			        
 			    </div>
+			    <!--
 			    <div class="member-card-social">
 			        <a ng-show="true" href="{{currentUser.socialAccounts.facebook.profileUrl}}"  target="_blank"><i class="fa fa-facebook facebook-icon"></i></a>
 			        <a ng-show="true" href="{{currentUser.socialAccounts.facebook.profileUrl}}"  target="_blank"><i class="fa fa-instagram"></i></a>
 			        <a ng-show="true" href="{{currentUser.socialAccounts.twitter.profileUrl}}"  target="_blank"><i class="fa fa-twitter twitter-icon"></i></a>
 			        <a ng-show="true" href="{{currentUser.socialAccounts.google.profileUrl}}"  target="_blank"><i class="fa fa-google google-icon"></i></a>
 			    </div>
+				-->
 			</div>
 		</div>
+
 		<div class="col-sm-8 col-xs-12" style="padding-left:5px;padding-right:0px">
+	        <ul style="padding:0px;" class="member-tabs">
+	            <li style="float:left;font-size:14px"><a href="#" ng-click="editAccountToggle()">Edit Account</a></li>
+	            <div style="clear:both"></div>
+	        </ul>
 			<div class="card">
 				<div style="padding:16px">
-					<span style="text-align:left;float:right"><a href="#"><span style="font-size:11px;color:gray">8x{{currentUser.id}}</span><img style="height:50px;" src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{currentUser.id}}"></a></span>
-					<h4>{{currentUser.username}}</h4>
-                    <p><a href="/member/{{currentUser.username}}/projects" ui-sref="member.projects({path:currentUser.username})">{{currentUser.projectCount || 0}} Projects</a> | <a href="/member/{{currentUser.username}}/followers" ui-sref="member.followers({path:currentUser.username})">{{currentUser.followerCount || 0}} Followers</a> | <a href="/member/{{currentUser.username}}/following" ui-sref="member.following({path:currentUser.username})">{{currentUser.followingCount || 0}} Following</a>
+					<div style="float:right"><img style="height:50px;text-align:left;margin-top:-5px" src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{currentUser.id}}"></div>
+					<h4>{{currentUser.firstName}} {{currentUser.lastName}}</h4>
+					<p>{{currentUser.email}}</p>
 
-					<div class="row">
-						<div class="col-xs-12">
-							<h5>Balance Mapping Lookup <span style="font-size:11px;color:gray"></span></h5>
-				       		<form ng-submit="lookupBalance()" style="display:flex;flex-direction:row;">
-					        	<input ng-model="balanceLook" style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder="Dimension">
-					        	<div ng-click="lookupBalance()" style="border:0px;float:right" class="btn btn-default">
-					                <a href="#"><h5 style="color:black;text-align:right" class="noselect"> <i class="fa fa-search"></i></h5></a>
-								</div>
-					    	</form>
-					    	<div ng-show="balanceLookupValue !== undefined">
-					    		<h5><a href="market/{{balanceLook}}" ui-sref="market({id:balanceLook})">{{balanceLook}}</a> | {{balanceLookupValue}}</h5>
-					    	</div>
-				        </div>
-
-				        <!--
-				        <div class="col-xs-6">
-							<h5>Reputation Lookup <span style="font-size:11px;color:gray"></span> </h5>
-				       		<form ng-click="lookupReputation()" style="display:flex;flex-direction:row;">
-					        	<input ng-model="reputationLook" style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder="Dimension">
-					        	<div ng-click="lookupReputation()" style="border:0px;float:right" class="btn btn-default">
-					                <a href="#"><h5 style="color:black;text-align:right" class="noselect"> <i class="fa fa-search"></i></h5></a>
-								</div>
-					    	</form>
-					    	<div ng-show="reputationLookupValue !== undefined">
-					    		<h5><a href="market/{{reputationLook}}">{{reputationLook}}</a> | {{reputationLookupValue}}</h5>
-					    	</div>
-				        </div>
-				    	-->
-
-					</div>
+					<!--<a ng-click="memberQRToggle(currentUser)" href="#">
+						<span style="font-size:11px;color:gray"><i class="fas fa-qrcode"></i> {{currentUser.id}}</span>
+					</a>-->
+					<!--<p>dob: {{currentUser.dateOfBirth | date :  "MM-dd-y"}}</p>
+					<p>join:{{currentUser.createdAt | date :  "MM-dd-y"}}</p>
+					<p>{{currentUser.email}}</p>-->
+					<p style="color:gray;font-size:12px;"><a href="#">Goverment ID</a> | <a href="#">Social Accounts</a> | <a href="#">BioMetric Data</a></p>
 				</div>
 			</div>
 		</div>
-	</div>
 
- 	<div class="row">
-        <ul style="padding:0px;" class="member-tabs">
-            <li style="float:left;font-size:14px"><a href="#" ng-click="editAccountToggle()">Edit Account</a></li>
-            <div style="clear:both"></div>
-        </ul>
 	</div>
 
 	<div class="row" ng-show="editAccountToggleVar">
 		<div class="card">
+			<div style="background:url('https://source.unsplash.com/1600x900/?geometry,information,passport')" class="imageContainerSmall">
+			    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+			    	<div style="text-align:right;padding:15px;position:absolute;right:0">
+		                <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><i class="fas fa-passport"></i></a>
+		            </div>
+			        <div style="margin-top: auto;margin-bottom: auto;">
+			        	<div class="container">
+				            <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">Information</h1>
+				            <h5 style="color:white">{{currentUser.id}}</h5>
+				        </div>
+			        </div>
+			    </div>
+			</div>
 		    <div style="padding:16px;">
 				<form role="form" ng-submit="editAccount()">
-
-                  	<div style="padding:0px" class="col-xs-12"><h5>Avatar Url</h5><input type="text" ng-model="newAccountInformation.avatarUrl" placeholder="Avatar Url" class="form-control"></div>
-                  	<div style="padding:0px" class="col-xs-12"><h5>Cover Url</h5><input type="text" ng-model="newAccountInformation.coverUrl" placeholder="Cover Url" class="form-control"></div>
-                  	<div style="padding:0px" class="col-xs-12"><h5>Username</h5><input type="text" ng-model="newAccountInformation.username" placeholder="Username" class="form-control"></div>
+                  	<div style="padding:0px" class="col-xs-6"><h5>Avatar Url</h5><input type="text" ng-model="newAccountInformation.avatarUrl" placeholder="Avatar Url" class="form-control"></div>
+                  	<div style="padding:0px" class="col-xs-6"><h5>Cover Url</h5><input type="text" ng-model="newAccountInformation.coverUrl" placeholder="Cover Url" class="form-control"></div>
+                  	<div style="padding:0px" class="col-xs-6"><h5>Username</h5><input type="text" ng-model="newAccountInformation.username" placeholder="Username" class="form-control"></div>
                 	<div style="padding:0px" class="col-xs-6"><h5>Email</h5><input type="text" ng-model="newAccountInformation.email" placeholder="Email" class="form-control"></div>
                 	<div style="padding:0px" class="col-xs-6"><h5>Phone Number</h5><input type="text" ng-model="newAccountInformation.phoneNumber" placeholder="Phone Number" class="form-control"></div>
 					<div style="padding:0px" class="col-xs-4"><h5>First Name</h5><input type="text" ng-model="newAccountInformation.firstName" placeholder="First Name" class="form-control"></div>
 					<div style="padding:0px" class="col-xs-4"><h5>Last Name</h5><input type="text" ng-model="newAccountInformation.lastName" placeholder="First Name" class="form-control"></div>
                    	<div style="padding:0px" class="col-xs-4"><h5>Date Of Birth</h5><input type="date" ng-model="newAccountInformation.dateOfBirth" placeholder="Date of Birth" class="form-control"></div>
                     <div style="padding:0px" class="col-xs-12"><h5>Description</h5><text-angular ng-model="newAccountInformation.description" ta-toolbar="[['p','h1','bold','italics','quote','ol','ul','insertLink','insertImage','html']]"></text-angular></div>
-
 					<button type="submit" class="btn btn-default log-btn">Save</button>
 	                <div style="clear:both"></div>
-
 				</form>
 			</div>
 		</div>
 	</div>
 
+	<!--
     <div class="row">
 		<div class="card">
 			<div style="background:url('https://source.unsplash.com/1600x900/?geometry,information,passport')" class="imageContainerSmall">
 			    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+			    	<div style="text-align:right;padding:15px;position:absolute;right:0">
+		                <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
+		                    <i class="fas fa-passport"></i>
+		                </a>
+		            </div>
 			        <div style="margin-top: auto;margin-bottom: auto;">
 			        	<div class="container">
 				            <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">Information</h1>
@@ -120,36 +147,25 @@
 			    </div>
 			</div>
 			<div style="padding:16px">
-				<div style="float:right">
-					<span style="font-size:24px;"><i class="fas fa-passport"></i></span>
-				</div>
-				<h4 style="color:gray;">{{currentUser.firstName}} {{currentUser.lastName}}</h4>
-				<h5 style="color:gray;">{{currentUser.email}}</h4>
-
-				<p style="color:gray;font-size:12px;">Phone Number: Two-Factor-Authentication <i style="color:#b23030" class="fa fa-circle"></i></p>
-				<p style="color:gray;font-size:12px;">Authenticator App: <i style="color:#b23030" class="fa fa-circle"></i></p>
-				<p style="color:gray;font-size:12px;">Human Proof ID: <i style="color:#b23030" class="fa fa-circle"></i></p>
-				<p style="color:gray;font-size:12px;">Verification: <a href="#">Goverment ID</a> | <a href="#">Social Accounts</a> | <a href="#">BioMetric Data</a></p>
+				<h4>{{currentUser.firstName}} {{currentUser.lastName}}</h4>
+				<h5>{{currentUser.email}}</h5>
+				<p style="color:gray;font-size:12px;"><a href="#">Goverment ID</a> | <a href="#">Social Accounts</a> | <a href="#">BioMetric Data</a></p>
 			</div>
 	    </div>
 	</div>
+	-->
 
 	<div class="spacing-5"></div>
-
-	<!--TODO: APPS; PASSPORTS; WALLETS; UNIFIY-->
 
 	<div class="row">
         <ul style="padding:0px;" class="member-tabs">
             <li style="font-size:14px"><a href="#" ng-click="selectTab('APPS')">Apps <i class="fas fa-universal-access"></i></a></li>
             <li style="font-size:14px"><a href="#" ng-click="selectTab('HISTORY')">History <i class="fas fa-history"></i></a></li>
             <li style="font-size:14px"><a href="#" ng-click="selectTab('MINING')">Mining <i class="fas fa-seedling"></i></a></li>
-            <!--<li style="font-size:14px"><a href="#" ng-click="selectTab('PRIVACY')">Privacy</a></li>-->
-            <!--<li style="font-size:14px"><a href="#" ng-click="selectTab('WALLETS')">Wallets</a></li>-->
             <div style="clear:both"></div>
         </ul>
 	</div>
 
-	<!--TODO: tokenized apps.. connect in..-->
 	<div class="row" ng-show="selectedTab=='APPS'">
 		<div class="card">
 			<div style="background:url('https://source.unsplash.com/1600x900/?applications,programming,idea')" class="imageContainerSmall">
@@ -162,322 +178,53 @@
 			        </div>
 			    </div>
 			</div>
-			<div style="padding:16px">
-				<!--
-				<div style="float:right">
-					<span style="font-size:24px;"><i class="fas fa-universal-access"></i></span>
-				</div>
-				-->
-				<!--HUMAN MACHINE ATTENTION AS APP-->
+		</div>
 
-				<ul style="padding:0px;" class="member-tabs">
-		            <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fa fa-filter"></i> Filter</a></li>
-		            <li style="font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fas fa-passport"></i> Passports & Wallets</a></li>
-		            <li style="float:right;font-size:14px"><a ng-click="sortToggle()" href="#">Sort By Recent <i class="fa fa-angle-down"></i></a></li>
-		            <div style="clear:both"></div>
-		        </ul>
-		        <div class="card">
-	                <tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search" ng-model="searchQuery"></tags-input>
-	            </div>
+		<ul style="padding:0px;" class="member-tabs">
+            <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fa fa-filter"></i> Filter</a></li>
+            <li style="font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fas fa-passport"></i> Passports & Wallets</a></li>
+            <li style="float:right;font-size:14px"><a ng-click="sortToggle()" href="#">Sort By Recent <i class="fa fa-angle-down"></i></a></li>
+            <div style="clear:both"></div>
+        </ul>
 
-				<!--MAPPING OF USER(ID) TO APPSTRING TO BOOL || OR OBJ - FOR SETTINGS (NOTIFICATIONS APP)-->
+        <div class="card">
+            <tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search" ng-model="searchQuery"></tags-input>
+        </div>
 
-				<!--LOL JSON NOW-->
-	            <!--TODO: APPS FROM DB-->    
-
-				<div class="card" ng-click="cardDetailToggle(app)">
-					<div style="background:url('https://source.unsplash.com/1600x900/?attention,intention,code)" class="imageContainerSmall">
-					    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
-					    	<div style="text-align:right;padding:15px;position:absolute;right:0">
-                                <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
-                                    <i class="fas fa-chevron-down"></i>
-                                </a>
-                            </div>
-					        <div style="margin-top: auto;margin-bottom: auto;">
-					        	<div style="padding:15px">
-						            <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;"><i class="fas fa-eye"></i> Attention Tokenization</h1>
-						            <h5 style="color:white">CRE8</h5>
-						        </div>
+        <div ng-repeat="app in apps">
+	        <div class="card" ng-click="cardDetailToggle(app)">
+	        	<div style="background:url('https://source.unsplash.com/1600x900/?attention,intention,code');min-height:100px" class="imageContainerSmall">
+				    <div style="background:rgba(0,0,0,0.75);height:100px" class="imageContainerSmallDiv">  
+				    	<div style="text-align:right;padding:15px;position:absolute;right:0">
+	                        <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
+	                            <i class="fas fa-chevron-down"></i>
+	                        </a>
+	                    </div>
+				        <div style="margin-top: auto;margin-bottom: auto;">
+				        	<div style="padding:15px">
+					            <h1 ng-click="$event.stopPropagation();" style="text-align:left;font-size:35px;font-weight:400;"><a style="color:rgba(255,255,255,0.9);" href="app/{{app.id}}" ui-sref="app({id:app.id})">{{app.title}}</a></h1>
+					            <h5 style="color:white">CRE8</h5>
 					        </div>
-					    </div>
-					</div>
-	                <div style="padding:16px;">
-						<span style="font-size:10px;color:gray">Required for Attention Tokenization</span>
-						<div ng-click="$event.stopPropagation();"><md-switch ng-change="editAccount()" ng-model="newAccountInformation.apps.cre8.recordAttention" aria-label="Record Attention"></md-switch></div>
-					</div>
+				        </div>
+				    </div>
 				</div>
-
-				<div class="card" ng-click="cardDetailToggle(app)">
-					<div style="background:url('https://source.unsplash.com/1600x900/?attention,intention,code)" class="imageContainerSmall">
-					    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
-					    	<div style="text-align:right;padding:15px;position:absolute;right:0">
-                                <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
-                                    <i class="fas fa-chevron-down"></i>
-                                </a>
-                            </div>
-					        <div style="margin-top: auto;margin-bottom: auto;">
-					        	<div style="padding:15px">
-						            <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;"><i class="fas fa-map-marker"></i> Location Tokenization</h1>
-						            <h5 style="color:white">CRE8</h5>
-						        </div>
-					        </div>
-					    </div>
-					</div>
-	                <div style="padding:16px;">
-						<span style="font-size:10px;color:gray">Required for Location Tokenization</span>
-						<div ng-click="$event.stopPropagation();"><md-switch ng-change="editAccount()" ng-model="newAccountInformation.apps.cre8.recordLocation" aria-label="Location Attention"></md-switch></div>
-					</div>
+				<div style="padding:16px;min-height:100px;max-height:100px">
+                    <p><span style="display:inline" ng-bind-html="renderContent(app.description)"></span></p>
+					<div ng-click="$event.stopPropagation();"><md-switch ng-change="editAccount()" ng-model="app.information.isActive"></md-switch></div>
 				</div>
-
-				<div class="card" ng-click="cardDetailToggle(app)">
-					<div style="background:url('https://source.unsplash.com/1600x900/?attention,intention,code)" class="imageContainerSmall">
-					    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
-					    	<div style="text-align:right;padding:15px;position:absolute;right:0">
-                                <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
-                                    <i class="fas fa-chevron-down"></i>
-                                </a>
-                            </div>
-					        <div style="margin-top: auto;margin-bottom: auto;">
-					        	<div style="padding:15px">
-						            <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;"><i class="fas fa-exclamation"></i> Notifications</h1>
-						            <h5 style="color:white">CRE8</h5>
-						        </div>
-					        </div>
-					    </div>
-					</div>
-	                <div style="padding:16px;">
-						<span style="font-size:10px;color:gray">Notifications Settings App</span>
-						<div ng-click="$event.stopPropagation();"><md-switch ng-change="editAccount()" ng-model="newAccountInformation.apps.cre8.notifications" aria-label="Notifications"></md-switch></div>
-					</div>
-				</div>
-
-				<div class="card" ng-click="cardDetailToggle(app)">
-					<div style="background:url('https://source.unsplash.com/1600x900/?attention,intention,code)" class="imageContainerSmall">
-					    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
-					    	<div style="text-align:right;padding:15px;position:absolute;right:0">
-                                <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
-                                    <i class="fas fa-chevron-down"></i>
-                                </a>
-                            </div>
-					        <div style="margin-top: auto;margin-bottom: auto;">
-					        	<div style="padding:15px">
-						            <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;"><i class="fas fa-question"></i> Tutorial</h1>
-						            <h5 style="color:white">CRE8</h5>
-						        </div>
-					        </div>
-					    </div>
-					</div>
-	                <div style="padding:16px;">
-						<span style="font-size:10px;color:gray">Tutorial Intro App</span>
-						<div ng-click="$event.stopPropagation();"><md-switch ng-change="editAccount()" ng-model="newAccountInformation.apps.cre8.tutorial" aria-label="Notifications"></md-switch></div>
-					</div>
-				</div>
-
-				<div class="card" ng-click="cardDetailToggle(app)">
-					<div style="background:url('https://source.unsplash.com/1600x900/?attention,intention,code)" class="imageContainerSmall">
-					    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv"> 
-					    	<div style="text-align:right;padding:15px;position:absolute;right:0">
-                                <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
-                                    <i class="fas fa-chevron-down"></i>
-                                </a>
-                            </div> 
-					        <div style="margin-top: auto;margin-bottom: auto;">
-					        	<div style="padding:15px">
-						            <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">Google Passport</h1>
-						        </div>
-					        </div>
-					    </div>
-					</div>
-	                <div style="padding:16px;">
-						<span style="font-size:10px;color:gray">Google Passport App</span>
-						<div ng-click="$event.stopPropagation();"><md-switch ng-change="editAccount()" ng-model="newAccountInformation.apps.googlePassport" aria-label="Google Passport"></md-switch></div>
-					</div>
-				</div>
-
-				<div class="card" ng-click="cardDetailToggle(app)">
-					<div style="background:url('https://source.unsplash.com/1600x900/?attention,intention,code)" class="imageContainerSmall">
-					    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
-					    	<div style="text-align:right;padding:15px;position:absolute;right:0">
-                                <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
-                                    <i class="fas fa-chevron-down"></i>
-                                </a>
-                            </div>
-					        <div style="margin-top: auto;margin-bottom: auto;">
-					        	<div style="padding:15px">
-						            <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">Facebook Passport</h1>
-						        </div>
-					        </div>
-					    </div>
-					</div>
-	                <div style="padding:16px;">
-						<span style="font-size:10px;color:gray">Facebook Passport App</span>
-						<div ng-click="$event.stopPropagation();"><md-switch ng-change="editAccount()" ng-model="newAccountInformation.apps.facebookPassport" aria-label="Facebook Passport"></md-switch></div>
-					</div>
-				</div>
-
-				<div class="card" ng-click="cardDetailToggle(app)">
-					<div style="background:url('https://source.unsplash.com/1600x900/?attention,intention,code)" class="imageContainerSmall">
-					    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
-					    	<div style="text-align:right;padding:15px;position:absolute;right:0">
-                                <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
-                                    <i class="fas fa-chevron-down"></i>
-                                </a>
-                            </div>
-					        <div style="margin-top: auto;margin-bottom: auto;">
-					        	<div style="padding:15px">
-						            <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">Twitter Passport</h1>
-						        </div>
-					        </div>
-					    </div>
-					</div>
-	                <div style="padding:16px;">
-						<span style="font-size:10px;color:gray">Twitter Passport App</span>
-						<div ng-click="$event.stopPropagation();"><md-switch ng-change="editAccount()" ng-model="newAccountInformation.apps.twitterPassport" aria-label="Twitter Passport"></md-switch></div>
-					</div>
-				</div>
-
-				<div class="card" ng-click="cardDetailToggle(app)">
-					<div style="background:url('https://source.unsplash.com/1600x900/?attention,intention,code)" class="imageContainerSmall">
-					    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
-					    	<div style="text-align:right;padding:15px;position:absolute;right:0">
-                                <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
-                                    <i class="fas fa-chevron-down"></i>
-                                </a>
-                            </div>
-					        <div style="margin-top: auto;margin-bottom: auto;">
-					        	<div style="padding:15px">
-						            <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">Phone Number Passport</h1>
-						        </div>
-					        </div>
-					    </div>
-					</div>
-	                <div style="padding:16px;">
-						<span style="font-size:10px;color:gray">Phone Number Passport (2FA)</span>
-						<div ng-click="$event.stopPropagation();"><md-switch ng-change="editAccount()" ng-model="newAccountInformation.apps.phoneNumber" aria-label="Phone Passport"></md-switch></div>
-					</div>
-				</div>
-
-				<div class="card" ng-click="cardDetailToggle(app)">
-					<div style="background:url('https://source.unsplash.com/1600x900/?attention,intention,code)" class="imageContainerSmall">
-					    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
-					    	<div style="text-align:right;padding:15px;position:absolute;right:0">
-                                <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
-                                    <i class="fas fa-chevron-down"></i>
-                                </a>
-                            </div>
-					        <div style="margin-top: auto;margin-bottom: auto;">
-					        	<div style="padding:15px">
-						            <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">Secret Text Passport</h1>
-						        </div>
-					        </div>
-					    </div>
-					</div>
-	                <div style="padding:16px;">
-						<span style="font-size:10px;color:gray">Text Password Passport (2FA) [default]</span>
-						<div ng-click="$event.stopPropagation();"><md-switch ng-change="editAccount()" ng-model="newAccountInformation.apps.password" aria-label="Password Passport"></md-switch></div>
-					</div>
-				</div>
-
-				<div class="card" ng-click="cardDetailToggle(app)">
-					<div style="background:url('https://source.unsplash.com/1600x900/?attention,intention,code)" class="imageContainerSmall">
-					    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
-					    	<div style="text-align:right;padding:15px;position:absolute;right:0">
-                                <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
-                                    <i class="fas fa-chevron-down"></i>
-                                </a>
-                            </div>
-					        <div style="margin-top: auto;margin-bottom: auto;">
-					        	<div style="padding:15px">
-						            <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">Fitbit App</h1>
-						        </div>
-					        </div>
-					    </div>
-					</div>
-	                <div style="padding:16px;">
-						<span style="font-size:10px;color:gray">Fitbit Tokenization & Passport</span>
-						<div ng-click="$event.stopPropagation();"><md-switch ng-change="editAccount()" ng-model="newAccountInformation.apps.fitbit" aria-label="Fitbit"></md-switch></div>
-					</div>
-				</div>
-
-				<div class="card" ng-click="cardDetailToggle(app)">
-					<div style="background:url('https://source.unsplash.com/1600x900/?attention,intention,code)" class="imageContainerSmall">
-					    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">
-					    	<div style="text-align:right;padding:15px;position:absolute;right:0">
-                                <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
-                                    <i class="fas fa-chevron-down"></i>
-                                </a>
-                            </div>  
-					        <div style="margin-top: auto;margin-bottom: auto;">
-					        	<div style="padding:15px">
-						            <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">Steemit App</h1>
-						        </div>
-					        </div>
-					    </div>
-					</div>
-	                <div style="padding:16px;">
-						<span style="font-size:10px;color:gray">Steemit Tokenization & Passport</span>
-						<div ng-click="$event.stopPropagation();"><md-switch ng-change="editAccount()" ng-model="newAccountInformation.apps.steemit" aria-label="Steemit"></md-switch></div>
-					</div>
-				</div>
-
-				<div class="card" ng-click="cardDetailToggle(app)">
-					<div style="background:url('https://source.unsplash.com/1600x900/?attention,intention,code)" class="imageContainerSmall">
-					    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">
-					    	<div style="text-align:right;padding:15px;position:absolute;right:0">
-                                <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
-                                    <i class="fas fa-chevron-down"></i>
-                                </a>
-                            </div>  
-					        <div style="margin-top: auto;margin-bottom: auto;">
-					        	<div style="padding:15px">
-						            <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">BTC</h1>
-						        </div>
-					        </div>
-					    </div>
-					</div>
-	                <div style="padding:16px;">
-						<span style="font-size:10px;color:gray">BTC App</span>
-						<div ng-click="$event.stopPropagation();"><md-switch ng-change="editAccount()" ng-model="newAccountInformation.apps.btc" aria-label="BTC"></md-switch></div>
-						<!--APP SPECIFIC DATA-->
-						<!--APP SPECIFIC INPUT-->
-						<!--APP SPECIFIC FONTEND CODE.. FORM(S)-->
-						<!--WALLET INPUT.. ; ADDRESS; -->
-						<input placeholder="Address" type="text"  ng-model="walletAddress" class="form-control">
-						<input placeholder="Secret" type="text"  ng-model="walletAddress" class="form-control">
-					</div>
-				</div>
-
-				<div class="card" ng-click="cardDetailToggle(app)">
-					<div style="background:url('https://source.unsplash.com/1600x900/?attention,intention,code)" class="imageContainerSmall">
-					    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
-					    	<div style="text-align:right;padding:15px;position:absolute;right:0">
-                                <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
-                                    <i class="fas fa-chevron-down"></i>
-                                </a>
-                            </div>
-					        <div style="margin-top: auto;margin-bottom: auto;">
-					        	<div style="padding:15px">
-						            <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">ETH</h1>
-						        </div>
-					        </div>
-					    </div>
-					</div>
-	                <div style="padding:16px;">
-						<span style="font-size:10px;color:gray">ETH App</span>
-						<div ng-click="$event.stopPropagation();"><md-switch ng-change="editAccount()" ng-model="newAccountInformation.apps.eth" aria-label="ETH"></md-switch></div>
-						<input placeholder="Address" type="text"  ng-model="walletAddress" class="form-control">
-						<input placeholder="Secret" type="text"  ng-model="walletAddress" class="form-control">
-					</div>
-				</div>
-
-			</div>
-	    </div>
-    </div>
+        	</div> 
+        </div> 
+	</div>
 
 	<div class="row" ng-show="selectedTab=='HISTORY'">
 		<div class="card">
 			<div style="background:url('https://source.unsplash.com/1600x900/?history,code,logs')" class="imageContainerSmall">
 			    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+			    	<div style="text-align:right;padding:15px;position:absolute;right:0">
+		                <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
+		                    <i class="fas fa-history"></i>
+		                </a>
+		            </div>
 			        <div style="margin-top: auto;margin-bottom: auto;">
 			        	<div style="padding:15px">
 				            <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">Account History</h1>
@@ -486,33 +233,34 @@
 			        </div>
 			    </div>
 			</div>
-			<div style="padding:16px">
-				<div style="float:right">
-					<span style="font-size:24px;"><i class="fas fa-history"></i></span>
-				</div>
-
-				<div ng-repeat="attention in humanAttention">
-					<p style="font-size:11px">
-						<b>{{attention.amount}} {{attention.string}}</b>
-						<br>{{attention.data.device.title}}
-						<br>{{attention.createdAt}}
-						<hr>
-					</p>
-				</div>
-
-				<!--
-				<p style="font-size:11px">MacBook Pro OSX | 2.3 GHz Intel Core i7, 8 GB 1600 MHz DDR3, Intel HD Graphics 4000 1536 MB | 22min @ 11.36PM</p>
-				<p style="font-size:11px">iPhone 8 | A11 Bionic chip with 64-bit architecture, M11 motion coprocessor, 2 GB RAM | 17min @ 2.15PM</p>
-				-->
-
-			</div>
 	    </div>
+	    <div class="card" ng-repeat="attention in machineAttention" ng-click="cardDetailToggle(attention)">
+	    	<div style="padding:16px">
+	    		<div style="float:right;text-align:right">
+		            <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(attention)">
+		                <i class="fas fa-chevron-down"></i>
+		            </a>
+		        </div>
+				<h5>{{attention.amount}} {{attention.string}}</h5>
+				<p style="font-size:11px">{{attention.data.device.title}}</p>
+				<p style="font-size:11px">{{attention.data.version}}</p>
+				<p style="color:gray;font-size:10px;">
+					<span style="color:gray" am-time-ago="attention.createdAt"></span> •  
+        			<span style="color:gray">{{attention.createdAt | date :  "y MM-dd hh:mm.ss a"}}</span>
+				</p>
+			</div>
+		</div>
 	</div>
 
   	<div class="row" ng-show="selectedTab=='MINING'">
 		<div class="card">
 			<div style="background:url('https://source.unsplash.com/1600x900/?geometry,network,data')" class="imageContainerSmall">
 			    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+			    	<div style="text-align:right;padding:15px;position:absolute;right:0">
+		                <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
+		                    <i class="fas fa-seedling"></i>
+		                </a>
+		            </div>
 			        <div style="margin-top: auto;margin-bottom: auto;">
 			        	<div style="padding:15px">
 				            <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">Peer Network Contribution</h1>
@@ -522,50 +270,39 @@
 			    </div>
 			</div>
 			<div style="padding:16px">
-				<div style="float:right">
-					<span style="font-size:24px;"><i class="fas fa-seedling"></i></span>
-				</div>
-				<p>Client Mining <a ng-click="informationToggle()" href="#"><i class="fa fa-question-circle"></i></a><br><span style="font-size:10px">Runs a CRE8 node that powers the network. Machine attention is tokenized.</span><md-switch ng-model="browserMining" aria-label="Browser Mining"></md-switch></p>
 
-				<div ng-repeat="attention in machineAttention">
-					<p style="font-size:11px">
-						<b>{{attention.amount}} {{attention.string}}</b>
-						<br>{{attention.data.device.title}}
-						<br>{{attention.data.version}}
-						<br>{{attention.createdAt}}
-						<hr>
-					</p>
-				</div>
+				<p>
+					Client Mining <a ng-click="informationToggle()" href="#"><i class="fa fa-question-circle"></i></a>
+					<br>
+					<span style="font-size:10px">Runs a CRE8 node that powers the network. Machine attention is tokenized.</span><md-switch ng-model="browserMining" aria-label="Browser Mining"></md-switch>
+				</p>
 
-				<!--
-				<p style="font-size:11px">MacBook Pro OSX | 2.3 GHz Intel Core i7, 8 GB 1600 MHz DDR3, Intel HD Graphics 4000 1536 MB | 22min @ 11.36PM</p>
-				<p style="font-size:11px">iPhone 8 | A11 Bionic chip with 64-bit architecture, M11 motion coprocessor, 2 GB RAM | 17min @ 2.15PM</p>
-				-->
+				<p ng-if="browerMining">
+
+					<h5>Peer Model</h5>
+					{{peer}}
+
+				</p>
+
 			</div>
 	    </div>
+	    <div class="card" ng-repeat="attention in machineAttention" ng-click="cardDetailToggle(attention)">
+	    	<div style="padding:16px">
+	    		<div style="float:right;text-align:right">
+		            <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(attention)">
+		                <i class="fas fa-chevron-down"></i>
+		            </a>
+		        </div>
+				<h5>{{attention.amount}} {{attention.string}}</h5>
+				<p style="font-size:11px">{{attention.data.device.title}}</p>
+				<p style="font-size:11px">{{attention.data.version}}</p>
+				<p style="color:gray;font-size:10px;">
+					<span style="color:gray" am-time-ago="attention.createdAt"></span> •  
+        			<span style="color:gray">{{attention.createdAt | date :  "y MM-dd hh:mm.ss a"}}</span>
+				</p>
+			</div>
+		</div>
 	</div>
-
-	<!--REDO SECTION-->
-    <!--
-    <div class="row" ng-show="selectedTab=='PRIVACY'">
-		<div class="card">
-			<div style="background:url('https://source.unsplash.com/1600x900/?camera,privacy,watching,tracking,information')" class="imageContainerSmall">
-			    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
-			        <div style="margin-top: auto;margin-bottom: auto;">
-			        	<div style="padding:15px">
-				            <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">Privacy</h1>
-				        </div>
-			        </div>
-			    </div>
-			</div>
-			<div style="padding:16px">
-				<div style="float:right">
-					<span style="font-size:24px;"><i class="fas fa-eye"></i></span>
-				</div>
-			</div>
-	    </div>
-    </div>
-	-->
 
 	<div class="spacing-10"></div>
 

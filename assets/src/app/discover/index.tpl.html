@@ -56,7 +56,7 @@
 				</div>
 		        <div style="padding:16px;">
 	                <div ng-click="$event.stopPropagation()">
-	                	<tags-input style="border:0px;flex-grow:2;" min-length="1" placeholder="Search" ng-model="searchQuery.tags"></tags-input>
+	                	<tags-input style="border:0px;flex-grow:2;" min-length="1" placeholder="Search" ng-model="searchQuery.context"></tags-input>
 	                </div>
 			        <div style="padding:16px;">
 			            <div ng-repeat="tag in sortedTagArray.slice(0,10) track by $index" ng-click="$event.stopPropagation()">

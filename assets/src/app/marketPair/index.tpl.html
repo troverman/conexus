@@ -8,15 +8,17 @@
                         <i class="fas fa-chevron-down"></i>
                     </a>
                 </div>
-                <div style="margin-top: auto;margin-bottom: auto;">
+                <div style="margin-top: auto;margin-bottom: auto;text-align:center">
                     <div style="padding:15px">
-                        <h1 style="text-align:left;font-size:30px;color:rgba(255,255,255,0.9);font-weight:400;">
+                        <h1 style="font-size:30px;color:rgba(255,255,255,0.9);font-weight:400;">
                             <img style="height:50px;width:50px" ng-src="http://identicon-1132.appspot.com/{{replace(market)}}"/>
                             <span style="word-break:break-word"><a style="color:white;font-weight:700" href="market/{{market}}" ui-sref="market({id:market})">{{market}}</a></span>
-			            	<br>
+                        </h1>
+                        <h1 style="font-size:30px;color:rgba(255,255,255,0.9);font-weight:400;">
                             <img style="height:50px;width:50px" ng-src="http://identicon-1132.appspot.com/{{replace(market1)}}"/>
 			            	<span style="word-break:break-word"><a style="color:white;font-weight:700"  href="market/{{market1}}" ui-sref="market({id:market1})">{{market1}}</a></span>
                         </h1>
+                        <!--
                         <h5 style="color:white">
 			        		<span style="color:white">{{chart.series[0].data[chart.series[0].data.length-1][1].toFixed(2)}}</span> | 
 			        		<span style="color:green">{{percentChange.toFixed(2)}}%</span> Daily Change | 
@@ -28,13 +30,14 @@
 			            	Highest Bid <span style="color:white">{{bidAskChart.series[0].data[bidAskChart.series[0].data.length-1][0].toFixed(2)}}</span> | 
 			            	Lowest Ask <span style="color:white">{{bidAskChart.series[1].data[0][0].toFixed(2)}}</span>
 			            </h5>
+			        	-->
                     </div>
                 </div>
             </div>
         </div>
         <div style="background-color:white">
             <div class="member-tab-container container" style="padding-left:0px">
-                <div style="text-align:left">
+                <div style="text-align:center">
                     <ul style="padding:0px;" class="member-tabs">
                         <li><a ng-click="$event.stopPropagation();selectTab('INFORMATION')">Information</a></li>
                         <li><a ng-click="$event.stopPropagation();selectTab('MANIFOLDS')">Manifold Actions</a></li>
@@ -152,11 +155,13 @@
 				</div>
 			</div>
 
-
+			<!--EMBEDDING SPACES-->
+			<!--EMBEDDED MARKETS THE OR -->
 
 			<!--COMBINATORIAL DECOMPOSITIONS BASEDO ON ORDER TYPES
 				BASED ON MARKET COMPUTATION
 			-->
+			
 			<div class="card">
                 <cytoscape graph-options="options" graph-elements="elementsObjCombinatorial" graph-layout="layout" graph-style="style"></cytoscape>
             </div>

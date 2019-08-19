@@ -63,6 +63,71 @@ angular.module( 'conexus.task', [
     $scope.verification = {};
     $rootScope.taskTime = 0;
 
+    $scope.statsChart = {
+        chart: {
+            zoomType: 'x',
+        },
+        series: [],
+        title: {text: ''},
+        xAxis: {
+            type: 'datetime',
+            currentMin: 0,
+            currentMax: 20,
+            title: null,
+            crosshair: true,
+            gridLineWidth: 0.5,
+            gridLineColor: 'grey'
+        },
+        yAxis: [{
+            title: {text: null},
+        }],
+        credits:{enabled:false},
+        plotOptions: {spline: {marker: {enabled: false}}, sma: {marker: {enabled: false}}}
+    };
+
+    $scope.statsChart.series = [];
+    $scope.statsChart.series.push({
+        id: 'content',
+        type: 'spline',
+        name: 'Content',
+        data: []
+    });
+    $scope.statsChart.series.push({
+        id: 'time',
+        type: 'spline',
+        name: 'Time',
+        data: []
+    });
+    $scope.statsChart.series.push({
+        id: 'validation',
+        type: 'spline',
+        name: 'Validations',
+        data: []
+    });
+
+    for(var i=0;i<100;i++){
+        var date = new Date();
+        date.setTime(date.getTime() - (60*60*1000*(1000-i)));
+        if (i == 0){
+            $scope.statsChart.series[0].data.push([date.getTime(),Math.floor(150*Math.random())])
+            $scope.statsChart.series[1].data.push([date.getTime(),Math.floor(20*Math.random())])
+        }
+        else{
+            var random = 1.21*Math.random();
+            var random1 = Math.random();
+            if (random > random1){
+                $scope.statsChart.series[0].data.push([date.getTime(),$scope.statsChart.series[0].data[i-1][1]+3*Math.random()])
+                $scope.statsChart.series[1].data.push([date.getTime(),20*Math.random()])
+            }
+            else{
+                $scope.statsChart.series[0].data.push([date.getTime(),$scope.statsChart.series[0].data[i-1][1]-3*Math.random()])
+                $scope.statsChart.series[1].data.push([date.getTime(),20*Math.random()])
+            }
+        }
+    }
+
+
+
     $scope.time = time;
     $scope.time.map(function(obj){
         obj.model = 'TIME';

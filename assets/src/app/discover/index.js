@@ -89,7 +89,6 @@ angular.module( 'conexus.discover', [
 
     $scope.shuffleActivity = function(){
 
-
         //HERE!
         $scope.searchQuery = {
             associations:[
@@ -104,15 +103,19 @@ angular.module( 'conexus.discover', [
             ],
         };
 
-        $scope.sortedTagArray
 
         var length = Math.floor(Math.random()*10)
         var randomContext = $scope.shuffleArray($scope.sortedTagArray).slice(0, length);
 
         randomContext = randomContext.map(function(obj){
-            obj.text = obj
-            return obj;
+            var returnObj = {
+                text:obj
+            };
+            return returnObj;
         });
+
+        $scope.searchQuery.context = randomContext;
+        console.log($scope.searchQuery.context)
 
         $scope.activity = $scope.shuffleArray($scope.activity);
     };

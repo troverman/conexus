@@ -33,6 +33,20 @@
 			        </div>
 			    </div>
 			</div>
+			<div style="background-color:white">
+	            <div class="member-tab-container container" style="padding-left:0px">
+	                <div style="text-align:center">
+	                    <ul style="padding:0px;" class="member-tabs">
+	                        <li><a ng-click="$event.stopPropagation();selectTab('INFORMATION');renderToggle(time)">Information</a></li>
+	                        <li><a ng-click="$event.stopPropagation();selectTab('ASSOCIATIONS');renderValidationToggle(time)">Associations</a></li>
+	                        <li><a ng-click="$event.stopPropagation();selectTab('CONTENT');">Content</a></li>
+	                        <li><a ng-click="$event.stopPropagation();selectTab('STATS');statsToggle(time)">Stats</a></li>
+	                        <li><a ng-click="$event.stopPropagation();selectTab('TOKENS');tokensToggle(time)">Tokens</a></li>
+	                    </ul>
+	                </div>
+	            </div>
+	        </div>
+	        <hr style="margin:0px;">
 			<div style="padding:16px" class="col-sm-12">
 
 				<a style="font-weight:700" href="member/{{time.user.username}}" ui-sref="member.activity({path:time.user.username})">
