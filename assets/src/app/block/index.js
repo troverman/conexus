@@ -16,6 +16,8 @@ angular.module( 'conexus.block', [
 .controller( 'BlockCtrl', ['$scope', function BlockCtrl($scope ) {
 
 	$scope.transactions = [];
-    for(var i=0;i<1000;i++){$scope.transactions.push({id:'1241312341',data:'HASHasdjhasdjahsdkjasdhjashdkjhjh2ekj3dvjik 3j k3jeajksdjadkjah'});}
+    for(var i=0;i<1000;i++){
+		$scope.transactions.push({id:Math.random(),data:'JSON '+Math.random()})
+    }
 
 }]);

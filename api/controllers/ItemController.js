@@ -93,6 +93,8 @@ module.exports = {
 
 	create: function (req, res) {
 
+		const crypto = require('crypto');
+
 		function mintTokens(model){
 			var protocolTokens = getProtocolTokens(model);
 		};
@@ -129,6 +131,16 @@ module.exports = {
 			reactions: {plus:0,minus:0},
 			attention: {general:0}
 		};
+
+		if (!model.data){model.data = {};}
+		model.data.apps = {
+			actions:[],
+			reactions: {plus:0,minus:0},
+			attention: {general:0},
+			json:{},
+		};
+
+		model.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
 
 		console.log('CREATE ITEM', model);
 

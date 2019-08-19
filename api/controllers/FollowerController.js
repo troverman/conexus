@@ -37,8 +37,6 @@ module.exports = {
 		});
 	},
 
-
-
 	//TODO:!!!
 	//MEMBER-MEMBER VALIDATION! 
 

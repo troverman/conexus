@@ -90,7 +90,7 @@ module.exports = {
 			attention: {general:0}
 		};
 
-		model.hash = crypto.createHmac('sha256', 'CRE8').update(model).digest('hex');
+		model.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
 
 		console.log('CREATE LOCATION', model);
 

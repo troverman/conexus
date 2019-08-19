@@ -10,6 +10,9 @@
 		
 				<div class="member-tab-container">
 					<ul class="member-tabs" style="text-align:right;padding-inline-start:0px;margin-left:-5px">
+
+						<!--SEARCH HERE!!!!-->
+						
 						<li style="float:left">
 							<img style="height:50px;text-align:left;margin-top:-5px" src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{member.id}}">
 							<a style="padding:10px 15px;color:rgb(125,125,125);text-align:left" class="btn btn-default" ng-click="$event.stopPropagation();transactionToggle(member)">Send Tokens</a>
@@ -26,18 +29,28 @@
 			<md-divider style="color:gray"></md-divider>
 			<div class="container">
 				<div class="">
+
+					<!--
+					<div style="text-align:center">
+						<h3>{{member.firstName}} {{member.lastName}}</h3>
+						<h4><a ng-click="$event.stopPropagation()" href="member/{{member.username}}" ui-sref="member.activity">@{{member.username}}</a></h4>
+						<p style="font-size:8px;" ng-click="$event.stopPropagation();memberQRToggle(member);"><a style="color:gray"><i class="fas fa-qrcode"></i> {{member.id}}</a></p>
+						<p><b>Total Reputation</b>: {{member.totalWork}}</p>
+					</div>
+					-->
+
 					<div class="pull-left" style="text-align:left">
 						<h2>{{member.firstName}} {{member.lastName}}</h2>
 						<h5><a ng-click="$event.stopPropagation()" href="member/{{member.username}}" ui-sref="member.activity">@{{member.username}}</a></h5>
-
 						<p><b>Total Reputation</b>: {{member.totalWork}}</p>
 					</div>
-					<div class="pull-right" style="margin-right:15px;margin-top:10px;">
+					<!--<div class="pull-right" style="margin-right:15px;margin-top:10px;">
 						<span ng-click="$event.stopPropagation();memberQRToggle(member);" style="color:gray;font-size:10px;float:right">0x{{member.id}}</span>
 						<br>
 						<img style="height:50px;text-align:left" src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{member.id}}">
 						<a style="padding:10px 15px;color:rgb(125,125,125)"class="btn btn-default" ng-click="$event.stopPropagation();transactionToggle(member)">Send Tokens</a>
-					</div>
+					</div>-->
+
 				</div>
 				<div class="spacing-10"></div>
 			</div>

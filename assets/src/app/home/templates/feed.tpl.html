@@ -39,11 +39,14 @@
                 <div style="padding:16px;">
 
                     <!--<span style="text-align:left;float:right"><a href="#"><span style="font-size:11px;color:gray">0x{{currentUser.id}}</span><img style="height:50px;" ng-src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{currentUser.id}}"></a></span>-->
+
                     <div ng-show="selectedTab =='INFORMATION'">
                         <h4><a href="member/{{currentUser.username}}" ui-sref="member.activity({path:currentUser.username})">{{currentUser.username}}</a></h4>
                         <p style="font-size:12px;" ng-click="$event.stopPropagation();memberQRToggle(currentUser);"><a style="color:gray"><i class="fas fa-qrcode"></i> {{currentUser.id}}</a></p>
                         <p style="font-size:13px;">
+
                             <!--<a href="member/{{currentUser.username}}/positions" ui-sref="member.positions({path:currentUser.username})"><i class="fas fa-globe"></i> Value Map</a> | -->
+
                             <a href="member/{{currentUser.username}}/projects" ui-sref="member.projects({path:currentUser.username})">{{currentUser.projectCount || 0}} Projects</a> | 
                             <a href="member/{{currentUser.username}}/followers" ui-sref="member.followers({path:currentUser.username})">{{currentUser.followerCount || 0}} Followers</a> | 
                             <a href="member/{{currentUser.username}}/following" ui-sref="member.following({path:currentUser.username})">{{currentUser.followingCount || 0}} Following</a>
@@ -54,8 +57,8 @@
                         <p style="color:gray;font-style:italic">Coming Soon</p>
                     </div>
                     <div ng-show="selectedTab =='VALUEMAP'">
+                        <img src="https://cdn.dribbble.com/users/32512/screenshots/4787574/light_ai_design_by_gleb.gif"/>
                         <p style="color:gray;font-style:italic">Coming Soon</p>
-                        <!--RENDER ORDERS-->
                     </div>
 
                     <div ng-show="selectedTab =='BALANCES'">
@@ -86,7 +89,10 @@
 
     <!--TODO: MOBILE FILTER-->
     <!--TODO: APP INPUT-->
+
     <div class="row" ng-show="!isTutorial || !currentUser.apps.cre8.tutorial">
+
+
         <div class="col-sm-4 mobileFix" style="padding-left:0px;padding-right:0px;">
 
 
@@ -152,8 +158,6 @@
                 <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fa fa-filter"></i> Filter</a></li>
                 <li ng-if="currentUser" style="float:left;font-size:14px"><a href="member/{{currentUser.username}}/followers" ng-click="getMyFollowers()"><i class="fa fa-users"></i> Following</a></li>
                 <li ng-if="currentUser" style="float:left;font-size:14px"><a href="member/{{currentUser.username}}/projects" ng-click="getMyProjects()"><i class="fas fa-project-diagram"></i> My Projects</a></li>
-                <!--<li ng-if="currentUser" style="float:left;font-size:14px"><a href="member/{{currentUser.username}}/positions" ui-sref="member.positions({path:currentUser.username})" ng-click="getMyProjects()"><i class="fas fa-globe"></i> My Value Map</a></li>-->
-
                 <li style="float:right;font-size:14px"><a href="#" ng-click="sortToggle()">Sort By Recent <i class="fa fa-angle-down"></i></a></li>
                 <div style="clear:both"></div>
             </ul>
@@ -176,7 +180,8 @@
             <!--TODO COMPLEX FILTER..-->
             <!--TODO: FEED.. FILTER-->
             <!--TODO: UNIFY HEADER.. 100px.. 35px font-->
-            <div ng-repeat="item in activity" ng-mouseover="hoverIn(item)" ng-mouseleave="hoverOut(item)">
+
+            <div ng-repeat="item in activity">
                 
                 <div class="card" ng-if="item.model=='CONTENT'" ng-click="cardDetailToggle(item)">
                     <div ng-if="item.title" style="background:url('https://source.unsplash.com/1600x900/?{{item.tags}}')" class="imageContainerSmall">
@@ -291,7 +296,6 @@
                             </a>
                             <p style="display:inline"><i class="fa fa-angle-right"></i></p>
                             <a ng-click="$event.stopPropagation()" style="display:inline;font-weight:600" href="time/{{item.id}}" ui-sref="time({id:item.id})">{{item.amount}}</a>
-                            <!--TODO: ASSOCIATION AREA-->
                         </div>
                         <p ng-show="item.task.tags > 0" style="margin-left:42px">
                             <a ng-click="$event.stopPropagation()" ng-repeat="tag in item.task.tags" href="market/{{tag.trim()}}+{{task.id}}" ui-sref="market({id:tag.trim()})">{{tag.trim()}} </a>
@@ -310,9 +314,11 @@
 
             </div>
 
+            <!--
             <div ng-show="false" ng-if="activity.length > 0" class="card" ng-click="loadMore()" style="text-align:center">
                 <button style="width:100%" class="btn btn-default log-btn">MORE <i class="fa fa-angle-down"></i></button>
             </div>
+            -->
 
         </div>
 

@@ -628,7 +628,7 @@ angular.module( 'conexus.nav', [
             $scope.newOrder = {
                 //iden
             };
-
+            
             //LOL TBD
             if (identiferSetAlpha){
                 $scope.identiferSetAlpha = [{text:identiferSetAlpha.id}];

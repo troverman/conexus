@@ -23,17 +23,20 @@
 <div style="background-color:white">
     <div class="spacing-50"></div>
     <div class="container">
-        <!--INTO-->
         <div class="row">
             <div class="col-md-6">
+
                 <!--
                 CREATE IS EMPOWERMENT
                 CREATE IS INCLUSIVITY
                 CREATE IS UNITY
                 -->
                 <!--<h3>WE ARE ALL VALUABLE</h3>-->
+
                 <h3 style="font-family:'Titillium Web',sans-serif;font-weight:600">WE ARE VALUABLE</h3>
+
                 <!--<h3 style="font-family:'Titillium Web',sans-serif;font-weight:600">INFORMATION IS VALUABLE</h3>-->
+
                 <div class="spacing-5"></div>
                 <p style="font-style:italic;margin:0px;color:gray">Sharing creates value, from imagination and intention to work and organization.</p>
                 <p style="font-style:italic;margin:0px;color:gray">Sharing reflects abundance. With inclusivity maximalism, you get what you give.</p>
@@ -151,11 +154,15 @@
                     </div>
                 </div>
                 <div class="spacing-10"></div>
+
                 <!--
                 <p style="font-style:italic;margin:0px;color:gray">App specific interoperable validation protocols allow for value validation though Machine Learning & Artificial Intelligence. Information and Intention create emergent intelligence in programatic value.</p>
                 -->
+
                 <p style="font-style:italic;margin:0px;color:gray">The <a href="/transparency" ui-sref="transparency"><b>Decentralized Network</b></a> is you! Decentralized peers create the network.</p>
+
                 <!--<p style="font-style:italic;margin:0px;color:gray">Finding congruence with human and machine consensus.</p>-->
+
             </div>
             <div class="col-md-6 mobileHide" style="text-align:center">
                 <img style="height:200px;" src="images/latticespin.gif">
@@ -233,6 +240,7 @@
             <p style="font-style:italic;margin:0px;color:gray">Wanna Collab? Get Involved in your Local Community.</p>
             <div class="spacing-25"></div>
             -->
+
             <div class="card">
                 <div style="background:url('https://source.unsplash.com/1600x900/?explore,discover')" class="imageContainerSmall">
                     <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
@@ -267,12 +275,12 @@
             </div>
 
             <div ng-repeat="item in activity">
+
                 <div class="card" ng-if="item.model=='CONTENT'" ng-click="cardDetailToggle(item)">
                     <div ng-if="item.title" style="background:url('https://source.unsplash.com/1600x900/?{{item.tags}}')" class="imageContainerSmall">
                         <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
                             <div style="text-align:right;padding:15px;position:absolute;right:0">
                                 <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
-                                    <!--<i class="fas fa-ellipsis-v"></i>-->
                                     <i class="fas fa-chevron-down"></i>
                                 </a>
                                 <div style="clear:both"></div>
@@ -280,7 +288,6 @@
                             <div style="margin-top: auto;margin-bottom: auto;">
                                 <div style="width:100%;padding:15px">
                                     <h1 ng-click="$event.stopPropagation();" style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;"><a style="color:white" href="content/{{item.id}}" ui-sref="content({id:item.id})">{{item.title}}</a></h1>
-                                    <!--<h5 style="color:white">Content</h5>-->
                                 </div>
                             </div>
                         </div>
@@ -298,15 +305,10 @@
                                 {{item.user.username}}
                             </a>
                             <p style="font-size:10px;color:gray;margin-left:42px" am-time-ago="item.createdAt"></p>
-                            <!--TODO: ASSOCIATION AREA-->
                         </div>
                         <div style="margin-left:42px">
                             <span style="display:inline" ng-bind-html="renderContent(item.content)"></span>
                         </div>
-                        <!--
-                        <div class="spacing-5"></div>
-                        <span style="color:gray" am-time-ago="item.createdAt"></span>
-                        -->
                     </div>
                     <div class="card-footer">
                         <a style="color:grey" href="content/{{item.id}}" ui-sref="content({id:item.id})">
@@ -318,20 +320,11 @@
                         <a ng-click="$event.stopPropagation();validationToggle(item)"><i class="fa fa-check"></i> validate </a>
                         <a ng-click="$event.stopPropagation()" style="padding:0px" class="pull-right" href="content/{{item.id}}" ui-sref="content({id:item.id})"><i class="fas fa-link grey"></i></a>
                     </div>
-                    <!--TODO: NESTED -->
-                    <div ng-show="item.showReply" class="card-footer" ng-click="$event.stopPropagation()">
-                        <form role="form" ng-submit="createContent(item)">
-                            <text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
-                            <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
-                        </form>
-                    </div>
                 </div>
 
                 <div class="card" ng-if="item.model=='PROJECT'" ng-click="cardDetailToggle(item)">
                     <div style="padding:16px;">
                         <div class="row">
-
-
                             <div class="col-sm-1 col-xs-2">
                                 <a ng-click="$event.stopPropagation();" href="project/{{item.urlTitle}}" ui-sref="project.activity({path:item.urlTitle})"><img style="width:50px;height:50px;max-width:1000%;border-radius:100%" ng-src="{{item.avatarUrl}}" err-src="/images/avatar.png"></a>
                             </div>
@@ -340,17 +333,13 @@
                                     <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
                                         <i class="fas fa-chevron-down"></i>
                                     </a>
-                                    <span ng-if="item.location" style="color:gray">
-                                        <!--{{item.location.address}} <i class="fa fa-map-marker"></i>-->
-                                    </span>
+                                    <span ng-if="item.location" style="color:gray"><i class="fa fa-map-marker"></i></span>
                                 </p>
                                 <h3 style="margin-top:0px"><a ng-click="$event.stopPropagation();" href="project/{{item.urlTitle}}" ui-sref="project.activity({path:item.urlTitle})">{{item.title}}</a></h3>
                                 <div style="">
                                     <span style="display:inline" ng-bind-html="renderContent(item.description)"></span>
                                 </div>
                             </div>
-
-
                         </div>
                     </div>
                 </div>
@@ -360,7 +349,6 @@
                         <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
                             <div style="text-align:right;padding:15px;position:absolute;right:0">
                                 <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
-                                    <!--<i class="fas fa-ellipsis-v"></i>-->
                                     <i class="fas fa-chevron-down"></i>
                                 </a>
                                 <div style="clear:both"></div>
@@ -368,7 +356,6 @@
                             <div style="margin-top: auto;margin-bottom: auto;">
                                 <div style="width:100%;padding:15px">
                                     <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;"><a style="color:white" ng-click="$event.stopPropagation()"href="task/{{item.id}}" ui-sref="task({id:item.id})">{{item.title}}</h1>
-                                    <!--<h5 style="color:white">Task</h5>-->
                                 </div>
                             </div>
                         </div>
@@ -387,59 +374,21 @@
                     </div>
                 </div>
 
-                <div class="card" ng-if="item.model=='TIME'" ng-click="cardDetailToggle(item)">
-                    <!--
-                    <div style="background:url('https://source.unsplash.com/1600x900/?{{item.tags}}')" class="imageContainerSmall">
-                        <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
-                            <div style="margin-top: auto;margin-bottom: auto;">
-                                <div style="padding:15px">
-                                    <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;"><a style="color:white" ng-click="$event.stopPropagation()"href="task/{{item.id}}">{{item.amount}}</h1>
-                                    <h5 style="color:white" am-time-ago="item.createdAt"></h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    -->
-                    <div style="padding:16px;">
+                <!--
+                <div ng-if="item.model=='CONTENT'" ng-include="'templates/cards/contentCard.tpl.html'"></div>
+                <div ng-if="item.model=='PROJECT'" ng-include="'templates/cards/projectCard.tpl.html'"></div>
+                <div ng-if="item.model=='TASK'" ng-include="'templates/cards/taskCard.tpl.html'"></div>
+                -->            
+                <div ng-if="item.model=='TIME'" ng-include="'templates/cards/timeCard.tpl.html'"></div>
 
-                        <div style="float:right;text-align:right">
-                            <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
-                                <i class="fas fa-chevron-down"></i>
-                            </a>
-                        </div>
-
-                        <div>
-                            <a ng-click="$event.stopPropagation()" style="display:inline;font-weight:600;" href="member/{{item.user.username}}" ui-sref="member.activity({path:item.user.username})">
-                                <img style="margin-right:5px" class="card-avatar" ng-src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
-                                {{item.user.username}}
-                            </a>
-                            <p style="display:inline"><i class="fa fa-angle-right"></i></p>
-                            <a ng-click="$event.stopPropagation()" style="display:inline;font-weight:600" href="time/{{item.id}}" ui-sref="time({id:item.id})">{{item.amount}}</a>
-                            <!--TODO: ASSOCIATION AREA-->
-                            <p style="color:gray;font-size:10px;margin-left:42px" am-time-ago="item.createdAt"></p>
-                        </div>
-
-                        <p ng-click="$event.stopPropagation()" ng-show="item.task.tags > 0" style="margin-left:42px">
-                            <a ng-repeat="tag in item.task.tags" href="market/{{tag.trim()}}+{{task.id}}" ui-sref="market({id:tag.trim()})">{{tag.trim()}} </a>
-                        </p>
-                        <div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></div>
-                        <!--
-                        <div class="spacing-5"></div>
-                        <span style="color:gray" am-time-ago="item.createdAt"></span>
-                        -->
-                    </div>
-                    <div class="card-footer">
-                        <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fas fa-angle-up"></i> {{item.reactions.plus}} like </a> 
-                        <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fas fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
-                        <a ng-click="$event.stopPropagation();contentToggle(item)"><i class="far fa-comment"></i> comment </a>
-                        <a ng-click="$event.stopPropagation();validationToggle(item)"><i class="fas fa-check"></i> validate </a>
-                        <a ng-click="$event.stopPropagation()" style="padding:0px" class="pull-right" href="time/{{item.id}}" ui-sref="time({id:item.id})"><i class="fas fa-link grey"></i></a>
-                    </div>
-                </div>             
             </div>
+
+            <!--
             <div ng-show="false" class="card" style="text-align:center" ng-click="loadMore()">
                 <button style="width:100%" class="btn btn-default log-btn">MORE <i class="fa fa-angle-down"></i></button>
             </div>
+            -->
+
         </div>
     </div>
 </div>

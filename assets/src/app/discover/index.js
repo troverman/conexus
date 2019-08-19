@@ -77,7 +77,7 @@ angular.module( 'conexus.discover', [
         return obj;
     });
 
-    function shuffleArray(d) {
+    $scope.shuffleArray = function(d) {
         for (var c = d.length - 1; c > 0; c--) {
             var b = Math.floor(Math.random() * (c + 1));
             var a = d[c];
@@ -86,10 +86,14 @@ angular.module( 'conexus.discover', [
         }
         return d
     };
+
+    $scope.shuffleActivity = function(){
+        $scope.activity = $scope.shuffleArray($scope.activity);
+    };
     
     $scope.activity = [].concat.apply([], [$scope.contentList, $scope.projects, $scope.tasks, $scope.time, $scope.transactions]);
     //$scope.activity = $scope.activity.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
-    $scope.activity = shuffleArray($scope.activity);
+    $scope.activity = $scope.shuffleArray($scope.activity);
     $scope.activity = $scope.activity.slice(0,100);
     
     $scope.map = {
@@ -101,6 +105,13 @@ angular.module( 'conexus.discover', [
     $scope.options = {scrollwheel: false};
     $scope.windowOptions = {visible: false};
 
+
+
+
+
+
+
+    //HERE!
     $scope.searchQuery = {
         associations:[
             {text:'CRE8'}
@@ -111,8 +122,19 @@ angular.module( 'conexus.discover', [
         tags:[
             {text:'Art'},
             {text:'City'}
-        ]
+        ],
+        //models:
     };
+
+
+
+
+
+
+
+
+
+
 
     //TODO: BETTER | BETTER QUERIES
     $scope.populateMap = function(){
@@ -131,6 +153,22 @@ angular.module( 'conexus.discover', [
         };
     };
     $scope.populateMap();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -176,6 +214,24 @@ angular.module( 'conexus.discover', [
             });
         }
     };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
