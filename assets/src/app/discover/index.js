@@ -14,8 +14,12 @@ angular.module( 'conexus.discover', [
         //TODO: DEPRECIATE RESOLVE
         resolve: {
 
-            //TODO: GET FEED ...
             //TODO: COMPLEX QUERY
+            //activity: ['SearchModel', function(SearchModel){
+            //    return SearchModel.getSome({limit:20, skip:0, sort:'createdAt DESC'});
+            //}],
+
+            //DEPRECIATE
             contentList: ['ContentModel', function(ContentModel){
                 return ContentModel.getSome({limit:20, skip:0, sort:'createdAt DESC'});
             }],
@@ -37,25 +41,20 @@ angular.module( 'conexus.discover', [
             
         }
 	});
-
-    //TODO: DEPRECIATE?
-	uiGmapGoogleMapApiProvider.configure({
-        key: 'AIzaSyBmbow2vLk6EMs0RT6r8U-umNzlkCNLrVY',
-        v: '3.20',
-        libraries: 'weather,geometry,visualization'
-    });
 }])
 
 .controller( 'DiscoverCtrl', ['$mdSidenav', '$rootScope', '$sce', '$scope', 'contentList', 'members', 'projects', 'tasks', 'time', 'transactions', function DiscoverController( $mdSidenav, $rootScope, $sce, $scope, contentList, members, projects, tasks, time, transactions ) {
 
-    //TODO: MODERNIZE
+    //CREATE QUERY BY (MEMBER)-APPS
+
+    //TODO: COMPLEX QUERY
     //TODO: REDUCE QUERIES
-    $scope.members = members;
     $scope.contentList = contentList.map(function(obj){
         obj.model='CONTENT';
         if (obj.tags){obj.tags = obj.tags.split(',')}
         return obj;
     });
+    $scope.members = members;
 	$scope.projects = projects.data.map(function(obj){
         obj.model='PROJECT';
         if (obj.tags){obj.tags = obj.tags.split(',')}
@@ -77,6 +76,16 @@ angular.module( 'conexus.discover', [
         return obj;
     });
 
+
+    $scope.map = {
+        center: {latitude: 35.902023, longitude: -84.1507067 },
+        zoom: 9
+    };
+    $scope.markers = [];
+    $scope.newLocation = {distance:0};
+    $scope.options = {scrollwheel: false};
+    $scope.windowOptions = {visible: false};
+    
     $scope.shuffleArray = function(d) {
         for (var c = d.length - 1; c > 0; c--) {
             var b = Math.floor(Math.random() * (c + 1));
@@ -95,7 +104,7 @@ angular.module( 'conexus.discover', [
                 {text:'CRE8'}
             ],
             locations:[
-                {text:'My Location - 5 km'}
+                {text:'My Location : 5 km'}
             ],
             context:[
                 {text:'Art'},
@@ -103,42 +112,24 @@ angular.module( 'conexus.discover', [
             ],
         };
 
-
         var length = Math.floor(Math.random()*10)
         var randomContext = $scope.shuffleArray($scope.sortedTagArray).slice(0, length);
 
         randomContext = randomContext.map(function(obj){
             var returnObj = {
-                text:obj
+                text:obj.element
             };
             return returnObj;
         });
 
         $scope.searchQuery.context = randomContext;
-        console.log($scope.searchQuery.context)
-
+        $scope.sortedTagArray = $scope.shuffleArray($scope.sortedTagArray);
         $scope.activity = $scope.shuffleArray($scope.activity);
     };
-    
+
     $scope.activity = [].concat.apply([], [$scope.contentList, $scope.projects, $scope.tasks, $scope.time, $scope.transactions]);
-    //$scope.activity = $scope.activity.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
-    $scope.activity = $scope.shuffleArray($scope.activity);
-    $scope.activity = $scope.activity.slice(0,100);
-    
-    $scope.map = {
-        center: {latitude: 35.902023, longitude: -84.1507067 },
-        zoom: 9
-    };
-    $scope.markers = [];
-    $scope.newLocation = {distance:0};
-    $scope.options = {scrollwheel: false};
-    $scope.windowOptions = {visible: false};
-
-
-
-
-
-
+    //$scope.activity = $scope.shuffleArray($scope.activity);
+    //$scope.activity = $scope.activity.slice(0,100);
 
     //HERE!
     $scope.searchQuery = {
@@ -146,7 +137,7 @@ angular.module( 'conexus.discover', [
             {text:'CRE8'}
         ],
         locations:[
-            {text:'My Location - 5 km'}
+            {text:'My Location : 5 km'}
         ],
         context:[
             {text:'Art'},
@@ -154,16 +145,6 @@ angular.module( 'conexus.discover', [
         ],
         //models:
     };
-
-
-
-
-
-
-
-
-
-
 
     //TODO: BETTER | BETTER QUERIES
     $scope.populateMap = function(){
@@ -184,26 +165,33 @@ angular.module( 'conexus.discover', [
     $scope.populateMap();
 
 
+    //TODO: NAV
+    //LOCATION APP
+    $scope.getLatLng = function() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                $scope.lat = position.coords.latitude; 
+                $scope.lng = position.coords.longitude;
+            });
+        }
+    };
+    $scope.getLatLng();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    $scope.filterContent = function(model){
+        $scope.shuffleActivity();
+        $scope.searchQuery.context = [
+            {text:model}
+        ];
+    };
 
 
 
 
     //TODO: BETTER | TAG STORAGE
     //TODO: ASSOCIATION TRAVERSAL
+    //\\//\\//\\//\\//
+    //FILTERS\\//\\//
+    //\\//\\//\\//\\//
     function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
     $scope.loadAssociations = function(){
         $scope.associations = $scope.activity.map(function(obj){return obj.associatedModels});
@@ -227,46 +215,23 @@ angular.module( 'conexus.discover', [
         }
         $scope.sortedTagArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);});  
     };
+
+    $scope.sortedLocationArray = [{element:'New York City',amount:1}];
     $scope.loadAssociations();
     $scope.loadTags();
-    $scope.filterSet = {associations:$scope.sortedAssociationArray, tags:$scope.sortedTagArray, locations:[]};
+    $scope.filterSet = {associations:$scope.sortedAssociationArray, tags:$scope.sortedTagArray, locations:$scope.sortedLocationArray};
+    //\\//\\//\\//\\//
+    //FILTERS\\//\\//
+    //\\//\\//\\//\\//
 
-    $scope.selectTag = function(item){
-        if ($rootScope.searchQueryNav.tags.map(function(obj){return obj.text}).indexOf(item)==-1){
-            $rootScope.searchQueryNav.tags.push({
-                text:'Tag | '+item, 
-                query:item, 
-                type:'TAG'
-            });
-            $scope.item.tags = $scope.item.tags.filter(function(obj) { 
-                return obj.element !== item
-            });
-        }
-    };
+
+    $scope.shuffleActivity();
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    //LET'S GO
-
-    //TODO: FILTER!
+    //\\//\\//\\//\\//
+    //WATCHERS\\//\\//
+    //\\//\\//\\//\\//
     $rootScope.$watch('searchQueryNav', function(newValue, oldValue){
         if (newValue !== oldValue) {
             console.log('searchQueryNav', $rootScope.searchQueryNav);
@@ -282,6 +247,9 @@ angular.module( 'conexus.discover', [
             $scope.searchModel = [];
         }
     }, true);
+    //\\//\\//\\//\\//
+    //WATCHERS\\//\\//
+    //\\//\\//\\//\\//
 
 
 }]);

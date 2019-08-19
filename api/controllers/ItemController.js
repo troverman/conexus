@@ -4,7 +4,7 @@
 
 module.exports = {
 
-	getSome: function(req, res) {
+	get: function(req, res) {
 
 		var mongodb = require('mongodb');
 

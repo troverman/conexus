@@ -82,43 +82,43 @@ module.exports.routes = {
   'get /auth/:provider/:action': 'AuthController.callback',
 
   /* Action routes */
-  'get /api/action': 'ActionController.getSome',
+  'get /api/action': 'ActionController.get',
   'post /api/action': 'ActionController.create',
 
   /* App routes */
-  'get /api/app': 'AppController.getSome',
+  'get /api/app': 'AppController.get',
   'post /api/app': 'AppController.create',
 
   /* Attention routes */
-  'get /api/attention': 'AttentionController.getSome',
+  'get /api/attention': 'AttentionController.get',
   'post /api/attention': 'AttentionController.create',
 
   /* Action routes */
-  'get /api/action': 'ActionController.getSome',
+  'get /api/action': 'ActionController.get',
 
   /* Association routes */
-  'get /api/association': 'AssociationController.getSome',
+  'get /api/association': 'AssociationController.get',
 
   /* Connection routes */
-  'get /api/connection': 'ConnectionController.getSome',
+  'get /api/connection': 'ConnectionController.get',
   'post /api/connection': 'ConnectionController.create',
 
   /* Content routes */
-  'get /api/content': 'ContentController.getSome',
+  'get /api/content': 'ContentController.get',
   'post /api/content': 'ContentController.create',
   'post /api/content/:id': 'ContentController.update',
   'delete /api/content/:id': 'ContentController.destroy',
 
    /* Follower routes DEPRECIATE */
    //TODO: MEMBER-MEMBER ASSOCIATION
-  'get /api/follower': 'FollowerController.getSome',
+  'get /api/follower': 'FollowerController.get',
   'get /api/follower/followers/:id': 'FollowerController.getFollowers',
   'get /api/follower/following/:id': 'FollowerController.getFollowing',
   'post /api/follower': 'FollowerController.create',
   'delete /api/follower/:id': 'FollowerController.destroy',
 
   /* Item routes */
-  'get /api/item': 'ItemController.getSome',
+  'get /api/item': 'ItemController.get',
   'post /api/item': 'ItemController.create',
   'delete /api/item/:id': 'ItemController.destroy',
 
@@ -127,25 +127,25 @@ module.exports.routes = {
   'post /api/location': 'LocationController.create',
 
   /* Notification routes */
-  'get /api/notification': 'NotificationController.getSome',
+  'get /api/notification': 'NotificationController.get',
   'post /api/notification/:id': 'NotificationController.update',
 
   /* Order routes */
-  'get /api/order': 'OrderController.getSome',
+  'get /api/order': 'OrderController.get',
   'post /api/order': 'OrderController.create',
   'delete /api/post/:id': 'OrderController.destroy',
 
   /* Reaction routes */
-  'get /api/reaction': 'ReactionController.getSome',
+  'get /api/reaction': 'ReactionController.get',
   'post /api/reaction': 'ReactionController.create',
   'delete /api/reaction/:id': 'ReactionController.destroy',
 
   /* Peer routes */
-  'get /api/peer': 'PeerController.getSome',
+  'get /api/peer': 'PeerController.get',
   'post /api/peer': 'PeerController.create',
 
   /* Project routes */
-  'get /api/project': 'ProjectController.getSome',
+  'get /api/project': 'ProjectController.get',
   //HMM
   'get /api/project/children/:id': 'ProjectController.getChildren',
 
@@ -154,7 +154,7 @@ module.exports.routes = {
   'delete /api/project/:id': 'ProjectController.destroy',
 
   /* Project Member routes DEPRECIATE*/
-  'get /api/projectmember': 'ProjectMemberController.getSome',
+  'get /api/projectmember': 'ProjectMemberController.get',
   'post /api/projectmember': 'ProjectMemberController.create',
   'delete /api/projectmember/:id': 'ProjectMemberController.destroy',
 
@@ -162,32 +162,32 @@ module.exports.routes = {
   'get /api/search': 'SearchController.search',
 
   /* Task routes */
-  'get /api/task': 'TaskController.getSome',
+  'get /api/task': 'TaskController.get',
   'post /api/task/:id': 'TaskController.update',
   'post /api/task': 'TaskController.create',
   'delete /api/task/:id': 'TaskController.destroy',
 
   /* Time routes */
-  'get /api/time': 'TimeController.getSome',
+  'get /api/time': 'TimeController.get',
   'post /api/time': 'TimeController.create',
 
   /* Token routes */
-  'get /api/token': 'TokenController.getSome',
+  'get /api/token': 'TokenController.get',
 
   /* Transaction routes */
-  'get /api/transaction': 'TransactionController.getSome',
+  'get /api/transaction': 'TransactionController.get',
   'post /api/transaction': 'TransactionController.create',
   'delete /api/transaction/:id': 'TransactionController.destroy',
 
   /* User (MEMBER) routes */
-  'get /api/user': 'UserController.getSome',
+  'get /api/user': 'UserController.get',
   'post /api/user': 'UserController.create',
   //HMM
   'post /api/user/upload': 'UserController.upload',
   'post /api/user/:id': 'UserController.update',
 
   /* Validation routes */
-  'get /api/validation': 'ValidationController.getSome',
+  'get /api/validation': 'ValidationController.get',
   'post /api/validation': 'ValidationController.create',
 
   /* Wildcard routes */

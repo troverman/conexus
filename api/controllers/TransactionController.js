@@ -23,7 +23,7 @@ function getFrom(model){
 
 module.exports = {
 
-	getSome: function(req, res) {
+	get: function(req, res) {
 
 		//RATING: SILVER
 		function parseQuery(queryModel){

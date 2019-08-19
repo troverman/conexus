@@ -13,12 +13,14 @@ angular.module( 'conexus.attention', [
         
         //TODO: DEPRECIATE RESOLVE
         resolve: {
-            attention: ['$stateParams', 'TimeModel', function($stateParams, AttentionModel){
+            attention: ['$stateParams', 'AttentionModel', function($stateParams, AttentionModel){
                 return AttentionModel.getSome({id:$stateParams.id});
             }],
         }
     });
 }])
 
-.controller( 'AttentionController', ['$scope', 'view', function AttentionController( $scope, view) {
+.controller( 'AttentionController', ['$scope', 'attention', function AttentionController( $scope, attention) {
+    $scope.attention = attention;
+    $scope.attention.model = 'ATTENTION';
 }]);

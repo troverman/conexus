@@ -1,7 +1,7 @@
 var Q = require('q');
 module.exports = {
 
-	getSome: function(req, res) {
+	get: function(req, res) {
 
 		var limit = parseInt(req.query.limit);
 		var skip = parseInt(req.query.skip);

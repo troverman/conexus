@@ -3,6 +3,9 @@
         <div style="margin-top: auto;margin-bottom: auto;">
         	<div class="container" style="text-align:center">
             	<h1 style="font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Discover</h1>
+                <h5 ng-if="lat" style="color:white"><i class="fas fa-map-marker"></i> {{lat}}, {{lng}}</h5>
+                <h5 ng-if="searchQuery.context" style="color:white"> <span ng-repeat="item in searchQuery.context">{{item.text}} </span></h5>
+
             	<h5 ng-if="true">
             		<b><a style="color:white" href="/apps" ui-sref="apps">Apps</a></b>
             		<b><a style="color:white" href="/content" ui-sref="contentList">Content</a></b>
@@ -59,8 +62,8 @@
 	                	<tags-input style="border:0px;flex-grow:2;" min-length="1" placeholder="Search" ng-model="searchQuery.context"></tags-input>
 	                </div>
 			        <div style="padding:16px;">
-			            <div ng-repeat="tag in sortedTagArray.slice(0,10) track by $index" ng-click="$event.stopPropagation()">
-			                <a ng-click="filterContent(tag.element)"><b>{{tag.element}}</b></a>
+			            <div ng-repeat="tag in sortedTagArray.slice(0,10)" ng-click="$event.stopPropagation()">
+			                <a ng-click="$event.stopPropagation();filterContent(tag.element)"><b>{{tag.element}}</b></a>
 			            </div>
 			        </div>
 		        </div>
@@ -80,8 +83,8 @@
 	                	<tags-input style="border:0px;flex-grow:2;" min-length="1" placeholder="Search | Filter" ng-model="searchQuery.associations"></tags-input>
 	                </div>
         			<div style="padding:16px;">
-			            <div ng-repeat="association in sortedAssociationArray track by $index" ng-click="$event.stopPropagation()">
-			                <a ng-click="filterContent(association.element.text)"><b>{{association.element.text}}</b></a>
+			            <div ng-repeat="association in sortedAssociationArray.slice(0,10)" ng-click="$event.stopPropagation()">
+			                <a ng-click="$event.stopPropagation();filterContent(association.element.text)"><b>{{association.element.text}}</b></a>
 			            </div>
 		            </div>
 		        </div>
@@ -117,8 +120,8 @@
 		                </div>
 		            </div>
         			<div style="padding:16px;">
-			            <div ng-repeat="location in sortedLocationArray track by $index" ng-click="$event.stopPropagation()">
-			                <a ng-click="filterContent(location.element)"><b>{{location}}</b></a>
+			            <div ng-repeat="location in sortedLocationArray" ng-click="$event.stopPropagation()">
+			                <a ng-click="$event.stopPropagation();filterContent(location.element)"><b>{{location.element}}</b></a>
 			            </div>
 	                </div>
 		        </div>
@@ -126,8 +129,20 @@
 		</div>
     	<div class="col-md-8" style="padding-left:0px;padding-right:0px;">
 
+    		<!--FILTER CARD-->
 
 	    	<div class="card" ng-if="true || locationFilter">
+	    		<div  ng-if="false && lat" style="background:url('https://source.unsplash.com/1600x900/?city,mountain,forest');min-height:50px" class="imageContainerSmall">
+				    <div style="background:rgba(0,0,0,0.75);height:50px" class="imageContainerSmallDiv">  
+				        <div style="margin-top: auto;margin-bottom: auto;">
+                        	<div style="padding:15px">
+					            <h1  style="text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;">
+					            	<i class="fas fa-map-marker"></i> {{lat}}, {{lng}}
+					            </h5>
+					        </div>
+				        </div>
+				    </div>
+				</div>
 	    		<style type="text/css">.angular-google-map-container{height:200px;}</style>
 				<ui-gmap-google-map center="map.center" zoom="map.zoom" options="options">
 				    <ui-gmap-marker ng-repeat="marker in markers" coords="marker.coords" options="marker.options" idkey="marker.id">
@@ -151,4 +166,4 @@
 	</div>
 </div>
 
-<div class="spacing-50"></div>
+<div class="spacing-25"></div>

@@ -6,7 +6,7 @@ var Q = require('q');
 
 module.exports = {
 
-	getSome: function(req, res) {
+	get: function(req, res) {
 
 		//SAVE MARKET?? :)
 		//LINK TO TOKEN 'STRUCT'

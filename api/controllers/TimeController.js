@@ -6,7 +6,7 @@ var Q = require('q');
 module.exports = {
 
 	//STANDARDIZE GET
-	getSome: function(req, res) {
+	get: function(req, res) {
 
 		//TODO: COMPLEX QUERIES..
 		var limit = parseInt(req.query.limit) || 1;

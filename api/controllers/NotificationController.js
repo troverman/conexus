@@ -4,7 +4,7 @@
 
 module.exports = {
 
-	getSome: function(req, res) {
+	get: function(req, res) {
 
 		var limit = req.query.limit;
 		var skip = req.query.skip;

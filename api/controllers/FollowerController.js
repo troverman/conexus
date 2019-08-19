@@ -6,7 +6,7 @@
 //TODO: RELATIONSHIP?
 module.exports = {
 
-	getSome: function(req, res) {
+	get: function(req, res) {
 		
 		//var follower;
 		//var followed;

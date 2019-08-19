@@ -249,6 +249,10 @@
         			<span style="color:gray">{{attention.createdAt | date :  "y MM-dd hh:mm.ss a"}}</span>
 				</p>
 			</div>
+			<div class="card-footer">
+		        <a ng-click="$event.stopPropagation();" class="pull-right" style="padding:0px;" href="attention/{{attention.id}}" ui-sref="attention({id:attention.id})"><i class="fas fa-link grey"></i></a>
+		        <div style="clear:both"></div>
+		    </div>
 		</div>
 	</div>
 
@@ -276,12 +280,9 @@
 					<br>
 					<span style="font-size:10px">Runs a CRE8 node that powers the network. Machine attention is tokenized.</span><md-switch ng-model="browserMining" aria-label="Browser Mining"></md-switch>
 				</p>
-
 				<p ng-if="browerMining">
-
 					<h5>Peer Model</h5>
 					{{peer}}
-
 				</p>
 
 			</div>
@@ -301,6 +302,10 @@
         			<span style="color:gray">{{attention.createdAt | date :  "y MM-dd hh:mm.ss a"}}</span>
 				</p>
 			</div>
+			<div class="card-footer">
+		        <a ng-click="$event.stopPropagation();" class="pull-right" style="padding:0px;" href="attention/{{attention.id}}" ui-sref="attention({id:attention.id})"><i class="fas fa-link grey"></i></a>
+		        <div style="clear:both"></div>
+		    </div>
 		</div>
 	</div>
 
