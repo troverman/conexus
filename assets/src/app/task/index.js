@@ -32,16 +32,12 @@ angular.module( 'conexus.task', [
 .controller( 'TaskController', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'contentList', 'ContentModel', 'ReactionModel', 'task', 'TaskModel', 'time', 'TimeModel', 'titleService', 'toaster', 'validations', function TaskController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, contentList, ContentModel, ReactionModel, task, TaskModel, time, TimeModel, titleService, toaster, validations) {
 
     $scope.task = task;
-    $scope.task.model = 'TASK';
-    $scope.task.tokens = [];
-    $scope.task.tokens.push('CRE8');
-    $scope.task.tokens.push('CRE8+TASK');
-
+    
     //TODO: FIX
     if(!$scope.task){$location.path('/')}
-    if($scope.task.tags){
-        $scope.task.tags = $scope.task.tags.split(',');
-    }
+    if($scope.task.tags){$scope.task.tags = $scope.task.tags.split(',');}
+
+    $scope.task.model = 'TASK';
 
     //TODO: DEPRECIATE -- MOVE TO NAV
     titleService.setTitle($scope.task.title + ' | Task | CRE8.XYZ');
@@ -63,77 +59,75 @@ angular.module( 'conexus.task', [
     $scope.verification = {};
     $rootScope.taskTime = 0;
 
-    $scope.statsChart = {
-        chart: {
-            zoomType: 'x',
-        },
-        series: [],
-        title: {text: ''},
-        xAxis: {
-            type: 'datetime',
-            currentMin: 0,
-            currentMax: 20,
-            title: null,
-            crosshair: true,
-            gridLineWidth: 0.5,
-            gridLineColor: 'grey'
-        },
-        yAxis: [{
-            title: {text: null},
-        }],
-        credits:{enabled:false},
-        plotOptions: {spline: {marker: {enabled: false}}, sma: {marker: {enabled: false}}}
-    };
+    $scope.renderStats = function(){
+        $scope.statsChart = {
+            chart: {
+                zoomType: 'x',
+            },
+            series: [],
+            title: {text: ''},
+            xAxis: {
+                type: 'datetime',
+                currentMin: 0,
+                currentMax: 20,
+                title: null,
+                crosshair: true,
+                gridLineWidth: 0.5,
+                gridLineColor: 'grey'
+            },
+            yAxis: [{
+                title: {text: null},
+            }],
+            credits:{enabled:false},
+            plotOptions: {spline: {marker: {enabled: false}}, sma: {marker: {enabled: false}}}
+        };
 
-    $scope.statsChart.series = [];
-    $scope.statsChart.series.push({
-        id: 'content',
-        type: 'spline',
-        name: 'Content',
-        data: []
-    });
-    $scope.statsChart.series.push({
-        id: 'time',
-        type: 'spline',
-        name: 'Time',
-        data: []
-    });
-    $scope.statsChart.series.push({
-        id: 'validation',
-        type: 'spline',
-        name: 'Validations',
-        data: []
-    });
+        $scope.statsChart.series = [];
+        $scope.statsChart.series.push({
+            id: 'content',
+            type: 'spline',
+            name: 'Content',
+            data: []
+        });
+        $scope.statsChart.series.push({
+            id: 'time',
+            type: 'spline',
+            name: 'Time',
+            data: []
+        });
+        $scope.statsChart.series.push({
+            id: 'validation',
+            type: 'spline',
+            name: 'Validations',
+            data: []
+        });
 
-    for(var i=0;i<100;i++){
-        var date = new Date();
-        date.setTime(date.getTime() - (60*60*1000*(1000-i)));
-        if (i == 0){
-            $scope.statsChart.series[0].data.push([date.getTime(),Math.floor(150*Math.random())])
-            $scope.statsChart.series[1].data.push([date.getTime(),Math.floor(20*Math.random())])
-        }
-        else{
-            var random = 1.21*Math.random();
-            var random1 = Math.random();
-            if (random > random1){
-                $scope.statsChart.series[0].data.push([date.getTime(),$scope.statsChart.series[0].data[i-1][1]+3*Math.random()])
-                $scope.statsChart.series[1].data.push([date.getTime(),20*Math.random()])
+        for(var i=0;i<100;i++){
+            var date = new Date();
+            date.setTime(date.getTime() - (60*60*1000*(1000-i)));
+            if (i == 0){
+                $scope.statsChart.series[0].data.push([date.getTime(),Math.floor(150*Math.random())])
+                $scope.statsChart.series[1].data.push([date.getTime(),Math.floor(20*Math.random())])
             }
             else{
-                $scope.statsChart.series[0].data.push([date.getTime(),$scope.statsChart.series[0].data[i-1][1]-3*Math.random()])
-                $scope.statsChart.series[1].data.push([date.getTime(),20*Math.random()])
+                var random = 1.21*Math.random();
+                var random1 = Math.random();
+                if (random > random1){
+                    $scope.statsChart.series[0].data.push([date.getTime(),$scope.statsChart.series[0].data[i-1][1]+3*Math.random()])
+                    $scope.statsChart.series[1].data.push([date.getTime(),20*Math.random()])
+                }
+                else{
+                    $scope.statsChart.series[0].data.push([date.getTime(),$scope.statsChart.series[0].data[i-1][1]-3*Math.random()])
+                    $scope.statsChart.series[1].data.push([date.getTime(),20*Math.random()])
+                }
             }
         }
-    }
-
-
-
+    };
+    $scope.renderStats();
+    
     $scope.time = time;
     $scope.time.map(function(obj){
         obj.model = 'TIME';
-        obj.tokens = [];
-        obj.tokens.push('CRE8');
-        obj.tokens.push('CRE8+TIME');
         if (obj.tags){obj.tags = obj.tags.split(',')}
         return obj;
     });
@@ -148,20 +142,12 @@ angular.module( 'conexus.task', [
     $scope.newValidation.validation = {};
     $scope.newValidation.validation.general = 0;
 
-
-    //TODO: VIEW IN NAV.. GLOBAL.. :)
-    $scope.askQuestion = function() {
-        if ($rootScope.currentUser){$scope.question = true;}
-        else{$mdSidenav('register').toggle();}
-    };
-
     //TODO: DEPRECIATE
     $scope.createReaction = function(item, type){
         if ($rootScope.currentUser){
             $scope.newReaction.amount = 1;
             $scope.newReaction.type = type;
             $scope.newReaction.user = $rootScope.currentUser.id;
-            //TIME, ORDER, CONTENT, ITEMS, TRANSACTION, TASK, REACTION
             var contentIndex = $scope.contentList.map(function(obj){return obj.id}).indexOf(item.id);
             if (contentIndex != -1){
                 $scope.newReaction.associatedModels = [{type:'CONTENT', id:item.id}];
@@ -177,23 +163,9 @@ angular.module( 'conexus.task', [
                 $scope.task.reactions[type]++;
             }
             ReactionModel.create($scope.newReaction);
+            $rootScope.pop(type, item.id)
         }
         else{$mdSidenav('login').toggle();}
-    };
-
-    //TODO: DEPRECIATE.. MOVE TO NAV
-    $scope.pop = function(){
-        toaster.pop({
-            type:'success',
-            title: $scope.task.title,
-            body: 'You\'re gonna earn some tokens',
-            onShowCallback: function (toast) { 
-                var audio = new Audio('audio/ping.mp3');
-                audio.play()
-                .then(function(audio){})
-                .catch(function(err){})
-            }
-        });
     };
 
     //TODO: DEPRECIATE | BETTER CONTENT EMBED
@@ -202,12 +174,7 @@ angular.module( 'conexus.task', [
         return $sce.trustAsHtml(html);
     };
 
-    //TODO: DEPRECIATE
-    $scope.reply = function(item){
-        if ($rootScope.currentUser){$mdSidenav('content').toggle();}
-        else{$mdSidenav('login').toggle();}
-    };
-
+    //lol
     $scope.selectedProjects = [];
     $scope.selectProject = function(model){
         $scope.selectedProjects.push({text:model});
@@ -217,40 +184,26 @@ angular.module( 'conexus.task', [
         });
     };
 
-    $scope.selectTab = function(model){
-        $scope.selectedTab = model;
-    };
-
-
+    $scope.selectTab = function(model){$scope.selectedTab = model;};
     $scope.showValidationImplicitToggle = function(){$scope.showValidationImplicitToggleVar = !$scope.showValidationImplicitToggleVar};
 
+    //TODO: REWORK FLOW
+    //CREATE TIME FLOW///
+    $scope.askQuestion = function() {
+        if ($rootScope.currentUser){$scope.question = true;}
+        else{$mdSidenav('register').toggle();}
+    };
 
-
-
-
-
-
-
-    //TODO: REWORK THE FLOW
     $scope.startStreaming = function() {
-        if ($rootScope.currentUser){
-            $scope.streaming = true;  
-            //startStream(); INIT    
-        }
+        if ($rootScope.currentUser){$scope.streaming = true;  }
         else{$mdSidenav('login').toggle();}
     };
 
-    //TODO: REWORK FLOW
     $scope.startTime = function() {
-
         if ($rootScope.currentUser){
-
             if ($scope.streaming){
-
                 //TODO: INIT STREAM
                 //TODO: IPFS STREAM
-                //startStream();
-
                 $scope.newContent = {
                     type:'video',
                     title: $scope.task.title,
@@ -262,80 +215,49 @@ angular.module( 'conexus.task', [
                     console.log('create', contentModel)
                     $scope.streamingId = contentModel.id;
                 });
-
             }
 
             //TODO: CREATE TIME HERE
-            //FILL OUT FORM BEFORE YOU START? HM
             $scope.startDateTime = new Date();
-
             $scope.newTime = {
                 amount: 0,
                 type:'LIVE',
-
-                //DEPRECIATE
-                stream: null,
                 content: null,
+
                 user: $rootScope.currentUser.id,
                 creator: $rootScope.currentUser.id,
 
-                //TODO: THINK
                 associatedModels: [
-                    {type:'TASK', address:$scope.task.id},
-                    //user: $rootScope.currentUser.id,
-                    //stream: $scope.streamingId,
-                    //content: null,
+                    {type:'TASK', id:$scope.task.id},
                 ],
-
-                //TODO: NEEDS TO BE ARRAY FOR MULTI PROJ SELECTION 
                 validationModels:[{
                     validation:{general:100},
-                    associatedModels:[{type:'TASK', address:$scope.task.id}]
+                    associatedModels:[{type:'TASK', id:$scope.task.id}]
                 }],
 
-            };
+                //DEPRECIATE
+                stream: null,
 
+            };
             $scope.timeTags = $scope.task.tags.map(function(obj){return {text:obj}});
 
             //TODO: DO IT
             //TimeModel.create($scope.newTime).then(function(timeModel){
-                //GET TIME ID
                 //$scope.newTime.id = timeModel.id;
-                //
                 //$scope.startDateTime = new Date(timeModel.createdAt);
-
             //}); 
 
             if($scope.recordingTime === true) return false;
             $scope.recordingTime = true;
-            $scope.pop();
+            $rootScope.pop($scope.task.title, 'You\'re gonna earn some tokens');
             $scope.interval = setInterval($scope.updateCount, 1000);
-
         }
-
         else{$mdSidenav('login').toggle();}
-
     };
 
-    //TODO: HMMMMMMMMMMMM.. a 'handhold' --> !!!
-    $scope.$watch('timeTags', function(newValue, oldValue){
-        if (newValue !== oldValue) {
-            for (x in $scope.newTime.validationModels){
-                for (y in $scope.timeTags){
-                    $scope.newTime.validationModels[x].validation[$scope.timeTags[y].text] = 100;
-                }
-            }
-            console.log( $scope.newTime.validationModels)
-        }
-    }, true);
-
-
-    //TODO: REWORK FLOW.
     $scope.submit = function() {
-
         if($scope.recordingTime === false) return false;
         $scope.recordingTime = false; $scope.question = false; $scope.streaming = false;
-
         //TODO: FLOW 
         $scope.newTime.amount = $rootScope.taskTime;
         $scope.newTime.content = $scope.timeContent;
@@ -347,14 +269,11 @@ angular.module( 'conexus.task', [
                 return obj.text
             }).join(",");
         }
-
         //TODO: UPDATE ON SUBMIT
         //TimeModel.update($scope.newTime)
         TimeModel.create($scope.newTime).then(function(model){
-
             $scope.time.unshift(model);
             $scope.timeContent = '';
-            
             //TODO: FLOW REWORK.. ASSOCIATED MODEL LINKAGES
             if ($scope.streamingId){
                 var update = {};
@@ -367,24 +286,16 @@ angular.module( 'conexus.task', [
                     console.log(contentModel)
                 });
             }
-
         }); 
-
         $rootScope.taskTime=0;
         clearInterval($scope.interval);
-
     };
 
-    //TODO: CREATE LIVE AT START
     $scope.updateCount = function() {
-        //TODO: CREATED AT
         var currentTime = new Date();
         $rootScope.taskTime = parseInt((currentTime.getTime() - $scope.startDateTime.getTime()) / 1000);
-        //COULD UPDATE HERE? --> DONT WANT TO OVERLOAD WITH CALLS. FINE? 
-        //TimeModel.update()? --> PERHAPS BACKEND TIMER .. ? SUBMIT KILLS THE TIMER ? 
         $scope.$apply();
     };
-
 
 
 
@@ -423,37 +334,19 @@ angular.module( 'conexus.task', [
     $scope.renderAssociations(task)
 
 
-    //TODO: BROWSER STREAM WEBRTC
-    $scope.startStream = function(){
-        var cameraPreview = document.getElementById('camera-preview');
-        function initializeRecorder(stream) {
-            var mediaStream = stream;
-            var recordAudio = RecordRTC(stream, {
-                onAudioProcessStarted: function() {
-                    recordVideoSeparately && recordVideo.startRecording();
-                    cameraPreview.src = window.URL.createObjectURL(stream);
-                    cameraPreview.play();
-                    cameraPreview.muted = true;
-                    cameraPreview.controls = false;
+
+
+    //TODO: HMMMMMMMMMMMM.. a 'handhold' --> !!!
+    $scope.$watch('timeTags', function(newValue, oldValue){
+        if (newValue !== oldValue) {
+            for (x in $scope.newTime.validationModels){
+                for (y in $scope.timeTags){
+                    $scope.newTime.validationModels[x].validation[$scope.timeTags[y].text] = 100;
                 }
-            });
-            var recordVideo = RecordRTC(stream, {type: 'video'});
-            recordAudio.startRecording();
-            stopRecording.disabled = false;
-        };
-        function recorderProcess(e) {var left = e.inputBuffer.getChannelData(0);}
-        function onError(e) {console.log(e);}
-        var session = {audio: true, video: true};
-        var recordRTC = null;
-        navigator.getUserMedia(session, initializeRecorder, onError);
-    };
-
-
-
-
-
-
-
+            }
+            console.log( $scope.newTime.validationModels)
+        }
+    }, true);
 
     //TODO: WEBSOCKET
     $sailsSocket.subscribe('content', function (envelope) {
@@ -463,8 +356,6 @@ angular.module( 'conexus.task', [
                 break;
         }
     });
-
-    //TODO: WEBSOCKET
     $sailsSocket.subscribe('time', function (envelope) {
         switch(envelope.verb) {
             case 'created':
@@ -472,5 +363,8 @@ angular.module( 'conexus.task', [
                 break;
         }
     });
+
+
+
 
 }]);

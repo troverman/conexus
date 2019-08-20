@@ -464,8 +464,11 @@ angular.module( 'conexus.home', [
             if (obj.project.tags){obj.project.tags = obj.project.tags.split(',')}
             return obj.project
         });
-
-        $scope.memberTasks = memberTasks.map(function(obj){obj.model = 'TASK';return obj});
+        
+        $scope.memberTasks = memberTasks;
+        if ($scope.memberTasks){
+            $scope.memberTasks = $scope.memberTasks.map(function(obj){obj.model = 'TASK';return obj});
+        }
 
         $scope.followers = followers;
         if ($scope.followers ){

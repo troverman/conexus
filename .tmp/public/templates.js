@@ -9512,6 +9512,13 @@ angular.module("nav/templates/createValidation.tpl.html", []).run(["$templateCac
     "                <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
     "            </tags-input>\n" +
     "\n" +
+    "            {{item.associatedModels}}\n" +
+    "            <div ng-repeat=\"associatedModel in item.associatedModels\" style=\"font-size:14px;font-weight:bold\">\n" +
+    "                <!--POPULATE MODEL-->\n" +
+    "                <p class=\"valueMapButton\">{{associatedModel}}</p>\n" +
+    "\n" +
+    "            </div>\n" +
+    "\n" +
     "            <div ng-repeat=\"(key, value) in newValidation.validation track by $index\">\n" +
     "                <div layout=\"\">\n" +
     "                    <div flex=\"10\" layout=\"\" layout-align=\"center center\">\n" +
@@ -9525,7 +9532,6 @@ angular.module("nav/templates/createValidation.tpl.html", []).run(["$templateCac
     "\n" +
     "                <!--CHARTER LOGIC HERE-->\n" +
     "                <div style=\"text-align:center\"><p style=\"font-size:9px\">{{reputation[key] || 0}} | {{reputation[key]*newValidation.validation[key]}} | Multiplicative Charter</p></div>\n" +
-    "\n" +
     "\n" +
     "            </div>\n" +
     "\n" +
@@ -13343,6 +13349,7 @@ angular.module("task/index.tpl.html", []).run(["$templateCache", function($templ
     "            <a ng-click=\"$event.stopPropagation();createReaction(task, 'plus')\"><i class=\"fas fa-angle-up\"></i> {{task.reactions.plus}} like </a> \n" +
     "            <a ng-click=\"$event.stopPropagation();createReaction(task, 'minus')\" ><i class=\"fas fa-angle-down\"></i> {{task.reactions.minus}} dislike </a>\n" +
     "            <a ng-click=\"$event.stopPropagation();contentToggle(task)\"><i class=\"far fa-comment\"></i> comment </a>\n" +
+    "            <a ng-click=\"$event.stopPropagation();validationToggle(task)\"><i class=\"fas fa-check\"></i> validate </a>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "</div>\n" +

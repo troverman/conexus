@@ -28,6 +28,13 @@
                 <auto-complete source="loadAssociations($query)"></auto-complete>
             </tags-input>
 
+            {{item.associatedModels}}
+            <div ng-repeat="associatedModel in item.associatedModels" style="font-size:14px;font-weight:bold">
+                <!--POPULATE MODEL-->
+                <p class="valueMapButton">{{associatedModel}}</p>
+
+            </div>
+
             <div ng-repeat="(key, value) in newValidation.validation track by $index">
                 <div layout="">
                     <div flex="10" layout="" layout-align="center center">
@@ -41,7 +48,6 @@
 
                 <!--CHARTER LOGIC HERE-->
                 <div style="text-align:center"><p style="font-size:9px">{{reputation[key] || 0}} | {{reputation[key]*newValidation.validation[key]}} | Multiplicative Charter</p></div>
-
 
             </div>
 

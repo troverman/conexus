@@ -812,7 +812,7 @@ angular.module( 'conexus.nav', [
         $scope.item = item;
 
         //$scope.assoicationFilter = [{text:$scope.item.title || $scope.item.id}];
-        $scope.assoicationFilter = [{text:$scope.item.associatedModels[0].address}];
+        $scope.assoicationFilter = [{text:$scope.item.associatedModels[0].id}];
 
         //TODO: GET ASSOCIATIONS
         //TODO: ASSOCIATION MODEL
@@ -1469,7 +1469,6 @@ angular.module( 'conexus.nav', [
         $scope.closeAllNav();
         if($rootScope.currentUser){
 
-
             $scope.newValidation = {
                 validation:{},
                 user: $rootScope.currentUser.id,
@@ -1489,6 +1488,9 @@ angular.module( 'conexus.nav', [
                         context: [{text:'self', score:100}]
                     }
                 ];
+
+                //POTIENTAL VALIDATIONS
+                //$scope.assoicationFilter = [{text:$scope.item.associatedModels[0].id}];
 
             }
             
