@@ -1,9 +1,6 @@
 <!--TODO: REFACTOR-->
-<% if (currentUser !== undefined) { %>
-    <script>var currentUser = {id: '<%= currentUser.id %>',};</script>
-<% } %>
+<% if (currentUser !== undefined) { %><script>var currentUser = {id: '<%= currentUser.id %>',};</script><% } %>
 <div ng-include="'nav/index.tpl.html'"></div>
 <toaster-container toaster-options="{'position-class':'toast-bottom-right'}"></toaster-container>
 <div class="main-container" ui-view="main"></div>
 <div ng-include="'footer/index.tpl.html'"></div>
-

@@ -26,6 +26,7 @@
         <div style="padding:16px">
 
             <p style="color:gray;font-style:italic">Items connect Token Protocols with information and applications logic such as 2nd Stage delivery consumption. Items can be acted upon. <a ng-click="informationToggle('CREATEITEM')" href="#"><i class="fa fa-question-circle"></i></a></p>
+            <!--items are physical and digital-->
 
             <div class="spacing-10"></div>
 
@@ -47,39 +48,52 @@
                         <auto-complete source="loadAssociations($query)"></auto-complete>
                     </tags-input>
 
+                    <!--EASY CONTEXT-->
+
                     <div class="row">
                         <div class="col-md-12 col-sm-12" ng-repeat="association in newItem.associatedModels">
                             <h5>
-                                {{association.text}} Association Context 
+                                {{association.text}} Association 
                                 <a ng-click="informationToggle('TAGS')" href="#"><i class="fa fa-question-circle"></i></a>
                                 <a href="#" ng-click="expandAssociations(association)" style="float:right">
                                     <i class="fas fa-bezier-curve"></i> Expand
                                 </a>
                             </h5>
 
-                            <!--CONNECTION TYPE-->
-
                             <tags-input min-length="1" placeholder="Context" ng-model="association.context">
                                 <auto-complete source="loadTags($query)"></auto-complete>
                             </tags-input>
-                            <div ng-repeat="context in association.context">
-                                <div layout="">
-                                    <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{context.text}}</span></div>
-                                    <md-slider 
-                                        ng-model="context.score"  
-                                        step="0.1" 
-                                        flex="" 
-                                        md-discrete="" 
-                                        min="-100" 
-                                        max="100">
-                                    </md-slider>
-                                    <div flex="10" layout="" layout-align="center center">
-                                        <p class="md-body-1">{{context.score}}</p>
+
+                            <div ng-if="associationsAreExpanded">
+                                <div class="spacing-5"></div>
+                                <div>
+                                    <div style="text-align:center"><a ng-click="expandConnection(association)">{{association.connection[0].text || 'Default Connection'}}</a></div>
+                                    <!--
+                                    if association.connectionExpand
+                                    <tags-input min-length="1" placeholder="Connection" ng-model="association.connection">
+                                        <auto-complete source="loadTags($query)"></auto-complete>
+                                    </tags-input>
+                                    -->
+                                </div>
+                                <div ng-repeat="context in association.context">
+                                    <div layout="">
+                                        <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{context.text}}</span></div>
+                                        <md-slider 
+                                            ng-model="context.score"  
+                                            step="0.1" 
+                                            flex="" 
+                                            md-discrete="" 
+                                            min="-100" 
+                                            max="100">
+                                        </md-slider>
+                                        <div flex="10" layout="" layout-align="center center">
+                                            <p class="md-body-1">{{context.score}}</p>
+                                        </div>
+                                    </div>
+                                    <div style="text-align:center">
+                                        <p style="font-size:9px">{{context.score}} | {{currentUser.reputation[context.text]*context.score}}</p>
                                     </div>
                                 </div>
-
-                                <div style="text-align:center"><p style="font-size:9px">{{context.score}} | {{currentUser.reputation[context.text]*context.score}} | Multiplicative Charter</p></div>
-
                             </div>
 
                         </div>

@@ -5041,7 +5041,7 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
 
 angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("home/templates/intro.tpl.html",
-    "<div class=\"intro\" style=\"margin-top:-50px\">\n" +
+    "<div class=\"intro\" style=\"\">\n" +
     "    <div class=\"intro-container\">\n" +
     "        <svg class=\"svg-defs\" viewBox=\"0 0 1920 1080\" viewPort=\"0 0 1920 1080\" preserveAspectRatio=\"xMidYMid slice\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
     "            <symbol id=\"intro-desktop-text\">\n" +
@@ -8803,6 +8803,7 @@ angular.module("nav/templates/createContent.tpl.html", []).run(["$templateCache"
     "                <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "                    <div style=\"padding:15px\">\n" +
     "                        <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Create Content</h1>\n" +
+    "                        <h5 style=\"color:white\" ng-if=\"item.id\">Reply to {{item.id}}</h5>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
@@ -8826,40 +8827,41 @@ angular.module("nav/templates/createContent.tpl.html", []).run(["$templateCache"
     "                    <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
     "                </tags-input>\n" +
     "\n" +
-    "                <!--\n" +
-    "                <h5>Context <a ng-click=\"informationToggle('ASSOCIATIONS')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a><a href=\"#\" ng-click=\"expandAssociations()\" style=\"float:right\"><i class=\"fas fa-bezier-curve\"></i> Expand</a></h5>\n" +
-    "                <tags-input min-length=\"1\" placeholder=\"Associations\" ng-model=\"newContent.associatedModels\">\n" +
-    "                    <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
+    "                <!--WATCHER TO APPLY-->\n" +
+    "                <h5>Context <a ng-if=\"newTransaction.context.length > 0\" href=\"#\" ng-click=\"expandAssociations()\" style=\"float:right\"><i class=\"fas fa-bezier-curve\"></i> Expand</a></h5>\n" +
+    "                <tags-input min-length=\"1\" placeholder=\"Context\" ng-model=\"newContent.context\">\n" +
+    "                    <auto-complete min-length=\"2\" source=\"loadTags($query)\"></auto-complete>\n" +
     "                </tags-input>\n" +
-    "                -->\n" +
-    "                \n" +
-    "                <div class=\"row\">\n" +
-    "                    <div class=\"col-md-12 col-sm-12\" ng-repeat=\"association in newContent.associatedModels\">\n" +
-    "                        <h5>{{association.text}} Association Context <a ng-click=\"informationToggle('ASSOCIATIONS')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a><a href=\"#\" ng-click=\"expandAssociations()\" style=\"float:right\"><i class=\"fas fa-bezier-curve\"></i> Expand</a></h5>\n" +
-    "                        <tags-input min-length=\"1\" placeholder=\"Context\" ng-model=\"association.context\">\n" +
-    "                            <auto-complete source=\"loadTags($query)\"></auto-complete>\n" +
-    "                        </tags-input>                               \n" +
-    "                        <div ng-repeat=\"context in association.context\">\n" +
-    "                            <div layout=\"\">\n" +
-    "                                <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{context.text}}</span></div>\n" +
-    "                                <md-slider \n" +
-    "                                    ng-model=\"context.score\"  \n" +
-    "                                    step=\"0.1\" \n" +
-    "                                    flex=\"\" \n" +
-    "                                    md-discrete=\"\" \n" +
-    "                                    min=\"-100\" \n" +
-    "                                    max=\"100\">\n" +
-    "                                </md-slider>\n" +
-    "                                <div flex=\"10\" layout=\"\" layout-align=\"center center\">\n" +
-    "                                    <p class=\"md-body-1\">{{context.score}}</p>\n" +
+    "\n" +
+    "                <div ng-if=\"associationsAreExpanded\">\n" +
+    "                    <div class=\"row\">\n" +
+    "                        <div class=\"col-md-12 col-sm-12\" ng-repeat=\"association in newContent.associatedModels\">\n" +
+    "                            <h5>{{association.text}} Association Context <a ng-click=\"informationToggle('ASSOCIATIONS')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                            <tags-input min-length=\"1\" placeholder=\"Context\" ng-model=\"association.context\">\n" +
+    "                                <auto-complete source=\"loadTags($query)\"></auto-complete>\n" +
+    "                            </tags-input>                               \n" +
+    "                            <div ng-repeat=\"context in association.context\">\n" +
+    "                                <div layout=\"\">\n" +
+    "                                    <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{context.text}}</span></div>\n" +
+    "                                    <md-slider \n" +
+    "                                        ng-model=\"context.score\"  \n" +
+    "                                        step=\"0.1\" \n" +
+    "                                        flex=\"\" \n" +
+    "                                        md-discrete=\"\" \n" +
+    "                                        min=\"-100\" \n" +
+    "                                        max=\"100\">\n" +
+    "                                    </md-slider>\n" +
+    "                                    <div flex=\"10\" layout=\"\" layout-align=\"center center\">\n" +
+    "                                        <p class=\"md-body-1\">{{context.score}}</p>\n" +
+    "                                    </div>\n" +
     "                                </div>\n" +
+    "                                <div style=\"text-align:center\"><p style=\"font-size:9px\">{{context.score}} | {{currentUser.reputation[context.text]*context.score}} | Multiplicative Charter</p></div>\n" +
     "                            </div>\n" +
-    "                            <div style=\"text-align:center\"><p style=\"font-size:9px\">{{context.score}} | {{currentUser.reputation[context.text]*context.score}} | Multiplicative Charter</p></div>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
+    "                               \n" +
     "\n" +
-    "                <!--HMM-->\n" +
     "                <ul class=\"nav nav-pills nav-justified contentTyle\">\n" +
     "                    <li ng-class=\"{active: selectedType=='AUDIO'}\" ng-click=\"selectType('AUDIO')\"><a href=\"#\">Audio</a></li>\n" +
     "                    <li ng-class=\"{active: selectedType=='IMAGE'}\" ng-click=\"selectType('IMAGE')\"><a href=\"#\">Image</a></li>\n" +
@@ -8913,6 +8915,7 @@ angular.module("nav/templates/createItem.tpl.html", []).run(["$templateCache", f
     "        <div style=\"padding:16px\">\n" +
     "\n" +
     "            <p style=\"color:gray;font-style:italic\">Items connect Token Protocols with information and applications logic such as 2nd Stage delivery consumption. Items can be acted upon. <a ng-click=\"informationToggle('CREATEITEM')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></p>\n" +
+    "            <!--items are physical and digital-->\n" +
     "\n" +
     "            <div class=\"spacing-10\"></div>\n" +
     "\n" +
@@ -8934,39 +8937,52 @@ angular.module("nav/templates/createItem.tpl.html", []).run(["$templateCache", f
     "                        <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
     "                    </tags-input>\n" +
     "\n" +
+    "                    <!--EASY CONTEXT-->\n" +
+    "\n" +
     "                    <div class=\"row\">\n" +
     "                        <div class=\"col-md-12 col-sm-12\" ng-repeat=\"association in newItem.associatedModels\">\n" +
     "                            <h5>\n" +
-    "                                {{association.text}} Association Context \n" +
+    "                                {{association.text}} Association \n" +
     "                                <a ng-click=\"informationToggle('TAGS')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a>\n" +
     "                                <a href=\"#\" ng-click=\"expandAssociations(association)\" style=\"float:right\">\n" +
     "                                    <i class=\"fas fa-bezier-curve\"></i> Expand\n" +
     "                                </a>\n" +
     "                            </h5>\n" +
     "\n" +
-    "                            <!--CONNECTION TYPE-->\n" +
-    "\n" +
     "                            <tags-input min-length=\"1\" placeholder=\"Context\" ng-model=\"association.context\">\n" +
     "                                <auto-complete source=\"loadTags($query)\"></auto-complete>\n" +
     "                            </tags-input>\n" +
-    "                            <div ng-repeat=\"context in association.context\">\n" +
-    "                                <div layout=\"\">\n" +
-    "                                    <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{context.text}}</span></div>\n" +
-    "                                    <md-slider \n" +
-    "                                        ng-model=\"context.score\"  \n" +
-    "                                        step=\"0.1\" \n" +
-    "                                        flex=\"\" \n" +
-    "                                        md-discrete=\"\" \n" +
-    "                                        min=\"-100\" \n" +
-    "                                        max=\"100\">\n" +
-    "                                    </md-slider>\n" +
-    "                                    <div flex=\"10\" layout=\"\" layout-align=\"center center\">\n" +
-    "                                        <p class=\"md-body-1\">{{context.score}}</p>\n" +
+    "\n" +
+    "                            <div ng-if=\"associationsAreExpanded\">\n" +
+    "                                <div class=\"spacing-5\"></div>\n" +
+    "                                <div>\n" +
+    "                                    <div style=\"text-align:center\"><a ng-click=\"expandConnection(association)\">{{association.connection[0].text || 'Default Connection'}}</a></div>\n" +
+    "                                    <!--\n" +
+    "                                    if association.connectionExpand\n" +
+    "                                    <tags-input min-length=\"1\" placeholder=\"Connection\" ng-model=\"association.connection\">\n" +
+    "                                        <auto-complete source=\"loadTags($query)\"></auto-complete>\n" +
+    "                                    </tags-input>\n" +
+    "                                    -->\n" +
+    "                                </div>\n" +
+    "                                <div ng-repeat=\"context in association.context\">\n" +
+    "                                    <div layout=\"\">\n" +
+    "                                        <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{context.text}}</span></div>\n" +
+    "                                        <md-slider \n" +
+    "                                            ng-model=\"context.score\"  \n" +
+    "                                            step=\"0.1\" \n" +
+    "                                            flex=\"\" \n" +
+    "                                            md-discrete=\"\" \n" +
+    "                                            min=\"-100\" \n" +
+    "                                            max=\"100\">\n" +
+    "                                        </md-slider>\n" +
+    "                                        <div flex=\"10\" layout=\"\" layout-align=\"center center\">\n" +
+    "                                            <p class=\"md-body-1\">{{context.score}}</p>\n" +
+    "                                        </div>\n" +
+    "                                    </div>\n" +
+    "                                    <div style=\"text-align:center\">\n" +
+    "                                        <p style=\"font-size:9px\">{{context.score}} | {{currentUser.reputation[context.text]*context.score}}</p>\n" +
     "                                    </div>\n" +
     "                                </div>\n" +
-    "\n" +
-    "                                <div style=\"text-align:center\"><p style=\"font-size:9px\">{{context.score}} | {{currentUser.reputation[context.text]*context.score}} | Multiplicative Charter</p></div>\n" +
-    "\n" +
     "                            </div>\n" +
     "\n" +
     "                        </div>\n" +
@@ -9474,8 +9490,7 @@ angular.module("nav/templates/createValidation.tpl.html", []).run(["$templateCac
     "                <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "                    <div style=\"padding:15px\">\n" +
     "                        <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Create Validation</h1>\n" +
-    "                        <h5 style=\"color:white\">\n" +
-    "                        </h5>\n" +
+    "                        <h5 style=\"color:white\" ng-if=\"item.id\">{{item.id}}</h5>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
@@ -13983,9 +13998,9 @@ angular.module("templates/cards/projectCard.tpl.html", []).run(["$templateCache"
     "                    <a style=\"color:gray;\" ng-click=\"$event.stopPropagation();cardDetailToggle(item)\">\n" +
     "                        <i class=\"fas fa-chevron-down\"></i>\n" +
     "                    </a>\n" +
-    "                    <span style=\"color:gray\" ng-if=\"item.location\">\n" +
-    "                        <!--{{item.location.address}} <i class=\"fa fa-map-marker\"></i>-->\n" +
-    "                    </span>\n" +
+    "                    <!--<span style=\"color:gray\" ng-if=\"item.location\">\n" +
+    "                        {{item.location.address}} <i class=\"fa fa-map-marker\"></i>\n" +
+    "                    </span>-->\n" +
     "                </p>\n" +
     "                <h3><a ng-click=\"$event.stopPropagation();\" href=\"project/{{item.urlTitle}}\" ui-sref=\"project.activity({path:item.urlTitle})\">{{item.title}}</a></h3>\n" +
     "                <div style=\"overflow:auto\">\n" +
@@ -14026,7 +14041,9 @@ angular.module("templates/cards/taskCard.tpl.html", []).run(["$templateCache", f
     "        <span style=\"color:gray\" am-time-ago=\"item.createdAt\"></span>\n" +
     "    </div>\n" +
     "    <div class=\"card-footer\">\n" +
-    "        <a ng-click=\"$event.stopPropagation();renderToggle(item)\" style=\"color:grey\"><i class=\"fas fa-eye\"></i> 0</a>\n" +
+    "        <a style=\"color:grey\" href=\"task/{{item.id}}\" ui-sref=\"item({id:item.id})\">\n" +
+    "            <i class=\"fas fa-eye\"></i> {{item.attention.general || 0}}\n" +
+    "        </a>\n" +
     "        <a ng-click=\"$event.stopPropagation();createReaction(item, 'plus')\"><i class=\"fas fa-angle-up\"></i> {{item.reactions.plus}} like </a> \n" +
     "        <a ng-click=\"$event.stopPropagation();createReaction(item, 'minus')\" ><i class=\"fas fa-angle-down\"></i> {{item.reactions.minus}} dislike </a>\n" +
     "        <a ng-click=\"$event.stopPropagation();contentToggle(item)\"><i class=\"far fa-comment\"></i> comment </a>\n" +
@@ -14057,6 +14074,9 @@ angular.module("templates/cards/timeCard.tpl.html", []).run(["$templateCache", f
     "        <div style=\"margin-left:42px\"><span style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span></div>\n" +
     "    </div>\n" +
     "    <div class=\"card-footer\">\n" +
+    "        <a style=\"color:grey\" href=\"time/{{item.id}}\" ui-sref=\"time({id:item.id})\">\n" +
+    "            <i class=\"fas fa-eye\"></i> {{item.attention.general || 0}}\n" +
+    "        </a>\n" +
     "        <a ng-click=\"$event.stopPropagation();createReaction(item, 'plus')\"><i class=\"fas fa-angle-up\"></i> {{item.reactions.plus}} like </a> \n" +
     "        <a ng-click=\"$event.stopPropagation();createReaction(item, 'minus')\" ><i class=\"fas fa-angle-down\"></i> {{item.reactions.minus}} dislike </a>\n" +
     "        <a ng-click=\"$event.stopPropagation();contentToggle(item)\"><i class=\"far fa-comment\"></i> comment </a>\n" +

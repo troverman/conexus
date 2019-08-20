@@ -7,7 +7,6 @@ module.exports = {
 		var limit = parseInt(req.query.limit) || 1;
 		var skip = parseInt(req.query.skip) || 0;
 		var sort = req.query.sort || 'createdAt DESC';
-		var project = req.query.project;
 		var task = req.query.task;
 		var user = req.query.user;
 		var time = req.query.time;
@@ -17,16 +16,44 @@ module.exports = {
 
 		Validation.watch(req);
 
-		//TODO: DEPRECIATE
-		if (req.query.project){
-			Validation.find({project:project})
+		if(req.query.id){
+			Validation.find({id:id})
 			.limit(limit)
 			.skip(skip)
 			.sort(sort)
 			.populate('user')
 			.then(function(models) {
-				Validation.subscribe(req, models);
-				res.json(models);
+
+				var promises = [];
+				for (x in models[0].associatedModels){
+					if (models[0].associatedModels[x].type == 'PROJECT'){promises.push(Project.find({id:models[0].associatedModels[x].address}).then(function(projectModels){return {project:projectModels[0]}}))}
+					if (models[0].associatedModels[x].type == 'TASK'){promises.push(Task.find({id:models[0].associatedModels[x].address}).then(function(taskModels){return {task:taskModels[0]}}))}
+					if (models[0].associatedModels[x].type == 'TIME'){promises.push(Time.find({id:models[0].associatedModels[x].address}).then(function(taskModels){return {time:taskModels[0]}}))}
+				}
+
+				Q.all(promises).then((populatedModels)=>{
+
+					for (x in models[0].associatedModels){
+						if (models[0].associatedModels[x].type == 'PROJECT'){
+							var project = populatedModels.filter(function(obj){return obj.project})
+							models[0].associatedModels[x].info = project[0];
+						}
+						if (models[0].associatedModels[x].type == 'TASK'){
+							var task = populatedModels.filter(function(obj){return obj.task});
+							models[0].associatedModels[x].info = task[0];
+						}
+						if (models[0].associatedModels[x].type == 'TIME'){
+							var time = populatedModels.filter(function(obj){return obj.time});
+							models[0].associatedModels[x].info = time[0];
+						}
+					}
+
+					//find association parent. . . .
+
+					Validation.subscribe(req, models);
+					res.json(models);
+
+				});
 			});
 		}
 
@@ -94,7 +121,6 @@ module.exports = {
 
 				});
 			});
-
 		}
 
 		//TODO: DEPRECIATE
@@ -119,55 +145,6 @@ module.exports = {
 			.then(function(models) {
 				Validation.subscribe(req, models);
 				res.json(models);
-			});
-		}
-
-		else if(req.query.id){
-			Validation.find({id:id})
-			.limit(limit)
-			.skip(skip)
-			.sort(sort)
-			.populate('user')
-			.then(function(models) {
-
-				//POPULATE
-				//TODO: FRESHEN
-				var promises = [];
-				for (x in models[0].associatedModels){
-					if (models[0].associatedModels[x].type == 'PROJECT'){
-						promises.push(Project.find({id:models[0].associatedModels[x].address}).then(function(projectModels){return {project:projectModels[0]}}))
-					}
-					if (models[0].associatedModels[x].type == 'TASK'){
-						promises.push(Task.find({id:models[0].associatedModels[x].address}).then(function(taskModels){return {task:taskModels[0]}}))
-					}
-					if (models[0].associatedModels[x].type == 'TIME'){
-						promises.push(Time.find({id:models[0].associatedModels[x].address}).then(function(taskModels){return {time:taskModels[0]}}))
-					}
-				}
-
-				Q.all(promises).then((populatedModels)=>{
-
-					console.log(populatedModels);
-
-					for (x in models[0].associatedModels){
-						if (models[0].associatedModels[x].type == 'PROJECT'){
-							var project = populatedModels.filter(function(obj){return obj.project})
-							models[0].associatedModels[x].info = project[0];
-						}
-						if (models[0].associatedModels[x].type == 'TASK'){
-							var task = populatedModels.filter(function(obj){return obj.task});
-							models[0].associatedModels[x].info = task[0];
-						}
-						if (models[0].associatedModels[x].type == 'TIME'){
-							var time = populatedModels.filter(function(obj){return obj.time});
-							models[0].associatedModels[x].info = time[0];
-						}
-					}
-
-					Validation.subscribe(req, models);
-					res.json(models);
-
-				});
 			});
 		}
 
@@ -292,27 +269,34 @@ module.exports = {
 			//});
 		};
 
-		//SECURITY AND PARSE REQUEST 
 		var model = {
-			//BY CHARTER.. ? 
-			type: req.param('type'),
+
+			type: req.param('type'), //charter? //APP.. HUMAN
+			connection: req.param('connection'), //charter - charter string? -- HASH, ID,, ETC
+
 			content: req.param('content'),
-			reputation: req.param('reputation'),
+
 			user: req.param('user'),
+			creator: req.param('creator'),
 			context: req.param('validation'),
+			reputation: req.param('reputation'),
+
 			associatedModels: req.param('associatedModels'),
 
-			reactions: {plus:0,minus:0},
-			attention: {general:0},
+			//APP DATA
+			data:{
+				reactions: {plus:0,minus:0},
+				attention: {general:0},
+			}
 
 		};
 
 		User.find({id:model.user}).then(function(userModels){
 
 			var reputation = {};
-			model.reputation = reputation;
+			model.reputation = userModels[0].reputation;
+			//getReputationFunction.. --> REP MANI IMPORT
 			console.log('CREATE VALIDATION', model);
-
 			Validation.create(model)
 			.exec(function(err, validation) {
 				if (err) {return console.log(err);}
@@ -322,7 +306,6 @@ module.exports = {
 					createAssociation(validation);
 					createNotification(validation);
 					mintTokens(validation);
-
 					res.json(validation);
 
 				}

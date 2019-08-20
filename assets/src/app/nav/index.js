@@ -240,7 +240,7 @@ angular.module( 'conexus.nav', [
             $scope.notifications = notifications;
             $rootScope.notificationCount = $scope.notifications.length;
             for (x in $scope.notifications){
-                $scope.pop($scope.notifications[x].title, $scope.notifications[x].content);
+                $rootScope.pop($scope.notifications[x].title, $scope.notifications[x].content);
             }
         });
 
@@ -252,7 +252,7 @@ angular.module( 'conexus.nav', [
                     //TODO: HAS TO BE BETTER THAN SOCKET CHECK; SOCKET ROOMS? 
                     if ($rootScope.currentUser.id == envelope.data.user){
                         $rootScope.notificationCount++;
-                        $scope.pop(envelope.data.title, envelope.data.info.username);
+                        $rootScope.pop(envelope.data.title, envelope.data.info.username);
                         $rootScope.notificationCount++;
                     }
             }
@@ -316,6 +316,7 @@ angular.module( 'conexus.nav', [
             }];
 
             if (item){
+                $scope.item = item;
                 $scope.newContent.associatedModels.push({
                     type:item.model, 
                     id:item.id, 
@@ -1723,6 +1724,7 @@ angular.module( 'conexus.nav', [
             $scope.item.reactions[type]++;
             //UPDATE LOCAL SCOPE..
             ReactionModel.create($scope.newReaction);
+            $rootScope.pop(type, item.id);
         }
         else{$mdSidenav('login').toggle()}
     };
@@ -2205,7 +2207,7 @@ angular.module( 'conexus.nav', [
     };
 
     //TODO: EXPAND
-    $scope.pop = function(title, body){
+    $rootScope.pop = function(title, body){
         toaster.pop({
             type:'success',
             title: title,

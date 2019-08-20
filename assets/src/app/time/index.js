@@ -47,13 +47,7 @@ angular.module( 'conexus.time', [
     $scope.contentList = contentList;
     $scope.newContent = {};
     $scope.newReaction = {};
-    $scope.newValidation = {};
-    $scope.newValidation.validation = {}
     $scope.validations = validations;
-   
-    //VALIDATION IS THE CORE.. 
-    //if ($scope.time.task){$scope.time.tokens.push('CRE8+TIME+'+$scope.time.task.title.toUpperCase().replace(/ /g, '-')+'.'+$scope.time.task.id)}
-    //if ($scope.time.project){$scope.time.tokens.push('CRE8+TIME+'+$scope.time.project.title.toUpperCase().replace(/ /g, '-')+'.'+$scope.time.project.id)}
 
     //TODO: DEPRECIATE
     $scope.createReaction = function(item, type){
@@ -72,15 +66,11 @@ angular.module( 'conexus.time', [
                 $scope.time.reactions[type]++;
             }
             ReactionModel.create($scope.newReaction);
+            $rootScope.pop(type, item.id)
         }
         else{$mdSidenav('login').toggle()}
     };
 
-    //TODO: DEPRECIATE
-    $scope.reply = function(item){
-        if ($rootScope.currentUser){$mdSidenav('content').toggle();}
-        else{$mdSidenav('login').toggle();}
-    };
 
     //TODO: WEBSOCKET
     $sailsSocket.subscribe('content', function (envelope) {
@@ -90,8 +80,6 @@ angular.module( 'conexus.time', [
                 break;
         }
     });
-
-    //TODO: WEBSOCKET
     $sailsSocket.subscribe('reaction', function (envelope) {
         switch(envelope.verb) {
             case 'created':
@@ -99,7 +87,6 @@ angular.module( 'conexus.time', [
                 break;
         }
     });
-
     $sailsSocket.subscribe('validation', function (envelope) {
         switch(envelope.verb) {
             case 'created':

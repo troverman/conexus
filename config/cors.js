@@ -3,6 +3,6 @@
  */
 
 module.exports.cors = {
-
-
+	allRoutes: true,
+	allowOrigins: '*'
 };

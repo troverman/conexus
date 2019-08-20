@@ -338,6 +338,15 @@ module.exports.intervalService = function(){
 		}
 	};
 	//populateApps();
+
+
+	//LEGACY DATA UPDATE
+	function legacyDataBuild(){
+
+		//Task.find()
+		//if (taskModels.project){}
+
+	}
 	
 
 

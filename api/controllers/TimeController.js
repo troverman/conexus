@@ -13,7 +13,6 @@ module.exports = {
 		var skip = parseInt(req.query.skip) || 0;
 		var sort = req.query.sort || 'createdAt DESC';
 		var task = req.query.task;
-		var project = req.query.project;
 		var user = req.query.user;
 		var id = req.query.id;
 
@@ -25,17 +24,19 @@ module.exports = {
 			.skip(skip)
 			.sort(sort)
 			.populate('user')
-			.populate('task')
 			.then(function(models) {
+
+
+				//POPULATE ASSOCIATED MODELS 
+
+
 				res.json(models[0]);
 			});
 		}
 
 		else if (req.query.task){
-
 			//ASSOCIATEDMODLES IS A COMPUTED VALUE VIA VAIDATION
 			//BRIDGE THOUGH ASSOCIATES TO GET THIS '''CLEAN'''
-
 			Time.native(function(err, time) {			
 				time.find({"associatedModels.address":{$in :[task]}})
 				.limit(limit)
@@ -46,7 +47,6 @@ module.exports = {
 						obj.id = obj._id;
 						return obj;
 					});
-
 					//JOIN TO USER
 					var promises = [];
 					for (x in models){
@@ -54,28 +54,12 @@ module.exports = {
 						if (!models[x].user){models[x].user ='57ab77fa804f7c11002a78db'}
 						promises.push(User.find({id:models[x].user.toString()}).then(function(userModels){return {user:userModels[0]}}));
 					}
-
 					Q.all(promises).then((populatedModels)=>{
 						for (x in models){models[x].user = populatedModels[x].user;}
 						res.json(models);
 					});
 
 				});
-			});
-
-		}
-
-		//OKAY --> HMM 
-		else if(req.query.project){
-			Time.find({project:project})
-			.limit(limit)
-			.skip(skip)
-			.sort(sort)
-			.populate('user')
-			.populate('task')
-			.populate('project')
-			.then(function(models) {
-				res.json(models);
 			});
 		}
 
@@ -86,8 +70,6 @@ module.exports = {
 			.skip(skip)
 			.sort(sort)
 			.populate('user')
-			.populate('task')
-			.populate('project')
 			.then(function(models) {
 				res.json(models);
 			});
@@ -99,8 +81,6 @@ module.exports = {
 			.skip(skip)
 			.sort(sort)
 			.populate('user')
-			.populate('task')
-			.populate('project')
 			.then(function(models) {
 				//var promises = [];
 				//for (x in models){
