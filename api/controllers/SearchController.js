@@ -182,13 +182,40 @@ module.exports = {
 		}
 	},
 
+	getFeed: function (req, res) {
+
+		var searchQuery = req.query.query;
+
+		var promises = [];
+		for (x in searchQuery){
+			if (query.model =='CONTENT'){}
+			if (query.model =='MEMBER'){}
+			if (query.model =='ITEM'){}
+			if (query.model =='TASK'){}
+			if (query.model =='PROJECT'){}
+		}
+
+		Q.all(promises).then((populatedModels)=>{
+
+			res.json(transactionModel);
+
+		});
+
+
+
+	},
+
+	getDiscover: function (req, res) {
+
+
+
+
+	},
 
 	//TODO: QUERY BUILD ...
 	//GET ACTIVITY BASED ON FOLLOWERS
 	//GET ACTIVITY BASED ON PROJECTS
-
 	//GET ACTIVITY BASED ON [CUSTOM]
-
 	//ACTIVITY QUERY AS ONE LOOKUP --> REFACTOR
 
 	//GET COMPLEX FILTER

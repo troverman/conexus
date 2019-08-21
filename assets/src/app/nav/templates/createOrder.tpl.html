@@ -1,4 +1,4 @@
-<md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="order" md-is-locked-open="false" style="position:fixed;background-color:white;width:70%;max-width:100%">
+<md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="order" md-is-locked-open="false" style="position:fixed;background-color:white;min-width:50%;max-width:100%">
     <div class="md-list-item-text" layout="column" style="height:100%;">
         <div class="spacing-25"></div>
         <div style="background:url('https://source.unsplash.com/1600x900/?connections,network,pattern')" class="imageContainerSmall">
@@ -11,9 +11,8 @@
             </div>
         </div>
         <div style="padding:16px">
-            <div class="spacing-15"></div>
-            <p style="color:gray;font-style:italic">An Order creates a position in our Value Matrix (MultiDimensional Token Market) <a ng-click="informationToggle('CREATEORDER')" href="#"><i class="fa fa-question-circle"></i></a></p>
             <div class="spacing-10"></div>
+            <p style="color:gray;font-style:italic">An Order creates a position in our Value Matrix (MultiDimensional Token Market) <a ng-click="informationToggle('CREATEORDER')" href="#"><i class="fa fa-question-circle"></i></a></p>
             <div class="spacing-10"></div>
             <form role="form" ng-submit="createOrder()">
                 <div class="row">
@@ -36,6 +35,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="row">
                     <div class="col-sm-6 form-group">
                         <h5>
@@ -77,9 +77,12 @@
                             <li ng-class="{active: selectedOrderType=='LIMIT'}" ng-click="selectOrderType('LIMIT')"><a href="#"> Limit <i ng-click="informationToggle('LIMIT')" class="fa fa-question-circle"></i></a></li>
                         </ul>
                     </div>
-                    <div class="spacing-10"></div>
-                    <button type="submit" class="btn btn-default log-btn" ng-disabled="!newOrder.setAlpha">create</button>
                 </div>
+
+                <div class="spacing-15"></div>
+
+                <button type="submit" class="btn btn-default log-btn" ng-disabled="!newOrder.setAlpha">create</button>
+
             </form>
         </div>
     </div>

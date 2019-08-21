@@ -65,6 +65,13 @@ module.exports = {
 			attention: {general:0},
 			reactions: {plus:0, minus:0},
 
+			data:{
+				apps:{
+					reactions: {plus:0, minus:0},
+					attention: {general:0}
+				}
+			}
+
 		};
 
 		console.log('CREATE APP', model);

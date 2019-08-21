@@ -675,10 +675,17 @@ tags-input .autocomplete .suggestion-item.selected{background-color:#002a56;}
 /* media queries */
 @media (max-width: 768px) {
     .mobileFix{display:none;}
+    .btn-group{zoom: 0.8;}
+    .card-footer{zoom: 0.8;}
+    .member-tabs{zoom: 0.9;}
+
 }
 
 @media (min-width: 768px){
     .mobileFix{display:block;}
+    .btn-group{zoom: 1;}
+    .card-footer{zoom: 1;}
+    .member-tabs{zoom: 1;}
 }
 
 @media only screen and (max-width: 788px) {

@@ -317,4 +317,17 @@ angular.module( 'conexus.order', [
         else{$mdSidenav('login').toggle();}
     };
 
+
+    $sailsSocket.subscribe('order', function (envelope) {
+        console.log(envelope)
+        switch(envelope.verb) {
+            case 'created':
+                if ($scope.order.id == envelope.data.id){
+                    $scope.order.attention = envelope.data.attention;
+                }
+                break;
+        }
+    });
+
+
 }]);

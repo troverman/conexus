@@ -131,7 +131,15 @@ module.exports = {
 
 			//PATCH
 			reactions: {plus:0,minus:0},
-			attention: {general:0}
+			attention: {general:0},
+
+			data:{
+				apps:{
+					reactions: {plus:0, minus:0},
+					attention: {general:0}
+				}
+			}
+
 		};
 
 		if (!model.data){model.data = {};}

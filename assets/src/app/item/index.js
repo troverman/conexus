@@ -418,7 +418,7 @@ angular.module( 'conexus.item', [
     $sailsSocket.subscribe('item', function (envelope) {
         switch(envelope.verb) {
             case 'created':
-                if ($scope.item.id == envelope.item.id){
+                if ($scope.item.id == envelope.data.id){
                     $scope.item.attention = envelope.data.attention;
                 }
                 break;

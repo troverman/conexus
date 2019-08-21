@@ -75,6 +75,13 @@ module.exports = {
 			creator: req.param('creator'),
 			attention: {general:0},
 			reactions: {plus:0, minus:0},
+
+			data:{
+				apps:{
+					reactions: {plus:0, minus:0},
+					attention: {general:0}
+				}
+			}
 		};
 		
 		Attention.create(model)
@@ -82,22 +89,20 @@ module.exports = {
 			if (err) {return console.log(err);}
 			else {
 
-				console.log('CREATE ATTENTION', model)
+				//console.log('CREATE ATTENTION', model)
 
 				for (x in model.associatedModels){
 					
 					//DEPRECIATE MOEL TYPE DISTINCTION ?
 					//MACHINE ATTENTION BY VALIDATION OF SPECIFIC DATA.. REVIEW THE DATA IN THE BLOCK ... GIVES IT MACHENE ATTENTION.. IE THE REMKLE PROOF
+
+					//TODO: MULTI D MAP
+					//TODO: STORE IN DATA LAYER OF MODEL
 					if (model.app == 'HUMAN'){
 
 						if (model.associatedModels[x].type == 'CONTENT'){
 							Content.find({id:model.associatedModels[x].id}).then(function(contentModel){
-								//TODO: MULTI D MAP
-								if (contentModel[0].attention){
-									attentionModel = {
-										general:contentModel[0].attention.general + model.amount
-									};
-								}
+								if (contentModel[0].attention){attentionModel = {general:contentModel[0].attention.general + model.amount};}
 								else{attentionModel = {general:0}}
 								Content.update({id:contentModel[0].id}, {attention:attentionModel}).then(function(newContentModel){Content.publishCreate(newContentModel);});
 							});
@@ -108,6 +113,14 @@ module.exports = {
 								if (itemModel[0].attention){attentionModel = {general:itemModel[0].attention.general + model.amount};}
 								else{attentionModel = {general:0}}
 								Item.update({id:itemModel[0].id}, {attention:attentionModel}).then(function(newItemModel){Item.publishCreate(newItemModel);});
+							});
+						}
+
+						if (model.associatedModels[x].type == 'ORDER'){
+							Order.find({id:model.associatedModels[x].id}).then(function(orderModel){
+								if (orderModel[0].attention){attentionModel = {general:orderModel[0].attention.general + model.amount};}
+								else{attentionModel = {general:0}}
+								Order.update({id:orderModel[0].id}, {attention:attentionModel}).then(function(newOrderModel){Order.publishCreate(newOrderModel);});
 							});
 						}
 
@@ -142,7 +155,6 @@ module.exports = {
 								Validation.update({id:validationModel[0].id}, {attention:attentionModel}).then(function(newValidationModel){Validation.publishCreate(newValidationModel);});
 							});
 						}
-
 
 					}
 

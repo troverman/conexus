@@ -128,6 +128,7 @@
 
                 </div>
                 <div class="card-footer">
+                    <a ng-click="$event.stopPropagation();" style="color:grey"><i class="fas fa-eye"></i>  {{order.attention.general || 0}}</a>
                     <a ng-click="$event.stopPropagation();createReaction(order, 'plus')"><i class="fa fa-angle-up"></i> {{order.reactions.plus}} like </a> 
                     <a ng-click="$event.stopPropagation();createReaction(order, 'plus')" ><i class="fa fa-angle-down"></i> {{order.reactions.minus}} dislike </a>
                     <a ng-click="$event.stopPropagation();contentToggle(order)"><i class="fa fa-comment-o"></i> comment </a>
@@ -238,12 +239,6 @@
                     <a style="padding:5px;color:grey" href="#" ng-click="createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
                     <a style="padding:5px;color:grey" href="#" ng-click="reply(item)"><i class="fa fa-comment-o"></i> comment </a>
                     <a style="color:grey" class="pull-right" href="content/{{item.id}}" ui-sref="content({id:item.id})"><i class="fa fa-link grey"></i></a>
-                </div>
-                <div ng-show="item.showReply" style="padding: 8px 16px 8px;background-color: #f9f9f9">
-                    <form role="form" ng-submit="createContent(item)">
-                        <text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
-                        <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
-                    </form>
                 </div>
             </div>
         </div>

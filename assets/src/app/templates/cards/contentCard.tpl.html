@@ -5,11 +5,11 @@
                 <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
                     <i class="fas fa-chevron-down"></i>
                 </a>
+                <div style="clear:both"></div>
             </div> 
             <div style="margin-top: auto;margin-bottom: auto;">
                 <div style="width:100%;padding:15px">
                     <h1 ng-click="$event.stopPropagation();" style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;"><a style="color:white" href="content/{{item.id}}" ui-sref="content({id:item.id})">{{item.title}}</a></h1>
-                    <!--<h5 style="color:white">Content</h5>-->
                 </div>
             </div>
         </div>
@@ -26,23 +26,19 @@
                 <img style="margin-right:5px"  class="card-avatar" ng-src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
                 {{item.user.username}}
             </a>
-            <span style="font-size:10px;color:gray;" >• <span am-time-ago="item.createdAt"></span></span>
-            <!--TODO: ASSOCIATION AREA-->
+            <p style="font-size:10px;color:gray;margin-left:42px" am-time-ago="item.createdAt"></p>
         </div>
-        <div class="spacing-5"></div>
-        <div>
-            <p><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></p>
+        <div style="margin-left:42px">
+            <span style="display:inline" ng-bind-html="renderContent(item.content)"></span>
         </div>
     </div>
     <div class="card-footer">
-        <a style="color:grey" href="content/{{item.id}}" ui-sref="content({id:item.id})">
-            <i class="fas fa-eye"></i> {{item.attention.general || 0}}
+        <a style="color:grey" href="content/{{item.id}}" ui-sref="content({id:item.id})"><i class="fas fa-eye"></i> {{item.attention.general || 0}}
         </a>
         <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fas fa-angle-up"></i> {{item.reactions.plus}} like </a> 
         <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fas fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
         <a ng-click="$event.stopPropagation();contentToggle(item)"><i class="far fa-comment"></i> comment </a>
-        <a ng-click="$event.stopPropagation();validationToggle(item)"><i class="fas fa-check"></i> validate </a>
+        <a ng-click="$event.stopPropagation();validationToggle(item)"><i class="fa fa-check"></i> validate </a>
         <a ng-click="$event.stopPropagation()" style="padding:0px" class="pull-right" href="content/{{item.id}}" ui-sref="content({id:item.id})"><i class="fas fa-link grey"></i></a>
     </div>
-    <!--TODO: NESTED ASSOCIATED CONTENT -->
 </div>

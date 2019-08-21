@@ -65,6 +65,12 @@ module.exports = {
 			dataModelAlpha: req.param('dataModelAlpha'),
 			dataModelBeta: req.param('dataModelBeta'),
 			info: req.param('info'),
+			data:{
+				apps:{
+					reactions: {plus:0, minus:0},
+					attention: {general:0}
+				}
+			}
 		};
 
 		console.log('CREATE CONNECTION', model);

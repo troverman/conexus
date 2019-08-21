@@ -48,7 +48,7 @@ angular.module( 'conexus.project', [
                 return TaskModel.getSome({project:project.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
             time: ['project', 'TimeModel', function(project, TimeModel){
-                return TimeModel.getSome({project:project.id, limit:100, skip:0, sort:'createdAt DESC'});
+                return TimeModel.getSome({project:project.id, limit:0, skip:0, sort:'createdAt DESC'});
             }],
             transactionsFrom: ['TransactionModel', 'project', function(TransactionModel, project) {
                 return TransactionModel.getSome({from:project.id, limit:100, skip:0, sort:'createdAt DESC'});

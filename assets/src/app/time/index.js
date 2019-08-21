@@ -73,7 +73,6 @@ angular.module( 'conexus.time', [
 
 
     //TODO: WEBSOCKET
-
     $sailsSocket.subscribe('time', function (envelope) {
         console.log(envelope)
         switch(envelope.verb) {

@@ -309,14 +309,15 @@ angular.module( 'conexus.nav', [
 
             $scope.newContent.associatedModels = [{
                 type:'CONTENT',
-                text:'Self',
+                text:'self',
                 context:[
                     {text:'self', score:100}
                 ]
             }];
-
+            $scope.createDetailToggleVar = true;
             if (item){
                 $scope.item = item;
+                $scope.createDetailToggleVar = false;
                 $scope.newContent.associatedModels.push({
                     type:item.model, 
                     id:item.id, 
@@ -345,6 +346,8 @@ angular.module( 'conexus.nav', [
         if($rootScope.currentUser){$mdSidenav('cre8').toggle();}
         else{$mdSidenav('login').toggle();}
     };
+
+    $scope.createDetailToggle = function(){$scope.createDetailToggleVar = !$scope.createDetailToggleVar;};
 
     $scope.expandAssets = function(){$scope.assetsAreExpanded = !$scope.assetsAreExpanded;};
 
@@ -586,7 +589,7 @@ angular.module( 'conexus.nav', [
             $scope.newItem.associatedModels = [
                 {
                     type:'ITEM',
-                    text:'Self',
+                    text:'self',
                     context:[
                         {text:'self', score:100}
                     ]
@@ -1219,7 +1222,7 @@ angular.module( 'conexus.nav', [
             //});
             
             $scope.newTask.validationModels = [{
-                validation:{self:100},
+                context:{self:100},
                 associatedModels:[]
             }];
 
@@ -1442,7 +1445,7 @@ angular.module( 'conexus.nav', [
             $scope.sortedBalances.sort(function(a, b) {return b[1] - a[1];});
 
             $scope.newTransaction.validationModels = [{
-                validation:{},
+                context:{},
                 associatedModels:[]
             }];
 
@@ -1470,7 +1473,7 @@ angular.module( 'conexus.nav', [
         if($rootScope.currentUser){
 
             $scope.newValidation = {
-                validation:{},
+                context:{},
                 user: $rootScope.currentUser.id,
                 associatedModels:[],
             };

@@ -1,4 +1,4 @@
- <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="validation" md-is-locked-open="false" style="position:fixed;background-color:white;width:70%;max-width:100%">
+ <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="validation" md-is-locked-open="false" style="position:fixed;background-color:white;min-width:50%;max-width:100%">
     <div class="md-list-item-text" layout="column" style="height:100%;">
         <div class="spacing-25"></div>
         <div style="background:url('https://source.unsplash.com/1600x900/?code,consensus')" class="imageContainerSmall">
@@ -13,10 +13,11 @@
         </div>
         <div style="padding:16px">
             <div class="spacing-15"></div>
-            <p style="color:gray;font-style:italic">Validations create value linkages. They form the mechanisms by which data is associated & given relation. <a ng-click="informationToggle('VALIDATION')" href="#"><i class="fa fa-question-circle"></i></a></p>
+            <p style="color:gray;font-style:italic">Validations create value linkages. They form the mechanisms which data is associated. <a ng-click="informationToggle('VALIDATION')" href="#"><i class="fa fa-question-circle"></i></a></p>
             <div class="spacing-10"></div>
 
-            <h5>Connection</h5>
+            <!--SAME AS ORDER.. :0 ?-->
+            <h5>Data</h5>
             <tags-input min-length="1" placeholder="Associations" ng-model="newValidation.associatedModels">
                 <auto-complete source="loadAssociations($query)"></auto-complete>
             </tags-input>
@@ -34,6 +35,8 @@
                 <p class="valueMapButton">{{associatedModel}}</p>
 
             </div>
+
+            <!--CONNECTIONS!-->
 
             <div ng-repeat="(key, value) in newValidation.validation track by $index">
                 <div layout="">

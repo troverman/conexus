@@ -8,29 +8,31 @@
 
 <div class="container" style="padding:0px">
     <div class="card" ng-click="cardDetailToggle(content)">
-        <div ng-if="content.title && content.type!='video' || content.contentModel" class="imageContainerSmall" style="background:url('https://source.unsplash.com/1600x900/?{{content.tags}}');">
+        <div ng-if="content.type!='video'" class="imageContainerSmall" style="background:url('https://source.unsplash.com/1600x900/?{{content.tags}}');">
             <div style="background:rgba(0,0,0,0.75);" class="imageContainerSmallDiv">
                 <div style="text-align:right;padding:15px;position:absolute;right:0">
                     <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(content)">
                         <i class="fas fa-chevron-down"></i>
                     </a>
                 </div>
-                <div style="margin-top: auto;margin-bottom: auto;">
+                <div style="margin-top: auto;margin-bottom: auto;text-align:center">
                     <div style="padding:15px">
-                        <h1 style="text-align:left;">
+                        <h1 style="font-size:30px">
                             <span ng-if="content.title">{{content.title}}</span>
-                            <span ng-click="$event.stopPropagation();" ng-if="content.contentModel"><a style="color:white" href="content/{{content.contentModel}}" ui-sref="content({id:content.contentModel})">{{content.contentModel}}</a></span>
+                            <span ng-if="!content.title">{{content.id}}</span>
                         </h1>
-                        <h5 style="color:white">{{content.id}}</h5>
+                        <!--ASSOCIATION NAV-->
+                        <h5 ng-if="content.contentModel" ng-click="$event.stopPropagation();"><a style="color:white" href="content/{{content.contentModel}}" ui-sref="content({id:content.contentModel})">{{content.contentModel}}</a></h5>
+                        <h5 ng-if="content.title" style="color:white">{{content.id}}</h5>
                     </div>
                 </div>
             </div>
         </div>
         <div ng-show="content.type!='video'" style="background-color:white">
             <div class="member-tab-container container" style="padding-left:0px">
-                <div style="text-align:left">
+                <div style="text-align:center">
                     <ul style="padding:0px;" class="member-tabs">
-                        <li><a ng-click="$event.stopPropagation();selectTab('CONTENT')" href="#">Content</a></li>
+                        <li><a ng-click="$event.stopPropagation();selectTab('CONTENT')">Content</a></li>
                         <li><a ng-click="selectTab('ASSOCIATIONS');$event.stopPropagation();renderValidationToggle(content);" >Associations</a></li>
                         <li><a ng-click="selectTab('STATS');$event.stopPropagation();statsToggle(content);">Stats</a></li>
                         <li><a ng-click="selectTab('TOKENS');$event.stopPropagation();tokensToggle(content);">Tokens</a></li>
@@ -65,9 +67,9 @@
 <div ng-show="content.type=='video'" class="member-tab-container container" style="padding-left:0px">
     <div style="text-align:left">
         <ul style="padding:0px;" class="member-tabs">
-            <li><a ng-click="aselectTab('CONTENT')"  href="#">Content</a></li>
-            <li><a ng-click="aselectTab('CONTENT')"  href="#">Tokens</a></li>
-            <li><a ng-click="aselectTab('CONTENT')"  href="#">Liquidity</a></li>
+            <li ng-click="aselectTab('CONTENT')"><a>Content</a></li>
+            <li ng-click="aselectTab('CONTENT')"><a>Tokens</a></li>
+            <li ng-click="aselectTab('CONTENT')"><a>Liquidity</a></li>
         </ul>
     </div>
 </div>
@@ -88,14 +90,6 @@
 				</div>
 				<div class="spacing-5"></div>
 				<p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="content.createdAt"></p>
-				<!--
-				<span ng-repeat="association in content.associatedModels">
-					<a href="{{association.address}}">{{association.address}}</a>
-				</span>
-				-->
-				<!--
-				<span ng-repeat="reaction in reactions"><br><a href="reaction/{{reaction.id}}">{{reaction.user.username}}, {{reaction.type}},{{reaction.amount}} </a>, </span>
-				-->
 				<div style="clear:both"></div>
 				<div class="spacing-10"></div>
 				<div style="max-height:5000px;overflow:auto" ng-show="content.type!='video'">
@@ -104,46 +98,20 @@
 		    </div>
 		    <div class="card-footer">
 		    	<!--Live: {{content.live || 0}}-->
-				<a style="color:grey" href="content/{{content.id}}" ui-sref="content({id:content.id})" ng-click="tokensToggle(content)">
-					<i class="fas fa-eye"></i> {{content.attention.general || 0}}
-				</a>
-		        <a style="padding:5px;color:grey" href="#" ng-click="createReaction(content, 'plus')"><i class="fa fa-angle-up"></i> {{content.reactions.plus}} like </a> 
-		        <a style="padding:5px;color:grey" href="#" ng-click="createReaction(content, 'minus')" ><i class="fa fa-angle-down"></i> {{content.reactions.minus}} dislike </a>
+				<a style="color:grey" href="content/{{content.id}}" ui-sref="content({id:content.id})" ng-click="tokensToggle(content)"><i class="fas fa-eye"></i> {{content.attention.general || 0}}</a>
+		        <a style="padding:5px;color:grey" href="#" ng-click="createReaction(content, 'plus')"><i class="fas fa-angle-up"></i> {{content.reactions.plus}} like </a> 
+		        <a style="padding:5px;color:grey" href="#" ng-click="createReaction(content, 'minus')" ><i class="fas fa-angle-down"></i> {{content.reactions.minus}} dislike </a>
 		       	<a style="padding:5px;color:grey" href="#" ng-click="reply(content)"><i class="fa fa-comment-o"></i> comment </a>
-				<!--NEED TO MAKE PUBLIC FACING TIMERS.. AKA THE ATTENTION OF CONTENT ? DATA LIVE-->
 		    </div>
+		    <!--DEPRECIATE :)))-->
 		    <div ng-show="content.showReply" class="card-footer">
 				<form role="form" ng-submit="createContent(content)">
-					<!--TODO: TAGS-->
 					<text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
 				    <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
 				</form>
 			</div>
-			<!--<div ng-include="'content/content.tpl.html'" ng-repeat="content in content.children track by content.id"></div>-->
 		</div>
 	</div>
-
-	<!--TODO: MOTION VALIDATION-->
-	<!--
-	<div class="row" ng-show="content.type == 'MOTION'">
-		<div class="card">
-		    <div style="padding:16px">
-		    	MOTION VALIDATION
-		    	<div layout="">
-                    <div flex="10" layout="" layout-align="center center"><span class="md-body-1">General</span></div>
-                    <md-slider step="0.1" flex="" md-discrete="" ng-model="newValidation.validation.general" step="1" min="-100" max="100" aria-label="general"></md-slider>
-                   	<div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{newValidation.validation.general}} | {{member.totalWork || 0}}</span></div>
-                </div>
-                <text-angular style="height:200px" ng-model="newValidation.content" ta-toolbar="''"></text-angular>
-				<button ng-click="createValidation()" type="submit" style="width:100%" class="btn btn-default log-btn">create</button>
-		    </div>
-		</div>
-	</div>
-	-->
-
-	<!--TRAVERSAL PARAMETERS-->
-	<!--COMBINITRONICS-->
-	<!--[IDENTITY] == 100% EACH .. OR WEIGHTED.. OR..-->
 
 	<div class="row">
 		<ul ng-show="content.children.length > 0" style="padding:0px;" class="member-tabs">
@@ -152,5 +120,8 @@
 		<div style="clear:both"></div>
 		<div ng-include="'content/templates/content.tpl.html'" ng-repeat="content in content.children track by content.id"></div>
 	</div>
+
+
 </div>
-<div class="spacing-50"></div>
+
+<div class="spacing-25"></div>

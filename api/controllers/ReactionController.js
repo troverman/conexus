@@ -58,6 +58,22 @@ module.exports = {
 
 	create: function (req, res) {
 
+		function createNotification(model, notificationModel){
+
+			//DO USER BY ASSOCIATION? || UPDATE OTHER MODELS.. 
+			User.find({id:model.user}).then(function(userModel){
+				userModel[0].balance = {};
+				userModel[0].reputation = {};
+
+				//console.log(notificationModel)
+				Notification.create(notificationModel).then(function(notificationModel){
+					console.log('created');
+					Notification.publishCreate(notificationModel);
+				});
+			});
+
+		};
+
 		function mintTokens(model){
 			var protocolTokens = getProtocolTokens(model);
 			for (x in protocolTokens){
@@ -80,12 +96,11 @@ module.exports = {
 						else{
 							tokenModels[0].information.inCirculation = parseInt(tokenModels[0].information.inCirculation) + parseFloat(model.amount); 
 							Token.update({id:tokenModels[0].id}, {information:tokenModels[0].information}).then(function(model){console.log('TOKEN UPDATED', model)});
-
 							if (model.user.balance[tokenString]){model.user.balance[tokenString] = parseInt(model.user.balance[tokenString]) + parseFloat(model.amount);}
 							else{model.user.balance[tokenString] = parseFloat(model.amount);}
 							User.update({id:model.user.id}, {balance:model.user.balance}).then(function(user){});
-
 						}
+
 					});
 				})(tokenString);
 			}
@@ -128,45 +143,31 @@ module.exports = {
 
 					Reaction.publishCreate(reaction);
 
-					//REACT TO ACTIVITY.. IE FOLLOW AND PROJECTMEMBER :P
-
-
-					//for (x in model.validationModels) // AUTO 100 --> DISCRET NO CONTEXT JUST TYPE 
-
-
-
-					//yikes... REWRITE LOL
-					//ASSOCIATION.. AND COUNTS; reaction mappings.. id / address
+					//TODO: REFACTOR AND CONDENSE
+					//INTERMUX THE MODELS
 					for (x in model.associatedModels){
 						if (model.associatedModels[x].type == 'CONTENT'){
 							Content.find({id:model.associatedModels[x].id}).then(function(contentModel){
+
 								if (!contentModel[0].reactions){contentModel[0].reactions = {};}
 								if (!contentModel[0].reactions[model.type]){contentModel[0].reactions[model.type] = model.amount;}
 								else if (contentModel[0].reactions[model.type]){contentModel[0].reactions[model.type] = contentModel[0].reactions[model.type] + model.amount;}
-								console.log(contentModel[0]);
+
 								Content.update({id:contentModel[0].id},{reactions:contentModel[0].reactions}).then(function(contentModel){
 									console.log('UPDATE');
 									res.json(reaction);
 								});
 
-								//DO USER BY ASSOCIATION? || UPDATE OTHER MODELS.. 
-								User.find({id:model.user}).then(function(userModel){
-									userModel[0].balance = {};
-									userModel[0].reputation = {};
-									var notificationModel = {
-										user: contentModel[0].user,
-										type: 'REACTION',
-										title: 'New '+model.type,
-										content:userModel[0].username+' '+model.type+' Content '+contentModel[0].id,
-										info:{user: userModel[0], content:contentModel[0], type:model.type},
-										priority:50,
-									};
-									//console.log(notificationModel)
-									Notification.create(notificationModel).then(function(notificationModel){
-										console.log('created');
-										Notification.publishCreate(notificationModel);
-									});
-								});
+								var notificationModel = {
+									user: contentModel[0].user,
+									type: 'REACTION',
+									title: 'New '+model.type,
+									content:userModel[0].username+' '+model.type+' Content '+contentModel[0].id,
+									info:{user: userModel[0], content:contentModel[0], type:model.type},
+									priority:50,
+								};
+
+								createNotification(model, notificationModel);
 
 							});
 
@@ -177,10 +178,23 @@ module.exports = {
 								if (!itemModel[0].reactions[model.type]){itemModel[0].reactions[model.type] = model.amount;}
 								else if (itemModel[0].reactions[model.type]){itemModel[0].reactions[model.type] = itemModel[0].reactions[model.type] + model.amount;}
 								console.log(itemModel[0]);
+								
 								Item.update({id:itemModel[0].id},{reactions:itemModel[0].reactions}).then(function(itemModel){
 									console.log('UPDATE');
 									res.json(reaction);
 								});
+
+								var notificationModel = {
+									user: itemModel[0].user,
+									type: 'REACTION',
+									title: 'New '+model.type,
+									content:userModel[0].username+' '+model.type+' Content '+itemModel[0].id,
+									info:{user: userModel[0], item:itemModel[0], type:model.type},
+									priority:50,
+								};
+
+								createNotification(model, notificationModel);
+
 							});
 						}
 						if (model.associatedModels[x].type == 'ORDER'){
@@ -193,6 +207,18 @@ module.exports = {
 									console.log('UPDATE');
 									res.json(reaction);
 								});
+
+								var notificationModel = {
+									user: orderModel[0].user,
+									type: 'REACTION',
+									title: 'New '+model.type,
+									content:userModel[0].username+' '+model.type+' Content '+orderModel[0].id,
+									info:{user: userModel[0], order:orderModel[0], type:model.type},
+									priority:50,
+								};
+
+								createNotification(model, notificationModel);
+
 							});
 						}
 						if (model.associatedModels[x].type == 'REACTION'){
@@ -205,6 +231,19 @@ module.exports = {
 									console.log('UPDATE');
 									res.json(reaction);
 								});
+
+								var notificationModel = {
+									user: reactionModel[0].user,
+									type: 'REACTION',
+									title: 'New '+model.type,
+									content:userModel[0].username+' '+model.type+' Content '+reactionModel[0].id,
+									info:{user: userModel[0], order:reactionModel[0], type:model.type},
+									priority:50,
+								};
+
+								createNotification(model, notificationModel);
+
+
 							});
 						}
 						if (model.associatedModels[x].type == 'TASK'){
@@ -217,6 +256,18 @@ module.exports = {
 									console.log('UPDATE');
 									res.json(reaction);
 								});
+
+								var notificationModel = {
+									user: taskModel[0].user,
+									type: 'REACTION',
+									title: 'New '+model.type,
+									content:userModel[0].username+' '+model.type+' Content '+taskModel[0].id,
+									info:{user: userModel[0], task:taskModel[0], type:model.type},
+									priority:50,
+								};
+
+								createNotification(model, notificationModel);
+								
 							});
 						}
 						if (model.associatedModels[x].type == 'TIME'){
@@ -229,6 +280,18 @@ module.exports = {
 									console.log('UPDATE');
 									res.json(reaction);
 								});
+
+								var notificationModel = {
+									user: timeModel[0].user,
+									type: 'REACTION',
+									title: 'New '+model.type,
+									content:userModel[0].username+' '+model.type+' Content '+timeModel[0].id,
+									info:{user: userModel[0], time:timeModel[0], type:model.type},
+									priority:50,
+								};
+
+								createNotification(model, notificationModel);
+
 							});
 						}
 						if (model.associatedModels[x].type == 'TRANSACTION'){
@@ -241,6 +304,18 @@ module.exports = {
 									console.log('UPDATE');
 									res.json(reaction);
 								});
+
+								var notificationModel = {
+									user: transactionModel[0].user,
+									type: 'REACTION',
+									title: 'New '+model.type,
+									content:userModel[0].username+' '+model.type+' Content '+transactionModel[0].id,
+									info:{user: userModel[0], transaction:transactionModel[0], type:model.type},
+									priority:50,
+								};
+
+								createNotification(model, notificationModel);
+
 							});
 						}
 						if (model.associatedModels[x].type == 'VALIDATION'){
@@ -253,6 +328,18 @@ module.exports = {
 									console.log('UPDATE');
 									res.json(reaction);
 								});
+
+								var validationModel = {
+									user: validationModel[0].user,
+									type: 'REACTION',
+									title: 'New '+model.type,
+									content:userModel[0].username+' '+model.type+' Content '+validationModel[0].id,
+									info:{user: userModel[0], validation:validationModel[0], type:model.type},
+									priority:50,
+								};
+
+								createNotification(model, notificationModel);
+
 							});
 						}
 					}
