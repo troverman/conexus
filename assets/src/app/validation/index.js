@@ -25,6 +25,7 @@ angular.module( 'conexus.validation', [
 
 .controller( 'ValidationController', ['$mdSidenav', '$location', '$rootScope', '$sailsSocket', '$sce', '$scope', 'contentList', 'ReactionModel', 'titleService', 'validation', 'ValidationModel', function ValidationController( $mdSidenav, $location, $rootScope, $sailsSocket, $sce, $scope, contentList, ReactionModel, titleService, validation, ValidationModel) {
     
+    console.log(validation)
 
     $scope.validation = validation[0];
     $scope.validation.model = 'VALIDATION';
@@ -43,12 +44,12 @@ angular.module( 'conexus.validation', [
     $scope.reputationWeightedList = []
 
     $scope.validationList = [];
-    for (x in Object.keys($scope.validation.validation)){
-        $scope.validationList.push([Object.keys($scope.validation.validation)[x], $scope.validation.validation[Object.keys($scope.validation.validation)[x]]]);
+    for (x in Object.keys($scope.validation.context)){
+        $scope.validationList.push([Object.keys($scope.validation.context)[x], $scope.validation.context[Object.keys($scope.validation.context)[x]]]);
         $scope.reputationList.push([Object.keys($scope.validation.reputation)[x], $scope.validation.reputation[Object.keys($scope.validation.reputation)[x]]]);
         
         //TODO: CHARTER: SOME WEIGHING PROTOCL HERE -- CAN BE FUNCTIONAL.. SIMPLE MULTIPLICATION NOW
-        $scope.reputationWeightedList.push([Object.keys($scope.validation.reputation)[x], $scope.validation.reputation[Object.keys($scope.validation.reputation)[x]]*$scope.validation.validation[Object.keys($scope.validation.validation)[x]]]);
+        $scope.reputationWeightedList.push([Object.keys($scope.validation.reputation)[x], $scope.validation.reputation[Object.keys($scope.validation.reputation)[x]]*$scope.validation.context[Object.keys($scope.validation.context)[x]]]);
     }
 
     $scope.validationColumn = {

@@ -310,10 +310,12 @@ angular.module( 'conexus.nav', [
             $scope.newContent.associatedModels = [{
                 type:'CONTENT',
                 text:'self',
+                id:'self',
                 context:[
                     {text:'self', score:100}
                 ]
             }];
+
             $scope.createDetailToggleVar = true;
             if (item){
                 $scope.item = item;
@@ -327,6 +329,25 @@ angular.module( 'conexus.nav', [
                     ]
                 });
             }
+
+            $scope.$watch('newContent.context', function(newValue, oldValue){
+                if (newValue !== oldValue) {
+
+                    console.log(newValue);
+
+                    for (x in $scope.newContent.associatedModels){
+                        $scope.newContent.associatedModels[x].context = newValue.map(function(obj){
+                            obj.score = 100;
+                            return obj;
+                        });
+                    }
+
+                    console.log($scope.newContent.associatedModels);
+
+                }
+            }, true);
+
+            //$scope.$watch('newContent.associatedModels', function(newValue, oldValue){})
 
             console.log('CONTENT TOGGLE', $scope.newContent);
 
@@ -590,6 +611,7 @@ angular.module( 'conexus.nav', [
                 {
                     type:'ITEM',
                     text:'self',
+                    id:'self',
                     context:[
                         {text:'self', score:100}
                     ]
@@ -1247,7 +1269,7 @@ angular.module( 'conexus.nav', [
                 $scope.newTime.endTime.setHours($scope.newTime.endTime.getHours() + 1);
                 $scope.newTime.endTime.setMilliseconds(0);
                 $scope.newTime.amount = 3600;
-                $scope.newTime.type = 'LIVE';
+                $scope.newTime.type = 'PLANNED';
                 $scope.newTime.associatedModels = $rootScope.associatedModels;
                 $scope.recordingTime = false;
                 $scope.streaming = false;

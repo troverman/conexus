@@ -160,6 +160,7 @@ module.exports.routes = {
 
   /* Search routes */
   'get /api/search': 'SearchController.search',
+  'get /api/search/feed': 'SearchController.getFeed',
 
   /* Task routes */
   'get /api/task': 'TaskController.get',

@@ -409,7 +409,7 @@ tags-input .autocomplete .suggestion-item.selected{background-color:#002a56;}
     width: 100%;
     height: 100%;
     margin: 0px;
-    padding-top:30px;
+    padding-top:50px;
     overflow-x: hidden;
 }
 
@@ -675,7 +675,7 @@ tags-input .autocomplete .suggestion-item.selected{background-color:#002a56;}
 /* media queries */
 @media (max-width: 768px) {
     .mobileFix{display:none;}
-    .btn-group{zoom: 0.8;}
+    .btn-group{zoom: 0.7;}
     .card-footer{zoom: 0.8;}
     .member-tabs{zoom: 0.9;}
 

@@ -217,38 +217,134 @@ module.exports = {
 			//SEND NOTIFICATION TO MEMBER
 		};
 
+		//TODO: CONNECTION!
 		function createValidation(model){
 
-			console.log(model);
 			console.log('ASSOCIATED MODELS');
 			console.log(model.associatedModels);
 
-			var newValidation = {
+			//validation set
+			for (x in model.associatedModels){
 
-				associatedModels: [],
-				context:{},
-				content:model.id + ' VALIDATION',
+				var newValidation = {
+					content:model.id + ' VALIDATION',
+					context: {},
+					reputation: {},
+					//TODO: CONNECTION!
+					connection:{
+						type:'HUMAN',
+						parameters:{charter:'STANDARD MULTIPLICATIVE'},
+					},
 
-				reputation: {},
+					//UNIFY AND ALLOW FOR PROJECT TO CREATE
+					user: model.user.id,
+					creator: model.user.id,
 
-				connection:{
-					type:'HUMAN',
-					parameters:{charter:'STANDARD MULTIPLICATIVE'},
-				},
-
-				//UNIFY AND ALLOW FOR PROJECT TO CREATE
-				user: model.user.id,
-				creator: model.user.id,
-
-				//APPS - DATA
-				data:{
-					apps:{
-						reactions: {plus:0,minus:0},
-						attention:{general:0}
+					//APPS - DATA
+					data:{
+						apps:{
+							reactions: {plus:0,minus:0},
+							attention:{general:0}
+						}
 					}
+				};
+
+				//TODO: FINDCONNECTION!
+
+				var associatedModelObj = {};
+				if (model.associatedModels[x].id.toLowerCase() == 'self'){associatedModelObj = {type:'CONTENT', id:model.id}}
+				else{associatedModelObj = {type:model.associatedModels[x].type,id:model.associatedModels[x].type};}
+
+				newValidation.associatedModels = [
+					{type:'CONTENT',id:model.id},
+					associatedModelObj
+				];
+
+				//LIST -> OBJ
+				for (y in model.associatedModels[x].context){
+					newValidation.context[model.associatedModels[x].context[y].text] = model.associatedModels[x].context[y].score;
 				}
-				
-			};
+
+				console.log(newValidation)
+				Validation.create(newValidation).then(function(newValidation){
+					console.log(newValidation);
+					//buildAssociation(newValidation)
+					//craeteAssociation
+				});
+
+			}
+
+
+
+		};
+
+		//TODO: CONNECTION && ++
+		function createAssociation(validationModel){
+
+			//COMPUTE ASSOCIATION HERE
+			var newAssociationModel = {}; 
+
+			//FIND ALL VALIDATIONS FOR SPECIFIC ASSOCIATED MODELS
+			Validation.native(function(err, validation) {
+				validation.find({
+					$and : [
+						{"associatedModels.id": {$in :[newValidationModel.associatedModels[0].id]}},
+						{"associatedModels.id": {$in :[newValidationModel.associatedModels[1].id]}},
+					]
+				})
+				.limit(1000)
+				.skip(0)
+				.sort({'createdAt':-1})
+				.toArray(function (err, validationModels) {
+					Association.native(function(err, association) {
+						association.find({
+							$and : [
+								{"associatedModels.id": {$in :[validationModels[0].associatedModels[0].id]}},
+								{"associatedModels.id": {$in :[validationModels[0].associatedModels[1].id]}},
+							]
+						})
+						.limit(1000)
+						.skip(0)
+						.sort({'createdAt':-1})
+						.toArray(function (err, associationModels) {
+							if (associationModels.length == 0){
+								var newAssociationModel = {
+									associatedModels: validationModels[0].associatedModels,
+									type: validationModels[0].type,
+									connection:{},
+									creator: validationModels[0].creator,
+									user: validationModels[0].user,
+									reactions: validationModels[0].reactions,
+									context:validationModels[x].context
+								};
+								Association.create(newAssociationModel).then(function(association){
+									console.log('CREATED ASSOCIATION', association);
+									Association.publishCreate(association);
+								});
+							}
+							else{
+								//ASSOCIATION BUILD!
+								var newAssociationModel = {
+									associatedModels: validationModels[0].associatedModels,
+									type: validationModels[0].type,
+									charterParams: validationModels[0].charterParams,
+									creator: validationModels[0].creator,
+									user: validationModels[0].user,
+									reactions: validationModels[0].reactions,
+									context:validationModels[x].context
+								};
+								Association.update({id:associationModels[0]._id, newAssociationModel}).then(function(association){
+									console.log('UPDATED ASSOCIATION', association);
+									Association.publishCreate(association);
+								});
+							}
+						});
+
+					});
+					
+				});
+
+			});
 
 		};
 

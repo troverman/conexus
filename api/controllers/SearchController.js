@@ -182,26 +182,81 @@ module.exports = {
 		}
 	},
 
+	//COMPLEX QUERY :)
 	getFeed: function (req, res) {
 
-		var searchQuery = req.query.query;
+		console.log('LETS GO!')
+
+		var searchQuery = JSON.parse(req.query.query);
+
+		console.log(searchQuery);
 
 		var promises = [];
 		for (x in searchQuery){
-			if (query.model =='CONTENT'){}
-			if (query.model =='MEMBER'){}
-			if (query.model =='ITEM'){}
-			if (query.model =='TASK'){}
-			if (query.model =='PROJECT'){}
+			if (searchQuery[x].model =='CONTENT'){promises.push(Content.find().limit(10).skip(0).sort('createdAt DESC'))}
+			//if (searchQuery[x].model =='MEMBER'){promises.push(User.find().limit(10).skip(0).sort('createdAt DESC'))}
+			//if (searchQuery[x].model =='ITEM'){promises.push(Item.find().limit(10).skip(0).sort('createdAt DESC'))}
+			if (searchQuery[x].model =='PROJECT'){promises.push(Project.find().limit(10).skip(0).sort('createdAt DESC'))}
+			if (searchQuery[x].model =='TASK'){promises.push(Task.find().limit(10).skip(0).sort('createdAt DESC'))}
+			if (searchQuery[x].model =='TIME'){promises.push(Time.find().limit(10).skip(0).sort('createdAt DESC'))}
+			if (searchQuery[x].model =='TRANSACTION'){promises.push(Transaction.find().limit(10).skip(0).sort('createdAt DESC'))}
 		}
 
 		Q.all(promises).then((populatedModels)=>{
 
-			res.json(transactionModel);
+			console.log('POPULATED !', populatedModels.length)
+
+			//TODO
+			var contentList = populatedModels[0];
+			var projects = populatedModels[1];
+			var tasks = populatedModels[2];
+			var time = populatedModels[3];
+			var transactions = populatedModels[4];
+			//console.log(populatedModels[4])
+
+			contentList = contentList.map(function(obj){
+		        obj.model = 'CONTENT';
+		        if (obj.tags){obj.tags = obj.tags.split(',')}
+		        return obj;
+		    });
+		    projects = projects.map(function(obj){
+		        obj.model = 'PROJECT';
+		        if (obj.tags){obj.tags = obj.tags.split(',')}
+		        return obj;
+		    });
+		    tasks = tasks.map(function(obj){
+		        obj.model = 'TASK';
+		        if (obj.tags){obj.tags = obj.tags.split(',')}
+		        return obj;
+		    });
+		    time = time.map(function(obj){
+		        obj.model = 'TIME';
+		        if (obj.tags){obj.tags = obj.tags.split(',')}
+		        return obj;
+		    });
+		    transactions = transactions.map(function(obj){
+		        obj.model = 'TRANSACTION';
+		        return obj;
+		    });
+
+
+		    var activity = [].concat.apply([], [contentList, projects, tasks, time]); //, transactions]);
+		    activity = activity.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
+		    activity = activity.slice(0,100);
+
+		    //USER PROMISES
+		    var userPromises = [];
+		    for (x in activity){userPromises.push(User.find({id:activity[x].user}))}
+
+    		Q.all(userPromises).then((populatedUserModels)=>{
+
+    			for (x in activity){activity[x].user = populatedUserModels[x][0]}
+    			console.log(activity);
+				res.json(activity);
+
+    		});
 
 		});
-
-
 
 	},
 

@@ -34,6 +34,7 @@
 		<div style="clear:both"></div>
 		<div class="card">
             <tags-input style="border:0px;flex-grow:2;" placeholder="Search" ng-model="searchQuery"></tags-input>
+            <md-progress-linear style="height:2px" ng-if="stateIsLoading" md-mode="indeterminate"></md-progress-linear>
 	    </div>
 		<!--
 		<div class="card">	
@@ -43,7 +44,7 @@
 		</div>
 		-->
 	</div>
-	<div class="row">
+	<div ng-if="!stateIsLoading" class="row">
 
 		<!--TODO TEMPLATE -->
     	<div class="col-md-4 mobileHide" style="padding-left:0px;padding-right:0px;">
@@ -99,18 +100,16 @@
 				        </div>
 				    </div>
 				</div>
-				<div>
-					<style type="text/css">.angular-google-map-container{height:200px;}</style>
-					<ui-gmap-google-map center="map.center" zoom="map.zoom" options="options">
-					    <ui-gmap-marker ng-repeat="marker in markers" coords="marker.coords" options="marker.options" idkey="marker.id">
-					        <ui-gmap-window options="windowOptions" closeClick="closeClick()">
-					            <div>
-					                <div style="font-size: 15px;"><a href="#">{{marker.content}}</a></div>
-					            </div>
-					        </ui-gmap-window>
-					    </ui-gmap-marker>
-					</ui-gmap-google-map>
-				</div>
+				<style type="text/css">.angular-google-map-container{height:200px;}</style>
+				<ui-gmap-google-map center="map.center" zoom="map.zoom" options="options">
+				    <ui-gmap-marker ng-repeat="marker in markers" coords="marker.coords" options="marker.options" idkey="marker.id">
+				        <ui-gmap-window options="windowOptions" closeClick="closeClick()">
+				            <div>
+				                <div style="font-size: 15px;"><a href="#">{{marker.content}}</a></div>
+				            </div>
+				        </ui-gmap-window>
+				    </ui-gmap-marker>
+				</ui-gmap-google-map>
 		        <div style="padding:16px;">
 	                <div ng-click="$event.stopPropagation()">
 		                <tags-input style="border:0px;flex-grow:2;" min-length="1" placeholder="Search" ng-model="searchQuery.locations"></tags-input>
@@ -130,7 +129,6 @@
     	<div class="col-md-8" style="padding-left:0px;padding-right:0px;">
 
     		<!--FILTER CARD-->
-
 	    	<div class="card" ng-if="true || locationFilter">
 	    		<div  ng-if="false && lat" style="background:url('https://source.unsplash.com/1600x900/?city,mountain,forest');min-height:50px" class="imageContainerSmall">
 				    <div style="background:rgba(0,0,0,0.75);height:50px" class="imageContainerSmallDiv">  
@@ -143,16 +141,18 @@
 				        </div>
 				    </div>
 				</div>
-	    		<style type="text/css">.angular-google-map-container{height:200px;}</style>
-				<ui-gmap-google-map center="map.center" zoom="map.zoom" options="options">
-				    <ui-gmap-marker ng-repeat="marker in markers" coords="marker.coords" options="marker.options" idkey="marker.id">
-				        <ui-gmap-window options="windowOptions" closeClick="closeClick()">
-				            <div>
-				                <div style="font-size: 15px;"><a href="#">{{marker.content}}</a></div>
-				            </div>
-				        </ui-gmap-window>
-				    </ui-gmap-marker>
-				</ui-gmap-google-map>
+				<div>
+		    		<style type="text/css">.angular-google-map-container{height:200px;}</style>
+					<ui-gmap-google-map center="map.center" zoom="map.zoom" options="options">
+					    <ui-gmap-marker ng-repeat="marker in markers" coords="marker.coords" options="marker.options" idkey="marker.id">
+					        <ui-gmap-window options="windowOptions" closeClick="closeClick()">
+					            <div>
+					                <div style="font-size: 15px;"><a href="#">{{marker.content}}</a></div>
+					            </div>
+					        </ui-gmap-window>
+					    </ui-gmap-marker>
+					</ui-gmap-google-map>
+				</div>
 			</div>
 
 			<div ng-repeat="item in activity">

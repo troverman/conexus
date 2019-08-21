@@ -17,6 +17,7 @@ module.exports = {
 		Validation.watch(req);
 
 		if(req.query.id){
+			
 			Validation.find({id:id})
 			.limit(limit)
 			.skip(skip)
@@ -26,14 +27,38 @@ module.exports = {
 
 				var promises = [];
 				for (x in models[0].associatedModels){
-					if (models[0].associatedModels[x].type == 'PROJECT'){promises.push(Project.find({id:models[0].associatedModels[x].address}).then(function(projectModels){return {project:projectModels[0]}}))}
-					if (models[0].associatedModels[x].type == 'TASK'){promises.push(Task.find({id:models[0].associatedModels[x].address}).then(function(taskModels){return {task:taskModels[0]}}))}
-					if (models[0].associatedModels[x].type == 'TIME'){promises.push(Time.find({id:models[0].associatedModels[x].address}).then(function(taskModels){return {time:taskModels[0]}}))}
+					if (models[0].associatedModels[x].type == 'ACTION'){promises.push(Action.find({id:models[0].associatedModels[x].id}).then(function(actionModels){return {action:actionModels[0]}}))}
+					if (models[0].associatedModels[x].type == 'APP'){promises.push(App.find({id:models[0].associatedModels[x].id}).then(function(appModels){return {app:appModels[0]}}))}
+					if (models[0].associatedModels[x].type == 'CONTENT'){promises.push(Content.find({id:models[0].associatedModels[x].id}).then(function(contentModels){return {content:contentModels[0]}}))}
+					if (models[0].associatedModels[x].type == 'ITEM'){promises.push(Item.find({id:models[0].associatedModels[x].id}).then(function(itemModels){return {item:itemModels[0]}}))}
+					if (models[0].associatedModels[x].type == 'MEMBER'){promises.push(User.find({id:models[0].associatedModels[x].id}).then(function(memberModels){return {member:memberModels[0]}}))}
+					if (models[0].associatedModels[x].type == 'PROJECT'){promises.push(Project.find({id:models[0].associatedModels[x].id}).then(function(projectModels){return {project:projectModels[0]}}))}
+					if (models[0].associatedModels[x].type == 'TASK'){promises.push(Task.find({id:models[0].associatedModels[x].id}).then(function(taskModels){return {task:taskModels[0]}}))}
+					if (models[0].associatedModels[x].type == 'TIME'){promises.push(Time.find({id:models[0].associatedModels[x].id}).then(function(taskModels){return {time:timeModels[0]}}))}
+					if (models[0].associatedModels[x].type == 'TRANSACTION'){promises.push(Transaction.find({id:models[0].associatedModels[x].id}).then(function(transactionModels){return {transaction:transactionModels[0]}}))}
+					if (models[0].associatedModels[x].type == 'VALIDATION'){promises.push(Validation.find({id:models[0].associatedModels[x].id}).then(function(validationModels){return {validation:validationModels[0]}}))}
 				}
 
 				Q.all(promises).then((populatedModels)=>{
 
 					for (x in models[0].associatedModels){
+
+						if (models[0].associatedModels[x].type == 'APP'){
+							var app = populatedModels.filter(function(obj){return obj.app})
+							models[0].associatedModels[x].info = app[0];
+						}
+						if (models[0].associatedModels[x].type == 'CONTENT'){
+							var content = populatedModels.filter(function(obj){return obj.content})
+							models[0].associatedModels[x].info = content[0];
+						}
+						if (models[0].associatedModels[x].type == 'ITEM'){
+							var item = populatedModels.filter(function(obj){return obj.item})
+							models[0].associatedModels[x].info = item[0];
+						}
+						if (models[0].associatedModels[x].type == 'MEMBER'){
+							var member = populatedModels.filter(function(obj){return obj.member})
+							models[0].associatedModels[x].info = member[0];
+						}
 						if (models[0].associatedModels[x].type == 'PROJECT'){
 							var project = populatedModels.filter(function(obj){return obj.project})
 							models[0].associatedModels[x].info = project[0];
@@ -46,6 +71,7 @@ module.exports = {
 							var time = populatedModels.filter(function(obj){return obj.time});
 							models[0].associatedModels[x].info = time[0];
 						}
+
 					}
 
 					//find association parent. . . .
@@ -55,6 +81,7 @@ module.exports = {
 
 				});
 			});
+
 		}
 
 		//TODO: DEPRECIATE

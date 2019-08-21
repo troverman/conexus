@@ -260,27 +260,28 @@
                         </div>
                     </div>
                 </div>
+                <md-progress-linear style="height:2px" ng-if="stateIsLoadingIntro" md-mode="indeterminate"></md-progress-linear>
             </div>
 
             <div class="spacing-25"></div>
+            <div ng-if="!stateIsLoadingIntro">
+                <ul style="padding:0px;" class="member-tabs">
+                    <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fa fa-filter"></i> Filter</a></li>
+                    <li style="float:left;font-size:14px"><a href="#" ng-click="getLatLng()"><i class="fa fa-map-marker"></i> Location</a></li>
+                    <li style="float:right;font-size:14px"><a href="#" ng-click="sortToggle()">Sort By Recent <i class="fa fa-angle-down"></i></a></li>
+                    <div style="clear:both"></div>
+                </ul>
+                <div class="card">
+                    <tags-input class="" min-length="1" placeholder="Search" ng-model="searchQuery"></tags-input>
+                </div>
 
-            <ul style="padding:0px;" class="member-tabs">
-                <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fa fa-filter"></i> Filter</a></li>
-                <li style="float:left;font-size:14px"><a href="#" ng-click="getLatLng()"><i class="fa fa-map-marker"></i> Location</a></li>
-                <li style="float:right;font-size:14px"><a href="#" ng-click="sortToggle()">Sort By Recent <i class="fa fa-angle-down"></i></a></li>
-                <div style="clear:both"></div>
-            </ul>
-            <div class="card">
-                <tags-input class="" min-length="1" placeholder="Search" ng-model="searchQuery"></tags-input>
+                <div ng-repeat="item in activity">
+                    <div ng-if="item.model=='CONTENT'" ng-include="'templates/cards/contentCard.tpl.html'"></div>
+                    <div ng-if="item.model=='PROJECT'" ng-include="'templates/cards/projectCard.tpl.html'"></div>
+                    <div ng-if="item.model=='TASK'" ng-include="'templates/cards/taskCard.tpl.html'"></div>
+                    <div ng-if="item.model=='TIME'" ng-include="'templates/cards/timeCard.tpl.html'"></div>
+                </div>
             </div>
-
-            <div ng-repeat="item in activity">
-                <div ng-if="item.model=='CONTENT'" ng-include="'templates/cards/contentCard.tpl.html'"></div>
-                <div ng-if="item.model=='PROJECT'" ng-include="'templates/cards/projectCard.tpl.html'"></div>
-                <div ng-if="item.model=='TASK'" ng-include="'templates/cards/taskCard.tpl.html'"></div>
-                <div ng-if="item.model=='TIME'" ng-include="'templates/cards/timeCard.tpl.html'"></div>
-            </div>
-
             <!--
             <div ng-show="false" class="card" style="text-align:center" ng-click="loadMore()">
                 <button style="width:100%" class="btn btn-default log-btn">MORE <i class="fa fa-angle-down"></i></button>

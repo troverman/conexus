@@ -188,10 +188,9 @@ angular.module( 'conexus.task', [
     $scope.showValidationImplicitToggle = function(){$scope.showValidationImplicitToggleVar = !$scope.showValidationImplicitToggleVar};
 
     //TODO: REWORK FLOW
-    //CREATE TIME FLOW///
     $scope.askQuestion = function() {
         if ($rootScope.currentUser){$scope.question = true;}
-        else{$mdSidenav('register').toggle();}
+        else{$mdSidenav('login').toggle();}
     };
 
     $scope.startStreaming = function() {

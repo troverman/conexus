@@ -20,34 +20,7 @@ angular.module( 'conexus.home', [
                 templateUrl: 'home/templates/intro.tpl.html'
             }
         },
-
-        //TODO: DEPRECIATE RESOLVE
-        resolve:{
-
-            //TODO: GET FEED
-            //TODO: COMPLEX QUERY
-            contentList: ['ContentModel', function(ContentModel){
-                return ContentModel.getSome({limit:10, skip:0, sort:'createdAt DESC'});
-            }],
-            members: ['UserModel', function(UserModel){
-                return UserModel.getSome({limit:10, skip:0, sort:'createdAt DESC'});
-            }],
-            orders: ['OrderModel', function(OrderModel) {
-                return OrderModel.getSome({limit:10, skip:0, sort:'createdAt DESC'});
-            }],
-            projects: ['ProjectModel', function(ProjectModel) {
-                return ProjectModel.getSome({limit:10, skip:0, sort:'createdAt DESC'});
-            }], 
-            tasks: ['TaskModel', function(TaskModel) {
-                return TaskModel.getSome({limit:10, skip:0, sort:'createdAt DESC'});
-            }],
-            time: ['TimeModel', function(TimeModel) {
-                return TimeModel.getSome({limit:10, skip:0, sort:'createdAt DESC'});
-            }],
-            transactions: ['TransactionModel', function(TransactionModel) {
-                return TransactionModel.getSome({limit:10, skip:0, sort:'createdAt DESC'});
-            }],
-        }
+        resolve:{}
     })
     .state( 'home.feed', {
         url: '',
@@ -109,11 +82,17 @@ angular.module( 'conexus.home', [
 }])
 
 .controller( 'HomeCtrl', ['$rootScope', '$state', function HomeController( $rootScope, $state ) {
-    if($rootScope.currentUser){$state.go('home.feed')}
-    else{$state.go('home.intro')}
+    if($rootScope.currentUser){
+        console.log('FEED');
+        $state.go('home.feed');
+    }
+    else{
+        console.log('INTRO');
+        $state.go('home.intro');
+    }
 }])
 
-.controller( 'IntroCtrl', ['$http', '$location', '$mdSidenav', '$rootScope', '$sce', '$scope', '$state', '$window', 'contentList', 'ContentModel', 'members', 'orders', 'ProjectModel', 'projects', 'ReactionModel', 'SearchModel', 'tasks', 'time', 'titleService', 'toaster', 'transactions', 'UserModel', function HomeController( $http, $location, $mdSidenav, $rootScope, $sce, $scope, $state, $window, contentList, ContentModel, members, orders, ProjectModel, projects, ReactionModel, SearchModel, tasks, time, titleService, toaster, transactions, UserModel ) {
+.controller( 'IntroCtrl', ['$http', '$location', '$mdSidenav', '$rootScope', '$sce', '$scope', '$state', '$window', 'ProjectModel', 'SearchModel', 'titleService', 'toaster', 'UserModel', function HomeController( $http, $location, $mdSidenav, $rootScope, $sce, $scope, $state, $window, ProjectModel, SearchModel, titleService, toaster, UserModel ) {
 
     $scope.introObj = [
         {title:'WE CRE8 MULTIDIMENSIONAL VALUE'},
@@ -133,65 +112,22 @@ angular.module( 'conexus.home', [
     $scope.selectedTime = Math.floor(Math.random()*92);
     vid[0].currentTime = $scope.selectedTime;
 
+    //TODO 
+    //PROJECT-MEMBER
+    //MEMBER-MEMBER
 
-
-    //GENERALIZE FEED QUERY IS .. 
-
-    var query = [
-        {model:'CONTENT', limit:100, skip:0, sort:'createdAt DESC', filter:{}},
-        {model:'ITEM', limit:100,skip:0,sort:'createdAt DESC', filter:{}},
-        {model:'TASK', limit:100,skip:0,sort:'createdAt DESC', filter:{}},
-        {model:'TIME', limit:100,skip:0,sort:'createdAt DESC', filter:{}},
-        {model:'PROJECT', limit:100,skip:0,sort:'createdAt DESC', filter:{}},
-        {model:'USER', limit:100,skip:0,sort:'createdAt DESC', filter:{}}
-    ];
-
-    //GET FEED
-    //SEARCH
-    //SearchModel.find().then(function(searchModel){
-    //});
-
-    //WEEDS CREATE IS 
-    //  PROJECT-MEMBER
-    //  MEMBER-MEMBER
-    //  SEARCH MODEL
-
-    $scope.contentList = contentList.map(function(obj){
-        obj.model = 'CONTENT';
-        if (obj.tags){obj.tags = obj.tags.split(',')}
-        return obj;
-    });
     $scope.map = {
         center: {latitude: 35.902023, longitude: -84.1507067 },
         zoom: 9
     };
     $scope.markers = [];
-    $scope.newReaction = {};
-    $scope.projects = projects.data.map(function(obj){
-        obj.model = 'PROJECT';
-        if (obj.tags){obj.tags = obj.tags.split(',')}
-        return obj;
-    });
+
+    //TODO: ROOTSCOPE
+    $scope.newMember={};
     $scope.searchResults = [];
-    $scope.tasks = tasks.data.map(function(obj){
-        obj.model = 'TASK';
-        if (obj.tags){obj.tags = obj.tags.split(',')}
-        return obj;
-    });
-    $scope.time = time.map(function(obj){
-        obj.model = 'TIME';
-        if (obj.tags){obj.tags = obj.tags.split(',')}
-        if (obj.task){if (obj.task.tags){obj.task.tags = obj.task.tags.split(',')}}
-        return obj;
-    });
-
-    $scope.activity = [].concat.apply([], [$scope.contentList, $scope.projects, $scope.tasks, $scope.time]);
-    $scope.activity = $scope.activity.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
-    $scope.activity = $scope.activity.slice(0,100);
     
-
     //TODO: DEPRECIATE --> PUT IN NAV
-    $scope.getLatLng = function() {
+    $rootScope.getLatLng = function() {
         if (navigator.geolocation) {
             $rootScope.stateIsLoading = true;
             navigator.geolocation.getCurrentPosition(function (position) {
@@ -246,25 +182,6 @@ angular.module( 'conexus.home', [
         console.log('TODO: LOAD MORE');
     };
 
-    $scope.createReaction = function(item, type){$mdSidenav('login').toggle()};
-
-    //TODO: ROOTSCOPE
-    $scope.newMember={};
-    $scope.pop = function(title, body){
-        toaster.pop({
-            type:'warning',
-            title: title,
-            body: body,
-            onShowCallback: function (toast) { 
-                var audio = new Audio('audio/ping.mp3');
-                audio.play()
-                .then(function(audio){console.log('POP', 'dingdong')})
-                .catch(function(err){console.log('ERR POP', err)})
-            }
-        });
-    };
-
-    //createmember
     $scope.registerUser = function(){
         $scope.valid = true;
         //TODO: FORM VALIDATION
@@ -275,15 +192,15 @@ angular.module( 'conexus.home', [
             }
         }
         else{
-            $scope.pop('ERROR', 'Password must be longer than 8 Characters');
+            $rootScope.pop('ERROR', 'Password must be longer than 8 Characters');
             $scope.valid = false;
         }
         if (!$scope.newMember.username){
-            $scope.pop('ERROR', 'Invalid Username');
+            $rootScope.pop('ERROR', 'Invalid Username');
             $scope.valid = false;
         }
         if (!$scope.newMember.email){
-            $scope.pop('ERROR', 'Invalid Email');
+            $rootScope.pop('ERROR', 'Invalid Email');
             $scope.valid = false;
         }
         console.log('NEW MEMBER', $scope.newMember)
@@ -302,28 +219,11 @@ angular.module( 'conexus.home', [
     //\\//\\//\\//\\//    
     //TODO: BETTER // DEPRECIATE!!!
     $scope.loadAssociations = function(){
-        $scope.associations = $scope.tasks.map(function(obj){
-            if (obj.project){return obj.project.title;}
-            if (obj.task){return obj.project.title;}
-            if (obj.user){return obj.user.username;}
-            if (obj.item){return obj.item.title;}
-            if (obj.order){return obj.order}
-        });
-        $scope.associations = [].concat.apply([], $scope.associations);
-        $scope.associations = $scope.associations.filter(function(e){return e});
-        function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
-        $scope.sortedAssociationArray = [];
-        for (x in $scope.associations){
-            var amount = countInArray($scope.associations, $scope.associations[x]);
-            if ($scope.sortedAssociationArray.map(function(obj){return obj.element}).indexOf($scope.associations[x]) == -1){
-                $scope.sortedAssociationArray.push({amount:amount, element:$scope.associations[x]})
-            }
-        }
-        $scope.sortedAssociationArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
+        $scope.sortedAssociationArray = []; 
     };
     $scope.loadLocations = function(){$scope.sortedLocationsArray = ['Chapel Hill', 'Knoxville', 'Los Angeles', 'New York City']};
     $scope.loadTags = function(){
-        $scope.tags = $scope.contentList.map(function(obj){
+        $scope.tags = $scope.activity.map(function(obj){
             return obj.tags;;
         });
         $scope.tags = [].concat.apply([], $scope.tags);
@@ -345,10 +245,30 @@ angular.module( 'conexus.home', [
         $scope.loadTags();
         $scope.filterSet = {associations:$scope.sortedAssociationArray, tags:$scope.sortedTagArray, locations:$scope.sortedLocationArray}
     };
-    $scope.init();
     //\\//\\//\\//\\//
     //FILTERS\\//\\//
     //\\//\\//\\//\\//
+
+
+
+    //TODO: COMPLEX QUERY
+    var query = JSON.stringify([
+        {model:'CONTENT', limit:20, skip:0, sort:'createdAt DESC'},
+        {model:'ITEM', limit:20,skip:0,sort:'createdAt DESC'},
+        {model:'PROJECT', limit:20,skip:0,sort:'createdAt DESC'},
+        {model:'TASK', limit:20,skip:0,sort:'createdAt DESC'},
+        {model:'TIME', limit:20,skip:0,sort:'createdAt DESC'},
+        {model:'TRANSACTION', limit:20,skip:0,sort:'createdAt DESC'},
+        {model:'USER', limit:20,skip:0,sort:'createdAt DESC'}
+    ]);
+
+    $scope.stateIsLoadingIntro = true;
+    SearchModel.getFeed(query).then(function(searchModels){
+        $scope.stateIsLoadingIntro = false;
+        console.log(searchModels);
+        $scope.activity = searchModels;
+        $scope.init();
+    });
 
 
     //\\//\\//\\//\\//
@@ -371,7 +291,6 @@ angular.module( 'conexus.home', [
         if (newValue !== oldValue) {
             $rootScope.stateIsLoading = true;
             //TODO: REMOVE BASED 64 STRING SEARCH
-
             var searchModel = {
                 limit:100,
                 skip:0,
@@ -386,14 +305,11 @@ angular.module( 'conexus.home', [
                     if (obj.tags){obj.tags = obj.tags.split(',');}
                 });
             });
-          
         }
     }, true);
     //\\//\\//\\//\\//
     //WATCHERS\\//\\//
     //\\//\\//\\//\\//
-
-
 
 
 }])

@@ -4,8 +4,13 @@ angular.module('models.search', ['services', 'sails.io',])
     
     this.getSome = function(model) {
         var url = utils.prepareUrl('search');
-        console.log(model)
         return $sailsSocket.get(url, {params:model}).then(success, error);
+    };
+
+    this.getFeed = function(model) {
+        var url = utils.prepareUrl('search/feed');
+        var query = {params:{query:model}}
+        return $sailsSocket.get(url, query).then(success, error);
     };
 
     this.search = function(model) {
