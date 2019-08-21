@@ -30,7 +30,7 @@ angular.module( 'conexus.item', [
 	});
 }])
 
-.controller( 'ItemCtrl', [ '$rootScope', '$location', '$mdSidenav', '$scope', 'actions', 'ContentModel', 'item', 'OrderModel', 'orders', 'ReactionModel', 'titleService', 'transactions', function ItemController( $rootScope, $location, $mdSidenav, $scope, actions, ContentModel, item, OrderModel, orders, ReactionModel, titleService, transactions ) {
+.controller( 'ItemCtrl', [ '$rootScope', '$sailsSocket', '$location', '$mdSidenav', '$scope', 'actions', 'ContentModel', 'item', 'OrderModel', 'orders', 'ReactionModel', 'titleService', 'transactions', function ItemController( $rootScope, $sailsSocket, $location, $mdSidenav, $scope, actions, ContentModel, item, OrderModel, orders, ReactionModel, titleService, transactions ) {
    
     $scope.item = item;
     if($scope.item.length == 0){$location.path('/')}
@@ -415,15 +415,17 @@ angular.module( 'conexus.item', [
     };
     //getOrderTraverse($scope.item.identiferSet);
 
+    $sailsSocket.subscribe('item', function (envelope) {
+        switch(envelope.verb) {
+            case 'created':
+                if ($scope.item.id == envelope.item.id){
+                    $scope.item.attention = envelope.data.attention;
+                }
+                break;
+        }
+    });
 
 
 
-
-
-
-
-
-    
-    
     
 }]);

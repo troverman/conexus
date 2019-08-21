@@ -44,28 +44,6 @@ angular.module( 'conexus.content', [
         //string to content 
     //attention:{sum:1000,attention[context]:1,live:1}
 
-
-
-    //+Addative Manifolds --> Extra dimensional 
-    $scope.content.tokens = [
-        'Content+Create',
-        'Content+[type]',
-        'Content+Create+[type]',
-        'createContent+'+$scope.content.id,
-        'Content+'+$scope.content.id,
-        'View+'+$scope.content.id,
-        'View+'+$scope.content.user.id,
-        'View+userId',
-        'View+[types | tags]',
-        'Reaction+userId',
-        'Reaction+[type]',
-        'Reaction+[type]+userId',
-    ]; 
-
-
-
-
-
     $scope.marketOutput = [];
     $scope.newContent = {};
     $scope.newReaction = {};

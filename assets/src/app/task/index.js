@@ -349,6 +349,15 @@ angular.module( 'conexus.task', [
     }, true);
 
     //TODO: WEBSOCKET
+    $sailsSocket.subscribe('task', function (envelope) {
+        switch(envelope.verb) {
+            case 'created':
+                if ($scope.task.id == envelope.data.id){
+                    $scope.task.attention = envelope.data.attention;
+                }
+                break;
+        }
+    });
     $sailsSocket.subscribe('content', function (envelope) {
         switch(envelope.verb) {
             case 'created':

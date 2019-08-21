@@ -73,26 +73,17 @@ angular.module( 'conexus.time', [
 
 
     //TODO: WEBSOCKET
-    $sailsSocket.subscribe('content', function (envelope) {
+
+    $sailsSocket.subscribe('time', function (envelope) {
+        console.log(envelope)
         switch(envelope.verb) {
             case 'created':
-                $scope.contentList.unshift(envelope.data);
+                if ($scope.time.id == envelope.data.id){
+                    $scope.time.attention = envelope.data.attention;
+                }
                 break;
         }
     });
-    $sailsSocket.subscribe('reaction', function (envelope) {
-        switch(envelope.verb) {
-            case 'created':
-                $scope.reactions.unshift(envelope.data);
-                break;
-        }
-    });
-    $sailsSocket.subscribe('validation', function (envelope) {
-        switch(envelope.verb) {
-            case 'created':
-                $scope.validations.unshift(envelope.data);
-                break;
-        }
-    });
+
 
 }]);

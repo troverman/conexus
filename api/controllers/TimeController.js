@@ -16,6 +16,8 @@ module.exports = {
 		var user = req.query.user;
 		var id = req.query.id;
 
+		Time.watch(req);
+
 		console.log('GET TIME', req.query)
 
 		if (req.query.id){

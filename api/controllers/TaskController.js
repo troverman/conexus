@@ -12,6 +12,8 @@ module.exports = {
 		var id = req.query.id;
 		var user = req.query.user;
 
+		Task.watch(req);
+
 		console.log('GET TASK', req.query);
 
 		if(req.query.id){

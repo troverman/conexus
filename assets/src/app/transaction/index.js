@@ -71,10 +71,12 @@ angular.module( 'conexus.transaction', [
     };
     
     //TODO: SOCKETS
-    $sailsSocket.subscribe('post', function (envelope) {
+    $sailsSocket.subscribe('transaction', function (envelope) {
         switch(envelope.verb) {
             case 'created':
-                $scope.contentList.unshift(envelope.data);
+                if ($scope.transaction.id == envelope.data.id){
+                    $scope.transaction.attention = envelope.data.attention;
+                }
                 break;
         }
     });

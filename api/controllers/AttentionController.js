@@ -56,6 +56,7 @@ module.exports = {
 
 		function mintTokens(model){
 			var protocolTokens = getProtocolTokens(model);
+			//content attention
 		};
 
 		function getProtocolTokens(model){
@@ -64,6 +65,7 @@ module.exports = {
 		};
 
 		var model = {
+
 			//app vs type vs :o
 			app: req.param('app'),
 			string: req.param('string'),
@@ -74,22 +76,21 @@ module.exports = {
 			attention: {general:0},
 			reactions: {plus:0, minus:0},
 		};
-
-		//console.log('CREATE ATTENTION', model);
 		
 		Attention.create(model)
 		.exec(function(err, model) {
 			if (err) {return console.log(err);}
 			else {
 
-				//console.log('CREATE ATTENTION', model)
+				console.log('CREATE ATTENTION', model)
 
 				for (x in model.associatedModels){
 					
 					//DEPRECIATE MOEL TYPE DISTINCTION ?
-					if (model.associatedModels[x].type == 'CONTENT'){
-						//MACHINE ATTENTION BY VALIDATION OF SPECIFIC DATA.. REVIEW THE DATA IN THE BLOCK ... GIVES IT MACHENE ATTENTION.. IE THE REMKLE PROOF
-						if (model.app == 'HUMAN'){
+					//MACHINE ATTENTION BY VALIDATION OF SPECIFIC DATA.. REVIEW THE DATA IN THE BLOCK ... GIVES IT MACHENE ATTENTION.. IE THE REMKLE PROOF
+					if (model.app == 'HUMAN'){
+
+						if (model.associatedModels[x].type == 'CONTENT'){
 							Content.find({id:model.associatedModels[x].id}).then(function(contentModel){
 								//TODO: MULTI D MAP
 								if (contentModel[0].attention){
@@ -98,27 +99,51 @@ module.exports = {
 									};
 								}
 								else{attentionModel = {general:0}}
-
-								Content.update({id:contentModel[0].id}, {attention:attentionModel}).then(function(newContentModel){
-									//console.log('LET THERE BE ATTENTION', attentionModel);
-									Content.publishCreate(newContentModel);
-								});
+								Content.update({id:contentModel[0].id}, {attention:attentionModel}).then(function(newContentModel){Content.publishCreate(newContentModel);});
 							});
 						}
-					}
 
-					if (model.associatedModels[x].type == 'TASK'){
-						if (model.app == 'HUMAN'){
-							Content.find({id:model.associatedModels[x].id}).then(function(taskModel){
-								//err
+						if (model.associatedModels[x].type == 'ITEM'){
+							Item.find({id:model.associatedModels[x].id}).then(function(itemModel){
+								if (itemModel[0].attention){attentionModel = {general:itemModel[0].attention.general + model.amount};}
+								else{attentionModel = {general:0}}
+								Item.update({id:itemModel[0].id}, {attention:attentionModel}).then(function(newItemModel){Item.publishCreate(newItemModel);});
+							});
+						}
+
+						if (model.associatedModels[x].type == 'TASK'){
+							Task.find({id:model.associatedModels[x].id}).then(function(taskModel){
 								if (taskModel[0].attention){attentionModel = {general:taskModel[0].attention.general + model.amount};}
 								else{attentionModel = {general:0}}
-								Task.update({id:taskModel[0].id}, {attention:attentionModel}).then(function(newTaskModel){
-									//console.log('LET THERE BE ATTENTION', attentionModel);
-									Task.publishCreate(newTaskModel);
-								});
+								Task.update({id:taskModel[0].id}, {attention:attentionModel}).then(function(newTaskModel){Task.publishCreate(newTaskModel);});
 							});
 						}
+
+						if (model.associatedModels[x].type == 'TIME'){
+							Time.find({id:model.associatedModels[x].id}).then(function(timeModel){
+								if (timeModel[0].attention){attentionModel = {general:timeModel[0].attention.general + model.amount};}
+								else{attentionModel = {general:0}}
+								Time.update({id:timeModel[0].id}, {attention:attentionModel}).then(function(newTimeModel){Time.publishCreate(newTimeModel);});
+							});
+						}
+
+						if (model.associatedModels[x].type == 'TRANSACTION'){
+							Transaction.find({id:model.associatedModels[x].id}).then(function(transactionModel){
+								if (transactionModel[0].attention){attentionModel = {general:transactionModel[0].attention.general + model.amount};}
+								else{attentionModel = {general:0}}
+								Transaction.update({id:transactionModel[0].id}, {attention:attentionModel}).then(function(newTransactionModel){Transaction.publishCreate(newTransactionModel);});
+							});
+						}
+
+						if (model.associatedModels[x].type == 'VALIDATION'){
+							Validation.find({id:model.associatedModels[x].id}).then(function(){
+								if (validationModel[0].attention){attentionModel = {general:validationModel[0].attention.general + model.amount};}
+								else{attentionModel = {general:0}}
+								Validation.update({id:validationModel[0].id}, {attention:attentionModel}).then(function(newValidationModel){Validation.publishCreate(newValidationModel);});
+							});
+						}
+
+
 					}
 
 				}

@@ -121,25 +121,14 @@ angular.module( 'conexus.validation', [
         else{$mdSidenav('login').toggle()}
     };
 
-    //TODO: DEPRECIATE
-    $scope.createValidation = function(){
-        if ($rootScope.currentUser){
-            $scope.newValidation.validation = $scope.validation.id;
-            $scope.newValidation.user = $rootScope.currentUser.id;
-            ValidationModel.create($scope.newValidation).then(function(model){
-                $scope.newValidation = {};
-                for (x in $scope.tags){
-                    $scope.newValidation.validation[$scope.tags[x]] = 0;
+    $sailsSocket.subscribe('validation', function (envelope) {
+        switch(envelope.verb) {
+            case 'created':
+                if ($scope.validation.id == envelope.data.id){
+                    $scope.validation.attention = envelope.data.attention;
                 }
-            });
+                break;
         }
-        else{$mdSidenav('login').toggle()}
-    };
-
-    //TODO: DEPRECIATE
-    $scope.reply = function(item){
-        if ($rootScope.currentUser){$mdSidenav('content').toggle()}
-        else{$mdSidenav('login').toggle();}
-    };
+    });
 
 }]);
