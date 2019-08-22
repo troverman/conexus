@@ -16,6 +16,21 @@ module.exports = {
 				res.json(models);
 			});
 		}
+		//mm
+		else if (req.query.app){
+			var app = req.query.app;
+			Association.native(function(err, association) {
+				association.find({"associatedModels.id": {$in :[app]}})
+				.limit(1000)
+				.skip(0)
+				.sort({'createdAt':-1})
+				.toArray(function (err, associationModels) {
+					console.log(associationModels)
+					associationModels = associationModels.map(function(obj){obj.id = obj._id; return obj;});
+					res.json(associationModels);
+				});
+			});
+		}
 	}
 
 };

@@ -26,7 +26,7 @@ html {height:100%;box-sizing: border-box;}
 img{max-width:100%;}
 
 md-progress-linear .md-container {background-color: rgba(36,36,46, 1)!important;}
-md-progress-linear.md-default-theme .md-bar, md-progress-linear .md-bar {background-color: #ffd56d!important;}//4bb140,f99731,ffd56d,f45d07  084b73,2ab996
+md-progress-linear.md-default-theme .md-bar, md-progress-linear .md-bar {background-color: #ffd56d!important;}//2ab995
 
 md-progress-linear {height:2px!important;}
 md-progress-linear .md-container {height: 3px;}

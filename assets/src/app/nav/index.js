@@ -2109,41 +2109,18 @@ angular.module( 'conexus.nav', [
     };
 
     //TODO! IMPORTANT
-    $scope.loadAssociationsOld = function(query){
+    $scope.loadAssociations = function(query){
         var deferred = $q.defer();
-        //SearchModel.search(query).then(function(searchModels){
-
-        //MM | YIKES
-        //$scope.newValidation.associatedModels = $scope.newValidation.associatedModels.concat({type:$scope.newValidation.associatedModel[0].type, address:$scope.newValidation.associatedModel[0].address});
-
-        //BASED ON TYPE AND MODELS.. UHG
-        /*UserModel.getSome('search', query, 10, 0, 'createdAt DESC').then(function(userSearchModels){
-            userSearchModels.map(function(obj){
-                obj.text = obj.username
+        console.log('loadAssociations', query)
+        //SearchModel.search(query).then(function(searchModels){})
+        ProjectModel.getSome({query:query, limit:10, skip:0, sort:'createdAt DESC'}).then(function(searchModels){
+            searchModels.map(function(obj){
+                obj.type='PROJECT';
+                obj.text = 'PROJECT+'+obj.id;
                 return obj;
-            }); */
-
-            console.log('loadAssociationsOld', query)
-            ProjectModel.getSome({search:query, limit:10, skip:0, sort:'createdAt DESC'}).then(function(projectSearchModels){
-                projectSearchModels.map(function(obj){
-                    obj.type='PROJECT';
-                    obj.text = 'PROJECT | '+obj.title;
-                    return obj;
-                });
-                TaskModel.getSome({search:query, limit:10, skip:0, sort:'createdAt DESC'}).then(function(taskSearchModels){
-                    taskSearchModels.map(function(obj){
-                        obj.type='TASK';
-                        obj.text = obj.title;
-                        return obj;
-                    });
-                    //searchModels = [].concat.apply([], [userSearchModels, projectSearchModels, taskSearchModels]);
-                    searchModels = [].concat.apply([], [projectSearchModels, taskSearchModels])
-                    console.log('loadAssociationsOld', searchModels);
-                    deferred.resolve(searchModels);
-                });
             });
-           //deferred.resolve(userSearchModels);
-        //});
+            deferred.resolve(searchModels);
+        });
         return deferred.promise;
     };
 

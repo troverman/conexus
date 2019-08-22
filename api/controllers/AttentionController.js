@@ -100,6 +100,14 @@ module.exports = {
 					//TODO: STORE IN DATA LAYER OF MODEL
 					if (model.app == 'HUMAN'){
 
+						if (model.associatedModels[x].type == 'ASSOCIATION'){
+							Association.find({id:model.associatedModels[x].id}).then(function(associationModel){
+								if (associationModel[0].attention){attentionModel = {general:associationModel[0].attention.general + model.amount};}
+								else{attentionModel = {general:0}}
+								Association.update({id:associationModel[0].id}, {attention:attentionModel}).then(function(newValidationModel){Association.publishCreate(newValidationModel);});
+							});
+						}
+						
 						if (model.associatedModels[x].type == 'CONTENT'){
 							Content.find({id:model.associatedModels[x].id}).then(function(contentModel){
 								if (contentModel[0].attention){attentionModel = {general:contentModel[0].attention.general + model.amount};}
@@ -149,7 +157,7 @@ module.exports = {
 						}
 
 						if (model.associatedModels[x].type == 'VALIDATION'){
-							Validation.find({id:model.associatedModels[x].id}).then(function(){
+							Validation.find({id:model.associatedModels[x].id}).then(function(validationModel){
 								if (validationModel[0].attention){attentionModel = {general:validationModel[0].attention.general + model.amount};}
 								else{attentionModel = {general:0}}
 								Validation.update({id:validationModel[0].id}, {attention:attentionModel}).then(function(newValidationModel){Validation.publishCreate(newValidationModel);});

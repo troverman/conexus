@@ -117,11 +117,8 @@ angular.module( 'conexus.project', [
 
         //TODO: DEPRECIATE RESOLVE
         resolve: {
-            motions: ['ContentModel', 'project', function(ContentModel, project){
-                return ContentModel.getSome({project:project.id, limit:100, skip:0, sort:'createdAt DESC'});
-            }], 
             connections: ['ConnectionModel', 'project', function(ConnectionModel, project){
-                return ConnectionModel.getSome({creator:project.id, limit:100, skip:0, sort:'createdAt DESC'});
+                return ConnectionModel.get({creator:project.id, limit:100, skip:0, sort:'createdAt DESC'});
             }]
         }
     })
@@ -279,7 +276,7 @@ angular.module( 'conexus.project', [
     $scope.searchQuery = [];
 
 
-    //TODO: GLOBAL VARIABLES.. HMM
+    //TODO: GLOBAL VARIABLES
     $rootScope.markers = [];
     $rootScope.associatedModels = [{
         address: $scope.project.id,
@@ -291,7 +288,6 @@ angular.module( 'conexus.project', [
 
 
     //TODO: SMOOTH STATE CHANGE
-
     if ($scope.project.location){ 
         $scope.map = {
             center: {latitude: $scope.project.location.lat, longitude: $scope.project.location.lng },
@@ -305,9 +301,7 @@ angular.module( 'conexus.project', [
                 longitude:$scope.project.location.lng
             }
         }];
-        $scope.options = {
-           disableDefaultUI: true
-        };
+        $scope.options = {disableDefaultUI: true};
     }
 
     //TODO: ROOT
@@ -428,12 +422,6 @@ angular.module( 'conexus.project', [
         else{$mdSidenav('login').toggle()}   
     };
 
-    //TODO: DEPRECIATE
-    $scope.reply = function(activity){
-        if ($rootScope.currentUser){$mdSidenav('content').toggle()}
-        else{$mdSidenav('login').toggle()}
-    };
-
     //TODO: WEBSOCKET
     $sailsSocket.subscribe('content', function (envelope) {
         switch(envelope.verb) {
@@ -485,7 +473,7 @@ angular.module( 'conexus.project', [
     titleService.setTitle(project.title + ' | Channels | CRE8.XYZ');
 
     //TODO: MESSAGING.. CHANNELS.. ALL.. COLLAB :)
-    
+
     $scope.channels = channels;
     $scope.newContent = {};
     $scope.project = project;
@@ -586,34 +574,23 @@ angular.module( 'conexus.project', [
     }
     $scope.loadTags();
 
-
-
-    //TODO: DEPRECIATE
-    $scope.reply = function(activity){
-        if ($rootScope.currentUser){$mdSidenav('content').toggle()}
-        else{$mdSidenav('login').toggle()}
-    };
-
 }])
     
-.controller( 'ProjectCharterCtrl', ['$location', '$mdSidenav', '$sailsSocket', '$sce', '$scope', 'connections', 'ContentModel', 'motions', 'project', 'titleService', function ProjectController( $location, $mdSidenav, $sailsSocket, $sce, $scope, connections, ContentModel, motions, project, titleService ) {
+.controller( 'ProjectCharterCtrl', ['$location', '$mdSidenav', '$sailsSocket', '$sce', '$scope', 'connections', 'ContentModel', 'project', 'titleService', function ProjectController( $location, $mdSidenav, $sailsSocket, $sce, $scope, connections, ContentModel, project, titleService ) {
     
     //TODO: DEPRECIATE
     titleService.setTitle(project.title + ' | Charter | CRE8.XYZ');
 
     //TODO: PROJECT CHARTER
-    //TODO: MOTIONS ++ VALIDATIONS
-    
-    $scope.newMotion = {};
-    //$scope.motions = motions;  
+    //TODO: MOTIONS ++ VALIDATIONS 
 
     $scope.connections = connections.map(function(obj){
-        obj.type = "CHARTER";
+        obj.model = "CHARTER";
         return obj;
     });
 
     console.log(connections);
-        //CONNECTIOS ARE CHARTERS.. 
+    //CONNECTIOS ARE CHARTERS.. 
 
     //TODO: ORG EARNS TOKENS WHEN WE CREATE.. PROTOCOL BALANCE AND REPUTATION
     //TODO: FIRE IS MOTION FOR EACH FILE .. --> LIKE THE CODE.. GIT
@@ -793,15 +770,6 @@ angular.module( 'conexus.project', [
         else{$mdSidenav('login').toggle();}
     };
 
-    //TODO: DEPRECIATE
-    $scope.reply = function(activity){
-        if ($rootScope.currentUser){
-            var index = $scope.transactions.map(function(obj){return obj.id}).indexOf(activity.id);
-            $scope.transactions[index].showReply = !$scope.transactions[index].showReply;
-        }
-        else{$mdSidenav('login').toggle()}
-    };
-
     //MD VS ABSOLUTE USAGE..
     function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0)};
     function amountInArray(array, value) {
@@ -810,9 +778,6 @@ angular.module( 'conexus.project', [
             return n;
         },0);
     };
-
-
-
 
     //TODO: IMPROVE :)
     $scope.loadAssets = function(){
@@ -1322,13 +1287,6 @@ angular.module( 'conexus.project', [
         $scope.populateMarkets();
     },true);
 
-
-    //TODO: DEPRECIATE
-    $scope.reply = function(activity){
-        if ($rootScope.currentUser){$mdSidenav('content').toggle()}
-        else{$mdSidenav('login').toggle()}
-    };
-
 }])
 
 .controller( 'ProjectProjectsCtrl', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'project', 'ProjectModel', 'projects', 'titleService', function ProjectController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, project, ProjectModel, projects, titleService ) {
@@ -1526,12 +1484,6 @@ angular.module( 'conexus.project', [
         $scope.sortedTagArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
     }
     $scope.loadTags();
-
-    //TODO: DEPRECIATE
-    $scope.reply = function(activity){
-        if ($scope.currentUser){$mdSidenav('content').toggle()}
-        else{$mdSidenav('login').toggle()}
-    };
     
     //TODO: WEBSOCKET
     $sailsSocket.subscribe('task', function (envelope) {
@@ -1602,12 +1554,6 @@ angular.module( 'conexus.project', [
             }
         }
         else{$mdSidenav('login').toggle();}
-    };
-
-    //TODO: DEPRECIATE
-    $scope.reply = function(item){
-        if ($rootScope.currentUser){$mdSidenav('content').toggle();}
-        else{$mdSidenav('login').toggle()}
     };
 
 }]);

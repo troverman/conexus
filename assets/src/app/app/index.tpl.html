@@ -54,11 +54,22 @@
                 <div hljs hljs-language="javascript" hljs-source="app.protocols"></div>
             </div>
             <div ng-show="selectedTab=='ASSOCIATIONS'">
+               
+
+                <!--TODO FILTER-->
                 <h4>Members</h4>
-                <p>MEMBER-APP Association</p>
-                <p>Live peers mining in this context</p>
-                <h5>Attention, Content, Reactions</h5>
+                <div ng-repeat="association in associations">
+                    <h5>
+                        <span ng-repeat="model in association.associatedModels">{{model.type}} </span>
+                    </h5>
+                    <a href="association/{{association.id}}" ui-sref="association({id:association.id})">{{association.id}}</a>
+                </div>
+                <h4>Peers</h4>
+                <p>Peers mining in this context</p>
+                <h4>Attention, Content, Reactions</h4>
+
                 <p>Implicit App-App by dependencies in shared code</p>
+
             </div>
         </div>
         <div class="card-footer">

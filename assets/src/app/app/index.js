@@ -18,7 +18,7 @@ angular.module( 'conexus.app', [
     });
 }])
 
-.controller( 'AppController', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', '$stateParams', 'app', 'titleService', 'toaster', 'ValidationModel', function AppController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, $stateParams, app, titleService, toaster, ValidationModel ) {
+.controller( 'AppController', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', '$stateParams', 'app', 'AssociationModel', 'titleService', 'toaster', 'ValidationModel', function AppController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, $stateParams, app, AssociationModel, titleService, toaster, ValidationModel ) {
     
     $scope.app = app;
     if(!$scope.app){$location.path('/')}
@@ -29,6 +29,18 @@ angular.module( 'conexus.app', [
         $scope.myApps = $rootScope.currentUser.apps;
         console.log($scope.myApps);
     }
+
+    var associationQuery = {
+        app:$scope.app.id, 
+        limit:10, 
+        skip:0, 
+        sort:'createdAt DESC'
+    };
+    AssociationModel.get(associationQuery).then(function(associations){
+        console.log(associations);
+        $scope.associations = associations;
+    });
+
 
     $scope.app.isAssociated = false;
 
@@ -42,10 +54,9 @@ angular.module( 'conexus.app', [
     $scope.selectedTab = 'INFORMATION';
     $scope.selectTab = function(model){$scope.selectedTab = model;};
 
-    //GENERIC ASSOCIATE FXN
     $scope.associateApp = function(model){
         if ($rootScope.currentUser){
-            var validationModel = {
+            $scope.newValidation = {
                 user:$rootScope.currentUser.id,
                 creator:$rootScope.currentUser.id,
                 validation:{self:100},
@@ -58,49 +69,19 @@ angular.module( 'conexus.app', [
             };
 
             if (model.isAssociated == false){
-                ValidationModel.create(validationModel).then(function(newValidation){
+                console.log($scope.newValidation);
+                ValidationModel.create($scope.newValidation).then(function(newValidation){
                     $scope.app.isAssociated = true;
-                    $scope.pop('Associated App!', 'You are now connected with '+ model.title + '!');
+                    $rootScope.pop('Associated App!', 'You are now connected with '+ model.title + '!');
                 });
             }
 
             else if (model.isAssociated == true){
                 $scope.app.isAssociated = false;
-                $scope.pop('Removed App!', 'It\'s all good!');
-
-                //var validationModel = {
-                //    user:$rootScope.currentUser.id,
-                //    creator:$rootScope.currentUser.id,
-                //    validation:{self:0},
-                //    associatedModels:[
-                //        {type:'MEMBER', id:$rootScope.currentUser.id},
-                //        {type:'APP', id:model.id},
-                //    ],
-                //    data:{}
-                //};
-                //ValidationModel.create(validationModel).then(function(newValidation){
-                //    $scope.app.isAssociated = true;
-                //    $scope.pop('Associated App!', 'You are now connected with '+ model.title + '!');
-                //});
-
+                $rootScope.pop('Removed App!', 'It\'s all good!');
             }
         }
     };
 
-    //TODO: ROOTSCOPE POP
-
-    $scope.pop = function(title, body){
-        toaster.pop({
-            type:'success',
-            title: title,
-            body: body,
-            onShowCallback: function (toast) { 
-                var audio = new Audio('audio/ping.mp3');
-                audio.play()
-                .then(function(audio){console.log('POP', 'dingdong')})
-                .catch(function(err){console.log('ERR POP', err)})
-            }
-        });
-    };
-
+   
 }]);

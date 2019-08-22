@@ -122,12 +122,6 @@ angular.module( 'conexus.item', [
         else{$mdSidenav('login').toggle();}
     };
 
-    //TODO:DEPRECIATE
-    $scope.reply = function(item){
-        if ($rootScope.currentUser){$mdSidenav('content').toggle()}
-        else{$mdSidenav('login').toggle();}
-    };
-
 
 
     //TODO: TRAVERSE!!

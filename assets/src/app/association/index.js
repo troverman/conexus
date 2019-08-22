@@ -13,21 +13,28 @@ angular.module( 'conexus.association', [
         resolve:{
             association: ['$stateParams', 'AssociationModel', function($stateParams, AssociationModel){
                 return AssociationModel.get({id:$stateParams.id});
-            }],
-            validations: ['$stateParams', 'ValidationModel', function($stateParams, ValidationModel){
-               // return ValidationModel.getSome({association:$stateParams.id, limit:10, skip:0, sort:'createdAt DESC'});
-               return null
-            }],
+            }]
         }
 	});
 }])
 
-.controller( 'AssociationCtrl', ['$sce', '$scope', 'association', 'validations', function AssociationController( $sce, $scope, association, validations ) {
+.controller( 'AssociationCtrl', ['$location', '$sailsSocket', '$sce', '$scope', 'association', 'ValidationModel', 'titleService', function AssociationController( $location, $sailsSocket, $sce, $scope, association, ValidationModel, titleService ) {
 
-    console.log(association)
-	$scope.association = association;
-    $scope.validations = validations;
-    //ASSOCIATION IS JSON CONTEXT + AVG SCORE && SET OF ASSOCIATED MODELS
+	$scope.association = association[0];
+    if(!$scope.association){$location.path('/')}
+    $scope.association.model = 'ASSOCIATION';
+    
+    titleService.setTitle('Association | '+$scope.association.id + ' | CRE8.XYZ');
+
+    var validationQuery = {
+        association:[association[0].associatedModels[0].id,association[0].associatedModels[1].id], 
+        limit:10, 
+        skip:0, 
+        sort:'createdAt DESC'
+    };
+    ValidationModel.getSome(validationQuery).then(function(validations){
+        $scope.validations = validations;
+    });
 
     $scope.associationColumn = {
         chart: {zoomType: 'x'},
@@ -56,6 +63,28 @@ angular.module( 'conexus.association', [
         plotOptions: {column: {minPointLength: 3}},
     };
 
-    //MAP VALIDATIONS
+    $scope.contextList = [];
+    for (x in Object.keys($scope.association.context)){
+        $scope.contextList.push([Object.keys($scope.association.context)[x], $scope.association.context[Object.keys($scope.association.context)[x]]]);
+    }
+
+    //TODO: CAN IMRPOVE
+    for (x in $scope.contextList){
+        $scope.associationColumn.series[0].data.push($scope.contextList[x][1]);
+        $scope.associationColumn.xAxis.categories.push($scope.contextList[x][0]);
+    }
+
+    $scope.selectedTab = 'INFORMATION';
+    $scope.selectTab = function(model){$scope.selectedTab = model;};
+
+    $sailsSocket.subscribe('association', function (envelope) {
+        switch(envelope.verb) {
+            case 'created':
+                if ($scope.association.id == envelope.data.id){
+                    $scope.association.attention = envelope.data.attention;
+                }
+                break;
+        }
+    });
 
 }]);

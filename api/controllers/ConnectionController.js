@@ -18,7 +18,6 @@ module.exports = {
 			.limit(limit)
 			.skip(skip)
 			.sort(sort)
-			.populate('user')
         	.then(function(models) {
 				res.json(models[0]);
 			});
@@ -30,7 +29,6 @@ module.exports = {
 			.limit(limit)
 			.skip(skip)
 			.sort(sort)
-			.populate('creator')
         	.then(function(models) {
 				res.json(models[0]);
 			});

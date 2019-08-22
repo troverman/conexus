@@ -10,6 +10,7 @@ angular.module('models.validation', ['services', 'sails.io',])
                 skip:model.skip,
                 sort:model.sort,
                 id:model.id,
+                association:model.association,
                 project:model.project,
                 task:model.task,
                 time:model.time,

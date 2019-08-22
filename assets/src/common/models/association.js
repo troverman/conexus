@@ -10,6 +10,8 @@ angular.module('models.association', ['services', 'sails.io',])
                 skip:model.skip,
                 sort:model.sort,
                 id:model.id,
+                app:model.app,
+                //filter
             }
         };
         return $sailsSocket.get(url, query).then(success, error);

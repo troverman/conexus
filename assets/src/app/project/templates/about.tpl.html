@@ -42,17 +42,14 @@
             <p><b>Members</b>: <a>{{project.memberCount || 0}}</a> | <b>Tasks</b>: <a>{{project.taskCount || 0}}</a> | <b>Time</b>: <a>{{project.timeCount||0 }}</a></p>
             <div class="spacing-10"></div>
 
-            <!--TODO-->
-            <p><b>Project Charter</b></p>
-            <p>Connections</p>
-            {{project.connections}}
+            <p><b><a href="project/{{project.urlTitle}}/charter" ui-sref="project.charter({path:project.urlTitle})">Project Charter</a></b></p>
             <div class="spacing-10"></div>
 
             <p><b>Manifolds</b></p> 
             <p>
-                <a href="market/{{project.urlTitle.toUpperCase()}}" ui-sref="market({id:project.urlTitle.toUpperCase()})">{{project.urlTitle.toUpperCase()}}+</a>, 
-                <a href="market/{{project.urlTitle.toUpperCase()}}+TASK+">{{project.urlTitle.toUpperCase()}}+TASK+</a>, 
-                <a href="{{market/project.urlTitle.toUpperCase()}}+TIME+">{{project.urlTitle.toUpperCase()}}+TIME+</a>
+                <a href="market/PROJECT+{{project.urlTitle.toUpperCase()}}" ui-sref="market({id:project.urlTitle.toUpperCase()})">PROJECT+{{project.urlTitle.toUpperCase()}}+</a>, 
+                <a href="market/PROJECT+{{project.urlTitle.toUpperCase()}}+TASK">PROJECT+{{project.urlTitle.toUpperCase()}}+TASK</a>, 
+                <a href="PROJECT+{{market/project.urlTitle.toUpperCase()}}+TIME">PROJECT+{{project.urlTitle.toUpperCase()}}+TIME</a>
             </p>
             <div class="spacing-10"></div>
 

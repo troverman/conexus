@@ -10,45 +10,32 @@ angular.module( 'conexus.validation', [
                 templateUrl: 'validation/index.tpl.html'
             }
         },
-        
-        //TODO: DEPRECIATE RESOLVE
         resolve: {
             validation: ['$stateParams', 'ValidationModel', function($stateParams, ValidationModel){
                 return ValidationModel.getSome({id:$stateParams.id, limit:1, skip:0, sort:'createdAt DESC'});
-            }],
-            contentList: ['validation', 'ContentModel', function(validation, ContentModel){
-                return ContentModel.getSome({validation:validation.id, limit:20, skip:0, sort:'createdAt DESC'});
-            }],
+            }]
         }
     });
 }])
 
-.controller( 'ValidationController', ['$mdSidenav', '$location', '$rootScope', '$sailsSocket', '$sce', '$scope', 'contentList', 'ReactionModel', 'titleService', 'validation', 'ValidationModel', function ValidationController( $mdSidenav, $location, $rootScope, $sailsSocket, $sce, $scope, contentList, ReactionModel, titleService, validation, ValidationModel) {
+.controller( 'ValidationController', ['$mdSidenav', '$location', '$rootScope', '$sailsSocket', '$sce', '$scope', 'ReactionModel', 'titleService', 'validation', 'ValidationModel', function ValidationController( $mdSidenav, $location, $rootScope, $sailsSocket, $sce, $scope, ReactionModel, titleService, validation, ValidationModel) {
     
-    console.log(validation)
-
     $scope.validation = validation[0];
+    if(!$scope.validation){$location.path('/')}
     $scope.validation.model = 'VALIDATION';
 
     titleService.setTitle('Validation | ' + $scope.validation.id + ' | CRE8.XYZ');
 
     //TODO: FIX
-    $rootScope.associatedModels = [{type:'VALIDATION', address:$scope.validation.id}];
+    $rootScope.associatedModels = [{type:'VALIDATION', id:$scope.validation.id}];
 
-    $scope.contentList = contentList;
-    $scope.newContent = {};
     $scope.newReaction = {};
-    
-    //TODO: CAN IMPROVE EFFIC 
     $scope.reputationList = [];
     $scope.reputationWeightedList = []
-
     $scope.validationList = [];
     for (x in Object.keys($scope.validation.context)){
         $scope.validationList.push([Object.keys($scope.validation.context)[x], $scope.validation.context[Object.keys($scope.validation.context)[x]]]);
-        $scope.reputationList.push([Object.keys($scope.validation.reputation)[x], $scope.validation.reputation[Object.keys($scope.validation.reputation)[x]]]);
-        
-        //TODO: CHARTER: SOME WEIGHING PROTOCL HERE -- CAN BE FUNCTIONAL.. SIMPLE MULTIPLICATION NOW
+        $scope.reputationList.push([Object.keys($scope.validation.reputation)[x], $scope.validation.reputation[Object.keys($scope.validation.reputation)[x]]]);        
         $scope.reputationWeightedList.push([Object.keys($scope.validation.reputation)[x], $scope.validation.reputation[Object.keys($scope.validation.reputation)[x]]*$scope.validation.context[Object.keys($scope.validation.context)[x]]]);
     }
 
@@ -91,13 +78,9 @@ angular.module( 'conexus.validation', [
         plotOptions: {column: {minPointLength: 3}},
     };
 
-    //TODO: CAN IMRPOVE
     for (x in $scope.validationList){
         $scope.validationColumn.series[0].data.push($scope.validationList[x][1]);
         $scope.validationColumn.series[1].data.push($scope.reputationList[x][1]);
-
-        //SOME WEIGHING PROTOCL HERE -- CAN BE FUNCTIONAL.. SIMPLE MULTIPLICATION NOW
-        //$scope.validationColumn.series[2].data.push($scope.reputationList[x][1]*$scope.validationList[x][1]);
         $scope.validationColumn.series[2].data.push($scope.reputationWeightedList[x][1]);
         $scope.validationColumn.xAxis.categories.push($scope.validationList[x][0]);
     }
@@ -108,15 +91,8 @@ angular.module( 'conexus.validation', [
             $scope.newReaction.amount = 1;
             $scope.newReaction.type = type;
             $scope.newReaction.user = $rootScope.currentUser.id;
-            var index = $scope.contentList.map(function(obj){return obj.id}).indexOf(item.id);
-            if (index != -1){
-                $scope.newReaction.associatedModels = [{type:'CONTENT', id:item.id}];
-                $scope.contentList[index].reactions[type]++;
-            }
-            else{
-                $scope.newReaction.associatedModels = [{type:'VALIDATION', id:item.id}];
-                $scope.validation.reactions[type]++;
-            }
+            $scope.newReaction.associatedModels = [{type:'VALIDATION', id:item.id}];
+            $scope.validation.reactions[type]++;
             ReactionModel.create($scope.newReaction);
         }
         else{$mdSidenav('login').toggle()}

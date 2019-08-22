@@ -17,7 +17,7 @@ module.exports = {
 		Validation.watch(req);
 
 		if(req.query.id){
-			
+
 			Validation.find({id:id})
 			.limit(limit)
 			.skip(skip)
@@ -82,6 +82,32 @@ module.exports = {
 				});
 			});
 
+		}
+
+		else if (req.query.association){
+			var association = req.query.association;
+			Validation.native(function(err, validation) {
+				validation.find({
+					$or:[
+						{$and:[
+							{"associatedModels.id": {$in :[association[0]]}},
+							{"associatedModels.id": {$in :[association[1]]}},
+						]},
+						{$and:[
+							{"associatedModels.id": {$in :[association[1]]}},
+							{"associatedModels.id": {$in :[association[0]]}},
+						]}
+					]
+				})
+				.limit(1000)
+				.skip(0)
+				.sort({'createdAt':-1})
+				.toArray(function (err, validationModels) {
+					console.log(validationModels)
+					validationModels = validationModels.map(function(obj){obj.id = obj._id; return obj;});
+					res.json(validationModels);
+				});
+			});
 		}
 
 		//TODO: DEPRECIATE
@@ -264,6 +290,7 @@ module.exports = {
 				association.find(andQuery).limit(100000).skip(0).sort({'createdAt':-1})
 				.toArray(function (err, associationModels) {
 					if (associationModels.length != 0){
+						console.log('HELLO');
 						associationModels = associationModels.map(function(obj){obj.id = obj._id; return obj;});
 						//Association.update({id:associationModels[0].id}, updatedModel).then((newAssociationModel)=>{
 						//	Association.publishUpdate(newAssociationModel);
@@ -321,7 +348,7 @@ module.exports = {
 		User.find({id:model.user}).then(function(userModels){
 
 			var reputation = {};
-			model.reputation = userModels[0].reputation;
+			//model.reputation = userModels[0].reputation;
 			//getReputationFunction.. --> REP MANI IMPORT
 			console.log('CREATE VALIDATION', model);
 			Validation.create(model)
