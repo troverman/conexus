@@ -1,4 +1,4 @@
-angular.module("templates-app", ["about/index.tpl.html", "account/index.tpl.html", "action/index.tpl.html", "app/index.tpl.html", "apps/index.tpl.html", "association/index.tpl.html", "attention/index.tpl.html", "block/index.tpl.html", "connection/index.tpl.html", "content/index.tpl.html", "content/templates/content.tpl.html", "contentList/index.tpl.html", "developers/index.tpl.html", "discover/index.tpl.html", "footer/index.tpl.html", "home/index.tpl.html", "home/templates/feed.tpl.html", "home/templates/intro.tpl.html", "item/index.tpl.html", "login/index.tpl.html", "market/index.tpl.html", "marketPair/index.tpl.html", "marketPlace/index.tpl.html", "markets/index.tpl.html", "member/index.tpl.html", "member/templates/about.tpl.html", "member/templates/actions.tpl.html", "member/templates/activity.tpl.html", "member/templates/assets.tpl.html", "member/templates/content.tpl.html", "member/templates/followers.tpl.html", "member/templates/following.tpl.html", "member/templates/items.tpl.html", "member/templates/ledger.tpl.html", "member/templates/positions.tpl.html", "member/templates/projects.tpl.html", "member/templates/tasks.tpl.html", "member/templates/time.tpl.html", "members/index.tpl.html", "nav/index.tpl.html", "nav/templates/cardDetail.tpl.html", "nav/templates/confirm.tpl.html", "nav/templates/create.tpl.html", "nav/templates/createAction.tpl.html", "nav/templates/createApp.tpl.html", "nav/templates/createConnection.tpl.html", "nav/templates/createContent.tpl.html", "nav/templates/createContentDetail.tpl.html", "nav/templates/createItem.tpl.html", "nav/templates/createOrder.tpl.html", "nav/templates/createProject.tpl.html", "nav/templates/createTask.tpl.html", "nav/templates/createTime.tpl.html", "nav/templates/createTransaction.tpl.html", "nav/templates/createValidation.tpl.html", "nav/templates/filter.tpl.html", "nav/templates/information.tpl.html", "nav/templates/login.tpl.html", "nav/templates/market.tpl.html", "nav/templates/nav.tpl.html", "nav/templates/qr.tpl.html", "nav/templates/register.tpl.html", "nav/templates/render.tpl.html", "nav/templates/renderReputation.tpl.html", "nav/templates/renderValidation.tpl.html", "nav/templates/sort.tpl.html", "nav/templates/stats.tpl.html", "nav/templates/subNav.tpl.html", "nav/templates/timer.tpl.html", "nav/templates/tokens.tpl.html", "notifications/index.tpl.html", "order/index.tpl.html", "project/index.tpl.html", "project/templates/about.tpl.html", "project/templates/activity.tpl.html", "project/templates/assets.tpl.html", "project/templates/channels.tpl.html", "project/templates/charter.tpl.html", "project/templates/content.tpl.html", "project/templates/items.tpl.html", "project/templates/ledger.tpl.html", "project/templates/members.tpl.html", "project/templates/positions.tpl.html", "project/templates/projects.tpl.html", "project/templates/settings.tpl.html", "project/templates/tasks.tpl.html", "project/templates/time.tpl.html", "projects/index.tpl.html", "reaction/index.tpl.html", "register/index.tpl.html", "search/index.tpl.html", "task/index.tpl.html", "tasks/index.tpl.html", "templates/cards/actionCard.tpl.html", "templates/cards/appCard.tpl.html", "templates/cards/contentCard.tpl.html", "templates/cards/itemCard.tpl.html", "templates/cards/memberCard.tpl.html", "templates/cards/orderCard.tpl.html", "templates/cards/projectCard.tpl.html", "templates/cards/taskCard.tpl.html", "templates/cards/timeCard.tpl.html", "templates/cards/transactionCard.tpl.html", "templates/cards/validationCard.tpl.html", "time/index.tpl.html", "token/index.tpl.html", "transaction/index.tpl.html", "transparency/index.tpl.html", "tutorial/index.tpl.html", "tutorial/templates/controls.tpl.html", "tutorial/templates/create.tpl.html", "tutorial/templates/intro.tpl.html", "tutorial/templates/members.tpl.html", "tutorial/templates/projects.tpl.html", "tutorial/templates/tasks.tpl.html", "tutorial/templates/updateValueMap.tpl.html", "tutorial/templates/valueMap.tpl.html", "tutorial/templates/valueMapBuilder.tpl.html", "tutorial/templates/valueMapOrders.tpl.html", "tutorial/templates/valueMapQuestions.tpl.html", "tx/index.tpl.html", "validation/index.tpl.html"]);
+angular.module("templates-app", ["about/index.tpl.html", "account/index.tpl.html", "action/index.tpl.html", "app/index.tpl.html", "apps/index.tpl.html", "association/index.tpl.html", "attention/index.tpl.html", "block/index.tpl.html", "connection/index.tpl.html", "content/index.tpl.html", "content/templates/associations.tpl.html", "content/templates/content.tpl.html", "contentList/index.tpl.html", "developers/index.tpl.html", "discover/index.tpl.html", "footer/index.tpl.html", "home/index.tpl.html", "home/templates/feed.tpl.html", "home/templates/intro.tpl.html", "item/index.tpl.html", "login/index.tpl.html", "market/index.tpl.html", "marketPair/index.tpl.html", "marketPlace/index.tpl.html", "markets/index.tpl.html", "member/index.tpl.html", "member/templates/about.tpl.html", "member/templates/actions.tpl.html", "member/templates/activity.tpl.html", "member/templates/assets.tpl.html", "member/templates/content.tpl.html", "member/templates/followers.tpl.html", "member/templates/following.tpl.html", "member/templates/items.tpl.html", "member/templates/ledger.tpl.html", "member/templates/positions.tpl.html", "member/templates/projects.tpl.html", "member/templates/tasks.tpl.html", "member/templates/time.tpl.html", "members/index.tpl.html", "nav/index.tpl.html", "nav/templates/cardDetail.tpl.html", "nav/templates/confirm.tpl.html", "nav/templates/create.tpl.html", "nav/templates/createAction.tpl.html", "nav/templates/createApp.tpl.html", "nav/templates/createConnection.tpl.html", "nav/templates/createContent.tpl.html", "nav/templates/createContentDetail.tpl.html", "nav/templates/createItem.tpl.html", "nav/templates/createOrder.tpl.html", "nav/templates/createProject.tpl.html", "nav/templates/createTask.tpl.html", "nav/templates/createTime.tpl.html", "nav/templates/createTransaction.tpl.html", "nav/templates/createValidation.tpl.html", "nav/templates/filter.tpl.html", "nav/templates/information.tpl.html", "nav/templates/login.tpl.html", "nav/templates/market.tpl.html", "nav/templates/nav.tpl.html", "nav/templates/qr.tpl.html", "nav/templates/register.tpl.html", "nav/templates/render.tpl.html", "nav/templates/renderReputation.tpl.html", "nav/templates/renderValidation.tpl.html", "nav/templates/sort.tpl.html", "nav/templates/stats.tpl.html", "nav/templates/subNav.tpl.html", "nav/templates/timer.tpl.html", "nav/templates/tokens.tpl.html", "notifications/index.tpl.html", "order/index.tpl.html", "project/index.tpl.html", "project/templates/about.tpl.html", "project/templates/activity.tpl.html", "project/templates/assets.tpl.html", "project/templates/channels.tpl.html", "project/templates/charter.tpl.html", "project/templates/content.tpl.html", "project/templates/items.tpl.html", "project/templates/ledger.tpl.html", "project/templates/members.tpl.html", "project/templates/positions.tpl.html", "project/templates/projects.tpl.html", "project/templates/settings.tpl.html", "project/templates/tasks.tpl.html", "project/templates/time.tpl.html", "projects/index.tpl.html", "reaction/index.tpl.html", "register/index.tpl.html", "search/index.tpl.html", "task/index.tpl.html", "tasks/index.tpl.html", "templates/cards/actionCard.tpl.html", "templates/cards/appCard.tpl.html", "templates/cards/contentCard.tpl.html", "templates/cards/itemCard.tpl.html", "templates/cards/memberCard.tpl.html", "templates/cards/orderCard.tpl.html", "templates/cards/projectCard.tpl.html", "templates/cards/taskCard.tpl.html", "templates/cards/timeCard.tpl.html", "templates/cards/transactionCard.tpl.html", "templates/cards/validationCard.tpl.html", "time/index.tpl.html", "token/index.tpl.html", "transaction/index.tpl.html", "transparency/index.tpl.html", "tutorial/index.tpl.html", "tutorial/templates/controls.tpl.html", "tutorial/templates/create.tpl.html", "tutorial/templates/intro.tpl.html", "tutorial/templates/members.tpl.html", "tutorial/templates/projects.tpl.html", "tutorial/templates/tasks.tpl.html", "tutorial/templates/updateValueMap.tpl.html", "tutorial/templates/valueMap.tpl.html", "tutorial/templates/valueMapBuilder.tpl.html", "tutorial/templates/valueMapOrders.tpl.html", "tutorial/templates/valueMapQuestions.tpl.html", "tx/index.tpl.html", "validation/index.tpl.html"]);
 
 angular.module("about/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("about/index.tpl.html",
@@ -1311,7 +1311,7 @@ angular.module("content/index.tpl.html", []).run(["$templateCache", function($te
     "                <div style=\"text-align:center\">\n" +
     "                    <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
     "                        <li><a ng-click=\"$event.stopPropagation();selectTab('CONTENT')\">Content</a></li>\n" +
-    "                        <li><a ng-click=\"selectTab('ASSOCIATIONS');$event.stopPropagation();renderValidationToggle(content);\" >Associations</a></li>\n" +
+    "                        <li><a ng-click=\"selectTab('ASSOCIATIONS');$event.stopPropagation();\" >Associations</a></li>\n" +
     "                        <li><a ng-click=\"selectTab('STATS');$event.stopPropagation();statsToggle(content);\">Stats</a></li>\n" +
     "                        <li><a ng-click=\"selectTab('TOKENS');$event.stopPropagation();tokensToggle(content);\">Tokens</a></li>\n" +
     "                        <li><a ng-click=\"$event.stopPropagation();selectTab('LIQUIDITY')\">Liquidity</a></li>\n" +
@@ -1319,36 +1319,27 @@ angular.module("content/index.tpl.html", []).run(["$templateCache", function($te
     "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
-    "        <!--\n" +
-    "        <hr style=\"margin:0px;\">\n" +
-    "        <div style=\"padding:16px;\">\n" +
-    "            <div>\n" +
-    "                <img class=\"card-avatar\" ng-src=\"{{content.user.avatarUrl}}\" src=\"{{content.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
-    "                <a ng-click=\"$event.stopPropagation();\" style=\"display:inline\" href=\"member/{{content.user.username}}\" ui-sref=\"member.activity({path:content.user.username})\"><span style=\"font-weight:800\">{{content.user.username}}</span></a>\n" +
-    "            </div>\n" +
-    "            <div class=\"spacing-5\"></div>\n" +
-    "            <p><a ng-repeat=\"tag in content.tags track by $index\" ng-click=\"$event.stopPropagation();filterContent(tag)\">{{tag.trim()}} </a></p>\n" +
-    "            <div class=\"spacing-5\"></div>\n" +
-    "            <div ng-click=\"$event.stopPropagation();\"><span style=\"display:inline\" ng-bind-html=\"renderContent(content.content)\"></span></div>\n" +
-    "            <div class=\"spacing-5\"></div>\n" +
-    "        </div>\n" +
-    "        <div class=\"card-footer\">\n" +
-    "            <a ng-click=\"$event.stopPropagation();tokensToggle(content)\" style=\"color:grey\"><i class=\"fas fa-eye\"></i> </a>\n" +
-    "            <a ng-click=\"$event.stopPropagation();createReaction(item, 'plus')\"><i class=\"fas fa-angle-up\"></i> {{item.reactions.plus}} like </a> \n" +
-    "            <a ng-click=\"$event.stopPropagation();createReaction(item, 'minus')\" ><i class=\"fas fa-angle-down\"></i> {{item.reactions.minus}} dislike </a>\n" +
-    "            <a ng-click=\"$event.stopPropagation();reply(item)\"><i class=\"far fa-comment\"></i> comment </a>\n" +
-    "        </div>\n" +
-    "    	-->\n" +
     "    </div>\n" +
     "</div>\n" +
     "\n" +
     "<div ng-show=\"content.type=='video'\" class=\"member-tab-container container\" style=\"padding-left:0px\">\n" +
     "    <div style=\"text-align:left\">\n" +
     "        <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
-    "            <li ng-click=\"aselectTab('CONTENT')\"><a>Content</a></li>\n" +
-    "            <li ng-click=\"aselectTab('CONTENT')\"><a>Tokens</a></li>\n" +
-    "            <li ng-click=\"aselectTab('CONTENT')\"><a>Liquidity</a></li>\n" +
+    "            <li><a ng-click=\"$event.stopPropagation();selectTab('CONTENT')\">Content</a></li>\n" +
+    "            <li><a ng-click=\"selectTab('ASSOCIATIONS');$event.stopPropagation();renderValidationToggle(content);\" >Associations</a></li>\n" +
+    "            <li><a ng-click=\"selectTab('STATS');$event.stopPropagation();statsToggle(content);\">Stats</a></li>\n" +
+    "            <li><a ng-click=\"selectTab('TOKENS');$event.stopPropagation();tokensToggle(content);\">Tokens</a></li>\n" +
+    "            <li><a ng-click=\"$event.stopPropagation();selectTab('LIQUIDITY')\">Liquidity</a></li>\n" +
     "        </ul>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div ng-if=\"selectedTab =='ASSOCIATIONS'\">\n" +
+    "    <div class=\"container\">\n" +
+    "        <div class=\"row\">\n" +
+    "            <div ng-include=\"'content/templates/associations.tpl.html'\"></div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
     "    </div>\n" +
     "</div>\n" +
     "\n" +
@@ -1356,9 +1347,6 @@ angular.module("content/index.tpl.html", []).run(["$templateCache", function($te
     "	<div class=\"row\">\n" +
     "		<div class=\"card\" style=\"background-color:#f9f9f9\">\n" +
     "		    <div style=\"padding:16px;background-color:white\">\n" +
-    "				<!--<div style=\"float:right;text-align:right\">\n" +
-    "                    <i style=\"\" ng-click=\"$event.stopPropagation();cardDetailToggle(content);\" class=\"fas fa-chevron-down\"></i>\n" +
-    "				</div>-->\n" +
     "				<p ng-show=\"content.tags\"><a style=\"color:gray;\" ng-repeat=\"tag in content.tags.split(',')\">{{tag}} </a></p>\n" +
     "				<div>\n" +
     "					<a style=\"display:inline\" href=\"member/{{content.user.username}}\" ui-sref=\"member.activity({path:content.user.username})\">\n" +
@@ -1403,6 +1391,43 @@ angular.module("content/index.tpl.html", []).run(["$templateCache", function($te
     "</div>\n" +
     "\n" +
     "<div class=\"spacing-25\"></div>");
+}]);
+
+angular.module("content/templates/associations.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("content/templates/associations.tpl.html",
+    "<div class=\"card\">\n" +
+    "    <div style=\"background:url('https://source.unsplash.com/1600x900/?{{item.tags}}')\" class=\"imageContainerSmall\">\n" +
+    "        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
+    "            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                <div style=\"padding:15px\">\n" +
+    "                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Associations</h1>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "    <div style=\"padding:16px;\">\n" +
+    "        \n" +
+    "        <div class=\"spacing-10\"></div>\n" +
+    "        <!--TODO-->\n" +
+    "        <div class=\"row\">\n" +
+    "            <div class=\"col-sm-3\">\n" +
+    "                <div style=\"max-height:500px;overflow:auto\">\n" +
+    "                    <div ng-repeat=\"association in content.associationModels\">\n" +
+    "                        <p ng-click=\"filterAssociation()\">\n" +
+    "                            <b><a href=\"association/{{association.id}}\" ui-sref=\"association({id:association.id})\">{{association.id}}</a></b>\n" +
+    "                            {{association.context}}\n" +
+    "                        </p>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "            <div class=\"col-sm-9\">\n" +
+    "                <!--<cytoscape graph-ready=\"graphReady\" graph-options=\"directedGraphOptions\" graph-elements=\"directedGraphElements\" graph-layout=\"directedGraphLayout\" graph-style=\"directedGraphStyle\"></cytoscape>-->\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "        \n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "");
 }]);
 
 angular.module("content/templates/content.tpl.html", []).run(["$templateCache", function($templateCache) {

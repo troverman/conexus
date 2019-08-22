@@ -33,7 +33,7 @@
                 <div style="text-align:center">
                     <ul style="padding:0px;" class="member-tabs">
                         <li><a ng-click="$event.stopPropagation();selectTab('CONTENT')">Content</a></li>
-                        <li><a ng-click="selectTab('ASSOCIATIONS');$event.stopPropagation();renderValidationToggle(content);" >Associations</a></li>
+                        <li><a ng-click="selectTab('ASSOCIATIONS');$event.stopPropagation();" >Associations</a></li>
                         <li><a ng-click="selectTab('STATS');$event.stopPropagation();statsToggle(content);">Stats</a></li>
                         <li><a ng-click="selectTab('TOKENS');$event.stopPropagation();tokensToggle(content);">Tokens</a></li>
                         <li><a ng-click="$event.stopPropagation();selectTab('LIQUIDITY')">Liquidity</a></li>
@@ -41,36 +41,27 @@
                 </div>
             </div>
         </div>
-        <!--
-        <hr style="margin:0px;">
-        <div style="padding:16px;">
-            <div>
-                <img class="card-avatar" ng-src="{{content.user.avatarUrl}}" src="{{content.user.avatarUrl}}" err-src="/images/avatar.png">
-                <a ng-click="$event.stopPropagation();" style="display:inline" href="member/{{content.user.username}}" ui-sref="member.activity({path:content.user.username})"><span style="font-weight:800">{{content.user.username}}</span></a>
-            </div>
-            <div class="spacing-5"></div>
-            <p><a ng-repeat="tag in content.tags track by $index" ng-click="$event.stopPropagation();filterContent(tag)">{{tag.trim()}} </a></p>
-            <div class="spacing-5"></div>
-            <div ng-click="$event.stopPropagation();"><span style="display:inline" ng-bind-html="renderContent(content.content)"></span></div>
-            <div class="spacing-5"></div>
-        </div>
-        <div class="card-footer">
-            <a ng-click="$event.stopPropagation();tokensToggle(content)" style="color:grey"><i class="fas fa-eye"></i> </a>
-            <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fas fa-angle-up"></i> {{item.reactions.plus}} like </a> 
-            <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fas fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
-            <a ng-click="$event.stopPropagation();reply(item)"><i class="far fa-comment"></i> comment </a>
-        </div>
-    	-->
     </div>
 </div>
 
 <div ng-show="content.type=='video'" class="member-tab-container container" style="padding-left:0px">
     <div style="text-align:left">
         <ul style="padding:0px;" class="member-tabs">
-            <li ng-click="aselectTab('CONTENT')"><a>Content</a></li>
-            <li ng-click="aselectTab('CONTENT')"><a>Tokens</a></li>
-            <li ng-click="aselectTab('CONTENT')"><a>Liquidity</a></li>
+            <li><a ng-click="$event.stopPropagation();selectTab('CONTENT')">Content</a></li>
+            <li><a ng-click="selectTab('ASSOCIATIONS');$event.stopPropagation();renderValidationToggle(content);" >Associations</a></li>
+            <li><a ng-click="selectTab('STATS');$event.stopPropagation();statsToggle(content);">Stats</a></li>
+            <li><a ng-click="selectTab('TOKENS');$event.stopPropagation();tokensToggle(content);">Tokens</a></li>
+            <li><a ng-click="$event.stopPropagation();selectTab('LIQUIDITY')">Liquidity</a></li>
         </ul>
+    </div>
+</div>
+
+<div ng-if="selectedTab =='ASSOCIATIONS'">
+    <div class="container">
+        <div class="row">
+            <div ng-include="'content/templates/associations.tpl.html'"></div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -78,9 +69,6 @@
 	<div class="row">
 		<div class="card" style="background-color:#f9f9f9">
 		    <div style="padding:16px;background-color:white">
-				<!--<div style="float:right;text-align:right">
-                    <i style="" ng-click="$event.stopPropagation();cardDetailToggle(content);" class="fas fa-chevron-down"></i>
-				</div>-->
 				<p ng-show="content.tags"><a style="color:gray;" ng-repeat="tag in content.tags.split(',')">{{tag}} </a></p>
 				<div>
 					<a style="display:inline" href="member/{{content.user.username}}" ui-sref="member.activity({path:content.user.username})">

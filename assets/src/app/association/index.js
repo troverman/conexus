@@ -11,16 +11,21 @@ angular.module( 'conexus.association', [
 			}
 		},
         resolve:{
+            association: ['$stateParams', 'AssociationModel', function($stateParams, AssociationModel){
+                return AssociationModel.get({id:$stateParams.id});
+            }],
             validations: ['$stateParams', 'ValidationModel', function($stateParams, ValidationModel){
-                return ValidationModel.getSome({association:$stateParams.id, limit:10, skip:0, sort:'createdAt DESC'});
+               // return ValidationModel.getSome({association:$stateParams.id, limit:10, skip:0, sort:'createdAt DESC'});
+               return null
             }],
         }
 	});
 }])
 
-.controller( 'AssociationCtrl', ['$sce', '$scope', 'validations', function AssociationController( $sce, $scope, validations ) {
+.controller( 'AssociationCtrl', ['$sce', '$scope', 'association', 'validations', function AssociationController( $sce, $scope, association, validations ) {
 
-	$scope.association = {};
+    console.log(association)
+	$scope.association = association;
     $scope.validations = validations;
     //ASSOCIATION IS JSON CONTEXT + AVG SCORE && SET OF ASSOCIATED MODELS
 

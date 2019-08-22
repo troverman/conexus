@@ -1,6 +1,7 @@
 angular.module('models', [
 	'models.action',
 	'models.app',
+	'models.association',
 	'models.attention',
 	'models.connection',
 	'models.content',

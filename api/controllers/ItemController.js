@@ -122,9 +122,6 @@ module.exports = {
 			creator: req.param('user'),
 			owner: req.param('owner'),
 
-			//DONT SAVE 
-			//associatedValidations: req.param('associatedValidations'),
-
 			//JSON TO STORE ITEM SPECIFIC DATA.. 
 			data: req.param('data'),
 			dataHash: req.param('dataHash'),
@@ -167,7 +164,6 @@ module.exports = {
 
 	update: function (req, res) {
 
-		//ENCAPSULATED BY MOTION
 		//Item.update({id:req.query.id}, {content: req.query.content)}).then(function(itemModel){
 		//	console.log('UPDATED ITEM', itemModel)
 		//});

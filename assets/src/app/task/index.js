@@ -139,8 +139,8 @@ angular.module( 'conexus.task', [
     }];
 
     $scope.newValidation = {};
-    $scope.newValidation.validation = {};
-    $scope.newValidation.validation.general = 0;
+    $scope.newValidation.context = {};
+    $scope.newValidation.context.general = 0;
 
     //TODO: DEPRECIATE
     $scope.createReaction = function(item, type){
@@ -179,7 +179,7 @@ angular.module( 'conexus.task', [
     $scope.selectProject = function(model){
         $scope.selectedProjects.push({text:model});
         $scope.newTime.validationModels.push({
-            validation:{general:100},
+            context:{general:100},
             associatedModels:[{type:'PROJECT', address:model.id}]
         });
     };
@@ -230,7 +230,7 @@ angular.module( 'conexus.task', [
                     {type:'TASK', id:$scope.task.id},
                 ],
                 validationModels:[{
-                    validation:{general:100},
+                    context:{general:100},
                     associatedModels:[{type:'TASK', id:$scope.task.id}]
                 }],
 
@@ -340,10 +340,10 @@ angular.module( 'conexus.task', [
         if (newValue !== oldValue) {
             for (x in $scope.newTime.validationModels){
                 for (y in $scope.timeTags){
-                    $scope.newTime.validationModels[x].validation[$scope.timeTags[y].text] = 100;
+                    $scope.newTime.validationModels[x].context[$scope.timeTags[y].text] = 100;
                 }
             }
-            console.log( $scope.newTime.validationModels)
+            console.log($scope.newTime.validationModels)
         }
     }, true);
 

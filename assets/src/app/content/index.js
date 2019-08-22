@@ -19,16 +19,11 @@ angular.module( 'conexus.content', [
             contentList:['content', 'ContentModel', function(content, ContentModel) {
                 return ContentModel.getSome({contentModel:content.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
-            //MAPPING LOOKUPS
-            reactions: ['content', 'ReactionModel', function(content, ReactionModel){
-                //return ReactionModel.getSome('contentModel', content.id, 100, 0, 'createdAt DESC');
-                return null;
-            }],
         }
     });
 }])
 
-.controller( 'ContentController', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'content', 'contentList', 'ContentModel', 'ReactionModel', 'reactions', 'titleService', 'UserModel', function ContentController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, content, contentList, ContentModel, ReactionModel, reactions, titleService, UserModel ) {
+.controller( 'ContentController', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'content', 'contentList', 'ContentModel', 'ReactionModel', 'titleService', 'UserModel', function ContentController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, content, contentList, ContentModel, ReactionModel, titleService, UserModel ) {
     
     $scope.content = content;
     if(!$scope.content){$location.path('/')}
@@ -37,7 +32,18 @@ angular.module( 'conexus.content', [
 
     $scope.content.tokens = [];
     
-    console.log(content)
+    console.log($scope.content, $scope.content.associationModels);
+
+    if ($scope.content.associationModels){
+        for (x in $scope.content.associationModels){
+
+            for (y in Object.keys($scope.content.associationModels[x].context)){
+                var context = Object.keys($scope.content.associationModels[x].context)[y]
+                console.log(context)
+            }
+
+        }
+    }
 
     //todo.. attention connection... common model.. like reaction
     //attention mapping -> 
@@ -51,15 +57,15 @@ angular.module( 'conexus.content', [
     $scope.newValidation.validation = {};
     $scope.newValidation.validation.general = 0;
 
-    $scope.reactions = reactions;
-
     $scope.tokenFilter = 0;
     $scope.toggleTokenVar = false;
+
+    $scope.selectedTab = 'CONTENT';
+    $scope.selectTab = function(model){$scope.selectedTab = model;};
 
     //TODO: VIEWCOUNTER ALL .. plug in for validation
     //viewToken Mechanism.. OnClick
     //GET A COUNT OF ALL LIVE PPL.. -> THIS WILL BE ONLY YOU
-
 
     //TODO: FINALIZE..
     //ERROR: DUPLICATES IN A REPEATOR ARE NOT ALLOWED

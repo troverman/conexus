@@ -16,12 +16,21 @@ module.exports = {
 			.skip(skip)
 			.sort(sort)
 			.populate('user')
-        	.populate('project')
-        	.populate('profile')
-        	.populate('task')
-        	.populate('time')
         	.then(function(models) {
-				res.json(models[0]);
+
+        		Association.native(function(err, association) {
+					association.find({$and : [{"associatedModels.id": {$in :[req.query.id]}}]})
+					.limit(1000)
+					.skip(0)
+					.sort({'createdAt':-1})
+					.toArray(function (err, associationModels) {
+						console.log(associationModels);
+						associationModels.map(function(obj){obj.id=obj._id; return obj})
+						models[0].associationModels = associationModels;
+						res.json(models[0]);
+					});
+				});
+
 			});
 		}
 
@@ -266,9 +275,10 @@ module.exports = {
 				}
 
 				console.log(newValidation)
-				Validation.create(newValidation).then(function(newValidation){
-					console.log(newValidation);
-					//buildAssociation(newValidation)
+				Validation.create(newValidation).then(function(newValidationModel){
+					console.log(newValidationModel);
+					createAssociation(newValidationModel)
+					//buildAssociation(newValidationModel)
 					//craeteAssociation
 				});
 
@@ -279,7 +289,7 @@ module.exports = {
 		};
 
 		//TODO: CONNECTION && ++
-		function createAssociation(validationModel){
+		function createAssociation(newValidationModel){
 
 			//COMPUTE ASSOCIATION HERE
 			var newAssociationModel = {}; 
