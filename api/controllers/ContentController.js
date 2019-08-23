@@ -1,6 +1,54 @@
+var Q = require('q');
+
 module.exports = {
 	
 	get: function(req, res) {
+
+		function getAssociations(model){
+			console.log(model.id)
+			var deferred = Q.defer();
+			Association.native(function(err, association) {
+				association.find({$and : [{"associatedModels.id": {$in:[model.id]}}]})
+				.limit(1000)
+				.skip(0)
+				.sort({'createdAt':-1})
+				.toArray(function (err, associationModels) {
+					console.log(associationModels)
+					if (associationModels.length > 0){
+						associationModels.map(function(obj){obj.id=obj._id; return obj});
+						model.associationModels = associationModels;
+
+						console.log(associationModels);
+
+						//WANNA POPULATE TTHE ASSOCIATED MODELS
+
+						//var promises = [];
+						//for (x in associationModels){
+						//	if (associationModels[x].type='CONTENT'){promises.push(Content.find({id:associationModels[x].id}))}
+						//	if (associationModels[x].type='TIME'){promises.push(Time.find({id:associationModels[x].id}))}
+						//	//..
+						//}
+
+						//Q.all(promises).then((populatedModels)=>{
+						//	console.log('sup')
+						//	for (x in model.associationModels){model.associationModels[x] = populatedModels[x][0];}
+							deferred.resolve(model);
+						//});
+
+
+						//CONTEXT IS AVG 
+						//model.context = {};
+						//for (x in model.associationModels){
+						//	model.associationModels[x].context;
+						//}
+
+					}
+					else{deferred.resolve([]);}
+				});
+			});
+			return deferred.promise;
+		};
+
 		var limit = parseInt(req.query.limit) || 1;
 		var skip = parseInt(req.query.skip) || 0;
 		var sort = req.query.sort;
@@ -16,21 +64,9 @@ module.exports = {
 			.skip(skip)
 			.sort(sort)
 			.populate('user')
-        	.then(function(models) {
-
-        		Association.native(function(err, association) {
-					association.find({$and : [{"associatedModels.id": {$in :[req.query.id]}}]})
-					.limit(1000)
-					.skip(0)
-					.sort({'createdAt':-1})
-					.toArray(function (err, associationModels) {
-						console.log(associationModels);
-						associationModels.map(function(obj){obj.id=obj._id; return obj})
-						models[0].associationModels = associationModels;
-						res.json(models[0]);
-					});
-				});
-
+        	.then(function(models){
+				Content.subscribe(req, models);
+				getAssociations(models[0]).then(function(models){res.json(models);});
 			});
 		}
 
@@ -43,7 +79,12 @@ module.exports = {
 			.populate('user')
 			.then(function(models) {
 				Content.subscribe(req, models);
-				res.json(models);
+				var promises = [];
+				for (x in models){promises.push(getAssociations(models[x]));}
+				Q.all(promises).then((populatedModels)=>{
+					for (x in models){models[x] = populatedModels[x];}
+					res.json(models);
+				});
 			});
 		}
 
@@ -56,7 +97,12 @@ module.exports = {
 			.populate('user')
 			.then(function(models) {
 				Content.subscribe(req, models);
-				res.json(models);
+				var promises = [];
+				for (x in models){promises.push(getAssociations(models[x]));}
+				Q.all(promises).then((populatedModels)=>{
+					for (x in models){models[x] = populatedModels[x];}
+					res.json(models);
+				});
 			});
 		}
 
@@ -69,7 +115,12 @@ module.exports = {
 			.populate('user')
 			.then(function(models) {
 				Content.subscribe(req, models);
-				res.json(models);
+				var promises = [];
+				for (x in models){promises.push(getAssociations(models[x]));}
+				Q.all(promises).then((populatedModels)=>{
+					for (x in models){models[x] = populatedModels[x];}
+					res.json(models);
+				});
 			});
 		}
 
@@ -82,7 +133,12 @@ module.exports = {
 			.populate('user')
 			.then(function(models) {
 				Content.subscribe(req, models);
-				res.json(models);
+				//var promises = [];
+				//for (x in models){promises.push(getAssociations(models[x]));}
+				//Q.all(promises).then((populatedModels)=>{
+				//	for (x in models){models[x] = populatedModels[x];}
+					res.json(models);
+				//s});
 			});
 		}
 
@@ -96,7 +152,12 @@ module.exports = {
 			.populate('profile')
 			.then(function(models) {
 				Content.subscribe(req, models);
-				res.json(models);
+				var promises = [];
+				for (x in models){promises.push(getAssociations(models[x]));}
+				Q.all(promises).then((populatedModels)=>{
+					for (x in models){models[x] = populatedModels[x];}
+					res.json(models);
+				});
 			});
 		}
 
@@ -131,7 +192,12 @@ module.exports = {
 			.populate('user')
 			.then(function(models) {
 				Content.subscribe(req, models);
-				res.json(models);
+				var promises = [];
+				for (x in models){promises.push(getAssociations(models[x]));}
+				Q.all(promises).then((populatedModels)=>{
+					for (x in models){models[x] = populatedModels[x];}
+					res.json(models);
+				});
 			});	
 		}
 
@@ -144,7 +210,12 @@ module.exports = {
 			.populate('user')
 			.then(function(models) {
 				Content.subscribe(req, models);
-				res.json(models);
+				var promises = [];
+				for (x in models){promises.push(getAssociations(models[x]));}
+				Q.all(promises).then((populatedModels)=>{
+					for (x in models){models[x] = populatedModels[x];}
+					res.json(models);
+				});
 			});
 		}
 
@@ -154,11 +225,15 @@ module.exports = {
 			.limit(limit)
 			.skip(skip)
 			.sort(sort)
-			.populate('task')
 			.populate('user')
 			.then(function(models) {
 				Content.subscribe(req, models);
-				res.json(models);
+				var promises = [];
+				for (x in models){promises.push(getAssociations(models[x]));}
+				Q.all(promises).then((populatedModels)=>{
+					for (x in models){models[x] = populatedModels[x];}
+					res.json(models);
+				});
 			});
 		}
 
@@ -171,7 +246,12 @@ module.exports = {
 			.populate('user')
 			.then(function(models) {
 				Content.subscribe(req, models);
-				res.json(models);
+				var promises = [];
+				for (x in models){promises.push(getAssociations(models[x]));}
+				Q.all(promises).then((populatedModels)=>{
+					for (x in models){models[x] = populatedModels[x];}
+					res.json(models);
+				});
 			});
 		}
 
@@ -181,11 +261,17 @@ module.exports = {
 			.limit(limit)
 			.skip(skip)
 			.sort(sort)
-			.populate('time')
 			.populate('user')
 			.then(function(models) {
+				
 				Content.subscribe(req, models);
-				res.json(models);
+				var promises = [];
+				for (x in models){promises.push(getAssociations(models[x]));}
+				Q.all(promises).then((populatedModels)=>{
+					for (x in models){models[x] = populatedModels[x];}
+					res.json(models);
+				});
+
 			});
 		}
 
@@ -196,10 +282,16 @@ module.exports = {
 			.skip(skip)
 			.sort(sort)
 			.populate('user')
-			.populate('project')
 			.then(function(models) {
+
 				Content.subscribe(req, models);
-				res.json(models);
+				var promises = [];
+				for (x in models){promises.push(getAssociations(models[x]));}
+				Q.all(promises).then((populatedModels)=>{
+					for (x in models){models[x] = populatedModels[x];}
+					res.json(models);
+				});
+			
 			});
 		}
 
@@ -209,10 +301,18 @@ module.exports = {
 			.skip(skip)
 			.sort(sort)
 			.populate('user')
-			.populate('project')
 			.then(function(models) {
+
 				Content.subscribe(req, models);
+				var promises = [];
+				for (x in models){promises.push(getAssociations(models[x]));}
+				//Q.all(promises).then((populatedModels)=>{
+				//	for (x in models){
+				//		if(populatedModels[x]){models[x] = populatedModels[x];}
+				//	}
+				//});
 				res.json(models);
+
 			});
 		}
 	},
@@ -325,7 +425,7 @@ module.exports = {
 									creator: validationModels[0].creator,
 									user: validationModels[0].user,
 									reactions: validationModels[0].reactions,
-									context:validationModels[x].context
+									context:validationModels[0].context
 								};
 								Association.create(newAssociationModel).then(function(association){
 									console.log('CREATED ASSOCIATION', association);
@@ -341,7 +441,7 @@ module.exports = {
 									creator: validationModels[0].creator,
 									user: validationModels[0].user,
 									reactions: validationModels[0].reactions,
-									context:validationModels[x].context
+									context:validationModels[0].context
 								};
 								Association.update({id:associationModels[0]._id, newAssociationModel}).then(function(association){
 									console.log('UPDATED ASSOCIATION', association);

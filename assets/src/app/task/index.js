@@ -35,7 +35,7 @@ angular.module( 'conexus.task', [
     
     //TODO: FIX
     if(!$scope.task){$location.path('/')}
-    if($scope.task.tags){$scope.task.tags = $scope.task.tags.split(',');}
+    if($scope.task.tags){$scope.task.context = $scope.task.tags.split(',');}
 
     $scope.task.model = 'TASK';
 

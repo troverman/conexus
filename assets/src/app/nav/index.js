@@ -268,7 +268,7 @@ angular.module( 'conexus.nav', [
             if (item){
                 $scope.newAction.type = 'USE';
                 $scope.newAction.amount = 1
-                $scope.newAction.associatedModels = [{text:item.title, address:item.id, id:item.id}];
+                $scope.newAction.associatedModels = [{text:item.title, id:item.id}];
             }
             $mdSidenav('action').toggle();
         }
@@ -332,18 +332,14 @@ angular.module( 'conexus.nav', [
 
             $scope.$watch('newContent.context', function(newValue, oldValue){
                 if (newValue !== oldValue) {
-
                     console.log(newValue);
-
                     for (x in $scope.newContent.associatedModels){
                         $scope.newContent.associatedModels[x].context = newValue.map(function(obj){
                             obj.score = 100;
                             return obj;
                         });
                     }
-
                     console.log($scope.newContent.associatedModels);
-
                 }
             }, true);
 
@@ -384,74 +380,24 @@ angular.module( 'conexus.nav', [
     //TODO!!!
     $rootScope.filterToggle = function(type, item, model){
 
+        //PASS ALL OBJECTS IN MODEL ^^
+
         $scope.updatedQuery = [];
 
         $scope.closeAllNav();
 
         $scope.locationFilter = {};
         $scope.locationFilter.distance = 10;
+
         //POSTIONS / MARKETS // LEDGER
         $scope.item = item;
         $scope.type = type;
+
         //NOTIFICATIONS
         $scope.selectedType = 'ALL';
         console.log('FILTER TOGGLE', type, item);
 
-        $scope.filterBuilder = JSON.stringify($scope.searchQueryNav, undefined, 4)
-
-        //TODO: CONTAIN IN NAV -- > AS ROOT SCOPE.. 
-        function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
-        $scope.loadAssociations = function(){        
-            $scope.sortedAssociationArray = [];
-            for (x in $scope.associations){
-                var amount = countInArray($scope.associations, $scope.associations[x]);
-                if ($scope.sortedAssociationArray.map(function(obj){return obj.element}).indexOf($scope.associations[x]) == -1){
-                    $scope.sortedAssociationArray.push({amount:amount, element:$scope.associations[x]})
-                }
-            }
-            $scope.sortedAssociationArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
-        };
-        $scope.loadLocations = function(){
-            $scope.tags = $scope.projects.map(function(obj){
-                return obj.location;
-            });
-            $scope.tags = [].concat.apply([], $scope.tags);
-            $scope.tags = $scope.tags.filter(function(e){return e});
-            $scope.sortedLocationArray = [];
-            for (x in $scope.tags){
-                var amount = countInArray($scope.tags, $scope.tags[x]);
-                if ($scope.sortedLocationArray.map(function(obj){return obj.element}).indexOf($scope.tags[x]) == -1){
-                    $scope.sortedLocationArray.push({amount:amount, element:$scope.tags[x]})
-                }
-            }
-            $scope.sortedLocationArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
-        };
-        $scope.loadTags = function(){
-            $scope.tags = $scope.projects.map(function(obj){
-                var returnObj = {};
-                if(obj.tags){obj.tags = obj.tags.split(',')}
-                returnObj = obj.tags;
-                return returnObj;
-            });
-            $scope.tags = [].concat.apply([], $scope.tags);
-            $scope.tags = $scope.tags.filter(function(e){return e});
-            $scope.sortedTagArray = [];
-            for (x in $scope.tags){
-                var amount = countInArray($scope.tags, $scope.tags[x]);
-                if ($scope.sortedTagArray.map(function(obj){return obj.element}).indexOf($scope.tags[x]) == -1){
-                    $scope.sortedTagArray.push({amount:amount, element:$scope.tags[x]})
-                }
-            }
-            $scope.sortedTagArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
-        };
-        //IMPROVE :)
-        $scope.init = function(){
-            $scope.loadAssociations();
-            $scope.loadLocations();
-            $scope.loadTags();
-            $scope.filterSet = {associations:$scope.sortedAssociationArray, tags:$scope.sortedTagArray, locations:$scope.sortedLocationArray}
-        };
-        //$scope.init();
+        $scope.filterBuilder = JSON.stringify($scope.searchQueryNav, undefined, 4);
 
         //TODO
         $scope.populateMap = function(){
@@ -469,7 +415,6 @@ angular.module( 'conexus.nav', [
                 }
             }
         };
-        //$scope.populateMap();
 
         $scope.selectAsset = function(item){
             if ($rootScope.selectedAssets.map(function(obj){return obj.text}).indexOf(item)==-1){
@@ -478,15 +423,13 @@ angular.module( 'conexus.nav', [
                     return obj.element !== item
                 });
             }
-
             console.log('SELECT ASSET', item, $rootScope.searchQueryNav, $rootScope.searchQuery);
-
         };
 
         $scope.selectAssociation = function(item){
             if ($rootScope.searchQueryNav.associations.map(function(obj){return obj.text}).indexOf(item)==-1){
                 $rootScope.searchQueryNav.associations.push({
-                    text:'Assocation | '+item, 
+                    text:item, 
                     query:item, 
                     type:'ASSOCIATION'
                 });
@@ -510,9 +453,6 @@ angular.module( 'conexus.nav', [
                     query:item, 
                     type:'LOCATION'
                 });
-
-                //$scope.init();
-
                 $scope.item.locations = $scope.item.locations.filter(function(obj) { 
                     return obj.element !== item
                 });
@@ -532,7 +472,7 @@ angular.module( 'conexus.nav', [
                 filter:[
                     {
                         model:null,
-                        modelParam:'tag',
+                        modelParam:'context',
                         query: item,
                         associaton:{
                             populate:true,
@@ -559,14 +499,11 @@ angular.module( 'conexus.nav', [
 
 
             //DO A FILTER OF SEARCHQUERY OF TYPE TAGS
-
-
-            if ($rootScope.searchQueryNav.tags.map(function(obj){return obj.text}).indexOf(item)==-1){
+            if ($rootScope.searchQueryNav.context.map(function(obj){return obj.text}).indexOf(item)==-1){
                 
-                $rootScope.searchQueryNav.tags.push({
-                    text:'Tag | '+item, 
+                $rootScope.searchQueryNav.context.push({
+                    text:item, 
                     query:item, 
-                    type:'TAG'
                 });
 
                 //$scope.init();
@@ -576,17 +513,14 @@ angular.module( 'conexus.nav', [
                 });
             }
 
-
-
-
-            console.log('SELECT TAG', item, $rootScope.searchQueryNav, $rootScope.searchQuery);
+            console.log('SELECT CONTEXT', item, $rootScope.searchQueryNav, $rootScope.searchQuery);
 
         };
 
         $scope.selectTypeFilter = function(item){
             if ($rootScope.searchQueryNav.type.map(function(obj){return obj.text}).indexOf(item)==-1){
                 $rootScope.searchQueryNav.type.push({
-                    text:'Type | '+item, 
+                    text:item, 
                     query:item, 
                     type:'TYPE'
                 });
@@ -845,9 +779,9 @@ angular.module( 'conexus.nav', [
             var nodeModel = {
                 group:'nodes',
                 data:{
-                    id:$scope.item.associatedModels[x].address,
-                    type:$scope.item.associatedModels[x].address,
-                    name:$scope.item.associatedModels[x].address
+                    id:$scope.item.associatedModels[x].id,
+                    type:$scope.item.associatedModels[x].id,
+                    name:$scope.item.associatedModels[x].id
                 }
             }; 
             $scope.directedGraphElements[$scope.item.associatedModels[x].address] = nodeModel;
@@ -856,12 +790,12 @@ angular.module( 'conexus.nav', [
                     group:'edges',
                     classes:'unbundled-bezier',
                     data:{
-                        id:$scope.item.associatedModels[0].address+'-'+$scope.item.associatedModels[x].address,
-                        source:$scope.item.associatedModels[0].address,
-                        target:$scope.item.associatedModels[x].address
+                        id:$scope.item.associatedModels[0].id+'-'+$scope.item.associatedModels[x].id,
+                        source:$scope.item.associatedModels[0].id,
+                        target:$scope.item.associatedModels[x].id
                     }
                 };
-                $scope.directedGraphElements[$scope.item.associatedModels[0].address+'-'+$scope.item.associatedModels[x].address] = edgeModel;
+                $scope.directedGraphElements[$scope.item.associatedModels[0].id+'-'+$scope.item.associatedModels[x].id] = edgeModel;
             }
         }
 
@@ -983,9 +917,11 @@ angular.module( 'conexus.nav', [
     };
 
     //TODO: RENDER PROJECT TOGGLE
-    //$rootScope.reply = function(){};
+    $rootScope.reply = function(){};
 
-    $rootScope.selectSort = function(type, detail, direction){
+    $rootScope.selectSort = function(model, direction, time){
+        $rootScope.selectedSort = {model:model.toLowerCase(), direction:direction.toLowerCase(), time:time};
+        //ROOTSCOPE WATCHER ON selectedSort change
         $mdSidenav('sort').toggle();
     };
 
@@ -1444,11 +1380,11 @@ angular.module( 'conexus.nav', [
        
         if($rootScope.currentUser){
 
-            $scope.newTransaction.from = [{text:$rootScope.currentUser.username, address:$rootScope.currentUser.id, id:$rootScope.currentUser.id}];
+            $scope.newTransaction.from = [{text:$rootScope.currentUser.username, id:$rootScope.currentUser.id}];
 
             if (item){
-                if(item.model=='PROJECT'){$scope.newTransaction.to = [{text:item.title, address:item.id, id:item.id}];}
-                else{$scope.newTransaction.to = [{text:item.username, address:item.id, id:item.id}];}
+                if(item.model=='PROJECT'){$scope.newTransaction.to = [{text:item.title, id:item.id}];}
+                else{$scope.newTransaction.to = [{text:item.username, id:item.id}];}
             }
 
             if (asset){
@@ -1473,10 +1409,11 @@ angular.module( 'conexus.nav', [
 
             console.log('CREATE TRANSACTION', item, $scope.newTransaction);
 
+            //TODO!
             $scope.$watch('newTransaction.context', function(newValue, oldValue){
                 if (newValue !== oldValue) {
                     for (x in $scope.newTransaction.context){
-                        $scope.newTransaction.validationModels[0].validation[$scope.newTransaction.context[x].text] = 100;
+                        $scope.newTransaction.associatedModels[0].context[$scope.newTransaction.context[x].text] = 100;
                     }
                 }
             }, true);
@@ -1492,36 +1429,59 @@ angular.module( 'conexus.nav', [
     $rootScope.validationToggle = function(item){
 
         $scope.closeAllNav();
+        $scope.item = item;
         if($rootScope.currentUser){
 
             $scope.newValidation = {
-                context:{},
+                context: [{text:'self', score:100}],
                 user: $rootScope.currentUser.id,
                 associatedModels:[],
             };
 
-            if(item){
+            if($scope.item){
 
                 //GET ASSOCIATED MDOELS
                 //TODO REDETERMINED CONTEXT.. TAGS.. ETC --> PERSPECTIVE
                 //UX SHOULD DO SET in validation sidebar
                 $scope.newValidation.associatedModels = [
                     {
-                        text:item.id,
-                        id:item.id,
-                        type:item.model,
+                        text:$scope.item.id,
+                        id:$scope.item.id,
+                        type:$scope.item.model,
                         context: [{text:'self', score:100}]
                     }
                 ];
+
+                //IF ITEM CONTEXT -->
+                console.log(item);
+
+                if ($scope.item.context){
+                    for (x in $scope.item.context){
+                        $scope.newValidation.associatedModels[0].context.push({score:100,text:$scope.item.context[x]});
+                        $scope.newValidation.context.push({score:100,text:$scope.item.context[x]})
+                    }
+                }
+
+                console.log($scope.newValidation.associatedModels)
 
                 //POTIENTAL VALIDATIONS
                 //$scope.assoicationFilter = [{text:$scope.item.associatedModels[0].id}];
 
             }
             
-            $scope.$watch('context', function(){
-                for (x in $scope.context){
-                    $scope.newValidation.validation[$scope.context[x].text] = 0;
+            //$scope.$watch('context', function(){
+            //    for (x in $scope.context){
+            //        $scope.newValidation.context[$scope.context[x].text] = 0;
+            //    }
+            //}, true);
+    
+            $scope.$watch('newValidation.context', function(newValue, oldValue){
+                if (newValue !== oldValue) {
+                    console.log(newValue)
+                    for (x in $scope.newValidation.context){
+                        $scope.newValidation.associatedModels[0].context[$scope.newValidation.context[x].text] = 100;
+                        console.log($scope.newValidation);
+                    }
                 }
             }, true);
 
@@ -1650,7 +1610,7 @@ angular.module( 'conexus.nav', [
             //PATCH!!!
             if ($scope.newItem.associatedModels){
                 for (x in $scope.newItem.associatedModels){
-                    $scope.newItem[$scope.newItem.associatedModels[x].type.toLowerCase()] = $scope.newItem.associatedModels[x].address
+                    $scope.newItem[$scope.newItem.associatedModels[x].type.toLowerCase()] = $scope.newItem.associatedModels[x].id
                 }
             }
             ItemModel.create($scope.newItem).then(function(model) {
@@ -1721,7 +1681,7 @@ angular.module( 'conexus.nav', [
             if ($scope.newProject.associatedModels){
                 if ($scope.newProject.associatedModels[0]){
                     if ($scope.newProject.associatedModels[0].type == 'PROJECT'){
-                        $scope.newProject.parent = $scope.newProject.associatedModels[0].address;
+                        $scope.newProject.parent = $scope.newProject.associatedModels[0].id;
                     }
                 }
             }
@@ -1771,7 +1731,7 @@ angular.module( 'conexus.nav', [
             //PATCH!!!
             if ($scope.newTask.associatedModels){
                 for (x in $scope.newTask.associatedModels){
-                    $scope.newTask[$scope.newTask.associatedModels[x].type.toLowerCase()] = $scope.newTask.associatedModels[x].address;
+                    $scope.newTask[$scope.newTask.associatedModels[x].type.toLowerCase()] = $scope.newTask.associatedModels[x].id;
                 }
             }
 
@@ -1803,7 +1763,7 @@ angular.module( 'conexus.nav', [
 
 
                 //for (x in $scope.newTime.associatedModels){
-                //    $scope.newTime[$scope.newTime.associatedModels[x].type.toLowerCase()] = $scope.newTime.associatedModels[x].address;
+                //    $scope.newTime[$scope.newTime.associatedModels[x].type.toLowerCase()] = $scope.newTime.associatedModels[x].id;
                 //}
 
 
@@ -2114,11 +2074,13 @@ angular.module( 'conexus.nav', [
         console.log('loadAssociations', query)
         //SearchModel.search(query).then(function(searchModels){})
         ProjectModel.getSome({query:query, limit:10, skip:0, sort:'createdAt DESC'}).then(function(searchModels){
-            searchModels.map(function(obj){
-                obj.type='PROJECT';
-                obj.text = 'PROJECT+'+obj.id;
-                return obj;
-            });
+            if (searchModels.length > 0){
+                searchModels.map(function(obj){
+                    obj.type='PROJECT';
+                    obj.text = 'PROJECT+'+obj.id;
+                    return obj;
+                });
+            }
             deferred.resolve(searchModels);
         });
         return deferred.promise;
@@ -2127,14 +2089,15 @@ angular.module( 'conexus.nav', [
     $scope.loadAssociationsTask = function(query){
         var deferred = $q.defer();
         console.log('loadAssociationsTask', query);
-        TaskModel.getSome({search:query, limit:10, skip:0, sort:'createdAt DESC'}).then(function(taskSearchModels){
-            taskSearchModels = taskSearchModels.map(function(obj){
-                obj.type='TASK';
-                obj.address=obj.id;
-                obj.text=obj.title;
-                return obj;
-            });
-            deferred.resolve(taskSearchModels);
+        TaskModel.getSome({search:query, limit:10, skip:0, sort:'createdAt DESC'}).then(function(searchModels){
+            if (searchModels.length > 0){
+                searchModels = searchModels.map(function(obj){
+                    obj.type='TASK';
+                    obj.text=obj.title;
+                    return obj;
+                });
+            }
+            deferred.resolve(searchModels);
         });
         return deferred.promise;
     };
@@ -2144,7 +2107,6 @@ angular.module( 'conexus.nav', [
         ItemModel.getSome({search:query, limit:10, skip:0, sort:'createdAt DESC'}).then(function(itemModels){
             itemModels = itemModels.map(function(obj){
                 obj.type='ITEM';
-                obj.address=obj.id;
                 obj.text=obj.title;
                 return obj;
             });

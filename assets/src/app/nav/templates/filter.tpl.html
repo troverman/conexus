@@ -34,7 +34,7 @@
 
                 <p><b>Context</b> <i style="float:right" class="fa fa-tags"></i></p>
                 <div>
-                    <tags-input min-length="1" placeholder="Context" ng-model="searchQueryNav.tags">
+                    <tags-input min-length="1" placeholder="Context" ng-model="searchQueryNav.context">
                         <auto-complete source="loadAsset($query)"></auto-complete>
                     </tags-input>
                     <div ng-repeat="item in item.tags.slice(0,10) track by $index">

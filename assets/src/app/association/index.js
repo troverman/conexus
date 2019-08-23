@@ -23,6 +23,8 @@ angular.module( 'conexus.association', [
 	$scope.association = association[0];
     if(!$scope.association){$location.path('/')}
     $scope.association.model = 'ASSOCIATION';
+
+    console.log($scope.association)
     
     titleService.setTitle('Association | '+$scope.association.id + ' | CRE8.XYZ');
 
@@ -64,8 +66,10 @@ angular.module( 'conexus.association', [
     };
 
     $scope.contextList = [];
-    for (x in Object.keys($scope.association.context)){
-        $scope.contextList.push([Object.keys($scope.association.context)[x], $scope.association.context[Object.keys($scope.association.context)[x]]]);
+    if ($scope.association.context){
+        for (x in Object.keys($scope.association.context)){
+            $scope.contextList.push([Object.keys($scope.association.context)[x], $scope.association.context[Object.keys($scope.association.context)[x]]]);
+        }
     }
 
     //TODO: CAN IMRPOVE

@@ -59,7 +59,7 @@ angular.module( 'conexus.app', [
             $scope.newValidation = {
                 user:$rootScope.currentUser.id,
                 creator:$rootScope.currentUser.id,
-                validation:{self:100},
+                context:{self:100},
                 associatedModels:[
                     {type:'MEMBER', id:$rootScope.currentUser.id},
                     {type:'APP', id:model.id},

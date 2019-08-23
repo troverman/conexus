@@ -355,6 +355,7 @@ angular.module( 'conexus.project', [
     $scope.transactions = $scope.transactionsFrom.concat($scope.transactionsTo);
     //$scope.transactions = $scope.transactions.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
 
+    console.log(contentList)
     //CONTENT, TIME, TASK CREATE, VALIDATION (VOTE)
     //TODO
     $scope.contentList = $scope.contentList.map(function(obj){

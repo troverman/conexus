@@ -37,17 +37,20 @@ angular.module( 'conexus.time', [
 
     //TODO: DEPRECIATE | PATCH!
     $rootScope.associatedModels = [{
-        address: $scope.time.id,
+        id: $scope.time.id,
         type: 'TIME',
     }];
 
     //TODO: DEPRECIATE | AS ASSOCIATIONS!
-    if ($scope.time.tags){$scope.time.tags = $scope.time.tags.split(',')}
+    if ($scope.time.tags){$scope.time.context = $scope.time.tags.split(',')}
 
     $scope.contentList = contentList;
     $scope.newContent = {};
     $scope.newReaction = {};
     $scope.validations = validations;
+
+    $scope.selectedTab = 'INFORMATION';
+    $scope.selectTab = function(model){$scope.selectedTab = model;};
 
     //TODO: DEPRECIATE
     $scope.createReaction = function(item, type){

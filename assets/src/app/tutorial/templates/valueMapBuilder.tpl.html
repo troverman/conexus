@@ -3,15 +3,11 @@
         <p style="color:gray;font-size:12px;font-style:italic">Select what you believe is worthwile.</p>
         <p style="color:gray;font-size:12px;font-style:italic">Creating a value map furthers a self-empowering mechanism. We create value; though sharing our values and relating them we create value in ourselves, in what we do, and within each other.</p>
 
-        <div class="row">
-            <div class="col-xs-4"><img ng-src="https://source.unsplash.com/900x900/?value,finance,vote"></div>
-            <div class="col-xs-4"><img ng-src="https://source.unsplash.com/900x900/?humananity,city,community"></div>
-            <div class="col-xs-4"><img ng-src="https://source.unsplash.com/900x900/?code,love,joy"></div>
-        </div>
+       <!--GENERATIVE ART HERE -->
     </div>
 </div>
 
-<div class="col-sm-3 mobileFix" style="padding-left:0px;padding-right:0px;">
+<div ng-if="false" class="col-sm-3 mobileFix" style="padding-left:0px;padding-right:0px;">
     <div class="card" ng-click="filterToggle('DISCOVER', filterSet)">
         <div style="background:url('https://source.unsplash.com/1600x900/?details,notes,exolore,wonder,connection');min-height:50px" class="imageContainerSmall">
             <div style="background:rgba(0,0,0,0.75);height:50px" class="imageContainerSmallDiv">  
@@ -23,6 +19,7 @@
             </div>
         </div>
         <div style="padding:16px;">
+            {{sortedTagArray}}
             <div ng-repeat="item in sortedTagArray track by $index" ng-click="$event.stopPropagation();filterContent(tag.element)">
                 <a><b>{{item.element}}</b></a>
             </div>
@@ -30,7 +27,7 @@
     </div>
 </div>
 
-<div class="col-sm-9 col-xs-12" style="padding-left:0px;padding-right:0px">
+<div class="col-sm-12 col-xs-12" style="padding-left:0px;padding-right:0px">
 
     <ul style="padding:0px;" class="member-tabs">
         <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fa fa-filter"></i> Filter</a></li>
@@ -82,7 +79,7 @@
             <p style="color:gray;font-style:italic;font-weight:bold">Select the following context of interest to you.</p>
 
             <div class="spacing-10"></div>
-
+            {{sortedTagArray}}
             <div class="" style="font-size:14px;font-weight:bold">
                 <span ng-click="createPosition(item.element)" ng-repeat="item in sortedTagArray track by $index">
                     <p class="valueMapButton">{{item.element}}</p>

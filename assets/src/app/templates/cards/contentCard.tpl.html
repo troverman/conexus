@@ -16,10 +16,7 @@
     </div>
     <div style="padding:16px">
         <div ng-if="!item.title" style="text-align:right;float:right">
-            <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
-                <i class="fas fa-chevron-down"></i>
-            </a>
-            <div style="clear:both"></div>
+            <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><i class="fas fa-chevron-down"></i></a>
         </div>
         <div>
             <a ng-click="$event.stopPropagation()" style="display:inline;font-weight:600;" href="member/{{item.user.username}}" ui-sref="member.activity({path:item.user.username})">

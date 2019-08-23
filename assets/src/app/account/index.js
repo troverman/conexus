@@ -19,7 +19,7 @@ angular.module( 'conexus.account', [
 	});
 }])
 
-.controller( 'AccountCtrl', ['$location', '$rootScope', '$scope', 'apps', 'AttentionModel', 'titleService', 'Upload', 'UserModel', function AccountController( $location, $rootScope, $scope, apps, AttentionModel, titleService, Upload, UserModel ) {
+.controller( 'AccountCtrl', ['$location', '$rootScope', '$scope', 'apps', 'AssociationModel', 'AttentionModel', 'titleService', 'Upload', 'UserModel', function AccountController( $location, $rootScope, $scope, apps, AssociationModel, AttentionModel, titleService, Upload, UserModel ) {
 	
     titleService.setTitle('Account Settings | CRE8.XYZ');
     if(!$rootScope.currentUser){$location.path('/')}
@@ -37,16 +37,24 @@ angular.module( 'conexus.account', [
     $scope.markers = [];
     $scope.selectedTab = 'APPS';
 
-
-
     //LOL COMPLEX QUERY BETTER FILTERING ETC
     AttentionModel.getSome({creator:$rootScope.currentUser.id, app:'HUMAN', limit:100, skip:0, sort:'createdAt DESC'}).then(function(humanAttention){
-        $scope.humanAttention = humanAttention;
+        if (humanAttention){
+            $scope.humanAttention = humanAttention.map(function(obj){
+                obj.model = 'ATTENTION';
+                return obj
+            });
+        }
     });
 
     //CONNECT TO PEER
     AttentionModel.getSome({creator:$rootScope.currentUser.id, app:'MACHINE', limit:100, skip:0, sort:'createdAt DESC'}).then(function(machineAttention){
-        $scope.machineAttention = machineAttention
+        if (machineAttention){
+            $scope.machineAttention = machineAttention.map(function(obj){
+                obj.model = 'ATTENTION';
+                return obj
+            });
+        }
     });
 
     $scope.apps = [
@@ -68,35 +76,24 @@ angular.module( 'conexus.account', [
 
     $scope.apps = apps;
 
+    //APPS
+    var associationQuery = {
+        member:$rootScope.currentUser.id,
+        limit:10, 
+        skip:0, 
+        sort:'createdAt DESC'
+    };
+    AssociationModel.get(associationQuery).then(function(associations){
+        console.log(associations);
+        $scope.associations = associations;
+    });
+
     $scope.myApps = $scope.currentUser.apps;
 
     console.log($scope.myApps);
 
     //return my apps first 
     //member-app association
-
-    var testApp = [
-        {
-            title:'cool', 
-            information:{
-                isActive:true
-            },
-            data:{
-                address:'test',
-            }
-        }
-    ];
-
-    $scope.apps = apps.map(function(obj){
-
-        //if($scope.myApps[obj.title]){
-
-        //}
-
-        return obj;
-
-    });
-
 
     //APP-MEMBER ASSOCIATION (AND DATA)
     //MEMBER-APP DATA

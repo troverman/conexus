@@ -31,8 +31,9 @@ angular.module( 'conexus.home', [
             }
         },
 
-        //TODO: DEPRECIATE RESOLVE
         resolve:{
+
+
 
             //TODO: GET FEED
             //TODO: COMPLEX QUERY
@@ -58,7 +59,7 @@ angular.module( 'conexus.home', [
                 return TransactionModel.getSome({limit:10, skip:0, sort:'createdAt DESC'});
             }],
 
-            //TODO: GET FEED CUSTOMIZED
+            //TODO: GET FEED CUSTOMIZED -- STORE IN USER OBJ
             //TODO: COMPLEX QUERY
             followers: ['$rootScope', 'FollowerModel', function($rootScope, FollowerModel) {
                 return FollowerModel.getFollowing($rootScope.currentUser);
@@ -75,6 +76,10 @@ angular.module( 'conexus.home', [
             positions: ['$rootScope', 'OrderModel', function($rootScope, OrderModel) {
                 return OrderModel.getSome({user:$rootScope.currentUser.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
+
+
+
+
             
         }
     })
@@ -224,7 +229,7 @@ angular.module( 'conexus.home', [
     $scope.loadLocations = function(){$scope.sortedLocationsArray = ['Chapel Hill', 'Knoxville', 'Los Angeles', 'New York City']};
     $scope.loadTags = function(){
         $scope.tags = $scope.activity.map(function(obj){
-            return obj.tags;;
+            return obj.tags;
         });
         $scope.tags = [].concat.apply([], $scope.tags);
         $scope.tags = $scope.tags.filter(function(e){return e});
@@ -355,6 +360,15 @@ angular.module( 'conexus.home', [
     $scope.activity = [].concat.apply([], [$scope.contentList, $scope.projects, $scope.tasks, $scope.time]);
     $scope.activity = $scope.activity.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
     $scope.activity = $scope.activity.slice(0,100); 
+
+
+    //$scope.stateIsLoadingIntro = true;
+    //SearchModel.getFeed(query).then(function(searchModels){
+    //    $scope.stateIsLoadingIntro = false;
+    //    console.log(searchModels);
+    //    $scope.activity = searchModels;
+    //    $scope.init();
+    //});
 
 
     //DEPRECIATE.. PUT IN NAV
@@ -812,8 +826,8 @@ angular.module( 'conexus.home', [
             });
         };
 
-        //$scope.selectedTab = 'QUESTIONS';
-        $scope.selectedTab = 'BUILDER';
+        $scope.selectedTab = 'QUESTIONS';
+        //$scope.selectedTab = 'BUILDER';
         $scope.selectTab = function(model){$scope.selectedTab = model;};
 
         $scope.totalMap = {

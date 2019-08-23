@@ -33,10 +33,12 @@ angular.module( 'conexus.validation', [
     $scope.reputationList = [];
     $scope.reputationWeightedList = []
     $scope.validationList = [];
-    for (x in Object.keys($scope.validation.context)){
-        $scope.validationList.push([Object.keys($scope.validation.context)[x], $scope.validation.context[Object.keys($scope.validation.context)[x]]]);
-        $scope.reputationList.push([Object.keys($scope.validation.reputation)[x], $scope.validation.reputation[Object.keys($scope.validation.reputation)[x]]]);        
-        $scope.reputationWeightedList.push([Object.keys($scope.validation.reputation)[x], $scope.validation.reputation[Object.keys($scope.validation.reputation)[x]]*$scope.validation.context[Object.keys($scope.validation.context)[x]]]);
+    if ($scope.validation.context){
+        for (x in Object.keys($scope.validation.context)){
+            $scope.validationList.push([Object.keys($scope.validation.context)[x], $scope.validation.context[Object.keys($scope.validation.context)[x]]]);
+            $scope.reputationList.push([Object.keys($scope.validation.reputation)[x], $scope.validation.reputation[Object.keys($scope.validation.reputation)[x]]]);        
+            $scope.reputationWeightedList.push([Object.keys($scope.validation.reputation)[x], $scope.validation.reputation[Object.keys($scope.validation.reputation)[x]]*$scope.validation.context[Object.keys($scope.validation.context)[x]]]);
+        }
     }
 
     $scope.validationColumn = {

@@ -153,19 +153,11 @@
                 <a href="#" ng-click="createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.reactions.plus}} like </a> 
                 <a href="#" ng-click="createReaction(item, 'minus')"><i class="fa fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
                 <a href="#" ng-click="reply(validation)"><i class="fa fa-comment-o"></i> comment </a>
-                <a ng-if="item.model == 'TASK'|| item.model == 'TIME'" href="#" ng-click="validationToggle(item)"><i class="fa fa-check"></i> validate </a>
+                <a href="#" ng-click="validationToggle(item)"><i class="fa fa-check"></i> validate </a>
             </div>
-
-            <div class="card-footer" ng-show="item.showReply">
-                <form role="form" ng-submit="createContent()">
-                    <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
-                </form>
-            </div>
-
             <!--RENDER ASSOCIATED TIME-->
             <!--RENDER ASSOCIATED CONTENT-->
-            <div ng-include="'content/content.tpl.html'" ng-repeat="content in content.children track by content.id"></div>
-
+            <!--<div ng-include="'content/content.tpl.html'" ng-repeat="content in content.children track by content.id"></div>-->
         </div>
 
     </div>

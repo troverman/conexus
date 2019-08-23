@@ -1,6 +1,6 @@
 <div class="container" style="padding:0px">
     <div class="card" ng-click="cardDetailToggle(task)">
-        <div class="imageContainerSmall" style="background:url('https://source.unsplash.com/1600x900/?{{task.tags}}');">
+        <div class="imageContainerSmall" style="background:url('https://source.unsplash.com/1600x900/?{{task.context}}');">
             <div style="background:rgba(0,0,0,0.75);text-align:center" class="imageContainerSmallDiv">
                 <div style="text-align:right;padding:15px;position:absolute;right:0">
                     <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(task)">
@@ -46,7 +46,7 @@
         </div>
         <hr style="margin:0px;">
         <div style="padding:16px;">
-            <p><a ng-repeat="tag in task.tags track by $index" ng-click="$event.stopPropagation();filterContent(tag)">{{tag.trim()}} </a></p>
+            <p><a ng-repeat="context in task.context" ng-click="$event.stopPropagation();filterContent(context)">{{context}} </a></p>
             <div class="spacing-5"></div>
             <div ng-click="$event.stopPropagation();"><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></div>
             <div class="spacing-5"></div> 

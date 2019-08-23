@@ -153,6 +153,7 @@ angular.module( 'conexus', [
         assetsInput:[],
         assetsOutput:[],
         associations:[],
+        context:[],
         model:[],
         locations:[],
         query:[],

@@ -30,16 +30,17 @@ angular.module( 'conexus.content', [
     if ($scope.content.title){titleService.setTitle($scope.content.title + ' | Content | CRE8.XYZ')}
     else{titleService.setTitle('Content | CRE8.XYZ')}
 
-    $scope.content.tokens = [];
     
     console.log($scope.content, $scope.content.associationModels);
 
+    $scope.content.context = [];
     if ($scope.content.associationModels){
         for (x in $scope.content.associationModels){
 
             for (y in Object.keys($scope.content.associationModels[x].context)){
                 var context = Object.keys($scope.content.associationModels[x].context)[y]
-                console.log(context)
+                $scope.content.context.push(context);
+                console.log(context);
             }
 
         }

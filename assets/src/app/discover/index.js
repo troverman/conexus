@@ -197,6 +197,13 @@ angular.module( 'conexus.discover', [
             $scope.searchModel = [];
         }
     }, true);
+
+    $rootScope.$watch('selectedSort', function(newValue, oldValue){
+        if (newValue !== oldValue) {
+            console.log(newValue);
+            $scope.shuffleActivity();
+        }
+    }, true);
     //\\//\\//\\//\\//
     //WATCHERS\\//\\//
     //\\//\\//\\//\\//
