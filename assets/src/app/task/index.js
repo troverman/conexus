@@ -238,7 +238,7 @@ angular.module( 'conexus.task', [
                 stream: null,
 
             };
-            $scope.timeTags = $scope.task.tags.map(function(obj){return {text:obj}});
+            $scope.timeTags = $scope.task.context.map(function(obj){return {text:obj}});
 
             //TODO: DO IT
             //TimeModel.create($scope.newTime).then(function(timeModel){

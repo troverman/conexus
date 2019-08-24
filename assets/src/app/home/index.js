@@ -326,6 +326,8 @@ angular.module( 'conexus.home', [
     //SEARCH
     //SearchModel.find().then(function(searchModel){
     //});
+
+
     
     //TODO:MOVE TO BACKEND SEARCH MODEL
     $scope.contentList = contentList.map(function(obj){
@@ -385,79 +387,50 @@ angular.module( 'conexus.home', [
         else{$mdSidenav('login').toggle()}   
     };
 
-    //TODO!!!!
+    //TODO: CREATE A TOKEN 'ORBIT' FOR MEMBER
+    //INTELLIGENT DISCORE AND FILTER CREATION..
     $scope.suggestedTokens = []
     $scope.discover = function(){
-
         $scope.memberProjects = memberProjects.map(function(obj){
             obj.project.model = 'PROJECT';
             if (obj.project.tags){obj.project.tags = obj.project.tags.split(',')}
             return obj.project
         });
-        
         $scope.memberTasks = memberTasks;
         if ($scope.memberTasks){
             $scope.memberTasks = $scope.memberTasks.map(function(obj){obj.model = 'TASK';return obj});
         }
-
         $scope.followers = followers;
         if ($scope.followers ){
             $scope.followers = $scope.followers.map(function(obj){return obj.followed});    
             $scope.members.map(function(obj){
                 var index = $scope.followers.map(function(obj1){
-                    //bug with undef followers
-                    if (obj1){
-                        return obj1.id;
-                    }
+                    if (obj1){return obj1.id;}
                 }).indexOf(obj.id);
                 if (index != -1){obj.isFollowing = true;}
                 if (index == -1){obj.isFollowing = false;}
                 return obj;
             });
         }
-
         $scope.projects.map(function(obj){
             var index = $scope.memberProjects.map(function(obj1){return obj1.id}).indexOf(obj.id);
             if (index != -1){obj.isMember = true;}
             if (index == -1){obj.isMember = false;}
             return obj;
         });
-
         $scope.tasks.map(function(obj){
             var index = $scope.memberTasks.map(function(obj1){return obj1.id}).indexOf(obj.id);
             if (index != -1){obj.isAssociated = true;}
             if (index == -1){obj.isAssociated = false;}
             return obj;
         });
-
         $scope.searchQueryFeed = [];
         for (x in $scope.followers){if ($scope.followers[x]){$scope.searchQueryFeed.push({type:'MEMBER', id:$scope.followers[x].id, text:$scope.followers[x].username})}}
         for (x in $scope.memberProjects){$scope.searchQueryFeed.push({type:'PROJECT', id:$scope.memberProjects[x].id, text:$scope.memberProjects[x].title})}
         for (x in $scope.memberTasks){$scope.searchQueryFeed.push({type:'TASK', id:$scope.memberTasks[x].id, text:$scope.memberTasks[x].title})}
-
-        //ORDERS
-        //LOOK AT MY TIME
-        //LOOK AT MY ACTIONS (RE)
-        //LOOK AT MY ORDERS (CURRENT MAPS)
-        //LOOK AT THE PEOPLE I FOLLOW'S PROJECTS
-        //console.log($scope.followers, $scope.memberProjects);
-        //LOOK AT THE PEOPLE I FOLLOW'S REPUTATION && SKILLS
-        //GET CUSTOM FEED SORTS BASED ON PROJECTS; FOLLOWING
-        //BUILD QUERY
-
-        //potientally compute some,
         $scope.positions = positions;
-
-        //FOLLOWERS .. VERBS
-        //for (x in $scope.followers){$scope.suggestedTokens.push({token:'CRE8+FOLLOW+'+$scope.followers[x].id})}
-        //TODO: STRING REPLACE URLTITLE
         for (x in $scope.memberProjects){$scope.suggestedTokens.push({token:$scope.memberProjects[x].urlTitle})}
-
-        //FACTOR: ASSOCIATION IS BASE
-        $scope.suggestedTokenTags = $scope.memberProjects.map(function(obj){
-            return obj.tags;
-        });
-
+        $scope.suggestedTokenTags = $scope.memberProjects.map(function(obj){return obj.tags;});
         $scope.suggestedTokenTags = [].concat.apply([], $scope.suggestedTokenTags);
         $scope.suggestedTokenTags = $scope.suggestedTokenTags.filter(function(e){return e});
         function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
@@ -469,100 +442,12 @@ angular.module( 'conexus.home', [
             }
         }
         $scope.sortedsuggestedTokenTags.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
-        //FACTOR
-
-        for (x in $scope.memberProjects){
-            $scope.suggestedTokens.push({token:$scope.memberProjects[x].urlTitle});
-        }
-
-        for (x in $scope.suggestedTokenTags){
-            //$scope.suggestedTokens.push({token:$scope.memberProjects[x].urlTitle});
-        }
-
-        $scope.chart = {
-            chart: {polar: true},
-            series: [{
-                id: 'values',
-                type: 'area',
-                name: 'Values',
-                pointPlacement: 'on',
-                data: [0.2, 0.15, 0.15, 0.10, 0.15, 0.15, 0.1],
-                color: 'rgba(153,0,0,0.3)',
-                fillOpacity: 0.3,
-            },{
-                id: 'values1',
-                type: 'area',
-                name: 'Values',
-                pointPlacement: 'on',
-                data: [0.2, 0.15, 0.1, 0.1, 0.1, 0.1, 0.15],
-                color: 'rgba(0,0,153,0.3)',
-                fillOpacity: 0.3,
-            },{
-                id: 'values2',
-                type: 'area',
-                name: 'Values',
-                pointPlacement: 'on',
-                data: [0.15, 0.1, 0.20, 0.2, 0.20, 0.05, 0.1],
-                color: 'rgba(0,153,0,0.3)',
-                fillOpacity: 0.3,
-            }],
-            title: {text: ''},
-            xAxis: {
-                title: {text: null},
-                categories: ['Education', 'Shelter', 'Food', 'Creation', 'Health', 'Security', 'Transparency'],
-                tickmarkPlacement: 'on',
-                lineWidth: 0,
-            },
-            yAxis: {
-                title: {text: null},
-                gridLineInterpolation: 'polygon',
-                lineWidth: 0,
-                min: 0,
-            },
-            legend: {
-                enabled: false,
-            },
-            tooltip: {},
-            credits:{enabled:false},
-        };
-
-        //IF NON ZERO
-        $scope.chart.series = [{
-            id: 'values',
-            type: 'area',
-            name: 'Values',
-            pointPlacement: 'on',
-            data: [],
-            color: 'rgba(153,0,0,0.3)',
-            fillOpacity: 0.3,
-        }];
-
-        $scope.chart.xAxis.categories = [];
-
-        for (x in $scope.sortedsuggestedTokenTags){
-            $scope.chart.series[0].data.push($scope.sortedsuggestedTokenTags[x].amount);
-            $scope.chart.xAxis.categories.push($scope.sortedsuggestedTokenTags[x].element)
-        }
-        //IF NON ZERO
+        for (x in $scope.memberProjects){$scope.suggestedTokens.push({token:$scope.memberProjects[x].urlTitle});}
     };
-    $scope.discover();
+    //$scope.discover();
 
-    $scope.hoverIn = function(item){console.log('hover in ', item)}
-    $scope.hoverOut = function(item){console.log('hover out ', item)}
 
-    //TODO
-    $scope.loadMore = function(){console.log('TODO: LOAD MORE')};
-
-    //TODO
-    $scope.lookupBalance = function(){
-        $scope.balanceLook = $scope.balanceLook;
-        if ($scope.balance[$scope.balanceLook]){$scope.balanceLookupValue = $scope.balance[$scope.balanceLook]}
-        if (!$scope.balance[$scope.balanceLook]){$scope.balanceLookupValue = 0}
-    };
-
-    $scope.selectedTab = 'INFORMATION';
-    $scope.selectTab = function(model){$scope.selectedTab = model;};
-
+    //BALANCE TEMPLATE
     $scope.balanceChart = {
         chart: {
             zoomType: 'x',
@@ -586,6 +471,13 @@ angular.module( 'conexus.home', [
         yAxis: {title: {text: null}},
         credits:{enabled:false},
     };
+
+    $scope.lookupBalance = function(){
+        $scope.balanceLook = $scope.balanceLook;
+        if ($scope.balance[$scope.balanceLook]){$scope.balanceLookupValue = $scope.balance[$scope.balanceLook]}
+        if (!$scope.balance[$scope.balanceLook]){$scope.balanceLookupValue = 0}
+    };
+
     $scope.renderBalances = function(){
         var sortable = [];
         for (var context in $rootScope.currentUser.balance) {sortable.push([context, $scope.reputation[context]])}
@@ -600,11 +492,20 @@ angular.module( 'conexus.home', [
     $scope.renderBalances();
 
 
+
+    $scope.selectedTab = 'INFORMATION';
+    $scope.selectTab = function(model){$scope.selectedTab = model;};
+
+
     //\\//\\//\\//\\//
     //TUTORIAL\\//\\//
     //\\//\\//\\//\\//
     $scope.isTutorial = true;
     if ($scope.isTutorial){
+
+
+        //QUERIES HERE!!!
+
 
         $rootScope.baseToken = {text:'UNIVERSAL TOKEN', description:'Universal Token Position; protocol where every member creates one Universal Token per day to serve an an eglatarian value position.'}
         $rootScope.baseManifold = {text:'+SPONSOR+ONMINT+'+$rootScope.currentUser.id, description:'Sponsorship On Mint postions have a triggering action potiental \'on mint\' of the specified token root the manifold (TOKEN+SPONSOR).'}
@@ -1060,13 +961,7 @@ angular.module( 'conexus.home', [
 
     //TODO: ASSOCIATIONS .. GRAPH TRAVERSAL CONTEXT
     $scope.loadAssociations = function(){
-        $scope.associations = $scope.tasks.map(function(obj){
-            if (obj.project){return obj.project.title;}
-            if (obj.task){return obj.project.title;}
-            if (obj.user){return obj.user.username;}
-            if (obj.item){return obj.item.title;}
-            if (obj.order){return obj.order}
-        });
+        $scope.associations = $scope.tasks.map(function(obj){});
         $scope.associations = [].concat.apply([], $scope.associations);
         $scope.associations = $scope.associations.filter(function(e){return e});
         function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
@@ -1102,7 +997,7 @@ angular.module( 'conexus.home', [
         $scope.loadTags();
         $scope.filterSet = {associations:$scope.sortedAssociationArray, tags:$scope.sortedTagArray, locations:$scope.sortedLocationArray}
     };
-    $scope.init();
+    //$scope.init();
 
     //\\//\\//\\//\\//
     //FILTERS\\//\\//
