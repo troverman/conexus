@@ -109,9 +109,10 @@ angular.module( 'conexus.contentList', [
             var contentIndex = $scope.contentList.map(function(obj){return obj.id}).indexOf(item.id);
             if (contentIndex != -1){
                 $scope.newReaction.associatedModels = [{type:'CONTENT', id:item.id}];
-                $scope.contentList[contentIndex].reactions[type]++;
+                $scope.contentList[contentIndex].data.apps.reactions[type]++;
             }
             ReactionModel.create($scope.newReaction);
+            $rootScope.pop(type, item.id);
         }
         else{$mdSidenav('login').toggle();}
     };

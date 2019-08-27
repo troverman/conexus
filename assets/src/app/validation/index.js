@@ -90,16 +90,22 @@ angular.module( 'conexus.validation', [
     //TODO: DEPRECIATE
     $scope.createReaction = function(item, type){
         if ($rootScope.currentUser){
-            $scope.newReaction.amount = 1;
-            $scope.newReaction.type = type;
-            $scope.newReaction.user = $rootScope.currentUser.id;
-            $scope.newReaction.associatedModels = [{type:'VALIDATION', id:item.id}];
-            $scope.validation.reactions[type]++;
+            $scope.newReaction = {
+                amount:1,
+                type:type,
+                user:$rootScope.currentUser.id,
+                associatedModels:[{type:'VALIDATION', id:item.id}],
+            };
+            $scope.validation.data.apps.reactions[type]++;
             ReactionModel.create($scope.newReaction);
+            $rootScope.pop(type, item.id);
         }
         else{$mdSidenav('login').toggle()}
     };
 
+//WATCH IDS THAT ARE SENT LOL!!!!! ! L!L L! L!
+
+    
     $sailsSocket.subscribe('validation', function (envelope) {
         switch(envelope.verb) {
             case 'created':

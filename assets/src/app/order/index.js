@@ -300,21 +300,17 @@ angular.module( 'conexus.order', [
     //TODO: DEPRECIATE
     $scope.createReaction = function(item, type){
         if ($rootScope.currentUser){
-            $scope.newReaction.amount = 1;
-            $scope.newReaction.type = type;
-            $scope.newReaction.user = $rootScope.currentUser.id;
-            var contentIndex = $scope.contentList.map(function(obj){return obj.id}).indexOf(item.id);
-            if (contentIndex != -1){
-                $scope.newReaction.associatedModels = [{type:'CONTENT', id:item.id}];
-                $scope.contentList[contentIndex].reactions[type]++;
-            }  
-            else{
-                $scope.newReaction.associatedModels = [{type:'ORDER', id:item.id}];
-                $scope.order.reactions[type]++;
-            }
-            ReactionModel.create($scope.newReaction);       
+            $scope.newReaction = {
+                amount:1,
+                type:type,
+                user:$rootScope.currentUser.id,
+                associatedModels:[{type:'ORDER', id:item.id}],
+            };
+            $scope.order.data.apps.reactions[type]++;
+            ReactionModel.create($scope.newReaction);
+            $rootScope.pop(type, item.id);
         }
-        else{$mdSidenav('login').toggle();}
+        else{$mdSidenav('login').toggle()}
     };
 
     $sailsSocket.subscribe('order', function (envelope) {

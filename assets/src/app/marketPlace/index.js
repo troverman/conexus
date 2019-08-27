@@ -89,8 +89,9 @@ angular.module( 'conexus.marketPlace', [
             $scope.newReaction.type = type;
             $scope.newReaction.user = $rootScope.currentUser.id;
             var index = $scope.items.map(function(obj){return obj.id}).indexOf(item.id);
-            if (index != -1){$scope.items[index].reactions[type]++;}
+            if (index != -1){$scope.items[index].data.apps.reactions[type]++;}
             ReactionModel.create($scope.newReaction);
+            $rootScope.pop(type, item.id);
         }
         else{$mdSidenav('login').toggle()}
     };

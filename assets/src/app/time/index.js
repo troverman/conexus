@@ -31,48 +31,47 @@ angular.module( 'conexus.time', [
     $scope.time = time;
     if(!$scope.time){$location.path('/')}
     $scope.time.model = 'TIME';
+
     titleService.setTitle($scope.time.amount + ' | Time | CRE8.XYZ');
    
     $scope.toolBarSettings = {toolbarButtons: ['fullscreen', 'bold', 'italic', 'underline', 'fontFamily', 'fontSize', 'insertLink', 'insertImage', 'insertTable', 'undo', 'redo', 'html']};
 
-    //TODO: DEPRECIATE | PATCH!
+
+
+    //TODO: DEPRECIATE
     $rootScope.associatedModels = [{
         id: $scope.time.id,
         type: 'TIME',
     }];
 
-    //TODO: DEPRECIATE | AS ASSOCIATIONS!
+    //TODO: DEPRECIATE
     if ($scope.time.tags){$scope.time.context = $scope.time.tags.split(',')}
 
+
+
     $scope.contentList = contentList;
-    $scope.newContent = {};
     $scope.newReaction = {};
     $scope.validations = validations;
 
     $scope.selectedTab = 'INFORMATION';
     $scope.selectTab = function(model){$scope.selectedTab = model;};
 
+
     //TODO: DEPRECIATE
     $scope.createReaction = function(item, type){
         if ($rootScope.currentUser){
-            //TIME, ORDER, CONTENT, ITEMS, TRANSACTION, TASK, REACTION
-            $scope.newReaction.amount = 1;
-            $scope.newReaction.type = type;
-            $scope.newReaction.user = $rootScope.currentUser.id;
-            var index = $scope.contentList.map(function(obj){return obj.id}).indexOf(item.id);
-            if (index != -1){
-                $scope.newReaction.associatedModels = [{type:'CONTENT', id:item.id}];
-                $scope.contentList[index].reactions[type]++;
-            }
-            else{
-                $scope.newReaction.associatedModels = [{type:'TIME', id:item.id}];
-                $scope.time.reactions[type]++;
-            }
+            $scope.newReaction = {
+                amount:1,
+                type:type,
+                user:$rootScope.currentUser.id,
+                associatedModels:[{type:'TIME', id:item.id}],
+            };
+            $scope.time.data.apps.reactions[type]++;
             ReactionModel.create($scope.newReaction);
-            $rootScope.pop(type, item.id)
+            $rootScope.pop(type, item.id);
         }
         else{$mdSidenav('login').toggle()}
-    };
+    }; 
 
     //TODO: WEBSOCKET
     $sailsSocket.subscribe('time', function (envelope) {

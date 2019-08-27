@@ -82,11 +82,21 @@ angular.module( 'conexus.search', [
     $scope.options = {scrollwheel: false};
 
 
-
     //TODO: DEPRECIATE
     $scope.createReaction = function(item, type){
-        if($rootScope.currentUser){}
-        else{$mdSidenav('login').toggle()}   
+        if ($rootScope.currentUser){
+            $scope.newReaction = {
+                amount:1,
+                type:type,
+                user:$rootScope.currentUser.id,
+                associatedModels:[{type:item.model, id:item.id}],
+            };
+            var index = $scope.searchResults.map(function(obj){return obj.id}).indexOf(item.id);
+            $scope.searchResults[index].data.apps.reactions[type]++;
+            ReactionModel.create($scope.newReaction);
+            $rootScope.pop(type, item.id);
+        }
+        else{$mdSidenav('login').toggle()}
     };
 
 

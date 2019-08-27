@@ -89,8 +89,8 @@
 				<a ng-click="$event.stopPropagation();" style="color:grey"><i class="fas fa-eye"></i>  {{validation.data.apps.attention.general || 0}}</a>
 				<a ng-click="$event.stopPropagation();createReaction(validation, 'plus')"><i class="fa fa-angle-up"></i> {{validation.data.apps.reactions.plus}} like </a> 
                 <a ng-click="$event.stopPropagation();createReaction(validation, 'minus')" ><i class="fa fa-angle-down"></i> {{validation.data.apps.reactions.minus}} dislike </a>
-		       	<a style="padding:5px;color:grey" ng-click="contentToggle(validation)"><i class="fa fa-comment-o"></i> comment </a>
-		       	<a style="padding:5px;color:grey" ng-click="validationToggle(validation)"><i class="fa fa-check"></i> validate </a>
+		       	<a ng-click="$event.stopPropagation();contentToggle(validation)" style="padding:5px;color:grey" ><i class="fa fa-comment-o"></i> comment </a>
+		       	<a ng-click="$event.stopPropagation();validationToggle(validation)" style="padding:5px;color:grey" ><i class="fa fa-check"></i> validate </a>
 		    </div>
 		</div>
 

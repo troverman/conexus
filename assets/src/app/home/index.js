@@ -369,7 +369,6 @@ angular.module( 'conexus.home', [
     //    $scope.init();
     //});
 
-
     //DEPRECIATE.. PUT IN NAV
     $scope.createReaction = function(item, type){
         if($rootScope.currentUser){
@@ -378,9 +377,9 @@ angular.module( 'conexus.home', [
             $scope.newReaction.type = type;
             $scope.newReaction.user = $rootScope.currentUser.id;
             var index = $scope.activity.map(function(obj){return obj.id}).indexOf(item.id);
-            $scope.activity[index].reactions[type]++;
+            $scope.activity[index].data.apps.reactions[type]++;
             ReactionModel.create($scope.newReaction);
-            $rootScope.pop(type, item.id)
+            $rootScope.pop(type, item.id);
         }
         else{$mdSidenav('login').toggle()}   
     };

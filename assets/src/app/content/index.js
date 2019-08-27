@@ -102,19 +102,19 @@ angular.module( 'conexus.content', [
     };
 
     //TODO: DEPRECIATE.. ? IN GLOBAL
-    $scope.createReaction = function(content, type){
+    $scope.createReaction = function(item, type){
         if($rootScope.currentUser){
             $scope.newReaction.amount = 1;
-            $scope.newReaction.associatedModels = [{type:'CONTENT', id:content.id}];
+            $scope.newReaction.associatedModels = [{type:'CONTENT', id:item.id}];
             $scope.newReaction.type = type;
             $scope.newReaction.user = $rootScope.currentUser.id;
 
-            var location = searchObject($scope.content, function (value) { return value != null && value != undefined && value.id == content.id; });
+            var location = searchObject($scope.content, function (value) { return value != null && value != undefined && value.id == item.id; });
 
             console.log(location[0]);
             location[0].value.data.apps.reactions[type]++;
             ReactionModel.create($scope.newReaction);
-            $rootScope.pop(type, item.id)
+            $rootScope.pop(type, item.id);
             //updateObject($scope.content, location[0].value, location[0].path);
         }
         else{$mdSidenav('login').toggle()}

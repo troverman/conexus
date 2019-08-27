@@ -47,10 +47,10 @@
 			
 			<div class="card-footer">
 				<a style="color:grey"><i class="fas fa-eye"></i> {{association.data.apps.attention.general || 0}}</a>
-				<a ng-click="$event.stopPropagation();createReaction(validation, 'plus')"><i class="fa fa-angle-up"></i> {{association.data.apps.reactions.plus || 0}} like </a> 
-                <a ng-click="$event.stopPropagation();createReaction(validation, 'minus')" ><i class="fa fa-angle-down"></i> {{association.data.apps.reactions.minus || 0}} dislike </a>
-		       	<a style="padding:5px;color:grey" ng-click="$event.stopPropagation();contentToggle(validation)"><i class="fa fa-comment-o"></i> comment </a>
-			    <a ng-click="$event.stopPropagation();validationToggle(validation)"><i class="fas fa-check"></i> validate </a>
+				<a ng-click="$event.stopPropagation();createReaction(association, 'plus')"><i class="fa fa-angle-up"></i> {{association.data.apps.reactions.plus || 0}} like </a> 
+                <a ng-click="$event.stopPropagation();createReaction(association, 'minus')" ><i class="fa fa-angle-down"></i> {{association.data.apps.reactions.minus || 0}} dislike </a>
+		       	<a ng-click="$event.stopPropagation();contentToggle(association)" style="padding:5px;color:grey"><i class="fa fa-comment-o"></i> comment </a>
+			    <a ng-click="$event.stopPropagation();validationToggle(association)"><i class="fas fa-check"></i> validate </a>
 		    </div>
 	
 		</div>

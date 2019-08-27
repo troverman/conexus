@@ -13,7 +13,7 @@ angular.module( 'conexus.discover', [
 	});
 }])
 
-.controller( 'DiscoverCtrl', ['$mdSidenav', '$rootScope', '$sce', '$scope', 'SearchModel', function DiscoverController( $mdSidenav, $rootScope, $sce, $scope, SearchModel ) {
+.controller( 'DiscoverCtrl', ['$mdSidenav', '$rootScope', '$sce', '$scope', 'ReactionModel', 'SearchModel', function DiscoverController( $mdSidenav, $rootScope, $sce, $scope, ReactionModel, SearchModel ) {
 
     //CREATE QUERY BY (MEMBER)-APPS
     //TODO: COMPLEX QUERY
@@ -45,6 +45,25 @@ angular.module( 'conexus.discover', [
     $scope.newLocation = {distance:0};
     $scope.options = {scrollwheel: false};
     $scope.windowOptions = {visible: false};
+
+
+
+    //TODO: DEPRECIATE
+    $scope.createReaction = function(item, type){
+        if ($rootScope.currentUser){
+            $scope.newReaction = {
+                amount:1,
+                type:type,
+                user:$rootScope.currentUser.id,
+                associatedModels:[{type:item.model, id:item.id}],
+            };
+            var index = $scope.activity.map(function(obj){return obj.id}).indexOf(item.id);
+            $scope.activity[index].data.apps.reactions[type]++;
+            ReactionModel.create($scope.newReaction);
+            $rootScope.pop(type, item.id);
+        }
+        else{$mdSidenav('login').toggle()}
+    };
     
     $scope.shuffleArray = function(d) {
         for (var c = d.length - 1; c > 0; c--) {

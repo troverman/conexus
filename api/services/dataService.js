@@ -449,6 +449,37 @@ module.exports = {
 
 	},
 
+	buildConnections: function(){
+
+		//APPS AND APP CONNECTIONS
+			//ABSTRACT CORE MODELS TO THE CENTRAL APP MODEL
+			//PROJECT, TASK, TIME --> APP.. 
+
+		//STATIC
+		//App.get();
+		var coreModels = [
+			'ASSOCIATION',
+			'ITEM',
+			'CONNECTION',
+			'CONTENT',
+			'REACTION',
+			'TRANSACTION',
+			'PROJECT',
+			'VALIDATION'
+		];
+
+		for (x in coreModels){
+			for (y in coreModels){
+				console.log(coreModels[x], '-', coreModels[y])
+			}
+		}
+
+
+		//POPULATE CONNECTIONS
+			
+
+	},
+
 	buildStringSpace: function(){
 
 		//TODO ASSOCIATION WALK VS PARENT

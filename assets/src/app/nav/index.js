@@ -1706,14 +1706,19 @@ angular.module( 'conexus.nav', [
     //TODO: MORE ON RENDER
     $rootScope.createReaction = function(item, type){
         if($rootScope.currentUser){
+
+
             $scope.newReaction.amount = 1;
             $scope.newReaction.associatedModels = [{type:item.model, id:item.id}];
             $scope.newReaction.type = type;
             $scope.newReaction.user = $rootScope.currentUser.id;
             $scope.item.reactions[type]++;
+            
             //UPDATE LOCAL SCOPE..
             ReactionModel.create($scope.newReaction);
             $rootScope.pop(type, item.id);
+
+
         }
         else{$mdSidenav('login').toggle()}
     };

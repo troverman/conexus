@@ -101,6 +101,8 @@ module.exports = {
 
 						if (model.associatedModels[x].type == 'ATTENTION'){
 							Attention.find({id:model.associatedModels[x].id}).then(function(newModel){
+								if (!newModel[0].data){newModel[0].data = {apps:{}}}
+								if (!newModel[0].data.apps){newModel[0].data.apps = {}}
 								if (newModel[0].data.apps.attention){newModel[0].data.apps.attention = {general:newModel[0].data.apps.attention.general + model.amount};}
 								else{newModel[0].data.apps.attention = {general:0}}
 								Attention.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){Attention.publishCreate(newModel);});
@@ -109,6 +111,8 @@ module.exports = {
 
 						if (model.associatedModels[x].type == 'APP'){
 							App.find({id:model.associatedModels[x].id}).then(function(newModel){
+								if (!newModel[0].data){newModel[0].data = {apps:{}}}
+								if (!newModel[0].data.apps){newModel[0].data.apps = {}}
 								if (newModel[0].data.apps.attention){newModel[0].data.apps.attention = {general:newModel[0].data.apps.attention.general + model.amount};}
 								else{newModel[0].data.apps.attention = {general:0}}
 								App.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){App.publishCreate(newModel);});
@@ -117,6 +121,8 @@ module.exports = {
 
 						if (model.associatedModels[x].type == 'ASSOCIATION'){
 							Association.find({id:model.associatedModels[x].id}).then(function(newModel){
+								if (!newModel[0].data){newModel[0].data = {apps:{}}}
+								if (!newModel[0].data.apps){newModel[0].data.apps = {}}
 								if (newModel[0].data.apps.attention){newModel[0].data.apps.attention = {general:newModel[0].data.apps.attention.general + model.amount};}
 								else{newModel[0].data.apps.attention = {general:0}}
 								Association.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){Association.publishCreate(newModel);});
@@ -125,6 +131,8 @@ module.exports = {
 
 						if (model.associatedModels[x].type == 'CONTENT'){
 							Content.find({id:model.associatedModels[x].id}).then(function(newModel){
+								if (!newModel[0].data){newModel[0].data = {apps:{}}}
+								if (!newModel[0].data.apps){newModel[0].data.apps = {}}
 								if (newModel[0].data.apps.attention){newModel[0].data.apps.attention = {general:newModel[0].data.apps.attention.general + model.amount};}
 								else{newModel[0].data.apps.attention = {general:0}}
 								Content.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){Content.publishCreate(newModel);});
@@ -133,6 +141,8 @@ module.exports = {
 
 						if (model.associatedModels[x].type == 'ITEM'){
 							Item.find({id:model.associatedModels[x].id}).then(function(newModel){
+								if (!newModel[0].data){newModel[0].data = {apps:{}}}
+								if (!newModel[0].data.apps){newModel[0].data.apps = {}}
 								if (newModel[0].data.apps.attention){newModel[0].data.apps.attention = {general:newModel[0].data.apps.attention.general + model.amount};}
 								else{newModel[0].data.apps.attention = {general:0}}
 								Item.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){Item.publishCreate(newModel);});
@@ -141,6 +151,8 @@ module.exports = {
 
 						if (model.associatedModels[x].type == 'ORDER'){
 							Order.find({id:model.associatedModels[x].id}).then(function(newModel){
+								if (!newModel[0].data){newModel[0].data = {apps:{}}}
+								if (!newModel[0].data.apps){newModel[0].data.apps = {}}
 								if (newModel[0].data.apps.attention){newModel[0].data.apps.attention = {general:newModel[0].data.apps.attention.general + model.amount};}
 								else{newModel[0].data.apps.attention = {general:0}}
 								Order.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){Order.publishCreate(newModel);});
@@ -149,6 +161,8 @@ module.exports = {
 
 						if (model.associatedModels[x].type == 'TASK'){
 							Task.find({id:model.associatedModels[x].id}).then(function(newModel){
+								if (!newModel[0].data){newModel[0].data = {apps:{}}}
+								if (!newModel[0].data.apps){newModel[0].data.apps = {}}
 								if (newModel[0].data.apps.attention){newModel[0].data.apps.attention = {general:newModel[0].data.apps.attention.general + model.amount};}
 								else{newModel[0].data.apps.attention = {general:0}}
 								Task.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){Task.publishCreate(newModel);});
@@ -157,6 +171,8 @@ module.exports = {
 
 						if (model.associatedModels[x].type == 'TIME'){
 							Time.find({id:model.associatedModels[x].id}).then(function(newModel){
+								if (!newModel[0].data){newModel[0].data = {apps:{}}}
+								if (!newModel[0].data.apps){newModel[0].data.apps = {}}
 								if (newModel[0].data.apps.attention){newModel[0].data.apps.attention = {general:newModel[0].data.apps.attention.general + model.amount};}
 								else{newModel[0].data.apps.attention = {general:0}}
 								Time.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){Time.publishCreate(newModel);});
@@ -165,6 +181,8 @@ module.exports = {
 
 						if (model.associatedModels[x].type == 'TRANSACTION'){
 							Transaction.find({id:model.associatedModels[x].id}).then(function(newModel){
+								if (!newModel[0].data){newModel[0].data = {apps:{}}}
+								if (!newModel[0].data.apps){newModel[0].data.apps = {}}
 								if (newModel[0].data.apps.attention){newModel[0].data.apps.attention = {general:newModel[0].data.apps.attention.general + model.amount};}
 								else{newModel[0].data.apps.attention = {general:0}}
 								Transaction.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){Transaction.publishCreate(newModel);});
@@ -173,6 +191,8 @@ module.exports = {
 
 						if (model.associatedModels[x].type == 'VALIDATION'){
 							Validation.find({id:model.associatedModels[x].id}).then(function(newModel){
+								if (!newModel[0].data){newModel[0].data = {apps:{}}}
+								if (!newModel[0].data.apps){newModel[0].data.apps = {}}
 								if (newModel[0].data.apps.attention){newModel[0].data.apps.attention = {general:newModel[0].data.apps.attention.general + model.amount};}
 								else{newModel[0].data.apps.attention = {general:0}}
 								Validation.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){Validation.publishCreate(newModel);});

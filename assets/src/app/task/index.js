@@ -148,22 +148,17 @@ angular.module( 'conexus.task', [
             $scope.newReaction.amount = 1;
             $scope.newReaction.type = type;
             $scope.newReaction.user = $rootScope.currentUser.id;
-            var contentIndex = $scope.contentList.map(function(obj){return obj.id}).indexOf(item.id);
-            if (contentIndex != -1){
-                $scope.newReaction.associatedModels = [{type:'CONTENT', id:item.id}];
-                $scope.contentList[contentIndex].reactions[type]++;
-            }
             var timeIndex = $scope.time.map(function(obj){return obj.id}).indexOf(item.id);
             if (timeIndex != -1){
                 $scope.newReaction.associatedModels = [{type:'TIME', id:item.id}];
-                $scope.time[timeIndex].reactions[type]++;
+                $scope.time[timeIndex].data.apps.reactions[type]++;
             }
             else{
                 $scope.newReaction.associatedModels = [{type:'TASK', id:item.id}];
-                $scope.task.reactions[type]++;
+                $scope.task.data.apps.reactions[type]++;
             }
             ReactionModel.create($scope.newReaction);
-            $rootScope.pop(type, item.id)
+            $rootScope.pop(type, item.id);
         }
         else{$mdSidenav('login').toggle();}
     };

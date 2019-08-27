@@ -18,7 +18,7 @@ angular.module( 'conexus.app', [
     });
 }])
 
-.controller( 'AppController', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', '$stateParams', 'app', 'AssociationModel', 'titleService', 'toaster', 'ValidationModel', function AppController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, $stateParams, app, AssociationModel, titleService, toaster, ValidationModel ) {
+.controller( 'AppController', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', '$stateParams', 'app', 'AssociationModel', 'ReactionModel', 'titleService', 'toaster', 'ValidationModel', function AppController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, $stateParams, app, AssociationModel, ReactionModel, titleService, toaster, ValidationModel ) {
     
     $scope.app = app;
     if(!$scope.app){$location.path('/')}
@@ -54,6 +54,22 @@ angular.module( 'conexus.app', [
 
     $scope.selectedTab = 'INFORMATION';
     $scope.selectTab = function(model){$scope.selectedTab = model;};
+
+    //TODO: DEPRECIATE
+    $scope.createReaction = function(item, type){
+        if ($rootScope.currentUser){
+            $scope.newReaction = {
+                amount:1,
+                type:type,
+                user:$rootScope.currentUser.id,
+                associatedModels:[{type:'APP', id:item.id}],
+            };
+            $scope.app.data.apps.reactions[type]++;
+            ReactionModel.create($scope.newReaction);
+            $rootScope.pop(type, item.id);
+        }
+        else{$mdSidenav('login').toggle()}
+    };
 
     $scope.associateApp = function(model){
         if ($rootScope.currentUser){

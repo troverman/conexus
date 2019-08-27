@@ -18,9 +18,23 @@ angular.module( 'conexus.connection', [
 	});
 }])
 
-.controller( 'ConnectionCtrl', ['$location', '$sce', '$scope', 'connection', 'titleService', function ConnectionController( $location, $sce, $scope, connection, titleService ) {
+.controller( 'ConnectionCtrl', ['$location', '$sce', '$scope', 'connection', 'ReactionModel', 'titleService', function ConnectionController( $location, $sce, $scope, connection, ReactionModel, titleService ) {
     titleService.setTitle('Connection | CRE8.XYZ');
     $scope.connection = connection;
     if(!$scope.connection){$location.path('/')}
     $scope.connection.model = 'CONNECTION';
+	//TODO: DEPRECIATE
+    $scope.createReaction = function(item, type){
+        if ($rootScope.currentUser){
+            $scope.newReaction = {
+                amount:1,
+                type:type,
+                user:$rootScope.currentUser.id,
+                associatedModels:[{type:'CONNECTION', id:item.id}],
+            };
+            $scope.connection.data.apps.reactions[type]++;
+            ReactionModel.create($scope.newReaction);
+        }
+        else{$mdSidenav('login').toggle()}
+    }; 
 }]);

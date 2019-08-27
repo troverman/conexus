@@ -18,7 +18,7 @@ angular.module( 'conexus.association', [
 	});
 }])
 
-.controller( 'AssociationCtrl', ['$location', '$sailsSocket', '$sce', '$scope', 'association', 'ValidationModel', 'titleService', function AssociationController( $location, $sailsSocket, $sce, $scope, association, ValidationModel, titleService ) {
+.controller( 'AssociationCtrl', ['$location', '$rootScope', '$sailsSocket', '$sce', '$scope', 'association', 'ReactionModel', 'titleService', 'ValidationModel', function AssociationController( $location, $rootScope, $sailsSocket, $sce, $scope, association, ReactionModel, titleService, ValidationModel ) {
 
 	$scope.association = association;
     if(!$scope.association){$location.path('/')}
@@ -85,6 +85,24 @@ angular.module( 'conexus.association', [
 
     $scope.selectedTab = 'INFORMATION';
     $scope.selectTab = function(model){$scope.selectedTab = model;};
+
+
+    //TODO: DEPRECIATE
+    $scope.createReaction = function(item, type){
+        if ($rootScope.currentUser){
+            $scope.newReaction = {
+                amount:1,
+                type:type,
+                user:$rootScope.currentUser.id,
+                associatedModels:[{type:'ASSOCIATION', id:item.id}],
+            };
+            $scope.association.data.apps.reactions[type]++;
+            ReactionModel.create($scope.newReaction);
+            $rootScope.pop(type, item.id);
+        }
+        else{$mdSidenav('login').toggle()}
+    };
+
 
     $sailsSocket.subscribe('association', function (envelope) {
         switch(envelope.verb) {

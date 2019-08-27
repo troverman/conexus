@@ -42,28 +42,23 @@ angular.module( 'conexus.tasks', [
     //TODO: DEPRECIATE
     $scope.createReaction = function(item, type){
         if ($rootScope.currentUser){
-            $scope.newReaction.amount = 1;
-            $scope.newReaction.type = type;
-            $scope.newReaction.user = $rootScope.currentUser.id;
-            //TIME, ORDER, CONTENT, ITEMS, TRANSACTION, TASK, REACTION
+            $scope.newReaction = {
+                amount:1,
+                type:type,
+                user:$rootScope.currentUser.id,
+            };
             var taskIndex = $scope.tasks.map(function(obj){return obj.id}).indexOf(item.id);
             if (taskIndex != -1){
                 $scope.newReaction.associatedModels = [{type:'TASK', id:item.id}];
-                $scope.tasks[taskIndex].reactions[type]++;
+                $scope.tasks[taskIndex].data.apps.reactions[type]++;
                 ReactionModel.create($scope.newReaction);
+                $rootScope.pop(type, item.id);
             }         
         }
         else{$mdSidenav('login').toggle();}
     };
 
-    //TODO: DEPRECIATE
-    $scope.reply = function(item){
-        if ($scope.currentUser){$mdSidenav('content').toggle();}
-        else{$mdSidenav('login').toggle();}
-    };
-
-
-
+  
 
 
     //COMPLEX QUERIES && POPULATION
@@ -165,7 +160,6 @@ angular.module( 'conexus.tasks', [
                 return obj;
             });
             $scope.taskCount = tasks.info.count;
-
             $scope.init();
         });
     };
@@ -183,7 +177,6 @@ angular.module( 'conexus.tasks', [
             $rootScope.stateIsLoading = false;
             tasks.map(function(obj){ 
                 obj.model = 'TASK' 
-                //if (obj.tags){obj.tags = obj.tags.split(',')}
             });
             Array.prototype.push.apply($scope.tasks, tasks);
             //$scope.init();
