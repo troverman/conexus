@@ -67,9 +67,9 @@
             </div>
 
             <div class="card-footer">
-                <a ng-click="$event.stopPropagation();" style="color:grey"><i class="fas fa-eye"></i>  {{transaction.attention.general || 0}}</a>
-                <a ng-click="$event.stopPropagation();createReaction(transaction, 'plus')"><i class="fas fa-angle-up"></i> {{transaction.reactions.plus}} like </a> 
-                <a ng-click="$event.stopPropagation();createReaction(transaction, 'minus')" ><i class="fas fa-angle-down"></i> {{transaction.reactions.minus}} dislike </a>
+                <a ng-click="$event.stopPropagation();" style="color:grey"><i class="fas fa-eye"></i>  {{transaction.data.apps.attention.general || 0}}</a>
+                <a ng-click="$event.stopPropagation();createReaction(transaction, 'plus')"><i class="fas fa-angle-up"></i> {{transaction.data.apps.reactions.plus}} like </a> 
+                <a ng-click="$event.stopPropagation();createReaction(transaction, 'minus')" ><i class="fas fa-angle-down"></i> {{transaction.data.apps.reactions.minus}} dislike </a>
                 <a ng-click="$event.stopPropagation();contentToggle(transaction);" style="padding:5px;color:grey"><i class="far fa-comment"></i> comment </a>
             </div>
             
@@ -86,8 +86,9 @@
                 <div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderMessage(item.content)"></span></div>
             </div>
             <div class="card-footer">
-                <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fas fa-angle-up"></i> {{item.reactions.plus}} like </a> 
-                <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fas fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
+                <a ng-click="$event.stopPropagation();"><i class="fas fa-eye"></i> {{time.data.apps.attention.general || 0}} </a>
+                <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fas fa-angle-up"></i> {{item.data.apps.reactions.plus}} like </a> 
+                <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fas fa-angle-down"></i> {{item.data.apps.reactions.minus}} dislike </a>
                 <a ng-click="$event.stopPropagation();" style="padding:5px;color:grey" ng-click="reply(item)" ui-sref="content({id:item.user.username})"><i class="far fa-comment"></i> comment </a>
                 <a ng-click="$event.stopPropagation();" style="color:grey" class="pull-right" href="content/{{item.id}}" ui-sref="content({id:item.user.username})"><i class="fas fa-link grey"></i></a>
             </div>

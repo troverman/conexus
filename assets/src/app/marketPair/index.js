@@ -14,13 +14,13 @@ angular.module( 'conexus.marketPair', [
         //TODO: DEPRECIATE RESOLVE
         resolve:{
             orders: ['$stateParams', 'OrderModel', function($stateParams, OrderModel) {
-                return OrderModel.getSome({setAlpha:$stateParams.setAlpha, setBeta:$stateParams.setBeta, limit:400, skip:0, sort:'createdAt DESC'});
+                return OrderModel.get({setAlpha:$stateParams.setAlpha, setBeta:$stateParams.setBeta, limit:400, skip:0, sort:'createdAt DESC'});
             }],
             mirrorOrders: ['$stateParams', 'OrderModel', function($stateParams, OrderModel) {
-                return OrderModel.getSome({setAlpha:$stateParams.setBeta, setBeta:$stateParams.setAlpha, limit:400, skip:0, sort:'createdAt DESC'});
+                return OrderModel.get({setAlpha:$stateParams.setBeta, setBeta:$stateParams.setAlpha, limit:400, skip:0, sort:'createdAt DESC'});
             }],
             contentList: ['$stateParams', 'ContentModel', function($stateParams, ContentModel) {
-                return ContentModel.getSome('marketPair', $stateParams.setAlpha, $stateParams.setBeta, 400, 0, 'createdAt DESC');
+                return ContentModel.get('marketPair', $stateParams.setAlpha, $stateParams.setBeta, 400, 0, 'createdAt DESC');
             }],
         }
 	});

@@ -2,7 +2,7 @@ angular.module('models.item', ['services', 'sails.io',])
 
 .service('ItemModel', ['$sailsSocket', 'utils', function($sailsSocket, utils) {
 
-    this.getSome = function(model) {
+    this.get = function(model) {
         var url = utils.prepareUrl('item');
         var query = {
             params:{
@@ -31,12 +31,6 @@ angular.module('models.item', ['services', 'sails.io',])
         return $sailsSocket.post(url, newModel).then(success, error);
     };
     
-    var success = function(response) {
-        return response.data;
-    };
-
-    var error = function(error) {
-        console.log(error);
-    };
-    
+    var success = function(response) {return response.data;};
+    var error = function(error) {console.log(error);};
 }]);

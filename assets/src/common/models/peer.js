@@ -2,7 +2,7 @@ angular.module('models.peer', ['services', 'sails.io',])
 
 .service('PeerModel', ['$sailsSocket', 'utils', function($sailsSocket, utils) {
 
-    this.getSome = function(model) {
+    this.get = function(model) {
         var url = utils.prepareUrl('peer'); 
         var query = {
             params:{

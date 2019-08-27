@@ -74,9 +74,9 @@
 			</div>
 			<div style="clear:both"></div>
 			<div class="card-footer">
-		       	<a ng-click="$event.stopPropagation();"><i class="fas fa-eye"></i> {{time.attention.general || 0}} </a>
-				<a ng-click="$event.stopPropagation();createReaction(time, 'plus')"><i class="fas fa-angle-up"></i> {{time.reactions.plus}} like </a> 
-				<a ng-click="$event.stopPropagation();createReaction(time, 'minus')" ><i class="fas fa-angle-down"></i> {{time.reactions.minus}} dislike </a>
+		       	<a ng-click="$event.stopPropagation();"><i class="fas fa-eye"></i> {{time.data.apps.attention.general || 0}} </a>
+				<a ng-click="$event.stopPropagation();createReaction(time, 'plus')"><i class="fas fa-angle-up"></i> {{time.data.apps.reactions.plus || 0}} like </a> 
+				<a ng-click="$event.stopPropagation();createReaction(time, 'minus')" ><i class="fas fa-angle-down"></i> {{time.data.apps.reactions.minus || 0}} dislike </a>
 				<a ng-click="$event.stopPropagation();contentToggle(time)"><i class="far fa-comment"></i> comment </a>
 		       	<a ng-click="$event.stopPropagation();validationToggle(time)"><i class="fas fa-check"></i> validate </a>
 			</div>
@@ -104,8 +104,8 @@
 					<div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></div>
 				</div>
 				<div class="card-footer">
-					<a href="#" ng-click="createReaction(item, 'plus')"><i class="fas fa-angle-up"></i> {{item.reactions.plus}} like </a> 
-					<a href="#" ng-click="createReaction(item, 'minus')" ><i class="fas fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
+					<a href="#" ng-click="createReaction(item, 'plus')"><i class="fas fa-angle-up"></i> {{item.data.apps.reactions.plus || 0}} like </a> 
+					<a href="#" ng-click="createReaction(item, 'minus')" ><i class="fas fa-angle-down"></i> {{item.data.apps.reactions.minus || 0}} dislike </a>
 					<a href="#" ng-click="reply(item)"><i class="far fa-comment"></i> comment </a>
 					<a style="padding:0px" class="pull-right" href="content/{{item.id}}" ui-sref="content({id:item.id}")><i class="fas fa-link grey"></i></a>
 				</div>

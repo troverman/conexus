@@ -52,7 +52,6 @@ module.exports = {
 
 	buildAssociatedModels:function(model){
 
-
 		Validation.native(function(err, validation) {
 
 			validation.find({"associatedModels.address":{$in :[model]}})

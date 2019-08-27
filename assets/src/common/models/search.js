@@ -2,7 +2,7 @@ angular.module('models.search', ['services', 'sails.io',])
 
 .service('SearchModel', ['$sailsSocket', 'utils', function($sailsSocket, utils) {
     
-    this.getSome = function(model) {
+    this.get = function(model) {
         var url = utils.prepareUrl('search');
         return $sailsSocket.get(url, {params:model}).then(success, error);
     };

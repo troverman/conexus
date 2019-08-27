@@ -14,10 +14,10 @@ angular.module( 'conexus.transaction', [
         //TODO: DEPRECIATE RESOLVE
         resolve: {
             transaction: ['$stateParams', 'TransactionModel', function($stateParams, TransactionModel){
-                return TransactionModel.getSome({id:$stateParams.id, limit:1, skip:0, sort:'createdAt DESC'});
+                return TransactionModel.get({id:$stateParams.id, limit:1, skip:0, sort:'createdAt DESC'});
             }],
             contentList: ['ContentModel', 'transaction', function(ContentModel, transaction){
-                return ContentModel.getSome({transaction:transaction[0].id, limit:100, skip:0, sort:'createdAt DESC'});
+                return ContentModel.get({transaction:transaction[0].id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
         }
     });
@@ -75,7 +75,7 @@ angular.module( 'conexus.transaction', [
         switch(envelope.verb) {
             case 'created':
                 if ($scope.transaction.id == envelope.data.id){
-                    $scope.transaction.attention = envelope.data.attention;
+                    $scope.transaction.data.apps.attention = envelope.data.data.apps.attention;
                 }
                 break;
         }

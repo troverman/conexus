@@ -29,7 +29,7 @@ module.exports = {
 		}
 
 		//TODO
-		if(req.query.associatedModels){
+		else if(req.query.associatedModels){
 			Reaction.find({associatedModels: {contains: req.query.associatedModels}})
 			.limit(limit)
 			.skip(skip)
@@ -59,19 +59,16 @@ module.exports = {
 	create: function (req, res) {
 
 		function createNotification(model, notificationModel){
-
 			//DO USER BY ASSOCIATION? || UPDATE OTHER MODELS.. 
 			User.find({id:model.user}).then(function(userModel){
 				userModel[0].balance = {};
 				userModel[0].reputation = {};
-
 				//console.log(notificationModel)
 				Notification.create(notificationModel).then(function(notificationModel){
 					console.log('created');
 					Notification.publishCreate(notificationModel);
 				});
 			});
-
 		};
 
 		function mintTokens(model){
@@ -80,7 +77,6 @@ module.exports = {
 				var tokenString = protocolTokens[x];
 				(function(tokenString) {
 					Token.find({string:tokenString}).then(function(tokenModels){
-
 						if (tokenModels.length == 0){
 							var newTokenModel = {
 								string:tokenString,
@@ -92,7 +88,6 @@ module.exports = {
 							model.user.balance[tokenString] = parseFloat(model.amount);
 							User.update({id:model.user.id}, {balance:model.user.balance}).then(function(user){});
 						}
-
 						else{
 							tokenModels[0].information.inCirculation = parseInt(tokenModels[0].information.inCirculation) + parseFloat(model.amount); 
 							Token.update({id:tokenModels[0].id}, {information:tokenModels[0].information}).then(function(model){console.log('TOKEN UPDATED', model)});
@@ -100,7 +95,6 @@ module.exports = {
 							else{model.user.balance[tokenString] = parseFloat(model.amount);}
 							User.update({id:model.user.id}, {balance:model.user.balance}).then(function(user){});
 						}
-
 					});
 				})(tokenString);
 			}
@@ -121,7 +115,7 @@ module.exports = {
 			amount: req.param('amount'),
 			type: req.param('type'),
 			user: req.param('user'),
-			data:{apps:{reactions: {plus:0,minus:0}, attention:{general:0}}}
+			data:{apps:{reactions:{plus:0,minus:0},attention:{general:0}}}
 		};
 
 		//TODO UPDATE COUNT IN DATA.APPS.REACTION
@@ -131,37 +125,45 @@ module.exports = {
 			if (err) {return console.log(err);}
 			else {
 
-				console.log(reaction);
+				console.log('CREATE REACTION', reaction);
 
 				User.find({id:model.user}).then(function(userModel){
 
 					reaction.user = userModel[0];
-					
 					mintTokens(reaction);
-
 					Reaction.publishCreate(reaction);
 
 					//TODO: REFACTOR AND CONDENSE
 					//INTERMUX THE MODELS
 					for (x in model.associatedModels){
+
+
+						//TODO: REDUCE CODE
+						//TODO: NAV REACTION
+						//TODO: REDUCE NOTIFICATION MODEL
 						if (model.associatedModels[x].type == 'CONTENT'){
-							Content.find({id:model.associatedModels[x].id}).then(function(contentModel){
+							Content.find({id:model.associatedModels[x].id}).then(function(newModel){
 
-								if (!contentModel[0].reactions){contentModel[0].reactions = {};}
-								if (!contentModel[0].reactions[model.type]){contentModel[0].reactions[model.type] = model.amount;}
-								else if (contentModel[0].reactions[model.type]){contentModel[0].reactions[model.type] = contentModel[0].reactions[model.type] + model.amount;}
-
-								Content.update({id:contentModel[0].id},{reactions:contentModel[0].reactions}).then(function(contentModel){
+								if (!newModel[0].data.apps.reactions){newModel[0].reactions = {};}
+								if (!newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = model.amount;}
+								else if (newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = newModel[0].data.apps.reactions[model.type] + model.amount;}
+								console.log(newModel[0].data)
+								Content.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){
 									console.log('UPDATE');
 									res.json(reaction);
 								});
 
+								//AUDIT NOTIFICATION MODEL STRUCT
 								var notificationModel = {
-									user: contentModel[0].user,
+									user: newModel[0].user,
 									type: 'REACTION',
 									title: 'New '+model.type,
-									content:userModel[0].username+' '+model.type+' Content '+contentModel[0].id,
-									info:{user: userModel[0], content:contentModel[0], type:model.type},
+									content:userModel[0].username+' '+model.type+' Content '+newModel[0].id,
+									info:{
+										user: userModel[0], 
+										content:newModel[0], 
+										type:model.type
+									},
 									priority:50,
 								};
 
@@ -170,6 +172,9 @@ module.exports = {
 							});
 
 						}
+
+
+						//TODO.....
 						if (model.associatedModels[x].type == 'ITEM'){
 							Item.find({id:model.associatedModels[x].id}).then(function(itemModel){
 								if (!itemModel[0].reactions){itemModel[0].reactions = {};}

@@ -1,9 +1,7 @@
 <div class="card" ng-click="cardDetailToggle(item)">
     <div style="padding:16px;">
         <div style="float:right;text-align:right">
-            <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
-                <i class="fas fa-chevron-down"></i>
-            </a>
+            <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><i class="fas fa-chevron-down"></i></a>
         </div>
         <div>
             <a ng-click="$event.stopPropagation()" style="display:inline;font-weight:600;" href="member/{{item.user.username}}" ui-sref="member.activity({path:item.user.username})">
@@ -17,11 +15,9 @@
         <div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></div>
     </div>
     <div class="card-footer">
-        <a style="color:grey" href="time/{{item.id}}" ui-sref="time({id:item.id})">
-            <i class="fas fa-eye"></i> {{item.attention.general || 0}}
-        </a>
-        <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fas fa-angle-up"></i> {{item.reactions.plus}} like </a> 
-        <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fas fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
+        <a style="color:grey"><i class="fas fa-eye"></i> {{item.data.apps.attention.general || 0}}</a>
+        <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fas fa-angle-up"></i> {{item.data.apps.reactions.plus || 0}} like </a> 
+        <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fas fa-angle-down"></i> {{item.data.apps.reactions.minus || 0}} dislike </a>
         <a ng-click="$event.stopPropagation();contentToggle(item)"><i class="far fa-comment"></i> comment </a>
         <a ng-click="$event.stopPropagation();validationToggle(item)"><i class="fas fa-check"></i> validate </a>
         <a ng-click="$event.stopPropagation()" style="padding:0px" class="pull-right" href="time/{{item.id}}" ui-sref="time({id:item.id})"><i class="fas fa-link grey"></i></a>

@@ -12,7 +12,7 @@ angular.module( 'conexus.contentList', [
 		},
         //TODO: DEPRECIATE RESOLVE
         resolve:{
-            contentList: ['ContentModel', function(ContentModel){return ContentModel.getSome({limit:20, skip:0, sort:'createdAt DESC'})}],
+            contentList: ['ContentModel', function(ContentModel){return ContentModel.get({limit:20, skip:0, sort:'createdAt DESC'})}],
         }
 	});
 }])
@@ -128,7 +128,7 @@ angular.module( 'conexus.contentList', [
         $scope.searchQuery = [{text:filter}];
         $rootScope.stateIsLoading = true;
         $location.search('tags', filter);
-        ContentModel.getSome({tag:filter, limit:20, skip:0, sort:'createdAt DESC'}).then(function(contentList){
+        ContentModel.get({tag:filter, limit:20, skip:0, sort:'createdAt DESC'}).then(function(contentList){
             $rootScope.stateIsLoading = false;
             $scope.selectedTag = filter;
             $scope.contentList = contentList;
@@ -140,7 +140,7 @@ angular.module( 'conexus.contentList', [
     $scope.loadMore = function() {
         $scope.skip = $scope.skip + 20;
         $rootScope.stateIsLoading = true;
-        ContentModel.getSome({limit:20, skip:$scope.skip, sort:$scope.selectedSort}).then(function(contentList) {
+        ContentModel.get({limit:20, skip:$scope.skip, sort:$scope.selectedSort}).then(function(contentList) {
             $rootScope.stateIsLoading = false;
             Array.prototype.push.apply($scope.contentList, contentList);
             $scope.loadAssociations();
@@ -155,7 +155,7 @@ angular.module( 'conexus.contentList', [
 
     $scope.search = function(){
         $rootScope.stateIsLoading = true;
-        ContentModel.getSome({search:$scope.searchQuery, limit:20, skip:0, sort:'createdAt DESC'}).then(function(models){
+        ContentModel.get({search:$scope.searchQuery, limit:20, skip:0, sort:'createdAt DESC'}).then(function(models){
             $rootScope.stateIsLoading = false;
             $scope.contentList = models;
         });
@@ -170,10 +170,6 @@ angular.module( 'conexus.contentList', [
         });
     };
     //TODO: COMPLEX QUERIES..
-
-
-
-
 
     console.log($location.search())
     if ($location.search().tags){

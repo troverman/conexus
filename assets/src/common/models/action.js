@@ -2,7 +2,7 @@ angular.module('models.action', ['services', 'sails.io',])
 
 .service('ActionModel', ['$sailsSocket', 'utils', function($sailsSocket, utils) {
 
-    this.getSome = function(model) {
+    this.get = function(model) {
         var url = utils.prepareUrl('action'); 
         var query = {
             params:{

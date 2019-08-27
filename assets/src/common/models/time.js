@@ -2,7 +2,7 @@ angular.module('models.time', ['services', 'sails.io',])
 
 .service('TimeModel',['utils', '$sailsSocket', function(utils, $sailsSocket) {
     
-    this.getSome = function(model) {
+    this.get = function(model) {
         var url = utils.prepareUrl('time');
         var query = {
             params:{

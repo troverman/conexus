@@ -16,7 +16,7 @@ angular.module( 'conexus.member', [
 		resolve: {
             member: ['$stateParams', 'UserModel', function($stateParams, UserModel){
                 //TODO: REFACTOR // TODO ALLOW FOR ADDRESS LOOKUP TOO username || OR ADDRESS IN FILTER
-                return UserModel.getSome({username:$stateParams.path,limit:1,skip:0,sort:'createdAt DESC'})
+                return UserModel.get({username:$stateParams.path,limit:1,skip:0,sort:'createdAt DESC'})
             }],
         }
 	})
@@ -32,22 +32,22 @@ angular.module( 'conexus.member', [
         //TODO: DEPRECIATE RESOLVE
         resolve: {
             orders: ['member', 'OrderModel', function(member, OrderModel){
-                return OrderModel.getSome({user:member.id, limit:20, skip:0, sort:'createdAt DESC'});
+                return OrderModel.get({user:member.id, limit:20, skip:0, sort:'createdAt DESC'});
             }],
             contentList: ['ContentModel', 'member', function(ContentModel, member) {
-                return ContentModel.getSome({user:member.id, limit:20, skip:0, sort:'createdAt DESC'});
+                return ContentModel.get({user:member.id, limit:20, skip:0, sort:'createdAt DESC'});
             }],
             profileContent: ['ContentModel', 'member', function(ContentModel, member) {
-                return ContentModel.getSome({profile:member.id, limit:20, skip:0, sort:'createdAt DESC'});
+                return ContentModel.get({profile:member.id, limit:20, skip:0, sort:'createdAt DESC'});
             }],
             time: ['member', 'TimeModel', function(member, TimeModel) {
-                return TimeModel.getSome({user:member.id, limit:20, skip:0, sort:'createdAt DESC'});
+                return TimeModel.get({user:member.id, limit:20, skip:0, sort:'createdAt DESC'});
             }],
             transactionsFrom: ['member', 'TransactionModel', function(member, TransactionModel) {
-                return TransactionModel.getSome({from:member.id, limit:20, skip:0, sort:'createdAt DESC'});
+                return TransactionModel.get({from:member.id, limit:20, skip:0, sort:'createdAt DESC'});
             }],
             transactionsTo: ['member', 'TransactionModel', function(member, TransactionModel) {
-                return TransactionModel.getSome({to:member.id, limit:20, skip:0, sort:'createdAt DESC'});
+                return TransactionModel.get({to:member.id, limit:20, skip:0, sort:'createdAt DESC'});
             }],
         }
     })
@@ -80,7 +80,7 @@ angular.module( 'conexus.member', [
         //TODO: DEPRECIATE RESOLVE
         resolve: {
             actions: ['ActionModel', 'member', function(ActionModel, member) {
-                return ActionModel.getSome({user:member.id, limit:20, skip:0, sort:'createdAt DESC'});
+                return ActionModel.get({user:member.id, limit:20, skip:0, sort:'createdAt DESC'});
             }]
         }
     })
@@ -96,7 +96,7 @@ angular.module( 'conexus.member', [
         //TODO: DEPRECIATE RESOLVE
         resolve: {
             contentList: ['ContentModel', 'member', function(ContentModel, member) {
-                return ContentModel.getSome({user:member.id, limit:20, skip:0, sort:'createdAt DESC'});
+                return ContentModel.get({user:member.id, limit:20, skip:0, sort:'createdAt DESC'});
             }]
         }
     })
@@ -112,7 +112,7 @@ angular.module( 'conexus.member', [
         //TODO: DEPRECIATE RESOLVE
         resolve: {
 
-            //TODO: REFACTOR GETSOME
+            //TODO: REFACTOR get
             followers: ['member', 'FollowerModel', function(member, FollowerModel) {
                 return FollowerModel.getFollowers(member);
             }],
@@ -130,7 +130,7 @@ angular.module( 'conexus.member', [
         //TODO: DEPRECIATE RESOLVE
         resolve: {
 
-            //TODO: REFACTOR GETSOME FILTER QUERY
+            //TODO: REFACTOR get FILTER QUERY
             following: ['member', 'FollowerModel', function(member, FollowerModel) {
                 return FollowerModel.getFollowing(member);
             }],
@@ -150,7 +150,7 @@ angular.module( 'conexus.member', [
         //INIT FILTER..
         resolve: {
             items: ['member', 'ItemModel', function(member, ItemModel) {
-                return ItemModel.getSome({user:member.id, limit:100, skip:0, sort:'createdAt DESC'});
+                return ItemModel.get({user:member.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
         }
     })
@@ -169,10 +169,10 @@ angular.module( 'conexus.member', [
         //TODO: BETTER GET...
         resolve: {
             transactionsFrom: ['member', 'TransactionModel', function(member, TransactionModel) {
-                return TransactionModel.getSome({from:member.id, limit:100, skip:0, sort:'createdAt DESC'});
+                return TransactionModel.get({from:member.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
             transactionsTo: ['member', 'TransactionModel', function(member, TransactionModel) {
-                return TransactionModel.getSome({to:member.id, limit:100, skip:0, sort:'createdAt DESC'});
+                return TransactionModel.get({to:member.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
         }
     })
@@ -188,7 +188,7 @@ angular.module( 'conexus.member', [
         //TODO: DEPRECIATE RESOLVE
         resolve: {
             orders: ['member', 'OrderModel', function(member, OrderModel){
-                return OrderModel.getSome({user:member.id, limit:20, skip:0, sort:'createdAt DESC'});
+                return OrderModel.get({user:member.id, limit:20, skip:0, sort:'createdAt DESC'});
             }],
         }
     })
@@ -204,7 +204,7 @@ angular.module( 'conexus.member', [
         //TODO: DEPRECIATE RESOLVE
         resolve: {
             projects: ['MemberModel', 'member', function(MemberModel, member) {
-                return  MemberModel.getSome({user:member.id, limit:100, skip:0, sort:'createdAt DESC'});
+                return  MemberModel.get({user:member.id, limit:100, skip:0, sort:'createdAt DESC'});
             }]
         }
     })
@@ -220,7 +220,7 @@ angular.module( 'conexus.member', [
         //TODO: DEPRECIATE RESOLVE
         resolve: {
             tasks: ['member', 'TaskModel', function(member, TaskModel) {
-                return TaskModel.getSome({user:member.id, limit:20, skip:0, sort:'createdAt DESC'});
+                return TaskModel.get({user:member.id, limit:20, skip:0, sort:'createdAt DESC'});
             }]
         }
     })
@@ -236,7 +236,7 @@ angular.module( 'conexus.member', [
         //TODO: DEPRECIATE RESOLVE
         resolve: {
             time: ['member', 'TimeModel', function(member, TimeModel) {
-                return TimeModel.getSome({user:member.id, limit:100, skip:0, sort:'createdAt DESC'});
+                return TimeModel.get({user:member.id, limit:100, skip:0, sort:'createdAt DESC'});
             }]
         }
     })
@@ -961,7 +961,7 @@ angular.module( 'conexus.member', [
         $scope.searchQuery.push({text:filter})
         $rootScope.stateIsLoading = true;
         //TODO: COMPLEX QUERY
-        ItemModel.getSome({user:$scope.member.id, limit:100, skip:0, sort:'createdAt DESC'}).then(function(items){
+        ItemModel.get({user:$scope.member.id, limit:100, skip:0, sort:'createdAt DESC'}).then(function(items){
             $rootScope.stateIsLoading = false;
             $scope.selectedTag = filter;
             items = items.map(function(obj){
@@ -977,7 +977,7 @@ angular.module( 'conexus.member', [
     $scope.loadMore = function() {
         $scope.skip = $scope.skip + 20;
         $rootScope.stateIsLoading = true;
-        ItemModel.getSome({limit:100, skip:$scope.skip, sort:$scope.selectedSort}).then(function(tasks) {
+        ItemModel.get({limit:100, skip:$scope.skip, sort:$scope.selectedSort}).then(function(tasks) {
             $rootScope.stateIsLoading = false;
             items = items.map(function(obj){
                 if(obj.tags){obj.tags = obj.tags.split(',')}
@@ -1396,7 +1396,7 @@ angular.module( 'conexus.member', [
         //    $location.search('assets',asset);
         //}
 
-        TransactionModel.getSome(oldQuery, JSON.stringify(newQuery)).then(function(transactionModels){
+        TransactionModel.get(oldQuery, JSON.stringify(newQuery)).then(function(transactionModels){
             $rootScope.stateIsLoading = false;
             $scope.transactions = transactionModels;
             //$scope.updateGraph();

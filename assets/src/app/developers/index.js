@@ -55,7 +55,7 @@ angular.module( 'conexus.developers', [
         //if (query.model == 'ASSOCIATION'){}
         //if (query.model == 'BLOCK'){}
         if (query.model == 'CONTENT'){
-            ContentModel.getSome('', '', 1, 0, 'createdAt DESC').then(function(models){
+            ContentModel.get('', '', 1, 0, 'createdAt DESC').then(function(models){
                 $scope.results.content = JSON.stringify(models, null, 4);
             });
         }
@@ -69,7 +69,7 @@ angular.module( 'conexus.developers', [
         //if (query.model == 'MOTION'){}
         //if (query.model == 'NOTIFICATION'){}
         if (query.model == 'ORDER'){
-            OrderModel.getSome('', '', '', 1, 0, 'createdAt DESC').then(function(models){
+            OrderModel.get('', '', '', 1, 0, 'createdAt DESC').then(function(models){
                 $scope.results.order = JSON.stringify(models, null, 4);
             });
         }
@@ -82,7 +82,7 @@ angular.module( 'conexus.developers', [
 
         //EVERY API REQUEST COULD GO THOUGH SEARCH.. LOL SHOUD IT ?
         if (query.model == 'SEARCH'){
-            TransactionModel.getSome('', '', 1, 0, 'createdAt DESC').then(function(models){
+            TransactionModel.get('', '', 1, 0, 'createdAt DESC').then(function(models){
                 $scope.results.search = JSON.stringify(models, null, 4);
             });
         }
@@ -92,13 +92,13 @@ angular.module( 'conexus.developers', [
         //if (query.model == 'TOKEN'){}
         //if (query.model == 'TIME'){}
         if (query.model == 'TRANSACTION'){
-            TransactionModel.getSome('', '', 1, 0, 'createdAt DESC').then(function(models){
+            TransactionModel.get('', '', 1, 0, 'createdAt DESC').then(function(models){
                 $scope.results.transaction = JSON.stringify(models, null, 4);
             });
         }
         //if (query.model == 'TX'){}
         if (query.model == 'VALIDATION'){
-            ValidationModel.getSome('', '', 1, 0, 'createdAt DESC').then(function(models){
+            ValidationModel.get('', '', 1, 0, 'createdAt DESC').then(function(models){
                 $scope.results.validation = JSON.stringify(models, null, 4);
             });
         }
@@ -949,7 +949,7 @@ angular.module( 'conexus.developers', [
 
     $scope.protocolStructureModel = JSON.stringify({
         create: "function(){return true}",
-        getSome: "function(){return true}"
+        get: "function(){return true}"
     }, null, 4);
 
     $scope.newOrderModel = JSON.stringify([{
@@ -993,7 +993,7 @@ angular.module( 'conexus.developers', [
 
     $scope.actionTokenization = JSON.stringify({
         create:'function(newFollow){}',
-        getSome:'function(newQuery){}'
+        get:'function(newQuery){}'
     }, null, 4);
 
     console.log($scope.actionTokenization)

@@ -14,16 +14,16 @@ angular.module( 'conexus.task', [
         //TODO: DEPRECIATE RESOLVE
         resolve: {
             task: ['$stateParams', 'TaskModel', function($stateParams, TaskModel){
-                return TaskModel.getSome({id:$stateParams.id, limit:1, skip:0, sort:'createdAt DESC'});
+                return TaskModel.get({id:$stateParams.id, limit:1, skip:0, sort:'createdAt DESC'});
             }],
             contentList: ['ContentModel', 'task', function(ContentModel, task){
-                return ContentModel.getSome({task:task.id, limit:100, skip:0, sort:'createdAt DESC'});
+                return ContentModel.get({task:task.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
             time: ['TimeModel', 'task', function(TimeModel, task){
-                return TimeModel.getSome({task:task.id, limit:100, skip:0, sort:'createdAt DESC'});
+                return TimeModel.get({task:task.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
             validations: ['ValidationModel', 'task', function(ValidationModel, task){
-                return ValidationModel.getSome({task:task.id, limit:100, skip:0, sort:'createdAt DESC'});
+                return ValidationModel.get({task:task.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
         }
     });
@@ -352,7 +352,7 @@ angular.module( 'conexus.task', [
         switch(envelope.verb) {
             case 'created':
                 if ($scope.task.id == envelope.data.id){
-                    $scope.task.attention = envelope.data.attention;
+                    $scope.task.data.apps.attention = envelope.data.data.apps.attention;
                 }
                 break;
         }

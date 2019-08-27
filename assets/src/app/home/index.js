@@ -37,25 +37,25 @@ angular.module( 'conexus.home', [
             //TODO: GET FEED
             //TODO: COMPLEX QUERY
             contentList: ['ContentModel', function(ContentModel){
-                return ContentModel.getSome({limit:10, skip:0, sort:'createdAt DESC'});
+                return ContentModel.get({limit:10, skip:0, sort:'createdAt DESC'});
             }],
             members: ['UserModel', function(UserModel){
-                return UserModel.getSome({limit:30, skip:0, sort:'createdAt DESC'});
+                return UserModel.get({limit:30, skip:0, sort:'createdAt DESC'});
             }],
             orders: ['OrderModel', function(OrderModel) {
-                return OrderModel.getSome({limit:10, skip:0, sort:'createdAt DESC'});
+                return OrderModel.get({limit:10, skip:0, sort:'createdAt DESC'});
             }],
             projects: ['ProjectModel', function(ProjectModel) {
-                return ProjectModel.getSome({limit:10, skip:0, sort:'createdAt DESC'});
+                return ProjectModel.get({limit:10, skip:0, sort:'createdAt DESC'});
             }],
             tasks: ['TaskModel', function(TaskModel) {
-                return TaskModel.getSome({limit:10, skip:0, sort:'createdAt DESC'});
+                return TaskModel.get({limit:10, skip:0, sort:'createdAt DESC'});
             }],
             time: ['TimeModel', function(TimeModel) {
-                return TimeModel.getSome({limit:10, skip:0, sort:'createdAt DESC'});
+                return TimeModel.get({limit:10, skip:0, sort:'createdAt DESC'});
             }],
             transactions: ['TransactionModel', function(TransactionModel) {
-                return TransactionModel.getSome({limit:10, skip:0, sort:'createdAt DESC'});
+                return TransactionModel.get({limit:10, skip:0, sort:'createdAt DESC'});
             }],
 
             //TODO: GET FEED CUSTOMIZED -- STORE IN USER OBJ
@@ -64,16 +64,16 @@ angular.module( 'conexus.home', [
                 return FollowerModel.getFollowing($rootScope.currentUser);
             }],
             memberProjects: ['$rootScope', 'MemberModel', function($rootScope, MemberModel) {
-                return MemberModel.getSome({user:$rootScope.currentUser.id, limit:100, skip:0, sort:'createdAt DESC'});
+                return MemberModel.get({user:$rootScope.currentUser.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
 
             //SELF ASSOCIATION TO TASK WHEN INTERACT. YEP!
             memberTasks: ['$rootScope', 'TaskModel', function($rootScope, TaskModel) {
-                return TaskModel.getSome({user:$rootScope.currentUser.id, limit:100, skip:0, sort:'createdAt DESC'});
+                return TaskModel.get({user:$rootScope.currentUser.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
 
             positions: ['$rootScope', 'OrderModel', function($rootScope, OrderModel) {
-                return OrderModel.getSome({user:$rootScope.currentUser.id, limit:100, skip:0, sort:'createdAt DESC'});
+                return OrderModel.get({user:$rootScope.currentUser.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
 
 
@@ -146,7 +146,7 @@ angular.module( 'conexus.home', [
                 //TODO: SIMPLY UPDATE QUERY :)
                 //$scope.searchQuery = [{text:'Current Location, 1mi | '+lng.toFixed(3)+', '+lat.toFixed(3), type:'LOCATION', query:{coordinates:[lng,lat]}}];
                 //TODO: DISTANCE
-                ProjectModel.getSome({location:[lng,lat], limit:10, skip:0}).then(function(projects){
+                ProjectModel.get({location:[lng,lat], limit:10, skip:0}).then(function(projects){
                     $scope.activity = projects.map(function(obj){
                         obj.model = 'PROJECT';
                         return obj;
@@ -380,6 +380,7 @@ angular.module( 'conexus.home', [
             var index = $scope.activity.map(function(obj){return obj.id}).indexOf(item.id);
             $scope.activity[index].reactions[type]++;
             ReactionModel.create($scope.newReaction);
+            $rootScope.pop(type, item.id)
         }
         else{$mdSidenav('login').toggle()}   
     };
@@ -585,7 +586,7 @@ angular.module( 'conexus.home', [
                         center: {latitude: lat, longitude: lng},
                         zoom: 14
                     };
-                    ProjectModel.getSome({location:[lng,lat], limit:10, skip:0}).then(function(projects){
+                    ProjectModel.get({location:[lng,lat], limit:10, skip:0}).then(function(projects){
                         $scope.projects = projects;
                         $scope.markers = [];
 
@@ -949,7 +950,7 @@ angular.module( 'conexus.home', [
     //TODO: BETTER
     $scope.filterContent = function(filter) {
         $rootScope.stateIsLoading = true;
-        ContentModel.getSome({tag:filter, limit:20, skip:0, sort:'createdAt DESC'}).then(function(contentList){
+        ContentModel.get({tag:filter, limit:20, skip:0, sort:'createdAt DESC'}).then(function(contentList){
             $rootScope.stateIsLoading = false;
             $scope.activity = contentList;
             $scope.loadTags();

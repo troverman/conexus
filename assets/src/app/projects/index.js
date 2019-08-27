@@ -14,7 +14,7 @@ angular.module( 'conexus.projects', [
         //TODO: DEPRECIATE RESOLVE
 		resolve: {
             projects: ['ProjectModel', function(ProjectModel) {
-                return ProjectModel.getSome({limit:100, skip:0, sort:'createdAt DESC', filter:[]});
+                return ProjectModel.get({limit:100, skip:0, sort:'createdAt DESC', filter:[]});
             }]
         }
 	});
@@ -29,7 +29,7 @@ angular.module( 'conexus.projects', [
 
     //TODO: BETTER | ROOTSCOPE
     if ($rootScope.currentUser){
-        MemberModel.getSome({user:$rootScope.currentUser.id, limit:100, skip:0, sort:'createdAt DESC'}).then(function(memberProjects){
+        MemberModel.get({user:$rootScope.currentUser.id, limit:100, skip:0, sort:'createdAt DESC'}).then(function(memberProjects){
             $scope.memberProjects = memberProjects.map(function(obj){
                 obj.project.model = 'PROJECT';
                 return obj.project
@@ -92,7 +92,7 @@ angular.module( 'conexus.projects', [
                     zoom: 14
                 };
 
-                ProjectModel.getSome({location:[$scope.lng,$scope.lat], limit:1000, skip:0}).then(function(projects){
+                ProjectModel.get({location:[$scope.lng,$scope.lat], limit:1000, skip:0}).then(function(projects){
                     $scope.projects = projects.map(function(obj){
                         obj.model = 'PROJECT';
                         return obj;
@@ -114,7 +114,7 @@ angular.module( 'conexus.projects', [
     $scope.getMyProjects = function(){
         if ($rootScope.currentUser){
             $rootScope.stateIsLoading = true;
-            MemberModel.getSome({user:$rootScope.currentUser.id, limit:100, skip:0, sort:'createdAt DESC'}).then(function(memberProjects){
+            MemberModel.get({user:$rootScope.currentUser.id, limit:100, skip:0, sort:'createdAt DESC'}).then(function(memberProjects){
                 $rootScope.stateIsLoading = false;
                 $scope.projects = memberProjects.map(function(obj){
                     obj.project.model = 'PROJECT';
@@ -270,7 +270,7 @@ angular.module( 'conexus.projects', [
         }
     ];
 
-    //SearchModel.getSome(query).then(function(searchResults){
+    //SearchModel.get(query).then(function(searchResults){
     //    console.log(searchResults)
     //}); 
 
@@ -289,7 +289,7 @@ angular.module( 'conexus.projects', [
     $scope.loadMore = function() {
         $scope.skip = $scope.skip + 100;
         $rootScope.stateIsLoading = true;
-        ProjectModel.getSome({ProjectModellimit:100, skip:$scope.skip, sort:$scope.selectedSort}).then(function(projects) {
+        ProjectModel.get({ProjectModellimit:100, skip:$scope.skip, sort:$scope.selectedSort}).then(function(projects) {
             $rootScope.stateIsLoading = false;
             Array.prototype.push.apply($scope.projects, projects.map(function(obj){obj.model='PROJECT';return obj}));
         });
@@ -297,7 +297,7 @@ angular.module( 'conexus.projects', [
     $scope.search = function(){
         $rootScope.stateIsLoading = true;
         console.log($scope.searchQuery)
-        ProjectModel.getSome({search:$scope.searchQuery, limit:20, skip:0, sort:'createdAt DESC'}).then(function(projects){
+        ProjectModel.get({search:$scope.searchQuery, limit:20, skip:0, sort:'createdAt DESC'}).then(function(projects){
             $rootScope.stateIsLoading = false;
             $scope.projects = projects.map(function(obj){
                 obj.model = 'PROJECT';
@@ -308,7 +308,7 @@ angular.module( 'conexus.projects', [
     $scope.selectSort = function(sort){
         $scope.selectedSort = sort;
         $rootScope.stateIsLoading = true;
-        ProjectModel.getSome({search:$scope.searchQuery, limit:20, skip:$scope.skip, sort:$scope.selectedSort}).then(function(projects){
+        ProjectModel.get({search:$scope.searchQuery, limit:20, skip:$scope.skip, sort:$scope.selectedSort}).then(function(projects){
             $rootScope.stateIsLoading = false;
             $scope.projects = projects.map(function(obj){
                 obj.model = 'PROJECT';
@@ -392,7 +392,7 @@ angular.module( 'conexus.projects', [
             console.log($scope.searchModel)
 
             //TODO:
-            SearchModel.getSome($scope.searchModel).then(function(projects){
+            SearchModel.get($scope.searchModel).then(function(projects){
 
                 console.log(projects);
 

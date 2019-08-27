@@ -10,30 +10,24 @@
     </div>
 </div>
 <div class="container">
-
 	<div class="spacing-10"></div>
-
 	<div class="row">
 		<div class="card" ng-click="cardDetailToggle(attention)">
 			<div style="padding:16px">
-
 				<h4>{{attention.string}}</h4>
 				<h5>{{attention.app}}</h5>
 				<p>{{attention.amount}}</p>
 				<p>{{attention.data}}</p>
 				<p>{{attention.associatedModels}}</p>
 				<p>{{attention.createdAt}}</p>
-
 			</div>
 			<div class="card-footer">
-	            <a ng-click="$event.stopPropagation();" style="color:grey"><i class="fas fa-eye"></i>  {{attention.attention.general || 0}}</a>
-	            <a ng-click="$event.stopPropagation();createReaction(attention, 'plus')"><i class="fas fa-angle-up"></i> {{attention.reactions.plus}} like </a> 
-	            <a ng-click="$event.stopPropagation();createReaction(attention, 'minus')" ><i class="fas fa-angle-down"></i> {{attention.reactions.minus}} dislike </a>
+	            <a ng-click="$event.stopPropagation();" style="color:grey"><i class="fas fa-eye"></i>  {{attention.data.apps.attention.general || 0}}</a>
+	            <a ng-click="$event.stopPropagation();createReaction(attention, 'plus')"><i class="fas fa-angle-up"></i> {{attention.data.apps.reactions.plus}} like </a> 
+	            <a ng-click="$event.stopPropagation();createReaction(attention, 'minus')" ><i class="fas fa-angle-down"></i> {{attention.data.apps.reactions.minus}} dislike </a>
 	            <a ng-click="$event.stopPropagation();contentToggle(attention)"><i class="far fa-comment"></i> comment </a>
 	        </div>
 		</div>
 	</div>
-	
-	<div class="spacing-50"></div>
-
 </div>
+<div class="spacing-25"></div>

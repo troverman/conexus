@@ -12,18 +12,18 @@ angular.module( 'conexus.item', [
 		},
         resolve:{
             item: ['$stateParams', 'ItemModel', function($stateParams, ItemModel) {
-                return ItemModel.getSome({id:$stateParams.id, limit:1, skip:0, sort:'createdAt DESC'});
+                return ItemModel.get({id:$stateParams.id, limit:1, skip:0, sort:'createdAt DESC'});
             }],
             //COMPONENT ITEMS... ASSOCIATED ITEMS (ITEM-ITEM COMPLEX)
             actions: ['ActionModel', 'item', function(ActionModel, item) {
-                return ActionModel.getSome({item:item.id, limit:20, skip:0, sort:'createdAt DESC'});
+                return ActionModel.get({item:item.id, limit:20, skip:0, sort:'createdAt DESC'});
             }],
             orders: ['OrderModel', 'item', function(OrderModel, item) {
-                return OrderModel.getSome({item:item.id, limit:20, skip:0, sort:'createdAt DESC'});
+                return OrderModel.get({item:item.id, limit:20, skip:0, sort:'createdAt DESC'});
             }],
             //TODO: ORDERS .. BIDS FOR OWNERSHIP -- UNIFY CONTENT AND ITEM
             transactions:['TransactionModel', 'item', function(TransactionModel, item) {
-                return TransactionModel.getSome({amountSet:[item.id], limit:20, skip:0, sort:'createdAt DESC'});
+                return TransactionModel.get({amountSet:[item.id], limit:20, skip:0, sort:'createdAt DESC'});
             }],
 
         }
@@ -78,7 +78,7 @@ angular.module( 'conexus.item', [
     $scope.transactions = transactions;
 
     //TODO: COMPLEX QUERY
-    ContentModel.getSome({item:item.id, limit:20, skip:0, sort:'createdAt DESC'}).then(function(contentList){
+    ContentModel.get({item:item.id, limit:20, skip:0, sort:'createdAt DESC'}).then(function(contentList){
         $scope.contentList = contentList;
     });
 
@@ -88,7 +88,7 @@ angular.module( 'conexus.item', [
     //EVERY TRANSACTION TOKEN IS AN ITEM..? EVERY UNIQUE TOKEN IS AN ITEM --> TOKEN AND ITEM UNITY?  .. // /token and /item unity
         //INTERLINK
         //items owning tokens (usd .. )
-    //OrderModel.getSome()..
+    //OrderModel.get()..
  
     //HMM.. 
     $rootScope.associatedModels = [{
@@ -386,7 +386,7 @@ angular.module( 'conexus.item', [
 
     //SETS OF UNIQUE IDENTIFIERS
     function getOrderTraverse(identifer){
-        OrderModel.getSome({market:identifer,limit:100,skip:0,sort:'price DESC'}).then(function(orders){
+        OrderModel.get({market:identifer,limit:100,skip:0,sort:'price DESC'}).then(function(orders){
             //GET SET OF SETS AT PRICE --> GRADIENT POTINETAL --> ORDER BOOK 
             //SORT TO BEST PRICE CONTAINED WITHIN ABSOLUTE CONSTRINT (% IS FUNCTIONAL RESULT.. | ABSOLUTE CONSTRAINT NOW)
             //DOES THE ORER SUM CONTAIN THE AMOUNT AND DO THE ORDER TYPES CHECK OUT? 
@@ -413,13 +413,11 @@ angular.module( 'conexus.item', [
         switch(envelope.verb) {
             case 'created':
                 if ($scope.item.id == envelope.data.id){
-                    $scope.item.attention = envelope.data.attention;
+                    $scope.item.data.apps.attention = envelope.data.data.apps.attention;
                 }
                 break;
         }
     });
-
-
 
     
 }]);

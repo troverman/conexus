@@ -2,7 +2,7 @@ angular.module('models.task', ['services', 'sails.io',])
 
 .service('TaskModel', ['$sailsSocket', 'utils', function($sailsSocket, utils) {
 
-    this.getSome = function(model) {
+    this.get = function(model) {
         var url = utils.prepareUrl('task');
         var query = {
             params:{

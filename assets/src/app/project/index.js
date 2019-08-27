@@ -15,7 +15,7 @@ angular.module( 'conexus.project', [
         //TODO: DEPRECIATE RESOLVE
         resolve: {
             project: ['$stateParams', 'ProjectModel', function($stateParams, ProjectModel) {
-                return ProjectModel.getSome({urlTitle:$stateParams.path,limit:1,skip:0,sort:'createdAt DESC'});
+                return ProjectModel.get({urlTitle:$stateParams.path,limit:1,skip:0,sort:'createdAt DESC'});
             }]
         }
     })
@@ -42,19 +42,19 @@ angular.module( 'conexus.project', [
 
             //TODO: FEED.. COMPLEX QUERY
             contentList: ['ContentModel', 'project', function(ContentModel, project){
-                return ContentModel.getSome({project:project.id, limit:100, skip:0, sort:'createdAt DESC'});
+                return ContentModel.get({project:project.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
             tasks: ['project', 'TaskModel', function(project, TaskModel){
-                return TaskModel.getSome({project:project.id, limit:100, skip:0, sort:'createdAt DESC'});
+                return TaskModel.get({project:project.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
             time: ['project', 'TimeModel', function(project, TimeModel){
-                return TimeModel.getSome({project:project.id, limit:0, skip:0, sort:'createdAt DESC'});
+                return TimeModel.get({project:project.id, limit:0, skip:0, sort:'createdAt DESC'});
             }],
             transactionsFrom: ['TransactionModel', 'project', function(TransactionModel, project) {
-                return TransactionModel.getSome({from:project.id, limit:100, skip:0, sort:'createdAt DESC'});
+                return TransactionModel.get({from:project.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
             transactionsTo: ['TransactionModel', 'project', function(TransactionModel, project) {
-                return TransactionModel.getSome({to:project.id, limit:100, skip:0, sort:'createdAt DESC'});
+                return TransactionModel.get({to:project.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
         }
     })
@@ -84,7 +84,7 @@ angular.module( 'conexus.project', [
                 return [{title:'general'},{title:'tasks'},{title:'create'},{title:'task1'}]
             }],
             contentList: ['ContentModel', 'project', function(ContentModel, project){
-                return ContentModel.getSome({project:project.id, limit:100, skip:0, sort:'createdAt DESC'});
+                return ContentModel.get({project:project.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
         }
     })
@@ -100,7 +100,7 @@ angular.module( 'conexus.project', [
         //TODO: DEPRECIATE RESOLVE
         resolve: {
             contentList: ['ContentModel', 'project', function(ContentModel, project){
-                return ContentModel.getSome({project:project.id, limit:100, skip:0, sort:'createdAt DESC'});
+                return ContentModel.get({project:project.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],            
         }
     })
@@ -134,13 +134,13 @@ angular.module( 'conexus.project', [
 
             //TODO: BETTER QUERY
             transactions: ['TransactionModel', 'project', function(TransactionModel, project) {
-                return TransactionModel.getSome({project:project.id, limit:100, skip:0, sort:'createdAt DESC'});
+                return TransactionModel.get({project:project.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
             transactionsFrom: ['TransactionModel', 'project', function(TransactionModel, project) {
-                return TransactionModel.getSome({from:project.id, limit:100, skip:0, sort:'createdAt DESC'});
+                return TransactionModel.get({from:project.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
             transactionsTo: ['TransactionModel', 'project', function(TransactionModel, project) {
-                return TransactionModel.getSome({to:project.id, limit:100, skip:0, sort:'createdAt DESC'});
+                return TransactionModel.get({to:project.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
         }
     })
@@ -174,7 +174,7 @@ angular.module( 'conexus.project', [
         //TODO: DEPRECIATE RESOLVE
         resolve: {
             members: ['MemberModel', 'project', function(MemberModel, project) {
-                return MemberModel.getSome({project:project.id, limit:100, skip:0, sort:'createdAt DESC'});
+                return MemberModel.get({project:project.id, limit:100, skip:0, sort:'createdAt DESC'});
             }]
         }
     })
@@ -192,7 +192,7 @@ angular.module( 'conexus.project', [
 
             //TODO: ..
             orders: ['OrderModel', 'project', function(OrderModel, project){
-                return OrderModel.getSome({limit:20, skip:0, sort:'createdAt DESC'});
+                return OrderModel.get({limit:20, skip:0, sort:'createdAt DESC'});
             }],
         }
     })
@@ -236,7 +236,7 @@ angular.module( 'conexus.project', [
         //TODO: DEPRECIATE RESOLVE
         resolve: {
             tasks: ['project', 'TaskModel', function(project, TaskModel){
-                return TaskModel.getSome({project:project.id, limit:100, skip:0, sort:'createdAt DESC'});
+                return TaskModel.get({project:project.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
         }
     })
@@ -252,7 +252,7 @@ angular.module( 'conexus.project', [
         //TODO: DEPRECIATE RESOLVE
         resolve: {
             time: ['project', 'TimeModel', function(project, TimeModel) {
-                return TimeModel.getSome({project:project.id, limit:200, skip:0, sort:'createdAt DESC'});
+                return TimeModel.get({project:project.id, limit:200, skip:0, sort:'createdAt DESC'});
             }]
         }
     })
@@ -985,7 +985,7 @@ angular.module( 'conexus.project', [
         $scope.searchQuery.push({text:tag, type:'TAG'})
         $location.search('tag',tag);
         var query = {member:$scope.member.id, tag:tag, from:$scope.member.id, to:$scope.member.id, identifer:$scope.identifer};
-        TransactionModel.getSome('query', query, 20, 0, 'createdAt DESC').then(function(transactions){
+        TransactionModel.get('query', query, 20, 0, 'createdAt DESC').then(function(transactions){
             $scope.transactions = transactions;
         });
     };
@@ -1424,7 +1424,7 @@ angular.module( 'conexus.project', [
 
     $scope.filterContent = function(filter) {
         $rootScope.stateIsLoading = true;
-        TaskModel.getSome('tag', filter, 20, 0, 'createdAt DESC').then(function(tasks){
+        TaskModel.get('tag', filter, 20, 0, 'createdAt DESC').then(function(tasks){
             $rootScope.stateIsLoading = false;
             $scope.tasks = tasks;
             $scope.loadTags();

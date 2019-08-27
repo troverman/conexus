@@ -2,7 +2,7 @@ angular.module('models.token', ['services', 'sails.io',])
 
 .service('TokenModel',['utils', '$sailsSocket', function(utils, $sailsSocket) {
     
-    this.getSome = function(model) {
+    this.get = function(model) {
         var url = utils.prepareUrl('token');
         var query = {
             params:{

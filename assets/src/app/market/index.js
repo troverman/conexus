@@ -16,10 +16,10 @@ angular.module( 'conexus.market', [
 
             //TEMP COMBINED WITH ORDERS
             orders: ['$stateParams', 'OrderModel', function($stateParams, OrderModel) {
-                return OrderModel.getSome({market:$stateParams.id, limit:100, skip:0, sort:'createdAt DESC'});
+                return OrderModel.get({market:$stateParams.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
             token: ['$stateParams', 'TokenModel', function($stateParams, TokenModel) {
-                return TokenModel.getSome({string:$stateParams.id, limit:1, skip:0, sort:'createdAt DESC'});
+                return TokenModel.get({string:$stateParams.id, limit:1, skip:0, sort:'createdAt DESC'});
             }],
         }
 	});

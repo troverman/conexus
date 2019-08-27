@@ -1,4 +1,4 @@
-angular.module('models.association', ['services', 'sails.io',])
+angular.module('models.association', ['services', 'sails.io'])
 
 .service('AssociationModel', ['$sailsSocket', 'utils', function($sailsSocket, utils) {
 

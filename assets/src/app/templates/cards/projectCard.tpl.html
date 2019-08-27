@@ -11,9 +11,11 @@
                     <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
                         <i class="fas fa-chevron-down"></i>
                     </a>
-                    <!--<span style="color:gray" ng-if="item.location">
+                    <!--
+                    <span style="color:gray" ng-if="item.location">
                         {{item.location.address}} <i class="fa fa-map-marker"></i>
-                    </span>-->
+                    </span>
+                    -->
                 </p>
                 <h3><a ng-click="$event.stopPropagation();" href="project/{{item.urlTitle}}" ui-sref="project.activity({path:item.urlTitle})">{{item.title}}</a></h3>
                 <div style="overflow:auto">

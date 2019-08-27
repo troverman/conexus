@@ -14,7 +14,7 @@ angular.module( 'conexus.token', [
         //TODO: DEPRECIATE RESOLVE
         resolve:{
             token: ['$stateParams', 'TokenModel', function($stateParams, TokenModel) {
-                return TokenModel.getSome({string:$stateParams.id, limit:1, skip:0, sort:'createdAt DESC'});
+                return TokenModel.get({string:$stateParams.id, limit:1, skip:0, sort:'createdAt DESC'});
             }],
         }
 	});

@@ -13,7 +13,7 @@ angular.module( 'conexus.transparency', [
 
         resolve: {
             peers: ['PeerModel', function(PeerModel){
-                return PeerModel.getSome({limit:100, skip:0, sort:'createdAt DESC'});
+                return PeerModel.get({limit:100, skip:0, sort:'createdAt DESC'});
             }],
         }
 

@@ -91,7 +91,7 @@ angular.module( 'conexus', [
     //TODO: BETTER
     $rootScope.currentUser = window.currentUser;
     if ($rootScope.currentUser){
-        UserModel.getSome({id:$rootScope.currentUser.id}).then(function(member){
+        UserModel.get({id:$rootScope.currentUser.id}).then(function(member){
             $rootScope.currentUser = member;
             if($rootScope.currentUser.dateOfBirth){$rootScope.currentUser.dateOfBirth = new Date($rootScope.currentUser.dateOfBirth)}
             $rootScope.balance = member.balance;

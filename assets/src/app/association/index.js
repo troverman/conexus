@@ -39,7 +39,7 @@ angular.module( 'conexus.association', [
         skip:0, 
         sort:'createdAt DESC'
     };
-    ValidationModel.getSome(validationQuery).then(function(validations){
+    ValidationModel.get(validationQuery).then(function(validations){
         $scope.validations = validations;
     });
 
@@ -90,7 +90,7 @@ angular.module( 'conexus.association', [
         switch(envelope.verb) {
             case 'created':
                 if ($scope.association.id == envelope.data.id){
-                    $scope.association.attention = envelope.data.attention;
+                    $scope.association.data.apps.attention = envelope.data.data.apps.attention;
                 }
                 break;
         }

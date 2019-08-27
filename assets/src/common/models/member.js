@@ -2,7 +2,7 @@ angular.module('models.member', ['services', 'sails.io',])
 
 .service('MemberModel', ['$sailsSocket', 'utils', function($sailsSocket, utils) {
 
-    this.getSome = function(model) {
+    this.get = function(model) {
         var url = utils.prepareUrl('projectmember');
         var query = {
             params:{

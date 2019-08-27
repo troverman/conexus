@@ -3,7 +3,7 @@ angular.module('models.transaction', ['services', 'sails.io',])
 .service('TransactionModel', ['$sailsSocket', 'utils', function($sailsSocket, utils) {
 
     //messy halfupgrade
-    this.getSome = function(model, queryNew) {
+    this.get = function(model, queryNew) {
         var url = utils.prepareUrl('transaction');
         var query = {
             params:{

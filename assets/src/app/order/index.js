@@ -14,13 +14,13 @@ angular.module( 'conexus.order', [
         //TODO: DEPRECIATE RESOLVE
         resolve: {
             order: ['$stateParams', 'OrderModel', function($stateParams, OrderModel){
-                return OrderModel.getSome({id:$stateParams.id, limit:1, skip:0, sort:'createdAt DESC'});
+                return OrderModel.get({id:$stateParams.id, limit:1, skip:0, sort:'createdAt DESC'});
             }],
             orders:['order', 'OrderModel', function(order, OrderModel){
-                return OrderModel.getSome({order:order.id, limit:100, skip:0, sort:'createdAt DESC'});
+                return OrderModel.get({order:order.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
             contentList: ['ContentModel', 'order', function(ContentModel, order){
-                return ContentModel.getSome({order:order.id, limit:100, skip:0, sort:'createdAt DESC'});
+                return ContentModel.get({order:order.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
         }
     });
@@ -317,17 +317,15 @@ angular.module( 'conexus.order', [
         else{$mdSidenav('login').toggle();}
     };
 
-
     $sailsSocket.subscribe('order', function (envelope) {
         console.log(envelope)
         switch(envelope.verb) {
             case 'created':
                 if ($scope.order.id == envelope.data.id){
-                    $scope.order.attention = envelope.data.attention;
+                    $scope.order.data.apps.attention = envelope.data.data.apps.attention;
                 }
                 break;
         }
     });
-
 
 }]);

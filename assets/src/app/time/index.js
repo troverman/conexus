@@ -14,13 +14,13 @@ angular.module( 'conexus.time', [
         //TODO: DEPRECIATE RESOLVE
         resolve: {
             time: ['$stateParams', 'TimeModel', function($stateParams, TimeModel){
-                return TimeModel.getSome({id:$stateParams.id, limit:1, skip:0, sort:'createdAt DESC'});
+                return TimeModel.get({id:$stateParams.id, limit:1, skip:0, sort:'createdAt DESC'});
             }],
             contentList: ['ContentModel', 'time', function(ContentModel, time){
-                return ContentModel.getSome({time:time.id, limit:100, skip:0, sort:'createdAt DESC'});
+                return ContentModel.get({time:time.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
             validations: ['ValidationModel', 'time', function(ValidationModel, time){
-                return ValidationModel.getSome({time:time.id, limit:100, skip:0, sort:'createdAt DESC'});
+                return ValidationModel.get({time:time.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
         }
     });
@@ -74,18 +74,15 @@ angular.module( 'conexus.time', [
         else{$mdSidenav('login').toggle()}
     };
 
-
     //TODO: WEBSOCKET
     $sailsSocket.subscribe('time', function (envelope) {
-        console.log(envelope)
         switch(envelope.verb) {
             case 'created':
                 if ($scope.time.id == envelope.data.id){
-                    $scope.time.attention = envelope.data.attention;
+                    $scope.time.data.apps.attention = envelope.data.data.apps.attention;
                 }
                 break;
         }
     });
-
 
 }]);

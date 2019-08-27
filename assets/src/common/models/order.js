@@ -2,7 +2,7 @@ angular.module('models.order', ['services', 'sails.io',])
 
 .service('OrderModel', ['$sailsSocket', 'utils', function($sailsSocket, utils) {
 
-    this.getSome = function(model) {
+    this.get = function(model) {
         var url = utils.prepareUrl('order');
         var query = {
             params:{

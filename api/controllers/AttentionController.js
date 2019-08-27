@@ -23,7 +23,7 @@ module.exports = {
 			});
 		}
 
-		if(req.query.creator && req.query.app){
+		else if(req.query.creator && req.query.app){
 			Attention.find({app:req.query.app,creator:req.query.creator})
 			.limit(limit)
 			.skip(skip)
@@ -74,8 +74,6 @@ module.exports = {
 			creator: req.param('creator'),
 			data:{apps:{reactions:{plus:0,minus:0},attention:{general:0}}}
 		};
-
-		//TODO UPDATE COUNT IN DATA.APPS.ATTENTION
 		
 		Attention.create(model)
 		.exec(function(err, model) {
@@ -88,75 +86,99 @@ module.exports = {
 					
 					//DEPRECIATE MOEL TYPE DISTINCTION ?
 					//MACHINE ATTENTION BY VALIDATION OF SPECIFIC DATA.. REVIEW THE DATA IN THE BLOCK ... GIVES IT MACHENE ATTENTION.. IE THE REMKLE PROOF
-
 					//TODO: MULTI D MAP
-					//TODO: STORE IN DATA LAYER OF MODEL
 					if (model.app == 'HUMAN'){
 
-						if (model.associatedModels[x].type == 'ASSOCIATION'){
-							Association.find({id:model.associatedModels[x].id}).then(function(associationModel){
-								if (associationModel[0].attention){attentionModel = {general:associationModel[0].attention.general + model.amount};}
-								else{attentionModel = {general:0}}
-								Association.update({id:associationModel[0].id}, {attention:attentionModel}).then(function(newValidationModel){Association.publishCreate(newValidationModel);});
+						if (model.associatedModels[x].type == 'ACTION'){
+							Action.find({id:model.associatedModels[x].id}).then(function(newModel){
+								if (!newModel[0].data){newModel[0].data = {apps:{}}}
+								if (!newModel[0].data.apps){newModel[0].data.apps = {}}
+								if (newModel[0].data.apps.attention){newModel[0].data.apps.attention = {general:newModel[0].data.apps.attention.general + model.amount};}
+								else{newModel[0].data.apps.attention = {general:0}}
+								Action.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){Action.publishCreate(newModel);});
 							});
 						}
-						
+
+						if (model.associatedModels[x].type == 'ATTENTION'){
+							Attention.find({id:model.associatedModels[x].id}).then(function(newModel){
+								if (newModel[0].data.apps.attention){newModel[0].data.apps.attention = {general:newModel[0].data.apps.attention.general + model.amount};}
+								else{newModel[0].data.apps.attention = {general:0}}
+								Attention.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){Attention.publishCreate(newModel);});
+							});
+						}
+
+						if (model.associatedModels[x].type == 'APP'){
+							App.find({id:model.associatedModels[x].id}).then(function(newModel){
+								if (newModel[0].data.apps.attention){newModel[0].data.apps.attention = {general:newModel[0].data.apps.attention.general + model.amount};}
+								else{newModel[0].data.apps.attention = {general:0}}
+								App.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){App.publishCreate(newModel);});
+							});
+						}
+
+						if (model.associatedModels[x].type == 'ASSOCIATION'){
+							Association.find({id:model.associatedModels[x].id}).then(function(newModel){
+								if (newModel[0].data.apps.attention){newModel[0].data.apps.attention = {general:newModel[0].data.apps.attention.general + model.amount};}
+								else{newModel[0].data.apps.attention = {general:0}}
+								Association.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){Association.publishCreate(newModel);});
+							});
+						}
+
 						if (model.associatedModels[x].type == 'CONTENT'){
-							Content.find({id:model.associatedModels[x].id}).then(function(contentModel){
-								if (contentModel[0].attention){attentionModel = {general:contentModel[0].attention.general + model.amount};}
-								else{attentionModel = {general:0}}
-								Content.update({id:contentModel[0].id}, {attention:attentionModel}).then(function(newContentModel){Content.publishCreate(newContentModel);});
+							Content.find({id:model.associatedModels[x].id}).then(function(newModel){
+								if (newModel[0].data.apps.attention){newModel[0].data.apps.attention = {general:newModel[0].data.apps.attention.general + model.amount};}
+								else{newModel[0].data.apps.attention = {general:0}}
+								Content.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){Content.publishCreate(newModel);});
 							});
 						}
 
 						if (model.associatedModels[x].type == 'ITEM'){
-							Item.find({id:model.associatedModels[x].id}).then(function(itemModel){
-								if (itemModel[0].attention){attentionModel = {general:itemModel[0].attention.general + model.amount};}
-								else{attentionModel = {general:0}}
-								Item.update({id:itemModel[0].id}, {attention:attentionModel}).then(function(newItemModel){Item.publishCreate(newItemModel);});
+							Item.find({id:model.associatedModels[x].id}).then(function(newModel){
+								if (newModel[0].data.apps.attention){newModel[0].data.apps.attention = {general:newModel[0].data.apps.attention.general + model.amount};}
+								else{newModel[0].data.apps.attention = {general:0}}
+								Item.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){Item.publishCreate(newModel);});
 							});
 						}
 
 						if (model.associatedModels[x].type == 'ORDER'){
-							Order.find({id:model.associatedModels[x].id}).then(function(orderModel){
-								if (orderModel[0].attention){attentionModel = {general:orderModel[0].attention.general + model.amount};}
-								else{attentionModel = {general:0}}
-								Order.update({id:orderModel[0].id}, {attention:attentionModel}).then(function(newOrderModel){Order.publishCreate(newOrderModel);});
+							Order.find({id:model.associatedModels[x].id}).then(function(newModel){
+								if (newModel[0].data.apps.attention){newModel[0].data.apps.attention = {general:newModel[0].data.apps.attention.general + model.amount};}
+								else{newModel[0].data.apps.attention = {general:0}}
+								Order.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){Order.publishCreate(newModel);});
 							});
 						}
 
 						if (model.associatedModels[x].type == 'TASK'){
-							Task.find({id:model.associatedModels[x].id}).then(function(taskModel){
-								if (taskModel[0].attention){attentionModel = {general:taskModel[0].attention.general + model.amount};}
-								else{attentionModel = {general:0}}
-								Task.update({id:taskModel[0].id}, {attention:attentionModel}).then(function(newTaskModel){Task.publishCreate(newTaskModel);});
+							Task.find({id:model.associatedModels[x].id}).then(function(newModel){
+								if (newModel[0].data.apps.attention){newModel[0].data.apps.attention = {general:newModel[0].data.apps.attention.general + model.amount};}
+								else{newModel[0].data.apps.attention = {general:0}}
+								Task.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){Task.publishCreate(newModel);});
 							});
 						}
 
 						if (model.associatedModels[x].type == 'TIME'){
-							Time.find({id:model.associatedModels[x].id}).then(function(timeModel){
-								if (timeModel[0].attention){attentionModel = {general:timeModel[0].attention.general + model.amount};}
-								else{attentionModel = {general:0}}
-								Time.update({id:timeModel[0].id}, {attention:attentionModel}).then(function(newTimeModel){Time.publishCreate(newTimeModel);});
+							Time.find({id:model.associatedModels[x].id}).then(function(newModel){
+								if (newModel[0].data.apps.attention){newModel[0].data.apps.attention = {general:newModel[0].data.apps.attention.general + model.amount};}
+								else{newModel[0].data.apps.attention = {general:0}}
+								Time.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){Time.publishCreate(newModel);});
 							});
 						}
 
 						if (model.associatedModels[x].type == 'TRANSACTION'){
-							Transaction.find({id:model.associatedModels[x].id}).then(function(transactionModel){
-								if (transactionModel[0].attention){attentionModel = {general:transactionModel[0].attention.general + model.amount};}
-								else{attentionModel = {general:0}}
-								Transaction.update({id:transactionModel[0].id}, {attention:attentionModel}).then(function(newTransactionModel){Transaction.publishCreate(newTransactionModel);});
+							Transaction.find({id:model.associatedModels[x].id}).then(function(newModel){
+								if (newModel[0].data.apps.attention){newModel[0].data.apps.attention = {general:newModel[0].data.apps.attention.general + model.amount};}
+								else{newModel[0].data.apps.attention = {general:0}}
+								Transaction.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){Transaction.publishCreate(newModel);});
 							});
 						}
 
 						if (model.associatedModels[x].type == 'VALIDATION'){
-							Validation.find({id:model.associatedModels[x].id}).then(function(validationModel){
-								if (validationModel[0].attention){attentionModel = {general:validationModel[0].attention.general + model.amount};}
-								else{attentionModel = {general:0}}
-								Validation.update({id:validationModel[0].id}, {attention:attentionModel}).then(function(newValidationModel){Validation.publishCreate(newValidationModel);});
+							Validation.find({id:model.associatedModels[x].id}).then(function(newModel){
+								if (newModel[0].data.apps.attention){newModel[0].data.apps.attention = {general:newModel[0].data.apps.attention.general + model.amount};}
+								else{newModel[0].data.apps.attention = {general:0}}
+								Validation.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){Validation.publishCreate(newModel);});
 							});
 						}
-
+					
 					}
 
 				}

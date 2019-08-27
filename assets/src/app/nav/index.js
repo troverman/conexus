@@ -236,7 +236,7 @@ angular.module( 'conexus.nav', [
         }, true);
 
         //TODO:BETTER
-        NotificationModel.getSome({user:$rootScope.currentUser.id, isRead:false, limit:100, skip:0, sort:'createdAt DESC'}).then(function(notifications){
+        NotificationModel.get({user:$rootScope.currentUser.id, isRead:false, limit:100, skip:0, sort:'createdAt DESC'}).then(function(notifications){
             $scope.notifications = notifications;
             $rootScope.notificationCount = $scope.notifications.length;
             for (x in $scope.notifications){
@@ -696,7 +696,7 @@ angular.module( 'conexus.nav', [
         //GET CHILDREN && || TIME... ASSOCIATIONS.. NEED TO FINISH ASSOCIATED SO I DONT KEEP REWRITING.. 
         function populateChildren(contentList, depth, limit){
             contentList.forEach(function(content) {
-                ContentModel.getSome({contentModel:content.id, limit:100, skip:0, sort:'createdAt DESC'}).then(function(contentList){
+                ContentModel.get({contentModel:content.id, limit:100, skip:0, sort:'createdAt DESC'}).then(function(contentList){
                     console.log('populateChildren', contentList)
                     if (contentList.length > 0){
                         depth++ 
@@ -708,7 +708,7 @@ angular.module( 'conexus.nav', [
             });
         }
         //TODO TYPE.. 
-        ContentModel.getSome({contentModel:item.id, limit:100, skip:0, sort:'createdAt DESC'}).then(function(contentList){
+        ContentModel.get({contentModel:item.id, limit:100, skip:0, sort:'createdAt DESC'}).then(function(contentList){
             console.log('populateChildren', contentList)
             populateChildren(contentList, 0, 5);
         });
@@ -809,7 +809,7 @@ angular.module( 'conexus.nav', [
             //associatedModels:[]
         };
 
-        ValidationModel.getSome(validationQueryModel).then(function(validationModels){
+        ValidationModel.get(validationQueryModel).then(function(validationModels){
 
             $scope.validationColumnRender = {
                 chart: {zoomType: 'x'},
@@ -2026,7 +2026,7 @@ angular.module( 'conexus.nav', [
         var deferred = $q.defer();
         //TODO: PROJECT AND MEMBER .. 
         //TOOD: SEARCH QUERY .. 
-        UserModel.getSome({search:query, limit:1000, skip:0, sort:'createdAt DESC'}).then(function(userModels){
+        UserModel.get({search:query, limit:1000, skip:0, sort:'createdAt DESC'}).then(function(userModels){
             console.log('USERS: LOAD ADDRESS', userModels);
             userModels.map(function(obj){
                 obj.text = obj.username;
@@ -2050,7 +2050,7 @@ angular.module( 'conexus.nav', [
         $scope.balance = $rootScope.balance;
         console.log('LOAD ASSET', $rootScope.balance, $scope.balance);
 
-        ItemModel.getSome({user:$rootScope.currentUser.id, limit:10, skip:0, sort:'createdAt DESC'}).then(function(itemModels){
+        ItemModel.get({user:$rootScope.currentUser.id, limit:10, skip:0, sort:'createdAt DESC'}).then(function(itemModels){
             console.log('LOAD ASSET ITEMS', itemModels)
             
             //TODO: ALLOW FOR TITLE.. ETC.. USE TOKEN DATA MODEL HERE.. 
@@ -2075,7 +2075,7 @@ angular.module( 'conexus.nav', [
         var deferred = $q.defer();
         console.log('loadAssociations', query)
         //SearchModel.search(query).then(function(searchModels){})
-        ProjectModel.getSome({query:query, limit:10, skip:0, sort:'createdAt DESC'}).then(function(searchModels){
+        ProjectModel.get({query:query, limit:10, skip:0, sort:'createdAt DESC'}).then(function(searchModels){
             if (searchModels.length > 0){
                 searchModels.map(function(obj){
                     obj.type='PROJECT';
@@ -2091,7 +2091,7 @@ angular.module( 'conexus.nav', [
     $scope.loadAssociationsTask = function(query){
         var deferred = $q.defer();
         console.log('loadAssociationsTask', query);
-        TaskModel.getSome({search:query, limit:10, skip:0, sort:'createdAt DESC'}).then(function(searchModels){
+        TaskModel.get({search:query, limit:10, skip:0, sort:'createdAt DESC'}).then(function(searchModels){
             if (searchModels.length > 0){
                 searchModels = searchModels.map(function(obj){
                     obj.type='TASK';
@@ -2106,7 +2106,7 @@ angular.module( 'conexus.nav', [
 
     $scope.loadItems = function(query){
         var deferred = $q.defer();
-        ItemModel.getSome({search:query, limit:10, skip:0, sort:'createdAt DESC'}).then(function(itemModels){
+        ItemModel.get({search:query, limit:10, skip:0, sort:'createdAt DESC'}).then(function(itemModels){
             itemModels = itemModels.map(function(obj){
                 obj.type='ITEM';
                 obj.text=obj.title;
@@ -2122,7 +2122,7 @@ angular.module( 'conexus.nav', [
         console.log('loadTags', query);
         var deferred = $q.defer();
         //SearchModel.search(query).then(function(searchModels){
-        //UserModel.getSome({search:query, limit:10, skip:0, sort:'createdAt DESC'}).then(function(searchModels){
+        //UserModel.get({search:query, limit:10, skip:0, sort:'createdAt DESC'}).then(function(searchModels){
         //    console.log(searchModels);
             //searchModels = [{text:'TAG'}, {text:'TAG2'}]
             var searchModels = [];

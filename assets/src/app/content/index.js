@@ -12,10 +12,10 @@ angular.module( 'conexus.content', [
         },
         resolve: {
             content: ['$stateParams', 'ContentModel', function($stateParams, ContentModel){
-                return ContentModel.getSome({id:$stateParams.id, limit:1, skip:0, sort:'createdAt DESC'});
+                return ContentModel.get({id:$stateParams.id, limit:1, skip:0, sort:'createdAt DESC'});
             }],
             contentList:['content', 'ContentModel', function(content, ContentModel) {
-                return ContentModel.getSome({contentModel:content.id, limit:100, skip:0, sort:'createdAt DESC'});
+                return ContentModel.get({contentModel:content.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
         }
     });
@@ -52,7 +52,7 @@ angular.module( 'conexus.content', [
     //TODO: ASSOCIATED TYPE.. CHILD.. DETAILS.. 
     function populateChildren(contentList, depth, limit){
         contentList.forEach(function(content) {
-            ContentModel.getSome({contentModel:content.id, limit:100, skip:0, sort:'createdAt DESC'}).then(function(contentList){
+            ContentModel.get({contentModel:content.id, limit:100, skip:0, sort:'createdAt DESC'}).then(function(contentList){
                 if (contentList.length > 0){
                     depth++ 
                     content.children = contentList;
@@ -112,11 +112,10 @@ angular.module( 'conexus.content', [
             var location = searchObject($scope.content, function (value) { return value != null && value != undefined && value.id == content.id; });
 
             console.log(location[0]);
-            location[0].value.reactions[type]++;
+            location[0].value.data.apps.reactions[type]++;
             ReactionModel.create($scope.newReaction);
-
+            $rootScope.pop(type, item.id)
             //updateObject($scope.content, location[0].value, location[0].path);
-
         }
         else{$mdSidenav('login').toggle()}
     };
@@ -141,7 +140,7 @@ angular.module( 'conexus.content', [
             //should be update ..
             case 'created':
                 if ($scope.content.id == envelope.data.id){
-                    $scope.content.attention = envelope.data.attention;
+                    $scope.content.data.apps.attention = envelope.data.data.apps.attention;
                 }
                 break;
         }

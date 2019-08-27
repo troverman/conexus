@@ -11,5 +11,4 @@ angular.module( 'conexus.reaction', [
         }
     });
 }])
-.controller( 'ReactionCtrl', ['$scope', function ReactionController( $scope ) {
-}]);
+.controller( 'ReactionCtrl', ['$scope', function ReactionController( $scope ) {}]);

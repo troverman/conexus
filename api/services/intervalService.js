@@ -246,7 +246,73 @@ module.exports.intervalService = function(){
 	};
 	//populateMerch();
 
-
+	function bulkEditFunction(){
+		var Q = require('q');
+		var promises = [
+			////Action.find().limit(100).skip(0).sort('createdAt DESC'),
+			////App.find().limit(100).skip(0).sort('createdAt DESC'),
+			////Attention.find().limit(100).skip(0).sort('createdAt DESC'),
+			////Association.find().limit(100).skip(0).sort('createdAt DESC'),
+			////Content.find().limit(420).skip(0).sort('createdAt DESC'),
+			////Item.find().limit(1000).skip(0).sort('createdAt DESC'),
+			////Order.find().limit(1000).skip(0).sort('createdAt DESC'),
+			//////Project.find().limit(100).skip(0).sort('createdAt DESC'),
+			//Reaction.find().limit(10000).skip(0).sort('createdAt DESC'),
+			////Task.find().limit(10000).skip(0).sort('createdAt DESC'),
+			////Time.find().limit(10000).skip(0).sort('createdAt DESC'),
+			////Transaction.find().limit(10000).skip(0).sort('createdAt DESC'),
+			//////User.find().limit(100).skip(0).sort('createdAt DESC'),
+			////Validation.find().limit(10000).skip(0).sort('createdAt DESC')
+		];
+		var type = [
+			////'ACTION',
+			////'APP',
+			////'ATTENTION',
+			////'ASSOCIATION',
+			////'CONTENT',
+			////'ITEM',
+			////'ORDER',
+			//////'PROJECT',
+			//'REACTION',
+			////'TASK',
+			////'TIME',
+			////'TRANSACTION',
+			//////'USER',
+			////'VALIDATION',
+		];
+		Q.all(promises)
+		.then(function(data){
+			console.log('LOAD');
+			var tokenSet = [];
+			for (x in data){
+				for (y in data[x]){
+					var apps = {reactions:{plus:0,minus:0},attention:{general:0}};
+					if (data[x][y].data){if (data[x][y].apps){apps = data[x][y].apps;}}
+					else{data[x][y].data = {};}
+					if (data[x][y].reactions){apps.reactions = data[x][y].reactions;}
+					if (data[x][y].attention){apps.attention = data[x][y].attention;}
+					if (data[x][y].data.applications){apps = data[x][y].data.applications}
+					data[x][y].data.apps = apps;
+					console.log(data[x][y].id, data[x][y].data);
+					//if (type[x] == 'ACTION'){Action.update({id:data[x][y].id}, {data: data[x][y].data}).then(function(data){console.log('UPDATE!', data)})}
+					//if (type[x] == 'APP'){App.update({id:data[x][y].id}, {data: data[x][y].data}).then(function(data){console.log('UPDATE!', data)})}
+					//if (type[x] == 'ASSOCIATION'){Association.update({id:data[x][y].id}, {data: data[x][y].data}).then(function(data){console.log('UPDATE!', data)})}
+					//if (type[x] == 'ATTENTION'){Association.update({id:data[x][y].id}, {data: data[x][y].data}).then(function(data){console.log('UPDATE!', data)})}
+					//if (type[x] == 'CONTENT'){Content.update({id:data[x][y].id}, {data: data[x][y].data}).then(function(data){console.log('UPDATE!', data)})}
+					//if (type[x] == 'ITEM'){Item.update({id:data[x][y].id}, {data: data[x][y].data}).then(function(data){console.log('UPDATE!', data)})}
+					//if (type[x] == 'ORDER'){Order.update({id:data[x][y].id}, {data: data[x][y].data}).then(function(data){console.log('UPDATE!', data)})}
+					//if (type[x] == 'PROJECT'){Project.update({id:data[x][y].id}, {data: data[x][y].data}).then(function(data){console.log('UPDATE!', data)})}
+					//if (type[x] == 'REACTION'){Reaction.update({id:data[x][y].id}, {data: data[x][y].data}).then(function(data){console.log('UPDATE!', data)})}
+					//if (type[x] == 'TASK'){Task.update({id:data[x][y].id}, {data: data[x][y].data}).then(function(data){console.log('UPDATE!', data)})}
+					//if (type[x] == 'TIME'){Time.update({id:data[x][y].id}, {data: data[x][y].data}).then(function(data){console.log('UPDATE!', data)})}
+					//if (type[x] == 'TRANSACTION'){Transaction.update({id:data[x][y].id}, {data: data[x][y].data}).then(function(data){console.log('UPDATE!', data)})}
+					//if (type[x] == 'USER'){User.update({id:data[x][y].id}, {data: data[x][y].data}).then(function(data){console.log('UPDATE!', data)})}
+					//if (type[x] == 'VALIDATION'){Validation.update({id:data[x][y].id}, {data: data[x][y].data}).then(function(data){console.log('UPDATE!', data)})}
+				}
+			}
+		});
+	};
+	//bulkEditFunction();
 
 	//MAINTAINCE.. REMOVE DUP TOKENS
 	function removeDuplicateTokens(){
@@ -338,7 +404,6 @@ module.exports.intervalService = function(){
 		}
 	};
 	//populateApps();
-
 
 	//LEGACY DATA UPDATE
 	function legacyDataBuild(){

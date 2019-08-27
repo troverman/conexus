@@ -2,7 +2,7 @@ angular.module('models.follower', ['services', 'sails.io',])
 
 .service('FollowerModel', ['$sailsSocket', 'utils', function($sailsSocket, utils) {
 
-    this.getSome = function(model) {
+    this.get = function(model) {
 
     };
 

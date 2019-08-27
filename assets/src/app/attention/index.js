@@ -14,13 +14,26 @@ angular.module( 'conexus.attention', [
         //TODO: DEPRECIATE RESOLVE
         resolve: {
             attention: ['$stateParams', 'AttentionModel', function($stateParams, AttentionModel){
-                return AttentionModel.getSome({id:$stateParams.id});
+                return AttentionModel.get({id:$stateParams.id});
             }],
         }
     });
 }])
 
-.controller( 'AttentionController', ['$scope', 'attention', function AttentionController( $scope, attention) {
+.controller( 'AttentionController', ['$sailsSocket', '$scope', 'attention', 'titleService', function AttentionController( $sailsSocket, $scope, attention, titleService) {
     $scope.attention = attention;
     $scope.attention.model = 'ATTENTION';
+
+    titleService.setTitle('Attention | '+$scope.attention.id + ' | CRE8.XYZ');
+
+    $sailsSocket.subscribe('attention', function (envelope) {
+        switch(envelope.verb) {
+            case 'created':
+                if ($scope.attention.id == envelope.data.id){
+                    $scope.attention.data.apps.attention = envelope.data.data.apps.attention;
+                }
+                break;
+        }
+    });
+
 }]);

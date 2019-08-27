@@ -32,12 +32,12 @@ angular.module( 'conexus.account', [
     $scope.selectedTab = 'APPS';
 
     $scope.apps = [];
-    AppModel.getSome({limit:100, skip:0, sort:'createdAt DESC'}).then(function(apps){
+    AppModel.get({limit:100, skip:0, sort:'createdAt DESC'}).then(function(apps){
         $scope.apps = apps;
     });
 
     //LOL COMPLEX QUERY BETTER FILTERING ETC
-    AttentionModel.getSome({creator:$rootScope.currentUser.id, app:'HUMAN', limit:100, skip:0, sort:'createdAt DESC'}).then(function(humanAttention){
+    AttentionModel.get({creator:$rootScope.currentUser.id, app:'HUMAN', limit:100, skip:0, sort:'createdAt DESC'}).then(function(humanAttention){
         if (humanAttention){
             $scope.humanAttention = humanAttention.map(function(obj){
                 obj.model = 'ATTENTION';
@@ -47,7 +47,7 @@ angular.module( 'conexus.account', [
     });
 
     //CONNECT TO PEER
-    AttentionModel.getSome({creator:$rootScope.currentUser.id, app:'MACHINE', limit:100, skip:0, sort:'createdAt DESC'}).then(function(machineAttention){
+    AttentionModel.get({creator:$rootScope.currentUser.id, app:'MACHINE', limit:100, skip:0, sort:'createdAt DESC'}).then(function(machineAttention){
         if (machineAttention){
             $scope.machineAttention = machineAttention.map(function(obj){
                 obj.model = 'ATTENTION';

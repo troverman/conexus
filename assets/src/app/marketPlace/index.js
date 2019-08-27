@@ -14,7 +14,7 @@ angular.module( 'conexus.marketPlace', [
         //TODO: DEPRECIATE RESOLVE
         resolve:{
             items: ['ItemModel', function(ItemModel) {
-                return ItemModel.getSome({limit:100, skip:0, sort:'createdAt DESC'});
+                return ItemModel.get({limit:100, skip:0, sort:'createdAt DESC'});
             }],
         }
 	});
@@ -99,7 +99,7 @@ angular.module( 'conexus.marketPlace', [
         $scope.searchQuery.push({text:filter});
         $rootScope.stateIsLoading = true;
         $location.search('tags', filter);
-        ItemModel.getSome({tag:filter, limit:20, skip:0, sort:'createdAt DESC'}).then(function(items){
+        ItemModel.get({tag:filter, limit:20, skip:0, sort:'createdAt DESC'}).then(function(items){
             $rootScope.stateIsLoading = false;
             $scope.selectedTag = filter;
             $scope.items = items.data;
@@ -111,7 +111,7 @@ angular.module( 'conexus.marketPlace', [
     $scope.loadMore = function() {
         $scope.skip = $scope.skip + 20;
         $rootScope.stateIsLoading = true;
-        ItemModel.getSome({limit:20, skip:$scope.skip, sort:$scope.selectedSort}).then(function(items) {
+        ItemModel.get({limit:20, skip:$scope.skip, sort:$scope.selectedSort}).then(function(items) {
             $rootScope.stateIsLoading = false;
             Array.prototype.push.apply($scope.items, items);
             $scope.loadTags();

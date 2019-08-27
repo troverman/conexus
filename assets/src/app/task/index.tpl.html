@@ -50,9 +50,9 @@
             <div class="spacing-5"></div> 
         </div>
         <div class="card-footer">
-            <a ng-click="$event.stopPropagation();" style="color:grey"><i class="fas fa-eye"></i>  {{task.attention.general || 0}}</a>
-            <a ng-click="$event.stopPropagation();createReaction(task, 'plus')"><i class="fas fa-angle-up"></i> {{task.reactions.plus}} like </a> 
-            <a ng-click="$event.stopPropagation();createReaction(task, 'minus')" ><i class="fas fa-angle-down"></i> {{task.reactions.minus}} dislike </a>
+            <a ng-click="$event.stopPropagation();" style="color:grey"><i class="fas fa-eye"></i>  {{task.data.apps.attention.general || 0}}</a>
+            <a ng-click="$event.stopPropagation();createReaction(task, 'plus')"><i class="fas fa-angle-up"></i> {{task.data.apps.reactions.plus || 0}} like </a> 
+            <a ng-click="$event.stopPropagation();createReaction(task, 'minus')" ><i class="fas fa-angle-down"></i> {{task.data.apps.reactions.minus || 0}} dislike </a>
             <a ng-click="$event.stopPropagation();contentToggle(task)"><i class="far fa-comment"></i> comment </a>
             <a ng-click="$event.stopPropagation();validationToggle(task)"><i class="fas fa-check"></i> validate </a>
         </div>

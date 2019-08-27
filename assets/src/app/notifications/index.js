@@ -14,7 +14,7 @@ angular.module( 'conexus.notifications', [
         //TODO: DEPRECIATE RESOLVE
         resolve: {
             notifications: ['$rootScope', 'NotificationModel', function($rootScope, NotificationModel){
-                return NotificationModel.getSome({user:$rootScope.currentUser.id, limit:100, skip:0, sort:'createdAt DESC'});
+                return NotificationModel.get({user:$rootScope.currentUser.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
         }
     });

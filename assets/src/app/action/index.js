@@ -13,7 +13,7 @@ angular.module( 'conexus.action', [
         //TODO: DEPRECIATE RESOLVE.. 
         resolve: {
             action: ['$stateParams', 'ActionModel', function($stateParams, ActionModel) {
-                return ActionModel.getSome({id:$stateParams.id});
+                return ActionModel.get({id:$stateParams.id});
             }]
         }
     });
@@ -22,7 +22,16 @@ angular.module( 'conexus.action', [
 .controller( 'ActionController', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', '$stateParams', 'action', 'titleService', function ActionController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, $stateParams, action, titleService ) {
 
     $scope.action = action;
-
     titleService.setTitle($scope.action.id + ' | Action | CRE8.XYZ');
+
+    $sailsSocket.subscribe('action', function (envelope) {
+        switch(envelope.verb) {
+            case 'created':
+                if ($scope.action.id == envelope.data.id){
+                    $scope.action.data.apps.attention = envelope.data.data.apps.attention;
+                }
+                break;
+        }
+    });
 
 }]);

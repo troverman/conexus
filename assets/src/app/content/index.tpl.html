@@ -85,9 +85,9 @@
 		    </div>
 		    <div class="card-footer">
 		    	<!--Live: {{content.live || 0}}-->
-				<a style="color:grey" href="content/{{content.id}}" ui-sref="content({id:content.id})" ng-click="tokensToggle(content)"><i class="fas fa-eye"></i> {{content.attention.general || 0}}</a>
-		        <a style="padding:5px;color:grey" href="#" ng-click="createReaction(content, 'plus')"><i class="fas fa-angle-up"></i> {{content.reactions.plus}} like </a> 
-		        <a style="padding:5px;color:grey" href="#" ng-click="createReaction(content, 'minus')" ><i class="fas fa-angle-down"></i> {{content.reactions.minus}} dislike </a>
+				<a style="color:grey" href="content/{{content.id}}" ui-sref="content({id:content.id})" ng-click="tokensToggle(content)"><i class="fas fa-eye"></i> {{content.data.apps.attention.general || 0}}</a>
+		        <a style="padding:5px;color:grey" href="#" ng-click="createReaction(content, 'plus')"><i class="fas fa-angle-up"></i> {{content.data.apps.reactions.plus || 0}} like </a> 
+		        <a style="padding:5px;color:grey" href="#" ng-click="createReaction(content, 'minus')" ><i class="fas fa-angle-down"></i> {{content.data.apps.reactions.minus || 0}} dislike </a>
 		       	<a style="padding:5px;color:grey" href="#" ng-click="reply(content)"><i class="fa fa-comment-o"></i> comment </a>
 		    </div>
 		    <!--DEPRECIATE :)))-->

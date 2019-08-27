@@ -12,7 +12,7 @@ angular.module( 'conexus.validation', [
         },
         resolve: {
             validation: ['$stateParams', 'ValidationModel', function($stateParams, ValidationModel){
-                return ValidationModel.getSome({id:$stateParams.id, limit:1, skip:0, sort:'createdAt DESC'});
+                return ValidationModel.get({id:$stateParams.id, limit:1, skip:0, sort:'createdAt DESC'});
             }]
         }
     });
@@ -104,7 +104,7 @@ angular.module( 'conexus.validation', [
         switch(envelope.verb) {
             case 'created':
                 if ($scope.validation.id == envelope.data.id){
-                    $scope.validation.attention = envelope.data.attention;
+                    $scope.validation.data.apps.attention = envelope.data.data.apps.attention;
                 }
                 break;
         }

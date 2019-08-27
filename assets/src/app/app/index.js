@@ -12,7 +12,7 @@ angular.module( 'conexus.app', [
         },
         resolve: {
             app: ['$stateParams', 'AppModel', function($stateParams, AppModel){
-                return AppModel.getSome({id:$stateParams.id, limit:1, skip:0, sort:'createdAt DESC'});
+                return AppModel.get({id:$stateParams.id, limit:1, skip:0, sort:'createdAt DESC'});
             }],
         }
     });
@@ -31,6 +31,8 @@ angular.module( 'conexus.app', [
         $scope.myApps = $rootScope.currentUser.apps;
         console.log($scope.myApps);
     }
+
+    console.log($scope.app)
 
     var associationQuery = {
         app:$scope.app.id, 
@@ -82,5 +84,14 @@ angular.module( 'conexus.app', [
         }
     };
 
+    $sailsSocket.subscribe('app', function (envelope) {
+        switch(envelope.verb) {
+            case 'created':
+                if ($scope.app.id == envelope.data.id){
+                    $scope.app.data.apps.attention = envelope.data.data.apps.attention;
+                }
+                break;
+        }
+    });
    
 }]);

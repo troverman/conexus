@@ -1,0 +1,38 @@
+<div class="card">
+    <div style="background:url('https://source.unsplash.com/1600x900/?explore,discover')" class="imageContainerSmall">
+        <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+            <div style="margin-top: auto;margin-bottom: auto;">
+                <div style="padding:15px">
+                    <h2 style="color:white">Orders</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="padding:16px">   
+        <h5>Matching..</h5>
+    </div>
+</div>
+<div class="card" ng-repeat="item in order.tokens">
+    <div style="background:url('https://source.unsplash.com/1600x900/?explore,discover')" class="imageContainerSmall">
+        <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+            <div style="margin-top: auto;margin-bottom: auto;">
+                <div style="padding:15px">
+                     <h4 style="color:white">{{order.amountSet}} {{order.identiferSet}}</h4>
+                     <h4 style="color:white">{{order.amountSet1}} {{order.identiferSet1}}</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="padding:16px">   
+        <a href="member/{{order.user.username}}" ui-sref="member.activity({path:order.user.username})">
+            <img class="card-avatar" ng-src="{{order.user.avatarUrl}}" src="{{order.user.avatarUrl}}" err-src="/images/avatar.png">
+            <b>{{order.user.username}}</b>
+        </a>
+    </div>
+    <div class="card-footer">
+        <a ng-click="createReaction(order, 'plus')"><i class="fa fa-angle-up"></i> {{order.reactions.plus}} like </a> 
+        <a ng-click="createReaction(order, 'plus')" ><i class="fa fa-angle-down"></i> {{order.reactions.minus}} dislike </a>
+        <a ng-click="contentToggle(order)"><i class="fa fa-comment-o"></i> comment </a>
+        <a style="color:grey" class="pull-right" href="order/{{item.id}}" ui-sref="order({id:item.id})"><i class="fa fa-link grey"></i></a>
+    </div>
+</div>

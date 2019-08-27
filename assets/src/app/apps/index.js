@@ -13,7 +13,7 @@ angular.module( 'conexus.apps', [
 
         resolve: {
             apps: ['AppModel', function(AppModel){
-                return AppModel.getSome({limit:100, skip:0, sort:'createdAt DESC'});
+                return AppModel.get({limit:100, skip:0, sort:'createdAt DESC'});
             }],
         }
 
