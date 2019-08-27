@@ -66,9 +66,6 @@ tags-input .autocomplete .suggestion-item.selected{background-color:#002a56;}
     100% {transform: translateX(50px) translateY(50px) rotateY(0deg) rotateX(90deg);}
 }
 
-#about-section1{background-color:white}
-#about-section2{color:white;background-color:black;}
-
 .angular-google-map-container { height: 400px; }
 
 .avatar {
@@ -122,15 +119,8 @@ tags-input .autocomplete .suggestion-item.selected{background-color:#002a56;}
     border-radius:100em;
 }
 
-.card-footer{
-    padding: 8px 16px 8px;
-    background-color: #f9f9f9
-}
-
-.card-footer a{
-    padding:5px;
-    color:gray;
-}
+.card-footer{padding: 8px 16px 8px;background-color: #f9f9f9}
+.card-footer a{padding:5px;color:gray;}
 
 .center {
     display: flex;
@@ -170,8 +160,6 @@ tags-input .autocomplete .suggestion-item.selected{background-color:#002a56;}
 .cube.outer > .side.bottom{transform: translateY(100px) rotateX(-90deg);}
 .cube.outer > .side.front{transform: translateZ(100px);}
 .cube.outer > .side.back{transform: translateZ(-100px) rotateX(180deg);}
-
-
 
 .form-group {
     position: relative;
@@ -225,26 +213,12 @@ tags-input .autocomplete .suggestion-item.selected{background-color:#002a56;}
     text-transform: uppercase;
 }
 
-.footer a:hover {
-    color:white;
-    padding:3px;
-    text-decoration:none;
-}
+.footer a:hover {color:white;padding:3px;text-decoration:none;}
+.footer a:focus {color:white;padding:3px;text-decoration:none;}
 
-.footer a:focus {
-    color:white;
-    padding:3px;
-    text-decoration:none;
-}
+.footer img{height:50px;}
 
-.footer img{
-    height:50px;
-}
-
-.footer-links{
-    float:left;
-    padding-top:10px;
-}
+.footer-links{float:left;padding-top:10px;}
 
 .header{background-color:black;}
 
@@ -419,10 +393,7 @@ tags-input .autocomplete .suggestion-item.selected{background-color:#002a56;}
     overflow: hidden;
 }
 
-.member-cover img{
-    width: 100%;
-    margin-top: -10%
-}
+.member-cover img{width: 100%;margin-top: -10%}
 
 .md-datepicker-calendar{background:rgb(255,255,255)}
 
@@ -482,7 +453,6 @@ tags-input .autocomplete .suggestion-item.selected{background-color:#002a56;}
     padding-top: 12px;
     padding-right:20px;
 }
-
 .member-card-info {
     padding:16px;
     padding-top:24px;
@@ -491,16 +461,8 @@ tags-input .autocomplete .suggestion-item.selected{background-color:#002a56;}
     text-align: center;
     overflow:auto;
 }
-
-.member-card-info h4{
-    margin:0px;
-    overflow:hidden;
-}
-
-.member-card-info p{
-    color: #666;
-    margin:0px;
-}
+.member-card-info h4{margin:0px; overflow:hidden;}
+.member-card-info p{color: #666; margin:0px;}
 
 .nav-links {
     font-family: 'Titillium Web', sans-serif;
@@ -512,9 +474,7 @@ tags-input .autocomplete .suggestion-item.selected{background-color:#002a56;}
 
 .navbar-inverse .navbar-toggle,
 .navbar-inverse .navbar-toggle:hover,
-.navbar-inverse .navbar-toggle:focus {
-    background-color: #000;
-}
+.navbar-inverse .navbar-toggle:focus {background-color: #000;}
 .navbar-toggle{border-radius:0px;}
 .navbar-inverse .navbar-toggle{border-color:#000;}
 
@@ -576,12 +536,7 @@ tags-input .autocomplete .suggestion-item.selected{background-color:#002a56;}
 .side.back{transform: translateZ(-50px) rotateX(180deg);}
 
 .social-log {text-align: center;}
-
-.social-log a {
-    margin: 3px;
-    display: inline-block;
-}
-
+.social-log a {margin: 3px; display: inline-block;}
 .social-log i {color: #EF8D09;}
 
 .page-heading {
@@ -672,85 +627,54 @@ tags-input .autocomplete .suggestion-item.selected{background-color:#002a56;}
     z-index:-5
 }
 
-/* media queries */
 @media (max-width: 768px) {
-    .mobileFix{display:none;}
     .btn-group{zoom: 0.7;}
     .card-footer{zoom: 0.8;}
     .member-tabs{zoom: 0.9;}
-
 }
 
 @media (min-width: 768px){
-    .mobileFix{display:block;}
     .btn-group{zoom: 1;}
     .card-footer{zoom: 1;}
     .member-tabs{zoom: 1;}
-}
-
-@media only screen and (max-width: 788px) {
-    .desktop {visibility:hidden}
-    .mobile {visibility:visible}
 }
 
 @media (max-width: 991px) {
     h1{font-size:20px;}
     h2{font-size:20px;}
     h3{font-size:20px;}
-    .mobileHide{display:none;}
+    .collapse.in {display: block !important;}
+    .imageContainerSmallDiv h1 {font-size: 2.5em;}
+    .imageContainerSmallDivH1{font-size: 2.5em;}
     .member-tabs li{font-size:14px;}
     .member-tabs > li > a{padding:5px 10px;}
-    .imageContainerSmallDiv h1 {
-        font-size: 2.5em;
-    }
-    .imageContainerSmallDivH1{
-        font-size: 2.5em;
-    }
     .member-tabs.subNav{display:none;}.nav-toggle{display:block;padding:20px;}
-
+    .mobileFix{display:none;}
+    .mobileHide{display:none;}
     .navbar-header {float: none;}
     .navbar-left, .navbar-right {float: none !important;}
     .navbar-toggle {display: block;}
-    .navbar-collapse {
-        border-top: 1px solid transparent;
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    }
-    .navbar-fixed-top {
-        top: 0;
-        border-width: 0 0 1px;
-    }
+    .navbar-collapse {border-top: 1px solid transparent; box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);}
+    .navbar-fixed-top {top: 0; border-width: 0 0 1px;}
     .navbar-collapse.collapse {display: none!important;}
-    .navbar-nav {
-        float: none!important;
-        margin-top: 7.5px;
-    }
+    .navbar-nav {float: none!important;margin-top: 7.5px;}
     .navbar-nav>li {float: none;}
-    .navbar-nav>li>a {
-        padding-top: 10px;
-        padding-bottom: 10px;
-    }
-    .collapse.in {display: block !important;}
+    .navbar-nav>li>a {padding-top: 10px;padding-bottom: 10px;}
 }
 
 @media (min-width: 991px){
     h1{font-size:30px;}
     h2{font-size:30px}
-    .mobileHide{display:block;}
+    .imageContainerSmallDiv h1 {font-size: 2.8em;}
+    .imageContainerSmallDivH1{font-size: 2.8em;}
     .member-tabs li{font-size:20px;}
     .member-tabs > li > a{padding:10px 15px;}
-    .imageContainerSmallDiv h1 {
-        font-size: 2.8em;
-    }
-    .imageContainerSmallDivH1{
-        font-size: 2.8em;
-    }
     .member-tabs.subNav{display:block;}.nav-toggle{display:none;}
+    .mobileHide{display:block;}
+    .mobileFix{display:block;}
 }
 
 @media only screen and (max-width: 1024px) {
     video {display:none}
-    .intro-mobile {
-        visibility:visible;
-        height:100%
-    }
+    .intro-mobile {visibility:visible;height:100%}
 }

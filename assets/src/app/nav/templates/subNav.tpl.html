@@ -29,16 +29,17 @@
             <div ng-if="item.title">
                 <h4 class="nav-links"><a href="project/{{item.urlTitle}}/about" ui-sref="project.about({path:item.urlTitle})">About</a></h4>
                 <h4 class="nav-links"><a href="project/{{item.urlTitle}}/assets" ui-sref="project.assets({path:item.urlTitle})">Assets</a></h4>
+                <h4 class="nav-links"><a href="project/{{item.urlTitle}}/charter" ui-sref="project.charter({path:item.urlTitle})">Charter</a></h4>
                 <h4 class="nav-links"><a href="project/{{item.urlTitle}}/content" ui-sref="project.content({path:item.urlTitle})">Content</a></h4>
                 <h4 class="nav-links"><a href="project/{{item.urlTitle}}/items" ui-sref="project.items({path:item.urlTitle})">Items</a></h4>
                 <h4 class="nav-links"><a href="project/{{item.urlTitle}}/ledger" ui-sref="project.ledger({path:item.urlTitle})">Ledger</a></h4>
                 <h4 class="nav-links"><a href="project/{{item.urlTitle}}/members" ui-sref="project.members({path:item.urlTitle})">{{item.memberCount}} Members</a></h4>
-                <h4 class="nav-links"><a href="project/{{item.urlTitle}}/charter" ui-sref="project.charter({path:item.urlTitle})">Motions</a></h4>
                 <h4 class="nav-links"><a href="project/{{item.urlTitle}}/positions" ui-sref="project.positions({path:item.urlTitle})">Positions</a></h4>
                 <h4 class="nav-links"><a href="project/{{item.urlTitle}}/projects" ui-sref="project.projects({path:item.urlTitle})">Projects</a></h4>
                 <h4 class="nav-links"><a href="project/{{item.urlTitle}}/tasks" ui-sref="project.tasks({path:item.urlTitle})">Tasks</a></h4>
                 <h4 class="nav-links"><a href="project/{{item.urlTitle}}/time" ui-sref="project.time({path:item.urlTitle})">Time</a></h4>
                 <!--<h4 class="nav-links"><a href="project/{{project.urlTitle}}/charter">Validations</a></h4>-->
+                <!--Motions.. Content Type - Validation??-->
             </div>
             <div ng-if="item.username">
                 <h4 class="nav-links"><a href="member/{{item.username}}/about" ui-sref="member.about({path:item.username})">About</a></h4>

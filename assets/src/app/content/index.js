@@ -10,8 +10,6 @@ angular.module( 'conexus.content', [
                 templateUrl: 'content/index.tpl.html'
             }
         },
-
-        //TODO: DEPRECIATE RESOLVE.. 
         resolve: {
             content: ['$stateParams', 'ContentModel', function($stateParams, ContentModel){
                 return ContentModel.getSome({id:$stateParams.id, limit:1, skip:0, sort:'createdAt DESC'});
@@ -26,52 +24,32 @@ angular.module( 'conexus.content', [
 .controller( 'ContentController', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'content', 'contentList', 'ContentModel', 'ReactionModel', 'titleService', 'UserModel', function ContentController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, content, contentList, ContentModel, ReactionModel, titleService, UserModel ) {
     
     $scope.content = content;
+    $scope.content.children = contentList;
+
     if(!$scope.content){$location.path('/')}
     if ($scope.content.title){titleService.setTitle($scope.content.title + ' | Content | CRE8.XYZ')}
     else{titleService.setTitle('Content | CRE8.XYZ')}
 
-    
     console.log($scope.content, $scope.content.associationModels);
 
     $scope.content.context = [];
     if ($scope.content.associationModels){
         for (x in $scope.content.associationModels){
-
             for (y in Object.keys($scope.content.associationModels[x].context)){
-                var context = Object.keys($scope.content.associationModels[x].context)[y]
+                var context = Object.keys($scope.content.associationModels[x].context)[y];
                 $scope.content.context.push(context);
-                console.log(context);
             }
-
         }
     }
-
-    //todo.. attention connection... common model.. like reaction
-    //attention mapping -> 
-        //string to content 
-    //attention:{sum:1000,attention[context]:1,live:1}
 
     $scope.marketOutput = [];
     $scope.newContent = {};
     $scope.newReaction = {};
-    $scope.newValidation = {};
-    $scope.newValidation.validation = {};
-    $scope.newValidation.validation.general = 0;
-
-    $scope.tokenFilter = 0;
-    $scope.toggleTokenVar = false;
-
     $scope.selectedTab = 'CONTENT';
     $scope.selectTab = function(model){$scope.selectedTab = model;};
 
-    //TODO: VIEWCOUNTER ALL .. plug in for validation
-    //viewToken Mechanism.. OnClick
-    //GET A COUNT OF ALL LIVE PPL.. -> THIS WILL BE ONLY YOU
-
     //TODO: FINALIZE..
-    //ERROR: DUPLICATES IN A REPEATOR ARE NOT ALLOWED
     //TODO: ASSOCIATED TYPE.. CHILD.. DETAILS.. 
-
     function populateChildren(contentList, depth, limit){
         contentList.forEach(function(content) {
             ContentModel.getSome({contentModel:content.id, limit:100, skip:0, sort:'createdAt DESC'}).then(function(contentList){
@@ -85,7 +63,6 @@ angular.module( 'conexus.content', [
         });
     }
     populateChildren(contentList, 0, 5);
-    $scope.content.children = contentList;
 
     function searchObject(object, matchCallback, currentPath, result, searched) {
         currentPath = currentPath || '';
@@ -103,19 +80,14 @@ angular.module( 'conexus.content', [
                 }
             }
         }
-        catch (e) {
-            console.log(object);
-            throw e;
-        }
+        catch (e) {throw e;}
         return result;
     }
 
     //ERROR: Cannot read property 'children' of undefined
     function updateObject(object, newValue, path){
         var stack = path.split('.');
-        while(stack.length>1){
-            object = object[stack.shift()];
-        }
+        while(stack.length>1){object = object[stack.shift()];}
         object[stack.shift()] = newValue;
     }
 
@@ -136,11 +108,15 @@ angular.module( 'conexus.content', [
             $scope.newReaction.associatedModels = [{type:'CONTENT', id:content.id}];
             $scope.newReaction.type = type;
             $scope.newReaction.user = $rootScope.currentUser.id;
+
             var location = searchObject($scope.content, function (value) { return value != null && value != undefined && value.id == content.id; });
+
             console.log(location[0]);
             location[0].value.reactions[type]++;
             ReactionModel.create($scope.newReaction);
+
             //updateObject($scope.content, location[0].value, location[0].path);
+
         }
         else{$mdSidenav('login').toggle()}
     };

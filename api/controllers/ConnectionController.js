@@ -19,12 +19,13 @@ module.exports = {
 			.skip(skip)
 			.sort(sort)
         	.then(function(models) {
+        		console.log(models)
 				res.json(models[0]);
 			});
 		}
 
 		//creator is address.. 
-		if(req.query.creator){
+		else if(req.query.creator){
 			Connection.find({creator:creator})
 			.limit(limit)
 			.skip(skip)
@@ -59,16 +60,13 @@ module.exports = {
 		};
 
 		var model = {
+			model: 'CONNECTION',
 			creator: req.param('creator'),
+			direction: req.param('direction'),
 			dataModelAlpha: req.param('dataModelAlpha'),
 			dataModelBeta: req.param('dataModelBeta'),
 			info: req.param('info'),
-			data:{
-				apps:{
-					reactions: {plus:0, minus:0},
-					attention: {general:0}
-				}
-			}
+			data:{apps:{reactions:{plus:0,minus:0},attention:{general:0}}}
 		};
 
 		console.log('CREATE CONNECTION', model);

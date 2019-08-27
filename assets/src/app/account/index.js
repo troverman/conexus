@@ -9,17 +9,11 @@ angular.module( 'conexus.account', [
 				controller: 'AccountCtrl',
 				templateUrl: 'account/index.tpl.html'
 			}
-		},
-
-        resolve: {
-            apps: ['AppModel', function(AppModel){
-                return AppModel.getSome({limit:100, skip:0, sort:'createdAt DESC'});
-            }],
-        }
+		}
 	});
 }])
 
-.controller( 'AccountCtrl', ['$location', '$rootScope', '$scope', 'apps', 'AssociationModel', 'AttentionModel', 'titleService', 'Upload', 'UserModel', function AccountController( $location, $rootScope, $scope, apps, AssociationModel, AttentionModel, titleService, Upload, UserModel ) {
+.controller( 'AccountCtrl', ['$location', '$rootScope', '$scope', 'AppModel', 'AssociationModel', 'AttentionModel', 'titleService', 'Upload', 'UserModel', function AccountController( $location, $rootScope, $scope, AppModel, AssociationModel, AttentionModel, titleService, Upload, UserModel ) {
 	
     titleService.setTitle('Account Settings | CRE8.XYZ');
     if(!$rootScope.currentUser){$location.path('/')}
@@ -36,6 +30,11 @@ angular.module( 'conexus.account', [
     };
     $scope.markers = [];
     $scope.selectedTab = 'APPS';
+
+    $scope.apps = [];
+    AppModel.getSome({limit:100, skip:0, sort:'createdAt DESC'}).then(function(apps){
+        $scope.apps = apps;
+    });
 
     //LOL COMPLEX QUERY BETTER FILTERING ETC
     AttentionModel.getSome({creator:$rootScope.currentUser.id, app:'HUMAN', limit:100, skip:0, sort:'createdAt DESC'}).then(function(humanAttention){
@@ -56,25 +55,6 @@ angular.module( 'conexus.account', [
             });
         }
     });
-
-    $scope.apps = [
-        {
-            title:'Attention', 
-            content:'Required for Attention Tokenization', 
-            information:{
-                isActive:'bool'
-            }
-        },
-        {
-            title:'ETH App', 
-            content:'ETH App', 
-            data:{
-                address:'0x888d348364E1a82727937D37980c316F9d27Fbf4'
-            }
-        },
-    ];
-
-    $scope.apps = apps;
 
     //APPS
     var associationQuery = {

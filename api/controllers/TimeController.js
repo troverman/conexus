@@ -8,6 +8,26 @@ module.exports = {
 	//STANDARDIZE GET
 	get: function(req, res) {
 
+		function getAssociations(model){
+			var deferred = Q.defer();
+			Association.native(function(err, association) {
+				association.find({$and : [{"associatedModels.id": {$in:[model.id]}}]})
+				.limit(1000)
+				.skip(0)
+				.sort({'createdAt':-1})
+				.toArray(function (err, associationModels) {
+					if (associationModels.length > 0){
+						associationModels.map(function(obj){obj.id=obj._id; return obj});
+						model.associationModels = associationModels;
+						console.log(model)
+						deferred.resolve(model);
+					}
+					else{deferred.resolve(model);}
+				});
+			});
+			return deferred.promise;
+		};
+
 		//TODO: COMPLEX QUERIES..
 		var limit = parseInt(req.query.limit) || 1;
 		var skip = parseInt(req.query.skip) || 0;
@@ -29,6 +49,10 @@ module.exports = {
 			.then(function(models) {
 				//POPULATE ASSOCIATED MODELS 
 				res.json(models[0]);
+				//getAssociations(models[0]);//.then(function(models){
+				//	res.json(models);
+				//});
+
 			});
 		}
 
@@ -314,13 +338,8 @@ module.exports = {
 
 		};
 
-		//HMM
-		//TODO: SUPERSET REP
-
 		//FACTOR TO RETURN TOKEN MODEL 
-
 		function getProtocolTokens(model){
-
 
 			//TODO VALIDATION..
 			//TODO: (LONG FORM) ASSOCIATION
@@ -347,6 +366,7 @@ module.exports = {
 
 		//TODO: SECURITY - PERMISSIONS.. AUTH
 		var model = {
+			model: 'TIME',
 
 			amount: req.param('amount'),
 
@@ -364,12 +384,9 @@ module.exports = {
 			
 			//DEPRECIATE - IS COMPUTED 
 			tags: req.param('tags'),
-			model: 'TIME',
 
-			//TODO: APP - DATA
-			reactions: {plus:0,minus:0},
-			attention:{general:0}
-			
+			data:{apps:{reactions:{plus:0,minus:0},attention:{general:0}}}
+
 		};
 
 		//TODO: BETTER SOON - && SECURITY
@@ -394,7 +411,6 @@ module.exports = {
 					for (x in time.associatedModels){
 						if (time.associatedModels[x].type == 'PROJECT'){createNotification(time)}
 					}
-
 
 					Time.publishCreate(time);
 

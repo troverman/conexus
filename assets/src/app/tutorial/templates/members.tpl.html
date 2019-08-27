@@ -18,15 +18,13 @@
     <li style="float:right;font-size:14px"><a href="#" ng-click="sortToggle()">Sort <i class="fa fa-angle-down"></i></a></li>
     <div style="clear:both"></div>
 </ul>
-<div class="card">
-    <tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search" ng-model="searchQuery"></tags-input>
-</div>
+<div class="card"><tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search" ng-model="searchQuery"></tags-input></div>
 <div class="card">
     <div style="padding:16px;">
         <highchart config="totalMap"></highchart>
     </div>
 </div>
-<div style="max-height:70vh;overflow:auto">
+<div>
     <div class="col-sm-6" ng-repeat="item in members" style="padding-left:10px;padding-right:10px;">
         <div class="member-card" style="margin-bottom:10px" ng-click="renderReputationToggle(item)">
             <div class="member-card-image" style="background-image: url('{{item.coverUrl}}')">
@@ -42,5 +40,6 @@
             </div>
         </div>
     </div>
+    <div style="clear:both"></div>
 </div>
 <div ng-include="'tutorial/templates/controls.tpl.html'"></div>

@@ -185,6 +185,8 @@ module.exports = {
 	//COMPLEX QUERY :)
 	getFeed: function (req, res) {
 
+		Content.watch(req);
+
 		console.log('LETS GO!')
 
 		var searchQuery = JSON.parse(req.query.query);

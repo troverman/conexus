@@ -51,7 +51,7 @@ module.exports = {
 		};
 
 		var model = {
-
+			model: 'APP',
 			title: req.param('title'),
 			description: req.param('description'),
 			information: req.param('information'),
@@ -61,16 +61,8 @@ module.exports = {
 
 			associatedModels: req.param('associatedModels'),
 			creator: req.param('creator'),
-
-			attention: {general:0},
-			reactions: {plus:0, minus:0},
-
-			data:{
-				apps:{
-					reactions: {plus:0, minus:0},
-					attention: {general:0}
-				}
-			}
+			
+			data:{apps:{reactions: {plus:0,minus:0}, attention:{general:0}}}
 
 		};
 

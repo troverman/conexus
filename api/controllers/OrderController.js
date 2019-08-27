@@ -412,7 +412,7 @@ module.exports = {
 
 
 		var model = {
-
+			model: 'ORDER',
 			//BLOCK..
 
 			//DATA -- MODEL (APP)
@@ -425,9 +425,7 @@ module.exports = {
 			creator: req.param('user'),
 			user: req.param('user'),
 
-			//DATA - ASSOCIATED APP(S)
-			reactions:{plus:0,minus:0},
-			attention:{general:0}
+			data:{apps:{reactions: {plus:0,minus:0}, attention:{general:0}}}
 
 		};
 		console.log('CREATE ORDER', model);

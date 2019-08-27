@@ -25,6 +25,7 @@
         </div>
     </div>
     -->
+    
 </div>
 <ul style="padding:0px;margin-bottom:0px" class="member-tabs">
     <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fa fa-filter"></i> Filter</a></li>
@@ -33,22 +34,20 @@
     <div style="clear:both"></div>
 </ul>
 
-<div class="card">
-    <tags-input class="" min-length="1" placeholder="Search " ng-model="searchQuery"></tags-input>
-</div>
+<div class="card"><tags-input class="" min-length="1" placeholder="Search " ng-model="searchQuery"></tags-input></div>
 
-<div style="max-height:70vh;overflow:auto">
+<div>
     <div ng-repeat="item in projects">
         <div class="card" ng-click="cardDetailToggle(item)">
             <div style="padding:16px;">
-                <div ng-click="$event.stopPropagation()"style="float:right">
+                <div ng-click="$event.stopPropagation()" style="float:right">
                     <button ng-click="$event.stopPropagation();join(item);" ng-if="(item.isMember != 'PENDING' || item.isMember == false) && item.isMember != true" class="btn btn-default">Join</button>
                     <button ng-click="$event.stopPropagation();join(item);" ng-if="item.isMember == 'PENDING'" class="btn btn-default">Cancel Request</button>
                     <button ng-click="$event.stopPropagation();join(item);" ng-if="item.isMember == true" class="btn btn-default">Leave</button>
                 </div>
-                <a ng-click="$event.stopPropagation()" href="/project/{{item.urlTitle}}" ui-sref="project.activity({path:item.urlTitle})">
+                <a ng-click="$event.stopPropagation()">
                     <img ng-click="$event.stopPropagation()" style="height:64px;float:left;margin-right:10px;" ng-src="{{item.avatarUrl}}">
-                    <h3 ng-click="$event.stopPropagation()" style="margin-top:0px">{{item.title}}</h3>
+                    <h3 style="margin-top:0px">{{item.title}}</h3>
                 </a>
                 <div><span ng-bind-html="renderContent(item.description)"></span></div>
                 <div style="clear:both"></div>

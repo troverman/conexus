@@ -7,25 +7,31 @@
 	<div class="card">
 		<div style="padding:16px;">
 
-            <p><b>Avatar</b></p>
-            <img style="height:50px;width:50px" src="{{project.avatarUrl}}">
-            <p>{{project.avatarUrl}}</p>
-            <div class="spacing-10"></div>
+            <div style="text-align:center">
+                <h4>Avatar</h4>
+                <img style="height:50px;width:50px" src="{{project.avatarUrl}}">
+                <div class="spacing-5"></div>
+                <p>{{project.avatarUrl}}</p>
+            </div>
 
-            <p><b>Title</b></p>
+            <div class="spacing-10"></div>
+            <h4>Title</h4>
             <p>{{project.title}}</p>
             <div class="spacing-10"></div>
-			
-            <p><b>Description</b></p>
+
+            <h4>Description</h4>
             <p><span style="display:inline" ng-bind-html="renderContent(project.description)"></span></p>
             <div class="spacing-10"></div>
 
-            <p><b>Wallet Address</b></p>
-            <p><a ng-click="transactionToggle()"><img style="height:50px;text-align:left" src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{project.id}}"> {{project.id}}</a></p>
+            <h4><a href="project/{{project.urlTitle}}/charter" ui-sref="project.charter({path:project.urlTitle})">Charter</a></h4>
+            <div class="spacing-10"></div>
+
+            <h4>Wallet</h4>
+            <p ng-click="transactionToggle(project)"><a><img style="height:50px;text-align:left" src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{project.id}}"> {{project.id}}</a></p>
             <div class="spacing-10"></div>
 
             <div ng-if="project.location">
-                <p><b>Location</b></p>
+                <h4>Location</h4>
                 <p ng-if='project.location.lat'><b>Latitude</b>: {{project.location.lat}}, <b>Longitude</b>: {{project.location.lng}}</p>
                 <p ng-if='project.location.address'><b>Address</b>: {{project.location.address}}</p>
                 <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options">
@@ -35,17 +41,16 @@
                         </ui-gmap-window>
                     </ui-gmap-marker>
                 </ui-gmap-google-map>
+                <div class="spacing-10"></div>
             </div>
+
+            <!--INFO.. COUNTS-->
+
+            <h4>Associations</h4>
+            <p><b>Members</b>: <a>{{project.memberCount || 0}}</a>, <b>Tasks</b>: <a>{{project.taskCount || 0}}</a>, <b>Time</b>: <a>{{project.timeCount||0 }}</a></p>
             <div class="spacing-10"></div>
 
-            <p><b>Associations</b></p>
-            <p><b>Members</b>: <a>{{project.memberCount || 0}}</a> | <b>Tasks</b>: <a>{{project.taskCount || 0}}</a> | <b>Time</b>: <a>{{project.timeCount||0 }}</a></p>
-            <div class="spacing-10"></div>
-
-            <p><b><a href="project/{{project.urlTitle}}/charter" ui-sref="project.charter({path:project.urlTitle})">Project Charter</a></b></p>
-            <div class="spacing-10"></div>
-
-            <p><b>Manifolds</b></p> 
+            <h4>Token Manifolds</h4>
             <p>
                 <a href="market/PROJECT+{{project.urlTitle.toUpperCase()}}" ui-sref="market({id:project.urlTitle.toUpperCase()})">PROJECT+{{project.urlTitle.toUpperCase()}}+</a>, 
                 <a href="market/PROJECT+{{project.urlTitle.toUpperCase()}}+TASK">PROJECT+{{project.urlTitle.toUpperCase()}}+TASK</a>, 
@@ -53,8 +58,8 @@
             </p>
             <div class="spacing-10"></div>
 
-            <!--APPS-->
-            <!--APPS-->
+            <h4>Apps</h4>
+            <div class="spacing-10"></div>
 
         </div>
     </div>

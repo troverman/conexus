@@ -1,0 +1,106 @@
+<!--FILTERS-->
+<!--
+<div class="col-sm-3 mobileFix" style="padding-left:0px;padding-right:0px;">
+    <div class="card">
+        <div style="background:url('https://source.unsplash.com/1600x900/?lattice,geometry,crystal,code');min-height:50px" class="imageContainerSmall">
+            <div style="background:rgba(0,0,0,0.75);height:50px" class="imageContainerSmallDiv">  
+                <div style="margin-top: auto;margin-bottom: auto;">
+                    <div class="container">
+                        <h1 style="text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;">Manifolds</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="padding:16px">
+            <div ng-repeat="item in manifolds">
+                <p><a href="market/{{token.string}}{{item.title}}{{item.manifolds}}" ui-sref="market({ id: token.string+item.title+item.manifolds})"><b>{{item.title}}</b></a></p>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div style="background:url('https://source.unsplash.com/1600x900/?lattice,geometry,crystal,code');min-height:50px" class="imageContainerSmall">
+            <div style="background:rgba(0,0,0,0.75);height:50px" class="imageContainerSmallDiv">  
+                <div style="margin-top: auto;margin-bottom: auto;">
+                    <div class="container">
+                        <h1 style="text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;">Type</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="padding:16px">
+            <div ng-repeat="item in types">
+                <p><a><b>{{item.title}}</b></a></p>
+            </div>
+        </div>
+    </div>
+</div>
+-->
+
+<div class="col-xs-12" style="padding-left:0px;padding-right:0px;">
+
+    <div class="spacing-5"></div>
+
+    <ul style="padding:0px;margin-top:0px;margin-bottom:0px;" class="member-tabs">
+        <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('MARKET', filterSet)"><i class="fa fa-filter"></i> Filter</a></li>
+        <li style="float:left;font-size:14px"><a href="#" ng-click="showManifold = !showManifold"><i class="fas fa-infinity"></i> Manifold Actions</a></li>
+        <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('VALUEMAP')"><i class="fas fa-dna"></i> Type <span style="font-size:10px;color:gray"></span></a>
+        </li>
+        <li ng-click="sortToggle()" style="float:right;font-size:14px"><a href="#">Sort By Base Volume <i class="fa fa-angle-down"></i></a></li>
+        <div style="clear:both"></div>
+    </ul>
+
+    <div class="card">
+        <tags-input style="border:0px;flex-grow:2;" placeholder="Search" ng-model="searchQuery"></tags-input>
+    </div>
+
+    <div class="card"><button class="btn btn-default log-btn" ng-click="orderToggle(token)">+ Market Order</button></div>
+
+    <div ng-show="!showManifold" class="card" ng-repeat="market in markets" ng-click="cardDetailToggle(market)">
+      
+        <div style="background:url('https://source.unsplash.com/1600x900/?{{market.string}}');height:100px;min-height:100px" class="imageContainerSmall">
+            <div style="background:rgba(0,0,0,0.75);height:100px" class="imageContainerSmallDiv">  
+                <div style="margin-top: auto;margin-bottom: auto;">
+                    <div style="padding:15px">
+                        <h1 style="text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;">
+                            <a style="color:white;word-break:break-word" ng-click="$event.stopPropagation();" href="market/{{stateParams.id}}/{{market.string}}" ui-sref="marketPair({ setAlpha: stateParams.id, setBeta:market.string })">
+                                {{market.string}}
+                            </a>
+                        </h1>
+                        <h5><a style="color:white" ng-click="$event.stopPropagation();" href="market/{{stateParams.id}}" ui-sref="market({ id: market.string})">Market</a></h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="padding:16px;">
+            <div class="row">
+                <div class="col-sm-12">
+                    <a ng-click="$event.stopPropagation();" href="market/{{stateParams.id}}/{{market.string}}" ui-sref="marketPair({ setAlpha: stateParams.id, setBeta:market.string })">Connection</a>
+                    <p style="color:gray;font-size:10px">{{market.info.rate}}</p>
+                    <p style="color:gray;font-size:10px">{{market.info.dailyChange}} 24/hr Change</p>
+                    <p style="color:gray;font-size:10px">{{market.info.marketDepth}} {{stateParams.id}} Depth</p>
+                    <p style="color:gray;font-size:10px">{{token.string.split(',').length || stateParams.id.split(',').length}} - {{market.string.split(',').length}}</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!--MANIFOLD-->
+    <div ng-show="showManifold">
+        <div class="card" ng-repeat="item in manifolds">
+            <div style="background:url('https://source.unsplash.com/1600x900/?lattice,geometry,crystal,code');min-height:100px" class="imageContainerSmall">
+                <div style="background:rgba(0,0,0,0.75);height:100px" class="imageContainerSmallDiv">  
+                    <div style="margin-top: auto;margin-bottom: auto;">
+                        <div class="container">
+                            <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;"><a style="color:white" href="market/{{token.string}}{{item.title}}" ui-sref="market({ id: token.string+item.title})">{{item.title}}</a></h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="padding:16px">
+                <p><a href="market/{{token.string}}{{item.title}}{{item.manifolds}}" ui-sref="market({ id: token.string+item.title+item.manifolds})">{{item.manifolds}}</a></p>
+            </div> 
+        </div>
+    </div>
+
+</div>

@@ -92,19 +92,12 @@ module.exports = {
 		};
 
 		var model = {
-			
+			model: 'ACTION',
 			type: req.param('type'),
 			amount: req.param('amount'),
 			associatedModels: req.param('associatedModels'),
 			user: req.param('user'),
-
-			data:{
-				apps:{
-					reactions: {plus:0, minus:0},
-					attention: {general:0}
-				}
-			}
-
+			data:{apps:{reactions: {plus:0,minus:0}, attention:{general:0}}}
 		};
 
 		console.log('CREATE ACTION', model);

@@ -1,0 +1,31 @@
+<h5><b>Connection</b></h5>
+<b><a href="connection/self" ui-sref="connection({id:'self'})">Self</a></b>
+<div class="spacing-5"></div>
+
+<h5><b>Associated Models</b></h5>
+<div ng-repeat="item in association.associatedModels">
+    <p>{{item.type}}</p>
+    <b><a href="{{item.type.toLowerCase()}}/{{item.data.title || item.data.id}}">{{item.data.title || item.data.id}}</a></b>
+</div>
+<div class="spacing-5"></div>
+<!--SUMMARY OF CONTENT?-->
+<!--GENERATED SUMMARY-->
+<!--TREE OF VALIDATION-->
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Dimension</th>
+            <th>Score</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="context in contextList track by $index">
+            <td>{{context[0]}}</td>
+            <td>{{context[1]}}</td>
+        </tr>
+    </tbody>
+</table>
+<div class="spacing-10"></div>
+<highchart config="associationColumn"></highchart>
+<div class="spacing-5"></div>
+<p style="font-size:10px;color:gray;margin-left:5px" am-time-ago="association.createdAt"></p>

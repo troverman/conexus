@@ -20,6 +20,14 @@
 		        <p style="color:gray">{{project.title}} | {{member.user.reputation[project.title] || 0}}</p>
                 <p style="color:gray">{{member.user.status}} Offline</p>
 		    </div>
+		    <!--IF CAN VALIDATE-->
+		   	<div ng-if="currentUser" class="card-footer">
+		   		<!--
+		   		<a ng-click="$event.stopPropagation();validationToggle(item)"><i class="fas fa-check"></i> send tokens </a>
+		   		<a ng-click="$event.stopPropagation();validationToggle(item)"><i class="fas fa-check"></i> follow </a>
+				-->
+		   		<a ng-click="$event.stopPropagation();validationToggle(item)"><i class="fas fa-check"></i> validate </a>
+		   	</div>
 		</div>
 	</div>
 </div>

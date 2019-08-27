@@ -20,16 +20,21 @@ angular.module( 'conexus.association', [
 
 .controller( 'AssociationCtrl', ['$location', '$sailsSocket', '$sce', '$scope', 'association', 'ValidationModel', 'titleService', function AssociationController( $location, $sailsSocket, $sce, $scope, association, ValidationModel, titleService ) {
 
-	$scope.association = association[0];
+	$scope.association = association;
     if(!$scope.association){$location.path('/')}
     $scope.association.model = 'ASSOCIATION';
 
-    console.log($scope.association)
+    console.log($scope.association);
+
+    $scope.tokens = [
+        {string:'CRE8+ASSOCIATION+'+$scope.association.id, amount:1},
+        {string:'CRE8+ASSOCIATION+'+$scope.association.associatedModels[0].id+'+'+$scope.association.associatedModels[1].id, amount:1}
+    ]
     
     titleService.setTitle('Association | '+$scope.association.id + ' | CRE8.XYZ');
 
     var validationQuery = {
-        association:[association[0].associatedModels[0].id,association[0].associatedModels[1].id], 
+        association:[$scope.association.associatedModels[0].id,$scope.association.associatedModels[1].id], 
         limit:10, 
         skip:0, 
         sort:'createdAt DESC'

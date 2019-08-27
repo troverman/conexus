@@ -58,6 +58,7 @@ module.exports.routes = {
   'get /project/:path/settings': 'HomeController.index',
   'get /project/:path/tasks': 'HomeController.index',
   'get /project/:path/time': 'HomeController.index',
+  'get /project/:path/validations': 'HomeController.index',
   'get /reaction/:id': 'HomeController.index',
   'get /register': 'HomeController.index',
   'get /search': 'HomeController.index',

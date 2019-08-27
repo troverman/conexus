@@ -114,8 +114,6 @@ angular.module( 'conexus.project', [
                 templateUrl: 'project/templates/charter.tpl.html'
             }
         },
-
-        //TODO: DEPRECIATE RESOLVE
         resolve: {
             connections: ['ConnectionModel', 'project', function(ConnectionModel, project){
                 return ConnectionModel.get({creator:project.id, limit:100, skip:0, sort:'createdAt DESC'});
@@ -256,6 +254,15 @@ angular.module( 'conexus.project', [
             time: ['project', 'TimeModel', function(project, TimeModel) {
                 return TimeModel.getSome({project:project.id, limit:200, skip:0, sort:'createdAt DESC'});
             }]
+        }
+    })
+    .state( 'project.validations', {
+        url: '/validations',
+        views: {
+            "projectValidations": {
+                controller: 'ProjectValidationsCtrl',
+                templateUrl: 'project/templates/validations.tpl.html'
+            }
         }
     })
 }])
@@ -577,62 +584,19 @@ angular.module( 'conexus.project', [
 
 }])
     
-.controller( 'ProjectCharterCtrl', ['$location', '$mdSidenav', '$sailsSocket', '$sce', '$scope', 'connections', 'ContentModel', 'project', 'titleService', function ProjectController( $location, $mdSidenav, $sailsSocket, $sce, $scope, connections, ContentModel, project, titleService ) {
+.controller( 'ProjectCharterCtrl', ['$sailsSocket', '$scope', 'connections', 'project', 'titleService', function ProjectController( $sailsSocket, $scope, connections, project, titleService ) {
     
-    //TODO: DEPRECIATE
     titleService.setTitle(project.title + ' | Charter | CRE8.XYZ');
 
-    //TODO: PROJECT CHARTER
-    //TODO: MOTIONS ++ VALIDATIONS 
-
     $scope.connections = connections.map(function(obj){
-        obj.model = "CHARTER";
+        obj.model = "CONNECTION";
         return obj;
     });
 
-    console.log(connections);
-    //CONNECTIOS ARE CHARTERS.. 
 
     //TODO: ORG EARNS TOKENS WHEN WE CREATE.. PROTOCOL BALANCE AND REPUTATION
+    //PROJECT-ASSET?
     //TODO: FIRE IS MOTION FOR EACH FILE .. --> LIKE THE CODE.. GIT
-
-    //TODO: CHARTER
-    $scope.enactedMotions = [
-        {title:'Member Creation Protocol', type:'PROTOCOL', content:'Simple Majority of active participants', reactions:{plus:0, minus:0}, id:1},
-        {title:'Task Validation Protocol', type:'PROTOCOL', content:'Governs the topology of reputation in governance with repect to the validation of task associations.', reactions:{plus:0, minus:0}, id:1},
-        {title:'Time Validation Protocol', type:'PROTOCOL', content:'Governs the topology of reputation in governance with repect to the validation of time worked.', reactions:{plus:0, minus:0}, id:1},
-        {title:'Project Validation Protocol', type:'PROTOCOL', content:'Governs the topology of reputation in governance with repect to the association of projects.', reactions:{plus:0, minus:0}, id:1},
-        {title:'Content Validation Protocol', type:'PROTOCOL', content:'How can content be linked to a project.', reactions:{plus:0, minus:0}, id:1},
-        {title:'Active Reputation Protocol', type:'PROTOCOL', content:'Governs the reputation decay function.', reactions:{plus:0, minus:0}, id:1},
-        {title:'Manifold Protocol(s)', type:'PROTOCOL', content:'Governs the reputation decay function.', reactions:{plus:0, minus:0}, id:1},
-        //{title:'Motion Validation Protocol', content:'Simple Majority ', id:1},
-        {title:'app.js', type:'FILE', content:'function(model){var create = true}', reactions:{plus:0, minus:0}, id:1},
-    ];  
-
-    //LINK MOTIONS TO UNVALIDATED 'PROPOSALS' | VEHICE TO SEND 
-    $scope.motions = [
-        {title:'Motion to Create Member -- Troverman', type:'CREATE MEMBER', content:'Resolution to the Question: Should Troverman Be afforded membership.', reactions:{plus:0, minus:0}, id:1},
-        {title:'Motion to Create Order', type:'CREATE ORDER', content:'Resolution to the Question: Should NOVO Create a Position in the Market', reactions:{plus:0, minus:0}, id:1},
-        {title:'Motion to Associate Project', type:'CREATE PROJECT ASSOCIATION', content:'Resolution to the Question: Should NOVO Associate PROJECT as a Parent Organization', reactions:{plus:0, minus:0}, id:1},
-        {title:'Motion to Create Transaction',  type:'CREATE TRANSACTION', content:'Resolution to the Question: Should NOVO Send 1 CRE8 to PROJECT', reactions:{plus:0, minus:0}, id:1},
-        {title:'Motion to Associate Task', type:'CREATE TASK ASSOCIATION', content:'Resolution to the Question: Should NOVO Associate PROJECT as a Parent Organization', reactions:{plus:0, minus:0}, id:1},
-        {title:'Motion to Update File',  type:'UPDATE FILES | COMMIT | PULL REQUEST', content:'{git commit message} // ++ function(model){var creation = true}', reactions:{plus:0, minus:0}, id:1},
-    ];  
-
-    $scope.status = [
-        'Enacted',
-        'Pending'
-    ];
-
-    $scope.types = [
-        'PROTOCOL',
-        'CREATE MEMBER',
-        'CREATE ORDER',
-        'CREATE TRANSACTION',
-        'CREATE PROJECT ASSOCIATION',
-        'CREATE TASK ASSOCIATION',
-        'UPDATE FILES',
-    ];
 
 }])
 
@@ -1557,4 +1521,21 @@ angular.module( 'conexus.project', [
         else{$mdSidenav('login').toggle();}
     };
 
+}])
+
+.controller( 'ProjectValidationsCtrl', ['$scope', 'project', 'titleService', function ProjectValidationsController( $scope, project, titleService ) {
+    
+    titleService.setTitle(project.title + ' | Validations | CRE8.XYZ');
+
+      //LINK MOTIONS TO UNVALIDATED 'PROPOSALS' | VEHICE TO SEND 
+    $scope.motions = [
+        {title:'Motion to Create Member -- Troverman', type:'CREATE MEMBER', content:'Resolution to the Question: Should Troverman Be afforded membership.', reactions:{plus:0, minus:0}, id:1},
+        {title:'Motion to Create Order', type:'CREATE ORDER', content:'Resolution to the Question: Should NOVO Create a Position in the Market', reactions:{plus:0, minus:0}, id:1},
+        {title:'Motion to Associate Project', type:'CREATE PROJECT ASSOCIATION', content:'Resolution to the Question: Should NOVO Associate PROJECT as a Parent Organization', reactions:{plus:0, minus:0}, id:1},
+        {title:'Motion to Create Transaction',  type:'CREATE TRANSACTION', content:'Resolution to the Question: Should NOVO Send 1 CRE8 to PROJECT', reactions:{plus:0, minus:0}, id:1},
+        {title:'Motion to Associate Task', type:'CREATE TASK ASSOCIATION', content:'Resolution to the Question: Should NOVO Associate PROJECT as a Parent Organization', reactions:{plus:0, minus:0}, id:1},
+        {title:'Motion to Update File',  type:'UPDATE FILES | COMMIT | PULL REQUEST', content:'{git commit message} // ++ function(model){var creation = true}', reactions:{plus:0, minus:0}, id:1},
+    ]; 
+
 }]);
+

@@ -116,18 +116,16 @@ module.exports = {
 		};
 
 		var model = {
-
+			model: 'REACTION',
 			associatedModels: req.param('associatedModels'),
 			amount: req.param('amount'),
 			type: req.param('type'),
 			user: req.param('user'),
-
-			//PATCH
-			reactions: {plus:0,minus:0},
-			attention: {general:0}
-
+			data:{apps:{reactions: {plus:0,minus:0}, attention:{general:0}}}
 		};
-		
+
+		//TODO UPDATE COUNT IN DATA.APPS.REACTION
+
 		Reaction.create(model)
 		.exec(function(err, reaction) {
 			if (err) {return console.log(err);}
@@ -231,7 +229,6 @@ module.exports = {
 									console.log('UPDATE');
 									res.json(reaction);
 								});
-
 								var notificationModel = {
 									user: reactionModel[0].user,
 									type: 'REACTION',
@@ -240,10 +237,7 @@ module.exports = {
 									info:{user: userModel[0], order:reactionModel[0], type:model.type},
 									priority:50,
 								};
-
 								createNotification(model, notificationModel);
-
-
 							});
 						}
 						if (model.associatedModels[x].type == 'TASK'){
@@ -328,7 +322,6 @@ module.exports = {
 									console.log('UPDATE');
 									res.json(reaction);
 								});
-
 								var validationModel = {
 									user: validationModel[0].user,
 									type: 'REACTION',
@@ -337,9 +330,7 @@ module.exports = {
 									info:{user: userModel[0], validation:validationModel[0], type:model.type},
 									priority:50,
 								};
-
 								createNotification(model, notificationModel);
-
 							});
 						}
 					}

@@ -22,6 +22,8 @@ angular.module( 'conexus.app', [
     
     $scope.app = app;
     if(!$scope.app){$location.path('/')}
+
+    $scope.app.isAssociated = false;
     $scope.app.model = 'APP';
     $scope.app.protocols = JSON.stringify($scope.app.protocols, null, 4);
 
@@ -41,9 +43,6 @@ angular.module( 'conexus.app', [
         $scope.associations = associations;
     });
 
-
-    $scope.app.isAssociated = false;
-
     titleService.setTitle($scope.app.title + ' | App | CRE8.XYZ');
 
     //LOOK AT ALL FILES
@@ -62,7 +61,7 @@ angular.module( 'conexus.app', [
                 context:{self:100},
                 associatedModels:[
                     {type:'MEMBER', id:$rootScope.currentUser.id},
-                    {type:'APP', id:model.id},
+                    {type:'APP+'+model.id, id:model.id},
                 ],
                 //app specific
                 data:{}

@@ -53,7 +53,6 @@ module.exports = {
 	//MACHINE ATTENTION BY VALIDATION OF SPECIFIC DATA.. REVIEW THE DATA IN THE BLOCK ... GIVES IT MACHENE ATTENTION.. IE THE MERKLE PROOF (POW)
 	create: function (req, res) {
 
-
 		function mintTokens(model){
 			var protocolTokens = getProtocolTokens(model);
 			//content attention
@@ -65,7 +64,7 @@ module.exports = {
 		};
 
 		var model = {
-
+			model: 'ATTENTION',
 			//app vs type vs :o
 			app: req.param('app'),
 			string: req.param('string'),
@@ -73,16 +72,10 @@ module.exports = {
 			data: req.param('data'),
 			associatedModels: req.param('associatedModels'),
 			creator: req.param('creator'),
-			attention: {general:0},
-			reactions: {plus:0, minus:0},
-
-			data:{
-				apps:{
-					reactions: {plus:0, minus:0},
-					attention: {general:0}
-				}
-			}
+			data:{apps:{reactions:{plus:0,minus:0},attention:{general:0}}}
 		};
+
+		//TODO UPDATE COUNT IN DATA.APPS.ATTENTION
 		
 		Attention.create(model)
 		.exec(function(err, model) {

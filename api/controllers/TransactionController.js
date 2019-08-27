@@ -507,7 +507,7 @@ module.exports = {
 
 
 		var model = {
-
+			model: 'TRANSACTION',
 			amountSet: req.param('amountSet'),
 
 			to: req.param('to'),
@@ -526,10 +526,12 @@ module.exports = {
 			//DEPRECIATE
 			tags: req.param('context'),
 
-			//APPS - DATA
-			//PATCH.. BETTER MAPPINGS
-			reactions:{plus:0,minus:0},
-			attention:{general:0},
+			//APP DATA
+			//VARIABLE..
+			data:{
+				reactions: {plus:0,minus:0},
+				attention: {general:0},
+			}
 
 		};
 

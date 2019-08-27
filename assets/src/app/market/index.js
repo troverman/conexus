@@ -28,7 +28,6 @@ angular.module( 'conexus.market', [
 .controller( 'MarketCtrl', [ '$rootScope', '$scope', '$stateParams', 'cytoData', 'OrderModel', 'orders', 'titleService', 'token', function MarketController( $rootScope, $scope, $stateParams, cytoData, OrderModel, orders, titleService, token ) {
    
     //VALIDATION (ORDER), ASSOCIATION (LIQUIDITY)//
-
         //connection type and scalar... 
 
     //TODO SAVE ASSETS (TOKENS), MARKETS (UNIQUE COMBINATORIALS OF TOKENS), AND (ASSOCIATIONS) && CONNECTIONS
@@ -36,19 +35,17 @@ angular.module( 'conexus.market', [
         //ORDER AS VALIDATION
             //ORDER (TRANSACTION-TRANSACTION)
 
-
     //MAP OUT THE HEIRARCHY..   TOPO
 
     //throttle
     //COMBINATORIAL TOKEN <-MARKET-> COMBINATORIAL TOKEN
-
 
     $scope.stateParams = $stateParams;
     
     titleService.setTitle('Market | ' + $stateParams.id + ' | CRE8.XYZ');
 
     $rootScope.associatedModels = [{
-        address: $stateParams.id,
+        id: $stateParams.id,
         type: 'MARKET',
     }];
     $scope.elementsObj = {};

@@ -110,6 +110,7 @@ module.exports = {
 		//TODO: SECURITY
 
 		var model = {
+			model: 'ITEM',
 			title: req.param('title'),
 			associatedModels: req.param('associatedModels'),
 			content: req.param('content'),
@@ -126,16 +127,7 @@ module.exports = {
 			data: req.param('data'),
 			dataHash: req.param('dataHash'),
 
-			//PATCH
-			reactions: {plus:0,minus:0},
-			attention: {general:0},
-
-			data:{
-				apps:{
-					reactions: {plus:0, minus:0},
-					attention: {general:0}
-				}
-			}
+			//data:{apps:{reactions: {plus:0,minus:0}, attention:{general:0}}}
 
 		};
 

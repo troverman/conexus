@@ -10,9 +10,8 @@
 	                </div>
 			        <div style="margin-top: auto;margin-bottom: auto;text-align:center">
 			        	<div style="padding:15px">
-			            	<h1 style="font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">
-			            		Connection
-			            	</h1>
+			            	<h1 style="font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">{{connection.info.title}}</h1>
+			            	<h5 style="color:white">Connection</h5>
 			            	<h5 style="color:white">{{connection.id}}</h5>
 			            </div>
 			        </div>
@@ -20,10 +19,12 @@
 			</div>
 			<div style="padding:16px">
 
+				<!--TODO STRUCTURE-->
+				<p>{{connection.info.description}}</p>
+
 				<h4>Associated Models</h4>
-				<h5>{{connection.dataModelAlpha}}</h5>
-				<h5>{{connection.dataModelBeta}}</h5>
-				<h5>{{connection.info}}</h5>
+				<h5>{{connection.dataModelAlpha}} - {{connection.dataModelBeta}}</h5>
+
 				<h5>{{connection.config}}</h5>
 
 			</div>

@@ -1,0 +1,140 @@
+<div class="card">
+    <div style="padding:16px">
+
+        <!--STARTS THE LIVE TIMER MODE || ALLOWANCE FOR MULTI -->
+
+        <div ng-show="!recordingTime">
+            <button ng-show="!question" type="submit" class="btn btn-default log-btn" ng-click="askQuestion()">Create Time</button>
+            <div ng-show="question && !streaming">
+                <h3>Streaming?</h3>
+                <button type="submit" class="btn btn-default log-btn" ng-click="startStreaming()">Yes</button>
+                <div class="spacing-5"></div>
+                <button type="submit" class="btn btn-default log-btn" ng-click="startTime()">No</button>
+            </div>
+            <div ng-show="streaming">
+                <input type="text" placeholder="Link" ng-model="streamUrl" class="form-control">
+                <input ng-show="false" type="text" placeholder="IFPS SECRET" ng-model="timeContent" class="form-control">
+                <input ng-show="false" type="text" placeholder="IFPS KEY" ng-model="timeContent" class="form-control">
+                <button style="width:100%;" class="btn btn-default log-btn" ng-click="startTime()">Start Stream</button>
+            </div>
+        </div>
+
+        <div ng-show="recordingTime">
+
+            <h3>{{taskTime}}</h3>
+
+            <!--TODO: IF NOT STREAM AND YA WANT TO STREAM-->
+            <div ng-show="false"><!--<div ng-show="!streaming">-->
+                <input type="text" placeholder="Link" ng-model="timeContent" class="form-control">
+                <input type="text" placeholder="IFPS SECRET" ng-model="timeContent" class="form-control">
+                <input type="text" placeholder="IFPS KEY" ng-model="timeContent" class="form-control">
+                <button style="width:100%;" class="btn btn-default log-btn" ng-click="startStream()">Start Stream</button>
+            </div>
+            <div ng-if="streaming"><div ng-bind-html="renderStream(streamUrl)"></div></div>
+
+            <div class="spacing-5"></div>
+
+            <!--TODO: ASSOCIATION COMPUTATION AND QUERY-->
+            <!--TODO: PROJECT SELECTION-->
+            <!--IF MULTIPLE??-->
+            <div ng-if="false">
+                <h5>Selected Projects</h5>
+                <tags-input ng-model="selectedProjects" placeholder="Selected Projects"></tags-input>
+
+                <!--TODO: ASSOCIATED MODELS ARE COMPUTED; JOIN-->
+                <div ng-repeat="model in task.associatedModels">
+                    <p><a href="#" ng-click="selectProject(model.address)">Select {{model}}</a></p>
+                </div>
+            </div>
+
+            <!--TODO: TASK SELECTION (UNIVERSAL UX .. LOCK IN TASK)-->
+            <!--IE IT'S HIDDEN HERE BUT WOULD BE OPEN ON +TIME GLOBAL-->
+            <!--UNIVERSAL UX FOR THIS IS IN NAV-->
+            <!--DEPRECIATE AND MOVE TO NAV - ALL IN NAV?-->
+            <!--PRE POPULATE YA MEMBERSHIP ETC.. IF ZEROd OUT SMART UX-->
+            
+            <!--TODO: NEW VALIDATION DIMENSION / TAG SUGGESTION -->
+            <!--TODO: TOKEN STRING PROTOCOL.. IE COMBINATORIAL CONTEXT - IT WILL COME SOON . . PROJECT+... TASK+.. WE ARE ONLY NAKE CONTEXT RN -->
+            <!--TODO: AUTO POPULATE TIME CONTEXT BASED ON COMPUTED TASK VALIDATION :)-->
+            <tags-input min-length="1" ng-model="timeTags" placeholder="Tags"></tags-input>
+            <div class="spacing-5"></div>
+            <a ng-click="showValidationImplicitToggle()" href="#"><i class="fas fa-bezier-curve"></i><b> Expand</b></a>
+            <div class="spacing-5"></div>
+
+            <div ng-show="showValidationImplicitToggleVar">
+
+                <div class="spacing-5"></div>
+
+                <div layout="">
+                    <div flex="15" layout="" layout-align="center center"><span style="color:gray" class="md-body-1"><b>Context</b></span></div>
+                    <div flex="70" layout="" layout-align="center center"></div>
+                    <div flex="15" layout="" layout-align="center center"><span style="color:gray" class="md-body-1"><b>Validation</b> | <b>Reputation</b></span></div>
+                </div>
+
+                <div class="spacing-5"></div>
+
+                <!--FIXED TASK VALIDATION-->
+                <div ng-repeat="validationModel in newTime.validationModels">
+
+                    <div layout="">
+                        <div flex="15" layout="" layout-align="center center"><span style="color:gray" class="md-body-1">General</span></div>
+                        <md-slider step="0.1" flex="" md-discrete="" ng-model="validationModel.validation.general" step="1" min="-100" max="100" aria-label="general"></md-slider>
+                        <div flex="15" layout="" layout-align="center center"><span style="color:gray" class="md-body-1">{{validationModel.validation.general}} | {{currentUser.totalWork}}</span></div>
+                    </div>
+
+                    <div ng-repeat="tag in timeTags track by $index">
+                        <div layout="">
+                            <div flex="15" layout="" layout-align="center center"><span style="color:gray" class="md-body-1">{{tag.text}}</span></div>
+                            <md-slider step="0.1" flex="" md-discrete="" ng-model="validationModel.validation[tag.text]" step="1" min="-100" max="100" aria-label="{{tag.text}}"></md-slider>
+                            <div flex="15" layout="" layout-align="center center"><span style="color:gray" class="md-body-1">{{validationModel.validation[tag.text]}} | {{reputation[tag.text] || 0}}</span></div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="spacing-5"></div>
+            <text-angular ng-model="timeContent" ta-toolbar="[['bold','italics','p','h1','h2','quote','pre','insertLink', 'html']]"></text-angular>
+            <div class="spacing-5"></div>
+            <button style="width:100%;" class="btn btn-default log-btn" ng-click="submit()">Submit Time</button>
+
+        </div>
+
+    </div>
+</div>
+
+<div class="card" ng-repeat="item in time" ng-click="cardDetailToggle(item)">
+
+    <!--TODO: TEMPLATE TIME CARD-->
+    <!--TODO: REMOVE INLINE STYLE-->
+    <!--<div ng-include="'cards/time.tpl.html'"></div>-->
+
+    <div style="padding:16px;">
+        <div style="float:right;text-align:right">
+            <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
+                <span style="color:gray"></span><i class="fa fa-chevron-down"></i>
+            </a>
+        </div>
+        <div ng-click="$event.stopPropagation();">
+            <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
+            <a style="display:inline;font-weight:600;margin-left:5px" href="member/{{item.user.username}}" ui-sref="member.activity({path:item.user.username})">{{item.user.username}}</a>
+            <p style="display:inline"><i class="fa fa-angle-right"></i></p>
+            <a style="display:inline;font-weight:600" href="time/{{item.id}}" ui-sref="time({id:item.id})">{{item.amount}}</a>
+            <p style="display:inline;color:gray;font-size:10px;margin-left:5px" am-time-ago="item.createdAt"></p>
+            <div style="clear:both"></div>
+        </div>
+        <p ng-show="item.task.tags.split(',') > 0" style="margin-left:42px"><a ng-repeat="tag in item.task.tags.split(',')" href="market/{{tag.trim()}}+{{task.id}}" ui-sref="market({id:tag.trim()})">{{tag.trim()}} </a></p>
+        <div style="margin-left:42px">
+            <span style="display:inline" ng-bind-html="renderContent(item.content)"></span>
+        </div>
+    </div>
+    <div class="card-footer">
+        <a ng-click="$event.stopPropagation();" style="color:grey"><i class="fas fa-eye"></i>  {{item.attention.general || 0}}</a>
+        <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fas fa-angle-up"></i> {{item.reactions.plus}} like </a> 
+        <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fas fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
+        <a ng-click="$event.stopPropagation();contentToggle(item)"><i class="far fa-comment"></i> comment </a>
+        <a ng-click="$event.stopPropagation();validationToggle(item)"><i class="fas fa-check"></i> validate </a>
+        <a ng-click="$event.stopPropagation();" style="padding:0px" class="pull-right" href="time/{{item.id}}" ui-sref="time({id:item.id})"><i class="fas fa-link grey"></i></a>
+    </div>
+</div>

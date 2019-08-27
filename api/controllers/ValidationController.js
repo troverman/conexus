@@ -28,7 +28,7 @@ module.exports = {
 				var promises = [];
 				for (x in models[0].associatedModels){
 					if (models[0].associatedModels[x].type == 'ACTION'){promises.push(Action.find({id:models[0].associatedModels[x].id}).then(function(actionModels){return {action:actionModels[0]}}))}
-					if (models[0].associatedModels[x].type == 'APP'){promises.push(App.find({id:models[0].associatedModels[x].id}).then(function(appModels){return {app:appModels[0]}}))}
+					if (models[0].associatedModels[x].type.includes("APP")){promises.push(App.find({id:models[0].associatedModels[x].id}).then(function(appModels){return {app:appModels[0]}}))}
 					if (models[0].associatedModels[x].type == 'CONTENT'){promises.push(Content.find({id:models[0].associatedModels[x].id}).then(function(contentModels){return {content:contentModels[0]}}))}
 					if (models[0].associatedModels[x].type == 'ITEM'){promises.push(Item.find({id:models[0].associatedModels[x].id}).then(function(itemModels){return {item:itemModels[0]}}))}
 					if (models[0].associatedModels[x].type == 'MEMBER'){promises.push(User.find({id:models[0].associatedModels[x].id}).then(function(memberModels){return {member:memberModels[0]}}))}
@@ -43,7 +43,7 @@ module.exports = {
 
 					for (x in models[0].associatedModels){
 
-						if (models[0].associatedModels[x].type == 'APP'){
+						if (models[0].associatedModels[x].type.includes("APP")){
 							var app = populatedModels.filter(function(obj){return obj.app})
 							models[0].associatedModels[x].info = app[0];
 						}
@@ -324,6 +324,7 @@ module.exports = {
 		};
 
 		var model = {
+			model: 'VALIDATION',
 
 			type: req.param('type'), //charter? //APP.. HUMAN
 			connection: req.param('connection'), //charter - charter string? -- HASH, ID,, ETC
@@ -338,11 +339,8 @@ module.exports = {
 			associatedModels: req.param('associatedModels'),
 
 			//APP DATA
-			data:{
-				reactions: {plus:0,minus:0},
-				attention: {general:0},
-			}
-
+			data:{apps:{reactions: {plus:0,minus:0}, attention:{general:0}}}
+			
 		};
 
 		User.find({id:model.user}).then(function(userModels){

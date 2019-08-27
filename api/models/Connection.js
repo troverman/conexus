@@ -1,14 +1,15 @@
-//CHARTER MODEL.. DEFINES ASSOCIATION RULES
-
-//TODO: BE GENEROUS WITH ORGANIZATION OF DATA
 module.exports = {
+
     attributes: {
     	creator:{type: 'string'},
-    	type:{type: 'json'}, //{type: modelA: modelB}
-
+		information: {type: 'json'},
+			//title: {type: 'string'},
+			//description: {type: 'string'},
+			//tags, context?
+    	type:{type: 'json'},
+    	direction: {type: 'string'},
     	dataModelAlpha: {type: 'string'},
     	dataModelBeta: {type: 'string'},
-		title: {type: 'string'},
-		info: {type: 'json'},		
-    },
+    }
+
 };

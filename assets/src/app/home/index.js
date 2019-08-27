@@ -34,7 +34,6 @@ angular.module( 'conexus.home', [
         resolve:{
 
 
-
             //TODO: GET FEED
             //TODO: COMPLEX QUERY
             contentList: ['ContentModel', function(ContentModel){
@@ -319,15 +318,13 @@ angular.module( 'conexus.home', [
 
 }])
 
-.controller( 'FeedCtrl', ['$mdSidenav', '$location', '$rootScope', '$sce', '$scope', 'contentList', 'ContentModel', 'FollowerModel', 'followers', 'MemberModel', 'members', 'memberProjects', 'memberTasks', 'orders', 'PeerModel', 'positions', 'ProjectModel', 'projects', 'ReactionModel', 'SearchModel', 'tasks', 'time', 'titleService', 'toaster', 'transactions', 'UserModel', 'ValidationModel', function HomeController( $mdSidenav, $location, $rootScope, $sce, $scope, contentList, ContentModel, FollowerModel, followers, MemberModel, members, memberProjects, memberTasks, orders, PeerModel, positions, ProjectModel, projects, ReactionModel, SearchModel, tasks, time, titleService, toaster, transactions, UserModel, ValidationModel ) {
+.controller( 'FeedCtrl', ['$mdSidenav', '$location', '$rootScope', '$sailsSocket', '$sce', '$scope', 'contentList', 'ContentModel', 'FollowerModel', 'followers', 'MemberModel', 'members', 'memberProjects', 'memberTasks', 'orders', 'PeerModel', 'positions', 'ProjectModel', 'projects', 'ReactionModel', 'SearchModel', 'tasks', 'time', 'titleService', 'toaster', 'transactions', 'UserModel', 'ValidationModel', function HomeController( $mdSidenav, $location, $rootScope, $sailsSocket, $sce, $scope, contentList, ContentModel, FollowerModel, followers, MemberModel, members, memberProjects, memberTasks, orders, PeerModel, positions, ProjectModel, projects, ReactionModel, SearchModel, tasks, time, titleService, toaster, transactions, UserModel, ValidationModel ) {
 	
     //NEED TO REDUCE QUERIES
     //GET FEED
     //SEARCH
     //SearchModel.find().then(function(searchModel){
     //});
-
-
     
     //TODO:MOVE TO BACKEND SEARCH MODEL
     $scope.contentList = contentList.map(function(obj){
@@ -588,7 +585,7 @@ angular.module( 'conexus.home', [
                         center: {latitude: lat, longitude: lng},
                         zoom: 14
                     };
-                    ProjectModel.getSome({location:[lng,lat], limit:100, skip:0}).then(function(projects){
+                    ProjectModel.getSome({location:[lng,lat], limit:10, skip:0}).then(function(projects){
                         $scope.projects = projects;
                         $scope.markers = [];
 
@@ -997,6 +994,8 @@ angular.module( 'conexus.home', [
         $scope.loadTags();
         $scope.filterSet = {associations:$scope.sortedAssociationArray, tags:$scope.sortedTagArray, locations:$scope.sortedLocationArray}
     };
+    $scope.sortedTagArray = [{element:'LOVE'}, {element:'ART'}, {element:'PEACE'}, {element:'SHELTER'}, {element:'REST'}, {element:'EXPERIENCE'}, {element:'HEALTH'}, {element:'HUMAN'}];
+
     //$scope.init();
 
     //\\//\\//\\//\\//
@@ -1040,6 +1039,14 @@ angular.module( 'conexus.home', [
     //\\//\\//\\//\\//
     //WATCHERS\\//\\//
     //\\//\\//\\//\\//
+
+    $sailsSocket.subscribe('content', function (envelope) {
+        switch(envelope.verb) {
+            case 'created':
+                $scope.activity.unshift(envelope.data);
+                break;
+        }
+    });
 
 
 

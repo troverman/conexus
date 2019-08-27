@@ -11,7 +11,6 @@ module.exports = {
 	congruence: function(req, res) {},
 	manifold: function(req, res) {},
 
-
 	get: function(req, res) {
 
 		var limit = parseInt(req.query.limit) || 1;
@@ -54,33 +53,13 @@ module.exports = {
 				.skip(skip)
 				.sort({'information.markets':-1, "information.inCirculation": -1, "createdAt": -1})
 				.toArray(function (err, models) {
-
 					models = models.map(function(obj){ obj.id = obj._id; return obj;});
-
 					Token.count().then(function(numRecords){
 						var returnObj = {data:models, info:{count:numRecords}};
-						//console.log(returnObj)
 						res.json(returnObj);
 					});
-
 				});
 			});
-
-			//Token.find({})
-			//.limit(limit)
-			//.skip(skip)
-			//.sort(sort)
-			//.then(function(models) {
-			//	Token.subscribe(req, models);
-				//TODO...
-				//Token.find({}).count()
-				//var numRecords = await Token.count();
-			//	Token.count().then(function(numRecords){
-			//		var returnObj = {data:models, info:{count:numRecords}};
-			//		console.log(returnObj)
-			//		res.json(returnObj);
-			//	});
-			//});
 
 		}
 

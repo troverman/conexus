@@ -290,10 +290,11 @@ angular.module( 'conexus.nav', [
         else{$mdSidenav('login').toggle();}
     };
 
-     $rootScope.connectionToggle = function(){
+     $rootScope.connectionToggle = function(item){
         $scope.closeAllNav();
         if($rootScope.currentUser){
-            //WHATS A CONNECTION
+
+            $scope.item = item;
             $scope.newConnection = {
                 associatedModels:$rootScope.associatedModels,
                 creator:$rootScope.currentUser.id,
@@ -306,7 +307,8 @@ angular.module( 'conexus.nav', [
     $rootScope.contentToggle = function(item){
         $scope.closeAllNav();
         if($rootScope.currentUser){
-
+            
+            $scope.newContent.type='POST';
             $scope.newContent.associatedModels = [{
                 type:'CONTENT',
                 text:'self',

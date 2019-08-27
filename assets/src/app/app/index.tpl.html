@@ -181,9 +181,9 @@
 
             </div>
             <div class="card-footer">
-                <a ng-click="$event.stopPropagation();" style="color:grey"><i class="fas fa-eye"></i>  {{app.attention.general || 0}}</a>
-                <a ng-click="$event.stopPropagation();createReaction(app, 'plus')"><i class="fa fa-angle-up"></i> {{app.reactions.plus}} like </a> 
-                <a ng-click="$event.stopPropagation();createReaction(app, 'minus')" ><i class="fa fa-angle-down"></i> {{app.reactions.minus}} dislike </a>
+                <a ng-click="$event.stopPropagation();" style="color:grey"><i class="fas fa-eye"></i>  {{app.data.app.attention.general || 0}}</a>
+                <a ng-click="$event.stopPropagation();createReaction(app, 'plus')"><i class="fa fa-angle-up"></i> {{app.data.app.reactions.plus}} like </a> 
+                <a ng-click="$event.stopPropagation();createReaction(app, 'minus')" ><i class="fa fa-angle-down"></i> {{app.data.app.reactions.minus}} dislike </a>
                 <a ng-click="$event.stopPropagation();contentToggle(app)"><i class="fa fa-comment-o"></i> comment </a>
             </div>
         </div>

@@ -1,0 +1,15 @@
+ <!--TODO MOBILE-->
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Identifer</th>
+            <th>Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="item in tokens">
+            <td><a href="market/{{item.string}}" ui-sref="market({id:item.string})">{{item.string}}</a></td>
+            <td>{{item.amount}}</td>
+        </tr>
+    </tbody>
+</table>

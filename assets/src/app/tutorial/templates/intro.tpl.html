@@ -18,11 +18,13 @@
     <div class="row">
         <div class="col-xs-12" style="padding-right:10px;padding-left:10px">
             <div class="member-card" ng-click="renderReputationToggle(currentUser)">
-                <!--<div style="text-align:right;padding:15px;position:absolute;right:0">
+                <!--
+                <div style="text-align:right;padding:15px;position:absolute;right:0">
                     <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
                         <i class="fas fa-chevron-down"></i>
                     </a>
-                </div>--> 
+                </div>
+                --> 
                 <div class="member-card-image" style="background-image: url('{{currentUser.coverUrl}}')">
                     <a href="#">
                         <img ng-src="{{currentUser.avatarUrl}}" err-src="/images/avatar.png">
@@ -80,9 +82,25 @@
                         <div style="padding:0px" class="col-xs-4"><h5><i class="fas fa-birthday-cake"></i> Date Of Birth</h5><input type="date" ng-model="newAccountInformation.dateOfBirth" placeholder="Date of Birth" class="form-control"></div>
 
                         <div style="clear:both"></div><div class="spacing-10"></div>
+                        <button type="submit" class="btn btn-default log-btn">Save Information</button>
+
+                    </form>
+                </div>
+            </div>
+            <div class="card" style="margin-top:0px;">
+                <div style="background:url('https://source.unsplash.com/1600x900/?personal,energy,joyful,humuan,data,code')" class="imageContainerSmall">
+                    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                        <div style="padding:15px;margin-top: auto;margin-bottom: auto;">
+                            <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">App Connections</h1>
+                            <h5 style="color:white">CRE8 your experience</h5>
+                        </div>
+                    </div>
+                </div>
+                <div style="padding:16px;">
+                    <form role="form" ng-submit="editAccount()">
 
                         <div style="padding:0px;text-align:center"  class="col-xs-12">
-                            <h5><i style="color:#2ab995" class="fas fa-seedling"></i> Client Mining</h5>
+                            <h5><a href="/account" ui-sref="account"><i style="color:#2ab995" class="fas fa-seedling"></i> Client Mining</a></h5>
                             <span style="font-size:10px;color:gray">Run a CRE8 node that powers the network. Machine attention is tokenized.</span>
                             <div ng-click="$event.stopPropagation();">
                                 <div layout="row" layout-align="center center" flex="100">
@@ -92,7 +110,7 @@
                         </div>
 
                         <div style="padding:0px;text-align:center"  class="col-xs-6">
-                            <h5><i style="color:#2ab995" class="fas fa-eye"></i> Attention Tokenization</h5>
+                            <h5><a href="/account" ui-sref="account"><i style="color:#2ab995" class="fas fa-eye"></i> Attention Tokenization</a></h5>
                             <span style="font-size:10px;color:gray">Required for Attention Tokenization</span>
                             <div ng-click="$event.stopPropagation();">
                                 <div layout="row" layout-align="center center" flex="100">
@@ -102,7 +120,7 @@
                         </div>
 
                         <div style="padding:0px;text-align:center"  class="col-xs-6">
-                            <h5><i style="color:#2ab995" class="fas fa-map-marker"></i> Location Tokenization</h5>
+                            <h5><a href="/account" ui-sref="account"><i style="color:#2ab995" class="fas fa-map-marker"></i> Location Tokenization</a></h5>
                             <span style="font-size:10px;color:gray">Required for Location Tokenization</span>
                             <div ng-click="$event.stopPropagation();">
                                 <div layout="row" layout-align="center center" flex="100">
@@ -112,19 +130,19 @@
                         </div>
 
                         <div style="clear:both"></div><div class="spacing-10"></div>
-
                         <div style="padding:0px;text-align:center"  class="col-xs-12">
                             <a href="/account" ui-sref="account"><b><i class="fas fa-passport"></i> More Apps & Account Settings</b></a>
                         </div>
-
                         <div style="clear:both"></div><div class="spacing-10"></div>
 
-                        <button type="submit" class="btn btn-default log-btn">Save Information</button>
+                        <!--
+                        <button type="submit" class="btn btn-default log-btn"><i class="fas fa-passport"></i> More Apps & Account Settings</button>
+                        -->
+
                     </form>
                 </div>
             </div>
         </div>
-       
     </div>
 </div>
 
