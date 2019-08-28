@@ -10,8 +10,6 @@ angular.module( 'conexus.notifications', [
                 templateUrl: 'notifications/index.tpl.html'
             }
         },
-        
-        //TODO: DEPRECIATE RESOLVE
         resolve: {
             notifications: ['$rootScope', 'NotificationModel', function($rootScope, NotificationModel){
                 return NotificationModel.get({user:$rootScope.currentUser.id, limit:100, skip:0, sort:'createdAt DESC'});
@@ -21,25 +19,23 @@ angular.module( 'conexus.notifications', [
 }])
 
 .controller( 'NotificationsController', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'FollowerModel', 'NotificationModel', 'notifications', 'toaster', function NotificationsController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, FollowerModel, NotificationModel, notifications, toaster) {
-
     if(!$rootScope.currentUser){$location.path('/')}
 
     $scope.notifications = notifications.map(function(obj){
         if (obj.type=='VALIDATION'){
             var associatedModels = [];
-            for (x in Object.keys(obj.info)){
+            for (x in Object.keys(obj.data.apps)){
                 associatedModels.push({
-                    type: Object.keys(obj.info)[x].toUpperCase(),
-                    address:obj.info[Object.keys(obj.info)[x]].id,
-                    id:obj.info[Object.keys(obj.info)[x]].id,
-                    text:Object.keys(obj.info)[x].toUpperCase() + ' ' + obj.info[Object.keys(obj.info)[x]].id
+                    type: Object.keys(obj.data.apps)[x].toUpperCase(),
+                    id:obj.data.apps[Object.keys(obj.data.apps)[x]].id,
+                    text:Object.keys(obj.data.apps)[x].toUpperCase() + ' ' + obj.data.apps[Object.keys(obj.data.apps)[x]].id
                 });
             }
             obj.newValidation = obj.newValidation = {
                 user: $rootScope.currentUser.id,
                 validation:{general:0},
                 associatedModels: associatedModels,
-                content: 'Validation for '+obj.info.member.username+' in '+obj.info.project.title
+                content: 'Validation for '+obj.data.apps.member.username+' in '+obj.data.apps.project.title
             }
         }
         return obj;
@@ -48,8 +44,8 @@ angular.module( 'conexus.notifications', [
     //TODO
     FollowerModel.getFollowing($scope.currentUser).then(function(following){
         $scope.notifications.map(function(obj){
-            if (obj.type == 'FOLLOW' && obj.info){
-                var index = following.map(function(obj1){return obj1.followed.id}).indexOf(obj.info.id)
+            if (obj.type == 'FOLLOW' && obj.data.apps){
+                var index = following.map(function(obj1){return obj1.followed.id}).indexOf(obj.data.apps.id)
                 console.log(index);
                 if (index != -1){obj.isFollowing = true;}
                 else{obj.isFollowing = false;}
@@ -116,7 +112,7 @@ angular.module( 'conexus.notifications', [
     $scope.follow = function(model){
 
         $scope.newFollower = {
-            followed:model.info.id,
+            followed:model.data.app.member.id,
             follower:$scope.currentUser.id,
         };
         console.log(model, $scope.newFollower);
@@ -126,12 +122,12 @@ angular.module( 'conexus.notifications', [
             FollowerModel.create($scope.newFollower).then(function(followerModel) {
                 $rootScope.confirm = $scope.newFollower;
                 $rootScope.confirm.modelType = 'FOLLOW';
-                var index = $scope.notifications.map(function(obj){return obj.info.id}).indexOf($scope.newFollower.followed);
+                var index = $scope.notifications.map(function(obj){return obj.data.app.member.id}).indexOf($scope.newFollower.followed);
                 $scope.notifications[index].isFollowing = true;
                 toaster.pop({
                     type:'success',
                     title: 'Following',
-                    body: 'You are now follwing '+ model.info.username, 
+                    body: 'You are now follwing '+ model.data.app.member.username, 
                     onShowCallback: function (toast) { 
                         var audio = new Audio('audio/ping.mp3');
                         audio.play()
@@ -151,12 +147,14 @@ angular.module( 'conexus.notifications', [
             //FollowerModel.getFollowing($scope.currentUser).then(function(following){
             //DROP BY ID
             //FollowerModel.delete($scope.newFollower).then(function(followerModel){
-            //    var index = $scope.notifications.map(function(obj){return obj.info.id}).indexOf(newFollower.followed);
+            //    var index = $scope.notifications.map(function(obj){return obj.data.app.member.id}).indexOf(newFollower.followed);
             //    $scope.notifications[index].isFollowing = false;
             //    console.log('FOLLOWER DELETE', index);
             //});
         }
 
     };
+
+    $scope.validate
 
 }]);

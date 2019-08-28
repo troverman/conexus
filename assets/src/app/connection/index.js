@@ -18,7 +18,7 @@ angular.module( 'conexus.connection', [
 	});
 }])
 
-.controller( 'ConnectionCtrl', ['$location', '$sce', '$scope', 'connection', 'ReactionModel', 'titleService', function ConnectionController( $location, $sce, $scope, connection, ReactionModel, titleService ) {
+.controller( 'ConnectionCtrl', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'connection', 'ReactionModel', 'titleService', function ConnectionController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, connection, ReactionModel, titleService ) {
     titleService.setTitle('Connection | CRE8.XYZ');
     $scope.connection = connection;
     if(!$scope.connection){$location.path('/')}
@@ -34,7 +34,20 @@ angular.module( 'conexus.connection', [
             };
             $scope.connection.data.apps.reactions[type]++;
             ReactionModel.create($scope.newReaction);
+            $rootScope.pop(type, item.id);
         }
         else{$mdSidenav('login').toggle()}
     }; 
+
+    $sailsSocket.subscribe('connection', function (envelope) {
+        console.log(envelope)
+        switch(envelope.verb) {
+            case 'created':
+                if ($scope.connection.id == envelope.data.id){
+                    $scope.connection.data.apps.attention = envelope.data.data.apps.attention;
+                }
+                break;
+        }
+    });
+    
 }]);

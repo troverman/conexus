@@ -309,6 +309,7 @@ angular.module( 'conexus.nav', [
         $scope.closeAllNav();
         if($rootScope.currentUser){
 
+            $scope.selectType = function(type){$scope.newContent.type = type;};
             $scope.createDetailToggleVar = true;
             $scope.newContent = {
                 type:'POST',
@@ -2190,6 +2191,5 @@ angular.module( 'conexus.nav', [
     $scope.selectOrderType = function(type){$scope.selectedOrderType = type;};
     $scope.selectedTab = 'ATTENTION';
     $scope.selectTab = function(model){$scope.selectedTab = model;};
-    $scope.selectType = function(type){$scope.newContent.type = type;};
 
 }]);

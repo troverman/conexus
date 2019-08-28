@@ -89,6 +89,8 @@ module.exports = {
 					//TODO: MULTI D MAP
 					if (model.app == 'HUMAN'){
 
+
+
 						if (model.associatedModels[x].type == 'ACTION'){
 							Action.find({id:model.associatedModels[x].id}).then(function(newModel){
 								if (!newModel[0].data){newModel[0].data = {apps:{}}}
@@ -129,6 +131,16 @@ module.exports = {
 							});
 						}
 
+						if (model.associatedModels[x].type == 'CONNECTION'){
+							Connection.find({id:model.associatedModels[x].id}).then(function(newModel){
+								if (!newModel[0].data){newModel[0].data = {apps:{}}}
+								if (!newModel[0].data.apps){newModel[0].data.apps = {}}
+								if (newModel[0].data.apps.attention){newModel[0].data.apps.attention = {general:newModel[0].data.apps.attention.general + model.amount};}
+								else{newModel[0].data.apps.attention = {general:0}}
+								Connection.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){Connection.publishCreate(newModel);});
+							});
+						}
+
 						if (model.associatedModels[x].type == 'CONTENT'){
 							Content.find({id:model.associatedModels[x].id}).then(function(newModel){
 
@@ -142,24 +154,25 @@ module.exports = {
 
 								if (newModel[0].data.apps.attention){
 
-									newModel[0].data.apps.attention = {
-										general:newModel[0].data.apps.attention.general + model.amount
-									};
-
-									if (newModel[0].data.apps.attention[model.creator]){
-										newModel[0].data.apps.attention[model.creator] = newModel[0].data.apps.attention[model.creator] + model.amount;
+									if (newModel[0].data.apps.attention.general){
+										newModel[0].data.apps.attention.general = newModel[0].data.apps.attention.general + model.amount;
 									}
-									
-									else{
-										newModel[0].data.apps.attention[model.creator] = model.amount;
-									}
+									else{newModel[0].data.apps.attention.general = model.amount;}
 
-								}
-								
+									//for x in protocol.. 
+									//CREATE+ATTENTION+USERNAME
+									if (newModel[0].data.apps.attention[model.creator.toString()]){
+										newModel[0].data.apps.attention[model.creator.toString()] = newModel[0].data.apps.attention[model.creator.toString()] + model.amount;
+									}
+									else{newModel[0].data.apps.attention[model.creator.toString()] = model.amount;}
+
+								}								
 								else{newModel[0].data.apps.attention = {general:0}}
+
+								//STRING TOKEN LANGUAGE 
+								console.log(model.creator, newModel[0].data.apps.attention)
+
 								Content.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){Content.publishCreate(newModel);});
-
-
 
 
 							});

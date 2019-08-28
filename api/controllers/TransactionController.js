@@ -385,7 +385,11 @@ module.exports = {
 				type: 'TRANSACTION',
 				title: 'New Transaction',
 				content:model.from+' sent you '+model.amountSet,
-				info:{transaction:model},
+				data:{
+					apps:{
+						transaction: model
+					}
+				},
 				priority:77,
 			};
 			Notification.create(notificationModel).then(function(notification){

@@ -304,17 +304,6 @@ module.exports = {
 							    return obj.user !== userModels[0].id;
 							});
 
-
-							//NOTIFICATION SETTINGS..
-							//TYPES OF ASSOCIATIONS
-							//MEMBER-PROJECT
-							//TASK-TIME
-							//TASK-PROJECT
-							//TIME-TASK-PROJECT
-							//TIME-TASK-
-							//VALIDATION-VALIDATION
-							//ALL COMBOS. . .
-
 							//NOTIFICATION RULES.. LOL
 							//	if associatedModels[0] || associatedModels[1] type == Member
 							//		-->check member notification settions
@@ -335,7 +324,12 @@ module.exports = {
 									isRead: false,
 									
 									//TOOD: TOO MUCH TO BE STORED.. ONLY DO ID --> SMART GET IN NOTIFICATION MODEL
-									info:{member:userModels[0], project:projectModels[0]},
+									data:{
+										apps:{
+											member:userModels[0], 
+											project:projectModels[0]
+										},
+									}
 								};
 
 								Notification.create(notificationModel).then(function(notification){

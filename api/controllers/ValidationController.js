@@ -309,14 +309,14 @@ module.exports = {
 		function createNotification(model){
 			//SEND NOTIFICATION, BASED ON RULES ASSOCIATED MODELS .. AND NOTIFICATION SETTINGS 
 			//TODO: VALIDATION NOTIFICATION
-			//var notificationModel = {
-			//	user: userModels[0].user,
-			//	type: 'VALIDATION',
-			//	title: 'New Validation',
-			//	content:'New Validation for associatedModels',
-			//	info:{user: userModels[0], associationModels:[]},
-			//	priority:75,
-			//};
+			var notificationModel = {
+				//user: userModels[0].user,
+				type: 'VALIDATION',
+				title: 'New Validation',
+				content:'New Validation for associatedModels',
+				//data:{apps:{user: userModels[0], associationModels:[]}},
+				priority:75,
+			};
 			//console.log('CREATE NOTIFICATION', notificationModel)
 			//Notification.create(notificationModel).then(function(notification){
 			//	Notification.publishCreate(follower[0]);
@@ -326,20 +326,20 @@ module.exports = {
 		var model = {
 			model: 'VALIDATION',
 
-			type: req.param('type'), //charter? //APP.. HUMAN
-			connection: req.param('connection'), //charter - charter string? -- HASH, ID,, ETC
+			connection: req.param('connection'),
+			type: req.param('type'),
 
 			content: req.param('content'),
 
 			user: req.param('user'),
 			creator: req.param('creator'),
+
 			context: req.param('validation'),
 			reputation: req.param('reputation'),
 
 			associatedModels: req.param('associatedModels'),
 
-			//APP DATA
-			data:{apps:{reactions: {plus:0,minus:0}, attention:{general:0}}}
+			data:{apps:{reactions:{plus:0,minus:0},attention:{general:0}}}
 			
 		};
 

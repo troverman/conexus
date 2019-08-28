@@ -31,7 +31,6 @@
             <div style="clear:both"></div>
 		</ul>
 
-
 		<!--
 		<h4>x Unread</h4>
 		<h4>Today</h4>
@@ -56,7 +55,6 @@
 
 	        <div style="padding:16px;">
 	        	<div style="float:right;text-align:center">
-		            <!--<i style="float:right" ng-click="$event.stopPropagation();tokensToggle(notification);" class="fa fa-ellipsis-v"></i>-->
 		            <span ng-if="notification.isRead">
 		            	<button class="btn btn-default" ng-click="$event.stopPropagation();markRead(notification, false)"><i class="fa fa-envelope-o"></i></button>
 						<br><span style="color:gray;font-size:10px;">Read</span>
@@ -67,120 +65,16 @@
 		            </span>
 	        	</div>
 
-	        	<!--<h5 style="text-transform: capitalize;">{{notification.title}}</h5>-->
-
-	            <!--if type is new follower; follow btn; embeded function-->
-
-				<p style="display:inline;font-size:10px;color:gray;margin-left:5px;margin-top:0px" am-time-ago="notification.createdAt"></p>
-				<div class="spacing-10"></div>
-
-	            <div ng-if="notification.type=='FOLLOW'">
-		          	<p><span style="color:gray">{{notification.content}}</span></p>
-	            	<a ng-click="$event.stopPropagation()" style="display:inline;font-weight:600;margin-left:5px" href="member/{{notification.info.username}}" ui-sref="member.activity({path:notification.info.username})">
-	                	<img class="card-avatar" ng-src="{{notification.info.avatarUrl}}" err-src="/images/avatar.png">
-	                	{{notification.info.username}}
-	                </a>
-	            	<button ng-if="!notification.isFollowing" ng-click="follow(notification)" class="btn btn-default">Follow</button>
-	            	<button ng-if="notification.isFollowing" ng-click="follow(notification)" class="btn btn-default">Unfollow</button>
-
-	            </div>
-
-	            <div ng-if="notification.type=='REACTION'">
-	            	<p>
-		            	<a ng-click="$event.stopPropagation()" style="display:inline;font-weight:600;margin-left:5px" href="member/{{notification.info.user.username}}" ui-sref="member.activity({path:notification.info.user.username})">
-		                	<img class="card-avatar" ng-src="{{notification.info.user.avatarUrl}}" err-src="/images/avatar.png">
-		                	{{notification.info.user.username}}
-		                </a>
-		            </p>
-
-	            	<p><span style="color:gray">{{notification.content}}</span></p>
-	                <!--ASSOCIATED MODELS.. LOL-->
-                	<!--{{notification.info.type}}-->
-                	<p><a ng-click="$event.stopPropagation();" href="content/{{notification.info.content.id}}" ui-sref="content({id:notification.info.content.id})">{{notification.info.content.title}}</a></p>
-                	<p><a ng-click="$event.stopPropagation();" href="content/{{notification.info.content.id}}" ui-sref="content({id:notification.info.content.id})">{{notification.info.content.id}}</a></p>
-                	<!--<p><a ng-click="$event.stopPropagation();" href="reaction/{{notification.info.id}}">{{notification.info.id}}</a></p>-->
-
-	            </div>
-
-	            <div ng-if="notification.type=='TRANSACTION'">
-	            	<p><span style="color:gray">{{notification.content}}</span></p>
-					<span ng-click="$event.stopPropagation();" ng-repeat="(key, value) in notification.info.transaction.amountSet"><p style="font-weight:800">{{value}} <a ng-click="$event.stopPropagation()"  href="market/{{key}}" ui-sref="market({id:key})">{{key}}</a></p></span>
-	            </div>
-
-	            <div ng-if="notification.type=='VALIDATION'">
-
-	            	<!--CHECK KEYS OF OBJECT INFO..-->
-    	            <div style="display:inline">
-
-		            	<a ng-click="$event.stopPropagation()" style="display:inline;font-weight:600;margin-left:5px" href="member/{{notification.info.member.username}}" ui-sref="member.activity({path:notification.info.member.username})">
-		                	<img class="card-avatar" ng-src="{{notification.info.member.avatarUrl}}" err-src="/images/avatar.png">
-		                	{{notification.info.member.username}}
-		                </a>
-		                <div style="display:inline;padding-left:5px;padding-right:5px;">
-			                <i class="fa fa-arrow-right"></i>
-			            </div>
-		                <a ng-click="$event.stopPropagation()" style="display:inline;font-weight:600;margin-left:5px" href="member/{{notification.info.project.title}}" ui-sref="member.activity({path:notification.info.member.username})">
-		                	<img class="card-avatar" ng-src="{{notification.info.project.avatarUrl}}" err-src="/images/avatar.png">
-		                	{{notification.info.project.title}}
-		                </a>
-		                <!--
-		                <div style="display:inline;padding-left:5px;padding-right:5px;">
-			                <i class="fa fa-arrow-right"></i>
-			            </div>
-			            <a ng-click="$event.stopPropagation()" style="display:inline;font-weight:600;margin-left:5px" href="/member/{{notification.info.project.title}}">
-		                	<img class="card-avatar" ng-src="{{notification.info.project.avatarUrl}}" err-src="/images/avatar.png">
-		                	{{notification.info.project.title}}
-		                </a>
-		            	-->
-			        </div>
-
-                	<div class="spacing-10"></div>
-
-	            	<p><span style="color:gray">{{notification.content}}</span></p>
-
-            		<!--DEPENDANT ON CHARTER AND MODELS-->
-			        <div ng-click="$event.stopPropagation();">
-				        <tags-input min-length="1" placeholder="Context" ng-model="context">
-		                    <auto-complete source="loadAssociations($query)"></auto-complete>
-		                </tags-input>
-	            	</div>
-
-		            <div ng-click="$event.stopPropagation();">
-		            	<!--FOR SPECIIC CONTEXT IN PROJECT CHARTER-->
-		            	<!--DEFATO, UNIDIM NEW MEMBER VALIDATE-->
-		            	<!--TODO INTI notification.newValidation.validation.general-->
-	                    <!--UX BY CHARTER TOO.. -->
-	                    <!--UX IF ALREADY VALIDATED-->
-	                    <!--PROJECT-PROJECTMEMEBER-MEMBER-->
-
-
-				        <div ng-repeat="(key, value) in notification.newValidation.validation track by $index">
-		                    <div layout="">
-		                        <div flex="10" layout="" layout-align="center center">
-		                            <p><b>{{key}}</b></p>
-		                            <div class="spacing-5"></div>
-		                        </div>
-		                        <md-slider step="0.1" flex="" md-discrete="" ng-model="notification.newValidation.validation[key]" step="1" min="-100" max="100" aria-label="{{key}}"></md-slider>
-		                        <div flex="10" layout="" layout-align="center center">
-		                            <p class="md-body-1">{{notification.newValidation.validation[key]}}</p>
-		                        </div>
-		                    </div>
-                    		<div style="text-align:center"><p style="font-size:9px">{{reputation[key] || 0}} | {{reputation[key]*notification.newValidation.validation[key]}} | Multiplicative Charter</p></div>
-		                </div>
-	                </div>
-	                <div ng-click="$event.stopPropagation();">
-	                	<div class="spacing-10"></div>
-	                	<h5>Content</h5>
-	                	<text-angular style="height:200px" ng-model="newValidation.content" ta-toolbar="''"></text-angular>
-	                </div>
-	                <div class="spacing-10"></div>
-	                <div ng-click="$event.stopPropagation();">
-		                <!--<button ng-click="validationToggle(notification.newValidation)" type="submit" style="width:100%" class="btn btn-default log-btn">+ Validation</button>-->
-		                <button ng-click="createValidation(notification.newValidation)" type="submit" style="width:100%" class="btn btn-default log-btn">create</button>
-		            </div>
-	            </div>
+    	        <div ng-if="notification.type=='FOLLOW'" ng-include="'notifications/templates/follow.tpl.html'"></div>
+    	        <div ng-if="notification.type=='REACTION'" ng-include="'notifications/templates/reaction.tpl.html'"></div>
+    	        <div ng-if="notification.type=='TRANSACTION'" ng-include="'notifications/templates/transaction.tpl.html'"></div>
+    	        <div ng-if="notification.type=='VALIDATION'" ng-include="'notifications/templates/validation.tpl.html'"></div>
 
 	        </div>
+
+	        <div  ng-if="notification.type=='VALIDATION'"  class="card-footer">
+		        <a ng-if="notification.type=='VALIDATION'" ng-click="$event.stopPropagation();validationToggle(item)"><i class="fas fa-check"></i> validate </a>
+		    </div>
 	    </div>
 
 

@@ -41,6 +41,9 @@ angular.module( 'conexus.project', [
         resolve: {
 
             //TODO: FEED.. COMPLEX QUERY
+            connections: ['ConnectionModel', 'project', function(ConnectionModel, project){
+                return ConnectionModel.get({creator:project.id, limit:100, skip:0, sort:'createdAt DESC'});
+            }],
             contentList: ['ContentModel', 'project', function(ContentModel, project){
                 return ContentModel.get({project:project.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
@@ -173,6 +176,9 @@ angular.module( 'conexus.project', [
 
         //TODO: DEPRECIATE RESOLVE
         resolve: {
+            connections: ['ConnectionModel', 'project', function(ConnectionModel, project){
+                return ConnectionModel.get({creator:project.id, limit:100, skip:0, sort:'createdAt DESC'});
+            }],
             members: ['MemberModel', 'project', function(MemberModel, project) {
                 return MemberModel.get({project:project.id, limit:100, skip:0, sort:'createdAt DESC'});
             }]
@@ -344,7 +350,7 @@ angular.module( 'conexus.project', [
 
 }])
 
-.controller( 'ProjectActivityCtrl', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'contentList', 'ContentModel', 'project', 'ReactionModel', 'tasks', 'time', 'titleService', 'transactionsFrom', 'transactionsTo', function ProjectActivityController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, contentList, ContentModel, project, ReactionModel, tasks, time, titleService, transactionsFrom, transactionsTo ) {
+.controller( 'ProjectActivityCtrl', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'connections', 'contentList', 'ContentModel', 'project', 'ReactionModel', 'tasks', 'time', 'titleService', 'transactionsFrom', 'transactionsTo', function ProjectActivityController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, connections, contentList, ContentModel, project, ReactionModel, tasks, time, titleService, transactionsFrom, transactionsTo ) {
    
     //TODO: DEPRECIATE
     titleService.setTitle(project.title + ' | Activity | CRE8.XYZ');
@@ -352,6 +358,7 @@ angular.module( 'conexus.project', [
     //INIT LOCAL VARIABLES
     $scope.newContent = {};
     $scope.newReaction = {};
+    $scope.connections = connections;
     $scope.contentList = contentList;
     $scope.project = project;
     $scope.searchQuery = [];
@@ -1111,11 +1118,12 @@ angular.module( 'conexus.project', [
 
 }])
 
-.controller( 'ProjectMembersCtrl', ['$location', '$mdSidenav', '$sailsSocket', '$rootScope', '$scope', 'MemberModel', 'members', 'project', 'titleService', function ProjectController( $location, $mdSidenav, $sailsSocket, $rootScope, $scope, MemberModel, members, project, titleService ) {
+.controller( 'ProjectMembersCtrl', ['$location', '$mdSidenav', '$sailsSocket', '$rootScope', '$scope', 'connections' ,'MemberModel', 'members', 'project', 'titleService', function ProjectController( $location, $mdSidenav, $sailsSocket, $rootScope, $scope, connections, MemberModel, members, project, titleService ) {
    
     //TODO: DEPRECIATE
     titleService.setTitle(project.title + ' | Members | CRE8.XYZ');
-   
+
+    $scope.connections = connections;
     $scope.members = members;
     $scope.newMember = {};
     $scope.project = project;
@@ -1123,7 +1131,6 @@ angular.module( 'conexus.project', [
     //DO BETTER>> ASSIGN MEMBERSHIP IN ROOT PROJ CTRL. ASSIGN PERMISSIONS
     //if ($scope.members.map(function(obj){return obj.user.id}).indexOf($rootScope.currentUser.id) != -1){$scope.isProjectMember = true}
     //else{$scope.isProjectMember = false}
-
 
     $scope.createMember = function() {
         if ($rootScope.currentUser){

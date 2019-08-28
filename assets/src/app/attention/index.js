@@ -10,8 +10,6 @@ angular.module( 'conexus.attention', [
                 templateUrl: 'attention/index.tpl.html'
             }
         },
-        
-        //TODO: DEPRECIATE RESOLVE
         resolve: {
             attention: ['$stateParams', 'AttentionModel', function($stateParams, AttentionModel){
                 return AttentionModel.get({id:$stateParams.id});
@@ -42,6 +40,7 @@ angular.module( 'conexus.attention', [
     }; 
 
     $sailsSocket.subscribe('attention', function (envelope) {
+        console.log(envelope)
         switch(envelope.verb) {
             case 'created':
                 if ($scope.attention.id == envelope.data.id){

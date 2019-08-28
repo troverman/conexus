@@ -103,7 +103,6 @@ angular.module( 'conexus.association', [
         else{$mdSidenav('login').toggle()}
     };
 
-
     $sailsSocket.subscribe('association', function (envelope) {
         switch(envelope.verb) {
             case 'created':

@@ -286,14 +286,14 @@ module.exports.intervalService = function(){
 			var tokenSet = [];
 			for (x in data){
 				for (y in data[x]){
-					var apps = {reactions:{plus:0,minus:0},attention:{general:0}};
-					if (data[x][y].data){if (data[x][y].apps){apps = data[x][y].apps;}}
-					else{data[x][y].data = {};}
-					if (data[x][y].reactions){apps.reactions = data[x][y].reactions;}
-					if (data[x][y].attention){apps.attention = data[x][y].attention;}
-					if (data[x][y].data.applications){apps = data[x][y].data.applications}
-					data[x][y].data.apps = apps;
-					console.log(data[x][y].id, data[x][y].data);
+					//var apps = {reactions:{plus:0,minus:0},attention:{general:0}};
+					//if (data[x][y].data){if (data[x][y].apps){apps = data[x][y].apps;}}
+					//else{data[x][y].data = {};}
+					//if (data[x][y].reactions){apps.reactions = data[x][y].reactions;}
+					//if (data[x][y].attention){apps.attention = data[x][y].attention;}
+					//if (data[x][y].data.applications){apps = data[x][y].data.applications}
+					//data[x][y].data.apps = apps;
+					//console.log(data[x][y].id);
 					//if (type[x] == 'ACTION'){Action.update({id:data[x][y].id}, {data: data[x][y].data}).then(function(data){console.log('UPDATE!', data)})}
 					//if (type[x] == 'APP'){App.update({id:data[x][y].id}, {data: data[x][y].data}).then(function(data){console.log('UPDATE!', data)})}
 					//if (type[x] == 'ASSOCIATION'){Association.update({id:data[x][y].id}, {data: data[x][y].data}).then(function(data){console.log('UPDATE!', data)})}
@@ -312,7 +312,7 @@ module.exports.intervalService = function(){
 			}
 		});
 	};
-	//bulkEditFunction();
+	bulkEditFunction();
 
 	//MAINTAINCE.. REMOVE DUP TOKENS
 	function removeDuplicateTokens(){

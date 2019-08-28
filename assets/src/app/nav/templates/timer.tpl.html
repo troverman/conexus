@@ -35,18 +35,21 @@
                 <highchart config="timeChart"></highchart>
                 <h4>{{timeModel.amount}}</h4>
                 <div ng-repeat="time in timeQ.attention.slice(0,100) | orderBy:'-'">
-                    <p>{{time.context}} : <b>{{time.amount}}</b></p>
+                    <p>{{time.context.string}} : <b>{{time.amount}}</b></p>
                     <!--LOCATION AS CONTEXT..?-->
-                    <p>{{time.location}}</p>
+                    <p><b>lat:</b> {{time.location.lat}}, <b>lng:</b> {{time.location.lng}}</p>
+                    <hr>
                 </div>
             </div>
 
             <div ng-if="selectedTab=='MACHINE'">
 
                 <div ng-repeat="time in timeQ.mining.slice(0,100) | orderBy:'-'">
-                    <p>{{time.context}} : <b>{{time.amount}}</b></p>
+                    <p>{{time.context.string}} : <b>{{time.amount}}</b></p>
                     <!--LOCATION AS CONTEXT..?-->
-                    <p>{{time.location}}</p>
+                    <!--FUNCTION CALLS-->
+                    <p><b>lat:</b> {{time.location.lat}}, <b>lng:</b> {{time.location.lng}}</p>
+                    <hr>
                 </div>
 
             </div>

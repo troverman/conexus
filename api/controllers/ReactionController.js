@@ -14,6 +14,19 @@ module.exports = {
 
 		Reaction.watch(req);
 
+		if(req.query.id){
+			var id = req.query.id;
+			Reaction.find({id:id})
+			.limit(limit)
+			.skip(skip)
+			.sort(sort)
+			.populate('user')
+			.then(function(models) {
+				Reaction.subscribe(req, models);
+				res.json(models[0]);
+			});
+		}
+
 		//TODO
 		if(req.query.contentModel){
 			var contentModel = req.query.contentModel;
@@ -195,16 +208,21 @@ module.exports = {
 									console.log('UPDATE');
 									res.json(reaction);
 								});
+
+								//NOTIFICATION.. ASSOCIATED MODEL
 								//AUDIT NOTIFICATION MODEL STRUCT
 								var notificationModel = {
 									user: newModel[0].user,
 									type: 'REACTION',
 									title: 'New '+model.type,
-									content:userModel[0].username+' '+model.type+' Content '+newModel[0].id,
-									info:{
-										user: userModel[0], 
-										content:newModel[0], 
-										type:model.type
+									content:userModel[0].username+' created a '+model.type+' reaction for content '+newModel[0].id,
+									data:{
+										apps:{
+											reacton:reaction,
+											user: userModel[0], 
+											content:newModel[0], 
+											type:model.type
+										}
 									},
 									priority:50,
 								};
@@ -225,8 +243,14 @@ module.exports = {
 									user: newModel[0].user,
 									type: 'REACTION',
 									title: 'New '+model.type,
-									content:userModel[0].username+' '+model.type+' Item '+newModel[0].id,
-									info:{user: userModel[0], item:newModel[0], type:model.type},
+									content:userModel[0].username+' created a '+model.type+' reaction for item '+newModel[0].id,
+									data:{
+										apps:{
+											user:userModel[0], 
+											item:newModel[0], 
+											type:model.type
+										}
+									},
 									priority:50,
 								};
 								createNotification(notificationModel);
@@ -245,8 +269,14 @@ module.exports = {
 									user: newModel[0].user,
 									type: 'REACTION',
 									title: 'New '+model.type,
-									content:userModel[0].username+' '+model.type+' Order '+newModel[0].id,
-									info:{user: userModel[0], order:newModel[0], type:model.type},
+									content:userModel[0].username+' created a '+model.type+' reaction for order '+newModel[0].id,
+									data:{
+										apps:{
+											user: userModel[0], 
+											order:newModel[0], 
+											type:model.type
+										}
+									},
 									priority:50,
 								};
 								createNotification(notificationModel);
@@ -265,8 +295,14 @@ module.exports = {
 									user: newModel[0].user,
 									type: 'REACTION',
 									title: 'New '+model.type,
-									content:userModel[0].username+' '+model.type+' Reaction '+newModel[0].id,
-									info:{user: userModel[0], reaction:newModel[0], type:model.type},
+									content:userModel[0].username+' created a '+model.type+' reaction for reaction '+newModel[0].id,
+									data:{
+										apps:{
+											user: userModel[0], 
+											reaction:newModel[0], 
+											type:model.type
+										}
+									},
 									priority:50,
 								};
 								createNotification(notificationModel);
@@ -285,8 +321,14 @@ module.exports = {
 									user: newModel[0].user,
 									type: 'REACTION',
 									title: 'New '+model.type,
-									content:userModel[0].username+' '+model.type+' Task '+newModel[0].id,
-									info:{user: userModel[0], task:newModel[0], type:model.type},
+									content:userModel[0].username+' created a '+model.type+' reaction for task '+newModel[0].id,
+									data:{
+										apps:{
+											user: userModel[0], 
+											task:newModel[0], 
+											type:model.type
+										}
+									},
 									priority:50,
 								};
 								createNotification(notificationModel);
@@ -305,8 +347,14 @@ module.exports = {
 									user: newModel[0].user,
 									type: 'REACTION',
 									title: 'New '+model.type,
-									content:userModel[0].username+' '+model.type+' Task '+newModel[0].id,
-									info:{user: userModel[0], time:newModel[0], type:model.type},
+									content:userModel[0].username+' created a '+model.type+' reaction for time '+newModel[0].id,
+									data:{
+										apps:{
+											user: userModel[0], 
+											time:newModel[0], 
+											type:model.type
+										}
+									},
 									priority:50,
 								};
 								createNotification(notificationModel);
@@ -325,8 +373,14 @@ module.exports = {
 									user: newModel[0].user,
 									type: 'REACTION',
 									title: 'New '+model.type,
-									content:userModel[0].username+' '+model.type+' Task '+newModel[0].id,
-									info:{user: userModel[0], transaction:newModel[0], type:model.type},
+									content:userModel[0].username+' created a '+model.type+' reaction for transaction '+newModel[0].id,
+									data:{
+										apps:{
+											user: userModel[0], 
+											transaction:newModel[0], 
+											type:model.type
+										}
+									},
 									priority:50,
 								};
 								createNotification(notificationModel);
@@ -345,8 +399,14 @@ module.exports = {
 									user: newModel[0].user,
 									type: 'REACTION',
 									title: 'New '+model.type,
-									content:userModel[0].username+' '+model.type+' Task '+newModel[0].id,
-									info:{user: userModel[0], validation:newModel[0], type:model.type},
+									content:userModel[0].username+' created a '+model.type+' reaction for validation '+newModel[0].id,
+									data:{
+										apps:{
+											user: userModel[0], 
+											validation:newModel[0], 
+											type:model.type
+										}
+									},
 									priority:50,
 								};
 								createNotification(notificationModel);

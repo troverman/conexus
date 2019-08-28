@@ -1,0 +1,13 @@
+<p><span style="color:gray">{{notification.content}}</span></p>
+<a ng-click="$event.stopPropagation()" style="display:inline;font-weight:600;margin-left:5px" href="member/{{notification.data.app.member.username}}" ui-sref="member.activity({path:notification.data.app.member.username})">
+    <img class="card-avatar" ng-src="{{notification.data.app.member.avatarUrl}}" err-src="/images/avatar.png">
+    {{notification.data.app.member.username}}
+</a>
+
+<div class="spacing-5"></div>
+<button ng-if="!notification.isFollowing" ng-click="follow(notification)" class="btn btn-default">Follow</button>
+<button ng-if="notification.isFollowing" ng-click="follow(notification)" class="btn btn-default">Unfollow</button>
+<div class="spacing-5"></div>
+
+<p style="display:inline;font-size:10px;color:gray;margin-left:5px;margin-top:0px" am-time-ago="notification.createdAt"></p>
+

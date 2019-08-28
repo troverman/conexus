@@ -1,15 +1,9 @@
 /**
  * FollowerController
  */
-
-
-//TODO: RELATIONSHIP?
 module.exports = {
 
 	get: function(req, res) {
-		
-		//var follower;
-		//var followed;
 		console.log('GET FOLLOWERS', req.query);
 
 	},
@@ -38,6 +32,7 @@ module.exports = {
 	},
 
 	//TODO:!!!
+	//CONNECTION..
 	//MEMBER-MEMBER VALIDATION! 
 
 		//""FRIEND SHIP"" IS REPROCITY 
@@ -71,14 +66,12 @@ module.exports = {
 					userModel[0].followingCount++;
 					User.update({id:model.follower}, {followingCount:userModel[0].followingCount}).then(function(user){});
 
-					//MB REFACTOR THIS BLOCK
-					//WHATS THE DATA?
 					var notificationModel = {
 						user: model.followed,
 						type: 'FOLLOW',
 						title: 'New Follower',
 						content:userModel[0].username+' started following you',
-						info:userModel[0],
+						data:{apps:{member:userModel[0]}},
 						priority:70,
 						isRead: false,
 					};
