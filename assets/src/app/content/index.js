@@ -134,6 +134,8 @@ angular.module( 'conexus.content', [
     };
 
     //TODO: WEBSOCKET
+    //WEBSOCKET WITH ASSOCIATED CONTET!
+
     $sailsSocket.subscribe('content', function (envelope) {
         console.log(envelope)
         switch(envelope.verb) {

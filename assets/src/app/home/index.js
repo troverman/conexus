@@ -327,7 +327,7 @@ angular.module( 'conexus.home', [
     //});
     
     //TODO:MOVE TO BACKEND SEARCH MODEL
-    $scope.contentList = contentList.map(function(obj){
+    $scope.contentList = contentList.data.map(function(obj){
         obj.model = 'CONTENT';
         if (obj.tags){obj.tags = obj.tags.split(',')}
         return obj;
@@ -475,7 +475,9 @@ angular.module( 'conexus.home', [
         if (!$scope.balance[$scope.balanceLook]){$scope.balanceLookupValue = 0}
     };
 
+    //BUG..
     $scope.renderBalances = function(){
+        console.log($rootScope.currentUser.balance)
         var sortable = [];
         for (var context in $rootScope.currentUser.balance) {sortable.push([context, $scope.reputation[context]])}
         sortable.sort(function(a, b) {return b[1] - a[1]});
@@ -606,7 +608,7 @@ angular.module( 'conexus.home', [
 
                         $scope.projects.map(function(obj){
                             obj.model='PROJECT';
-                            var index = $scope.memberProjects.map(function(obj1){return obj1.id}).indexOf(obj.id);
+                            var index = -1;//= $scope.memberProjects.map(function(obj1){return obj1.id}).indexOf(obj.id);
                             if (index != -1){obj.isMember = true;}
                             if (index == -1){obj.isMember = false;}
                             return obj;

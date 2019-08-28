@@ -76,11 +76,11 @@
                     </div>
                                   
                     <ul class="nav nav-pills nav-justified contentTyle">
-                        <li ng-class="{active: selectedType=='AUDIO'}" ng-click="selectType('AUDIO')"><a href="#">Audio</a></li>
-                        <li ng-class="{active: selectedType=='IMAGE'}" ng-click="selectType('IMAGE')"><a href="#">Image</a></li>
-                        <li ng-class="{active: selectedType=='LINK'}" ng-click="selectType('LINK')"><a href="#">Link</a></li>
-                        <li ng-class="{active: selectedType=='POST'}" ng-click="selectType('POST')"><a href="#">Post</a></li>
-                        <li ng-class="{active: selectedType=='VIDEO'}" ng-click="selectType('VIDEO')"><a href="#">Video</a></li>
+                        <li ng-class="{active: newContent.type=='AUDIO'}" ng-click="selectType('AUDIO')"><a href="#">Audio</a></li>
+                        <li ng-class="{active: newContent.type=='IMAGE'}" ng-click="selectType('IMAGE')"><a href="#">Image</a></li>
+                        <li ng-class="{active: newContent.type=='LINK'}" ng-click="selectType('LINK')"><a href="#">Link</a></li>
+                        <li ng-class="{active: newContent.type=='POST'}" ng-click="selectType('POST')"><a href="#">Post</a></li>
+                        <li ng-class="{active: newContent.type=='VIDEO'}" ng-click="selectType('VIDEO')"><a href="#">Video</a></li>
                     </ul>
 
                 </div>
@@ -88,7 +88,7 @@
     
                 <text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','bold','italics','quote','ol','ul','insertLink','insertImage','html']]"></text-angular>
 
-                <div ng-if="selectedType!='POST'">
+                <div ng-if="newContent.type!='POST'">
                     <input type="text" placeholder="Link" ng-model="newContent.link" class="form-control">
                 </div>
 

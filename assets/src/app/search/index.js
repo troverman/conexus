@@ -57,7 +57,7 @@ angular.module( 'conexus.search', [
     });
 }])
 
-.controller( 'SearchController', ['$location', '$mdSidenav', '$rootScope', '$sce', '$scope', '$stateParams', 'titleService', 'SearchModel', 'searchResults', function SearchController( $location, $mdSidenav, $rootScope, $sce, $scope, $stateParams, titleService, SearchModel, searchResults ) {
+.controller( 'SearchController', ['$location', '$mdSidenav', '$rootScope', '$sce', '$scope', '$stateParams', 'ReactionModel', 'titleService', 'SearchModel', 'searchResults', function SearchController( $location, $mdSidenav, $rootScope, $sce, $scope, $stateParams, ReactionModel, titleService, SearchModel, searchResults ) {
     
     $scope.searchResults = searchResults;
     

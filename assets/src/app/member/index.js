@@ -550,8 +550,9 @@ angular.module( 'conexus.member', [
             $scope.newReaction.type = type;
             $scope.newReaction.user = $rootScope.currentUser.id;
             var index = $scope.activity.map(function(obj){return obj.id}).indexOf(item.id);
-            $scope.activity[index].reactions[type]++;
+            $scope.activity[index].data.apps.reactions[type]++;
             ReactionModel.create($scope.newReaction);
+            $rootScope.pop(type, item.id);
         }
         else{$mdSidenav('login').toggle()}
     };
@@ -809,55 +810,25 @@ angular.module( 'conexus.member', [
 
 }])
 
-.controller( 'MemberContentCtrl', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', '$stateParams', 'contentList', 'ContentModel', 'titleService', function MemberContentController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, $stateParams, contentList, ContentModel, titleService) {
+.controller( 'MemberContentCtrl', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', '$stateParams', 'contentList', 'ReactionModel', 'titleService', function MemberContentController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, $stateParams, contentList, ReactionModel, titleService) {
    
     titleService.setTitle($scope.member.username + ' | Content | CRE8.XYZ');
     
     $scope.contentList = contentList;
-    $scope.newContent = {};
-    $scope.newReaction = {};
-
-    $scope.selectedType = 'POST';
-
-    $scope.createContent = function(){
-        if ($rootScope.currentUser){
-            if(content){$scope.newContent.contentModel = content.id;}
-            $scope.newContent.user = $rootScope.currentUser.id;
-            $scope.newContent.project = $scope.project.id;
-            $scope.newContent.tags = $scope.newContent.tags.map(function(obj){
-                return obj.text
-            }).join(",");
-            $scope.newContent.type = $scope.selectedType;
-            ContentModel.create($scope.newContent).then(function(model) {
-                $scope.newContent = {};
-                $scope.content.unshift(model);
-            });
-        }
-        else{$mdSidenav('login').toggle()}
-    };
-
-    //TODO: MODELS | ONLY CONTENT
-    $scope.createReaction = function(content, type){
+    $scope.newReaction = {};  
+    
+    //DEPRECIATE  
+    $scope.createReaction = function(item, type){
         if($rootScope.currentUser){
             $scope.newReaction.amount = 1;
-            $scope.newReaction.contentModel = content.id;
+            $scope.newReaction.associatedModels = [{type:item.model, id:item.id}];
             $scope.newReaction.type = type;
             $scope.newReaction.user = $rootScope.currentUser.id;
-
-            var index = $scope.contentList.map(function(obj){return obj.id}).indexOf(content.id);
-
-            if (type =='plus'){$scope.contentList[index].plusCount++}
-            if (type =='minus'){$scope.contentList[index].minusCount++}
-            ReactionModel.create($scope.newReaction).then(function(model){
-                $scope.newReaction = {};
-            });
-
+            var index = $scope.contentList.map(function(obj){return obj.id}).indexOf(item.id);
+            $scope.contentList[index].data.apps.reactions[type]++;
+            ReactionModel.create($scope.newReaction);
+            $rootScope.pop(type, item.id);
         }
-        else{$mdSidenav('login').toggle()}
-    };
-
-    $scope.contentToggle = function(){
-        if($rootScope.currentUser){$mdSidenav('content').toggle();}
         else{$mdSidenav('login').toggle()}
     };
 
@@ -881,17 +852,6 @@ angular.module( 'conexus.member', [
         $scope.sortedTagArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
     }
     $scope.loadTags();
-
-    $scope.reply = function(item){
-        var index = $scope.content.map(function(obj){return obj.id}).indexOf(item.id);
-        $scope.content[index].showReply = !$scope.content[index].showReply
-    };
-
-    $scope.search = function(){};
-
-    $scope.selectType = function(type){
-        $scope.selectedType = type;
-    };
 
 }])
 
@@ -1218,6 +1178,7 @@ angular.module( 'conexus.member', [
         credits:{enabled:false},
     };
 
+    //DEPRECIATE
     $scope.createReaction = function(item, type){
         if ($rootScope.currentUser){
             $scope.newReaction.amount = 1;
@@ -1226,8 +1187,9 @@ angular.module( 'conexus.member', [
             var transactionIndex = $scope.transactions.map(function(obj){return obj.id}).indexOf(item.id);
             if (timeIndex != -1){
                 $scope.newReaction.associatedModels = [{type:'TRANSACTION', id:item.id}];
-                $scope.transactions[transactionIndex].reactions[type]++;
+                $scope.transactions[transactionIndex].data.apps.reactions[type]++;
                 ReactionModel.create($scope.newReaction);
+                $rootScope.pop(type, item.id);
             }
         }
         else{$mdSidenav('login').toggle();}
@@ -2064,8 +2026,9 @@ angular.module( 'conexus.member', [
             $scope.newReaction.type = type;
             $scope.newReaction.user = $rootScope.currentUser.id;
             var index = $scope.orders.map(function(obj){return obj.id}).indexOf(item.id);
-            $scope.orders[index].reactions[type]++;
+            $scope.orders[index].data.apps.reactions[type]++;
             ReactionModel.create($scope.newReaction);
+            $rootScope.pop(type, item.id);
         }
         else{$mdSidenav('login').toggle()}
     };
@@ -2241,8 +2204,9 @@ angular.module( 'conexus.member', [
             var timeIndex = $scope.time.map(function(obj){return obj.id}).indexOf(item.id);
             if (timeIndex != -1){
                 $scope.newReaction.associatedModels = [{type:'TIME', id:item.id}];
-                $scope.time[timeIndex].reactions[type]++;
+                $scope.time[timeIndex].data.apps.reactions[type]++;
                 ReactionModel.create($scope.newReaction);
+                $rootScope.pop(type, item.id);
             }
         }
         else{$mdSidenav('login').toggle();}

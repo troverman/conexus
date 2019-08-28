@@ -1,36 +1,28 @@
-<!--TODO: UNITY IN SEARCH MODEL; QUERY && DISCOVERABILITY..-->
-
 <div ui-view="search">
-
 	<div style="background:url('https://source.unsplash.com/1600x900/?{{searchQueryString}}')" class="imageContainerSmall">
 	    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
 	        <div style="margin-top: auto;margin-bottom: auto;">
 	        	<div class="container">
 	            	<h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">{{searchQueryString}}</h1>
+	            	<h5 style="color:white">{{searchResults.length}} results</h5>
 	        	</div>
 	        </div>
 	    </div>
 	</div>
-
 	<div class="spacing-5"></div>
-	
-	<!--TOKEN FILTERS-->
-	<!--Protocol | Context-->
-	<!--Market Discoverability-->
-	<!--Orders-->
-
 	<div class="container">
 		<div class="spacing-10"></div>
 		<div class="row">
 			<ul style="padding:0px;" class="member-tabs">
 	            <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER')"><i class="fa fa-filter"></i> Filter</a></li>
 				<li style="float:right;font-size:14px"><a href="#" ng-click="sortToggle()">Sort By Recent <i class="fa fa-angle-down"></i></a></li>
+				<div style="clear:both"></div>
 	        </ul>
-	        <div style="clear:both"></div>
 			<div class="card">
 	            <tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search" ng-model="searchQuery"></tags-input>
 		    </div>
 		</div>
+
 		<div class="row">
 
 			<!--TODO!!!!-->
@@ -69,10 +61,13 @@
 		        </div>
 		    </div>
 
-
+		    <!--TODO FILTER AREA-->
 			<div class="col-sm-12" style="padding-left:0px;padding-right:0px;">
-
-				<div ng-if="searchResults.length > 0" class="card">
+				<ul style="padding:0px;" class="member-tabs">
+		            <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER')"><i class="fa fa-map-marker"></i> Location</a></li>
+        	        <div style="clear:both"></div>
+		        </ul>
+			    <div ng-if="searchResults.length > 0" class="card">
 			        <style type="text/css">.angular-google-map-container{height: 200px;}</style>
 			        <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options">
 		                <ui-gmap-marker ng-repeat="marker in markers" coords="marker.coords" options="marker.options" idkey="marker.id">
@@ -82,188 +77,31 @@
 		                </ui-gmap-marker>
 		            </ui-gmap-google-map>
 			    </div>
+		    </div>
 
+			<div class="col-sm-12" style="padding-left:0px;padding-right:0px;">
 				<div ng-if="searchResults.length == 0" class="card">
 			        <div style="padding:16px;">
 			            <span style="color:gray">There's nothing here..</span>
 			        </div>
 			    </div>
-
 				<div ng-if="searchResults.length > 0" ng-repeat="item in searchResults">
-
 					<!-- UNIFY ITEM AND CONTENT -->
-					<div ng-if="item.model=='CONTENT'" class="card" ng-click="cardDetailToggle(item)">
-						<div ng-if="item.title" style="background:url('https://source.unsplash.com/1600x900/?{{item.tags}}')" class="imageContainerSmall">
-		                    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
-		                        <div style="text-align:right;padding:15px;position:absolute;right:0">
-					                <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
-					                    <i class="fas fa-chevron-down"></i>
-					                </a>
-					            </div>
-		                        <div style="margin-top: auto;margin-bottom: auto;">
-		                            <div class="container">
-		                                <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;"><a ng-click="$event.stopPropagation();" style="color:white" href="content/{{item.id}}" ui-sref="content({id:item.id})">{{item.title}}</h1>
-                                        <h5 style="color:white">Content</h5>
-		                            </div>
-		                        </div>
-		                    </div>
-		                </div>
-				        <div style="padding:16px;">
-				        	<div ng-if="!item.title" style="text-align:right;float:right">
-					            <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
-					                <i class="fas fa-chevron-down"></i>
-					            </a>
-					            <div style="clear:both"></div>
-					        </div>
-				            <div>
-				                <a ng-click="$event.stopPropagation();" style="display:inline;font-weight:600;margin-left:5px" href="member/{{item.user.username}}" ui-sref="member.activity({path:item.user.username})">
-					                <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="images/avatar.png">
-				                	{{item.user.username}}
-				                </a>
-				               	<!--TODO: ASSOCIATIONS-->
-				                <p style="font-size:10px;color:gray;margin-left:42px" am-time-ago="item.createdAt"></p>
-				            </div>
-				            <div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></div>
-				        </div>
-				        <div class="card-footer">
-							<a style="color:grey" href="content/{{item.id}}" ui-sref="content({id:item.id})" ng-click="tokensToggle(item)">
-								<i class="fas fa-eye"></i> {{item.attention.general || 0}}
-							</a>
-				            <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fas fa-angle-up"></i> {{item.reactions.plus}} like </a> 
-							<a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fas fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
-				            <a ng-click="$event.stopPropagation();reply(item)"><i class="far fa-comment"></i> comment </a>
-				            <a ng-click="$event.stopPropagation();" style="padding:0px" class="pull-right" href="content/{{item.id}}" ui-sref="content({id:item.id})"><i class="fas fa-link grey"></i></a>
-				        </div>
-				        <div ng-click="$event.stopPropagation();" ng-show="item.showReply" class="card-footer">
-				            <form role="form" ng-submit="createContent(item)">
-								<text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
-				                <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
-				            </form>
-				        </div>
-			    	</div>
-
-				    <div ng-if="item.model=='ITEM'" class="card" ng-click="cardDetailToggle(item)">
-			        	<div ng-click="$event.stopPropagation();cardDetailToggle(item)" style="background:url('https://source.unsplash.com/1600x900/?{{item.tags}}');" class="imageContainerSmall">
-			                <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
-			                	<div style="text-align:right;padding:15px;position:absolute;right:0">
-					                <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
-					                    <i class="fas fa-chevron-down"></i>
-					                </a>
-					            </div>
-			                    <div style="margin-top: auto;margin-bottom: auto;">
-			                        <div class="container">
-			                            <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;"><a style="color:white" ng-click="$event.stopPropagation();" href="item/{{item.id}}" ui-sref="item({id:item.id})">{{item.title}}</a></h1>
-                                        <h5 style="color:white">Item</h5>
-			                        </div>
-			                    </div>
-			                </div>
-			            </div>
-			            <div style="padding:16px">
-	                        <div style="float:right;padding-left:5px;">
-	                            <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
-	                        </div>
-							<p><a ng-repeat="tag in item.tags track by $index" ng-click="$event.stopPropagation();filterContent(tag)">{{tag.trim()}} </a></p>
-		                	<div style="">
-								<span style="display:inline;height:100%" ng-bind-html="renderContent(item.content)"></span>
-							</div>
-	                    	<h5>{{item.amountSet}} <span ng-repeat="asset in item.identiferSet"><a ng-click="$event.stopPropagation();" href="market/{{asset}}" ui-sref="market({id:asset})">{{asset}}</a></h5>
-			            </div>
-			            <div class="card-footer">
-			                <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fas fa-angle-up"></i> {{item.reactions.plus}} like </a> 
-			                <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fas fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
-			                <a ng-click="$event.stopPropagation();reply(item)"><i class="far fa-comment"></i> comment </a>
-			                <a class="pull-right" style="padding:0px;" href="item/{{item.id}}" ui-sref="item({id:item.id})"><i class="fas fa-link grey"></i></a>
-			            </div>
-			        </div>
-
-					<div ng-if="item.model=='MEMBER'" ng-click="renderReputationToggle(item)">
-						<div class="row" style="margin:0px">
-							<div class="col-xs-12" style="padding:0px">
-								<div class="member-card card" style="margin-bottom:0px" ng-click="renderReputationToggle(item)">
-								    <div class="member-card-image" style="background-image: url('{{item.coverUrl}}')">
-								        <a ng-click="$event.stopPropagation();" href="member/{{item.username}}" ui-sref="member.activity({path:item.username})"><img ng-src="{{item.avatarUrl}}" err-src="/images/avatar.png"></a>
-								    </div>
-            						<div class="member-card-info" style="padding:16px;height:auto">
-								        <h4><a ng-click="$event.stopPropagation();" href="member/{{item.username}}" ui-sref="member.activity({path:item.username})">{{item.username}}</a></h4>
-		        						<p style="font-size:13px;"><a href="member/{item.username}}/projects" ui-sref="member.projects({path:item.username})">{{item.projectCount || 0}} Projects</a> | <a href="member/{{item.username}}/followers" ui-sref="member.followers({path:item.username})">{{item.followerCount || 0}} Followers</a> | <a href="member/{{item.username}}/following" ui-sref="member.following({path:item.username})">{{item.followingCount || 0}} Following</a>
-								        <p style="color:gray">Total Reputation | {{item.totalWork}}</p>
-								        <p style="color:gray">{{item.status}} Offline</p>
-								    </div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div ng-if="item.model=='ORDER'" class="card" ng-click="cardDetailToggle(item)"></div>
-
-					<div ng-if="item.model=='PROJECT'" class="card" ng-click="cardDetailToggle(item)">
-			            <div style="padding:16px;">
-			                <div class="row">
-			                    <div class="col-sm-1 col-xs-2">
-		                        	<a href="project/{{item.urlTitle}}" ui-sref="project.activity({path:item.urlTitle})"><img style="width:50px;height:50px;max-width:1000%" src="{{item.avatarUrl}}" err-src="/images/avatar.png"></a>
-			                    </div>
-			                    <div class="col-sm-11 col-xs-10">
-			                        <h3 style="margin-top:0px">
-			                            <a ng-click="$event.stopPropagation();" href="project/{{item.urlTitle}}" ui-sref="project.activity({path:item.urlTitle})">
-			                                {{item.title}}
-			                            </a>
-			                        </h3>
-		                        	<p style="color:gray;font-style:italic;"><span ng-bind-html="renderContent(project.description)"></span></p>
-			                    </div>
-			                </div>
-			            </div>
-					</div>
-
-					<div ng-if="item.model=='TASK'" class="card" ng-click="cardDetailToggle(item)">
-						<div ng-if="item.title" style="background:url('https://source.unsplash.com/1600x900/?{{item.tags}}')" class="imageContainerSmall">
-		                    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
-		                    	<div style="text-align:right;padding:15px;position:absolute;right:0">
-					                <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
-					                    <i class="fas fa-chevron-down"></i>
-					                </a>
-					            </div>
-		                        <div style="margin-top: auto;margin-bottom: auto;">
-		                            <div class="container">
-		                                <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">
-		                                	<a ng-click="$event.stopPropagation();" href="task/{{item.id}}" ui-sref="task({id:item.id})" style="color:white">{{item.title}}</a>
-		                                </h1>
-                                        <h5 style="color:white">Task</h5>
-		                            </div>
-		                        </div>
-		                    </div>
-		                </div>
-						<div style="padding:16px;">
-							<div style="float:right;text-align:right">
-	                            <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><span style="color:gray"></span><i class="fa fa-ellipsis-v"></i></a>
-			                </div>
-							<p><a ng-click="$event.stopPropagation();" ng-repeat="tag in item.tags track by $index" href="market/{{tag.trim()}}" ui-sref="market({id:tag.trim()})">{{tag.trim()}} </a></p>
-	                    	<p><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></p>
-							<span style="color:gray" am-time-ago="item.createdAt"></span>
-						</div>
-						<div class="card-footer">
-							<a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fas fa-angle-up"></i> {{item.reactions.plus}} like </a> 
-							<a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fas fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
-							<a ng-click="$event.stopPropagation();reply(item)"><i class="far fa-comment"></i> comment </a>
-		        			<a ng-click="$event.stopPropagation();" style="padding:0px" class="pull-right" href="task/{{item.id}}" ui-sref="task({id:item.id})"><i class="fas fa-link grey"></i></a>
-						</div>
-					</div>
-
-					<div ng-if="item.model=='TIME'" class="card" ng-click="cardDetailToggle(item)">
-					</div>
-
+					<!--TODO: RENEDER MODEL TYPE-->
+					<div ng-if="item.model=='CONTENT'" ng-include="'templates/cards/contentCard.tpl.html'"></div>
+					<div ng-if="item.model=='ITEM'" ng-include="'templates/cards/itemCard.tpl.html'"></div>
+					<div ng-if="item.model=='MEMBER'" ng-include="'templates/cards/memberCard.tpl.html'"></div>
+					<div ng-if="item.model=='ORDER'" ng-include="'templates/cards/orderCard.tpl.html'"></div>
+					<div ng-if="item.model=='PROJECT'" ng-include="'templates/cards/projectCard.tpl.html'"></div>
+					<div ng-if="item.model=='TASK'" ng-include="'templates/cards/taskCard.tpl.html'"></div>
+					<div ng-if="item.model=='TIME'" ng-include="'templates/cards/timeCard.tpl.html'"></div>
 				</div>
-
 				<!--TODO: MORE-->
 				<div ng-if="false" class="card" style="text-align:center" ng-click="loadMore()">
 	                <button style="width:100%" class="btn btn-default log-btn">MORE <i class="fa fa-angle-down"></i></button>
 	            </div>
-
 			</div>
-
 		</div>
-
 	</div>
-
-	<div class="spacing-50"></div>
-
 </div>
+<div class="spacing-25"></div>

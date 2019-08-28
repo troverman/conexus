@@ -312,17 +312,11 @@ module.exports = {
 			.sort(sort)
 			.populate('user')
 			.then(function(models) {
-
-				Content.subscribe(req, models);
-				var promises = [];
-				for (x in models){promises.push(getAssociations(models[x]));}
-				//Q.all(promises).then((populatedModels)=>{
-				//	for (x in models){
-				//		if(populatedModels[x]){models[x] = populatedModels[x];}
-				//	}
-				//});
-				res.json(models);
-
+				Content.count().then(function(numRecords){
+					Content.subscribe(req, models);
+					var returnObj = {data:models, info:{count:numRecords}};
+					res.json(returnObj);
+				});
 			});
 		}
 	},

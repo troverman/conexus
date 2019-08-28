@@ -131,11 +131,37 @@ module.exports = {
 
 						if (model.associatedModels[x].type == 'CONTENT'){
 							Content.find({id:model.associatedModels[x].id}).then(function(newModel){
+
+
+								//DIMENSIONAL ATTENTION
+								//NEED TO PAY ATTENTION!
+
+
 								if (!newModel[0].data){newModel[0].data = {apps:{}}}
 								if (!newModel[0].data.apps){newModel[0].data.apps = {}}
-								if (newModel[0].data.apps.attention){newModel[0].data.apps.attention = {general:newModel[0].data.apps.attention.general + model.amount};}
+
+								if (newModel[0].data.apps.attention){
+
+									newModel[0].data.apps.attention = {
+										general:newModel[0].data.apps.attention.general + model.amount
+									};
+
+									if (newModel[0].data.apps.attention[model.creator]){
+										newModel[0].data.apps.attention[model.creator] = newModel[0].data.apps.attention[model.creator] + model.amount;
+									}
+									
+									else{
+										newModel[0].data.apps.attention[model.creator] = model.amount;
+									}
+
+								}
+								
 								else{newModel[0].data.apps.attention = {general:0}}
 								Content.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){Content.publishCreate(newModel);});
+
+
+
+
 							});
 						}
 

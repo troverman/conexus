@@ -424,8 +424,9 @@ angular.module( 'conexus.project', [
             $scope.newReaction.type = type;
             $scope.newReaction.user = $rootScope.currentUser.id;
             var index = $scope.activity.map(function(obj){return obj.id}).indexOf(item.id);
-            $scope.activity[index].reactions[type]++;
+            $scope.activity[index].data.apps.reactions[type]++;
             ReactionModel.create($scope.newReaction);
+            $rootScope.pop(type, item.id);
         }
         else{$mdSidenav('login').toggle()}   
     };
@@ -728,8 +729,9 @@ angular.module( 'conexus.project', [
             var transactionIndex = $scope.time.map(function(obj){return obj.id}).indexOf(item.id);
             if (timeIndex != -1){
                 $scope.newReaction.associatedModels = [{type:'TRANSACTION', id:item.id}];
-                $scope.transactions[transactionIndex].reactions[type]++;
+                $scope.transactions[transactionIndex].data.apps.reactions[type]++;
                 ReactionModel.create($scope.newReaction);
+                $rootScope.pop(type, item.id);
             }
         }
         else{$mdSidenav('login').toggle();}
@@ -1410,8 +1412,9 @@ angular.module( 'conexus.project', [
             var taskIndex = $scope.tasks.map(function(obj){return obj.id}).indexOf(item.id);
             if (taskIndex != -1){
                 $scope.newReaction.associatedModels = [{type:'TASK', id:item.id}];
-                $scope.tasks[taskIndex].reactions[type]++;
+                $scope.tasks[taskIndex].data.apps.reactions[type]++;
                 ReactionModel.create($scope.newReaction);
+                $rootScope.pop(type, item.id);
             }
         }
         else{$mdSidenav('login').toggle();}
@@ -1514,8 +1517,9 @@ angular.module( 'conexus.project', [
             var timeIndex = $scope.time.map(function(obj){return obj.id}).indexOf(item.id);
             if (timeIndex != -1){
                 $scope.newReaction.associatedModels = [{type:'TIME', id:item.id}];
-                $scope.time[timeIndex].reactions[type]++;
+                $scope.time[timeIndex].data.apps.reactions[type]++;
                 ReactionModel.create($scope.newReaction);
+                $rootScope.pop(type, item.id);
             }
         }
         else{$mdSidenav('login').toggle();}

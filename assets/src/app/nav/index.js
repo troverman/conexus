@@ -23,6 +23,7 @@ angular.module( 'conexus.nav', [
     //INITALIZE LOCAL VARIABLES
     $scope.associationsAreExpanded = false;
     $scope.chart = {};
+    $scope.attentionChart = {};
     $scope.confirm = {};
 
     //ROOTSCOPE..
@@ -307,18 +308,21 @@ angular.module( 'conexus.nav', [
     $rootScope.contentToggle = function(item){
         $scope.closeAllNav();
         if($rootScope.currentUser){
-            
-            $scope.newContent.type='POST';
-            $scope.newContent.associatedModels = [{
-                type:'CONTENT',
-                text:'self',
-                id:'self',
-                context:[
-                    {text:'self', score:100}
-                ]
-            }];
 
             $scope.createDetailToggleVar = true;
+            $scope.newContent = {
+                type:'POST',
+                associatedModels:[{
+                    type:'CONTENT',
+                    text:'self',
+                    id:'self',
+                    context:[
+                        {text:'self', score:100}
+                    ]
+                }],
+                user:$rootScope.currentUser.id,
+            };
+
             if (item){
                 $scope.item = item;
                 $scope.createDetailToggleVar = false;
@@ -602,7 +606,6 @@ angular.module( 'conexus.nav', [
                 $scope.newOrder.setBeta[identiferSetBeta.id] = 1
             }
 
-
             $mdSidenav('order').toggle();
         }
 
@@ -755,6 +758,41 @@ angular.module( 'conexus.nav', [
                 name: model,
             }).run();
         });
+    };
+
+    $rootScope.renderAttentionToggle = function(item){
+        $scope.closeAllNav();
+        $scope.item = item;
+        $scope.attentionChart = {
+            chart: {zoomType: 'x'},
+            series: [{
+                id: 'Attention',
+                type: 'column',
+                name: 'Attention',
+                data: []
+            }],
+            title: {text: ''},
+            xAxis: {
+                crosshair: true,
+                gridLineWidth: 0.5,
+                gridLineColor: 'grey',
+                title: {text: null},
+                categories: [],
+            },
+            legend: {enabled: false},
+            yAxis: {title: {text: null}},
+            credits:{enabled:false},
+        };
+        var sortable = [];
+        for (x in Object.keys($scope.item.data.apps.attention)){sortable.push([Object.keys($scope.item.data.apps.attention)[x], $scope.item.data.apps.attention[Object.keys($scope.item.data.apps.attention)[x]]])}
+        sortable.sort(function(a, b) {return b[1] - a[1]});
+        for (x in sortable){
+            if (x < 100){
+                $scope.attentionChart.xAxis.categories.push(sortable[x][0]);
+                $scope.attentionChart.series[0].data.push(sortable[x][1]);
+            }
+        }
+        $mdSidenav('renderAttention').toggle()
     };
 
     $rootScope.renderMarketToggle = function(item){
@@ -1289,13 +1327,8 @@ angular.module( 'conexus.nav', [
 
                     $rootScope.stateIsLoading = false;
 
-                    //TODO UPDATE CONFIRM POPUP
-                    $scope.confirm = $scope.newTime;
-                    $scope.confirm.model = 'TIME';
-                    $scope.newTime = {};
                     $mdSidenav('time').close();
-                    setTimeout(function () {$mdSidenav('confirm').open()}, 500);
-                    setTimeout(function () {$mdSidenav('confirm').close()}, 25000);
+                    setTimeout(function () {$rootScope.pop('New Time!', newTime.id +' '+ newTime.createdAt);}, 250);
                       
                     $rootScope.taskTime=0;
                     clearInterval($scope.interval);
@@ -1522,14 +1555,8 @@ angular.module( 'conexus.nav', [
     $scope.createAction = function(item){
         if ($rootScope.currentUser){
             ActionModel.create($scope.newAction).then(function(model) {
-
-                $scope.confirm = $scope.newAction;
-                $scope.confirm.model = 'ACTION';
-                $scope.newAction = {};
                 $mdSidenav('action').close();
-                setTimeout(function () {$mdSidenav('confirm').open()}, 500);
-                setTimeout(function () {$mdSidenav('confirm').close()}, 25000);
-                
+                setTimeout(function () {$rootScope.pop('New Action!', model.id +' '+ model.createdAt);}, 250);
             });
         }
         else{$mdSidenav('login').toggle()}
@@ -1538,15 +1565,8 @@ angular.module( 'conexus.nav', [
    $scope.createApp = function(item){
         if ($rootScope.currentUser){
             AppModel.create($scope.newApp).then(function(model) {
-
-                $scope.confirm = $scope.newAction;
-                $scope.confirm.model = 'APP';
-                $scope.newApp = {};
                 $mdSidenav('app').close();
-
-                setTimeout(function () {$mdSidenav('confirm').open()}, 500);
-                setTimeout(function () {$mdSidenav('confirm').close()}, 25000);
-                
+                setTimeout(function () {$rootScope.pop('New App!', model.id +' '+ model.createdAt);}, 250);
             });
         }
         else{$mdSidenav('login').toggle()}
@@ -1555,12 +1575,8 @@ angular.module( 'conexus.nav', [
     $scope.createConnection = function(item) {
         if ($rootScope.currentUser){
             ConnectionModel.create($scope.newConnection).then(function(model) {
-                $scope.confirm = $scope.newConnection;
-                $scope.confirm.model = 'CONNECTION';
-                $scope.newConnection = {};
                 $mdSidenav('connection').close();
-                setTimeout(function () {$mdSidenav('confirm').open()}, 500);
-                setTimeout(function () {$mdSidenav('confirm').close()}, 25000);
+                setTimeout(function () {$rootScope.pop('New Connection!', model.id +' '+ model.createdAt);}, 250);
             });
         }
         else{$mdSidenav('login').toggle()}
@@ -1569,34 +1585,11 @@ angular.module( 'conexus.nav', [
     //TODO: ASSOCIATED MODELS
     $scope.createContent = function(item) {
         if ($rootScope.currentUser){
-
-            //RENDER | nested Reply
-            if(item){
-
-            }
-
-            $scope.newContent.type = $scope.selectedType;
-            $scope.newContent.user = $rootScope.currentUser.id;
-            
-            if ($scope.newContent.tags){
-                $scope.newContent.tags = $scope.newContent.tags.map(function(obj){
-                    return obj.text;
-                }).join(",");
-            }
-
-            //CONTENT, TASK, TIME, TRANSACTION, ORDER, PROJECT
             console.log('CREATE CONTENT', $scope.newContent);
-
             ContentModel.create($scope.newContent).then(function(model) {
-                $scope.confirm = $scope.newContent;
-                $scope.confirm.model = 'CONTENT';
-                $scope.newContent = {};
-                $mdSidenav('content').close();
-                setTimeout(function () {$mdSidenav('confirm').open()}, 500);
-                setTimeout(function () {$mdSidenav('confirm').close()}, 25000);
+               $mdSidenav('content').close();
+                setTimeout(function () {$rootScope.pop('New Content!', model.id +' '+ model.createdAt);}, 250);
             });
-
-
         }
         else{$mdSidenav('login').toggle()}
     };
@@ -1616,12 +1609,8 @@ angular.module( 'conexus.nav', [
                 }
             }
             ItemModel.create($scope.newItem).then(function(model) {
-                $scope.confirm = $scope.newItem;
-                $scope.confirm.model = 'ITEM';
-                $scope.newItem = {};
                 $mdSidenav('item').close();
-                setTimeout(function () {$mdSidenav('confirm').open()}, 500);
-                setTimeout(function () {$mdSidenav('confirm').close()}, 25000);
+                setTimeout(function () {$rootScope.pop('New Item!', model.id +' '+ model.createdAt);}, 250);
             });
         }
         else{$mdSidenav('login').toggle()}
@@ -1652,12 +1641,8 @@ angular.module( 'conexus.nav', [
             console.log('CREATE ORDER', $scope.newOrder);
 
             OrderModel.create($scope.newOrder).then(function(model) {
-                $scope.confirm = $scope.newOrder;
-                $scope.confirm.model = 'ORDER';
                 $mdSidenav('order').close();
-                $scope.newOrder = {};
-                setTimeout(function () {$mdSidenav('confirm').open()}, 500);
-                setTimeout(function () {$mdSidenav('confirm').close()}, 25000);
+                setTimeout(function () {$rootScope.pop('New Order!', model.id +' '+ model.createdAt);}, 250);
             });
         }
         else{$mdSidenav('login').toggle()}
@@ -1691,12 +1676,8 @@ angular.module( 'conexus.nav', [
             console.log('CREATE PROJECT', $scope.newProject);
 
             ProjectModel.create($scope.newProject).then(function(model) {
-                $scope.confirm = $scope.newProject;
-                $scope.confirm.model = 'PROJECT';
-                $scope.newProject = {};
                 $mdSidenav('project').close();
-                setTimeout(function () {$mdSidenav('confirm').open()}, 500);
-                setTimeout(function () {$mdSidenav('confirm').close()}, 25000);
+                setTimeout(function () {$rootScope.pop('New Project!', model.id +' '+ model.createdAt);}, 250);
             });
 
         }
@@ -1745,12 +1726,8 @@ angular.module( 'conexus.nav', [
 
             console.log('CREATE TASK', $scope.newTask);
             TaskModel.create($scope.newTask).then(function(model) {
-                $scope.confirm = $scope.newTask;
-                $scope.confirm.model = 'TASK';
-                $scope.newTask = {};
                 $mdSidenav('task').close();
-                setTimeout(function () {$mdSidenav('confirm').open()}, 500);
-                setTimeout(function () {$mdSidenav('confirm').close()}, 25000);
+                setTimeout(function () {$rootScope.pop('New Task!', model.id +' '+ model.createdAt);}, 250);
             });
         }
         else{$mdSidenav('login').toggle()}
@@ -1777,12 +1754,8 @@ angular.module( 'conexus.nav', [
             }
             console.log('CREATE TIME', $scope.newTime);
             TimeModel.create($scope.newTime).then(function(model){
-                $scope.confirm = $scope.newTime;
-                $scope.confirm.model = 'TIME';
-                $scope.newTime = {};
                 $mdSidenav('time').close();
-                setTimeout(function () {$mdSidenav('confirm').open()}, 500);
-                setTimeout(function () {$mdSidenav('confirm').close()}, 25000);
+                setTimeout(function () {$rootScope.pop('New Time!', model.id +' '+ model.createdAt);}, 250);
             });
         }
         else{$mdSidenav('login').toggle()}
@@ -1812,15 +1785,8 @@ angular.module( 'conexus.nav', [
 
             TransactionModel.create(newTransaction).then(function(model){
                 
-                $scope.confirm = newTransaction;
-                $scope.confirm.model = 'TRANSACTION';
-
-                $scope.newTransaction.amountSet = {};
-                $scope.newTransaction.tags = '';
-                $scope.newTransaction.content = '';
                 $mdSidenav('transaction').close();
-                setTimeout(function () {$mdSidenav('confirm').open()}, 500);
-                setTimeout(function () {$mdSidenav('confirm').close()}, 25000);
+                setTimeout(function () {$rootScope.pop('New Transaction!', model.id +' '+ model.createdAt);}, 250);
                 
             });
 
@@ -1844,12 +1810,8 @@ angular.module( 'conexus.nav', [
                     $rootScope.stateIsLoading = false;
 
                     //TODO UPDATE CONFIRM POPUP
-                    $scope.confirm = $scope.newValidation;
-                    $scope.confirm.model = 'VALIDATION';
-                    $scope.newValidation = {};
                     $mdSidenav('validation').close();
-                    setTimeout(function () {$mdSidenav('confirm').open()}, 500);
-                    setTimeout(function () {$mdSidenav('confirm').close()}, 25000);
+                    setTimeout(function () {$rootScope.pop('New Validation!', model.id +' '+ model.createdAt);}, 250);
 
                 });
             }
@@ -2227,9 +2189,7 @@ angular.module( 'conexus.nav', [
 
     $scope.selectOrderType = function(type){$scope.selectedOrderType = type;};
     $scope.selectedTab = 'ATTENTION';
-    $scope.selectTab = function(model){
-        $scope.selectedTab = model;
-    };
-    $scope.selectType = function(type){$scope.selectedType = type;};
+    $scope.selectTab = function(model){$scope.selectedTab = model;};
+    $scope.selectType = function(type){$scope.newContent.type = type;};
 
 }]);

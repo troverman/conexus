@@ -58,16 +58,17 @@ module.exports = {
 
 	create: function (req, res) {
 
-		function createNotification(model, notificationModel){
+		function createNotification(notificationModel){
+			console.log(notificationModel)
 			//DO USER BY ASSOCIATION? || UPDATE OTHER MODELS.. 
-			User.find({id:model.user}).then(function(userModel){
-				userModel[0].balance = {};
-				userModel[0].reputation = {};
-				Notification.create(notificationModel).then(function(notificationModel){
-					console.log('created');
-					Notification.publishCreate(notificationModel);
+			//User.find({id:model.user}).then(function(userModel){
+				//userModel[0].balance = {};
+				//userModel[0].reputation = {};
+				Notification.create(notificationModel).then(function(model){
+					console.log('CREATE NOTIFICATION', model);
+					Notification.publishCreate(model);
 				});
-			});
+			//});
 		};
 
 		function mintTokens(model){
@@ -101,7 +102,6 @@ module.exports = {
 
 		//FACTOR TO RETURN ENTIER TOKEN MODEL
 		function getProtocolTokens(model){
-			console.log(model)
 			//TODO: CREATOR AND RECIEVER AND TYPE
 			//associated models.. ie  react to content, time, etc
 			var protocolTokens = ['CRE8', 'CRE8+REACTION', 'CRE8+REACTION+'+model.id, 'CRE8+REACTION+'+model.type.toUpperCase()];
@@ -140,6 +140,8 @@ module.exports = {
 						//TODO: NAV REACTION
 						//TODO: REDUCE NOTIFICATION MODEL
 						//RATING D
+						userModel[0].balance = {};
+						userModel[0].reputation = {};
 						if (model.associatedModels[x].type == 'APP'){
 							App.find({id:model.associatedModels[x].id}).then(function(newModel){
 								if (!newModel[0].data.apps.reactions){newModel[0].reactions = {};}
@@ -206,7 +208,8 @@ module.exports = {
 									},
 									priority:50,
 								};
-								createNotification(model, notificationModel);
+								console.log('HEY!')
+								createNotification(notificationModel);
 							});
 						}
 						if (model.associatedModels[x].type == 'ITEM'){
@@ -226,7 +229,7 @@ module.exports = {
 									info:{user: userModel[0], item:newModel[0], type:model.type},
 									priority:50,
 								};
-								createNotification(model, notificationModel);
+								createNotification(notificationModel);
 							});
 						}
 						if (model.associatedModels[x].type == 'ORDER'){
@@ -246,7 +249,7 @@ module.exports = {
 									info:{user: userModel[0], order:newModel[0], type:model.type},
 									priority:50,
 								};
-								createNotification(model, notificationModel);
+								createNotification(notificationModel);
 							});
 						}
 						if (model.associatedModels[x].type == 'REACTION'){
@@ -266,7 +269,7 @@ module.exports = {
 									info:{user: userModel[0], reaction:newModel[0], type:model.type},
 									priority:50,
 								};
-								createNotification(model, notificationModel);
+								createNotification(notificationModel);
 							});
 						}
 						if (model.associatedModels[x].type == 'TASK'){
@@ -286,7 +289,7 @@ module.exports = {
 									info:{user: userModel[0], task:newModel[0], type:model.type},
 									priority:50,
 								};
-								createNotification(model, notificationModel);
+								createNotification(notificationModel);
 							});
 						}
 						if (model.associatedModels[x].type == 'TIME'){
@@ -306,7 +309,7 @@ module.exports = {
 									info:{user: userModel[0], time:newModel[0], type:model.type},
 									priority:50,
 								};
-								createNotification(model, notificationModel);
+								createNotification(notificationModel);
 							});
 						}
 						if (model.associatedModels[x].type == 'TRANSACTION'){
@@ -326,7 +329,7 @@ module.exports = {
 									info:{user: userModel[0], transaction:newModel[0], type:model.type},
 									priority:50,
 								};
-								createNotification(model, notificationModel);
+								createNotification(notificationModel);
 							});
 						}
 						if (model.associatedModels[x].type == 'VALIDATION'){
@@ -346,16 +349,13 @@ module.exports = {
 									info:{user: userModel[0], validation:newModel[0], type:model.type},
 									priority:50,
 								};
-								createNotification(model, notificationModel);
+								createNotification(notificationModel);
 							});
 						}
 					}
-
 				});
-
 			}
 		});
-
 	},
 
 	destroy: function (req, res) {

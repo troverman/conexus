@@ -106,8 +106,7 @@
                 <div class="">
 
                     <h5>Location <a ng-click="informationToggle('LOCATION')" href="#"><i class="fa fa-question-circle"></i></a><i style="float:right" class="fas fa-map-marker-alt"></i></h5>
-                    <input placeholder="Location" type="text" ng-model="newItem.location" class="form-control">
-
+                    <tags-input min-length="1" placeholder="Location" ng-model="newItem.location"></tags-input>
                     <div class="">
                         <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options">
                             <ui-gmap-marker ng-repeat="marker in markers" coords="marker.coords" options="marker.options" idkey="marker.id">

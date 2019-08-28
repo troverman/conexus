@@ -201,6 +201,15 @@
                 </div>
 				<div class="spacing-5"></div>
 				<p style="color:#a8a8a8;font-style:italic;"><a href="/transparency" ui-sref="transparency"><b>Transparency in action</b></a></p>
+
+				<ui-gmap-google-map center="map.center" zoom="map.zoom" options="options">
+				    <ui-gmap-marker ng-repeat="marker in markers" coords="marker.coords" options="marker.options" idkey="marker.id">
+				        <ui-gmap-window options="windowOptions" closeClick="closeClick()">
+				            <div><div style="font-size: 15px;"><a href="#">{{marker.content}}</a></div></div>
+				        </ui-gmap-window>
+				    </ui-gmap-marker>
+				</ui-gmap-google-map>
+				
 			</div>
 		</div>
 		<div class="spacing-50"></div>

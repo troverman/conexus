@@ -412,9 +412,6 @@ module.exports.intervalService = function(){
 		//if (taskModels.project){}
 
 	}
-	
-
-
 
 	//DATA SERVICE
 	//dataService.getData();
