@@ -506,6 +506,8 @@ tags-input .autocomplete .suggestion-item.selected{background-color:#002a56;}
     margin-top: 4px;
 }
 
+.ngCytoscape{height: 200px;width:100%;};
+
 .outer > .cube .side {background: rgba(255, 255, 255, 0.05);}
 
 .shape{
