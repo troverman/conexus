@@ -152,6 +152,18 @@ module.exports = {
 			return protocolTokens;
 		};
 
+		function createNotification(model){
+
+		};
+
+		function createValidation(model){
+
+		};
+
+		function createAssociation(newValidationModel){
+
+		};
+
 		function mintTokens(model){
 			var taskProtocolTokens = getProtocolTokens(model);
 			for (x in timeProtocolTokens){
@@ -183,6 +195,7 @@ module.exports = {
 		};
 
 		var model = {
+			
 			model: 'TASK',
 			title: req.param('title'),
 			content: req.param('content'),
@@ -202,57 +215,18 @@ module.exports = {
 		};
 		console.log('CREATE TASK', model);
 		Task.create(model)
-		.exec(function(err, task) {
+		.exec(function(err, model) {
 			if (err) {return console.log(err);}
 			else {
 
 				User.find({id:model.user}).then(function(userModel){
 
-					task.user = userModel[0];
-					
-					mintTokens(task);
-					Task.publishCreate(task);
-					res.json(task);
-
-					//ALWAYS ASSOCIATED TO SELF 
-					//for (x in model.validationModels){
-						//model.validationModels[x].content = 'TASK '+ task.id + ' VALIDATION';
-						//model.validationModels[x].reputation = {};
-						//model.validationModels[x].associatedModels.push({type:'TASK', address:task.id});
-						//model.validationModels[x].type = 'MULTIPLICATIVE';
-						//model.validationModels[x].parameters = 'STANDARD';
-						//model.validationModels[x].user = userModel[0].id;
-						//model.validationModels[x].creator = userModel[0].id;
-						//model.validationModels[x].reactions = {plus:0,minus:0};
-						//for (y in Object.keys(model.validationModels[x].validation)){
-							//var context = Object.keys(model.validationModels[x].validation)[y];
-							//model.validationModels[x].reputation[context] = userModel[0].reputation[context] || 0;
-						//}
-						//Validation.create(model.validationModels[x]).then(function(validation){
-						//	console.log('CREATED IMPLICIT VALIDATION', validation);
-						//	var newAssociationModel = {};
-						//});
-					//}
-
-					//console.log(model.validationModels);
-
-					//REQUEST TO VALIDATE NOTIFICATION
-					//for (x in task.associatedModels){
-						//if (task.associatedModels[x].type == 'PROJECT'){
-							//ProjectMember.find({project:time.associatedModels.address}).then(function(projectMembers){
-								//for (x in projectMembers){
-									//var notificationModel = {
-									//	user: projectMembers[x],
-									//	type: 'Request to Validate',
-									//	content:'New Time, '+userModel.username +' is requesting validation for '+time,
-									//};
-									//Notification.create(notificationModel).then(function(notification){
-									//	Notification.publishCreate(follower[0]);
-									//});
-								//}
-							//});
-						//}
-					//}
+					model.user = userModels[0];
+					Task.publishCreate(model);
+					createNotification(model);
+					createValidation(model);
+					mintTokens(model);
+					res.json(model);
 
 				});
 

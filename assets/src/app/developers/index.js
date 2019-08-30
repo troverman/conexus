@@ -161,6 +161,10 @@ angular.module( 'conexus.developers', [
             {name:'VALIDATION'},
             {name:'VALIDATION'},
 
+            {name:'CONNECTION'},
+            {name:'ASSOCIATION'},
+            {name:'VALIDATION'},
+
         ],
         links:[
 
@@ -188,6 +192,10 @@ angular.module( 'conexus.developers', [
 
             //VALIDATION VALIDATION
             {value:1, source:19, target:20},
+
+            //CONNECTION ASSOCIATION VALIDATION
+            {value:1, source:21, target:22},
+            {value:1, source:22, target:23},
 
         ]
     };

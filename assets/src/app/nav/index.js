@@ -543,6 +543,19 @@ angular.module( 'conexus.nav', [
         $mdSidenav('filter').toggle();
     };
 
+    $rootScope.getLatLng = function() {
+        if (navigator.geolocation) {
+            $rootScope.stateIsLoading = true;
+            navigator.geolocation.getCurrentPosition(function (position) {
+                $rootScope.stateIsLoading = false;
+                $rootScope.location = {};
+                $rootScope.location.lat = position.coords.latitude; 
+                $rootScope.location.lng = position.coords.longitude;
+                if ($rootScope.currentUser){$rootScope.currentUser.location = $rootScope.location;}
+            });
+        }
+    };
+
     $rootScope.itemToggle = function(){
         $scope.closeAllNav();
         if($rootScope.currentUser){
@@ -1199,34 +1212,49 @@ angular.module( 'conexus.nav', [
 
     $rootScope.subNavToggle = function(item){
         $scope.item = item;
-        //$scope.closeAllNav();
         $mdSidenav('subNav').toggle();
     };
 
-    $rootScope.taskToggle = function(){
+    $rootScope.taskToggle = function(item){
         $scope.closeAllNav();
+
         if($rootScope.currentUser){
             $scope.newTask = {};
+            $scope.createDetailToggleVar = true;
+            $scope.newTask = {
+                associatedModels:[{
+                    type:'TASK',
+                    text:'self',
+                    id:'self',
+                    context:[
+                        {text:'self', score:100}
+                    ]
+                }],
+                user:$rootScope.currentUser.id,
+            };
 
-            //CONTEXT TO AN ASSOCIATION IS A TAG
-            //UX KEEP CONTEXT THE SAME UNLESS CHECKED
-            $scope.newTask.associatedModels = $rootScope.associatedModels;
+            if (item){
+                $scope.item = item;
+                $scope.createDetailToggleVar = false;
+                $scope.newTask.associatedModels.push({
+                    type:item.model, 
+                    id:item.id, 
+                    text:item.model+'+'+item.id, 
+                    context:[
+                        {text:'self', score:100}
+                    ]
+                });
+            }
 
-            //$scope.associatedModels.associatedModels.push({
-            //    type:'CONTENT',
-            //    text:'Self',
-            //    context:{
-            //        general:100
-            //    }
-            //});
-            
-            $scope.newTask.validationModels = [{
-                context:{self:100},
-                associatedModels:[]
-            }];
+            $scope.$watch('newTask.context', function(newValue, oldValue){
+                if (newValue !== oldValue) {
+                    for (x in $scope.newTask.associatedModels){
+                        $scope.newTask.associatedModels[x].context = newValue.map(function(obj){obj.score = 100;return obj;});
+                    }
+                }
+            }, true);
 
-
-            //WATCHER .. TAGS .. ASSOCIATED MODEL.. BUILD validationModels
+            console.log('TASK TOGGLE', $scope.newTask);
 
             $mdSidenav('task').toggle();
         }

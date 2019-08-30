@@ -63,19 +63,15 @@
 
         <div class="spacing-5"></div>
 
-        <ul style="padding:0px;" class="member-tabs">
-            <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fa fa-filter"></i> Filter</a></li>
-            <li style="float:right;font-size:14px"><a href="#" ng-click="sortToggle()">Sort By Recent <i class="fa fa-angle-down"></i></a></li>
-            <div style="clear:both"></div>
-        </ul>
-
-        <div class="card">
-            <form ng-submit="search()" style="display:flex;flex-direction:row;">
-                <tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search" ng-model="searchQuery"></tags-input>
-                <div ng-click="search()" style="border:0px;float:right" class="btn btn-default">
-                    <a href="#" role="button"><h5 style="color:black;text-align:right" class="noselect">Search <i class="fa fa-search"></i></h5></a>
-                </div>
-            </form>
+        <div class="mobileFix">
+            <ul style="padding:0px;" class="member-tabs">
+                <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fa fa-filter"></i> Filter</a></li>
+                <li style="float:right;font-size:14px"><a href="#" ng-click="sortToggle()">Sort By Recent <i class="fa fa-angle-down"></i></a></li>
+                <div style="clear:both"></div>
+            </ul>
+            <div class="card">
+               <tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search" ng-model="searchQuery"></tags-input>
+            </div>
         </div>
 
         <div class="card" ng-show="currentUser.id == member.id">

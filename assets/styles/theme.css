@@ -628,15 +628,19 @@ tags-input .autocomplete .suggestion-item.selected{background-color:#002a56;}
 }
 
 @media (max-width: 768px) {
-    .btn-group{zoom: 0.7;}
+    .btn-group{zoom: 0.65;}
     .card-footer{zoom: 0.8;}
     .member-tabs{zoom: 0.9;}
+    .mobileMargin{margin-right:-20px;}
+    .navbar-brand{padding-left:0px;}
 }
 
 @media (min-width: 768px){
     .btn-group{zoom: 1;}
     .card-footer{zoom: 1;}
     .member-tabs{zoom: 1;}
+    .mobileMargin{margin-right:0px;}
+    .navbar-brand{padding-left:10px;}
 }
 
 @media (max-width: 991px) {
@@ -668,7 +672,7 @@ tags-input .autocomplete .suggestion-item.selected{background-color:#002a56;}
     .imageContainerSmallDiv h1 {font-size: 2.8em;}
     .imageContainerSmallDivH1{font-size: 2.8em;}
     .member-tabs li{font-size:20px;}
-    .member-tabs > li > a{padding:10px 15px;}
+    //.member-tabs > li > a{padding:10px 15px;}
     .member-tabs.subNav{display:block;}.nav-toggle{display:none;}
     .mobileHide{display:block;}
     .mobileFix{display:block;}

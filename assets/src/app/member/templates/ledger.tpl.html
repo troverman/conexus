@@ -55,40 +55,7 @@
 
 	<div class="col-sm-9" style="padding-left:0px;padding-right:0px;">
 
-		<!--
 		<div class="spacing-5"></div>
-		<ul style="padding:0px;" class="member-tabs">
-			<li><a href="member/{{member.username}}/assets">Assets</a></li>
-			<li><a href="member/{{member.username}}/positions">Positions</a></li>
-			<li><a href="member/{{member.username}}/ledger">Transactions</a></li>
-		</ul>
-	    <div class="card">
-	        <form ng-submit="search()" style="display:flex;flex-direction:row;">
-	            <tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search" ng-model="searchQuery"></tags-input>
-	            <div ng-click="search()" style="border:0px;float:right" class="btn btn-default">
-	                <a href="#" role="button">
-	                    <h5 style="color:black;text-align:right" class="noselect">Search <i class="fa fa-search"></i></h5>
-	                </a>
-	            </div>
-	        </form>
-	    </div>
-		-->
-
-		<div class="spacing-5"></div>
-
-		<!--
-		<ul style="padding:0px;" class="member-tabs">
-			<li ng-click="selectOverview()"><a href="">Overview</a></li>
-			<li ng-click="selectExpense()"><a href="">Expense</a></li>
-			<li ng-click="selectRevenue()"><a href="">Revenue</a></li>
-			<li style="float:right">
-				<a ng-click="filterToggle('LEDGER')" href="#">
-					{{assetSet[0].element}}
-					<i class="fa fa-question-circle"></i>
-				</a>
-			</li>
-		</ul>
-		-->
 
 		<ul style="padding:0px;" class="member-tabs">
 			<li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('LEDGER', filterSet)"><i class="fa fa-filter"></i> Filter</a></li>

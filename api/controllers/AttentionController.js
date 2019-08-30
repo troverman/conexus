@@ -65,11 +65,13 @@ module.exports = {
 
 		var model = {
 			model: 'ATTENTION',
+
 			//app vs type vs :o
+			//HUMAN.. MACHINE.. ETC
 			app: req.param('app'),
+
 			string: req.param('string'),
 			amount: req.param('amount'),
-			data: req.param('data'),
 			associatedModels: req.param('associatedModels'),
 			creator: req.param('creator'),
 			data:{apps:{reactions:{plus:0,minus:0},attention:{general:0}}}
@@ -161,6 +163,7 @@ module.exports = {
 
 									//for x in protocol.. 
 									//CREATE+ATTENTION+USERNAME
+
 									if (newModel[0].data.apps.attention[model.creator.toString()]){
 										newModel[0].data.apps.attention[model.creator.toString()] = newModel[0].data.apps.attention[model.creator.toString()] + model.amount;
 									}
