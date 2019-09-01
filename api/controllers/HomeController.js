@@ -2,6 +2,11 @@ module.exports = {
     index: function(req, res) {
     	//POST SESSION IN VIEW
     	//DECENTRALIZE SESSION MANAGEMENT...
+    	
+
+    	//BASED ON APPS.. POPULATE USER INFORMATION
+    	//SOLVES THE PROBLEM OF JUST .id RENDER
+
         res.view({currentUser: req.user});
     }, 
     ssl: function(req, res) {

@@ -120,7 +120,7 @@ module.exports.intervalService = function(){
 
 	//PRE-ALPHA. 
 	//setInterval(intervalService.universalTokenProtocolPreAlpha, 8640000);
-	//setInterval(intervalService.reputationBuild, 8640000);
+	setInterval(intervalService.reputationBuild, 8640000);
 	//intervalService.reputationBuild();
 
 	//POPULATE TOKEN -- ALPHA.. 
@@ -312,7 +312,7 @@ module.exports.intervalService = function(){
 			}
 		});
 	};
-	bulkEditFunction();
+	//bulkEditFunction();
 
 	//MAINTAINCE.. REMOVE DUP TOKENS
 	function removeDuplicateTokens(){

@@ -1,10 +1,10 @@
-/**
- * FollowerController
- */
+
 module.exports = {
 
 	get: function(req, res) {
 		console.log('GET FOLLOWERS', req.query);
+
+		//Association.find({member-member})
 
 	},
 

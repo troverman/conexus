@@ -13,8 +13,6 @@ module.exports = {
 
 		App.watch(req);
 
-		//WRITE PARSER.. LOL
-
 		if(req.query.id){
 			App.find({id:id})
 			.limit(limit)

@@ -1,4 +1,4 @@
-angular.module("templates-app", ["about/index.tpl.html", "account/index.tpl.html", "action/index.tpl.html", "app/index.tpl.html", "app/templates/associations.tpl.html", "app/templates/information.tpl.html", "app/templates/protocols.tpl.html", "apps/index.tpl.html", "association/index.tpl.html", "association/templates/content.tpl.html", "association/templates/information.tpl.html", "association/templates/tokens.tpl.html", "association/templates/validations.tpl.html", "attention/index.tpl.html", "block/index.tpl.html", "connection/index.tpl.html", "content/index.tpl.html", "content/templates/associations.tpl.html", "content/templates/content.tpl.html", "content/templates/liquidity.tpl.html", "content/templates/stats.tpl.html", "content/templates/tokens.tpl.html", "contentList/index.tpl.html", "developers/index.tpl.html", "discover/index.tpl.html", "footer/index.tpl.html", "home/index.tpl.html", "home/templates/feed.tpl.html", "home/templates/feedBalances.tpl.html", "home/templates/feedSuggestions.tpl.html", "home/templates/feedValueMap.tpl.html", "home/templates/intro.tpl.html", "item/index.tpl.html", "item/templates/actions.tpl.html", "item/templates/associations.tpl.html", "item/templates/components.tpl.html", "item/templates/history.tpl.html", "item/templates/liquidity.tpl.html", "item/templates/tokens.tpl.html", "login/index.tpl.html", "market/index.tpl.html", "market/templates/analysis.tpl.html", "market/templates/content.tpl.html", "market/templates/markets.tpl.html", "marketPair/index.tpl.html", "marketPlace/index.tpl.html", "markets/index.tpl.html", "member/index.tpl.html", "member/templates/about.tpl.html", "member/templates/actions.tpl.html", "member/templates/activity.tpl.html", "member/templates/assets.tpl.html", "member/templates/content.tpl.html", "member/templates/followers.tpl.html", "member/templates/following.tpl.html", "member/templates/items.tpl.html", "member/templates/ledger.tpl.html", "member/templates/positions.tpl.html", "member/templates/projects.tpl.html", "member/templates/tasks.tpl.html", "member/templates/time.tpl.html", "members/index.tpl.html", "nav/index.tpl.html", "nav/templates/cardDetail.tpl.html", "nav/templates/confirm.tpl.html", "nav/templates/create.tpl.html", "nav/templates/createAction.tpl.html", "nav/templates/createApp.tpl.html", "nav/templates/createConnection.tpl.html", "nav/templates/createContent.tpl.html", "nav/templates/createContentDetail.tpl.html", "nav/templates/createItem.tpl.html", "nav/templates/createOrder.tpl.html", "nav/templates/createProject.tpl.html", "nav/templates/createTask.tpl.html", "nav/templates/createTime.tpl.html", "nav/templates/createTransaction.tpl.html", "nav/templates/createValidation.tpl.html", "nav/templates/filter.tpl.html", "nav/templates/information.tpl.html", "nav/templates/login.tpl.html", "nav/templates/market.tpl.html", "nav/templates/nav.tpl.html", "nav/templates/qr.tpl.html", "nav/templates/register.tpl.html", "nav/templates/render.tpl.html", "nav/templates/renderAttention.tpl.html", "nav/templates/renderReputation.tpl.html", "nav/templates/renderValidation.tpl.html", "nav/templates/sort.tpl.html", "nav/templates/stats.tpl.html", "nav/templates/subNav.tpl.html", "nav/templates/timer.tpl.html", "nav/templates/tokens.tpl.html", "notifications/index.tpl.html", "notifications/templates/follow.tpl.html", "notifications/templates/reaction.tpl.html", "notifications/templates/transaction.tpl.html", "notifications/templates/validation.tpl.html", "order/index.tpl.html", "order/templates/content.tpl.html", "order/templates/information.tpl.html", "order/templates/liquidity.tpl.html", "order/templates/orders.tpl.html", "order/templates/transactions.tpl.html", "project/index.tpl.html", "project/templates/about.tpl.html", "project/templates/activity.tpl.html", "project/templates/assets.tpl.html", "project/templates/channels.tpl.html", "project/templates/charter.tpl.html", "project/templates/content.tpl.html", "project/templates/items.tpl.html", "project/templates/ledger.tpl.html", "project/templates/members.tpl.html", "project/templates/positions.tpl.html", "project/templates/projects.tpl.html", "project/templates/settings.tpl.html", "project/templates/tasks.tpl.html", "project/templates/time.tpl.html", "project/templates/validations.tpl.html", "projects/index.tpl.html", "reaction/index.tpl.html", "register/index.tpl.html", "search/index.tpl.html", "task/index.tpl.html", "task/templates/associations.tpl.html", "task/templates/content.tpl.html", "task/templates/stats.tpl.html", "task/templates/time.tpl.html", "task/templates/tokens.tpl.html", "tasks/index.tpl.html", "templates/cards/actionCard.tpl.html", "templates/cards/appCard.tpl.html", "templates/cards/connectionCard.tpl.html", "templates/cards/contentCard.tpl.html", "templates/cards/itemCard.tpl.html", "templates/cards/memberCard.tpl.html", "templates/cards/orderCard.tpl.html", "templates/cards/projectCard.tpl.html", "templates/cards/taskCard.tpl.html", "templates/cards/timeCard.tpl.html", "templates/cards/transactionCard.tpl.html", "templates/cards/validationCard.tpl.html", "time/index.tpl.html", "time/templates/associations.tpl.html", "token/index.tpl.html", "transaction/index.tpl.html", "transparency/index.tpl.html", "tutorial/index.tpl.html", "tutorial/templates/controls.tpl.html", "tutorial/templates/create.tpl.html", "tutorial/templates/intro.tpl.html", "tutorial/templates/members.tpl.html", "tutorial/templates/projects.tpl.html", "tutorial/templates/tasks.tpl.html", "tutorial/templates/updateValueMap.tpl.html", "tutorial/templates/valueMap.tpl.html", "tutorial/templates/valueMapBuilder.tpl.html", "tutorial/templates/valueMapOrders.tpl.html", "tutorial/templates/valueMapQuestions.tpl.html", "tx/index.tpl.html", "validation/index.tpl.html"]);
+angular.module("templates-app", ["about/index.tpl.html", "account/index.tpl.html", "action/index.tpl.html", "app/index.tpl.html", "app/templates/associations.tpl.html", "app/templates/information.tpl.html", "app/templates/protocols.tpl.html", "apps/index.tpl.html", "association/index.tpl.html", "association/templates/content.tpl.html", "association/templates/information.tpl.html", "association/templates/tokens.tpl.html", "association/templates/validations.tpl.html", "attention/index.tpl.html", "block/index.tpl.html", "connection/index.tpl.html", "content/index.tpl.html", "content/templates/associations.tpl.html", "content/templates/content.tpl.html", "content/templates/stats.tpl.html", "content/templates/tokens.tpl.html", "contentList/index.tpl.html", "developers/index.tpl.html", "discover/index.tpl.html", "footer/index.tpl.html", "home/index.tpl.html", "home/templates/feed.tpl.html", "home/templates/intro.tpl.html", "item/index.tpl.html", "item/templates/actions.tpl.html", "item/templates/associations.tpl.html", "item/templates/components.tpl.html", "item/templates/history.tpl.html", "item/templates/liquidity.tpl.html", "item/templates/tokens.tpl.html", "login/index.tpl.html", "market/index.tpl.html", "market/templates/analysis.tpl.html", "market/templates/content.tpl.html", "market/templates/markets.tpl.html", "marketPair/index.tpl.html", "marketPlace/index.tpl.html", "markets/index.tpl.html", "member/index.tpl.html", "member/templates/about.tpl.html", "member/templates/actions.tpl.html", "member/templates/activity.tpl.html", "member/templates/assets.tpl.html", "member/templates/content.tpl.html", "member/templates/followers.tpl.html", "member/templates/following.tpl.html", "member/templates/items.tpl.html", "member/templates/ledger.tpl.html", "member/templates/positions.tpl.html", "member/templates/projects.tpl.html", "member/templates/tasks.tpl.html", "member/templates/time.tpl.html", "members/index.tpl.html", "nav/index.tpl.html", "nav/templates/cardDetail.tpl.html", "nav/templates/confirm.tpl.html", "nav/templates/create.tpl.html", "nav/templates/createAction.tpl.html", "nav/templates/createApp.tpl.html", "nav/templates/createConnection.tpl.html", "nav/templates/createContent.tpl.html", "nav/templates/createContentDetail.tpl.html", "nav/templates/createItem.tpl.html", "nav/templates/createOrder.tpl.html", "nav/templates/createProject.tpl.html", "nav/templates/createTask.tpl.html", "nav/templates/createTime.tpl.html", "nav/templates/createTransaction.tpl.html", "nav/templates/createValidation.tpl.html", "nav/templates/filter.tpl.html", "nav/templates/information.tpl.html", "nav/templates/login.tpl.html", "nav/templates/market.tpl.html", "nav/templates/nav.tpl.html", "nav/templates/qr.tpl.html", "nav/templates/register.tpl.html", "nav/templates/render.tpl.html", "nav/templates/renderAttention.tpl.html", "nav/templates/renderReputation.tpl.html", "nav/templates/renderValidation.tpl.html", "nav/templates/sort.tpl.html", "nav/templates/stats.tpl.html", "nav/templates/subNav.tpl.html", "nav/templates/timer.tpl.html", "nav/templates/tokens.tpl.html", "notifications/index.tpl.html", "notifications/templates/follow.tpl.html", "notifications/templates/reaction.tpl.html", "notifications/templates/transaction.tpl.html", "notifications/templates/validation.tpl.html", "order/index.tpl.html", "order/templates/content.tpl.html", "order/templates/information.tpl.html", "order/templates/liquidity.tpl.html", "order/templates/orders.tpl.html", "order/templates/transactions.tpl.html", "project/index.tpl.html", "project/templates/about.tpl.html", "project/templates/activity.tpl.html", "project/templates/assets.tpl.html", "project/templates/channels.tpl.html", "project/templates/charter.tpl.html", "project/templates/content.tpl.html", "project/templates/items.tpl.html", "project/templates/ledger.tpl.html", "project/templates/members.tpl.html", "project/templates/positions.tpl.html", "project/templates/projects.tpl.html", "project/templates/settings.tpl.html", "project/templates/tasks.tpl.html", "project/templates/time.tpl.html", "project/templates/validations.tpl.html", "projects/index.tpl.html", "reaction/index.tpl.html", "register/index.tpl.html", "search/index.tpl.html", "task/index.tpl.html", "task/templates/associations.tpl.html", "task/templates/content.tpl.html", "task/templates/stats.tpl.html", "task/templates/time.tpl.html", "task/templates/tokens.tpl.html", "tasks/index.tpl.html", "templates/cards/actionCard.tpl.html", "templates/cards/appCard.tpl.html", "templates/cards/connectionCard.tpl.html", "templates/cards/contentCard.tpl.html", "templates/cards/itemCard.tpl.html", "templates/cards/memberCard.tpl.html", "templates/cards/orderCard.tpl.html", "templates/cards/projectCard.tpl.html", "templates/cards/taskCard.tpl.html", "templates/cards/timeCard.tpl.html", "templates/cards/transactionCard.tpl.html", "templates/cards/validationCard.tpl.html", "time/index.tpl.html", "time/templates/associations.tpl.html", "token/index.tpl.html", "transaction/index.tpl.html", "transparency/index.tpl.html", "tutorial/index.tpl.html", "tutorial/templates/controls.tpl.html", "tutorial/templates/create.tpl.html", "tutorial/templates/intro.tpl.html", "tutorial/templates/members.tpl.html", "tutorial/templates/projects.tpl.html", "tutorial/templates/tasks.tpl.html", "tutorial/templates/updateValueMap.tpl.html", "tutorial/templates/valueMap.tpl.html", "tutorial/templates/valueMapBuilder.tpl.html", "tutorial/templates/valueMapOrders.tpl.html", "tutorial/templates/valueMapQuestions.tpl.html", "tx/index.tpl.html", "validation/index.tpl.html"]);
 
 angular.module("about/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("about/index.tpl.html",
@@ -1411,7 +1411,6 @@ angular.module("content/index.tpl.html", []).run(["$templateCache", function($te
     "                        <li><a ng-click=\"$event.stopPropagation();selectTab('ASSOCIATIONS');\" >Associations</a></li>\n" +
     "                        <li><a ng-click=\"$event.stopPropagation();selectTab('STATS')\">Stats</a></li>\n" +
     "                        <li><a ng-click=\"$event.stopPropagation();selectTab('TOKENS');\">Tokens</a></li>\n" +
-    "                        <li><a ng-click=\"$event.stopPropagation();selectTab('LIQUIDITY')\">Liquidity</a></li>\n" +
     "                    </ul>\n" +
     "                </div>\n" +
     "            </div>\n" +
@@ -1426,7 +1425,6 @@ angular.module("content/index.tpl.html", []).run(["$templateCache", function($te
     "            <li><a ng-click=\"$event.stopPropagation();selectTab('ASSOCIATIONS');\" >Associations</a></li>\n" +
     "            <li><a ng-click=\"$event.stopPropagation();selectTab('STATS')\">Stats</a></li>\n" +
     "            <li><a ng-click=\"$event.stopPropagation();selectTab('TOKENS');\">Tokens</a></li>\n" +
-    "            <li><a ng-click=\"$event.stopPropagation();selectTab('LIQUIDITY')\">Liquidity</a></li>\n" +
     "        </ul>\n" +
     "    </div>\n" +
     "</div>\n" +
@@ -1477,12 +1475,11 @@ angular.module("content/index.tpl.html", []).run(["$templateCache", function($te
     "        <div style=\"clear:both\"></div>\n" +
     "        <div ng-include=\"'content/templates/content.tpl.html'\" ng-repeat=\"content in content.children track by content.id\"></div>\n" +
     "    </div>\n" +
-    "\n" +
+    "    \n" +
     "    <div class=\"row\">\n" +
     "        <div ng-if=\"selectedTab =='ASSOCIATIONS'\" ng-include=\"'content/templates/associations.tpl.html'\"></div>\n" +
     "        <div ng-if=\"selectedTab =='STATS'\" ng-include=\"'content/templates/stats.tpl.html'\"></div>\n" +
     "        <div ng-if=\"selectedTab =='TOKENS'\" ng-include=\"'content/templates/tokens.tpl.html'\"></div>\n" +
-    "        <div ng-if=\"selectedTab =='LIQUIDITY'\" ng-include=\"'content/templates/liquidity.tpl.html'\"></div>\n" +
     "    </div>\n" +
     "\n" +
     "</div>\n" +
@@ -1602,11 +1599,6 @@ angular.module("content/templates/content.tpl.html", []).run(["$templateCache", 
     "");
 }]);
 
-angular.module("content/templates/liquidity.tpl.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("content/templates/liquidity.tpl.html",
-    "");
-}]);
-
 angular.module("content/templates/stats.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("content/templates/stats.tpl.html",
     "<div class=\"card\">\n" +
@@ -1639,8 +1631,24 @@ angular.module("content/templates/tokens.tpl.html", []).run(["$templateCache", f
     "    </div>\n" +
     "    <div style=\"padding:16px;\">\n" +
     "        <div class=\"spacing-15\"></div>\n" +
-    "        <h4 style=\"\">Protocols <a ng-click=\"informationToggle('PROTOCOLS', 'GENERAL', item)\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h4>\n" +
-    "        <p><a ng-click=\"informationToggle('PROTOCOLS')\" href=\"#\">Task Protocol</a></p>\n" +
+    "        <p>Attention, Content, Associations, Validations</p>\n" +
+    "        <highchart config=\"tokenChart\"></highchart>\n" +
+    "         <!--TODO MOBILE-->\n" +
+    "         <!--UNIFITY TOKEN MODEL-->\n" +
+    "        <table class=\"table table-striped table-hover\">\n" +
+    "            <thead>\n" +
+    "                <tr>\n" +
+    "                    <th>Identifer</th>\n" +
+    "                    <th>Value</th>\n" +
+    "                </tr>\n" +
+    "            </thead>\n" +
+    "            <tbody>\n" +
+    "                <tr ng-repeat=\"(key, value) in content.data.apps.tokens\">\n" +
+    "                    <td><a href=\"market/{{key}}\" ui-sref=\"market({id:key})\">{{key}}</a></td>\n" +
+    "                    <td>{{value}}</td>\n" +
+    "                </tr>\n" +
+    "            </tbody>\n" +
+    "        </table>\n" +
     "    </div>\n" +
     "</div>");
 }]);
@@ -4970,6 +4978,7 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "\n" +
     "            <div class=\"card\">\n" +
     "                <tags-input class=\"\" style=\"border:0px;flex-grow:2;\" min-length=\"1\" placeholder=\"Search\" ng-model=\"searchQuery\"></tags-input>\n" +
+    "                <md-progress-linear style=\"height:2px\" ng-if=\"stateIsLoadingFeed\" md-mode=\"indeterminate\"></md-progress-linear>\n" +
     "            </div>\n" +
     "\n" +
     "            <div class=\"card\" style=\"margin-top:0px;\">\n" +
@@ -4997,21 +5006,6 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "    <div class=\"spacing-25\"></div>\n" +
     "\n" +
     "</div>");
-}]);
-
-angular.module("home/templates/feedBalances.tpl.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("home/templates/feedBalances.tpl.html",
-    "");
-}]);
-
-angular.module("home/templates/feedSuggestions.tpl.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("home/templates/feedSuggestions.tpl.html",
-    "");
-}]);
-
-angular.module("home/templates/feedValueMap.tpl.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("home/templates/feedValueMap.tpl.html",
-    "");
 }]);
 
 angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", function($templateCache) {

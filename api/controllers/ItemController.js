@@ -122,20 +122,16 @@ module.exports = {
 			user: req.param('user'),
 			creator: req.param('user'),
 			owner: req.param('owner'),
-
 			//JSON TO STORE ITEM SPECIFIC DATA.. 
 			data: req.param('data'),
 			dataHash: req.param('dataHash'),
-
-			//data:{apps:{reactions: {plus:0,minus:0}, attention:{general:0}}}
-
 		};
 
 		if (!model.data){model.data = {};}
 		model.data.apps = {
 			actions:[],
-			reactions: {plus:0,minus:0},
-			attention: {general:0},
+			reactions:{plus:0,minus:0},
+			attention:{general:0},
 			json:{},
 		};
 

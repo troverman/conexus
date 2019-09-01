@@ -323,6 +323,19 @@ module.exports = {
 
 	create: function (req, res) {
 
+		//THINK
+		//ACTIVITY IS EVENT!
+		//APP - DATA () --> EVENT --> 
+		function createEvent(model){
+
+			var eventModel = {
+				verb:'create', //call? machine attention
+				model:{id:model.id,type:'CONTENT'}
+			};
+			Event.create(eventModel);
+
+		};
+
 		function createNotification(model){
 			//<-- ASSOCIATIONS -->
 			//SEND NOTIFICATIONS TO FOLLOWERS
@@ -461,12 +474,7 @@ module.exports = {
 			contentModel: req.param('contentModel'),
 
 			associatedModels: req.param('associatedModels'),
-
-			//PATCH
-			reactions: {plus:0, minus:0},
-			attention: {general:0},
-
-			data:{apps:{reactions: {plus:0, minus:0},attention: {general:0}}}
+			data:{apps:{reactions:{plus:0, minus:0},attention:{general:0}}}
 
 		};
 
@@ -481,6 +489,7 @@ module.exports = {
 
 					model.user = userModels[0];
 					Content.publishCreate(model);
+					createEvent(model);//ACTION
 					createNotification(model);
 					createValidation(model);
 					mintTokens(model);

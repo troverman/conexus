@@ -1,5 +1,6 @@
 module.exports = {
 
+	//TODO: RENAME TO MEMBER
 	get: function(req, res) {
 
 		var limit = parseInt(req.query.limit) || 1;

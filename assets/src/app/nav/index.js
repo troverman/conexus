@@ -3,188 +3,19 @@ angular.module( 'conexus.nav', [
 
 .controller( 'NavCtrl', ['$http', '$interval', '$location', '$mdSidenav', '$q', '$rootScope', '$sailsSocket', '$sce', '$scope', '$state', '$window', 'ActionModel', 'AttentionModel', 'AppModel', 'ConnectionModel', 'ContentModel', 'cytoData', 'ItemModel', 'NotificationModel', 'OrderModel', 'ProjectModel', 'ReactionModel', 'SearchModel', 'TaskModel', 'TimeModel', 'toaster', 'TransactionModel', 'ValidationModel', 'UserModel', function NavController( $http, $interval, $location, $mdSidenav, $q, $rootScope, $sailsSocket, $sce, $scope, $state, $window, ActionModel, AttentionModel, AppModel, ConnectionModel, ContentModel, cytoData, ItemModel, NotificationModel, OrderModel, ProjectModel, ReactionModel, SearchModel, TaskModel, TimeModel, toaster, TransactionModel, ValidationModel, UserModel ) {
 
-    //TODO: ALL!
-    //VALIDATE BUNDLES OF TIME.. IE GRANULAR TIME DATA.. POST REQ EVERY 1 SEC? TO MUCH OR NOT
-    //CREATE TIME .. 
-    //UPDATE EVERY 10 SECONDS 
-    //--> THATS THE FRONT END TIMER
-    //.. CALC THE TIME SINCE CREATE TO ENSURE TIMER
-    //.. NOT FRONTEND
-
     //TODO: IN APP.JS
     //STATE CHANGE LOGIC
     $rootScope.$on("$stateChangeStart", function() {
         //VIEW GENERATION
         $scope.closeAllNav();
     });
-    
-    $rootScope.consentAgreement = false;
-    
+
+    $scope.directedGraphElements = {};
+
     //INITALIZE LOCAL VARIABLES
     $scope.associationsAreExpanded = false;
     $scope.chart = {};
     $scope.attentionChart = {};
-    $scope.confirm = {};
-
-    //ROOTSCOPE..
-    $rootScope.directedGraphStyle = [
-        {
-            "selector": "core",
-            "style": {
-                "selection-box-color": "#AAD8FF",
-                "selection-box-border-color": "#8BB0D0",
-                "selection-box-opacity": "0.5"
-            }
-        }, {
-            "selector": "node",
-            "style": {
-                "width": "25",
-                "height": "25",
-                "content": "data(name)",
-                "font-size": "9px",
-                "text-valign": "center",
-                "text-halign": "center",
-                "background-color": "#77828C",
-                "text-outline-color": "#77828C",
-                "text-outline-width": "2px",
-                "color": "#fff",
-                "overlay-padding": "3px",
-                "z-index": "10"
-            }
-        }, {
-            "selector": "node[?attr]",
-            "style": {
-                "shape": "rectangle",
-                "background-color": "#aaa",
-                "text-outline-color": "#aaa",
-                "width": "8px",
-                "height": "8px",
-                "font-size": "3px",
-                "z-index": "1"
-            }
-        }, {
-            "selector": "node[?query]",
-            "style": {
-                "background-clip": "none",
-                "background-fit": "contain"
-            }
-        }, {
-            "selector": "node:selected",
-            "style": {
-                "border-width": "3px",
-                "border-color": "#AAD8FF",
-                "border-opacity": "0.5",
-                "background-color": "#77828C",
-                "text-outline-color": "#77828C"
-            }
-        }, {
-            "selector": "edge",
-            "style": {
-                "curve-style": "bezier",
-                "target-arrow-shape": "triangle",
-                "arrow-scale":"0.75",
-                "source-arrow-shape": "none",
-                "opacity": "0.9",
-                "line-color": "#bbb",
-                "width": "3",
-                "overlay-padding": "3px"
-            }
-        }, {
-            "selector": "node.unhighlighted",
-            "style": {
-                "opacity": "0.2"
-            }
-        }, {
-            "selector": "edge.unhighlighted",
-            "style": {
-                "opacity": "0.05"
-            }
-        }, {
-            "selector": ".highlighted",
-            "style": {
-                "z-index": "999999"
-            }
-        }, {
-            "selector": "node.highlighted",
-            "style": {
-                "border-width": "3px",
-                "border-color": "#AAD8FF",
-                "border-opacity": "0.5",
-                "background-color": "#394855",
-                "text-outline-color": "#394855"
-            }
-        }, {
-            "selector": "edge.filtered",
-            "style": {
-                "opacity": "0"
-            }
-        }, {
-            "selector": "edge[group=\"coexp\"]",
-            "style": {
-                "line-color": "#d0b7d5"
-            }
-        }, {
-            "selector": "edge[group=\"coloc\"]",
-            "style": {
-                "line-color": "#a0b3dc"
-            }
-        }, {
-            "selector": "edge[group=\"gi\"]",
-            "style": {
-                "line-color": "#90e190"
-            }
-        }, {
-            "selector": "edge[group=\"path\"]",
-            "style": {
-                "line-color": "#9bd8de"
-            }
-        }, {
-            "selector": "edge[group=\"pi\"]",
-            "style": {
-                "line-color": "#eaa2a2"
-            }
-        }, {
-            "selector": "edge[group=\"predict\"]",
-            "style": {
-                "line-color": "#f6c384"
-            }
-        }, {
-            "selector": "edge[group=\"spd\"]",
-            "style": {
-                "line-color": "#dad4a2"
-            }
-        }, {
-            "selector": "edge[group=\"spd_attr\"]",
-            "style": {
-                "line-color": "#D0D0D0"
-            }
-        }, {
-            "selector": "edge[group=\"reg\"]",
-            "style": {
-                "line-color": "#D0D0D0"
-            }
-        }, {
-            "selector": "edge[group=\"reg_attr\"]",
-            "style": {
-                "line-color": "#D0D0D0"
-            }
-        }, 
-        {
-            "selector": "edge[group=\"user\"]",
-            "style": {
-                "line-color": "#f0ec86"
-            }
-        }
-    ];
-    $rootScope.directedGraphOptions = {
-        textureOnViewport:true,
-        pixelRatio: 'auto',
-        motionBlur: false,
-        hideEdgesOnViewport:true
-    };
-    $rootScope.directedGraphLayout = {name: 'cola'};
-    $scope.directedGraphElements = {};
-
     $scope.inputVector = [];
     $scope.map = {center: {latitude: 35.902023, longitude: -84.1507067 }, zoom: 9};
     $scope.newLogin = {};
@@ -194,14 +25,12 @@ angular.module( 'conexus.nav', [
     $scope.inverted = false;
     $scope.isInformation = false;
     $scope.selectedOrderType = 'ONBOOKS';
+    $scope.selectedTab = 'ATTENTION';
     $scope.selectedType = 'POST';
     $scope.validationColumnRender = {};
 
-    //TODO: REFACTOR SOON
+    //TODO: REFACTOR
     if ($rootScope.currentUser){
-
-        //DO BETTER
-        $scope.viewing = true;
 
         $scope.newAction = {};
         $scope.newContent = {};
@@ -214,22 +43,6 @@ angular.module( 'conexus.nav', [
         $scope.newTransaction = {};
         $scope.newValidation = {};
         $scope.newContent.associatedModels = [{text: $rootScope.currentUser.username, type:'PROFILE', id:$rootScope.currentUser.id}];
-
-        //IF PERMISSIONS
-        //TODO: LOCATION FILTER BASED ON LOCATION.. DEFAULT -- TOGGLE.. 
-        $scope.getLatLng = function() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function (position) {
-                    lat = position.coords.latitude; 
-                    lng = position.coords.longitude;
-                    $rootScope.currentUser.location = {
-                        lat:lat,
-                        lng:lng
-                    };
-                });
-            }
-        };
-        //$scope.getLatLng();
 
         //TODO: KINDA HACY
         $rootScope.$watch('currentUser', function(){
@@ -247,20 +60,19 @@ angular.module( 'conexus.nav', [
 
         //TODO: WEBSOCKETS
         $sailsSocket.subscribe('notification', function (envelope) {
-            switch(envelope.verb) {
-                case 'created':
-                    console.log('SOCKET NOTIRICATION', envelope)
-                    //TODO: HAS TO BE BETTER THAN SOCKET CHECK; SOCKET ROOMS? 
-                    if ($rootScope.currentUser.id == envelope.data.user){
-                        $rootScope.notificationCount++;
-                        $rootScope.pop(envelope.data.title, envelope.data.info.username);
-                        $rootScope.notificationCount++;
-                    }
+            if (envelope.verb == 'created'){
+                console.log('SOCKET NOTIRICATION', envelope)
+                //TODO: HAS TO BE BETTER THAN SOCKET CHECK; SOCKET ROOMS? 
+                if ($rootScope.currentUser.id == envelope.data.user){
+                    $rootScope.notificationCount++;
+                    $rootScope.pop(envelope.data.title, envelope.data.info.username);
+                    $rootScope.notificationCount++;
+                }
             }
         });
+
     }
 
-    //ROOT FUNCTIONS
     $rootScope.actionToggle = function(item){
         $scope.closeAllNav();
         $scope.newAction = {};
@@ -276,17 +88,13 @@ angular.module( 'conexus.nav', [
         else{$mdSidenav('login').toggle();}
     };
 
-    //ROOT FUNCTIONS
     $rootScope.appToggle = function(){
         $scope.closeAllNav();
-
         $scope.newApp = {};
-
         $scope.newProtocol = {};
         $scope.newProtocol.associatedProtocols = [{text:'888 STRUCTURE'},{text:'TOKEN LANGUAGE STRUCTURE'},{text:'CRE8 MEMBER'}];
         $scope.newProtocol.title = 'New Protocol';
         $scope.newProtocol.code = 'function sampleCode(sampleParameter){}';
-
         if($rootScope.currentUser){$mdSidenav('app').toggle();}
         else{$mdSidenav('login').toggle();}
     };
@@ -324,6 +132,8 @@ angular.module( 'conexus.nav', [
                 user:$rootScope.currentUser.id,
             };
 
+            //IMPLICIT IS REALATION TO ITEM
+            //FACTOR TO HAVE SAME STRUCT
             if (item){
                 $scope.item = item;
                 $scope.createDetailToggleVar = false;
@@ -371,6 +181,22 @@ angular.module( 'conexus.nav', [
         else{$mdSidenav('login').toggle();}
     };
 
+    //TODO: EXPAND
+    $rootScope.pop = function(title, body){
+        toaster.pop({
+            type:'success',
+            title: title,
+            body: body,
+            onShowCallback: function (toast) { 
+                var audio = new Audio('audio/ping.mp3');
+                audio.play()
+                .then(function(audio){console.log('POP', 'dingdong')})
+                .catch(function(err){console.log('POP ERR:', err)})
+            }
+        });
+    };
+
+
     $scope.createDetailToggle = function(){$scope.createDetailToggleVar = !$scope.createDetailToggleVar;};
 
     $scope.expandAssets = function(){$scope.assetsAreExpanded = !$scope.assetsAreExpanded;};
@@ -388,14 +214,10 @@ angular.module( 'conexus.nav', [
     $rootScope.filterToggle = function(type, item, model){
 
         //PASS ALL OBJECTS IN MODEL ^^
-
         $scope.updatedQuery = [];
-
         $scope.closeAllNav();
-
         $scope.locationFilter = {};
         $scope.locationFilter.distance = 10;
-
         //POSTIONS / MARKETS // LEDGER
         $scope.item = item;
         $scope.type = type;
@@ -403,25 +225,7 @@ angular.module( 'conexus.nav', [
         //NOTIFICATIONS
         $scope.selectedType = 'ALL';
         console.log('FILTER TOGGLE', type, item);
-
         $scope.filterBuilder = JSON.stringify($scope.searchQueryNav, undefined, 4);
-
-        //TODO
-        $scope.populateMap = function(){
-            for (x in projects){
-                if (projects[x].location){
-                    $scope.markers.push({
-                        id:projects[x].id,
-                        content:projects[x].title,
-                        url:projects[x].urlTitle,
-                        coords:{
-                            latitude:projects[x].location.lat,
-                            longitude:projects[x].location.lng
-                        }
-                    });
-                }
-            }
-        };
 
         $scope.selectAsset = function(item){
             if ($rootScope.selectedAssets.map(function(obj){return obj.text}).indexOf(item)==-1){
@@ -440,23 +244,19 @@ angular.module( 'conexus.nav', [
                     query:item, 
                     type:'ASSOCIATION'
                 });
-
                 //$scope.init();
-
                 $scope.item.associations = $scope.item.associations.filter(function(obj) { 
                     return obj.element !== item
                 });
             }
-
             console.log('SELECT ASSOCIATION', item, $rootScope.searchQueryNav, $rootScope.searchQuery);
-
         };
 
         $scope.selectLocation = function(item){
             if ($rootScope.searchQueryNav.locations.map(function(obj){return obj.text}).indexOf(item)==-1){
                 item.distance = $scope.locationFilter.distance;
                 $rootScope.searchQueryNav.locations.push({
-                    text:'Location, '+$scope.locationFilter.distance+' | '+item.address, 
+                    text:'Location, '+$scope.locationFilter.distance+' | '+item.id, 
                     query:item, 
                     type:'LOCATION'
                 });
@@ -638,6 +438,23 @@ angular.module( 'conexus.nav', [
 
         else{$mdSidenav('login').toggle();}
 
+    };
+
+    $rootScope.populateMap = function(models){
+        $rootScope.markers = [];
+        for (x in models){
+            if (models[x].location){
+                $rootScope.markers.push({
+                    id:models[x].id,
+                    content:models[x].title,
+                    url:models[x].urlTitle,
+                    coords:{
+                        latitude:models[x].location.lat,
+                        longitude:models[x].location.lng
+                    }
+                });
+            }
+        }
     };
 
     $rootScope.projectToggle = function(){
@@ -824,7 +641,6 @@ angular.module( 'conexus.nav', [
         $scope.closeAllNav();
         $scope.item = item;
 
-        //$scope.assoicationFilter = [{text:$scope.item.title || $scope.item.id}];
         $scope.assoicationFilter = [{text:$scope.item.associatedModels[0].id}];
 
         //TODO: GET ASSOCIATIONS
@@ -838,7 +654,7 @@ angular.module( 'conexus.nav', [
                     name:$scope.item.associatedModels[x].id
                 }
             }; 
-            $scope.directedGraphElements[$scope.item.associatedModels[x].address] = nodeModel;
+            $scope.directedGraphElements[$scope.item.associatedModels[x].id] = nodeModel;
             if (x > 0){
                 var edgeModel = {
                     group:'edges',
@@ -1431,7 +1247,6 @@ angular.module( 'conexus.nav', [
 
         //TEMP HAK?
         $scope.newTransaction = {};
-
         $scope.closeAllNav();
 
         $scope.addAssetToTransaction = function(model){
@@ -1466,7 +1281,7 @@ angular.module( 'conexus.nav', [
 
             $scope.sortedBalances.sort(function(a, b) {return b[1] - a[1];});
 
-            $scope.newTransaction.validationModels = [{
+            $scope.newTransaction.associatedModels = [{
                 context:{},
                 associatedModels:[]
             }];
@@ -1481,13 +1296,9 @@ angular.module( 'conexus.nav', [
                     }
                 }
             }, true);
-
             $mdSidenav('transaction').toggle();
-
         }
-
         else{$mdSidenav('login').toggle();}
-
     };
 
     $rootScope.validationToggle = function(item){
@@ -1719,7 +1530,7 @@ angular.module( 'conexus.nav', [
 
 
             $scope.newReaction.amount = 1;
-            $scope.newReaction.associatedModels = [{type:item.model, id:item.id}];
+            $scope.newReaction.associatedModels = [{type:item.model, id:item.id, context:{general:100}}];
             $scope.newReaction.type = type;
             $scope.newReaction.user = $rootScope.currentUser.id;
             $scope.item.reactions[type]++;
@@ -1764,6 +1575,7 @@ angular.module( 'conexus.nav', [
 
     $scope.createTime = function(){
         if($rootScope.currentUser){
+
             $scope.newTime.user = $rootScope.currentUser.id;
             $scope.newTime.createdAt = $scope.newTime.startTime;
             if ($scope.newTime.tags){
@@ -1771,21 +1583,14 @@ angular.module( 'conexus.nav', [
                     return obj.text;
                 }).join(",");
             }
-            //PATCH!!!
-            if ($scope.newTime.associatedModels){
-
-
-                //for (x in $scope.newTime.associatedModels){
-                //    $scope.newTime[$scope.newTime.associatedModels[x].type.toLowerCase()] = $scope.newTime.associatedModels[x].id;
-                //}
-
-
-            }
+           
             console.log('CREATE TIME', $scope.newTime);
+
             TimeModel.create($scope.newTime).then(function(model){
                 $mdSidenav('time').close();
                 setTimeout(function () {$rootScope.pop('New Time!', model.id +' '+ model.createdAt);}, 250);
             });
+
         }
         else{$mdSidenav('login').toggle()}
     };
@@ -1892,8 +1697,7 @@ angular.module( 'conexus.nav', [
             },0);
         };
 
-        //timeQ['general']
-        //timeQ['task']
+        //timeQ['general'] , timeQ['task']
 
         //break into lists of context.. overtime.. and current. .. need graph
         //allow for meta data in auto time .... 
@@ -1921,19 +1725,6 @@ angular.module( 'conexus.nav', [
         var location = '';
         if ($rootScope.currentUser.location){location=$rootScope.currentUser.location;}
 
-    
-
-        //$rootScope.timeQ[context].map(function(obj){
-        //    obj.context.string 
-        //});
-
-        //$rootScope.sumContext = $scope.sumObj(rootScope.timeQ[context]);
-
-        //if ($rootScope.sumContext){
-        //}
-
-        //THIS IS SUPER DRAFT 
-        //THIS IS SUPER DRAFT 
         //THIS IS SUPER DRAFT 
         //make db call if more than 10 sec or change 
 
@@ -1960,7 +1751,7 @@ angular.module( 'conexus.nav', [
             amount:1, 
             string: string,
             data: {verion:'PRE ALPHA', ip:{}, device:{title:navigator.userAgent, id:1, hardwareHash:''}},
-            associatedModels: associatedModels,//$rootScope.associatedModels,
+            associatedModels: associatedModels,
             creator: $rootScope.currentUser,
         };
 
@@ -1971,43 +1762,33 @@ angular.module( 'conexus.nav', [
         }
 
         if (context == 'mining'){
-            if ($rootScope.timeQ[context].length >= 10){
-                AttentionModel.create(attentionModel);
-            }
+            if ($rootScope.timeQ[context].length >= 10){AttentionModel.create(attentionModel);}
         }
+
         if (context == 'attention'){
             $rootScope.timeModel.amount = $rootScope.timeModel.amount + time;
         }
-
-
-
 
         var index = $scope.timeChart.xAxis.categories.indexOf(string);
         if (index == -1){
             $scope.timeChart.xAxis.categories.push(string);
             $scope.timeChart.series[0].data.push(1);
         }
-        else{
-            $scope.timeChart.series[0].data[index] = $rootScope.timeModel.amount;
-        }
-
-
+        else{$scope.timeChart.series[0].data[index] = $rootScope.timeModel.amount;}
 
     };
 
-    //LOL
-    //IF LOGGED IN AND PERMISIONS
-    if($rootScope.currentUser){
-        //TODO:ROOTSCOPE ISNT LOADED
-        console.log('STARTING ATTENTION', $rootScope.currentUser)
-        //if ($rootScope.currentUser.apps){
-            //if ($rootScope.currentUser.apps.cre8.recordAttention){
+    //GENERALIZE AS APPS
+    $scope.initAttention = function(){
+        if($rootScope.currentUser){
+            console.log('STARTING ATTENTION', $rootScope.currentUser)
+            //if ($rootScope.currentUser.apps.attention.isActive){
                 $interval(function(){$scope.timerFunction(1, 'attention', 'HUMAN')}, 1000);
                 $interval(function(){$scope.timerFunction(1, 'mining', 'MACHINE')}, 1000);
             //}
-        //}
-    }
-
+        }
+    };
+    $scope.initAttention();
  
     //TODO: TEST
     $scope.invertMarket = function() {
@@ -2020,7 +1801,6 @@ angular.module( 'conexus.nav', [
     //TODO! IMPORTANT
     $scope.loadAddress = function(query){
         var deferred = $q.defer();
-        //TODO: PROJECT AND MEMBER .. 
         //TOOD: SEARCH QUERY .. 
         UserModel.get({search:query, limit:1000, skip:0, sort:'createdAt DESC'}).then(function(userModels){
             console.log('USERS: LOAD ADDRESS', userModels);
@@ -2063,7 +1843,6 @@ angular.module( 'conexus.nav', [
             deferred.resolve(itemModels);
         });
         return deferred.promise;
-
     };
 
     //TODO! IMPORTANT
@@ -2114,19 +1893,15 @@ angular.module( 'conexus.nav', [
     };
 
     //TODO! IMPORTANT
-    $scope.loadTags = function(query){
+    $scope.loadContext = function(query){
         console.log('loadTags', query);
         var deferred = $q.defer();
-        //SearchModel.search(query).then(function(searchModels){
-        //UserModel.get({search:query, limit:10, skip:0, sort:'createdAt DESC'}).then(function(searchModels){
-        //    console.log(searchModels);
-            //searchModels = [{text:'TAG'}, {text:'TAG2'}]
-            var searchModels = [];
-            deferred.resolve(searchModels);
-        //});
+        var searchModels = [];
+        deferred.resolve(searchModels);
         return deferred.promise;
     };
 
+    //ROOTSCOPE
     $scope.login = function(){
         var data = JSON.stringify($scope.newLogin);
         $http({method:'POST', url:'/auth/local', data:data}).then(function(newModel){
@@ -2138,7 +1913,6 @@ angular.module( 'conexus.nav', [
 
     //IMPROVE
     $scope.loginToggle = function(){
-        //$scope.closeAllNav();
         $mdSidenav('nav').close();
         $mdSidenav('subNav').close();
         $mdSidenav('action').close();
@@ -2170,32 +1944,13 @@ angular.module( 'conexus.nav', [
         }
     };
 
-    //TODO: EXPAND
-    $rootScope.pop = function(title, body){
-        toaster.pop({
-            type:'success',
-            title: title,
-            body: body,
-            onShowCallback: function (toast) { 
-                var audio = new Audio('audio/ping.mp3');
-                audio.play()
-                .then(function(audio){console.log('POP', 'dingdong')})
-                .catch(function(err){console.log('POP ERR:', err)})
-            }
-        });
-    };
-
     //TODO
     $scope.reply = function(item){
-        //var location = searchObject($scope.content, function (value) { return value != null && value != undefined && value.id == content.id; });
-        //location[0].value.showReply = !location[0].value.showReply;
-        //updateObject($scope.content, location[0].value, location[0].path);
         $scope.item.showReply = !$scope.item.showReply;
     };
 
     //IMPROVE
     $scope.sideNavToggle = function(){
-        //$scope.closeAllNav();
         $mdSidenav('subNav').close();
         $mdSidenav('action').close();
         $mdSidenav('cardDetail').close();
@@ -2217,7 +1972,8 @@ angular.module( 'conexus.nav', [
     };
 
     $scope.selectOrderType = function(type){$scope.selectedOrderType = type;};
-    $scope.selectedTab = 'ATTENTION';
+    
+    //ROOTSCOPE?
     $scope.selectTab = function(model){$scope.selectedTab = model;};
 
 }]);

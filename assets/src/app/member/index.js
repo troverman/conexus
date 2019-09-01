@@ -305,12 +305,6 @@ angular.module( 'conexus.member', [
         }
         else{$mdSidenav('login').toggle()}
     };
-
-    //TODO: FXNS
-    $scope.unfollow = function(member) {
-        if ($rootScope.currentUser){FollowerModel.delete(member);}
-        else{$mdSidenav('login').toggle()}
-    };
    
 }])
 
@@ -339,6 +333,38 @@ angular.module( 'conexus.member', [
     
     $scope.newContent = {};
     $scope.newReaction = {};
+
+
+    //orders
+
+    //contentList //{user:member.id
+    //profileContent //profile:member.id
+
+    //time
+
+    //NEED MODEL FOR TOKENIZATION MINT? EVENT? 
+        //NEEDED FOR REAL LEDGER PG..
+    //transactionsFrom
+    //transactionsTo
+
+    //var query = JSON.stringify([
+    //    {model:'ORDER', limit:20, skip:0, sort:'createdAt DESC'},
+    //    {model:'ITEM', limit:20,skip:0,sort:'createdAt DESC'},
+    //    {model:'PROJECT', limit:20,skip:0,sort:'createdAt DESC'},
+    //    {model:'TASK', limit:20,skip:0,sort:'createdAt DESC'},
+    //    {model:'TIME', limit:20,skip:0,sort:'createdAt DESC'},
+    //    {model:'TRANSACTION', limit:20,skip:0,sort:'createdAt DESC'},
+    //    {model:'USER', limit:20,skip:0,sort:'createdAt DESC'}
+    //]);
+    //$scope.stateIsLoadingActivity = true;
+    //SearchModel.getFeed(query).then(function(searchModels){
+    //    $scope.stateIsLoadingIntro = false;
+    //    console.log(searchModels);
+    //    $scope.activity = searchModels;
+    //    $scope.init();
+    //});
+
+
 
     //TODO: ACTIVITY FEED ~ BLEND OF MODELS
     $scope.orders = orders.map(function(obj){

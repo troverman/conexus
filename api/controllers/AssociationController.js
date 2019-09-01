@@ -16,9 +16,11 @@ module.exports = {
 			.sort(sort)
 			.then(function(models) {
 				if (models[0]){
-
-					//DEPRECIATE THIS STYLE
+					//TODO: DEPRECIATE THIS STYLE
 					//APPRECIATE APP 
+					//APPRECIATE '''DATA''' MODEL
+						//APP HAS STRUCT DATA MODEL 
+							//ALL DATA IN ONE MODEL?
 					var promises = [];
 					for (x in models[0].associatedModels){
 						if (models[0].associatedModels[x].type == 'ACTION'){promises.push(Action.find({id:models[0].associatedModels[x].id}).then(function(models){return models[0];}))}
@@ -33,7 +35,6 @@ module.exports = {
 						if (models[0].associatedModels[x].type == 'TRANSACTION'){promises.push(Transaction.find({id:models[0].associatedModels[x].id}).then(function(models){return models[0];}))}
 						if (models[0].associatedModels[x].type == 'VALIDATION'){promises.push(Validation.find({id:models[0].associatedModels[x].id}).then(function(models){return models[0];}))}
 					}
-
 					Q.all(promises).then((populatedModels)=>{
 						for (x in models[0].associatedModels){
 							console.log(models[0].associatedModels[x])
@@ -41,7 +42,6 @@ module.exports = {
 						}
 						res.json(models[0]);
 					});
-
 				}
 				else{res.json(models);}
 			});

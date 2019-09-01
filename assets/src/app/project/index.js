@@ -59,6 +59,7 @@ angular.module( 'conexus.project', [
             transactionsTo: ['TransactionModel', 'project', function(TransactionModel, project) {
                 return TransactionModel.get({to:project.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
+
         }
     })
     .state( 'project.assets', {
@@ -354,6 +355,42 @@ angular.module( 'conexus.project', [
    
     //TODO: DEPRECIATE
     titleService.setTitle(project.title + ' | Activity | CRE8.XYZ');
+
+    //TODO: FEED.. COMPLEX QUERY
+    //ACTIONS??? EVENTS??? HM
+        //ON CREATE MODEL....
+            //EVENT MODEL (ACTION OR DATA?)
+                //EVENT FOR TOKEN CREATION IS GOOOOOOOD
+            //FOR ACTIVITY.. EVENTS!!!
+
+
+    //SUPER SIMPLIFY IS .... GET EVENT MODEL!!!
+        //POPULATE THE DATA FROM THE EVENT
+
+    //var query = JSON.stringify([
+    //    {model:'CONNECTION', limit:20, skip:0, sort:'createdAt DESC'},
+    //    {model:'ITEM', limit:20,skip:0,sort:'createdAt DESC'},
+    //    {model:'PROJECT', limit:20,skip:0,sort:'createdAt DESC'},
+    //    {model:'TASK', limit:20,skip:0,sort:'createdAt DESC'},
+    //    {model:'TIME', limit:20,skip:0,sort:'createdAt DESC'},
+    //    {model:'TRANSACTION', limit:20,skip:0,sort:'createdAt DESC'},
+    //    {model:'USER', limit:20,skip:0,sort:'createdAt DESC'}
+    //]);
+    //$scope.stateIsLoadingActivity = true;
+    //SearchModel.getFeed(query).then(function(searchModels){
+    //    $scope.stateIsLoadingIntro = false;
+    //    console.log(searchModels);
+    //    $scope.activity = searchModels;
+    //    $scope.init();
+    //});
+
+    //connections
+    //contentList
+    //tasks
+    //time 
+
+    //transactionsFrom
+    //transactionsTo  
     
     //INIT LOCAL VARIABLES
     $scope.newContent = {};

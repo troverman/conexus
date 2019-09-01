@@ -163,6 +163,7 @@
 
             <div class="card">
                 <tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search" ng-model="searchQuery"></tags-input>
+                <md-progress-linear style="height:2px" ng-if="stateIsLoadingFeed" md-mode="indeterminate"></md-progress-linear>
             </div>
 
             <div class="card" style="margin-top:0px;">

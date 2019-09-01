@@ -69,12 +69,14 @@ module.exports = {
 			//app vs type vs :o
 			//HUMAN.. MACHINE.. ETC
 			app: req.param('app'),
+			type: req.param('type'),
 
 			string: req.param('string'),
 			amount: req.param('amount'),
 			associatedModels: req.param('associatedModels'),
 			creator: req.param('creator'),
 			data:{apps:{reactions:{plus:0,minus:0},attention:{general:0}}}
+			
 		};
 		
 		Attention.create(model)

@@ -31,7 +31,6 @@
                         <li><a ng-click="$event.stopPropagation();selectTab('ASSOCIATIONS');" >Associations</a></li>
                         <li><a ng-click="$event.stopPropagation();selectTab('STATS')">Stats</a></li>
                         <li><a ng-click="$event.stopPropagation();selectTab('TOKENS');">Tokens</a></li>
-                        <li><a ng-click="$event.stopPropagation();selectTab('LIQUIDITY')">Liquidity</a></li>
                     </ul>
                 </div>
             </div>
@@ -46,7 +45,6 @@
             <li><a ng-click="$event.stopPropagation();selectTab('ASSOCIATIONS');" >Associations</a></li>
             <li><a ng-click="$event.stopPropagation();selectTab('STATS')">Stats</a></li>
             <li><a ng-click="$event.stopPropagation();selectTab('TOKENS');">Tokens</a></li>
-            <li><a ng-click="$event.stopPropagation();selectTab('LIQUIDITY')">Liquidity</a></li>
         </ul>
     </div>
 </div>
@@ -97,12 +95,11 @@
         <div style="clear:both"></div>
         <div ng-include="'content/templates/content.tpl.html'" ng-repeat="content in content.children track by content.id"></div>
     </div>
-
+    
     <div class="row">
         <div ng-if="selectedTab =='ASSOCIATIONS'" ng-include="'content/templates/associations.tpl.html'"></div>
         <div ng-if="selectedTab =='STATS'" ng-include="'content/templates/stats.tpl.html'"></div>
         <div ng-if="selectedTab =='TOKENS'" ng-include="'content/templates/tokens.tpl.html'"></div>
-        <div ng-if="selectedTab =='LIQUIDITY'" ng-include="'content/templates/liquidity.tpl.html'"></div>
     </div>
 
 </div>

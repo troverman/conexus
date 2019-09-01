@@ -1,35 +1,23 @@
-/**
- * Authentication Controller
- */
- 
-var AuthController = {
+
+module.exports = {
 
     logout: function (req, res) {
-        //console.log(req.user);
         req.user.loggedIn = false;
         User.update({id: req.user.id}, {loggedIn: false}).then(function(userModel) {
-            // Inform other sockets (e.g. connected sockets that are subscribed) that this user is now logged in
             User.publishUpdate(userModel[0].id, userModel[0]);
-
-            //PEER DELETE
-
         });
         console.log(req.user.username + ': logged out');
         req.logout();
         res.redirect('/');
     },
 
-    provider: function (req, res) {
-        passport.endpoint(req, res);
-    },
+    provider: function (req, res) {passport.endpoint(req, res);},
 
     callback: function (req, res) {
-        console.log(req.body)
         passport.callback(req, res, function (err, user) {
             req.login(user, function (err) {
                 if (err) {res.redirect('/login');}
                 else {
-
 
                     //ON AUTH / LOGIN
 
@@ -48,6 +36,18 @@ var AuthController = {
 
                     });
 
+                    //FIND ALL ASSOCIATIONS FOR USER
+                    Association.find({}).then(function(){
+
+                    });
+
+                    //ORDERS TOO..
+
+                    //POST SESSION IN VIEW
+                    //DECENTRALIZE SESSION MANAGEMENT...
+                    //BASED ON APPS.. POPULATE USER INFORMATION
+                    //SOLVES THE PROBLEM OF JUST .id RENDER
+
                     //TODO:APP INPUT --> ON LOGIN
                     console.log(user, 'now get data..')
 
@@ -58,10 +58,8 @@ var AuthController = {
                     console.log('currently logged in user is: ' + req.user.username);
                     res.json(user);
 
-
                     //if (register){res.json(user)}
                     //else{res.redirect('/'));
-
 
                 }
             });
@@ -69,5 +67,3 @@ var AuthController = {
     }
 
 };
-
-module.exports = AuthController;

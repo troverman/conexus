@@ -82,12 +82,6 @@ angular.module( 'conexus', [
 .run(function run(){moment.locale('en')})
 .controller( 'AppCtrl', ['$location', '$rootScope', '$scope', '$state', 'seoService', 'titleService', 'UserModel', function AppCtrl ( $location, $rootScope, $scope, $state, seoService, titleService, UserModel ) {
 
-    //titleService.setTitle('CRE8.XYZ')
-    //seoService.setDescription('LET\'s CRE8');
-    //seoService.setKeywords('CRE8,love,unification,universal,income,eglatarian');
-    
-    //TODO: LOCAL STORAGE
-
     //TODO: BETTER
     $rootScope.currentUser = window.currentUser;
     if ($rootScope.currentUser){
@@ -96,8 +90,23 @@ angular.module( 'conexus', [
             if($rootScope.currentUser.dateOfBirth){$rootScope.currentUser.dateOfBirth = new Date($rootScope.currentUser.dateOfBirth)}
             $rootScope.balance = member.balance;
             $rootScope.reputation = member.reputation;
-            //force update 
-            //reload on -- watch patch possible 
+
+            //TODO!
+            //PACKAGE IN LOGIN FXN -- APP PERMS ETc
+            //INIT THE LOGIN, THE DATA, THE USER
+            //getLatLng()
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    lat = position.coords.latitude; 
+                    lng = position.coords.longitude;
+                    $rootScope.currentUser.location = {
+                        lat:position.coords.latitude,
+                        lng:position.coords.longitude
+                    };
+                });
+            }
+            //USER IS LOADED
+
         });
     }
 
@@ -107,22 +116,12 @@ angular.module( 'conexus', [
 
     $rootScope.$on('$stateChangeSuccess',function(){
         $rootScope.stateIsLoading = false;
-        
-        //if ($state.current.url.split('/').length > 1){
-        //    $rootScope.associatedModels = [{model:$state.current.url.split('/')[0].toUpperCase(), id:$state.current.url.split('/')[1]}];
-        //}
-
         window.scrollTo(0, 0);
-        //titleService | seoService
         if ($state.current.url.substring(1) !== ''){
-
             titleService.setTitle($state.current.url.substring(1).replace(/(^|\s)\S/g, function(t) { return t.toUpperCase() }) +' | CRE8.XYZ');
-
             //seoService.setDescription('LET\'s CRE8');
             //seoService.setKeywords('CRE8,love,unification,universal,income,eglatarian');
-
             $rootScope.projectNavigation = $state.current.url.substring(1);
-
         }
         else{titleService.setTitle('CRE8.XYZ');}
     });
@@ -132,15 +131,174 @@ angular.module( 'conexus', [
         return true;
     });
 
-    $rootScope.goToState = function(state, params){
-        $location.path($state.href(state, params));
-    };
-    
+    $rootScope.goToState = function(state, params){$location.path($state.href(state, params));};
 
     $rootScope.associatedModels = [];
+    $rootScope.consentAgreement = false;
+
+    //ROOTSCOPE..
+    $rootScope.directedGraphStyle = [
+        {
+            "selector": "core",
+            "style": {
+                "selection-box-color": "#AAD8FF",
+                "selection-box-border-color": "#8BB0D0",
+                "selection-box-opacity": "0.5"
+            }
+        }, {
+            "selector": "node",
+            "style": {
+                "width": "25",
+                "height": "25",
+                "content": "data(name)",
+                "font-size": "9px",
+                "text-valign": "center",
+                "text-halign": "center",
+                "background-color": "#77828C",
+                "text-outline-color": "#77828C",
+                "text-outline-width": "2px",
+                "color": "#fff",
+                "overlay-padding": "3px",
+                "z-index": "10"
+            }
+        }, {
+            "selector": "node[?attr]",
+            "style": {
+                "shape": "rectangle",
+                "background-color": "#aaa",
+                "text-outline-color": "#aaa",
+                "width": "8px",
+                "height": "8px",
+                "font-size": "3px",
+                "z-index": "1"
+            }
+        }, {
+            "selector": "node[?query]",
+            "style": {
+                "background-clip": "none",
+                "background-fit": "contain"
+            }
+        }, {
+            "selector": "node:selected",
+            "style": {
+                "border-width": "3px",
+                "border-color": "#AAD8FF",
+                "border-opacity": "0.5",
+                "background-color": "#77828C",
+                "text-outline-color": "#77828C"
+            }
+        }, {
+            "selector": "edge",
+            "style": {
+                "curve-style": "bezier",
+                "target-arrow-shape": "triangle",
+                "arrow-scale":"0.75",
+                "source-arrow-shape": "none",
+                "opacity": "0.9",
+                "line-color": "#bbb",
+                "width": "3",
+                "overlay-padding": "3px"
+            }
+        }, {
+            "selector": "node.unhighlighted",
+            "style": {
+                "opacity": "0.2"
+            }
+        }, {
+            "selector": "edge.unhighlighted",
+            "style": {
+                "opacity": "0.05"
+            }
+        }, {
+            "selector": ".highlighted",
+            "style": {
+                "z-index": "999999"
+            }
+        }, {
+            "selector": "node.highlighted",
+            "style": {
+                "border-width": "3px",
+                "border-color": "#AAD8FF",
+                "border-opacity": "0.5",
+                "background-color": "#394855",
+                "text-outline-color": "#394855"
+            }
+        }, {
+            "selector": "edge.filtered",
+            "style": {
+                "opacity": "0"
+            }
+        }, {
+            "selector": "edge[group=\"coexp\"]",
+            "style": {
+                "line-color": "#d0b7d5"
+            }
+        }, {
+            "selector": "edge[group=\"coloc\"]",
+            "style": {
+                "line-color": "#a0b3dc"
+            }
+        }, {
+            "selector": "edge[group=\"gi\"]",
+            "style": {
+                "line-color": "#90e190"
+            }
+        }, {
+            "selector": "edge[group=\"path\"]",
+            "style": {
+                "line-color": "#9bd8de"
+            }
+        }, {
+            "selector": "edge[group=\"pi\"]",
+            "style": {
+                "line-color": "#eaa2a2"
+            }
+        }, {
+            "selector": "edge[group=\"predict\"]",
+            "style": {
+                "line-color": "#f6c384"
+            }
+        }, {
+            "selector": "edge[group=\"spd\"]",
+            "style": {
+                "line-color": "#dad4a2"
+            }
+        }, {
+            "selector": "edge[group=\"spd_attr\"]",
+            "style": {
+                "line-color": "#D0D0D0"
+            }
+        }, {
+            "selector": "edge[group=\"reg\"]",
+            "style": {
+                "line-color": "#D0D0D0"
+            }
+        }, {
+            "selector": "edge[group=\"reg_attr\"]",
+            "style": {
+                "line-color": "#D0D0D0"
+            }
+        }, 
+        {
+            "selector": "edge[group=\"user\"]",
+            "style": {
+                "line-color": "#f0ec86"
+            }
+        }
+    ];
+    $rootScope.directedGraphOptions = {
+        textureOnViewport:true,
+        pixelRatio: 'auto',
+        motionBlur: false,
+        hideEdgesOnViewport:true
+    };
+    $rootScope.directedGraphLayout = {name: 'cola'};
     
     //INITALIZE ROOT VARIABLES
     $rootScope.notificationCount = 0;
+
+
+    //TODO: FILTERs
 
     //TODO:DEPRECIATE
     $rootScope.selectedTags = [];
@@ -160,18 +318,11 @@ angular.module( 'conexus', [
         tags:[],
         type:[],
     };
+
     $rootScope.taskTime = 0;
+
+
 
 }])
 
-.directive('errSrc', function() {
-    return {
-        link: function(scope, element, attrs) {
-            element.bind('error', function() {
-                if (attrs.src != attrs.errSrc) {
-                    attrs.$set('src', attrs.errSrc);
-                }
-            });
-        }
-    }
-})
+.directive('errSrc', function() {return {link: function(scope, element, attrs) {element.bind('error', function() {if (attrs.src != attrs.errSrc) {attrs.$set('src', attrs.errSrc);}});}}})

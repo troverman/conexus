@@ -185,80 +185,121 @@ module.exports = {
 	//COMPLEX QUERY :)
 	getFeed: function (req, res) {
 
-		Content.watch(req);
+		//data models are contined within apps 
+			//simplify to data ?? hm
 
-		console.log('LETS GO!')
+		//DEPRECIATE
+		//WEBSOCKET..
+		Action.watch(req);
+		App.watch(req);
+		Content.watch(req);
+		Item.watch(req);
+		User.watch(req); //MEMBER
+		Project.watch(req);
+		Task.watch(req);
+		Time.watch(req);
+		Transaction.watch(req);
+		Validation.watch(req);
 
 		var searchQuery = JSON.parse(req.query.query);
 
 		console.log(searchQuery);
 
+		//TODO.. ALL MODELS ARE APP DEFINED. 
+			//APP {protocol, data}
+				//APP, DATA
+					//APP (set {protocol, data} - bundle)
+						//APP DEFINES (DATA MODEL)
+						//HMMM
+						//data.find({app:'PROJECT', model:'PROJECT'})
+
+
 		var promises = [];
 		for (x in searchQuery){
-			if (searchQuery[x].model =='CONTENT'){promises.push(Content.find().limit(10).skip(0).sort('createdAt DESC'))}
-			//if (searchQuery[x].model =='MEMBER'){promises.push(User.find().limit(10).skip(0).sort('createdAt DESC'))}
-			//if (searchQuery[x].model =='ITEM'){promises.push(Item.find().limit(10).skip(0).sort('createdAt DESC'))}
-			if (searchQuery[x].model =='PROJECT'){promises.push(Project.find().limit(10).skip(0).sort('createdAt DESC'))}
-			if (searchQuery[x].model =='TASK'){promises.push(Task.find().limit(10).skip(0).sort('createdAt DESC'))}
-			if (searchQuery[x].model =='TIME'){promises.push(Time.find().limit(10).skip(0).sort('createdAt DESC'))}
-			if (searchQuery[x].model =='TRANSACTION'){promises.push(Transaction.find().limit(10).skip(0).sort('createdAt DESC'))}
+			if (searchQuery[x].model =='ACTION'){promises.push(Action.find().limit(10).skip(0).sort('createdAt DESC').then(function(models){return {action:models}}))}
+			if (searchQuery[x].model.includes("APP")){promises.push(App.find().limit(10).skip(0).sort('createdAt DESC').then(function(models){return {app:models}}))}
+			if (searchQuery[x].model =='CONTENT'){promises.push(Content.find().limit(10).skip(0).sort('createdAt DESC').then(function(models){return {content:models}}))}
+			if (searchQuery[x].model =='ITEM'){promises.push(Item.find().limit(10).skip(0).sort('createdAt DESC').then(function(models){return {item:models}}))}
+			if (searchQuery[x].model =='MEMBER'){promises.push(User.find().limit(10).skip(0).sort('createdAt DESC').then(function(models){return {member:models}}))}
+			if (searchQuery[x].model =='PROJECT'){promises.push(Project.find().limit(10).skip(0).sort('createdAt DESC').then(function(models){return {project:models}}))}
+			if (searchQuery[x].model =='TASK'){promises.push(Task.find().limit(10).skip(0).sort('createdAt DESC').then(function(models){return {task:models}}))}
+			if (searchQuery[x].model =='TIME'){promises.push(Time.find().limit(10).skip(0).sort('createdAt DESC').then(function(models){return {time:models}}))}
+			if (searchQuery[x].model =='TRANSACTION'){promises.push(Transaction.find().limit(10).skip(0).sort('createdAt DESC').then(function(models){return {transaction:models}}))}
+			if (searchQuery[x].model =='VALIDATION'){promises.push(Validation.find().limit(10).skip(0).sort('createdAt DESC').then(function(models){return {validation:models}}))}
 		}
-
+		
 		Q.all(promises).then((populatedModels)=>{
 
-			console.log('POPULATED !', populatedModels.length)
+			console.log('POPULATED !', populatedModels.length);
 
-			//TODO
-			var contentList = populatedModels[0];
-			var projects = populatedModels[1];
-			var tasks = populatedModels[2];
-			var time = populatedModels[3];
-			var transactions = populatedModels[4];
-			//console.log(populatedModels[4])
+			populatedModels = populatedModels.map(function(obj){
+				var returnObj = {};
+				if (obj.action){returnObj = obj.action.map(function(anObj){anObj.model = 'ACTION'; return anObj;}); }
+				if (obj.app){returnObj = obj.app.map(function(anObj){anObj.model = 'APP'; return anObj;}); }
+				if (obj.content){
+					returnObj = obj.content.map(function(anObj){
+						if (anObj.tags){anObj.tags = anObj.tags.split(',')}
+						anObj.model = 'CONTENT';
+						return anObj;
+					}); 
+				}
+				if (obj.item){
+					returnObj = obj.item.map(function(anObj){
+						if (anObj.tags){anObj.tags = anObj.tags.split(',')}
+						anObj.model = 'ITEM';
+						return anObj;
+					}); 
+				}
+				if (obj.member){
+					returnObj = obj.member.map(function(anObj){
+						anObj.model = 'MEMBER';
+						return anObj;
+					}); 
+				}
+				if (obj.project){returnObj = obj.project.map(function(anObj){anObj.model = 'PROJECT'; return anObj;}); }
+				if (obj.task){
+					returnObj = obj.task.map(function(anObj){
+						if (anObj.tags){anObj.tags = anObj.tags.split(',')}
+						anObj.model = 'TASK';
+						return anObj;
+					}); 
+				}
+				if (obj.time){
+					returnObj = obj.time.map(function(anObj){
+						if (anObj.tags){anObj.tags = anObj.tags.split(',')}
+						anObj.model = 'TIME';
+						return anObj;	
+					}); 
+				}
+				if (obj.transaction){
+					returnObj = obj.transaction.map(function(anObj){
+						if (anObj.tags){anObj.tags = anObj.tags.split(',')}
+						anObj.model = 'TRANSACTION';
+						return anObj;
+					}); 
+				}
+				if (obj.validation){returnObj = obj.validation.map(function(anObj){anObj.model = 'VALIDATION'; return anObj;}); }
+				console.log(returnObj)
+				return returnObj;
+			});
 
-			contentList = contentList.map(function(obj){
-		        obj.model = 'CONTENT';
-		        if (obj.tags){obj.tags = obj.tags.split(',')}
-		        return obj;
-		    });
-		    projects = projects.map(function(obj){
-		        obj.model = 'PROJECT';
-		        if (obj.tags){obj.tags = obj.tags.split(',')}
-		        return obj;
-		    });
-		    tasks = tasks.map(function(obj){
-		        obj.model = 'TASK';
-		        if (obj.tags){obj.tags = obj.tags.split(',')}
-		        return obj;
-		    });
-		    time = time.map(function(obj){
-		        obj.model = 'TIME';
-		        if (obj.tags){obj.tags = obj.tags.split(',')}
-		        return obj;
-		    });
-		    transactions = transactions.map(function(obj){
-		        obj.model = 'TRANSACTION';
-		        return obj;
-		    });
-
-
-		    var activity = [].concat.apply([], [contentList, projects, tasks, time]); //, transactions]);
+		    var activity = [].concat.apply([], populatedModels);
 		    activity = activity.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
 		    activity = activity.slice(0,100);
+		    console.log('length!', activity.length);
+			res.json(activity);
 
 		    //USER PROMISES
 		    var userPromises = [];
 		    for (x in activity){userPromises.push(User.find({id:activity[x].user}))}
-
     		Q.all(userPromises).then((populatedUserModels)=>{
-
+    			console.log('made it')
     			for (x in activity){activity[x].user = populatedUserModels[x][0]}
-    			console.log(activity);
-				res.json(activity);
-
+				//res.json(activity);
     		});
 
 		});
+
 
 	},
 

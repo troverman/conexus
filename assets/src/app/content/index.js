@@ -32,6 +32,57 @@ angular.module( 'conexus.content', [
 
     console.log($scope.content, $scope.content.associationModels);
 
+    //TOKENS BETA///
+    $scope.populateTokensBeta = function(){
+        //$scope.content.data.apps.tokens
+        $scope.content.data.apps.tokens = $scope.content.data.apps.attention;
+        $scope.content.data.apps.tokens['CRE8'] = 1;
+        $scope.content.data.apps.tokens['CRE8+CONTENT'] = 1;
+        $scope.content.data.apps.tokens['CRE8+CONTENT+'+$scope.content.id] = 1;
+
+        //CONTEXT SPECIFIC TOKENSZ
+        for (x in $scope.content.associationModels){
+            for (y in Object.keys($scope.content.associationModels[x].context)){
+                $scope.content.data.apps.tokens['CRE8+CONTENT+'+Object.keys($scope.content.associationModels[x].context)[y]] = 1;
+            }
+        }
+        //get associations...
+    };
+    $scope.populateTokensBeta();
+
+
+    $scope.tokenChart = {
+        chart: {zoomType: 'x'},
+        series: [{
+            id: 'Attention',
+            type: 'column',
+            name: 'Attention',
+            data: []
+        }],
+        title: {text: ''},
+        xAxis: {
+            crosshair: true,
+            gridLineWidth: 0.5,
+            gridLineColor: 'grey',
+            title: {text: null},
+            categories: [],
+        },
+        legend: {enabled: false},
+        yAxis: {title: {text: null}},
+        credits:{enabled:false},
+    };
+    var sortable = [];
+    for (x in Object.keys($scope.content.data.apps.tokens)){sortable.push([Object.keys($scope.content.data.apps.tokens)[x], $scope.content.data.apps.tokens[Object.keys($scope.content.data.apps.tokens)[x]]])}
+    sortable.sort(function(a, b) {return b[1] - a[1]});
+    for (x in sortable){
+        if (x < 100){
+            $scope.tokenChart.xAxis.categories.push(sortable[x][0]);
+            $scope.tokenChart.series[0].data.push(sortable[x][1]);
+        }
+    }
+
+
+
     $scope.content.context = [];
     if ($scope.content.associationModels){
         for (x in $scope.content.associationModels){

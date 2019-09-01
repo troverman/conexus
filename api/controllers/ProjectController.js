@@ -195,7 +195,7 @@ module.exports = {
 			urlTitle: req.param('title').replace(/\s/g, '-').toLowerCase().replace('#','').replace('/',''),
 			user: req.param('user'),
 			parent: req.param('parent'),
-			data:{apps:{reactions: {plus:0,minus:0}, attention:{general:0}}}
+			data:{apps:{reactions:{plus:0,minus:0},attention:{general:0}}}
 		};
 
 		Project.create(model)
