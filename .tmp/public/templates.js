@@ -14391,8 +14391,9 @@ angular.module("tutorial/templates/tasks.tpl.html", []).run(["$templateCache", f
     "                <span style=\"color:gray\" am-time-ago=\"item.createdAt\"></span>\n" +
     "            </div>\n" +
     "            <div class=\"card-footer\">\n" +
-    "                <a ng-click=\"$event.stopPropagation();createReaction(item, 'plus')\"><i class=\"fas fa-angle-up\"></i> {{item.reactions.plus}} like </a> \n" +
-    "                <a ng-click=\"$event.stopPropagation();createReaction(item, 'minus')\" ><i class=\"fas fa-angle-down\"></i> {{item.reactions.minus}} dislike </a>\n" +
+    "                <a ng-click=\"$event.stopPropagation();renderAttentionToggle(item)\"  style=\"color:grey\"><i class=\"fas fa-eye\"></i> {{item.data.apps.attention.general || 0}}</a>\n" +
+    "                <a ng-click=\"$event.stopPropagation();createReaction(item, 'plus')\"><i class=\"fas fa-angle-up\"></i> {{item.data.apps.reactions.plus || 0}} like </a> \n" +
+    "                <a ng-click=\"$event.stopPropagation();createReaction(item, 'minus')\" ><i class=\"fas fa-angle-down\"></i> {{item.data.apps.reactions.minus || 0}} dislike </a>\n" +
     "                <a ng-click=\"$event.stopPropagation();reply(item)\" href=\"task/{{item.id}}\" ui-sref=\"task({id:item.id})\"><i class=\"far fa-comment\"></i> comment </a>\n" +
     "                <a ng-click=\"$event.stopPropagation();reply(item)\" href=\"task/{{item.id}}\" ui-sref=\"task({id:item.id})\" style=\"padding:0px\" class=\"pull-right\"><i class=\"fas fa-link grey\"></i></a>\n" +
     "            </div>\n" +

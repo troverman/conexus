@@ -133,7 +133,6 @@ angular.module( 'conexus.task', [
     });
 
     $rootScope.associatedModels = [{
-        address: $scope.task.id,
         text: $scope.task.title,
         type: 'TASK',
     }];
@@ -175,7 +174,7 @@ angular.module( 'conexus.task', [
         $scope.selectedProjects.push({text:model});
         $scope.newTime.validationModels.push({
             context:{general:100},
-            associatedModels:[{type:'PROJECT', address:model.id}]
+            associatedModels:[{type:'PROJECT', id:model.id}]
         });
     };
 
@@ -298,29 +297,29 @@ angular.module( 'conexus.task', [
     $scope.renderAssociations = function(item){
 
         $scope.item = item;
-        $scope.assoicationFilter = [{text:$scope.item.associatedModels[0].address}];
+        $scope.assoicationFilter = [{text:$scope.item.associatedModels[0].id}];
 
         for (x in $scope.item.associatedModels){
             var nodeModel = {
                 group:'nodes',
                 data:{
-                    id:$scope.item.associatedModels[x].address,
-                    type:$scope.item.associatedModels[x].address,
-                    name:$scope.item.associatedModels[x].address
+                    id:$scope.item.associatedModels[x].id,
+                    type:$scope.item.associatedModels[x].id,
+                    name:$scope.item.associatedModels[x].id
                 }
             }; 
-            $scope.directedGraphElements[$scope.item.associatedModels[x].address] = nodeModel;
+            $scope.directedGraphElements[$scope.item.associatedModels[x].id] = nodeModel;
             if (x > 0){
                 var edgeModel = {
                     group:'edges',
                     classes:'unbundled-bezier',
                     data:{
-                        id:$scope.item.associatedModels[0].address+'-'+$scope.item.associatedModels[x].address,
-                        source:$scope.item.associatedModels[0].address,
-                        target:$scope.item.associatedModels[x].address
+                        id:$scope.item.associatedModels[0].id+'-'+$scope.item.associatedModels[x].id,
+                        source:$scope.item.associatedModels[0].id,
+                        target:$scope.item.associatedModels[x].id
                     }
                 };
-                $scope.directedGraphElements[$scope.item.associatedModels[0].address+'-'+$scope.item.associatedModels[x].address] = edgeModel;
+                $scope.directedGraphElements[$scope.item.associatedModels[0].id+'-'+$scope.item.associatedModels[x].id] = edgeModel;
             }
         }
     
