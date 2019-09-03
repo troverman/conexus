@@ -96,8 +96,6 @@ module.exports = {
 				.toArray(function (err, models) {
 					models = models.map(function(obj){obj.id = obj._id; return obj;});
 
-
-
 					//console.log(models)
 					//var promises = [];
 					//for (x in models){

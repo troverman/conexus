@@ -66,7 +66,7 @@ tags-input .autocomplete .suggestion-item.selected{background-color:#002a56;}
     100% {transform: translateX(50px) translateY(50px) rotateY(0deg) rotateX(90deg);}
 }
 
-.angular-google-map-container { height: 400px; }
+.angular-google-map-container { height: 350px; }
 
 .avatar {
     position:absolute;
@@ -630,7 +630,7 @@ tags-input .autocomplete .suggestion-item.selected{background-color:#002a56;}
 }
 
 @media (max-width: 768px) {
-    .btn-group{zoom: 0.65;}
+    .btn-group{zoom: 0.60;}
     .card-footer{zoom: 0.8;}
     .member-tabs{zoom: 0.9;}
     .mobileMargin{margin-right:-20px;}

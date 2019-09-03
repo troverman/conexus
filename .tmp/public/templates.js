@@ -4813,15 +4813,14 @@ angular.module("home/index.tpl.html", []).run(["$templateCache", function($templ
 
 angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("home/templates/feed.tpl.html",
-    "<style type=\"text/css\">.angular-google-map-container{height: 350px;}</style>\n" +
     "<div class=\"container\">\n" +
-    "\n" +
     "    <div ng-if=\"currentUser.apps.cre8.tutorial && isTutorial\">\n" +
     "        <div ng-include=\"'tutorial/index.tpl.html'\"></div>\n" +
     "    </div>\n" +
     "\n" +
-    "    <div class=\"spacing-10\"></div>\n" +
+    "    <div class=\"spacing-5\"></div>\n" +
     "\n" +
+    "    <!--CONSENT FORM SEPERATE-->\n" +
     "    <div class=\"row\" ng-if=\"!isTutorial || !currentUser.apps.cre8.tutorial\">\n" +
     "\n" +
     "        <div class=\"col-md-4 col-sm-12 col-xs-12\" style=\"padding-left:0px;padding-right:0px\">\n" +
@@ -4877,13 +4876,11 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "\n" +
     "                    <div ng-show=\"selectedTab =='BALANCES'\">\n" +
     "                        <div class=\"row\">\n" +
-    "                            <div>\n" +
-    "                                <highchart config=\"balanceChart\"></highchart>\n" +
-    "                            </div>\n" +
+    "                            <div><highchart config=\"balanceChart\"></highchart></div>\n" +
     "                            <div class=\"col-xs-12\">\n" +
     "                                <h5>Balance Lookup <br><span style=\"font-size:11px;color:gray\">{{currentUser.id}}</span></h5>\n" +
     "                                <form ng-submit=\"lookupBalance()\" style=\"display:flex;flex-direction:row;\">\n" +
-    "                                    <input ng-model=\"balanceLook\" style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder=\"Asset\">\n" +
+    "                                    <input ng-model=\"$root.balanceLook\" style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder=\"Asset\">\n" +
     "                                    <div ng-click=\"lookupBalance()\" style=\"border:0px;float:right\" class=\"btn btn-default\">\n" +
     "                                        <a href=\"#\"><h5 style=\"color:black;text-align:right\" class=\"noselect\"> <i class=\"fa fa-search\"></i></h5></a>\n" +
     "                                    </div>\n" +
@@ -4903,7 +4900,6 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "\n" +
     "    <!--TODO: MOBILE FILTER-->\n" +
     "    <!--TODO: APP INPUT-->\n" +
-    "\n" +
     "    <div class=\"row\" ng-show=\"!isTutorial || !currentUser.apps.cre8.tutorial\">\n" +
     "\n" +
     "        <div class=\"col-sm-4 mobileFix\" style=\"padding-left:0px;padding-right:0px;\">\n" +
@@ -4991,21 +4987,19 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                </div>\n" +
     "            </div>\n" +
     "\n" +
-    "            <!--TODO COMPLEX FILTER..-->\n" +
     "            <div ng-repeat=\"item in activity\">\n" +
     "                <div ng-if=\"item.model=='CONTENT'\" ng-include=\"'templates/cards/contentCard.tpl.html'\"></div>\n" +
     "                <div ng-if=\"item.model=='PROJECT'\" ng-include=\"'templates/cards/projectCard.tpl.html'\"></div>\n" +
     "                <div ng-if=\"item.model=='TASK'\" ng-include=\"'templates/cards/taskCard.tpl.html'\"></div>\n" +
     "                <div ng-if=\"item.model=='TIME'\" ng-include=\"'templates/cards/timeCard.tpl.html'\"></div>\n" +
     "            </div>\n" +
-    "\n" +
     "        </div>\n" +
     "\n" +
     "    </div>\n" +
     "\n" +
-    "    <div class=\"spacing-25\"></div>\n" +
+    "</div>\n" +
     "\n" +
-    "</div>");
+    "<div class=\"spacing-25\"></div>");
 }]);
 
 angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", function($templateCache) {
@@ -14205,12 +14199,12 @@ angular.module("tutorial/templates/intro.tpl.html", []).run(["$templateCache", f
     "\n" +
     "                    </form>\n" +
     "                </div>\n" +
+    "                <md-progress-linear style=\"height:2px\" ng-if=\"stateIsLoadingFeed\" md-mode=\"indeterminate\"></md-progress-linear>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "</div>\n" +
-    "\n" +
-    "<div ng-if=\"consentAgreement\" ng-include=\"'tutorial/templates/controls.tpl.html'\"></div>\n" +
+    "<div ng-if=\"!stateIsLoadingFeed\" ng-include=\"'tutorial/templates/controls.tpl.html'\"></div>\n" +
     "");
 }]);
 

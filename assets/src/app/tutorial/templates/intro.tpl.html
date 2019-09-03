@@ -141,9 +141,9 @@
 
                     </form>
                 </div>
+                <md-progress-linear style="height:2px" ng-if="stateIsLoadingFeed" md-mode="indeterminate"></md-progress-linear>
             </div>
         </div>
     </div>
 </div>
-
-<div ng-if="consentAgreement" ng-include="'tutorial/templates/controls.tpl.html'"></div>
+<div ng-if="!stateIsLoadingFeed" ng-include="'tutorial/templates/controls.tpl.html'"></div>

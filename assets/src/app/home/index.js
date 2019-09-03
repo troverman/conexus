@@ -19,8 +19,7 @@ angular.module( 'conexus.home', [
                 controller: 'IntroCtrl',
                 templateUrl: 'home/templates/intro.tpl.html'
             }
-        },
-        resolve:{}
+        }
     })
     .state( 'home.feed', {
         url: '',
@@ -29,42 +28,14 @@ angular.module( 'conexus.home', [
                 controller: 'FeedCtrl',
                 templateUrl: 'home/templates/feed.tpl.html'
             }
-        },
-
-        resolve:{
-
-            //TODO: GET FEED CUSTOMIZED -- STORE IN USER OBJ
-            //TODO: COMPLEX QUERY
-            //STORE ALL MEMEBER ASSOCIATIONS LOCALLY TO CREATE COMPLEX Q
-
-            followers: ['$rootScope', 'FollowerModel', function($rootScope, FollowerModel) {
-                return FollowerModel.getFollowing($rootScope.currentUser);
-            }],
-            memberProjects: ['$rootScope', 'MemberModel', function($rootScope, MemberModel) {
-                return MemberModel.get({user:$rootScope.currentUser.id, limit:100, skip:0, sort:'createdAt DESC'});
-            }],
-            //SELF ASSOCIATION TO TASK WHEN INTERACT. YEP!
-            memberTasks: ['$rootScope', 'TaskModel', function($rootScope, TaskModel) {
-                return TaskModel.get({user:$rootScope.currentUser.id, limit:100, skip:0, sort:'createdAt DESC'});
-            }],
-            positions: ['$rootScope', 'OrderModel', function($rootScope, OrderModel) {
-                return OrderModel.get({user:$rootScope.currentUser.id, limit:100, skip:0, sort:'createdAt DESC'});
-            }],
-            
         }
     })
 
 }])
 
 .controller( 'HomeCtrl', ['$rootScope', '$state', function HomeController( $rootScope, $state ) {
-    if($rootScope.currentUser){
-        console.log('FEED');
-        $state.go('home.feed');
-    }
-    else{
-        console.log('INTRO');
-        $state.go('home.intro');
-    }
+    if($rootScope.currentUser){console.log('FEED'); $state.go('home.feed');}
+    else{console.log('INTRO'); $state.go('home.intro');}
 }])
 
 .controller( 'IntroCtrl', ['$http', '$location', '$mdSidenav', '$rootScope', '$sce', '$scope', '$state', '$window', 'ProjectModel', 'SearchModel', 'titleService', 'toaster', 'UserModel', function HomeController( $http, $location, $mdSidenav, $rootScope, $sce, $scope, $state, $window, ProjectModel, SearchModel, titleService, toaster, UserModel ) {
@@ -209,7 +180,6 @@ angular.module( 'conexus.home', [
         {model:'TASK', limit:20,skip:0,sort:'createdAt DESC'},
         {model:'TIME', limit:20,skip:0,sort:'createdAt DESC'},
         {model:'TRANSACTION', limit:20,skip:0,sort:'createdAt DESC'},
-        {model:'USER', limit:20,skip:0,sort:'createdAt DESC'}
     ]);
 
     $scope.stateIsLoadingIntro = true;
@@ -265,7 +235,7 @@ angular.module( 'conexus.home', [
 
 }])
 
-.controller( 'FeedCtrl', ['$mdSidenav', '$location', '$rootScope', '$sailsSocket', '$sce', '$scope', 'ContentModel', 'FollowerModel', 'followers', 'MemberModel', 'memberProjects', 'memberTasks', 'PeerModel', 'positions', 'ProjectModel', 'ReactionModel', 'SearchModel', 'titleService', 'toaster', 'UserModel', 'ValidationModel', function HomeController( $mdSidenav, $location, $rootScope, $sailsSocket, $sce, $scope, ContentModel, FollowerModel, followers, MemberModel, memberProjects, memberTasks, PeerModel, positions, ProjectModel, ReactionModel, SearchModel, titleService, toaster, UserModel, ValidationModel ) {
+.controller( 'FeedCtrl', ['$mdSidenav', '$location', '$rootScope', '$sailsSocket', '$sce', '$scope', 'ContentModel', 'FollowerModel', 'MemberModel', 'OrderModel', 'PeerModel', 'ProjectModel', 'ReactionModel', 'SearchModel', 'TaskModel', 'titleService', 'toaster', 'UserModel', 'ValidationModel', function HomeController( $mdSidenav, $location, $rootScope, $sailsSocket, $sce, $scope, ContentModel, FollowerModel, MemberModel, OrderModel, PeerModel, ProjectModel, ReactionModel, SearchModel, TaskModel, titleService, toaster, UserModel, ValidationModel ) {
 
     $scope.balanceChart = {
         chart: {
@@ -370,16 +340,18 @@ angular.module( 'conexus.home', [
     };
     //$scope.discover();   
 
+    //TODO: MAPPING LOOKUP! 
     $scope.lookupBalance = function(){
-        $scope.balanceLook = $scope.balanceLook;
-        if ($scope.balance[$scope.balanceLook]){$scope.balanceLookupValue = $scope.balance[$scope.balanceLook]}
-        if (!$scope.balance[$scope.balanceLook]){$scope.balanceLookupValue = 0}
+        console.log($rootScope.balanceLook, $rootScope.balance[$rootScope.balanceLook.toString()])
+        if (!$rootScope.balance[$rootScope.balanceLook.toString()]){$rootScope.balanceLookupValue = 0}
+        if ($rootScope.balance[$rootScope.balanceLook.toString()]){$scope.balanceLookupValue = $rootScope.balance[$rootScope.balanceLook.toString()]}
     };
 
     //BUG..
     $scope.renderBalances = function(){
         var sortable = [];
-        for (var context in $rootScope.currentUser.balance) {sortable.push([context, $scope.reputation[context]])}
+        console.log( $rootScope.balance);
+        for (var context in $rootScope.balance) {sortable.push([context, $rootScope.balance[context.toString()]])}
         sortable.sort(function(a, b) {return b[1] - a[1]});
         for (x in sortable){
             if (x < 100){
@@ -388,7 +360,6 @@ angular.module( 'conexus.home', [
             }
         }
     };
-    $scope.renderBalances();
 
     $scope.selectTab = function(model){$scope.selectedTab = model;};
 
@@ -396,116 +367,116 @@ angular.module( 'conexus.home', [
     //\\//\\//\\//\\//
     //TUTORIAL\\//\\//
     //\\//\\//\\//\\//
+    //CUSTOM CONTROLLER..
+    $rootScope.baseToken = {text:'UNIVERSAL TOKEN', description:'Universal Token Position; protocol where every member creates one Universal Token per day to serve an an eglatarian value position.'}
+    $rootScope.baseManifold = {text:'+SPONSOR+ONMINT+'+$rootScope.currentUser.id, description:'Sponsorship On Mint postions have a triggering action potiental \'on mint\' of the specified token root the manifold (TOKEN+SPONSOR).'}
+    $rootScope.orderType = {text:'Continual', description:'Continual Market Orders will fill as long as there is liquidity. Useful for token protocols with ongoing minting logic'}
+    $scope.chartMapTotal = {
+        chart: {
+            polar: true,
+            margin: [30, 30, 30, 30]
+        },
+        series: [{
+            id: 'values',
+            type: 'area',
+            name: 'UNIVERSAL',
+            pointPlacement: 'on',
+            fillOpacity: 0.3,
+            data:[1,1,1,1,1,1,1,1],
+        }],
+        title: {text: ''},
+        xAxis: {
+            title: {text: null},
+            categories: ['LOVE', 'ART', 'PEACE', 'SHELTER', 'REST', 'EXPERIENCE', 'HEALTH', 'HUMAN'],
+            tickmarkPlacement: 'on',
+            lineWidth: 0,
+        },
+        yAxis: {
+            title: {text: null},
+            gridLineInterpolation: 'polygon',
+            lineWidth: 0,
+            min: 0,
+        },
+        legend: {
+            enabled: true,
+            align: 'left',
+            verticalAlign: 'top',
+            y: 70,
+            layout: 'vertical'
+        },
+        legend:false,
+        tooltip:{shared: true,},
+        credits:{enabled:false},
+    };
+    $scope.map = {center: {latitude: 35.902023, longitude: -84.1507067 },zoom: 9};
+    $scope.markers = [];
+    $scope.newAccountInformation = $rootScope.currentUser;
+    $scope.newOrder = [];
+    $scope.newOrderNEW = [];
+    $scope.options = {scrollwheel: false};
+    $scope.pageNumber = 0;
+    $scope.pieTotal = {
+        chart: {},
+        series: [{
+            id: 'Pie',
+            type: 'pie',
+            name: 'Pie',
+            colorByPoint: true,
+            data: [
+                {name:'LOVE',y:1},
+                {name:'ART',y:1},
+                {name:'PEACE',y:1},
+                {name:'SHELTER',y:1},
+                {name:'EXPERIENCE',y:1},
+                {name:'HEALTH',y:1},
+                {name:'HUMAN',y:1},
+            ]
+        }],  
+        title: {text: ''},
+        xAxis: {title: {text: null}},
+        yAxis: {title: {text: null}},
+        credits:{enabled:false},
+    };
+    $scope.selectedTab = 'QUESTIONS';
+    $scope.totalMap = {
+        chart: {zoomType: 'x'},
+        series: [{
+            id: 'Reputation',
+            type: 'column',
+            name: 'Reputation',
+            data: []
+        }],
+        title: {text: ''},
+        xAxis: {
+            crosshair: true,
+            gridLineWidth: 0.5,
+            gridLineColor: 'grey',
+            title: {text: null},
+            categories: [],
+        },
+        legend: {enabled: false},
+        yAxis: {title: {text: null}},
+        credits:{enabled:false},
+    };
+    $scope.valueMapQuery = [
+        {text:'create'},
+        {text:'bright'},
+        {text:'futures'},
+    ];
+
+    $scope.changePage = function(page){
+        console.log('hmm')
+        window.scrollTo(0, 0);
+        if (page){$scope.pageNumber = page}
+        else{$scope.pageNumber++}
+        if ($scope.pageNumber<0 || $scope.pageNumber>6){
+            $scope.isTutorial = !$scope.isTutorial;
+            $scope.selectedTab = 'INFORMATION';
+        }
+    };
+
     $scope.initTutorial = function(){
-
-        //QUERIES HERE!!!
-        $rootScope.baseToken = {text:'UNIVERSAL TOKEN', description:'Universal Token Position; protocol where every member creates one Universal Token per day to serve an an eglatarian value position.'}
-        $rootScope.baseManifold = {text:'+SPONSOR+ONMINT+'+$rootScope.currentUser.id, description:'Sponsorship On Mint postions have a triggering action potiental \'on mint\' of the specified token root the manifold (TOKEN+SPONSOR).'}
-        $rootScope.orderType = {text:'Continual', description:'Continual Market Orders will fill as long as there is liquidity. Useful for token protocols with ongoing minting logic'}
-    
-        $scope.chartMapTotal = {
-            chart: {
-                polar: true,
-                margin: [30, 30, 30, 30]
-            },
-            series: [{
-                id: 'values',
-                type: 'area',
-                name: 'UNIVERSAL',
-                pointPlacement: 'on',
-                fillOpacity: 0.3,
-                data:[1,1,1,1,1,1,1,1],
-            }],
-            title: {text: ''},
-            xAxis: {
-                title: {text: null},
-                categories: ['LOVE', 'ART', 'PEACE', 'SHELTER', 'REST', 'EXPERIENCE', 'HEALTH', 'HUMAN'],
-                tickmarkPlacement: 'on',
-                lineWidth: 0,
-            },
-            yAxis: {
-                title: {text: null},
-                gridLineInterpolation: 'polygon',
-                lineWidth: 0,
-                min: 0,
-            },
-            legend: {
-                enabled: true,
-                align: 'left',
-                verticalAlign: 'top',
-                y: 70,
-                layout: 'vertical'
-            },
-            legend:false,
-            tooltip:{shared: true,},
-            credits:{enabled:false},
-        };
-        $scope.pageNumber = 0;
-        $scope.map = {center: {latitude: 35.902023, longitude: -84.1507067 },zoom: 9};
-        $scope.markers = [];
-        $scope.newAccountInformation = $rootScope.currentUser;
-        $scope.newOrder = [];
-        $scope.newOrderNEW = [];
-        $scope.options = {scrollwheel: false};
-        $scope.pieTotal = {
-            chart: {},
-            series: [{
-                id: 'Pie',
-                type: 'pie',
-                name: 'Pie',
-                colorByPoint: true,
-                data: [
-                    {name:'LOVE',y:1},
-                    {name:'ART',y:1},
-                    {name:'PEACE',y:1},
-                    {name:'SHELTER',y:1},
-                    {name:'EXPERIENCE',y:1},
-                    {name:'HEALTH',y:1},
-                    {name:'HUMAN',y:1},
-                ]
-            }],  
-            title: {text: ''},
-            xAxis: {title: {text: null}},
-            yAxis: {title: {text: null}},
-            credits:{enabled:false},
-        };
-        $scope.selectedTab = 'QUESTIONS';
-        $scope.totalMap = {
-            chart: {zoomType: 'x'},
-            series: [{
-                id: 'Reputation',
-                type: 'column',
-                name: 'Reputation',
-                data: []
-            }],
-            title: {text: ''},
-            xAxis: {
-                crosshair: true,
-                gridLineWidth: 0.5,
-                gridLineColor: 'grey',
-                title: {text: null},
-                categories: [],
-            },
-            legend: {enabled: false},
-            yAxis: {title: {text: null}},
-            credits:{enabled:false},
-        };
-        $scope.valueMapQuery = [
-            {text:'create'},
-            {text:'bright'},
-            {text:'futures'},
-        ];
-
-        $scope.changePage = function(page){
-            window.scrollTo(0, 0);
-            if (page){$scope.pageNumber = page}
-            else{$scope.pageNumber++}
-            if ($scope.pageNumber<0 || $scope.pageNumber>6){
-                $scope.isTutorial = !$scope.isTutorial;
-                $scope.selectedTab = 'INFORMATION';
-            }
-        };
-
+      
         //TODO: APP STRUCT
         //TODO: PEER STRUCT
         $scope.editAccount = function () {
@@ -550,9 +521,7 @@ angular.module( 'conexus.home', [
         //IF ROOTSCOPE LOCATION
         $scope.getLatLng = function() {
             if (navigator.geolocation) {
-                $rootScope.stateIsLoading = true;
                 navigator.geolocation.getCurrentPosition(function (position) {
-                    $rootScope.stateIsLoading = false;
                     $rootScope.currentUser.location = {
                         lat:position.coords.latitude,
                         lng:position.coords.longitude
@@ -563,14 +532,13 @@ angular.module( 'conexus.home', [
                         $scope.markers = [];
                         //TODO: HELPER CONTAINER FUNCTIONS
                         $scope.populateMap($scope.projects);
-                        $scope.projects.map(function(obj){
-                            obj.model='PROJECT';
-                            var index = -1;//= $scope.memberProjects.map(function(obj1){return obj1.id}).indexOf(obj.id);
+                        $scope.projects = $scope.projects.map(function(obj){
+                            var index = -1
+                            if ($scope.memberProjects){index = $scope.memberProjects.map(function(obj1){return obj1.id}).indexOf(obj.id);}
                             if (index != -1){obj.isMember = true;}
                             if (index == -1){obj.isMember = false;}
                             return obj;
                         });
-                        //$scope.init();
                     });
                     $scope.$apply();
                 });
@@ -852,7 +820,7 @@ angular.module( 'conexus.home', [
         {model:'TASK', limit:20,skip:0,sort:'createdAt DESC'},
         {model:'TIME', limit:20,skip:0,sort:'createdAt DESC'},
         {model:'TRANSACTION', limit:20,skip:0,sort:'createdAt DESC'},
-        {model:'USER', limit:20,skip:0,sort:'createdAt DESC'}
+        {model:'MEMBER', limit:20,skip:0,sort:'createdAt DESC'}
     ]);
 
     $scope.stateIsLoadingFeed = true;
@@ -884,11 +852,25 @@ angular.module( 'conexus.home', [
             return obj.model == 'TRANSACTION';
         });
 
-        console.log(searchModels)
+        console.log(searchModels);
 
-        $scope.init();
+        //LOL OBV DEPRECIATE
+        FollowerModel.getFollowing($rootScope.currentUser).then(function(followers){
+            $scope.followers = followers;
+            MemberModel.get({user:$rootScope.currentUser.id, limit:100, skip:0, sort:'createdAt DESC'}).then(function(memberProjects){
+                $scope.memberProjects = memberProjects;
+                TaskModel.get({user:$rootScope.currentUser.id, limit:100, skip:0, sort:'createdAt DESC'}).then(function(memberTasks){
+                    $scope.memberTasks = memberTasks;
+                    OrderModel.get({user:$rootScope.currentUser.id, limit:100, skip:0, sort:'createdAt DESC'}).then(function(positions){
+                        $scope.positions = positions;
+                        $scope.init();
+                        $scope.initTutorial();
+                        $scope.renderBalances();
+                    });
+                });
+            });
+        });
 
-        $scope.initTutorial();
 
     });
 

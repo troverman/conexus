@@ -287,7 +287,6 @@ module.exports = {
 		    activity = activity.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
 		    activity = activity.slice(0,100);
 		    console.log('length!', activity.length);
-			res.json(activity);
 
 		    //USER PROMISES
 		    var userPromises = [];
@@ -295,7 +294,7 @@ module.exports = {
     		Q.all(userPromises).then((populatedUserModels)=>{
     			console.log('made it')
     			for (x in activity){activity[x].user = populatedUserModels[x][0]}
-				//res.json(activity);
+				res.json(activity);
     		});
 
 		});

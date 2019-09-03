@@ -187,7 +187,7 @@ angular.module( 'conexus.discover', [
         $scope.sortedTagArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);});  
     };
     $scope.sortedLocationArray = [{element:'New York City',amount:1}];
-     $scope.init = function(){
+    $scope.init = function(){
         $scope.loadAssociations();
         //$scope.loadLocations();
         $scope.loadTags();

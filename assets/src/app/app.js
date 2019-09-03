@@ -62,7 +62,6 @@ angular.module( 'conexus', [
     'conexus.validation',
 ])
 .config(['$locationProvider', '$mdThemingProvider', '$stateProvider', '$urlRouterProvider', function myAppConfig ( $locationProvider, $mdThemingProvider, $stateProvider, $urlRouterProvider ) {
-    //$mdThemingProvider.theme('default').primaryPalette('blue-grey').accentPalette('blue')
     $mdThemingProvider.disableTheming();
     $urlRouterProvider.rule(function($injector, $location) {
         var path = $location.path();
@@ -78,11 +77,13 @@ angular.module( 'conexus', [
         else {window.location = $location.$$absUrl;}
     });
     $locationProvider.html5Mode(true);
+
 }])
 .run(function run(){moment.locale('en')})
 .controller( 'AppCtrl', ['$location', '$rootScope', '$scope', '$state', 'seoService', 'titleService', 'UserModel', function AppCtrl ( $location, $rootScope, $scope, $state, seoService, titleService, UserModel ) {
 
     //TODO: BETTER
+    //BETTER THAN RENDERING IN VIEW.. LOL
     $rootScope.currentUser = window.currentUser;
     if ($rootScope.currentUser){
         UserModel.get({id:$rootScope.currentUser.id}).then(function(member){
@@ -92,7 +93,7 @@ angular.module( 'conexus', [
             $rootScope.reputation = member.reputation;
 
             //TODO!
-            //PACKAGE IN LOGIN FXN -- APP PERMS ETc
+            //PACKAGE IN LOGIN FXN -- APP PERMS ETC
             //INIT THE LOGIN, THE DATA, THE USER
             //getLatLng()
             if (navigator.geolocation) {

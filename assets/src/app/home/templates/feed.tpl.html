@@ -1,12 +1,11 @@
-<style type="text/css">.angular-google-map-container{height: 350px;}</style>
 <div class="container">
-
     <div ng-if="currentUser.apps.cre8.tutorial && isTutorial">
         <div ng-include="'tutorial/index.tpl.html'"></div>
     </div>
 
-    <div class="spacing-10"></div>
+    <div class="spacing-5"></div>
 
+    <!--CONSENT FORM SEPERATE-->
     <div class="row" ng-if="!isTutorial || !currentUser.apps.cre8.tutorial">
 
         <div class="col-md-4 col-sm-12 col-xs-12" style="padding-left:0px;padding-right:0px">
@@ -62,13 +61,11 @@
 
                     <div ng-show="selectedTab =='BALANCES'">
                         <div class="row">
-                            <div>
-                                <highchart config="balanceChart"></highchart>
-                            </div>
+                            <div><highchart config="balanceChart"></highchart></div>
                             <div class="col-xs-12">
                                 <h5>Balance Lookup <br><span style="font-size:11px;color:gray">{{currentUser.id}}</span></h5>
                                 <form ng-submit="lookupBalance()" style="display:flex;flex-direction:row;">
-                                    <input ng-model="balanceLook" style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder="Asset">
+                                    <input ng-model="$root.balanceLook" style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder="Asset">
                                     <div ng-click="lookupBalance()" style="border:0px;float:right" class="btn btn-default">
                                         <a href="#"><h5 style="color:black;text-align:right" class="noselect"> <i class="fa fa-search"></i></h5></a>
                                     </div>
@@ -88,7 +85,6 @@
 
     <!--TODO: MOBILE FILTER-->
     <!--TODO: APP INPUT-->
-
     <div class="row" ng-show="!isTutorial || !currentUser.apps.cre8.tutorial">
 
         <div class="col-sm-4 mobileFix" style="padding-left:0px;padding-right:0px;">
@@ -176,18 +172,16 @@
                 </div>
             </div>
 
-            <!--TODO COMPLEX FILTER..-->
             <div ng-repeat="item in activity">
                 <div ng-if="item.model=='CONTENT'" ng-include="'templates/cards/contentCard.tpl.html'"></div>
                 <div ng-if="item.model=='PROJECT'" ng-include="'templates/cards/projectCard.tpl.html'"></div>
                 <div ng-if="item.model=='TASK'" ng-include="'templates/cards/taskCard.tpl.html'"></div>
                 <div ng-if="item.model=='TIME'" ng-include="'templates/cards/timeCard.tpl.html'"></div>
             </div>
-
         </div>
 
     </div>
 
-    <div class="spacing-25"></div>
-
 </div>
+
+<div class="spacing-25"></div>
