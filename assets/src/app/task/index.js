@@ -297,7 +297,6 @@ angular.module( 'conexus.task', [
     $scope.renderAssociations = function(item){
 
         $scope.item = item;
-        $scope.assoicationFilter = [{text:$scope.item.associatedModels[0].id}];
 
         for (x in $scope.item.associatedModels){
             var nodeModel = {
