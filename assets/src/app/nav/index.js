@@ -65,7 +65,7 @@ angular.module( 'conexus.nav', [
                 //TODO: HAS TO BE BETTER THAN SOCKET CHECK; SOCKET ROOMS? 
                 if ($rootScope.currentUser.id == envelope.data.user){
                     $rootScope.notificationCount++;
-                    $rootScope.pop(envelope.data.title, envelope.data.info.username);
+                    $rootScope.pop(envelope.data.title, envelope.data.apps.user.username);
                     $rootScope.notificationCount++;
                 }
             }
@@ -1394,9 +1394,9 @@ angular.module( 'conexus.nav', [
 
     $scope.createAction = function(item){
         if ($rootScope.currentUser){
+            $mdSidenav('action').close();
             ActionModel.create($scope.newAction).then(function(model) {
-                $mdSidenav('action').close();
-                setTimeout(function () {$rootScope.pop('New Action!', model.id +' '+ model.createdAt);}, 250);
+                $rootScope.pop('New Action!', model.id +' '+ model.createdAt);
             });
         }
         else{$mdSidenav('login').toggle()}
@@ -1404,9 +1404,9 @@ angular.module( 'conexus.nav', [
 
    $scope.createApp = function(item){
         if ($rootScope.currentUser){
+            $mdSidenav('app').close();
             AppModel.create($scope.newApp).then(function(model) {
-                $mdSidenav('app').close();
-                setTimeout(function () {$rootScope.pop('New App!', model.id +' '+ model.createdAt);}, 250);
+                $rootScope.pop('New App!', model.id +' '+ model.createdAt);
             });
         }
         else{$mdSidenav('login').toggle()}
@@ -1414,9 +1414,9 @@ angular.module( 'conexus.nav', [
 
     $scope.createConnection = function(item) {
         if ($rootScope.currentUser){
+            $mdSidenav('connection').close();
             ConnectionModel.create($scope.newConnection).then(function(model) {
-                $mdSidenav('connection').close();
-                setTimeout(function () {$rootScope.pop('New Connection!', model.id +' '+ model.createdAt);}, 250);
+               $rootScope.pop('New Connection!', model.id +' '+ model.createdAt);
             });
         }
         else{$mdSidenav('login').toggle()}
@@ -1426,9 +1426,9 @@ angular.module( 'conexus.nav', [
     $scope.createContent = function(item) {
         if ($rootScope.currentUser){
             console.log('CREATE CONTENT', $scope.newContent);
+            $mdSidenav('content').close();
             ContentModel.create($scope.newContent).then(function(model) {
-               $mdSidenav('content').close();
-                setTimeout(function () {$rootScope.pop('New Content!', model.id +' '+ model.createdAt);}, 250);
+                $rootScope.pop('New Content!', model.id +' '+ model.createdAt);
             });
         }
         else{$mdSidenav('login').toggle()}
@@ -1448,10 +1448,12 @@ angular.module( 'conexus.nav', [
                     $scope.newItem[$scope.newItem.associatedModels[x].type.toLowerCase()] = $scope.newItem.associatedModels[x].id
                 }
             }
+
+            $mdSidenav('item').close();
             ItemModel.create($scope.newItem).then(function(model) {
-                $mdSidenav('item').close();
-                setTimeout(function () {$rootScope.pop('New Item!', model.id +' '+ model.createdAt);}, 250);
+                $rootScope.pop('New Item!', model.id +' '+ model.createdAt);
             });
+
         }
         else{$mdSidenav('login').toggle()}
     };
@@ -1480,10 +1482,11 @@ angular.module( 'conexus.nav', [
             
             console.log('CREATE ORDER', $scope.newOrder);
 
+            $mdSidenav('order').close();
             OrderModel.create($scope.newOrder).then(function(model) {
-                $mdSidenav('order').close();
-                setTimeout(function () {$rootScope.pop('New Order!', model.id +' '+ model.createdAt);}, 250);
+                $rootScope.pop('New Order!', model.id +' '+ model.createdAt);
             });
+
         }
         else{$mdSidenav('login').toggle()}
     };
@@ -1515,9 +1518,9 @@ angular.module( 'conexus.nav', [
 
             console.log('CREATE PROJECT', $scope.newProject);
 
+            $mdSidenav('project').close();
             ProjectModel.create($scope.newProject).then(function(model) {
-                $mdSidenav('project').close();
-                setTimeout(function () {$rootScope.pop('New Project!', model.id +' '+ model.createdAt);}, 250);
+               $rootScope.pop('New Project!', model.id +' '+ model.createdAt);
             });
 
         }
@@ -1563,12 +1566,12 @@ angular.module( 'conexus.nav', [
                 }
             }
 
-
             console.log('CREATE TASK', $scope.newTask);
+            $mdSidenav('task').close();
             TaskModel.create($scope.newTask).then(function(model) {
-                $mdSidenav('task').close();
-                setTimeout(function () {$rootScope.pop('New Task!', model.id +' '+ model.createdAt);}, 250);
+                $rootScope.pop('New Task!', model.id +' '+ model.createdAt);
             });
+
         }
         else{$mdSidenav('login').toggle()}
     };
@@ -1585,10 +1588,10 @@ angular.module( 'conexus.nav', [
             }
            
             console.log('CREATE TIME', $scope.newTime);
-
+            
+            $mdSidenav('time').close();
             TimeModel.create($scope.newTime).then(function(model){
-                $mdSidenav('time').close();
-                setTimeout(function () {$rootScope.pop('New Time!', model.id +' '+ model.createdAt);}, 250);
+                $rootScope.pop('New Time!', model.id +' '+ model.createdAt);
             });
 
         }
@@ -1598,9 +1601,9 @@ angular.module( 'conexus.nav', [
     $scope.createTransaction = function(){
         if ($rootScope.currentUser){
 
-            $scope.newTransaction.user = $rootScope.currentUser.id
+            $scope.newTransaction.user = $rootScope.currentUser.id;
+
             if ($scope.newTransaction.context){
-                //console.log($scope.newTransaction.context)
                 $scope.newTransaction.context = $scope.newTransaction.context.map(function(obj){
                     return obj.text
                 }).join(",");
@@ -1614,14 +1617,9 @@ angular.module( 'conexus.nav', [
             
             console.log('CREATE TRANSACTION', $scope.newTransaction);
 
-            //SELF VALIDATION HERE! --> TAGS
-            //VECTOR TAGS  ((((((TAG COMPUTATION FUNCTION TO DO FOR ALL THE SIDEBARS -- RENAME TO CONTEXT))))))
-
+            $mdSidenav('transaction').close();
             TransactionModel.create(newTransaction).then(function(model){
-                
-                $mdSidenav('transaction').close();
-                setTimeout(function () {$rootScope.pop('New Transaction!', model.id +' '+ model.createdAt);}, 250);
-                
+               $rootScope.pop('New Transaction!', model.id +' '+ model.createdAt);
             });
 
         }
@@ -1639,15 +1637,11 @@ angular.module( 'conexus.nav', [
                 
                 console.log('CREATE VALIDATION', $scope.newValidation);
 
-                $rootScope.stateIsLoading = true;
+                $mdSidenav('validation').close();
                 ValidationModel.create($scope.newValidation).then(function(model) {
-                    $rootScope.stateIsLoading = false;
-
-                    //TODO UPDATE CONFIRM POPUP
-                    $mdSidenav('validation').close();
-                    setTimeout(function () {$rootScope.pop('New Validation!', model.id +' '+ model.createdAt);}, 250);
-
+                    $rootScope.pop('New Validation!', model.id +' '+ model.createdAt);
                 });
+
             }
         }
         else{$mdSidenav('login').toggle()}

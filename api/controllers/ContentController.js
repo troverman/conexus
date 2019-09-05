@@ -332,7 +332,7 @@ module.exports = {
 				verb:'create', //call? machine attention
 				model:{id:model.id,type:'CONTENT'}
 			};
-			Event.create(eventModel);
+			//Event.create(eventModel);
 
 		};
 

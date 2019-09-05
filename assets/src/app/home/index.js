@@ -141,6 +141,7 @@ angular.module( 'conexus.home', [
     //FILTERS\\//\\//
     //\\//\\//\\//\\//    
     //TODO: BETTER // DEPRECIATE!!!
+    function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
     $scope.loadAssociations = function(){
         $scope.sortedAssociationArray = []; 
     };
@@ -151,7 +152,6 @@ angular.module( 'conexus.home', [
         });
         $scope.tags = [].concat.apply([], $scope.tags);
         $scope.tags = $scope.tags.filter(function(e){return e});
-        function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
         $scope.sortedTagArray = [];
         for (x in $scope.tags){
             var amount = countInArray($scope.tags, $scope.tags[x]);
@@ -285,49 +285,28 @@ angular.module( 'conexus.home', [
     //TODO: CREATE A TOKEN 'ORBIT' FOR MEMBER
     //TODO: CREATE COMPLEX QUERY / DISCOVER
     $scope.discover = function(){
-        $scope.memberProjects = memberProjects.map(function(obj){
-            obj.project.model = 'PROJECT';
-            if (obj.project.tags){obj.project.tags = obj.project.tags.split(',')}
-            return obj.project
-        });
-        $scope.memberTasks = memberTasks;
-        if ($scope.memberTasks){
-            $scope.memberTasks = $scope.memberTasks.map(function(obj){obj.model = 'TASK';return obj});
-        }
-        $scope.followers = followers;
-        if ($scope.followers ){
-            $scope.followers = $scope.followers.map(function(obj){return obj.followed});    
-            $scope.members.map(function(obj){
-                var index = $scope.followers.map(function(obj1){
-                    if (obj1){return obj1.id;}
-                }).indexOf(obj.id);
-                if (index != -1){obj.isFollowing = true;}
-                if (index == -1){obj.isFollowing = false;}
-                return obj;
-            });
-        }
-        $scope.projects.map(function(obj){
-            var index = $scope.memberProjects.map(function(obj1){return obj1.id}).indexOf(obj.id);
-            if (index != -1){obj.isMember = true;}
-            if (index == -1){obj.isMember = false;}
-            return obj;
-        });
-        $scope.tasks.map(function(obj){
-            var index = $scope.memberTasks.map(function(obj1){return obj1.id}).indexOf(obj.id);
-            if (index != -1){obj.isAssociated = true;}
-            if (index == -1){obj.isAssociated = false;}
-            return obj;
-        });
+
         $scope.searchQueryFeed = [];
-        for (x in $scope.followers){if ($scope.followers[x]){$scope.searchQueryFeed.push({type:'MEMBER', id:$scope.followers[x].id, text:$scope.followers[x].username})}}
-        for (x in $scope.memberProjects){$scope.searchQueryFeed.push({type:'PROJECT', id:$scope.memberProjects[x].id, text:$scope.memberProjects[x].title})}
-        for (x in $scope.memberTasks){$scope.searchQueryFeed.push({type:'TASK', id:$scope.memberTasks[x].id, text:$scope.memberTasks[x].title})}
-        $scope.positions = positions;
-        for (x in $scope.memberProjects){$scope.suggestedTokens.push({token:$scope.memberProjects[x].urlTitle})}
+        for (x in $scope.followers){
+            if ($scope.followers[x]){$scope.searchQueryFeed.push({type:'MEMBER', id:$scope.followers[x].id, text:$scope.followers[x].username})}
+        }
+
+        for (x in $scope.memberProjects){
+            $scope.searchQueryFeed.push({type:'PROJECT', id:$scope.memberProjects[x].id, text:$scope.memberProjects[x].title});
+        }
+
+        for (x in $scope.memberTasks){
+            $scope.searchQueryFeed.push({type:'TASK', id:$scope.memberTasks[x].id, text:$scope.memberTasks[x].title})
+        }
+
+        for (x in $scope.memberProjects){
+            $scope.suggestedTokens.push({token:$scope.memberProjects[x].urlTitle});
+        }
+        
         $scope.suggestedTokenTags = $scope.memberProjects.map(function(obj){return obj.tags;});
         $scope.suggestedTokenTags = [].concat.apply([], $scope.suggestedTokenTags);
         $scope.suggestedTokenTags = $scope.suggestedTokenTags.filter(function(e){return e});
-        function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
+        
         $scope.sortedsuggestedTokenTags = [];
         for (x in $scope.suggestedTokenTags){
             var amount = countInArray($scope.suggestedTokenTags, $scope.suggestedTokenTags[x]);
@@ -336,9 +315,9 @@ angular.module( 'conexus.home', [
             }
         }
         $scope.sortedsuggestedTokenTags.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
-        for (x in $scope.memberProjects){$scope.suggestedTokens.push({token:$scope.memberProjects[x].urlTitle});}
+
+
     };
-    //$scope.discover();   
 
     //TODO: MAPPING LOOKUP! 
     $scope.lookupBalance = function(){
@@ -350,7 +329,6 @@ angular.module( 'conexus.home', [
     //BUG..
     $scope.renderBalances = function(){
         var sortable = [];
-        console.log( $rootScope.balance);
         for (var context in $rootScope.balance) {sortable.push([context, $rootScope.balance[context.toString()]])}
         sortable.sort(function(a, b) {return b[1] - a[1]});
         for (x in sortable){
@@ -757,6 +735,7 @@ angular.module( 'conexus.home', [
     //FILTERS\\//\\//
     //\\//\\//\\//\\//
     //TODO: BETTER
+    function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
     $scope.filterContent = function(filter) {
         $rootScope.stateIsLoading = true;
         ContentModel.get({tag:filter, limit:20, skip:0, sort:'createdAt DESC'}).then(function(contentList){
@@ -770,7 +749,6 @@ angular.module( 'conexus.home', [
         $scope.associations = $scope.tasks.map(function(obj){});
         $scope.associations = [].concat.apply([], $scope.associations);
         $scope.associations = $scope.associations.filter(function(e){return e});
-        function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
         $scope.sortedAssociationArray = [];
         for (x in $scope.associations){
             var amount = countInArray($scope.associations, $scope.associations[x]);
@@ -787,7 +765,6 @@ angular.module( 'conexus.home', [
         });
         $scope.tags = [].concat.apply([], $scope.tags);
         $scope.tags = $scope.tags.filter(function(e){return e});
-        function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
         $scope.sortedTagArray = [];
         for (x in $scope.tags){
             var amount = countInArray($scope.tags, $scope.tags[x]);
@@ -866,6 +843,33 @@ angular.module( 'conexus.home', [
                         $scope.init();
                         $scope.initTutorial();
                         $scope.renderBalances();
+
+                        $scope.projects.map(function(obj){
+                            var index = $scope.memberProjects.map(function(obj1){return obj1.id}).indexOf(obj.id);
+                            if (index != -1){obj.isMember = true;}
+                            if (index == -1){obj.isMember = false;}
+                            return obj;
+                        });
+
+                        $scope.tasks.map(function(obj){
+                            var index = $scope.memberTasks.map(function(obj1){return obj1.id}).indexOf(obj.id);
+                            if (index != -1){obj.isAssociated = true;}
+                            if (index == -1){obj.isAssociated = false;}
+                            return obj;
+                        });
+
+                        if ($scope.followers ){
+                            $scope.followers = $scope.followers.map(function(obj){return obj.followed});    
+                            $scope.members.map(function(obj){
+                                var index = $scope.followers.map(function(obj1){
+                                    if (obj1){return obj1.id;}
+                                }).indexOf(obj.id);
+                                if (index != -1){obj.isFollowing = true;}
+                                if (index == -1){obj.isFollowing = false;}
+                                return obj;
+                            });
+                        }
+
                     });
                 });
             });
@@ -915,6 +919,7 @@ angular.module( 'conexus.home', [
     //\\//\\//\\//\\//
     //SOCKETS\\//\\//
     //\\//\\//\\//\\//
+    //TODO: CUSTOM ROOMS, CUSTOM FILTER.
     $sailsSocket.subscribe('content', function (envelope) {
         if (envelope.verb == 'created'){$scope.activity.unshift(envelope.data);}
     });

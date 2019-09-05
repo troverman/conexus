@@ -85,6 +85,7 @@ module.exports = {
 		};
 
 		function mintTokens(model){
+			console.log('USER BALANCE!!', model.user.balance)
 			var protocolTokens = getProtocolTokens(model);
 			for (x in protocolTokens){
 				var tokenString = protocolTokens[x];
@@ -99,6 +100,8 @@ module.exports = {
 							};
 							Token.create(newTokenModel).then(function(model){console.log('TOKEN CREATED', model.string);});
 							model.user.balance[tokenString] = parseFloat(model.amount);
+							console.log('balance!',model.user.balance)
+
 							User.update({id:model.user.id}, {balance:model.user.balance}).then(function(user){});
 						}
 						else{
@@ -106,6 +109,7 @@ module.exports = {
 							Token.update({id:tokenModels[0].id}, {information:tokenModels[0].information}).then(function(model){console.log('TOKEN UPDATED', model)});
 							if (model.user.balance[tokenString]){model.user.balance[tokenString] = parseInt(model.user.balance[tokenString]) + parseFloat(model.amount);}
 							else{model.user.balance[tokenString] = parseFloat(model.amount);}
+							console.log('balance',model.user.balance)
 							User.update({id:model.user.id}, {balance:model.user.balance}).then(function(user){});
 						}
 					});
