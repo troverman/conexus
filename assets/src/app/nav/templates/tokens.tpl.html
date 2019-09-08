@@ -15,31 +15,27 @@
         <div style="padding:16px;">
 
             <div class="spacing-15"></div>
-
-            <h4 style="">Protocols <a ng-click="informationToggle('PROTOCOLS', 'GENERAL', item)" href="#"><i class="fa fa-question-circle"></i></a></h4>
-
-            <!--REPEAT IN item.protocols-->
-            <p>
-                <!--<a ng-repeat="protocol in item.protocols" href="#"></a>-->
-                <a ng-click="informationToggle('PROTOCOLS')" href="#">Content Protocol</a>, 
-                <a ng-click="informationToggle('PROTOCOLS')" href="#">Data Protocol</a>,
-                <a ng-click="informationToggle('PROTOCOLS')" href="#">Project Protocol</a>, 
-                <a ng-click="informationToggle('PROTOCOLS')" href="#">Reaction Protocol</a>,
-                <a ng-click="informationToggle('PROTOCOLS')" href="#">Task Protocol</a>, 
-                <a ng-click="informationToggle('PROTOCOLS')" href="#">Time Protocol</a>, 
-                <a ng-click="informationToggle('PROTOCOLS')" href="#">Validation Protocol</a>
-            </p>
-
+            <highchart config="tokenChart"></highchart>
+            <tags-input min-length="1" ng-model="tokenFilter" placeholder="Token Filter"></tags-input>
+            <h5 style="">Protocols <a ng-click="informationToggle('PROTOCOLS', 'GENERAL', item)" href="#"><i class="fa fa-question-circle"></i></a></h5>
             <div class="spacing-5"></div>
-
-            <!--Token Space-->
-            <tags-input min-length="1" ng-model="tokenFilter" placeholder="Token Manifold"></tags-input>
-
-            <!--TODO: MOBILE-->
             <table class="table table-striped table-hover">
-                <!--<thead>
-                    <tr><th>Manifold and Action Table</th></tr>
-                </thead>-->
+                <thead>
+                    <tr>
+                        <th>Identifer</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="(key, value) in item.data.apps.tokens">
+                        <td><a href="market/{{key}}" ui-sref="market({id:key})">{{key}}</a></td>
+                        <td>{{value}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!--
+            <table class="table table-striped table-hover">
                 <tbody>
                     <tr ng-repeat="token in tokens">
                         <td><a href="market/{{token}}" ui-sref="market({id:token})">{{token}}</a></td>
@@ -47,17 +43,12 @@
                 </tbody>
             </table>
 
-            <!--<div class="spacing-10"></div>
-            <h3 style="">Tokens Earned</h3>-->
-
             <div class="spacing-10"></div>
 
             <h3 style="">Market Liquidity<h3>
             <h5>Equality Traverse <a ng-click="informationToggle('MARKETLIQUIDITY')" href="#"><i class="fa fa-question-circle"></i></a></h5>
 
             <div class="spacing-15"></div>
-
-            <!--TODO: WEIGHT THE INPUT (SLIDER) ; absolute || % -->
 
             <h4>Asset Input</h4>
             <tags-input min-length="1" ng-model="inputVector" placeholder="Input"></tags-input>
@@ -75,9 +66,6 @@
 
             <div ng-show="outputMatix.length > 0" >
 
-
-                <!--TRAVERSAL GRAPH?-->
-                <!--TODO MOBILE-->
                 <table class="table table-striped table-hover">
                     <tbody>
                         <tr ng-repeat="token in inputVector track by $index">
@@ -92,7 +80,6 @@
 
                 <div class="spacing-15"></div>
 
-                <!--TODO MOBILE-->
                 <table class="table table-striped table-hover">
                     <thead>
                         <tr>
@@ -109,6 +96,10 @@
                 </table>
                 <div class="spacing-15"></div>
             </div>
+
+            -->
+
+
         </div>
     </div>
 </md-sidenav>

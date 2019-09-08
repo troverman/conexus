@@ -90,12 +90,6 @@ angular.module( 'conexus.item', [
         //items owning tokens (usd .. )
     //OrderModel.get()..
  
-    //HMM.. 
-    $rootScope.associatedModels = [{
-        address: $scope.item.id,
-        type: 'MARKET',
-    }];
-
     //HMM
     $scope.selectedTab = 'INFORMATION';
     $scope.selectTab = function(model){

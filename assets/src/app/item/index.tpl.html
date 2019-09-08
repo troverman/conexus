@@ -38,7 +38,7 @@
                         <li><a ng-click="$event.stopPropagation();selectTab('CONTENT')">Content</a></li>
                         <li><a ng-click="$event.stopPropagation();selectTab('COMPONENTS')">Components</a></li>
                         <li><a ng-click="$event.stopPropagation();selectTab('HISTORY')" >History</a></li>
-                        <li><a ng-click="$event.stopPropagation();selectTab('LIQUIDITY')">Liquidity</a></li>
+                        <li><a ng-click="$event.stopPropagation();selectTab('MARKET')">Market</a></li>
                         <li><a ng-click="$event.stopPropagation();selectTab('STATS')">Stats</a></li>
                         <li><a ng-click="$event.stopPropagation();selectTab('TOKENS')">Tokens</a></li>
                         <li><a ng-click="$event.stopPropagation();orderToggle(null, item);" class="btn btn-default">Purchase</a></li>
@@ -74,7 +74,7 @@
         <div ng-if="selectedTab =='CONTENT'" ng-include="'item/templates/content.tpl.html'"></div>
         <div ng-if="selectedTab =='HISTORY'" ng-include="'item/templates/history.tpl.html'"></div>
         <div ng-if="selectedTab =='COMPONENTS'" ng-include="'item/templates/components.tpl.html'"></div>
-        <div ng-if="selectedTab =='LIQUIDITY'" ng-include="'item/templates/liquidity.tpl.html'"></div>
+        <div ng-if="selectedTab =='MARKET'" ng-include="'item/templates/market.tpl.html'"></div>
         <div ng-if="selectedTab =='STATS'" ng-include="'item/templates/stats.tpl.html'"></div>
         <div ng-if="selectedTab =='TOKENS'" ng-include="'item/templates/tokens.tpl.html'"></div>
     </div>

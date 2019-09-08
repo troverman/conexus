@@ -1,18 +1,11 @@
 <div class="row">
 
 	<div ng-show="items.length == 0">
-       <div class="card">
-		    <button class="btn btn-default log-btn" ng-click="itemToggle()">+ Task</button>
-		</div>
-	    <div class="card">
-	        <div style="padding:16px;">
-	            <span style="color:gray">There's nothing here..</span>
-	        </div>
-	    </div>
+	    <div class="card"><div style="padding:16px;"><span style="color:gray">There's nothing here..</span></div></div>
     </div>
 
 	<div ng-show="tasks.length > 0" class="col-sm-3 mobileFix" style="padding-left:0px;padding-right:0px;">
-        <div class="card" ng-click="filterToggle('DISCOVER',filterSet)">
+        <div ng-if="sortedTagArray.length > 0" class="card" ng-click="filterToggle('DISCOVER',filterSet)">
         	<div style="background:url('https://source.unsplash.com/1600x900/?details,notes,explore,wonder');height:50px;min-height:50px" class="imageContainerSmall">
 			    <div style="background:rgba(0,0,0,0.75);height:50px" class="imageContainerSmallDiv">  
 			        <div style="margin-top: auto;margin-bottom: auto;">
@@ -28,7 +21,7 @@
                 </div>
             </div>
         </div>
-        <div class="card" ng-click="filterToggle('DISCOVER',filterSet)">
+        <div ng-if="sortedAssociationArray.length > 0" class="card" ng-click="filterToggle('DISCOVER',filterSet)">
         	<div style="background:url('https://source.unsplash.com/1600x900/?details,connection,explore,wonder,graph');height:50px;min-height:50px" class="imageContainerSmall">
 			    <div style="background:rgba(0,0,0,0.75);height:50px" class="imageContainerSmallDiv">  
 			        <div style="margin-top: auto;margin-bottom: auto;">
@@ -39,8 +32,8 @@
 			    </div>
 			</div>
             <div style="padding:16px;">
-                <div ng-repeat="tag in sortedTagArray" ng-click="$event.stopPropagation()">
-                    <a ng-click="filterContent(tag.element)"><b>{{tag.element}}</b></a>
+                <div ng-repeat="association in sortedAssociationArray" ng-click="$event.stopPropagation()">
+                    <a ng-click="filterContent(association.element)"><b>{{association.element}}</b></a>
                 </div>
             </div>
         </div>
@@ -58,22 +51,15 @@
 
 	    <div class="card mobileFix">
 	        <form ng-submit="search()" style="display:flex;flex-direction:row;">
-                <tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search" ng-model="searchQuery"></tags-input>
-	            <div ng-click="search()" style="border:0px;float:right" class="btn btn-default">
-	                <a href="#" role="button">
-	                    <h5 style="color:black;text-align:right" class="noselect">Search <i class="fa fa-search"></i></h5>
-	                </a>
-	            </div>
-	        </form>
+                <tags-input style="border:0px;flex-grow:2;" placeholder="Search" ng-model="searchQuery"></tags-input>
+                <div ng-click="search()" style="border:0px;float:right" class="btn btn-default">
+                    <a href="#" role="button"><h5 style="color:black;text-align:right" class="noselect"><i class="fa fa-search"></i></h5></a>
+                </div>
+            </form>
 	    </div>
 
-	    <div class="card">
-	        <button class="btn btn-default log-btn" ng-click="taskToggle()">+ Task</button>
-	    </div>
-	
-		<div ng-repeat="item in tasks">
-			<div ng-include="'templates/cards/taskCard.tpl.html'"></div>
-		</div>
+	    <div class="card"><button class="btn btn-default log-btn" ng-click="taskToggle()">+ Task</button></div>
+		<div ng-repeat="item in tasks"><div ng-include="'templates/cards/taskCard.tpl.html'"></div></div>
 		
 	</div>
 

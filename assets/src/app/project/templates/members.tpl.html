@@ -1,27 +1,27 @@
 <div class="row">
-    <div class="card" ng-if="!isProjectMember">
-		<button class="btn btn-default log-btn" ng-click="createMember()">+ motion to join</button>
-    </div>
+    <div class="card" ng-if="!isProjectMember"><button class="btn btn-default log-btn" ng-click="createMember()">+ motion to join</button></div>
 </div>
-
 <div class="spacing-5"></div>
-
 <!--FILTER SORT-->
-
 <div class="row">
 	<div class="col-sm-6" ng-repeat="member in members" style="padding-left:10px;padding-right:10px;">
-		<div class="member-card" ng-click="renderReputationToggle(member)" style="margin-bottom:10px">
+		<div class="member-card" ng-click="renderReputationToggle(member)" style="margin-bottom:10px;">
+			<div style="text-align:right;padding:15px;position:absolute;right:0;margin-right:10px">
+		        <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(member)">
+		            <i class="fas fa-chevron-down"></i>
+		        </a>
+		    </div> 
 		    <div class="member-card-image" style="background-image: url('{{member.user.coverUrl}}')">
 		        <a ng-click="$event.stopPropagation()" href="member/{{member.user.username}}" ui-sref="member.activity({path:member.user.username})"><img ng-src="{{member.user.avatarUrl}}" err-src="/images/avatar.png"></a>
 		    </div>
-            <div class="member-card-info" style="padding:16px;height:auto">
+            <div class="member-card-info" style="padding:16px;height:auto;min-height:125px;">
 		        <h4 ng-click="$event.stopPropagation()"><a href="member/{{member.user.username}}" ui-sref="member.activity({path:member.user.username})">{{member.user.username}}</a></h4>
-		       	<p style="color:gray">{{member.status}} {{member.type}}</p>
-		        <p style="color:gray">{{project.title}} | {{member.user.reputation[project.title] || 0}}</p>
+		       	<p style="color:gray">{{member.status || 'MEMBER'}} {{member.type}}</p>
+		        <p style="color:gray">{{project.title}}: {{member.user.reputation[project.title] || 0}}</p>
                 <p style="color:gray">{{member.user.status}} Offline</p>
 		    </div>
 		    <!--IF CAN VALIDATE-->
-		   	<div ng-if="currentUser" class="card-footer">
+		   	<div class="card-footer">
 		   		<!--
 		   		<a ng-click="$event.stopPropagation();validationToggle(item)"><i class="fas fa-check"></i> send tokens </a>
 		   		<a ng-click="$event.stopPropagation();validationToggle(item)"><i class="fas fa-check"></i> follow </a>

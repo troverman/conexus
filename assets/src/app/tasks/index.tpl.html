@@ -15,11 +15,36 @@
 
 <!--TODO: TOKEN OUPUT FILTERS-->
 <div class="container">
+
 	<div class="row">
-		<div class="col-sm-3 mobileFix" style="padding-left:0px;padding-right:0px;">
-			<!--TODO: MOBILE-->
-			<!--TODO: URL-->
-			<!--TODO: FILTER RENDER-->
+
+	    <ul style="padding:0px;" class="member-tabs">
+            <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fa fa-filter"></i> Filter</a></li>
+            <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fa fa-map-marker"></i> Location</a></li>
+			<li style="float:right;font-size:14px"><a href="#" ng-click="sortToggle()">Sort By Recent <i class="fa fa-angle-down"></i></a></li>
+            <div style="clear:both"></div>
+        </ul>
+
+        <div class="card">
+			<tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search" ng-model="searchQuery"></tags-input>
+		</div>
+
+		<!--if location selected-->
+		<div class="card">
+            <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options">
+                <ui-gmap-marker ng-repeat="marker in markers" coords="marker.coords" options="marker.options" idkey="marker.id">
+                    <ui-gmap-window options="windowOptions" closeClick="closeClick()">
+                        <div style="font-size: 15px;"><a href="project/{{marker.url}}" ui-sref="project.activity({path:marker.url})">{{marker.content}}</a></div>
+                    </ui-gmap-window>
+                </ui-gmap-marker>
+            </ui-gmap-google-map>
+        </div>
+
+    </div>
+
+	<div class="row">
+
+	    <div class="col-sm-4" style="padding-left:0px;padding-right:0px;">
 	        <div class="card" ng-click="filterToggle('DISCOVER', filterSet)">
 			 	<div style="background:url('https://source.unsplash.com/1600x900/?details,notes,explore,wonder');height:50px;min-height:50px" class="imageContainerSmall">
 				    <div style="background:rgba(0,0,0,0.75);height:50px" class="imageContainerSmallDiv">  
@@ -70,44 +95,12 @@
 	        </div>
 	    </div>
 
-	    <div class="col-sm-9" style="padding-left:0px;padding-right:0px;">
+	    <div class="col-sm-8" style="padding-left:0px;padding-right:0px;">
 
-	    	<!--STATIC BUTTON FOR CURRENT LOCATION FILTER-->
-		    <ul style="padding:0px;" class="member-tabs">
-                <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fa fa-filter"></i> Filter</a></li>
-                <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fa fa-map-marker"></i> Location</a></li>
-				<li style="float:right;font-size:14px"><a href="#" ng-click="sortToggle()">Sort By Recent <i class="fa fa-angle-down"></i></a></li>
-            </ul>
 
-            <div style="clear:both"></div>
-
-            <div class="card">
-				<tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search" ng-model="searchQuery"></tags-input>
-			</div>
-
-			<!--if location selected-->
-			<div class="card">
-	            <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options">
-	                <ui-gmap-marker ng-repeat="marker in markers" coords="marker.coords" options="marker.options" idkey="marker.id">
-	                    <ui-gmap-window options="windowOptions" closeClick="closeClick()">
-	                        <div style="font-size: 15px;"><a href="project/{{marker.url}}" ui-sref="project.activity({path:marker.url})">{{marker.content}}</a></div>
-	                    </ui-gmap-window>
-	                </ui-gmap-marker>
-	            </ui-gmap-google-map>
-	        </div>
-
-			<div class="card">
-		        <button class="btn btn-default log-btn" ng-click="taskToggle()">+ Task</button>
-		    </div>
-
-			<!--TODO: MARKET LOOKUP-->
-			<!--TODO: ASSOCIATIONS-->
-			<!--TODO: COMMENT-->
-			<div ng-repeat="item in tasks">
-				<div ng-include="'templates/cards/taskCard.tpl.html'"></div>
-			</div>
-
-			<div ng-show="tasks.length > 0" class="card" style="text-align:center" ng-click="loadMore()">
+			<div class="card"><button class="btn btn-default log-btn" ng-click="taskToggle()">+ Task</button></div>		
+			<div ng-repeat="item in tasks"><div ng-include="'templates/cards/taskCard.tpl.html'"></div></div>
+			<div ng-show="taskCount > tasks.length" class="card" style="text-align:center" ng-click="loadMore()">
                 <button style="width:100%" class="btn btn-default log-btn">MORE <i class="fa fa-angle-down"></i></button>
             </div>
 

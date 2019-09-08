@@ -81,7 +81,7 @@
 				</div>
 		        <div style="padding:16px;">
 	                <div ng-click="$event.stopPropagation()">
-	                	<tags-input style="border:0px;flex-grow:2;" min-length="1" placeholder="Search | Filter" ng-model="searchQuery.associations"></tags-input>
+	                	<tags-input style="border:0px;flex-grow:2;" min-length="1" placeholder="Search" ng-model="searchQuery.associations"></tags-input>
 	                </div>
         			<div style="padding:16px;">
 			            <div ng-repeat="association in sortedAssociationArray.slice(0,10)" ng-click="$event.stopPropagation()">

@@ -2,58 +2,7 @@
 
 <div class="row">
 
-	<div class="col-sm-3 mobileFix" style="padding-left:0px;padding-right:0px;">
-		<div class="card" ng-click="filterToggle('LEDGER', filterSet)">
-			<div style="background:url('https://source.unsplash.com/1600x900/?details,notes,explore,wonder,location,connection,asset,finance');height:50px;min-height:50px" class="imageContainerSmall">
-	            <div style="background:rgba(0,0,0,0.75);height:50px" class="imageContainerSmallDiv">  
-	                <div style="margin-top: auto;margin-bottom: auto;">
-	                    <div style="padding:15px">
-	                        <h1 style="text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;">Assets</h1>
-	                    </div>
-	                </div>
-	            </div>
-	        </div>
-			<div style="padding:16px;">
-	            <div ng-repeat="asset in sortedTransactionAssets" ng-click="$event.stopPropagation()">
-                    <a ng-click="selectAsset(asset.element)"><b>{{asset.element}}</b></a>
-                </div>
-			</div>
-		</div>
-		<div class="card" ng-click="filterToggle('LEDGER', filterSet)">
-			<div style="background:url('https://source.unsplash.com/1600x900/?details,notes,explore,wonder,location,connection');height:50px;min-height:50px" class="imageContainerSmall">
-                <div style="background:rgba(0,0,0,0.75);height:50px" class="imageContainerSmallDiv">  
-                    <div style="margin-top: auto;margin-bottom: auto;">
-                        <div style="padding:15px">
-                            <h1 style="text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;">Associations</h1>
-                        </div>
-                    </div>
-                </div>
-            </div>
-			<div style="padding:16px;">
-                <div ng-repeat="association in sortedTransactionAssociations" ng-click="$event.stopPropagation()">
-                    <a ng-click="selectAssociation(association.element)"><b>{{association.obj.username || association.obj.title}}</b></a>
-                </div>
-			</div>
-		</div>
-		<div class="card" ng-click="filterToggle('LEDGER', filterSet)">
-			<div style="background:url('https://source.unsplash.com/1600x900/?details,notes,explore,wonder');height:50px;min-height:50px" class="imageContainerSmall">
-	            <div style="background:rgba(0,0,0,0.75);height:50px" class="imageContainerSmallDiv">  
-	                <div style="margin-top: auto;margin-bottom: auto;">
-	                    <div style="padding:15px">
-	                        <h1 style="text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;">Context</h1>
-	                    </div>
-	                </div>
-	            </div>
-	        </div>
-			<div style="padding:16px;">
-                <div ng-repeat="tag in sortedTransactionTags" ng-click="$event.stopPropagation()">
-                    <a ng-click="selectTag(tag.element)"><b>{{tag.element}}</b></a>
-                </div>
-			</div>
-		</div>
-	</div>
-
-	<div class="col-sm-9" style="padding-left:0px;padding-right:0px;">
+	<div class="col-sm-12" style="padding-left:0px;padding-right:0px;">
 
 		<div class="spacing-5"></div>
 
@@ -104,70 +53,63 @@
 			</div>
 		</div>
 
-		<div class="card">
-			<button class="btn btn-default log-btn" ng-click="transactionToggle(member)">+ Transaction</button>
-		</div>
+	</div>
+</div>
+<div class="row">
 
-		<div class="card" ng-repeat="item in transactions" ng-click="cardDetailToggle(item)">
-			<div style="padding:16px">
-
-				<div style="float:right;text-align:right">
-                    <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><span style="color:gray"></span><i class="fa fa-chevron-down"></i></a>
-                </div>  
-                <div style="display:inline">
-                    <span ng-if="item.from.username">
-                        <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="member/{{item.from.username}}" ui-sref="member.activity({path:item.from.username})">
-                            <img class="card-avatar" ng-src="{{item.from.avatarUrl}}" src="{{item.from.avatarUrl}}" err-src="/images/avatar.png">
-                            {{item.from.username}}
-                        </a>
-                    </span>
-                    <span ng-if="item.from.title">
-                        <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="project/{{item.from.urlTitle}}" ui-sref="project.activity({path:item.from.urlTitle})">
-                            <img class="card-avatar" ng-src="{{item.from.avatarUrl}}" src="{{item.from.avatarUrl}}" err-src="/images/avatar.png">
-                            {{item.from.title}}
-                        </a>
-                    </span>
-                </div>
-                <div style="display:inline;padding-left:5px;padding-right:5px;">
-                    <i class="fa fa-arrow-right"></i>
-                </div>
-				<div style="display:inline">
-                    <span ng-if="item.to.username">
-                        <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="member/{{item.to.username}}" ui-sref="member.activity({path:item.to.username})">
-                            <img class="card-avatar" ng-src="{{item.to.avatarUrl}}" src="{{item.to.avatarUrl}}" err-src="/images/avatar.png">
-                            {{item.to.username}}
-                        </a>
-                    </span>
-                    <span ng-if="item.to.title">
-                        <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="project/{{item.to.urlTitle}}" ui-sref="project.activity({path:item.to.urlTitle})">
-                            <img class="card-avatar" ng-src="{{item.to.avatarUrl}}" src="{{item.to.avatarUrl}}" err-src="/images/avatar.png">
-                            {{item.to.title}}
-                        </a>
-                    </span>
-                </div>
-                
-                <div class="spacing-5"></div>
-
-				<span ng-repeat="(key, value) in item.amountSet"><p style="font-weight:800">{{value}} <a ng-click="$event.stopPropagation()" href="market/{{key}}" ui-sref="market({id:key})">{{key}}</a></p></span>
-				<p><a ng-click="$event.stopPropagation()" ng-repeat="tag in item.tags" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
-				<p>{{item.content}}</p>
-				<p style="color:gray"><span style="color:gray" am-time-ago="item.createdAt"></span> • {{item.createdAt | date :  "y MM-dd hh:mm.ss a"}}</p>
-				<a ng-click="$event.stopPropagation()" href="transaction/{{item.id}}" ui-sref="transaction({id:item.id})"></a>
-			</div>
-			<div class="card-footer">
-				<a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fas fa-angle-up"></i> {{item.reactions.plus}} like </a> 
-				<a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fas fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
-				<a ng-click="$event.stopPropagation();reply(item)"><i class="far fa-comment"></i> comment </a>
-				<a ng-click="$event.stopPropagation()" class="pull-right" style="padding:0px;" href="transaction/{{item.id}}" ui-sref="transaction({id:item.id})"><i class="fas fa-link grey"></i></a>
-			</div>
-			<div ng-click="$event.stopPropagation()" ng-show="item.showReply" class="card-footer">
-	            <form role="form" ng-submit="createContent(item)">
-	                <text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','h2','bold','italics','quote','pre','insertLink', 'html']]"></text-angular>
-	                <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newContent.content">create</button>
-	            </form>
+	<div class="col-sm-4 mobileFix" style="padding-left:0px;padding-right:0px;">
+		<div class="card" ng-click="filterToggle('LEDGER', filterSet)">
+			<div style="background:url('https://source.unsplash.com/1600x900/?details,notes,explore,wonder,location,connection,asset,finance');height:50px;min-height:50px" class="imageContainerSmall">
+	            <div style="background:rgba(0,0,0,0.75);height:50px" class="imageContainerSmallDiv">  
+	                <div style="margin-top: auto;margin-bottom: auto;">
+	                    <div style="padding:15px">
+	                        <h1 style="text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;">Assets</h1>
+	                    </div>
+	                </div>
+	            </div>
 	        </div>
+			<div style="padding:16px;">
+	            <div ng-repeat="asset in sortedTransactionAssets" ng-click="$event.stopPropagation()">
+                    <a ng-click="selectAsset(asset.element)"><b>{{asset.element}}</b></a>
+                </div>
+			</div>
 		</div>
-
+		<div class="card" ng-click="filterToggle('LEDGER', filterSet)">
+			<div style="background:url('https://source.unsplash.com/1600x900/?details,notes,explore,wonder,location,connection');height:50px;min-height:50px" class="imageContainerSmall">
+                <div style="background:rgba(0,0,0,0.75);height:50px" class="imageContainerSmallDiv">  
+                    <div style="margin-top: auto;margin-bottom: auto;">
+                        <div style="padding:15px">
+                            <h1 style="text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;">Associations</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+			<div style="padding:16px;">
+                <div ng-repeat="association in sortedTransactionAssociations" ng-click="$event.stopPropagation()">
+                    <a ng-click="selectAssociation(association.element)"><b>{{association.obj.username || association.obj.title}}</b></a>
+                </div>
+			</div>
+		</div>
+		<div class="card" ng-click="filterToggle('LEDGER', filterSet)">
+			<div style="background:url('https://source.unsplash.com/1600x900/?details,notes,explore,wonder');height:50px;min-height:50px" class="imageContainerSmall">
+	            <div style="background:rgba(0,0,0,0.75);height:50px" class="imageContainerSmallDiv">  
+	                <div style="margin-top: auto;margin-bottom: auto;">
+	                    <div style="padding:15px">
+	                        <h1 style="text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;">Context</h1>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+			<div style="padding:16px;">
+                <div ng-repeat="tag in sortedTransactionTags" ng-click="$event.stopPropagation()">
+                    <a ng-click="selectTag(tag.element)"><b>{{tag.element}}</b></a>
+                </div>
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-8" style="padding-left:0px;padding-right:0px;">
+		<div class="card"><button class="btn btn-default log-btn" ng-click="transactionToggle(member)">+ Transaction</button></div>
+		<div ng-repeat="item in transactions"><div ng-include="'templates/cards/transactionCard.tpl.html'"></div></div>
 	</div>
 
 </div>

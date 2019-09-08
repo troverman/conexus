@@ -1,28 +1,23 @@
 <div class="card">
-    <div style="background:url('https://source.unsplash.com/1600x900/?{{item.tags}}')" class="imageContainerSmall">
-        <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+    <div style="background:url('https://source.unsplash.com/1600x900/?{{item.tags}}');min-height:auto" class="imageContainerSmall">
+        <div style="background:rgba(0,0,0,0.75);height:auto" class="imageContainerSmallDiv">  
             <div style="margin-top: auto;margin-bottom: auto;">
                 <div style="padding:15px">
-                    <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Associations</h1>
+                    <h1 style="text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;">Associations</h1>
                 </div>
             </div>
         </div>
     </div>
     <div style="padding:16px;">
 
-        <h5>Filter</h5>
-        <tags-input min-length="1" max-tags="1" placeholder="Associations" ng-model="assoicationFilter">
-            <auto-complete source="loadAssociations($query)"></auto-complete>
-        </tags-input>
-
-        <div class="spacing-10"></div>
-
-        <!--TODO-->
         <div class="row">
             <div class="col-sm-3">
                 <div style="max-height:500px;overflow:auto">
+                    <tags-input min-length="1" max-tags="1" placeholder="Associations" ng-model="assoicationFilter">
+                        <auto-complete source="loadAssociations($query)"></auto-complete>
+                    </tags-input>
                     <div ng-repeat="association in item.associatedModels">
-                        <p ng-click="filterAssociation()"><b>{{association.address}}</b></p>
+                        <p ng-click="filterAssociation()"><b>{{association.id}}</b></p>
                     </div>
                 </div>
             </div>

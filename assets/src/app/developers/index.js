@@ -1010,9 +1010,11 @@ angular.module( 'conexus.developers', [
     //$scope.metaModel = JSON.stringify({}, null, 4);
 
 
-    //is this it?
-    //recursive? 
-    //close
+
+    //DEMO OBJ -- FLATTEN INTO STRING
+    //IE .. DEMO CONTENT?
+    //$scope.tokenObj = JSON.stringify([{}}], null, 4);
+    //$scope.tokenObj = JSON.stringify([{}}], null, 4);
 
     $scope.queryModel = [{
         filter:[
@@ -1135,6 +1137,11 @@ angular.module( 'conexus.developers', [
         size: {type: 'string'},
     }, null, 4);
 
+    $scope.connectionModel = JSON.stringify({
+        id: {type: 'string'}
+    }, null, 4);
+
+
     $scope.contentModel = JSON.stringify({
         id: {type: 'string'},
         title: {type: 'string'},
@@ -1192,6 +1199,12 @@ angular.module( 'conexus.developers', [
     $scope.locationModel = JSON.stringify({
         creator: {type: 'string'},
         location: {type: 'json'},
+    }, null, 4);
+
+     $scope.marketModel = JSON.stringify({
+        id: {type: 'string'},
+        information: {type: 'json'},
+        tokens: {type: 'json'},
     }, null, 4);
 
     $scope.memberModel = JSON.stringify({

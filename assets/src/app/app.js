@@ -49,6 +49,7 @@ angular.module( 'conexus', [
     'conexus.order',
     'conexus.project',
     'conexus.projects',
+    'conexus.protocol',
     'conexus.reaction',
     'conexus.register',
     'conexus.search',

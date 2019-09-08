@@ -2,6 +2,11 @@
 <div class="row">
 	<div class="col-sm-6" ng-repeat="member in followers">
 		<div class="member-card" ng-click="renderReputationToggle(member)">
+			<div style="text-align:right;padding:15px;position:absolute;right:0;margin-right:10px">
+		        <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(member)">
+		            <i class="fas fa-chevron-down"></i>
+		        </a>
+		    </div> 
 		    <div class="member-card-image" style="background-image: url('{{member.follower.coverUrl}}')">
 		        <a ng-click="$event.stopPropagation();" href="member/{{member.follower.username}}" ui-sref="member.activity({path:member.follower.username})">
 		        	<img ng-src="{{member.follower.avatarUrl}}" err-src="/images/avatar.png">
@@ -16,7 +21,7 @@
 		        	<a ng-click="$event.stopPropagation();" href="/member/{{member.follower.username}}/followers" ui-sref="member.followers({path:member.follower.username})">{{member.follower.followerCount || 0}} Followers</a> | 
 		        	<a ng-click="$event.stopPropagation();" href="/member/{{member.follower.username}}/following" ui-sref="member.following({path:member.follower.username})">{{member.follower.followingCount || 0}} Following</a>
 		        </p>
-		        <p style="color:gray">Total Reputation | {{member.follower.totalWork}}</p>
+		        <p style="color:gray">Total Reputation: {{member.follower.totalWork}}</p>
 		        <p style="color:gray">{{member.follower.status}} Offline</p>
 		    </div>
 		</div>

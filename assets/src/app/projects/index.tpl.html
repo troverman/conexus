@@ -29,14 +29,7 @@
         </ul>
 
         <div class="card">
-            <form ng-submit="search()" style="display:flex;flex-direction:row;">
-                <tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search" ng-model="searchQuery"></tags-input>
-                <div ng-click="search()" style="border:0px" class="btn btn-default" style="float:right">
-                    <a  href="#" role="button">
-                        <h5 style="color:black;text-align:right" class="noselect">Search <i class="fa fa-search"></i></h5>
-                    </a>
-                </div>
-            </form>
+            <tags-input style="border:0px;flex-grow:2;" placeholder="Search" ng-model="searchQuery"></tags-input>
         </div>
 
         <!--if location-->
@@ -58,7 +51,7 @@
             <div ng-include="'templates/cards/projectCard.tpl.html'"></div>
         </div>
 
-        <div ng-show="projects.length > 0" ng-click="loadMore()" class="card">
+        <div ng-show="projectCount > projects.length" ng-click="loadMore()" class="card">
             <button style="width:100%" class="btn btn-default log-btn">MORE <i class="fa fa-angle-down"></i></button>
         </div>
 

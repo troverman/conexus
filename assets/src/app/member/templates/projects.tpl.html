@@ -1,15 +1,18 @@
 <div class="spacing-5"></div>
 <div class="row">
-	<div class="col-lg-4 col-sm-6" ng-repeat="project in projects">
-		<!--TODO RENDER PROJECT-MEMBER-->
-		<div class="member-card" ng-click="cardDetailToggle(project.project)">
+	<div class="col-lg-4 col-sm-6" ng-repeat="item in projects">
+		<div class="member-card" ng-click="cardDetailToggle(item.project)">
+			<div style="text-align:right;padding:15px;position:absolute;right:0;margin-right:10px">
+		        <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
+		            <i class="fas fa-chevron-down"></i>
+		        </a>
+		    </div> 
 			<div class="member-card-image" style="background-color:black">
-		        <a ng-click="$event.stopPropagation();" href="project/{{project.project.title}}" ui-sref="project.activity({path:project.project.urlTitle})"><img ng-src="{{project.project.avatarUrl}}" err-src="/images/avatar.png"></a>
+		        <a ng-click="$event.stopPropagation();" href="project/{{item.project.title}}" ui-sref="project.activity({path:item.project.urlTitle})"><img ng-src="{{item.project.avatarUrl}}" err-src="/images/avatar.png"></a>
 		    </div>
 		    <div class="member-card-info">
-		        <h4><a ng-click="$event.stopPropagation();" href="project/{{project.project.urlTitle}}" ui-sref="project.activity({path:project.project.urlTitle})">{{project.project.title}}</a></h4>
-		        <p style="color:gray">{{project.status}}</p>
-		        <p style="color:gray">Member | {{project.user.reputation[project.project.title] || 0}}</p>
+		        <h4><a ng-click="$event.stopPropagation();" href="project/{{item.project.urlTitle}}" ui-sref="project.activity({path:item.project.urlTitle})">{{item.project.title}}</a></h4>
+		        <p style="color:gray">{{item.status || 'MEMBER'}} {{project.user.balance[project.project.title] || 0}}</p>
 		    </div>
 		</div>
 	</div>

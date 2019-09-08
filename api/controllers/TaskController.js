@@ -3,9 +3,9 @@ module.exports = {
 
 	get: function(req, res) {
 
-		var limit = parseInt(req.query.limit);
-		var skip = parseInt(req.query.skip);
-		var sort = req.query.sort;
+		var limit = parseInt(req.query.limit) || 1;
+		var skip = parseInt(req.query.skip) || 0 ;
+		var sort = req.query.sort || 'createdAt DESC';
 		var project = req.query.project;
 		var search = req.query.search;
 		var tag = req.query.tag;
@@ -18,7 +18,6 @@ module.exports = {
 
 		if(req.query.id){
 			Task.find({id:id})
-			.populate('project')
 			.then(function(models) {
 				res.json(models[0]);
 			});
@@ -59,7 +58,6 @@ module.exports = {
 			.limit(limit)
 			.skip(skip)
 			.sort(sort)
-			.populate('project')
 			.populate('user')
 			.then(function(models) {
 				Task.subscribe(req, models);
@@ -72,7 +70,6 @@ module.exports = {
 			.limit(limit)
 			.skip(skip)
 			.sort(sort)
-			.populate('project')
 			.populate('user')
 			.then(function(models) {
 				Task.count({tags:{contains: tag}}).then(function(numRecords){
@@ -123,9 +120,8 @@ module.exports = {
 			.skip(skip)
 			.sort(sort)
 			.populate('user')
-			.populate('project')
-			.then(function(models) {
-
+			.then(function(models){
+				console.log(models)
 				Task.count().then(function(numRecords){
 					Task.subscribe(req, models);
 					var returnObj = {data:models, info:{count:numRecords}};

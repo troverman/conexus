@@ -5,7 +5,7 @@
 	<div class="spacing-5"></div>
 	<h3>
 		<a href="project/{{project.parent.urlTitle}}" ui-sref="project.activity({path:project.parent.urlTitle})">
-			<img style="height:32px" src="{{project.parent.avatarUrl}}">
+			<img style="height:32px;border-radius:100%" src="{{project.parent.avatarUrl}}">
 			<span>{{project.parent.title}}</span>
 		</a>
 	</h3>
@@ -14,28 +14,12 @@
 
 <!--FILTER SORT-->
 
-<div class="row">
-    <div class="card">
-    	<button class="btn btn-default log-btn" ng-click="projectToggle()">+ Project</button>
-    </div>
-</div>
-
 <!--ASSOCIATIONS FOR TRAVERSAL-->
 <div class="row">
-	<div ng-repeat="project in projects" ng-click="cardDetailToggle(project)">
-		<div class="card">
-			<div style="padding:16px;">
-				<div class="row">
-                    <div class="col-sm-1 col-xs-2"><a ng-click="$event.stopPropagation();" href="project/{{project.urlTitle}}" ui-sref="project.activity({path:project.urlTitle})"><img style="width:100%;height:100%" src="{{project.avatarUrl}}"></a></div>
-                    <div class="col-sm-11 col-xs-10">
-                    	<p style="float:right;text-align:right">
-                            <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><span style="color:gray"></span><i class="fa fa-chevron-down"></i></a>
-                        </p>
-                        <h3 style="margin-top:0px"><a ng-click="$event.stopPropagation();" href="project/{{project.urlTitle}}" ui-sref="project.activity({path:project.urlTitle})">{{project.title}}</a></h3>
-                        <div style="max-height:500px;overflow:auto"><span ng-bind-html="renderContent(project.description)"></span></div>
-                    </div>
-				</div>
-			</div>
-		</div>
+	<div ng-if="currentUser" class="card">
+    	<button class="btn btn-default log-btn" ng-click="projectToggle()">+ Project</button>
+    </div>
+	<div ng-repeat="item in projects" ng-click="cardDetailToggle(project)">
+        <div ng-include="'templates/cards/projectCard.tpl.html'"></div>
 	</div>
 </div>

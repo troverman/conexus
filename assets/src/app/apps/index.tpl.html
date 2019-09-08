@@ -75,28 +75,8 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-6 col-sm-6" ng-repeat="app in apps" style="padding-left:0px;padding-right:0px;">
-            <div class="card" ng-click="cardDetailToggle(app)">
-                <div style="background:url('https://source.unsplash.com/1600x900/?{{app.tags}},code');min-height:100px" class="imageContainerSmall">
-                    <div style="background:rgba(0,0,0,0.75);height:100px" class="imageContainerSmallDiv">  
-                        <div style="text-align:right;padding:15px;position:absolute;right:0">
-                            <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(app)">
-                                <i class="fas fa-chevron-down"></i>
-                            </a>
-                        </div> 
-                        <div style="margin-top: auto;margin-bottom: auto;">
-                            <div style="padding:15px">
-                                <h1 style="text-align:left;font-size:30px;color:rgba(255,255,255,0.9);font-weight:400;">
-                                    <a ng-click="$event.stopPropagation();" style="color:white" href="app/{{app.id}}" ui-sref="app({id:app.id})">{{app.title}}</a>
-                                </h1>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div style="padding:16px;min-height:100px;max-height:100px">
-                    <p><span style="display:inline" ng-bind-html="renderContent(app.description)"></span></p>
-                </div>
-            </div>
+        <div class="col-lg-6 col-sm-6" ng-repeat="item in apps" style="padding-left:0px;padding-right:0px;">
+            <div ng-include="'templates/cards/appCard.tpl.html'"></div>
         </div>
     </div>
     <div class="spacing-5"></div>

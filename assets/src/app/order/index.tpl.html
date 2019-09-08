@@ -4,7 +4,7 @@
             <div style="background:url('https://source.unsplash.com/1600x900/?explore,discover')" class="imageContainerSmall">
                 <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv"> 
                     <div style="text-align:right;padding:15px;position:absolute;right:0">
-                        <a style="color:white;" ng-click="$event.stopPropagation();"><i class="fas fa-chevron-down"></i></a>
+                        <a style="color:white;"><i class="fas fa-chevron-down"></i></a>
                     </div>
                     <div style="margin-top: auto;margin-bottom: auto;text-align:center">
                         <div style="padding:15px">
@@ -39,10 +39,10 @@
             <hr style="margin:0px;">
             <div style="padding:16px" ng-if="selectedTab =='INFORMATION'" ng-include="'order/templates/information.tpl.html'"></div>
             <div class="card-footer">
-                <a ng-click="$event.stopPropagation();" style="color:grey"><i class="fas fa-eye"></i>  {{order.data.apps.attention.general || 0}}</a>
-                <a ng-click="$event.stopPropagation();createReaction(order, 'plus')"><i class="fa fa-angle-up"></i> {{order.data.apps.reactions.plus || 0}} like </a> 
-                <a ng-click="$event.stopPropagation();createReaction(order, 'plus')" ><i class="fa fa-angle-down"></i> {{order.data.apps.reactions.minus || 0}} dislike </a>
-                <a ng-click="$event.stopPropagation();contentToggle(order)"><i class="fa fa-comment-o"></i> comment </a>
+                <a ng-click="$event.stopPropagation();renderAttentionToggle(order)" style="color:grey"><i class="fas fa-eye"></i>  {{order.data.apps.attention.general || 0}}</a>
+                <a ng-click="$event.stopPropagation();createReaction(order, 'plus')"><i class="fas fa-angle-up"></i> {{order.data.apps.reactions.plus || 0}} like </a> 
+                <a ng-click="$event.stopPropagation();createReaction(order, 'plus')" ><i class="fas fa-angle-down"></i> {{order.data.apps.reactions.minus || 0}} dislike </a>
+                <a ng-click="$event.stopPropagation();contentToggle(order)"><i class="far fa-comment"></i> comment </a>
             </div>
         </div>
         <div ng-if="selectedTab =='LIQUIDITY'" ng-include="'order/templates/liquidity.tpl.html'"></div>

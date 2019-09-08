@@ -59,6 +59,50 @@ angular.module( 'conexus.task', [
     $scope.verification = {};
     $rootScope.taskTime = 0;
 
+
+    //TOKENS BETA///
+    $scope.populateTokensBeta = function(){
+        $scope.task.data.apps.tokens = $scope.task.data.apps.attention;
+        $scope.task.data.apps.tokens['CRE8'] = 1;
+        $scope.task.data.apps.tokens['CRE8+TASK'] = 1;
+        $scope.task.data.apps.tokens['CRE8+TASK+'+$scope.task.id] = 1;
+    };
+    $scope.populateTokensBeta();
+
+    $scope.tokenChart = {
+        chart: {zoomType: 'x'},
+        series: [{
+            id: 'Attention',
+            type: 'column',
+            name: 'Attention',
+            data: []
+        }],
+        title: {text: ''},
+        xAxis: {
+            crosshair: true,
+            gridLineWidth: 0.5,
+            gridLineColor: 'grey',
+            title: {text: null},
+            categories: [],
+        },
+        legend: {enabled: false},
+        yAxis: {title: {text: null}},
+        credits:{enabled:false},
+    };
+    var sortable = [];
+    for (x in Object.keys($scope.task.data.apps.tokens)){sortable.push([Object.keys($scope.task.data.apps.tokens)[x], $scope.task.data.apps.tokens[Object.keys($scope.task.data.apps.tokens)[x]]])}
+    sortable.sort(function(a, b) {return b[1] - a[1]});
+    for (x in sortable){
+        if (x < 100){
+            $scope.tokenChart.xAxis.categories.push(sortable[x][0]);
+            $scope.tokenChart.series[0].data.push(sortable[x][1]);
+        }
+    }
+
+
+
+
+
     $scope.renderStats = function(){
         $scope.statsChart = {
             chart: {

@@ -28,9 +28,9 @@
 
 	<div class="row">
 		<div class="col-sm-3 mobileFix" style="padding-left:0px;padding-right:0px;">
-			 <div class="card" ng-click="filterToggle('DISCOVER',filterSet)">
-			 	<div style="background:url('https://source.unsplash.com/1600x900/?details,notes,explore,wonder');height:50px;min-height:50px" class="imageContainerSmall">
-				    <div style="background:rgba(0,0,0,0.75);height:50px" class="imageContainerSmallDiv">  
+			 <div ng-if="sortedTagArray.length > 0" class="card" ng-click="filterToggle('DISCOVER',filterSet)">
+			 	<div style="background:url('https://source.unsplash.com/1600x900/?details,notes,explore,wonder');min-height:auto" class="imageContainerSmall">
+				    <div style="background:rgba(0,0,0,0.75);height:auto" class="imageContainerSmallDiv">  
 				        <div style="margin-top: auto;margin-bottom: auto;">
                         	<div style="padding:15px">
 					            <h1 style="text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;">Context</h1>
@@ -42,13 +42,11 @@
 	                <div ng-repeat="tag in sortedTagArray.slice(0,20)" ng-click="$event.stopPropagation()">
 	                    <a ng-click="filterContent(tag.element)"><b>{{tag.element}}</b></a>
 	                </div>
-    	            <!--TODO: MORE SECTION-->
-	                <!--<div style="text-align:center"><i class="fas fa-chevron-down"></i></div>-->
 	            </div>
 	        </div>
-		    <div class="card" ng-click="filterToggle('DISCOVER',filterSet)">
-		    	<div style="background:url('https://source.unsplash.com/1600x900/?connection,code,explore,wonder,graph,node');height:50px;min-height:50px" class="imageContainerSmall">
-				    <div style="background:rgba(0,0,0,0.75);height:50px" class="imageContainerSmallDiv">  
+		    <div ng-if="sortedAssociationArray.length > 0" class="card" ng-click="filterToggle('DISCOVER',filterSet)">
+		    	<div style="background:url('https://source.unsplash.com/1600x900/?connection,code,explore,wonder,graph,node');min-height:auto" class="imageContainerSmall">
+				    <div style="background:rgba(0,0,0,0.75);height:auto" class="imageContainerSmallDiv">  
 				        <div style="margin-top: auto;margin-bottom: auto;">
                         	<div style="padding:15px">
 					            <h1 style="text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;">Associations</h1>
@@ -62,9 +60,9 @@
 	                </div>
 	            </div>
 	        </div>
-	        <div class="card" ng-click="filterToggle('DISCOVER',filterSet)">
-	        	<div style="background:url('https://source.unsplash.com/1600x900/?location,forest,city,map');height:50px;min-height:50px" class="imageContainerSmall">
-				    <div style="background:rgba(0,0,0,0.75);height:50px" class="imageContainerSmallDiv">  
+	        <div ng-if="locations.length > 0" class="card" ng-click="filterToggle('DISCOVER',filterSet)">
+	        	<div style="background:url('https://source.unsplash.com/1600x900/?location,forest,city,map');min-height:auto" class="imageContainerSmall">
+				    <div style="background:rgba(0,0,0,0.75);height:auto" class="imageContainerSmallDiv">  
 				        <div style="margin-top: auto;margin-bottom: auto;">
                         	<div style="padding:15px">
 					            <h1 style="text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;">Locations</h1>
@@ -78,9 +76,9 @@
 	                </div>
 	            </div>
 	        </div>
-	        <div class="card" ng-click="filterToggle('DISCOVER',filterSet)">
-	        	<div style="background:url('https://source.unsplash.com/1600x900/?asset,token,money,code,value,people,energy');height:50px;min-height:50px" class="imageContainerSmall">
-				    <div style="background:rgba(0,0,0,0.75);height:50px" class="imageContainerSmallDiv">  
+	        <div ng-if="sortedAssetArray.length > 0" class="card" ng-click="filterToggle('DISCOVER',filterSet)">
+	        	<div style="background:url('https://source.unsplash.com/1600x900/?asset,token,money,code,value,people,energy');min-height:auto" class="imageContainerSmall">
+				    <div style="background:rgba(0,0,0,0.75);height:auto" class="imageContainerSmallDiv">  
 				        <div style="margin-top: auto;margin-bottom: auto;">
                         	<div style="padding:15px">
 					            <h1 style="text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;">Assets</h1>

@@ -1,11 +1,8 @@
 <div class="card" ng-click="cardDetailToggle(item)">
-    <div ng-if="item.title" style="background:url('https://source.unsplash.com/1600x900/?{{item.tags}}')" class="imageContainerSmall">
-        <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+    <div ng-if="item.title" style="background:url('https://source.unsplash.com/1600x900/?{{item.tags}}');min-height:auto" class="imageContainerSmall">
+        <div style="background:rgba(0,0,0,0.75);height:auto" class="imageContainerSmallDiv">  
             <div style="text-align:right;padding:15px;position:absolute;right:0">
-                <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
-                    <i class="fas fa-chevron-down"></i>
-                </a>
-                <div style="clear:both"></div>
+                <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><i class="fas fa-chevron-down"></i></a>
             </div> 
             <div style="margin-top: auto;margin-bottom: auto;">
                 <div style="width:100%;padding:15px">

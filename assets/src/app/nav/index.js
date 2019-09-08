@@ -27,6 +27,26 @@ angular.module( 'conexus.nav', [
     $scope.selectedOrderType = 'ONBOOKS';
     $scope.selectedTab = 'ATTENTION';
     $scope.selectedType = 'POST';
+    $scope.tokenChart = {
+        chart: {zoomType: 'x'},
+        series: [{
+            id: 'Attention',
+            type: 'column',
+            name: 'Attention',
+            data: []
+        }],
+        title: {text: ''},
+        xAxis: {
+            crosshair: true,
+            gridLineWidth: 0.5,
+            gridLineColor: 'grey',
+            title: {text: null},
+            categories: [],
+        },
+        legend: {enabled: false},
+        yAxis: {title: {text: null}},
+        credits:{enabled:false},
+    };
     $scope.validationColumnRender = {};
 
     //TODO: REFACTOR
@@ -1238,8 +1258,20 @@ angular.module( 'conexus.nav', [
 
     $rootScope.tokensToggle = function(item){
         $scope.closeAllNav();
-        $scope.tokens = []
-        if (item.tokens){$scope.tokens = item.tokens;}
+        $scope.item = item;
+        if ($scope.item){
+            $scope.item.data.apps.tokens = {'CREATE':1, 'SAMPLE':2};
+            var sortable = [];
+            for (x in Object.keys($scope.item.data.apps.tokens)){sortable.push([Object.keys($scope.item.data.apps.tokens)[x], $scope.item.data.apps.tokens[Object.keys($scope.item.data.apps.tokens)[x]]])}
+            sortable.sort(function(a, b) {return b[1] - a[1]});
+            for (x in sortable){
+                if (x < 100){
+                    $scope.tokenChart.xAxis.categories.push(sortable[x][0]);
+                    $scope.tokenChart.series[0].data.push(sortable[x][1]);
+                }
+            }
+        }
+
         $mdSidenav('tokens').toggle();
     };
 
@@ -1588,7 +1620,7 @@ angular.module( 'conexus.nav', [
             }
            
             console.log('CREATE TIME', $scope.newTime);
-            
+
             $mdSidenav('time').close();
             TimeModel.create($scope.newTime).then(function(model){
                 $rootScope.pop('New Time!', model.id +' '+ model.createdAt);

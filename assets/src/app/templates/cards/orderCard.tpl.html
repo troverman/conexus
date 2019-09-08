@@ -1,6 +1,6 @@
 <div class="card" ng-click="cardDetailToggle(item)">
-    <div style="background:url('https://source.unsplash.com/1600x900/?')" class="imageContainerSmall">
-        <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+    <div style="background:url('https://source.unsplash.com/1600x900/?');min-height:200px" class="imageContainerSmall">
+        <div style="background:rgba(0,0,0,0.75);height:200px" class="imageContainerSmallDiv">  
             <div style="text-align:right;padding:15px;position:absolute;right:0">
                 <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><i class="fas fa-chevron-down"></i></a>
             </div>  
@@ -88,7 +88,7 @@
         <a ng-click="$event.stopPropagation();renderAttentionToggle(item)" style="color:grey"><i class="fas fa-eye"></i> {{item.data.apps.attention.general || 0}}</a>
         <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fas fa-angle-up"></i> {{item.data.apps.reactions.plus || 0 }} like </a> 
         <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fas fa-angle-down"></i> {{item.data.apps.reactions.minus || 0 }} dislike </a>
-        <a ng-click="$event.stopPropagation();contentToggle(item)"><i class="far fa-comment-o"></i> comment </a>
+        <a ng-click="$event.stopPropagation();contentToggle(item)"><i class="far fa-comment"></i> comment </a>
         <a ng-click="$event.stopPropagation();" class="pull-right" style="padding:0px;" href="order/{{item.id}}" ui-sref="order({id:item.id})"><i class="fa fa-link grey"></i></a>
     </div>        
 </div>
