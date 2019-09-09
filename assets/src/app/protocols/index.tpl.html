@@ -1,0 +1,52 @@
+<!--<div class="intro" style="max-height:720px">-->
+<div class="intro">
+    <div class="intro-container">
+        <svg class="svg-defs" viewBox="0 0 1920 1080" viewPort="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+            <symbol id="intro-desktop-text">
+                <text style="font-size:108px;font-family:Helvetica Neue,Helvetica,Arial,sans-serif;font-weight:bold" text-anchor="middle" x="960" y="488" dy=".35em" class="medium-text">CRE8.XYZ</text> 
+                <text style="font-size:28px;font-weight:bold;font-family:Titillium Web,Helvetica,Arial,sans-serif" text-anchor="middle" x="960" y="570" dy=".35em" class="medium-text">PROTOCOLS
+            </symbol>  
+            <div class="intro-shade"></div>  
+        </svg> 
+        <div class="box-with-text">
+            <div class="text-fill">
+                <video itemscope itemtype="VideoObject" class="video" src="https://www.bidio.co/videos/energy.mp4" preload="auto" autoplay="autoplay" loop="loop" muted="muted" playsinline></video>
+            </div>
+            <svg class="svg-inverted-mask" viewBox="0 0 1920 1080" viewPort="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+                <rect width="100%" height="100%" mask="url(#intro-desktop-mask)" class="shape--fill"/>
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#intro-desktop-text" class="text--transparent"></use>
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#intro-desktop-novo" class="text--transparent"></use>
+            </svg> 
+        </div>
+    </div>
+    <div class="intro-mobile"></div>
+</div>
+<div class="container">
+    <div class="spacing-15"></div>
+    <div class="row">
+        <ul style="padding:0px;" class="member-tabs">
+            <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fa fa-filter"></i> Filter</a></li>
+            <li ng-click="expandSort()" style="float:right;font-size:14px"><a href="#">Sort By Recent <i class="fa fa-angle-down"></i></a></li>
+            <div style="clear:both"></div>
+        </ul>
+        <div class="card">
+            <form ng-submit="search()" style="display:flex;flex-direction:row;">
+                <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder="Search" ng-model="searchQuery">
+                <div ng-click="search()" style="border:0px" class="btn btn-default" style="float:right">
+                    <a  href="#" role="button">
+                        <h5 style="color:black;text-align:right" class="noselect">Search <i class="fa fa-search"></i></h5>
+                    </a>
+                </div>
+            </form>
+        </div>
+        <div class="card">
+            <button class="btn btn-default log-btn" ng-click="protocolToggle()">+ Protocol</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-sm-6" ng-repeat="item in protocols" style="padding-left:0px;padding-right:0px;">
+            <div ng-include="'templates/cards/appCard.tpl.html'"></div>
+        </div>
+    </div>   
+</div>
+<div class="spacing-25"></div>

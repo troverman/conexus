@@ -50,6 +50,7 @@ angular.module( 'conexus', [
     'conexus.project',
     'conexus.projects',
     'conexus.protocol',
+    'conexus.protocols',
     'conexus.reaction',
     'conexus.register',
     'conexus.search',

@@ -53,7 +53,6 @@ angular.module( 'conexus.home', [
     ];
     
     var vid = angular.element('#introVideo');
-    //$scope.selectedIntro = $scope.introObj[1];
     $scope.selectedIntro = $scope.introObj[Math.floor(Math.random()*$scope.introObj.length)];
     $scope.selectedTime = Math.floor(Math.random()*92);
     vid[0].currentTime = $scope.selectedTime;
