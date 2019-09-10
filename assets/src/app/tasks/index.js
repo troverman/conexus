@@ -208,6 +208,8 @@ angular.module( 'conexus.tasks', [
     }, true);
 
 
+    //WATCH FOR COMMENTS.. --> UPDATE SCOPE
+
 
     //TODO: SOCKET
     $sailsSocket.subscribe('task', function (envelope) {

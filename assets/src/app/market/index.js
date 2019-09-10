@@ -445,46 +445,9 @@ angular.module( 'conexus.market', [
             }
         }
         console.log($scope.immutableMarket)
-
-
-
         //console.log($scope.immutableMarket);
-
         //POWER SET.. WITH RESPECT TO HIGH D.. LOOK AT HIGHEST DIM
         //HIGH DIMS IMMEDIATLY DECOMPOSE 
-
-
-        //DOESNT WORK :P
-        console.log($scope.orders[x])
-        if (Object.keys($scope.orders[x].setBeta).length > 1){
-            if ($scope.markets.map(function(obj){return obj.string}).indexOf(assetIdentifier) == -1){
-                $scope.markets.push({
-                    string:Object.keys($scope.orders[x].setBeta).join(','), 
-                    info:{
-                        rate:Math.random(),
-                        dailyChange:Math.random(),
-                        marketDepth:Math.random(),
-                    },
-                    model:'MARKET',
-                });
-            }
-        }
-
-        for (y in Object.keys($scope.orders[x].setBeta)){
-            var assetIdentifier = Object.keys($scope.orders[x].setBeta)[y];
-            if ($scope.markets.map(function(obj){return obj.string}).indexOf(assetIdentifier) == -1){
-                $scope.markets.push({
-                    string:assetIdentifier, 
-                    info:{
-                        rate:Math.random(),
-                        dailyChange:Math.random(),
-                        marketDepth:Math.random(),
-                    },
-                    model:'MARKET',
-                });
-            }
-        }
-
     }
 
     //STRING

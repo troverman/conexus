@@ -18,6 +18,28 @@ angular.module( 'conexus.developers', [
 
 .controller( 'DevelopersController', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'ContentModel', 'cytoData', 'OrderModel', 'ReactionModel', 'TransactionModel', 'ValidationModel', function DevelopersController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, ContentModel, cytoData, OrderModel, ReactionModel, TransactionModel, ValidationModel ) {
 
+    $scope.peerChart = {
+        chart: {
+            zoomType: 'x',
+        },
+        series: [],
+        title: {text: ''},
+        xAxis: {
+            type: 'datetime',
+            currentMin: 0,
+            currentMax: 20,
+            title: null,
+            crosshair: true,
+            gridLineWidth: 0.5,
+            gridLineColor: 'grey'
+        },
+        yAxis: [{
+            title: {text: null},
+        }],
+        credits:{enabled:false},
+        plotOptions: {spline: {marker: {enabled: false}}, sma: {marker: {enabled: false}}}
+    };
+
     $scope.results = {
         action:'[{}]',
         app:'[{}]',
@@ -46,64 +68,38 @@ angular.module( 'conexus.developers', [
         tx:'[{}]',
         validation:'[{}]',
     };
+    $scope.map = {center: {latitude: 35.902023, longitude: -84.1507067 }, zoom: 9};
     $scope.newQuery = {};
   
     //FACTOR IN GLOBAL SERCH MODEL FOR API CALLS :P
     $scope.apiCall = function(query){
-        //if (query.model == 'ACTION'){}
-        //if (query.model == 'APP'){}
-        //if (query.model == 'ASSOCIATION'){}
-        //if (query.model == 'BLOCK'){}
         if (query.model == 'CONTENT'){
             ContentModel.get('', '', 1, 0, 'createdAt DESC').then(function(models){
                 $scope.results.content = JSON.stringify(models, null, 4);
             });
         }
-        //if (query.model == 'DATA'){}
-        //if (query.model == 'EVENT'){}
-        //if (query.model == 'FOLLOWER'){}
-        //if (query.model == 'ITEM'){}
-        //if (query.model == 'LOCATION'){}
-        //if (query.model == 'MEMBER'){}
-        //if (query.model == 'MARKET'){}
-        //if (query.model == 'MOTION'){}
-        //if (query.model == 'NOTIFICATION'){}
         if (query.model == 'ORDER'){
             OrderModel.get('', '', '', 1, 0, 'createdAt DESC').then(function(models){
                 $scope.results.order = JSON.stringify(models, null, 4);
             });
         }
-        //if (query.model == 'PROJECT'){}
-        //if (query.model == 'PROJECTCHARTER'){}
-        //if (query.model == 'PROJECTMEMBER'){}
-        //if (query.model == 'PROTOCOL'){}
-        //if (query.model == 'REACTION'){}
-
-
         //EVERY API REQUEST COULD GO THOUGH SEARCH.. LOL SHOUD IT ?
         if (query.model == 'SEARCH'){
             TransactionModel.get('', '', 1, 0, 'createdAt DESC').then(function(models){
                 $scope.results.search = JSON.stringify(models, null, 4);
             });
         }
-
-
-        //if (query.model == 'TASK'){}
-        //if (query.model == 'TOKEN'){}
-        //if (query.model == 'TIME'){}
         if (query.model == 'TRANSACTION'){
             TransactionModel.get('', '', 1, 0, 'createdAt DESC').then(function(models){
                 $scope.results.transaction = JSON.stringify(models, null, 4);
             });
         }
-        //if (query.model == 'TX'){}
         if (query.model == 'VALIDATION'){
             ValidationModel.get('', '', 1, 0, 'createdAt DESC').then(function(models){
                 $scope.results.validation = JSON.stringify(models, null, 4);
             });
         }
     };
-    //$scope.apiCall();
 
     //VALIDATION GRAPH
     $scope.graphOptions = {
@@ -241,7 +237,6 @@ angular.module( 'conexus.developers', [
         pixelRatio: 'auto',
         maxZoom:10,
         minZoom:1,
-        //zoom:0.7
     };
 
     $scope.layout = {name: 'cose'};
@@ -562,8 +557,6 @@ angular.module( 'conexus.developers', [
         ]
     };
 
-    //console.log($scope.elements.edges.length);
-
     $scope.style = [
         {
             "selector": "core",
@@ -742,20 +735,21 @@ angular.module( 'conexus.developers', [
         }, [[]]);
     };  
 
-    //TODO: STANDARDIZE ALG
-    //FIX UPDATING
+    //TODO: STANDARDIZE ALG | FIX UPDATING
     $scope.combinatorialGenerator = function(model){
         
         //cytoData.getGraph().then(function(graph){
-            //console.log(graph)
-            $scope.elementsObj = {};
             //$scope.graph = graph;
             //$scope.graph.layout();
+            //console.log(graph);
 
+            $scope.elementsObj = {};
+        
             var powerSet = [];
             powerSet = getAllSubsets(model)
             powerSet.shift();
             powerSet.pop();
+
             //GENERATE NODES
             for (x in powerSet){
                 var stringX = powerSet[x].join('');
@@ -791,16 +785,16 @@ angular.module( 'conexus.developers', [
                     }
                 }
             }
+
             console.log($scope.elementsObj);
+
             cytoData.getGraph().then(function(graph){
                 $scope.graph = graph;
-                //$scope.graph.fit();
                 $scope.graph.layout({
-                    name: 'cose',//'cola', //name: 'cose', coolingFactor: 0, animate: 'end',  //numIter: 100000000,
-                //    infinite: false,
-                    //fit: true
+                    name: 'cose',
                 }).run();
             });
+
         //});
     };
     $scope.combinatorialGenerator(['A','B','C']);
@@ -823,24 +817,12 @@ angular.module( 'conexus.developers', [
                 }
             }
         }
-        //cytoData.getGraph().then(function(graph){
-        //    $scope.graph = graph;
-        //    $scope.graph.layout({name: 'cose'}).run();
-        //});
     };
     $scope.classicMarketGenerator(['A','B']);
 
     //TODO
     $scope.inverseFacetGenerator = function(model){
         $scope.elementsObj = {};
-        //cytoData.getGraph().then(function(graph){
-        //    $scope.graph = [];
-        //    $scope.graph.layout({
-        //        name: 'cose',
-        //        infinite: true,
-        //        fit: false
-        //    }).run();
-        //});
         var powerSet = [];
         if (model){powerSet = getAllSubsets(model);}
         else{powerSet = getAllSubsets(['A','B','C'])}
@@ -868,7 +850,6 @@ angular.module( 'conexus.developers', [
                 }
             }
         }
-
         cytoData.getGraph().then(function(graph){
             $scope.graph = graph;
             $scope.graph.layout({
@@ -890,8 +871,7 @@ angular.module( 'conexus.developers', [
                 powerSet.splice(x, 1);
             }
         }
-        console.log(powerSet)
-
+        
         //GENERATE NODES
         for (x in powerSet){
             var stringX = powerSet[x].join('');
@@ -900,21 +880,6 @@ angular.module( 'conexus.developers', [
                 data:{id:stringX, type:stringX, name:stringX}
             };
             $scope.elementsObj[stringX] = modelNode;
-            
-            //for (y in powerSet){
-            //    var stringY = powerSet[y].join('');
-            //    var found = stringY.split('').some(function(obj){
-            //        return stringX.split('').includes(obj);
-            //    });
-            //    if (!found){
-            //        var modelEdge = {
-            //            group:'edges',
-            //            data:{id:stringX+'-'+stringY, source:stringX, target:stringY}
-            //        };
-            //        $scope.elementsObj[stringX+'-'+stringY] = modelEdge;
-            //    }
-            //}
-
         }
 
         console.log($scope.elementsObj);
@@ -929,12 +894,6 @@ angular.module( 'conexus.developers', [
         });
     };
 
-    //for (x in $scope.item.associatedModels){
-    //    var length = $scope.graphData.nodes.length;
-    //    $scope.graphData.nodes.push({name:$scope.item.associatedModels[x].type})
-    //    $scope.graphData.links.push({value:1, source:0, target:length});
-    //}
-    
     //DATA MODELS
     $scope.humanReadableTokenModel = 'var humanReadableTokenModel = '+JSON.stringify({ 
         string: 'MODEL+id',
@@ -960,7 +919,8 @@ angular.module( 'conexus.developers', [
         get: "function(){return true}"
     }, null, 4);
 
-    $scope.newOrderModel = JSON.stringify([{
+    $scope.newOrderModel = JSON.stringify([
+        {
             setAlpha:{UNIVERSALTOKEN:1},
             setBeta:{'CRE8+TIME+VOLUNTEER+ONMINT+SPONSOR+id':1}, 
             type:'ONBOOK', 
@@ -996,25 +956,13 @@ angular.module( 'conexus.developers', [
         },
     }, null, 4);
 
-    //MODELS..
-    //HEADERS IN HTML.. GENERATE TOKEN.. PASSPORT.. 
-
     $scope.actionTokenization = JSON.stringify({
         create:'function(newFollow){}',
         get:'function(newQuery){}'
     }, null, 4);
 
-    console.log($scope.actionTokenization)
-
     //TODO FACTORIZATION OF COMMON MODEL ELEMENTS.. 
     //$scope.metaModel = JSON.stringify({}, null, 4);
-
-
-
-    //DEMO OBJ -- FLATTEN INTO STRING
-    //IE .. DEMO CONTENT?
-    //$scope.tokenObj = JSON.stringify([{}}], null, 4);
-    //$scope.tokenObj = JSON.stringify([{}}], null, 4);
 
     $scope.queryModel = [{
         filter:[
@@ -1063,8 +1011,8 @@ angular.module( 'conexus.developers', [
 
     $scope.queryModel = JSON.stringify([{
         filter:[{
-            model:'Association, Task, Project',//Association, Task, Project ..
-            modelParam:'association, id, location, query, tag, ...',//'association, id, location, query, tag, urlTitle',
+            model:'Association, Task, Project',
+            modelParam:'association, id, location, query, tag, ...',
             query:'query',
             association:{
                 population:'boolean',
@@ -1104,7 +1052,6 @@ angular.module( 'conexus.developers', [
     }, null, 4);
 
     $scope.attentionModel = JSON.stringify(
-
         {
             id: {type: 'string'},
             type: {type: 'string'},
@@ -1113,7 +1060,6 @@ angular.module( 'conexus.developers', [
             associatedModels: {type: 'json'},
             creator: {type: 'string'},
         }
-
     , null, 4);
 
     $scope.associationModel = JSON.stringify({
@@ -1140,7 +1086,6 @@ angular.module( 'conexus.developers', [
     $scope.connectionModel = JSON.stringify({
         id: {type: 'string'}
     }, null, 4);
-
 
     $scope.contentModel = JSON.stringify({
         id: {type: 'string'},
@@ -1201,7 +1146,7 @@ angular.module( 'conexus.developers', [
         location: {type: 'json'},
     }, null, 4);
 
-     $scope.marketModel = JSON.stringify({
+    $scope.marketModel = JSON.stringify({
         id: {type: 'string'},
         information: {type: 'json'},
         tokens: {type: 'json'},
@@ -1251,7 +1196,7 @@ angular.module( 'conexus.developers', [
         createdAt: {type: 'string'},
     }, null, 4);
 
-     $scope.orderQuery = JSON.stringify({
+    $scope.orderQuery = JSON.stringify({
         limit: 10,
         skip:0,
         sort:'createdAt DESC',
@@ -1267,7 +1212,7 @@ angular.module( 'conexus.developers', [
         user: { model: 'User',}
     }, null, 4);
 
-     $scope.peerModel = JSON.stringify({
+    $scope.peerModel = JSON.stringify({
         apps: {type: 'json'}, 
         reputation: {type: 'json'}, 
         validiatedBlocks: {type: 'string'},
@@ -1276,7 +1221,7 @@ angular.module( 'conexus.developers', [
         creator: {type: 'string'},
     }, null, 4);
 
-     $scope.projectController = JSON.stringify({
+    $scope.projectController = JSON.stringify({
         get: {type: 'json'},
         create: {type: 'json'},
     }, null, 4);
@@ -1296,9 +1241,7 @@ angular.module( 'conexus.developers', [
         info: {type: 'json'},
     }, null, 4);
 
-
-    //SIMPLY PART OF THE PROJECT..
-    //DEPRECIATE
+    //STANDARDIZE
     $scope.projectCharterModel = JSON.stringify({
         membership:{
             types:[{

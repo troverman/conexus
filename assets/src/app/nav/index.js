@@ -487,6 +487,13 @@ angular.module( 'conexus.nav', [
         else{$mdSidenav('login').toggle();}
     };
 
+    $rootScope.protocolToggle = function(){
+        $scope.closeAllNav();
+        $scope.newProtocol = {};
+        if($rootScope.currentUser){$mdSidenav('protocol').toggle();}
+        else{$mdSidenav('login').toggle();}
+    };
+
     //TODO
     $rootScope.renderToggle = function(item, type){
         $scope.closeAllNav();
@@ -820,8 +827,6 @@ angular.module( 'conexus.nav', [
         $scope.closeAllNav();
         $mdSidenav('sort').toggle();
     };
-
-
 
     $rootScope.statsToggle = function(item){
 
@@ -1524,7 +1529,7 @@ angular.module( 'conexus.nav', [
     };
 
     //TODO: MOVE TO ASSOCIATED MODELS
-    $scope.createProject = function(content) {
+    $scope.createProject = function() {
 
         if ($rootScope.currentUser){
 
@@ -1559,6 +1564,8 @@ angular.module( 'conexus.nav', [
         else{$mdSidenav('login').toggle()}
     };
 
+    $scope.createProtocol = function() {};
+
     //TODO: MORE ON RENDER
     $rootScope.createReaction = function(item, type){
         if($rootScope.currentUser){
@@ -1579,7 +1586,7 @@ angular.module( 'conexus.nav', [
         else{$mdSidenav('login').toggle()}
     };
 
-    $scope.createTask = function(content) {
+    $scope.createTask = function() {
         if ($rootScope.currentUser){
             $scope.newTask.user = $rootScope.currentUser.id;
 

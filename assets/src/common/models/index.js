@@ -12,6 +12,7 @@ angular.module('models', [
 	'models.order',
 	'models.peer',
 	'models.project',
+	'models.protocol',
 	'models.reaction',
 	'models.search',
 	'models.task',
