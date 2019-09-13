@@ -3,6 +3,24 @@
 */
 var Q = require('q');
 
+function getTo(model){
+	var deferred = Q.defer();
+	User.find({id:model.to}).then(function(userModels){
+		if (userModels.length == 0){Project.find({id:model.to}).then(function(projectModels){deferred.resolve(projectModels[0])})}
+		else{deferred.resolve(userModels[0])}
+	})
+	return deferred.promise;
+};
+
+function getFrom(model){
+	var deferred = Q.defer();
+	User.find({id:model.from}).then(function(userModels){
+		if (userModels.length == 0){Project.find({id:model.from}).then(function(projectModels){deferred.resolve(projectModels[0])})}
+		else{deferred.resolve(userModels[0])}
+	});
+	return deferred.promise;
+};
+
 module.exports = {
 
 	//CAN HANDLE ALL API CALLS..
@@ -292,8 +310,9 @@ module.exports = {
 		    var userPromises = [];
 		    for (x in activity){userPromises.push(User.find({id:activity[x].user}))}
     		Q.all(userPromises).then((populatedUserModels)=>{
-    			console.log('made it')
+    			console.log('made it');
     			for (x in activity){activity[x].user = populatedUserModels[x][0]}
+    			//getFrom, getTo
 				res.json(activity);
     		});
 

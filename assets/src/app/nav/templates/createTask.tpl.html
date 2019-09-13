@@ -6,67 +6,63 @@
             <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
                 <div style="margin-top: auto;margin-bottom: auto;">
                     <div style="padding:15px">
-                        <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Create Task</h1>
+                        <h1 style="text-align:left;font-size:42px;color:rgba(255,255,255,0.9);font-weight:400;">Create Task</h1>
                     </div>
                 </div>
             </div>
         </div>
-
         <div style="padding:16px">
             <div class="spacing-15"></div>
-            <p style="color:gray;font-style:italic">Tasks are an abstraction of intentional time, they create linkages between Time & Token Protocols. <a ng-click="informationToggle('CREATETASK')" href="#"><i class="fa fa-question-circle"></i></a></p>
+            <p style="color:gray;font-style:italic">Tasks are an abstraction of intentional time, they create linkages between Time & Token Protocols. <a ng-click="informationToggle('CREATETASK')"><i class="fa fa-question-circle"></i></a></p>
             <div class="spacing-10"></div>
             <form role="form" ng-submit="createTask()">
                 <h5>Title</h5>
                 <input type="text" placeholder="Title" ng-model="newTask.title" class="form-control">
-
-                <h5>Associations <a ng-click="informationToggle('ASSOCIATIONS')" href="#"><i class="fa fa-question-circle"></i></a><a href="#" ng-click="expandAssociations()" style="float:right"><i class="fas fa-bezier-curve"></i> Expand</a></h5>
-                <tags-input min-length="1" placeholder="Associations" ng-model="newTask.associatedModels">
-                    <auto-complete source="loadAssociations($query)"></auto-complete>
-                </tags-input>
-
-                <div ng-if="!associationsAreExpanded && newTask.associatedModels.length > 0">
-                    <h5>Context <a ng-if="newTransaction.context.length > 0" href="#" ng-click="expandAssociations()" style="float:right"><i class="fas fa-bezier-curve"></i> Expand</a></h5>
+                <div>
+                    <h5>
+                        Context 
+                        <a ng-click="expandAssociations()" style="float:right">
+                            <span ng-if="!associationsAreExpanded"><i class="fas fa-bezier-curve"></i> Expand</span>
+                            <span ng-if="associationsAreExpanded"><i class="fas fa-grip-lines"></i> Hide</span>
+                        </a>
+                    </h5>
                     <tags-input min-length="1" placeholder="Context" ng-model="newTask.context">
                         <auto-complete min-length="2" source="loadTags($query)"></auto-complete>
                     </tags-input>
                 </div>
-
                 <div ng-if="associationsAreExpanded">
+                    <h5>Associations </h5>
+                    <tags-input min-length="1" placeholder="Associations" ng-model="newTask.associatedModels">
+                        <auto-complete source="loadAssociations($query)"></auto-complete>
+                    </tags-input>
                     <div class="row">
                         <div class="col-md-12 col-sm-12" ng-repeat="association in newTask.associatedModels">
-                            <h5>{{association.text}}</h5>
-                            <h5>Connection</h5>
-                            <div style="text-align:left">
-                                <a ng-click="expandConnection(association)"><b>{{association.connection[0].text || 'Default Connection'}}</b></a>
-                            </div> 
-                            <h5>Context</h5>
-                            <tags-input min-length="1" placeholder="Context" ng-model="association.context">
+                            <h5>
+                                {{association.text}} 
+                                <a style="float:right" ng-click="association.isExpanded=!association.isExpanded">
+                                    <i class="fas fa-compress-arrows-alt"></i>
+                                    <b>{{association.connection[0].text || 'Default Connection'}}</b>
+                                </a>
+                            </h5>
+                            <div ng-if="association.isExpanded">
+                                <h4>Default Connection</h4>
+                                <p>Details & Rules<p>
+                            </div>
+                            <tags-input min-length="1" placeholder="{{association.text}} Context" ng-model="association.context">
                                 <auto-complete source="loadTags($query)"></auto-complete>
                             </tags-input>
-                            <div class="spacing-5"></div>                       
+                            <div class="spacing-5"></div>
                             <div ng-repeat="context in association.context">
                                 <div layout="">
                                     <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{context.text}}</span></div>
-                                    <md-slider 
-                                        ng-model="context.score"  
-                                        step="0.1" 
-                                        flex="" 
-                                        md-discrete="" 
-                                        min="-100" 
-                                        max="100">
-                                    </md-slider>
-                                    <div flex="10" layout="" layout-align="center center">
-                                        <p class="md-body-1">{{context.score}}</p>
-                                    </div>
+                                    <md-slider ng-model="context.score" step="0.1" flex="" md-discrete="" min="-100" max="100"></md-slider>
+                                    <div flex="10" layout="" layout-align="center center"><p class="md-body-1">{{context.score}}</p></div>
                                 </div>
-                                <div style="text-align:center"><p style="font-size:9px">{{context.score}} | {{currentUser.reputation[context.text]*context.score}}</p></div>
+                                <div style="text-align:center"><p style="font-size:9px">{{context.score}}</p></div>
                             </div>
-                            <hr>
                         </div>
                     </div>
                 </div>
-
                 <h5>Location</h5>
                 <input type="text" placeholder="Location" ng-model="newTask.location" class="form-control">
                 <div class="">
@@ -78,11 +74,9 @@
                         </ui-gmap-marker>
                     </ui-gmap-google-map>
                 </div>
-                <h5>Content</h5>
                 <text-angular ng-model="newTask.content" ta-toolbar="[['p','h1','bold','italics','quote','insertLink', 'html']]"></text-angular>
                 <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newTask.title">create</button>
             </form>
         </div>
-
     </div>
 </md-sidenav>

@@ -14,7 +14,7 @@
             <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
                 <div style="margin-top: auto;margin-bottom: auto;">
                     <div style="padding:15px">
-                        <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Create Item</h1>
+                        <h1 style="text-align:left;font-size:42px;color:rgba(255,255,255,0.9);font-weight:400;">Create Item</h1>
                         <h5 style="color:white">Sharing Creates Abundance</h5>
                     </div>
                 </div>
@@ -25,9 +25,6 @@
 
         <div style="padding:16px">
 
-            <p style="color:gray;font-style:italic">Items connect Token Protocols with information and applications logic such as 2nd Stage delivery consumption. Items can be acted upon. <a ng-click="informationToggle('CREATEITEM')" href="#"><i class="fa fa-question-circle"></i></a></p>
-            <!--items are physical and digital-->
-
             <div class="spacing-10"></div>
 
             <form role="form" ng-submit="createItem()">
@@ -36,45 +33,25 @@
                 <input type="text" placeholder="Title" ng-model="newItem.title" class="form-control">
                 <div class="spacing-5"></div>
 
-
-                <!--CREATE (MULTI)-VALIDATION FORM-->
-
-                <!--template-->
-                <div>
-
-                    <!--TODO: SELF VALIDATION-->
-                    <h5>Associations <a ng-click="informationToggle('ASSOCIATION')" href="#"><i class="fa fa-question-circle"></i></a><i style="float:right" class="fas fa-bezier-curve"></i></h5>
+                <div ng-if="false">
+                    <h5>Associations <a ng-click="informationToggle('ASSOCIATION')"><i class="fa fa-question-circle"></i></a><i style="float:right" class="fas fa-bezier-curve"></i></h5>
                     <tags-input min-length="1" placeholder="Associations" ng-model="newItem.associatedModels">
                         <auto-complete source="loadAssociations($query)"></auto-complete>
                     </tags-input>
-
-                    <!--EASY CONTEXT-->
-
                     <div class="row">
                         <div class="col-md-12 col-sm-12" ng-repeat="association in newItem.associatedModels">
                             <h5>
                                 {{association.text}} Association 
-                                <a ng-click="informationToggle('TAGS')" href="#"><i class="fa fa-question-circle"></i></a>
-                                <a href="#" ng-click="expandAssociations(association)" style="float:right">
+                                <a ng-click="informationToggle('TAGS')"><i class="fa fa-question-circle"></i></a>
+                                <a ng-click="expandAssociations(association)" style="float:right">
                                     <i class="fas fa-bezier-curve"></i> Expand
                                 </a>
                             </h5>
-
                             <tags-input min-length="1" placeholder="Context" ng-model="association.context">
                                 <auto-complete source="loadTags($query)"></auto-complete>
                             </tags-input>
-
                             <div ng-if="associationsAreExpanded">
                                 <div class="spacing-5"></div>
-                                <div>
-                                    <div style="text-align:center"><a ng-click="expandConnection(association)">{{association.connection[0].text || 'Default Connection'}}</a></div>
-                                    <!--
-                                    if association.connectionExpand
-                                    <tags-input min-length="1" placeholder="Connection" ng-model="association.connection">
-                                        <auto-complete source="loadTags($query)"></auto-complete>
-                                    </tags-input>
-                                    -->
-                                </div>
                                 <div ng-repeat="context in association.context">
                                     <div layout="">
                                         <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{context.text}}</span></div>
@@ -95,75 +72,154 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
-
                 </div>
 
-                <div class="spacing-10"></div>
-
-                <div class="">
-
-                    <h5>Location <a ng-click="informationToggle('LOCATION')" href="#"><i class="fa fa-question-circle"></i></a><i style="float:right" class="fas fa-map-marker-alt"></i></h5>
-                    <tags-input min-length="1" placeholder="Location" ng-model="newItem.location"></tags-input>
-                    <div class="">
-                        <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options">
-                            <ui-gmap-marker ng-repeat="marker in markers" coords="marker.coords" options="marker.options" idkey="marker.id">
-                                <ui-gmap-window options="windowOptions" closeClick="closeClick()">
-                                    <div style="font-size: 15px;"><a href="project/{{marker.url}}" ui-sref="project.activity({path:marker.url})">{{marker.content}}</a></div>
-                                </ui-gmap-window>
-                            </ui-gmap-marker>
-                        </ui-gmap-google-map>
-                    </div>
-
+                <div>
+                    <h5>
+                        Context 
+                        <a ng-click="expandAssociations()" style="float:right">
+                            <span ng-if="!associationsAreExpanded"><i class="fas fa-bezier-curve"></i> Expand</span>
+                            <span ng-if="associationsAreExpanded"><i class="fas fa-grip-lines"></i> Hide</span>
+                        </a>
+                    </h5>
+                    <tags-input min-length="1" placeholder="Context" ng-model="newContent.context">
+                        <auto-complete min-length="2" source="loadTags($query)"></auto-complete>
+                    </tags-input>
                 </div>
 
-                <div class="spacing-10"></div>
-                <h5>More Information</h5>
-                <md-switch ng-model="expand" aria-label="tradable"></md-switch>
-                <div class="spacing-10"></div>
+                <div ng-if="associationsAreExpanded">
 
-                <div ng-if="expand">
-
-                    <h4>Apps</h4>
-                    <p style="color:gray;font-style:italic">Actions, Componets, Data, Delivery, Generator, Status</p>
-                    <!--VS ASSOCIATED MODELS..-->
-                    <!--TYPE OF ASSOCIATION. 'TYPE' (SHOULD BE OF MODEL TYPE ITEM) (&OR DEPRECIATE CONTENT)--> 
-                    <h5>Components <a ng-click="informationToggle('ASSOCIATION')" href="#"><i class="fa fa-question-circle"></i></a><i style="float:right" class="fas fa-bezier-curve"></i></h5>
-                    <tags-input min-length="1" placeholder="Item Components" ng-model="newItem.associatedComponentModels">
+                    <h5>Associations </h5>
+                    <tags-input min-length="1" placeholder="Associations" ng-model="newContent.associatedModels">
                         <auto-complete source="loadAssociations($query)"></auto-complete>
                     </tags-input>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12" ng-repeat="association in newContent.associatedModels">
+                            <h5>
+                                {{association.text}} 
+                                <a style="float:right" ng-click="association.isExpanded=!association.isExpanded">
+                                    <i class="fas fa-compress-arrows-alt"></i>
+                                    <b>{{association.connection[0].text || 'Default Connection'}}</b>
+                                </a>
+                            </h5>
+                            <div ng-if="association.isExpanded">
+                                <h4>Default Connection</h4>
+                                <p>Details & Rules<p>
+                            </div>
 
-                    <h5>Generator: <b>{{newItem.isGenerator}}</b><a ng-click="informationToggle('ITEM GENERATOR')" href="#"><i class="fa fa-question-circle"></i></a></h5>
-                    <md-switch ng-model="newItem.isGenerator" aria-label="newItem.isGenerator"></md-switch>
+                            <tags-input min-length="1" placeholder="{{association.text}} Context" ng-model="association.context">
+                                <auto-complete source="loadTags($query)"></auto-complete>
+                            </tags-input>
 
-                    <h5>Item Status <a ng-click="informationToggle('ITEM STATUS')" href="#"><i class="fa fa-question-circle"></i></a></h5>
-                    <input placeholder="Status" type="text" ng-model="newItem.status" class="form-control">
+                            <div class="spacing-5"></div>
 
-                    <h5>Associated Actions <a ng-click="informationToggle('ITEM ACTIONS')" href="#"><i class="fa fa-question-circle"></i></a></h5>
+                            <div ng-repeat="context in association.context">
+
+                                <div layout="">
+                                    <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{context.text}}</span></div>
+                                    <md-slider 
+                                        ng-model="context.score"  
+                                        step="0.1" 
+                                        flex="" 
+                                        md-discrete="" 
+                                        min="-100" 
+                                        max="100">
+                                    </md-slider>
+                                    <div flex="10" layout="" layout-align="center center">
+                                        <p class="md-body-1">{{context.score}}</p>
+                                    </div>
+                                </div>
+                                <div style="text-align:center"><p style="font-size:9px">{{context.score}}</p></div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="spacing-10"></div>
+
+                <h5>
+                    <a ng-click="expandItem=!expandItem">
+                        <span ng-if="!expandItem"><i class="fas fa-bars"></i> Show Details</span>
+                        <span ng-if="expandItem"><i class="fas fa-grip-lines"></i> Hide Details</span>
+                    </a>
+                </h5>
+
+                <div class="spacing-10"></div>
+
+                <div ng-if="expandItem">
+
+                    <h4>Apps</h4>
+                    <p style="color:gray;font-style:italic">Actions, Componets, Data, Delivery, Generator, Location, Status</p>
+                    <!--VS ASSOCIATED MODELS..-->
+                    <!--TYPE OF ASSOCIATION. 'TYPE' (SHOULD BE OF MODEL TYPE ITEM) (&OR DEPRECIATE CONTENT)--> 
+
+                    <h5>Associated Actions <a ng-click="informationToggle('ITEM ACTIONS')"><i class="fa fa-question-circle"></i></a></h5>
+                    <p style="color:gray;font-style:italic">App Defined Actions for the Item</p>
                     <tags-input min-length="1" placeholder="Associated Actions" ng-model="newItem.associatedActions">
                         <auto-complete></auto-complete>
                     </tags-input>
 
+                    <h5>Components <a ng-click="informationToggle('ASSOCIATION')"><i class="fa fa-question-circle"></i></a><i style="float:right" class="fas fa-bezier-curve"></i></h5>
+                    <tags-input min-length="1" placeholder="Item Components" ng-model="newItem.associatedComponentModels">
+                        <auto-complete source="loadAssociations($query)"></auto-complete>
+                    </tags-input>
 
-                    <h5>Associated Orders <a ng-click="informationToggle('ITEM IDENTIFER SET')" href="#"><i class="fa fa-question-circle"></i></a></h5>
+                    <h5>Connections / Item Charter</h5>
+                    <p style="color:gray;font-style:italic">Rules surrounding data association, and principles such as item ownership.</p>
+                    <tags-input min-length="1" placeholder="Item Connections" ng-model="newItem.associatedConnections">
+                        <auto-complete source="loadAssociations($query)"></auto-complete>
+                    </tags-input>
+
+                    <h5>Generator <b>{{newItem.isGenerator}}</b><a ng-click="informationToggle('ITEM GENERATOR')"><i class="fa fa-question-circle"></i></a></h5>
+                    <p style="color:gray;font-style:italic">The Generator Property denotes that an item is Abstract and generates discrete item copys on purchase. Useful for inventory.</p>
+                    <md-switch ng-model="newItem.isGenerator" aria-label="newItem.isGenerator"></md-switch>
+
+                    <div class="">
+                        <h5>Location <a ng-click="informationToggle('LOCATION')"><i class="fa fa-question-circle"></i></a></h5>
+                        <tags-input min-length="1" placeholder="Location" ng-model="newItem.location"></tags-input>
+                        <div class="">
+                            <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options">
+                                <ui-gmap-marker ng-repeat="marker in markers" coords="marker.coords" options="marker.options" idkey="marker.id">
+                                    <ui-gmap-window options="windowOptions" closeClick="closeClick()">
+                                        <div style="font-size: 15px;"><a href="project/{{marker.url}}" ui-sref="project.activity({path:marker.url})">{{marker.content}}</a></div>
+                                    </ui-gmap-window>
+                                </ui-gmap-marker>
+                            </ui-gmap-google-map>
+                        </div>
+                    </div>
+                    <div class="spacing-10"></div>
+
+                    <h5>Item Status <a ng-click="informationToggle('ITEM STATUS')"><i class="fa fa-question-circle"></i></a></h5>
+                    <input placeholder="Status" type="text" ng-model="newItem.status" class="form-control">
+
+                    <h5>Associated Orders <a ng-click="informationToggle('ITEM IDENTIFER SET')"><i class="fa fa-question-circle"></i></a></h5>
+                    <p style="color:gray;font-style:italic">If you wish to create liquidity with the item on create</p>
                     <tags-input min-length="1" placeholder="Associated Orders" ng-model="newItem.associatedOrders">
                         <auto-complete></auto-complete>
                     </tags-input>
 
-
-                    <!--POTIENTALL PART OF ORDER PROCESS AND ORDER ''FUILFUILMENT''-->
-                    <h5>Delivery Protocol <a ng-click="informationToggle('ITEM DELIVERY PROTOCOL')" href="#"><i class="fa fa-question-circle"></i></a></h5>
+                    <h5>Fulfilment Protocol <a ng-click="informationToggle('ITEM DELIVERY PROTOCOL')"><i class="fa fa-question-circle"></i></a></h5>
+                    <p style="color:gray;font-style:italic">Delivery etc</p>
                     <tags-input min-length="1" placeholder="Delivery Protocol" ng-model="newItem.deliveryProtocol">
                         <auto-complete></auto-complete>
                     </tags-input>
 
-                    <h5>JSON Data <a ng-click="informationToggle('ITEM DATA')" href="#"><i class="fa fa-question-circle"></i></a></h5>
+                    <h5>Time Ownership Protocol <a ng-click="informationToggle('Time Ownership Protocol')"><i class="fa fa-question-circle"></i></a></h5>
+                    <tags-input min-length="1" placeholder="Time Ownership Protocol" ng-model="newItem.timeOwnershipProtocol">
+                        <auto-complete></auto-complete>
+                    </tags-input>
+
+                    <h5>JSON Data <a ng-click="informationToggle('ITEM DATA')"><i class="fa fa-question-circle"></i></a></h5>
                     <input type="text" placeholder="JSON Data" ng-model="newItem.data" class="form-control">
+                    
+                    <div class="spacing-10"></div>
 
                 </div>
-                <div class="spacing-10"></div>
 
                 <text-angular ng-model="newItem.content" ta-toolbar="[['p','h1','bold','italics','quote','insertLink', 'html']]"></text-angular>
 

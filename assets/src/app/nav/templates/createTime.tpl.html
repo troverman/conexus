@@ -13,50 +13,60 @@
 
         <div style="padding:16px">
             <div class="spacing-15"></div>
-            <p style="color:gray;font-style:italic">Time & Intention unite. Token Protocols propogate value interactions. <a ng-click="informationToggle('CREATETIME')" href="#"><i class="fa fa-question-circle"></i></a></p>
+            <p style="color:gray;font-style:italic">Time & Intention unite. Token Protocols propogate value interactions. <a ng-click="informationToggle('CREATETIME')"><i class="fa fa-question-circle"></i></a></p>
             <div class="spacing-10"></div>
             <form role="form" ng-submit="createTime()">
 
-                <!--SELF CONTEXT-->
-                <!--IMPLICIT VALIDATION W CONTEXT FOR TAGS-->
-                <h5>Task <a ng-click="informationToggle('ASSOCIATIONS')" href="#"><i class="fa fa-question-circle"></i></a></h5>
-                <tags-input min-length="1" placeholder="Associations" ng-model="newTime.associatedModels">
-                    <auto-complete source="loadAssociationsTask($query)"></auto-complete>
-                </tags-input>
-
-                <div ng-if="!newTime.associatedModels.length">
-                    <h5>Context <a ng-click="informationToggle('TAGS')" href="#"><i class="fa fa-question-circle"></i></a></h5>
-                    <tags-input min-length="1" placeholder="Tags" ng-model="newTime.tags">
-                        <auto-complete source="loadTags($query)"></auto-complete>
+                <div>
+                    <h5>
+                        Context 
+                        <a ng-click="expandAssociations()" style="float:right">
+                            <span ng-if="!associationsAreExpanded"><i class="fas fa-bezier-curve"></i> Expand</span>
+                            <span ng-if="associationsAreExpanded"><i class="fas fa-grip-lines"></i> Hide</span>
+                        </a>
+                    </h5>
+                    <tags-input min-length="1" placeholder="Context" ng-model="newTime.context">
+                        <auto-complete min-length="2" source="loadTags($query)"></auto-complete>
                     </tags-input>
                 </div>
-    
-                <!--TODO-->
-                <!--FOR X IN TAGS-->
-                <div ng-repeat="model in newTime.associatedModels">
-                    <div class="col-sm-12">
-
-                        <h5>Context <a ng-click="informationToggle('TAGS')" href="#"><i class="fa fa-question-circle"></i></a></h5>
-                        <tags-input min-length="1" placeholder="Tags" ng-model="newTime.tags">
-                            <auto-complete source="loadTags($query)"></auto-complete>
-                        </tags-input>
-
-                        <div class="spacing-5"></div>
-
-                        <div ng-repeat="tag in newTime.tags track by $index">
-                            <div layout="">
-                                <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{tag.text}}</span></div>
-                                <md-slider step="0.1" flex="" md-discrete="" ng-model="newValidation.validation[tag.text]" step="1" min="-100" max="100" aria-label="{{tag.text}}"></md-slider>
-                                <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{newValidation.validation[tag.text]}} | {{reputation[tag.text] || 0}}</span></div>
+                
+                <div ng-if="associationsAreExpanded">
+                    <h5>Associations </h5>
+                    <tags-input min-length="1" placeholder="Associations" ng-model="newTime.associatedModels">
+                        <auto-complete source="loadAssociations($query)"></auto-complete>
+                    </tags-input>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12" ng-repeat="association in newTime.associatedModels">
+                            <h5>
+                                {{association.text}} 
+                                <a style="float:right" ng-click="association.isExpanded=!association.isExpanded">
+                                    <i class="fas fa-compress-arrows-alt"></i>
+                                    <b>{{association.connection[0].text || 'Default Connection'}}</b>
+                                </a>
+                            </h5>
+                            <div ng-if="association.isExpanded">
+                                <h4>Default Connection</h4>
+                                <p>Details & Rules<p>
+                            </div>
+                            <tags-input min-length="1" placeholder="{{association.text}} Context" ng-model="association.context">
+                                <auto-complete source="loadTags($query)"></auto-complete>
+                            </tags-input>
+                            <div class="spacing-5"></div>
+                            <div ng-repeat="context in association.context">
+                                <div layout="">
+                                    <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{context.text}}</span></div>
+                                    <md-slider ng-model="context.score" step="0.1" flex="" md-discrete="" min="-100" max="100"></md-slider>
+                                    <div flex="10" layout="" layout-align="center center"><p class="md-body-1">{{context.score}}</p></div>
+                                </div>
+                                <div style="text-align:center"><p style="font-size:9px">{{context.score}}</p></div>
                             </div>
                         </div>
-
                     </div>
                 </div>
 
                 <ul class="nav nav-pills nav-justified contentTyle">
-                    <li ng-class="{active: newTime.type=='PLANNED'}" ng-click="selectTypeTime('PLANNED')"><a href="#">RETROACTIVE OR PLANNED</a></li>
-                    <li ng-class="{active: newTime.type=='LIVE'}" ng-click="selectTypeTime('LIVE')"><a href="#">LIVE</a></li>
+                    <li ng-class="{active: newTime.type=='PLANNED'}" ng-click="selectTypeTime('PLANNED')"><a>RETROACTIVE OR PLANNED</a></li>
+                    <li ng-class="{active: newTime.type=='LIVE'}" ng-click="selectTypeTime('LIVE')"><a>LIVE</a></li>
                 </ul>
 
                 <div ng-if="newTime.type == 'LIVE'">

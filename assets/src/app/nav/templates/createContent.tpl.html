@@ -18,12 +18,12 @@
 
             <div class="spacing-15"></div>
 
-            <p style="color:gray;font-style:italic">Well developed content earns more tokens. <a ng-click="informationToggle('CREATECONTENT')" href="#"><i class="fa fa-question-circle"></i></a></p>
+            <p style="color:gray;font-style:italic">Well developed content earns more tokens. <a ng-click="informationToggle('CREATECONTENT')"><i class="fa fa-question-circle"></i></a></p>
 
             <div ng-click="createDetailToggle()">
                 <div class="spacing-5"></div>
-                <a ng-if="!createDetailToggleVar" href="#"><b><i class="fas fa-bars"></i> Show Details</b></a>
-                <a ng-if="createDetailToggleVar" href="#"><b><i class="fas fa-grip-lines"></i> Hide Details</b></a>
+                <a ng-if="!createDetailToggleVar"><b><i class="fas fa-bars"></i> Show Details</b></a>
+                <a ng-if="createDetailToggleVar"><b><i class="fas fa-grip-lines"></i> Hide Details</b></a>
                 <div class="spacing-5"></div>
             </div>
 
@@ -34,31 +34,57 @@
                     <h5>Title</h5>
                     <input type="text" placeholder="Title" ng-model="newContent.title" class="form-control">
                 
-                    <h5>Associations <a ng-click="informationToggle('ASSOCIATIONS')" href="#"><i class="fa fa-question-circle"></i></a><a href="#" ng-click="expandAssociations()" style="float:right"><i class="fas fa-bezier-curve"></i> Expand</a></h5>
-                    <tags-input min-length="1" placeholder="Associations" ng-model="newContent.associatedModels">
-                        <auto-complete source="loadAssociations($query)"></auto-complete>
-                    </tags-input>
-
                     <!--WATCHER TO APPLY-->
+                    <!--
                     <div ng-if="!associationsAreExpanded && newContent.associatedModels.length > 0">
-                        <h5>Context <a ng-if="newTransaction.context.length > 0" href="#" ng-click="expandAssociations()" style="float:right"><i class="fas fa-bezier-curve"></i> Expand</a></h5>
+                        <h5>Context </h5>
+                        <tags-input min-length="1" placeholder="Context" ng-model="newContent.context">
+                            <auto-complete min-length="2" source="loadTags($query)"></auto-complete>
+                        </tags-input>
+                    </div>
+                    -->
+
+                    <div>
+                        <h5>
+                            Context 
+                            <a ng-click="expandAssociations()" style="float:right">
+                                <span ng-if="!associationsAreExpanded"><i class="fas fa-bezier-curve"></i> Expand</span>
+                                <span ng-if="associationsAreExpanded"><i class="fas fa-grip-lines"></i> Hide</span>
+                            </a>
+                        </h5>
                         <tags-input min-length="1" placeholder="Context" ng-model="newContent.context">
                             <auto-complete min-length="2" source="loadTags($query)"></auto-complete>
                         </tags-input>
                     </div>
 
                     <div ng-if="associationsAreExpanded">
+
+                        <h5>Associations </h5>
+                        <tags-input min-length="1" placeholder="Associations" ng-model="newContent.associatedModels">
+                            <auto-complete source="loadAssociations($query)"></auto-complete>
+                        </tags-input>
                         <div class="row">
                             <div class="col-md-12 col-sm-12" ng-repeat="association in newContent.associatedModels">
-                                <h5>{{association.text}} Association Context <a ng-click="informationToggle('ASSOCIATIONS')" href="#"><i class="fa fa-question-circle"></i></a></h5>
-                                <tags-input min-length="1" placeholder="Context" ng-model="association.context">
+                                <h5>
+                                    {{association.text}} 
+                                    <a style="float:right" ng-click="association.isExpanded=!association.isExpanded">
+                                        <i class="fas fa-compress-arrows-alt"></i>
+                                        <b>{{association.connection[0].text || 'Default Connection'}}</b>
+                                    </a>
+                                </h5>
+                                <div ng-if="association.isExpanded">
+                                    <h4>Default Connection</h4>
+                                    <p>Details & Rules<p>
+                                </div>
+
+                                <tags-input min-length="1" placeholder="{{association.text}} Context" ng-model="association.context">
                                     <auto-complete source="loadTags($query)"></auto-complete>
                                 </tags-input>
+
                                 <div class="spacing-5"></div>
-                                <div style="text-align:center">
-                                    <a ng-click="expandConnection(association)"><b>{{association.connection[0].text || 'Default Connection'}}</b></a>
-                                </div>                        
+
                                 <div ng-repeat="context in association.context">
+
                                     <div layout="">
                                         <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{context.text}}</span></div>
                                         <md-slider 
@@ -73,23 +99,25 @@
                                             <p class="md-body-1">{{context.score}}</p>
                                         </div>
                                     </div>
-                                    <div style="text-align:center"><p style="font-size:9px">{{context.score}} | {{currentUser.reputation[context.text]*context.score}}</p></div>
+                                    <div style="text-align:center"><p style="font-size:9px">{{context.score}}</p></div>
+
                                 </div>
+
                             </div>
+
                         </div>
                     </div>
                                   
                     <ul class="nav nav-pills nav-justified contentTyle">
-                        <li ng-class="{active: newContent.type=='AUDIO'}" ng-click="selectType('AUDIO')"><a href="#">Audio</a></li>
-                        <li ng-class="{active: newContent.type=='IMAGE'}" ng-click="selectType('IMAGE')"><a href="#">Image</a></li>
-                        <li ng-class="{active: newContent.type=='LINK'}" ng-click="selectType('LINK')"><a href="#">Link</a></li>
-                        <li ng-class="{active: newContent.type=='POST'}" ng-click="selectType('POST')"><a href="#">Post</a></li>
-                        <li ng-class="{active: newContent.type=='VIDEO'}" ng-click="selectType('VIDEO')"><a href="#">Video</a></li>
+                        <li ng-class="{active: newContent.type=='AUDIO'}" ng-click="selectType('AUDIO')"><a>Audio</a></li>
+                        <li ng-class="{active: newContent.type=='IMAGE'}" ng-click="selectType('IMAGE')"><a>Image</a></li>
+                        <li ng-class="{active: newContent.type=='LINK'}" ng-click="selectType('LINK')"><a>Link</a></li>
+                        <li ng-class="{active: newContent.type=='POST'}" ng-click="selectType('POST')"><a>Post</a></li>
+                        <li ng-class="{active: newContent.type=='VIDEO'}" ng-click="selectType('VIDEO')"><a>Video</a></li>
                     </ul>
 
                 </div>
 
-    
                 <text-angular ng-model="newContent.content" ta-toolbar="[['p','h1','bold','italics','quote','ol','ul','insertLink','insertImage','html']]"></text-angular>
 
                 <div ng-if="newContent.type!='POST'">

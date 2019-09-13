@@ -7654,26 +7654,16 @@ angular.module("nav/templates/create.tpl.html", []).run(["$templateCache", funct
     "        </div>\n" +
     "        <div style=\"min-height:500px;max-height:100vh;overflow:hidden;\">\n" +
     "            <div style=\"padding:16px;\">\n" +
-    "                <h2 ng-click=\"actionToggle()\" class=\"nav-links\" style=\"padding:4px;\"><a>Action</a></h2>\n" +
+    "                <!--<h2 ng-click=\"actionToggle()\" class=\"nav-links\" style=\"padding:4px;\"><a>Action</a></h2>-->\n" +
     "                <h2 ng-click=\"contentToggle()\" class=\"nav-links\" style=\"padding:4px;\"><a>Content</a></h2>\n" +
     "                <h2 ng-click=\"itemToggle()\" class=\"nav-links\" style=\"padding:4px;\"><a>Item</a></h2>\n" +
     "                <h2 ng-click=\"orderToggle()\" class=\"nav-links\" style=\"padding:4px;\"><a>Order</a></h2>\n" +
     "                <h2 ng-click=\"projectToggle()\" class=\"nav-links\" style=\"padding:4px;\"><a>Project</a></h2>\n" +
+    "                <!--<h2 ng-click=\"reactionToggle()\" class=\"nav-links\" style=\"padding:4px;\"><a>Reaction</a></h2>-->\n" +
     "                <h2 ng-click=\"taskToggle()\" class=\"nav-links\" style=\"padding:4px;\"><a>Task</a></h2>\n" +
     "                <h2 ng-click=\"timeToggle()\" class=\"nav-links\" style=\"padding:4px;\"><a>Time</a></h2>\n" +
     "                <h2 ng-click=\"transactionToggle()\" class=\"nav-links\" style=\"padding:4px;\"><a>Transaction</a></h2>\n" +
-    "                <h2 ng-click=\"validationToggle()\" class=\"nav-links\" style=\"padding:4px;\"><a>Validation</a></h2>\n" +
-    "                <!--\n" +
-    "                <h4 ng-click=\"actionToggle()\" class=\"nav-links\" style=\"padding:0px;\"><a>+ Action</a></h2>\n" +
-    "                <h4 ng-click=\"contentToggle()\" class=\"nav-links\" style=\"padding:0px;\"><a>+ Content</a></h2>\n" +
-    "                <h4 ng-click=\"itemToggle()\" class=\"nav-links\" style=\"padding:0px;\"><a>+ Item</a></h2>\n" +
-    "                <h4 ng-click=\"orderToggle()\" class=\"nav-links\" style=\"padding:0px;\"><a>+ Order</a></h2>\n" +
-    "                <h4 ng-click=\"projectToggle()\" class=\"nav-links\" style=\"padding:0px;\"><a>+ Project</a></h2>\n" +
-    "                <h4 ng-click=\"taskToggle()\" class=\"nav-links\" style=\"padding:0px;\"><a>+ Task</a></h2>\n" +
-    "                <h4 ng-click=\"timeToggle()\" class=\"nav-links\" style=\"padding:0px;\"><a>+ Time</a></h2>\n" +
-    "                <h4 ng-click=\"transactionToggle()\" class=\"nav-links\" style=\"padding:0px;\"><a>+ Transaction</a></h2>\n" +
-    "                <h4 ng-click=\"validationToggle()\" class=\"nav-links\" style=\"padding:0px;\"><a>+ Validation</a></h2>\n" +
-    "                -->\n" +
+    "                <!--<h2 ng-click=\"validationToggle()\" class=\"nav-links\" style=\"padding:4px;\"><a>Validation</a></h2>-->\n" +
     "            </div>\n" +
     "            <div style=\"background:url('https://source.unsplash.com/1600x900/?code,pattern,art,forest');height:100vh\" class=\"imageContainerSmall\"><div style=\"background:rgba(0,0,0,0.75);height:100vh\" class=\"imageContainerSmallDiv\"></div></div>\n" +
     "        </div>\n" +
@@ -7863,12 +7853,12 @@ angular.module("nav/templates/createContent.tpl.html", []).run(["$templateCache"
     "\n" +
     "            <div class=\"spacing-15\"></div>\n" +
     "\n" +
-    "            <p style=\"color:gray;font-style:italic\">Well developed content earns more tokens. <a ng-click=\"informationToggle('CREATECONTENT')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></p>\n" +
+    "            <p style=\"color:gray;font-style:italic\">Well developed content earns more tokens. <a ng-click=\"informationToggle('CREATECONTENT')\"><i class=\"fa fa-question-circle\"></i></a></p>\n" +
     "\n" +
     "            <div ng-click=\"createDetailToggle()\">\n" +
     "                <div class=\"spacing-5\"></div>\n" +
-    "                <a ng-if=\"!createDetailToggleVar\" href=\"#\"><b><i class=\"fas fa-bars\"></i> Show Details</b></a>\n" +
-    "                <a ng-if=\"createDetailToggleVar\" href=\"#\"><b><i class=\"fas fa-grip-lines\"></i> Hide Details</b></a>\n" +
+    "                <a ng-if=\"!createDetailToggleVar\"><b><i class=\"fas fa-bars\"></i> Show Details</b></a>\n" +
+    "                <a ng-if=\"createDetailToggleVar\"><b><i class=\"fas fa-grip-lines\"></i> Hide Details</b></a>\n" +
     "                <div class=\"spacing-5\"></div>\n" +
     "            </div>\n" +
     "\n" +
@@ -7879,31 +7869,57 @@ angular.module("nav/templates/createContent.tpl.html", []).run(["$templateCache"
     "                    <h5>Title</h5>\n" +
     "                    <input type=\"text\" placeholder=\"Title\" ng-model=\"newContent.title\" class=\"form-control\">\n" +
     "                \n" +
-    "                    <h5>Associations <a ng-click=\"informationToggle('ASSOCIATIONS')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a><a href=\"#\" ng-click=\"expandAssociations()\" style=\"float:right\"><i class=\"fas fa-bezier-curve\"></i> Expand</a></h5>\n" +
-    "                    <tags-input min-length=\"1\" placeholder=\"Associations\" ng-model=\"newContent.associatedModels\">\n" +
-    "                        <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
-    "                    </tags-input>\n" +
-    "\n" +
     "                    <!--WATCHER TO APPLY-->\n" +
+    "                    <!--\n" +
     "                    <div ng-if=\"!associationsAreExpanded && newContent.associatedModels.length > 0\">\n" +
-    "                        <h5>Context <a ng-if=\"newTransaction.context.length > 0\" href=\"#\" ng-click=\"expandAssociations()\" style=\"float:right\"><i class=\"fas fa-bezier-curve\"></i> Expand</a></h5>\n" +
+    "                        <h5>Context </h5>\n" +
+    "                        <tags-input min-length=\"1\" placeholder=\"Context\" ng-model=\"newContent.context\">\n" +
+    "                            <auto-complete min-length=\"2\" source=\"loadTags($query)\"></auto-complete>\n" +
+    "                        </tags-input>\n" +
+    "                    </div>\n" +
+    "                    -->\n" +
+    "\n" +
+    "                    <div>\n" +
+    "                        <h5>\n" +
+    "                            Context \n" +
+    "                            <a ng-click=\"expandAssociations()\" style=\"float:right\">\n" +
+    "                                <span ng-if=\"!associationsAreExpanded\"><i class=\"fas fa-bezier-curve\"></i> Expand</span>\n" +
+    "                                <span ng-if=\"associationsAreExpanded\"><i class=\"fas fa-grip-lines\"></i> Hide</span>\n" +
+    "                            </a>\n" +
+    "                        </h5>\n" +
     "                        <tags-input min-length=\"1\" placeholder=\"Context\" ng-model=\"newContent.context\">\n" +
     "                            <auto-complete min-length=\"2\" source=\"loadTags($query)\"></auto-complete>\n" +
     "                        </tags-input>\n" +
     "                    </div>\n" +
     "\n" +
     "                    <div ng-if=\"associationsAreExpanded\">\n" +
+    "\n" +
+    "                        <h5>Associations </h5>\n" +
+    "                        <tags-input min-length=\"1\" placeholder=\"Associations\" ng-model=\"newContent.associatedModels\">\n" +
+    "                            <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
+    "                        </tags-input>\n" +
     "                        <div class=\"row\">\n" +
     "                            <div class=\"col-md-12 col-sm-12\" ng-repeat=\"association in newContent.associatedModels\">\n" +
-    "                                <h5>{{association.text}} Association Context <a ng-click=\"informationToggle('ASSOCIATIONS')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
-    "                                <tags-input min-length=\"1\" placeholder=\"Context\" ng-model=\"association.context\">\n" +
+    "                                <h5>\n" +
+    "                                    {{association.text}} \n" +
+    "                                    <a style=\"float:right\" ng-click=\"association.isExpanded=!association.isExpanded\">\n" +
+    "                                        <i class=\"fas fa-compress-arrows-alt\"></i>\n" +
+    "                                        <b>{{association.connection[0].text || 'Default Connection'}}</b>\n" +
+    "                                    </a>\n" +
+    "                                </h5>\n" +
+    "                                <div ng-if=\"association.isExpanded\">\n" +
+    "                                    <h4>Default Connection</h4>\n" +
+    "                                    <p>Details & Rules<p>\n" +
+    "                                </div>\n" +
+    "\n" +
+    "                                <tags-input min-length=\"1\" placeholder=\"{{association.text}} Context\" ng-model=\"association.context\">\n" +
     "                                    <auto-complete source=\"loadTags($query)\"></auto-complete>\n" +
     "                                </tags-input>\n" +
+    "\n" +
     "                                <div class=\"spacing-5\"></div>\n" +
-    "                                <div style=\"text-align:center\">\n" +
-    "                                    <a ng-click=\"expandConnection(association)\"><b>{{association.connection[0].text || 'Default Connection'}}</b></a>\n" +
-    "                                </div>                        \n" +
+    "\n" +
     "                                <div ng-repeat=\"context in association.context\">\n" +
+    "\n" +
     "                                    <div layout=\"\">\n" +
     "                                        <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{context.text}}</span></div>\n" +
     "                                        <md-slider \n" +
@@ -7918,23 +7934,25 @@ angular.module("nav/templates/createContent.tpl.html", []).run(["$templateCache"
     "                                            <p class=\"md-body-1\">{{context.score}}</p>\n" +
     "                                        </div>\n" +
     "                                    </div>\n" +
-    "                                    <div style=\"text-align:center\"><p style=\"font-size:9px\">{{context.score}} | {{currentUser.reputation[context.text]*context.score}}</p></div>\n" +
+    "                                    <div style=\"text-align:center\"><p style=\"font-size:9px\">{{context.score}}</p></div>\n" +
+    "\n" +
     "                                </div>\n" +
+    "\n" +
     "                            </div>\n" +
+    "\n" +
     "                        </div>\n" +
     "                    </div>\n" +
     "                                  \n" +
     "                    <ul class=\"nav nav-pills nav-justified contentTyle\">\n" +
-    "                        <li ng-class=\"{active: newContent.type=='AUDIO'}\" ng-click=\"selectType('AUDIO')\"><a href=\"#\">Audio</a></li>\n" +
-    "                        <li ng-class=\"{active: newContent.type=='IMAGE'}\" ng-click=\"selectType('IMAGE')\"><a href=\"#\">Image</a></li>\n" +
-    "                        <li ng-class=\"{active: newContent.type=='LINK'}\" ng-click=\"selectType('LINK')\"><a href=\"#\">Link</a></li>\n" +
-    "                        <li ng-class=\"{active: newContent.type=='POST'}\" ng-click=\"selectType('POST')\"><a href=\"#\">Post</a></li>\n" +
-    "                        <li ng-class=\"{active: newContent.type=='VIDEO'}\" ng-click=\"selectType('VIDEO')\"><a href=\"#\">Video</a></li>\n" +
+    "                        <li ng-class=\"{active: newContent.type=='AUDIO'}\" ng-click=\"selectType('AUDIO')\"><a>Audio</a></li>\n" +
+    "                        <li ng-class=\"{active: newContent.type=='IMAGE'}\" ng-click=\"selectType('IMAGE')\"><a>Image</a></li>\n" +
+    "                        <li ng-class=\"{active: newContent.type=='LINK'}\" ng-click=\"selectType('LINK')\"><a>Link</a></li>\n" +
+    "                        <li ng-class=\"{active: newContent.type=='POST'}\" ng-click=\"selectType('POST')\"><a>Post</a></li>\n" +
+    "                        <li ng-class=\"{active: newContent.type=='VIDEO'}\" ng-click=\"selectType('VIDEO')\"><a>Video</a></li>\n" +
     "                    </ul>\n" +
     "\n" +
     "                </div>\n" +
     "\n" +
-    "    \n" +
     "                <text-angular ng-model=\"newContent.content\" ta-toolbar=\"[['p','h1','bold','italics','quote','ol','ul','insertLink','insertImage','html']]\"></text-angular>\n" +
     "\n" +
     "                <div ng-if=\"newContent.type!='POST'\">\n" +
@@ -8064,7 +8082,7 @@ angular.module("nav/templates/createItem.tpl.html", []).run(["$templateCache", f
     "            <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "                <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "                    <div style=\"padding:15px\">\n" +
-    "                        <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Create Item</h1>\n" +
+    "                        <h1 style=\"text-align:left;font-size:42px;color:rgba(255,255,255,0.9);font-weight:400;\">Create Item</h1>\n" +
     "                        <h5 style=\"color:white\">Sharing Creates Abundance</h5>\n" +
     "                    </div>\n" +
     "                </div>\n" +
@@ -8075,9 +8093,6 @@ angular.module("nav/templates/createItem.tpl.html", []).run(["$templateCache", f
     "\n" +
     "        <div style=\"padding:16px\">\n" +
     "\n" +
-    "            <p style=\"color:gray;font-style:italic\">Items connect Token Protocols with information and applications logic such as 2nd Stage delivery consumption. Items can be acted upon. <a ng-click=\"informationToggle('CREATEITEM')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></p>\n" +
-    "            <!--items are physical and digital-->\n" +
-    "\n" +
     "            <div class=\"spacing-10\"></div>\n" +
     "\n" +
     "            <form role=\"form\" ng-submit=\"createItem()\">\n" +
@@ -8086,45 +8101,25 @@ angular.module("nav/templates/createItem.tpl.html", []).run(["$templateCache", f
     "                <input type=\"text\" placeholder=\"Title\" ng-model=\"newItem.title\" class=\"form-control\">\n" +
     "                <div class=\"spacing-5\"></div>\n" +
     "\n" +
-    "\n" +
-    "                <!--CREATE (MULTI)-VALIDATION FORM-->\n" +
-    "\n" +
-    "                <!--template-->\n" +
-    "                <div>\n" +
-    "\n" +
-    "                    <!--TODO: SELF VALIDATION-->\n" +
-    "                    <h5>Associations <a ng-click=\"informationToggle('ASSOCIATION')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a><i style=\"float:right\" class=\"fas fa-bezier-curve\"></i></h5>\n" +
+    "                <div ng-if=\"false\">\n" +
+    "                    <h5>Associations <a ng-click=\"informationToggle('ASSOCIATION')\"><i class=\"fa fa-question-circle\"></i></a><i style=\"float:right\" class=\"fas fa-bezier-curve\"></i></h5>\n" +
     "                    <tags-input min-length=\"1\" placeholder=\"Associations\" ng-model=\"newItem.associatedModels\">\n" +
     "                        <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
     "                    </tags-input>\n" +
-    "\n" +
-    "                    <!--EASY CONTEXT-->\n" +
-    "\n" +
     "                    <div class=\"row\">\n" +
     "                        <div class=\"col-md-12 col-sm-12\" ng-repeat=\"association in newItem.associatedModels\">\n" +
     "                            <h5>\n" +
     "                                {{association.text}} Association \n" +
-    "                                <a ng-click=\"informationToggle('TAGS')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a>\n" +
-    "                                <a href=\"#\" ng-click=\"expandAssociations(association)\" style=\"float:right\">\n" +
+    "                                <a ng-click=\"informationToggle('TAGS')\"><i class=\"fa fa-question-circle\"></i></a>\n" +
+    "                                <a ng-click=\"expandAssociations(association)\" style=\"float:right\">\n" +
     "                                    <i class=\"fas fa-bezier-curve\"></i> Expand\n" +
     "                                </a>\n" +
     "                            </h5>\n" +
-    "\n" +
     "                            <tags-input min-length=\"1\" placeholder=\"Context\" ng-model=\"association.context\">\n" +
     "                                <auto-complete source=\"loadTags($query)\"></auto-complete>\n" +
     "                            </tags-input>\n" +
-    "\n" +
     "                            <div ng-if=\"associationsAreExpanded\">\n" +
     "                                <div class=\"spacing-5\"></div>\n" +
-    "                                <div>\n" +
-    "                                    <div style=\"text-align:center\"><a ng-click=\"expandConnection(association)\">{{association.connection[0].text || 'Default Connection'}}</a></div>\n" +
-    "                                    <!--\n" +
-    "                                    if association.connectionExpand\n" +
-    "                                    <tags-input min-length=\"1\" placeholder=\"Connection\" ng-model=\"association.connection\">\n" +
-    "                                        <auto-complete source=\"loadTags($query)\"></auto-complete>\n" +
-    "                                    </tags-input>\n" +
-    "                                    -->\n" +
-    "                                </div>\n" +
     "                                <div ng-repeat=\"context in association.context\">\n" +
     "                                    <div layout=\"\">\n" +
     "                                        <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{context.text}}</span></div>\n" +
@@ -8145,75 +8140,154 @@ angular.module("nav/templates/createItem.tpl.html", []).run(["$templateCache", f
     "                                    </div>\n" +
     "                                </div>\n" +
     "                            </div>\n" +
-    "\n" +
     "                        </div>\n" +
     "                    </div>\n" +
-    "\n" +
     "                </div>\n" +
     "\n" +
-    "                <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                <div class=\"\">\n" +
-    "\n" +
-    "                    <h5>Location <a ng-click=\"informationToggle('LOCATION')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a><i style=\"float:right\" class=\"fas fa-map-marker-alt\"></i></h5>\n" +
-    "                    <tags-input min-length=\"1\" placeholder=\"Location\" ng-model=\"newItem.location\"></tags-input>\n" +
-    "                    <div class=\"\">\n" +
-    "                        <ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\">\n" +
-    "                            <ui-gmap-marker ng-repeat=\"marker in markers\" coords=\"marker.coords\" options=\"marker.options\" idkey=\"marker.id\">\n" +
-    "                                <ui-gmap-window options=\"windowOptions\" closeClick=\"closeClick()\">\n" +
-    "                                    <div style=\"font-size: 15px;\"><a href=\"project/{{marker.url}}\" ui-sref=\"project.activity({path:marker.url})\">{{marker.content}}</a></div>\n" +
-    "                                </ui-gmap-window>\n" +
-    "                            </ui-gmap-marker>\n" +
-    "                        </ui-gmap-google-map>\n" +
-    "                    </div>\n" +
-    "\n" +
+    "                <div>\n" +
+    "                    <h5>\n" +
+    "                        Context \n" +
+    "                        <a ng-click=\"expandAssociations()\" style=\"float:right\">\n" +
+    "                            <span ng-if=\"!associationsAreExpanded\"><i class=\"fas fa-bezier-curve\"></i> Expand</span>\n" +
+    "                            <span ng-if=\"associationsAreExpanded\"><i class=\"fas fa-grip-lines\"></i> Hide</span>\n" +
+    "                        </a>\n" +
+    "                    </h5>\n" +
+    "                    <tags-input min-length=\"1\" placeholder=\"Context\" ng-model=\"newContent.context\">\n" +
+    "                        <auto-complete min-length=\"2\" source=\"loadTags($query)\"></auto-complete>\n" +
+    "                    </tags-input>\n" +
     "                </div>\n" +
     "\n" +
-    "                <div class=\"spacing-10\"></div>\n" +
-    "                <h5>More Information</h5>\n" +
-    "                <md-switch ng-model=\"expand\" aria-label=\"tradable\"></md-switch>\n" +
-    "                <div class=\"spacing-10\"></div>\n" +
+    "                <div ng-if=\"associationsAreExpanded\">\n" +
     "\n" +
-    "                <div ng-if=\"expand\">\n" +
-    "\n" +
-    "                    <h4>Apps</h4>\n" +
-    "                    <p style=\"color:gray;font-style:italic\">Actions, Componets, Data, Delivery, Generator, Status</p>\n" +
-    "                    <!--VS ASSOCIATED MODELS..-->\n" +
-    "                    <!--TYPE OF ASSOCIATION. 'TYPE' (SHOULD BE OF MODEL TYPE ITEM) (&OR DEPRECIATE CONTENT)--> \n" +
-    "                    <h5>Components <a ng-click=\"informationToggle('ASSOCIATION')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a><i style=\"float:right\" class=\"fas fa-bezier-curve\"></i></h5>\n" +
-    "                    <tags-input min-length=\"1\" placeholder=\"Item Components\" ng-model=\"newItem.associatedComponentModels\">\n" +
+    "                    <h5>Associations </h5>\n" +
+    "                    <tags-input min-length=\"1\" placeholder=\"Associations\" ng-model=\"newContent.associatedModels\">\n" +
     "                        <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
     "                    </tags-input>\n" +
+    "                    <div class=\"row\">\n" +
+    "                        <div class=\"col-md-12 col-sm-12\" ng-repeat=\"association in newContent.associatedModels\">\n" +
+    "                            <h5>\n" +
+    "                                {{association.text}} \n" +
+    "                                <a style=\"float:right\" ng-click=\"association.isExpanded=!association.isExpanded\">\n" +
+    "                                    <i class=\"fas fa-compress-arrows-alt\"></i>\n" +
+    "                                    <b>{{association.connection[0].text || 'Default Connection'}}</b>\n" +
+    "                                </a>\n" +
+    "                            </h5>\n" +
+    "                            <div ng-if=\"association.isExpanded\">\n" +
+    "                                <h4>Default Connection</h4>\n" +
+    "                                <p>Details & Rules<p>\n" +
+    "                            </div>\n" +
     "\n" +
-    "                    <h5>Generator: <b>{{newItem.isGenerator}}</b><a ng-click=\"informationToggle('ITEM GENERATOR')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
-    "                    <md-switch ng-model=\"newItem.isGenerator\" aria-label=\"newItem.isGenerator\"></md-switch>\n" +
+    "                            <tags-input min-length=\"1\" placeholder=\"{{association.text}} Context\" ng-model=\"association.context\">\n" +
+    "                                <auto-complete source=\"loadTags($query)\"></auto-complete>\n" +
+    "                            </tags-input>\n" +
     "\n" +
-    "                    <h5>Item Status <a ng-click=\"informationToggle('ITEM STATUS')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
-    "                    <input placeholder=\"Status\" type=\"text\" ng-model=\"newItem.status\" class=\"form-control\">\n" +
+    "                            <div class=\"spacing-5\"></div>\n" +
     "\n" +
-    "                    <h5>Associated Actions <a ng-click=\"informationToggle('ITEM ACTIONS')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                            <div ng-repeat=\"context in association.context\">\n" +
+    "\n" +
+    "                                <div layout=\"\">\n" +
+    "                                    <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{context.text}}</span></div>\n" +
+    "                                    <md-slider \n" +
+    "                                        ng-model=\"context.score\"  \n" +
+    "                                        step=\"0.1\" \n" +
+    "                                        flex=\"\" \n" +
+    "                                        md-discrete=\"\" \n" +
+    "                                        min=\"-100\" \n" +
+    "                                        max=\"100\">\n" +
+    "                                    </md-slider>\n" +
+    "                                    <div flex=\"10\" layout=\"\" layout-align=\"center center\">\n" +
+    "                                        <p class=\"md-body-1\">{{context.score}}</p>\n" +
+    "                                    </div>\n" +
+    "                                </div>\n" +
+    "                                <div style=\"text-align:center\"><p style=\"font-size:9px\">{{context.score}}</p></div>\n" +
+    "\n" +
+    "                            </div>\n" +
+    "\n" +
+    "                        </div>\n" +
+    "\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <h5>\n" +
+    "                    <a ng-click=\"expandItem=!expandItem\">\n" +
+    "                        <span ng-if=\"!expandItem\"><i class=\"fas fa-bars\"></i> Show Details</span>\n" +
+    "                        <span ng-if=\"expandItem\"><i class=\"fas fa-grip-lines\"></i> Hide Details</span>\n" +
+    "                    </a>\n" +
+    "                </h5>\n" +
+    "\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <div ng-if=\"expandItem\">\n" +
+    "\n" +
+    "                    <h4>Apps</h4>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Actions, Componets, Data, Delivery, Generator, Location, Status</p>\n" +
+    "                    <!--VS ASSOCIATED MODELS..-->\n" +
+    "                    <!--TYPE OF ASSOCIATION. 'TYPE' (SHOULD BE OF MODEL TYPE ITEM) (&OR DEPRECIATE CONTENT)--> \n" +
+    "\n" +
+    "                    <h5>Associated Actions <a ng-click=\"informationToggle('ITEM ACTIONS')\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">App Defined Actions for the Item</p>\n" +
     "                    <tags-input min-length=\"1\" placeholder=\"Associated Actions\" ng-model=\"newItem.associatedActions\">\n" +
     "                        <auto-complete></auto-complete>\n" +
     "                    </tags-input>\n" +
     "\n" +
+    "                    <h5>Components <a ng-click=\"informationToggle('ASSOCIATION')\"><i class=\"fa fa-question-circle\"></i></a><i style=\"float:right\" class=\"fas fa-bezier-curve\"></i></h5>\n" +
+    "                    <tags-input min-length=\"1\" placeholder=\"Item Components\" ng-model=\"newItem.associatedComponentModels\">\n" +
+    "                        <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
+    "                    </tags-input>\n" +
     "\n" +
-    "                    <h5>Associated Orders <a ng-click=\"informationToggle('ITEM IDENTIFER SET')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                    <h5>Connections / Item Charter</h5>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Rules surrounding data association, and principles such as item ownership.</p>\n" +
+    "                    <tags-input min-length=\"1\" placeholder=\"Item Connections\" ng-model=\"newItem.associatedConnections\">\n" +
+    "                        <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
+    "                    </tags-input>\n" +
+    "\n" +
+    "                    <h5>Generator <b>{{newItem.isGenerator}}</b><a ng-click=\"informationToggle('ITEM GENERATOR')\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">The Generator Property denotes that an item is Abstract and generates discrete item copys on purchase. Useful for inventory.</p>\n" +
+    "                    <md-switch ng-model=\"newItem.isGenerator\" aria-label=\"newItem.isGenerator\"></md-switch>\n" +
+    "\n" +
+    "                    <div class=\"\">\n" +
+    "                        <h5>Location <a ng-click=\"informationToggle('LOCATION')\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                        <tags-input min-length=\"1\" placeholder=\"Location\" ng-model=\"newItem.location\"></tags-input>\n" +
+    "                        <div class=\"\">\n" +
+    "                            <ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\">\n" +
+    "                                <ui-gmap-marker ng-repeat=\"marker in markers\" coords=\"marker.coords\" options=\"marker.options\" idkey=\"marker.id\">\n" +
+    "                                    <ui-gmap-window options=\"windowOptions\" closeClick=\"closeClick()\">\n" +
+    "                                        <div style=\"font-size: 15px;\"><a href=\"project/{{marker.url}}\" ui-sref=\"project.activity({path:marker.url})\">{{marker.content}}</a></div>\n" +
+    "                                    </ui-gmap-window>\n" +
+    "                                </ui-gmap-marker>\n" +
+    "                            </ui-gmap-google-map>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                    <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                    <h5>Item Status <a ng-click=\"informationToggle('ITEM STATUS')\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                    <input placeholder=\"Status\" type=\"text\" ng-model=\"newItem.status\" class=\"form-control\">\n" +
+    "\n" +
+    "                    <h5>Associated Orders <a ng-click=\"informationToggle('ITEM IDENTIFER SET')\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">If you wish to create liquidity with the item on create</p>\n" +
     "                    <tags-input min-length=\"1\" placeholder=\"Associated Orders\" ng-model=\"newItem.associatedOrders\">\n" +
     "                        <auto-complete></auto-complete>\n" +
     "                    </tags-input>\n" +
     "\n" +
-    "\n" +
-    "                    <!--POTIENTALL PART OF ORDER PROCESS AND ORDER ''FUILFUILMENT''-->\n" +
-    "                    <h5>Delivery Protocol <a ng-click=\"informationToggle('ITEM DELIVERY PROTOCOL')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                    <h5>Fulfilment Protocol <a ng-click=\"informationToggle('ITEM DELIVERY PROTOCOL')\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                    <p style=\"color:gray;font-style:italic\">Delivery etc</p>\n" +
     "                    <tags-input min-length=\"1\" placeholder=\"Delivery Protocol\" ng-model=\"newItem.deliveryProtocol\">\n" +
     "                        <auto-complete></auto-complete>\n" +
     "                    </tags-input>\n" +
     "\n" +
-    "                    <h5>JSON Data <a ng-click=\"informationToggle('ITEM DATA')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                    <h5>Time Ownership Protocol <a ng-click=\"informationToggle('Time Ownership Protocol')\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                    <tags-input min-length=\"1\" placeholder=\"Time Ownership Protocol\" ng-model=\"newItem.timeOwnershipProtocol\">\n" +
+    "                        <auto-complete></auto-complete>\n" +
+    "                    </tags-input>\n" +
+    "\n" +
+    "                    <h5>JSON Data <a ng-click=\"informationToggle('ITEM DATA')\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
     "                    <input type=\"text\" placeholder=\"JSON Data\" ng-model=\"newItem.data\" class=\"form-control\">\n" +
+    "                    \n" +
+    "                    <div class=\"spacing-10\"></div>\n" +
     "\n" +
     "                </div>\n" +
-    "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
     "                <text-angular ng-model=\"newItem.content\" ta-toolbar=\"[['p','h1','bold','italics','quote','insertLink', 'html']]\"></text-angular>\n" +
     "\n" +
@@ -8236,22 +8310,21 @@ angular.module("nav/templates/createOrder.tpl.html", []).run(["$templateCache", 
     "            <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "                <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "                    <div style=\"padding:15px\">\n" +
-    "                        <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Create Order</h1>\n" +
+    "                        <h1 style=\"text-align:left;font-size:42px;color:rgba(255,255,255,0.9);font-weight:400;\">Create Order</h1>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "        <div style=\"padding:16px\">\n" +
     "            <div class=\"spacing-10\"></div>\n" +
-    "            <p style=\"color:gray;font-style:italic\">An Order creates a position in our Value Matrix (MultiDimensional Token Market) <a ng-click=\"informationToggle('CREATEORDER')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></p>\n" +
+    "            <p style=\"color:gray;font-style:italic\">An Order creates a position in the MultiDimensional Market <a ng-click=\"informationToggle('CREATEORDER')\"><i class=\"fa fa-question-circle\"></i></a></p>\n" +
     "            <div class=\"spacing-10\"></div>\n" +
     "            <form role=\"form\" ng-submit=\"createOrder()\">\n" +
     "                <div class=\"row\">\n" +
-    "                    <div class=\"col-sm-6 form-group\">\n" +
+    "                    <div class=\"col-sm-6\">\n" +
     "                        <h5>\n" +
     "                            <span ng-show=\"!identiferSetAlpha\">Asset Identifer Set α</span>\n" +
     "                            <span ng-repeat=\"market in identiferSetAlpha track by $index\">{{market.text}} </span> \n" +
-    "                            <a ng-click=\"informationToggle('IDENTIFERSETALPHA')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a>\n" +
     "                        </h5>\n" +
     "                        <tags-input min-length=\"1\" placeholder=\"Asset Identifer Set α\" ng-model=\"identiferSetAlpha\">\n" +
     "                            <auto-complete source=\"loadTags($query)\"></auto-complete>\n" +
@@ -8260,7 +8333,7 @@ angular.module("nav/templates/createOrder.tpl.html", []).run(["$templateCache", 
     "                    <div class=\"col-sm-6 form-group\">\n" +
     "                        <div ng-repeat=\"market in identiferSetAlpha track by $index\">\n" +
     "                            <div class=\"col-sm-12\">\n" +
-    "                                <h5>{{market.text}} Amount | Available {{balance[market.text] || 0}}</h5>\n" +
+    "                                <h5>{{market.text}} Amount <span style=\"float:right\">{{balance[market.text] || 0}} Available</span></h5>\n" +
     "                                <input placeholder=\"{{market.text}} Amount\" type=\"number\" step=\"0.000000001\" ng-model=\"newOrder.setAlpha[market.text]\" class=\"form-control\">\n" +
     "                            </div>\n" +
     "                        </div>\n" +
@@ -8268,17 +8341,16 @@ angular.module("nav/templates/createOrder.tpl.html", []).run(["$templateCache", 
     "                </div>\n" +
     "\n" +
     "                <div class=\"row\">\n" +
-    "                    <div class=\"col-sm-6 form-group\">\n" +
+    "                    <div class=\"col-sm-6\">\n" +
     "                        <h5>\n" +
     "                            <span ng-show=\"!identiferSetBeta\">Asset Identifer Set β</span>\n" +
     "                            <span ng-repeat=\"market in identiferSetBeta track by $index\">{{market.text}} </span> \n" +
-    "                            <a ng-click=\"informationToggle('IDENTIFERSETBETA')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a>\n" +
     "                        </h5>\n" +
     "                        <tags-input min-length=\"1\" placeholder=\"Asset Identifer Set β\" ng-model=\"identiferSetBeta\">\n" +
     "                            <auto-complete source=\"loadTags($query)\"></auto-complete>\n" +
     "                        </tags-input>\n" +
     "                    </div>\n" +
-    "                    <div class=\"col-sm-6 form-group\">\n" +
+    "                    <div class=\"col-sm-6\">\n" +
     "                        <div ng-repeat=\"market in identiferSetBeta track by $index\">\n" +
     "                            <div class=\"col-sm-12\">\n" +
     "                                <h5>{{market.text}} Amount</h5>\n" +
@@ -8286,6 +8358,8 @@ angular.module("nav/templates/createOrder.tpl.html", []).run(["$templateCache", 
     "                            </div>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
+    "\n" +
+    "                    <!--\n" +
     "                    <div class=\"col-sm-12\" style=\"padding:20px;\">\n" +
     "                        <p ng-show=\"!inverted\" style=\"font-weight:800;\">\n" +
     "                            Sell <span ng-repeat=\"market in identiferSetAlpha\">{{newOrder.setAlpha[market.text]}} {{market.text}} </span> \n" +
@@ -8300,12 +8374,15 @@ angular.module("nav/templates/createOrder.tpl.html", []).run(["$templateCache", 
     "                            for <span ng-repeat=\"market in identiferSetAlpha\">{{newOrder.setAlpha[market.text]}} {{market.text}} </span>\n" +
     "                        </p>\n" +
     "                    </div>\n" +
+    "                    -->\n" +
+    "                    \n" +
     "                    <div class=\"col-sm-12\" style=\"marking:10px\">\n" +
+    "                        <h5>Order Type</h5>\n" +
     "                        <ul class=\"nav nav-pills nav-justified contentType\">\n" +
-    "                            <li ng-class=\"{active: selectedOrderType=='ONBOOKS'}\" ng-click=\"selectOrderType('ONBOOKS')\"><a href=\"#\">Market onBooks <i ng-click=\"informationToggle('ONBOOKSORDER')\" class=\"fa fa-question-circle\"></i></a></li>\n" +
-    "                            <li ng-class=\"{active: selectedOrderType=='FILLORKILL'}\" ng-click=\"selectOrderType('FILLORKILL')\"><a href=\"#\">Market Fill Or Kill <i ng-click=\"informationToggle('FILLORKILL')\" class=\"fa fa-question-circle\"></i></a></li>\n" +
-    "                            <li ng-class=\"{active: selectedOrderType=='IMMEDIATEORCANCEL'}\" ng-click=\"selectOrderType('IMMEDIATEORCANCEL')\"><a href=\"#\">Immediate or Cancel <i ng-click=\"informationToggle('IMMEDIATEORCANCEL')\" class=\"fa fa-question-circle\"></i></a></li>\n" +
-    "                            <li ng-class=\"{active: selectedOrderType=='LIMIT'}\" ng-click=\"selectOrderType('LIMIT')\"><a href=\"#\"> Limit <i ng-click=\"informationToggle('LIMIT')\" class=\"fa fa-question-circle\"></i></a></li>\n" +
+    "                            <li ng-class=\"{active: selectedOrderType=='ONBOOKS'}\" ng-click=\"selectOrderType('ONBOOKS')\"><a>Market onBooks <i ng-click=\"informationToggle('ONBOOKSORDER')\" class=\"fa fa-question-circle\"></i></a></li>\n" +
+    "                            <li ng-class=\"{active: selectedOrderType=='FILLORKILL'}\" ng-click=\"selectOrderType('FILLORKILL')\"><a>Market Fill Or Kill <i ng-click=\"informationToggle('FILLORKILL')\" class=\"fa fa-question-circle\"></i></a></li>\n" +
+    "                            <li ng-class=\"{active: selectedOrderType=='IMMEDIATEORCANCEL'}\" ng-click=\"selectOrderType('IMMEDIATEORCANCEL')\"><a>Immediate or Cancel <i ng-click=\"informationToggle('IMMEDIATEORCANCEL')\" class=\"fa fa-question-circle\"></i></a></li>\n" +
+    "                            <li ng-class=\"{active: selectedOrderType=='LIMIT'}\" ng-click=\"selectOrderType('LIMIT')\"><a> Limit <i ng-click=\"informationToggle('LIMIT')\" class=\"fa fa-question-circle\"></i></a></li>\n" +
     "                        </ul>\n" +
     "                    </div>\n" +
     "                </div>\n" +
@@ -8338,25 +8415,59 @@ angular.module("nav/templates/createProject.tpl.html", []).run(["$templateCache"
     "        <div style=\"padding:16px\">\n" +
     "\n" +
     "            <div class=\"spacing-15\"></div>\n" +
-    "            <p style=\"color:gray;font-style:italic\">A Project is a Self-Governing collective of individuals. <a ng-click=\"informationToggle('CREATEPROJECT')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></p>\n" +
+    "            <p style=\"color:gray;font-style:italic\">A Project is a Self-Governing collective of individuals. <a ng-click=\"informationToggle('CREATEPROJECT')\"><i class=\"fa fa-question-circle\"></i></a></p>\n" +
     "            <div class=\"spacing-10\"></div>\n" +
     "\n" +
     "            <form role=\"form\" ng-submit=\"createProject()\">\n" +
     "                <h5>Title</h5>\n" +
     "                <input type=\"text\" placeholder= \"Title\" ng-model=\"newProject.title\" class=\"form-control\">\n" +
     "\n" +
+    "                <div>\n" +
+    "                    <h5>\n" +
+    "                        Context \n" +
+    "                        <a ng-click=\"expandAssociations()\" style=\"float:right\">\n" +
+    "                            <span ng-if=\"!associationsAreExpanded\"><i class=\"fas fa-bezier-curve\"></i> Expand</span>\n" +
+    "                            <span ng-if=\"associationsAreExpanded\"><i class=\"fas fa-grip-lines\"></i> Hide</span>\n" +
+    "                        </a>\n" +
+    "                    </h5>\n" +
+    "                    <tags-input min-length=\"1\" placeholder=\"Context\" ng-model=\"newProject.context\">\n" +
+    "                        <auto-complete min-length=\"2\" source=\"loadTags($query)\"></auto-complete>\n" +
+    "                    </tags-input>\n" +
+    "                </div>\n" +
     "\n" +
-    "\n" +
-    "                <!--TODO-->\n" +
-    "                <h5>Context</h5>\n" +
-    "                <tags-input min-length=\"1\" placeholder=\"Context\" ng-model=\"newProject.tags\">\n" +
-    "                    <auto-complete source=\"loadTags($query)\"></auto-complete>\n" +
-    "                </tags-input>\n" +
-    "                <h5>Associations <a ng-click=\"informationToggle('ASSOCIATIONS')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
-    "                <tags-input min-length=\"1\" placeholder=\"Associations\" ng-model=\"newProject.associatedModels\">\n" +
-    "                    <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
-    "                </tags-input>\n" +
-    "\n" +
+    "                <div ng-if=\"associationsAreExpanded\">\n" +
+    "                    <h5>Associations </h5>\n" +
+    "                    <tags-input min-length=\"1\" placeholder=\"Associations\" ng-model=\"newProject.associatedModels\">\n" +
+    "                        <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
+    "                    </tags-input>\n" +
+    "                    <div class=\"row\">\n" +
+    "                        <div class=\"col-md-12 col-sm-12\" ng-repeat=\"association in newProject.associatedModels\">\n" +
+    "                            <h5>\n" +
+    "                                {{association.text}} \n" +
+    "                                <a style=\"float:right\" ng-click=\"association.isExpanded=!association.isExpanded\">\n" +
+    "                                    <i class=\"fas fa-compress-arrows-alt\"></i>\n" +
+    "                                    <b>{{association.connection[0].text || 'Default Connection'}}</b>\n" +
+    "                                </a>\n" +
+    "                            </h5>\n" +
+    "                            <div ng-if=\"association.isExpanded\">\n" +
+    "                                <h4>Default Connection</h4>\n" +
+    "                                <p>Details & Rules<p>\n" +
+    "                            </div>\n" +
+    "                            <tags-input min-length=\"1\" placeholder=\"{{association.text}} Context\" ng-model=\"association.context\">\n" +
+    "                                <auto-complete source=\"loadTags($query)\"></auto-complete>\n" +
+    "                            </tags-input>\n" +
+    "                            <div class=\"spacing-5\"></div>\n" +
+    "                            <div ng-repeat=\"context in association.context\">\n" +
+    "                                <div layout=\"\">\n" +
+    "                                    <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{context.text}}</span></div>\n" +
+    "                                    <md-slider ng-model=\"context.score\" step=\"0.1\" flex=\"\" md-discrete=\"\" min=\"-100\" max=\"100\"></md-slider>\n" +
+    "                                    <div flex=\"10\" layout=\"\" layout-align=\"center center\"><p class=\"md-body-1\">{{context.score}}</p></div>\n" +
+    "                                </div>\n" +
+    "                                <div style=\"text-align:center\"><p style=\"font-size:9px\">{{context.score}}</p></div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
     "\n" +
     "                <h5>Location</h5>\n" +
     "                <input type=\"text\" placeholder=\"Location\" ng-model=\"newProject.location\" class=\"form-control\">\n" +
@@ -8434,67 +8545,63 @@ angular.module("nav/templates/createTask.tpl.html", []).run(["$templateCache", f
     "            <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "                <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "                    <div style=\"padding:15px\">\n" +
-    "                        <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Create Task</h1>\n" +
+    "                        <h1 style=\"text-align:left;font-size:42px;color:rgba(255,255,255,0.9);font-weight:400;\">Create Task</h1>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
-    "\n" +
     "        <div style=\"padding:16px\">\n" +
     "            <div class=\"spacing-15\"></div>\n" +
-    "            <p style=\"color:gray;font-style:italic\">Tasks are an abstraction of intentional time, they create linkages between Time & Token Protocols. <a ng-click=\"informationToggle('CREATETASK')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></p>\n" +
+    "            <p style=\"color:gray;font-style:italic\">Tasks are an abstraction of intentional time, they create linkages between Time & Token Protocols. <a ng-click=\"informationToggle('CREATETASK')\"><i class=\"fa fa-question-circle\"></i></a></p>\n" +
     "            <div class=\"spacing-10\"></div>\n" +
     "            <form role=\"form\" ng-submit=\"createTask()\">\n" +
     "                <h5>Title</h5>\n" +
     "                <input type=\"text\" placeholder=\"Title\" ng-model=\"newTask.title\" class=\"form-control\">\n" +
-    "\n" +
-    "                <h5>Associations <a ng-click=\"informationToggle('ASSOCIATIONS')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a><a href=\"#\" ng-click=\"expandAssociations()\" style=\"float:right\"><i class=\"fas fa-bezier-curve\"></i> Expand</a></h5>\n" +
-    "                <tags-input min-length=\"1\" placeholder=\"Associations\" ng-model=\"newTask.associatedModels\">\n" +
-    "                    <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
-    "                </tags-input>\n" +
-    "\n" +
-    "                <div ng-if=\"!associationsAreExpanded && newTask.associatedModels.length > 0\">\n" +
-    "                    <h5>Context <a ng-if=\"newTransaction.context.length > 0\" href=\"#\" ng-click=\"expandAssociations()\" style=\"float:right\"><i class=\"fas fa-bezier-curve\"></i> Expand</a></h5>\n" +
+    "                <div>\n" +
+    "                    <h5>\n" +
+    "                        Context \n" +
+    "                        <a ng-click=\"expandAssociations()\" style=\"float:right\">\n" +
+    "                            <span ng-if=\"!associationsAreExpanded\"><i class=\"fas fa-bezier-curve\"></i> Expand</span>\n" +
+    "                            <span ng-if=\"associationsAreExpanded\"><i class=\"fas fa-grip-lines\"></i> Hide</span>\n" +
+    "                        </a>\n" +
+    "                    </h5>\n" +
     "                    <tags-input min-length=\"1\" placeholder=\"Context\" ng-model=\"newTask.context\">\n" +
     "                        <auto-complete min-length=\"2\" source=\"loadTags($query)\"></auto-complete>\n" +
     "                    </tags-input>\n" +
     "                </div>\n" +
-    "\n" +
     "                <div ng-if=\"associationsAreExpanded\">\n" +
+    "                    <h5>Associations </h5>\n" +
+    "                    <tags-input min-length=\"1\" placeholder=\"Associations\" ng-model=\"newTask.associatedModels\">\n" +
+    "                        <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
+    "                    </tags-input>\n" +
     "                    <div class=\"row\">\n" +
     "                        <div class=\"col-md-12 col-sm-12\" ng-repeat=\"association in newTask.associatedModels\">\n" +
-    "                            <h5>{{association.text}}</h5>\n" +
-    "                            <h5>Connection</h5>\n" +
-    "                            <div style=\"text-align:left\">\n" +
-    "                                <a ng-click=\"expandConnection(association)\"><b>{{association.connection[0].text || 'Default Connection'}}</b></a>\n" +
-    "                            </div> \n" +
-    "                            <h5>Context</h5>\n" +
-    "                            <tags-input min-length=\"1\" placeholder=\"Context\" ng-model=\"association.context\">\n" +
+    "                            <h5>\n" +
+    "                                {{association.text}} \n" +
+    "                                <a style=\"float:right\" ng-click=\"association.isExpanded=!association.isExpanded\">\n" +
+    "                                    <i class=\"fas fa-compress-arrows-alt\"></i>\n" +
+    "                                    <b>{{association.connection[0].text || 'Default Connection'}}</b>\n" +
+    "                                </a>\n" +
+    "                            </h5>\n" +
+    "                            <div ng-if=\"association.isExpanded\">\n" +
+    "                                <h4>Default Connection</h4>\n" +
+    "                                <p>Details & Rules<p>\n" +
+    "                            </div>\n" +
+    "                            <tags-input min-length=\"1\" placeholder=\"{{association.text}} Context\" ng-model=\"association.context\">\n" +
     "                                <auto-complete source=\"loadTags($query)\"></auto-complete>\n" +
     "                            </tags-input>\n" +
-    "                            <div class=\"spacing-5\"></div>                       \n" +
+    "                            <div class=\"spacing-5\"></div>\n" +
     "                            <div ng-repeat=\"context in association.context\">\n" +
     "                                <div layout=\"\">\n" +
     "                                    <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{context.text}}</span></div>\n" +
-    "                                    <md-slider \n" +
-    "                                        ng-model=\"context.score\"  \n" +
-    "                                        step=\"0.1\" \n" +
-    "                                        flex=\"\" \n" +
-    "                                        md-discrete=\"\" \n" +
-    "                                        min=\"-100\" \n" +
-    "                                        max=\"100\">\n" +
-    "                                    </md-slider>\n" +
-    "                                    <div flex=\"10\" layout=\"\" layout-align=\"center center\">\n" +
-    "                                        <p class=\"md-body-1\">{{context.score}}</p>\n" +
-    "                                    </div>\n" +
+    "                                    <md-slider ng-model=\"context.score\" step=\"0.1\" flex=\"\" md-discrete=\"\" min=\"-100\" max=\"100\"></md-slider>\n" +
+    "                                    <div flex=\"10\" layout=\"\" layout-align=\"center center\"><p class=\"md-body-1\">{{context.score}}</p></div>\n" +
     "                                </div>\n" +
-    "                                <div style=\"text-align:center\"><p style=\"font-size:9px\">{{context.score}} | {{currentUser.reputation[context.text]*context.score}}</p></div>\n" +
+    "                                <div style=\"text-align:center\"><p style=\"font-size:9px\">{{context.score}}</p></div>\n" +
     "                            </div>\n" +
-    "                            <hr>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
-    "\n" +
     "                <h5>Location</h5>\n" +
     "                <input type=\"text\" placeholder=\"Location\" ng-model=\"newTask.location\" class=\"form-control\">\n" +
     "                <div class=\"\">\n" +
@@ -8506,12 +8613,10 @@ angular.module("nav/templates/createTask.tpl.html", []).run(["$templateCache", f
     "                        </ui-gmap-marker>\n" +
     "                    </ui-gmap-google-map>\n" +
     "                </div>\n" +
-    "                <h5>Content</h5>\n" +
     "                <text-angular ng-model=\"newTask.content\" ta-toolbar=\"[['p','h1','bold','italics','quote','insertLink', 'html']]\"></text-angular>\n" +
     "                <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newTask.title\">create</button>\n" +
     "            </form>\n" +
     "        </div>\n" +
-    "\n" +
     "    </div>\n" +
     "</md-sidenav>");
 }]);
@@ -8533,50 +8638,60 @@ angular.module("nav/templates/createTime.tpl.html", []).run(["$templateCache", f
     "\n" +
     "        <div style=\"padding:16px\">\n" +
     "            <div class=\"spacing-15\"></div>\n" +
-    "            <p style=\"color:gray;font-style:italic\">Time & Intention unite. Token Protocols propogate value interactions. <a ng-click=\"informationToggle('CREATETIME')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></p>\n" +
+    "            <p style=\"color:gray;font-style:italic\">Time & Intention unite. Token Protocols propogate value interactions. <a ng-click=\"informationToggle('CREATETIME')\"><i class=\"fa fa-question-circle\"></i></a></p>\n" +
     "            <div class=\"spacing-10\"></div>\n" +
     "            <form role=\"form\" ng-submit=\"createTime()\">\n" +
     "\n" +
-    "                <!--SELF CONTEXT-->\n" +
-    "                <!--IMPLICIT VALIDATION W CONTEXT FOR TAGS-->\n" +
-    "                <h5>Task <a ng-click=\"informationToggle('ASSOCIATIONS')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
-    "                <tags-input min-length=\"1\" placeholder=\"Associations\" ng-model=\"newTime.associatedModels\">\n" +
-    "                    <auto-complete source=\"loadAssociationsTask($query)\"></auto-complete>\n" +
-    "                </tags-input>\n" +
-    "\n" +
-    "                <div ng-if=\"!newTime.associatedModels.length\">\n" +
-    "                    <h5>Context <a ng-click=\"informationToggle('TAGS')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
-    "                    <tags-input min-length=\"1\" placeholder=\"Tags\" ng-model=\"newTime.tags\">\n" +
-    "                        <auto-complete source=\"loadTags($query)\"></auto-complete>\n" +
+    "                <div>\n" +
+    "                    <h5>\n" +
+    "                        Context \n" +
+    "                        <a ng-click=\"expandAssociations()\" style=\"float:right\">\n" +
+    "                            <span ng-if=\"!associationsAreExpanded\"><i class=\"fas fa-bezier-curve\"></i> Expand</span>\n" +
+    "                            <span ng-if=\"associationsAreExpanded\"><i class=\"fas fa-grip-lines\"></i> Hide</span>\n" +
+    "                        </a>\n" +
+    "                    </h5>\n" +
+    "                    <tags-input min-length=\"1\" placeholder=\"Context\" ng-model=\"newTime.context\">\n" +
+    "                        <auto-complete min-length=\"2\" source=\"loadTags($query)\"></auto-complete>\n" +
     "                    </tags-input>\n" +
     "                </div>\n" +
-    "    \n" +
-    "                <!--TODO-->\n" +
-    "                <!--FOR X IN TAGS-->\n" +
-    "                <div ng-repeat=\"model in newTime.associatedModels\">\n" +
-    "                    <div class=\"col-sm-12\">\n" +
-    "\n" +
-    "                        <h5>Context <a ng-click=\"informationToggle('TAGS')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
-    "                        <tags-input min-length=\"1\" placeholder=\"Tags\" ng-model=\"newTime.tags\">\n" +
-    "                            <auto-complete source=\"loadTags($query)\"></auto-complete>\n" +
-    "                        </tags-input>\n" +
-    "\n" +
-    "                        <div class=\"spacing-5\"></div>\n" +
-    "\n" +
-    "                        <div ng-repeat=\"tag in newTime.tags track by $index\">\n" +
-    "                            <div layout=\"\">\n" +
-    "                                <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{tag.text}}</span></div>\n" +
-    "                                <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"newValidation.validation[tag.text]\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"{{tag.text}}\"></md-slider>\n" +
-    "                                <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{newValidation.validation[tag.text]}} | {{reputation[tag.text] || 0}}</span></div>\n" +
+    "                \n" +
+    "                <div ng-if=\"associationsAreExpanded\">\n" +
+    "                    <h5>Associations </h5>\n" +
+    "                    <tags-input min-length=\"1\" placeholder=\"Associations\" ng-model=\"newTime.associatedModels\">\n" +
+    "                        <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
+    "                    </tags-input>\n" +
+    "                    <div class=\"row\">\n" +
+    "                        <div class=\"col-md-12 col-sm-12\" ng-repeat=\"association in newTime.associatedModels\">\n" +
+    "                            <h5>\n" +
+    "                                {{association.text}} \n" +
+    "                                <a style=\"float:right\" ng-click=\"association.isExpanded=!association.isExpanded\">\n" +
+    "                                    <i class=\"fas fa-compress-arrows-alt\"></i>\n" +
+    "                                    <b>{{association.connection[0].text || 'Default Connection'}}</b>\n" +
+    "                                </a>\n" +
+    "                            </h5>\n" +
+    "                            <div ng-if=\"association.isExpanded\">\n" +
+    "                                <h4>Default Connection</h4>\n" +
+    "                                <p>Details & Rules<p>\n" +
+    "                            </div>\n" +
+    "                            <tags-input min-length=\"1\" placeholder=\"{{association.text}} Context\" ng-model=\"association.context\">\n" +
+    "                                <auto-complete source=\"loadTags($query)\"></auto-complete>\n" +
+    "                            </tags-input>\n" +
+    "                            <div class=\"spacing-5\"></div>\n" +
+    "                            <div ng-repeat=\"context in association.context\">\n" +
+    "                                <div layout=\"\">\n" +
+    "                                    <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{context.text}}</span></div>\n" +
+    "                                    <md-slider ng-model=\"context.score\" step=\"0.1\" flex=\"\" md-discrete=\"\" min=\"-100\" max=\"100\"></md-slider>\n" +
+    "                                    <div flex=\"10\" layout=\"\" layout-align=\"center center\"><p class=\"md-body-1\">{{context.score}}</p></div>\n" +
+    "                                </div>\n" +
+    "                                <div style=\"text-align:center\"><p style=\"font-size:9px\">{{context.score}}</p></div>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
-    "\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "\n" +
     "                <ul class=\"nav nav-pills nav-justified contentTyle\">\n" +
-    "                    <li ng-class=\"{active: newTime.type=='PLANNED'}\" ng-click=\"selectTypeTime('PLANNED')\"><a href=\"#\">RETROACTIVE OR PLANNED</a></li>\n" +
-    "                    <li ng-class=\"{active: newTime.type=='LIVE'}\" ng-click=\"selectTypeTime('LIVE')\"><a href=\"#\">LIVE</a></li>\n" +
+    "                    <li ng-class=\"{active: newTime.type=='PLANNED'}\" ng-click=\"selectTypeTime('PLANNED')\"><a>RETROACTIVE OR PLANNED</a></li>\n" +
+    "                    <li ng-class=\"{active: newTime.type=='LIVE'}\" ng-click=\"selectTypeTime('LIVE')\"><a>LIVE</a></li>\n" +
     "                </ul>\n" +
     "\n" +
     "                <div ng-if=\"newTime.type == 'LIVE'\">\n" +
@@ -8647,7 +8762,7 @@ angular.module("nav/templates/createTransaction.tpl.html", []).run(["$templateCa
     "            <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "                <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "                    <div style=\"padding:15px\">\n" +
-    "                        <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Create Transaction</h1>\n" +
+    "                        <h1 style=\"text-align:left;font-size:42px;color:rgba(255,255,255,0.9);font-weight:400;\">Create Transaction</h1>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
@@ -8657,27 +8772,24 @@ angular.module("nav/templates/createTransaction.tpl.html", []).run(["$templateCa
     "            <p style=\"color:gray;font-style:italic\">Send tokens to any address; double check that the information is correct before sending. All transactions are final. <a ng-click=\"informationToggle('CREATETRANSACTION')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></p>\n" +
     "            <div class=\"spacing-10\"></div>\n" +
     "            <form role=\"form\" ng-submit=\"createTransaction()\">\n" +
-    "                <h5>Address From</h5>\n" +
+    "\n" +
+    "                <h5>From</h5>\n" +
     "                <tags-input min-length=\"1\" max-tags=\"1\" placeholder=\"From\" ng-model=\"newTransaction.from\">\n" +
     "                    <auto-complete min-length=\"2\" source=\"loadAddress($query)\"></auto-complete>\n" +
     "                </tags-input>\n" +
-    "                <h5>Address To</h5>\n" +
+    "                <h5>To</h5>\n" +
     "                <tags-input min-length=\"1\" max-tags=\"1\" placeholder=\"To\" ng-model=\"newTransaction.to\">\n" +
     "                    <auto-complete min-length=\"2\" source=\"loadAddress($query)\" max-results-to-show=\"1000\" highlight-matched-text=\"true\"></auto-complete>\n" +
     "                </tags-input>\n" +
-    "\n" +
     "                <h5>Asset <a href=\"#\" ng-click=\"expandAssets()\" style=\"float:right\"><i class=\"fas fa-coins\"></i> My Assets</a></h5>\n" +
     "                <tags-input min-length=\"1\" placeholder=\"Asset Identifier\" ng-model=\"newTransaction.identifierSet\">\n" +
     "                    <auto-complete min-length=\"1\" highlight-matched-text=\"true\" load-on-empty=\"true\" max-results-to-show=\"1000\" source=\"loadAsset($query)\"></auto-complete>\n" +
     "                </tags-input>\n" +
     "\n" +
     "                <div class=\"row\" ng-if=\"assetsAreExpanded\">\n" +
-    "                    <!--MY MANIFOLDS-->\n" +
     "                    <div class=\"spacing-10\"></div>\n" +
     "                    <div class=\"col-xs-4\" ng-repeat=\"asset in sortedBalances\">\n" +
     "                        <p>\n" +
-    "                            <!--<img style=\"height:32px;border-radius:100%;\" src=\"https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{asset[0]}}\">-->\n" +
-    "\n" +
     "                            <img style=\"border-radius:100%;height:32px;padding-right:5px;\" ng-src=\"http://identicon-1132.appspot.com/{{asset[0]}}?s=8&p=8&f=png\">\n" +
     "                            <a href=\"#\" ng-click=\"addAssetToTransaction(asset[0])\"><b>{{asset[0]}}</b>: {{asset[1]}}</a>\n" +
     "                        </p>\n" +
@@ -8692,26 +8804,65 @@ angular.module("nav/templates/createTransaction.tpl.html", []).run(["$templateCa
     "                    <div style=\"clear:both\"></div>\n" +
     "                </div>\n" +
     "\n" +
-    "                <!--<h5>Associated Items</h5>-->\n" +
-    "                <!--BUYING AN ITEM WITH PRESET CONTEXT..-->\n" +
-    "                <!--TRADE.. 2 BUNDLES TRANSACTIONS-->\n" +
-    "                <!--SEND TOKEN SET, RECIEVE TOKEN ASSET-->\n" +
-    "                <!--TRADE POPUP.. ORDER-->\n" +
-    "\n" +
-    "                <h5>Context <a ng-if=\"newTransaction.context.length > 0\" href=\"#\" ng-click=\"expandAssociations()\" style=\"float:right\"><i class=\"fas fa-bezier-curve\"></i> Expand</a></h5>\n" +
+    "                <h5>\n" +
+    "                    Context \n" +
+    "                    <a ng-if=\"newTransaction.context.length > 0\" ng-click=\"expandAssociations()\" style=\"float:right\">\n" +
+    "                        <span ng-if=\"!associationsAreExpanded\"><i class=\"fas fa-bezier-curve\"></i> Expand</span>\n" +
+    "                        <span ng-if=\"associationsAreExpanded\"><i class=\"fas fa-grip-lines\"></i> Hide</span>\n" +
+    "                    </a>\n" +
+    "                </h5>\n" +
     "                <tags-input min-length=\"1\" placeholder=\"Context\" ng-model=\"newTransaction.context\">\n" +
     "                    <auto-complete min-length=\"2\" source=\"loadTags($query)\"></auto-complete>\n" +
     "                </tags-input>\n" +
     "\n" +
     "                <div ng-if=\"associationsAreExpanded\">\n" +
-    "                    <div style=\"padding:16px\">\n" +
-    "                        <div ng-repeat=\"context in newTransaction.context track by $index\">\n" +
-    "                            <div layout=\"\">\n" +
-    "                                <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{context.text}}</span></div>\n" +
-    "                                <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"newTransaction.validationModels[0].validation[context.text]\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"{{context.text}}\"></md-slider>\n" +
-    "                                <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{newTransaction.validationModels[0].validation[context.text]}}</span></div>\n" +
+    "\n" +
+    "                    <!--\n" +
+    "                    <h5>\n" +
+    "                        <a ng-if=\"newTransaction.context.length > 0\" href=\"#\" ng-click=\"expandAssociations()\">\n" +
+    "                            <span ng-if=\"true\"><i class=\"fas fa-bezier-curve\"></i> Expand Details</span>\n" +
+    "                            <span ng-if=\"false\"><i class=\"fas fa-grip-lines\"></i> Hide</span>\n" +
+    "                        </a>\n" +
+    "                    </h5>\n" +
+    "\n" +
+    "                    <h5>Associations <a ng-click=\"informationToggle('ASSOCIATIONS')\" href=\"#\"></h5>\n" +
+    "                    <tags-input min-length=\"1\" placeholder=\"Associations\" ng-model=\"newTransaction.associatedModels\">\n" +
+    "                        <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
+    "                    </tags-input>\n" +
+    "                    -->\n" +
+    "\n" +
+    "                    <div class=\"row\">\n" +
+    "\n" +
+    "                        <div class=\"col-md-12 col-sm-12\" ng-repeat=\"association in newTransaction.associatedModels\">\n" +
+    "                            <!--\n" +
+    "                            <h5>{{association.text}} Context <a ng-click=\"informationToggle('ASSOCIATIONS')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
+    "                            <tags-input min-length=\"1\" placeholder=\"Context\" ng-model=\"association.context\">\n" +
+    "                                <auto-complete source=\"loadTags($query)\"></auto-complete>\n" +
+    "                            </tags-input>\n" +
+    "                            <div class=\"spacing-5\"></div>\n" +
+    "                            <div style=\"text-align:center\">\n" +
+    "                                <a ng-click=\"expandConnection(association)\"><b>{{association.connection[0].text || 'Default Connection'}}</b></a>\n" +
+    "                            </div>   \n" +
+    "                            -->                     \n" +
+    "                            <div ng-repeat=\"context in association.context\">\n" +
+    "                                <div layout=\"\">\n" +
+    "                                    <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{context.text}}</span></div>\n" +
+    "                                    <md-slider \n" +
+    "                                        ng-model=\"context.score\"  \n" +
+    "                                        step=\"0.1\" \n" +
+    "                                        flex=\"\" \n" +
+    "                                        md-discrete=\"\" \n" +
+    "                                        min=\"-100\" \n" +
+    "                                        max=\"100\">\n" +
+    "                                    </md-slider>\n" +
+    "                                    <div flex=\"10\" layout=\"\" layout-align=\"center center\">\n" +
+    "                                        <p class=\"md-body-1\">{{context.score}}</p>\n" +
+    "                                    </div>\n" +
+    "                                </div>\n" +
+    "                                <div style=\"text-align:center\"><p style=\"font-size:9px\">{{context.score}}</p></div>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
+    "\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "\n" +
@@ -11394,7 +11545,7 @@ angular.module("project/templates/projects.tpl.html", []).run(["$templateCache",
     "<!--ASSOCIATIONS FOR TRAVERSAL-->\n" +
     "<div class=\"row\">\n" +
     "	<div ng-if=\"currentUser\" class=\"card\">\n" +
-    "    	<button class=\"btn btn-default log-btn\" ng-click=\"projectToggle()\">+ Project</button>\n" +
+    "    	<button class=\"btn btn-default log-btn\" ng-click=\"projectToggle(project)\">+ Project</button>\n" +
     "    </div>\n" +
     "	<div ng-repeat=\"item in projects\" ng-click=\"cardDetailToggle(project)\">\n" +
     "        <div ng-include=\"'templates/cards/projectCard.tpl.html'\"></div>\n" +
@@ -13806,7 +13957,7 @@ angular.module("tutorial/templates/intro.tpl.html", []).run(["$templateCache", f
     "        </div>\n" +
     "    </div>\n" +
     "</div>\n" +
-    "<div ng-if=\"!stateIsLoadingFeed\" ng-include=\"'tutorial/templates/controls.tpl.html'\"></div>\n" +
+    "<div ng-if=\"!stateIsLoadingFeed && consentAgreement\" ng-include=\"'tutorial/templates/controls.tpl.html'\"></div>\n" +
     "");
 }]);
 

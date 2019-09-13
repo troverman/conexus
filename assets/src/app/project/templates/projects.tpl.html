@@ -17,7 +17,7 @@
 <!--ASSOCIATIONS FOR TRAVERSAL-->
 <div class="row">
 	<div ng-if="currentUser" class="card">
-    	<button class="btn btn-default log-btn" ng-click="projectToggle()">+ Project</button>
+    	<button class="btn btn-default log-btn" ng-click="projectToggle(project)">+ Project</button>
     </div>
 	<div ng-repeat="item in projects" ng-click="cardDetailToggle(project)">
         <div ng-include="'templates/cards/projectCard.tpl.html'"></div>

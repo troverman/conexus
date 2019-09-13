@@ -635,6 +635,7 @@ tags-input .autocomplete .suggestion-item.selected{background-color:#002a56;}
     .member-tabs{zoom: 0.9;}
     .mobileMargin{margin-right:-20px;}
     .navbar-brand{padding-left:0px;}
+    .nav-justified>li {display: table-cell;width: 1%;zoom: 0.7;}
 }
 
 @media (min-width: 768px){
@@ -643,6 +644,7 @@ tags-input .autocomplete .suggestion-item.selected{background-color:#002a56;}
     .member-tabs{zoom: 1;}
     .mobileMargin{margin-right:0px;}
     .navbar-brand{padding-left:10px;}
+    .nav-justified>li {display: table-cell;width: 1%;zoom: 1;}
 }
 
 @media (max-width: 991px) {

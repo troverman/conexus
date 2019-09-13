@@ -180,8 +180,6 @@ angular.module( 'conexus.nav', [
                 }
             }, true);
 
-            //$scope.$watch('newContent.associatedModels', function(newValue, oldValue){})
-
             console.log('CONTENT TOGGLE', $scope.newContent);
 
             $mdSidenav('content').toggle();
@@ -477,11 +475,40 @@ angular.module( 'conexus.nav', [
         }
     };
 
-    $rootScope.projectToggle = function(){
+    $rootScope.projectToggle = function(item){
         $scope.closeAllNav();
         if($rootScope.currentUser){
-            $scope.newProject = {};
-            $scope.newProject.associatedModels = $rootScope.associatedModels;
+            $scope.newProject = {
+                associatedModels:[{
+                    type:'PROJECT',
+                    text:'self',
+                    id:'self',
+                    context:[
+                        {text:'self', score:100}
+                    ]
+                }],
+                user:$rootScope.currentUser.id,
+            };
+            if (item){
+                $scope.item = item;
+                $scope.newProject.associatedModels.push({
+                    type:item.model, 
+                    id:item.id, 
+                    text:item.model+'+'+item.id, 
+                    context:[
+                        {text:'self', score:100}
+                    ]
+                });
+            }
+
+            $scope.$watch('newTask.context', function(newValue, oldValue){
+                if (newValue !== oldValue) {
+                    for (x in $scope.newTask.associatedModels){
+                        $scope.newTask.associatedModels[x].context = newValue.map(function(obj){obj.score = 100;return obj;});
+                    }
+                }
+            }, true);
+
             $mdSidenav('project').toggle();
         }
         else{$mdSidenav('login').toggle();}
@@ -1106,7 +1133,21 @@ angular.module( 'conexus.nav', [
         $scope.closeAllNav();
         if($rootScope.currentUser){
 
-            $scope.newTime = {};
+            $scope.newTime = {
+                associatedModels:[{
+                    type:'TIME',
+                    text:'self',
+                    id:'self',
+                    context:[
+                        {text:'self', score:100}
+                    ]
+                }],
+                user:$rootScope.currentUser.id,
+            };
+
+            if ($rootScope.associatedModels){
+                $scope.newTime.associatedModels = $rootScope.associatedModels;
+            }
 
             if (!$scope.newTime.recordingTime){
                 $scope.newTime.startTime = new Date();
@@ -1116,7 +1157,6 @@ angular.module( 'conexus.nav', [
                 $scope.newTime.endTime.setMilliseconds(0);
                 $scope.newTime.amount = 3600;
                 $scope.newTime.type = 'PLANNED';
-                $scope.newTime.associatedModels = $rootScope.associatedModels;
                 $scope.recordingTime = false;
                 $scope.streaming = false;
             }
@@ -1233,6 +1273,14 @@ angular.module( 'conexus.nav', [
             };
 
 
+            $scope.$watch('newTime.context', function(newValue, oldValue){
+                if (newValue !== oldValue) {
+                    for (x in $scope.newTime.associatedModels){
+                        $scope.newTime.associatedModels[x].context = newValue.map(function(obj){obj.score = 100;return obj;});
+                    }
+                }
+            }, true);
+
             $mdSidenav('time').toggle();
         }
         else{$mdSidenav('login').toggle();}
@@ -1296,7 +1344,18 @@ angular.module( 'conexus.nav', [
        
         if($rootScope.currentUser){
 
-            $scope.newTransaction.from = [{text:$rootScope.currentUser.username, id:$rootScope.currentUser.id}];
+            $scope.newTransaction = {
+                from:[{text:$rootScope.currentUser.username, id:$rootScope.currentUser.id}],
+                associatedModels:[{
+                    type:'TRANSACTION',
+                    text:'self',
+                    id:'self',
+                    context:[
+                        {text:'self', score:100}
+                    ]
+                }],
+                user:$rootScope.currentUser.id,
+            };
 
             if (item){
                 if(item.model=='PROJECT'){$scope.newTransaction.to = [{text:item.title, id:item.id}];}
@@ -1311,28 +1370,22 @@ angular.module( 'conexus.nav', [
             }
 
             $scope.sortedBalances = [];
-
-            for (var key in $rootScope.balance) {
-                if(!isNaN($rootScope.balance[key])){$scope.sortedBalances.push([key, $rootScope.balance[key]]);}
-            }
-
+            for (var key in $rootScope.balance) {if(!isNaN($rootScope.balance[key])){$scope.sortedBalances.push([key, $rootScope.balance[key]]);}}
             $scope.sortedBalances.sort(function(a, b) {return b[1] - a[1];});
-
-            $scope.newTransaction.associatedModels = [{
-                context:{},
-                associatedModels:[]
-            }];
 
             console.log('CREATE TRANSACTION', item, $scope.newTransaction);
 
-            //TODO!
             $scope.$watch('newTransaction.context', function(newValue, oldValue){
                 if (newValue !== oldValue) {
-                    for (x in $scope.newTransaction.context){
-                        $scope.newTransaction.associatedModels[0].context[$scope.newTransaction.context[x].text] = 100;
+                    for (x in $scope.newTransaction.associatedModels){
+                        $scope.newTransaction.associatedModels[x].context = newValue.map(function(obj){
+                            obj.score = 100;
+                            return obj;
+                        });
                     }
                 }
             }, true);
+
             $mdSidenav('transaction').toggle();
         }
         else{$mdSidenav('login').toggle();}
