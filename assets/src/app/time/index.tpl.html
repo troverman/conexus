@@ -38,8 +38,7 @@
 	                        <li><a ng-click="$event.stopPropagation();selectTab('INFORMATION');">Information</a></li>
 	                        <li><a ng-click="$event.stopPropagation();selectTab('ASSOCIATIONS');">Associations</a></li>
 	                        <li><a ng-click="$event.stopPropagation();selectTab('CONTENT');">Content</a></li>
-	                        <li><a ng-click="$event.stopPropagation();selectTab('STATS');statsToggle(time)">Stats</a></li>
-	                        <li><a ng-click="$event.stopPropagation();selectTab('TOKENS');tokensToggle(time)">Tokens</a></li>
+	                        <li><a ng-click="$event.stopPropagation();selectTab('TOKENS');">Tokens</a></li>
 	                    </ul>
 	                </div>
 	            </div>
@@ -84,11 +83,11 @@
 	</div>
 
 
-	<div ng-if="selectedTab =='ASSOCIATIONS'">
-        <div class="row">
-        	<div ng-include="'time/templates/associations.tpl.html'"></div>
-        </div>
-	</div>
+    <div class="row">
+    	<div ng-if="selectedTab =='ASSOCIATIONS'" ng-include="'time/templates/associations.tpl.html'"></div>
+    	<div ng-if="selectedTab =='TOKENS'" ng-include="'time/templates/tokens.tpl.html'"></div>
+
+    </div>
 
 	<!--TODO: NESTED RENDER-->
 	<!--TODO: TEMPLATE-->

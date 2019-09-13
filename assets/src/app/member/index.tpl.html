@@ -1,6 +1,9 @@
 <div ui-view="member">
 	<div class="container" style="padding:0px">
 		<div class="card" ng-click="subNavToggle(member)">
+			<div style="text-align:right;padding:15px;position:absolute;right:0">
+                <a style="color:white;" ng-click=""><i class="fas fa-chevron-down"></i></a>
+            </div>
 			<div style="background-image: url('{{member.coverUrl}}');text-align:center">
 				<a ng-click="$event.stopPropagation()" href="member/{{member.username}}" ui-sref="member.activity"><img style="border-radius:100%;margin-top:25px;margin-bottom:25px;background: #fff;width: 200px;height: 200px;padding: 0.25em;" err-src="/images/avatar.png" ng-src="{{member.avatarUrl}}"/></a>
 			</div>

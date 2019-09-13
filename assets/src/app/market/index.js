@@ -63,9 +63,11 @@ angular.module( 'conexus.market', [
 
     //weird/
     //$scope.market = orders.market;
-    $scope.market = token[0];
-    $scope.market.model = 'MARKET';
-    console.log($scope.market);
+    if(token[0]){
+        $scope.market = token[0];
+        $scope.market.model = 'MARKET';
+        console.log($scope.market);
+    }
     
     $scope.markets = [];
     $scope.newMarket = {};
@@ -240,10 +242,16 @@ angular.module( 'conexus.market', [
             }
         }
     ];
-
-    $scope.token = token[0];
-    $scope.token.model = 'TOKEN';
+    if(token[0]){
+        $scope.token = token[0];
+        $scope.token.model = 'TOKEN';
+    }
     //vs market
+
+    //validateion...
+    //eskrow is a validation type..
+    //connection is exchange governance!!!!!!!!
+    //coinbase eat
 
     $scope.trades = {};
 

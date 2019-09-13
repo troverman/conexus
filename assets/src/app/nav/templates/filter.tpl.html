@@ -7,8 +7,7 @@
                 <div style="margin-top: auto;margin-bottom: auto;">
                     <div style="padding:15px">
                         <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Filter</h1>
-                        <h5 style="color:white">
-                        <!--CONTEXT-->
+                        <h5><a style="color:white" href="#" ng-click="sortToggle()">Sort</a></h5>
                     </div>
                 </div>
             </div>
@@ -98,11 +97,9 @@
                     <text-angular ng-model="filterBuilder" ta-toolbar="[['p','h1','bold','italics','quote','insertLink', 'html']]"></text-angular>
                     <button type="submit" class="btn btn-default log-btn" ng-click="">Submit</button>
                 </div>
-
             </div>
         
             <!--LEDGER-->
-            <!--DO ITTTT-->
             <!--AND VECTOR / SELF-TRANSACTION ASSOCIATIONS-->
             <div ng-if="type=='LEDGER'">
 
@@ -133,7 +130,6 @@
                     <a href="#" ng-click="selectTag(asset.element)"><b>{{asset.element}}</b></a>
                 </div>
                 <div class="spacing-10"></div>
-
             </div>
 
             <div ng-if="type=='MANIFOLD'">
@@ -142,7 +138,6 @@
                 <h5>+CREDIT+(TIME)</h5>
                 <h5>+FUTURE+(TIME)</h5>
                 <h5>+OPTION+(TIME)</h5>
-
             </div>
 
             <!--MARKET-->
@@ -176,8 +171,6 @@
                     <md-slider step="0.1" flex="" md-discrete="" ng-model="locationFilter.distance" step="1" min="0" max="100" aria-label="general"></md-slider>
                     <div flex="10" layout="" layout-align="center center"><span class="md-body-1"></span></div>
                 </div>
-
-
             </div>
 
             <div ng-if="type=='NOTIFICATION'">
@@ -212,7 +205,6 @@
                     <md-slider step="0.1" flex="" md-discrete="" ng-model="priorityFilter.priority" step="1" min="0" max="100" aria-label="general"></md-slider>
                 </div>
                 <div class="spacing-10"></div>
-
             </div>
 
             <!--POSTIONS | MAP-->
@@ -252,7 +244,6 @@
                     <li ng-class="{active: selectedType=='LIMIT'}" ng-click="selectType('LIMIT')"><a href="#">Limit</a></li>
                 </ul>
                 <div class="spacing-10"></div>
-
             </div>
 
         </div>
