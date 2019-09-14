@@ -1,4 +1,4 @@
-angular.module("templates-app", ["about/index.tpl.html", "account/index.tpl.html", "action/index.tpl.html", "app/index.tpl.html", "app/templates/associations.tpl.html", "app/templates/information.tpl.html", "app/templates/protocols.tpl.html", "apps/index.tpl.html", "association/index.tpl.html", "association/templates/content.tpl.html", "association/templates/information.tpl.html", "association/templates/tokens.tpl.html", "association/templates/validations.tpl.html", "attention/index.tpl.html", "block/index.tpl.html", "connection/index.tpl.html", "content/index.tpl.html", "content/templates/associations.tpl.html", "content/templates/content.tpl.html", "content/templates/stats.tpl.html", "content/templates/tokens.tpl.html", "contentList/index.tpl.html", "developers/index.tpl.html", "discover/index.tpl.html", "footer/index.tpl.html", "home/index.tpl.html", "home/templates/feed.tpl.html", "home/templates/intro.tpl.html", "item/index.tpl.html", "item/templates/actions.tpl.html", "item/templates/associations.tpl.html", "item/templates/components.tpl.html", "item/templates/history.tpl.html", "item/templates/market.tpl.html", "item/templates/tokens.tpl.html", "login/index.tpl.html", "market/index.tpl.html", "market/templates/analysis.tpl.html", "market/templates/content.tpl.html", "market/templates/markets.tpl.html", "marketPair/index.tpl.html", "marketPlace/index.tpl.html", "markets/index.tpl.html", "member/index.tpl.html", "member/templates/about.tpl.html", "member/templates/actions.tpl.html", "member/templates/activity.tpl.html", "member/templates/assets.tpl.html", "member/templates/content.tpl.html", "member/templates/followers.tpl.html", "member/templates/following.tpl.html", "member/templates/items.tpl.html", "member/templates/ledger.tpl.html", "member/templates/positions.tpl.html", "member/templates/projects.tpl.html", "member/templates/tasks.tpl.html", "member/templates/time.tpl.html", "members/index.tpl.html", "nav/index.tpl.html", "nav/templates/cardDetail.tpl.html", "nav/templates/confirm.tpl.html", "nav/templates/create.tpl.html", "nav/templates/createAction.tpl.html", "nav/templates/createApp.tpl.html", "nav/templates/createConnection.tpl.html", "nav/templates/createContent.tpl.html", "nav/templates/createContentDetail.tpl.html", "nav/templates/createItem.tpl.html", "nav/templates/createOrder.tpl.html", "nav/templates/createProject.tpl.html", "nav/templates/createProtocol.tpl.html", "nav/templates/createTask.tpl.html", "nav/templates/createTime.tpl.html", "nav/templates/createTransaction.tpl.html", "nav/templates/createValidation.tpl.html", "nav/templates/filter.tpl.html", "nav/templates/information.tpl.html", "nav/templates/login.tpl.html", "nav/templates/market.tpl.html", "nav/templates/nav.tpl.html", "nav/templates/qr.tpl.html", "nav/templates/register.tpl.html", "nav/templates/render.tpl.html", "nav/templates/renderAttention.tpl.html", "nav/templates/renderReputation.tpl.html", "nav/templates/renderValidation.tpl.html", "nav/templates/sort.tpl.html", "nav/templates/stats.tpl.html", "nav/templates/subNav.tpl.html", "nav/templates/timer.tpl.html", "nav/templates/tokens.tpl.html", "notifications/index.tpl.html", "notifications/templates/follow.tpl.html", "notifications/templates/reaction.tpl.html", "notifications/templates/transaction.tpl.html", "notifications/templates/validation.tpl.html", "order/index.tpl.html", "order/templates/content.tpl.html", "order/templates/information.tpl.html", "order/templates/liquidity.tpl.html", "order/templates/orders.tpl.html", "order/templates/transactions.tpl.html", "project/index.tpl.html", "project/templates/about.tpl.html", "project/templates/activity.tpl.html", "project/templates/assets.tpl.html", "project/templates/channels.tpl.html", "project/templates/charter.tpl.html", "project/templates/content.tpl.html", "project/templates/items.tpl.html", "project/templates/ledger.tpl.html", "project/templates/members.tpl.html", "project/templates/positions.tpl.html", "project/templates/projects.tpl.html", "project/templates/settings.tpl.html", "project/templates/tasks.tpl.html", "project/templates/time.tpl.html", "project/templates/validations.tpl.html", "projects/index.tpl.html", "protocol/index.tpl.html", "protocols/index.tpl.html", "reaction/index.tpl.html", "register/index.tpl.html", "search/index.tpl.html", "task/index.tpl.html", "task/templates/associations.tpl.html", "task/templates/content.tpl.html", "task/templates/stats.tpl.html", "task/templates/time.tpl.html", "task/templates/tokens.tpl.html", "tasks/index.tpl.html", "templates/cards/actionCard.tpl.html", "templates/cards/appCard.tpl.html", "templates/cards/connectionCard.tpl.html", "templates/cards/contentCard.tpl.html", "templates/cards/itemCard.tpl.html", "templates/cards/memberCard.tpl.html", "templates/cards/orderCard.tpl.html", "templates/cards/projectCard.tpl.html", "templates/cards/taskCard.tpl.html", "templates/cards/timeCard.tpl.html", "templates/cards/timeCardLarge.tpl.html", "templates/cards/transactionCard.tpl.html", "templates/cards/validationCard.tpl.html", "time/index.tpl.html", "time/templates/associations.tpl.html", "time/templates/tokens.tpl.html", "token/index.tpl.html", "transaction/index.tpl.html", "transparency/index.tpl.html", "tutorial/index.tpl.html", "tutorial/templates/controls.tpl.html", "tutorial/templates/create.tpl.html", "tutorial/templates/intro.tpl.html", "tutorial/templates/members.tpl.html", "tutorial/templates/projects.tpl.html", "tutorial/templates/tasks.tpl.html", "tutorial/templates/updateValueMap.tpl.html", "tutorial/templates/valueMap.tpl.html", "tutorial/templates/valueMapBuilder.tpl.html", "tutorial/templates/valueMapOrders.tpl.html", "tutorial/templates/valueMapQuestions.tpl.html", "tx/index.tpl.html", "validation/index.tpl.html"]);
+angular.module("templates-app", ["about/index.tpl.html", "account/index.tpl.html", "action/index.tpl.html", "app/index.tpl.html", "app/templates/associations.tpl.html", "app/templates/information.tpl.html", "app/templates/protocols.tpl.html", "apps/index.tpl.html", "association/index.tpl.html", "association/templates/content.tpl.html", "association/templates/information.tpl.html", "association/templates/tokens.tpl.html", "association/templates/validations.tpl.html", "attention/index.tpl.html", "block/index.tpl.html", "connection/index.tpl.html", "connection/templates/content.tpl.html", "connection/templates/information.tpl.html", "connection/templates/tokens.tpl.html", "connection/templates/validations.tpl.html", "content/index.tpl.html", "content/templates/associations.tpl.html", "content/templates/content.tpl.html", "content/templates/stats.tpl.html", "content/templates/tokens.tpl.html", "contentList/index.tpl.html", "developers/index.tpl.html", "discover/index.tpl.html", "footer/index.tpl.html", "home/index.tpl.html", "home/templates/feed.tpl.html", "home/templates/intro.tpl.html", "item/index.tpl.html", "item/templates/actions.tpl.html", "item/templates/associations.tpl.html", "item/templates/components.tpl.html", "item/templates/history.tpl.html", "item/templates/market.tpl.html", "item/templates/tokens.tpl.html", "login/index.tpl.html", "market/index.tpl.html", "market/templates/analysis.tpl.html", "market/templates/content.tpl.html", "market/templates/markets.tpl.html", "marketPair/index.tpl.html", "marketPlace/index.tpl.html", "markets/index.tpl.html", "member/index.tpl.html", "member/templates/about.tpl.html", "member/templates/actions.tpl.html", "member/templates/activity.tpl.html", "member/templates/assets.tpl.html", "member/templates/content.tpl.html", "member/templates/followers.tpl.html", "member/templates/following.tpl.html", "member/templates/items.tpl.html", "member/templates/ledger.tpl.html", "member/templates/positions.tpl.html", "member/templates/projects.tpl.html", "member/templates/tasks.tpl.html", "member/templates/time.tpl.html", "members/index.tpl.html", "nav/index.tpl.html", "nav/templates/cardDetail.tpl.html", "nav/templates/confirm.tpl.html", "nav/templates/create.tpl.html", "nav/templates/createAction.tpl.html", "nav/templates/createApp.tpl.html", "nav/templates/createConnection.tpl.html", "nav/templates/createContent.tpl.html", "nav/templates/createItem.tpl.html", "nav/templates/createOrder.tpl.html", "nav/templates/createProject.tpl.html", "nav/templates/createProtocol.tpl.html", "nav/templates/createTask.tpl.html", "nav/templates/createTime.tpl.html", "nav/templates/createTransaction.tpl.html", "nav/templates/createValidation.tpl.html", "nav/templates/filter.tpl.html", "nav/templates/information.tpl.html", "nav/templates/login.tpl.html", "nav/templates/market.tpl.html", "nav/templates/nav.tpl.html", "nav/templates/qr.tpl.html", "nav/templates/register.tpl.html", "nav/templates/render.tpl.html", "nav/templates/renderAttention.tpl.html", "nav/templates/renderReputation.tpl.html", "nav/templates/renderValidation.tpl.html", "nav/templates/sort.tpl.html", "nav/templates/stats.tpl.html", "nav/templates/subNav.tpl.html", "nav/templates/timer.tpl.html", "nav/templates/tokens.tpl.html", "notifications/index.tpl.html", "notifications/templates/follow.tpl.html", "notifications/templates/reaction.tpl.html", "notifications/templates/transaction.tpl.html", "notifications/templates/validation.tpl.html", "order/index.tpl.html", "order/templates/content.tpl.html", "order/templates/information.tpl.html", "order/templates/liquidity.tpl.html", "order/templates/orders.tpl.html", "order/templates/transactions.tpl.html", "project/index.tpl.html", "project/templates/about.tpl.html", "project/templates/activity.tpl.html", "project/templates/assets.tpl.html", "project/templates/channels.tpl.html", "project/templates/charter.tpl.html", "project/templates/content.tpl.html", "project/templates/items.tpl.html", "project/templates/ledger.tpl.html", "project/templates/members.tpl.html", "project/templates/positions.tpl.html", "project/templates/projects.tpl.html", "project/templates/settings.tpl.html", "project/templates/tasks.tpl.html", "project/templates/time.tpl.html", "project/templates/validations.tpl.html", "projects/index.tpl.html", "protocol/index.tpl.html", "protocols/index.tpl.html", "reaction/index.tpl.html", "register/index.tpl.html", "search/index.tpl.html", "task/index.tpl.html", "task/templates/associations.tpl.html", "task/templates/content.tpl.html", "task/templates/stats.tpl.html", "task/templates/time.tpl.html", "task/templates/tokens.tpl.html", "tasks/index.tpl.html", "templates/cards/actionCard.tpl.html", "templates/cards/appCard.tpl.html", "templates/cards/connectionCard.tpl.html", "templates/cards/contentCard.tpl.html", "templates/cards/itemCard.tpl.html", "templates/cards/memberCard.tpl.html", "templates/cards/orderCard.tpl.html", "templates/cards/projectCard.tpl.html", "templates/cards/taskCard.tpl.html", "templates/cards/timeCard.tpl.html", "templates/cards/timeCardLarge.tpl.html", "templates/cards/transactionCard.tpl.html", "templates/cards/validationCard.tpl.html", "time/index.tpl.html", "time/templates/associations.tpl.html", "time/templates/tokens.tpl.html", "token/index.tpl.html", "transaction/index.tpl.html", "transparency/index.tpl.html", "tutorial/index.tpl.html", "tutorial/templates/controls.tpl.html", "tutorial/templates/create.tpl.html", "tutorial/templates/intro.tpl.html", "tutorial/templates/members.tpl.html", "tutorial/templates/projects.tpl.html", "tutorial/templates/tasks.tpl.html", "tutorial/templates/updateValueMap.tpl.html", "tutorial/templates/valueMap.tpl.html", "tutorial/templates/valueMapBuilder.tpl.html", "tutorial/templates/valueMapOrders.tpl.html", "tutorial/templates/valueMapQuestions.tpl.html", "tx/index.tpl.html", "validation/index.tpl.html", "validation/templates/content.tpl.html", "validation/templates/information.tpl.html", "validation/templates/tokens.tpl.html", "validation/templates/validations.tpl.html"]);
 
 angular.module("about/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("about/index.tpl.html",
@@ -1098,13 +1098,10 @@ angular.module("association/index.tpl.html", []).run(["$templateCache", function
     "\n" +
     "			<div style=\"padding:16px\">\n" +
     "				<div ng-if=\"selectedTab =='INFORMATION'\" ng-include=\"'association/templates/information.tpl.html'\"></div>\n" +
-    "				<div ng-if=\"selectedTab =='CONTENT'\" ng-include=\"'association/templates/content.tpl.html'\"></div>\n" +
-    "	            <div ng-if=\"selectedTab =='TOKENS'\" ng-include=\"'association/templates/tokens.tpl.html'\"></div>\n" +
-    "	            <div ng-if=\"selectedTab =='VALIDATIONS'\" ng-include=\"'association/templates/validations.tpl.html'\"></div>\n" +
     "			</div>\n" +
     "			\n" +
     "			<div class=\"card-footer\">\n" +
-    "				<a style=\"color:grey\"><i class=\"fas fa-eye\"></i> {{association.data.apps.attention.general || 0}}</a>\n" +
+    "        		<a ng-click=\"$event.stopPropagation();renderAttentionToggle(association)\"  style=\"color:grey\"><i class=\"fas fa-eye\"></i> {{association.data.apps.attention.general || 0}}</a>\n" +
     "				<a ng-click=\"$event.stopPropagation();createReaction(association, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{association.data.apps.reactions.plus || 0}} like </a> \n" +
     "                <a ng-click=\"$event.stopPropagation();createReaction(association, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{association.data.apps.reactions.minus || 0}} dislike </a>\n" +
     "		       	<a ng-click=\"$event.stopPropagation();contentToggle(association)\" style=\"padding:5px;color:grey\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
@@ -1112,6 +1109,9 @@ angular.module("association/index.tpl.html", []).run(["$templateCache", function
     "		    </div>\n" +
     "	\n" +
     "		</div>\n" +
+    "		<div ng-if=\"selectedTab =='CONTENT'\" ng-include=\"'association/templates/content.tpl.html'\"></div>\n" +
+    "        <div ng-if=\"selectedTab =='TOKENS'\" ng-include=\"'association/templates/tokens.tpl.html'\"></div>\n" +
+    "        <div ng-if=\"selectedTab =='VALIDATIONS'\" ng-include=\"'association/templates/validations.tpl.html'\"></div>\n" +
     "	</div>\n" +
     "	<div class=\"spacing-25\"></div>\n" +
     "</div>");
@@ -1124,23 +1124,45 @@ angular.module("association/templates/content.tpl.html", []).run(["$templateCach
 
 angular.module("association/templates/information.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("association/templates/information.tpl.html",
-    "<h5><b>Connection</b></h5>\n" +
-    "<b><a href=\"connection/self\" ui-sref=\"connection({id:'self'})\">Self</a></b>\n" +
+    "<div>\n" +
+    "    <h5>Connection</h5>\n" +
+    "    <b><a href=\"connection/self\" ui-sref=\"connection({id:connection.id})\">{{connection.title}}</a></b>\n" +
+    "    <p>{{connection.description}}</p>\n" +
+    "    <!--{{connection.context}}-->\n" +
+    "    <!--ng-repeat-->\n" +
+    "    <p>{{connection.modelAlpha}} - {{connection.modelBeta}}</p>\n" +
+    "    <div class=\"spacing-5\"></div>\n" +
+    "\n" +
+    "    <h5>Connection Information</h5>\n" +
+    "    <p>{{connection.information}}</p>\n" +
+    "\n" +
+    "    <!--\n" +
+    "    {{connection.type}}\n" +
+    "    {{connection.data}}\n" +
+    "    -->\n" +
+    "\n" +
+    "</div>\n" +
+    "\n" +
     "<div class=\"spacing-5\"></div>\n" +
     "\n" +
     "<h5><b>Associated Models</b></h5>\n" +
     "<div ng-repeat=\"item in association.associatedModels\">\n" +
-    "    <p>{{item.type}}</p>\n" +
-    "    <b><a href=\"{{item.type.toLowerCase()}}/{{item.data.title || item.data.id}}\">{{item.data.title || item.data.id}}</a></b>\n" +
+    "    <p>\n" +
+    "        {{item.type}}\n" +
+    "        <b><a href=\"{{item.type.toLowerCase()}}/{{item.data.title || item.data.id}}\">{{item.data.title || item.data.id}}</a></b>\n" +
+    "    </p>\n" +
     "</div>\n" +
+    "\n" +
     "<div class=\"spacing-5\"></div>\n" +
+    "\n" +
     "<!--SUMMARY OF CONTENT?-->\n" +
     "<!--GENERATED SUMMARY-->\n" +
     "<!--TREE OF VALIDATION-->\n" +
+    "<!--\n" +
     "<table class=\"table table-striped table-hover\">\n" +
     "    <thead>\n" +
     "        <tr>\n" +
-    "            <th>Dimension</th>\n" +
+    "            <th>Context</th>\n" +
     "            <th>Score</th>\n" +
     "        </tr>\n" +
     "    </thead>\n" +
@@ -1152,38 +1174,83 @@ angular.module("association/templates/information.tpl.html", []).run(["$template
     "    </tbody>\n" +
     "</table>\n" +
     "<div class=\"spacing-10\"></div>\n" +
+    "-->\n" +
+    "\n" +
     "<highchart config=\"associationColumn\"></highchart>\n" +
     "<div class=\"spacing-5\"></div>\n" +
+    "\n" +
     "<p style=\"font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"association.createdAt\"></p>\n" +
     "");
 }]);
 
 angular.module("association/templates/tokens.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("association/templates/tokens.tpl.html",
-    "<!--TODO MOBILE-->\n" +
-    "<table class=\"table table-striped table-hover\">\n" +
-    "    <thead>\n" +
-    "        <tr>\n" +
-    "            <th>Identifer</th>\n" +
-    "            <th>Value</th>\n" +
-    "        </tr>\n" +
-    "    </thead>\n" +
-    "    <tbody>\n" +
-    "        <tr ng-repeat=\"item in tokens\">\n" +
-    "            <td><a href=\"market/{{item.string}}\" ui-sref=\"market({id:item.string})\">{{item.string}}</a></td>\n" +
-    "            <td>{{item.amount}}</td>\n" +
-    "        </tr>\n" +
-    "    </tbody>\n" +
-    "</table>");
+    "<div class=\"card\">\n" +
+    "    <div style=\"background:url('https://source.unsplash.com/1600x900/?{{item.tags}}');min-height:auto;\" class=\"imageContainerSmall\">\n" +
+    "        <div style=\"background:rgba(0,0,0,0.75);height:auto\" class=\"imageContainerSmallDiv\">  \n" +
+    "            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                <div style=\"padding:15px\">\n" +
+    "                    <h1 style=\"text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;\">Tokens</h1>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "    <div style=\"padding:16px;\">\n" +
+    "        <table class=\"table table-striped table-hover\">\n" +
+    "            <thead>\n" +
+    "                <tr>\n" +
+    "                    <th>Identifer</th>\n" +
+    "                    <th>Value</th>\n" +
+    "                </tr>\n" +
+    "            </thead>\n" +
+    "            <tbody>\n" +
+    "                <tr ng-repeat=\"item in tokens\">\n" +
+    "                    <td><a href=\"market/{{item.string}}\" ui-sref=\"market({id:item.string})\">{{item.string}}</a></td>\n" +
+    "                    <td>{{item.amount}}</td>\n" +
+    "                </tr>\n" +
+    "            </tbody>\n" +
+    "        </table>\n" +
+    "    </div>\n" +
+    "</div>");
 }]);
 
 angular.module("association/templates/validations.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("association/templates/validations.tpl.html",
-    "<h2>Validations</h2>\n" +
-    "<div ng-repeat=\"item in validations\">\n" +
-    "	<b><a href=\"validation/{{item.id}}\" ui-sref=\"validation({id:item.id})\">{{item.id}}</a></b>\n" +
+    "<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "    <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
+    "    <li style=\"float:right;font-size:14px\"><a href=\"#\" ng-click=\"sortToggle()\">Sort By Recent <i class=\"fa fa-angle-down\"></i></a></li>\n" +
+    "    <div style=\"clear:both\"></div>\n" +
+    "</ul>\n" +
+    "<div class=\"card\">\n" +
+    "    <tags-input style=\"border:0px;flex-grow:2;\" placeholder=\"Search\" ng-model=\"searchQuery\"></tags-input>\n" +
     "</div>\n" +
-    "");
+    "<div class=\"card\" ng-repeat=\"item in validations\" ng-click=\"cardDetailExpand(item)\">\n" +
+    "	<div style=\"background:url('https://source.unsplash.com/1600x900/?{{item.tags}}');min-height:auto;\" class=\"imageContainerSmall\">\n" +
+    "        <div style=\"background:rgba(0,0,0,0.75);height:auto\" class=\"imageContainerSmallDiv\">  \n" +
+    "        	<div style=\"text-align:right;padding:15px;position:absolute;right:0\">\n" +
+    "                <a style=\"color:white;\" ng-click=\"$event.stopPropagation();cardDetailToggle(item)\"><i class=\"fas fa-chevron-down\"></i></a>\n" +
+    "            </div>\n" +
+    "            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                <div style=\"padding:15px\">\n" +
+    "                    <h1 style=\"text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;\"><a style=\"color:white\" href=\"validation/{{item.id}}\" ui-sref=\"validation({id:item.id})\">{{item.id}}</a></h1>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "    <div style=\"padding:16px;\">\n" +
+    "    	<span ng-repeat=\"model in item.associatedModels\"><a href=\"{{model.type.toLowerCase()}}/{{model.id}}\">{{model.type}} - {{model.id}}</a>, </span>\n" +
+    "    	<div class=\"spacing-5\"></div>\n" +
+    "    	<span ng-repeat=\"(object, key) in item.context\"><b>{{object}}</b>:{{key}}, </span>\n" +
+    "    </div>\n" +
+    "    <div class=\"card-footer\">\n" +
+    "        <a ng-click=\"$event.stopPropagation();renderAttentionToggle(item)\"  style=\"color:grey\"><i class=\"fas fa-eye\"></i> {{item.data.apps.attention.general || 0}}</a>\n" +
+    "		<a ng-click=\"$event.stopPropagation();createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.data.apps.reactions.plus}} like </a> \n" +
+    "        <a ng-click=\"$event.stopPropagation();createReaction(item, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{item.data.apps.reactions.minus}} dislike </a>\n" +
+    "       	<a ng-click=\"$event.stopPropagation();contentToggle(item)\" style=\"padding:5px;color:grey\" ><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "       	<a ng-click=\"$event.stopPropagation();validationToggle(item)\" style=\"padding:5px;color:grey\" ><i class=\"fa fa-check\"></i> validate </a>\n" +
+    "       	<a ng-click=\"$event.stopPropagation();\" style=\"padding:0px\" class=\"pull-right\" href=\"validation/{{item.id}}\" ui-sref=\"validation({id:item.id})\"><i class=\"fas fa-link grey\"></i></a>\n" +
+    "    </div>\n" +
+    "</div>");
 }]);
 
 angular.module("attention/index.tpl.html", []).run(["$templateCache", function($templateCache) {
@@ -1331,16 +1398,25 @@ angular.module("connection/index.tpl.html", []).run(["$templateCache", function(
     "			        </div>\n" +
     "			    </div>\n" +
     "			</div>\n" +
+    "			<div style=\"background-color:white\">\n" +
+    "	            <div class=\"member-tab-container container\" style=\"padding-left:0px\">\n" +
+    "	                <div style=\"text-align:center\">\n" +
+    "	                    <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "	                        <li><a ng-click=\"$event.stopPropagation();selectTab('INFORMATION')\">Information</a></li>\n" +
+    "	                        <li><a ng-click=\"$event.stopPropagation();selectTab('CONTENT')\">Content</a></li>\n" +
+    "	                        <li><a ng-click=\"$event.stopPropagation();selectTab('VALIDATIONS')\">Associations</a></li>\n" +
+    "	                        <li><a ng-click=\"$event.stopPropagation();selectTab('CHARTER')\">Charter</a></li>\n" +
+    "	                    </ul>\n" +
+    "	                </div>\n" +
+    "	            </div>\n" +
+    "	        </div>\n" +
+    "	        <hr style=\"margin:0px;\">\n" +
     "			<div style=\"padding:16px\">\n" +
-    "\n" +
-    "				<!--TODO STRUCTURE-->\n" +
-    "				<p>{{connection.info.description}}</p>\n" +
-    "\n" +
-    "				<h4>Associated Models</h4>\n" +
-    "				<h5>{{connection.dataModelAlpha}} - {{connection.dataModelBeta}}</h5>\n" +
-    "\n" +
-    "				<h5>{{connection.config}}</h5>\n" +
-    "\n" +
+    "				<h5>Description</h5>\n" +
+    "        		<span style=\"display:inline\" ng-bind-html=\"renderContent(connection.info.description)\"></span>\n" +
+    "				<h5>Associated Models</h5>\n" +
+    "				<p>{{connection.dataModelAlpha}} - {{connection.dataModelBeta}}</p>\n" +
+    "				<p>{{connection.information}}</p>\n" +
     "			</div>\n" +
     "			<div class=\"card-footer\">\n" +
     "		        <a ng-click=\"$event.stopPropagation();renderAttentionToggle(connection)\" style=\"color:grey\"><i class=\"fas fa-eye\"></i> {{connection.data.apps.attention.general || 0}}</a>\n" +
@@ -1348,12 +1424,146 @@ angular.module("connection/index.tpl.html", []).run(["$templateCache", function(
     "		        <a ng-click=\"$event.stopPropagation();createReaction(connection, 'minus')\" ><i class=\"fas fa-angle-down\"></i> {{connection.data.apps.reactions.minus || 0 }} dislike </a>\n" +
     "		        <a ng-click=\"$event.stopPropagation();contentToggle(connection)\"><i class=\"far fa-comment\"></i> comment </a>\n" +
     "		        <a ng-click=\"$event.stopPropagation();validationToggle(connection)\"><i class=\"fa fa-check\"></i> validate </a>\n" +
-    "		        <a ng-click=\"$event.stopPropagation()\" style=\"padding:0px\" class=\"pull-right\" href=\"connection/{{connection.id}}\" ui-sref=\"connection({id:connection.id})\"><i class=\"fas fa-link grey\"></i></a>\n" +
     "		    </div>\n" +
     "		</div>\n" +
-    "\n" +
     "	</div>\n" +
     "	<div class=\"spacing-25\"></div>\n" +
+    "</div>");
+}]);
+
+angular.module("connection/templates/content.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("connection/templates/content.tpl.html",
+    "");
+}]);
+
+angular.module("connection/templates/information.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("connection/templates/information.tpl.html",
+    "<div>\n" +
+    "    <h5>Connection</h5>\n" +
+    "    <b><a href=\"connection/self\" ui-sref=\"connection({id:connection.id})\">{{connection.title}}</a></b>\n" +
+    "    <p>{{connection.description}}</p>\n" +
+    "    <!--{{connection.context}}-->\n" +
+    "    <!--ng-repeat-->\n" +
+    "    <p>{{connection.modelAlpha}} - {{connection.modelBeta}}</p>\n" +
+    "    <div class=\"spacing-5\"></div>\n" +
+    "\n" +
+    "    <h5>Connection Information</h5>\n" +
+    "    <p>{{connection.information}}</p>\n" +
+    "\n" +
+    "    <!--\n" +
+    "    {{connection.type}}\n" +
+    "    {{connection.data}}\n" +
+    "    -->\n" +
+    "\n" +
+    "</div>\n" +
+    "\n" +
+    "<div class=\"spacing-5\"></div>\n" +
+    "\n" +
+    "<h5><b>Associated Models</b></h5>\n" +
+    "<div ng-repeat=\"item in association.associatedModels\">\n" +
+    "    <p>\n" +
+    "        {{item.type}}\n" +
+    "        <b><a href=\"{{item.type.toLowerCase()}}/{{item.data.title || item.data.id}}\">{{item.data.title || item.data.id}}</a></b>\n" +
+    "    </p>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div class=\"spacing-5\"></div>\n" +
+    "\n" +
+    "<!--SUMMARY OF CONTENT?-->\n" +
+    "<!--GENERATED SUMMARY-->\n" +
+    "<!--TREE OF VALIDATION-->\n" +
+    "<!--\n" +
+    "<table class=\"table table-striped table-hover\">\n" +
+    "    <thead>\n" +
+    "        <tr>\n" +
+    "            <th>Context</th>\n" +
+    "            <th>Score</th>\n" +
+    "        </tr>\n" +
+    "    </thead>\n" +
+    "    <tbody>\n" +
+    "        <tr ng-repeat=\"context in contextList track by $index\">\n" +
+    "            <td>{{context[0]}}</td>\n" +
+    "            <td>{{context[1]}}</td>\n" +
+    "        </tr>\n" +
+    "    </tbody>\n" +
+    "</table>\n" +
+    "<div class=\"spacing-10\"></div>\n" +
+    "-->\n" +
+    "\n" +
+    "<highchart config=\"associationColumn\"></highchart>\n" +
+    "<div class=\"spacing-5\"></div>\n" +
+    "\n" +
+    "<p style=\"font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"association.createdAt\"></p>\n" +
+    "");
+}]);
+
+angular.module("connection/templates/tokens.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("connection/templates/tokens.tpl.html",
+    "<div class=\"card\">\n" +
+    "    <div style=\"background:url('https://source.unsplash.com/1600x900/?{{item.tags}}');min-height:auto;\" class=\"imageContainerSmall\">\n" +
+    "        <div style=\"background:rgba(0,0,0,0.75);height:auto\" class=\"imageContainerSmallDiv\">  \n" +
+    "            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                <div style=\"padding:15px\">\n" +
+    "                    <h1 style=\"text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;\">Tokens</h1>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "    <div style=\"padding:16px;\">\n" +
+    "        <table class=\"table table-striped table-hover\">\n" +
+    "            <thead>\n" +
+    "                <tr>\n" +
+    "                    <th>Identifer</th>\n" +
+    "                    <th>Value</th>\n" +
+    "                </tr>\n" +
+    "            </thead>\n" +
+    "            <tbody>\n" +
+    "                <tr ng-repeat=\"item in tokens\">\n" +
+    "                    <td><a href=\"market/{{item.string}}\" ui-sref=\"market({id:item.string})\">{{item.string}}</a></td>\n" +
+    "                    <td>{{item.amount}}</td>\n" +
+    "                </tr>\n" +
+    "            </tbody>\n" +
+    "        </table>\n" +
+    "    </div>\n" +
+    "</div>");
+}]);
+
+angular.module("connection/templates/validations.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("connection/templates/validations.tpl.html",
+    "<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "    <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
+    "    <li style=\"float:right;font-size:14px\"><a href=\"#\" ng-click=\"sortToggle()\">Sort By Recent <i class=\"fa fa-angle-down\"></i></a></li>\n" +
+    "    <div style=\"clear:both\"></div>\n" +
+    "</ul>\n" +
+    "<div class=\"card\">\n" +
+    "    <tags-input style=\"border:0px;flex-grow:2;\" placeholder=\"Search\" ng-model=\"searchQuery\"></tags-input>\n" +
+    "</div>\n" +
+    "<div class=\"card\" ng-repeat=\"item in validations\" ng-click=\"cardDetailExpand(item)\">\n" +
+    "	<div style=\"background:url('https://source.unsplash.com/1600x900/?{{item.tags}}');min-height:auto;\" class=\"imageContainerSmall\">\n" +
+    "        <div style=\"background:rgba(0,0,0,0.75);height:auto\" class=\"imageContainerSmallDiv\">  \n" +
+    "        	<div style=\"text-align:right;padding:15px;position:absolute;right:0\">\n" +
+    "                <a style=\"color:white;\" ng-click=\"$event.stopPropagation();cardDetailToggle(item)\"><i class=\"fas fa-chevron-down\"></i></a>\n" +
+    "            </div>\n" +
+    "            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                <div style=\"padding:15px\">\n" +
+    "                    <h1 style=\"text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;\"><a style=\"color:white\" href=\"validation/{{item.id}}\" ui-sref=\"validation({id:item.id})\">{{item.id}}</a></h1>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "    <div style=\"padding:16px;\">\n" +
+    "    	<span ng-repeat=\"model in item.associatedModels\"><a href=\"{{model.type.toLowerCase()}}/{{model.id}}\">{{model.type}} - {{model.id}}</a>, </span>\n" +
+    "    	<div class=\"spacing-5\"></div>\n" +
+    "    	<span ng-repeat=\"(object, key) in item.context\"><b>{{object}}</b>:{{key}}, </span>\n" +
+    "    </div>\n" +
+    "    <div class=\"card-footer\">\n" +
+    "        <a ng-click=\"$event.stopPropagation();renderAttentionToggle(item)\"  style=\"color:grey\"><i class=\"fas fa-eye\"></i> {{item.data.apps.attention.general || 0}}</a>\n" +
+    "		<a ng-click=\"$event.stopPropagation();createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.data.apps.reactions.plus}} like </a> \n" +
+    "        <a ng-click=\"$event.stopPropagation();createReaction(item, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{item.data.apps.reactions.minus}} dislike </a>\n" +
+    "       	<a ng-click=\"$event.stopPropagation();contentToggle(item)\" style=\"padding:5px;color:grey\" ><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "       	<a ng-click=\"$event.stopPropagation();validationToggle(item)\" style=\"padding:5px;color:grey\" ><i class=\"fa fa-check\"></i> validate </a>\n" +
+    "       	<a ng-click=\"$event.stopPropagation();\" style=\"padding:0px\" class=\"pull-right\" href=\"validation/{{item.id}}\" ui-sref=\"validation({id:item.id})\"><i class=\"fas fa-link grey\"></i></a>\n" +
+    "    </div>\n" +
     "</div>");
 }]);
 
@@ -5236,6 +5446,7 @@ angular.module("item/index.tpl.html", []).run(["$templateCache", function($templ
     "            <div class=\"member-tab-container container\" style=\"padding-left:0px\">\n" +
     "                <div style=\"text-align:center\">\n" +
     "                    <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "                        <li><a ng-click=\"$event.stopPropagation();selectTab('INFORMATION')\">Information</a></li>\n" +
     "                        <li><a ng-click=\"$event.stopPropagation();selectTab('ACTIVITY')\">Activity</a></li>\n" +
     "                        <li><a ng-click=\"$event.stopPropagation();selectTab('ACTIONS')\">Actions</a></li>\n" +
     "                        <li><a ng-click=\"$event.stopPropagation();selectTab('ASSOCIATIONS')\">Associations</a></li>\n" +
@@ -5251,7 +5462,7 @@ angular.module("item/index.tpl.html", []).run(["$templateCache", function($templ
     "            </div>\n" +
     "        </div>\n" +
     "        <hr style=\"margin:0px;\">\n" +
-    "        <div style=\"padding:16px;\">\n" +
+    "        <div style=\"padding:16px;\" ng-if=\"selectedTab =='INFORMATION'\">\n" +
     "            <div>\n" +
     "                <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
     "                <a ng-click=\"$event.stopPropagation();\" style=\"display:inline\" href=\"member/{{item.user.username}}\" ui-sref=\"member.activity({path:item.user.username})\"><span style=\"font-weight:800\">{{item.user.username}}</span></a>\n" +
@@ -6702,7 +6913,6 @@ angular.module("member/templates/assets.tpl.html", []).run(["$templateCache", fu
     "			<div class=\"spacing-10\"></div>\n" +
     "			<div>\n" +
     "				<highchart config=\"balanceColumn\"></highchart>\n" +
-    "				<highchart config=\"balancePie\"></highchart>\n" +
     "			</div>\n" +
     "		</div>\n" +
     "	</div>	\n" +
@@ -7522,18 +7732,12 @@ angular.module("nav/templates/cardDetail.tpl.html", []).run(["$templateCache", f
     "            <!--PROJECT-->\n" +
     "            <h4 ng-if=\"item.model=='PROJECT'\" ng-click=\"\" class=\"nav-links\"><a>Request To Join <i style=\"float:right\" class=\"fas fa-users\"></i></a></h4>\n" +
     "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
     "            <h4 ng-click=\"renderValidationToggle(item)\" class=\"nav-links\"><a>Associations <i style=\"float:right\" class=\"fas fa-bezier-curve\"></i></a></h4>\n" +
     "\n" +
     "            <h4 ng-click=\"statsToggle(item)\" class=\"nav-links\"><a>Stats <i style=\"float:right\" class=\"fa fa-eye\"></i></a></h4>\n" +
     "            <!--token action potiental-->\n" +
     "\n" +
     "            <h4 ng-if=\"item.model!='TOKEN'\"  ng-click=\"tokensToggle(item)\" class=\"nav-links\"><a>Tokens <i style=\"float:right\" class=\"fas fa-coins\"></i></a></h4>\n" +
-    "\n" +
-    "\n" +
     "\n" +
     "        </div>\n" +
     "    </div>\n" +
@@ -7784,7 +7988,7 @@ angular.module("nav/templates/createConnection.tpl.html", []).run(["$templateCac
     "            <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "                <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "                    <div style=\"padding:15px\">\n" +
-    "                        <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Create Connection</h1>\n" +
+    "                        <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\">Create Connection</h1>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
@@ -7800,25 +8004,19 @@ angular.module("nav/templates/createConnection.tpl.html", []).run(["$templateCac
     "                <h5>Title</h5>\n" +
     "                <input type=\"text\" placeholder= \"Title\" ng-model=\"newConnection.info.title\" class=\"form-control\">\n" +
     "    \n" +
-    "                <!--\n" +
-    "                <h5>Creator</h5>\n" +
-    "                <input type=\"text\" placeholder= \"Title\" ng-model=\"newConnection.creator\" class=\"form-control\">\n" +
-    "                -->\n" +
-    "\n" +
-    "                <!--FIX THIS... PROJECT MEMBER :)-->\n" +
     "                <div class=\"row\">\n" +
-    "                    <div class=\"col-sm-6\">\n" +
-    "                        <h5>Data Model Alpha</h5>\n" +
-    "                        <input type=\"text\" placeholder=\"Data Model Alpha\" ng-model=\"newConnection.dataModelAlpha\" class=\"form-control\">\n" +
+    "\n" +
+    "                    <div class=\"col-sm-12\">\n" +
+    "                        <h5>Associated Models</h5>\n" +
+    "                        <tags-input min-length=\"1\" placeholder=\"Associated Models\" ng-model=\"newConnection.associatedModels\">\n" +
+    "                            <auto-complete min-length=\"2\" source=\"loadTags($query)\"></auto-complete>\n" +
+    "                        </tags-input>\n" +
     "                    </div>\n" +
-    "                    <div class=\"col-sm-6\">\n" +
-    "                        <h5>Data Model Beta</h5>\n" +
-    "                        <input type=\"text\" placeholder=\"Data Model Beta\" ng-model=\"newConnection.dataModelBeta\" class=\"form-control\">\n" +
-    "                    </div>\n" +
+    "                    \n" +
     "                </div>\n" +
     "\n" +
-    "                <h5>Data</h5>\n" +
-    "                <input type=\"text\" placeholder=\"Data\" ng-model=\"newConnection.data\" class=\"form-control\">\n" +
+    "                <h5>Information</h5>\n" +
+    "                <input type=\"text\" placeholder=\"Information\" ng-model=\"newConnection.information\" class=\"form-control\">\n" +
     "\n" +
     "                <h5>Description</h5>\n" +
     "                <text-angular placeholder=\"Description\" ng-model=\"newConnection.info.description\" ta-toolbar=\"''\"></text-angular>\n" +
@@ -7956,102 +8154,6 @@ angular.module("nav/templates/createContent.tpl.html", []).run(["$templateCache"
     "                <text-angular ng-model=\"newContent.content\" ta-toolbar=\"[['p','h1','bold','italics','quote','ol','ul','insertLink','insertImage','html']]\"></text-angular>\n" +
     "\n" +
     "                <div ng-if=\"newContent.type!='POST'\">\n" +
-    "                    <input type=\"text\" placeholder=\"Link\" ng-model=\"newContent.link\" class=\"form-control\">\n" +
-    "                </div>\n" +
-    "\n" +
-    "                <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newContent.content\">create</button>\n" +
-    "\n" +
-    "            </form>\n" +
-    "        </div>\n" +
-    "\n" +
-    "    </div>\n" +
-    "</md-sidenav>");
-}]);
-
-angular.module("nav/templates/createContentDetail.tpl.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("nav/templates/createContentDetail.tpl.html",
-    "<md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"content\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;width:70%;max-width:100%\">\n" +
-    "    <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
-    "\n" +
-    "        <div class=\"spacing-25\"></div>\n" +
-    "\n" +
-    "        <div style=\"background:url('https://source.unsplash.com/1600x900/?create,code,paint')\" class=\"imageContainerSmall\">\n" +
-    "            <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                    <div style=\"padding:15px\">\n" +
-    "                        <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">Create Content</h1>\n" +
-    "                        <h5 style=\"color:white\" ng-if=\"item.id\">Reply to {{item.id}}</h5>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "\n" +
-    "        <div style=\"padding:16px\">\n" +
-    "\n" +
-    "            <div class=\"spacing-15\"></div>\n" +
-    "\n" +
-    "            <p style=\"color:gray;font-style:italic\">Create content. Well developed content earns more tokens. <a ng-click=\"informationToggle('CREATECONTENT')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></p>\n" +
-    "\n" +
-    "            <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "            <form role=\"form\" ng-submit=\"createContent()\">\n" +
-    "                <h5>Title</h5>\n" +
-    "                <input type=\"text\" placeholder=\"Title\" ng-model=\"newContent.title\" class=\"form-control\">\n" +
-    "                \n" +
-    "\n" +
-    "                <h5>Associations <a ng-click=\"informationToggle('ASSOCIATIONS')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a><a href=\"#\" ng-click=\"expandAssociations()\" style=\"float:right\"><i class=\"fas fa-bezier-curve\"></i> Expand</a></h5>\n" +
-    "                <tags-input min-length=\"1\" placeholder=\"Associations\" ng-model=\"newContent.associatedModels\">\n" +
-    "                    <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
-    "                </tags-input>\n" +
-    "\n" +
-    "                <!--WATCHER TO APPLY-->\n" +
-    "                <div ng-if=\"!associationsAreExpanded && newContent.associatedModels.length > 0\">\n" +
-    "                    <h5>Context <a ng-if=\"newTransaction.context.length > 0\" href=\"#\" ng-click=\"expandAssociations()\" style=\"float:right\"><i class=\"fas fa-bezier-curve\"></i> Expand</a></h5>\n" +
-    "                    <tags-input min-length=\"1\" placeholder=\"Context\" ng-model=\"newContent.context\">\n" +
-    "                        <auto-complete min-length=\"2\" source=\"loadTags($query)\"></auto-complete>\n" +
-    "                    </tags-input>\n" +
-    "                </div>\n" +
-    "\n" +
-    "                <div ng-if=\"associationsAreExpanded\">\n" +
-    "                    <div class=\"row\">\n" +
-    "                        <div class=\"col-md-12 col-sm-12\" ng-repeat=\"association in newContent.associatedModels\">\n" +
-    "                            <h5>{{association.text}} Association Context <a ng-click=\"informationToggle('ASSOCIATIONS')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></h5>\n" +
-    "                            <tags-input min-length=\"1\" placeholder=\"Context\" ng-model=\"association.context\">\n" +
-    "                                <auto-complete source=\"loadTags($query)\"></auto-complete>\n" +
-    "                            </tags-input>                               \n" +
-    "                            <div ng-repeat=\"context in association.context\">\n" +
-    "                                <div layout=\"\">\n" +
-    "                                    <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{context.text}}</span></div>\n" +
-    "                                    <md-slider \n" +
-    "                                        ng-model=\"context.score\"  \n" +
-    "                                        step=\"0.1\" \n" +
-    "                                        flex=\"\" \n" +
-    "                                        md-discrete=\"\" \n" +
-    "                                        min=\"-100\" \n" +
-    "                                        max=\"100\">\n" +
-    "                                    </md-slider>\n" +
-    "                                    <div flex=\"10\" layout=\"\" layout-align=\"center center\">\n" +
-    "                                        <p class=\"md-body-1\">{{context.score}}</p>\n" +
-    "                                    </div>\n" +
-    "                                </div>\n" +
-    "                                <div style=\"text-align:center\"><p style=\"font-size:9px\">{{context.score}} | {{currentUser.reputation[context.text]*context.score}} | Multiplicative Charter</p></div>\n" +
-    "                            </div>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "                               \n" +
-    "\n" +
-    "                <ul class=\"nav nav-pills nav-justified contentTyle\">\n" +
-    "                    <li ng-class=\"{active: selectedType=='AUDIO'}\" ng-click=\"selectType('AUDIO')\"><a href=\"#\">Audio</a></li>\n" +
-    "                    <li ng-class=\"{active: selectedType=='IMAGE'}\" ng-click=\"selectType('IMAGE')\"><a href=\"#\">Image</a></li>\n" +
-    "                    <li ng-class=\"{active: selectedType=='LINK'}\" ng-click=\"selectType('LINK')\"><a href=\"#\">Link</a></li>\n" +
-    "                    <li ng-class=\"{active: selectedType=='POST'}\" ng-click=\"selectType('POST')\"><a href=\"#\">Post</a></li>\n" +
-    "                    <li ng-class=\"{active: selectedType=='VIDEO'}\" ng-click=\"selectType('VIDEO')\"><a href=\"#\">Video</a></li>\n" +
-    "                </ul>\n" +
-    "    \n" +
-    "                <text-angular ng-model=\"newContent.content\" ta-toolbar=\"[['p','h1','bold','italics','quote','ol','ul','insertLink','insertImage','html']]\"></text-angular>\n" +
-    "\n" +
-    "                <div ng-if=\"selectedType!='POST'\">\n" +
     "                    <input type=\"text\" placeholder=\"Link\" ng-model=\"newContent.link\" class=\"form-control\">\n" +
     "                </div>\n" +
     "\n" +
@@ -8896,7 +8998,6 @@ angular.module("nav/templates/createValidation.tpl.html", []).run(["$templateCac
     "            <p style=\"color:gray;font-style:italic\">Validations create value linkages. They form the mechanisms which data is associated. <a ng-click=\"informationToggle('VALIDATION')\" href=\"#\"><i class=\"fa fa-question-circle\"></i></a></p>\n" +
     "            <div class=\"spacing-10\"></div>\n" +
     "\n" +
-    "            <!--SAME AS ORDER.. :0 ?-->\n" +
     "            <h5>Data</h5>\n" +
     "            <tags-input min-length=\"1\" placeholder=\"Associations\" ng-model=\"newValidation.associatedModels\">\n" +
     "                <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
@@ -8909,14 +9010,11 @@ angular.module("nav/templates/createValidation.tpl.html", []).run(["$templateCac
     "                <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
     "            </tags-input>\n" +
     "\n" +
-    "            <!--{{item.associatedModels}}-->\n" +
+    "            <!--\n" +
     "            <div ng-repeat=\"associatedModel in item.associatedModels\" style=\"font-size:14px;font-weight:bold\">\n" +
-    "                <!--POPULATE MODEL-->\n" +
     "                <p class=\"valueMapButton\">{{associatedModel}}</p>\n" +
-    "\n" +
     "            </div>\n" +
-    "\n" +
-    "            <!--CONNECTIONS!-->\n" +
+    "            -->\n" +
     "\n" +
     "            <div ng-repeat=\"context in newValidation.context track by $index\">\n" +
     "                <div layout=\"\">\n" +
@@ -8928,19 +9026,12 @@ angular.module("nav/templates/createValidation.tpl.html", []).run(["$templateCac
     "                        <p class=\"md-body-1\">{{context.score}}</p>\n" +
     "                    </div>\n" +
     "                </div>\n" +
-    "\n" +
-    "                <!--CHARTER LOGIC HERE-->\n" +
-    "                <div style=\"text-align:center\"><p style=\"font-size:9px\">{{reputation[context.text] || 0}} | {{reputation[context.text]*newValidation.context[context.text]}}</p></div>\n" +
-    "\n" +
+    "                <div style=\"text-align:center\"><p style=\"font-size:9px\">{{reputation[context.text] || 0}}</p></div>\n" +
     "            </div>\n" +
     "\n" +
     "            <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "            <h5>Content</h5>\n" +
     "            <text-angular style=\"height:200px\" ng-model=\"newValidation.content\" ta-toolbar=\"''\"></text-angular>\n" +
-    "\n" +
     "            <div class=\"spacing-10\"></div>\n" +
-    "\n" +
     "            <button ng-click=\"createValidation()\" type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\">create</button>\n" +
     "\n" +
     "        </div>\n" +
@@ -9783,16 +9874,11 @@ angular.module("nav/templates/renderReputation.tpl.html", []).run(["$templateCac
     "\n" +
     "            <div class=\"spacing-5\"></div>\n" +
     "\n" +
-    "            <!--<h3>Reputation</h3>-->\n" +
-    "            <!--IF PRE SELECTED FILTER-->\n" +
     "            <h4>{{item.project.title}}</h4>\n" +
-    "            <!--<tags-input min-length=\"1\" max-tags=\"1\" placeholder=\"Manifold Filter\" ng-model=\"reputationFilter\">\n" +
-    "                <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
-    "            </tags-input>-->\n" +
     "            <div class=\"spacing-5\"></div>\n" +
     "            \n" +
     "            <!--FIX CRASH-->\n" +
-    "            <!--<highchart config=\"reputationChart\"></highchart>-->\n" +
+    "            <highchart config=\"reputationChart\"></highchart>\n" +
     "            \n" +
     "        </div>\n" +
     "    </div>\n" +
@@ -10076,6 +10162,13 @@ angular.module("nav/templates/timer.tpl.html", []).run(["$templateCache", functi
     "            <div ng-if=\"selectedTab=='TASK'\">\n" +
     "                <!--IF MULTI TASKS-->\n" +
     "                <h4 ng-if=\"taskTime > 0\">{{taskTime}}</h4>\n" +
+    "                <div class=\"spacing-5\"></div>\n" +
+    "                <tags-input min-length=\"1\" ng-model=\"timeTags\" placeholder=\"Context\"></tags-input>\n" +
+    "                <div class=\"spacing-5\"></div>\n" +
+    "                <text-angular ng-model=\"timeContent\" ta-toolbar=\"[['bold','italics','p','h1','h2','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
+    "                <div class=\"spacing-5\"></div>\n" +
+    "                <button style=\"width:100%;\" class=\"btn btn-default log-btn\" ng-click=\"createTime()\">Submit Time</button>\n" +
+    "\n" +
     "            </div>\n" +
     "\n" +
     "            <div ng-if=\"selectedTab=='ATTENTION'\">\n" +
@@ -10716,6 +10809,7 @@ angular.module("project/index.tpl.html", []).run(["$templateCache", function($te
     "                        <li><a ng-click=\"$event.stopPropagation();\" href=\"project/{{project.urlTitle}}/tasks\" ui-sref=\"project.tasks\">Tasks</a></li>\n" +
     "                        <li><a ng-click=\"$event.stopPropagation();\" href=\"project/{{project.urlTitle}}/time\" ui-sref=\"project.time\">Time</a></li>\n" +
     "                        <li><a ng-click=\"$event.stopPropagation();transactionToggle(project)\" class=\"btn btn-default\">Send Tokens</a></li>\n" +
+    "                        <li style=\"float:right;margin-top:5px\"><a style=\"color:black\"><i class=\"fa fa-bars\"></i></a></li>\n" +
     "                    </ul>\n" +
     "                </div>\n" +
     "            </div>\n" +
@@ -10874,23 +10968,13 @@ angular.module("project/templates/activity.tpl.html", []).run(["$templateCache",
 angular.module("project/templates/assets.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("project/templates/assets.tpl.html",
     "<div class=\"row\">\n" +
-    "	<div class=\"card mobileFix\">\n" +
-    "        <form ng-submit=\"search()\" style=\"display:flex;flex-direction:row;\">\n" +
-    "            <input style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder= \"Seach\" ng-model=\"searchQuery\">\n" +
-    "            <div ng-click=\"search()\" style=\"border:0px;float:right\" class=\"btn btn-default\">\n" +
-    "                <a href=\"#\" role=\"button\">\n" +
-    "                    <h5 style=\"color:black;text-align:right\" class=\"noselect\">Search <i class=\"fa fa-search\"></i></h5>\n" +
-    "                </a>\n" +
-    "            </div>\n" +
-    "        </form>\n" +
-    "    </div>\n" +
     "	<div class=\"card\">\n" +
     "		<div style=\"background:url('https://source.unsplash.com/1600x900/?details,notes,explore,wonder,connection,create,content,creation');min-height:100px\" class=\"imageContainerSmall\">\n" +
     "            <div style=\"background:rgba(0,0,0,0.75);height:100px\" class=\"imageContainerSmallDiv\">  \n" +
     "                <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "                    <div style=\"padding:15px\">\n" +
     "                        <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\">Balance</h1>\n" +
-    "                        <h5><span style=\"font-size:11px;color:gray\">0x{{project.id}}</span></h5>\n" +
+    "                        <h5><span style=\"font-size:11px;color:white\">{{project.id}}</span></h5>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
@@ -10905,6 +10989,8 @@ angular.module("project/templates/assets.tpl.html", []).run(["$templateCache", f
     "	    	<div ng-show=\"balanceLookupValue !== undefined\">\n" +
     "	    		<h5><a href=\"market/{{balanceLook}}\" ui-sref=\"market({id:balanceLook})\">{{balanceLook}}</a> | {{balanceLookupValue}}</h5>\n" +
     "	    	</div>\n" +
+    "            <div class=\"spacing-10\"></div>\n" +
+    "            <div><highchart config=\"balanceColumn\"></highchart></div>\n" +
     "	    </div>\n" +
     "	</div>\n" +
     "</div>");
@@ -10958,8 +11044,6 @@ angular.module("project/templates/charter.tpl.html", []).run(["$templateCache", 
     "<div class=\"row\">\n" +
     "    <div class=\"col-sm-12\" style=\"padding-left:0px;padding-right:0px;\">\n" +
     "\n" +
-    "\n" +
-    "\n" +
     "        <div class=\"spacing-5 mobileFix\"></div>\n" +
     "\n" +
     "        <ul style=\"padding:0px;\" class=\"member-tabs mobileFix\">\n" +
@@ -10979,8 +11063,6 @@ angular.module("project/templates/charter.tpl.html", []).run(["$templateCache", 
     "                </div>\n" +
     "            </form>\n" +
     "        </div>\n" +
-    "\n" +
-    "\n" +
     "\n" +
     "        <div class=\"card\"><button class=\"btn btn-default log-btn\" ng-click=\"connectionToggle()\">+ Connection Rule</button></div>\n" +
     "        <div ng-repeat=\"item in connections\"><div ng-include=\"'templates/cards/connectionCard.tpl.html'\"></div></div>\n" +
@@ -11375,6 +11457,7 @@ angular.module("project/templates/members.tpl.html", []).run(["$templateCache", 
   $templateCache.put("project/templates/members.tpl.html",
     "<div class=\"row\">\n" +
     "    <div class=\"card\" ng-if=\"!isProjectMember\"><button class=\"btn btn-default log-btn\" ng-click=\"createMember()\">+ motion to join</button></div>\n" +
+    "    <div class=\"card\" ng-if=\"!isProjectMember\"><button class=\"btn btn-default log-btn\" ng-click=\"createMemberValidate()\">+ motion to join</button></div>\n" +
     "</div>\n" +
     "<div class=\"spacing-5\"></div>\n" +
     "<!--FILTER SORT-->\n" +
@@ -11382,9 +11465,7 @@ angular.module("project/templates/members.tpl.html", []).run(["$templateCache", 
     "	<div class=\"col-sm-6\" ng-repeat=\"member in members\" style=\"padding-left:10px;padding-right:10px;\">\n" +
     "		<div class=\"member-card\" ng-click=\"renderReputationToggle(member)\" style=\"margin-bottom:10px;\">\n" +
     "			<div style=\"text-align:right;padding:15px;position:absolute;right:0;margin-right:10px\">\n" +
-    "		        <a style=\"color:white;\" ng-click=\"$event.stopPropagation();cardDetailToggle(member)\">\n" +
-    "		            <i class=\"fas fa-chevron-down\"></i>\n" +
-    "		        </a>\n" +
+    "		        <a style=\"color:white;\"><i class=\"fas fa-chevron-down\"></i></a>\n" +
     "		    </div> \n" +
     "		    <div class=\"member-card-image\" style=\"background-image: url('{{member.user.coverUrl}}')\">\n" +
     "		        <a ng-click=\"$event.stopPropagation()\" href=\"member/{{member.user.username}}\" ui-sref=\"member.activity({path:member.user.username})\"><img ng-src=\"{{member.user.avatarUrl}}\" err-src=\"/images/avatar.png\"></a>\n" +
@@ -11395,7 +11476,6 @@ angular.module("project/templates/members.tpl.html", []).run(["$templateCache", 
     "		        <p style=\"color:gray\">{{project.title}}: {{member.user.reputation[project.title] || 0}}</p>\n" +
     "                <p style=\"color:gray\">{{member.user.status}} Offline</p>\n" +
     "		    </div>\n" +
-    "		    <!--IF CAN VALIDATE-->\n" +
     "		   	<div class=\"card-footer\">\n" +
     "		   		<!--\n" +
     "		   		<a ng-click=\"$event.stopPropagation();validationToggle(item)\"><i class=\"fas fa-check\"></i> send tokens </a>\n" +
@@ -11414,36 +11494,13 @@ angular.module("project/templates/members.tpl.html", []).run(["$templateCache", 
 angular.module("project/templates/positions.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("project/templates/positions.tpl.html",
     "<div class=\"row\">\n" +
-    "\n" +
-    "	<div class=\"col-sm-2 mobileFix\" style=\"padding-left:0px;padding-right:0px;\">\n" +
-    "		<div class=\"card\">\n" +
-    "			<div style=\"padding:16px;\">\n" +
-    "				<span><b>Base Assets</b></span>\n" +
-    "	            <div ng-repeat=\"market in baseMarkets\">\n" +
-    "	                <a href=\"#\" ng-click=\"filterToggle('POSITIONS')\">{{market.text}}</a>\n" +
-    "	            </div>\n" +
-    "			</div>\n" +
-    "		</div>\n" +
-    "		<div class=\"card\">\n" +
-    "			<div style=\"padding:16px;\">\n" +
-    "				<span><b>Assets</b></span>\n" +
-    "	            <div ng-repeat=\"market in markets\">\n" +
-    "	                <a href=\"#\" ng-click=\"filterToggle('POSITIONS')\">{{market.text}}</a>\n" +
-    "	            </div>\n" +
-    "			</div>\n" +
-    "		</div>\n" +
-    "	</div>\n" +
-    "\n" +
-    "	<div class=\"col-sm-10\" style=\"padding-left:0px;padding-right:0px;\">\n" +
-    "\n" +
-    "		<div class=\"card\">\n" +
+    "	<div class=\"col-sm-12\" style=\"padding-left:0px;padding-right:0px;\">\n" +
+    "		<div class=\"card mobileFix\">\n" +
     "            <tags-input class=\"\" style=\"border:0px;flex-grow:2;\" min-length=\"1\" placeholder=\"Search\" ng-model=\"searchQuery\"></tags-input>\n" +
     "	    </div>	\n" +
-    "\n" +
     "		<div class=\"card\">\n" +
     "			<button class=\"btn btn-default log-btn\" ng-click=\"orderToggle()\">+ Motion to Create Order</button>\n" +
     "		</div>\n" +
-    "\n" +
     "		<div class=\"card\">\n" +
     "			<div style=\"background:url('https://source.unsplash.com/1600x900/?code,finance')\" class=\"imageContainerSmall\">\n" +
     "                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
@@ -11454,72 +11511,13 @@ angular.module("project/templates/positions.tpl.html", []).run(["$templateCache"
     "                </div>\n" +
     "            </div>\n" +
     "			<div style=\"padding:16px;\">\n" +
-    "\n" +
-    "				<!--<div style=\"float:right\">\n" +
-    "					<a href=\"#\" ng-click=\"filterToggle()\"><span ng-repeat=\"dimension in baseMarkets\">{{dimension.text}}, </span><i class=\"fa fa-question-circle\"></i></a>\n" +
-    "				</div>-->\n" +
-    "\n" +
     "				<div class=\"spacing-10\"></div>\n" +
     "				<highchart config=\"chart\"></highchart>\n" +
     "				<div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "				<!--<div style=\"\">\n" +
-    "					<a href=\"#\" ng-click=\"filterToggle()\"><span ng-repeat=\"dimension in markets\">{{dimension.text}}, </span><i class=\"fa fa-question-circle\"></i></a>\n" +
-    "				</div>-->\n" +
-    "\n" +
     "			</div>\n" +
     "		</div>\n" +
-    "\n" +
-    "		<!--ACTUAL ORDERS && MOTIONS-->\n" +
-    "\n" +
     "		<div ng-repeat=\"item in orders\">\n" +
-    "	        <div class=\"card\" ng-click=\"cardDetailToggle(item)\">\n" +
-    "\n" +
-    "	        	<div style=\"background:url('https://source.unsplash.com/1600x900/?')\" class=\"imageContainerSmall\">\n" +
-    "	                <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "	                	<div style=\"text-align:right;padding:15px;position:absolute;right:0\">\n" +
-    "                            <a style=\"color:white;\" ng-click=\"$event.stopPropagation();cardDetailToggle(item)\">\n" +
-    "                                <i class=\"fas fa-chevron-down\"></i>\n" +
-    "                            </a>\n" +
-    "                            <div style=\"clear:both\"></div>\n" +
-    "                        </div>\n" +
-    "	                    <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "	                        <div style=\"padding:15px\">\n" +
-    "	                            <span ng-repeat=\"(key, value) in item.setAlpha\">\n" +
-    "	                                <a style=\"color:white\" href=\"market/{{key}}\" ui-sref=\"market({id:key})\">{{key}}</a>\n" +
-    "	                            </span>\n" +
-    "	                            <br>\n" +
-    "	                            <span ng-repeat=\"(key, value) in item.setBeta\">\n" +
-    "	                                <a style=\"color:white\" href=\"market/{{key}}\" ui-sref=\"market({id:key})\">{{key}}</a>\n" +
-    "	                            </span>\n" +
-    "	                            <h5 style=\"color:white\"><span style=\"font-size:10px\">{{item.type}}</span></h5>\n" +
-    "	                        </div>\n" +
-    "	                    </div>\n" +
-    "	                </div>\n" +
-    "	            </div>\n" +
-    "	            <div style=\"padding:16px\">\n" +
-    "                    <div class=\"row\">\n" +
-    "	                    <div class=\"col-xs-2\">\n" +
-    "	                        <span ng-repeat=\"(key, value) in item.setAlpha\">\n" +
-    "	                            <p style=\"font-weight:400\">{{value}} <a href=\"market/{{key}}\" ui-sref=\"market({id:key})\">{{key}}</a></p>\n" +
-    "	                        </span>\n" +
-    "	                    </div>\n" +
-    "	                    <div class=\"col-xs-1\"><i class=\"fa fa-exchange\"></i></div>\n" +
-    "	                    <div class=\"col-xs-2\">\n" +
-    "	                        <span ng-repeat=\"(key, value) in item.setBeta\">\n" +
-    "	                            <p style=\"font-weight:400\">{{value}} <a href=\"market/{{key}}\" ui-sref=\"market({id:key})\">{{key}}</a></p>\n" +
-    "	                        </span>\n" +
-    "	                    </div>\n" +
-    "                   	</div>\n" +
-    "					<p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"item.createdAt\"></p>\n" +
-    "	            </div>\n" +
-    "	            <div class=\"card-footer\">\n" +
-    "	                <a href=\"#\" ng-click=\"createReaction(item, 'plus')\"><i class=\"fas fa-angle-up\"></i> {{item.reactions.plus}} like </a> \n" +
-    "	                <a href=\"#\" ng-click=\"createReaction(item, 'minus')\" ><i class=\"fas fa-angle-down\"></i> {{item.reactions.minus}} dislike </a>\n" +
-    "	                <a href=\"#\" ng-click=\"reply(item)\"><i class=\"far fa-comment\"></i> comment </a>\n" +
-    "	                <a class=\"pull-right\" style=\"padding:0px;\" href=\"order/{{item.id}}\" ui-sref=\"order({id:item.id})\"><i class=\"fas fa-link grey\"></i></a>\n" +
-    "	            </div>\n" +
-    "	        </div>\n" +
+    "			<div ng-include=\"'templates/cards/orderCard.tpl.html'\"></div>\n" +
     "		</div>\n" +
     "	</div>\n" +
     "</div>");
@@ -11699,7 +11697,6 @@ angular.module("projects/index.tpl.html", []).run(["$templateCache", function($t
     "        </div>\n" +
     "    </div>\n" +
     "</div>\n" +
-    "\n" +
     "\n" +
     "<div class=\"container\">\n" +
     "\n" +
@@ -12396,9 +12393,8 @@ angular.module("task/templates/associations.tpl.html", []).run(["$templateCache"
     "        </div>\n" +
     "    </div>\n" +
     "    <div style=\"padding:16px;\">\n" +
-    "\n" +
     "        <div class=\"row\">\n" +
-    "            <div class=\"col-sm-3\">\n" +
+    "            <div class=\"col-sm-12\">\n" +
     "                <div style=\"max-height:500px;overflow:auto\">\n" +
     "                    <tags-input min-length=\"1\" max-tags=\"1\" placeholder=\"Associations\" ng-model=\"assoicationFilter\">\n" +
     "                        <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
@@ -12408,11 +12404,7 @@ angular.module("task/templates/associations.tpl.html", []).run(["$templateCache"
     "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
-    "            <div class=\"col-sm-9\">\n" +
-    "                <cytoscape graph-ready=\"graphReady\" graph-options=\"directedGraphOptions\" graph-elements=\"directedGraphElements\" graph-layout=\"directedGraphLayout\" graph-style=\"directedGraphStyle\"></cytoscape>\n" +
-    "            </div>\n" +
     "        </div>\n" +
-    "        \n" +
     "    </div>\n" +
     "</div>");
 }]);
@@ -12484,8 +12476,7 @@ angular.module("task/templates/time.tpl.html", []).run(["$templateCache", functi
     "\n" +
     "            <h3>{{taskTime}}</h3>\n" +
     "\n" +
-    "            <!--TODO: IF NOT STREAM AND YA WANT TO STREAM-->\n" +
-    "            <div ng-show=\"false\"><!--<div ng-show=\"!streaming\">-->\n" +
+    "            <div ng-show=\"false\">\n" +
     "                <input type=\"text\" placeholder=\"Link\" ng-model=\"timeContent\" class=\"form-control\">\n" +
     "                <input type=\"text\" placeholder=\"IFPS SECRET\" ng-model=\"timeContent\" class=\"form-control\">\n" +
     "                <input type=\"text\" placeholder=\"IFPS KEY\" ng-model=\"timeContent\" class=\"form-control\">\n" +
@@ -12494,67 +12485,16 @@ angular.module("task/templates/time.tpl.html", []).run(["$templateCache", functi
     "            <div ng-if=\"streaming\"><div ng-bind-html=\"renderStream(streamUrl)\"></div></div>\n" +
     "\n" +
     "            <div class=\"spacing-5\"></div>\n" +
-    "\n" +
-    "            <!--TODO: ASSOCIATION COMPUTATION AND QUERY-->\n" +
-    "            <!--TODO: PROJECT SELECTION-->\n" +
-    "            <!--IF MULTIPLE??-->\n" +
-    "            <div ng-if=\"false\">\n" +
-    "                <h5>Selected Projects</h5>\n" +
-    "                <tags-input ng-model=\"selectedProjects\" placeholder=\"Selected Projects\"></tags-input>\n" +
-    "\n" +
-    "                <!--TODO: ASSOCIATED MODELS ARE COMPUTED; JOIN-->\n" +
-    "                <div ng-repeat=\"model in task.associatedModels\">\n" +
-    "                    <p><a href=\"#\" ng-click=\"selectProject(model.address)\">Select {{model}}</a></p>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "\n" +
-    "            <!--TODO: TASK SELECTION (UNIVERSAL UX .. LOCK IN TASK)-->\n" +
-    "            <!--IE IT'S HIDDEN HERE BUT WOULD BE OPEN ON +TIME GLOBAL-->\n" +
-    "            <!--UNIVERSAL UX FOR THIS IS IN NAV-->\n" +
-    "            <!--DEPRECIATE AND MOVE TO NAV - ALL IN NAV?-->\n" +
-    "            <!--PRE POPULATE YA MEMBERSHIP ETC.. IF ZEROd OUT SMART UX-->\n" +
     "            \n" +
-    "            <!--TODO: NEW VALIDATION DIMENSION / TAG SUGGESTION -->\n" +
-    "            <!--TODO: TOKEN STRING PROTOCOL.. IE COMBINATORIAL CONTEXT - IT WILL COME SOON . . PROJECT+... TASK+.. WE ARE ONLY NAKE CONTEXT RN -->\n" +
-    "            <!--TODO: AUTO POPULATE TIME CONTEXT BASED ON COMPUTED TASK VALIDATION :)-->\n" +
-    "            <tags-input min-length=\"1\" ng-model=\"timeTags\" placeholder=\"Tags\"></tags-input>\n" +
-    "            <div class=\"spacing-5\"></div>\n" +
-    "            <a ng-click=\"showValidationImplicitToggle()\" href=\"#\"><i class=\"fas fa-bezier-curve\"></i><b> Expand</b></a>\n" +
-    "            <div class=\"spacing-5\"></div>\n" +
-    "\n" +
-    "            <div ng-show=\"showValidationImplicitToggleVar\">\n" +
-    "\n" +
-    "                <div class=\"spacing-5\"></div>\n" +
-    "\n" +
-    "                <div layout=\"\">\n" +
-    "                    <div flex=\"15\" layout=\"\" layout-align=\"center center\"><span style=\"color:gray\" class=\"md-body-1\"><b>Context</b></span></div>\n" +
-    "                    <div flex=\"70\" layout=\"\" layout-align=\"center center\"></div>\n" +
-    "                    <div flex=\"15\" layout=\"\" layout-align=\"center center\"><span style=\"color:gray\" class=\"md-body-1\"><b>Validation</b> | <b>Reputation</b></span></div>\n" +
-    "                </div>\n" +
-    "\n" +
-    "                <div class=\"spacing-5\"></div>\n" +
-    "\n" +
-    "                <!--FIXED TASK VALIDATION-->\n" +
-    "                <div ng-repeat=\"validationModel in newTime.validationModels\">\n" +
-    "\n" +
-    "                    <div layout=\"\">\n" +
-    "                        <div flex=\"15\" layout=\"\" layout-align=\"center center\"><span style=\"color:gray\" class=\"md-body-1\">General</span></div>\n" +
-    "                        <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"validationModel.validation.general\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"general\"></md-slider>\n" +
-    "                        <div flex=\"15\" layout=\"\" layout-align=\"center center\"><span style=\"color:gray\" class=\"md-body-1\">{{validationModel.validation.general}} | {{currentUser.totalWork}}</span></div>\n" +
-    "                    </div>\n" +
-    "\n" +
-    "                    <div ng-repeat=\"tag in timeTags track by $index\">\n" +
-    "                        <div layout=\"\">\n" +
-    "                            <div flex=\"15\" layout=\"\" layout-align=\"center center\"><span style=\"color:gray\" class=\"md-body-1\">{{tag.text}}</span></div>\n" +
-    "                            <md-slider step=\"0.1\" flex=\"\" md-discrete=\"\" ng-model=\"validationModel.validation[tag.text]\" step=\"1\" min=\"-100\" max=\"100\" aria-label=\"{{tag.text}}\"></md-slider>\n" +
-    "                            <div flex=\"15\" layout=\"\" layout-align=\"center center\"><span style=\"color:gray\" class=\"md-body-1\">{{validationModel.validation[tag.text]}} | {{reputation[tag.text] || 0}}</span></div>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "\n" +
-    "                </div>\n" +
-    "\n" +
+    "            <!--\n" +
+    "            <h5>Selected Projects</h5>\n" +
+    "            <tags-input ng-model=\"selectedProjects\" placeholder=\"Selected Projects\"></tags-input>\n" +
+    "            <div ng-repeat=\"model in task.associatedModels\">\n" +
+    "                <p><a href=\"#\" ng-click=\"selectProject(model.address)\">Select {{model}}</a></p>\n" +
     "            </div>\n" +
+    "            -->\n" +
     "\n" +
+    "            <tags-input min-length=\"1\" ng-model=\"timeTags\" placeholder=\"Context\"></tags-input>\n" +
     "            <div class=\"spacing-5\"></div>\n" +
     "            <text-angular ng-model=\"timeContent\" ta-toolbar=\"[['bold','italics','p','h1','h2','quote','pre','insertLink', 'html']]\"></text-angular>\n" +
     "            <div class=\"spacing-5\"></div>\n" +
@@ -12565,39 +12505,8 @@ angular.module("task/templates/time.tpl.html", []).run(["$templateCache", functi
     "    </div>\n" +
     "</div>\n" +
     "\n" +
-    "<div class=\"card\" ng-repeat=\"item in time\" ng-click=\"cardDetailToggle(item)\">\n" +
-    "\n" +
-    "    <!--TODO: TEMPLATE TIME CARD-->\n" +
-    "    <!--TODO: REMOVE INLINE STYLE-->\n" +
-    "    <!--<div ng-include=\"'cards/time.tpl.html'\"></div>-->\n" +
-    "\n" +
-    "    <div style=\"padding:16px;\">\n" +
-    "        <div style=\"float:right;text-align:right\">\n" +
-    "            <a style=\"color:gray;\" ng-click=\"$event.stopPropagation();cardDetailToggle(item)\">\n" +
-    "                <span style=\"color:gray\"></span><i class=\"fa fa-chevron-down\"></i>\n" +
-    "            </a>\n" +
-    "        </div>\n" +
-    "        <div ng-click=\"$event.stopPropagation();\">\n" +
-    "            <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
-    "            <a style=\"display:inline;font-weight:600;margin-left:5px\" href=\"member/{{item.user.username}}\" ui-sref=\"member.activity({path:item.user.username})\">{{item.user.username}}</a>\n" +
-    "            <p style=\"display:inline\"><i class=\"fa fa-angle-right\"></i></p>\n" +
-    "            <a style=\"display:inline;font-weight:600\" href=\"time/{{item.id}}\" ui-sref=\"time({id:item.id})\">{{item.amount}}</a>\n" +
-    "            <p style=\"display:inline;color:gray;font-size:10px;margin-left:5px\" am-time-ago=\"item.createdAt\"></p>\n" +
-    "            <div style=\"clear:both\"></div>\n" +
-    "        </div>\n" +
-    "        <p ng-show=\"item.task.tags.split(',') > 0\" style=\"margin-left:42px\"><a ng-repeat=\"tag in item.task.tags.split(',')\" href=\"market/{{tag.trim()}}+{{task.id}}\" ui-sref=\"market({id:tag.trim()})\">{{tag.trim()}} </a></p>\n" +
-    "        <div style=\"margin-left:42px\">\n" +
-    "            <span style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
-    "    <div class=\"card-footer\">\n" +
-    "        <a ng-click=\"$event.stopPropagation();\" style=\"color:grey\"><i class=\"fas fa-eye\"></i>  {{item.attention.general || 0}}</a>\n" +
-    "        <a ng-click=\"$event.stopPropagation();createReaction(item, 'plus')\"><i class=\"fas fa-angle-up\"></i> {{item.reactions.plus}} like </a> \n" +
-    "        <a ng-click=\"$event.stopPropagation();createReaction(item, 'minus')\" ><i class=\"fas fa-angle-down\"></i> {{item.reactions.minus}} dislike </a>\n" +
-    "        <a ng-click=\"$event.stopPropagation();contentToggle(item)\"><i class=\"far fa-comment\"></i> comment </a>\n" +
-    "        <a ng-click=\"$event.stopPropagation();validationToggle(item)\"><i class=\"fas fa-check\"></i> validate </a>\n" +
-    "        <a ng-click=\"$event.stopPropagation();\" style=\"padding:0px\" class=\"pull-right\" href=\"time/{{item.id}}\" ui-sref=\"time({id:item.id})\"><i class=\"fas fa-link grey\"></i></a>\n" +
-    "    </div>\n" +
+    "<div ng-repeat=\"item in time\" ng-click=\"cardDetailToggle(item)\">\n" +
+    "    <div ng-include=\"'templates/cards/timeCard.tpl.html'\"></div>\n" +
     "</div>\n" +
     "");
 }]);
@@ -12827,7 +12736,7 @@ angular.module("templates/cards/connectionCard.tpl.html", []).run(["$templateCac
     "            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "                <div style=\"padding:15px;\">\n" +
     "                    <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\">\n" +
-    "                        <a style=\"color:white\" href=\"connection/{{item.id}}\" ui-sref=\"connection({id:item.id})\">{{item.info.title}}</a>\n" +
+    "                        <a ng-click=\"$event.stopPropagation();\" style=\"color:white\" href=\"connection/{{item.id}}\" ui-sref=\"connection({id:item.id})\">{{item.info.title}}</a>\n" +
     "                    </h1>\n" +
     "                </div>\n" +
     "            </div>\n" +
@@ -13218,7 +13127,7 @@ angular.module("templates/cards/transactionCard.tpl.html", []).run(["$templateCa
     "                </a>\n" +
     "            </span>\n" +
     "            <span ng-if=\"item.from.title\">\n" +
-    "                <a ng-click=\"$event.stopPropagation()\"  style=\"display:inline;font-weight:600;margin-left:5px\" href=\"project/{{item.from.urlTitle}}\" ui-sref=\"project.activity({path:item.from.username})\">\n" +
+    "                <a ng-click=\"$event.stopPropagation()\"  style=\"display:inline;font-weight:600;margin-left:5px\" href=\"project/{{item.from.urlTitle}}\" ui-sref=\"project.activity({path:item.from.urlTitle})\">\n" +
     "                    <img class=\"card-avatar\" ng-src=\"{{item.from.avatarUrl}}\" src=\"{{item.from.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
     "                    {{item.from.title}}\n" +
     "                </a>\n" +
@@ -13235,7 +13144,7 @@ angular.module("templates/cards/transactionCard.tpl.html", []).run(["$templateCa
     "                </a>\n" +
     "            </span>\n" +
     "            <span ng-if=\"item.to.title\">\n" +
-    "                <a ng-click=\"$event.stopPropagation()\"  style=\"display:inline;font-weight:600;margin-left:5px\" href=\"project/{{item.to.urlTitle}}\" ui-sref=\"project.activity({path:item.to.username})\">\n" +
+    "                <a ng-click=\"$event.stopPropagation()\"  style=\"display:inline;font-weight:600;margin-left:5px\" href=\"project/{{item.to.urlTitle}}\" ui-sref=\"project.activity({path:item.to.urlTitle})\">\n" +
     "                    <img class=\"card-avatar\" ng-src=\"{{item.to.avatarUrl}}\" src=\"{{item.to.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
     "                    {{item.to.title}}\n" +
     "                </a>\n" +
@@ -13507,11 +13416,7 @@ angular.module("token/index.tpl.html", []).run(["$templateCache", function($temp
 angular.module("transaction/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("transaction/index.tpl.html",
     "<div class=\"container\">\n" +
-    "\n" +
-    "	<div class=\"spacing-10\"></div>\n" +
-    "\n" +
     "    <div class=\"row\">\n" +
-    "        \n" +
     "        <div class=\"card\" ng-click=\"cardDetailToggle(transaction);\">\n" +
     "\n" +
     "            <div style=\"background:url('https://source.unsplash.com/1600x900/?{{transaction.tags}}')\" class=\"imageContainerSmall\">\n" +
@@ -13530,6 +13435,21 @@ angular.module("transaction/index.tpl.html", []).run(["$templateCache", function
     "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
+    "            <div style=\"background-color:white\">\n" +
+    "                <div class=\"member-tab-container container\" style=\"padding-left:0px\">\n" +
+    "                    <div style=\"text-align:center\">\n" +
+    "                        <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "                            <li ng-if=\"false\"><a ng-click=\"$event.stopPropagation();selectTab('TIME')\">Activity</a></li>\n" +
+    "                            <li><a ng-click=\"$event.stopPropagation();selectTab('INFORMATION')\">Information</a></li>\n" +
+    "                            <li><a ng-click=\"$event.stopPropagation();selectTab('ASSOCIATIONS')\">Associations</a></li>\n" +
+    "                            <li><a ng-click=\"$event.stopPropagation();selectTab('CONTENT')\">Content</a></li>\n" +
+    "                            <li><a ng-click=\"$event.stopPropagation();selectTab('STATS')\">Stats</a></li>\n" +
+    "                            <li><a ng-click=\"$event.stopPropagation();selectTab('TOKENS')\">Tokens</a></li>\n" +
+    "                        </ul>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "            <hr style=\"margin:0px;\">\n" +
     "\n" +
     "            <div style=\"padding:16px\">\n" +
     "        \n" +
@@ -13601,18 +13521,9 @@ angular.module("transaction/index.tpl.html", []).run(["$templateCache", function
     "                <a ng-click=\"$event.stopPropagation();\" style=\"color:grey\" class=\"pull-right\" href=\"content/{{item.id}}\" ui-sref=\"content({id:item.user.username})\"><i class=\"fas fa-link grey\"></i></a>\n" +
     "            </div>\n" +
     "        </div>\n" +
-    "\n" +
     "    </div>\n" +
-    "\n" +
     "    <div class=\"spacing-10\"></div>\n" +
-    "	\n" +
-    "</div>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "");
+    "</div>");
 }]);
 
 angular.module("transparency/index.tpl.html", []).run(["$templateCache", function($templateCache) {
@@ -14772,7 +14683,6 @@ angular.module("tx/index.tpl.html", []).run(["$templateCache", function($templat
 angular.module("validation/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("validation/index.tpl.html",
     "<div class=\"container\">\n" +
-    "\n" +
     "	<div class=\"row\">\n" +
     "		<div class=\"card\" ng-click=\"cardDetailToggle(validation)\">\n" +
     "			<div style=\"background:url('https://source.unsplash.com/1600x900/?explore,discover')\" class=\"imageContainerSmall\">\n" +
@@ -14784,80 +14694,30 @@ angular.module("validation/index.tpl.html", []).run(["$templateCache", function(
     "                </div>\n" +
     "			        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "			        	<div class=\"container\">\n" +
-    "			            	<h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">\n" +
-    "			            		<span ng-repeat=\"model in validation.associatedModels track by $index\">\n" +
-    "\n" +
-    "			            			<!--TODO: ui-sref -->\n" +
-    "			            			<span ng-if=\"model.type == 'TASK'\">\n" +
-    "										<a style=\"color:white\" href=\"{{model.type.toLowerCase()}}/{{model.address}}\" ui-sref=\"task({id:model.address})\">{{model.info[model.type.toLowerCase()].title}}</a>\n" +
-    "									</span>\n" +
-    "									<span ng-if=\"model.type == 'TIME'\">\n" +
-    "										<a style=\"color:white\" href=\"{{model.type.toLowerCase()}}/{{model.address}}\" ui-sref=\"time({id:model.address})\">{{model.info[model.type.toLowerCase()].amount}}</a>\n" +
-    "									</span>\n" +
-    "									<span ng-if=\"model.type == 'PROJECT'\">\n" +
-    "										<a style=\"color:white\" href=\"{{model.type.toLowerCase()}}/{{model.info[model.type.toLowerCase()].urlTitle}}\" ui-sref=\"project({path:model.info.project.urlTitle})\">{{model.info[model.type.toLowerCase()].title}}</a>\n" +
-    "									</span>\n" +
-    "\n" +
-    "									<i ng-show=\"!$last\" class=\"fa fa-arrows-h\"></i> \n" +
-    "\n" +
-    "			            		</span>\n" +
-    "			            	</h1>\n" +
-    "			            	<h5 style=\"color:white\">Validation</h5>\n" +
+    "			            	<h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\">Validation</h1>\n" +
+    "			            	<h5 style=\"color:white\">{{validation.id}}</h5>\n" +
     "			            </div>\n" +
     "			        </div>\n" +
     "			    </div>\n" +
     "			</div>\n" +
+    "			<div style=\"background-color:white\">\n" +
+    "	            <div class=\"member-tab-container container\" style=\"padding-left:0px\">\n" +
+    "	                <div style=\"text-align:center\">\n" +
+    "	                    <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "	                        <li><a ng-click=\"$event.stopPropagation();selectTab('INFORMATION')\">Information</a></li>\n" +
+    "	                        <li><a ng-click=\"$event.stopPropagation();selectTab('CONTENT')\">Content</a></li>\n" +
+    "	                        <li><a ng-click=\"$event.stopPropagation();selectTab('VALIDATIONS')\">Validations</a></li>\n" +
+    "	                        <li><a ng-click=\"$event.stopPropagation();selectTab('TOKENS')\">Tokens</a></li>\n" +
+    "	                    </ul>\n" +
+    "	                </div>\n" +
+    "	            </div>\n" +
+    "	        </div>\n" +
+    "	        <hr style=\"margin:0px;\">\n" +
     "\n" +
-    "			<div style=\"padding:16px\">\n" +
-    "	            <!--{{validation}}-->\n" +
-    "\n" +
-    "				<a href=\"member/{{validation.user.username}}\" ui-sref=\"member.activity({path:validation.user.username})\">\n" +
-    "					<img class=\"card-avatar\" ng-src=\"{{validation.user.avatarUrl}}\"/>\n" +
-    "					<b>{{validation.user.username}}</b>\n" +
-    "				</a>\n" +
-    "\n" +
-    "				<div class=\"spacing-5\"></div>\n" +
-    "\n" +
-    "				<p style=\"font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"validation.createdAt\"></p>\n" +
-    "				\n" +
-    "				<div class=\"spacing-5\"></div>\n" +
-    "\n" +
-    "				<div ng-if=\"validation.content\">\n" +
-    "					<span ng-bind-html=\"renderContent(validation.content)\"></span>\n" +
-    "					<div class=\"spacing-10\"></div>\n" +
-    "				</div>\n" +
-    "\n" +
-    "				<!--\n" +
-    "				<p>Project Charter | <a ng-click=\"informationToggle('VOTINGPROTOCOL')\">Multipliticative Reputation Weight</a></p>\n" +
-    "				<div class=\"spacing-10\"></div>\n" +
-    "				-->\n" +
-    "\n" +
-    "				<table class=\"table table-striped table-hover\">\n" +
-    "					<thead>\n" +
-    "						<tr>\n" +
-    "							<th>Dimension</th>\n" +
-    "							<th>Validation Score</th>\n" +
-    "							<th>Reputation</th>\n" +
-    "							<th>Project Charter <a ng-click=\"informationToggle('PROJECTCHARTER')\"><i class=\"fa fa-question-circle\"></i></a></th>\n" +
-    "							<th>Reputation Weighted Validation Score <a ng-click=\"informationToggle('REPUTATIONWEIGHTEDVALIDATIONSCORE')\"><i class=\"fa fa-question-circle\"></i></a></th>\n" +
-    "						</tr>\n" +
-    "					</thead>\n" +
-    "					<tbody>\n" +
-    "						<tr ng-repeat=\"validation in validationList track by $index\">\n" +
-    "							<td>{{validation[0]}}</td>\n" +
-    "							<td>{{validationList[$index][1]}}</td>\n" +
-    "							<td>{{reputationList[$index][1]}}</td>\n" +
-    "							<td><a ng-click=\"informationToggle('VOTINGPROTOCOL - MULTIPLICATIVE')\">Multipliticative </a></td>\n" +
-    "							<td>{{reputationWeightedList[$index][1]}}</td>\n" +
-    "						</tr>\n" +
-    "					</tbody>\n" +
-    "				</table>\n" +
-    "\n" +
-    "				<div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "				<highchart config=\"validationColumn\"></highchart>\n" +
-    "\n" +
+    "	        <div style=\"padding:16px\">\n" +
+    "				<div ng-if=\"selectedTab =='INFORMATION'\" ng-include=\"'validation/templates/information.tpl.html'\"></div>\n" +
     "			</div>\n" +
+    "		\n" +
     "			<div class=\"card-footer\">\n" +
     "				<a ng-click=\"$event.stopPropagation();\" style=\"color:grey\"><i class=\"fas fa-eye\"></i>  {{validation.data.apps.attention.general || 0}}</a>\n" +
     "				<a ng-click=\"$event.stopPropagation();createReaction(validation, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{validation.data.apps.reactions.plus}} like </a> \n" +
@@ -14866,10 +14726,133 @@ angular.module("validation/index.tpl.html", []).run(["$templateCache", function(
     "		       	<a ng-click=\"$event.stopPropagation();validationToggle(validation)\" style=\"padding:5px;color:grey\" ><i class=\"fa fa-check\"></i> validate </a>\n" +
     "		    </div>\n" +
     "		</div>\n" +
-    "\n" +
+    "		<div ng-if=\"selectedTab =='CONTENT'\" ng-include=\"'validation/templates/content.tpl.html'\"></div>\n" +
+    "        <div ng-if=\"selectedTab =='TOKENS'\" ng-include=\"'validation/templates/tokens.tpl.html'\"></div>\n" +
+    "        <div ng-if=\"selectedTab =='VALIDATIONS'\" ng-include=\"'validation/templates/validations.tpl.html'\"></div>\n" +
     "	</div>\n" +
-    "		\n" +
-    "	<div class=\"spacing-50\"></div>\n" +
+    "	<div class=\"spacing-25\"></div>\n" +
+    "</div>");
+}]);
+
+angular.module("validation/templates/content.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("validation/templates/content.tpl.html",
+    "");
+}]);
+
+angular.module("validation/templates/information.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("validation/templates/information.tpl.html",
+    "<a href=\"member/{{validation.user.username}}\" ui-sref=\"member.activity({path:validation.user.username})\">\n" +
+    "    <img class=\"card-avatar\" ng-src=\"{{validation.user.avatarUrl}}\"/>\n" +
+    "    <b>{{validation.user.username}}</b>\n" +
+    "</a>\n" +
     "\n" +
+    "<div class=\"spacing-5\"></div>\n" +
+    "\n" +
+    "<p><a ng-click=\"informationToggle('Association')\">Association</a></p>\n" +
+    "\n" +
+    "<p><a ng-click=\"informationToggle('VOTINGPROTOCOL - MULTIPLICATIVE')\">Charter: Multipliticative </a></p>\n" +
+    "\n" +
+    "<div class=\"spacing-5\"></div>\n" +
+    "\n" +
+    "<p style=\"font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"validation.createdAt\"></p>\n" +
+    "\n" +
+    "<div class=\"spacing-5\"></div>\n" +
+    "\n" +
+    "<div ng-if=\"validation.content\">\n" +
+    "    <span ng-bind-html=\"renderContent(validation.content)\"></span>\n" +
+    "    <div class=\"spacing-10\"></div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<table class=\"table table-striped table-hover\">\n" +
+    "    <thead>\n" +
+    "        <tr>\n" +
+    "            <th>Context</th>\n" +
+    "            <th>Validation Score</th>\n" +
+    "            <th>Connection Score (Reputation) </th>\n" +
+    "            <th>Connection (Reputation) Weighted Score <a ng-click=\"informationToggle('REPUTATIONWEIGHTEDVALIDATIONSCORE')\"><i class=\"fa fa-question-circle\"></i></a></th>\n" +
+    "        </tr>\n" +
+    "    </thead>\n" +
+    "    <tbody>\n" +
+    "        <tr ng-repeat=\"validation in validationList track by $index\">\n" +
+    "            <td>{{validation[0]}}</td>\n" +
+    "            <td>{{validation[1]}}</td>\n" +
+    "            <td>0</td>\n" +
+    "            <td>0</td>\n" +
+    "        </tr>\n" +
+    "    </tbody>\n" +
+    "</table>\n" +
+    "\n" +
+    "<div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "<highchart config=\"validationColumn\"></highchart>");
+}]);
+
+angular.module("validation/templates/tokens.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("validation/templates/tokens.tpl.html",
+    "<div class=\"card\">\n" +
+    "    <div style=\"background:url('https://source.unsplash.com/1600x900/?{{item.tags}}');min-height:auto;\" class=\"imageContainerSmall\">\n" +
+    "        <div style=\"background:rgba(0,0,0,0.75);height:auto\" class=\"imageContainerSmallDiv\">  \n" +
+    "            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                <div style=\"padding:15px\">\n" +
+    "                    <h1 style=\"text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;\">Tokens</h1>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "    <div style=\"padding:16px;\">\n" +
+    "        <table class=\"table table-striped table-hover\">\n" +
+    "            <thead>\n" +
+    "                <tr>\n" +
+    "                    <th>Identifer</th>\n" +
+    "                    <th>Value</th>\n" +
+    "                </tr>\n" +
+    "            </thead>\n" +
+    "            <tbody>\n" +
+    "                <tr ng-repeat=\"item in tokens\">\n" +
+    "                    <td><a href=\"market/{{item.string}}\" ui-sref=\"market({id:item.string})\">{{item.string}}</a></td>\n" +
+    "                    <td>{{item.amount}}</td>\n" +
+    "                </tr>\n" +
+    "            </tbody>\n" +
+    "        </table>\n" +
+    "    </div>\n" +
+    "</div>");
+}]);
+
+angular.module("validation/templates/validations.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("validation/templates/validations.tpl.html",
+    "<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "    <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
+    "    <li style=\"float:right;font-size:14px\"><a href=\"#\" ng-click=\"sortToggle()\">Sort By Recent <i class=\"fa fa-angle-down\"></i></a></li>\n" +
+    "    <div style=\"clear:both\"></div>\n" +
+    "</ul>\n" +
+    "<div class=\"card\">\n" +
+    "    <tags-input style=\"border:0px;flex-grow:2;\" placeholder=\"Search\" ng-model=\"searchQuery\"></tags-input>\n" +
+    "</div>\n" +
+    "<div class=\"card\" ng-repeat=\"item in validations\" ng-click=\"cardDetailExpand(item)\">\n" +
+    "	<div style=\"background:url('https://source.unsplash.com/1600x900/?{{item.tags}}');min-height:auto;\" class=\"imageContainerSmall\">\n" +
+    "        <div style=\"background:rgba(0,0,0,0.75);height:auto\" class=\"imageContainerSmallDiv\">  \n" +
+    "        	<div style=\"text-align:right;padding:15px;position:absolute;right:0\">\n" +
+    "                <a style=\"color:white;\" ng-click=\"$event.stopPropagation();cardDetailToggle(item)\"><i class=\"fas fa-chevron-down\"></i></a>\n" +
+    "            </div>\n" +
+    "            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                <div style=\"padding:15px\">\n" +
+    "                    <h1 style=\"text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;\"><a style=\"color:white\" href=\"validation/{{item.id}}\" ui-sref=\"validation({id:item.id})\">{{item.id}}</a></h1>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "    <div style=\"padding:16px;\">\n" +
+    "    	<span ng-repeat=\"model in item.associatedModels\"><a href=\"{{model.type.toLowerCase()}}/{{model.id}}\">{{model.type}} - {{model.id}}</a>, </span>\n" +
+    "    	<div class=\"spacing-5\"></div>\n" +
+    "    	<span ng-repeat=\"(object, key) in item.context\"><b>{{object}}</b>:{{key}}, </span>\n" +
+    "    </div>\n" +
+    "    <div class=\"card-footer\">\n" +
+    "        <a ng-click=\"$event.stopPropagation();renderAttentionToggle(item)\"  style=\"color:grey\"><i class=\"fas fa-eye\"></i> {{item.data.apps.attention.general || 0}}</a>\n" +
+    "		<a ng-click=\"$event.stopPropagation();createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.data.apps.reactions.plus}} like </a> \n" +
+    "        <a ng-click=\"$event.stopPropagation();createReaction(item, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{item.data.apps.reactions.minus}} dislike </a>\n" +
+    "       	<a ng-click=\"$event.stopPropagation();contentToggle(item)\" style=\"padding:5px;color:grey\" ><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
+    "       	<a ng-click=\"$event.stopPropagation();validationToggle(item)\" style=\"padding:5px;color:grey\" ><i class=\"fa fa-check\"></i> validate </a>\n" +
+    "       	<a ng-click=\"$event.stopPropagation();\" style=\"padding:0px\" class=\"pull-right\" href=\"validation/{{item.id}}\" ui-sref=\"validation({id:item.id})\"><i class=\"fas fa-link grey\"></i></a>\n" +
+    "    </div>\n" +
     "</div>");
 }]);

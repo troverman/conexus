@@ -29,6 +29,13 @@
             <div ng-if="selectedTab=='TASK'">
                 <!--IF MULTI TASKS-->
                 <h4 ng-if="taskTime > 0">{{taskTime}}</h4>
+                <div class="spacing-5"></div>
+                <tags-input min-length="1" ng-model="timeTags" placeholder="Context"></tags-input>
+                <div class="spacing-5"></div>
+                <text-angular ng-model="timeContent" ta-toolbar="[['bold','italics','p','h1','h2','quote','pre','insertLink', 'html']]"></text-angular>
+                <div class="spacing-5"></div>
+                <button style="width:100%;" class="btn btn-default log-btn" ng-click="createTime()">Submit Time</button>
+
             </div>
 
             <div ng-if="selectedTab=='ATTENTION'">

@@ -32,6 +32,7 @@
             <div class="member-tab-container container" style="padding-left:0px">
                 <div style="text-align:center">
                     <ul style="padding:0px;" class="member-tabs">
+                        <li><a ng-click="$event.stopPropagation();selectTab('INFORMATION')">Information</a></li>
                         <li><a ng-click="$event.stopPropagation();selectTab('ACTIVITY')">Activity</a></li>
                         <li><a ng-click="$event.stopPropagation();selectTab('ACTIONS')">Actions</a></li>
                         <li><a ng-click="$event.stopPropagation();selectTab('ASSOCIATIONS')">Associations</a></li>
@@ -47,7 +48,7 @@
             </div>
         </div>
         <hr style="margin:0px;">
-        <div style="padding:16px;">
+        <div style="padding:16px;" ng-if="selectedTab =='INFORMATION'">
             <div>
                 <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
                 <a ng-click="$event.stopPropagation();" style="display:inline" href="member/{{item.user.username}}" ui-sref="member.activity({path:item.user.username})"><span style="font-weight:800">{{item.user.username}}</span></a>

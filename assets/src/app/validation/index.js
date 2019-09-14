@@ -103,8 +103,10 @@ angular.module( 'conexus.validation', [
         else{$mdSidenav('login').toggle()}
     };
 
-//WATCH IDS THAT ARE SENT LOL!!!!! ! L!L L! L!
+    $scope.selectedTab = 'INFORMATION';
+    $scope.selectTab = function(model){$scope.selectedTab = model;};
 
+    //WATCH IDS THAT ARE SENT LOL!!!!! ! L!L L! L!
     
     $sailsSocket.subscribe('validation', function (envelope) {
         switch(envelope.verb) {

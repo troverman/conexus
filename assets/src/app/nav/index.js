@@ -24,6 +24,26 @@ angular.module( 'conexus.nav', [
     $scope.item = {};
     $scope.inverted = false;
     $scope.isInformation = false;
+    $scope.reputationChart = {
+        chart: {zoomType: 'x'},
+        series: [{
+            id: 'Reputation',
+            type: 'column',
+            name: 'Reputation',
+            data: []
+        }],
+        title: {text: ''},
+        xAxis: {
+            crosshair: true,
+            gridLineWidth: 0.5,
+            gridLineColor: 'grey',
+            title: {text: null},
+            categories: [],
+        },
+        legend: {enabled: false},
+        yAxis: {title: {text: null}},
+        credits:{enabled:false},
+    };
     $scope.selectedOrderType = 'ONBOOKS';
     $scope.selectedTab = 'ATTENTION';
     $scope.selectedType = 'POST';
@@ -796,6 +816,9 @@ angular.module( 'conexus.nav', [
         $scope.closeAllNav();
 
         $scope.item = item;
+        $scope.reputationChart.xAxis.categories = [];
+        $scope.reputationChart.series[0].data = [];
+
         if ($scope.item.reputation){$scope.reputation = $scope.item.reputation;$scope.item.user = item}
         if ($scope.item.user){$scope.reputation = $scope.item.user.reputation}
 
@@ -804,39 +827,17 @@ angular.module( 'conexus.nav', [
             $scope.reputationFilter = [{text:$scope.item.project.title}];
         }
 
-        $scope.reputationChart = {
-            chart: {zoomType: 'x'},
-            series: [{
-                id: 'Reputation',
-                type: 'column',
-                name: 'Reputation',
-                data: []
-            }],
-            title: {text: ''},
-            xAxis: {
-                crosshair: true,
-                gridLineWidth: 0.5,
-                gridLineColor: 'grey',
-                title: {text: null},
-                categories: [],
-            },
-            legend: {enabled: false},
-            yAxis: {title: {text: null}},
-            credits:{enabled:false},
-        };
+        var sortable = [];
+        for (var context in $scope.reputation) {sortable.push([context, $scope.reputation[context]])}
+        sortable.sort(function(a, b) {return b[1] - a[1]});
 
-        //TODO: FIX CRASH!
+        for (x in sortable){
+            if (x < 100){
+                $scope.reputationChart.xAxis.categories.push(sortable[x][0]);
+                $scope.reputationChart.series[0].data.push(sortable[x][1]);
+            }
+        }
 
-        //var sortable = [];
-        //for (var dimension in $scope.reputation) {sortable.push([dimension, $scope.reputation[dimension]])}
-        //sortable.sort(function(a, b) {return b[1] - a[1]});
-
-        //for (x in sortable){
-        //    if (x < 100){
-        //        $scope.reputationChart.xAxis.categories.push(sortable[x][0]);
-        //        $scope.reputationChart.series[0].data.push(sortable[x][1]);
-        //    }
-        //}
         $mdSidenav('renderReputation').toggle();
     };
 
@@ -1417,11 +1418,11 @@ angular.module( 'conexus.nav', [
                     }
                 ];
 
-                //IF ITEM CONTEXT -->
                 console.log(item);
 
                 if ($scope.item.context){
                     for (x in $scope.item.context){
+                        $scope.newValidation.context.push({text:$scope.item.context[x]});
                         $scope.newValidation.associatedModels[0].context.push({score:100,text:$scope.item.context[x]});
                         $scope.newValidation.context.push({score:100,text:$scope.item.context[x]})
                     }

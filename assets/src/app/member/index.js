@@ -632,58 +632,6 @@ angular.module( 'conexus.member', [
     var random2 = Math.floor(255*Math.random());
     var random3 = Math.floor(255*Math.random());
 
-    $scope.reputationRadial = {
-        chart: {polar: true},
-        series: [{
-            id: 'reputation',
-            type: 'area',
-            name: 'Reputation',
-            pointPlacement: 'on',
-            data: [],
-            color: 'rgba('+random1+','+random2+','+random3+',0.3)',
-            fillOpacity: 0.3,
-        }],
-        title: {text: ''},
-        xAxis: {
-            title: {text: null},
-            categories: [],
-            tickmarkPlacement: 'on',
-            lineWidth: 0,
-        },
-        yAxis: {
-            title: {text: null},
-            gridLineInterpolation: 'polygon',
-            lineWidth: 0,
-            min: 0,
-        },
-        legend: {enabled: false},
-        tooltip: {
-            shared: true,
-        },
-        credits:{enabled:false},
-    };
-
-    $scope.reputationColumn = {
-        chart: {zoomType: 'x',},
-        series: [{
-            id: 'Combination',
-            type: 'column',
-            name: 'Reputation Balance',
-            data: [],
-        }],
-        title: {text: ''},
-        xAxis: {
-            crosshair: true,
-            gridLineWidth: 0.5,
-            gridLineColor: 'grey',
-            title: {text: null},
-            categories: [],
-        },
-        yAxis: {title: {text: null}},
-        legend: {enabled: false},
-        credits:{enabled:false},
-    };
-
     $scope.balancePie = {
         chart: {},
         series: [{
@@ -703,7 +651,6 @@ angular.module( 'conexus.member', [
         credits:{enabled:false},
     };
 
-    //FILTERING | LAYER IE PROJECT | MANIFOLD
     $scope.balanceRadial = {
         chart: {polar: true},
         series: [{
@@ -766,50 +713,22 @@ angular.module( 'conexus.member', [
         credits:{enabled:false},
     };
 
-    //RADIAL | REPUTATION
-    for (x in Object.keys($scope.reputation)){
-        if ($scope.reputation[Object.keys($scope.reputation)[x]] > 50000){
-            $scope.reputationRadial.xAxis.categories.push(Object.keys($scope.reputation)[x]);
-            $scope.reputationRadial.series[0].data.push($scope.reputation[Object.keys($scope.reputation)[x]]);
-        }
-    }
-
-    //COLUMN | REPUTATION
-    for (x in Object.keys($scope.reputation)){
-        if ($scope.reputation[Object.keys($scope.reputation)[x]]){
-            $scope.reputationColumn.series[0].data.push($scope.reputation[Object.keys($scope.reputation)[x]]);
-            $scope.reputationColumn.xAxis.categories.push(Object.keys($scope.reputation)[x]);
-        }
-    }
-
     //RADIAL | BALANCE
     for (x in Object.keys($scope.balance)){
-        //if ($scope.balance[Object.keys($scope.balance)[x]] < 500){
         $scope.balanceRadial.xAxis.categories.push(Object.keys($scope.balance)[x]);
         $scope.balanceRadial.series[0].data.push($scope.balance[Object.keys($scope.balance)[x]]);
-        //}
     }
 
-    //COLUMN | BALANCE
-    for (x in Object.keys($scope.balance)){
-        if ($scope.balance[Object.keys($scope.balance)[x]]){
-            //$scope.balanceColumn.series[0].data.push($scope.balance[Object.keys($scope.balance)[x]]);
-            //$scope.balanceColumn.xAxis.categories.push(Object.keys($scope.balance)[x]);
-        }
-    }
-
-    //PIE | BALANCE
-    //BAD
     var sortable = [];
     for (x in $scope.balance) {
         if(!isNaN($scope.balance[x]) && $scope.balance[x]!=null && $scope.balance[x]!="undefined" && $scope.balance[x]!="NaN"){
             sortable.push([x, $scope.balance[x]]);
         }
     }
-    //COULD SORT BY 'WORTH'
     sortable.sort(function(a, b) {
         return b[1] - a[1];
     });
+
     for (x in sortable){
         if (x < 250){
             $scope.balancePie.series[0].data.push({
@@ -821,17 +740,9 @@ angular.module( 'conexus.member', [
         }
     }
     
-    //TODO SERVER | CHAIN
     $scope.lookupBalance = function(){
-        //$scope.balanceLook = $scope.balanceLook.toLowerCase();
         if ($scope.balance[$scope.balanceLook]){$scope.balanceLookupValue = $scope.balance[$scope.balanceLook]}
         if (!$scope.balance[$scope.balanceLook]){$scope.balanceLookupValue = 0}
-    };
-
-    $scope.lookupReputation = function(){
-        //$scope.reputationLook = $scope.reputationLook.toLowerCase();
-        if ($scope.reputation[$scope.reputationLook]){$scope.reputationLookupValue = $scope.reputation[$scope.reputationLook]}
-        if (!$scope.reputation[$scope.reputationLook]){$scope.reputationLookupValue = 0;}
     };
 
 }])

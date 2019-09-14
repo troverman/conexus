@@ -11,8 +11,6 @@ angular.module( 'conexus.project', [
                 templateUrl: 'project/index.tpl.html'
             }
         },
-
-        //TODO: DEPRECIATE RESOLVE
         resolve: {
             project: ['$stateParams', 'ProjectModel', function($stateParams, ProjectModel) {
                 return ProjectModel.get({urlTitle:$stateParams.path,limit:1,skip:0,sort:'createdAt DESC'});
@@ -36,11 +34,9 @@ angular.module( 'conexus.project', [
                 templateUrl: 'project/templates/activity.tpl.html'
             }
         },
-
         //TODO: DEPRECIATE RESOLVE
+        //TODO: FEED.. COMPLEX QUERY
         resolve: {
-
-            //TODO: FEED.. COMPLEX QUERY
             connections: ['ConnectionModel', 'project', function(ConnectionModel, project){
                 return ConnectionModel.get({creator:project.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
@@ -71,8 +67,6 @@ angular.module( 'conexus.project', [
             }
         }
     })
-
-    //TODO: ALL
     .state( 'project.channels', {
         url: '/channels',
         views: {
@@ -81,8 +75,6 @@ angular.module( 'conexus.project', [
                 templateUrl: 'project/templates/channels.tpl.html'
             }
         },
-
-        //TODO: DEPRECIATE RESOLVE
         resolve: {
             channels: [function() {
                 return [{title:'general'},{title:'tasks'},{title:'create'},{title:'task1'}]
@@ -100,8 +92,6 @@ angular.module( 'conexus.project', [
                 templateUrl: 'project/templates/content.tpl.html'
             }
         },
-
-        //TODO: DEPRECIATE RESOLVE
         resolve: {
             contentList: ['ContentModel', 'project', function(ContentModel, project){
                 return ContentModel.get({project:project.id, limit:100, skip:0, sort:'createdAt DESC'});
@@ -132,11 +122,9 @@ angular.module( 'conexus.project', [
                 templateUrl: 'project/templates/ledger.tpl.html'
             }
         },
-
         //TODO: DEPRECIATE RESOLVE
+        //TODO: BETTER QUERY
         resolve: {
-
-            //TODO: BETTER QUERY
             transactions: ['TransactionModel', 'project', function(TransactionModel, project) {
                 return TransactionModel.get({project:project.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
@@ -156,11 +144,7 @@ angular.module( 'conexus.project', [
                 templateUrl: 'project/templates/items.tpl.html'
             }
         },
-
-        //TODO: DEPRECIATE RESOLVE
         resolve: {
-
-            //TODO: ...
             items: ['project', 'ItemModel', function(project, ItemModel) {
                 return[];
             }]
@@ -174,8 +158,6 @@ angular.module( 'conexus.project', [
                 templateUrl: 'project/templates/members.tpl.html'
             }
         },
-
-        //TODO: DEPRECIATE RESOLVE
         resolve: {
             connections: ['ConnectionModel', 'project', function(ConnectionModel, project){
                 return ConnectionModel.get({creator:project.id, limit:100, skip:0, sort:'createdAt DESC'});
@@ -193,11 +175,7 @@ angular.module( 'conexus.project', [
                 templateUrl: 'project/templates/positions.tpl.html'
             }
         },
-
-        //TODO: DEPRECIATE RESOLVE
         resolve: {
-
-            //TODO: ..
             orders: ['OrderModel', 'project', function(OrderModel, project){
                 return OrderModel.get({limit:20, skip:0, sort:'createdAt DESC'});
             }],
@@ -211,8 +189,6 @@ angular.module( 'conexus.project', [
                 templateUrl: 'project/templates/projects.tpl.html'
             }
         },
-
-        //TODO: DEPRECIATE RESOLVE
         resolve: {
 
             //TODO: DEPRECIATE.. 
@@ -239,11 +215,9 @@ angular.module( 'conexus.project', [
                 templateUrl: 'project/templates/tasks.tpl.html'
             }
         },
-
-        //TODO: DEPRECIATE RESOLVE
         resolve: {
             tasks: ['project', 'TaskModel', function(project, TaskModel){
-                return TaskModel.get({project:project.id, limit:100, skip:0, sort:'createdAt DESC'});
+                return TaskModel.get({project:project.id, limit:10, skip:0, sort:'createdAt DESC'});
             }],
         }
     })
@@ -255,11 +229,9 @@ angular.module( 'conexus.project', [
                 templateUrl: 'project/templates/time.tpl.html'
             }
         },
-
-        //TODO: DEPRECIATE RESOLVE
         resolve: {
             time: ['project', 'TimeModel', function(project, TimeModel) {
-                return TimeModel.get({project:project.id, limit:200, skip:0, sort:'createdAt DESC'});
+                return TimeModel.get({project:project.id, limit:10, skip:0, sort:'createdAt DESC'});
             }]
         }
     })
@@ -274,7 +246,7 @@ angular.module( 'conexus.project', [
     })
 }])
 
-.controller( 'ProjectCtrl', ['$location', '$mdSidenav', '$rootScope', '$scope', '$state', 'MemberModel', 'project', 'SearchModel', 'titleService', 'TransactionModel', function ProjectController( $location, $mdSidenav, $rootScope, $scope, $state, MemberModel, project, SearchModel, titleService, TransactionModel ) {
+.controller( 'ProjectCtrl', ['$location', '$mdSidenav', '$rootScope', '$scope', '$state', 'MemberModel', 'project', 'SearchModel', 'titleService', 'TransactionModel', 'ValidationModel', function ProjectController( $location, $mdSidenav, $rootScope, $scope, $state, MemberModel, project, SearchModel, titleService, TransactionModel, ValidationModel ) {
     
     //TODO: DEPRECIATE --> MOVE TO NAV
     titleService.setTitle(project.title + ' | CRE8.XYZ');
@@ -335,6 +307,36 @@ angular.module( 'conexus.project', [
         }
         else{$mdSidenav('login').toggle()}
     };
+
+    $scope.createMemberValidate = function(){
+        if($scope.currentUser){
+
+            $scope.newValidation = {
+                creator:$rootScope.currentUser.id,
+                user:$rootScope.currentUser.id,
+                content:'Request for Membership',
+                associatedModels:[
+                    {type:'MEMBER', id:$rootScope.currentUser.id},
+                    {type:'PROJECT', id:project.id},
+
+                ],
+                context:{
+                    general:100
+                },
+                type:'HUMAN',
+                information:{},
+                parameters:{},
+                reputation:{}
+            };
+
+            ValidationModel.create($scope.newValidation).then(function(model) {
+                console.log(model);
+            });
+
+        }
+        else{$mdSidenav('login').toggle()}
+    };
+
 
     //TODO: BETTER
     $scope.isProjectCreator = function() {
@@ -517,6 +519,44 @@ angular.module( 'conexus.project', [
     
     //TODO: DEPREICATE
     titleService.setTitle(project.title + ' | Assets | CRE8.XYZ');
+
+    $scope.balanceColumn = {
+        chart: {
+            zoomType: 'x',
+        },
+        series: [{
+            id: 'Combination',
+            type: 'column',
+            name: 'Asset Balance',
+            data: [],
+        }],
+        title: {
+            text: ''
+        },
+        xAxis: {
+            crosshair: true,
+            gridLineWidth: 0.5,
+            gridLineColor: 'grey',
+            title: {
+                text: null
+            },
+            categories: [],
+        },
+        yAxis: {
+            title: {
+                text: null
+            }
+        },
+        legend:{enabled: false},
+        credits:{enabled:false},
+    };
+
+    var array = [1,2,3,4,5];
+    for (x in array){
+        $scope.balanceColumn.xAxis.categories.push('name'+array[x]);
+        $scope.balanceColumn.series[0].data.push(array[x]);   
+    }
+
 
 }])
 

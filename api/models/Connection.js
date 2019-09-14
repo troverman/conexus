@@ -1,15 +1,14 @@
 module.exports = {
 
     attributes: {
-    	creator:{type: 'string'},
 		information: {type: 'json'},
-			//title: {type: 'string'},
-			//description: {type: 'string'},
-			//tags, context?
-    	type:{type: 'json'},
-    	direction: {type: 'string'},
-    	dataModelAlpha: {type: 'string'},
-    	dataModelBeta: {type: 'string'},
+		title: {type: 'string'},
+		description: {type: 'string'},
+        context:{type: 'string'},
+        creator:{type: 'string'},
+    	type:{type: 'string'},
+        associatedModels:{type: 'string'},
+        data: {type: 'json'},
     }
 
 };

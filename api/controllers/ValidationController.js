@@ -291,7 +291,7 @@ module.exports = {
 				.toArray(function (err, associationModels) {
 					if (associationModels.length != 0){
 						console.log('HELLO');
-						associationModels = associationModels.map(function(obj){obj.id = obj._id; return obj;});
+						//associationModels = associationModels.map(function(obj){obj.id = obj._id; return obj;});
 						//Association.update({id:associationModels[0].id}, updatedModel).then((newAssociationModel)=>{
 						//	Association.publishUpdate(newAssociationModel);
 						//	console.log('UPDATE ASSOCIATION', newAssociationModel)
@@ -334,7 +334,7 @@ module.exports = {
 			user: req.param('user'),
 			creator: req.param('creator'),
 
-			context: req.param('validation'),
+			context: req.param('context'),
 			reputation: req.param('reputation'),
 
 			associatedModels: req.param('associatedModels'),

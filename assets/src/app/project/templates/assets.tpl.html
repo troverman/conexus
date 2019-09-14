@@ -1,21 +1,11 @@
 <div class="row">
-	<div class="card mobileFix">
-        <form ng-submit="search()" style="display:flex;flex-direction:row;">
-            <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder= "Seach" ng-model="searchQuery">
-            <div ng-click="search()" style="border:0px;float:right" class="btn btn-default">
-                <a href="#" role="button">
-                    <h5 style="color:black;text-align:right" class="noselect">Search <i class="fa fa-search"></i></h5>
-                </a>
-            </div>
-        </form>
-    </div>
 	<div class="card">
 		<div style="background:url('https://source.unsplash.com/1600x900/?details,notes,explore,wonder,connection,create,content,creation');min-height:100px" class="imageContainerSmall">
             <div style="background:rgba(0,0,0,0.75);height:100px" class="imageContainerSmallDiv">  
                 <div style="margin-top: auto;margin-bottom: auto;">
                     <div style="padding:15px">
                         <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">Balance</h1>
-                        <h5><span style="font-size:11px;color:gray">0x{{project.id}}</span></h5>
+                        <h5><span style="font-size:11px;color:white">{{project.id}}</span></h5>
                     </div>
                 </div>
             </div>
@@ -30,6 +20,8 @@
 	    	<div ng-show="balanceLookupValue !== undefined">
 	    		<h5><a href="market/{{balanceLook}}" ui-sref="market({id:balanceLook})">{{balanceLook}}</a> | {{balanceLookupValue}}</h5>
 	    	</div>
+            <div class="spacing-10"></div>
+            <div><highchart config="balanceColumn"></highchart></div>
 	    </div>
 	</div>
 </div>

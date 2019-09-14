@@ -18,11 +18,38 @@ angular.module( 'conexus.association', [
 	});
 }])
 
-.controller( 'AssociationCtrl', ['$location', '$rootScope', '$sailsSocket', '$sce', '$scope', 'association', 'ReactionModel', 'titleService', 'ValidationModel', function AssociationController( $location, $rootScope, $sailsSocket, $sce, $scope, association, ReactionModel, titleService, ValidationModel ) {
+.controller( 'AssociationCtrl', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'association', 'ReactionModel', 'titleService', 'ValidationModel', function AssociationController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, association, ReactionModel, titleService, ValidationModel ) {
 
 	$scope.association = association;
     if(!$scope.association){$location.path('/')}
     $scope.association.model = 'ASSOCIATION';
+
+    $scope.connection = {
+        title:'Default Connection',
+        description:'this is the default connection',
+        context:{lol:100},
+        type:'PRACTICE',
+
+        information:{
+            direction:{},
+        },
+        logic:{},
+        
+        data:{
+
+            self:{},
+
+            apps:{
+                reactions:{plus:0,minus:0},
+                attention:{general:0}
+            }
+        },
+
+        modelAlpha:'CONTENT',
+        modelBeta:'CONTENT',
+        creator:'troverman',
+        id:1
+    }
 
     console.log($scope.association);
 

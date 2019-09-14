@@ -16,7 +16,6 @@
             <p style="color:gray;font-style:italic">Validations create value linkages. They form the mechanisms which data is associated. <a ng-click="informationToggle('VALIDATION')" href="#"><i class="fa fa-question-circle"></i></a></p>
             <div class="spacing-10"></div>
 
-            <!--SAME AS ORDER.. :0 ?-->
             <h5>Data</h5>
             <tags-input min-length="1" placeholder="Associations" ng-model="newValidation.associatedModels">
                 <auto-complete source="loadAssociations($query)"></auto-complete>
@@ -29,14 +28,11 @@
                 <auto-complete source="loadAssociations($query)"></auto-complete>
             </tags-input>
 
-            <!--{{item.associatedModels}}-->
+            <!--
             <div ng-repeat="associatedModel in item.associatedModels" style="font-size:14px;font-weight:bold">
-                <!--POPULATE MODEL-->
                 <p class="valueMapButton">{{associatedModel}}</p>
-
             </div>
-
-            <!--CONNECTIONS!-->
+            -->
 
             <div ng-repeat="context in newValidation.context track by $index">
                 <div layout="">
@@ -48,19 +44,12 @@
                         <p class="md-body-1">{{context.score}}</p>
                     </div>
                 </div>
-
-                <!--CHARTER LOGIC HERE-->
-                <div style="text-align:center"><p style="font-size:9px">{{reputation[context.text] || 0}} | {{reputation[context.text]*newValidation.context[context.text]}}</p></div>
-
+                <div style="text-align:center"><p style="font-size:9px">{{reputation[context.text] || 0}}</p></div>
             </div>
 
             <div class="spacing-10"></div>
-
-            <h5>Content</h5>
             <text-angular style="height:200px" ng-model="newValidation.content" ta-toolbar="''"></text-angular>
-
             <div class="spacing-10"></div>
-
             <button ng-click="createValidation()" type="submit" style="width:100%" class="btn btn-default log-btn">create</button>
 
         </div>

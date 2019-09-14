@@ -1,9 +1,5 @@
 <div class="container">
-
-	<div class="spacing-10"></div>
-
     <div class="row">
-        
         <div class="card" ng-click="cardDetailToggle(transaction);">
 
             <div style="background:url('https://source.unsplash.com/1600x900/?{{transaction.tags}}')" class="imageContainerSmall">
@@ -22,6 +18,21 @@
                     </div>
                 </div>
             </div>
+            <div style="background-color:white">
+                <div class="member-tab-container container" style="padding-left:0px">
+                    <div style="text-align:center">
+                        <ul style="padding:0px;" class="member-tabs">
+                            <li ng-if="false"><a ng-click="$event.stopPropagation();selectTab('TIME')">Activity</a></li>
+                            <li><a ng-click="$event.stopPropagation();selectTab('INFORMATION')">Information</a></li>
+                            <li><a ng-click="$event.stopPropagation();selectTab('ASSOCIATIONS')">Associations</a></li>
+                            <li><a ng-click="$event.stopPropagation();selectTab('CONTENT')">Content</a></li>
+                            <li><a ng-click="$event.stopPropagation();selectTab('STATS')">Stats</a></li>
+                            <li><a ng-click="$event.stopPropagation();selectTab('TOKENS')">Tokens</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <hr style="margin:0px;">
 
             <div style="padding:16px">
         
@@ -93,14 +104,6 @@
                 <a ng-click="$event.stopPropagation();" style="color:grey" class="pull-right" href="content/{{item.id}}" ui-sref="content({id:item.user.username})"><i class="fas fa-link grey"></i></a>
             </div>
         </div>
-
     </div>
-
     <div class="spacing-10"></div>
-	
 </div>
-
-
-
-
-

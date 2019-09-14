@@ -15,16 +15,25 @@
 			        </div>
 			    </div>
 			</div>
+			<div style="background-color:white">
+	            <div class="member-tab-container container" style="padding-left:0px">
+	                <div style="text-align:center">
+	                    <ul style="padding:0px;" class="member-tabs">
+	                        <li><a ng-click="$event.stopPropagation();selectTab('INFORMATION')">Information</a></li>
+	                        <li><a ng-click="$event.stopPropagation();selectTab('CONTENT')">Content</a></li>
+	                        <li><a ng-click="$event.stopPropagation();selectTab('VALIDATIONS')">Associations</a></li>
+	                        <li><a ng-click="$event.stopPropagation();selectTab('CHARTER')">Charter</a></li>
+	                    </ul>
+	                </div>
+	            </div>
+	        </div>
+	        <hr style="margin:0px;">
 			<div style="padding:16px">
-
-				<!--TODO STRUCTURE-->
-				<p>{{connection.info.description}}</p>
-
-				<h4>Associated Models</h4>
-				<h5>{{connection.dataModelAlpha}} - {{connection.dataModelBeta}}</h5>
-
-				<h5>{{connection.config}}</h5>
-
+				<h5>Description</h5>
+        		<span style="display:inline" ng-bind-html="renderContent(connection.info.description)"></span>
+				<h5>Associated Models</h5>
+				<p>{{connection.dataModelAlpha}} - {{connection.dataModelBeta}}</p>
+				<p>{{connection.information}}</p>
 			</div>
 			<div class="card-footer">
 		        <a ng-click="$event.stopPropagation();renderAttentionToggle(connection)" style="color:grey"><i class="fas fa-eye"></i> {{connection.data.apps.attention.general || 0}}</a>
@@ -32,10 +41,8 @@
 		        <a ng-click="$event.stopPropagation();createReaction(connection, 'minus')" ><i class="fas fa-angle-down"></i> {{connection.data.apps.reactions.minus || 0 }} dislike </a>
 		        <a ng-click="$event.stopPropagation();contentToggle(connection)"><i class="far fa-comment"></i> comment </a>
 		        <a ng-click="$event.stopPropagation();validationToggle(connection)"><i class="fa fa-check"></i> validate </a>
-		        <a ng-click="$event.stopPropagation()" style="padding:0px" class="pull-right" href="connection/{{connection.id}}" ui-sref="connection({id:connection.id})"><i class="fas fa-link grey"></i></a>
 		    </div>
 		</div>
-
 	</div>
 	<div class="spacing-25"></div>
 </div>

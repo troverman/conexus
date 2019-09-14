@@ -62,10 +62,9 @@ module.exports = {
 		var model = {
 			model: 'CONNECTION',
 			creator: req.param('creator'),
-			direction: req.param('direction'),
+			information: req.param('information'),
 			dataModelAlpha: req.param('dataModelAlpha'),
 			dataModelBeta: req.param('dataModelBeta'),
-			info: req.param('info'),
 			data:{apps:{reactions:{plus:0,minus:0},attention:{general:0}}}
 		};
 

@@ -9,9 +9,8 @@
         </div>
     </div>
     <div style="padding:16px;">
-
         <div class="row">
-            <div class="col-sm-3">
+            <div class="col-sm-12">
                 <div style="max-height:500px;overflow:auto">
                     <tags-input min-length="1" max-tags="1" placeholder="Associations" ng-model="assoicationFilter">
                         <auto-complete source="loadAssociations($query)"></auto-complete>
@@ -21,10 +20,6 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-9">
-                <cytoscape graph-ready="graphReady" graph-options="directedGraphOptions" graph-elements="directedGraphElements" graph-layout="directedGraphLayout" graph-style="directedGraphStyle"></cytoscape>
-            </div>
         </div>
-        
     </div>
 </div>
