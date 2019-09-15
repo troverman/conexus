@@ -1,6 +1,4 @@
-<div class="row" ng-show="items.length == 0">
-    <div class="card"><div style="padding:16px;"><span style="color:gray">There's nothing here..</span></div></div>
-</div>
+<div class="row" ng-show="items.length == 0"><div class="card"><div style="padding:16px;"><span style="color:gray">There's nothing here..</span></div></div></div>
 
 <div class="row" ng-show="items.length > 0">
 
@@ -59,6 +57,7 @@
 
         <div class="spacing-5"></div>
 
+        <!--
         <div class="mobileFix">
             <ul style="padding:0px;" class="member-tabs">
                 <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fa fa-filter"></i> Filter</a></li>
@@ -69,19 +68,10 @@
                <tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search" ng-model="searchQuery"></tags-input>
             </div>
         </div>
+        -->
 
-        <div class="card" ng-show="currentUser.id == member.id">
-            <button class="btn btn-default log-btn" ng-click="itemToggle()">+ Item</button>
-        </div>
-
-        <div ng-repeat="item in items">
-            <div ng-include="'templates/cards/itemCard.tpl.html'"></div>
-        </div>
-
-        <div class="card" ng-click="loadMore()">
-            <button style="width:100%" class="btn btn-default log-btn">MORE <i class="fa fa-angle-down"></i></button>
-        </div>
-
+        <div class="card" ng-show="currentUser.id == member.id"><button class="btn btn-default log-btn" ng-click="itemToggle()">+ Item</button></div>
+        <div ng-repeat="item in items"><div ng-include="'templates/cards/itemCard.tpl.html'"></div></div>
+        <div class="card" ng-click="loadMore()"><button style="width:100%" class="btn btn-default log-btn">MORE <i class="fa fa-angle-down"></i></button></div>
     </div>
-
 </div>

@@ -18,6 +18,8 @@ module.exports = {
 		setAlpha: {type:'json'},
 		setBeta: {type:'json'},
 
+		//associatedSets: {type:'json'},
+
 		//INFO
         model: {type: 'string', defaultsTo: 'ORDER'},
         reactions: {type: 'json'},

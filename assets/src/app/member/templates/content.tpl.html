@@ -6,6 +6,8 @@
             </div>
         </div>
     </div>
+
+    <!--
     <div class="col-sm-3 mobileFix" style="padding-left:0px;padding-right:0px;">
         <div class="card" ng-if="sortedTagArray.length > 0" ng-click="filterToggle('DISCOVER')">
             <div style="background:url('https://source.unsplash.com/1600x900/?details,notes,explore,wonder');height:50px;min-height:50px" class="imageContainerSmall">
@@ -56,9 +58,11 @@
             </div>
         </div>
     </div>
+    -->
 
-    <div ng-show="contentList.length > 0" class="col-sm-9" style="padding-left:0px;padding-right:0px;">
+    <div ng-show="contentList.length > 0" class="col-sm-12" style="padding-left:0px;padding-right:0px;">
 
+        <!--
         <div class="spacing-5"></div>
         <div class="mobileFix">
             <ul style="padding:0px;" class="member-tabs">
@@ -70,20 +74,14 @@
                 <tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search" ng-model="searchQuery"></tags-input>
             </div>
         </div>
-
-        <!--IF MEMBER-->
-        <div class="card" ng-if="currentUser.id == member.id">
-            <button class="btn btn-default log-btn" ng-click="contentToggle()">+ Content</button>
-        </div>
+        -->
 
         <div ng-repeat="item in contentList">
            <div ng-include="'templates/cards/contentCard.tpl.html'"></div>
         </div>
 
         <div class="card" ng-click="loadMore()">
-            <div style="">
-                <button style="width:100%" class="btn btn-default log-btn">MORE <i class="fa fa-angle-down"></i></button>
-            </div>
+            <button style="width:100%" class="btn btn-default log-btn">MORE <i class="fa fa-angle-down"></i></button>
         </div>
     </div>
 

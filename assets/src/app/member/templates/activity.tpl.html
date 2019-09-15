@@ -1,8 +1,7 @@
 <div class="row">
 
-    <!--TODO: FILTER ; TEMPLATE-->
-    <div class="col-sm-3 mobileFix" style="padding-left:0px;padding-right:0px;">
-        <div class="card" ng-click="filterToggle('DISCOVER', filterSet)">
+    <div ng-if="false" class="col-sm-3 mobileFix" style="padding-left:0px;padding-right:0px;">
+        <div class="card" ng-if="sortedTagArray.length > 0" ng-click="filterToggle('DISCOVER', filterSet)">
             <div style="background:url('https://source.unsplash.com/1600x900/?details,notes,explore,wonder');height:50px;min-height:50px" class="imageContainerSmall">
                 <div style="background:rgba(0,0,0,0.75);height:50px" class="imageContainerSmallDiv">  
                     <div style="margin-top: auto;margin-bottom: auto;">
@@ -51,7 +50,13 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-9" style="padding-left:0px;padding-right:0px;">
+
+    <!--START ACTIVITY FEED WITH REGISTER.. ACTION!-->
+    <!--ACTIONS (AND ACTIVITY)-->
+    <div class="col-sm-12" style="padding-left:0px;padding-right:0px;" ng-if="activity.length>0">
+
+        <!--TEMPLATE!-->
+        <!--
         <div class="mobileHide">
             <ul style="padding:0px;" class="member-tabs">
                 <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fa fa-filter"></i> Filter</a></li>
@@ -70,10 +75,12 @@
             </div>
         </div>
         <div class="card"><button class="btn btn-default log-btn" ng-click="cre8Toggle(member)">CRE8</button></div>
+        -->
+
         <div ng-repeat="item in activity  track by $index">
-            <!--<div ng-if="item.model=='ACTION'" ng-include="'templates/cards/actionCard.tpl.html'"></div>-->
+            <div ng-if="item.model=='ACTION'" ng-include="'templates/cards/actionCard.tpl.html'"></div>
             <div ng-if="item.model=='CONTENT'" ng-include="'templates/cards/contentCard.tpl.html'"></div>
-            <!--<div ng-if="item.model=='ITEM'" ng-include="'templates/cards/itemCard.tpl.html'"></div>-->
+            <div ng-if="item.model=='ITEM'" ng-include="'templates/cards/itemCard.tpl.html'"></div>
             <div ng-if="item.model=='ORDER'" ng-include="'templates/cards/orderCard.tpl.html'"></div>
             <div ng-if="item.model=='TIME'" ng-include="'templates/cards/timeCard.tpl.html'"></div>
             <div ng-if="item.model=='TRANSACTION'" ng-include="'templates/cards/transactionCard.tpl.html'"></div>

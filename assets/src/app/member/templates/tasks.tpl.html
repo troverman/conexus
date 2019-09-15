@@ -6,6 +6,7 @@
     </div>
 </div>
 <div class="row" ng-show="tasks.length > 0">
+	<!--
 	<div class="col-sm-3 mobileFix" style="padding-left:0px;padding-right:0px;">
         <div class="card" ng-click="filterToggle('DISCOVER')">
 			<div style="background:url('https://source.unsplash.com/1600x900/?details,notes,explore,wonder');height:50px;min-height:50px" class="imageContainerSmall">
@@ -40,7 +41,9 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-9" style="padding-left:0px;padding-right:0px;">
+-->
+    <div class="col-sm-12" style="padding-left:0px;padding-right:0px;">
+    	<!--
     	<div class="spacing-5"></div>
     	<div class="mobileFix">
 	    	<ul style="padding:0px;" class="member-tabs">
@@ -52,11 +55,8 @@
 		        <tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search" ng-model="searchQuery"></tags-input>
 		    </div>
 		</div>
-		<div class="card">
-	        <button class="btn btn-default log-btn" ng-click="taskToggle()">+ Task</button>
-	    </div>
-		<div ng-repeat="item in tasks">
-	        <div ng-include="'templates/cards/taskCard.tpl.html'"></div>
-		</div>
+		-->
+		<div ng-show="currentUser.id == member.id" class="card"><button class="btn btn-default log-btn" ng-click="taskToggle()">+ Task</button></div>
+		<div ng-repeat="item in tasks"><div ng-include="'templates/cards/taskCard.tpl.html'"></div></div>
 	</div>
 </div>

@@ -657,8 +657,8 @@ tags-input .autocomplete .suggestion-item.selected{background-color:#002a56;}
     .member-tabs li{font-size:14px;}
     .member-tabs > li > a{padding:5px 10px;}
     .member-tabs.subNav{display:none;}.nav-toggle{display:block;padding:20px;}
-    .mobileFix{display:none;}
-    .mobileHide{display:none;}
+    .mobileFix{display:none!important;}
+    .mobileHide{display:none!important;}
     .navbar-header {float: none;}
     .navbar-left, .navbar-right {float: none !important;}
     .navbar-toggle {display: block;}
@@ -678,8 +678,8 @@ tags-input .autocomplete .suggestion-item.selected{background-color:#002a56;}
     .member-tabs li{font-size:18px;}
     //.member-tabs > li > a{padding:10px 15px;}
     .member-tabs.subNav{display:block;}.nav-toggle{display:none;}
-    .mobileHide{display:block;}
-    .mobileFix{display:block;}
+    .mobileHide{display:block!important;}
+    .mobileFix{display:block!important;}
 }
 
 @media only screen and (max-width: 1024px) {

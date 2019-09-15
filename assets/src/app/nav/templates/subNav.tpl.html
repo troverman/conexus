@@ -8,17 +8,18 @@
                     <div style="padding:15px" style="width:100%">
                         <h1 style="font-size:14px;color:rgba(255,255,255,0.9);font-weight:400;">
                             <a ng-if="item.title" href="project/{{item.title}}" ui-sref="project.activity({path:item.urlTitle})">
-                                <img ng-src="{{item.avatarUrl}}" style="height:50px;width:50px;border-radius:100%">
+                                <img  err-src="/images/avatar.png" ng-src="{{item.avatarUrl}}" style="height:50px;width:50px;border-radius:100%">
                                 <div class="spacing-5"></div>
                                 <span style="font-size:24px;color:white">{{project.title}}</span>
                             </span>
                             <a ng-if="item.username" href="member/{{item.username}}" ui-sref="member.activity({path:item.username})">
-                                <img ng-src="{{item.avatarUrl}}" style="height:50px;width:50px;border-radius:100%">
+                                <img  err-src="/images/avatar.png" ng-src="{{item.avatarUrl}}" style="height:50px;width:50px;border-radius:100%">
                                 <div class="spacing-5"></div>
                                 <span style="font-size:24px;color:white">{{item.username}}</span>
                             </a>
                         </h1>
                         <h5 style="color:white" ng-click="memberQRToggle(item)"><i style="color:white" class="fas fa-qrcode"></i> {{item.id}}</h5>
+                        <!--<a style="color:white" ng-if="item.username" ng-click="renderReputationToggle(item)"><i class="fas fa-plus"></i></a>-->
                     </div>
                 </div>
             </div>
@@ -39,7 +40,6 @@
                 <h4 class="nav-links"><a href="project/{{item.urlTitle}}/tasks" ui-sref="project.tasks({path:item.urlTitle})">Tasks</a></h4>
                 <h4 class="nav-links"><a href="project/{{item.urlTitle}}/time" ui-sref="project.time({path:item.urlTitle})">Time</a></h4>
                 <!--<h4 class="nav-links"><a href="project/{{project.urlTitle}}/charter">Validations</a></h4>-->
-                <!--Motions.. Content Type - Validation??-->
             </div>
             <div ng-if="item.username">
                 <h4 class="nav-links"><a href="member/{{item.username}}/about" ui-sref="member.about({path:item.username})">About</a></h4>

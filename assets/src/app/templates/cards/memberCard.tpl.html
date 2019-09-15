@@ -20,9 +20,7 @@
 
 <div class="member-card" style="margin-bottom:10px;background-color:white" ng-click="renderReputationToggle(item)">
     <div style="text-align:right;padding:15px;position:absolute;right:0;margin-right:10px">
-        <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
-            <i class="fas fa-chevron-down"></i>
-        </a>
+        <a style="color:white;" ng-click="$event.stopPropagation();subNavToggle(item)"><i class="fas fa-chevron-down"></i></a>
     </div> 
     <div class="member-card-image" style="background-image: url('{{item.coverUrl}}')">
         <a ng-click="$event.stopPropagation()" href="member/{{item.username}}" ui-sref="member.activity({path:item.username})">
@@ -39,16 +37,13 @@
             <a href="member/{{item.username}}/projects" ui-sref="member.projects({path:item.username})">{{item.projectCount || 0}} Projects</a> | 
             <a href="member/{{item.username}}/followers" ui-sref="member.followers({path:item.username})">{{item.followerCount || 0}} Followers</a> | 
             <a href="member/{{item.username}}/following" ui-sref="member.following({path:item.username})">{{item.followingCount || 0}} Following</a>
-            <p style="color:gray">Total Reputation | {{item.totalWork || 0}}
+            <p style="color:gray" ng-click="renderReputationToggle(item)">Total Reputation | {{item.totalWork || 0}}
         </p>
         <p style="color:gray">{{currentUser.status}} <i style="color:#30b257" class="fa fa-circle"></i> Offline</p>
-
     </div>
-    <hr style="margin:0px;">
-    <div style="padding:16px;">
-        <a ng-show="!item.isFollowing" style="padding:10px 15px;color:rgb(125,125,125);float:left" class="btn btn-default" ng-click="$event.stopPropagation();follow(item)">Follow</button></a>
-        <a ng-show="item.isFollowing" style="padding:10px 15px;color:rgb(125,125,125);float:left" class="btn btn-default" ng-click="$event.stopPropagation();follow(item)">Unfollow</button></a>
-        <a style="padding:10px 15px;color:rgb(125,125,125);float:right" class="btn btn-default" ng-click="$event.stopPropagation();transactionToggle(item)">Send Tokens</a>
-        <div style="clear:both"></div>
+    <div class="card-footer">
+        <a ng-click="$event.stopPropagation();transactionToggle(item)"><i class="fas fa-plus"></i> Transaction </a>
+        <a ng-show="!item.isFollowing" ng-click="$event.stopPropagation();follow(item)"><i class="fas fa-users"></i> Follow </a>
+        <a ng-show="item.isFollowing" ng-click="$event.stopPropagation();follow(item)"><i class="fas fa-user"></i> Unfollow</button></a>
     </div>
 </div>
