@@ -1,0 +1,60 @@
+<div class="card" style="margin-top:0px;">
+    <div style="background:url('https://source.unsplash.com/1600x900/?personal,energy,joyful,humuan,data,code')" class="imageContainerSmall">
+        <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+            <div style="padding:15px;margin-top: auto;margin-bottom: auto;">
+                <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">Share With Us</h1>
+                <h5><a style="color:white" href="/account"  ui-sref="account"><i class="fas fa-passport"></i> Account Information</a></h5>
+            </div>
+        </div>
+    </div>
+    <div style="padding:16px;">
+        <form role="form" ng-submit="editAccount()">
+
+            <div style="padding:0px" class="col-xs-6">
+                <h5>Avatar URL</h5>
+                <input type="text" ng-model="newAccountInformation.avatarUrl" placeholder="Avatar Url" class="form-control">
+            </div>
+
+            <div style="padding:0px" class="col-xs-6">
+                <h5>Cover URL</h5>
+                <input type="text" ng-model="newAccountInformation.coverUrl" placeholder="Cover Url" class="form-control">
+            </div>
+
+            <div style="padding:0px" class="col-xs-12">
+                <h5>Username</h5>
+                <input type="text" ng-model="newAccountInformation.username" placeholder="Username" class="form-control">
+            </div>
+
+            <div style="padding:0px" class="col-xs-6">
+                <h5>Email</h5>
+                <input type="text" ng-model="newAccountInformation.email" placeholder="Email" class="form-control">
+            </div>
+
+            <div style="padding:0px" class="col-xs-6">
+                <h5>Phone Number</h5>
+                <input type="text" ng-model="newAccountInformation.phoneNumber" placeholder="Phone Number" class="form-control">
+            </div>
+
+            <div style="padding:0px" class="col-xs-6">
+                <h5>First Name</h5>
+                <input type="text" ng-model="newAccountInformation.firstName" placeholder="First Name" class="form-control">
+            </div>
+
+            <div style="padding:0px" class="col-xs-6">
+                <h5>Last Name</h5>
+                <input type="text" ng-model="newAccountInformation.lastName" placeholder="Last Name" class="form-control">
+            </div>
+
+            <div style="padding:0px" class="col-xs-12">
+                <h5>Date Of Birth</h5>
+                <input type="date" ng-model="newAccountInformation.dateOfBirth" placeholder="Date of Birth" class="form-control">
+            </div>
+
+            <div style="clear:both"></div>
+            <div class="spacing-10"></div>
+
+            <button type="submit" class="btn btn-default log-btn">Save Information</button>
+
+        </form>
+    </div>
+</div>

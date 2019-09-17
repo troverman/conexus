@@ -1,9 +1,8 @@
 <div class="card">
     <div style="padding:16px">
 
-        <!--STARTS THE LIVE TIMER MODE || ALLOWANCE FOR MULTI -->
-
         <div ng-show="!recordingTime">
+
             <button ng-show="!question" type="submit" class="btn btn-default log-btn" ng-click="askQuestion()">Create Time</button>
             <div ng-show="question && !streaming">
                 <h3>Streaming?</h3>
@@ -13,37 +12,19 @@
             </div>
             <div ng-show="streaming">
                 <input type="text" placeholder="Link" ng-model="streamUrl" class="form-control">
-                <input ng-show="false" type="text" placeholder="IFPS SECRET" ng-model="timeContent" class="form-control">
-                <input ng-show="false" type="text" placeholder="IFPS KEY" ng-model="timeContent" class="form-control">
                 <button style="width:100%;" class="btn btn-default log-btn" ng-click="startTime()">Start Stream</button>
             </div>
+            
         </div>
 
         <div ng-show="recordingTime">
 
             <h3>{{taskTime}}</h3>
-
-            <div ng-show="false">
-                <input type="text" placeholder="Link" ng-model="timeContent" class="form-control">
-                <input type="text" placeholder="IFPS SECRET" ng-model="timeContent" class="form-control">
-                <input type="text" placeholder="IFPS KEY" ng-model="timeContent" class="form-control">
-                <button style="width:100%;" class="btn btn-default log-btn" ng-click="startStream()">Start Stream</button>
-            </div>
             <div ng-if="streaming"><div ng-bind-html="renderStream(streamUrl)"></div></div>
-
             <div class="spacing-5"></div>
-            
-            <!--
-            <h5>Selected Projects</h5>
-            <tags-input ng-model="selectedProjects" placeholder="Selected Projects"></tags-input>
-            <div ng-repeat="model in task.associatedModels">
-                <p><a href="#" ng-click="selectProject(model.address)">Select {{model}}</a></p>
-            </div>
-            -->
-
-            <tags-input min-length="1" ng-model="timeTags" placeholder="Context"></tags-input>
+            <tags-input min-length="1" ng-model="newTime.context" placeholder="Context"></tags-input>
             <div class="spacing-5"></div>
-            <text-angular ng-model="timeContent" ta-toolbar="[['bold','italics','p','h1','h2','quote','pre','insertLink', 'html']]"></text-angular>
+            <text-angular ng-model="newTime.content" ta-toolbar="[['bold','italics','p','h1','h2','quote','pre','insertLink', 'html']]"></text-angular>
             <div class="spacing-5"></div>
             <button style="width:100%;" class="btn btn-default log-btn" ng-click="submit()">Submit Time</button>
 

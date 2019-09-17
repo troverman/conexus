@@ -1,17 +1,15 @@
-angular.module( 'conexus.marketPlace', [
+angular.module( 'conexus.items', [
 ])
 
 .config(['$stateProvider', function config( $stateProvider ) {
-	$stateProvider.state( 'marketPlace', {
-		url: '/marketplace',
+	$stateProvider.state( 'items', {
+		url: '/items',
 		views: {
 			"main": {
-				controller: 'MarketPlaceCtrl',
-				templateUrl: 'marketPlace/index.tpl.html'
+				controller: 'ItemsCtrl',
+				templateUrl: 'items/index.tpl.html'
 			}
 		},
-        
-        //TODO: DEPRECIATE RESOLVE
         resolve:{
             items: ['ItemModel', function(ItemModel) {
                 return ItemModel.get({limit:100, skip:0, sort:'createdAt DESC'});
@@ -20,7 +18,7 @@ angular.module( 'conexus.marketPlace', [
 	});
 }])
 
-.controller( 'MarketPlaceCtrl', ['$location', '$mdSidenav', '$rootScope', '$sce', '$scope', '$stateParams', 'ItemModel', 'items', 'ReactionModel', function MarketPlaceController( $location, $mdSidenav, $rootScope, $sce, $scope, $stateParams, ItemModel, items, ReactionModel ) {
+.controller( 'ItemsCtrl', ['$location', '$mdSidenav', '$rootScope', '$sce', '$scope', '$stateParams', 'ItemModel', 'items', 'ReactionModel', function ItemsController( $location, $mdSidenav, $rootScope, $sce, $scope, $stateParams, ItemModel, items, ReactionModel ) {
 
     $scope.newItem = {};
     $scope.newReaction = {};

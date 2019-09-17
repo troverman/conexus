@@ -22,10 +22,8 @@
                 <div style="text-align:center">
                     <ul style="padding:0px;" class="member-tabs">
                         <li><a ng-click="$event.stopPropagation();selectTab('INFORMATION')">Information</a></li>
-                        <!--<li><a ng-click="$event.stopPropagation();selectTab('CONTENT')">Content</a></li>-->
                         <li><a ng-click="$event.stopPropagation();selectTab('MARKETS')"><i class="fa fa-exchange"></i> Markets</a></li>
                         <li><a ng-click="$event.stopPropagation();selectTab('ANALYSIS')"><i class="fas fa-project-diagram"></i> Analysis</a></li>
-                       <!--<li><a ng-click="$event.stopPropagation();selectTab('POSITIONS')"><i class="fas fa-bezier-curve"></i> Positions</a></li>-->
                     </ul>
                 </div>
             </div>
@@ -66,21 +64,13 @@
 								</div>
 							</div>
 							<!--<h5>Asset Holders</h5>-->
+                            <!--WHERE IT CAME FROM.. ACTION ETC-->
+                            <!--WHO OWNS THE TOKEN-->
 						</div>
 						<div class="spacing-5"></div>
-						<!--WHERE IT CAME FROM.. ACTION ETC-->
-						<!--WHO OWNS THE TOKEN-->
 			    	</div>
 		    	</div>
-    		</div>
-    		<!--
-    		<div class="card-footer">
-                <a ng-click="$event.stopPropagation();" style="color:grey"><i class="fas fa-eye"></i> 0</a>
-                <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fas fa-angle-up"></i> {{item.reactions.plus}} like </a> 
-                <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fas fa-angle-down"></i> {{item.reactions.minus}} dislike </a>
-                <a ng-click="$event.stopPropagation();contentToggle(item)"><i class="far fa-comment"></i> comment </a>
-            </div>
-        	-->
+    		</div>    		
     	</div>	
     </div>
     <div class="spacing-5"></div>

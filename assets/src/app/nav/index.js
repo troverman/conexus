@@ -1079,6 +1079,17 @@ angular.module( 'conexus.nav', [
 
     };
 
+    $rootScope.shareToggle = function(item){
+        $scope.item = item;
+        $scope.closeAllNav();
+
+        $scope.url = 'https://www.cre8.xyz/'+item.model.toLowerCase()+'/'+item.id;
+
+        $scope.copyToClipBoard = function(text){navigator.clipboard.writeText(text)}
+
+        $mdSidenav('share').toggle();
+    };
+
     $rootScope.subNavToggle = function(item){
         $scope.item = item;
         $mdSidenav('subNav').toggle();
@@ -1473,6 +1484,7 @@ angular.module( 'conexus.nav', [
         $mdSidenav('render').close();
         $mdSidenav('renderReputation').close();
         $mdSidenav('renderValidation').close();
+        $mdSidenav('sort').close();
         $mdSidenav('stats').close();
         $mdSidenav('subNav').close();
         $mdSidenav('task').close();

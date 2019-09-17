@@ -38,12 +38,12 @@ angular.module( 'conexus', [
     'conexus.market',
     'conexus.markets',
     'conexus.marketPair',
-    'conexus.marketPlace',
     'conexus.members',
     'conexus.notifications',
     'conexus.nav',
     'conexus.home',
     'conexus.item',
+    'conexus.items',
     'conexus.login',
     'conexus.member',
     'conexus.order',
@@ -139,7 +139,6 @@ angular.module( 'conexus', [
     $rootScope.associatedModels = [];
     $rootScope.consentAgreement = false;
 
-    //ROOTSCOPE..
     $rootScope.directedGraphStyle = [
         {
             "selector": "core",
@@ -289,20 +288,13 @@ angular.module( 'conexus', [
             }
         }
     ];
-    $rootScope.directedGraphOptions = {
-        textureOnViewport:true,
-        pixelRatio: 'auto',
-        motionBlur: false,
-        hideEdgesOnViewport:true
-    };
+    
     $rootScope.directedGraphLayout = {name: 'cola'};
     
     //INITALIZE ROOT VARIABLES
     $rootScope.notificationCount = 0;
 
-
     //TODO: FILTERs
-
     //TODO:DEPRECIATE
     $rootScope.selectedTags = [];
     $rootScope.selectedAssets = [];
@@ -323,8 +315,6 @@ angular.module( 'conexus', [
     };
 
     $rootScope.taskTime = 0;
-
-
 
 }])
 

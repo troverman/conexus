@@ -12,14 +12,13 @@
     <div style="padding:16px">
         <p>Size: {{markets.length}}</p>
         <p>Rank: {{stateParams.id.split(',').length}}
-        <p>Highest Dimension: 7</p>
         <p>Nodes: {{graphDataPower.nodes.length}}, Connections: {{graphDataPower.links.length}}</p>
         <p>Computed Lattice Neighborhood</p>
         
         <div class="spacing-5"></div>
 
         <div ng-if="orders.length>0" class="col-md-12">
-            <cytoscape graph-options="options" graph-elements="elementsObj" graph-layout="layout" graph-style="style"></cytoscape>
+            <cytoscape graph-options="directedGraphOptions" graph-elements="elementsObj" graph-layout="directedGraphLayout" graph-style="directedGraphStyle"></cytoscape>
         </div>
 
         <div class="spacing-5"></div>
@@ -39,7 +38,7 @@
             alg removes loops first then. .
         -->
 
-        <div style="max-height:50vh;overflow:auto">
+        <div>
 
             <h4>Immutable Structure</h4>
             <div hljs hljs-language="javascript"  hljs-source="renderImmutableMarket"></div>
@@ -72,19 +71,20 @@
                     <tr ng-repeat="order in orders">
                         <td>{{order.setAlpha}}</td>
                         <td>{{order.setBeta}}</td>
-                        <td>{{order.id}}</td>
+                        <td><a href="order/{{order.id}}" ui-sref="order({id:order.id})">{{order.id}}</a></td>
                     </tr>
                 </tbody>
             </table>
         </div>
 
         <div class="spacing-5"></div>
-        <h4>CREATE.CAPITAL PROBABILITY DENSITY </h4>
+        <h4>CRE8.CAPITAL <a href="https://www.cre8.capital"><i class="fas fa-link"></i></a></h4>
+        <h5>Probability Density Functions</h5>
 
-        <!--CREATE.CAPITAL PDF??-->
         <!--COMBINITORIALS SERVED FIRST-->
         <!--DEPTH OF THE COMBINITORIAL SPACES-->
         <!--COMBINITORIAL & MANIFOLD MAPPING SPACE(S)-->
+
         <!--VALUE VECTOR-->
         <!--1ST DEGREE-->
         <!--VALUE MATRIX-->

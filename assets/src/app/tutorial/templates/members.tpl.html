@@ -13,12 +13,15 @@
         </div>
     </div>
 </div>
+<!--FILTER TEMPLATE-->
+<!--
 <ul style="padding:0px;" class="member-tabs">
     <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fa fa-filter"></i> Filter</a></li>
     <li style="float:right;font-size:14px"><a href="#" ng-click="sortToggle()">Sort <i class="fa fa-angle-down"></i></a></li>
     <div style="clear:both"></div>
 </ul>
 <div class="card"><tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search" ng-model="searchQuery"></tags-input></div>
+-->
 <div class="card">
     <div style="padding:16px;">
         <highchart config="totalMap"></highchart>
@@ -26,19 +29,7 @@
 </div>
 <div>
     <div class="col-sm-6" ng-repeat="item in members" style="padding-left:10px;padding-right:10px;">
-        <div class="member-card" style="margin-bottom:10px" ng-click="renderReputationToggle(item)">
-            <div class="member-card-image" style="background-image: url('{{item.coverUrl}}')">
-                <a ng-click="$event.stopPropagation()" href="member/{{item.username}}" ui-sref="member.activity({path:item.username})"><img ng-src="{{item.avatarUrl}}" err-src="/images/avatar.png"></a>
-            </div>
-            <div class="member-card-info" style="padding:16px;height:auto">
-                <h4><a href="member/{{item.username}}" ui-sref="member.activity({path:item.username})">{{item.username}}</a></h4>
-                <p style="font-size:13px;"><a href="/member/{{item.username}}/projects" ui-sref="member.projects({path:item.username})">{{item.projectCount || 0}} Projects</a> | <a href="/member/{{item.username}}/followers" ui-sref="member.followers({path:item.username})">{{item.followerCount || 0}} Followers</a> | <a href="/member/{{item.username}}/following" ui-sref="member.following({path:item.username})">{{item.followingCount || 0}} Following</a>
-                <p style="color:gray">Total Reputation | {{item.totalWork}}</p>
-                <p style="color:gray">{{currentUser.status}} Offline</p>
-                <button ng-show="!item.isFollowing" class="btn btn-default" ng-click="$event.stopPropagation();follow(item);">Follow</button>
-                <button ng-show="item.isFollowing" class="btn btn-default" ng-click="$event.stopPropagation();follow(item);">Unfollow</button>
-            </div>
-        </div>
+        <div ng-include="'templates/cards/memberCard.tpl.html'"></div>
     </div>
     <div style="clear:both"></div>
 </div>

@@ -19,6 +19,7 @@ module.exports.routes = {
   'get /content/:id': 'HomeController.index',
   'get /developers': 'HomeController.index',
   'get /discover': 'HomeController.index',
+  'get /items': 'HomeController.index',
   'get /item/:id': 'HomeController.index',
   'get /login': 'HomeController.index',
   'get /market': 'HomeController.index',

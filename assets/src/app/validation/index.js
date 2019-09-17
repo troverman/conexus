@@ -36,8 +36,8 @@ angular.module( 'conexus.validation', [
     if ($scope.validation.context){
         for (x in Object.keys($scope.validation.context)){
             $scope.validationList.push([Object.keys($scope.validation.context)[x], $scope.validation.context[Object.keys($scope.validation.context)[x]]]);
-            $scope.reputationList.push([Object.keys($scope.validation.reputation)[x], $scope.validation.reputation[Object.keys($scope.validation.reputation)[x]]]);        
-            $scope.reputationWeightedList.push([Object.keys($scope.validation.reputation)[x], $scope.validation.reputation[Object.keys($scope.validation.reputation)[x]]*$scope.validation.context[Object.keys($scope.validation.context)[x]]]);
+            //$scope.reputationList.push([Object.keys($scope.validation.reputation)[x], $scope.validation.reputation[Object.keys($scope.validation.reputation)[x]]]);        
+            //$scope.reputationWeightedList.push([Object.keys($scope.validation.reputation)[x], $scope.validation.reputation[Object.keys($scope.validation.reputation)[x]]*$scope.validation.context[Object.keys($scope.validation.context)[x]]]);
         }
     }
 
@@ -82,8 +82,8 @@ angular.module( 'conexus.validation', [
 
     for (x in $scope.validationList){
         $scope.validationColumn.series[0].data.push($scope.validationList[x][1]);
-        $scope.validationColumn.series[1].data.push($scope.reputationList[x][1]);
-        $scope.validationColumn.series[2].data.push($scope.reputationWeightedList[x][1]);
+        //$scope.validationColumn.series[1].data.push($scope.reputationList[x][1]);
+        //$scope.validationColumn.series[2].data.push($scope.reputationWeightedList[x][1]);
         $scope.validationColumn.xAxis.categories.push($scope.validationList[x][0]);
     }
 

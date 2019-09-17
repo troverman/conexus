@@ -452,8 +452,15 @@ angular.module( 'conexus.home', [
         }
     };
 
+    //CORE APPS
+    $scope.apps = [
+        {model:'APP', title:'Client Mining', description:'Run a CRE8 node that powers the network. Machine attention is tokenized.'},
+        {model:'APP', title:'Attention Tokenization', description:'Required for Attention Tokenization'},
+        {model:'APP', title:'Location Tokenization', description:'Required for Location Tokenization'},
+    ];
+  
     $scope.initTutorial = function(){
-      
+        
         //TODO: APP STRUCT
         //TODO: PEER STRUCT
         $scope.editAccount = function () {

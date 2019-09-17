@@ -16,11 +16,24 @@
             </div>
 			<div style="padding:16px">
 				<div style="text-align:left">
+
+					<div style="float:right">
+						<a style="padding:10px 15px;color:rgb(125,125,125);text-align:left" class="btn btn-default" ng-click="$event.stopPropagation();transactionToggle(member)">+Transaction</a>
+						<img ng-click="$event.stopPropagation();renderReputationToggle(member)" style="height:50px;text-align:right;" src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{member.id}}">
+					</div>
+					<div style="float:right;margin:2.5px;" ng-show="currentUser.id != member.id">
+						<a style="padding:10px 15px;color:rgb(125,125,125);text-align:left" ng-show="!isFollowing" class="btn btn-default" ng-click="$event.stopPropagation();follow()">Follow</a>
+						<a style="padding:10px 15px;color:rgb(125,125,125);text-align:left" ng-show="isFollowing" class="btn btn-default" ng-click="$event.stopPropagation();unfollow()">UnFollow</a>
+					</div>
+
 					<h2>{{member.firstName}} {{member.lastName}}</h2>
-					<h5><a ng-click="$event.stopPropagation();renderReputationToggle(member)">@{{member.username}}</a></h5>
+					<h3><a ng-click="$event.stopPropagation();renderReputationToggle(member)">@{{member.username}}</a></h3>
 					<p style="font-size:8px;" ng-click="$event.stopPropagation();memberQRToggle(member);"><a style="color:gray"><i class="fas fa-qrcode"></i> {{member.id}}</a></p>
-					<p ng-click="$event.stopPropagation();renderReputationToggle(member)"><b>Total Reputation</b>: {{member.totalWork}}</p>
+        			<p style="color:gray;font-size:12px;">{{currentUser.status}} <i style="color:#30b257" class="fa fa-circle"></i> Offline</p>
+					<!--<p ng-if="member.totalWork>0" ng-click="$event.stopPropagation();renderReputationToggle(member)"><b>Total Reputation</b>: {{member.totalWork}}</p>-->
+
 				</div>
+				
 			</div>
 			<md-divider style="color:gray;padding:0px"></md-divider>
 			<div style="padding:0px">
@@ -33,17 +46,6 @@
                             <tags-input style="border:0px;flex-grow:2;height:auto;" placeholder="Search" ng-model="searchQuery"></tags-input>
                         </form>
                     </li>
-                    <li class="" style="float:right">
-						<img ng-click="$event.stopPropagation();renderReputationToggle(member)" style="height:50px;text-align:right;" src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{member.id}}">
-					</li>
-					<li class="mobileFix" style="float:right;margin:2.5px;">
-						<a style="padding:10px 15px;color:rgb(125,125,125);text-align:left" class="btn btn-default" ng-click="$event.stopPropagation();transactionToggle(member)">Send Tokens</a>
-					</li>
-					<li class="mobileFix" style="float:right;margin:2.5px;" ng-show="currentUser.id != member.id">
-						<a style="padding:10px 15px;color:rgb(125,125,125);text-align:left" ng-show="!isFollowing" class="btn btn-default" ng-click="$event.stopPropagation();follow()">Follow</a>
-						<a style="padding:10px 15px;color:rgb(125,125,125);text-align:left" ng-show="isFollowing" class="btn btn-default" ng-click="$event.stopPropagation();unfollow()">UnFollow</a>
-					</li>
-					<li ng-if="false"><a class="mobileMargin" style="color:black" href="#"><i class="fa fa-bars"></i></a></li>
                     <div style="clear:both"></div>
                 </ul>
             </div>
