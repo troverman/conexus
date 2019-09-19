@@ -1,0 +1,42 @@
+<div class="card">
+    <div style="background:url('https://source.unsplash.com/1600x900/?{{item.tags}}');min-height:auto" class="imageContainerSmall">
+        <div style="background:rgba(0,0,0,0.75);height:auto" class="imageContainerSmallDiv">  
+            <div style="margin-top: auto;margin-bottom: auto;">
+                <div style="padding:15px">
+                    <h1 style="text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;">Associations</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="padding:16px;">
+        <!--TODO-->
+        <div class="row">
+
+            <div class="col-sm-12">
+                <h4>Context</h4>
+                <div>
+                    <span ng-repeat="context in transaction.context">{{context}}</span>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div>
+                    <div ng-repeat="association in transaction.associationModels">
+
+                        <p ng-click="filterAssociation()"><span>{{association.associatedModels[0].type}} - {{association.associatedModels[1].type}}</span></p>
+                        <p>{{association.associatedModels[0].data.title}}</p>
+                        <p>{{association.associatedModels[1].data.title}}</p>
+
+                        <p><span>{{association.context}}</span></p>
+                        <p><b><a href="association/{{association.id}}" ui-sref="association({id:association.id})">{{association.id}}</a></b></p>
+                        <!--POPULATE ASSOCIATIONS-->
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <!--<cytoscape graph-ready="graphReady" graph-options="directedGraphOptions" graph-elements="directedGraphElements" graph-layout="directedGraphLayout" graph-style="directedGraphStyle"></cytoscape>-->
+            </div>
+        </div>
+        
+    </div>
+</div>

@@ -1,5 +1,5 @@
+//CRE8.CONNECTION
 module.exports = {
-
     attributes: {
 		information: {type: 'json'},
 		title: {type: 'string'},
@@ -10,5 +10,4 @@ module.exports = {
         associatedModels:{type: 'string'},
         data: {type: 'json'},
     }
-
 };

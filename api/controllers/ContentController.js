@@ -1,4 +1,5 @@
-var Q = require('q');
+//CRE8.CONTENT
+const Q = require('q');
 
 module.exports = {
 	
@@ -379,14 +380,14 @@ module.exports = {
 					//newValidation.connection = connectionModel[0];
 
 					var associatedModelObj = {};
-					if (model.associatedModels[x].id.toLowerCase() == 'self'){associatedModelObj = {type:'CONTENT', id:model.id}}
+					if (model.associatedModels[x].id.toLowerCase() == 'self'){associatedModelObj = {type:model.model, id:model.id}}
 					else{associatedModelObj = {
 						type:model.associatedModels[x].type,
 						id:model.associatedModels[x].id};
 					}
 
 					newValidation.associatedModels = [
-						{type:'CONTENT', id:model.id},
+						{type:model.model, id:model.id},
 						associatedModelObj
 					];
 
@@ -463,6 +464,7 @@ module.exports = {
 
 		var model = {
 			model: 'CONTENT',
+
 			title: req.param('title'),
 			type: req.param('type'),
 			content: req.param('content'),
@@ -473,7 +475,8 @@ module.exports = {
 			//TODO: DEPRECIATE
 			contentModel: req.param('contentModel'),
 
-			associatedModels: req.param('associatedModels'),
+			//associatedModels: req.param('associatedModels'),
+			
 			data:{apps:{reactions:{plus:0, minus:0},attention:{general:0}}}
 
 		};
@@ -488,8 +491,10 @@ module.exports = {
 				User.find({id:model.user}).then(function(userModels){
 
 					model.user = userModels[0];
+					model.associatedModels = req.param('associatedModels');
+
 					Content.publishCreate(model);
-					createEvent(model);//ACTION
+					createEvent(model);
 					createNotification(model);
 					createValidation(model);
 					mintTokens(model);

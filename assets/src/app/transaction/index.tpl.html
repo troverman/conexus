@@ -22,7 +22,7 @@
                 <div class="member-tab-container container" style="padding-left:0px">
                     <div style="text-align:center">
                         <ul style="padding:0px;" class="member-tabs">
-                            <li ng-if="false"><a ng-click="$event.stopPropagation();selectTab('TIME')">Activity</a></li>
+                            <li ng-if="false"><a ng-click="$event.stopPropagation();selectTab('ACTIVITY')">Activity</a></li>
                             <li><a ng-click="$event.stopPropagation();selectTab('INFORMATION')">Information</a></li>
                             <li><a ng-click="$event.stopPropagation();selectTab('ASSOCIATIONS')">Associations</a></li>
                             <li><a ng-click="$event.stopPropagation();selectTab('CONTENT')">Content</a></li>
@@ -34,7 +34,7 @@
             </div>
             <hr style="margin:0px;">
 
-            <div style="padding:16px">
+            <div style="padding:16px" ng-if="selectedTab =='INFORMATION'">
         
                 <div style="display:inline">
                     <span ng-if="transaction.from.username">
@@ -85,25 +85,12 @@
             </div>
             
         </div>
-     
-        <!--(ASSOCIATED) CONTENT RENDER..-->
-        <div class="card" ng-repeat="item in contentList">
-            <div style="padding:16px" ng-click="">
-                <div>
-                    <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="images/avatar.png">
-                    <a style="display:inline;font-weight:600;margin-left:5px" href="member/{{item.user.username}}" ui-sref="member.activity({id:item.user.username})">{{item.user.username}}</a>
-                    <p style="display:inline;font-size:10px;color:gray;margin-left:5px" am-time-ago="item.createdAt"></p>
-                </div> 
-                <div style="margin-left:42px"><span style="display:inline" ng-bind-html="renderMessage(item.content)"></span></div>
-            </div>
-            <div class="card-footer">
-                <a ng-click="$event.stopPropagation();"><i class="fas fa-eye"></i> {{time.data.apps.attention.general || 0}} </a>
-                <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fas fa-angle-up"></i> {{item.data.apps.reactions.plus}} like </a> 
-                <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fas fa-angle-down"></i> {{item.data.apps.reactions.minus}} dislike </a>
-                <a ng-click="$event.stopPropagation();" style="padding:5px;color:grey" ng-click="reply(item)" ui-sref="content({id:item.user.username})"><i class="far fa-comment"></i> comment </a>
-                <a ng-click="$event.stopPropagation();" style="color:grey" class="pull-right" href="content/{{item.id}}" ui-sref="content({id:item.user.username})"><i class="fas fa-link grey"></i></a>
-            </div>
-        </div>
+        <div ng-if="selectedTab =='ASSOCIATIONS'" ng-include="'transaction/templates/associations.tpl.html'"></div>
+        <div ng-if="selectedTab =='CONTENT'" ng-include="'transaction/templates/content.tpl.html'"></div>
+        <div ng-if="selectedTab =='STATS'" ng-include="'transaction/templates/stats.tpl.html'"></div>
+        <div ng-if="selectedTab =='TOKENS'" ng-include="'transaction/templates/tokens.tpl.html'"></div>
     </div>
     <div class="spacing-10"></div>
 </div>
+
+

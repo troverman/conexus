@@ -1,7 +1,5 @@
-/**
- * TransactionController
- */
-var Q = require('q');
+//CRE8.TRANSACTION
+const Q = require('q');
 
 function getTo(model){
 	var deferred = Q.defer();
@@ -17,6 +15,49 @@ function getFrom(model){
 	User.find({id:model.from}).then(function(userModels){
 		if (userModels.length == 0){Project.find({id:model.from}).then(function(projectModels){deferred.resolve(projectModels[0])})}
 		else{deferred.resolve(userModels[0])}
+	});
+	return deferred.promise;
+};
+
+function getAssociations(model){
+	var deferred = Q.defer();
+	Association.native(function(err, association) {
+		association.find({$and : [{"associatedModels.id": {$in:[model.id]}}]})
+		.limit(1000)
+		.skip(0)
+		.sort({'createdAt':-1})
+		.toArray(function (err, associationModels) {
+			if (associationModels.length > 0){
+				associationModels.map(function(obj){obj.id=obj._id; return obj});
+				model.associationModels = associationModels;
+				var promises = [];
+				for (x in model.associationModels){
+					for (y in associationModels[x].associatedModels){
+						if (associationModels[x].associatedModels[y].type=='ACTION'){promises.push(Action.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+						if (associationModels[x].associatedModels[y].type=='APP'){promises.push(App.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+						if (associationModels[x].associatedModels[y].type=='ATTENTION'){promises.push(Attention.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+						if (associationModels[x].associatedModels[y].type=='CONTENT'){promises.push(Content.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+						if (associationModels[x].associatedModels[y].type=='ITEM'){promises.push(Item.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+						if (associationModels[x].associatedModels[y].type=='MEMBER'){promises.push(User.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+						if (associationModels[x].associatedModels[y].type=='PROJECT'){promises.push(Project.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+						if (associationModels[x].associatedModels[y].type=='TASK'){promises.push(Task.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+						if (associationModels[x].associatedModels[y].type=='TIME'){promises.push(Time.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+						if (associationModels[x].associatedModels[y].type=='TRANSACTION'){promises.push(Transaction.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+						if (associationModels[x].associatedModels[y].type=='VALIDATION'){promises.push(Validation.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+					}
+				}
+				Q.all(promises).then((populatedModels)=>{
+					for (x in model.associationModels){
+						for (y in associationModels[x].associatedModels){
+							var index = parseInt(x+y);
+							model.associationModels[x].associatedModels[y].data = populatedModels[index];
+						}
+					}
+					deferred.resolve(model);
+				});
+			}
+			else{deferred.resolve(model);}
+		});
 	});
 	return deferred.promise;
 };
@@ -168,7 +209,7 @@ module.exports = {
 						models[x].from = populatedModels[sum];
 						sum++;
 					}
-					res.json(models);
+					getAssociations(models[0]).then(function(models){res.json(models);});
 				});
 			});
 		}
@@ -322,7 +363,17 @@ module.exports = {
 
 	create: function (req, res) {
 
-		//TODO: GLOBAL
+		function createEvent(model){
+			var eventModel = {
+				type:'create',
+				model:{
+					id:model.id, //hash
+					type:model.model //app
+				},
+				data:{},
+			};
+			Event.create(eventModel);
+		};
 
 		//IMPLICIT VALIDATIONS REPLACE 'user'? what about 'creator'
 		//DEPRECAITE TO.. FROM????? --> VALIDATION / ASSOCIATION IS MAIN DATA MODEL ...
@@ -332,63 +383,123 @@ module.exports = {
 
 		function createValidation(model){
 
-			console.log(model);
-
-			for (x in model.validationModels){
-				model.validationModels[x].validation;
-				var validationModel = {
-					associatedModels:[
-						{type:'TRANSACTION',id:model.id},
-						{type:'TRANSACTION',id:model.id}
-					],
-
-					//TODO: UPDATE .validation to .context
-					validation:model.validationModels[x].validation,
-					context:model.validationModels[x].validation,
-
-					user: model.user,
-					creator:model.user,
-					type:'HUMAN',
-					parameters:{connctionType:'SELF'}
-				};
-
-				Validation.create(validationModel).then(function(newValidationModel){
-					
-					console.log('CREATE VALIDATION', newValidationModel)
-
-					//ONLY FOR SELF VALIDATION
-					//MACHINE VALIDATION SOON
-					Association.create(validationModel).then((newAssociationModel)=>{
-						console.log('CREATE ASSOCIATION', newAssociationModel)
-					});
-
-					//UPDATE TRANSACTION WITH COMPUTED CONTEXT??? OKAY :)
-
-				});
-
-			}
+			console.log('ASSOCIATED MODELS');
+			console.log(model.associatedModels);
 
 			//CREATE VALIDATION (IE SELF VALIDATION .. CONTEXT OF TRANSACTION)
 			//SOME CHARTER WHERE THE CREATOR IS WEIGHTED
 			//SOME CHARTER WHERE THE FROM AND TO IS WEIGHTED
 			//IE BUY AN ITEM.. CONTEXTUALIZED VALIDATION
 
+			for (x in model.associatedModels){
+
+				var newValidation = {
+			
+					content:model.id + ' VALIDATION',
+
+					//THIS IS DEFINED BY CONNECTION!!!
+					context: {},
+					reputation: {},		
+
+					//UNIFY
+					user: model.user.id,
+					creator: model.user.id,
+
+					data:{apps:{reactions: {plus:0,minus:0}, attention:{general:0}}}
+
+				};
+
+				newValidation.connection = {
+					id:1,
+					type:'HUMAN',
+					title:'STANDARD MULTI, AGNOSTIC MODELS',
+					parameters:{
+						mapping:['context','reputation'],
+						logic:'context[%context]*reputation[%context]'
+					},
+
+				};
+
+				var associatedModelObj = {};
+				if (model.associatedModels[x].id.toLowerCase() == 'self'){associatedModelObj = {type:model.model, id:model.id}}
+				else{
+					associatedModelObj = {type:model.associatedModels[x].type, id:model.associatedModels[x].id};
+				}
+
+				newValidation.associatedModels = [
+					{type:model.model, id:model.id},
+					associatedModelObj
+				];
+
+				//LIST -> OBJ
+				for (y in model.associatedModels[x].context){
+					newValidation.context[model.associatedModels[x].context[y].text] = model.associatedModels[x].context[y].score;
+				}
+
+				Validation.create(validationModel).then(function(newValidationModel){
+					
+					console.log('CREATE VALIDATION', newValidationModel);
+
+					//SELF-ASSOCIATION
+					createAssociation(newValidationModel);
+
+					//GENERALIZED ASSOCIATION
+					//Transaction.update({id:model.id},{context:{}}).then((newTransactionModel)=>{
+					//	console.log('UPDATE CONTEXT??', newTransactionModel)
+					//});
+
+				});
+			}
 		};
 
-		//TODO: GLOBAL
-		//TODO: IMPROVE NOTIFICATION STORAGE
+		function createAssociation(newValidationModel){
+			var newAssociationModel = {};
+			Validation.native(function(err, validation) {
+				validation.find({
+					$and : [
+						{"associatedModels.id": {$in :[newValidationModel.associatedModels[0].id]}}, 
+						{"associatedModels.id": {$in :[newValidationModel.associatedModels[1].id]}},
+					]
+				})
+				.limit(1000)
+				.skip(0)
+				.sort({'createdAt':-1})
+				.toArray(function (err, validationModels) {
+					Association.native(function(err, association) {
+						association.find({
+							$and : [
+								{"associatedModels.id": {$in :[validationModels[0].associatedModels[0].id]}},
+								{"associatedModels.id": {$in :[validationModels[0].associatedModels[1].id]}},
+							]
+						})
+						.limit(1000)
+						.skip(0)
+						.sort({'createdAt':-1})
+						.toArray(function (err, associationModels) {
+							if (associationModels.length == 0){
+								var newAssociationModel = newValidationModel;
+								Association.create(newAssociationModel).then(function(association){
+									console.log('CREATED ASSOCIATION', association);
+									Association.publishCreate(association);
+								});
+							}
+							else{
+								console.log('ASSOCIATION EXISTS -- COMPUTE')
+							}
+						});
+					});
+				});
+			});
+		};
+
 		function createNotification(model){
 			var notificationModel = {
 				user: model.to,
 				type: 'TRANSACTION',
 				title: 'New Transaction',
 				content:model.from+' sent you '+model.amountSet,
-				data:{
-					apps:{
-						transaction: model
-					}
-				},
-				priority:77,
+				data:{apps:{transaction: model}},
+				priority:77,//defined by user
 			};
 			Notification.create(notificationModel).then(function(notification){
 				Notification.publishCreate(notification);
@@ -396,15 +507,13 @@ module.exports = {
 		};
 
 		function mintTokens(model){
-
 			var transactionProtocolTokens = getProtocolTokens(model);
 			for (x in transactionProtocolTokens){
 				var tokenString = transactionProtocolTokens[x]; 
+
 				console.log(tokenString);
 
-				/*
 				(function(tokenString) {
-
 					Token.find({string:tokenString}).then(function(tokenModels){
 						if (tokenModels.length == 0){
 							var newTokenModel = {
@@ -413,38 +522,25 @@ module.exports = {
 								information:{inCirculation:model.amount, markets:0},
 								logic:{transferrable:true, mint:'CREATE TIME'}
 							};
-
 							Token.create(newTokenModel).then(function(model){console.log('TOKEN CREATED', model.string);});
-
 							//TO, FROM
 							model.user.balance[tokenString] = parseFloat(model.amount);
 							User.update({id:model.user.id}, {balance:model.user.balance}).then(function(user){});
-
 						}
-
 						else{
-
 							tokenModels[0].information.inCirculation = parseInt(tokenModels[0].information.inCirculation) + parseFloat(model.amount); 
 							Token.update({id:tokenModels[0].id}, {information:tokenModels[0].information}).then(function(model){console.log('TOKEN UPDATED', model)});
-
 							//TO, FROM
 							if (model.user.balance[tokenString]){model.user.balance[tokenString] = parseInt(model.user.balance[tokenString]) + parseFloat(model.amount);}
 							else{model.user.balance[tokenString] = parseFloat(model.amount);}
 							User.update({id:model.user.id}, {balance:model.user.balance}).then(function(user){});
-
 						}
-
 					});
-
 				})(tokenString);
-				*/
 
 			}
 		};
 
-
-		//WILL DOO SOON!!!
-		//DO THIS SOON(ER THAN LATER)
 		//CRE8 is not a 'verb' in the traditional context. is is ''''AN APP SPECIFIC'''' MANIFOLD
 		//AUDIT IF TOO MANY OVERLAPPING NFTs .. think we good
 		function getProtocolTokens(model){
@@ -455,6 +551,7 @@ module.exports = {
 			//CRE8manifold'contains recieve..ie 
 				//CRE8+SEND
 				//CRE8+RECIEVE.. YES
+
 			var protocolTokens = [
 
 				//goes to both?
@@ -494,21 +591,18 @@ module.exports = {
 				for (x in model.tags.split(',')){
 					//protocolTokens.push(model.tags.split(',')[x].toUpperCase());
 					protocolTokens.push('CRE8+TRANSACTION+CONTEXT+'+model.tags.split(',')[x].toUpperCase());
-
 					protocolTokens.push('CRE8+TRANSACTION+SEND+CONTEXT+'+model.tags.split(',')[x].toUpperCase());
 					protocolTokens.push('CRE8+TRANSACTION+RECIEVE+CONTEXT+'+model.tags.split(',')[x].toUpperCase());
-
 				}
 			}
 
 			//return based on who recieved the toks?
 			//[id,tok]
 			return protocolTokens;
-
 		};
 
-
 		var model = {
+
 			model: 'TRANSACTION',
 			amountSet: req.param('amountSet'),
 
@@ -518,10 +612,12 @@ module.exports = {
 			//HM -- ASSOCIATED?
 			content: req.param('content'),
 
-			//ITEMS OR?? HM --> COULD CODIFY FROM TO ETC IN 
-			associatedModels: req.param('associatedModels'),
+			//to,from,self,creator
+			//NOT STORED IN MAIN MODEL... 
+			//associatedModels: req.param('associatedModels'),
 
-			//UNIFY
+			context: req.param('context'),
+
 			user: req.param('user'),
 			creator: req.param('user'),
 			
@@ -539,10 +635,10 @@ module.exports = {
 			if (err) {return console.log(err);}
 			else {
 	
-				//TODO: ITEM INTERACTION
-				//ITEM ACTIONS.. ATTENTION TOKEN RIGHTS | CONTENT AS ITEM.. ADD VIEWOWNER?
+				//ITEM ACTIONS.. 			
 				//IF GENERATOR
-				//CONTENT OWNERSHIP? --> CONTENT AND ITEM .. ATTENTION(ASSET) TOKEN RIGHTS.. 
+				//CONTENT OWNERSHIP? --> CONTENT AND ITEM 
+				//.. ATTENTION(ASSET) TOKEN RIGHTS.. 
 				for (x in Object.keys(transactionModel.amountSet)){
 					Item.find({id:Object.keys(transactionModel.amountSet)[x]}).then(function(itemModels){
 						if (itemModels.length!=0){
@@ -554,35 +650,32 @@ module.exports = {
 				}
 
 				//HMM
-				transactionModel.validationModels = req.param('validationModels');
+				transactionModel.associatedModels = req.param('associatedModels');
 
-
-
-				//MESSY CODE . LOL
+				//MESSY CODE .. LOL .. POPULATE ASSOCIATIONS
 				var promises = [];
 				promises.push(getTo(transactionModel));
 				promises.push(getFrom(transactionModel));
 
 				Q.all(promises).then((populatedModels)=>{
+					User.find({id:model.user}).then(function(userModels){
 
-					console.log(populatedModels.length, populatedModels)
+						transactionModel.user = userModels[0];
+						transactionModel.to = populatedModels[0];
+						transactionModel.from = populatedModels[1];
+						
+						Transaction.publishCreate(transactionModel);
+						createEvent(transactionModel);
+						createNotification(transactionModel);
+						createValidation(transactionModel);
+						mintTokens(transactionModel);
+						res.json(transactionModel);
 
-					transactionModel.to = populatedModels[0];
-					transactionModel.from = populatedModels[1];
-
-					mintTokens(transactionModel);
-					createNotification(transactionModel);
-					Transaction.publishCreate(transactionModel);
-					res.json(transactionModel);
-
+					});
 				});
-
-
 			}
 		});
 	},
-
-	update: function (req, res) {},
 	
 };
 

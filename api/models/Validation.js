@@ -1,19 +1,15 @@
-/**
-* Validation.js
-VALIDATIONS ARE TRAVERSED TO CREATE ASSOCIATIONS WHICH CREATES TOKEN POTIENTAL.
-VALIDATION CREATES TOKEN POTIENTAL
-*/
+//CRE8.VALIDATION
+//VALIDATIONS CREATE TOKEN POTIENTAL
+//VALIDATIONS ARE TRAVERSED TO CREATE ASSOCIATIONS WHICH CREATES TOKEN POTIENTAL.
 
 module.exports = {
-
 	attributes: {
-
-        //BINARY ASSOCIATION
         associatedModels: {type: 'json'},
 
-        context: {type: 'json'},
-
         //APPS - CONFIG - CONNECTION PARAMS
+        //DEFINED BY CONNECTION
+        content: {type: 'string'},
+        context: {type: 'json'},
         reputation: {type: 'json'},
         parameters: {type: 'json'},
         information: {type: 'json'},
@@ -23,12 +19,7 @@ module.exports = {
         user: {model: 'user'},
         creator: {type: 'string'},
 
-        //ASSOCIATED CONTENT
-        content: {type: 'string'},
-
         data: {type: 'json'},
 
     },
-    
 };
-

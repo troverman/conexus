@@ -1,9 +1,6 @@
-/**
- * TokenController
- */
+//CRE8.TOKEN
 
 module.exports = {
-
 
 	//TEST | WIP | PLAYGROUND
 	structure: function(req, res) {},
@@ -46,7 +43,6 @@ module.exports = {
 		}
 
 		else{
-
 			Token.native(function(err, token) {
 				token.find({})
 				.limit(limit)
@@ -60,10 +56,11 @@ module.exports = {
 					});
 				});
 			});
-
 		}
 
 	},
 
-};
+	//COMBINATORIAL REPRESENTATION? 
+	//--> MARKET AS COMPUTED PROP
 
+};

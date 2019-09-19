@@ -1,6 +1,8 @@
+//CRE8.USER
+//TODO: RENAME TO MEMBER
+
 module.exports = {
 
-	//TODO: RENAME TO MEMBER
 	get: function(req, res) {
 
 		var limit = parseInt(req.query.limit) || 1;
@@ -60,24 +62,18 @@ module.exports = {
 
 	},
 
+	/*
 	create: function (req, res) {
-
 		function mintTokens(model){
 			var protocolTokens = getProtocolTokens(model);
 		};
-
-		//DEPRECIATE CRE8 BASE MANI? --MB
 		function getProtocolTokens(model){
 			var protocolTokens = [model.username.toUpperCase()];
 			return protocolTokens;
 		};
-
 		var model = {
 			username: req.param('username'),
 			email: req.param('email'),
-			firstName: req.param('firstName'),
-			lastName: req.param('lastName'),
-			address: req.param('address'),
 		};
 		console.log('CREATE USER', model);
 		User.create(model)
@@ -89,6 +85,7 @@ module.exports = {
 			}
 		});
 	},
+	*/
 
 	update: function(req,res){
 		//TODO: SECURITY
@@ -111,10 +108,6 @@ module.exports = {
 			User.publishUpdate(id, model);
 			res.json(model);
 		});
-	},
-
-	//TODO: IPFS BLOB / PEER UPLOAD
-	upload: function(req,res){
-	},
+	}
 
 };

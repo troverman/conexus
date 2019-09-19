@@ -1,15 +1,9 @@
-/**
- * OrderController
- */
-
-var Q = require('q');
+//CRE8.ORDER
+const Q = require('q');
 
 module.exports = {
 
 	get: function(req, res) {
-
-		//SAVE MARKET?? :)
-		//LINK TO TOKEN 'STRUCT'
 
 		//CREATE THE TENSOR OBJ..
 		//HUGELY HIGH DIM
@@ -17,12 +11,6 @@ module.exports = {
 			//SORT ASSETS.. 
 
 		function buildMarketV1(baseMarket, orders){
-
-			//CAN REFRESH A COUPLE TIMES
-			//FINALIZE DATA STRUCT :)
-				//AND INPUTS
-
-			//POTIENTALL CONVERT TO ARRAY BUT I LIKE OBJS
 
 			var market = {};
 
@@ -90,7 +78,6 @@ module.exports = {
 			//..
 			
 		};
-
 
 		var limit = parseInt(req.query.limit) || 1;
 		var skip = parseInt(req.query.skip) || 0;
@@ -170,7 +157,6 @@ module.exports = {
 			});
 		}
 
-
 		//?? 
 		else if(req.query.setBeta && !req.query.setAlpha){
 			var query = {};
@@ -191,7 +177,6 @@ module.exports = {
 				});
 			});
 		}
-
 
 		//MARKETPAIR
 		else if(req.query.setAlpha && req.query.setBeta){
@@ -246,17 +231,12 @@ module.exports = {
 			});
 		}
 
-
-
-
 		//LOL WEIRD STRUCTURE 
 
 		//COULD STORE TO TOKEN MODEL.. SHOULD DO THIS.. 
 			//DB OF TOKENS? --> YEAH .. 
 				//PLURLISTIC TO MAPPING .. 
 					//never 1 or 2, it's 1 and 2
-
-
 
 		//single market interaction in its own higher d market --> (up)compose
 		//include higer dim positions in .. ?
@@ -320,15 +300,7 @@ module.exports = {
 
 		}
 
-		else{
-			Order.find({})
-			.limit(limit)
-			.skip(skip)
-			.sort(sort)
-			.then(function(models) {
-				res.json(models);
-			});
-		}
+		else{res.json([]);}
 		
 	},
 
@@ -379,45 +351,46 @@ module.exports = {
 		//ORDERS ASSOCIATION
 		function getProtocolTokens(model){
 			var protocolTokens = ['CRE8', 'CRE8+ORDER'];
+
+
+
+
+
+
+
+
 			return protocolTokens;
 		};
 
 		//TODO
-		//ASSET ASSOCIATION....:)
 		//CONNECTION? (ORDER RULZ)
-		function createMarket(order){
-			var marketModel = {
+		function createAssociation(order){
+			
+			var associationModel = {
 				setAlpha:order.setAlpha,
 				setBeta:order.setBeta,
 				rank:1
 			};
 
-			//GET ALL ORDERS WITH setAlpha and beta
-				//return bookzzz
+			//Association.create(associationModel);
 
 		};
 
-
 		//TOKEN(ASSET) VS MARKET VS MARKETPAIR
 		//SINGLE - COMBINATORIAL - 
-
-		//take your time trev 
-
-		//well see ya again soon 
-
 		//ORDER 
 			//=> {}={}
 		//MARKET
-			//=? SUM (SET)
+			//= SUM (SET)
 
-
+		//CAN DEFINE ORDER MODEL IN MARKET-MARKET CONNECTION LOGIC.. 
 		var model = {
 			model: 'ORDER',
-			//BLOCK..
 
 			//DATA -- MODEL (APP)
 			setAlpha: req.param('setAlpha'),
 			setBeta: req.param('setBeta'),
+			orderSet:[req.param('setAlpha'), req.param('setBeta')],
 			
 			status: req.param('status'),
 			type: req.param('type'),
@@ -433,40 +406,16 @@ module.exports = {
 		.exec(function(err, order) {
 			if (err) {return console.log(err);}
 			else {
-
 				Order.publishCreate(order);
-
-				//CREATE TOKENS ON ORDER!!
-				//(ASSET)
 				mintTokens(order);
-
-				//CREATE MARKET ON ORDER!
-				//(ASSET-ASSET ASSOCIATION)
-				//createMarket(order);
-					//COMPUTE ORDER BOOK????
-
-				console.log(order)
+				//createValidation..createAssociation..createMarket
+				createMarket(order);
 				res.json(order);
-
 			}
 		});
 	},
 
 	update: function (req, res) {},
 
-	destroy: function (req, res) {
-		var id = req.param('id');
-		if (!id) {return res.badRequest('No id provided.');}
-		Order.findOne(id).exec(function(err, model) {
-			if (err) {return res.serverError(err);}
-			if (!model) {return res.notFound();}
-			Order.destroy(id, function(err) {
-				if (err) {return res.serverError(err);}
-				Order.publishDestroy(model.id);
-				return res.json(model);
-			});
-		});
-	}
-	
 };
 

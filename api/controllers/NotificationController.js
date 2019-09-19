@@ -1,6 +1,4 @@
-/**
- * NotificationController
- */
+//CRE8.NOTIFICATION
 
 module.exports = {
 
@@ -15,7 +13,6 @@ module.exports = {
 		Notification.watch(req);
 		
 		if (req.query.user){
-
 			if (req.query.isRead){
 				Notification.find({user:req.query.user, isRead:req.query.isRead})
 				.limit(limit)
@@ -26,7 +23,6 @@ module.exports = {
 					res.json(models);
 				});
 			}
-
 			else{
 				Notification.find({user:req.query.user})
 				.limit(limit)
@@ -37,11 +33,9 @@ module.exports = {
 					res.json(models);
 				});
 			}
-
 		}
 
 		else{
-
 			Notification.find({})
 			.limit(limit)
 			.skip(skip)
@@ -50,7 +44,6 @@ module.exports = {
 				Notification.subscribe(req, models);
 				res.json(models);
 			});
-
 		}
 
 	},

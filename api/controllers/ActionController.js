@@ -1,4 +1,5 @@
-var Q = require('q');
+//CRE8.ACTION
+const Q = require('q');
 
 module.exports = {
 	
@@ -82,18 +83,22 @@ module.exports = {
 
 	create: function (req, res) {
 
+		//HEHEHE; WHATCHA THINKIN BOUT? ;)
+		function createEvent(model){
+			var eventModel = {
+				type:'create',
+				model:{id:model.id,type:model.model},
+				data:{},
+			};
+			Event.create(eventModel);
+		};
 		function mintTokens(model){
 			var protocolTokens = getProtocolTokens(model);
 		};
-
 		function getProtocolTokens(model){
-
-			//TOKENS ARE THE ASSOCIATION
-
 			var protocolTokens = ['CRE8', 'CRE8+ACTION', 'CRE8+ACTION+'+model.type.toUpperCase()];
 			return protocolTokens;
 		};
-
 		var model = {
 			model: 'ACTION',
 			type: req.param('type'),
@@ -102,9 +107,7 @@ module.exports = {
 			user: req.param('user'),
 			data:{apps:{reactions:{plus:0,minus:0},attention:{general:0}}}
 		};
-
 		console.log('CREATE ACTION', model);
-
 		Action.create(model)
 		.exec(function(err, model) {
 			if (err) {return console.log(err);}

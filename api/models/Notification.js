@@ -1,7 +1,4 @@
-/**
-* Notification.js
-*/
-
+//CRE8.NOTIFICATION
 module.exports = {
 	attributes: {
         user: {model: 'user'},

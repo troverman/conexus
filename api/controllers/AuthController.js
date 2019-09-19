@@ -1,3 +1,6 @@
+//CRE8.AUTH
+//TODO: LOCAL SESSION
+//LOCAL VS NON LOCAL AUTH AND IDENTITY
 
 module.exports = {
 
@@ -29,7 +32,6 @@ module.exports = {
                         User.publishUpdate(userModel[0].id, userModel[0]);
 
                     });
-
 
                     //if user is mining
                     Peer.find({}).then(function(){
@@ -65,5 +67,4 @@ module.exports = {
             });
         });
     }
-
 };

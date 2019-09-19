@@ -187,8 +187,6 @@ module.exports.routes = {
   /* User (MEMBER) routes */
   'get /api/user': 'UserController.get',
   'post /api/user': 'UserController.create',
-  //HMM
-  'post /api/user/upload': 'UserController.upload',
   'post /api/user/:id': 'UserController.update',
 
   /* Validation routes */

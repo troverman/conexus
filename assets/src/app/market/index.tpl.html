@@ -31,7 +31,6 @@
     </div>
 </div>
 <div class="container">
-    <!--INFORMATION-->
     <div class="row" ng-if="selectedTab=='INFORMATION'">
         <div class="card">
         	<div style="background:url('https://source.unsplash.com/1600x900/?lattice,geometry,crystal,code');min-height:auto" class="imageContainerSmall">
@@ -47,10 +46,8 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div>
-							<h4>Market Connectivity: {{markets.length}}</h4>
-							<hr>
+							<h4 ng-if="markets.length">Market Connectivity: {{markets.length}}</h4>
 							<h4>Assets</h4>
-							<hr>
 							<div>
 					    		<p><b><a ng-click="$event.stopPropagation();cardDetailToggle(token)">{{token.string}}</a></b></p>	
 								<p style="font-style:italic;color:gray">In Circulation: {{token.information.inCirculation}}</p>
@@ -63,9 +60,6 @@
 									<p style="font-style:italic;color:gray"><a href="{{token.model.toLowerCase()}}/{{token.id}}">{{token.model.toUpperCase()}}</a></p>
 								</div>
 							</div>
-							<!--<h5>Asset Holders</h5>-->
-                            <!--WHERE IT CAME FROM.. ACTION ETC-->
-                            <!--WHO OWNS THE TOKEN-->
 						</div>
 						<div class="spacing-5"></div>
 			    	</div>

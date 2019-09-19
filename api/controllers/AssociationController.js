@@ -1,4 +1,5 @@
-var Q = require('q');
+//CRE8.ASSOCIATION
+const Q = require('q');
 
 module.exports = {
 

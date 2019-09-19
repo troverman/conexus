@@ -1,4 +1,5 @@
-var Q = require('q');
+//CRE8.CONNECTION
+const Q = require('q');
 
 module.exports = {
 	
@@ -63,6 +64,7 @@ module.exports = {
 			model: 'CONNECTION',
 			creator: req.param('creator'),
 			information: req.param('information'),
+			associatedModels: req.param('associatedModels'),//id, type..
 			dataModelAlpha: req.param('dataModelAlpha'),
 			dataModelBeta: req.param('dataModelBeta'),
 			data:{apps:{reactions:{plus:0,minus:0},attention:{general:0}}}
@@ -75,6 +77,10 @@ module.exports = {
 			if (err) {return console.log(err);}
 			else {
 				Connection.publishCreate(model);
+				//createEvent(model);
+				//createNotification(model);
+				//createValidation(model);
+				//mintTokens(model);
 				res.json(model);
 			}
 		});

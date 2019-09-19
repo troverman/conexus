@@ -1,7 +1,5 @@
-/**
- * SearchController
-*/
-var Q = require('q');
+//CRE8.SEARCH
+const Q = require('q');
 
 function getTo(model){
 	var deferred = Q.defer();
@@ -323,9 +321,6 @@ module.exports = {
 
 	getDiscover: function (req, res) {
 
-
-
-
 	},
 
 	//TODO: QUERY BUILD ...
@@ -408,6 +403,5 @@ module.exports = {
 		]);
 
 	},
-
 
 };

@@ -1,4 +1,5 @@
-var Q = require('q');
+//CRE8.PEER
+const Q = require('q');
 
 module.exports = {
 	
@@ -24,7 +25,6 @@ module.exports = {
 			});
 		}
 
-		//creator is address.. 
 		if(req.query.creator){
 			Peer.find({creator:creator})
 			.limit(limit)
@@ -52,11 +52,19 @@ module.exports = {
 	create: function (req, res) {
 		var model = {
 			info: req.param('info'),
+			information: req.param('information'),
+			versionHash: 'UNSTABLE PRE-ALPHA',
 			data: req.param('data'),
+
+
+
 			reputation: {},
 			validiatedBlocks: [],
-			versionHash: 'UNSTABLE PRE-ALPHA',
 			creator: req.param('creator'),
+
+
+
+
 		};
 		console.log('CREATE PEER', model);
 		Peer.create(model)
@@ -68,9 +76,5 @@ module.exports = {
 			}
 		});
 	},
-
-	update: function (req, res) {
-
-	},
-
+	
 };

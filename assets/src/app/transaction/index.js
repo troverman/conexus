@@ -20,13 +20,15 @@ angular.module( 'conexus.transaction', [
 
 .controller( 'TransactionController', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'ReactionModel', 'titleService', 'transaction', function TransactionController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, ReactionModel, titleService, transaction ) {
     
-    $scope.transaction = transaction[0];
-    $scope.transaction.model = 'TRANSACTION';
+    $scope.transaction = transaction;
     
     titleService.setTitle($scope.transaction.id + ' | Transaction | CRE8.XYZ');
 
     $scope.newReaction = {};
-   
+
+    $scope.selectedTab = 'INFORMATION';
+    $scope.selectTab = function(model){$scope.selectedTab = model;};
+
     //TODO: DEPRECIATE
     $scope.createReaction = function(item, type){
         if ($rootScope.currentUser){

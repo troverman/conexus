@@ -1,3 +1,4 @@
+//CRE8.APP
 module.exports = {
     attributes: {
 		title: {type: 'string'},

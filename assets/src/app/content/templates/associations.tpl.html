@@ -9,34 +9,45 @@
         </div>
     </div>
     <div style="padding:16px;">
-        <!--TODO-->
         <div class="row">
-
             <div class="col-sm-12">
+                <!--ALL ASSOCIATIONS && SERLF-ASSOCIATIONS-&FILTER-->
                 <h4>Context</h4>
                 <div>
-                    <span ng-repeat="context in content.context">{{context}}</span>
+                    <span ng-repeat="context in content.context">{{context}}, </span>
                 </div>
-            </div>
-            <div class="col-sm-12">
-                <div>
-                    <div ng-repeat="association in content.associationModels">
-
-                        <p ng-click="filterAssociation()"><span>{{association.associatedModels[0].type}} - {{association.associatedModels[1].type}}</span></p>
-                        <p>{{association.associatedModels[0].data.title}}</p>
-                        <p>{{association.associatedModels[1].data.title}}</p>
-
-                        <p><span>{{association.context}}</span></p>
-                        <p><b><a href="association/{{association.id}}" ui-sref="association({id:association.id})">{{association.id}}</a></b></p>
-                        <!--POPULATE ASSOCIATIONS-->
-                        
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-12">
-                <!--<cytoscape graph-ready="graphReady" graph-options="directedGraphOptions" graph-elements="directedGraphElements" graph-layout="directedGraphLayout" graph-style="directedGraphStyle"></cytoscape>-->
             </div>
         </div>
-        
+    </div>
+</div>
+<div class="card" ng-repeat="item in content.associationModels" ng-click="cardDetailExpand(item)">
+    <div style="background:url('https://source.unsplash.com/1600x900/?{{item.tags}}');min-height:auto;" class="imageContainerSmall">
+        <div style="background:rgba(0,0,0,0.75);height:auto" class="imageContainerSmallDiv">  
+            <div style="text-align:right;padding:15px;position:absolute;right:0">
+                <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><i class="fas fa-chevron-down"></i></a>
+            </div>
+            <div style="margin-top: auto;margin-bottom: auto;">
+                <div style="padding:15px">
+                    <h1 style="text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;"><a style="color:white" href="association/{{item.id}}" ui-sref="association({id:item.id})">{{item.id}}</a></h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="padding:16px;">
+        <p ng-repeat="model in item.associatedModels">
+            <a href="{{model.type.toLowerCase()}}/{{model.id}}">{{model.type}} - {{model.id}}</a>, 
+            <span>{{model.data.title}}</span>
+        </p>
+        <div class="spacing-5"></div>
+        <span ng-repeat="(object, key) in item.context"><b>{{object}}</b>:{{key}}, </span>
+        <p><b><a href="association/{{association.id}}" ui-sref="association({id:association.id})">{{association.id}}</a></b></p>
+    </div>
+    <div class="card-footer">
+        <a ng-click="$event.stopPropagation();renderAttentionToggle(item)"  style="color:grey"><i class="fas fa-eye"></i> {{item.data.apps.attention.general || 0}}</a>
+        <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.data.apps.reactions.plus}} like </a> 
+        <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.data.apps.reactions.minus}} dislike </a>
+        <a ng-click="$event.stopPropagation();contentToggle(item)" style="padding:5px;color:grey" ><i class="fa fa-comment-o"></i> comment </a>
+        <a ng-click="$event.stopPropagation();validationToggle(item)" style="padding:5px;color:grey" ><i class="fa fa-check"></i> validate </a>
+        <a ng-click="$event.stopPropagation();" style="padding:0px" class="pull-right" href="association/{{item.id}}" ui-sref="association({id:item.id})"><i class="fas fa-link grey"></i></a>
     </div>
 </div>

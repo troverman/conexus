@@ -1,90 +1,61 @@
+//CRE8.USER
+//TODO: TO MEMBER
 module.exports = {
     attributes: {
 
-        //BASIC
-        avatarUrl: {
-            type: 'string',
-            defaultsTo: 'images/avatar.png'
-        },
+        avatarUrl: {type: 'string', defaultsTo: 'images/avatar.png'},
         coverUrl: {type: 'string'},
-        email: {
-            type: 'email',
-            required: true,
-            unique: true
-        },
-        username: {
-            type: 'string',
-            required: true,
-            unique: true
-        },
+        username: {type: 'string', required: true, unique: true},
 
-        //INFO
+        //IDENTITY AND PASSPORTS..
+        email: {type: 'email', required: true, unique: true},
+        phoneNumber: {type: 'string'},
+
+        //INFORMATION
+        info: {type: 'json'},
+        information: {type: 'json'},
         firstName: {type: 'string'},
         lastName: {type: 'string'},
         dateOfBirth: {type: 'string'},
         address: {type: 'string'},
 
-        //STATUS
-        loggedIn: {
-            type: 'boolean',
-            defaultsTo: false
-        },
-        isWorking: {
-            type: 'boolean',
-            defaultsTo: false
-        },
-        isLive: {
-            type: 'boolean',
-            defaultsTo: false
-        },
+        //STATUS.. APP
+        loggedIn: {type: 'boolean', defaultsTo: false},
+        isWorking: {type: 'boolean', defaultsTo: false},
+        isLive: {type: 'boolean', defaultsTo: false},
 
-        //COUNTS
-        followingCount: {
-            type: 'integer',
-            defaultsTo: 0
-        },
-        followerCount: {
-            type: 'integer',
-            defaultsTo: 0
-        },
-        notificationCount: {
-            type: 'integer',
-            defaultsTo: 0
-        },
-        projectCount: {
-            type: 'integer',
-            defaultsTo: 0
-        },
-        totalWork: {
-            type: 'integer',
-            defaultsTo: 0
-        },
+        //DATA
+        //COUNTS.. APP
+        followingCount: {type: 'integer',defaultsTo: 0},
+        followerCount: {type: 'integer',defaultsTo: 0},
+        notificationCount: {type: 'integer',defaultsTo: 0},
+        projectCount: {type: 'integer',defaultsTo: 0},
+        totalWork: {type: 'integer',defaultsTo: 0},
 
         //MAPPINGS
-        reputation: {type: 'json'},
+        //..APP
+        //reputation: {type: 'json'},
         balance: {type: 'json'},
-
-        //location time mapping??
-        //give dimensional tokens 
+        
         //mappingOfTimeStampString -> LatLng
         //Location Token Manifold minting logic
+        //balance..
         //Location+lat+lng+datetime
-        //give +1 latLng Token per create 
         locationTime: {type: 'json'},
-
+        
         //PASSPORT
         passports: { collection: 'Passport', via: 'user' },
+
+        //DATA
+        data: {type: 'json'},
+        apps: {type: 'json'},
 
     },
 
     //TODO
     afterCreate: function(model, next){
 
-        var request = require('request');
-
-        //var coverUrlArray = ['images/congress.jpg', 'images/congress1.jpg', 'images/crowd.jpg', 'images/capitol.jpg', 'images/capitol1.jpg', 'images/bokeh.jpg', 'images/metro.jpg', 'images/natural.jpg' ,'images/nature.jpg'];
-        //var randInt = Math.floor(Math.random() * (coverUrlArray.length + 1));
-        //model.coverUrl = coverUrlArray[randInt];
+        const request = require('request');
 
         var colorArray = ['2ab996', '24242e', 'ff6a6a', 'ddbea8'];
         var colorInt = Math.floor(Math.random() * (colorArray.length + 1));
@@ -95,15 +66,10 @@ module.exports = {
         request(url, function (error, response, body) {
             var body = JSON.parse(body);
             if (body.urls){model.coverUrl = body.urls.small;}
-            model.apps = {
-                cre8:{
-                    recordAttention:true,
-                    tutorial:true
-                }
-            };
+            //TODO           
+            model.apps = {cre8:{recordAttention:true,tutorial:true}};
             User.update({id: model.id}, model)
             .then(function(model){
-
                 //emailService.sendTemplate('welcome', model.email, 'Welcome To CREATE!', {username: model.username});
                 return next(null, model);
             });

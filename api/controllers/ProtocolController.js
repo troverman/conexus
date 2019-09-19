@@ -1,12 +1,7 @@
-/**
- * ProtocolController
- */
-
+//CRE8.PROTOCOL
 
 //IMMUTABLE JSON
-
 //NAKED MODEL DEFINE.. .create, get / find
-
 //BACKEND
 module.exports = {
 

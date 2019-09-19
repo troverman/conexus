@@ -1,12 +1,9 @@
-/**
-* Event.js
-*/
-
+//CRE8.EVENT
 module.exports = {
 	attributes: {
         type: {type: 'string'},
         data: {type: 'json'},
-        associatedModels: {type: 'json'},        
+        model: {type: 'json'},        
     },
 };
 

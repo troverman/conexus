@@ -1,3 +1,4 @@
+//CRE8.ATTENTION
 module.exports = {
     attributes: {
 		//associated App.. PEER MINING APP INPUT.. 

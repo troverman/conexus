@@ -1,4 +1,5 @@
-var Q = require('q');
+//CRE8.VALIDATION
+const Q = require('q');
 
 module.exports = {
 
@@ -241,30 +242,7 @@ module.exports = {
 
 		function associationBuild(model){
 			var deferred = Q.defer();
-			Validation.find({
-				associationModels:[
-					model.associationModels[0],
-					model.associationModels[1]
-				]
-			}).then(function(validationModels){
-				var associationModel = {
-					context: {},
-					associationModels: validation.associationModels,
-				};
-				//TEMP SIMPLE SUM
-				for (x in validationModels){
-					for (y in Object.keys(validationModels[x].validation)){
-						 var context = Object.keys(validationModels[x].validation)[y];
-						 associationModel.context[context] += validationModels[x].validation[context];
-					}
-				}
-				//TEMP. SIMPLE AVERAGE
-				for (x in Object.keys(associationModel.context)){
-					var context = Object.keys(associationModel.context)[x];
-			 		associationModel.context[context] = associationModel.context[context] / Object.keys(associationModel).length;
-			 	}
-			 	deferred.resolve(associationModel)
-			});
+			deferred.resolve([]);
 			return deferred.promise;
 		};
 
@@ -278,24 +256,17 @@ module.exports = {
 		};
 
 		function createAssociation(model){
-
 			var andQuery = { 
 				$and: [
 					{"associatedModels.id":{$in:[model.associatedModels[0].id]}},
 					{"associatedModels.id":{$in:[model.associatedModels[1].id]}}
 				]
 			};
-
 			Association.native(function(err, association) {			
 				association.find(andQuery).limit(100000).skip(0).sort({'createdAt':-1})
 				.toArray(function (err, associationModels) {
 					if (associationModels.length != 0){
-						console.log('HELLO');
-						//associationModels = associationModels.map(function(obj){obj.id = obj._id; return obj;});
-						//Association.update({id:associationModels[0].id}, updatedModel).then((newAssociationModel)=>{
-						//	Association.publishUpdate(newAssociationModel);
-						//	console.log('UPDATE ASSOCIATION', newAssociationModel)
-						//});
+						console.log('NEED TO RECOMPUTE THE ASSOCIATION :)');
 					}
 					else{
 						Association.create(model).then((newAssociationModel)=>{
@@ -307,28 +278,17 @@ module.exports = {
 		};
 
 		function createNotification(model){
-			//SEND NOTIFICATION, BASED ON RULES ASSOCIATED MODELS .. AND NOTIFICATION SETTINGS 
-			//TODO: VALIDATION NOTIFICATION
 			var notificationModel = {
-				//user: userModels[0].user,
 				type: 'VALIDATION',
 				title: 'New Validation',
 				content:'New Validation for associatedModels',
-				//data:{apps:{user: userModels[0], associationModels:[]}},
 				priority:75,
 			};
-			//console.log('CREATE NOTIFICATION', notificationModel)
-			//Notification.create(notificationModel).then(function(notification){
-			//	Notification.publishCreate(follower[0]);
-			//});
 		};
 
 		var model = {
 			model: 'VALIDATION',
-
 			connection: req.param('connection'),
-			type: req.param('type'),
-
 			content: req.param('content'),
 
 			user: req.param('user'),
@@ -343,26 +303,35 @@ module.exports = {
 			
 		};
 
-		User.find({id:model.user}).then(function(userModels){
+		if(!model.connection){
+			model.connection = {
+				id:1,
+				type:'HUMAN',
+				title:'STANDARD MULTI, AGNOSTIC MODELS',
+				parameters:{
+					mapping:['context','reputation','computed'],
+					logic:'context[%context]*reputation[%context]'
+				},
+			};
+			//CONNECTION DEFINED MAPPINGS
+			for (y in newValidation.connection.parameters.mapping){
+				newValidation[newValidation.connection.parameters.mapping[y]] = {};
+			}
+		}
 
-			var reputation = {};
-			//model.reputation = userModels[0].reputation;
-			//getReputationFunction.. --> REP MANI IMPORT
+		User.find({id:model.user}).then(function(userModels){
 			console.log('CREATE VALIDATION', model);
 			Validation.create(model)
 			.exec(function(err, validation) {
 				if (err) {return console.log(err);}
 				else {
-
 					Validation.publishCreate(validation);
 					createAssociation(validation);
 					createNotification(validation);
 					mintTokens(validation);
 					res.json(validation);
-
 				}
 			});
-
 		});
 
 	},

@@ -1,32 +1,18 @@
-/**
-* Transaction.js
-*/
-
-//MOVE TO GENRAL MAPPINGS AND BARE BONES MODELS
-//IE REACTION COUNT MAPPING, TAG MAPPING (mapping transid => tags..)
-//mapping from slngleton 
-//id, address mapping; string language; id
-//string to string 
-
+//CRE8.TRANSACTION
 module.exports = {
-
 	attributes: {
-        amount: {type: 'string'},
-        identifier: {type: 'string'},
+        model: {type: 'string', defaultsTo: 'TRANSACTION'},
+        amountSet: {type: 'json'},
         to: {type: 'string'},
         from: {type: 'string'},
-        associatedModels: {type: 'json'}, //linked items
+        //[linked items], to, from, self,creator, [tokens]
+        associatedModels: {type: 'json'},
         content: {type: 'string'},
-        tags: {type: 'string'},
-        creator: {type: 'string'},
-        //REACTIONS \\ info
-        reactions: {type: 'json'},
+        context: {type: 'string'},
 
-        //TODO:DEPRECIATE
         user: {model: 'user'},
         creator: {type: 'string'},
 
+        data: {type: 'json'},
     },
-
 };
-

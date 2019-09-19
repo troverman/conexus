@@ -1,9 +1,6 @@
-/**
- * ProjectController
- */
+//CRE8.PROJECT
 
 module.exports = {
-
 
 	get: function(req, res) {
 
@@ -169,9 +166,125 @@ module.exports = {
 
 	create: function (req, res) {
 
+		function googleGeoCodeService(model){
+			var deferred = Q.defer();
+			//TODO: SECURITY! HIDE THIS.. SECRET INFORMATION.. NEED ENCRYPTION.
+			const googleMapsClient = require('@google/maps').createClient({
+				key: 'AIzaSyDcTGxD4H3lnx84u8EPcbh7PodbsEyzbg4'
+			});				
+			googleMapsClient.geocode({address: model.location}, function(err, response) {
+				if (!err) {
+					var location = {
+						address:response.json.results[0].formatted_address,
+						lat:parseFloat(response.json.results[0].geometry.location.lat),
+						lng:parseFloat(response.json.results[0].geometry.location.lng),
+						coordinates: [parseFloat(response.json.results[0].geometry.location.lng), parseFloat(response.json.results[0].geometry.location.lat)],
+					};
+					deferred.resolve(location);
+				}
+			});
+			return deferred.promise;
+		};
 
+		function createEvent(model){
+			var eventModel = {
+				type:'create',
+				model:{id:model.id,type:model.model},
+				data:{},
+			};
+			Event.create(eventModel);
+		};
 
+		function createNotification(model){};
 
+		function createProjectMember(model){
+			var projectMemberModel = {
+				project: model.id,
+				user: model.user.id,
+				context: {general:100},
+				type:'Creator'
+			};
+			ProjectMember.create(projectMemberModel).then(function(){
+				console.log('PROJECTMEMBER CREATE');
+			});
+		};
+
+		function createValidation(model){
+			for (x in model.associatedModels){
+				var newValidation = {
+					content:model.id + ' VALIDATION',
+					user: model.user.id,
+					creator: model.user.id,
+					data:{apps:{reactions: {plus:0,minus:0}, attention:{general:0}}}
+
+				};
+				newValidation.connection = {
+					id:1,
+					type:'HUMAN',
+					title:'STANDARD MULTI, AGNOSTIC MODELS',
+					parameters:{
+						mapping:['context','reputation','computed'],
+						logic:'context[%context]*reputation[%context]'
+					},
+				};
+				//CONNECTION DEFINED MAPPINGS
+				for (y in newValidation.connection.parameters.mapping){
+					newValidation[newValidation.connection.parameters.mapping[y]] = {};
+				}
+				var associatedModelObj = {};
+				if (model.associatedModels[x].id.toLowerCase() == 'self'){associatedModelObj = {type:model.model, id:model.id}}
+				else{associatedModelObj = {type:model.associatedModels[x].type, id:model.associatedModels[x].id};}
+				newValidation.associatedModels = [
+					{type:model.model, id:model.id},
+					associatedModelObj
+				];
+				for (y in model.associatedModels[x].context){newValidation.context[model.associatedModels[x].context[y].text] = model.associatedModels[x].context[y].score;}
+				Validation.create(validationModel).then(function(newValidationModel){
+					console.log('CREATE VALIDATION', newValidationModel);
+					createAssociation(newValidationModel);
+				});
+			}
+		};
+
+		function createAssociation(newValidationModel){
+			var newAssociationModel = {};
+			Validation.native(function(err, validation) {
+				validation.find({
+					$and : [
+						{"associatedModels.id": {$in :[newValidationModel.associatedModels[0].id]}}, 
+						{"associatedModels.id": {$in :[newValidationModel.associatedModels[1].id]}},
+					]
+				})
+				.limit(1000)
+				.skip(0)
+				.sort({'createdAt':-1})
+				.toArray(function (err, validationModels) {
+					Association.native(function(err, association) {
+						association.find({
+							$and : [
+								{"associatedModels.id": {$in :[validationModels[0].associatedModels[0].id]}},
+								{"associatedModels.id": {$in :[validationModels[0].associatedModels[1].id]}},
+							]
+						})
+						.limit(1000)
+						.skip(0)
+						.sort({'createdAt':-1})
+						.toArray(function (err, associationModels) {
+							if (associationModels.length == 0){
+								var newAssociationModel = newValidationModel;
+								Association.create(newAssociationModel).then(function(association){
+									console.log('CREATED ASSOCIATION', association);
+									Association.publishCreate(association);
+								});
+							}
+							else{
+								console.log('ASSOCIATION EXISTS -- COMPUTE')
+							}
+						});
+					});
+				});
+			});
+		};
 
 		function mintTokens(model){
 			var protocolTokens = getProtocolTokens(model);
@@ -184,17 +297,21 @@ module.exports = {
 			return protocolTokens;
 		};
 
-
-
 		var model = {
 			model: 'PROJECT',
+			
 			title: req.param('title'),
-			tags: req.param('tags'),
+
+			context: req.param('context'),
 			location: req.param('location'),
 			description: req.param('description'),
-			urlTitle: req.param('title').replace(/\s/g, '-').toLowerCase().replace('#','').replace('/',''),
+			
+			creator: req.param('user'),
 			user: req.param('user'),
+
 			parent: req.param('parent'),
+			urlTitle: req.param('title').replace(/\s/g, '-').toLowerCase().replace('#','').replace('/',''),
+
 			data:{apps:{reactions:{plus:0,minus:0},attention:{general:0}}}
 		};
 
@@ -203,61 +320,32 @@ module.exports = {
 			if (err) {return console.log(err);}
 			else {
 
-				//TODO: SECURITY! HIDE THIS
-				const googleMapsClient = require('@google/maps').createClient({
-					key: 'AIzaSyDcTGxD4H3lnx84u8EPcbh7PodbsEyzbg4'
-				});
+				User.find({id:model.user}).then(function(userModels){
+					googleGeoCodeService(project).then(function(location){
+						
+						project.associatedModels = req.param('associatedModels');
+						project.user = userModels[0];
+						project.location = location;
 
-				//TODO: AS A SERVICE / UTIL / CONTRACT
-				googleMapsClient.geocode({address: project.location}, function(err, response) {
-					if (!err) {
-						var location = {
-							address:response.json.results[0].formatted_address,
-							lat:parseFloat(response.json.results[0].geometry.location.lat),
-							lng:parseFloat(response.json.results[0].geometry.location.lng),
-							coordinates: [parseFloat(response.json.results[0].geometry.location.lng), parseFloat(response.json.results[0].geometry.location.lat)],
-						};
-						console.log(location, project.id);
-						Project.update({id:project.id}, {location:location}).then(function(model){
-							console.log('update');
+						Project.update({id:project.id}, {location:location}).then(function(projectModel){
+							console.log('UPDATE PROJECT LOCATION -- GEO CODE');
 							Project.publishCreate(model);
 							res.json(model);
 						});
-					}
+
+						createEvent(project);
+						createNotification(project);	
+
+						createValidation(project);
+
+						//upgrading helps
+						createProjectMember(project);
+
+						mintTokens(project);
+
+					});
+	
 				});
-
-				//LINKAGE.. ? ASSOCIATED MODELS
-				//AS VALIDATION?????
-				//ON PROJECT CREATE, CREATE VALIDATION WITH ASSOCIATED MODELS OF USER AND PROJECT
-				var validationModel = {
-					associatedModels: [
-						{type:'PROJECT', address:project.id},
-						{type:'MEMBER', address:model.user},
-					],
-					validation: {general:100}
-				};
-
-				//Validation.create(validationModel).then(function(){
-					//console.log('VALIDATIONCREATE')
-				//});
-
-
-				//...PROJECT MEMBER CAN HAVE DATA CONTAINED AS VALIDATION(PROJ-MEMBER)-VALIDATION? 
-				//(CHARTER) CONTEXT SPECIFIC UX IE TYPE.. 
-				var projectMemberModel = {
-					project: project.id,
-					user: model.user,
-					validation: {general:100},
-					type:'Creator'
-				};
-
-				//LOL DEPRECIATE ProjctMember Data Model :0 --> FACTOR TO DO :)
-				ProjectMember.create(projectMemberModel).then(function(){
-					console.log('PROJECTMEMBERCREATE')
-				});
-
-				mintTokens(project);
-
 			}
 		});
 	},

@@ -1,3 +1,4 @@
+//CRE8.ACTION
 module.exports = {
     attributes: {
 		type: {type: 'string'},

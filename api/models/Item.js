@@ -1,34 +1,34 @@
-/**
-* Item.js
-*/
-
+//CRE8.ITEM
 module.exports = {
 
 	attributes: {
 
         title: {type: 'string'},
         associatedModels: {type: 'json'}, 
-        
-        compontentItems: {type: 'json'},
-        tags: {type: 'string'},
+        context: {type: 'string'},
         content: {type: 'string'},
 
         info: {type: 'json'},
+        information: {type: 'json'},
         location: {type: 'json'},
         status: {type: 'string'},
         isGenerator:{type:'boolean'},
+        compontentItems: {type: 'json'},
         
         verbs:{type:'string'},
-
-        reactions: {type: 'json'},
+        actions:{type:'string'},
 
         owner: {type: 'string'},
         creator: {type: 'string'},
-
-        dataHash: {type: 'string'},
-
-        //DEPRECIATE
         user: {model: 'user'},
+
+        data: {type: 'json'},
+        dataHash: {type: 'string'},
+        hash: {type: 'string'}, //id
+
+        //createdAt
+        //updatedAt
+        //id
 
     },
 };

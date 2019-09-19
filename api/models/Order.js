@@ -1,12 +1,10 @@
-/**
-* Order.js
-*/
-
+//CRE8.ORDER
 module.exports = {
-
-	//TODO: BETTER
-
 	attributes: {
+
+        info: {type: 'json'},
+        information: {type: 'json'},
+        model: {type: 'string', defaultsTo: 'ORDER'},
 
 		creator: {type: 'string'},
 		user: {model: 'user'},
@@ -14,17 +12,13 @@ module.exports = {
 		type: {type: 'string'},
 		status: {type: 'string'},
 
-		//100% STRING MAPPINGS VS OBJS. THIS SEEMS TOO IN IT
 		setAlpha: {type:'json'},
 		setBeta: {type:'json'},
+		associatedSets: {type:'json'},
 
-		//associatedSets: {type:'json'},
-
-		//INFO
-        model: {type: 'string', defaultsTo: 'ORDER'},
-        reactions: {type: 'json'},
+        data: {type: 'json'},
+        dataHash: {type: 'string'},
+		hash: {type: 'string'},
 
     },
-
 };
-

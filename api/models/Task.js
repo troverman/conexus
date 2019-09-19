@@ -1,36 +1,18 @@
-/**
-* Task.js
-*/
-
+//CRE8.TASK
 module.exports = {
-
     attributes: {
-
-        title: {type: 'string', required: true,},
+        title: {type: 'string'},
         content: {type: 'string'},
-
-        status: {type: 'string', defaultsTo: 'Pending'},
-
-        location: {type: 'json'},
-
-        //TODO: TAGS AS DATA MODEL && || String
-        tags: {type: 'string'},
-
-        user: {model: 'user', required: true},
-
-        relationships: {type: 'json'},
-
-        //TODO: RELATIONSHIPS
-        //MODLULAR.. PROJECT; MEMBER
         associatedModels: {type: 'json'},
-
-        //REACTIONS
-        reactions: {type: 'json'},
-
-        //TODO:  DEPRECIATE
-        project: {model: 'project'},
-
+        context: {type: 'string'},
+        location: {type: 'json'},
+        user: {model: 'user'},
+        creator: {type: 'string'},
+        //COUNT.. DATA.. CONNECTED APPS..
+        information: {type: 'json'},
+        //WHOS VIEWING.. ETC
+        //status: {type: 'string', defaultsTo: 'Pending'},
+        data: {type: 'json'},
     },
-
 };
 

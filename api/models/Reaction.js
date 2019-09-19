@@ -1,32 +1,16 @@
-/**
-* Reaction.js
-*/
-
+//CRE8.REACTION
 module.exports = {
-
 	attributes: {
-
-        //REACTION DATA
         amount: {type: 'string'},
-        type: {type: 'string', required: true},
+        type: {type: 'string'},
         user: {model: 'user'},
-
-        //ASSOCIATED MODELS
         associatedModels: {type: 'json'},
-
-        //REACTIONS
-        reactions: {type: 'json'},
-        
+        data: {type: 'json'},  
     },
-
     beforeCreate: function(model, next) {
         next();
         if (false){
-            Reaction.find({user:model.user, associatedModels:model.associatedModels}).then(function(reactionModel){
-                if (reactionModel.length == 0){next()}
-            });
+            Reaction.find({user:model.user, associatedModels:model.associatedModels}).then(function(reactionModel){if (reactionModel.length == 0){next()}});
         }
     },
-
 };
-
