@@ -115,7 +115,6 @@ module.exports.routes = {
 
    /* Follower routes DEPRECIATE */
    //TODO: MEMBER-MEMBER ASSOCIATION
-  'get /api/follower': 'FollowerController.get',
   'get /api/follower/followers/:id': 'FollowerController.getFollowers',
   'get /api/follower/following/:id': 'FollowerController.getFollowing',
   'post /api/follower': 'FollowerController.create',
