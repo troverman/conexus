@@ -123,8 +123,6 @@ module.exports = {
 		var skip = parseInt(req.query.skip) || 0;
 		var sort = req.query.sort || 'createdAt DESC';
 		
-		Transaction.watch(req);
-
 		if (req.query.query){
 			var querySet = JSON.parse(req.query.query);
 			var mongoQuery = parseQuery(querySet);
@@ -209,7 +207,10 @@ module.exports = {
 						models[x].from = populatedModels[sum];
 						sum++;
 					}
-					getAssociations(models[0]).then(function(models){res.json(models);});
+					getAssociations(models[0]).then(function(models){
+						Transaction.subscribe(req, [models[0]]);
+						res.json(models);
+					});
 				});
 			});
 		}
@@ -365,12 +366,8 @@ module.exports = {
 
 		function createEvent(model){
 			var eventModel = {
-				type:'create',
-				model:{
-					id:model.id, //hash
-					type:model.model //app
-				},
-				data:{},
+				verb:'create',
+				model:{id:model.id,type:'CONTENT'}
 			};
 			Event.create(eventModel);
 		};
@@ -436,7 +433,7 @@ module.exports = {
 					newValidation.context[model.associatedModels[x].context[y].text] = model.associatedModels[x].context[y].score;
 				}
 
-				Validation.create(validationModel).then(function(newValidationModel){
+				Validation.create(newValidation).then(function(newValidationModel){
 					
 					console.log('CREATE VALIDATION', newValidationModel);
 
@@ -480,7 +477,7 @@ module.exports = {
 								var newAssociationModel = newValidationModel;
 								Association.create(newAssociationModel).then(function(association){
 									console.log('CREATED ASSOCIATION', association);
-									Association.publishCreate(association);
+									Association.publish([association.id], {verb: 'update', data: association});
 								});
 							}
 							else{
@@ -502,7 +499,7 @@ module.exports = {
 				priority:77,//defined by user
 			};
 			Notification.create(notificationModel).then(function(notification){
-				Notification.publishCreate(notification);
+				Notification.publish([notification.id], {verb: 'update', data: notification});
 			});
 		};
 
@@ -538,19 +535,21 @@ module.exports = {
 					});
 				})(tokenString);
 
+				//UPDATE TRANSACTION MODEL..
+				//ATTENTION + REACTION + PROTOCOL + ASSOCIATION + ALL TOKENS IN CONTEXT
+
+				//data.apps.tokens = {
+				//}
+
 			}
 		};
 
-		//CRE8 is not a 'verb' in the traditional context. is is ''''AN APP SPECIFIC'''' MANIFOLD
-		//AUDIT IF TOO MANY OVERLAPPING NFTs .. think we good
 		function getProtocolTokens(model){
 
-			//TODO --> MULTI PARTIES GET TOKENS.. TO; FROM
-
-			//THINK ABOUT THE VERBS IN 'TOKEN/ASSET' LANGUAGE 
-			//CRE8manifold'contains recieve..ie 
-				//CRE8+SEND
-				//CRE8+RECIEVE.. YES
+			//TODO: STANDARDIZE VERBS
+			//TODO: MULTI PARTIES GET TOKENS.. TO; FROM
+			//CRE8+SEND
+			//CRE8+RECIEVE
 
 			var protocolTokens = [
 
@@ -580,24 +579,29 @@ module.exports = {
 				protocolTokens.push('CRE8+TRANSACTION+RECIEVE+'+Object.keys(model.amountSet)[x]);
 				protocolTokens.push('CRE8+TRANSACTION+RECIEVE+'+Object.keys(model.amountSet)[x]+'+FROM+'+model.to.id);
 
+				if (model.context){
+					for (y in model.context.split(',')){
+						protocolTokens.push('CRE8+TRANSACTION+'+Object.keys(model.amountSet)[x]+'+'+model.context.split(',')[y].toUpperCase());
+						protocolTokens.push('CRE8+TRANSACTION+SEND+'+Object.keys(model.amountSet)[x]+'+'+model.context.split(',')[y].toUpperCase());
+						protocolTokens.push('CRE8+TRANSACTION+RECIEVE+'+Object.keys(model.amountSet)[x]+'+'+model.context.split(',')[y].toUpperCase());
+					}
+				}
+
 			}
 
-			//DEPRECIATE TAGS
-
 			//TODO:... CONTEXT
-			//THINK ABOUT ASSOCIATION PROTOCLLS WRT SELF-ASSOCATION
-			//LAYERING MAY B 2 MUCH DUP
-			if (model.tags){
-				for (x in model.tags.split(',')){
-					//protocolTokens.push(model.tags.split(',')[x].toUpperCase());
-					protocolTokens.push('CRE8+TRANSACTION+CONTEXT+'+model.tags.split(',')[x].toUpperCase());
-					protocolTokens.push('CRE8+TRANSACTION+SEND+CONTEXT+'+model.tags.split(',')[x].toUpperCase());
-					protocolTokens.push('CRE8+TRANSACTION+RECIEVE+CONTEXT+'+model.tags.split(',')[x].toUpperCase());
+			//THINK ABOUT ASSOCIATION WRT SELF-ASSOCATION
+			if (model.context){
+				for (x in model.context.split(',')){
+					protocolTokens.push('CRE8+TRANSACTION+'+model.context.split(',')[x].toUpperCase());
+					protocolTokens.push('CRE8+TRANSACTION+SEND+'+model.context.split(',')[x].toUpperCase());
+					protocolTokens.push('CRE8+TRANSACTION+RECIEVE+'+model.context.split(',')[x].toUpperCase());
 				}
 			}
 
 			//return based on who recieved the toks?
 			//[id,tok]
+
 			return protocolTokens;
 		};
 
@@ -615,15 +619,11 @@ module.exports = {
 			//to,from,self,creator
 			//NOT STORED IN MAIN MODEL... 
 			//associatedModels: req.param('associatedModels'),
-
 			context: req.param('context'),
 
 			user: req.param('user'),
 			creator: req.param('user'),
 			
-			//DEPRECIATE
-			tags: req.param('context'),
-
 			data:{apps:{reactions:{plus:0,minus:0},attention:{general:0}}}
 
 		};
@@ -652,7 +652,8 @@ module.exports = {
 				//HMM
 				transactionModel.associatedModels = req.param('associatedModels');
 
-				//MESSY CODE .. LOL .. POPULATE ASSOCIATIONS
+				//MESSY CODE
+				// .. POPULATE ASSOCIATIONS
 				var promises = [];
 				promises.push(getTo(transactionModel));
 				promises.push(getFrom(transactionModel));
@@ -663,8 +664,7 @@ module.exports = {
 						transactionModel.user = userModels[0];
 						transactionModel.to = populatedModels[0];
 						transactionModel.from = populatedModels[1];
-						
-						Transaction.publishCreate(transactionModel);
+						Transaction.publish([transactionModel.id], {verb: 'update', data: transactionModel});
 						createEvent(transactionModel);
 						createNotification(transactionModel);
 						createValidation(transactionModel);

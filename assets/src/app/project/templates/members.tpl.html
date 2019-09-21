@@ -1,9 +1,15 @@
 <div class="row">
-    <div class="card" ng-if="!isProjectMember"><button class="btn btn-default log-btn" ng-click="createMember()">+ motion to join</button></div>
+	<ul style="padding:0px;" class="member-tabs">
+	    <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet, null)"><i class="fa fa-filter"></i> Filter</a></li>
+	    <li style="float:right;font-size:14px"><a href="#" ng-click="sortToggle()">Sort By Recent <i class="fa fa-angle-down"></i></a></li>
+	   	<div style="clear:both"></div>
+	</ul>
+	<div class="card"><tags-input style="border:0px;flex-grow:2;" placeholder="Search" ng-model="searchQuery"></tags-input></div>
     <div class="card" ng-if="!isProjectMember"><button class="btn btn-default log-btn" ng-click="createMemberValidate()">+ motion to join</button></div>
 </div>
+
 <div class="spacing-5"></div>
-<!--FILTER SORT-->
+
 <div class="row">
 	<div class="col-sm-6" ng-repeat="member in members" style="padding-left:10px;padding-right:10px;">
 		<div class="member-card" ng-click="renderReputationToggle(member)" style="margin-bottom:10px;">
@@ -15,20 +21,13 @@
 		    </div>
             <div class="member-card-info" style="padding:16px;height:auto;min-height:125px;">
 		        <h4 ng-click="$event.stopPropagation()"><a href="member/{{member.user.username}}" ui-sref="member.activity({path:member.user.username})">{{member.user.username}}</a></h4>
-		       	<p style="color:gray">{{member.status || 'MEMBER'}} {{member.type}}</p>
+		       	<p style="color:gray">{{member.status}} {{member.type || || 'MEMBER'}}</p>
 		        <p style="color:gray">{{project.title}}: {{member.user.reputation[project.title] || 0}}</p>
                 <p style="color:gray">{{member.user.status}} Offline</p>
 		    </div>
 		   	<div class="card-footer">
-		   		<!--
-		   		<a ng-click="$event.stopPropagation();validationToggle(item)"><i class="fas fa-check"></i> send tokens </a>
-		   		<a ng-click="$event.stopPropagation();validationToggle(item)"><i class="fas fa-check"></i> follow </a>
-				-->
 		   		<a ng-click="$event.stopPropagation();validationToggle(item)"><i class="fas fa-check"></i> validate </a>
 		   	</div>
 		</div>
 	</div>
 </div>
-                
-                
-              

@@ -149,16 +149,16 @@ angular.module( 'conexus.contentList', [
     console.log($location.search())
     if ($location.search().tags){$scope.filterContent($location.search().tags);}
 
-
-
     $sailsSocket.subscribe('content', function (envelope) {
-        switch(envelope.verb) {
-            case 'created':
-                $scope.contentList.unshift(envelope.data);
-                break;
+        console.log(envelope);
+        if (envelope.verb == 'create'){$scope.contentList.unshift(envelope.data);}
+        if (envelope.verb == 'update'){
+            var index = $scope.contentList.map(function(obj){return obj.id}).indexOf(envelope.data.id);
+            if (index != -1){
+                $scope.contentList[index].data = envelope.data.data;
+            }
         }
     });
-
 
 
 

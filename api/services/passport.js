@@ -6,6 +6,7 @@ passport.protocols = require('./protocols');
 passport.connect = function (req, query, profile, next) {
 
     console.log('CONNECT', query, profile);
+
     var user = {}, provider;
     query.provider = req.param('provider');
     provider = profile.provider || query.provider;
@@ -39,8 +40,7 @@ passport.connect = function (req, query, profile, next) {
             }
             else {
                 if (query.hasOwnProperty('tokens') && query.tokens !== passport.tokens) {passport.tokens = query.tokens;}
-                passport.save(function (err, passport) {
-                    if (err) {return next(err);}
+                Passport.update({id:passport.id}, {tokens:passport.tokens}).then(function(passportModel){
                     User.findOne(passport.user.id, next);
                 });
             }
@@ -55,8 +55,7 @@ passport.connect = function (req, query, profile, next) {
             }
             else {
                 if (query.hasOwnProperty('tokens') && query.tokens !== passport.tokens) {passport.tokens = query.tokens;}
-                passport.save(function (err, passport) {
-                    if (err) {return next(err);}
+                Passport.update({id:passport.id}, {tokens:passport.tokens}).then(function(passportModel){
                     User.findOne(passport.user.id, next);
                 });
             }
@@ -108,7 +107,7 @@ passport.loadStrategies = function () {
             var callback = strategies[key].callback;
             if (!callback) {callback = 'auth/' + key + '/callback';}
             Strategy = strategies[key].strategy;
-            var baseUrl = sails.getBaseurl();
+            var baseUrl = 'https://www.cre8.xyz'; //sails.getBaseurl();
 
             switch (protocol) {
                 case 'oauth':
@@ -130,7 +129,6 @@ passport.loadStrategies = function () {
 passport.disconnect = function (req, res, next) {
     var user = req.user;
     var provider = req.param('provider');
-
     Passport.findOne({provider: provider, user: user.id}, function (err, passport) {
         if (err) {return next(err);}
         Passport.destroy(passport.id, function (error) {

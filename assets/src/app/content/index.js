@@ -32,25 +32,6 @@ angular.module( 'conexus.content', [
 
     console.log($scope.content, $scope.content.associationModels);
 
-    //TOKENS BETA///
-    $scope.populateTokensBeta = function(){
-        //$scope.content.data.apps.tokens
-        $scope.content.data.apps.tokens = $scope.content.data.apps.attention;
-        $scope.content.data.apps.tokens['CRE8'] = 1;
-        $scope.content.data.apps.tokens['CRE8+CONTENT'] = 1;
-        $scope.content.data.apps.tokens['CRE8+CONTENT+'+$scope.content.id] = 1;
-
-        //CONTEXT SPECIFIC TOKENSZ
-        for (x in $scope.content.associationModels){
-            for (y in Object.keys($scope.content.associationModels[x].context)){
-                $scope.content.data.apps.tokens['CRE8+CONTENT+'+Object.keys($scope.content.associationModels[x].context)[y]] = 1;
-            }
-        }
-        //get associations...
-    };
-    $scope.populateTokensBeta();
-
-
     $scope.tokenChart = {
         chart: {zoomType: 'x'},
         series: [{
@@ -80,8 +61,6 @@ angular.module( 'conexus.content', [
             $scope.tokenChart.series[0].data.push(sortable[x][1]);
         }
     }
-
-
 
     $scope.content.context = [];
     if ($scope.content.associationModels){
@@ -143,40 +122,30 @@ angular.module( 'conexus.content', [
     }
 
     //TODO: DEPRECIATE
-    $scope.createContent = function(content) {
-        if($rootScope.currentUser){
-            $scope.newContent.contentModel = content.id;
-            $scope.newContent.user = $rootScope.currentUser.id;
-            ContentModel.create($scope.newContent).then(function(model) {$scope.newContent = {}});
-        }
-        else{$mdSidenav('login').toggle()}
-    };
+    //$scope.createContent = function(content) {
+    //    if($rootScope.currentUser){
+    //        $scope.newContent.contentModel = content.id;
+    //        $scope.newContent.user = $rootScope.currentUser.id;
+    //        ContentModel.create($scope.newContent).then(function(model) {$scope.newContent = {}});
+    //    }
+    //    else{$mdSidenav('login').toggle()}
+    //};
 
     //TODO: DEPRECIATE.. ? IN GLOBAL
-    $scope.createReaction = function(item, type){
-        if($rootScope.currentUser){
-            $scope.newReaction.amount = 1;
-            $scope.newReaction.associatedModels = [{type:'CONTENT', id:item.id}];
-            $scope.newReaction.type = type;
-            $scope.newReaction.user = $rootScope.currentUser.id;
-
-            var location = searchObject($scope.content, function (value) { return value != null && value != undefined && value.id == item.id; });
-
-            console.log(location[0]);
-            location[0].value.data.apps.reactions[type]++;
-            ReactionModel.create($scope.newReaction);
-            $rootScope.pop(type, item.id);
-            //updateObject($scope.content, location[0].value, location[0].path);
-        }
-        else{$mdSidenav('login').toggle()}
-    };
+    //$scope.createReaction = function(item, type){
+    //    if($rootScope.currentUser){
+    //        var location = searchObject($scope.content, function (value) { return value != null && value != undefined && value.id == item.id; });
+    //        location[0].value.data.apps.reactions[type]++;
+    //    }
+    //    else{$mdSidenav('login').toggle()}
+    //};
  
     //TODO: GLOBAL..
-    $scope.reply = function(content){
-        var location = searchObject($scope.content, function (value) { return value != null && value != undefined && value.id == content.id; });
-        location[0].value.showReply = !location[0].value.showReply;
-        updateObject($scope.content, location[0].value, location[0].path);
-    };
+    //$scope.reply = function(content){
+    //    var location = searchObject($scope.content, function (value) { return value != null && value != undefined && value.id == content.id; });
+    //    location[0].value.showReply = !location[0].value.showReply;
+    //    updateObject($scope.content, location[0].value, location[0].path);
+    //};
 
     $scope.toggleThread = function(content){
         var location = searchObject($scope.content, function (value) { return value != null && value != undefined && value.id == content.id; });
@@ -184,18 +153,12 @@ angular.module( 'conexus.content', [
         updateObject($scope.content, location[0].value, location[0].path);
     };
 
-    //TODO: WEBSOCKET
-    //WEBSOCKET WITH ASSOCIATED CONTET!
-
     $sailsSocket.subscribe('content', function (envelope) {
         console.log(envelope)
-        switch(envelope.verb) {
-            //should be update ..
-            case 'created':
-                if ($scope.content.id == envelope.data.id){
-                    $scope.content.data.apps.attention = envelope.data.data.apps.attention;
-                }
-                break;
+        if (envelope.verb == 'update'){
+            if ($scope.content.id == envelope.data.id){
+                $scope.content.data.apps = envelope.data.data.apps
+            }
         }
     });
 

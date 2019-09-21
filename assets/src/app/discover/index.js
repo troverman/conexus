@@ -13,7 +13,7 @@ angular.module( 'conexus.discover', [
 	});
 }])
 
-.controller( 'DiscoverCtrl', ['$mdSidenav', '$rootScope', '$sce', '$scope', 'ReactionModel', 'SearchModel', function DiscoverController( $mdSidenav, $rootScope, $sce, $scope, ReactionModel, SearchModel ) {
+.controller( 'DiscoverCtrl', ['$rootScope', '$sailsSocket', '$scope', 'ReactionModel', 'SearchModel', function DiscoverController( $rootScope, $sailsSocket, $scope, ReactionModel, SearchModel ) {
 
     //CREATE QUERY BY (MEMBER)-APPS
     //TODO: COMPLEX QUERY
@@ -46,32 +46,8 @@ angular.module( 'conexus.discover', [
     $scope.options = {scrollwheel: false};
     $scope.windowOptions = {visible: false};
 
-
-
-    //TODO: DEPRECIATE
-    $scope.createReaction = function(item, type){
-        if ($rootScope.currentUser){
-            $scope.newReaction = {
-                amount:1,
-                type:type,
-                user:$rootScope.currentUser.id,
-                associatedModels:[{type:item.model, id:item.id}],
-            };
-            var index = $scope.activity.map(function(obj){return obj.id}).indexOf(item.id);
-            $scope.activity[index].data.apps.reactions[type]++;
-            ReactionModel.create($scope.newReaction);
-            $rootScope.pop(type, item.id);
-        }
-        else{$mdSidenav('login').toggle()}
-    };
-    
     $scope.shuffleArray = function(d) {
-        for (var c = d.length - 1; c > 0; c--) {
-            var b = Math.floor(Math.random() * (c + 1));
-            var a = d[c];
-            d[c] = d[b];
-            d[b] = a;
-        }
+        for (var c = d.length - 1; c > 0; c--) {var b = Math.floor(Math.random() * (c + 1)); var a = d[c]; d[c] = d[b]; d[b] = a;}
         return d
     };
 
@@ -226,6 +202,65 @@ angular.module( 'conexus.discover', [
     //\\//\\//\\//\\//
     //WATCHERS\\//\\//
     //\\//\\//\\//\\//
+
+
+
+    //\\//\\//\\//\\//
+    //SOCKETS\\//\\//
+    //\\//\\//\\//\\//
+    //IF LIVE FILTER..
+    //LOOK AT MEMBER ASSOCIATIONS
+    //TODO CUSTOM ROOM SOCKET IN PEER
+    //TODO: ABSTRACT! :P --> ALWAYSSSS
+    $sailsSocket.subscribe('content', function (envelope) {
+        if (envelope.verb == 'create'){$scope.activity.unshift(envelope.data);}
+        if (envelope.verb == 'update'){
+            var index = $scope.activity.map(function(obj){return obj.id}).indexOf(envelope.data.id);
+            if (index != -1){$scope.activity[index].data = envelope.data.data;}
+        }
+    });
+    $sailsSocket.subscribe('item', function (envelope) {
+        if (envelope.verb == 'create'){$scope.activity.unshift(envelope.data);}
+        if (envelope.verb == 'update'){
+            var index = $scope.activity.map(function(obj){return obj.id}).indexOf(envelope.data.id);
+            if (index != -1){$scope.activity[index].data = envelope.data.data;}
+        }
+    });
+    $sailsSocket.subscribe('order', function (envelope) {
+        if (envelope.verb == 'create'){$scope.activity.unshift(envelope.data);}
+        if (envelope.verb == 'update'){
+            var index = $scope.activity.map(function(obj){return obj.id}).indexOf(envelope.data.id);
+            if (index != -1){$scope.activity[index].data = envelope.data.data;}
+        }
+    });
+     $sailsSocket.subscribe('project', function (envelope) {
+        if (envelope.verb == 'create'){$scope.activity.unshift(envelope.data);}
+        if (envelope.verb == 'update'){
+            var index = $scope.activity.map(function(obj){return obj.id}).indexOf(envelope.data.id);
+            if (index != -1){$scope.activity[index].data = envelope.data.data;}
+        }
+    });
+    $sailsSocket.subscribe('task', function (envelope) {
+        if (envelope.verb == 'create'){$scope.activity.unshift(envelope.data);}
+        if (envelope.verb == 'update'){
+            var index = $scope.activity.map(function(obj){return obj.id}).indexOf(envelope.data.id);
+            if (index != -1){$scope.activity[index].data = envelope.data.data;}
+        }
+    });
+    $sailsSocket.subscribe('time', function (envelope) {
+        if (envelope.verb == 'create'){$scope.activity.unshift(envelope.data);}
+        if (envelope.verb == 'update'){
+            var index = $scope.activity.map(function(obj){return obj.id}).indexOf(envelope.data.id);
+            if (index != -1){$scope.activity[index].data = envelope.data.data;}
+        }
+    });
+    $sailsSocket.subscribe('transaction', function (envelope) {
+        if (envelope.verb == 'create'){$scope.activity.unshift(envelope.data);}
+        if (envelope.verb == 'update'){
+            var index = $scope.activity.map(function(obj){return obj.id}).indexOf(envelope.data.id);
+            if (index != -1){$scope.activity[index].data = envelope.data.data;}
+        }
+    });
 
 
 }]);

@@ -42,7 +42,7 @@ angular.module( 'conexus.app', [
     };
     AssociationModel.get(associationQuery).then(function(associations){
         console.log(associations);
-        $scope.associations = associations;
+        $scope.associations = associations.map(function(obj){obj.model='ASSOCIATION';return obj});
     });
 
     titleService.setTitle($scope.app.title + ' | App | CRE8.XYZ');
@@ -55,22 +55,6 @@ angular.module( 'conexus.app', [
     $scope.selectedTab = 'INFORMATION';
     $scope.selectTab = function(model){$scope.selectedTab = model;};
 
-    //TODO: DEPRECIATE
-    $scope.createReaction = function(item, type){
-        if ($rootScope.currentUser){
-            $scope.newReaction = {
-                amount:1,
-                type:type,
-                user:$rootScope.currentUser.id,
-                associatedModels:[{type:'APP', id:item.id}],
-            };
-            $scope.app.data.apps.reactions[type]++;
-            ReactionModel.create($scope.newReaction);
-            $rootScope.pop(type, item.id);
-        }
-        else{$mdSidenav('login').toggle()}
-    };
-
     $scope.associateApp = function(model){
         if ($rootScope.currentUser){
             $scope.newValidation = {
@@ -81,12 +65,9 @@ angular.module( 'conexus.app', [
                     {type:'MEMBER', id:$rootScope.currentUser.id},
                     {type:'APP+'+model.id, id:model.id},
                 ],
-                //app specific
-                data:{}
             };
 
             if (model.isAssociated == false){
-                console.log($scope.newValidation);
                 ValidationModel.create($scope.newValidation).then(function(newValidation){
                     $scope.app.isAssociated = true;
                     $rootScope.pop('Associated App!', 'You are now connected with '+ model.title + '!');
@@ -101,13 +82,20 @@ angular.module( 'conexus.app', [
     };
 
     $sailsSocket.subscribe('app', function (envelope) {
-        switch(envelope.verb) {
-            case 'created':
-                if ($scope.app.id == envelope.data.id){
-                    $scope.app.data.apps.attention = envelope.data.data.apps.attention;
-                }
-                break;
+        console.log(envelope)
+        if (envelope.verb == 'update'){
+            if ($scope.app.id == envelope.data.id){
+                $scope.app.data.apps = envelope.data.data.apps
+            }
         }
     });
+
+    $sailsSocket.subscribe('association', function (envelope) {
+        if (envelope.verb == 'update'){
+            var index = $scope.associations.map(function(obj){return obj.id}).indexOf(envelope.data.id);
+            if (index != -1){$scope.associations[index] = envelope.data;}
+        }
+    });
+
    
 }]);

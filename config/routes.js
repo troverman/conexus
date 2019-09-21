@@ -150,11 +150,11 @@ module.exports.routes = {
 
   /* Project routes */
   'get /api/project': 'ProjectController.get',
+
   //HMM
   'get /api/project/children/:id': 'ProjectController.getChildren',
 
   'post /api/project': 'ProjectController.create',
-  'post /api/project/:id': 'ProjectController.update',
   'delete /api/project/:id': 'ProjectController.destroy',
 
   /* Project Member routes DEPRECIATE*/
@@ -168,7 +168,6 @@ module.exports.routes = {
 
   /* Task routes */
   'get /api/task': 'TaskController.get',
-  'post /api/task/:id': 'TaskController.update',
   'post /api/task': 'TaskController.create',
   'delete /api/task/:id': 'TaskController.destroy',
 

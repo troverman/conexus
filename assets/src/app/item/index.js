@@ -34,9 +34,33 @@ angular.module( 'conexus.item', [
    
     $scope.item = item;
     if($scope.item.length == 0){$location.path('/')}
-    $scope.item.model = 'ITEM';
-    if ($scope.item.tags){$scope.item.tags = $scope.item.tags.split(',')}
     titleService.setTitle($scope.item.title+' | Item | CRE8.XYZ');
+
+    console.log($scope.item, $scope.item.associationModels);
+
+    $scope.item.context = [];
+    if ($scope.item.associationModels){
+        for (x in $scope.item.associationModels){
+            for (y in Object.keys($scope.item.associationModels[x].context)){
+                var context = Object.keys($scope.item.associationModels[x].context)[y];
+                $scope.item.context.push(context);
+            }
+        }
+    }
+    console.log($scope.item.context)
+
+    //TOKENS BETA///
+    $scope.populateTokensBeta = function(){
+        $scope.item.data.apps.tokens = $scope.item.data.apps.attention;
+        $scope.item.data.apps.tokens['CRE8'] = 1;
+        $scope.item.data.apps.tokens['CRE8+TASK'] = 1;
+        $scope.item.data.apps.tokens['CRE8+TASK+'+$scope.item.id] = 1;
+    };
+    $scope.populateTokensBeta();
+
+
+
+
 
     //VERBS FOR THE ITEM ARE?? 
     $scope.actions = actions;
@@ -89,29 +113,10 @@ angular.module( 'conexus.item', [
         //INTERLINK
         //items owning tokens (usd .. )
     //OrderModel.get()..
- 
-    //HMM
+
+
     $scope.selectedTab = 'INFORMATION';
-    $scope.selectTab = function(model){
-        $scope.selectedTab = model;
-    };
-
-
-    //TODO: DEPRECIATE
-    $scope.createReaction = function(item, type){
-        if ($rootScope.currentUser){
-            $scope.newReaction = {
-                amount:1,
-                type:type,
-                user:$rootScope.currentUser.id,
-                associatedModels:[{type:'ITEM', id:item.id}],
-            };
-            $scope.item.data.apps.reactions[type]++;
-            ReactionModel.create($scope.newReaction);
-            $rootScope.pop(type, item.id);
-        }
-        else{$mdSidenav('login').toggle()}
-    };
+    $scope.selectTab = function(model){$scope.selectedTab = model;};
 
 
     //TODO: TRAVERSE!!
@@ -400,14 +405,14 @@ angular.module( 'conexus.item', [
     //getOrderTraverse($scope.item.identiferSet);
 
     $sailsSocket.subscribe('item', function (envelope) {
-        switch(envelope.verb) {
-            case 'created':
-                if ($scope.item.id == envelope.data.id){
-                    $scope.item.data.apps.attention = envelope.data.data.apps.attention;
-                }
-                break;
+        console.log(envelope)
+        if (envelope.verb == 'update'){
+            if ($scope.item.id == envelope.data.id){
+                $scope.item.data.apps = envelope.data.data.apps;
+            }
         }
     });
+
 
     
 }]);

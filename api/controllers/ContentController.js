@@ -37,11 +37,12 @@ module.exports = {
 						}
 
 						Q.all(promises).then((populatedModels)=>{
+							//console.log(populatedModels)
 							for (x in model.associationModels){
 								for (y in associationModels[x].associatedModels){
 									var index = parseInt(x+y);
 									model.associationModels[x].associatedModels[y].data = populatedModels[index];
-									console.log(populatedModels[index])
+									//console.log(populatedModels[index])
 								}
 							}
 							deferred.resolve(model);
@@ -62,12 +63,10 @@ module.exports = {
 
 		var limit = parseInt(req.query.limit) || 1;
 		var skip = parseInt(req.query.skip) || 0;
-		var sort = req.query.sort;
+		var sort = req.query.sort || 'createdAt DESC';
 		var id = req.query.id;
 
 		console.log('GET CONTENT', req.query);
-
-		Content.watch(req);
 
 		if(req.query.id){
 			Content.find({id:id})
@@ -76,7 +75,7 @@ module.exports = {
 			.sort(sort)
 			.populate('user')
         	.then(function(models){
-				Content.subscribe(req, models);
+				Content.subscribe(req, [models[0].id]);
 				getAssociations(models[0]).then(function(models){res.json(models);});
 			});
 		}
@@ -143,7 +142,7 @@ module.exports = {
 			.sort(sort)
 			.populate('user')
 			.then(function(models) {
-				Content.subscribe(req, models);
+				Content.subscribe(req, models.map((obj)=>obj.id));
 				//var promises = [];
 				//for (x in models){promises.push(getAssociations(models[x]));}
 				//Q.all(promises).then((populatedModels)=>{
@@ -160,9 +159,8 @@ module.exports = {
 			.skip(skip)
 			.sort(sort)
 			.populate('user')
-			.populate('profile')
 			.then(function(models) {
-				Content.subscribe(req, models);
+				Content.subscribe(req, [models]);
 				var promises = [];
 				for (x in models){promises.push(getAssociations(models[x]));}
 				Q.all(promises).then((populatedModels)=>{
@@ -179,9 +177,8 @@ module.exports = {
 			.skip(skip)
 			.sort(sort)
 			.populate('user')
-			.populate('project')
 			.then(function(models) {
-				Content.subscribe(req, models);
+				Content.subscribe(req, [models]);
 				res.json(models);
 			});
 		}
@@ -202,7 +199,7 @@ module.exports = {
 			.sort(sort)
 			.populate('user')
 			.then(function(models) {
-				Content.subscribe(req, models);
+				Content.subscribe(req, [models]);
 				var promises = [];
 				for (x in models){promises.push(getAssociations(models[x]));}
 				Q.all(promises).then((populatedModels)=>{
@@ -220,7 +217,7 @@ module.exports = {
 			.sort(sort)
 			.populate('user')
 			.then(function(models) {
-				Content.subscribe(req, models);
+				Content.subscribe(req, [models]);
 				var promises = [];
 				for (x in models){promises.push(getAssociations(models[x]));}
 				Q.all(promises).then((populatedModels)=>{
@@ -238,7 +235,7 @@ module.exports = {
 			.sort(sort)
 			.populate('user')
 			.then(function(models) {
-				Content.subscribe(req, models);
+				Content.subscribe(req, [models]);
 				var promises = [];
 				for (x in models){promises.push(getAssociations(models[x]));}
 				Q.all(promises).then((populatedModels)=>{
@@ -256,7 +253,7 @@ module.exports = {
 			.sort(sort)
 			.populate('user')
 			.then(function(models) {
-				Content.subscribe(req, models);
+				Content.subscribe(req, [models]);
 				var promises = [];
 				for (x in models){promises.push(getAssociations(models[x]));}
 				Q.all(promises).then((populatedModels)=>{
@@ -274,15 +271,13 @@ module.exports = {
 			.sort(sort)
 			.populate('user')
 			.then(function(models) {
-				
-				Content.subscribe(req, models);
+				Content.subscribe(req, [models]);
 				var promises = [];
 				for (x in models){promises.push(getAssociations(models[x]));}
 				Q.all(promises).then((populatedModels)=>{
 					for (x in models){models[x] = populatedModels[x];}
 					res.json(models);
 				});
-
 			});
 		}
 
@@ -294,7 +289,6 @@ module.exports = {
 			.sort(sort)
 			.populate('user')
 			.then(function(models) {
-
 				Content.subscribe(req, models);
 				var promises = [];
 				for (x in models){promises.push(getAssociations(models[x]));}
@@ -302,7 +296,6 @@ module.exports = {
 					for (x in models){models[x] = populatedModels[x];}
 					res.json(models);
 				});
-			
 			});
 		}
 
@@ -324,17 +317,13 @@ module.exports = {
 
 	create: function (req, res) {
 
-		//THINK
-		//ACTIVITY IS EVENT!
 		//APP - DATA () --> EVENT --> 
 		function createEvent(model){
-
 			var eventModel = {
-				verb:'create', //call? machine attention
+				verb:'create',
 				model:{id:model.id,type:'CONTENT'}
 			};
-			//Event.create(eventModel);
-
+			Event.create(eventModel);
 		};
 
 		function createNotification(model){
@@ -346,9 +335,6 @@ module.exports = {
 
 		//TODO: CONNECTION!
 		function createValidation(model){
-
-			console.log('ASSOCIATED MODELS');
-			console.log(model.associatedModels);
 
 			//validation set
 			for (x in model.associatedModels){
@@ -437,7 +423,7 @@ module.exports = {
 								var newAssociationModel = newValidationModel;
 								Association.create(newAssociationModel).then(function(association){
 									console.log('CREATED ASSOCIATION', association);
-									Association.publishCreate(association);
+									Association.publish(association.id, {verb: 'create', data: association});
 								});
 							}
 							else{
@@ -470,7 +456,7 @@ module.exports = {
 			content: req.param('content'),
 
 			user: req.param('user'),
-			creator: req.param('user'),
+			//creator: req.param('user'),
 
 			//TODO: DEPRECIATE
 			contentModel: req.param('contentModel'),
@@ -487,13 +473,16 @@ module.exports = {
 		.exec(function(err, model) {
 			if (err) {return console.log(err);}
 			else {
+
 				//TODO: POPULATE USER
 				User.find({id:model.user}).then(function(userModels){
 
 					model.user = userModels[0];
 					model.associatedModels = req.param('associatedModels');
 
-					Content.publishCreate(model);
+					Content.subscribe(req, [model.id]);
+					Content.publish(model.id, {verb: 'create', data: model});
+					
 					createEvent(model);
 					createNotification(model);
 					createValidation(model);
@@ -508,9 +497,7 @@ module.exports = {
 	//IS UPDATING REAL ONCHAIN? | NEW TYPE? NAH
 	//IT'S A NEW 'CREATE' THAT OVERLAPS. 
 	update: function(req, res){
-
 		//UPDATE HISTORY IN MODEL
-
 	}
 
 };

@@ -1,8 +1,8 @@
 //const tf = require('@tensorflow/tfjs');
 //require('@tensorflow/tfjs-node');
-var Q = require('q');
-var async = require('async');
-var _ = require('lodash');
+const Q = require('q');
+const async = require('async');
+const _ = require('lodash');
 
 //POWER SET
 function getAllSubsets(theArray) {

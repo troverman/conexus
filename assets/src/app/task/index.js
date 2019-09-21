@@ -22,20 +22,16 @@ angular.module( 'conexus.task', [
             time: ['TimeModel', 'task', function(TimeModel, task){
                 return TimeModel.get({task:task.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
-            validations: ['ValidationModel', 'task', function(ValidationModel, task){
-                return ValidationModel.get({task:task.id, limit:100, skip:0, sort:'createdAt DESC'});
-            }],
         }
     });
 }])
 
-.controller( 'TaskController', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'contentList', 'ContentModel', 'ReactionModel', 'task', 'TaskModel', 'time', 'TimeModel', 'titleService', 'toaster', 'validations', function TaskController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, contentList, ContentModel, ReactionModel, task, TaskModel, time, TimeModel, titleService, toaster, validations) {
+.controller( 'TaskController', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'contentList', 'ContentModel', 'task', 'TaskModel', 'time', 'TimeModel', 'titleService', 'toaster', function TaskController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, contentList, ContentModel, task, TaskModel, time, TimeModel, titleService, toaster) {
 
     $scope.task = task;
     
     //TODO: FIX
     if(!$scope.task){$location.path('/')}
-    if($scope.task.tags){$scope.task.context = $scope.task.tags.split(',');}
 
     $scope.task.model = 'TASK';
 
@@ -44,8 +40,6 @@ angular.module( 'conexus.task', [
    
     $scope.contentList = contentList;
 
-    $scope.newContent = {};
-    $scope.newReaction = {};
     $scope.newTime = {};
 
     $scope.question = false;
@@ -55,19 +49,22 @@ angular.module( 'conexus.task', [
     $scope.streamingId = null;
     $scope.streamUrl = '';
     $scope.taskVerification = [];
-    $scope.validations = validations;
-    $scope.verification = {};
     $rootScope.taskTime = 0;
 
+    //NORMALIZE....
+    console.log($scope.task, $scope.task.associationModels);
 
-    //TOKENS BETA///
-    $scope.populateTokensBeta = function(){
-        $scope.task.data.apps.tokens = $scope.task.data.apps.attention;
-        $scope.task.data.apps.tokens['CRE8'] = 1;
-        $scope.task.data.apps.tokens['CRE8+TASK'] = 1;
-        $scope.task.data.apps.tokens['CRE8+TASK+'+$scope.task.id] = 1;
-    };
-    $scope.populateTokensBeta();
+    $scope.task.context = [];
+    if ($scope.task.associationModels){
+        for (x in $scope.task.associationModels){
+            for (y in Object.keys($scope.task.associationModels[x].context)){
+                var context = Object.keys($scope.task.associationModels[x].context)[y];
+                $scope.task.context.push(context);
+            }
+        }
+    }
+    console.log($scope.task.context);
+
 
     $scope.tokenChart = {
         chart: {zoomType: 'x'},
@@ -89,15 +86,21 @@ angular.module( 'conexus.task', [
         yAxis: {title: {text: null}},
         credits:{enabled:false},
     };
-    var sortable = [];
-    for (x in Object.keys($scope.task.data.apps.tokens)){sortable.push([Object.keys($scope.task.data.apps.tokens)[x], $scope.task.data.apps.tokens[Object.keys($scope.task.data.apps.tokens)[x]]])}
-    sortable.sort(function(a, b) {return b[1] - a[1]});
-    for (x in sortable){
-        if (x < 100){
-            $scope.tokenChart.xAxis.categories.push(sortable[x][0]);
-            $scope.tokenChart.series[0].data.push(sortable[x][1]);
+
+    $scope.populateTokenChart = function(){
+        $scope.sortableSet = [];
+        $scope.tokenChart.xAxis.categories = [];
+        $scope.tokenChart.series[0].data = [];
+        for (x in Object.keys($scope.task.data.apps.tokens)){$scope.sortableSet.push([Object.keys($scope.task.data.apps.tokens)[x], $scope.task.data.apps.tokens[Object.keys($scope.task.data.apps.tokens)[x]]])}
+        $scope.sortableSet.sort(function(a, b) {return b[1] - a[1]});
+        for (x in $scope.sortableSet){
+            if (x < 100){
+                $scope.tokenChart.xAxis.categories.push($scope.sortableSet[x][0]);
+                $scope.tokenChart.series[0].data.push($scope.sortableSet[x][1]);
+            }
         }
-    }
+    };
+    $scope.populateTokenChart();
 
     $scope.renderStats = function(){
         $scope.statsChart = {
@@ -180,27 +183,6 @@ angular.module( 'conexus.task', [
     $scope.newValidation = {};
     $scope.newValidation.context = {};
     $scope.newValidation.context.general = 0;
-
-    //TODO: DEPRECIATE
-    $scope.createReaction = function(item, type){
-        if ($rootScope.currentUser){
-            $scope.newReaction.amount = 1;
-            $scope.newReaction.type = type;
-            $scope.newReaction.user = $rootScope.currentUser.id;
-            var timeIndex = $scope.time.map(function(obj){return obj.id}).indexOf(item.id);
-            if (timeIndex != -1){
-                $scope.newReaction.associatedModels = [{type:'TIME', id:item.id}];
-                $scope.time[timeIndex].data.apps.reactions[type]++;
-            }
-            else{
-                $scope.newReaction.associatedModels = [{type:'TASK', id:item.id}];
-                $scope.task.data.apps.reactions[type]++;
-            }
-            ReactionModel.create($scope.newReaction);
-            $rootScope.pop(type, item.id);
-        }
-        else{$mdSidenav('login').toggle();}
-    };
 
     $scope.renderStream = function(stream){
         var html = '<iframe width="510" height="265" src="'+stream+'" frameborder="0" allowfullscreen></iframe>'
@@ -337,31 +319,26 @@ angular.module( 'conexus.task', [
         }
 
     };
-    $scope.renderAssociations(task)
+    $scope.renderAssociations(task);
 
-    //TODO: WEBSOCKET
     $sailsSocket.subscribe('task', function (envelope) {
-        switch(envelope.verb) {
-            case 'created':
-                if ($scope.task.id == envelope.data.id){
-                    $scope.task.data.apps.attention = envelope.data.data.apps.attention;
-                }
-                break;
+        console.log(envelope)
+        if (envelope.verb == 'update'){
+            if ($scope.task.id == envelope.data.id){
+                $scope.task.data.apps = envelope.data.data.apps;
+                $scope.populateTokenChart();
+            }
         }
     });
-    $sailsSocket.subscribe('content', function (envelope) {
-        switch(envelope.verb) {
-            case 'created':
-                $scope.contentList.unshift(envelope.data);
-                break;
+
+    $sailsSocket.subscribe('association', function (envelope) {
+        if (envelope.verb == 'update'){
+            var index = $scope.associations.map(function(obj){return obj.id}).indexOf(envelope.data.id);
+            if (index != -1){$scope.associations[index] = envelope.data;}
         }
     });
-    $sailsSocket.subscribe('time', function (envelope) {
-        switch(envelope.verb) {
-            case 'created':
-                $scope.time.unshift(envelope.data);
-                break;
-        }
-    });
+
+    $sailsSocket.subscribe('content', function (envelope) {if (envelope.verb == 'create'){$scope.content.unshift(envelope.data);}});
+    $sailsSocket.subscribe('time', function (envelope) {if (envelope.verb == 'create'){$scope.time.unshift(envelope.data);}});
 
 }]);

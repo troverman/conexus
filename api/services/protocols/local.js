@@ -6,8 +6,8 @@
  * registering entirely new users, assigning passwords to already registered
  * users and validating login requesting.
  */
-
-
+ 
+const bcrypt = require('bcryptjs');
 const validator = require('validator');
 
 /**
@@ -25,10 +25,6 @@ exports.register = function (req, res, next) {
         username:req.param('username'),
     };
 
-    if (req.param('firstName')){newMember.firstName = req.param('firstName');}
-    if (req.param('lastName')){newMember.lastName = req.param('lastName');}
-    if (req.param('dateOfBirth')){newMember.dateOfBirth  = req.param('dateOfBirth');}
-
     //HAK
     newMember.balance = {cre8:8, UNIVERSALTOKEN:1};
 
@@ -36,27 +32,15 @@ exports.register = function (req, res, next) {
     if (!newMember.username) {return next(new Error('No username was entered.'));}
     if (!req.param('password')) {return next(new Error('No password was entered.'));}
 
-    User.create(newMember, function (err, user) {
-        if (err) {
-            if (err.code === 'E_VALIDATION') {
-                if (err.invalidAttributes.email) {console.log('Error.Passport.Email.Exists');} 
-                else {console.log('error', 'Error.Passport.User.Exists');}
-            }
-            return next(err);
-        }
-        Passport.create({protocol : 'local', password : req.param('password'), user: user.id}, function (err, passport) {
-            if (err) {
-                if (err.code === 'E_VALIDATION') {
-                    console.log('error', 'Error.Passport.Password.Invalid');
-                }
-                return user.destroy(function (destroyErr) {
-                    next(destroyErr || err);
-                });
-            }
+    //_id???
+    User.create(newMember).exec(function(err, user) {
+        console.log(user);
+        Passport.create({protocol : 'local', password : req.param('password'), user: user._id.toString()}).exec(function(err, passport) {
+            if (err) {console.log('error', err); }
             else{next(null, user);}
         });
-
     });
+
 };
 
 /**
@@ -72,7 +56,7 @@ exports.connect = function (req, res, next) {
     Passport.findOne({protocol : 'local', user: user.id}, function (err, passport) {
         if (err) {return next(err);}
         if (!passport) {
-            Passport.create({protocol : 'local', password : password, user: user.id}, function (err, passport) {
+            Passport.create({protocol : 'local', password : password, user: user._id.toString()}, function (err, passport) {
                 next(err, user);
             });
         }
@@ -101,8 +85,8 @@ exports.login = function (req, identifier, password, next) {
         }
         Passport.findOne({protocol : 'local', user: user.id}, function (err, passport) {
             if (passport) {
-                passport.validatePassword(password, function (err, res) {
-                    if (err) {return next(err);}
+                bcrypt.compare(password, passport.password, function (err, res) {
+                 if (err) {return next(err);}
                     if (!res) {return next(null, false);} 
                     else {return next(null, user);}
                 });

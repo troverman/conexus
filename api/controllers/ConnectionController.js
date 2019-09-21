@@ -12,26 +12,24 @@ module.exports = {
 
 		console.log('GET CONNECTION', req.query);
 
-		Connection.watch(req);
-
 		if(req.query.id){
 			Connection.find({id:id})
 			.limit(limit)
 			.skip(skip)
 			.sort(sort)
         	.then(function(models) {
-        		console.log(models)
+				Connection.subscribe(req, [models[0].id]);
 				res.json(models[0]);
 			});
 		}
 
-		//creator is address.. 
 		else if(req.query.creator){
 			Connection.find({creator:creator})
 			.limit(limit)
 			.skip(skip)
 			.sort(sort)
         	.then(function(models) {
+				Content.subscribe(req, [models[0].id]);
 				res.json(models[0]);
 			});
 		}
@@ -42,7 +40,7 @@ module.exports = {
 			.skip(skip)
 			.sort(sort)
 			.then(function(models) {
-				Connection.subscribe(req, models);
+				Connection.subscribe(req, models.map(function(obj){return obj.id}));
 				res.json(models);
 			});
 		}
@@ -76,7 +74,7 @@ module.exports = {
 		.exec(function(err, model) {
 			if (err) {return console.log(err);}
 			else {
-				Connection.publishCreate(model);
+				Connection.publish([model.id], {verb: 'create', data: model});
 				//createEvent(model);
 				//createNotification(model);
 				//createValidation(model);

@@ -9,8 +9,8 @@ module.exports = {
 		creator: {type: 'string'},
 		user: {model: 'user'},
 
-		type: {type: 'string'},
-		status: {type: 'string'},
+		type: {type: 'string', allowNull: true},
+		status: {type: 'string', allowNull: true},
 
 		setAlpha: {type:'json'},
 		setBeta: {type:'json'},

@@ -38,7 +38,7 @@ angular.module( 'conexus.home', [
     else{console.log('INTRO'); $state.go('home.intro');}
 }])
 
-.controller( 'IntroCtrl', ['$http', '$location', '$mdSidenav', '$rootScope', '$sce', '$scope', '$state', '$window', 'ProjectModel', 'SearchModel', 'titleService', 'toaster', 'UserModel', function HomeController( $http, $location, $mdSidenav, $rootScope, $sce, $scope, $state, $window, ProjectModel, SearchModel, titleService, toaster, UserModel ) {
+.controller( 'IntroCtrl', ['$http', '$location', '$rootScope', '$sailsSocket', '$scope', '$state', 'ProjectModel', 'SearchModel', 'titleService', 'UserModel', function HomeController( $http, $location, $rootScope, $sailsSocket, $scope, $state, ProjectModel, SearchModel, titleService, UserModel ) {
 
     $scope.introObj = [
         {title:'WE CRE8 MULTIDIMENSIONAL VALUE'},
@@ -232,9 +232,66 @@ angular.module( 'conexus.home', [
     //WATCHERS\\//\\//
     //\\//\\//\\//\\//
 
+    //TODO: ROOT SOCKETS TO ROOT SCOPES -- > APP (USER DEFINED) LISTENING..
+        //APP SPECIFIC -- ABSTRACT
+        //LOL!!!!! EVENT SUBSCRIPTIONS HAAAA
+            //OK SOON..
+            //EASY
+    $sailsSocket.subscribe('content', function (envelope) {
+        console.log(envelope)
+        if (envelope.verb == 'create'){$scope.activity.unshift(envelope.data);}
+        if (envelope.verb == 'update'){
+            var index = $scope.activity.map(function(obj){return obj.id}).indexOf(envelope.data.id);
+            if (index != -1){$scope.activity[index].data = envelope.data.data;}
+        }
+    });
+    $sailsSocket.subscribe('item', function (envelope) {
+        if (envelope.verb == 'create'){$scope.activity.unshift(envelope.data);}
+        if (envelope.verb == 'update'){
+            var index = $scope.activity.map(function(obj){return obj.id}).indexOf(envelope.data.id);
+            if (index != -1){$scope.activity[index].data = envelope.data.data;}
+        }
+    });
+    $sailsSocket.subscribe('order', function (envelope) {
+        if (envelope.verb == 'create'){$scope.activity.unshift(envelope.data);}
+        if (envelope.verb == 'update'){
+            var index = $scope.activity.map(function(obj){return obj.id}).indexOf(envelope.data.id);
+            if (index != -1){$scope.activity[index].data = envelope.data.data;}
+        }
+    });
+     $sailsSocket.subscribe('project', function (envelope) {
+        if (envelope.verb == 'create'){$scope.activity.unshift(envelope.data);}
+        if (envelope.verb == 'update'){
+            var index = $scope.activity.map(function(obj){return obj.id}).indexOf(envelope.data.id);
+            if (index != -1){$scope.activity[index].data = envelope.data.data;}
+        }
+    });
+    $sailsSocket.subscribe('task', function (envelope) {
+        if (envelope.verb == 'create'){$scope.activity.unshift(envelope.data);}
+        if (envelope.verb == 'update'){
+            var index = $scope.activity.map(function(obj){return obj.id}).indexOf(envelope.data.id);
+            if (index != -1){$scope.activity[index].data = envelope.data.data;}
+        }
+    });
+    $sailsSocket.subscribe('time', function (envelope) {
+        if (envelope.verb == 'create'){$scope.activity.unshift(envelope.data);}
+        if (envelope.verb == 'update'){
+            var index = $scope.activity.map(function(obj){return obj.id}).indexOf(envelope.data.id);
+            if (index != -1){$scope.activity[index].data = envelope.data.data;}
+        }
+    });
+    $sailsSocket.subscribe('transaction', function (envelope) {
+        if (envelope.verb == 'create'){$scope.activity.unshift(envelope.data);}
+        if (envelope.verb == 'update'){
+            var index = $scope.activity.map(function(obj){return obj.id}).indexOf(envelope.data.id);
+            if (index != -1){$scope.activity[index].data = envelope.data.data;}
+        }
+    });
+
+
 }])
 
-.controller( 'FeedCtrl', ['$mdSidenav', '$location', '$rootScope', '$sailsSocket', '$sce', '$scope', 'ContentModel', 'FollowerModel', 'MemberModel', 'OrderModel', 'PeerModel', 'ProjectModel', 'ReactionModel', 'SearchModel', 'TaskModel', 'titleService', 'toaster', 'UserModel', 'ValidationModel', function HomeController( $mdSidenav, $location, $rootScope, $sailsSocket, $sce, $scope, ContentModel, FollowerModel, MemberModel, OrderModel, PeerModel, ProjectModel, ReactionModel, SearchModel, TaskModel, titleService, toaster, UserModel, ValidationModel ) {
+.controller( 'FeedCtrl', ['$location', '$rootScope', '$sailsSocket', '$sce', '$scope', 'ContentModel', 'FollowerModel', 'MemberModel', 'OrderModel', 'PeerModel', 'ProjectModel', 'ReactionModel', 'SearchModel', 'TaskModel', 'titleService', 'UserModel', 'ValidationModel', function HomeController( $location, $rootScope, $sailsSocket, $sce, $scope, ContentModel, FollowerModel, MemberModel, OrderModel, PeerModel, ProjectModel, ReactionModel, SearchModel, TaskModel, titleService, UserModel, ValidationModel ) {
 
     $scope.balanceChart = {
         chart: {
@@ -266,20 +323,6 @@ angular.module( 'conexus.home', [
     $scope.selectedTab = 'INFORMATION';
     $scope.suggestedTokens = [];
 
-    //DEPRECIATE.. PUT IN NAV
-    $scope.createReaction = function(item, type){
-        if($rootScope.currentUser){
-            $scope.newReaction.amount = 1;
-            $scope.newReaction.associatedModels = [{type:item.model, id:item.id}];
-            $scope.newReaction.type = type;
-            $scope.newReaction.user = $rootScope.currentUser.id;
-            var index = $scope.activity.map(function(obj){return obj.id}).indexOf(item.id);
-            $scope.activity[index].data.apps.reactions[type]++;
-            ReactionModel.create($scope.newReaction);
-            $rootScope.pop(type, item.id);
-        }
-        else{$mdSidenav('login').toggle()}   
-    };
 
     //TODO: CREATE A TOKEN 'ORBIT' FOR MEMBER
     //TODO: CREATE COMPLEX QUERY / DISCOVER
@@ -925,10 +968,58 @@ angular.module( 'conexus.home', [
     //\\//\\//\\//\\//
     //SOCKETS\\//\\//
     //\\//\\//\\//\\//
-    //TODO: CUSTOM ROOMS, CUSTOM FILTER.
+    //IF LIVE FILTER..
+    //LOOK AT MEMBER ASSOCIATIONS
+    //TODO CUSTOM ROOM SOCKET IN PEER
+    //TODO: ABSTRACT! :P --> ALWAYSSSS
     $sailsSocket.subscribe('content', function (envelope) {
-        if (envelope.verb == 'created'){$scope.activity.unshift(envelope.data);}
+        if (envelope.verb == 'create'){$scope.activity.unshift(envelope.data);}
+        if (envelope.verb == 'update'){
+            var index = $scope.activity.map(function(obj){return obj.id}).indexOf(envelope.data.id);
+            if (index != -1){$scope.activity[index].data = envelope.data.data;}
+        }
     });
-
+    $sailsSocket.subscribe('item', function (envelope) {
+        if (envelope.verb == 'create'){$scope.activity.unshift(envelope.data);}
+        if (envelope.verb == 'update'){
+            var index = $scope.activity.map(function(obj){return obj.id}).indexOf(envelope.data.id);
+            if (index != -1){$scope.activity[index].data = envelope.data.data;}
+        }
+    });
+    $sailsSocket.subscribe('order', function (envelope) {
+        if (envelope.verb == 'create'){$scope.activity.unshift(envelope.data);}
+        if (envelope.verb == 'update'){
+            var index = $scope.activity.map(function(obj){return obj.id}).indexOf(envelope.data.id);
+            if (index != -1){$scope.activity[index].data = envelope.data.data;}
+        }
+    });
+     $sailsSocket.subscribe('project', function (envelope) {
+        if (envelope.verb == 'create'){$scope.activity.unshift(envelope.data);}
+        if (envelope.verb == 'update'){
+            var index = $scope.activity.map(function(obj){return obj.id}).indexOf(envelope.data.id);
+            if (index != -1){$scope.activity[index].data = envelope.data.data;}
+        }
+    });
+    $sailsSocket.subscribe('task', function (envelope) {
+        if (envelope.verb == 'create'){$scope.activity.unshift(envelope.data);}
+        if (envelope.verb == 'update'){
+            var index = $scope.activity.map(function(obj){return obj.id}).indexOf(envelope.data.id);
+            if (index != -1){$scope.activity[index].data = envelope.data.data;}
+        }
+    });
+    $sailsSocket.subscribe('time', function (envelope) {
+        if (envelope.verb == 'create'){$scope.activity.unshift(envelope.data);}
+        if (envelope.verb == 'update'){
+            var index = $scope.activity.map(function(obj){return obj.id}).indexOf(envelope.data.id);
+            if (index != -1){$scope.activity[index].data = envelope.data.data;}
+        }
+    });
+    $sailsSocket.subscribe('transaction', function (envelope) {
+        if (envelope.verb == 'create'){$scope.activity.unshift(envelope.data);}
+        if (envelope.verb == 'update'){
+            var index = $scope.activity.map(function(obj){return obj.id}).indexOf(envelope.data.id);
+            if (index != -1){$scope.activity[index].data = envelope.data.data;}
+        }
+    });
 
 }]);

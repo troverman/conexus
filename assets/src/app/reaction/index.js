@@ -17,37 +17,13 @@ angular.module( 'conexus.reaction', [
     });
 }])
 .controller( 'ReactionCtrl', ['$mdSidenav', '$sailsSocket', '$scope', 'reaction', 'ReactionModel', 'titleService', function ReactionController( $mdSidenav, $sailsSocket, $scope, reaction, ReactionModel, titleService) {
-
 	$scope.reaction = reaction;
-    $scope.reaction.model = 'REACTION';
-
     titleService.setTitle('Reaction | '+$scope.reaction.id + ' | CRE8.XYZ');
-
-    //TODO: DEPRECIATE
-    $scope.createReaction = function(item, type){
-        if ($rootScope.currentUser){
-            $scope.newReaction = {
-                amount:1,
-                type:type,
-                user:$rootScope.currentUser.id,
-                associatedModels:[{type:'REACTION', id:item.id}],
-            };
-            $scope.attention.data.apps.reactions[type]++;
-            ReactionModel.create($scope.newReaction);
-        }
-        else{$mdSidenav('login').toggle()}
-    }; 
-
     $sailsSocket.subscribe('reaction', function (envelope) {
-        switch(envelope.verb) {
-            case 'created':
-                if ($scope.reaction.id == envelope.data.id){
-                    $scope.reaction.data.apps.attention = envelope.data.data.apps.attention;
-                }
-                break;
+        if (envelope.verb == 'update'){
+            if ($scope.reaction.id == envelope.data.id){
+                $scope.reaction.data.apps = envelope.data.data.apps
+            }
         }
     });
-
-
-
 }]);

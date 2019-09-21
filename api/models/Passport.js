@@ -13,13 +13,12 @@ function hashPassword (passport, next) {
 
 module.exports = {
     attributes: {
-        protocol: { type: 'alphanumeric', required: true },
+        protocol: { type: 'string', required: true },
         password: { type: 'string', minLength: 8 },
-        provider: { type: 'alphanumericdashed' },
+        provider: { type: 'string' },
         identifier: { type: 'string' },
         tokens: { type: 'json' },
         user: { model: 'User', required: true },
-        validatePassword: function (password, next) {bcrypt.compare(password, this.password, next);}
     },
     beforeCreate: function (passport, next) {hashPassword(passport, next);},
     beforeUpdate: function (passport, next) {hashPassword(passport, next);}

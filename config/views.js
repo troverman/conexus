@@ -3,7 +3,7 @@
  */
 
 module.exports.views = {
-  engine: 'ejs',
+  extension: 'ejs',
   layout: 'layout',
   partials: false
 };

@@ -26,10 +26,6 @@ angular.module( 'conexus.validation', [
 
     titleService.setTitle('Validation | ' + $scope.validation.id + ' | CRE8.XYZ');
 
-    //TODO: FIX
-    $rootScope.associatedModels = [{type:'VALIDATION', id:$scope.validation.id}];
-
-    $scope.newReaction = {};
     $scope.reputationList = [];
     $scope.reputationWeightedList = []
     $scope.validationList = [];
@@ -87,34 +83,15 @@ angular.module( 'conexus.validation', [
         $scope.validationColumn.xAxis.categories.push($scope.validationList[x][0]);
     }
 
-    //TODO: DEPRECIATE
-    $scope.createReaction = function(item, type){
-        if ($rootScope.currentUser){
-            $scope.newReaction = {
-                amount:1,
-                type:type,
-                user:$rootScope.currentUser.id,
-                associatedModels:[{type:'VALIDATION', id:item.id}],
-            };
-            $scope.validation.data.apps.reactions[type]++;
-            ReactionModel.create($scope.newReaction);
-            $rootScope.pop(type, item.id);
-        }
-        else{$mdSidenav('login').toggle()}
-    };
-
     $scope.selectedTab = 'INFORMATION';
     $scope.selectTab = function(model){$scope.selectedTab = model;};
 
-    //WATCH IDS THAT ARE SENT LOL!!!!! ! L!L L! L!
-    
     $sailsSocket.subscribe('validation', function (envelope) {
-        switch(envelope.verb) {
-            case 'created':
-                if ($scope.validation.id == envelope.data.id){
-                    $scope.validation.data.apps.attention = envelope.data.data.apps.attention;
-                }
-                break;
+        console.log(envelope)
+        if (envelope.verb == 'update'){
+            if ($scope.validation.id == envelope.data.id){
+                $scope.validation.data.apps = envelope.data.data.apps
+            }
         }
     });
 

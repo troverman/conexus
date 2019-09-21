@@ -7,7 +7,7 @@ module.exports = {
         from: {type: 'string'},
         //[linked items], to, from, self,creator, [tokens]
         associatedModels: {type: 'json'},
-        content: {type: 'string'},
+        content: {type: 'string', allowNull: true},
         context: {type: 'string'},
 
         user: {model: 'user'},

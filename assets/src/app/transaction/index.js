@@ -18,41 +18,34 @@ angular.module( 'conexus.transaction', [
     });
 }])
 
-.controller( 'TransactionController', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'ReactionModel', 'titleService', 'transaction', function TransactionController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, ReactionModel, titleService, transaction ) {
+.controller( 'TransactionController', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'ReactionModel', 'titleService', 'transaction', function TransactionController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, ReactionModel, titleService, transaction ) {
     
     $scope.transaction = transaction;
-    
-    titleService.setTitle($scope.transaction.id + ' | Transaction | CRE8.XYZ');
+    if(!$scope.transaction){$location.path('/')}    
+    titleService.setTitle('Transaction | ' + $scope.transaction.id + ' | CRE8.XYZ');
 
-    $scope.newReaction = {};
+    console.log($scope.transaction);
+
+    //COMPUTE THIS!!
+    $scope.transaction.context = [];
+    if ($scope.transaction.associationModels){
+        for (x in $scope.transaction.associationModels){
+            for (y in Object.keys($scope.transaction.associationModels[x].context)){
+                var context = Object.keys($scope.transaction.associationModels[x].context)[y];
+                $scope.transaction.context.push(context);
+            }
+        }
+    }
 
     $scope.selectedTab = 'INFORMATION';
     $scope.selectTab = function(model){$scope.selectedTab = model;};
 
-    //TODO: DEPRECIATE
-    $scope.createReaction = function(item, type){
-        if ($rootScope.currentUser){
-            $scope.newReaction = {
-                amount:1,
-                type:type,
-                user:$rootScope.currentUser.id,
-                associatedModels:[{type:'TRANSACTION', id:item.id}],
-            };
-            $scope.transaction.data.apps.reactions[type]++;
-            ReactionModel.create($scope.newReaction);
-            $rootScope.pop(type, item.id);
-        }
-        else{$mdSidenav('login').toggle()}
-    }; 
-
-    //TODO: SOCKETS
     $sailsSocket.subscribe('transaction', function (envelope) {
-        switch(envelope.verb) {
-            case 'created':
-                if ($scope.transaction.id == envelope.data.id){
-                    $scope.transaction.data.apps.attention = envelope.data.data.apps.attention;
-                }
-                break;
+        console.log(envelope)
+        if (envelope.verb == 'update'){
+            if ($scope.transaction.id == envelope.data.id){
+                $scope.transaction.data.apps = envelope.data.data.apps
+            }
         }
     });
 

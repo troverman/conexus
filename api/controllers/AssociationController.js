@@ -9,7 +9,6 @@ module.exports = {
 		var sort = req.query.sort || 'createdAt DESC';
 		var id = req.query.id;
 		console.log('GET ASSOCIATION', req.query)
-		Association.watch(req);
 		if(req.query.id){
 			Association.find({id:id})
 			.limit(limit)
@@ -41,12 +40,14 @@ module.exports = {
 							console.log(models[0].associatedModels[x])
 							models[0].associatedModels[x].data = populatedModels[x];
 						}
+						Association.subscribe(req, [models[0].id]);
 						res.json(models[0]);
 					});
 				}
 				else{res.json(models);}
 			});
 		}
+
 		//mm
 		else if (req.query.app){
 			var app = req.query.app;
@@ -61,6 +62,33 @@ module.exports = {
 				});
 			});
 		}
+
+		else if(req.query.filter){
+
+			//GET PROJECT-MEMBER HERE
+			//GET PROJECT-PROJECT HERE
+			//GET MEMBER-MEMBER (FOLLOWER) HERE
+			//COMPLEXISH QUERY HERE
+
+			Association.native(function(err, association) {
+
+				association.find({
+					"associatedModels.id": {
+						$in :[req.query.filter]
+					}
+				})
+				.limit(1000)
+				.skip(0)
+				.sort({'createdAt':-1})
+				.toArray(function (err, associationModels) {
+					associationModels = associationModels.map(function(obj){obj.id = obj._id; return obj;});
+					res.json(associationModels);
+				});
+
+			});
+
+		}
+
 	}
 
 };

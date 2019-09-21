@@ -5,6 +5,51 @@ module.exports = {
 
 	get: function(req, res) {
 
+		function getAssociations(model){
+			var deferred = Q.defer();
+			Association.native(function(err, association) {
+				association.find({$and : [{"associatedModels.id": {$in:[model.id]}}]})
+				.limit(1000)
+				.skip(0)
+				.sort({'createdAt':-1})
+				.toArray(function (err, associationModels) {
+					if (associationModels.length > 0){
+						associationModels.map(function(obj){obj.id=obj._id; return obj});
+						model.associationModels = associationModels;
+						var promises = [];
+						for (x in model.associationModels){
+							for (y in associationModels[x].associatedModels){
+								if (associationModels[x].associatedModels[y].type=='ACTION'){promises.push(Action.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+								if (associationModels[x].associatedModels[y].type=='APP'){promises.push(App.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+								if (associationModels[x].associatedModels[y].type=='ATTENTION'){promises.push(Attention.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+								if (associationModels[x].associatedModels[y].type=='CONTENT'){promises.push(Content.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+								if (associationModels[x].associatedModels[y].type=='ITEM'){promises.push(Item.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+								if (associationModels[x].associatedModels[y].type=='MEMBER'){promises.push(User.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+								if (associationModels[x].associatedModels[y].type=='PROJECT'){promises.push(Project.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+								if (associationModels[x].associatedModels[y].type=='TASK'){promises.push(Task.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+								if (associationModels[x].associatedModels[y].type=='TIME'){promises.push(Time.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+								if (associationModels[x].associatedModels[y].type=='TRANSACTION'){promises.push(Transaction.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+								if (associationModels[x].associatedModels[y].type=='VALIDATION'){promises.push(Validation.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+							}
+						}
+						Q.all(promises).then((populatedModels)=>{
+							for (x in model.associationModels){
+								for (y in associationModels[x].associatedModels){
+									var index = parseInt(x+y);
+									model.associationModels[x].associatedModels[y].data = populatedModels[index];
+								}
+							}
+							deferred.resolve(model);
+						});
+						model.context = {};
+						for (x in model.associationModels){}
+					}
+					else{deferred.resolve(model);}
+				});
+			});
+			return deferred.promise;
+		};
+
 		var limit = parseInt(req.query.limit) || 1;
 		var skip = parseInt(req.query.skip) || 0 ;
 		var sort = req.query.sort || 'createdAt DESC';
@@ -14,11 +59,14 @@ module.exports = {
 		var id = req.query.id;
 		var user = req.query.user;
 
-		Task.watch(req);
-
 		console.log('GET TASK', req.query);
 
-		if(req.query.id){Task.find({id:id}).then(function(models) {res.json(models[0]);});}
+		if(req.query.id){
+			Task.find({id:id}).then(function(models) {
+				Task.subscribe(req, [models[0]]);
+				getAssociations(models[0]).then(function(models){res.json(models);});
+			});
+		}
 
 		//lol
 		else if (req.query.project){
@@ -103,7 +151,7 @@ module.exports = {
 						}
 					}
 					Q.all(promises).then((populatedModels)=>{
-						console.log(populatedModels)
+						//console.log(populatedModels)
 						res.json(populatedModels);
 					});
 				});
@@ -118,7 +166,7 @@ module.exports = {
 			.sort(sort)
 			.populate('user')
 			.then(function(models){
-				console.log(models)
+				//console.log(models)
 				Task.count().then(function(numRecords){
 					Task.subscribe(req, models);
 					var returnObj = {data:models, info:{count:numRecords}};
@@ -183,7 +231,7 @@ module.exports = {
 					associatedModelObj
 				];
 				for (y in model.associatedModels[x].context){newValidation.context[model.associatedModels[x].context[y].text] = model.associatedModels[x].context[y].score;}
-				Validation.create(validationModel).then(function(newValidationModel){
+				Validation.create(newValidation).then(function(newValidationModel){
 					console.log('CREATE VALIDATION', newValidationModel);
 					createAssociation(newValidationModel);
 				});
@@ -218,7 +266,7 @@ module.exports = {
 								var newAssociationModel = newValidationModel;
 								Association.create(newAssociationModel).then(function(association){
 									console.log('CREATED ASSOCIATION', association);
-									Association.publishCreate(association);
+									Association.publish([association.id], {verb: 'create', data: association});
 								});
 							}
 							else{
@@ -232,7 +280,7 @@ module.exports = {
 
 		function mintTokens(model){
 			var taskProtocolTokens = getProtocolTokens(model);
-			for (x in timeProtocolTokens){
+			for (x in taskProtocolTokens){
 				var tokenString = taskProtocolTokens[x];
 				(function(tokenString) {
 					Token.find({string:tokenString}).then(function(tokenModels){
@@ -280,9 +328,10 @@ module.exports = {
 			location: req.param('location'),
 			
 			//associatedModels: req.param('associatedModels'),
-			context: req.param('context'),
+			//context: req.param('context'),
 
 			user: req.param('user'),
+			creator: req.param('user'),
 
 			data:{apps:{reactions:{plus:0,minus:0},attention:{general:0}}}
 
@@ -294,11 +343,15 @@ module.exports = {
 			else {
 
 				User.find({id:model.user}).then(function(userModels){
-
+					//if (model.location){
+					//	googleGeoCodeService(project).then(function(location){});
+					//}
 					model.associatedModels = req.param('associatedModels');
 					model.user = userModels[0];
+					
+					Task.subscribe(req, [model]);
+					Task.publish([model.id], {verb: 'create', data: model});
 
-					Task.publishCreate(model);
 					createEvent(model);
 					createNotification(model);
 					createValidation(model);

@@ -248,8 +248,10 @@
 				</p>
 			</div>
 			<div class="card-footer">
+				<a ng-click="$event.stopPropagation();renderAttentionToggle(item)" style="color:grey"><i class="fas fa-eye"></i> {{attention.data.apps.attention.general || 0}}</a>
+		        <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fas fa-angle-up"></i> {{attention.data.apps.reactions.plus || 0}}  like </a> 
+		        <a ng-click="$event.stopPropagation();createReaction(item, 'plus')" ><i class="fas fa-angle-down"></i> {{attention.data.apps.reactions.minus || 0}}  dislike </a>
 		        <a ng-click="$event.stopPropagation();" class="pull-right" style="padding:0px;" href="attention/{{attention.id}}" ui-sref="attention({id:attention.id})"><i class="fas fa-link grey"></i></a>
-		        <div style="clear:both"></div>
 		    </div>
 		</div>
 	</div>
@@ -301,8 +303,10 @@
 				</p>
 			</div>
 			<div class="card-footer">
+				<a ng-click="$event.stopPropagation();renderAttentionToggle(attention)" style="color:grey"><i class="fas fa-eye"></i> {{attention.data.apps.attention.general || 0}}</a>
+		        <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fas fa-angle-up"></i> {{attention.data.apps.reactions.plus || 0}}  like </a>
+		        <a ng-click="$event.stopPropagation();createReaction(item, 'plus')" ><i class="fas fa-angle-down"></i> {{attention.data.apps.reactions.minus || 0}}  dislike </a>
 		        <a ng-click="$event.stopPropagation();" class="pull-right" style="padding:0px;" href="attention/{{attention.id}}" ui-sref="attention({id:attention.id})"><i class="fas fa-link grey"></i></a>
-		        <div style="clear:both"></div>
 		    </div>
 		</div>
 	</div>

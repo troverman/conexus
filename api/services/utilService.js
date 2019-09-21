@@ -1,5 +1,6 @@
-var async = require('async');
-var request = require('request');
+const async = require('async');
+const Q = require('q');
+const request = require('request');
 
 module.exports = {
 
@@ -212,6 +213,27 @@ module.exports = {
 				}
 			});
 		});
+	},
+
+	googleGeoCodeService: function(model){
+		var deferred = Q.defer();
+		var googleMapsClient = require('@google/maps').createClient({
+			key: 'AIzaSyDcTGxD4H3lnx84u8EPcbh7PodbsEyzbg4'
+		});
+		googleMapsClient.geocode({address: model.location}, function(err, response) {
+			location = null;
+			if (!err) {
+				location = {
+					address:response.json.results[0].formatted_address,
+					lat:parseFloat(response.json.results[0].geometry.location.lat),
+					lng:parseFloat(response.json.results[0].geometry.location.lng),
+					coordinates: [parseFloat(response.json.results[0].geometry.location.lng), parseFloat(response.json.results[0].geometry.location.lat)],
+				};
+				deferred.resolve(location);
+			}
+			else{deferred.resolve(location);}
+		});
+		return deferred.promise;
 	},
 
 	//GMAP RESEARCH.. COFFEE ETC

@@ -12,8 +12,6 @@ module.exports = {
 
 		console.log('GET ACTION', req.query);
 
-		Action.watch(req);
-
 		//TODO: GENERATOR
 		function getItem(model){
 			var deferred = Q.defer();
@@ -113,6 +111,7 @@ module.exports = {
 			if (err) {return console.log(err);}
 			else {
 				Action.publishCreate(model);
+				Action.publish([model.id], {verb: 'create', data: model});
 				res.json(model);
 			}
 		});

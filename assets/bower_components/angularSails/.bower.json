@@ -38,6 +38,5 @@
   },
   "_source": "https://github.com/balderdashy/angularSails.git",
   "_target": "~0.12.1",
-  "_originalSource": "angularSails",
-  "_direct": true
+  "_originalSource": "angularSails"
 }

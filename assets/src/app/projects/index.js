@@ -76,7 +76,6 @@ angular.module( 'conexus.projects', [
     $scope.populateMap();
 
     $scope.getLatLng = function() {
-
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function (position) {
                 $rootScope.locationFilter = true;
@@ -92,16 +91,9 @@ angular.module( 'conexus.projects', [
                     limit:1000, 
                     skip:0
                 };
-                ProjectModel.get(projectQuery)
-                .then(function(projects){
-                    $scope.projects = projects.map(function(obj){
-                        obj.model = 'PROJECT';
-                        return obj;
-                    });
-                    $scope.map = {
-                        center: {latitude:$rootScope.location.lat, longitude:$rootScope.location.lng},
-                        zoom: 12
-                    };
+                ProjectModel.get(projectQuery).then(function(projects){
+                    $scope.projects = projects.map(function(obj){obj.model = 'PROJECT';return obj;});
+                    $scope.map = {center: {latitude:$rootScope.location.lat, longitude:$rootScope.location.lng},zoom: 12};
                     $scope.markers = [];
                     $scope.populateMap();
                     $scope.init();
@@ -288,14 +280,10 @@ angular.module( 'conexus.projects', [
         }
     }, true);
 
-
     //TODO: WEBSOCKET
     $sailsSocket.subscribe('project', function (envelope) {
-        switch(envelope.verb) {
-            case 'created':
-                $scope.projects.unshift(envelope.data);
-                break;
-        }
+        console.log(envelope)
+        if (envelope.verb == 'create'){$scope.projects.unshift(envelope.data);}
     });
 
 }]);

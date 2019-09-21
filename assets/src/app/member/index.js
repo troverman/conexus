@@ -11,11 +11,8 @@ angular.module( 'conexus.member', [
 				templateUrl: 'member/index.tpl.html'
 			}
 		},
-
-        //TODO: DEPRECIATE RESOLVE
 		resolve: {
             member: ['$stateParams', 'UserModel', function($stateParams, UserModel){
-                //TODO: REFACTOR // TODO ALLOW FOR ADDRESS LOOKUP TOO username || OR ADDRESS IN FILTER
                 return UserModel.get({username:$stateParams.path,limit:1,skip:0,sort:'createdAt DESC'})
             }],
         }
@@ -242,66 +239,23 @@ angular.module( 'conexus.member', [
     })
 }])
 
-.controller( 'MemberCtrl', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$scope', '$stateParams', 'FollowerModel', 'member', 'seoService', 'titleService', 'toaster', 'TransactionModel', function MemberController($location, $mdSidenav, $rootScope, $sailsSocket, $scope, $stateParams, FollowerModel, member, seoService, titleService, toaster, TransactionModel) {
+.controller( 'MemberCtrl', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$scope', '$stateParams', 'FollowerModel', 'member', 'seoService', 'titleService', function MemberController($location, $mdSidenav, $rootScope, $sailsSocket, $scope, $stateParams, FollowerModel, member, seoService, titleService) {
     
-    //ERR CHECK
-    //TODO: IMPROVE
     $scope.member = member;
     if(!$scope.member){$location.path('/')}
-
-    $rootScope.to = $scope.member.id;
-    $rootScope.associatedModels = [{
-        address: $scope.member.id,
-        type: 'PROFILE',
-    }];
-    $rootScope.member = $scope.member;
-    $rootScope.project = null;
-
-    //INITALIZE LOCAL
-    //TODO: GLOBALIZE
     titleService.setTitle($scope.member.username + ' | CRE8.XYZ');
-    //SEOSERVICE
-
-    //TODO: isFollowing
-    $scope.isFollowing = false;
-    $scope.newFollower = {};
-    $scope.newTransaction = {};
-    $scope.newTransaction.identifier = 'CRE8';
-    $scope.newTransaction.content = $scope.member.username + ' here\'s some '+$scope.newTransaction.identifier;
-    if($rootScope.currentUser){$scope.newTransaction.from = $rootScope.currentUser.id;}
-
-   
-    //TODO: FACTOR
+    $scope.member.isFollowing = false;
+    
+    //TODO: ASSOCIATION..
     $scope.follow = function() {
         if ($rootScope.currentUser){
+            $scope.newFollower = {};
             $scope.newFollower.followed = $scope.member.id;
             $scope.newFollower.follower = $rootScope.currentUser.id;
             FollowerModel.create($scope.newFollower).then(function(model) {
-
-                $rootScope.confirm = $scope.newFollower;
-                $rootScope.confirm.modelType = 'FOLLOW';
-
-                $scope.isFollowing = true;
-
-                toaster.pop({
-                    type:'success',
-                    title: 'Following',
-                    body: 'You are now follwing '+ $scope.member.username , 
-                    onShowCallback: function (toast) { 
-                        var audio = new Audio('audio/ping.mp3');
-                        audio.play()
-                        .then(function(audio){console.log(audio)})
-                        .catch(function(err){console.log(err)})
-                    }
-                });
-
-                //ERR?
-                $scope.newFollower = {};
-                setTimeout(function () {$mdSidenav('confirm').open()}, 500);
-                setTimeout(function () {$mdSidenav('confirm').close()}, 5000);
-
+                $scope.member.isFollowing = true;
+                $rootScope.pop('Following', 'You are now follwing '+ $scope.member.username)
             });
-
         }
         else{$mdSidenav('login').toggle()}
     };
@@ -309,38 +263,17 @@ angular.module( 'conexus.member', [
 }])
 
 .controller( 'MemberAboutCtrl', ['$sailsSocket', '$scope', 'titleService', function MemberAboutController($sailsSocket, $scope, titleService) {
-    
     titleService.setTitle($scope.member.username + ' | About | CRE8.XYZ');
-
 }])
 
 .controller( 'MemberActionsCtrl', ['$sailsSocket', '$scope', 'ActionModel', 'actions', 'titleService', function MemberActionsController($sailsSocket, $scope, ActionModel, actions, titleService) {
-    
-
-    //STORE ACTION DATA... AGNOSTIC.. HM -- CREATE IS AN ACTION. CREATE ITEM. CREATE CONTENT - REDUCTION SOOON IN DUE TIME
     titleService.setTitle($scope.member.username + ' | Actions | CRE8.XYZ');
-
-    $scope.actions = actions.map(function(obj){
-        obj.model = 'ACTION';
-        return obj;
-    });
-
+    $scope.actions = actions.map(function(obj){obj.model = 'ACTION'; return obj;});
 }])
 
 .controller( 'MemberActivityCtrl', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', '$stateParams', 'contentList', 'ContentModel', 'FollowerModel', 'member', 'orders', 'profileContent', 'ReactionModel', 'time', 'titleService', 'transactionsFrom', 'transactionsTo', function MemberActivityController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, $stateParams, contentList, ContentModel, FollowerModel, member, orders, profileContent, ReactionModel, time, titleService, transactionsFrom, transactionsTo) {
    
     titleService.setTitle($scope.member.username + ' | Activity | CRE8.XYZ');
-    
-    $scope.newContent = {};
-    $scope.newReaction = {};
-
-
-    //orders
-
-    //contentList //{user:member.id
-    //profileContent //profile:member.id
-
-    //time
 
     //NEED MODEL FOR TOKENIZATION MINT? EVENT? 
         //NEEDED FOR REAL LEDGER PG..
@@ -364,9 +297,7 @@ angular.module( 'conexus.member', [
     //    $scope.init();
     //});
 
-
-
-    //TODO: ACTIVITY FEED ~ BLEND OF MODELS
+    $scope.contentList = contentList.map(function(obj){obj.model = 'CONTENT';return obj;});
     $scope.orders = orders.map(function(obj){
         var elementsObj = {};
         for (y in Object.keys(obj.setAlpha)){
@@ -402,220 +333,50 @@ angular.module( 'conexus.member', [
         obj.model = 'ORDER';
         return obj
     });
-
-    $scope.contentList = contentList;
-    $scope.profileContent = profileContent;
-    $scope.contentList = [].concat.apply([], [$scope.contentList, $scope.profileContent]);
-    $scope.contentList = $scope.contentList.map(function(obj){
-        obj.model = 'CONTENT';
-        return obj;
-    });
-
-    //COMBINE AND REMOVE DUPS .. REDO THIS LATER | REFACTOR .... BLEH
-    $scope.contentList = $scope.contentList.filter(function(obj){
-        if (obj.profile){
-            if (obj.profile.hasOwnProperty('id')){
-                console.log(obj.profile, obj.user.id)
-                if(obj.profile.id == obj.user.id){return false}
-                else{return true}
-            }
-            else{return true}
-        }
-        else{return true}
-    });
-
-    $scope.layout = {name: 'cola', coolingFactor: 0, animate: true};
-    $scope.options = {
-        pixelRatio: 'auto',
-        maxZoom:10,
-        minZoom:0.1,
-    };
-    $scope.style = [
-        {
-            "selector": "core",
-            "style": {
-                "selection-box-color": "#AAD8FF",
-                "selection-box-border-color": "#8BB0D0",
-                "selection-box-opacity": "0.5"
-            }
-        }, {
-            "selector": "node",
-            "style": {
-                "width": "25",
-                "height": "25",
-                "content": "data(name)",
-                "font-size": "12px",
-                "text-valign": "center",
-                "text-halign": "center",
-                "background-color": "#77828C",
-                "text-outline-color": "#77828C",
-                "text-outline-width": "2px",
-                "color": "#fff",
-                "overlay-padding": "3px",
-                "z-index": "10"
-            }
-        }, {
-            "selector": "node[?attr]",
-            "style": {
-                "shape": "rectangle",
-                "background-color": "#aaa",
-                "text-outline-color": "#aaa",
-                "width": "8px",
-                "height": "8px",
-                "font-size": "3px",
-                "z-index": "1"
-            }
-        }, {
-            "selector": "node[?query]",
-            "style": {
-                "background-clip": "none",
-                "background-fit": "contain"
-            }
-        }, {
-            "selector": "node:selected",
-            "style": {
-                "border-width": "3px",
-                "border-color": "#AAD8FF",
-                "border-opacity": "0.5",
-                "background-color": "#77828C",
-                "text-outline-color": "#77828C"
-            }
-        }, {
-            "selector": "edge",
-            "style": {
-                "curve-style": "bezier",
-                "target-arrow-shape": "triangle",
-                "arrow-scale":"0.75",
-                "source-arrow-shape": "none",
-                "opacity": "0.9",
-                "line-color": "#bbb",
-                "width": "3",
-                "overlay-padding": "3px",
-                'label': 'data(label)'
-            }
-        },
-        {
-            "selector": ".edgeLabelStyle",
-            "style": {
-                 "text-background-opacity": 1,
-                  "color": "#fff",
-                  "font-size": "12px",
-                  "text-background-color": "#77828C",
-                  "text-background-shape": "roundrectangle",
-                  "text-border-color": "#e8e8e8",
-                  "text-border-width": 1,
-                  "text-border-opacity": 1
-            }
-        },
-        {
-            "selector": "node.unhighlighted",
-            "style": {
-                "opacity": "0.2"
-            }
-        }, {
-            "selector": "edge.unhighlighted",
-            "style": {
-                "opacity": "0.05"
-            }
-        }, {
-            "selector": ".highlighted",
-            "style": {
-                "z-index": "999999"
-            }
-        }, {
-            "selector": "node.highlighted",
-            "style": {
-                "border-width": "3px",
-                "border-color": "#AAD8FF",
-                "border-opacity": "0.5",
-                "background-color": "#394855",
-                "text-outline-color": "#394855"
-            }
-        }, {
-            "selector": "edge.filtered",
-            "style": {
-                "opacity": "0"
-            }
-        }
-    ];
-
-    $scope.time = time;
-    $scope.time = $scope.time.map(function(obj){
-        obj.model = 'TIME';
-        return obj;
-    });
-
+    $scope.time = time.map(function(obj){obj.model = 'TIME';return obj;});
     $scope.transactions = [].concat.apply([], [transactionsFrom, transactionsTo]);
     $scope.transactions = $scope.transactions.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
-
-    $scope.transactions = $scope.transactions.map(function(obj){
-        obj.model = 'TRANSACTION';
-        return obj;
-    });
-    
+    $scope.transactions = $scope.transactions.map(function(obj){obj.model = 'TRANSACTION';return obj;});
     $scope.activity = [].concat.apply([], [$scope.contentList, $scope.orders, $scope.time, $scope.transactions]);
     $scope.activity = $scope.activity.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
     $scope.activity = $scope.activity.slice(0,300);
 
-    //TODO ASSOCIATION
-    $scope.createContent = function(content){
 
-        $scope.newContent.contentModel = content.id;
-
-        $scope.newContent.user = $rootScope.currentUser.id;
-        $scope.newContent.profile = $scope.member.id;
-        ContentModel.create($scope.newContent).then(function(model) {
-            $scope.newContent = {};
-        });
-    };
-
-    $scope.createReaction = function(item, type){
-        if($rootScope.currentUser){
-            $scope.newReaction.amount = 1;
-            $scope.newReaction.associatedModels = [{type:item.model, id:item.id}];
-            $scope.newReaction.type = type;
-            $scope.newReaction.user = $rootScope.currentUser.id;
-            var index = $scope.activity.map(function(obj){return obj.id}).indexOf(item.id);
-            $scope.activity[index].data.apps.reactions[type]++;
-            ReactionModel.create($scope.newReaction);
-            $rootScope.pop(type, item.id);
-        }
-        else{$mdSidenav('login').toggle()}
-    };
-
-    //TODO: BETTER | TAG STORAGE
-    $scope.loadTags = function(){
-        function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
-        $scope.tags = $scope.activity.map(function(obj){
-            if(obj.tags){obj.tags = obj.tags.split(',')}
-            return obj.tags;
-        });
-        $scope.tags = [].concat.apply([], $scope.tags);
-        $scope.tags = $scope.tags.filter(function(e){return e});
-        $scope.sortedTagArray = [];
-        for (x in $scope.tags){
-            var amount = countInArray($scope.tags, $scope.tags[x]);
-            if ($scope.sortedTagArray.map(function(obj){return obj.element}).indexOf($scope.tags[x]) == -1){
-                $scope.sortedTagArray.push({amount:amount, element:$scope.tags[x]})
-            }
-        }
-        $scope.sortedTagArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
-    }
-    $scope.loadTags();
-
-    //DEPRECIATE
-    $scope.reply = function(item){
-        //var index = $scope.activity.map(function(obj){return obj.id}).indexOf(item.id);
-        //$scope.activity[index].showReply = !$scope.activity[index].showReply;
-        if ($rootScope.currentUser){$mdSidenav('content').toggle();}
-        else{$mdSidenav('login').toggle()}
-    };
-
+    //\/\\//\\//
+    //\SOCKETS//
+    //\\\//\\///
+    //IF LIVE FILTER..
+    //LOOK AT MEMBER ASSOCIATIONS
+    //TODO CUSTOM ROOM SOCKET IN PEER
+    //TODO... EVENTS
+    //ASSOCIATION(S)
+    //USER VS PROFILE POST ETC --> 2 SIDED
     $sailsSocket.subscribe('content', function (envelope) {
-        switch(envelope.verb) {
-            case 'created':
-                $scope.contentList.unshift(envelope.data);
-                break;
+        if (envelope.verb == 'create'){if (envelope.data.user == $scope.member.id){$scope.activity.unshift(envelope.data);}}
+        if (envelope.verb == 'update'){
+            var index = $scope.activity.map(function(obj){return obj.id}).indexOf(envelope.data.id);
+            if (index != -1){$scope.activity[index].data = envelope.data.data;}
+        }
+    });
+    $sailsSocket.subscribe('task', function (envelope) {
+        if (envelope.verb == 'create'){if (envelope.data.user == $scope.member.id){$scope.activity.unshift(envelope.data);}}
+        if (envelope.verb == 'update'){
+            var index = $scope.activity.map(function(obj){return obj.id}).indexOf(envelope.data.id);
+            if (index != -1){$scope.activity[index].data = envelope.data.data;}
+        }
+    });
+    $sailsSocket.subscribe('time', function (envelope) {
+        if (envelope.verb == 'create'){if (envelope.data.user == $scope.member.id){$scope.activity.unshift(envelope.data);}}
+        if (envelope.verb == 'update'){
+            var index = $scope.activity.map(function(obj){return obj.id}).indexOf(envelope.data.id);
+            if (index != -1){$scope.activity[index].data = envelope.data.data;}
+        }
+    });
+    $sailsSocket.subscribe('transaction', function (envelope) {
+        if (envelope.verb == 'create'){if (envelope.data.user == $scope.member.id){$scope.activity.unshift(envelope.data);}}
+        if (envelope.verb == 'update'){
+            var index = $scope.activity.map(function(obj){return obj.id}).indexOf(envelope.data.id);
+            if (index != -1){$scope.activity[index].data = envelope.data.data;}
         }
     });
 
@@ -676,39 +437,27 @@ angular.module( 'conexus.member', [
             min: 0,
         },
         legend: {enabled: false},
-        tooltip: {
-            shared: true,
-        },
+        tooltip: {shared: true,},
         credits:{enabled:false},
     };
 
     $scope.balanceColumn = {
-        chart: {
-            zoomType: 'x',
-        },
+        chart: {zoomType: 'x',},
         series: [{
             id: 'Combination',
             type: 'column',
             name: 'Asset Balance',
             data: [],
         }],
-        title: {
-            text: ''
-        },
+        title: {text: ''},
         xAxis: {
             crosshair: true,
             gridLineWidth: 0.5,
             gridLineColor: 'grey',
-            title: {
-                text: null
-            },
+            title: {text: null},
             categories: [],
         },
-        yAxis: {
-            title: {
-                text: null
-            }
-        },
+        yAxis: {title: {text: null}},
         legend:{enabled: false},
         credits:{enabled:false},
     };
@@ -725,9 +474,7 @@ angular.module( 'conexus.member', [
             sortable.push([x, $scope.balance[x]]);
         }
     }
-    sortable.sort(function(a, b) {
-        return b[1] - a[1];
-    });
+    sortable.sort(function(a, b) {return b[1] - a[1];});
 
     for (x in sortable){
         if (x < 250){
@@ -750,45 +497,19 @@ angular.module( 'conexus.member', [
 .controller( 'MemberContentCtrl', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', '$stateParams', 'contentList', 'ReactionModel', 'titleService', function MemberContentController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, $stateParams, contentList, ReactionModel, titleService) {
    
     titleService.setTitle($scope.member.username + ' | Content | CRE8.XYZ');
-    
+
+    //TODO: EVENT.. SIMPLITY & UNIFY.. ROOTSCOPE ACTIVITY.... OR ITEMS..
+        //GENERIC TEMPLATING
+        //reaction..contentList..
+            //event, items
     $scope.contentList = contentList;
-    $scope.newReaction = {};  
-    
-    //DEPRECIATE  
-    $scope.createReaction = function(item, type){
-        if($rootScope.currentUser){
-            $scope.newReaction.amount = 1;
-            $scope.newReaction.associatedModels = [{type:item.model, id:item.id}];
-            $scope.newReaction.type = type;
-            $scope.newReaction.user = $rootScope.currentUser.id;
-            var index = $scope.contentList.map(function(obj){return obj.id}).indexOf(item.id);
-            $scope.contentList[index].data.apps.reactions[type]++;
-            ReactionModel.create($scope.newReaction);
-            $rootScope.pop(type, item.id);
+    $sailsSocket.subscribe('reaction', function (envelope) {
+        if (envelope.verb == 'create'){if (envelope.data.user == $scope.member.id){$scope.contentList.unshift(envelope.data);}}
+        if (envelope.verb == 'update'){
+            var index = $scope.contentList.map(function(obj){return obj.id}).indexOf(envelope.data.id);
+            if (index != -1){$scope.contentList[index] = envelope.data;}
         }
-        else{$mdSidenav('login').toggle()}
-    };
-
-    //TODO: BETTER | TAG STORAGE
-    $scope.loadTags = function(){
-        function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
-        $scope.tags = $scope.contentList.map(function(obj){
-            if(obj.tags){obj.tags = obj.tags.split(',')}
-            return obj.tags;
-        });
-
-        $scope.tags = [].concat.apply([], $scope.tags);
-        $scope.tags = $scope.tags.filter(function(e){return e});
-        $scope.sortedTagArray = [];
-        for (x in $scope.tags){
-            var amount = countInArray($scope.tags, $scope.tags[x]);
-            if ($scope.sortedTagArray.map(function(obj){return obj.element}).indexOf($scope.tags[x]) == -1){
-                $scope.sortedTagArray.push({amount:amount, element:$scope.tags[x]})
-            }
-        }
-        $scope.sortedTagArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
-    }
-    $scope.loadTags();
+    });
 
 }])
 
@@ -801,15 +522,11 @@ angular.module( 'conexus.member', [
         return obj;
     });
 
-    /*
     $sailsSocket.subscribe('follower', function (envelope) {
-        switch(envelope.verb) {
-            case 'created':
-                $scope.followers.unshift(envelope.data);
-                break;
+        if (envelope.verb == 'create'){
+            $scope.time.unshift(envelope.data);
         }
     });
-    */
 
 }])
 
@@ -822,15 +539,11 @@ angular.module( 'conexus.member', [
         return obj;
     });
 
-    /*
-    $sailsSocket.subscribe('follower', function (envelope) {
-        switch(envelope.verb) {
-            case 'created':
-                $scope.followers.unshift(envelope.data);
-                break;
+   $sailsSocket.subscribe('follower', function (envelope) {
+        if (envelope.verb == 'create'){
+            $scope.time.unshift(envelope.data);
         }
     });
-    */
 
 }])
 
@@ -936,24 +649,13 @@ angular.module( 'conexus.member', [
     
     titleService.setTitle($scope.member.username + ' | Ledger | CRE8.XYZ');
 
-    if($rootScope.currentUser){
-        $scope.newTransaction.from = $rootScope.currentUser.id;
-        $scope.newTransaction.to = $scope.member.id;
-    }
-
     $scope.member = member;
-    $scope.newReaction = {};
-    $scope.newTransaction = {};
 
     $scope.searchQuery = [];
     $scope.transactionsFrom = transactionsFrom;
     $scope.transactionsTo = transactionsTo;
     $scope.transactions = $scope.transactionsFrom.concat($scope.transactionsTo);
-    
-    $scope.transactions = $scope.transactions.map(function(obj){
-        obj.model = 'TRANSACTION';
-        return obj;
-    });
+    $scope.transactions = $scope.transactions.map(function(obj){ obj.model = 'TRANSACTION'; return obj;});
 
     //ON ANY TOKEN MOMENT..  FOR LEDGER.. GOTTA SHOW THE INCOME! -- SOME UNITY
     //QUERY AGNOSITC MODEL.. AND OR ALL SEARCH LOL
@@ -1115,23 +817,6 @@ angular.module( 'conexus.member', [
         credits:{enabled:false},
     };
 
-    //DEPRECIATE
-    $scope.createReaction = function(item, type){
-        if ($rootScope.currentUser){
-            $scope.newReaction.amount = 1;
-            $scope.newReaction.type = type;
-            $scope.newReaction.user = $rootScope.currentUser.id;
-            var transactionIndex = $scope.transactions.map(function(obj){return obj.id}).indexOf(item.id);
-            if (timeIndex != -1){
-                $scope.newReaction.associatedModels = [{type:'TRANSACTION', id:item.id}];
-                $scope.transactions[transactionIndex].data.apps.reactions[type]++;
-                ReactionModel.create($scope.newReaction);
-                $rootScope.pop(type, item.id);
-            }
-        }
-        else{$mdSidenav('login').toggle();}
-    };
-
     //IMPROVE :)
     function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
     function amountInArray(array, value) {
@@ -1140,8 +825,6 @@ angular.module( 'conexus.member', [
             return n;
         },0);
     };
-
-
 
     //BETTER..
     $scope.loadAssets = function(){
@@ -1303,27 +986,13 @@ angular.module( 'conexus.member', [
 
     };
 
-
-    //TIME TO REDO THIS WHOLE THING LOL.........
-    //AFTER BETTER QUERIES AND FILTERING..
-
-
-    //WORK HERE!! :)
-    //USD HARD CODED. 
-    //REDO IT
-
-    //THERE ARE MORE THAN TRANSACTIONTO POPULATE .... YIk
     $scope.updateGraph = function(){
+
         $scope.sumFlow = [];
         $scope.sumFrom = []
         $scope.sumTo = [];
         $scope.sumTransactions = [];
         $scope.transactions = $scope.transactions.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);}).reverse(); 
-
-        console.log($scope.transactions);
-
-        //FXN TO CHANGE ASSETS --> ||| DEFAUT ASSET SERIES ARE BASED ON RECENT HISTORY... SORTED BY AMOUNT, MAGNITUDE IS RELATIVE
-        console.log($scope.sortedTransactionAssets)
 
         //SERIES FOR EACH ASSET
         //$scope.multiSum = [];
@@ -1337,10 +1006,8 @@ angular.module( 'conexus.member', [
         //    }
         //    return $scope.multiSum[i] = data;
         //},[[0,0],[0,0]]);
-        //console.log($scope.multiSum);
 
         //series for tag, series for asset..
-
         /*
         $scope.transactionsByIdentifier = {};
         $scope.transactions.map(function(obj){
@@ -1392,7 +1059,6 @@ angular.module( 'conexus.member', [
         }
         */
 
-
         console.log($scope.assetChart);
         $scope.transactions.reduce(function(a,b,i) {
 
@@ -1434,7 +1100,6 @@ angular.module( 'conexus.member', [
 
         //sumTo
         $scope.transactions.reduce(function(a,b,i) {
-
             if(b.to.id == $scope.member.id){
                 var amount = b.amountSet['USD'] || 0;
                 var sum =  parseFloat(a[1])+parseFloat(amount)
@@ -1445,12 +1110,10 @@ angular.module( 'conexus.member', [
                 var data = [new Date(b.createdAt).getTime(), parseFloat(a[1])];
                 return $scope.sumTo[i] = data;
             }
-
         },[0,0]);
 
         //sumFlow
         $scope.transactions.reduce(function(a,b,i) {
-
             if(b.from.id == $scope.member.id){
                 var amount = b.amountSet['USD'] || 0;
                 var sum =  parseFloat(a[1])+parseFloat(amount)
@@ -1463,7 +1126,6 @@ angular.module( 'conexus.member', [
                 var data = [new Date(b.createdAt).getTime(), sum];
                 return $scope.sumFlow[i] = data
             }
-
         },[0,0]);
 
         $scope.chart.series[0].data = $scope.sumTransactions;
@@ -1475,6 +1137,7 @@ angular.module( 'conexus.member', [
         $scope.startDate = new Date($scope.transactions[0].createdAt);
         $scope.endDate = new Date($scope.transactions[$scope.transactions.length-1].createdAt);
         $scope.transactions = $scope.transactions.reverse();
+
     };
 
     $scope.updateGraph();
@@ -1628,15 +1291,10 @@ angular.module( 'conexus.member', [
 
 
     //DO IN RESOLVE!
-    //KINDA HACKY? CAN USE STATES.. ETC
     console.log($location.search());
-    //TYPE.. EXPENSE..? 
-    //have init based on ... location.search
     if ($location.search()){
         //if assets..
-        if ($location.search().assets){
-            $scope.selectAsset($location.search().assets);
-        }
+        if ($location.search().assets){$scope.selectAsset($location.search().assets);}
         if ($location.search().type){
             if ($location.search().type.toLowerCase() == 'overview'){$scope.selectOverview();}
             if ($location.search().type.toLowerCase() == 'expense'){$scope.selectExpense();}
@@ -1647,7 +1305,6 @@ angular.module( 'conexus.member', [
     }
 
 
-
 }])
 
 .controller( 'MemberPositionsCtrl', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$scope', '$stateParams', 'member', 'OrderModel', 'orders', 'ReactionModel', 'titleService', function MemberPositionsController( $location, $mdSidenav, $rootScope, $sailsSocket, $scope, $stateParams, member, OrderModel, orders, ReactionModel, titleService) {
@@ -1655,123 +1312,6 @@ angular.module( 'conexus.member', [
     titleService.setTitle($scope.member.username + ' | Positions | CRE8.XYZ');
 
     $scope.newReaction = {};
-    $scope.orders = orders;
-
-    $scope.layout = {name: 'cola', coolingFactor: 0, animate: true};
-    $scope.options = {
-        pixelRatio: 'auto',
-        maxZoom:10,
-        minZoom:0.1,
-    };
-    $scope.style = [
-        {
-            "selector": "core",
-            "style": {
-                "selection-box-color": "#AAD8FF",
-                "selection-box-border-color": "#8BB0D0",
-                "selection-box-opacity": "0.5"
-            }
-        }, {
-            "selector": "node",
-            "style": {
-                "width": "25",
-                "height": "25",
-                "content": "data(name)",
-                "font-size": "12px",
-                "text-valign": "center",
-                "text-halign": "center",
-                "background-color": "#77828C",
-                "text-outline-color": "#77828C",
-                "text-outline-width": "2px",
-                "color": "#fff",
-                "overlay-padding": "3px",
-                "z-index": "10"
-            }
-        }, {
-            "selector": "node[?attr]",
-            "style": {
-                "shape": "rectangle",
-                "background-color": "#aaa",
-                "text-outline-color": "#aaa",
-                "width": "8px",
-                "height": "8px",
-                "font-size": "3px",
-                "z-index": "1"
-            }
-        }, {
-            "selector": "node[?query]",
-            "style": {
-                "background-clip": "none",
-                "background-fit": "contain"
-            }
-        }, {
-            "selector": "node:selected",
-            "style": {
-                "border-width": "3px",
-                "border-color": "#AAD8FF",
-                "border-opacity": "0.5",
-                "background-color": "#77828C",
-                "text-outline-color": "#77828C"
-            }
-        }, {
-            "selector": "edge",
-            "style": {
-                "curve-style": "bezier",
-                "target-arrow-shape": "triangle",
-                "arrow-scale":"0.75",
-                "source-arrow-shape": "none",
-                "opacity": "0.9",
-                "line-color": "#bbb",
-                "width": "3",
-                "overlay-padding": "3px",
-                'label': 'data(label)'
-            }
-        },
-        {
-            "selector": ".edgeLabelStyle",
-            "style": {
-                 "text-background-opacity": 1,
-                  "color": "#fff",
-                  "font-size": "12px",
-                  "text-background-color": "#77828C",
-                  "text-background-shape": "roundrectangle",
-                  "text-border-color": "#e8e8e8",
-                  "text-border-width": 1,
-                  "text-border-opacity": 1
-            }
-        },
-        {
-            "selector": "node.unhighlighted",
-            "style": {
-                "opacity": "0.2"
-            }
-        }, {
-            "selector": "edge.unhighlighted",
-            "style": {
-                "opacity": "0.05"
-            }
-        }, {
-            "selector": ".highlighted",
-            "style": {
-                "z-index": "999999"
-            }
-        }, {
-            "selector": "node.highlighted",
-            "style": {
-                "border-width": "3px",
-                "border-color": "#AAD8FF",
-                "border-opacity": "0.5",
-                "background-color": "#394855",
-                "text-outline-color": "#394855"
-            }
-        }, {
-            "selector": "edge.filtered",
-            "style": {
-                "opacity": "0"
-            }
-        }
-    ];
-
     $scope.orders = orders.map(function(obj){
         var elementsObj = {};
         for (y in Object.keys(obj.setAlpha)){
@@ -1836,38 +1376,31 @@ angular.module( 'conexus.member', [
         credits:{enabled:false},
     };
 
-    //PLURALISM
+    $rootScope.types = [
+        {text:'CONTINUAL'},
+        {text:'ONBOOKS'},
+    ];
+
+    $scope.searchQuery = $rootScope.baseMarkets;
+    $scope.selectedTab = 'POSITIONS';
+
+    //COMPUTED?? IN MEMBER??.. MAPPING FOR VALUE MAP.. IE LIKE MARKET FOR MEMBER.. [MEMBER-ORDER]
     if ($scope.orders.length != 0){
+
         $rootScope.baseMarkets = [];
         $rootScope.markets = [];
 
         for (x in $scope.orders){
-            //console.log($scope.orders[x]);
             if ($scope.orders[x].setAlpha && $scope.orders[x].setBeta){
-                for (y in Object.keys($scope.orders[x].setAlpha)){
-                    //AMOUNT!
-                    //$scope.orders[x].setAlpha[Object.keys($scope.orders[x].setAlpha)[y]]
-                    $rootScope.baseMarkets.push(Object.keys($scope.orders[x].setAlpha)[y])
-                }
-                for (y in Object.keys($scope.orders[x].setBeta)){
-                    //AMOUNT!
-                    //$scope.orders[x].setBeta[Object.keys($scope.orders[x].setBeta)[y]]
-                    $rootScope.markets.push(Object.keys($scope.orders[x].setBeta)[y])
-                }
+                for (y in Object.keys($scope.orders[x].setAlpha)){$rootScope.baseMarkets.push(Object.keys($scope.orders[x].setAlpha)[y])}
+                for (y in Object.keys($scope.orders[x].setBeta)){$rootScope.markets.push(Object.keys($scope.orders[x].setBeta)[y])}
             }
         }
-
         //REMOVE DUPS
         $rootScope.baseMarkets = Array.from(new Set($rootScope.baseMarkets));
         $rootScope.markets = Array.from(new Set($rootScope.markets));
-
-        $rootScope.baseMarkets = $rootScope.baseMarkets.map(function(obj){
-            return {text:obj};
-        });
-
-        $rootScope.markets = $rootScope.markets.map(function(obj){
-            return {text:obj};
-        });
+        $rootScope.baseMarkets = $rootScope.baseMarkets.map(function(obj){return {text:obj};});
+        $rootScope.markets = $rootScope.markets.map(function(obj){return {text:obj};});
 
     }
 
@@ -1909,13 +1442,6 @@ angular.module( 'conexus.member', [
         ];
     }
 
-    $rootScope.types = [
-        {text:'CONTINUAL'},
-        {text:'ONBOOKS'},
-    ];
-
-    $scope.searchQuery = $rootScope.baseMarkets;
-
     $scope.populateBaseMarkets = function(){
         $scope.chart.series = [];
         for (x in $rootScope.baseMarkets){
@@ -1932,12 +1458,9 @@ angular.module( 'conexus.member', [
                 fillOpacity: 0.3,
             });
         }
-    }
+    };
 
-    $rootScope.$watch('baseMarkets' ,function(){
-        $scope.populateBaseMarkets();
-        $scope.populateMarkets();
-    },true);
+    $rootScope.$watch('baseMarkets' ,function(){$scope.populateBaseMarkets();$scope.populateMarkets();},true);
    
     $scope.populateMarkets = function(){
         $scope.chart.xAxis.categories = [];
@@ -1948,34 +1471,10 @@ angular.module( 'conexus.member', [
                 $scope.chart.series[y].data.push((1+1*Math.random())/2);
             }
         }
-    }
-
-    $rootScope.$watch('markets' ,function(){
-        $scope.populateMarkets();
-    },true);
-
-    $scope.addMarket = function(type){};
-
-    $scope.createReaction = function(item, type){
-        if($rootScope.currentUser){
-            $scope.newReaction.amount = 1;
-            $scope.newReaction.associatedModels = [{type:'ORDER', id:item.id}];
-            $scope.newReaction.type = type;
-            $scope.newReaction.user = $rootScope.currentUser.id;
-            var index = $scope.orders.map(function(obj){return obj.id}).indexOf(item.id);
-            $scope.orders[index].data.apps.reactions[type]++;
-            ReactionModel.create($scope.newReaction);
-            $rootScope.pop(type, item.id);
-        }
-        else{$mdSidenav('login').toggle()}
     };
 
-    $scope.reply = function(activity){
-        if ($rootScope.currentUser){$mdSidenav('content').toggle();}
-        else{$mdSidenav('login').toggle()}
-    };
+    $rootScope.$watch('markets' ,function(){$scope.populateMarkets();},true);
 
-    $scope.selectedTab = 'POSITIONS';
     $scope.selectTab = function(model){$scope.selectedTab = model};
 
 }])
@@ -1985,96 +1484,37 @@ angular.module( 'conexus.member', [
     titleService.setTitle($scope.member.username + ' | Projects | CRE8.XYZ');
     $scope.projects = projects;
 
-    /*
-    $sailsSocket.subscribe('projectMember', function (envelope) {
-        switch(envelope.verb) {
-            case 'created':
-                $scope.followers.unshift(envelope.data);
-                break;
+    $sailsSocket.subscribe('projectmember', function (envelope) {
+        if (envelope.verb == 'create'){
+            $scope.projects.unshift(envelope.data);
         }
     });
-    */
 
 }])
 
-.controller( 'MemberTasksCtrl', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$scope', '$stateParams', 'member', 'ReactionModel', 'tasks', 'TaskModel', 'titleService', function MemberTimeController( $location, $mdSidenav, $rootScope, $sailsSocket, $scope, $stateParams, member, ReactionModel, tasks, TaskModel, titleService) {
-    
-    titleService.setTitle($scope.member.username + ' | Tasks | CRE8.XYZ');
-    
-    $scope.tasks = tasks.map(function(obj){
-        obj.model = 'TASK';
-        return obj;
-    });
-    $scope.newContent = {};
-    $scope.newReaction = {};
-    $scope.newTask = {};
-
-    //TODO: BETTER | TAG STORAGE
-    $scope.loadTags = function(){
-        $scope.tags = $scope.tasks.map(function(obj){
-            console.log(obj);
-            var returnObj = {};
-            if(obj.tags){obj.tags = obj.tags.split(',')}
-            returnObj = obj.tags;
-            return returnObj;
-        });
-        $scope.tags = [].concat.apply([], $scope.tags);
-        $scope.tags = $scope.tags.filter(function(e){return e});
-        function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0)}
-        $scope.sortedTagArray = [];
-        for (x in $scope.tags){
-            var amount = countInArray($scope.tags, $scope.tags[x]);
-            if ($scope.sortedTagArray.map(function(obj){return obj.element}).indexOf($scope.tags[x]) == -1){
-                $scope.sortedTagArray.push({amount:amount, element:$scope.tags[x]})
-            }
-        }
-        $scope.sortedTagArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
-    }
-    $scope.loadTags();
-
-    //DEPRECIATE
-    $scope.reply = function(activity){
-        if ($rootScope.currentUser){
-            //var index = $scope.tasks.map(function(obj){return obj.id}).indexOf(activity.id);
-            //$scope.tasks[index].showReply = !$scope.tasks[index].showReply;
-            $mdSidenav('content').toggle();
-        }
-        else{$mdSidenav('login').toggle()}
-    };
-
+.controller( 'MemberTasksCtrl', ['$rootScope', '$sailsSocket', '$scope', 'member', 'tasks', 'titleService', function MemberTimeController($rootScope, $sailsSocket, $scope, member, tasks, titleService) {
+    titleService.setTitle($scope.member.username + ' | Tasks | CRE8.XYZ'); 
+    $scope.tasks = tasks.map(function(obj){obj.model = 'TASK';return obj;});
     $sailsSocket.subscribe('task', function (envelope) {
-        switch(envelope.verb) {
-            case 'created':
-                $scope.tasks.unshift(envelope.data);
-                break;
+        if (envelope.verb == 'create'){if (envelope.data.user == $scope.member.id){$scope.tasks.unshift(envelope.data);}}
+        if (envelope.verb == 'update'){
+            var index = $scope.tasks.map(function(obj){return obj.id}).indexOf(envelope.data.id);
+            if (index != -1){$scope.tasks[index] = envelope.data;}
         }
     });
-
 }])
 
 .controller( 'MemberTimeCtrl', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$scope', '$stateParams', 'member', 'ReactionModel', 'time', 'TimeModel', 'titleService', function MemberTimeController( $location, $mdSidenav, $rootScope, $sailsSocket, $scope, $stateParams, member, ReactionModel, time, TimeModel, titleService) {
     
     titleService.setTitle($scope.member.username + ' | Time | CRE8.XYZ');
-    
-    //THE GROUP TESSERACT IS CONENESUS ON TIME ++ DIMENSIONAL WORK
-    //based on tokens 
-    //location mapping over time
-    //time mapping via actions ?  
-    //CAL SCHED .. PROMISE
 
-    //TODO VIEW --> CONSUMPTION
-    //VIZ ON A DAY TIME
-    //VIZ ON MONTH TIME
-    
     $scope.eventSources = [];
-    //IDEALLY WANT THIS TO BE AN INFINITE SCROLL TIMELINE YPE WITH ADVANCED FEATURES RN THIS IS TWO THINGS MASHED
     $scope.calendar = {
         height:448,
         editable: false,
         defaultView: "agendaWeek",
         header:{
             left: 'month,agendaWeek,agendaDay',
-            //left: 'month,agendaWeek,agendaDay listMonth,listWeek',
             center: 'title',
             right: 'today,prev,next',
         },
@@ -2086,24 +1526,17 @@ angular.module( 'conexus.member', [
             listMonth: 'List Month',
             listWeek: 'List Week',
         },
-        //themeSystem:'bootstrap4',
-        //dayClick
         slotDuration:'00:15:00',
         nowIndicator: true,
         allDaySlot: false,
     };
     $scope.newReaction = {};
-
-    $scope.newTime = {};
-    $scope.newTime.startTime = new Date();
-    $scope.newTime.startTime.setMilliseconds(0);
     $scope.map = {
         center: {latitude: 35.902023, longitude: -84.1507067 },
         zoom: 9
     };
     $scope.markers = [];
     $scope.options = {scrollwheel: false};
-
     $scope.time = time;
     $scope.time = time.map(function(obj){
         //HACK | CONFUSING | REMOVE CREATEDAT AS TIME --> FOCUS ON START AND END PARAMS
@@ -2132,48 +1565,12 @@ angular.module( 'conexus.member', [
         return obj;
     });
 
-    //DEPRECIATE
-    $scope.createReaction = function(item, type){
-        if ($rootScope.currentUser){
-            $scope.newReaction.amount = 1;
-            $scope.newReaction.type = type;
-            $scope.newReaction.user = $rootScope.currentUser.id;
-            var timeIndex = $scope.time.map(function(obj){return obj.id}).indexOf(item.id);
-            if (timeIndex != -1){
-                $scope.newReaction.associatedModels = [{type:'TIME', id:item.id}];
-                $scope.time[timeIndex].data.apps.reactions[type]++;
-                ReactionModel.create($scope.newReaction);
-                $rootScope.pop(type, item.id);
-            }
+    $sailsSocket.subscribe('time', function (envelope) {
+        if (envelope.verb == 'create'){if (envelope.data.user == $scope.member.id){$scope.time.unshift(envelope.data);}}
+        if (envelope.verb == 'update'){
+            var index = $scope.time.map(function(obj){return obj.id}).indexOf(envelope.data.id);
+            if (index != -1){$scope.time[index] = envelope.data;}
         }
-        else{$mdSidenav('login').toggle();}
-    };
-
-    //DEPRECIATE
-    $scope.createTime = function(){
-        if($rootScope.currentUser){
-            $scope.newTime.user = $rootScope.currentUser.id;
-            //HMM
-            $scope.newTime.createdAt = $scope.newTime.startTime;
-            $scope.newTime.tags = $scope.newTime.tags.map(function(obj){
-                return obj.text;
-            }).join(",");
-            console.log($scope.newTime);
-            TimeModel.create($scope.newTime).then(function(model){
-                $scope.newTime = {};
-            });
-        }
-        else{$mdSidenav('login').toggle()}
-    };
-
-    //DEPRECAITE
-    $scope.reply = function(activity){
-        if ($rootScope.currentUser){
-            //var index = $scope.time.map(function(obj){return obj.id}).indexOf(item.id);
-            //$scope.time[index].showReply = !$scope.time[index].showReply
-            $mdSidenav('content').toggle();
-        }
-        else{$mdSidenav('login').toggle()}
-    };
+    });
 
 }]);

@@ -10,8 +10,6 @@ module.exports = {
 
 		console.log('GET REACTION', req.query);
 
-		Reaction.watch(req);
-
 		if(req.query.id){
 			var id = req.query.id;
 			Reaction.find({id:id})
@@ -47,15 +45,20 @@ module.exports = {
 		function createNotification(notificationModel){
 			Notification.create(notificationModel).then(function(model){
 				console.log('CREATE NOTIFICATION', model);
-				Notification.publishCreate(model);
+				Notification.publish([model.id], {verb: 'create', data: model});
 			});
 		};
 
+		//ASYNC
 		function mintTokens(model){
-			console.log('USER BALANCE!!', model.user.balance)
+
 			var protocolTokens = getProtocolTokens(model);
+
 			for (x in protocolTokens){
+
 				var tokenString = protocolTokens[x];
+
+				//CREATE AND UPDATE TOKEN STRUCT
 				(function(tokenString) {
 					Token.find({string:tokenString}).then(function(tokenModels){
 						if (tokenModels.length == 0){
@@ -65,85 +68,192 @@ module.exports = {
 								information:{inCirculation:model.amount, markets:0},
 								logic:{transferrable:true, mint:'CREATE REACTION'}
 							};
-							
 							Token.create(newTokenModel).then(function(model){console.log('TOKEN CREATED', model.string);});
-							model.user.balance[tokenString] = parseFloat(model.amount);
-							
-							console.log('balance!',model.user.balance)
-
-							User.update({id:model.user.id}, {balance:model.user.balance}).then(function(user){});
 						}
 						else{
-							
 							tokenModels[0].information.inCirculation = parseInt(tokenModels[0].information.inCirculation) + parseFloat(model.amount); 
-							Token.update({id:tokenModels[0].id}, {information:tokenModels[0].information}).then(function(model){console.log('TOKEN UPDATED', model)});
-							
-							if (model.user.balance[tokenString]){model.user.balance[tokenString] = parseInt(model.user.balance[tokenString]) + parseFloat(model.amount);}
-							else{model.user.balance[tokenString] = parseFloat(model.amount);}
-							
-							console.log('balance',model.user.balance)
-							
-							User.update({id:model.user.id}, {balance:model.user.balance}).then(function(user){});
+							Token.update({id:tokenModels[0].id}, {information:tokenModels[0].information}).then(function(model){console.log('TOKEN UPDATED', model[0].string)});
 						}
 					});
 				})(tokenString);
+
+				//UPDATE CREATOR (USER) BALANCE MAPPING.
+				//TODO: A SET
+				if (model.user.balance[tokenString]){
+					model.user.balance[tokenString] = parseInt(model.user.balance[tokenString]) + parseFloat(model.amount);
+				}
+				else{
+					model.user.balance[tokenString] = parseFloat(model.amount);
+				}
 			}
+
+			User.update({id:model.user.id}, {balance:model.user.balance}).then(function(userModel){
+				console.log('BALANCE:', userModel[0].balance);
+			});
+
+			//DATA MODEL.. 
+			//TODO REMUX
+			//updateAssociatedModels(model, protocolTokens);
+
 		};
 
 		//FACTOR TO RETURN ENTIER TOKEN MODEL
+		//CONDIFY AMOUNT
 		function getProtocolTokens(model){
+
+			//WHO ARE THE AGENTS GETTING TOKENS?
+			//CREATOR
+				//ALL DATA MODELS GET THE HISTORY ON THE APP DATA
+
+				//CREATOR
+					//MODEL CREATOR (RECIEVOR)
+						//MODEL
+
 			//TODO: CREATOR AND RECIEVER AND TYPE
-			//associated models.. ie  react to content, time, etc
-			var protocolTokens = ['CRE8', 'CRE8+REACTION', 'CRE8+REACTION+'+model.id, 'CRE8+REACTION+'+model.type.toUpperCase()];
+			var protocolTokens = [
+				'CRE8', 
+				'CRE8+REACTION', 
+				'CRE8+REACTION+'+model.id, 
+				'CRE8+REACTION+'+model.type.toUpperCase(),
+				'CRE8+REACTION+'+model.user.username.toUpperCase(),
+				'CRE8+REACTION+'+model.user.username.toUpperCase()+'+'+model.type.toUpperCase(),
+			];
+
+			//protocolTokens.push('CRE8+REACTION+CREATE+'+Object.keys(model.amountSet)[x]);
+			//protocolTokens.push('CRE8+REACTION+SEND+'+Object.keys(model.amountSet)[x]+'+TO+'+model.to.id);
+
 			return protocolTokens;
+
 		};
 
 		//TODO: REFACTOR AND CONDENSE
 		//INTERMUX THE MODELS
+		//ABSTRACT THIS..
+
+		function updateAssociatedModels(model, protocolTokens){
+			for (x in model.associatedModels){
+				if (model.associatedModels[x].type == 'CONTENT'){
+					Content.find({id:model.associatedModels[x].id}).then(function(newModel){
+						if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
+						//UPDATE IT.. FLOW THRU PROTOCOL MAPPING..
+						for (y in protocolTokens){
+							if (!newModel[0].data.apps.tokens[protocolTokens[y]]){
+								newModel[0].data.apps.tokens[protocolTokens[y]] = model.amount;
+							}
+							else if (newModel[0].data.apps.tokens[protocolTokens[y]]){
+								newModel[0].data.apps.tokens[protocolTokens[y]] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y]]) + parseInt(model.amount);
+							}
+						}
+						Content.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){})
+					});
+				}
+				if (model.associatedModels[x].type == 'TASK'){
+					Task.find({id:model.associatedModels[x].id}).then(function(newModel){
+						if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
+						//UPDATE IT.. FLOW THRU PROTOCOL MAPPING..
+						for (y in protocolTokens){
+							if (!newModel[0].data.apps.tokens[protocolTokens[y]]){
+								newModel[0].data.apps.tokens[protocolTokens[y]] = model.amount;
+							}
+							else if (newModel[0].data.apps.tokens[protocolTokens[y]]){
+								newModel[0].data.apps.tokens[protocolTokens[y]] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y]]) + parseInt(model.amount);
+							}
+						}
+						Task.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){})
+					});
+				}
+			}
+		};
+
+		//REMIX
 		function updateAssociatedModelsData(model){
 			for (x in model.associatedModels){
-				model.user.balance = {};
-				model.user.reputation = {};
 				if (model.associatedModels[x].type == 'APP'){
 					App.find({id:model.associatedModels[x].id}).then(function(newModel){
 						if (!newModel[0].data.apps.reactions){newModel[0].reactions = {};}
 						if (!newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = model.amount;}
-						else if (newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = newModel[0].data.apps.reactions[model.type] + model.amount;}
-						App.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){console.log('UPDATE APP ASSOCIATED REACTION DATA');});
+						else if (newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);}
+						App.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){
+							App.publish([newModel[0].id], {verb:'update', data: newModel[0]});
+							console.log('UPDATE APP ASSOCIATED REACTION DATA');
+						});
 					});
 				}
 				if (model.associatedModels[x].type == 'ACTION'){
 					Action.find({id:model.associatedModels[x].id}).then(function(newModel){
 						if (!newModel[0].data.apps.reactions){newModel[0].reactions = {};}
 						if (!newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = model.amount;}
-						else if (newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = newModel[0].data.apps.reactions[model.type] + model.amount;}
-						Action.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){console.log('UPDATE ACTION ASSOCIATED REACTION DATA');});
+						else if (newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);}
+						Action.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){
+							Action.publish([newModel[0].id], {verb:'update', data: newModel[0]});
+							console.log('UPDATE ACTION ASSOCIATED REACTION DATA');
+						});
+						var notificationModel = {
+							user: newModel[0].user,
+							type: 'REACTION',
+							title: 'New '+model.type,
+							content:model.user.username+' created a '+model.type+' reaction for reaction '+newModel[0].id,
+							data:{
+								apps:{
+									user:model.user, 
+									action:newModel[0], 
+									type:model.type
+								}
+							},
+							priority:50,
+						};
+						createNotification(notificationModel);
 					});
 				}
 				if (model.associatedModels[x].type == 'ASSOCIATION'){
 					Association.find({id:model.associatedModels[x].id}).then(function(newModel){
 						if (!newModel[0].data.apps.reactions){newModel[0].reactions = {};}
 						if (!newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = model.amount;}
-						else if (newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = newModel[0].data.apps.reactions[model.type] + model.amount;}
-						Association.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){console.log('UPDATE ASSOCIATION ASSOCIATED REACTION DATA');});
+						else if (newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);}
+						Association.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){
+							Association.publish([newModel[0].id], {verb:'update', data: newModel[0]});
+							console.log('UPDATE ASSOCIATION ASSOCIATED REACTION DATA');
+						});
+						var notificationModel = {
+							user: newModel[0].user,
+							type: 'REACTION',
+							title: 'New '+model.type,
+							content:model.user.username+' created a '+model.type+' reaction for reaction '+newModel[0].id,
+							data:{
+								apps:{
+									user:model.user, 
+									association:newModel[0], 
+									type:model.type
+								}
+							},
+							priority:50,
+						};
+						createNotification(notificationModel);
 					});
 				}
 				if (model.associatedModels[x].type == 'CONNECTION'){
 					Connection.find({id:model.associatedModels[x].id}).then(function(newModel){
 						if (!newModel[0].data.apps.reactions){newModel[0].reactions = {};}
 						if (!newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = model.amount;}
-						else if (newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = newModel[0].data.apps.reactions[model.type] + model.amount;}
-						Connection.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){console.log('UPDATE CONNECTION ASSOCIATED REACTION DATA');});
+						else if (newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);}
+						Connection.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){
+							Connection.publish([newModel[0].id], {verb:'update', data: newModel[0]});
+							console.log('UPDATE CONNECTION ASSOCIATED REACTION DATA');
+						});
 					});
 				}
-				//LOOK
+
 				if (model.associatedModels[x].type == 'CONTENT'){
 					Content.find({id:model.associatedModels[x].id}).then(function(newModel){
 
 						if (!newModel[0].data.apps.reactions){newModel[0].reactions = {};}
 						if (!newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = model.amount;}
-						else if (newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = newModel[0].data.apps.reactions[model.type] + model.amount;}
-						Content.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){console.log('UPDATE CONTENT ASSOCIATED REACTION DATA');});å
+						else if (newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);}
+						Content.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){
+							console.log('UPDATE CONTENT ASSOCIATED REACTION DATA');
+							Content.publish([newModel[0].id], {verb:'update', data: newModel[0]});
+						});
+
 						//NOTIFICATION.. ASSOCIATED MODEL
 						//AUDIT NOTIFICATION MODEL STRUCT
 						var notificationModel = {
@@ -153,7 +263,7 @@ module.exports = {
 							content:model.user.username+' created a '+model.type+' reaction for content '+newModel[0].id,
 							data:{
 								apps:{
-									reacton:reaction,
+									reacton:model,
 									user:model.user, 
 									content:newModel[0], 
 									type:model.type
@@ -169,8 +279,11 @@ module.exports = {
 					Item.find({id:model.associatedModels[x].id}).then(function(newModel){
 						if (!newModel[0].data.apps.reactions){newModel[0].reactions = {};}
 						if (!newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = model.amount;}
-						else if (newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = newModel[0].data.apps.reactions[model.type] + model.amount;}
-						Item.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){console.log('UPDATE ITEM ASSOCIATED REACTION DATA');});
+						else if (newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);}
+						Item.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){
+							Item.publish([newModel[0].id], {verb:'update', data: newModel[0]});
+							console.log('UPDATE ITEM ASSOCIATED REACTION DATA');
+						});
 						var notificationModel = {
 							user: newModel[0].user,
 							type: 'REACTION',
@@ -192,8 +305,11 @@ module.exports = {
 					Order.find({id:model.associatedModels[x].id}).then(function(newModel){
 						if (!newModel[0].data.apps.reactions){newModel[0].reactions = {};}
 						if (!newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = model.amount;}
-						else if (newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = newModel[0].data.apps.reactions[model.type] + model.amount;}
-						Order.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){console.log('UPDATE ORDER ASSOCIATED REACTION DATA');});
+						else if (newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);}
+						Order.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){
+							Order.publish([newModel[0].id], {verb:'update', data: newModel[0]});
+							console.log('UPDATE ORDER ASSOCIATED REACTION DATA');
+						});
 						var notificationModel = {
 							user: newModel[0].user,
 							type: 'REACTION',
@@ -215,8 +331,11 @@ module.exports = {
 					Reaction.find({id:model.associatedModels[x].id}).then(function(newModel){
 						if (!newModel[0].data.apps.reactions){newModel[0].reactions = {};}
 						if (!newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = model.amount;}
-						else if (newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = newModel[0].data.apps.reactions[model.type] + model.amount;}
-						Reaction.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){console.log('UPDATE REACTION ASSOCIATED REACTION DATA');});
+						else if (newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);}
+						Reaction.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){
+							Reaction.publish([newModel[0].id], {verb:'update', data: newModel[0]});
+							console.log('UPDATE REACTION ASSOCIATED REACTION DATA');
+						});
 						var notificationModel = {
 							user: newModel[0].user,
 							type: 'REACTION',
@@ -238,8 +357,12 @@ module.exports = {
 					Task.find({id:model.associatedModels[x].id}).then(function(newModel){
 						if (!newModel[0].data.apps.reactions){newModel[0].reactions = {};}
 						if (!newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = model.amount;}
-						else if (newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = newModel[0].data.apps.reactions[model.type] + model.amount;}
-						Task.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){console.log('UPDATE TASK ASSOCIATED REACTION DATA');});
+						else if (newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);}
+						Task.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){
+							Task.publish([newModel[0].id], {verb:'update', data: newModel[0]});
+							console.log('UPDATE TASK ASSOCIATED REACTION DATA');
+						});
+
 						var notificationModel = {
 							user: newModel[0].user,
 							type: 'REACTION',
@@ -255,14 +378,18 @@ module.exports = {
 							priority:50,
 						};
 						createNotification(notificationModel);
+
 					});
 				}
 				if (model.associatedModels[x].type == 'TIME'){
 					Time.find({id:model.associatedModels[x].id}).then(function(newModel){
 						if (!newModel[0].data.apps.reactions){newModel[0].reactions = {};}
 						if (!newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = model.amount;}
-						else if (newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = newModel[0].data.apps.reactions[model.type] + model.amount;}
-						Time.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){console.log('UPDATE TIME ASSOCIATED REACTION DATA');});
+						else if (newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);}
+						Time.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){
+							Time.publish([newModel[0].id], {verb:'update', data: newModel[0]});
+							console.log('UPDATE TIME ASSOCIATED REACTION DATA');
+						});
 						var notificationModel = {
 							user: newModel[0].user,
 							type: 'REACTION',
@@ -284,8 +411,11 @@ module.exports = {
 					Transaction.find({id:model.associatedModels[x].id}).then(function(newModel){
 						if (!newModel[0].data.apps.reactions){newModel[0].reactions = {};}
 						if (!newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = model.amount;}
-						else if (newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = newModel[0].data.apps.reactions[model.type] + model.amount;}
-						Transaction.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){console.log('UPDATE TRANSACTION ASSOCIATED REACTION DATA');});
+						else if (newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);}
+						Transaction.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){
+							Transaction.publish([newModel[0].id], {verb:'update', data: newModel[0]});
+							console.log('UPDATE TRANSACTION ASSOCIATED REACTION DATA');
+						});
 						var notificationModel = {
 							user: newModel[0].user,
 							type: 'REACTION',
@@ -307,8 +437,11 @@ module.exports = {
 					Validation.find({id:model.associatedModels[x].id}).then(function(newModel){
 						if (!newModel[0].data.apps.reactions){newModel[0].reactions = {};}
 						if (!newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = model.amount;}
-						else if (newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = newModel[0].data.apps.reactions[model.type] + model.amount;}
-						Validation.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){console.log('UPDATE VALIDATION ASSOCIATED REACTION DATA');});
+						else if (newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);}
+						Validation.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){
+							Validation.publish([newModel[0].id], {verb:'update', data: newModel[0]});
+							console.log('UPDATE VALIDATION ASSOCIATED REACTION DATA');
+						});
 						var notificationModel = {
 							user: newModel[0].user,
 							type: 'REACTION',
@@ -327,7 +460,7 @@ module.exports = {
 					});
 				}
 			}
-		}
+		};
 
 		var model = {
 			model: 'REACTION',
@@ -351,8 +484,9 @@ module.exports = {
 					
 					reaction.associatedModels = req.param('associatedModels'),
 					reaction.user = userModel[0];
-
-					Reaction.publishCreate(reaction);
+					
+					Reaction.publish([reaction.id], {verb:'create', data: reaction});
+					
 					mintTokens(reaction);
 
 					//TODO: CREATE VALIDATIONS / ASSOCIATIONS

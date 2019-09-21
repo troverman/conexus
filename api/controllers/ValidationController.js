@@ -15,8 +15,6 @@ module.exports = {
 
 		console.log('GET VALIDATION', req.query)
 
-		Validation.watch(req);
-
 		if(req.query.id){
 
 			Validation.find({id:id})
@@ -75,14 +73,11 @@ module.exports = {
 
 					}
 
-					//find association parent. . . .
-
-					Validation.subscribe(req, models);
+					Validation.subscribe(req, [models[0].id]);
 					res.json(models);
 
 				});
 			});
-
 		}
 
 		else if (req.query.association){
@@ -104,14 +99,15 @@ module.exports = {
 				.skip(0)
 				.sort({'createdAt':-1})
 				.toArray(function (err, validationModels) {
-					console.log(validationModels)
-					validationModels = validationModels.map(function(obj){obj.id = obj._id; return obj;});
+					console.log(validationModels);
+					validationModels = validationModels.map(function(obj){obj.id = obj._id.toString(); return obj;});
+					console.log(validationModels.map(function(obj){return obj.id;}))
+					Validation.subscribe(req, validationModels.map(function(obj){return obj.id;}));
 					res.json(validationModels);
 				});
 			});
 		}
 
-		//TODO: DEPRECIATE
 		else if (req.query.task){
 
 			//Association.find({"associatedModels.address":{$in :[task]}})
@@ -132,11 +128,7 @@ module.exports = {
 					var promises = [];
 					for (x in models){
 
-						promises.push(
-							User.find({
-								id:models[x].user.toString()
-							}).then(function(userModels){return {user:userModels[0]}})
-						);
+						promises.push(User.find({id:models[x].user.toString()}).then(function(userModels){return {user:userModels[0]}}));
 
 						for (y in models[x].associatedModels){
 							if (models[x].associatedModels[y].type == 'PROJECT'){
@@ -177,7 +169,6 @@ module.exports = {
 			});
 		}
 
-		//TODO: DEPRECIATE
 		else if(req.query.user){
 			Validation.find({user:user})
 			.limit(limit)
@@ -185,7 +176,7 @@ module.exports = {
 			.sort(sort)
 			.populate('user')
 			.then(function(models) {
-				Validation.subscribe(req, models);
+				Validation.subscribe(req, models.map((obj)=>obj.id));
 				res.json(models);
 			});
 		}
@@ -197,7 +188,7 @@ module.exports = {
 			.sort(sort)
 			.populate('user')
 			.then(function(models) {
-				Validation.subscribe(req, models);
+				Validation.subscribe(req, models.map((obj)=>obj.id));
 				res.json(models);
 			});
 		}
@@ -233,7 +224,6 @@ module.exports = {
 					res.json(models);
 				});				
 			});
-
 		}
 
 	},
@@ -255,39 +245,77 @@ module.exports = {
 			return protocolTokens;
 		};
 
-		function createAssociation(model){
-			var andQuery = { 
-				$and: [
-					{"associatedModels.id":{$in:[model.associatedModels[0].id]}},
-					{"associatedModels.id":{$in:[model.associatedModels[1].id]}}
-				]
-			};
-			Association.native(function(err, association) {			
-				association.find(andQuery).limit(100000).skip(0).sort({'createdAt':-1})
-				.toArray(function (err, associationModels) {
-					if (associationModels.length != 0){
-						console.log('NEED TO RECOMPUTE THE ASSOCIATION :)');
-					}
-					else{
-						Association.create(model).then((newAssociationModel)=>{
-							console.log('CREATE ASSOCIATION', newAssociationModel)
+		function createAssociation(newValidationModel){
+			var newAssociationModel = {};
+			Validation.native(function(err, validation) {
+				validation.find({
+					$and : [
+						{"associatedModels.id": {$in :[newValidationModel.associatedModels[0].id]}}, 
+						{"associatedModels.id": {$in :[newValidationModel.associatedModels[1].id]}},
+					]
+				})
+				.limit(1000)
+				.skip(0)
+				.sort({'createdAt':-1})
+				.toArray(function (err, validationModels) {
+					Association.native(function(err, association) {
+						association.find({
+							$and : [
+								{"associatedModels.id": {$in :[validationModels[0].associatedModels[0].id]}},
+								{"associatedModels.id": {$in :[validationModels[0].associatedModels[1].id]}},
+							]
+						})
+						.limit(1000)
+						.skip(0)
+						.sort({'createdAt':-1})
+						.toArray(function (err, associationModels) {
+							if (associationModels.length == 0){
+								var newAssociationModel = newValidationModel;
+								newAssociationModel.model = 'ASSOCIATION';
+								newAssociationModel.user = newValidationModel.user.id;
+								Association.create(newAssociationModel).then(function(association){
+									console.log('CREATED ASSOCIATION', association);
+									Association.publish([association.id], {verb: 'update', data: association});
+								});
+							}
+							else{
+								console.log('ASSOCIATION EXISTS -- COMPUTE')
+							}
 						});
-					}
+					});
 				});
 			});
 		};
 
-		function createNotification(model){
+		function createNotification(user, model){
+			//NOTIFICATIONS APP-MEMBER ASSOCIATION
+				//FIND PRIORITY MAPPINGS
+					//TYPE IS IN MODEL 
+						//GLOBAL FX
+			//USER.FIND --> IF USER NOTIFICATION PERMISSION
 			var notificationModel = {
+				user: user,
 				type: 'VALIDATION',
-				title: 'New Validation',
-				content:'New Validation for associatedModels',
-				priority:75,
+				title: 'Request to Join',
+				content:'New Member, '+model.user.username +' is requesting membership validation for '+model.project.title,
+				priority: 100,
+				isRead: false,
+				data:{
+					apps:{
+						member:model.user.id, 
+						project:model.project.id
+					},
+				}
 			};
+			Notification.create(notificationModel).then(function(notification){
+				console.log('CREATE NOTIFICATION', notification);
+				Notification.publish([notification[0].id], {verb: 'create', data: associationModels[0].id});
+			});
 		};
 
 		var model = {
 			model: 'VALIDATION',
+
 			connection: req.param('connection'),
 			content: req.param('content'),
 
@@ -295,12 +323,9 @@ module.exports = {
 			creator: req.param('creator'),
 
 			context: req.param('context'),
-			reputation: req.param('reputation'),
-
 			associatedModels: req.param('associatedModels'),
 
 			data:{apps:{reactions:{plus:0,minus:0},attention:{general:0}}}
-			
 		};
 
 		if(!model.connection){
@@ -314,24 +339,55 @@ module.exports = {
 				},
 			};
 			//CONNECTION DEFINED MAPPINGS
-			for (y in newValidation.connection.parameters.mapping){
-				newValidation[newValidation.connection.parameters.mapping[y]] = {};
+			for (y in model.connection.parameters.mapping){
+				if(!model[model.connection.parameters.mapping[y]]){
+					model[model.connection.parameters.mapping[y]] = {};
+				}
 			}
 		}
 
 		User.find({id:model.user}).then(function(userModels){
+
 			console.log('CREATE VALIDATION', model);
+
 			Validation.create(model)
 			.exec(function(err, validation) {
 				if (err) {return console.log(err);}
 				else {
-					Validation.publishCreate(validation);
+
+					validation.user = userModels[0];
+					Validation.subscribe(req, [validation.id]);
+					Validation.publish([validation.id], {verb: 'create', data: validation.id});
+
 					createAssociation(validation);
 					createNotification(validation);
+
+					//NOTIFICATION TYPES --> IN CONNECTION FOR NON HARDCODE..
+					//HARDCODE IS THIS
+					//Association.find({}).then(function(associationModels){});
+					//ProjectMember.find({project:model.project}).then(function(projectMembers){
+					//	projectMember.user = userModels[0];
+					//	projectMember.project = projectMembers[0];
+					//	projectMembers = projectMembers.filter(function(obj){return obj.user !== userModels[0].id;});
+					//	for (x in projectMembers){createNotification(projectMember, projectMembers[x]);}
+					//});
+
 					mintTokens(validation);
 					res.json(validation);
+
+					//UPDATE COUNTS..
+					//STORED IN APPS?
+					//data:{
+						//apps:{
+						//	associations:{
+						//		tasks:0
+						//	}
+						//}
+					//}
+
 				}
 			});
+
 		});
 
 	},

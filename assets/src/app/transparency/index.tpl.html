@@ -7,20 +7,16 @@
         </div>
     </div>
 </div>
-
 <div class="spacing-10"></div>
-
 <div class="container">
-
 	<div class="row">
         <ul style="padding:0px;" class="member-tabs">
-            <li style="font-size:14px"><a ng-click="selectTab('PEERNETWORK')" href="#">Peer Network</a></li>
+            <li style="font-size:14px"><a ng-click="selectTab('NETWORK')" href="#">Peer Network</a></li>
             <li style="font-size:14px"><a ng-click="selectTab('STATS')" href="#">Stats</a></li>
             <div style="clear:both"></div>
         </ul>
 	</div>
-
-	<div class="row" ng-if="selectedTab == 'PEERNETWORK'">
+	<div class="row" ng-if="selectedTab == 'NETWORK'">
 		<div class="card">
 			<div style="background:url('https://source.unsplash.com/1600x900/?network')" class="imageContainerSmall">
 			    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
@@ -65,7 +61,6 @@
 			</div>
 		</div>
 	</div>
-
 	<div class="row" ng-if="selectedTab == 'STATS'">
 		<div class="card">
 			<div style="background:url('https://source.unsplash.com/1600x900/?network')" class="imageContainerSmall">
@@ -92,8 +87,4 @@
 			</div>
 		</div>
 	</div>
-
 </div>
-
-<div class="spacing-50"></div>
-

@@ -59,7 +59,7 @@ angular.module('angularSails.io', [])
  */
     .constant('$$sailsSDKParams', {
 
-        version: '0.11.0',  // TODO: pull this automatically from package.json during build.
+        version: '1.1.0',  // TODO: pull this automatically from package.json during build.
         platform: typeof module === 'undefined' ? 'browser' : 'node',
         language: 'javascript',
         flavor: 'angular'

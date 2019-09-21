@@ -34,8 +34,6 @@ module.exports = {
 		var user = req.query.user;
 		var id = req.query.id;
 
-		Time.watch(req);
-
 		console.log('GET TIME', req.query)
 
 		if (req.query.id){
@@ -108,8 +106,8 @@ module.exports = {
 			var eventModel = {
 				type:'create',
 				model:{
-					id:model.id, //hash
-					type:model.model //app
+					id:model.id,
+					type:model.model
 				},
 				data:{},
 			};
@@ -194,15 +192,11 @@ module.exports = {
 								var newAssociationModel = newValidationModel;
 								Association.create(newAssociationModel).then(function(association){
 									console.log('CREATED ASSOCIATION', association);
-									Association.publishCreate(association);
+									Association.publish([association.id], {verb: 'create', data: association});
 								});
 							}
 							else{
 								console.log('ASSOCIATION EXISTS -- COMPUTE');
-								//Association.update({id:associationModels[0]._id, newAssociationModel}).then(function(association){
-								//	console.log('UPDATED ASSOCIATION', association);
-								//	Association.publishCreate(association);
-								//});
 							}
 						});
 					});
@@ -324,7 +318,7 @@ module.exports = {
 					time.associatedModels = req.param('associatedModels');
 					time.user = userModels[0];
 
-					Time.publishCreate(time);
+					Time.publish([time.id], {verb: 'create', data: time});
 					createEvent(time);
 					createNotification(time);
 					createValidation(time);

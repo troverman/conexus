@@ -100,10 +100,8 @@ module.exports = {
 		.exec(function(err, location) {
 			if (err) {return console.log(err);}
 			else {
-				Location.publishCreate(location);
-
+				Location.publish([location.id], {verb: 'create', data: location});
 				mintTokens(location);
-
 				res.json(location);
 			}
 		});

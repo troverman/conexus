@@ -20,7 +20,7 @@ angular.module( 'conexus.tasks', [
 	});
 }])
 
-.controller( 'TasksCtrl', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'ReactionModel', 'TaskModel', 'tasks', function TasksController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, ReactionModel, TaskModel, tasks ) {
+.controller( 'TasksCtrl', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'TaskModel', 'tasks', function TasksController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, TaskModel, tasks ) {
 	
     $scope.map = {center: {latitude: 35.902023, longitude: -84.1507067 }, zoom: 9};
     $scope.markers = [];
@@ -38,28 +38,6 @@ angular.module( 'conexus.tasks', [
         return obj;
     });
     $scope.taskCount = tasks.info.count;
-
-    //TODO: DEPRECIATE
-    $scope.createReaction = function(item, type){
-        if ($rootScope.currentUser){
-            $scope.newReaction = {
-                amount:1,
-                type:type,
-                user:$rootScope.currentUser.id,
-            };
-            var taskIndex = $scope.tasks.map(function(obj){return obj.id}).indexOf(item.id);
-            if (taskIndex != -1){
-                $scope.newReaction.associatedModels = [{type:'TASK', id:item.id}];
-                $scope.tasks[taskIndex].data.apps.reactions[type]++;
-                ReactionModel.create($scope.newReaction);
-                $rootScope.pop(type, item.id);
-            }         
-        }
-        else{$mdSidenav('login').toggle();}
-    };
-
-  
-
 
     //COMPLEX QUERIES && POPULATION
 
@@ -183,7 +161,6 @@ angular.module( 'conexus.tasks', [
         });
     };
 
-
     $scope.$watch('searchQueryNEW' ,function(newValue, oldValue){
         if (newValue !== oldValue) {
 
@@ -207,21 +184,14 @@ angular.module( 'conexus.tasks', [
         }
     }, true);
 
-
-    //WATCH FOR COMMENTS.. --> UPDATE SCOPE
-
-
-    //TODO: SOCKET
     $sailsSocket.subscribe('task', function (envelope) {
-        switch(envelope.verb) {
-            case 'created':
-                $scope.tasks.unshift(envelope.data);
-                $scope.tasks.map(function(obj){
-                    obj.model = 'TASK';
-                    if (obj.tags){obj.tags = obj.tags.split(',')}
-                    return obj;
-                });
-                break;
+        console.log(envelope);
+        if (envelope.verb == 'create'){$scope.tasks.unshift(envelope.data);}
+        if (envelope.verb == 'update'){
+            var index = $scope.tasks.map(function(obj){return obj.id}).indexOf(envelope.data.id);
+            if (index != -1){
+                $scope.tasks[index] = envelope.data;
+            }
         }
     });
 

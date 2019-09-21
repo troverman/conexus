@@ -7,7 +7,7 @@ module.exports = {
     logout: function (req, res) {
         req.user.loggedIn = false;
         User.update({id: req.user.id}, {loggedIn: false}).then(function(userModel) {
-            User.publishUpdate(userModel[0].id, userModel[0]);
+            User.publish([userModel[0].id], {verb: 'create', data: userModel[0].id});
         });
         console.log(req.user.username + ': logged out');
         req.logout();
@@ -18,7 +18,9 @@ module.exports = {
 
     callback: function (req, res) {
         passport.callback(req, res, function (err, user) {
+            if (user._id){user.id = user._id;}
             req.login(user, function (err) {
+                console.log(err);
                 if (err) {res.redirect('/login');}
                 else {
 
@@ -28,9 +30,7 @@ module.exports = {
                     req.session.User = user;
 
                     User.update({id: user.id}, {loggedIn: true}).then(function(userModel) {
-
-                        User.publishUpdate(userModel[0].id, userModel[0]);
-
+                        User.publish([userModel[0].id], {verb: 'updated', data: userModel[0]});
                     });
 
                     //if user is mining

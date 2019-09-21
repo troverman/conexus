@@ -24,7 +24,7 @@ module.exports = {
 	//CAN HANDLE ALL API CALLS..
 	search: function (req, res) {
 
-		console.log(req._sails)
+		console.log('SEARCH!')
 
 		if (!req.query.query){
 
@@ -84,7 +84,7 @@ module.exports = {
 				        obj.model = 'PROJECT';
 				        return obj;
 				    });
-				    console.log(projectModels)
+				    //console.log(projectModels)
 					Project.subscribe(req, projectModels);
 					res.json(projectModels);
 				});
@@ -112,7 +112,6 @@ module.exports = {
 				        obj.model = 'PROJECT';
 				        return obj;
 				    });
-					Project.watch(req);
 					Project.subscribe(req, models);
 
 					//TODO UNIFY CONTENT MODEL
@@ -132,7 +131,6 @@ module.exports = {
 					    });
 						var combinedModels = [].concat.apply([], [projectModels, contentModels]);
 		    			combinedModels = combinedModels.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
-						Content.watch(req);
 						Content.subscribe(req, models);
 
 						//TODO UNIFY CONTENT MODEL
@@ -151,7 +149,6 @@ module.exports = {
 						    });
 						    var superCombinedModels = [].concat.apply([], [taskModels, combinedModels]);
 		    				superCombinedModels = superCombinedModels.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
-		    				Task.watch(req);
 							Task.subscribe(req, models);
 							User.find()
 							.where({
@@ -166,7 +163,6 @@ module.exports = {
 							    });
 							    var superSuperCombinedModels = [].concat.apply([], [userModels, superCombinedModels]);
 		    					superSuperCombinedModels = superSuperCombinedModels.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
-								User.watch(req);
 								User.subscribe(req, models);
 
 								//LOL WOT --> HEHEHEHEHEH
@@ -185,9 +181,7 @@ module.exports = {
 								    });
 								    var superSuperSuperCombinedModels = [].concat.apply([], [itemModels, superSuperCombinedModels]);
 		    						superSuperSuperCombinedModels = superSuperSuperCombinedModels.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
-									Item.watch(req);
 									Item.subscribe(req, models);
-									//console.log(superSuperSuperCombinedModels)
 									res.json(superSuperSuperCombinedModels);
 								});
 							});
@@ -204,19 +198,6 @@ module.exports = {
 		//data models are contined within apps 
 			//simplify to data ?? hm
 
-		//DEPRECIATE
-		//WEBSOCKET..
-		Action.watch(req);
-		App.watch(req);
-		Content.watch(req);
-		Item.watch(req);
-		User.watch(req); //MEMBER
-		Project.watch(req);
-		Task.watch(req);
-		Time.watch(req);
-		Transaction.watch(req);
-		Validation.watch(req);
-
 		var searchQuery = JSON.parse(req.query.query);
 
 		console.log(searchQuery);
@@ -232,16 +213,16 @@ module.exports = {
 
 		var promises = [];
 		for (x in searchQuery){
-			if (searchQuery[x].model =='ACTION'){promises.push(Action.find().limit(10).skip(0).sort('createdAt DESC').then(function(models){return {action:models}}))}
-			if (searchQuery[x].model.includes("APP")){promises.push(App.find().limit(10).skip(0).sort('createdAt DESC').then(function(models){return {app:models}}))}
-			if (searchQuery[x].model =='CONTENT'){promises.push(Content.find().limit(10).skip(0).sort('createdAt DESC').then(function(models){return {content:models}}))}
-			if (searchQuery[x].model =='ITEM'){promises.push(Item.find().limit(10).skip(0).sort('createdAt DESC').then(function(models){return {item:models}}))}
-			if (searchQuery[x].model =='MEMBER'){promises.push(User.find().limit(10).skip(0).sort('createdAt DESC').then(function(models){return {member:models}}))}
-			if (searchQuery[x].model =='PROJECT'){promises.push(Project.find().limit(10).skip(0).sort('createdAt DESC').then(function(models){return {project:models}}))}
-			if (searchQuery[x].model =='TASK'){promises.push(Task.find().limit(10).skip(0).sort('createdAt DESC').then(function(models){return {task:models}}))}
-			if (searchQuery[x].model =='TIME'){promises.push(Time.find().limit(10).skip(0).sort('createdAt DESC').then(function(models){return {time:models}}))}
-			if (searchQuery[x].model =='TRANSACTION'){promises.push(Transaction.find().limit(10).skip(0).sort('createdAt DESC').then(function(models){return {transaction:models}}))}
-			if (searchQuery[x].model =='VALIDATION'){promises.push(Validation.find().limit(10).skip(0).sort('createdAt DESC').then(function(models){return {validation:models}}))}
+			if (searchQuery[x].model =='ACTION'){promises.push(Action.find().limit(10).skip(0).sort('createdAt DESC').then(function(models){Action.subscribe(req, models.map((obj)=>obj.id));return {action:models}}))}
+			if (searchQuery[x].model.includes("APP")){promises.push(App.find().limit(10).skip(0).sort('createdAt DESC').then(function(models){App.subscribe(req, models.map((obj)=>obj.id));return {app:models}}))}
+			if (searchQuery[x].model =='CONTENT'){promises.push(Content.find().limit(10).skip(0).sort('createdAt DESC').then(function(models){Content.subscribe(req, models.map((obj)=>obj.id));return {content:models}}))}
+			if (searchQuery[x].model =='ITEM'){promises.push(Item.find().limit(10).skip(0).sort('createdAt DESC').then(function(models){Item.subscribe(req, models.map((obj)=>obj.id));return {item:models}}))}
+			if (searchQuery[x].model =='MEMBER'){promises.push(User.find().limit(10).skip(0).sort('createdAt DESC').then(function(models){User.subscribe(req, models.map((obj)=>obj.id));return {member:models}}))}
+			if (searchQuery[x].model =='PROJECT'){promises.push(Project.find().limit(10).skip(0).sort('createdAt DESC').then(function(models){Project.subscribe(req, models.map((obj)=>obj.id));return {project:models}}))}
+			if (searchQuery[x].model =='TASK'){promises.push(Task.find().limit(10).skip(0).sort('createdAt DESC').then(function(models){Task.subscribe(req, models.map((obj)=>obj.id));return {task:models}}))}
+			if (searchQuery[x].model =='TIME'){promises.push(Time.find().limit(10).skip(0).sort('createdAt DESC').then(function(models){Time.subscribe(req, models.map((obj)=>obj.id));return {time:models}}))}
+			if (searchQuery[x].model =='TRANSACTION'){promises.push(Transaction.find().limit(10).skip(0).sort('createdAt DESC').then(function(models){Transaction.subscribe(req, models.map((obj)=>obj.id));return {transaction:models}}))}
+			if (searchQuery[x].model =='VALIDATION'){promises.push(Validation.find().limit(10).skip(0).sort('createdAt DESC').then(function(models){Validation.subscribe(req, models.map((obj)=>obj.id));return {validation:models}}))}
 		}
 		
 		Q.all(promises).then((populatedModels)=>{
@@ -295,7 +276,6 @@ module.exports = {
 					}); 
 				}
 				if (obj.validation){returnObj = obj.validation.map(function(anObj){anObj.model = 'VALIDATION'; return anObj;}); }
-				console.log(returnObj)
 				return returnObj;
 			});
 

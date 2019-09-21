@@ -98,9 +98,9 @@ angular.module( 'conexus.nav', [
             }
         });
 
-        //TODO: WEBSOCKETS
         $sailsSocket.subscribe('notification', function (envelope) {
-            if (envelope.verb == 'created'){
+            console.log(envelope)
+            if (envelope.verb == 'create'){
                 console.log('SOCKET NOTIRICATION', envelope)
                 //TODO: HAS TO BE BETTER THAN SOCKET CHECK; SOCKET ROOMS? 
                 if ($rootScope.currentUser.id == envelope.data.user){
@@ -397,24 +397,28 @@ angular.module( 'conexus.nav', [
     $rootScope.itemToggle = function(){
         $scope.closeAllNav();
         if($rootScope.currentUser){
-            $scope.newItem = {};
+            $scope.newItem = {
+                associatedModels:[
+                    {
+                        type:'ITEM',
+                        text:'self',
+                        id:'self',
+                        context:[
+                            {text:'self', score:100}
+                        ]
+                    }
+                ],
+                user:$rootScope.currentUser.id,
+            };
 
-            $scope.newItem.associatedModels = [
-                {
-                    type:'ITEM',
-                    text:'self',
-                    id:'self',
-                    context:[
-                        {text:'self', score:100}
-                    ]
+            $scope.$watch('newTask.context', function(newValue, oldValue){
+                if (newValue !== oldValue) {
+                    for (x in $scope.newTask.associatedModels){
+                        $scope.newTask.associatedModels[x].context = newValue.map(function(obj){obj.score = 100;return obj;});
+                    }
                 }
-            ];
+            }, true);
 
-            //$scope.$watch('newItem.associatedModels', function(newValue, oldValue){
-            //    if (newValue !== oldValue) {
-            //        //ADD SCORE
-            //    }
-            //}, true);
 
             $mdSidenav('item').toggle();
         }
@@ -498,6 +502,7 @@ angular.module( 'conexus.nav', [
     $rootScope.projectToggle = function(item){
         $scope.closeAllNav();
         if($rootScope.currentUser){
+
             $scope.newProject = {
                 associatedModels:[{
                     type:'PROJECT',
@@ -509,6 +514,7 @@ angular.module( 'conexus.nav', [
                 }],
                 user:$rootScope.currentUser.id,
             };
+            
             if (item){
                 $scope.item = item;
                 $scope.newProject.associatedModels.push({
@@ -521,10 +527,10 @@ angular.module( 'conexus.nav', [
                 });
             }
 
-            $scope.$watch('newTask.context', function(newValue, oldValue){
+            $scope.$watch('newProject.context', function(newValue, oldValue){
                 if (newValue !== oldValue) {
-                    for (x in $scope.newTask.associatedModels){
-                        $scope.newTask.associatedModels[x].context = newValue.map(function(obj){obj.score = 100;return obj;});
+                    for (x in $scope.newProject.associatedModels){
+                        $scope.newProject.associatedModels[x].context = newValue.map(function(obj){obj.score = 100;return obj;});
                     }
                 }
             }, true);
@@ -587,20 +593,7 @@ angular.module( 'conexus.nav', [
 
         $scope.item = item;
         $scope.content = item;
-        //PATCH
-        if ($scope.item.tags){
-            if (!Array.isArray($scope.item.tags)){
-                $scope.item.tags = $scope.item.tags.split(',');
-            }
-        }
-        //PATCH
-        if ($scope.item.task){
-            if ($scope.item.task.tags){
-                if (!Array.isArray($scope.item.task.tags)){
-                     $scope.item.task.tags = $scope.item.task.tags.split(',');
-                }
-            }
-        }
+      
         //GET CHILDREN && || TIME... ASSOCIATIONS.. NEED TO FINISH ASSOCIATED SO I DONT KEEP REWRITING.. 
         function populateChildren(contentList, depth, limit){
             contentList.forEach(function(content) {
@@ -709,7 +702,6 @@ angular.module( 'conexus.nav', [
 
     };
 
-    //TODO!!!
     $rootScope.renderValidationToggle = function(item){
         
         $scope.closeAllNav();
@@ -1099,7 +1091,6 @@ angular.module( 'conexus.nav', [
         $scope.closeAllNav();
 
         if($rootScope.currentUser){
-            $scope.newTask = {};
             $scope.createDetailToggleVar = true;
             $scope.newTask = {
                 associatedModels:[{
@@ -1187,7 +1178,7 @@ angular.module( 'conexus.nav', [
                     $scope.newContent = {
                         type:'video',
                         title: $scope.task.title,
-                        tags: $scope.task.title + ',stream,work,' + $scope.task.project.title,
+                        context: $scope.task.title + ',stream,work,' + $scope.task.project.title,
                         content: '<iframe width="510" height="265" src="'+$scope.streamUrl+'" frameborder="0" allowfullscreen></iframe>', //BUILD FOR EMBED
                         user: $rootScope.currentUser.id,
                     };
@@ -1222,15 +1213,10 @@ angular.module( 'conexus.nav', [
                     stream: $scope.streamingId,
                     type:'LIVE',
                 };
-                if ($scope.timeTags){
-                    timeModel.tags = $scope.timeTags.map(function(obj){
-                        return obj.text
-                    }).join(",");
-                }
 
                 $rootScope.stateIsLoading = true;
-
                 TimeModel.create(timeModel).then(function(newTime){
+                    $rootScope.stateIsLoading = false;
                     $scope.timeContent = '';
 
                     //TODO BACKEND.. GENERALIZE CONTENT ASSOCIATION :)
@@ -1247,10 +1233,8 @@ angular.module( 'conexus.nav', [
                         });
                     }
 
-                    $rootScope.stateIsLoading = false;
-
                     $mdSidenav('time').close();
-                    setTimeout(function () {$rootScope.pop('New Time!', newTime.id +' '+ newTime.createdAt);}, 250);
+                    $rootScope.pop('New Time!', newTime.id +' '+ newTime.createdAt);
                       
                     $rootScope.taskTime=0;
                     clearInterval($scope.interval);
@@ -1539,24 +1523,15 @@ angular.module( 'conexus.nav', [
 
     $scope.createItem = function(content) {
         if ($rootScope.currentUser){
-            $scope.newItem.user = $rootScope.currentUser.id;
-            if ($scope.newItem.tags){
-                $scope.newItem.tags = $scope.newItem.tags.map(function(obj){
+            if ($scope.newItem.context){
+                $scope.newItem.context = $scope.newItem.context.map(function(obj){
                     return obj.text;
                 }).join(",");
             }
-            //PATCH!!!
-            if ($scope.newItem.associatedModels){
-                for (x in $scope.newItem.associatedModels){
-                    $scope.newItem[$scope.newItem.associatedModels[x].type.toLowerCase()] = $scope.newItem.associatedModels[x].id
-                }
-            }
-
             $mdSidenav('item').close();
             ItemModel.create($scope.newItem).then(function(model) {
                 $rootScope.pop('New Item!', model.id +' '+ model.createdAt);
             });
-
         }
         else{$mdSidenav('login').toggle()}
     };
@@ -1594,38 +1569,13 @@ angular.module( 'conexus.nav', [
         else{$mdSidenav('login').toggle()}
     };
 
-    //TODO: MOVE TO ASSOCIATED MODELS
     $scope.createProject = function() {
-
         if ($rootScope.currentUser){
-
-            if ($scope.newProject.tags){
-
-                $scope.newProject.tags = $scope.newProject.tags.map(function(obj){
-                    return obj.text;
-                }).join(",");
-
-            }
-
-            //NOT ON FRONTEND
-            $scope.newProject.user = $rootScope.currentUser.id;
-
-            //PATCH!!!
-            if ($scope.newProject.associatedModels){
-                if ($scope.newProject.associatedModels[0]){
-                    if ($scope.newProject.associatedModels[0].type == 'PROJECT'){
-                        $scope.newProject.parent = $scope.newProject.associatedModels[0].id;
-                    }
-                }
-            }
-
             console.log('CREATE PROJECT', $scope.newProject);
-
             $mdSidenav('project').close();
             ProjectModel.create($scope.newProject).then(function(model) {
-               $rootScope.pop('New Project!', model.id +' '+ model.createdAt);
+                $rootScope.pop('New Project!', model.id +' '+ model.createdAt);
             });
-
         }
         else{$mdSidenav('login').toggle()}
     };
@@ -1635,45 +1585,28 @@ angular.module( 'conexus.nav', [
     //TODO: MORE ON RENDER
     $rootScope.createReaction = function(item, type){
         if($rootScope.currentUser){
-
-
-            $scope.newReaction.amount = 1;
-            $scope.newReaction.associatedModels = [{type:item.model, id:item.id, context:{general:100}}];
-            $scope.newReaction.type = type;
-            $scope.newReaction.user = $rootScope.currentUser.id;
-            $scope.item.reactions[type]++;
-            
+            $scope.newReaction = {
+                amount:1,
+                associatedModels: [{type:item.model, id:item.id}],
+                type:type,
+                user:$rootScope.currentUser.id
+            }
+            //WEBSOCKETS
+            //$scope.item.reactions[type]++;
             //UPDATE LOCAL SCOPE..
+            console.log($scope.newReaction);
             ReactionModel.create($scope.newReaction);
             $rootScope.pop(type, item.id);
-
-
         }
         else{$mdSidenav('login').toggle()}
     };
 
     $scope.createTask = function() {
         if ($rootScope.currentUser){
-            $scope.newTask.user = $rootScope.currentUser.id;
-
-            //DEPRECIATE
-            if ($scope.newTask.tags){
-                $scope.newTask.tags = $scope.newTask.tags.map(function(obj){
-                    return obj.text;
-                }).join(",");
-            }
-
-
-            //PATCH!!!
-            if ($scope.newTask.associatedModels){
-                for (x in $scope.newTask.associatedModels){
-                    $scope.newTask[$scope.newTask.associatedModels[x].type.toLowerCase()] = $scope.newTask.associatedModels[x].id;
-                }
-            }
-
-            console.log('CREATE TASK', $scope.newTask);
             $mdSidenav('task').close();
+            console.log('CREATE TASK', $scope.newTask);
             TaskModel.create($scope.newTask).then(function(model) {
+                console.log(model)
                 $rootScope.pop('New Task!', model.id +' '+ model.createdAt);
             });
 
@@ -1683,50 +1616,39 @@ angular.module( 'conexus.nav', [
 
     $scope.createTime = function(){
         if($rootScope.currentUser){
-
-            $scope.newTime.user = $rootScope.currentUser.id;
             $scope.newTime.createdAt = $scope.newTime.startTime;
-            if ($scope.newTime.tags){
-                $scope.newTime.tags = $scope.newTime.tags.map(function(obj){
+            if ($scope.newTime.context){
+                $scope.newTime.context = $scope.newTime.context.map(function(obj){
                     return obj.text;
                 }).join(",");
             }
-           
             console.log('CREATE TIME', $scope.newTime);
-
             $mdSidenav('time').close();
             TimeModel.create($scope.newTime).then(function(model){
                 $rootScope.pop('New Time!', model.id +' '+ model.createdAt);
             });
-
         }
         else{$mdSidenav('login').toggle()}
     };
 
     $scope.createTransaction = function(){
         if ($rootScope.currentUser){
-
             $scope.newTransaction.user = $rootScope.currentUser.id;
-
             if ($scope.newTransaction.context){
                 $scope.newTransaction.context = $scope.newTransaction.context.map(function(obj){
                     return obj.text
                 }).join(",");
             }
-
             //MULTI TRANSACTION BUG... 
             //COPY MODEL.. 
             var newTransaction = $scope.newTransaction;
             newTransaction.from = newTransaction.from[0].id;
             newTransaction.to = newTransaction.to[0].id;
-            
             console.log('CREATE TRANSACTION', $scope.newTransaction);
-
             $mdSidenav('transaction').close();
             TransactionModel.create(newTransaction).then(function(model){
                $rootScope.pop('New Transaction!', model.id +' '+ model.createdAt);
             });
-
         }
         else{$mdSidenav('transaction').close();$mdSidenav('login').toggle()}
     };
@@ -1739,19 +1661,15 @@ angular.module( 'conexus.nav', [
         if ($rootScope.currentUser){
             if (item){$scope.newValidation = item;}           
             if ($scope.newValidation.associatedModels){
-                
                 console.log('CREATE VALIDATION', $scope.newValidation);
-
                 $mdSidenav('validation').close();
                 ValidationModel.create($scope.newValidation).then(function(model) {
                     $rootScope.pop('New Validation!', model.id +' '+ model.createdAt);
                 });
-
             }
         }
         else{$mdSidenav('login').toggle()}
     };
-
 
     //VIEWMODEL.. 
     if (!$rootScope.timeModel){
@@ -1851,7 +1769,7 @@ angular.module( 'conexus.nav', [
             string: string,
             data: {verion:'PRE ALPHA', ip:{}, device:{title:navigator.userAgent, id:1, hardwareHash:''}},
             associatedModels: associatedModels,
-            creator: $rootScope.currentUser,
+            creator: $rootScope.currentUser.id,
         };
 
         if (set.length >= 10){

@@ -12,14 +12,13 @@ module.exports = {
 
 		console.log('GET APP', req.query);
 
-		App.watch(req);
-
 		if(req.query.id){
 			App.find({id:id})
 			.limit(limit)
 			.skip(skip)
 			.sort(sort)
         	.then(function(models) {
+				App.subscribe(req, [models[0].id]);
 				res.json(models[0]);
 			});
 		}
@@ -161,8 +160,9 @@ module.exports = {
 			if (err) {return console.log(err);}
 			else {
 
-				Action.publishCreate(model);
+				App.publish([model.id], {verb: 'create', data: model});
 				createEvent(model);
+				
 				createNotification(model);	
 				createValidation(model);
 				res.json(model);

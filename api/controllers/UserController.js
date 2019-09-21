@@ -14,14 +14,14 @@ module.exports = {
 
 		if (req.query.id){
 			User.find({id:id}).then(function(models){
-				User.subscribe(req, models[0]);
+				User.subscribe(req, [models[0].id]);
 				res.json(models[0]);
 			});
 		}
 
 		else if (req.query.username){
 			User.find({username:username}).then(function(models){
-				User.subscribe(req, models);
+				User.subscribe(req, [models[0].id]);
 				res.json(models[0]);
 			});
 		}
@@ -62,31 +62,6 @@ module.exports = {
 
 	},
 
-	/*
-	create: function (req, res) {
-		function mintTokens(model){
-			var protocolTokens = getProtocolTokens(model);
-		};
-		function getProtocolTokens(model){
-			var protocolTokens = [model.username.toUpperCase()];
-			return protocolTokens;
-		};
-		var model = {
-			username: req.param('username'),
-			email: req.param('email'),
-		};
-		console.log('CREATE USER', model);
-		User.create(model)
-		.exec(function(err, model) {
-			if (err) {return console.log(err);}
-			else {
-				User.publishCreate(model.toJSON());
-				res.json(model);
-			}
-		});
-	},
-	*/
-
 	update: function(req,res){
 		//TODO: SECURITY
 		var id = req.param('id');
@@ -103,9 +78,8 @@ module.exports = {
 		};
 		if (req.param('description')){model.description = req.param('description')}
 		console.log('UPDATE USER', id, model);
-		User.update({id: id}, model)
-		.then(function(model){
-			User.publishUpdate(id, model);
+		User.update({id: id}, model).then(function(model){
+			User.publish([model.id], {verb: 'update', data: model});
 			res.json(model);
 		});
 	}

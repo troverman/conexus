@@ -8,16 +8,16 @@ module.exports = {
         username: {type: 'string', required: true, unique: true},
 
         //IDENTITY AND PASSPORTS..
-        email: {type: 'email', required: true, unique: true},
-        phoneNumber: {type: 'string'},
+        email: {type: 'string', required: true, unique: true},
+        phoneNumber: {type: 'string', allowNull: true},
 
         //INFORMATION
         info: {type: 'json'},
         information: {type: 'json'},
-        firstName: {type: 'string'},
-        lastName: {type: 'string'},
-        dateOfBirth: {type: 'string'},
-        address: {type: 'string'},
+        firstName: {type: 'string', allowNull: true},
+        lastName: {type: 'string', allowNull: true},
+        dateOfBirth: {type: 'string', allowNull: true},
+        address: {type: 'string', allowNull: true},
 
         //STATUS.. APP
         loggedIn: {type: 'boolean', defaultsTo: false},
@@ -26,11 +26,11 @@ module.exports = {
 
         //DATA
         //COUNTS.. APP
-        followingCount: {type: 'integer',defaultsTo: 0},
-        followerCount: {type: 'integer',defaultsTo: 0},
-        notificationCount: {type: 'integer',defaultsTo: 0},
-        projectCount: {type: 'integer',defaultsTo: 0},
-        totalWork: {type: 'integer',defaultsTo: 0},
+        followingCount: {type: 'number',defaultsTo: 0},
+        followerCount: {type: 'number',defaultsTo: 0},
+        notificationCount: {type: 'number',defaultsTo: 0},
+        projectCount: {type: 'number',defaultsTo: 0},
+        totalWork: {type: 'number',defaultsTo: 0},
 
         //MAPPINGS
         //..APP

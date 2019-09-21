@@ -8,7 +8,7 @@
     <!--CONSENT FORM SEPERATE-->
     <div class="row" ng-if="!isTutorial || !currentUser.apps.cre8.tutorial">
 
-        <div class="col-md-4 col-sm-12 col-xs-12" style="padding-left:0px;padding-right:0px">
+        <div class="col-sm-4 col-xs-12" style="padding-left:0px;padding-right:0px">
             <div class="member-card" style="margin-left:10px;margin-right:10px;margin-bottom:0px" ng-click="renderReputationToggle(currentUser)">
                 <div class="member-card-image" style="background-image: url('{{currentUser.coverUrl}}')">
                     <a href="member/{{currentUser.username}}" ui-sref="member.activity({path:currentUser.username})">
@@ -26,7 +26,7 @@
 
         <!--REPUTATION / BALANCE MAPPING && VALUE MAP-->
         <!--APP INPUT-->
-        <div class="col-md-8 col-sm-12 col-xs-12" style="padding-left:0px;padding-right:0px">
+        <div class="col-sm-8 col-xs-12" style="padding-left:0px;padding-right:0px">
             <div class="spacing-5"></div>
             <ul style="padding:0px;" class="member-tabs">
                 <li style="float:left;font-size:14px"><a href="#" ng-click="selectTab('INFORMATION')"><i class="fas fa-passport"></i> Information</a></li>

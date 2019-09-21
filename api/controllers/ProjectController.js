@@ -1,12 +1,14 @@
 //CRE8.PROJECT
+const Q = require('q');
 
 module.exports = {
 
 	get: function(req, res) {
 
-		var limit = parseInt(req.query.limit);
-		var skip = parseInt(req.query.skip);
-		var sort = req.query.sort;
+		var limit = parseInt(req.query.limit) || 10;
+		var skip = parseInt(req.query.skip) || 0;
+		var sort = req.query.sort || 'createdAt DESC';
+
 		var urlTitle = req.query.urlTitle;
 		var id = req.query.id;
 		var query = req.query.query;
@@ -14,18 +16,19 @@ module.exports = {
 
 		console.log('GET PROJECT', req.query);
 
-		Project.watch(req);
-
 		if (req.query.id){
 			Project.find({id:id})
 			.limit(limit)
 			.skip(skip)
 			.sort(sort)
 			.then(function(models) {
-				Project.find({id:models[0].parent}).then(function(parentModel){
-					models[0].parent = parentModel[0];
-					res.json(models[0]);
-				});
+				if (models[0].parent){
+					Project.find({id:models[0].parent}).then(function(parentModel){
+						models[0].parent = parentModel[0];
+						res.json(models[0]);
+					});
+				}
+				else{res.json(models[0]);}
 			});
 		}
 
@@ -35,10 +38,13 @@ module.exports = {
 			.skip(skip)
 			.sort(sort)
 			.then(function(models) {
-				Project.find({id:models[0].parent}).then(function(parentModel){
-					models[0].parent = parentModel[0];
-					res.json(models[0]);
-				});
+				if (models[0].parent){
+					Project.find({id:models[0].parent}).then(function(parentModel){
+						models[0].parent = parentModel[0];
+						res.json(models[0]);
+					});
+				}
+				else{res.json(models[0]);}
 			});
 		}
 
@@ -63,7 +69,6 @@ module.exports = {
 		else if(req.query.location){
 			var location = req.query.location.map(function(obj){return parseFloat(obj)});
 			var distance = req.query.distance || 5000;
-
 			Project.native(function(err, project) {
 				project.find({
 					"location.coordinates": {
@@ -79,12 +84,10 @@ module.exports = {
 				})
 				.limit(limit)
 				.skip(skip)
-				//.sort({'dist':-1})
 				.toArray(function (err, models) {
 					if (models){
-						models = models.map(function(obj){obj.id = obj._id; return obj;});
+						models = models.map(function(obj){obj.id = obj._id.toString(); return obj;});
 					}
-					//console.log(err, models, req.query, location);
 					res.json(models);
 				});
 			});
@@ -137,6 +140,7 @@ module.exports = {
 				});
 			});
 		}
+
 	},
 
 	//KINDA HACKY
@@ -169,12 +173,13 @@ module.exports = {
 		function googleGeoCodeService(model){
 			var deferred = Q.defer();
 			//TODO: SECURITY! HIDE THIS.. SECRET INFORMATION.. NEED ENCRYPTION.
-			const googleMapsClient = require('@google/maps').createClient({
+			var googleMapsClient = require('@google/maps').createClient({
 				key: 'AIzaSyDcTGxD4H3lnx84u8EPcbh7PodbsEyzbg4'
-			});				
+			});
 			googleMapsClient.geocode({address: model.location}, function(err, response) {
+				location = null;
 				if (!err) {
-					var location = {
+					location = {
 						address:response.json.results[0].formatted_address,
 						lat:parseFloat(response.json.results[0].geometry.location.lat),
 						lng:parseFloat(response.json.results[0].geometry.location.lng),
@@ -182,6 +187,7 @@ module.exports = {
 					};
 					deferred.resolve(location);
 				}
+				else{deferred.resolve(location);}
 			});
 			return deferred.promise;
 		};
@@ -239,7 +245,7 @@ module.exports = {
 					associatedModelObj
 				];
 				for (y in model.associatedModels[x].context){newValidation.context[model.associatedModels[x].context[y].text] = model.associatedModels[x].context[y].score;}
-				Validation.create(validationModel).then(function(newValidationModel){
+				Validation.create(newValidation).then(function(newValidationModel){
 					console.log('CREATE VALIDATION', newValidationModel);
 					createAssociation(newValidationModel);
 				});
@@ -275,6 +281,7 @@ module.exports = {
 								Association.create(newAssociationModel).then(function(association){
 									console.log('CREATED ASSOCIATION', association);
 									Association.publishCreate(association);
+									Association.publish([association.id], {verb: 'create', data: association});
 								});
 							}
 							else{
@@ -302,7 +309,7 @@ module.exports = {
 			
 			title: req.param('title'),
 
-			context: req.param('context'),
+			//context: req.param('context'),
 			location: req.param('location'),
 			description: req.param('description'),
 			
@@ -315,54 +322,49 @@ module.exports = {
 			data:{apps:{reactions:{plus:0,minus:0},attention:{general:0}}}
 		};
 
+		console.log('CREATE PROJECT', model);
+
 		Project.create(model)
 		.exec(function(err, project) {
 			if (err) {return console.log(err);}
 			else {
 
-				User.find({id:model.user}).then(function(userModels){
+				User.find({id:model.user.toString()}).then(function(userModels){
+
+					if(project._id){project.id = project._id.toString()}
+					project.associatedModels = req.param('associatedModels');
+					project.user = userModels[0];
+
+					console.log(project);
+
 					googleGeoCodeService(project).then(function(location){
-						
-						project.associatedModels = req.param('associatedModels');
-						project.user = userModels[0];
+				
 						project.location = location;
 
-						Project.update({id:project.id}, {location:location}).then(function(projectModel){
+						Project.update({id:project._id.toString()}, {location:location}).then(function(projectModel){
+							
 							console.log('UPDATE PROJECT LOCATION -- GEO CODE');
-							Project.publishCreate(model);
+							console.log(projectModel);
+
+							Project.subscribe(req, [project]);
+							Project.publish([projectModel[0].id], {verb: 'create', data: projectModel[0]});
+
+							//createEvent(project);
+							createNotification(project);	
+							createValidation(project);
+
+							//upgrading helps
+							createProjectMember(project);
+							mintTokens(project);
+
 							res.json(model);
+
 						});
-
-						createEvent(project);
-						createNotification(project);	
-
-						createValidation(project);
-
-						//upgrading helps
-						createProjectMember(project);
-
-						mintTokens(project);
-
 					});
-	
 				});
 			}
 		});
-	},
-
-	destroy: function (req, res) {
-		var id = req.param('id');
-		if (!id) {return res.badRequest('No id provided.');}
-		Project.findOne(id).exec(function(err, model) {
-			if (err) {return res.serverError(err);}
-			if (!model) {return res.notFound();}
-			Project.destroy(id, function(err) {
-				if (err) {return res.serverError(err);}
-				Project.publishDestroy(model.id);
-				return res.json(model);
-			});
-		});
 	}
-	
+
 };
 

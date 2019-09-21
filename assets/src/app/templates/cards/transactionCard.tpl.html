@@ -48,6 +48,7 @@
         <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fas fa-angle-up"></i> {{item.data.apps.reactions.plus || 0}}  like </a> 
         <a ng-click="$event.stopPropagation();createReaction(item, 'plus')" ><i class="fas fa-angle-down"></i> {{item.data.apps.reactions.minus || 0}}  dislike </a>
         <a ng-click="$event.stopPropagation();contentToggle(item)"><i class="far fa-comment"></i> comment </a>
+        <a ng-click="$event.stopPropagation();validationToggle(item)"><i class="fas fa-check"></i> validate </a>
         <a ng-click="$event.stopPropagation();" class="pull-right" style="padding:0px;" href="transaction/{{item.id}}" ui-sref="transaction({id:item.id})"><i class="fas fa-link grey"></i></a>
     </div>
 </div>

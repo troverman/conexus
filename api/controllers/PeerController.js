@@ -12,8 +12,6 @@ module.exports = {
 
 		console.log('GET PEER', req.query);
 
-		Peer.watch(req);
-
 		if(req.query.id){
 			Peer.find({id:id})
 			.limit(limit)
@@ -55,23 +53,16 @@ module.exports = {
 			information: req.param('information'),
 			versionHash: 'UNSTABLE PRE-ALPHA',
 			data: req.param('data'),
-
-
-
 			reputation: {},
 			validiatedBlocks: [],
 			creator: req.param('creator'),
-
-
-
-
 		};
 		console.log('CREATE PEER', model);
 		Peer.create(model)
 		.exec(function(err, model) {
 			if (err) {return console.log(err);}
 			else {
-				Peer.publishCreate(model);
+				Peer.publish([model.id], {verb: 'create', data: model});
 				res.json(model);
 			}
 		});

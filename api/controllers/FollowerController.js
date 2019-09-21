@@ -3,17 +3,12 @@
 
 module.exports = {
 
-	get: function(req, res) {
-		console.log('GET FOLLOWERS', req.query);
-	},
-
 	//DEPRECIATE
 	getFollowers: function(req, res) {
 		Follower.find({followed:req.param('id')})
 		.populate('follower')
 		.populate('followed')
 		.then(function(models) {
-			Follower.watch(req);
 			Follower.subscribe(req, models);
 			res.json(models);
 		});
@@ -24,7 +19,6 @@ module.exports = {
 		.populate('follower')
 		.populate('followed')
 		.then(function(models) {
-			Follower.watch(req);
 			Follower.subscribe(req, models);
 			res.json(models);
 		});
@@ -94,7 +88,7 @@ module.exports = {
 				//createValidation(itemModel);
 				//mintTokens(itemModel);
 
-				Follower.publishCreate(follower);
+				Follower.publish([follower.id], {verb: 'create', data: follower});
 				res.json(follower);
 
 			}

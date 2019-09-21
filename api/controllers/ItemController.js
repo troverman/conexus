@@ -1,16 +1,59 @@
 //CRE8.ITEM
+const Q = require('q');
+const mongodb = require('mongodb');
 
 module.exports = {
 
 	get: function(req, res) {
 
-		var mongodb = require('mongodb');
+		function getAssociations(model){
+			var deferred = Q.defer();
+			Association.native(function(err, association) {
+				association.find({$and : [{"associatedModels.id": {$in:[model.id]}}]})
+				.limit(1000)
+				.skip(0)
+				.sort({'createdAt':-1})
+				.toArray(function (err, associationModels) {
+					if (associationModels.length > 0){
+						associationModels.map(function(obj){obj.id=obj._id; return obj});
+						model.associationModels = associationModels;
+						var promises = [];
+						for (x in model.associationModels){
+							for (y in associationModels[x].associatedModels){
+								if (associationModels[x].associatedModels[y].type=='ACTION'){promises.push(Action.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+								if (associationModels[x].associatedModels[y].type=='APP'){promises.push(App.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+								if (associationModels[x].associatedModels[y].type=='ATTENTION'){promises.push(Attention.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+								if (associationModels[x].associatedModels[y].type=='CONTENT'){promises.push(Content.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+								if (associationModels[x].associatedModels[y].type=='ITEM'){promises.push(Item.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+								if (associationModels[x].associatedModels[y].type=='MEMBER'){promises.push(User.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+								if (associationModels[x].associatedModels[y].type=='PROJECT'){promises.push(Project.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+								if (associationModels[x].associatedModels[y].type=='TASK'){promises.push(Task.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+								if (associationModels[x].associatedModels[y].type=='TIME'){promises.push(Time.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+								if (associationModels[x].associatedModels[y].type=='TRANSACTION'){promises.push(Transaction.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+								if (associationModels[x].associatedModels[y].type=='VALIDATION'){promises.push(Validation.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+							}
+						}
+						Q.all(promises).then((populatedModels)=>{
+							for (x in model.associationModels){
+								for (y in associationModels[x].associatedModels){
+									var index = parseInt(x+y);
+									model.associationModels[x].associatedModels[y].data = populatedModels[index];
+								}
+							}
+							deferred.resolve(model);
+						});
+						model.context = {};
+						for (x in model.associationModels){}
+					}
+					else{deferred.resolve(model);}
+				});
+			});
+			return deferred.promise;
+		};
 
 		var limit = parseInt(req.query.limit) || 1;
 		var skip = parseInt(req.query.skip) || 0;
 		var sort = req.query.sort || 'createdAt DESC';
-
-		Item.watch(req);
 		
 		console.log('GET ITEM', req.query);
 
@@ -27,10 +70,12 @@ module.exports = {
 				.toArray(function (err, models) {
 					if (models.length > 0){
 						var itemModel = models[0];
-						itemModel.id = itemModel._id;
+						itemModel.id = itemModel._id.toString();
 						User.find({id:itemModel.user.toString()}).then(function(userModel){
 							itemModel.user = userModel[0];
-							res.json(itemModel);
+							Item.subscribe(req, [itemModel]);
+							console.log(itemModel)
+							getAssociations(itemModel).then(function(models){res.json(models);});
 						});
 					}
 					else{res.json([]);}
@@ -45,7 +90,7 @@ module.exports = {
 			.limit(limit)
 			.skip(skip)
 			.sort(sort)
-			.populate('user') //TODO: OWNER
+			.populate('user')
 			.then(function(models) {
 
 				Item.count({tags:{contains: tag}}).then(function(numRecords){
@@ -57,15 +102,13 @@ module.exports = {
 			});
 		}
 
-		//TODO: OWNER
 		else if (req.query.user){
 			var user = req.query.user;
-			console.log(req.query)
-			Item.find({user:user}) //TODO: OWNER
+			Item.find({user:user})
 			.limit(limit)
 			.skip(skip)
 			.sort(sort)
-			.populate('user')  //TODO: OWNER
+			.populate('user') 
 			.then(function(models) {
 				Item.subscribe(req, models);
 				res.json(models);
@@ -77,15 +120,13 @@ module.exports = {
 			.limit(limit)
 			.skip(skip)
 			.sort(sort)
-			.populate('user')  //TODO: OWNER
+			.populate('user')
 			.then(function(models){
-
 				Item.count().then(function(numRecords){
 					Item.subscribe(req, models);
 					var returnObj = {data:models, info:{count:numRecords}};
 					res.json(returnObj);
 				});
-
 			});
 		}
 		
@@ -99,10 +140,9 @@ module.exports = {
 			var eventModel = {
 				type:'create',
 				model:{
-					id:model.id, //hash
-					type:model.model //app
+					id:model.id,
+					type:model.model
 				},
-				data:{},
 			};
 			Event.create(eventModel);
 		};
@@ -114,7 +154,6 @@ module.exports = {
 					user: model.user.id,
 					creator: model.user.id,
 					data:{apps:{reactions: {plus:0,minus:0},attention:{general:0}}}
-
 				};
 				newValidation.connection = {
 					id:1,
@@ -137,7 +176,7 @@ module.exports = {
 					associatedModelObj
 				];
 				for (y in model.associatedModels[x].context){newValidation.context[model.associatedModels[x].context[y].text] = model.associatedModels[x].context[y].score;}
-				Validation.create(validationModel).then(function(newValidationModel){
+				Validation.create(newValidation).then(function(newValidationModel){
 					console.log('CREATE VALIDATION', newValidationModel);
 					createAssociation(newValidationModel);
 				});
@@ -171,8 +210,8 @@ module.exports = {
 							if (associationModels.length == 0){
 								var newAssociationModel = newValidationModel;
 								Association.create(newAssociationModel).then(function(association){
-									console.log('CREATED ASSOCIATION', association);
-									Association.publishCreate(association);
+									console.log('CREATE ASSOCIATION', association);
+									Association.publish([association.id], {verb: 'create', data: association});
 								});
 							}
 							else{
@@ -207,6 +246,7 @@ module.exports = {
 			context: req.param('context'),
 
 			info: req.param('info'),
+			information: req.param('info'),
 
 			user: req.param('user'),
 			creator: req.param('user'),
@@ -235,11 +275,12 @@ module.exports = {
 				User.find({id:model.user}).then(function(userModels){
 					itemModel.associatedModels = req.param('associatedModels');
 					itemModel.user = userModels[0];
-					Item.publishCreate(itemModel);
-					createEvent(itemModel);
+					Item.subscribe(req, [itemModel]);
+					Item.publish([itemModel.id], {verb: 'create', data: itemModel});
+					//createEvent(itemModel);
 					createNotification(itemModel);
 					createValidation(itemModel);
-					mintTokens(itemModel);
+					//mintTokens(itemModel);
 					res.json(itemModel);
 				});
 			}
@@ -250,4 +291,3 @@ module.exports = {
 	update: function (req, res) {},
 	
 };
-

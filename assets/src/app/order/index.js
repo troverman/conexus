@@ -282,7 +282,6 @@ angular.module( 'conexus.order', [
     //tierate dim
 
     function powerSetDecompose(array, tensor, iteration){
-        
         for (x in array){
             tensor.push(array[x])
             if (array.length != 1){
@@ -292,35 +291,14 @@ angular.module( 'conexus.order', [
         }
         //lol
         console.log(tensor)
-
-
     };
     powerSetDecompose($scope.betaPower, [], 0);
 
-    //TODO: DEPRECIATE
-    $scope.createReaction = function(item, type){
-        if ($rootScope.currentUser){
-            $scope.newReaction = {
-                amount:1,
-                type:type,
-                user:$rootScope.currentUser.id,
-                associatedModels:[{type:'ORDER', id:item.id}],
-            };
-            $scope.order.data.apps.reactions[type]++;
-            ReactionModel.create($scope.newReaction);
-            $rootScope.pop(type, item.id);
-        }
-        else{$mdSidenav('login').toggle()}
-    };
-
     $sailsSocket.subscribe('order', function (envelope) {
-        console.log(envelope)
-        switch(envelope.verb) {
-            case 'created':
-                if ($scope.order.id == envelope.data.id){
-                    $scope.order.data.apps.attention = envelope.data.data.apps.attention;
-                }
-                break;
+        if (envelope.verb == 'update'){
+            if ($scope.order.id == envelope.data.id){
+                $scope.order.data.apps = envelope.data.data.apps
+            }
         }
     });
 

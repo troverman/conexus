@@ -1,9 +1,7 @@
 <div class="row">
-
 	<div ng-show="items.length == 0">
 	    <div class="card"><div style="padding:16px;"><span style="color:gray">There's nothing here..</span></div></div>
     </div>
-
 	<div ng-show="tasks.length > 0" class="col-sm-3 mobileFix" style="padding-left:0px;padding-right:0px;">
         <div ng-if="sortedTagArray.length > 0" class="card" ng-click="filterToggle('DISCOVER',filterSet)">
         	<div style="background:url('https://source.unsplash.com/1600x900/?details,notes,explore,wonder');height:50px;min-height:50px" class="imageContainerSmall">

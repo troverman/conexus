@@ -1,13 +1,7 @@
-/**
- * Global Variable Configuration
- */
- 
-module.exports.globals = {
-
-	// _: true,
-	// async: true,
-	// sails: true,
-	// services: true,
-	// models: true
-
-};
+ module.exports.globals = {
+   _: require('lodash'),
+   async: require('async'),
+   models: true,
+   services: true,
+   sails: true,
+ };

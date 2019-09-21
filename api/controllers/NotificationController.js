@@ -4,13 +4,11 @@ module.exports = {
 
 	get: function(req, res) {
 
-		var limit = req.query.limit;
-		var skip = req.query.skip;
-		var sort = req.query.sort;
+		var limit = req.query.limit || 1;
+		var skip = req.query.skip || 0;
+		var sort = req.query.sort || 'createdAt DESC';
 		
 		console.log('GET NOTIFICATION', req.query);
-
-		Notification.watch(req);
 		
 		if (req.query.user){
 			if (req.query.isRead){
@@ -52,10 +50,8 @@ module.exports = {
 		var id = req.param('id');
 		var model = {isRead: req.param('isRead')};
 		console.log('UPDATE NOTIFICATION', id, model);
-		Notification.update({id: id}, model)
-		.then(function(model){
-			console.log(model);
-			Notification.publishUpdate(id, model);
+		Notification.update({id: id}, model).then(function(model){
+			Notification.publish([model[0].id], {verb: 'update', data: model});
 			res.json(model);
 		});
 	},

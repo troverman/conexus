@@ -6,21 +6,20 @@
                 <div style="margin-top: auto;margin-bottom: auto;">
                     <div style="padding:15px" style="width:100%">
 
-                        <!--TODO.. SPECIFIC DETAILS-->
                         <h1 style="text-align:left;font-size:14px;color:rgba(255,255,255,0.9);font-weight:400;">
 
-                            <!--TODO..LINK-->
                             <span ng-if="item.model != 'TIME'">
                                 <span style="font-size:24px;color:white" ng-if="item.title">{{item.title}}</span>
                                 <span style="font-size:24px;color:white" ng-if="!item.title">{{item.model}}</span>
                             </span>
+
                             <span ng-if="item.model == 'TIME'">
                                 <span style="font-size:24px;color:white">{{item.amount}} seconds</span>
                             </span>
+
                             <br>
 
                             <!--ui-sref-->
-                            <span style="font-size:10px;color:white"><a style="color:white">{{item.model}}</a></span>
                             <span style="font-size:10px;color:white"><a style="color:white" href="{{item.model.toLowerCase()}}/{{item.id}}">{{item.id}}</a></span>
 
                             <!--
@@ -35,7 +34,6 @@
                             -->
 
                         </h1>
-
                     
                     </div>
                 </div>
@@ -46,13 +44,10 @@
 
             <h4 ng-click="renderToggle(item)" class="nav-links"><a>Information <i style="float:right" class="fas fa-info"></i></a></h4>
 
-            <!--ITEM-->
             <h4 ng-if="item.model=='ITEM'" ng-click="actionToggle(item)" class="nav-links">
-                <!--LOOK AT ITEM ACTION POTIENTAL..-->
                 <a>Create Action <i style="float:right" class="fas fa-atom"></i></a>
             </h4>
             <h4 ng-if="item.model=='ITEM'" ng-click="" class="nav-links">
-                <!--TODO: OWNER-->
                 <a ng-if="currentUser.id == item.user.id" ng-click="transactionToggle(null, item.id)">Send Item <i style="float:right" class="fas fa-paper-plane"></i></a>
                 <a ng-if="currentUser.id != item.user.id" ng-click="orderToggle(item)">Purchase Item <i style="float:right" class="fas fa-shopping-cart"></i></a>
             </h4>
@@ -60,7 +55,6 @@
                 <a ng-if="currentUser.id == item.user.id">Liquidity <i style="float:right" class="fas fa-exchange-alt"></i></a>
             </h4>
 
-            <!--PROJECT-->
             <h4 ng-if="item.model=='PROJECT'" ng-click="" class="nav-links"><a>Request To Join <i style="float:right" class="fas fa-users"></i></a></h4>
 
             <h4 ng-click="renderValidationToggle(item)" class="nav-links"><a>Associations <i style="float:right" class="fas fa-bezier-curve"></i></a></h4>

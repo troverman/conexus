@@ -46,7 +46,6 @@ angular.module( 'conexus.notifications', [
         $scope.notifications.map(function(obj){
             if (obj.type == 'FOLLOW' && obj.data.apps){
                 var index = following.map(function(obj1){return obj1.followed.id}).indexOf(obj.data.apps.id)
-                console.log(index);
                 if (index != -1){obj.isFollowing = true;}
                 else{obj.isFollowing = false;}
             }
@@ -154,7 +153,5 @@ angular.module( 'conexus.notifications', [
         }
 
     };
-
-    $scope.validate
 
 }]);

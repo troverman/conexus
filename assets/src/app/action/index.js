@@ -23,29 +23,12 @@ angular.module( 'conexus.action', [
     $scope.action = action;
     titleService.setTitle($scope.action.id + ' | Action | CRE8.XYZ');
 
-    //TODO: DEPRECIATE
-    $scope.createReaction = function(item, type){
-        if ($rootScope.currentUser){
-            $scope.newReaction = {
-                amount:1,
-                type:type,
-                user:$rootScope.currentUser.id,
-                associatedModels:[{type:'ACTION', id:item.id}],
-            };
-            $scope.action.data.apps.reactions[type]++;
-            ReactionModel.create($scope.newReaction);
-            $rootScope.pop(type, item.id);
-        }
-        else{$mdSidenav('login').toggle()}
-    };
-
     $sailsSocket.subscribe('action', function (envelope) {
-        switch(envelope.verb) {
-            case 'created':
-                if ($scope.action.id == envelope.data.id){
-                    $scope.action.data.apps.attention = envelope.data.data.apps.attention;
-                }
-                break;
+        console.log(envelope)
+        if (envelope.verb == 'update'){
+            if ($scope.action.id == envelope.data.id){
+                $scope.action.data.apps = envelope.data.data.apps
+            }
         }
     });
 

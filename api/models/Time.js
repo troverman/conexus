@@ -2,11 +2,11 @@
 module.exports = {
 	attributes: {
         amount: {type: 'string'},
-        content: {type: 'string'},
+        content: {type: 'string', allowNull:true},
         context: {type: 'string'},
         associatedModels: {type: 'json'},
         location: {type: 'json'},
-        startTime: {type: 'string'},
+        startTime: {type: 'string', allowNull:true},
         //RETROACTIVE | TRACKED | STREAM | APP
         type: {type: 'string'},
         creator: {type: 'string'},

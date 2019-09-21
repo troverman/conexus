@@ -18,23 +18,21 @@ angular.module( 'conexus.items', [
 	});
 }])
 
-.controller( 'ItemsCtrl', ['$location', '$mdSidenav', '$rootScope', '$sce', '$scope', '$stateParams', 'ItemModel', 'items', 'ReactionModel', function ItemsController( $location, $mdSidenav, $rootScope, $sce, $scope, $stateParams, ItemModel, items, ReactionModel ) {
+.controller( 'ItemsCtrl', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$scope', '$stateParams', 'ItemModel', 'items', 'ReactionModel', function ItemsController( $location, $mdSidenav, $rootScope, $sailsSocket, $scope, $stateParams, ItemModel, items, ReactionModel ) {
 
     $scope.newItem = {};
     $scope.newReaction = {};
     $scope.stateParams = $stateParams;
-    $scope.items = items.data.map(function(obj){
-        obj.model = 'ITEM';
-        return obj;
-    });
+    
+    $scope.items = items.data.map(function(obj){obj.model = 'ITEM'; return obj;});
     $scope.itemCount = items.info.count;
+
     $scope.searchQuery = [];
     $scope.selectedSort = 'createdAt DESC';
     $scope.selectedTag = '';
     $scope.skip = 0;
     $scope.sortedLocationArray = [{element:'Knoxville, TN'}, {element:'New York City'}, {element:'Chapel Hill'}];
 
-    //TODO: BETTER
     $scope.loadAssets = function(){
         $scope.assets = $scope.items.map(function(obj){
             if(obj.identiferSet){obj.identiferSet = obj.identiferSet.split(',');}
@@ -55,7 +53,6 @@ angular.module( 'conexus.items', [
     };
     $scope.loadAssets();
 
-    //TODO: BETTER
     $scope.loadTags = function(){
         $scope.tags = $scope.items.map(function(obj){
             var returnObj = {};
@@ -78,21 +75,6 @@ angular.module( 'conexus.items', [
     $scope.loadTags();
 
     $scope.filterSet = {tags:$scope.sortedTagArray, associations:$scope.sortedAssociationArray, locations:$scope.sortedLocationArray}
-
-    $scope.createReaction = function(item, type){
-        if($rootScope.currentUser){
-            $scope.newReaction.amount = 1;
-            $scope.newReaction.associatedModels = [{type:'ITEM', id:item.id}];
-            //TODO: FIVE STAR ETC
-            $scope.newReaction.type = type;
-            $scope.newReaction.user = $rootScope.currentUser.id;
-            var index = $scope.items.map(function(obj){return obj.id}).indexOf(item.id);
-            if (index != -1){$scope.items[index].data.apps.reactions[type]++;}
-            ReactionModel.create($scope.newReaction);
-            $rootScope.pop(type, item.id);
-        }
-        else{$mdSidenav('login').toggle()}
-    };
 
     $scope.filterContent = function(filter) {
         $scope.searchQuery.push({text:filter});
@@ -117,13 +99,17 @@ angular.module( 'conexus.items', [
         });
     };
 
-    $scope.reply = function(item){
-        if($rootScope.currentUser){$mdSidenav('content').toggle();}
-        else{$mdSidenav('login').toggle()}
-    };
-
-    if ($location.search().tags){
-        $scope.filterContent($location.search().tags);
+    if ($location.search().context){
+        $scope.filterContent($location.search().context);
     }
+
+    $sailsSocket.subscribe('item', function (envelope) {
+        console.log(envelope);
+        if (envelope.verb == 'create'){$scope.items.unshift(envelope.data);}
+        if (envelope.verb == 'update'){
+            var index = $scope.items.map(function(obj){return obj.id}).indexOf(envelope.data.id);
+            if (index != -1){$scope.items[index] = envelope.data;}
+        }
+    });
 
 }]);

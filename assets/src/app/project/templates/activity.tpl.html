@@ -1,9 +1,7 @@
 <div class="row">
 
     <div ng-show="activity.length == 0">
-        <div class="card">
-            <button class="btn btn-default log-btn" ng-click="contentToggle()">+ Content</button>
-        </div>
+        <div class="card"><button class="btn btn-default log-btn" ng-click="cre8Toggle(project)">CRE8</button></div>
         <div class="card">
             <div style="padding:16px;">
                 <span style="color:gray">There's nothing here..</span>
@@ -22,9 +20,7 @@
             <tags-input class="" style="border:0px;flex-grow:2;" placeholder="Search" ng-model="searchQuery"></tags-input>    
         </div>
 
-        <div class="card">
-            <button class="btn btn-default log-btn" ng-click="cre8Toggle(project)">CRE8</button>
-        </div>
+        <div class="card"><button class="btn btn-default log-btn" ng-click="cre8Toggle(project)">CRE8</button></div>
 
         <div ng-repeat="item in activity">
             <div ng-if="item.model=='CONTENT'" ng-click="cardDetailToggle(item)"><div ng-include="'templates/cards/contentCard.tpl.html'"></div></div>

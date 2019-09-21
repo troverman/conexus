@@ -50,9 +50,8 @@
 </div>
 
 <div style="background-color:white;min-height:70vh">
-
-    <div class="container">
     <div class="spacing-50"></div>
+    <div class="container">
         <div class="row">
             <div class="col-sm-8 developersHeader">
                 <h2 style="font-family:'Titillium Web',sans-serif;font-weight:600">Developers</h2>
@@ -66,8 +65,8 @@
                 <img style="height:200px;" src="images/latticespin.gif">
             </div>
         </div>
-    <div class="spacing-50"></div>
     </div>
+    <div class="spacing-50"></div>
 </div>
 
 <div id="DOCUMENTATION" style="background-color:white;min-height:70vh">
@@ -610,7 +609,7 @@ balance[id][hash]++;
     <div class="spacing-50"></div>
 </div>
 
-<div id="IDENTITY" style="background-color:white;min-height:70vh">
+<div id="IDENTITY" style="background-color:white">
     <div style="background:url('https://source.unsplash.com/1600x900/?identity,connection')" class="imageContainerSmall">
         <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
             <div style="margin-top: auto;margin-bottom: auto;">
@@ -622,10 +621,11 @@ balance[id][hash]++;
         </div>
     </div>
     <div class="container">
-        <div class="spacing-15"></div>
         <div class="row">
+            <div class="spacing-15"></div>
+
             <div class="col-sm-6">  
-                <p style="color:gray;font-style:italic">This is the Passport Model. Passports are modular access points to executing requests on behalf of a member. </p>
+                <p style="color:gray;font-style:italic">Passports are modular access points to executing requests on behalf of a member. </p>
 
                 <p>Interoperable & Context Specific Identity</p>
                 <p>Local Identity Context - Admin of Peer</p>
@@ -638,12 +638,16 @@ balance[id][hash]++;
                 <div class="spacing-10"></div>
 
             </div>
-            <div class="col-sm-6">
-                <div hljs hljs-language="javascript"  hljs-source="passportModel"></div>
+
+            <div class="col-sm-6 col-xs-12" style="padding-left:0px;max-width: none;">
+                <div class="bootstrapHack">
+                    <div hljs hljs-language="javascript"  hljs-source="passportModel"></div>
+                </div>
             </div>
+
         </div>
     </div>
-    <div class="spacing-50"></div>
+    <div class="spacing-15"></div>
 </div>
 
 <div id="CONEXAPI" style="background-color:white;">
@@ -683,9 +687,10 @@ balance[id][hash]++;
                         <p><a href="#APP" du-smooth-scroll>App</a></p>
                         <p><a href="#ASSOCIATION" du-smooth-scroll>Assoication</a></p>
                         <p><a href="#BLOCK" du-smooth-scroll>Block</a></p>
-                        <p><a href="#CONTENT" du-smooth-scroll>Content</a></p>
                         <p><a href="#CONNECTION" du-smooth-scroll>Connection</a></p>
+                        <p><a href="#CONTENT" du-smooth-scroll>Content</a></p>
                         <p><a href="#DATA" du-smooth-scroll>Data</a></p>
+                        <p><a href="#EVENT" du-smooth-scroll>Event</a></p>
                         <p><a href="#ITEM" du-smooth-scroll>Item</a></p>
                         <p><a href="#LOCATION" du-smooth-scroll>Location</a></p>
                         <p><a href="#MEMBER" du-smooth-scroll>Member</a></p>
@@ -711,6 +716,14 @@ balance[id][hash]++;
 
     <div class="spacing-15">
 
+    <!--META MODEL || ABSTRACT APP!?-->
+    <!--SEARCH MODEL-->
+    <!--META MODEL..ASSOCIATION..CONTEXT..LOCATION..DATA-->
+    <!--CORE?-->
+    <!--APPS! (DATAMODEL) (set(PROTOCOL))-->
+        <!--APP DOCUMENTATION??-->
+        <!--PROTOCOL METADATA-->
+
     <div id="QUERYLANGUAGE" style="background-color:white;">
         <div class="container">
             <div style="background:url('https://source.unsplash.com/1600x900/?explore,discover,code')" class="imageContainerSmall">
@@ -726,8 +739,13 @@ balance[id][hash]++;
             <div class="row">
                 <div class="col-sm-6">     
                     <div>
-                        <p style="color:gray;font-style:italic">Filter & Search Parameters<p>
+                        <h4><p style="color:gray;font-style:italic">Filter & Search Parameters<p></h4>
                         <p style="color:gray;font-style:italic">CRE8 Core Querying Language is recursive and compouding. Querys can be composed for deep programatic specification.</p>
+
+                        <h5>ModelParam</h5>
+                        <h5>SortParam</h5>
+                        <h5>Chain</h5>
+
                     </div>
                 </div>
                 <div class="col-sm-6">
@@ -745,7 +763,6 @@ balance[id][hash]++;
 
     <div class="spacing-15"></div>
 
-    <!--META MODEL..ASSOCIATION..CONTEXT..LOCATION..DATA-->
 
     <div id="ACTION" style="background-color:white;min-height:70vh">
         <div class="container">
@@ -1017,7 +1034,7 @@ balance[id][hash]++;
 
     <div class="spacing-15"></div>
 
-    <div id="CONNECTIONMODEL" style="background-color:white;min-height:70vh">
+    <div id="CONNECTION" style="background-color:white;min-height:70vh">
         <div class="container">
             <div style="background:url('https://source.unsplash.com/1600x900/?explore,discover')" class="imageContainerSmall">
                 <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
@@ -1724,13 +1741,22 @@ balance[id][hash]++;
                     <h4 style="font-style:italic">Protocol Information</h4>
                     <p style="color:gray;font-style:italic">In creating layered and interoperable protocols, application architecture adopts core principles - which espouse a meta consensus mechanism. The CRE8 governing body defines the core.</p>
                     
-                    <p>immutable structure; json; smart contract language</p>
+                    <p>Immutable structure; json; smart contract language</p>
                     <p>Abstraction of {Language Abstraction} working with the <a href="#CRE8VM" du-smooth-scroll>CRE8 virtual machine</a></p>
+                    <p>Wrappers APP (NATIVE) RUST vs. APP (CREATE LANGUAGE) (BOTH ARE WRAPPED)</p>
+                    <p>Meta Data && Context Specific Machine Attention </p>
+
+                    <!--MAP IT OUT-->
+                    <!--META DATA (ASSOCIATED APPS - CONSENSUS APP.. ATTENTION), PROTOCOL DATA MODEL-->
+                    <!--[PROTOCOL]-APP-->
+                    <!--[APP]-PEER-->
+
                     <div class="spacing-10"></div>
                     <h4 style="font-style:italic">End Points & Verbs</h4>
                     <div>
                         <p><b>[get, post] /api/protocol</b></p>
                     </div>
+
                 </div>
                 <div class="col-sm-6">
                     <div class="bootstrapHack" style="z-index:auto;">
@@ -2714,8 +2740,9 @@ balance[id][hash]++;
         <div class="spacing-15"></div>
         <div class="row">
             <div class="col-sm-8">
-                <p style="color:gray;font-style:italic">Deep Learning and video feeds to discreetly tokenize time</p>
-                <p style="color:gray;font-style:italic">Tokenization with a high degree of consensus on context through multidimensional validation</p>
+                <p style="color:gray;font-style:italic">Deep Learning and video feeds validate, contextualize, and tokenize time.</p>
+                <p style="color:gray;font-style:italic">Application Defined ' Deep Learning ' Modules</p>
+                <p style="color:gray;font-style:italic">Tokenization with a high degree of consensus on context through multidimensional validation.</p>
                 <p>
                 <p style="color:gray;font-style:italic">Tokenizing Public Spaces Though AI</p>
                 <img src="images/aitoken.gif">

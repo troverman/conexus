@@ -12,9 +12,12 @@ module.exports = {
 
 		console.log('GET ATTENTION', req.query);
 
-		Attention.watch(req);
-
-		if(req.query.id){Attention.find({id:id}).limit(limit).skip(skip).sort(sort).then(function(models){res.json(models[0]);});}
+		if(req.query.id){
+			Attention.find({id:id}).limit(limit).skip(skip).sort(sort).then(function(models){
+				Attention.subscribe(req, [models[0]]);
+				res.json(models[0]);
+			});
+		}
 
 		else if(req.query.creator && req.query.app){
 			Attention.find({app:req.query.app,creator:req.query.creator})
@@ -22,6 +25,7 @@ module.exports = {
 			.skip(skip)
 			.sort(sort)
         	.then(function(models) {
+				Attention.subscribe(req, [models[0]]);
 				res.json(models);
 			});
 		}
@@ -47,13 +51,61 @@ module.exports = {
 	//GIVES IT MACHENE ATTENTION.. IE THE MERKLE PROOF (POW)
 	create: function (req, res) {
 
+			//ASYNC
 		function mintTokens(model){
+
 			var protocolTokens = getProtocolTokens(model);
+			//DATA MODEL.. 
+			//TODO REMUX
+			updateAssociatedModels(model, protocolTokens);
+
 		};
 
 		function getProtocolTokens(model){
-			var protocolTokens = ['CRE8', 'CRE8+ATTENTION', 'CRE8+ATTENTION+'+model.id];
+			var protocolTokens = [
+				'CRE8', 
+				'CRE8+ATTENTION', 
+				'CRE8+ATTENTION+'+model.id,
+				//careful creator
+				'CRE8+ATTENTION+'+model.creator.username.toUpperCase(),
+				'CRE8+ATTENTION+'+model.app,
+
+			];
 			return protocolTokens;
+		};
+
+		function updateAssociatedModels(model, protocolTokens){
+			for (x in model.associatedModels){
+				if (model.associatedModels[x].type == 'CONTENT'){
+					Content.find({id:model.associatedModels[x].id}).then(function(newModel){
+						if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
+						//UPDATE IT.. FLOW THRU PROTOCOL MAPPING..
+						for (y in protocolTokens){
+							if (!newModel[0].data.apps.tokens[protocolTokens[y]]){
+								newModel[0].data.apps.tokens[protocolTokens[y]] = model.amount;
+							}
+							else if (newModel[0].data.apps.tokens[protocolTokens[y]]){
+								newModel[0].data.apps.tokens[protocolTokens[y]] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y]]) + parseInt(model.amount);
+							}
+						}
+						Content.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){})
+					});
+				}
+				if (model.associatedModels[x].type == 'TASK'){
+					Task.find({id:model.associatedModels[x].id}).then(function(newModel){
+						if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
+						for (y in protocolTokens){
+							if (!newModel[0].data.apps.tokens[protocolTokens[y]]){
+								newModel[0].data.apps.tokens[protocolTokens[y]] = model.amount;
+							}
+							else if (newModel[0].data.apps.tokens[protocolTokens[y]]){
+								newModel[0].data.apps.tokens[protocolTokens[y]] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y]]) + parseInt(model.amount);
+							}
+						}
+						Task.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){})
+					});
+				}
+			}
 		};
 
 		//REDUCE.. ITERATE THROUGH TYPES :)
@@ -71,7 +123,7 @@ module.exports = {
 							if (!newModel[0].data.apps){newModel[0].data.apps = {}}
 							if (newModel[0].data.apps.attention){newModel[0].data.apps.attention = {general:newModel[0].data.apps.attention.general + model.amount};}
 							else{newModel[0].data.apps.attention = {general:0}}
-							Action.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){Action.publishCreate(newModel);});
+							Action.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){Action.publish([newModel[0].id], {verb:'update', data: newModel[0]});});
 						});
 					}
 					if (model.associatedModels[x].type == 'ATTENTION'){
@@ -80,7 +132,7 @@ module.exports = {
 							if (!newModel[0].data.apps){newModel[0].data.apps = {}}
 							if (newModel[0].data.apps.attention){newModel[0].data.apps.attention = {general:newModel[0].data.apps.attention.general + model.amount};}
 							else{newModel[0].data.apps.attention = {general:0}}
-							Attention.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){Attention.publishCreate(newModel);});
+							Attention.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){Attention.publish([newModel[0].id], {verb:'update', data: newModel[0]});});
 						});
 					}
 					if (model.associatedModels[x].type == 'APP'){
@@ -89,7 +141,7 @@ module.exports = {
 							if (!newModel[0].data.apps){newModel[0].data.apps = {}}
 							if (newModel[0].data.apps.attention){newModel[0].data.apps.attention = {general:newModel[0].data.apps.attention.general + model.amount};}
 							else{newModel[0].data.apps.attention = {general:0}}
-							App.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){App.publishCreate(newModel);});
+							App.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){App.publish([newModel[0].id], {verb:'update', data: newModel[0]});});
 						});
 					}
 					if (model.associatedModels[x].type == 'ASSOCIATION'){
@@ -98,7 +150,7 @@ module.exports = {
 							if (!newModel[0].data.apps){newModel[0].data.apps = {}}
 							if (newModel[0].data.apps.attention){newModel[0].data.apps.attention = {general:newModel[0].data.apps.attention.general + model.amount};}
 							else{newModel[0].data.apps.attention = {general:0}}
-							Association.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){Association.publishCreate(newModel);});
+							Association.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){Association.publish([newModel[0].id], {verb:'update', data: newModel[0]});});
 						});
 					}
 					if (model.associatedModels[x].type == 'CONNECTION'){
@@ -107,15 +159,17 @@ module.exports = {
 							if (!newModel[0].data.apps){newModel[0].data.apps = {}}
 							if (newModel[0].data.apps.attention){newModel[0].data.apps.attention = {general:newModel[0].data.apps.attention.general + model.amount};}
 							else{newModel[0].data.apps.attention = {general:0}}
-							Connection.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){Connection.publishCreate(newModel);});
+							Connection.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){Connection.publish([newModel[0].id], {verb:'update', data: newModel[0]});});
 						});
 					}
 					if (model.associatedModels[x].type == 'CONTENT'){
 						Content.find({id:model.associatedModels[x].id}).then(function(newModel){
+
 							//DIMENSIONAL ATTENTION
 							//NEED TO PAY ATTENTION!
 							if (!newModel[0].data){newModel[0].data = {apps:{}}}
 							if (!newModel[0].data.apps){newModel[0].data.apps = {}}
+
 							if (newModel[0].data.apps.attention){
 								if (newModel[0].data.apps.attention.general){
 									newModel[0].data.apps.attention.general = newModel[0].data.apps.attention.general + model.amount;
@@ -129,9 +183,9 @@ module.exports = {
 								else{newModel[0].data.apps.attention[model.creator.toString()] = model.amount;}
 							}								
 							else{newModel[0].data.apps.attention = {general:0}}
-							//STRING TOKEN LANGUAGE 
 							console.log(model.creator, newModel[0].data.apps.attention);
-							Content.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){Content.publishCreate(newModel);});
+							Content.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){Content.publish([newModel[0].id], {verb:'update', data: newModel[0]});});
+						
 						});
 					}
 					if (model.associatedModels[x].type == 'ITEM'){
@@ -140,7 +194,7 @@ module.exports = {
 							if (!newModel[0].data.apps){newModel[0].data.apps = {}}
 							if (newModel[0].data.apps.attention){newModel[0].data.apps.attention = {general:newModel[0].data.apps.attention.general + model.amount};}
 							else{newModel[0].data.apps.attention = {general:0}}
-							Item.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){Item.publishCreate(newModel);});
+							Item.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){Item.publish([newModel[0].id], {verb:'update', data: newModel[0]});});
 						});
 					}
 					if (model.associatedModels[x].type == 'ORDER'){
@@ -149,7 +203,7 @@ module.exports = {
 							if (!newModel[0].data.apps){newModel[0].data.apps = {}}
 							if (newModel[0].data.apps.attention){newModel[0].data.apps.attention = {general:newModel[0].data.apps.attention.general + model.amount};}
 							else{newModel[0].data.apps.attention = {general:0}}
-							Order.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){Order.publishCreate(newModel);});
+							Order.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){Order.publish([newModel[0].id], {verb:'update', data: newModel[0]});});
 						});
 					}
 					if (model.associatedModels[x].type == 'TASK'){
@@ -158,7 +212,7 @@ module.exports = {
 							if (!newModel[0].data.apps){newModel[0].data.apps = {}}
 							if (newModel[0].data.apps.attention){newModel[0].data.apps.attention = {general:newModel[0].data.apps.attention.general + model.amount};}
 							else{newModel[0].data.apps.attention = {general:0}}
-							Task.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){Task.publishCreate(newModel);});
+							Task.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){Task.publish([newModel[0].id], {verb:'update', data: newModel[0]});});
 						});
 					}
 					if (model.associatedModels[x].type == 'TIME'){
@@ -167,7 +221,7 @@ module.exports = {
 							if (!newModel[0].data.apps){newModel[0].data.apps = {}}
 							if (newModel[0].data.apps.attention){newModel[0].data.apps.attention = {general:newModel[0].data.apps.attention.general + model.amount};}
 							else{newModel[0].data.apps.attention = {general:0}}
-							Time.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){Time.publishCreate(newModel);});
+							Time.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){Time.publish([newModel[0].id], {verb:'update', data: newModel[0]});});
 						});
 					}
 					if (model.associatedModels[x].type == 'TRANSACTION'){
@@ -176,7 +230,7 @@ module.exports = {
 							if (!newModel[0].data.apps){newModel[0].data.apps = {}}
 							if (newModel[0].data.apps.attention){newModel[0].data.apps.attention = {general:newModel[0].data.apps.attention.general + model.amount};}
 							else{newModel[0].data.apps.attention = {general:0}}
-							Transaction.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){Transaction.publishCreate(newModel);});
+							Transaction.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){Transaction.publish([newModel[0].id], {verb:'update', data: newModel[0]});});
 						});
 					}
 					if (model.associatedModels[x].type == 'VALIDATION'){
@@ -185,7 +239,7 @@ module.exports = {
 							if (!newModel[0].data.apps){newModel[0].data.apps = {}}
 							if (newModel[0].data.apps.attention){newModel[0].data.apps.attention = {general:newModel[0].data.apps.attention.general + model.amount};}
 							else{newModel[0].data.apps.attention = {general:0}}
-							Validation.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){Validation.publishCreate(newModel);});
+							Validation.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){Validation.publish([newModel[0].id], {verb:'update', data: newModel[0]});});
 						});
 					}
 				}
@@ -195,7 +249,6 @@ module.exports = {
 		var model = {
 			model: 'ATTENTION',
 
-			//human,machine,app,...
 			app: req.param('app'),
 			type: req.param('type'),
 			
@@ -211,14 +264,21 @@ module.exports = {
 		.exec(function(err, model) {
 			if (err) {return console.log(err);}
 			else {
-				//console.log('CREATE ATTENTION', model)
-				Attention.publishCreate(model);
-				//createEvent(model);
-				//createNotification(model);
-				//createValidation(model);
-				updateAssociatedModelsData(model);
-				mintTokens(model);
-				res.json(model);
+
+				User.find({id:model.creator}).then(function(userModel){
+
+					model.creator = userModel[0];
+					//console.log('CREATE ATTENTION', model)
+					Attention.publish([model.id], {verb:'create', data: model});
+					//createEvent(model);
+					//createNotification(model);
+					//createValidation(model);
+					updateAssociatedModelsData(model);
+					mintTokens(model);
+					res.json(model);
+
+				});
+				
 			}
 		});
 	},

@@ -9,7 +9,6 @@ module.exports = {
 		//HUGELY HIGH DIM
 		//BUILD UP -- HIGHEST DIM CONNECTION IS BASE
 			//SORT ASSETS.. 
-
 		function buildMarketV1(baseMarket, orders){
 
 			var market = {};
@@ -85,8 +84,6 @@ module.exports = {
 		
 		console.log('GET ORDER', req.query);
 
-		Order.watch(req);
-
 		//buildMarket();
 
 		if(req.query.id){
@@ -96,6 +93,7 @@ module.exports = {
 			.sort(sort)
 			.populate('user')
 			.then(function(models) {
+				Order.subscribe(req, [models[0]]);
 				res.json(models[0]);
 			});
 		}
@@ -366,13 +364,49 @@ module.exports = {
 		//CONNECTION? (ORDER RULZ)
 		function createAssociation(order){
 			
+			//DISCRETE MARKET ASSOCIATION (MARKET PAIR)
 			var associationModel = {
+				model: 'ASSOCIATION',
+
+				//type.. of order.. dynamic.. codify these
+				connection:{
+					id:1,
+					title:'MARKET-MARKET ORDER CONNECTION BETA',
+					parameters:{
+						mapping:['context','reputation','computed'],
+					},
+					computedFrom:'ORDER'
+				},
+				content: JSON.stringify(order.setAlpha)+'to '+ JSON.stringify(order.setBeta),
+
+				//CONNECTION DEFINED>>>>
+				//NEED MARKET DATA MODEL..
+				associatedModels: [
+					{type:'MARKET', id: JSON.stringify(order.setAlpha)},
+					{type:'MARKET', id: JSON.stringify(order.setBeta)}
+				],
+				contextSet:[
+					order.setAlpha,
+					order.setBeta
+				],
+				computedContextSet:[],
+				computedLiquidityPool:[],
+				//COMPUTED
+				context: {},
 				setAlpha:order.setAlpha,
 				setBeta:order.setBeta,
-				rank:1
+
+				data:{apps:{reactions:{plus:0,minus:0},attention:{general:0}}}
 			};
 
-			//Association.create(associationModel);
+			//IF NOT ASSOCIATION CREATE
+
+			Association.create(associationModel).then(function(newAssociationModel){
+				console.log('NEW ORDER ASSOCIATION', newAssociationModel);
+			});
+
+			//ELSE COMPUTE NEW ORDER BOOK!!! --> START IT UPPPPPPP
+				//VROOM
 
 		};
 
@@ -406,10 +440,10 @@ module.exports = {
 		.exec(function(err, order) {
 			if (err) {return console.log(err);}
 			else {
-				Order.publishCreate(order);
+				Order.publish([order.id], {verb: 'create', data: order});
 				mintTokens(order);
 				//createValidation..createAssociation..createMarket
-				createMarket(order);
+				createAssociation(order);
 				res.json(order);
 			}
 		});
