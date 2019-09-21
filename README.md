@@ -1,15 +1,26 @@
+
 ![conexus](https://www.conex.us/images/hypercube.new.gif "conex.us")
 # CRE8
 > ### [Developers](https://www.cre8.xyz/developers)
-> ### [Wiki](wiki)
-## A Transparent Peer Network
-> ### [Connect Collab Create](https://www.cre8.xyz/transparency)
+> ### [How to Contribute](wiki/HowToContribute.md)
+
+
+## A Transparent Peer Network 
+
+ ###  [Connect Collab Create](https://www.cre8.xyz/transparency)
+
+> State of the Art Multidimensional, and Pluralist First Peer Build Mechanism. [Build](https://www.cre8.xyz/register) your custom peer. All Models, Views, and Controllers compile to native and .wasm bindings from an onChain [App Ecosystem](https://www.cre8.xyz/apps) . 
+> 
+
+ > - The network is supported though Human and Machine Attention. Agent Centric, Context Specific Consensus and Interoperable Validation. 
+> - Proof of Attention. Proof of Intention. Reputation Weighted Governance.
+
 
 ## Asset Balance Mapping
-> Token data-structures with balances specified by unique identifiers create emergent properties within cryptoeconomic systems that introduce valuable approaches to mechanism design and contract development.
+> Multidimensional Asset data-structures with balances specified by unique identifiers create emergent properties within cryptoeconomic systems that introduce valuable approaches to mechanism design.
 
-## [Application Ecosystem](https://www.cre8.xyz/apps)
-> Apps are a set of modular protocols and plugins to an asset string space. Application creation and collaboration is facilitated though projects.
+## [Applications Design](https://www.cre8.xyz/apps)
+> Applications are a set of modular protocols which plug into an asset string space. Application creation and collaboration is facilitated though projects.
 
 ```javascript
 {
@@ -72,7 +83,8 @@
 }
 ```
 ## [API](https://www.cre8.xyz/developers#API)
-### Filters
+> CORE
+#### Query Language & Data Model Filters
 ```javascript
 var query = [{
     filter:[{

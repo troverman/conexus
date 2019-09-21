@@ -63,7 +63,7 @@ module.exports = {
 
 		if(req.query.id){
 			Task.find({id:id}).then(function(models) {
-				Task.subscribe(req, [models[0]]);
+				Task.subscribe(req, [models[0].id]);
 				getAssociations(models[0]).then(function(models){res.json(models);});
 			});
 		}
@@ -168,7 +168,7 @@ module.exports = {
 			.then(function(models){
 				//console.log(models)
 				Task.count().then(function(numRecords){
-					Task.subscribe(req, models);
+					Task.subscribe(req, models.map(function(obj){return obj.id});
 					var returnObj = {data:models, info:{count:numRecords}};
 					//console.log(returnObj)
 					res.json(returnObj);
@@ -349,7 +349,7 @@ module.exports = {
 					model.associatedModels = req.param('associatedModels');
 					model.user = userModels[0];
 					
-					Task.subscribe(req, [model]);
+					Task.subscribe(req, [model.id]);
 					Task.publish([model.id], {verb: 'create', data: model});
 
 					createEvent(model);

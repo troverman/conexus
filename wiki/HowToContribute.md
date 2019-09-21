@@ -1,4 +1,3 @@
-
 # CRE8
 ## [Developers](https://www.cre8.xyz/developers)
 
@@ -19,15 +18,15 @@ CRE8 Core Contribution is accepted through the following project.
 
 -  Development and Coordination is governed through [projects](https://www.cre8.xyz/projects).
 - Apps and App Versioning
--- Apps as Modules. 
--- App -- App Connections. 
--- Protocol Compostability.
+	- Apps as Modules. 
+	- App <-> App Connections
+	- Protocol Compostability.
 
 Create Core App Charter Connection Rules for Systematic Upgrade (PR acceptance)* & contribution follow the follow paradigms:
 - Protocol Validation Threshold by the [following connection](https://www.cre8.xyz/project/cre8/charter).
 - Transparency Maximalism & Live Streaming 
--- Validation is accelerated and given implicit value though data contained in live streaming development. 
--- [App](https://www.cre8.xyz/apps) based validation converts information into tokenized income. It is multiplicative in [CRE8's Charter](https://www.cre8.xyz/project/cre8/charter).
+	- Validation is accelerated and given implicit value though data contained in live streaming development. 
+	- [App](https://www.cre8.xyz/apps) based validation converts information into tokenized income. It is multiplicative in [CRE8's Charter](https://www.cre8.xyz/project/cre8/charter).
 
 ## Community Chat & Communication 
 - [CRE8](https://www.cre8.xyz/project/cre8)
