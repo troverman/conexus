@@ -8,4 +8,6 @@ module.exports = {
   policies: {
     '*': ['enforceSsl', 'passport']
   },
+  port: process.env.PORT || 80,
+
 };
