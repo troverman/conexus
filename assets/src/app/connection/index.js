@@ -23,7 +23,10 @@ angular.module( 'conexus.connection', [
     $scope.connection = connection;
     $scope.connection.model = 'CONNECTION';
     if(!$scope.connection){$location.path('/')}
-	
+        
+	$scope.selectedTab = 'INFORMATION';
+    $scope.selectTab = function(model){$scope.selectedTab = model;};
+
     $sailsSocket.subscribe('connection', function (envelope) {
         console.log(envelope)
         if (envelope.verb == 'update'){

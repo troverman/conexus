@@ -84,7 +84,7 @@
                             <span ng-if="associationsAreExpanded"><i class="fas fa-grip-lines"></i> Hide</span>
                         </a>
                     </h5>
-                    <tags-input min-length="1" placeholder="Context" ng-model="newContent.context">
+                    <tags-input min-length="1" placeholder="Context" ng-model="newItem.context">
                         <auto-complete min-length="2" source="loadTags($query)"></auto-complete>
                     </tags-input>
                 </div>
@@ -92,11 +92,11 @@
                 <div ng-if="associationsAreExpanded">
 
                     <h5>Associations </h5>
-                    <tags-input min-length="1" placeholder="Associations" ng-model="newContent.associatedModels">
+                    <tags-input min-length="1" placeholder="Associations" ng-model="newItem.associatedModels">
                         <auto-complete source="loadAssociations($query)"></auto-complete>
                     </tags-input>
                     <div class="row">
-                        <div class="col-md-12 col-sm-12" ng-repeat="association in newContent.associatedModels">
+                        <div class="col-md-12 col-sm-12" ng-repeat="association in newItem.associatedModels">
                             <h5>
                                 {{association.text}} 
                                 <a style="float:right" ng-click="association.isExpanded=!association.isExpanded">

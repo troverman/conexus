@@ -292,6 +292,14 @@ module.exports = {
 					//createValidation(model);
 					updateAssociatedModelsData(model);
 					mintTokens(model);
+
+
+					//TODO: STANDARDIZE USER STATE....
+					//Viewing string -- decompose..?
+					User.update({id:userModel[0].id}, {status:model.string}).then(function(userModel){})
+
+
+
 					res.json(model);
 
 				});

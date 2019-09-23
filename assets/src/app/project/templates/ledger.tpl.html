@@ -1,6 +1,41 @@
 <div class="row">
+	<div class="col-sm-12" style="padding-left:0px;padding-right:0px;">
+		<div class="spacing-5"></div>
+		<ul style="padding:0px;" class="member-tabs">
+			<li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('LEDGER', filterSet)"><i class="fa fa-filter"></i> Filter</a></li>
+			<li style="float:right;font-size:14px"><a href="#" ng-click="sortToggle()">Sort By Recent <i class="fa fa-angle-down"></i></a></li>
+	    	<li style="float:right" ng-click="selectRevenue()"><a href="">Revenue</a></li>
+			<li style="float:right" ng-click="selectExpense()"><a href="">Expense</a></li>
+			<li style="float:right" ng-click="selectOverview()"><a href="">Overview</a></li>
+			<div style="clear:both"></div>
+		</ul>
+		<div class="card mobileHide"><tags-input style="border:0px;flex-grow:2;" placeholder="Search" ng-model="searchQuery"></tags-input></div>
+		<div class="card">
+			<div style="padding:16px;">
+				<div class="row">
+					<div style="padding-left:0px;padding-right:0px;" class="col-xs-6">
+						<div style="padding-left:0px;padding-right:0px;" class="col-sm-6"><md-datepicker style="display:inline" ng-model="startDate" md-placeholder="Start date"></md-datepicker></div>
+	      				<div style="padding-left:0px;padding-right:0px;" class="col-sm-6"><md-datepicker ng-model="endDate" md-placeholder="End date"></md-datepicker></div>
+					</div>
+					<div style="text-align:right;" class="col-xs-6">
+						<h5>{{sumTransactions[sumTransactions.length-1][1].toFixed(2)}} <a href="#">{{assetSet[0].element}}</a> Balance</h5>
+						<h5>{{sumTo[sumTo.length-1][1].toFixed(2)}} <a href="#">{{assetSet[0].element}}</a> Revenue</h5>
+						<h5>{{sumFrom[sumFrom.length-1][1].toFixed(2)}} <a href="#">{{assetSet[0].element}}</a> Expense</h5>
+					</div>
+				</div>
+				<div class="col-xs-12">
+					<highchart config="chart"></highchart>
+				</div>
+				<div class="col-xs-12">
+					<highchart config="pie"></highchart>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 
-	<div class="col-sm-3 mobileFix" style="padding-left:0px;padding-right:0px;">
+<div class="row">
+	<div class="col-sm-4 mobileFix" style="padding-left:0px;padding-right:0px;">
 		<div class="card" ng-click="filterToggle('LEDGER', filterSet)">
 			<div style="background:url('https://source.unsplash.com/1600x900/?details,notes,explore,wonder,location,connection,asset,finance');height:50px;min-height:50px" class="imageContainerSmall">
                 <div style="background:rgba(0,0,0,0.75);height:50px" class="imageContainerSmallDiv">  
@@ -50,140 +85,8 @@
 			</div>
 		</div>
 	</div>
-
-	<div class="col-sm-9" style="padding-left:0px;padding-right:0px;">
-
-		<div class="spacing-5"></div>
-
-		<!--
-		<ul style="padding:0px;" class="member-tabs">
-			<li ng-click="selectOverview()"><a href="">Overview</a></li>
-			<li ng-click="selectExpense()"><a href="">Expense</a></li>
-			<li ng-click="selectRevenue()"><a href="">Revenue</a></li>
-			<li style="float:right">
-				<a ng-click="filterToggle('LEDGER', filterSet)" href="#">
-					{{assetSet[0].element}}
-					<i class="fa fa-question-circle"></i>
-				</a>
-			</li>
-		</ul>
-		-->
-
-		<ul style="padding:0px;" class="member-tabs">
-			<li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('POSITIONS')"><i class="fa fa-filter"></i> Filter</a></li>
-	    	<li style="float:right" ng-click="selectRevenue()"><a href="">Revenue</a></li>
-			<li style="float:right" ng-click="selectExpense()"><a href="">Expense</a></li>
-			<li style="float:right" ng-click="selectOverview()"><a href="">Overview</a></li>
-			<div style="clear:both"></div>
-		</ul>
-
-		<div class="card mobileFix">
-		    <form ng-submit="search()" style="display:flex;flex-direction:row;">
-		        <tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search" ng-model="searchQuery"></tags-input>
-		        <div ng-click="search()" style="border:0px;float:right" class="btn btn-default">
-		            <a href="#" role="button">
-		                <h5 style="color:black;text-align:right" class="noselect">Search <i class="fa fa-search"></i></h5>
-		            </a>
-		        </div>
-		    </form>
-		</div>
-
-		<div class="card">
-			<button class="btn btn-default log-btn" ng-click="transactionToggle(project)">+ Transaction</button>
-		</div>
-
-		<div class="card">
-			<div style="padding:16px;">
-
-				<div class="row">
-					<div style="padding-left:0px;padding-right:0px;" class="col-xs-6">
-
-						<div style="padding-left:0px;padding-right:0px;" class="col-sm-6"><md-datepicker style="display:inline" ng-model="startDate" md-placeholder="Start date"></md-datepicker></div>
-	      				<div style="padding-left:0px;padding-right:0px;" class="col-sm-6"><md-datepicker ng-model="endDate" md-placeholder="End date"></md-datepicker></div>
-
-					</div>
-
-					<!--TODO-->
-					<div style="text-align:right;" class="col-xs-6">
-						<h5>{{sumTransactions[sumTransactions.length-1][1].toFixed(2)}} <a href="#">{{assetSet[0].element}}</a> Balance</h5>
-						<h5>{{sumTo[sumTo.length-1][1].toFixed(2)}} <a href="#">{{assetSet[0].element}}</a> Revenue</h5>
-						<h5>{{sumFrom[sumFrom.length-1][1].toFixed(2)}} <a href="#">{{assetSet[0].element}}</a> Expense</h5>
-					</div>
-
-				</div>
-
-				<!--children projects..-->
-
-				<div class="col-xs-12">
-					<highchart config="chart"></highchart>
-				</div>
-
-				<div class="col-xs-12">
-					<highchart config="pie"></highchart>
-				</div>
-
-				<!--TODO TABLE-->
-
-			</div>
-		</div>
-
-		<!--item in transactions-->
-		<div class="card" ng-repeat="transaction in transactions" ng-click="cardDetailToggle(transaction)">
-			<div style="padding:16px">
-
-				<div style="float:right;text-align:right">
-                	<a ng-click="$event.stopPropagation();cardDetailToggle(task)"><span style="color:gray"><i class="fa fa-chevron-down"></i></span></a>
-                </div>
-		
-                <div style="display:inline">
-                    <span ng-if="transaction.from.username">
-                        <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="member/{{transaction.from.username}}" ui-sref="member.activity({path:transaction.from.username})">
-                            <img class="card-avatar" ng-src="{{transaction.from.avatarUrl}}" src="{{transaction.from.avatarUrl}}" err-src="/images/avatar.png">
-                            {{transaction.from.username}}
-                        </a>
-                    </span>
-                    <span ng-if="transaction.from.title">
-                        <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="project/{{transaction.from.urlTitle}}" ui-sref="project.activity({path:transaction.from.title})">
-                            <img class="card-avatar" ng-src="{{transaction.from.avatarUrl}}" src="{{transaction.from.avatarUrl}}" err-src="/images/avatar.png">
-                            {{transaction.from.title}}
-                        </a>
-                    </span>
-                </div>
-
-                <div style="display:inline;padding-left:5px;padding-right:5px;">
-                    <i class="fa fa-arrow-right"></i>
-                </div>
-
-                <div style="display:inline">
-                    <span ng-if="transaction.to.username">
-                        <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="member/{{transaction.to.username}}" ui-sref="member.activity({path:transaction.to.username})">
-                            <img class="card-avatar" ng-src="{{transaction.to.avatarUrl}}" src="{{transaction.to.avatarUrl}}" err-src="/images/avatar.png">
-                            {{transaction.to.username}}
-                        </a>
-                    </span>
-                    <span ng-if="transaction.to.title">
-                        <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="project/{{transaction.to.urlTitle}}" ui-sref="project.activity({path:transaction.to.title})">
-                            <img class="card-avatar" ng-src="{{transaction.to.avatarUrl}}" src="{{transaction.to.avatarUrl}}" err-src="/images/avatar.png">
-                            {{transaction.to.title}}
-                        </a>
-                    </span>
-                </div>
-                <div class="spacing-5"></div>
-                
-				<span ng-repeat="(key, value) in transaction.amountSet"><p style="font-weight:800">{{value}} <a href="market/{{key}}" ui-sref="market({id:key})">{{key}}</a></p></span>
-				<p><a ng-click="$event.stopPropagation();" ng-repeat="tag in transaction.tags" href="market/{{tag.trim()}}">{{tag.trim()}} </a></p>
-				<p>{{transaction.content}}</p>
-				<p style="color:gray"><span style="color:gray" am-time-ago="transaction.createdAt"></span> • {{transaction.createdAt | date :  "y MM-dd hh:mm.ss a"}}</p>
-				<a ng-click="$event.stopPropagation();" href="transaction/{{transaction.id}}" ui-sref="transaction({id:transaction.id})"></a>
-			</div>
-			<div class="card-footer">
-				<a ng-click="$event.stopPropagation();createReaction(transaction, 'plus')"><i class="fas fa-angle-up"></i> {{transaction.reactions.plus}} like </a> 
-				<a ng-click="$event.stopPropagation();createReaction(transaction, 'minus')" ><i class="fas fa-angle-down"></i> {{transaction.reactions.minus}} dislike </a>
-				<a ng-click="$event.stopPropagation();reply(transaction)"><i class="far fa-comment"></i> comment </a>
-				<a ng-click="$event.stopPropagation();" class="pull-right" style="padding:0px;" href="transaction/{{transaction.id}}" ui-sref="transaction({id:transaction.id})"><i class="fas fa-link grey"></i></a>
-			</div>
-		</div>
-
+	<div class="col-sm-8" style="padding-left:0px;padding-right:0px;">
+		<div class="card"><button class="btn btn-default log-btn" ng-click="transactionToggle(project)">+ Transaction</button></div>
+		<div ng-repeat="item in transactions"><div ng-include="'templates/cards/transactionCard.tpl.html'"></div></div>
 	</div>
-
 </div>

@@ -1,11 +1,6 @@
-<div class="spacing-5"></div>
-
 <div class="row">
-
 	<div class="col-sm-12" style="padding-left:0px;padding-right:0px;">
-
 		<div class="spacing-5"></div>
-
 		<ul style="padding:0px;" class="member-tabs">
 			<li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('LEDGER', filterSet)"><i class="fa fa-filter"></i> Filter</a></li>
 			<li style="float:right;font-size:14px"><a href="#" ng-click="sortToggle()">Sort By Recent <i class="fa fa-angle-down"></i></a></li>
@@ -14,18 +9,7 @@
 			<li style="float:right" ng-click="selectOverview()"><a href="">Overview</a></li>
 			<div style="clear:both"></div>
 		</ul>
-
-		<div class="card">
-	        <form ng-submit="search()" style="display:flex;flex-direction:row;">
-	            <tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search" ng-model="searchQuery"></tags-input>
-	            <div ng-click="search()" style="border:0px;float:right" class="btn btn-default">
-	                <a href="#" role="button">
-	                    <h5 style="color:black;text-align:right" class="noselect">Search <i class="fa fa-search"></i></h5>
-	                </a>
-	            </div>
-	        </form>
-	    </div>
-
+		<div class="card mobileFix"><tags-input style="border:0px;flex-grow:2;" placeholder="Search" ng-model="searchQuery"></tags-input></div>
 		<div class="card">
 			<div style="padding:16px;">
 				<div class="row">
@@ -33,14 +17,6 @@
 						<div style="padding-left:0px;padding-right:0px;" class="col-sm-6"><md-datepicker style="display:inline" ng-model="startDate" md-placeholder="Start date"></md-datepicker></div>
 	      				<div style="padding-left:0px;padding-right:0px;" class="col-sm-6"><md-datepicker ng-model="endDate" md-placeholder="End date"></md-datepicker></div>
 					</div>
-					<!--TODO-->
-					<!--
-					<div style="text-align:right;" class="col-xs-6">
-						<h5>{{sumTransactions[sumTransactions.length-1][1].toFixed(2)}} <a href="#">{{assetSet[0].element}}</a> Balance</h5>
-						<h5>{{sumTo[sumTo.length-1][1].toFixed(2)}} <a href="#">{{assetSet[0].element}}</a> Revenue</h5>
-						<h5>{{sumFrom[sumFrom.length-1][1].toFixed(2)}} <a href="#">{{assetSet[0].element}}</a> Expense</h5>
-					</div>
-					-->
 				</div>
 				<div class="col-xs-12">
 					<div ng-if="selectedState == 'OVERVIEW'"><highchart config="chart"></highchart></div>
@@ -52,11 +28,9 @@
 				</div>
 			</div>
 		</div>
-
 	</div>
 </div>
 <div class="row">
-
 	<div class="col-sm-4 mobileFix" style="padding-left:0px;padding-right:0px;">
 		<div class="card" ng-click="filterToggle('LEDGER', filterSet)">
 			<div style="background:url('https://source.unsplash.com/1600x900/?details,notes,explore,wonder,location,connection,asset,finance');height:50px;min-height:50px" class="imageContainerSmall">
@@ -111,5 +85,4 @@
 		<div class="card"><button class="btn btn-default log-btn" ng-click="transactionToggle(member)">+ Transaction</button></div>
 		<div ng-repeat="item in transactions"><div ng-include="'templates/cards/transactionCard.tpl.html'"></div></div>
 	</div>
-
 </div>

@@ -21,14 +21,13 @@
 	                    <ul style="padding:0px;" class="member-tabs">
 	                        <li><a ng-click="$event.stopPropagation();selectTab('INFORMATION')">Information</a></li>
 	                        <li><a ng-click="$event.stopPropagation();selectTab('CONTENT')">Content</a></li>
-	                        <li><a ng-click="$event.stopPropagation();selectTab('VALIDATIONS')">Associations</a></li>
-	                        <li><a ng-click="$event.stopPropagation();selectTab('CHARTER')">Charter</a></li>
+	                        <li><a ng-click="$event.stopPropagation();selectTab('ASSOCIATIONS')">Associations</a></li>
 	                    </ul>
 	                </div>
 	            </div>
 	        </div>
 	        <hr style="margin:0px;">
-			<div style="padding:16px">
+			<div style="padding:16px" ng-if="selectedTab =='INFORMATION'">
 				<h5>Description</h5>
         		<span style="display:inline" ng-bind-html="renderContent(connection.info.description)"></span>
 				<h5>Associated Models</h5>
@@ -44,5 +43,10 @@
 		    </div>
 		</div>
 	</div>
-	<div class="spacing-25"></div>
+	<div class="row">
+        <div ng-if="selectedTab =='ASSOCIATIONS'" ng-include="'task/templates/associations.tpl.html'"></div>
+        <div ng-if="selectedTab =='CONTENT'" ng-include="'connection/templates/content.tpl.html'"></div>
+        <div ng-if="selectedTab =='STATS'" ng-include="'connection/templates/stats.tpl.html'"></div>
+        <div ng-if="selectedTab =='TOKENS'" ng-include="'connection/templates/tokens.tpl.html'"></div>
+    </div>
 </div>

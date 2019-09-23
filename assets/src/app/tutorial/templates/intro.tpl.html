@@ -17,7 +17,7 @@
 <div style="padding:16px;">
     <div class="row">
         <div class="col-xs-12" style="padding-right:10px;padding-left:10px">
-            <div class="member-card" ng-click="renderReputationToggle(currentUser)">
+            <div class="member-card" ng-click="subNavToggle(currentUser)">
                 <!--<div style="text-align:right;padding:15px;position:absolute;right:0">
                     <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><i class="fas fa-chevron-down"></i></a>
                 </div>-->
@@ -27,9 +27,8 @@
                 <div style="clear:both"></div>
                 <div class="member-card-info" style="height:auto;padding-left:0%">
                     <h4 ng-click="$event.stopPropagation()"><a href="member/{{currentUser.username}}" ui-sref="member.activity({path:currentUser.username})">{{currentUser.username}}</a></h4>
-                    <p style="color:gray"><i style="color:#30b257" class="fa fa-circle"></i> {{currentUser.status}} Creating Account</p>
-                    <p style="color:gray"><b>Total Reputation</b>: {{currentUser.totalWork}}</p>
                     <p style="font-size:12px;" ng-click="$event.stopPropagation();memberQRToggle(currentUser);"><a style="color:gray"><i class="fas fa-qrcode"></i> {{currentUser.id}}</a></p>
+                    <p style="color:gray"><i style="color:#30b257" class="fa fa-circle"></i> Online<!--<br>{{currentUser.status}}--></p>
                 </div>
             </div>
             <div style="padding:16px;text-align:center">

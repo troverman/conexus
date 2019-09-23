@@ -573,31 +573,29 @@ angular.module( 'conexus.home', [
         };
         $scope.getLatLng();
      
-        //TODO: DEPRECIATE MEMBER MODEL
-        //VALIDATION - ASSOCIATION - CONNECTION
-        //CREATE PROJECT-MEMBER, 
         $scope.join = function(model){
-            $scope.newMember = {
-                user:$rootScope.currentUser.id,
-                project:model.id,
-            };
-            var index = $scope.projects.map(function(obj){return obj.id}).indexOf($scope.newMember.project);
-            if (model.isMember == false){
-                //ValidationModel.create($scope.newMember).then(function(model) {});
-                MemberModel.create($scope.newMember).then(function(model) {
-                    $scope.projects[index].isMember = 'PENDING';
-                    $scope.newMember = {};
+            var index = $scope.projects.map(function(obj){return obj.id}).indexOf(model.id);
+            if (!model.isMember){
+                var validationModel = {
+                    user:$rootScope.currentUser.id,
+                    context:{general:100},
+                    associatedModels:[
+                        {type:'MEMBER', id:$rootScope.currentUser.id},
+                        {type:'PROJECT', id:model.id},
+                    ],
+                };
+                ValidationModel.create(validationModel).then(function(model) {
+                    $scope.projects[index].isMember = true;
                     $rootScope.pop('Request to Join','You requested to join.. ' +model.title+' .. pending validation');
                 });
             }
-            else if (model.isMember == 'PENDING'){
-                $scope.projects[index].isMember = false;
-                $rootScope.pop('Request canceled','You canceled your request to join.. ' +model.title);
-            }
-            else if (model.isMember == true){
-                $rootScope.pop('Project Left','You left ' +model.title);
-                $scope.projects[index].isMember = false;
-            }            
+            if (model.isMember){
+                //cancel the validation by addative prop
+                //ValidationModel.create(validationModel).then(function(model) {});
+                    $scope.projects[index].isMember = false;
+                    $rootScope.pop('Project Left','You left ' +model.title);
+                //});
+            }          
         };
 
         //ASSOCIATE TASK
@@ -605,32 +603,56 @@ angular.module( 'conexus.home', [
         $scope.interested = function(model){
             var validationModel = {
                 user:$rootScope.currentUser.id,
-                type:'HUMAN',
-                validation:{general:100},
+                context:{general:100},
                 associatedModels:[
                     {type:'MEMBER', id:$rootScope.currentUser.id},
                     {type:'TASK', id:model.id},
                 ],
             };
             var index = $scope.tasks.map(function(obj){return obj.id}).indexOf(model.id);
-            if (model.isAssociated == false){
+            if (!model.isAssociated){
                 ValidationModel.create(validationModel).then(function(newValidation){
                     $scope.tasks[index].isAssociated = true;
                     $rootScope.pop('Associated Task!', 'You are now associated with '+ model.title + '. Schedule some intentional time!');
                 });
             }
-            else if (model.isAssociated == true){
-                $scope.tasks[index].isAssociated = false;
-                $rootScope.pop('Removed Association!', 'It\'s all good!');
+            if (model.isAssociated){
+                //ValidationModel.create($scope.newMember).then(function(model) {});
+                    $scope.tasks[index].isAssociated = false;
+                    $rootScope.pop('Removed Association!', 'It\'s all good!');
+                //});
             }
         };
 
-        //TODO: DEPRECIATE FOLLOW MODEL
-        //VALIDATION - ASSOCIATION - CONNECTION
-        //CREATE MEMBER-MEMBER, 
-        //ROOTSCOPE IT 
+
         $scope.follow = function(model){
-            //newValidation = {}
+
+            /*var validationModel = {
+                user:$rootScope.currentUser.id,
+                context:{general:100},
+                associatedModels:[
+                    {type:'MEMBER', id:$rootScope.currentUser.id},
+                    {type:'MEMBER', id:model.id},
+                ],
+            };
+
+            if (!model.isFollowing){
+                ValidationModel.create(validationModel).then(function(newValidation){
+                    var index = $scope.members.map(function(obj){return obj.id}).indexOf($scope.newFollower.followed);
+                    $scope.members[index].isFollowing = true;
+                    $scope.members[index].followerCount++;
+                    $rootScope.pop('Following!', 'You are now follwing '+ model.username);
+                });
+            }
+            if (model.isFollowing){
+                var index = $scope.members.map(function(obj){return obj.id}).indexOf($scope.newFollower.followed);
+                $scope.members[index].isFollowing = false;
+                $scope.members[index].followerCount--;
+                $rootScope.pop('Unfollowed!', 'You Unfollowed '+ model.username);
+            }*/
+
+
+
             $scope.newFollower = {
                 followed:model.id,
                 follower:$rootScope.currentUser.id,
@@ -665,6 +687,7 @@ angular.module( 'conexus.home', [
             $scope.totalMap.xAxis.categories = [];
             var groupObject = {};
             for (x in $scope.members){
+                if (!$scope.members[x].reputation){$scope.members[x].reputation = $scope.members[x].balance}
                 for (y in Object.keys($scope.members[x].reputation)){
                     if(isNaN($scope.members[x].reputation[Object.keys($scope.members[x].reputation)[y]])){
                         groupObject[Object.keys($scope.members[x].reputation)[y]] = 0

@@ -73,7 +73,7 @@ module.exports = {
 						itemModel.id = itemModel._id.toString();
 						User.find({id:itemModel.user.toString()}).then(function(userModel){
 							itemModel.user = userModel[0];
-							Item.subscribe(req, [itemModel]);
+							Item.subscribe(req, [itemModel[0].id]);
 							console.log(itemModel)
 							getAssociations(itemModel).then(function(models){res.json(models);});
 						});

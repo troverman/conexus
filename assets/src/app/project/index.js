@@ -275,20 +275,6 @@ angular.module( 'conexus.project', [
         $scope.options = {disableDefaultUI: true};
     }
 
-    $scope.createMember = function(){
-        if($scope.currentUser){
-            $scope.newMember.user = $rootScope.currentUser.id;
-            $scope.newMember.project = project.id;
-            //TODO: default type -- charter for ux 
-            $scope.newMember.type = 'Member';
-            MemberModel.create($scope.newMember).then(function(model) {
-                $rootScope.confirm = $scope.newMember;
-                $rootScope.confirm.modelType = 'PROJECTMEMBER';
-            });
-        }
-        else{$mdSidenav('login').toggle()}
-    };
-
     $scope.createMemberValidate = function(){
         if($scope.currentUser){
             $scope.newValidation = {
@@ -302,7 +288,7 @@ angular.module( 'conexus.project', [
                 context:{
                     general:100
                 },
-                type:'HUMAN',
+                connection:{},
                 information:{},
                 parameters:{},
             };
@@ -972,6 +958,27 @@ angular.module( 'conexus.project', [
     $scope.newMember = {};
     $scope.project = project;
 
+    $scope.members = $scope.project.associationModels.filter(function(obj){
+        for (x in obj.associatedModels){
+            if (obj.associatedModels[x].type == 'MEMBER'){
+                return obj;
+            }
+        }
+    }).map(function(obj) {
+        for (x in obj.associatedModels){
+            if (obj.associatedModels[x].type == 'MEMBER'){
+                //var returnObj = obj.associatedModels[x].data;
+                //returnObj.connection = obj.connection;
+                //returnObj.context = obj.context;
+                var returnObj = obj;
+                returnObj.user =  obj.associatedModels[x].data;
+                returnObj.id = returnObj._id
+                return returnObj;
+            }
+        }
+    });
+
+    console.log($scope.members);
     console.log($scope.project);
 
     //filtering associations

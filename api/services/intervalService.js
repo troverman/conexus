@@ -379,8 +379,17 @@ module.exports.intervalService = function(){
 	function legacyDataBuild(){
 		//Task.find()
 		//if (taskModels.project){}
-	}
+	};
 
+	function logOut(){
+		User.find().then(function(userModels){
+			for (x in userModels){
+				User.update({id:userModels[x].id},{loggedIn:false}).then(function(userModels){});
+			}
+		});
+	};
+	logOut();
+	
 	//DATA SERVICE
 	//dataService.getData();
 	//dataService.traverse();

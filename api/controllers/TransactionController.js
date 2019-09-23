@@ -47,9 +47,10 @@ function getAssociations(model){
 					}
 				}
 				Q.all(promises).then((populatedModels)=>{
+					var index = -1;
 					for (x in model.associationModels){
 						for (y in associationModels[x].associatedModels){
-							var index = parseInt(x+y);
+							index++;
 							model.associationModels[x].associatedModels[y].data = populatedModels[index];
 						}
 					}
@@ -204,9 +205,10 @@ module.exports = {
 						models[x].from = populatedModels[sum];
 						sum++;
 					}
-					getAssociations(models[0]).then(function(models){
-						Transaction.subscribe(req, [models[0].id]);
-						res.json(models);
+					getAssociations(models[0]).then(function(model){
+						console.log(models)
+						Transaction.subscribe(req, [model.id]);
+						res.json(model);
 					});
 				});
 			});

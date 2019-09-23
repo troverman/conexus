@@ -28,22 +28,27 @@
         </a>
     </div>
     <div class="member-card-info">
-        <h3 ng-click="$event.stopPropagation()">
-            <a href="member/{{item.username}}" ui-sref="member.activity({path:item.username})">{{item.username}}</a>
-        </h3>
+        <h2 ng-click="$event.stopPropagation()" style="margin-bottom:3px"><a href="member/{{item.username}}" ui-sref="member.activity({path:item.username})">{{item.username}}</a></h2>
         <p style="font-size:8px;" ng-click="$event.stopPropagation();memberQRToggle(item);"><a style="color:gray"><i class="fas fa-qrcode"></i> {{item.id}}</a></p>
-        <div class="spacing-5"></div>
-        <p style="font-size:11px;" ng-click="$event.stopPropagation()">
+        <p style="font-size:12px;" ng-click="$event.stopPropagation()">
             <a href="member/{{item.username}}/projects" ui-sref="member.projects({path:item.username})">{{item.projectCount || 0}} Projects</a> | 
             <a href="member/{{item.username}}/followers" ui-sref="member.followers({path:item.username})">{{item.followerCount || 0}} Followers</a> | 
             <a href="member/{{item.username}}/following" ui-sref="member.following({path:item.username})">{{item.followingCount || 0}} Following</a>
-            <p style="color:gray" ng-click="renderReputationToggle(item)">Total Reputation | {{item.totalWork || 0}}
         </p>
-        <p style="color:gray">{{currentUser.status}} <i style="color:#30b257" class="fa fa-circle"></i> Offline</p>
+        <p style="font-size:12px;"><a ng-click="renderReputationToggle(item)">{{item.totalWork || 0}} Reputation</a></p>
+        <p style="color:gray;font-size:12px;">
+            <span ng-if="item.loggedIn">
+                <span><i style="color:#30b257" class="fa fa-circle"></i> Online</span>
+                <span ng-if="item.status"><br>{{item.status}}</span>
+            </span>
+            <span ng-if="!item.loggedIn"><i class="fa fa-circle"></i> Offline</span>
+        </p>
     </div>
-    <div class="card-footer">
+    <div class="card-footer" style="text-align:center">
+        <a ng-click="$event.stopPropagation();cre8Toggle(item)"><i class="fas fa-expand"></i> Create </a>
         <a ng-click="$event.stopPropagation();transactionToggle(item)"><i class="fas fa-plus"></i> Transaction </a>
         <a ng-show="!item.isFollowing" ng-click="$event.stopPropagation();follow(item)"><i class="fas fa-users"></i> Follow </a>
         <a ng-show="item.isFollowing" ng-click="$event.stopPropagation();follow(item)"><i class="fas fa-user"></i> Unfollow</button></a>
+        <a ng-click="$event.stopPropagation();validationToggle(item)"><i class="fas fa-check"></i> validate </a>
     </div>
 </div>

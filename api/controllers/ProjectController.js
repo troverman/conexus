@@ -5,6 +5,7 @@ module.exports = {
 
 	get: function(req, res) {
 
+		//DO COMPLEX (COMB IT) FILTER WITH 
 		function getAssociations(model){
 			var deferred = Q.defer();
 			Association.native(function(err, association) {
@@ -30,19 +31,17 @@ module.exports = {
 							}
 						}
 						Q.all(promises).then((populatedModels)=>{
+							var index = -1 
 							for (x in model.associationModels){
 								for (y in associationModels[x].associatedModels){
-									var index = parseInt(x+y);
+									index++;
 									model.associationModels[x].associatedModels[y].data = populatedModels[index];
 								}
 							}
-
 							model.context = {};
 							for (x in model.associationModels){
-
+								//console.log(model.associationModels[x])
 							}
-
-							console.log(model)
 							deferred.resolve(model);
 						});
 					}
@@ -368,14 +367,32 @@ module.exports = {
 							Project.subscribe(req, [project.id]);
 							Project.publish([projectModel[0].id], {verb: 'create', data: projectModel[0]});
 
-							//createEvent(project);
-							createNotification(project);	
+							createEvent(project);
+							createNotification(project);
 							createValidation(project);
 
-							//upgrading helps
-							createProjectMember(project);
-							mintTokens(project);
+							//createCharter()
+							//initCharter.. 
 
+								//Project-Connection
+								//(Project-Association)
+
+								//Project-Member - Creator 
+								//Project-Member - Member
+
+								//Project-Order
+								//Project-Validation
+
+								//Project-Task
+								//Project-Task-Time
+								//Project-Transaction
+
+								//Project-Item
+								//Project-Content
+
+							//createProjectMember
+
+							mintTokens(project);
 							res.json(model);
 
 						});

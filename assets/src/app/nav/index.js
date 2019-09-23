@@ -171,6 +171,13 @@ angular.module( 'conexus.nav', [
                     context:[
                         {text:'self', score:100}
                     ]
+                },{
+                    type:'MEMBER',
+                    text:'MEMBER'+$rootScope.currentUser.id,
+                    id:$rootScope.currentUser.id,
+                    context:[
+                        {text:'self', score:100}
+                    ]
                 }],
                 user:$rootScope.currentUser.id,
             };
@@ -397,7 +404,7 @@ angular.module( 'conexus.nav', [
         }
     };
 
-    $rootScope.itemToggle = function(){
+    $rootScope.itemToggle = function(item){
         $scope.closeAllNav();
         if($rootScope.currentUser){
             $scope.newItem = {
@@ -409,10 +416,29 @@ angular.module( 'conexus.nav', [
                         context:[
                             {text:'self', score:100}
                         ]
+                    },{
+                        type:'MEMBER',
+                        text:'MEMBER'+$rootScope.currentUser.id,
+                        id:$rootScope.currentUser.id,
+                        context:[
+                            {text:'self', score:100}
+                        ]
                     }
                 ],
                 user:$rootScope.currentUser.id,
             };
+
+            if (item){
+                $scope.item = item;
+                $scope.newItem.associatedModels.push({
+                    type:item.model, 
+                    id:item.id, 
+                    text:item.model+'+'+item.id, 
+                    context:[
+                        {text:'self', score:100}
+                    ]
+                });
+            }
 
             $scope.$watch('newTask.context', function(newValue, oldValue){
                 if (newValue !== oldValue) {
@@ -709,7 +735,6 @@ angular.module( 'conexus.nav', [
         
         $scope.closeAllNav();
         $scope.item = item;
-
         $scope.assoicationFilter = [{text:$scope.item.associatedModels[0].id}];
 
         //TODO: GET ASSOCIATIONS
@@ -809,21 +834,17 @@ angular.module( 'conexus.nav', [
     //TODO: REDO REP MAPPING
     $rootScope.renderReputationToggle = function(item){
         $scope.closeAllNav();
-
         $scope.item = item;
+        if (!$scope.item.user){$scope.item.user = item};
+
+        console.log(item);
         $scope.reputationChart.xAxis.categories = [];
         $scope.reputationChart.series[0].data = [];
-
-        if ($scope.item.reputation){$scope.reputation = $scope.item.reputation;$scope.item.user = item}
-        if ($scope.item.user){$scope.reputation = $scope.item.user.reputation}
-
-        //DEPRECIATE
-        if ($scope.item.project){
-            $scope.reputationFilter = [{text:$scope.item.project.title}];
-        }
+        
+        if ($scope.item.user){$scope.balance = $scope.item.user.balance}
 
         var sortable = [];
-        for (var context in $scope.reputation) {sortable.push([context, $scope.reputation[context]])}
+        for (var context in $scope.balance) {sortable.push([context, $scope.balance[context]])}
         sortable.sort(function(a, b) {return b[1] - a[1]});
 
         for (x in sortable){
@@ -1101,6 +1122,13 @@ angular.module( 'conexus.nav', [
                     context:[
                         {text:'self', score:100}
                     ]
+                },{
+                    type:'MEMBER',
+                    text:'MEMBER'+$rootScope.currentUser.id,
+                    id:$rootScope.currentUser.id,
+                    context:[
+                        {text:'self', score:100}
+                    ]
                 }],
                 user:$rootScope.currentUser.id,
             };
@@ -1142,6 +1170,13 @@ angular.module( 'conexus.nav', [
                     type:'TIME',
                     text:'self',
                     id:'self',
+                    context:[
+                        {text:'self', score:100}
+                    ]
+                },{
+                    type:'MEMBER',
+                    text:'MEMBER'+$rootScope.currentUser.id,
+                    id:$rootScope.currentUser.id,
                     context:[
                         {text:'self', score:100}
                     ]
@@ -1333,6 +1368,7 @@ angular.module( 'conexus.nav', [
        
         if($rootScope.currentUser){
 
+            //ASSOCIATE
             $scope.newTransaction = {
                 from:[{text:$rootScope.currentUser.username, id:$rootScope.currentUser.id}],
                 associatedModels:[{

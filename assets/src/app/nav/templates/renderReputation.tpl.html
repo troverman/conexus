@@ -13,12 +13,6 @@
                                 <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
                                 {{item.user.username}}
                             </a>
-                            <!--
-                            <a>
-                                <span style="color:white;font-size:10px;">0x{{item.user.id}}</span>
-                                <span ng-if="item.project" style="color:gray;font-size:10px;">, 0x{{item.id}}</span>
-                            </a>
-                            -->
                         </h1>
                         <h5 style="color:white">
                             <span style="color:white;font-size:10px;">
@@ -35,23 +29,25 @@
 
         <div style="padding:16px;text-align:center">
 
-            <p style="font-size:13px;">
+            <p style="font-size:14px;">
                 <a href="member/{{item.user.username}}/projects" ui-sref="member.projects({path:item.user.username})">{{item.user.projectCount || 0}} Projects</a> | 
                 <a href="member/{{item.user.username}}/followers" ui-sref="member.followers({path:item.user.username})">{{item.user.followerCount || 0}} Followers</a> | 
                 <a href="member/{{item.user.username}}/following" ui-sref="member.following({path:item.user.username})">{{item.user.followingCount || 0}} Following</a>
             </p>
-
-            <div class="spacing-5"></div>
-
+            <p style="font-size:14px;"><a href="member/{{item.user.username}}/assets" ui-sref="member.assets({path:item.user.username})">{{item.totalWork || 0}} Reputation</a></p>
+            <p style="color:gray;font-size:12px;">
+                <span ng-if="item.user.loggedIn">
+                    <span><i style="color:#30b257" class="fa fa-circle"></i> Online</span>
+                    <span ng-if="item.user.status"><br>{{item.user.status}}</span>
+                </span>
+                <span ng-if="!item.user.loggedIn"><i class="fa fa-circle"></i> Offline</span>
+            </p>
             <div ng-if="currentUser.id != item.user.id">
                 <img ng-click="memberQRToggle(item.user)" style="height:50px;text-align:left" src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{item.user.id}}">
                 <a style="padding:10px 15px;color:rgb(125,125,125)" class="btn btn-default" ng-click="$event.stopPropagation();transactionToggle()">Send Tokens</a>
                 <a style="padding:10px 15px;color:rgb(125,125,125)" class="btn btn-default" ng-click="$event.stopPropagation();transactionToggle()">Follow</button></a>
             </div>
 
-            <div class="spacing-5"></div>
-
-            <h4>{{item.project.title}}</h4>
             <div class="spacing-5"></div>
             
             <!--FIX CRASH-->
