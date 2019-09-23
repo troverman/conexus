@@ -159,7 +159,5 @@ angular.module( 'conexus.contentList', [
             }
         }
     });
-
-
-
+    
 }]);

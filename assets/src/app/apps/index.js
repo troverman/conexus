@@ -49,4 +49,15 @@ angular.module( 'conexus.apps', [
 
     $scope.filterSet = {tags: $scope.sortedTagArray};
 
+    $sailsSocket.subscribe('app', function (envelope) {
+        console.log(envelope);
+        if (envelope.verb == 'create'){$scope.apps.unshift(envelope.data);}
+        if (envelope.verb == 'update'){
+            var index = $scope.apps.map(function(obj){return obj.id}).indexOf(envelope.data.id);
+            if (index != -1){
+                $scope.apps[index].data = envelope.data.data;
+            }
+        }
+    });
+
 }]);

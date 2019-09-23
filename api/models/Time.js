@@ -12,6 +12,9 @@ module.exports = {
         creator: {type: 'string'},
         user: {model: 'user'},
         data: {type: 'json'},
+
+        task: {model: 'task'},
+
     },
 };
 

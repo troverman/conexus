@@ -47,20 +47,42 @@ angular.module( 'conexus.item', [
             }
         }
     }
-    console.log($scope.item.context)
+    console.log($scope.item.context);
 
-    //TOKENS BETA///
-    $scope.populateTokensBeta = function(){
-        $scope.item.data.apps.tokens = $scope.item.data.apps.attention;
-        $scope.item.data.apps.tokens['CRE8'] = 1;
-        $scope.item.data.apps.tokens['CRE8+TASK'] = 1;
-        $scope.item.data.apps.tokens['CRE8+TASK+'+$scope.item.id] = 1;
+    $scope.tokenChart = {
+        chart: {zoomType: 'x'},
+        series: [{
+            id: 'Attention',
+            type: 'column',
+            name: 'Attention',
+            data: []
+        }],
+        title: {text: ''},
+        xAxis: {
+            crosshair: true,
+            gridLineWidth: 0.5,
+            gridLineColor: 'grey',
+            title: {text: null},
+            categories: [],
+        },
+        legend: {enabled: false},
+        yAxis: {title: {text: null}},
+        credits:{enabled:false},
     };
-    $scope.populateTokensBeta();
-
-
-
-
+    $scope.populateTokenChart = function(){
+        $scope.sortableSet = [];
+        $scope.tokenChart.xAxis.categories = [];
+        $scope.tokenChart.series[0].data = [];
+        for (x in Object.keys($scope.item.data.apps.tokens)){$scope.sortableSet.push([Object.keys($scope.item.data.apps.tokens)[x], $scope.item.data.apps.tokens[Object.keys($scope.item.data.apps.tokens)[x]]])}
+        $scope.sortableSet.sort(function(a, b) {return b[1] - a[1]});
+        for (x in $scope.sortableSet){
+            if (x < 100){
+                $scope.tokenChart.xAxis.categories.push($scope.sortableSet[x][0]);
+                $scope.tokenChart.series[0].data.push($scope.sortableSet[x][1]);
+            }
+        }
+    };
+    if ($scope.item.data.apps.tokens){$scope.populateTokenChart();}
 
     //VERBS FOR THE ITEM ARE?? 
     $scope.actions = actions;

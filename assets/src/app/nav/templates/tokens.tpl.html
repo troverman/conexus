@@ -27,9 +27,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="(key, value) in item.data.apps.tokens">
-                        <td><a href="market/{{key}}" ui-sref="market({id:key})">{{key}}</a></td>
-                        <td>{{value}}</td>
+                    <tr ng-repeat="item in sortableSet">
+                        <td><a href="market/{{item[0]}}" ui-sref="market({id:item[0]})">{{item[0]}}</a></td>
+                        <td>{{item[1]}}</td>
                     </tr>
                 </tbody>
             </table>

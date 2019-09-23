@@ -1,4 +1,5 @@
 const async = require('async');
+const Q = require('q');
 const request = require('request');
 
 module.exports = {
@@ -51,34 +52,36 @@ module.exports = {
 		User.find().then(function(userModels){
 			for (x in userModels){
 				(function(userModels, x){
-					Time.find({user:userModels[x].id}).populate('task').then(function(workModels){
 
-						var workSum = {};
+					Time.find({user:userModels[x].id}).limit(10000).populate('task').then(function(timeModels){
+
+						var balances = {};
 						//TOKENS ARE .. 
+						//console.log(userModels[x].username, timeModels.length)
 
-						for (y in workModels){
-							if (!workSum[workModels[y].id]){workSum[workModels[y].id] = parseFloat(workModels[y].amount)}
-							workSum[workModels[y].id] += parseFloat(workModels[y].amount);
-							if (workModels[y].task && workModels[y].task.tags){
-								for (z in workModels[y].task.tags.split(',')){
-									//if (!workSum[workModels[y].task.tags.split(',')[z]+'+'+workModels[y].id]){workSum[workModels[y].task.tags.split(',')[z]+'+'+workModels[y].id] = parseFloat(workModels[y].amount)}
-									//workSum[workModels[y].task.tags.split(',')[z]+'+'+workModels[y].id] += parseFloat(workModels[y].amount);
-									if (!workSum[workModels[y].task.tags.split(',')[z].replace(/\s/g, '').toLowerCase()]){workSum[workModels[y].task.tags.split(',')[z].replace(/\s/g, '').toLowerCase()] = parseFloat(workModels[y].amount)}
-									workSum[workModels[y].task.tags.split(',')[z].replace(/\s/g, '').toLowerCase()] += parseFloat(workModels[y].amount);
+						for (y in timeModels){
+
+							if (!balances[timeModels[y].id]){balances[timeModels[y].id] = parseFloat(timeModels[y].amount)}
+							balances[timeModels[y].id] += parseFloat(timeModels[y].amount);
+
+							if (timeModels[y].task && timeModels[y].task.tags){
+								console.log(timeModels[y].task)
+								for (z in timeModels[y].task.tags.split(',')){
+									if (!balances[timeModels[y].task.tags.split(',')[z].replace(/\s/g, '').toUpperCase()]){balances[timeModels[y].task.tags.split(',')[z].replace(/\s/g, '').toUpperCase()] = parseFloat(balances[y].amount)}
+									balances[timeModels[y].task.tags.split(',')[z].replace(/\s/g, '').toUpperCase()] += parseFloat(timeModels[y].amount);
 								}
 							}
+					
 						}
 
-						var balance = Object.assign(workSum, userModels[x].balance);
+						var balance = Object.assign(balances, userModels[x].balance);
 						if (balance['cre8']!=0){balance['cre8'] = 8};
-
-						//console.log(workSum);
-						//console.log(userModels[x].id);
+						//console.log(balance)
 						
-						User.update({id:userModels[x].id}, {reputation:workSum, balance:balance}).then(function(userModels){console.log('UPDATE')})
-
+						User.update({id:userModels[x].id}, {balance:balance}).then(function(userModels){console.log('UPDATE', userModels[0].username)})
 
 					});
+
 				})(userModels, x);
 			}
 		});
@@ -107,12 +110,51 @@ module.exports = {
 		});
 	},
 
+	privacyTokenProtocolPreAlpha:function(){
+		//GET PRIVACY TOKEN ASSOCIATED MEMBERS
+		var tokenSum = 0;
+		User.find().then(function(userModels){
+			for (x in userModels){
+				if(!userModels[x].balance){userModels[x].balance = {}}
+				if(!userModels[x].balance['PRIVACY']){userModels[x].balance['PRIVACY'] = 0}
+				function getTimeAmount(model){
+					//await
+					var deferred = Q.defer();
+					//GET TIME CREATED SINCE LAST EPOCH IE DAY
+					model.epoch = 86400;
+					//var time = new Date('2018-08-24T14:56:21.774Z').getTime() - 86400;
+					var time = new Date();
+					time.setDate(date.getDate() - 1);
+					var query = {
+						user:model.user,
+						createdAt: {'<=': time}
+			        };
+					Time.find(query).then(function(timeModels){
+						var sumOfTime = timeModels.reduce(function(a, b){return a + b[amount]}, 0);
+						deferred.resolve(sumOfTime);
+					});
+					return deferred.promise;
+				};
 
-	//get time created today eight6400-time;
-	//APP SPECIFIC 'DEAMON' -- MAKE DIS AN APP :)
-	//WELL DOCUMENT UNIVERSAL TOKEN
-	//privacyTokenProtocolPreAlpha
+				getTimeAmount(userModels[x]).then(function(){
 
+				});
+
+				//not done
+				userModels[x].balance['PRIVACY'] = userModels[x].balance['PRIVACY'] + (86400 - getTimeAmount(model)) ;
+				tokenSum+=userModels[x].balance['PRIVACY']
+				User.update({id:userModels[x].id}, {balance: userModels[x].balance}).then(function(userModel){
+					console.log('UPDATED', userModel[0].username, userModel[0].balance['PRIVACY'])
+				});	
+			}
+			Token.find({string:'PRIVACY'}).then(function(tokenModels){
+				if (!tokenModels[0].information.inCirculation){tokenModels[0].information.inCirculation = 0;}
+				tokenModels[0].information.inCirculation = parseInt(tokenModels[0].information.inCirculation) + parseInt(tokenSum);
+				Token.update({id:tokenModels[0].id}, tokenModels[0]).then(function(tokenModel){console.log('UPDATED', tokenModel)});
+			});
+		});
+	},
+	
 };
 
 module.exports.intervalService = function(){
@@ -123,11 +165,13 @@ module.exports.intervalService = function(){
 	//setInterval(intervalService.universalTokenProtocolPreAlpha, 8640000);
 	//setInterval(intervalService.reputationBuild, 8640000);
 	//intervalService.reputationBuild();
-
 	//POPULATE TOKEN -- ALPHA.. 
 	//COALESE CONGRUENT DATA MAPPINGS.. 
 	//TOKEN IS A MAPPING FROM STRING TO PROTOCOLS (WHICH ARE LOGIC MAPS)
 	//setInterval(dataService.buildStringSpace, 3600);
+
+	intervalService.reputationBuild()
+
 
 	//CONNECTION | (VALIDATION - ASSOCIATION)
 
@@ -144,6 +188,7 @@ module.exports.intervalService = function(){
 	//		dataService.buildAssociationFromValidation(taskModels[x]);
 	//	}
 	//});
+
 
 	
 	function populateMerch(){
@@ -330,89 +375,10 @@ module.exports.intervalService = function(){
 	};
 	//removeDuplicateTokens();
 
-	function populateApps(){
-		var apps = [    
-	        {title:'STRUCTURE', description:'CRE8 CORE STRUCTURE APP', tags:'CRE8,CORE,STRUCTURE'},
-	        {title:'LANGUAGE', description:'CRE8 CORE LANGUAGE APP', tags:'CRE8,CORE,LANGUAGE'},
-	        {title:'CONGURENCE', description:'CRE8 CORE CONGURENCE APP', tags:'CRE8,CORE,CONGURENCE'},
-	        {title:'MANIFOLD', description:'CRE8 CORE MANIFOLD APP', tags:'CRE8,CORE,MANIFOLD'},
-	        {title:'CONNECTION', description:'CRE8 CORE CONNECTION APP', tags:'CRE8,CORE,MANIFOLD,CONNECTION,ASSOCIATION'},
-	        {title:'ASSOCIATION', description:'CRE8 CORE ASSOCIATION APP', tags:'CRE8,CORE,MANIFOLD,CONNECTION,ASSOCIATION'},
-	        {title:'CREDIT', description:'Credit Manifold', manifold:'+CREDIT+[INTEREST], +CREDIT+[ISSUE]+[TIMEDOMAIN]+[INTERESTASSETSET]+[INTERESTSET]', tags:'CRE8,CORE,MANIFOLD,CREDIT'},
-	        {title:'FUTURE', description:'Future Manifold App', manifold:'+FUTURE+[ASSETSET]+[DATE]', tags:'CRE8,CORE,MANIFOLD,FUTURE'},
-	        {title:'OPTION', description:'Option Manifold APP', manifold:'+OPTION+[ASSETSET]+[PRICESET]+[TIMEALPHA]+[TIMEBETA] ', tags:'CRE8,CORE,MANIFOLD,OPTION'},
-	        {title:'SPONSOR', description:'Sponsor Manifold APP', manifold:'+SPONSOR+[NAMESPACE]', tags:'CRE8,CORE,MANIFOLD,SPONSOR'},
-	        {title:'ATTENTION', description:'CREATE CORE PROTOCOLS; ALL MODELS', protocols:''},
-	        {title:'RELATION', description:'Data Association', protocols:''},
-	        {title:'VALIDATION', description:'Creation of consensus based data associations', protocols:''},
-	        {title:'ITEM', description:'Item.', protocols:''},
-	        {title:'CONTENT', description:'Content.', protocols:''},
-	        {title:'ACTION', description:'CREATE CORE PROTOCOLS; ALL MODELS', protocols:''},
-	        {title:'TRANSACTION', description:'CREATE CORE PROTOCOLS; ALL MODELS', protocols:''},
-	        {title:'Universal Token', description:'Universal Token, an eglatarian initalization for value map creation', manifold:'UNIVERSALTOKEN+', tags:'CRE8,UNIVERSALTOKEN'},
-	        {title:'Privacy Token', description:'Per day total of time NOT shared and contextualized 86400-dailyTime.', manifold:'UNIVERSALTOKEN+', tags:'CRE8,UNIVERSALTOKEN'},
-	        {title:'Machine Learning Tokenization', description:'', tags:'Machine,ai,container,intellligence,pattern'},
-	        {title:'Location Tokenization', description:'Location Tokenization; A Space Time Mapping', tags:'USD,bank,finance,fiat,authentication'},
-	        {title:'Consumption', description:'Comsumption Tracking Tokenization', manifold:'CRE8+CONSUMPTION+', tags:'CRE8,consumption'},
-	        {title:'Fitbit Activity Tokenization', description:'Fitbit Activity Tokenization, authentication and app integration', manifold:'APP+FITBIT+', tags:'fitbit,data,exercise,health,authentication'},
-	        {title:'CRE8 Capital', description:'Smart Investment though Synthetic Intellligence; requires permissions to access balances.', tags:'CRE8,capital,investment,financialmanagement,ai,artificialintelligence'},
-	        {title:'CRE8 Capital NASDEQ', description:'Smart Investment though Synthetic Intellligence; requires permissions to access balances. NASDEQ custodial relations', tags:'CRE8,capital,investment,financialmanagement,ai,artificialintelligence'},
-	        {title:'CRE8 Capital NYSE', description:'Smart Investment though Synthetic Intellligence; requires permissions to access balances. NYSE custodial relations', tags:'CRE8,capital,investment,financialmanagement,ai,artificialintelligence'},
-	        {title:'Voetr', description:'Consensus Building on Legislation & Political Representation', manifold:'APP+VOETR+', tags:'voetr,voting,politics,legislation,representation'},
-	        {title:'Inspiro', description:'Tokenization of Inspiration https://www.inspiro.care', manifold:'APP+INSPIRO+', tags:'medicine,medical,hardware,device'},
-	        {title:'CRE8.NYC', description:'CRE8 Partnership with New York City .NYC', tags:'CRE8,capital,investment,financialmanagement,ai,artificialintelligence'},
-	        {title:'CRE8.CITY', description:'CRE8 Partnership with CITY', tags:'CRE8,capital,investment,financialmanagement,ai,artificialintelligence'},
-	        {title:'Delivery', description:'2nd Stage Delivery Protocol', tags:'CRE8,capital,investment,financialmanagement,ai,artificialintelligence'},
-	        {title:'USD Tokenization', description:'USD Tokenization, manages custodial relationships with affiliate banks and institutions.', manifold:'USD', tags:'USD,bank,finance,fiat,authentication'},
-	        {title:'ETH Tokenization', description:'ETH Activity Tokenization, manages custodial relationships', manifold:'ETH', tags:'ETH,crypto,finance'},
-	        {title:'ETH20 Tokenization', description:'ETH ERC 20 Tokenization, manages custodial relationships', manifold:'ETH20', tags:'ETH,crypto,finance,token,ERC20'},
-	        {title:'ETH721 Tokenization', description:'ETH ERC 721 Tokenization, manages custodial relationships', manifold:'ETH721', tags:'ETH,crypto,finance,token,ERC721,NFT'},
-	        {title:'BTC Tokenization', description:'BTC Tokenization, manages custodial relationships', manifold:'BTC', tags:'BTC,crypto,finance'},
-	        {title:'LTC Tokenization', description:'LTC Tokenization, manages custodial relationships', manifold:'LTC', tags:'LTC,crypto,finance'},
-	        {title:'XRP Tokenization', description:'XRP Tokenization, manages custodial relationships', manifold:'XRP', tags:'XRP,crypto,finance'},
-	        {title:'TRON Tokenization', description:'TRON Tokenization, manages custodial relationships', manifold:'TRON', tags:'TRON,crypto,finance'},
-	        {title:'STEEM Activity Tokenization', description:'STEEM Activity Tokenization, authentication and app integration', manifold:'STEEM+', tags:'STEEM,activity,app,authentication'},
-	        {title:'Github', description:'Github Activity Tokenization, authentication and app integration', manifold:'GITHUB+', tags:'github,activity,app,authentication'},
-	        {title:'Gitcoin App', description:'Gitcoin Activity Tokenization, authentication and app integration', manifold:'GITCOIN+', tags:'gitcoin,activity,app,authentication'},
-	        {title:'CRATER', description:'virtual; augmented reality; crater uprising', manifold:'CRATER+', tags:'gitcoin,activity,app,authentication'},
-	    ];
-
-	    for (x in apps){
-	    	var appModel = {
-	    		title:apps[x].title,
-	    		description:apps[x].description,
-	    		tags:apps[x].tags,
-	    		creator:'569f0edcd3e4c517075be5d6',
-	    		information:{},
-	    		data:{},
-	    		manifold: apps[x].manifold,
-	    		protocols:[
-	    			'function(){}',
-	    			'function(){}'
-	    		],
-	    		associatedValidations:[
-	    			{
-	    				context:[
-	    					{type:'tag', score:100},
-	    				],
-	    				data:[
-	    					{type:'APP', id:'self', direction:false},//[]},
-	    				],
-	    				connection:'connection',
-	    			}
-	    		]
-	    	};
-	    	App.create(appModel).then(function(){console.log('CREATED APP')})
-		}
-	};
-	//populateApps();
-
 	//LEGACY DATA UPDATE
 	function legacyDataBuild(){
-
 		//Task.find()
 		//if (taskModels.project){}
-
 	}
 
 	//DATA SERVICE

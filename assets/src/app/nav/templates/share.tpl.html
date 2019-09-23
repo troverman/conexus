@@ -15,24 +15,24 @@
 
         <div style="padding:16px;">
 
-            <h3>Share on CRE8</h3>
-            <h5><a ng-click="validationToggle(item)">Associate</a></h5>
-            <h5>repost</h5>
+            <h5>CRE8</h5>
+            <p ng-click="validationToggle(item)"><a><i class="fas fa-bezier-curve"></i> Associate by Validation</a></p>
             <div class="spacing-5"></div>
 
-            <h3>Information</h3>
             <h5>URL</h5>
-            <span>{{url}}</span>
-            <br>
-            <span class="btn btn-default" ng-click="copyToClipBoard(url)">copy</span>
-            <!--
-            <h5>Embed</h5>
-            <span>https://www.cre8.xyz/embed/{{item.id}}</span>
-            <h5>Stringify</h5>
-            <span>{{JSON.stringify(item)}}</span>
-            -->
-            <h5>Qr</h5>
+            <p>{{url}} </p>
+            <p style="width:auto" class="btn btn-default log-btn" ng-click="copyToClipBoard(url)">copy <i class="fas fa-copy"></i></p>
+            <div class="spacing-5"></div>
+
+            <h5>QR</h5>
             <img style="height:100px;width:100px" src="https://chart.googleapis.com/chart?chs=500x500&cht=qr&chl={{url}}">
+            <div class="spacing-5"></div>
+
+            <h5>JSON</h5>
+            <p style="width:auto" class="btn btn-default log-btn" ng-click="copyToClipBoard(jsonObj)">copy <i class="fas fa-copy"></i></p>
+            <div hljs hljs-language="javascript"  hljs-source="jsonObj"></div>
+            <div class="spacing-5"></div>
+
 
             <div class="spacing-10"></div>
 

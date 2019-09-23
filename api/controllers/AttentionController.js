@@ -57,7 +57,8 @@ module.exports = {
 			var protocolTokens = getProtocolTokens(model);
 			//DATA MODEL.. 
 			//TODO REMUX
-			updateAssociatedModels(model, protocolTokens);
+			//SOOOON PLZ
+			//updateAssociatedModels(model, protocolTokens);
 
 		};
 
@@ -91,16 +92,22 @@ module.exports = {
 						Content.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){})
 					});
 				}
+				if (model.associatedModels[x].type == 'ITEM'){
+					Item.find({id:model.associatedModels[x].id}).then(function(newModel){
+						if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
+						for (y in protocolTokens){
+							if (!newModel[0].data.apps.tokens[protocolTokens[y]]){newModel[0].data.apps.tokens[protocolTokens[y]] = model.amount;}
+							else if (newModel[0].data.apps.tokens[protocolTokens[y]]){newModel[0].data.apps.tokens[protocolTokens[y]] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y]]) + parseInt(model.amount);}
+						}
+						Item.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){})
+					});
+				}
 				if (model.associatedModels[x].type == 'TASK'){
 					Task.find({id:model.associatedModels[x].id}).then(function(newModel){
 						if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
 						for (y in protocolTokens){
-							if (!newModel[0].data.apps.tokens[protocolTokens[y]]){
-								newModel[0].data.apps.tokens[protocolTokens[y]] = model.amount;
-							}
-							else if (newModel[0].data.apps.tokens[protocolTokens[y]]){
-								newModel[0].data.apps.tokens[protocolTokens[y]] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y]]) + parseInt(model.amount);
-							}
+							if (!newModel[0].data.apps.tokens[protocolTokens[y]]){newModel[0].data.apps.tokens[protocolTokens[y]] = model.amount;}
+							else if (newModel[0].data.apps.tokens[protocolTokens[y]]){newModel[0].data.apps.tokens[protocolTokens[y]] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y]]) + parseInt(model.amount);}
 						}
 						Task.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){})
 					});
@@ -192,7 +199,12 @@ module.exports = {
 						Item.find({id:model.associatedModels[x].id}).then(function(newModel){
 							if (!newModel[0].data){newModel[0].data = {apps:{}}}
 							if (!newModel[0].data.apps){newModel[0].data.apps = {}}
-							if (newModel[0].data.apps.attention){newModel[0].data.apps.attention = {general:newModel[0].data.apps.attention.general + model.amount};}
+							if (newModel[0].data.apps.attention){
+								if (newModel[0].data.apps.attention.general){newModel[0].data.apps.attention.general = newModel[0].data.apps.attention.general + model.amount;}
+								else{newModel[0].data.apps.attention.general = model.amount;}
+								if (newModel[0].data.apps.attention[model.creator.toString()]){newModel[0].data.apps.attention[model.creator.toString()] = newModel[0].data.apps.attention[model.creator.toString()] + model.amount;}
+								else{newModel[0].data.apps.attention[model.creator.toString()] = model.amount;}
+							}								
 							else{newModel[0].data.apps.attention = {general:0}}
 							Item.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){Item.publish([newModel[0].id], {verb:'update', data: newModel[0]});});
 						});
@@ -210,7 +222,12 @@ module.exports = {
 						Task.find({id:model.associatedModels[x].id}).then(function(newModel){
 							if (!newModel[0].data){newModel[0].data = {apps:{}}}
 							if (!newModel[0].data.apps){newModel[0].data.apps = {}}
-							if (newModel[0].data.apps.attention){newModel[0].data.apps.attention = {general:newModel[0].data.apps.attention.general + model.amount};}
+							if (newModel[0].data.apps.attention){
+								if (newModel[0].data.apps.attention.general){newModel[0].data.apps.attention.general = newModel[0].data.apps.attention.general + model.amount;}
+								else{newModel[0].data.apps.attention.general = model.amount;}
+								if (newModel[0].data.apps.attention[model.creator.toString()]){newModel[0].data.apps.attention[model.creator.toString()] = newModel[0].data.apps.attention[model.creator.toString()] + model.amount;}
+								else{newModel[0].data.apps.attention[model.creator.toString()] = model.amount;}
+							}								
 							else{newModel[0].data.apps.attention = {general:0}}
 							Task.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){Task.publish([newModel[0].id], {verb:'update', data: newModel[0]});});
 						});

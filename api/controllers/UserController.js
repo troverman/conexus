@@ -12,21 +12,17 @@ module.exports = {
 		var username = req.query.username;
 		console.log('GET USER', req.query);
 
-		if (req.query.id){
-			User.find({id:id}).then(function(models){
+		if (req.query.id || req.query.username){
+			var query = {};
+			if (req.query.id){query.id = req.query.id}
+			if (req.query.username){query.username = req.query.username}
+			User.find(query).then(function(models){
 				User.subscribe(req, [models[0].id]);
 				res.json(models[0]);
 			});
 		}
 
-		else if (req.query.username){
-			User.find({username:username}).then(function(models){
-				User.subscribe(req, [models[0].id]);
-				res.json(models[0]);
-			});
-		}
-
-		//SEARCH
+		//SEARCH.. FILTER
 		else if (req.query.query){
 			User.find()
 			.where({
@@ -45,7 +41,7 @@ module.exports = {
 				res.json(models);
 			});
 		}
-		//FIND BY.. USERNAME
+
 		else{
 			User.find({})
 			.limit(limit)

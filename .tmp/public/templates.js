@@ -85,7 +85,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "				<p style=\"font-style:italic;color:gray;margin:0px\">From time and space to digital and physical items, sharing networks reflect our commitment to one another.</p>\n" +
     "				<p style=\"font-style:italic;color:gray;margin:0px\">CRE8 promulgates sharing culture.</p>\n" +
     "				<div class=\"spacing-5\"></div>\n" +
-    "				<p><a href=\"/marketplace\" ui-sref=\"marketPlace\"><b>Marketplace</b></a></p>\n" +
+    "				<p><a href=\"/items\" ui-sref=\"items\"><b>Marketplace</b></a></p>\n" +
     "				<div class=\"spacing-10\"></div>\n" +
     "			</div>\n" +
     "			<div class=\"col-sm-3\">\n" +
@@ -1842,7 +1842,6 @@ angular.module("content/templates/tokens.tpl.html", []).run(["$templateCache", f
     "        </div>\n" +
     "    </div>\n" +
     "    <div style=\"padding:16px;\">\n" +
-    "        <p>Attention, Content, Associations, Validations</p>\n" +
     "        <highchart config=\"tokenChart\"></highchart>\n" +
     "         <!--TODO MOBILE-->\n" +
     "         <!--UNIFITY TOKEN MODEL-->\n" +
@@ -1854,9 +1853,9 @@ angular.module("content/templates/tokens.tpl.html", []).run(["$templateCache", f
     "                </tr>\n" +
     "            </thead>\n" +
     "            <tbody>\n" +
-    "                <tr ng-repeat=\"(key, value) in content.data.apps.tokens\">\n" +
-    "                    <td><a href=\"market/{{key}}\" ui-sref=\"market({id:key})\">{{key}}</a></td>\n" +
-    "                    <td>{{value}}</td>\n" +
+    "                <tr ng-repeat=\"item in sortableSet\">\n" +
+    "                    <td><a href=\"market/{{item[0]}}\" ui-sref=\"market({id:item[0]})\">{{item[0]}}</a></td>\n" +
+    "                    <td>{{item[1]}}</td>\n" +
     "                </tr>\n" +
     "            </tbody>\n" +
     "        </table>\n" +
@@ -4909,7 +4908,6 @@ angular.module("footer/index.tpl.html", []).run(["$templateCache", function($tem
     "				<div class=\"spacing-5\"></div>\n" +
     "				<a href=\"/discover\" ui-sref=\"discover\">Discover</a>\n" +
     "				<a href=\"/market\" ui-sref=\"markets\">Market</a>\n" +
-    "				<a href=\"/content\" ui-sref=\"contentList\">Content</a>\n" +
     "				<a href=\"/items\" ui-sref=\"items\">Items</a>\n" +
     "				<a href=\"/members\" ui-sref=\"members\">Members</a>\n" +
     "				<a href=\"/projects\" ui-sref=\"projects\">Projects</a>\n" +
@@ -5520,10 +5518,11 @@ angular.module("item/index.tpl.html", []).run(["$templateCache", function($templ
     "            <div class=\"spacing-5\"></div>       \n" +
     "        </div>\n" +
     "        <div class=\"card-footer\">\n" +
-    "            <a style=\"color:grey\" href=\"content/{{item.id}}\" ui-sref=\"content({id:item.id})\"> {{item.data.apps.attention.general || 0}} <i class=\"fas fa-eye\"></i></a>\n" +
+    "            <a ng-click=\"$event.stopPropagation();renderAttentionToggle(item)\" style=\"color:grey\"><i class=\"fas fa-eye\"></i> {{item.data.apps.attention.general || 0}}</a>\n" +
     "            <a ng-click=\"$event.stopPropagation();createReaction(item, 'plus')\"><i class=\"fas fa-angle-up\"></i> {{item.data.apps.reactions.plus || 0}} like </a> \n" +
     "            <a ng-click=\"$event.stopPropagation();createReaction(item, 'minus')\" ><i class=\"fas fa-angle-down\"></i> {{item.data.apps.reactions.minus || 0}} dislike </a>\n" +
     "            <a ng-click=\"$event.stopPropagation();contentToggle(item)\"><i class=\"far fa-comment\"></i> comment </a>\n" +
+    "            <a ng-click=\"$event.stopPropagation();validationToggle(item)\" style=\"padding:5px;color:grey\" ><i class=\"fa fa-check\"></i> validate </a>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "</div>\n" +
@@ -5851,7 +5850,7 @@ angular.module("item/templates/market.tpl.html", []).run(["$templateCache", func
 angular.module("item/templates/tokens.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("item/templates/tokens.tpl.html",
     "<div class=\"card\">\n" +
-    "    <div style=\"background:url('https://source.unsplash.com/1600x900/?{{item.tags}}');min-height:auto\" class=\"imageContainerSmall\">\n" +
+    "    <div style=\"background:url('https://source.unsplash.com/1600x900/?{{item.tags}}');min-height:auto;\" class=\"imageContainerSmall\">\n" +
     "        <div style=\"background:rgba(0,0,0,0.75);height:auto\" class=\"imageContainerSmallDiv\">  \n" +
     "            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "                <div style=\"padding:15px\">\n" +
@@ -5861,6 +5860,23 @@ angular.module("item/templates/tokens.tpl.html", []).run(["$templateCache", func
     "        </div>\n" +
     "    </div>\n" +
     "    <div style=\"padding:16px;\">\n" +
+    "        <highchart config=\"tokenChart\"></highchart>\n" +
+    "         <!--TODO MOBILE-->\n" +
+    "         <!--UNIFITY TOKEN MODEL-->\n" +
+    "        <table class=\"table table-striped table-hover\">\n" +
+    "            <thead>\n" +
+    "                <tr>\n" +
+    "                    <th>Identifer</th>\n" +
+    "                    <th>Value</th>\n" +
+    "                </tr>\n" +
+    "            </thead>\n" +
+    "            <tbody>\n" +
+    "                <tr ng-repeat=\"item in sortableSet\">\n" +
+    "                    <td><a href=\"market/{{item[0]}}\" ui-sref=\"market({id:item[0]})\">{{item[0]}}</a></td>\n" +
+    "                    <td>{{item[1]}}</td>\n" +
+    "                </tr>\n" +
+    "            </tbody>\n" +
+    "        </table>\n" +
     "    </div>\n" +
     "</div>");
 }]);
@@ -7872,14 +7888,14 @@ angular.module("nav/templates/create.tpl.html", []).run(["$templateCache", funct
     "        <div style=\"min-height:500px;max-height:100vh;overflow:hidden;\">\n" +
     "            <div style=\"padding:16px;\">\n" +
     "                <!--<h2 ng-click=\"actionToggle()\" class=\"nav-links\" style=\"padding:4px;\"><a>Action</a></h2>-->\n" +
-    "                <h2 ng-click=\"contentToggle()\" class=\"nav-links\" style=\"padding:4px;\"><a>Content</a></h2>\n" +
-    "                <h2 ng-click=\"itemToggle()\" class=\"nav-links\" style=\"padding:4px;\"><a>Item</a></h2>\n" +
-    "                <h2 ng-click=\"orderToggle()\" class=\"nav-links\" style=\"padding:4px;\"><a>Order</a></h2>\n" +
-    "                <h2 ng-click=\"projectToggle()\" class=\"nav-links\" style=\"padding:4px;\"><a>Project</a></h2>\n" +
+    "                <h2 ng-click=\"contentToggle(item)\" class=\"nav-links\" style=\"padding:4px;\"><a>Content</a></h2>\n" +
+    "                <h2 ng-click=\"itemToggle(item)\" class=\"nav-links\" style=\"padding:4px;\"><a>Item</a></h2>\n" +
+    "                <h2 ng-click=\"orderToggle(item)\" class=\"nav-links\" style=\"padding:4px;\"><a>Order</a></h2>\n" +
+    "                <h2 ng-click=\"projectToggle(item)\" class=\"nav-links\" style=\"padding:4px;\"><a>Project</a></h2>\n" +
     "                <!--<h2 ng-click=\"reactionToggle()\" class=\"nav-links\" style=\"padding:4px;\"><a>Reaction</a></h2>-->\n" +
-    "                <h2 ng-click=\"taskToggle()\" class=\"nav-links\" style=\"padding:4px;\"><a>Task</a></h2>\n" +
-    "                <h2 ng-click=\"timeToggle()\" class=\"nav-links\" style=\"padding:4px;\"><a>Time</a></h2>\n" +
-    "                <h2 ng-click=\"transactionToggle()\" class=\"nav-links\" style=\"padding:4px;\"><a>Transaction</a></h2>\n" +
+    "                <h2 ng-click=\"taskToggle(item)\" class=\"nav-links\" style=\"padding:4px;\"><a>Task</a></h2>\n" +
+    "                <h2 ng-click=\"timeToggle(item)\" class=\"nav-links\" style=\"padding:4px;\"><a>Time</a></h2>\n" +
+    "                <h2 ng-click=\"transactionToggle(item)\" class=\"nav-links\" style=\"padding:4px;\"><a>Transaction</a></h2>\n" +
     "                <!--<h2 ng-click=\"validationToggle()\" class=\"nav-links\" style=\"padding:4px;\"><a>Validation</a></h2>-->\n" +
     "            </div>\n" +
     "            <div style=\"background:url('https://source.unsplash.com/1600x900/?code,pattern,art,forest');height:100vh\" class=\"imageContainerSmall\"><div style=\"background:rgba(0,0,0,0.75);height:100vh\" class=\"imageContainerSmallDiv\"></div></div>\n" +
@@ -9500,7 +9516,6 @@ angular.module("nav/templates/nav.tpl.html", []).run(["$templateCache", function
     "            <h4 ng-show=\"currentUser\" class=\"nav-links\" ng-click=\"cre8Toggle()\" style=\"padding:8px;\"><a>CRE8</a></h4>\n" +
     "            <h4 class=\"nav-links\" style=\"padding:4px;\"><a href=\"/discover\" ui-sref=\"discover\">Discover</a></h4>\n" +
     "            <h4 class=\"nav-links\" style=\"padding:4px;\"><a href=\"/market\" ui-sref=\"markets\">Market</a></h4>\n" +
-    "            <h4 class=\"nav-links\" style=\"padding:4px;\"><a href=\"/content\" ui-sref=\"contentList\">Content</a></h4>\n" +
     "            <h4 class=\"nav-links\" style=\"padding:4px;\"><a href=\"/items\" ui-sref=\"items\">Items</a></h4>\n" +
     "            <h4 class=\"nav-links\" style=\"padding:4px;\"><a href=\"/projects\" ui-sref=\"projects\">Projects</a></h4>\n" +
     "            <h4 class=\"nav-links\" style=\"padding:4px;\"><a href=\"/tasks\" ui-sref=\"tasks\">Tasks</a></h4>\n" +
@@ -9998,24 +10013,24 @@ angular.module("nav/templates/share.tpl.html", []).run(["$templateCache", functi
     "\n" +
     "        <div style=\"padding:16px;\">\n" +
     "\n" +
-    "            <h3>Share on CRE8</h3>\n" +
-    "            <h5><a ng-click=\"validationToggle(item)\">Associate</a></h5>\n" +
-    "            <h5>repost</h5>\n" +
+    "            <h5>CRE8</h5>\n" +
+    "            <p ng-click=\"validationToggle(item)\"><a><i class=\"fas fa-bezier-curve\"></i> Associate by Validation</a></p>\n" +
     "            <div class=\"spacing-5\"></div>\n" +
     "\n" +
-    "            <h3>Information</h3>\n" +
     "            <h5>URL</h5>\n" +
-    "            <span>{{url}}</span>\n" +
-    "            <br>\n" +
-    "            <span class=\"btn btn-default\" ng-click=\"copyToClipBoard(url)\">copy</span>\n" +
-    "            <!--\n" +
-    "            <h5>Embed</h5>\n" +
-    "            <span>https://www.cre8.xyz/embed/{{item.id}}</span>\n" +
-    "            <h5>Stringify</h5>\n" +
-    "            <span>{{JSON.stringify(item)}}</span>\n" +
-    "            -->\n" +
-    "            <h5>Qr</h5>\n" +
+    "            <p>{{url}} </p>\n" +
+    "            <p style=\"width:auto\" class=\"btn btn-default log-btn\" ng-click=\"copyToClipBoard(url)\">copy <i class=\"fas fa-copy\"></i></p>\n" +
+    "            <div class=\"spacing-5\"></div>\n" +
+    "\n" +
+    "            <h5>QR</h5>\n" +
     "            <img style=\"height:100px;width:100px\" src=\"https://chart.googleapis.com/chart?chs=500x500&cht=qr&chl={{url}}\">\n" +
+    "            <div class=\"spacing-5\"></div>\n" +
+    "\n" +
+    "            <h5>JSON</h5>\n" +
+    "            <p style=\"width:auto\" class=\"btn btn-default log-btn\" ng-click=\"copyToClipBoard(jsonObj)\">copy <i class=\"fas fa-copy\"></i></p>\n" +
+    "            <div hljs hljs-language=\"javascript\"  hljs-source=\"jsonObj\"></div>\n" +
+    "            <div class=\"spacing-5\"></div>\n" +
+    "\n" +
     "\n" +
     "            <div class=\"spacing-10\"></div>\n" +
     "\n" +
@@ -10269,9 +10284,9 @@ angular.module("nav/templates/tokens.tpl.html", []).run(["$templateCache", funct
     "                    </tr>\n" +
     "                </thead>\n" +
     "                <tbody>\n" +
-    "                    <tr ng-repeat=\"(key, value) in item.data.apps.tokens\">\n" +
-    "                        <td><a href=\"market/{{key}}\" ui-sref=\"market({id:key})\">{{key}}</a></td>\n" +
-    "                        <td>{{value}}</td>\n" +
+    "                    <tr ng-repeat=\"item in sortableSet\">\n" +
+    "                        <td><a href=\"market/{{item[0]}}\" ui-sref=\"market({id:item[0]})\">{{item[0]}}</a></td>\n" +
+    "                        <td>{{item[1]}}</td>\n" +
     "                    </tr>\n" +
     "                </tbody>\n" +
     "            </table>\n" +
@@ -11096,7 +11111,7 @@ angular.module("project/templates/charter.tpl.html", []).run(["$templateCache", 
     "            </form>\n" +
     "        </div>\n" +
     "\n" +
-    "        <div class=\"card\"><button class=\"btn btn-default log-btn\" ng-click=\"connectionToggle()\">+ Connection Rule</button></div>\n" +
+    "        <div class=\"card\"><button class=\"btn btn-default log-btn\" ng-click=\"connectionToggle()\">+ Connection</button></div>\n" +
     "        <div ng-repeat=\"item in connections\"><div ng-include=\"'templates/cards/connectionCard.tpl.html'\"></div></div>\n" +
     "\n" +
     "    </div>\n" +
@@ -11510,7 +11525,7 @@ angular.module("project/templates/members.tpl.html", []).run(["$templateCache", 
     "		    </div>\n" +
     "            <div class=\"member-card-info\" style=\"padding:16px;height:auto;min-height:125px;\">\n" +
     "		        <h4 ng-click=\"$event.stopPropagation()\"><a href=\"member/{{member.user.username}}\" ui-sref=\"member.activity({path:member.user.username})\">{{member.user.username}}</a></h4>\n" +
-    "		       	<p style=\"color:gray\">{{member.status}} {{member.type || || 'MEMBER'}}</p>\n" +
+    "		       	<p style=\"color:gray\">{{member.status}} {{member.type || 'MEMBER'}}</p>\n" +
     "		        <p style=\"color:gray\">{{project.title}}: {{member.user.reputation[project.title] || 0}}</p>\n" +
     "                <p style=\"color:gray\">{{member.user.status}} Offline</p>\n" +
     "		    </div>\n" +
@@ -12871,6 +12886,7 @@ angular.module("templates/cards/itemCard.tpl.html", []).run(["$templateCache", f
     "        <a ng-click=\"$event.stopPropagation();createReaction(item, 'plus')\"><i class=\"fas fa-angle-up\"></i> {{item.data.apps.reactions.plus || 0 }} like </a> \n" +
     "        <a ng-click=\"$event.stopPropagation();createReaction(item, 'minus')\" ><i class=\"fas fa-angle-down\"></i> {{item.data.apps.reactions.minus || 0 }} dislike </a>\n" +
     "        <a ng-click=\"$event.stopPropagation();contentToggle(item)\"><i class=\"far fa-comment\"></i> comment </a>\n" +
+    "        <a ng-click=\"$event.stopPropagation();validationToggle(item)\" style=\"padding:5px;color:grey\" ><i class=\"fa fa-check\"></i> validate </a>\n" +
     "        <a ng-click=\"$event.stopPropagation();\" class=\"pull-right\" style=\"padding:0px;\" href=\"item/{{item.id}}\" ui-sref=\"item({id:item.id})\"><i class=\"fas fa-link grey\"></i></a>\n" +
     "    </div>\n" +
     "</div>");

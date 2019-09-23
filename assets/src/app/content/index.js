@@ -52,15 +52,21 @@ angular.module( 'conexus.content', [
         yAxis: {title: {text: null}},
         credits:{enabled:false},
     };
-    var sortable = [];
-    for (x in Object.keys($scope.content.data.apps.tokens)){sortable.push([Object.keys($scope.content.data.apps.tokens)[x], $scope.content.data.apps.tokens[Object.keys($scope.content.data.apps.tokens)[x]]])}
-    sortable.sort(function(a, b) {return b[1] - a[1]});
-    for (x in sortable){
-        if (x < 100){
-            $scope.tokenChart.xAxis.categories.push(sortable[x][0]);
-            $scope.tokenChart.series[0].data.push(sortable[x][1]);
+     $scope.populateTokenChart = function(){
+        $scope.sortableSet = [];
+        $scope.tokenChart.xAxis.categories = [];
+        $scope.tokenChart.series[0].data = [];
+        for (x in Object.keys($scope.content.data.apps.tokens)){$scope.sortableSet.push([Object.keys($scope.content.data.apps.tokens)[x], $scope.content.data.apps.tokens[Object.keys($scope.content.data.apps.tokens)[x]]])}
+        $scope.sortableSet.sort(function(a, b) {return b[1] - a[1]});
+        for (x in $scope.sortableSet){
+            if (x < 100){
+                $scope.tokenChart.xAxis.categories.push($scope.sortableSet[x][0]);
+                $scope.tokenChart.series[0].data.push($scope.sortableSet[x][1]);
+            }
         }
-    }
+    };
+    if ($scope.content.data.apps.tokens){$scope.populateTokenChart();}
+
 
     $scope.content.context = [];
     if ($scope.content.associationModels){

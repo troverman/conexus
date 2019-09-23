@@ -7,20 +7,18 @@
 
 ## A Transparent Peer Network 
 
- ###  [Connect Collab Create](https://www.cre8.xyz/transparency)
+### [Connect Collab Create](https://www.cre8.xyz/transparency)
 
-> State of the Art Multidimensional, and Pluralist First Peer Build Mechanism. [Build](https://www.cre8.xyz/register) your custom peer. All Models, Views, and Controllers compile to native and .wasm bindings from an onChain [App Ecosystem](https://www.cre8.xyz/apps) . 
-> 
+> State of the Art Multidimensional, and Pluralist First Peer Build Mechanism. [Build](https://www.cre8.xyz/register) your custom peer. All Models, Views, and Controllers compile to native and .wasm bindings from an onChain [Application Ecosystem](https://www.cre8.xyz/apps) . 
 
- > - The network is supported though Human and Machine Attention. Agent Centric, Context Specific Consensus and Interoperable Validation. 
-> - Proof of Attention. Proof of Intention. Reputation Weighted Governance.
-
+> - The network is supported though Human and Machine Attention. Agent Centric, Context Specific Consensus and Interoperable Validation. 
+> - Proof of Attention. Proof of Intention. Governance as Data Connection Protocols. Democratic & Reputation Weighted Governance.
 
 ## Asset Balance Mapping
-> Multidimensional Asset data-structures with balances specified by unique identifiers create emergent properties within cryptoeconomic systems that introduce valuable approaches to mechanism design.
+> Multidimensional Asset data-structures with balances specified by string identifiers create emergent properties within cryptoeconomic systems that introduce valuable approaches to mechanism design. Hashed Data String Assets are Emergent.
 
-## [Applications Design](https://www.cre8.xyz/apps)
-> Applications are a set of modular protocols which plug into an asset string space. Application creation and collaboration is facilitated though projects.
+## [Application Design](https://www.cre8.xyz/apps)
+> Applications are a set of modular protocols which plug into an asset string space. Application creation and collaboration is facilitated though [projects](https://www.cre8.xyz/projects).
 
 ```javascript
 {

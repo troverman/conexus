@@ -168,8 +168,6 @@ module.exports = {
 			.limit(limit)
 			.skip(skip)
 			.sort(sort)
-			.populate('user')
-			.populate('project')
 			.then(function(models) {
 				res.json(models);
 			});
@@ -181,7 +179,6 @@ module.exports = {
 			.limit(limit)
 			.skip(skip)
 			.sort(sort)
-			.populate('user')
 			.then(function(models) {
 				res.json(models);
 			});
@@ -208,7 +205,7 @@ module.exports = {
 						sum++;
 					}
 					getAssociations(models[0]).then(function(models){
-						Transaction.subscribe(req, [models[0]]);
+						Transaction.subscribe(req, [models[0].id]);
 						res.json(models);
 					});
 				});

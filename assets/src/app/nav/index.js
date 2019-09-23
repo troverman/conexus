@@ -12,6 +12,9 @@ angular.module( 'conexus.nav', [
 
     $scope.directedGraphElements = {};
 
+    //TODO: ROOTSCOPE ITEM
+    //FUNCTION IN CREATE TOGGLE MAIN NAV
+
     //INITALIZE LOCAL VARIABLES
     $scope.associationsAreExpanded = false;
     $scope.chart = {};
@@ -213,9 +216,9 @@ angular.module( 'conexus.nav', [
         $mdSidenav('cardDetail').toggle();
     };
 
-    $rootScope.cre8Toggle = function(){
+    $rootScope.cre8Toggle = function(item){
         $scope.closeAllNav();
-        if($rootScope.currentUser){$mdSidenav('cre8').toggle();}
+        if($rootScope.currentUser){$scope.item = item;$mdSidenav('cre8').toggle();}
         else{$mdSidenav('login').toggle();}
     };
 
@@ -1074,11 +1077,9 @@ angular.module( 'conexus.nav', [
     $rootScope.shareToggle = function(item){
         $scope.item = item;
         $scope.closeAllNav();
-
         $scope.url = 'https://www.cre8.xyz/'+item.model.toLowerCase()+'/'+item.id;
-
-        $scope.copyToClipBoard = function(text){navigator.clipboard.writeText(text)}
-
+        $scope.jsonObj = JSON.stringify($scope.item);
+        $scope.copyToClipBoard = function(text){navigator.clipboard.writeText(text);$rootScope.pop('Coped!')}
         $mdSidenav('share').toggle();
     };
 
@@ -1132,7 +1133,7 @@ angular.module( 'conexus.nav', [
         else{$mdSidenav('login').toggle();}
     };
 
-    $rootScope.timeToggle = function(){
+    $rootScope.timeToggle = function(item){
         $scope.closeAllNav();
         if($rootScope.currentUser){
 
@@ -1148,8 +1149,17 @@ angular.module( 'conexus.nav', [
                 user:$rootScope.currentUser.id,
             };
 
-            if ($rootScope.associatedModels){
-                $scope.newTime.associatedModels = $rootScope.associatedModels;
+            if (item){
+                $scope.item = item;
+                $scope.createDetailToggleVar = false;
+                $scope.newTime.associatedModels.push({
+                    type:item.model, 
+                    id:item.id, 
+                    text:item.model+'+'+item.id, 
+                    context:[
+                        {text:'self', score:100}
+                    ]
+                });
             }
 
             if (!$scope.newTime.recordingTime){
@@ -1167,13 +1177,13 @@ angular.module( 'conexus.nav', [
             $scope.selectTypeTime = function(type){$scope.newTime.type = type};
             $scope.startStreaming = function() {$scope.streaming = true;};
             $scope.cancelStreaming = function() {$scope.streaming = false;};
-
             $scope.renderStream = function(stream){
                 var html = '<iframe width="510" height="265" src="'+stream+'" frameborder="0" allowfullscreen></iframe>'
                 return $sce.trustAsHtml(html);
             };
 
             $scope.startTime = function() {
+                //CONTENT VS TIME VS ITEM VS 
                 if ($scope.streaming){
                     $scope.newContent = {
                         type:'video',
@@ -1189,20 +1199,14 @@ angular.module( 'conexus.nav', [
                 }
                 if($scope.recordingTime === true) return false;
                 $scope.recordingTime = true;
-
                 //TODO: CREATE TIME HERE
                 $scope.startDateTime = new Date();
-
-                //better
                 clearInterval($scope.interval);
-                //better
                 $interval(function(){$scope.updateCount(1, 'task')},1000);
-
             };
 
             //HMM VS CREATE TIME
             $scope.submit = function() {
-
                 if($scope.recordingTime === false) return false;
                 $scope.recordingTime = false; $scope.streaming = false;
                 var timeModel = {
@@ -1213,34 +1217,26 @@ angular.module( 'conexus.nav', [
                     stream: $scope.streamingId,
                     type:'LIVE',
                 };
-
                 $rootScope.stateIsLoading = true;
                 TimeModel.create(timeModel).then(function(newTime){
                     $rootScope.stateIsLoading = false;
                     $scope.timeContent = '';
-
-                    //TODO BACKEND.. GENERALIZE CONTENT ASSOCIATION :)
-                        //CREATE CONTENT ON BACKED FOR ALL DATA? 
-                            //MODEL-CONTENT ASSOC
                     if ($scope.streamingId){
-                        var update = {};
-                        update.id = $scope.streamingId;
-                        update.time = newTime.id;
-                        update.parent = newTime.id;
-                        update.parentModel = 'time';
+                        var update = {
+                            id:$scope.streamingId,
+                            time:newTime.id,
+                            parent:newTime.id,
+                            parentModel:'time'
+                        };
                         ContentModel.update(update).then(function(contentModel){
                             consooe.log(contentModel)
                         });
                     }
-
                     $mdSidenav('time').close();
-                    $rootScope.pop('New Time!', newTime.id +' '+ newTime.createdAt);
-                      
+                    $rootScope.pop('New Time!', newTime.id +' '+ newTime.createdAt); 
                     $rootScope.taskTime=0;
                     clearInterval($scope.interval);
-
                 }); 
-
             };
 
             //TODO: UNIFY WITH TIMER
@@ -1265,9 +1261,7 @@ angular.module( 'conexus.nav', [
                 });
 
                 //$scope.$apply();
-
             };
-
 
             $scope.$watch('newTime.context', function(newValue, oldValue){
                 if (newValue !== oldValue) {
@@ -1309,14 +1303,13 @@ angular.module( 'conexus.nav', [
         $scope.closeAllNav();
         $scope.item = item;
         if ($scope.item){
-            $scope.item.data.apps.tokens = {'CREATE':1, 'SAMPLE':2};
-            var sortable = [];
-            for (x in Object.keys($scope.item.data.apps.tokens)){sortable.push([Object.keys($scope.item.data.apps.tokens)[x], $scope.item.data.apps.tokens[Object.keys($scope.item.data.apps.tokens)[x]]])}
-            sortable.sort(function(a, b) {return b[1] - a[1]});
-            for (x in sortable){
+            $scope.sortableSet = [];
+            for (x in Object.keys($scope.item.data.apps.tokens)){$scope.sortableSet.push([Object.keys($scope.item.data.apps.tokens)[x], $scope.item.data.apps.tokens[Object.keys($scope.item.data.apps.tokens)[x]]])}
+            $scope.sortableSet.sort(function(a, b) {return b[1] - a[1]});
+            for (x in $scope.sortableSet){
                 if (x < 100){
-                    $scope.tokenChart.xAxis.categories.push(sortable[x][0]);
-                    $scope.tokenChart.series[0].data.push(sortable[x][1]);
+                    $scope.tokenChart.xAxis.categories.push($scope.sortableSet[x][0]);
+                    $scope.tokenChart.series[0].data.push($scope.sortableSet[x][1]);
                 }
             }
         }
@@ -1468,6 +1461,7 @@ angular.module( 'conexus.nav', [
         $mdSidenav('render').close();
         $mdSidenav('renderReputation').close();
         $mdSidenav('renderValidation').close();
+        $mdSidenav('share').close();
         $mdSidenav('sort').close();
         $mdSidenav('stats').close();
         $mdSidenav('subNav').close();

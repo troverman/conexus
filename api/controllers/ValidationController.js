@@ -28,6 +28,7 @@ module.exports = {
 				for (x in models[0].associatedModels){
 					if (models[0].associatedModels[x].type == 'ACTION'){promises.push(Action.find({id:models[0].associatedModels[x].id}).then(function(actionModels){return {action:actionModels[0]}}))}
 					if (models[0].associatedModels[x].type.includes("APP")){promises.push(App.find({id:models[0].associatedModels[x].id}).then(function(appModels){return {app:appModels[0]}}))}
+					if (models[0].associatedModels[x].type == 'CONNTECTION'){promises.push(Content.find({id:models[0].associatedModels[x].id}).then(function(connectionModels){return {connection:connectionModels[0]}}))}
 					if (models[0].associatedModels[x].type == 'CONTENT'){promises.push(Content.find({id:models[0].associatedModels[x].id}).then(function(contentModels){return {content:contentModels[0]}}))}
 					if (models[0].associatedModels[x].type == 'ITEM'){promises.push(Item.find({id:models[0].associatedModels[x].id}).then(function(itemModels){return {item:itemModels[0]}}))}
 					if (models[0].associatedModels[x].type == 'MEMBER'){promises.push(User.find({id:models[0].associatedModels[x].id}).then(function(memberModels){return {member:memberModels[0]}}))}
@@ -45,6 +46,10 @@ module.exports = {
 						if (models[0].associatedModels[x].type.includes("APP")){
 							var app = populatedModels.filter(function(obj){return obj.app})
 							models[0].associatedModels[x].info = app[0];
+						}
+						if (models[0].associatedModels[x].type == 'CONNTECTION'){
+							var connection = populatedModels.filter(function(obj){return obj.content})
+							models[0].associatedModels[x].info = connection[0];
 						}
 						if (models[0].associatedModels[x].type == 'CONTENT'){
 							var content = populatedModels.filter(function(obj){return obj.content})
@@ -109,9 +114,6 @@ module.exports = {
 		}
 
 		else if (req.query.task){
-
-			//Association.find({"associatedModels.address":{$in :[task]}})
-
 			//WORK HERE
 			Validation.native(function(err, validation) {
 				validation.find({"associatedModels.address":{$in :[task]}})
@@ -119,29 +121,16 @@ module.exports = {
 				.skip(skip)
 				.sort({'createdAt':-1})
 				.toArray(function (err, models) {
-					models = models.map(function(obj){
-						obj.id = obj._id;
-						return obj;
-					});
-
+					models = models.map(function(obj){obj.id = obj._id;return obj;});
 					//JOIN TO USER
 					var promises = [];
 					for (x in models){
-
 						promises.push(User.find({id:models[x].user.toString()}).then(function(userModels){return {user:userModels[0]}}));
-
 						for (y in models[x].associatedModels){
-							if (models[x].associatedModels[y].type == 'PROJECT'){
-								promises.push(Project.find({id:models[x].associatedModels[y].address}).then(function(projectModels){return {project:projectModels[0]}}))
-							}
-							if (models[x].associatedModels[y].type == 'TASK'){
-								promises.push(Task.find({id:models[x].associatedModels[y].address}).then(function(taskModels){return {task:taskModels[0]}}))
-							}
-							if (models[x].associatedModels[y].type == 'TIME'){
-								promises.push(Time.find({id:models[x].associatedModels[y].address}).then(function(timeModels){return {time:timeModels[0]}}))
-							}
+							if (models[x].associatedModels[y].type == 'PROJECT'){promises.push(Project.find({id:models[x].associatedModels[y].address}).then(function(projectModels){return {project:projectModels[0]}}))}
+							if (models[x].associatedModels[y].type == 'TASK'){promises.push(Task.find({id:models[x].associatedModels[y].address}).then(function(taskModels){return {task:taskModels[0]}}))}
+							if (models[x].associatedModels[y].type == 'TIME'){promises.push(Time.find({id:models[x].associatedModels[y].address}).then(function(timeModels){return {time:timeModels[0]}}))}
 						}
-
 					}
 					Q.all(promises).then((populatedModels)=>{
 						var sum = 0;
@@ -149,22 +138,14 @@ module.exports = {
 							models[x].user = populatedModels[sum].user;
 							sum++;
 							for (y in models[x].associatedModels){
-								if (models[x].associatedModels[y].type == 'PROJECT'){
-									models[x].associatedModels[y].info = populatedModels[sum].project;
-								}
-								if (models[x].associatedModels[y].type == 'TASK'){
-									models[x].associatedModels[y].info = populatedModels[sum].task;
-								}
-								if (models[x].associatedModels[y].type == 'TIME'){
-									models[x].associatedModels[y].info = populatedModels[sum].time;
-								}
+								if (models[x].associatedModels[y].type == 'PROJECT'){models[x].associatedModels[y].info = populatedModels[sum].project;}
+								if (models[x].associatedModels[y].type == 'TASK'){models[x].associatedModels[y].info = populatedModels[sum].task;}
+								if (models[x].associatedModels[y].type == 'TIME'){models[x].associatedModels[y].info = populatedModels[sum].time;}
 								sum++;
 							}
-
 						}
 						res.json(models);
 					});
-
 				});
 			});
 		}
@@ -174,19 +155,6 @@ module.exports = {
 			.limit(limit)
 			.skip(skip)
 			.sort(sort)
-			.populate('user')
-			.then(function(models) {
-				Validation.subscribe(req, models.map((obj)=>obj.id));
-				res.json(models);
-			});
-		}
-
-		else if (req.query.time){
-			Validation.find({time:time})
-			.limit(limit)
-			.skip(skip)
-			.sort(sort)
-			.populate('user')
 			.then(function(models) {
 				Validation.subscribe(req, models.map((obj)=>obj.id));
 				res.json(models);
@@ -279,7 +247,8 @@ module.exports = {
 								});
 							}
 							else{
-								console.log('ASSOCIATION EXISTS -- COMPUTE')
+								console.log('ASSOCIATION EXISTS -- COMPUTE');
+								//lookup connection here..
 							}
 						});
 					});

@@ -102,7 +102,7 @@ angular.module( 'conexus.projects', [
             });
         }
     };
-    $scope.getLatLng();
+    //$scope.getLatLng();
 
 
     //TODO: IMPROVE :)

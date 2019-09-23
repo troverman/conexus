@@ -168,7 +168,7 @@ module.exports = {
 			.then(function(models){
 				//console.log(models)
 				Task.count().then(function(numRecords){
-					Task.subscribe(req, models.map(function(obj){return obj.id});
+					Task.subscribe(req, models.map(function(obj){return obj.id}));
 					var returnObj = {data:models, info:{count:numRecords}};
 					//console.log(returnObj)
 					res.json(returnObj);

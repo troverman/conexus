@@ -100,7 +100,7 @@ angular.module( 'conexus.task', [
             }
         }
     };
-    $scope.populateTokenChart();
+    if ($scope.task.data.apps.tokens){$scope.populateTokenChart();}
 
     $scope.renderStats = function(){
         $scope.statsChart = {

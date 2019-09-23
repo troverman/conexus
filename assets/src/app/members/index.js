@@ -133,6 +133,8 @@ angular.module( 'conexus.members', [
         $scope.totalMap.xAxis.categories = [];
         var groupObject = {};
         for (x in $scope.members){
+            $scope.members[x].reputation
+            if (!$scope.members[x].reputation){$scope.members[x].reputation = $scope.members[x].balance}
             for (y in Object.keys($scope.members[x].reputation)){
                 if(isNaN($scope.members[x].reputation[Object.keys($scope.members[x].reputation)[y]])){
                     groupObject[Object.keys($scope.members[x].reputation)[y]] = 0

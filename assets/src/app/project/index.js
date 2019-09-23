@@ -967,18 +967,24 @@ angular.module( 'conexus.project', [
    
     titleService.setTitle(project.title + ' | Members | CRE8.XYZ');
 
-    console.log($scope.members);
-
     $scope.connections = connections;
     $scope.members = members;
     $scope.newMember = {};
     $scope.project = project;
 
-    var filter = [{type:'PROJECT',id:project.id},{type:'MEMBER'}]
-    AssociationModel.get({filter:filter, limit:20, skip:0, sort:'createdAt DESC'}).then(function(members){
-        console.log(members);
+    console.log($scope.project);
+
+    //filtering associations
+
+    //FILTER OUT MEMBER..
+    //for x in ($scope.project.associationModels){
+    //}
+
+    //var filter = [{type:'PROJECT',id:project.id},{type:'MEMBER'}];
+        //AssociationModel.get({filter:filter, limit:20, skip:0, sort:'createdAt DESC'}).then(function(members){
+    //    console.log(members);
         //$scope.members = members;
-    });
+    //});
 
     $scope.createMember = function() {
         if ($rootScope.currentUser){
@@ -998,6 +1004,14 @@ angular.module( 'conexus.project', [
     $sailsSocket.subscribe('association', function (envelope) {
         if (envelope.verb == 'create'){
             $scope.members.unshift(envelope.data);
+        }
+    });
+
+    $sailsSocket.subscribe('project', function (envelope) {
+        if (envelope.data.to.id == $scope.project.id || envelope.data.from.id == $scope.project.id){$scope.activity.unshift(envelope.data);}
+        if (envelope.verb == 'update'){
+            var index = $scope.activity.map(function(obj){return obj.id}).indexOf(envelope.data.id);
+            if (index != -1){$scope.activity[index].data = envelope.data.data;}
         }
     });
     

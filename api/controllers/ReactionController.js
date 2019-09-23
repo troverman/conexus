@@ -147,6 +147,16 @@ module.exports = {
 						Content.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){})
 					});
 				}
+				if (model.associatedModels[x].type == 'ITEM'){
+					Item.find({id:model.associatedModels[x].id}).then(function(newModel){
+						if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
+						for (y in protocolTokens){
+							if (!newModel[0].data.apps.tokens[protocolTokens[y]]){newModel[0].data.apps.tokens[protocolTokens[y]] = model.amount;}
+							else if (newModel[0].data.apps.tokens[protocolTokens[y]]){newModel[0].data.apps.tokens[protocolTokens[y]] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y]]) + parseInt(model.amount);}
+						}
+						Item.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){})
+					});
+				}
 				if (model.associatedModels[x].type == 'TASK'){
 					Task.find({id:model.associatedModels[x].id}).then(function(newModel){
 						if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
@@ -170,7 +180,7 @@ module.exports = {
 			for (x in model.associatedModels){
 				if (model.associatedModels[x].type == 'APP'){
 					App.find({id:model.associatedModels[x].id}).then(function(newModel){
-						if (!newModel[0].data.apps.reactions){newModel[0].reactions = {};}
+						if (!newModel[0].data.apps.reactions){newModel[0].data.apps.reactions = {};}
 						if (!newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = model.amount;}
 						else if (newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);}
 						App.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){
@@ -181,7 +191,7 @@ module.exports = {
 				}
 				if (model.associatedModels[x].type == 'ACTION'){
 					Action.find({id:model.associatedModels[x].id}).then(function(newModel){
-						if (!newModel[0].data.apps.reactions){newModel[0].reactions = {};}
+						if (!newModel[0].data.apps.reactions){newModel[0].data.apps.reactions = {};}
 						if (!newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = model.amount;}
 						else if (newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);}
 						Action.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){
@@ -207,7 +217,7 @@ module.exports = {
 				}
 				if (model.associatedModels[x].type == 'ASSOCIATION'){
 					Association.find({id:model.associatedModels[x].id}).then(function(newModel){
-						if (!newModel[0].data.apps.reactions){newModel[0].reactions = {};}
+						if (!newModel[0].data.apps.reactions){newModel[0].data.apps.reactions = {};}
 						if (!newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = model.amount;}
 						else if (newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);}
 						Association.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){
@@ -233,7 +243,7 @@ module.exports = {
 				}
 				if (model.associatedModels[x].type == 'CONNECTION'){
 					Connection.find({id:model.associatedModels[x].id}).then(function(newModel){
-						if (!newModel[0].data.apps.reactions){newModel[0].reactions = {};}
+						if (!newModel[0].data.apps.reactions){newModel[0].data.apps.reactions = {};}
 						if (!newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = model.amount;}
 						else if (newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);}
 						Connection.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){
@@ -246,7 +256,7 @@ module.exports = {
 				if (model.associatedModels[x].type == 'CONTENT'){
 					Content.find({id:model.associatedModels[x].id}).then(function(newModel){
 
-						if (!newModel[0].data.apps.reactions){newModel[0].reactions = {};}
+						if (!newModel[0].data.apps.reactions){newModel[0].data.apps.reactions = {};}
 						if (!newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = model.amount;}
 						else if (newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);}
 						Content.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){
@@ -277,7 +287,7 @@ module.exports = {
 				}
 				if (model.associatedModels[x].type == 'ITEM'){
 					Item.find({id:model.associatedModels[x].id}).then(function(newModel){
-						if (!newModel[0].data.apps.reactions){newModel[0].reactions = {};}
+						if (!newModel[0].data.apps.reactions){newModel[0].data.apps.reactions = {};}
 						if (!newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = model.amount;}
 						else if (newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);}
 						Item.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){
@@ -303,7 +313,7 @@ module.exports = {
 				}
 				if (model.associatedModels[x].type == 'ORDER'){
 					Order.find({id:model.associatedModels[x].id}).then(function(newModel){
-						if (!newModel[0].data.apps.reactions){newModel[0].reactions = {};}
+						if (!newModel[0].data.apps.reactions){newModel[0].data.apps.reactions = {};}
 						if (!newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = model.amount;}
 						else if (newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);}
 						Order.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){
@@ -329,7 +339,7 @@ module.exports = {
 				}
 				if (model.associatedModels[x].type == 'REACTION'){
 					Reaction.find({id:model.associatedModels[x].id}).then(function(newModel){
-						if (!newModel[0].data.apps.reactions){newModel[0].reactions = {};}
+						if (!newModel[0].data.apps.reactions){newModel[0].data.apps.reactions = {};}
 						if (!newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = model.amount;}
 						else if (newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);}
 						Reaction.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){
@@ -355,7 +365,7 @@ module.exports = {
 				}
 				if (model.associatedModels[x].type == 'TASK'){
 					Task.find({id:model.associatedModels[x].id}).then(function(newModel){
-						if (!newModel[0].data.apps.reactions){newModel[0].reactions = {};}
+						if (!newModel[0].data.apps.reactions){newModel[0].data.apps.reactions = {};}
 						if (!newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = model.amount;}
 						else if (newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);}
 						Task.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){
@@ -383,7 +393,7 @@ module.exports = {
 				}
 				if (model.associatedModels[x].type == 'TIME'){
 					Time.find({id:model.associatedModels[x].id}).then(function(newModel){
-						if (!newModel[0].data.apps.reactions){newModel[0].reactions = {};}
+						if (!newModel[0].data.apps.reactions){newModel[0].data.apps.reactions = {};}
 						if (!newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = model.amount;}
 						else if (newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);}
 						Time.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){
@@ -409,7 +419,7 @@ module.exports = {
 				}
 				if (model.associatedModels[x].type == 'TRANSACTION'){
 					Transaction.find({id:model.associatedModels[x].id}).then(function(newModel){
-						if (!newModel[0].data.apps.reactions){newModel[0].reactions = {};}
+						if (!newModel[0].data.apps.reactions){newModel[0].data.apps.reactions = {};}
 						if (!newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = model.amount;}
 						else if (newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);}
 						Transaction.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){
@@ -435,7 +445,7 @@ module.exports = {
 				}
 				if (model.associatedModels[x].type == 'VALIDATION'){
 					Validation.find({id:model.associatedModels[x].id}).then(function(newModel){
-						if (!newModel[0].data.apps.reactions){newModel[0].reactions = {};}
+						if (!newModel[0].data.apps.reactions){newModel[0].data.apps.reactions = {};}
 						if (!newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = model.amount;}
 						else if (newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);}
 						Validation.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){
