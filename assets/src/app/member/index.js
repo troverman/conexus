@@ -17,6 +17,15 @@ angular.module( 'conexus.member', [
             }],
         }
 	})
+
+    //TODO: APPRECIATE ASSOCIATION MODEL... 
+    //TODO: APPRECIATE ASSOCIATION MODEL... 
+    //TODO: APPRECIATE ASSOCIATION MODEL... 
+    //TODO: APPRECIATE ASSOCIATION MODEL... 
+    //TODO: APPRECIATE ASSOCIATION MODEL... 
+    //TODO: APPRECIATE ASSOCIATION MODEL... 
+    //TODO: APPRECIATE ASSOCIATION MODEL... 
+
     .state( 'member.activity', {
         url: '',
         views: {
@@ -26,26 +35,26 @@ angular.module( 'conexus.member', [
             }
         },
 
-        //TODO: DEPRECIATE RESOLVE
+        //TODO: ACTIVITY / EVENTS
         resolve: {
+
             orders: ['member', 'OrderModel', function(member, OrderModel){
                 return OrderModel.get({user:member.id, limit:20, skip:0, sort:'createdAt DESC'});
             }],
             contentList: ['ContentModel', 'member', function(ContentModel, member) {
                 return ContentModel.get({user:member.id, limit:20, skip:0, sort:'createdAt DESC'});
             }],
-            profileContent: ['ContentModel', 'member', function(ContentModel, member) {
-                return ContentModel.get({profile:member.id, limit:20, skip:0, sort:'createdAt DESC'});
-            }],
             time: ['member', 'TimeModel', function(member, TimeModel) {
                 return TimeModel.get({user:member.id, limit:20, skip:0, sort:'createdAt DESC'});
             }],
+
             transactionsFrom: ['member', 'TransactionModel', function(member, TransactionModel) {
                 return TransactionModel.get({from:member.id, limit:20, skip:0, sort:'createdAt DESC'});
             }],
             transactionsTo: ['member', 'TransactionModel', function(member, TransactionModel) {
                 return TransactionModel.get({to:member.id, limit:20, skip:0, sort:'createdAt DESC'});
             }],
+
         }
     })
     .state( 'member.about', {
@@ -74,7 +83,6 @@ angular.module( 'conexus.member', [
                 templateUrl: 'member/templates/actions.tpl.html'
             }
         },
-        //TODO: DEPRECIATE RESOLVE
         resolve: {
             actions: ['ActionModel', 'member', function(ActionModel, member) {
                 return ActionModel.get({user:member.id, limit:20, skip:0, sort:'createdAt DESC'});
@@ -89,8 +97,6 @@ angular.module( 'conexus.member', [
                 templateUrl: 'member/templates/content.tpl.html'
             }
         },
-
-        //TODO: DEPRECIATE RESOLVE
         resolve: {
             contentList: ['ContentModel', 'member', function(ContentModel, member) {
                 return ContentModel.get({user:member.id, limit:20, skip:0, sort:'createdAt DESC'});
@@ -105,11 +111,7 @@ angular.module( 'conexus.member', [
                 templateUrl: 'member/templates/followers.tpl.html'
             }
         },
-
-        //TODO: DEPRECIATE RESOLVE
         resolve: {
-
-            //TODO: REFACTOR get
             followers: ['member', 'FollowerModel', function(member, FollowerModel) {
                 return FollowerModel.getFollowers(member);
             }],
@@ -123,11 +125,7 @@ angular.module( 'conexus.member', [
                 templateUrl: 'member/templates/following.tpl.html'
             }
         },
-
-        //TODO: DEPRECIATE RESOLVE
         resolve: {
-
-            //TODO: REFACTOR get FILTER QUERY
             following: ['member', 'FollowerModel', function(member, FollowerModel) {
                 return FollowerModel.getFollowing(member);
             }],
@@ -141,10 +139,6 @@ angular.module( 'conexus.member', [
                 templateUrl: 'member/templates/items.tpl.html'
             }
         },
-
-        //TODO: DEPRECIATE RESOLVE
-        //TODO:$location.search RESOLVE PARAMS..
-        //INIT FILTER..
         resolve: {
             items: ['member', 'ItemModel', function(member, ItemModel) {
                 return ItemModel.get({user:member.id, limit:100, skip:0, sort:'createdAt DESC'});
@@ -159,11 +153,7 @@ angular.module( 'conexus.member', [
                 templateUrl: 'member/templates/ledger.tpl.html'
             }
         },
-
-        //TODO: DEPRECIATE RESOLVE
-        //TODO:$location.search RESOLVE PARAMS..
-        //INIT FILTER..
-        //TODO: BETTER GET...
+        //TODO: BETTER GET
         resolve: {
             transactionsFrom: ['member', 'TransactionModel', function(member, TransactionModel) {
                 return TransactionModel.get({from:member.id, limit:100, skip:0, sort:'createdAt DESC'});
@@ -181,8 +171,6 @@ angular.module( 'conexus.member', [
                 templateUrl: 'member/templates/positions.tpl.html'
             }
         },
-
-        //TODO: DEPRECIATE RESOLVE
         resolve: {
             orders: ['member', 'OrderModel', function(member, OrderModel){
                 return OrderModel.get({user:member.id, limit:20, skip:0, sort:'createdAt DESC'});
@@ -197,11 +185,19 @@ angular.module( 'conexus.member', [
                 templateUrl: 'member/templates/projects.tpl.html'
             }
         },
-
-        //TODO: DEPRECIATE RESOLVE
         resolve: {
-            projects: ['MemberModel', 'member', function(MemberModel, member) {
-                return  MemberModel.get({user:member.id, limit:100, skip:0, sort:'createdAt DESC'});
+            projects: ['AssociationModel', 'member', function(AssociationModel, member) {
+                var query = {
+                    filter:[
+                        {type:'MEMBER', id:member.id},
+                        {type:'PROJECT'},
+                    ],
+                    limit:100,
+                    skip:0,
+                    sort:'createdAt DESC'
+                };
+                return []
+                //return AssociationModel.get(query);
             }]
         }
     })
@@ -213,10 +209,20 @@ angular.module( 'conexus.member', [
                 templateUrl: 'member/templates/tasks.tpl.html'
             }
         },
-
-        //TODO: DEPRECIATE RESOLVE
         resolve: {
             tasks: ['member', 'TaskModel', function(member, TaskModel) {
+                //SMART QUERY HERE!
+                //UPDATE TO AssociationModel..
+                //var query = {
+                //    filter:[
+                //        {type:'MEMBER', id:member.id},
+                //        {type:'TASK'},
+                //    ],
+                //   limit:100,
+                //    skip:0,
+                //    sort:'createdAt DESC'
+                //};
+                //return AssociationModel.get(query);
                 return TaskModel.get({user:member.id, limit:20, skip:0, sort:'createdAt DESC'});
             }]
         }
@@ -229,8 +235,6 @@ angular.module( 'conexus.member', [
                 templateUrl: 'member/templates/time.tpl.html'
             }
         },
-        
-        //TODO: DEPRECIATE RESOLVE
         resolve: {
             time: ['member', 'TimeModel', function(member, TimeModel) {
                 return TimeModel.get({user:member.id, limit:100, skip:0, sort:'createdAt DESC'});
@@ -239,27 +243,41 @@ angular.module( 'conexus.member', [
     })
 }])
 
-.controller( 'MemberCtrl', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$scope', '$stateParams', 'FollowerModel', 'member', 'seoService', 'titleService', function MemberController($location, $mdSidenav, $rootScope, $sailsSocket, $scope, $stateParams, FollowerModel, member, seoService, titleService) {
+.controller( 'MemberCtrl', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$scope', 'member', 'titleService', 'ValidationModel', function MemberController($location, $mdSidenav, $rootScope, $sailsSocket, $scope, member, titleService, ValidationModel) {
     
     $scope.member = member;
     if(!$scope.member){$location.path('/')}
     titleService.setTitle($scope.member.username + ' | CRE8.XYZ');
-    $scope.member.isFollowing = false;
-    
-    //TODO: ASSOCIATION..
-    $scope.follow = function() {
-        if ($rootScope.currentUser){
-            $scope.newFollower = {};
-            $scope.newFollower.followed = $scope.member.id;
-            $scope.newFollower.follower = $rootScope.currentUser.id;
-            FollowerModel.create($scope.newFollower).then(function(model) {
-                $scope.member.isFollowing = true;
-                $rootScope.pop('Following', 'You are now follwing '+ $scope.member.username)
-            });
+
+    //if ($rootScope.currentUser){
+        //memberFollowers
+        $scope.member.isFollowing = false;
+    //}
+
+    console.log($scope.member)
+
+    //DO IN NAV
+    $scope.follow = function(model){
+        if($rootScope.currentUser){
+            var validationModel = {
+                user:$rootScope.currentUser.id,
+                context:{general:100},
+                associatedModels:[
+                    {type:'MEMBER', id:$rootScope.currentUser.id},
+                    {type:'MEMBER', id:model.id},
+                ],
+            };
+            if (!model.isFollowing){
+                ValidationModel.create(validationModel).then(function(newValidation){
+                    $scope.member.isFollowing = true;
+                    $scope.member.followerCount = true;
+                    $rootScope.pop('Following!', 'You are now follwing '+ model.username);
+                });
+            }
         }
-        else{$mdSidenav('login').toggle()}
+        else{$mdSidenav('login').toggle();}   
     };
-   
+    
 }])
 
 .controller( 'MemberAboutCtrl', ['$sailsSocket', '$scope', 'titleService', function MemberAboutController($sailsSocket, $scope, titleService) {
@@ -271,7 +289,7 @@ angular.module( 'conexus.member', [
     $scope.actions = actions.map(function(obj){obj.model = 'ACTION'; return obj;});
 }])
 
-.controller( 'MemberActivityCtrl', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', '$stateParams', 'contentList', 'ContentModel', 'FollowerModel', 'member', 'orders', 'profileContent', 'ReactionModel', 'time', 'titleService', 'transactionsFrom', 'transactionsTo', function MemberActivityController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, $stateParams, contentList, ContentModel, FollowerModel, member, orders, profileContent, ReactionModel, time, titleService, transactionsFrom, transactionsTo) {
+.controller( 'MemberActivityCtrl', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', '$stateParams', 'contentList', 'ContentModel', 'FollowerModel', 'member', 'orders', 'ReactionModel', 'time', 'titleService', 'transactionsFrom', 'transactionsTo', function MemberActivityController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, $stateParams, contentList, ContentModel, FollowerModel, member, orders, ReactionModel, time, titleService, transactionsFrom, transactionsTo) {
    
     titleService.setTitle($scope.member.username + ' | Activity | CRE8.XYZ');
 
@@ -1483,12 +1501,6 @@ angular.module( 'conexus.member', [
     
     titleService.setTitle($scope.member.username + ' | Projects | CRE8.XYZ');
     $scope.projects = projects;
-
-    $sailsSocket.subscribe('projectmember', function (envelope) {
-        if (envelope.verb == 'create'){
-            $scope.projects.unshift(envelope.data);
-        }
-    });
 
 }])
 

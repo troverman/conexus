@@ -55,7 +55,7 @@
                 <a ng-if="currentUser.id == item.user.id">Liquidity <i style="float:right" class="fas fa-exchange-alt"></i></a>
             </h4>
 
-            <h4 ng-if="item.model=='PROJECT'" ng-click="" class="nav-links"><a>Request To Join <i style="float:right" class="fas fa-users"></i></a></h4>
+            <h4 ng-if="item.model=='PROJECT'" ng-click="validationToggle(item)" class="nav-links"><a>Request To Join <i style="float:right" class="fas fa-users"></i></a></h4>
 
             <h4 ng-click="renderValidationToggle(item)" class="nav-links"><a>Associations <i style="float:right" class="fas fa-bezier-curve"></i></a></h4>
 

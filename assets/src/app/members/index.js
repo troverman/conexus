@@ -10,45 +10,18 @@ angular.module( 'conexus.members', [
 				templateUrl: 'members/index.tpl.html'
 			}
 		},
-
-        //TODO: DEPRECIATE RESOLVE
 		resolve: {
             members: ['UserModel', function(UserModel){
-                return UserModel.get({limit:1000, skip:0, sort:'createdAt DESC'});
-            }],
-            followers: ['$rootScope', 'FollowerModel', function($rootScope, FollowerModel) {
-                if (!$rootScope.currentUser){return null}
-                else{return FollowerModel.getFollowing($rootScope.currentUser)}
-            }],
+                return UserModel.get({limit:250, skip:0, sort:'createdAt DESC'});
+            }]
         }
 	});
 }])
 
-.controller( 'MembersCtrl', ['$rootScope', '$sailsSocket', '$sce', '$scope', 'FollowerModel', 'followers', 'members', 'SearchModel', 'toaster', 'UserModel', function MembersController( $rootScope, $sailsSocket, $sce, $scope, FollowerModel, followers, members, SearchModel, toaster, UserModel ) {
+.controller( 'MembersCtrl', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'FollowerModel', 'members', 'UserModel', 'ValidationModel', function MembersController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, FollowerModel, members, SearchModel, toaster, UserModel, ValidationModel ) {
 	
-    $scope.members = members.data.map(function(obj){
-        obj.model = 'MEMBER';
-        return obj;
-    });
-    $scope.memberCount = members.info.count;
-    
-    $scope.selectedSort = 'createdAt DESC';
-    $scope.skip = 0;
-
-    //if logged in
-    if (followers){
-        $scope.followers = followers.map(function(obj){return obj.followed});
-        $scope.members.map(function(obj){
-            var index = $scope.followers.map(function(obj1){return obj1.id}).indexOf(obj.id);
-            if (index != -1){obj.isFollowing = true;}
-            if (index == -1){obj.isFollowing = false;}
-            return obj;
-        });
-    }
-
-    //DEPRECIATE 'TOTAL WORK'
-    $scope.sortText = {'totalWork DESC':'Total Reputation','createdAt DESC':'Date Joined'}
-
+    $scope.members = members.data.map(function(obj){obj.model = 'MEMBER'; return obj;});
+    $scope.memberCount = members.info.count;  
     $scope.totalMap = {
         chart: {zoomType: 'x'},
         series: [{
@@ -69,7 +42,6 @@ angular.module( 'conexus.members', [
         yAxis: {title: {text: null}},
         credits:{enabled:false},
     };
-
     $scope.pieMap = {
         chart: {},
         series: [{
@@ -85,7 +57,47 @@ angular.module( 'conexus.members', [
         credits:{enabled:false},
     };
 
+    if ($rootScope.currentUser){
+        //memberFollowers
+        $scope.members.map(function(obj){
+            var index = -1; //$scope.followers.map(function(obj1){return obj1.id}).indexOf(obj.id);
+            if (index != -1){obj.isFollowing = true;}
+            if (index == -1){obj.isFollowing = false;}
+            return obj;
+        });
+    }
+
+    //DO IN NAV
     $scope.follow = function(model){
+        if($rootScope.currentUser){
+            var validationModel = {
+                user:$rootScope.currentUser.id,
+                context:{general:100},
+                associatedModels:[
+                    {type:'MEMBER', id:$rootScope.currentUser.id},
+                    {type:'MEMBER', id:model.id},
+                ],
+            };
+            if (!model.isFollowing){
+                ValidationModel.create(validationModel).then(function(newValidation){
+                    var index = $scope.members.map(function(obj){return obj.id}).indexOf($scope.newFollower.followed);
+                    $scope.members[index].isFollowing = true;
+                    $scope.members[index].followerCount++;
+                    $rootScope.pop('Following!', 'You are now follwing '+ model.username);
+                });
+            }
+            if (model.isFollowing){
+                //ValidationModel.create(validationModel).then(function(newValidation){
+                    var index = $scope.members.map(function(obj){return obj.id}).indexOf($scope.newFollower.followed);
+                    $scope.members[index].isFollowing = false;
+                    $scope.members[index].followerCount--;
+                    $rootScope.pop('Unfollowed!', 'You Unfollowed '+ model.username);
+                //});
+            }
+        }
+        else{$mdSidenav('login').toggle();}
+
+        /*
         $scope.newFollower = {
             followed:model.id,
             follower:$rootScope.currentUser.id,
@@ -94,32 +106,16 @@ angular.module( 'conexus.members', [
             FollowerModel.create($scope.newFollower).then(function(followerModel) {
                 var index = $scope.members.map(function(obj){return obj.id}).indexOf($scope.newFollower.followed);
                 $scope.members[index].isFollowing = true;
-                $scope.pop('Following!', 'You are now follwing '+ model.username);
+                $rootScope.pop('Following!', 'You are now follwing '+ model.username);
                 $scope.newFollower = {};
             });
         }
         if (model.isFollowing){
-            //FollowerModel.delete($scope.newFollower).then(function(followerModel){
-                $scope.pop('Unfollowed!', 'You Unfollowed '+ model.username);
-                var index = $scope.members.map(function(obj){return obj.id}).indexOf($scope.newFollower.followed);
-                $scope.members[index].isFollowing = false;
-            //});
+            $rootScope.pop('Unfollowed!', 'You Unfollowed '+ model.username);
+            var index = $scope.members.map(function(obj){return obj.id}).indexOf($scope.newFollower.followed);
+            $scope.members[index].isFollowing = false;
         }
-    };
-
-    //ROOT
-    $scope.pop = function(title, body){
-        toaster.pop({
-            type:'success',//info, wait, success, warning
-            title: title,
-            body: body,
-            onShowCallback: function (toast) { 
-                var audio = new Audio('audio/ping.mp3');
-                audio.play()
-                .then(function(audio){console.log('dingdong')})
-                .catch(function(err){console.log(err)})
-            }
-        });
+        */
     };
 
     $scope.updateChart = function(){
@@ -161,32 +157,5 @@ angular.module( 'conexus.members', [
         }
     };
     $scope.updateChart();
-
-    $scope.loadMore = function() {
-        $scope.skip = $scope.skip + 1000;
-        $rootScope.stateIsLoading = true;
-        UserModel.get({limit:100, skip:$scope.skip, sort:$scope.selectedSort}).then(function(members) {
-            $rootScope.stateIsLoading = false;
-            Array.prototype.push.apply($scope.members, members);
-            $scope.updateChart();
-        });
-    };
-
-    $scope.search = function(){
-        UserModel.get({search:$scope.searchQuery, limit:100, skip:0, sort:'createdAt DESC'}).then(function(models){
-            $scope.members = models;
-            $scope.updateChart();
-        });
-    };
-
-    $scope.selectSort = function(sort){
-        $scope.selectedSort = sort;
-        $rootScope.stateIsLoading = true;
-        UserModel.get({limit:100, skip:$scope.skip, sort:$scope.selectedSort}).then(function(members) {
-            $rootScope.stateIsLoading = false;
-            $scope.members = members;
-            $scope.updateChart();
-        });
-    };
 
 }]);

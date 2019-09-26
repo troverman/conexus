@@ -56,7 +56,7 @@
             </form>
 	    </div>
 
-	    <div class="card"><button class="btn btn-default log-btn" ng-click="taskToggle()">+ Task</button></div>
+	    <div class="card"><button class="btn btn-default log-btn" ng-click="taskToggle(project)">+ Task</button></div>
 		<div ng-repeat="item in tasks"><div ng-include="'templates/cards/taskCard.tpl.html'"></div></div>
 		
 	</div>

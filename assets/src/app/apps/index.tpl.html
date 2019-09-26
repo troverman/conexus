@@ -39,7 +39,7 @@
                 <div class="spacing-10"></div>
                 <div style="padding:16px">
                     <p style="color:gray;font-style:italic">Apps are a set of modular protocols and plugins to an asset string space.</p>
-                    <p style="color:gray;font-style:italic">Application creation and collaboration is facilitated though <a href="/projects" ui-sref="projects">projects</a>.</p>
+                    <p style="color:gray;font-style:italic">Application creation and collaboration is facilitated though <a href="/projects" ui-sref="projects"><b>projects</b></a>.</p>
                     <p style="color:gray;font-style:italic"><a href="/developers" ui-sref="developers"><b>Developer Documentation</b></a></p>
                     <p style="color:gray;font-style:italic">Help create value.</p>
                 </div>
@@ -57,22 +57,20 @@
     <div class="row">
         <ul style="padding:0px;" class="member-tabs">
             <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fa fa-filter"></i> Filter</a></li>
-            <li ng-click="expandSort()" style="float:right;font-size:14px"><a href="#">Sort By Recent <i class="fa fa-angle-down"></i></a></li>
+            <li ng-click="sortToggle()" style="float:right;font-size:14px"><a href="#">Sort By Recent <i class="fa fa-angle-down"></i></a></li>
             <div style="clear:both"></div>
         </ul>
         <div class="card">
             <form ng-submit="search()" style="display:flex;flex-direction:row;">
                 <input style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder="Search" ng-model="searchQuery">
                 <div ng-click="search()" style="border:0px" class="btn btn-default" style="float:right">
-                    <a  href="#" role="button">
-                        <h5 style="color:black;text-align:right" class="noselect">Search <i class="fa fa-search"></i></h5>
+                    <a href="#" role="button">
+                        <h5 style="color:black;text-align:right" class="noselect"><i class="fa fa-search"></i></h5>
                     </a>
                 </div>
             </form>
         </div>
-        <div class="card">
-            <button class="btn btn-default log-btn" ng-click="appToggle()">+ App</button>
-        </div>
+        <div class="card"><button class="btn btn-default log-btn" ng-click="appToggle()">+ App</button></div>
     </div>
     <div class="row">
         <div class="col-lg-6 col-sm-6" ng-repeat="item in apps" style="padding-left:0px;padding-right:0px;">

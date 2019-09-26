@@ -1,4 +1,5 @@
 //CRE8.PROJECT
+const crypto = require('crypto');
 const Q = require('q');
 
 module.exports = {
@@ -221,25 +222,13 @@ module.exports = {
 
 		function createNotification(model){};
 
-		function createProjectMember(model){
-			var projectMemberModel = {
-				project: model.id,
-				user: model.user.id,
-				context: {general:100},
-				type:'Creator'
-			};
-			ProjectMember.create(projectMemberModel).then(function(){
-				console.log('PROJECTMEMBER CREATE');
-			});
-		};
-
 		function createValidation(model){
 			for (x in model.associatedModels){
 				var newValidation = {
 					content:model.id + ' VALIDATION',
 					user: model.user.id,
 					creator: model.user.id,
-					data:{apps:{reactions: {plus:0,minus:0}, attention:{general:0}}}
+					data:{apps:{reactions: {plus:0,minus:0},attention:{general:0}}}
 
 				};
 				newValidation.connection = {
@@ -298,7 +287,6 @@ module.exports = {
 								var newAssociationModel = newValidationModel;
 								Association.create(newAssociationModel).then(function(association){
 									console.log('CREATED ASSOCIATION', association);
-									Association.publishCreate(association);
 									Association.publish([association.id], {verb: 'create', data: association});
 								});
 							}
@@ -339,8 +327,13 @@ module.exports = {
 
 			data:{apps:{reactions:{plus:0,minus:0},attention:{general:0}}}
 		};
+		model.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
 
 		console.log('CREATE PROJECT', model);
+
+		//CREATEING SELF DEFINED VALIDATIONS OF SOME TYPE CREATES THE MDOEL
+			//INSIDE OUT HERE
+			//ONLY 'CREATE' IS VALIDATE?
 
 		Project.create(model)
 		.exec(function(err, project) {
@@ -392,6 +385,34 @@ module.exports = {
 
 							//createProjectMember
 
+							//INVERT THIS..
+								//DEFINE THE CREATION OF PROJECT BY VALDIDATION
+									//NOT CREATE -- GET WHAT WE CREATE THEN VALIDATE ?
+
+							//TODO: DEFINE CONNECTION PERMISSIONS.. CREATOR PERMS ETC 
+							var newValidation = {
+				                creator:project.user.id,
+				                user:project.user.id,
+				                content:'CREATOR OF THE PROJECT '+ project.title,
+				                associatedModels:[
+				                    {type:'MEMBER', id:project.user.id},
+				                    {type:'PROJECT', id:project.id},
+				                ],
+				                context:{general:100},
+				                connection:{
+				                	title:'PROJECT CREATOR',
+				                	parameters:{},
+				                },
+			                	information:{},
+            					data:{apps:{reactions: {plus:0,minus:0},attention:{general:0}}}
+				            };
+		            		newValidation.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(newValidation)).digest('hex');
+
+				            Validation.create(newValidation).then(function(newValidationModel){
+								console.log('CREATE VALIDATION', newValidationModel);
+								createAssociation(newValidationModel);
+							});
+			
 							mintTokens(project);
 							res.json(model);
 

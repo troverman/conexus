@@ -126,7 +126,7 @@ angular.module( 'conexus.tasks', [
     $scope.filterContent = function(filter) {
         $scope.searchQuery.push({text:filter})
         $rootScope.stateIsLoading = true;
-        $location.search('tags', filter);
+        $location.search('context', filter);
         //$location.search('filter', '{id:\'cool\'}');
         //TaskModel.get({search:$scope.searchQuery, limit:20, skip:0, sort:'createdAt DESC'}).then(function(models){
         TaskModel.get({tag:filter, limit:20, skip:0, sort:'createdAt DESC'}).then(function(tasks){

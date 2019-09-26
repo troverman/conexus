@@ -26,7 +26,7 @@ angular.module( 'conexus.transaction', [
 
     console.log($scope.transaction);
 
-    //COMPUTE THIS!!
+    //COMPUTE THIS!! && RENDER AS CHART
     $scope.transaction.context = [];
     if ($scope.transaction.associationModels){
         for (x in $scope.transaction.associationModels){

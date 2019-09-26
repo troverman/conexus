@@ -1,15 +1,13 @@
 <div class="row">
-	<ul style="padding:0px;" class="member-tabs">
+	<ul ng-if="members.length>0" style="padding:0px;" class="member-tabs">
 	    <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet, null)"><i class="fa fa-filter"></i> Filter</a></li>
 	    <li style="float:right;font-size:14px"><a href="#" ng-click="sortToggle()">Sort By Recent <i class="fa fa-angle-down"></i></a></li>
 	   	<div style="clear:both"></div>
 	</ul>
-	<div class="card"><tags-input style="border:0px;flex-grow:2;" placeholder="Search" ng-model="searchQuery"></tags-input></div>
-    <div class="card" ng-if="!isProjectMember"><button class="btn btn-default log-btn" ng-click="createMemberValidate()">+ motion to join</button></div>
+	<div ng-if="members.length>0" class="card"><tags-input style="border:0px;flex-grow:2;" placeholder="Search" ng-model="searchQuery"></tags-input></div>
+    <div class="card"><button class="btn btn-default log-btn" ng-click="createMemberValidate()">+ motion to join</button></div>
 </div>
-
 <div class="spacing-5"></div>
-
 <div class="row">
 	<div class="col-sm-6" ng-repeat="item in members" style="padding-left:10px;padding-right:10px;">
 		<div class="member-card" ng-click="renderReputationToggle(item)" style="margin-bottom:10px;">
@@ -22,9 +20,14 @@
             <div class="member-card-info" style="padding:16px;height:auto;min-height:125px;">
 		        <h4 ng-click="$event.stopPropagation()"><a href="member/{{item.user.username}}" ui-sref="member.activity({path:item.user.username})">{{item.user.username}}</a></h4>
 		       	<p style="color:gray"><a ng-click="$event.stopPropagation();" href="connection/{{item.connection.id}}" ui-sref="connection({id:item.connection.id})">{{item.connection.title}}</p>
-		       	<!--REP VS MEMBER CONTEXT-->
 		        <p style="color:gray">{{project.title}}: {{item.context}}</p>
-                <p style="color:gray">{{item.user.status}} Offline</p>
+                <p style="color:gray;font-size:12px;">
+		            <span ng-if="item.loggedIn">
+		                <span><i style="color:#30b257" class="fa fa-circle"></i> Online</span>
+		                <span ng-if="item.status"><br>{{item.status}}</span>
+		            </span>
+		            <span ng-if="!item.loggedIn"><i class="fa fa-circle"></i> Offline</span>
+		        </p>
 		    </div>
 		   	<div class="card-footer">
 		   		<a ng-click="$event.stopPropagation();validationToggle(item)"><i class="fas fa-check"></i> validate </a>

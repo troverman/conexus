@@ -1,36 +1,31 @@
+//CRE8.UTILSERVICE
 const async = require('async');
 const Q = require('q');
 const request = require('request');
 
 module.exports = {
 
-	getData: function(req){
-
+	getFitbitData: function(req){
 		User.findOne(req.id)
 		.then(function(model) {
-
+			//if firbitpassport
 			var fitbitPassport = model.passports.filter(function(obj){return obj.provider=='fitbit'});
 			var userId = fitbitPassport[0].identifier;
 			var activity = 'steps';
 			var peroid = '1m'; //1d, 7d, 30d, 1w, 1m
 			var url = 'https://api.fitbit.com/1/user/' + userId + '/activities/' + activity + '/date/today/' + peroid + '.json';
-
 			//NEED API PERMISSIONS... >:|
 			//var url = 'https://api.fitbit.com/1/user/' + userId + '/activities/heart/date/2016-10-31/1d/1sec/time/00:00/00:01.json'
-
 			var model= {
 				url: url,
 				json: true,
 				headers: {'Authorization': ' Bearer ' + fitbitPassport[0].tokens.accessToken}
 			};
-
 			request(model, function (error, response, body) {
 				//console.log(body['activities-heart'])
 				//console.log(body)
 			});
-
-		})
-		
+		});
 	},
 
 	getGeoNamesByParent: function(geoNameParentId, parentId, username, nestLevel){
@@ -46,7 +41,6 @@ module.exports = {
 				var nameData = body.geonames;
 				async.eachSeries(nameData, function (projectData, nextProject){
 					if (projectData.fcl=='A' || projectData.fcode=='PPLA' || projectData.fcode=='PPLA2' || projectData.fcode=='PPLA3'){
-						
 						var countryName = projectData.countryName;
 						var fcl = projectData.fcl;
 						var fcode =  projectData.fcode;
@@ -196,7 +190,6 @@ module.exports = {
 								else{process.nextTick(next);}
 							});
 
-
 							//TASK FIND
 								//IMPLICIT VALIDATION
 								//MULTIASSOCIATION
@@ -236,97 +229,46 @@ module.exports = {
 		return deferred.promise;
 	},
 
-	//GMAP RESEARCH.. COFFEE ETC
-	//googleMapService: function(model){
-		//var request = {
-		//	location: center,
-		//	radius: 8047,
-		//	types: ['cafe']
-		//};
-		//var service = new google.maps.places.PlacesService(map);
-		//service.nearbySearch(request, callback);
-		//function createMarker(place) {
-			//var placeLoc = place.geometry.location;
-			//var marker = new google.maps.Marker({map: map,position: place.geometry.location});
-		//}
-	//},
+	googleNearbyService: function(model){
+	},
 
-	//emailService:function(){},
-
-	//HELPER LEGACY DATA CONVERT
-
-	//layer this later into getsome complex query tag - context pop
-	//self charters.. ie task nxt
 	tagsToAssociation: function(dataModel, limit){
-
 		var promise = ''
-
 		if (dataModel = 'CONTENT'){promise = Content.find({}).limit(limit).skip(0).sort('createdAt DESC')}
 		if (dataModel = 'ITEM'){promise = Item.find({}).limit(limit).skip(0).sort('createdAt DESC')}
 		if (dataModel = 'PROJECT'){promise = Project.find({}).limit(limit).skip(0).sort('createdAt DESC')}
 		if (dataModel = 'TASK'){promise = Task.find({}).limit(limit).skip(0).sort('createdAt DESC')}
 		if (dataModel = 'TIME'){promise = Task.find({}).limit(limit).skip(0).sort('createdAt DESC')}
 		if (dataModel = 'TRANSACTION'){promise = Transaction.find({}).limit(limit).skip(0).sort('createdAt DESC')}
-
 		promise.then(function(models){
-
 			for (x in models){
-
 				var validationModel = {
-
 					//dont need to double store this for self.. 
 					associatedModels:[
 						{type:dataModel, id:models[x].id},
 						{type:dataModel, id:models[x].id},
 					],
-
 					context:{general:100},
 					validation:{general:100},
-
 					parameters:{type:'SELF', connection:'CRE8COREPROJECTSELF'},
 					type:'HUMAN',
-
 					creator:models[x].user,
 					user:models[x].user,
-
 					content:'SELF IMPLICIT ASSOCIATION',
-
-					//APP DATA..
-					reactions: {plus:0,minus:0},
-					attention:{general:0}
+					data:{apps:{reactions:{plus:0,minus:0},attention:{general:0}}}
 				};
-
 				if (models[x].tags){
 					var context = models[x].tags.split(',');
-
-					//TODO.. UNIFY DATA STRUCT.. LOL - IT OK
 					for (y in context){
 						//should be 0 - 1 
 						validationModel.context[context[y]] = 100
 						validationModel.validation[context[y]] = 100 
 					}
-
 				}
-
 				console.log(validationModel)
-
-				//Validation.create(validationModel).then(function(newValidationModel){
-
-					//STRUCUTRE BETTER> : )
-					//STRUCT WITH CONNECTION : )
-					//NO WORRIES : P
-
-					//Association.create(newValidationModel);
-
-				//});
-
 			}
-
 		});
-
-
 	},
-
 
 	purge: function(model){
 		console.log(model)

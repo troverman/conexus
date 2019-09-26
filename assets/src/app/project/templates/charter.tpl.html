@@ -12,15 +12,7 @@
         </ul>
         
         <!--DEPRECIATE-->
-        <div class="card mobileFix">
-            <form ng-submit="search()" style="display:flex;flex-direction:row;">
-                <tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search" ng-model="searchQuery"></tags-input>
-                <div ng-click="search()" style="border:0px;float:right" class="btn btn-default">
-                    <a href="#" role="button"><h5 style="color:black;text-align:right" class="noselect">Search <i class="fa fa-search"></i></h5></a>
-                </div>
-            </form>
-        </div>
-
+        <div class="card mobileFix"><tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search" ng-model="searchQuery"></tags-input></div>
         <div class="card"><button class="btn btn-default log-btn" ng-click="connectionToggle()">+ Connection</button></div>
         <div ng-repeat="item in connections"><div ng-include="'templates/cards/connectionCard.tpl.html'"></div></div>
 

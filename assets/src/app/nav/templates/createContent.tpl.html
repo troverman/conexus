@@ -76,35 +76,21 @@
                                     <h4>Default Connection</h4>
                                     <p>Details & Rules<p>
                                 </div>
-
                                 <tags-input min-length="1" placeholder="{{association.text}} Context" ng-model="association.context">
                                     <auto-complete source="loadTags($query)"></auto-complete>
                                 </tags-input>
-
                                 <div class="spacing-5"></div>
-
                                 <div ng-repeat="context in association.context">
-
                                     <div layout="">
                                         <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{context.text}}</span></div>
-                                        <md-slider 
-                                            ng-model="context.score"  
-                                            step="0.1" 
-                                            flex="" 
-                                            md-discrete="" 
-                                            min="-100" 
-                                            max="100">
-                                        </md-slider>
+                                        <md-slider ng-model="context.score" step="0.1" flex="" md-discrete="" min="-100" max="100"></md-slider>
                                         <div flex="10" layout="" layout-align="center center">
                                             <p class="md-body-1">{{context.score}}</p>
                                         </div>
                                     </div>
                                     <div style="text-align:center"><p style="font-size:9px">{{context.score}}</p></div>
-
                                 </div>
-
                             </div>
-
                         </div>
                     </div>
                                   

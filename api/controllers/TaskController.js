@@ -1,5 +1,6 @@
 //CRE8.TASK
 const Q = require('q');
+const crypto = require('crypto');
 
 module.exports = {
 
@@ -219,6 +220,7 @@ module.exports = {
 						logic:'computed[%context] = context[%context]*reputation[%context]'
 					},
 				};
+        		newValidation.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(newValidation)).digest('hex');
 				//CONNECTION DEFINED MAPPINGS
 				for (y in newValidation.connection.parameters.mapping){
 					newValidation[newValidation.connection.parameters.mapping[y]] = {};
@@ -336,6 +338,7 @@ module.exports = {
 			data:{apps:{reactions:{plus:0,minus:0},attention:{general:0}}}
 
 		};
+		model.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
 		console.log('CREATE TASK', model);
 		Task.create(model)
 		.exec(function(err, model) {

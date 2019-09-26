@@ -40,9 +40,13 @@
 			        	<img ng-src="{{currentUser.avatarUrl}}" err-src="/images/avatar.png">
 			        </a>
 			    </div>
-			    <!--<a ng-click="editAccountToggle()" href="#" style="float:right;padding-right:5px;">
+			    
+			    <!--
+			    <a ng-click="editAccountToggle()" href="#" style="float:right;padding-right:5px;">
 		        	<p><i class="fa fa-upload"></i></p>
-				</a>-->
+				</a>
+				-->
+
 				<div style="clear:both"></div>
 			    <div class="member-card-info" style="height:auto;">
 			        <h4><a href="member/{{currentUser.username}}" ui-sref="member.activity({path:currentUser.username})">{{currentUser.username}}</a></h4>
@@ -60,6 +64,7 @@
 			        <p style="color:gray"> <i style="color:#30b257" class="fa fa-circle"></i> {{currentUser.status}} Editing Account</p>
 			        
 			    </div>
+
 			    <!--
 			    <div class="member-card-social">
 			        <a ng-show="true" href="{{currentUser.socialAccounts.facebook.profileUrl}}"  target="_blank"><i class="fa fa-facebook facebook-icon"></i></a>
@@ -68,6 +73,7 @@
 			        <a ng-show="true" href="{{currentUser.socialAccounts.google.profileUrl}}"  target="_blank"><i class="fa fa-google google-icon"></i></a>
 			    </div>
 				-->
+
 			</div>
 		</div>
 
@@ -82,12 +88,18 @@
 					<h4>{{currentUser.firstName}} {{currentUser.lastName}}</h4>
 					<p>{{currentUser.email}}</p>
 
-					<!--<a ng-click="memberQRToggle(currentUser)" href="#">
+					<!--
+					<a ng-click="memberQRToggle(currentUser)" href="#">
 						<span style="font-size:11px;color:gray"><i class="fas fa-qrcode"></i> {{currentUser.id}}</span>
-					</a>-->
-					<!--<p>dob: {{currentUser.dateOfBirth | date :  "MM-dd-y"}}</p>
+					</a>
+					-->
+
+					<!--
+					<p>dob: {{currentUser.dateOfBirth | date :  "MM-dd-y"}}</p>
 					<p>join:{{currentUser.createdAt | date :  "MM-dd-y"}}</p>
-					<p>{{currentUser.email}}</p>-->
+					<p>{{currentUser.email}}</p>
+					-->
+
 					<p style="color:gray;font-size:12px;"><a href="#">Goverment ID</a> | <a href="#">Social Accounts</a> | <a href="#">BioMetric Data</a></p>
 				</div>
 			</div>
@@ -128,33 +140,6 @@
 		</div>
 	</div>
 
-	<!--
-    <div class="row">
-		<div class="card">
-			<div style="background:url('https://source.unsplash.com/1600x900/?geometry,information,passport')" class="imageContainerSmall">
-			    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
-			    	<div style="text-align:right;padding:15px;position:absolute;right:0">
-		                <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
-		                    <i class="fas fa-passport"></i>
-		                </a>
-		            </div>
-			        <div style="margin-top: auto;margin-bottom: auto;">
-			        	<div class="container">
-				            <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">Information</h1>
-				            <h5 style="color:white">Authentication & Verification</h5>
-				        </div>
-			        </div>
-			    </div>
-			</div>
-			<div style="padding:16px">
-				<h4>{{currentUser.firstName}} {{currentUser.lastName}}</h4>
-				<h5>{{currentUser.email}}</h5>
-				<p style="color:gray;font-size:12px;"><a href="#">Goverment ID</a> | <a href="#">Social Accounts</a> | <a href="#">BioMetric Data</a></p>
-			</div>
-	    </div>
-	</div>
-	-->
-
 	<div class="spacing-5"></div>
 
 	<div class="row">
@@ -167,6 +152,7 @@
 	</div>
 
 	<div class="row" ng-show="selectedTab=='APPS'">
+		
 		<div class="card">
 			<div style="background:url('https://source.unsplash.com/1600x900/?applications,programming,idea')" class="imageContainerSmall">
 			    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
@@ -212,6 +198,7 @@
 				</div>
         	</div> 
         </div> 
+
 	</div>
 
 	<div class="row" ng-show="selectedTab=='HISTORY'">
@@ -232,28 +219,7 @@
 			    </div>
 			</div>
 	    </div>
-	    <div class="card" ng-repeat="attention in machineAttention" ng-click="cardDetailToggle(attention)">
-	    	<div style="padding:16px">
-	    		<div style="float:right;text-align:right">
-		            <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(attention)">
-		                <i class="fas fa-chevron-down"></i>
-		            </a>
-		        </div>
-				<h5>{{attention.amount}} {{attention.string}}</h5>
-				<p style="font-size:11px">{{attention.data.device.title}}</p>
-				<p style="font-size:11px">{{attention.data.version}}</p>
-				<p style="color:gray;font-size:10px;">
-					<span style="color:gray" am-time-ago="attention.createdAt"></span> •  
-        			<span style="color:gray">{{attention.createdAt | date :  "y MM-dd hh:mm.ss a"}}</span>
-				</p>
-			</div>
-			<div class="card-footer">
-				<a ng-click="$event.stopPropagation();renderAttentionToggle(item)" style="color:grey"><i class="fas fa-eye"></i> {{attention.data.apps.attention.general || 0}}</a>
-		        <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fas fa-angle-up"></i> {{attention.data.apps.reactions.plus || 0}}  like </a> 
-		        <a ng-click="$event.stopPropagation();createReaction(item, 'plus')" ><i class="fas fa-angle-down"></i> {{attention.data.apps.reactions.minus || 0}}  dislike </a>
-		        <a ng-click="$event.stopPropagation();" class="pull-right" style="padding:0px;" href="attention/{{attention.id}}" ui-sref="attention({id:attention.id})"><i class="fas fa-link grey"></i></a>
-		    </div>
-		</div>
+	    <div ng-repeat="item in humanAttention"><div ng-include="'templates/cards/attentionCard.tpl.html'"></div></div>
 	</div>
 
   	<div class="row" ng-show="selectedTab=='MINING'">
@@ -274,7 +240,6 @@
 			    </div>
 			</div>
 			<div style="padding:16px">
-
 				<p>
 					Client Mining <a ng-click="informationToggle()" href="#"><i class="fa fa-question-circle"></i></a>
 					<br>
@@ -284,35 +249,11 @@
 					<h5>Peer Model</h5>
 					{{peer}}
 				</p>
-
 			</div>
 	    </div>
-	    <div class="card" ng-repeat="attention in machineAttention" ng-click="cardDetailToggle(attention)">
-	    	<div style="padding:16px">
-	    		<div style="float:right;text-align:right">
-		            <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(attention)">
-		                <i class="fas fa-chevron-down"></i>
-		            </a>
-		        </div>
-				<h5>{{attention.amount}} {{attention.string}}</h5>
-				<p style="font-size:11px">{{attention.data.device.title}}</p>
-				<p style="font-size:11px">{{attention.data.version}}</p>
-				<p style="color:gray;font-size:10px;">
-					<span style="color:gray" am-time-ago="attention.createdAt"></span> •  
-        			<span style="color:gray">{{attention.createdAt | date :  "y MM-dd hh:mm.ss a"}}</span>
-				</p>
-			</div>
-			<div class="card-footer">
-				<a ng-click="$event.stopPropagation();renderAttentionToggle(attention)" style="color:grey"><i class="fas fa-eye"></i> {{attention.data.apps.attention.general || 0}}</a>
-		        <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fas fa-angle-up"></i> {{attention.data.apps.reactions.plus || 0}}  like </a>
-		        <a ng-click="$event.stopPropagation();createReaction(item, 'plus')" ><i class="fas fa-angle-down"></i> {{attention.data.apps.reactions.minus || 0}}  dislike </a>
-		        <a ng-click="$event.stopPropagation();" class="pull-right" style="padding:0px;" href="attention/{{attention.id}}" ui-sref="attention({id:attention.id})"><i class="fas fa-link grey"></i></a>
-		    </div>
-		</div>
+	    <div ng-repeat="item in machineAttention"><div ng-include="'templates/cards/attentionCard.tpl.html'"></div></div>
 	</div>
 
 	<div class="spacing-10"></div>
 
 </div>
-<div class="spacing-50"></div>
-

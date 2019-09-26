@@ -1,5 +1,6 @@
 //CRE8.CONTENT
 const Q = require('q');
+const crypto = require('crypto');
 
 module.exports = {
 	
@@ -381,6 +382,8 @@ module.exports = {
 					for (y in model.associatedModels[x].context){
 						newValidation.context[model.associatedModels[x].context[y].text] = model.associatedModels[x].context[y].score;
 					}
+					
+					newValidation.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(newValidation)).digest('hex');
 
 					Validation.create(newValidation).then(function(newValidationModel){
 						console.log('CREATE VALIDATION', newValidationModel);
@@ -456,16 +459,12 @@ module.exports = {
 			content: req.param('content'),
 
 			user: req.param('user'),
-			//creator: req.param('user'),
-
-			//TODO: DEPRECIATE
-			contentModel: req.param('contentModel'),
-
-			//associatedModels: req.param('associatedModels'),
-			
+			creator: req.param('user'),			
 			data:{apps:{reactions:{plus:0, minus:0},attention:{general:0}}}
 
 		};
+
+		model.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
 
 		console.log('CREATE CONTENT', model);
 

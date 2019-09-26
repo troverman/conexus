@@ -1,39 +1,25 @@
  <div class="card">
+    <div style="background:url('https://source.unsplash.com/1600x900/?details,notes,exolore,wonder,connection');min-height:50px" class="imageContainerSmall">
+        <div style="background:rgba(0,0,0,0.75);height:50px" class="imageContainerSmallDiv">  
+            <div style="text-align:right;padding:15px;position:absolute;right:0">
+                <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><i class="fas fa-poll"></i></a>
+                <div style="clear:both"></div>
+            </div> 
+            <div style="margin-top: auto;margin-bottom: auto;">
+                <div class="container">
+                    <h1 style="text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;">Orders</h1>
+                </div>
+            </div>
+        </div>
+    </div>
     <div style="padding:16px;">
         <p style="color:gray;font-size:12px;font-style:italic">Your Orders on the Multidimensional Token Market</p>
         <p style="color:gray;font-size:12px;font-style:italic">These Discrete Market positions codify your value map and create relation in value; a self-empowering mechanism.</p>
-
-        <!--<div class="row">
-            <div class="col-xs-4"><img ng-src="https://source.unsplash.com/900x900/?value,finance,vote"></div>
-            <div class="col-xs-4"><img ng-src="https://source.unsplash.com/900x900/?humananity,city,community"></div>
-            <div class="col-xs-4"><img ng-src="https://source.unsplash.com/900x900/?code,love,joy"></div>
-        </div>-->
     </div>
 </div>
 
 <div class="col-xs-12" style="padding-left:0px;padding-right:0px">
-    <div class="card">
-        <div style="background:url('https://source.unsplash.com/1600x900/?love,art,geometry');min-height:150px;" class="imageContainerSmall">
-            <div style="background:rgba(0,0,0,0.75);height:150px;" class="imageContainerSmallDiv">  
-                <div style="text-align:right;padding:15px;position:absolute;right:0">
-                    <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
-                        <i class="fas fa-universal-access"></i>
-                    </a>
-                    <div style="clear:both"></div>
-                </div> 
-                <div style="margin-top: auto;margin-bottom: auto;padding:15px;">
-                    <h4 style="text-align:left;color:rgba(255,255,255,0.9);font-weight:400;">Discrete Orders</h4>
-                </div>
-            </div>
-        </div>
-        <div style="padding:16px">
-
-            <div class="col-xs-12">
-                <div ng-repeat="item in positions">
-                    <div ng-include="'templates/cards/orderCard.tpl.html'"></div>
-                </div>
-            </div>
-
-        </div>
+    <div ng-repeat="item in positions">
+        <div ng-include="'templates/cards/orderCard.tpl.html'"></div>
     </div>
 </div>

@@ -1,5 +1,6 @@
 //CRE8.ACTION
 const Q = require('q');
+const crypto = require('crypto');
 
 module.exports = {
 	
@@ -105,6 +106,7 @@ module.exports = {
 			user: req.param('user'),
 			data:{apps:{reactions:{plus:0,minus:0},attention:{general:0}}}
 		};
+		model.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
 		console.log('CREATE ACTION', model);
 		Action.create(model)
 		.exec(function(err, model) {

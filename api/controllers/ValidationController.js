@@ -1,4 +1,5 @@
 //CRE8.VALIDATION
+const crypto = require('crypto');
 const Q = require('q');
 
 module.exports = {
@@ -250,6 +251,11 @@ module.exports = {
 								console.log('ASSOCIATION EXISTS -- COMPUTE');
 								//lookup connection here..
 							}
+
+
+							//UPDATE LINKED MODELS & COUNTS?
+
+
 						});
 					});
 				});
@@ -315,6 +321,8 @@ module.exports = {
 			}
 		}
 
+		model.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
+
 		User.find({id:model.user}).then(function(userModels){
 
 			console.log('CREATE VALIDATION', model);
@@ -330,17 +338,6 @@ module.exports = {
 
 					createAssociation(validation);
 					createNotification(validation);
-
-					//NOTIFICATION TYPES --> IN CONNECTION FOR NON HARDCODE..
-					//HARDCODE IS THIS
-					//Association.find({}).then(function(associationModels){});
-					//ProjectMember.find({project:model.project}).then(function(projectMembers){
-					//	projectMember.user = userModels[0];
-					//	projectMember.project = projectMembers[0];
-					//	projectMembers = projectMembers.filter(function(obj){return obj.user !== userModels[0].id;});
-					//	for (x in projectMembers){createNotification(projectMember, projectMembers[x]);}
-					//});
-
 					mintTokens(validation);
 					res.json(validation);
 

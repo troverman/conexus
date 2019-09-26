@@ -50,23 +50,25 @@ angular.module( 'conexus.association', [
 
     console.log($scope.association);
 
-    $scope.tokens = [
-        {string:'CRE8+ASSOCIATION+'+$scope.association.id, amount:1},
-        {string:'CRE8+ASSOCIATION+'+$scope.association.associatedModels[0].id+'+'+$scope.association.associatedModels[1].id, amount:1}
-    ]
+    //$scope.tokens = [
+    //    {string:'CRE8+ASSOCIATION+'+$scope.association.id, amount:1},
+    //    {string:'CRE8+ASSOCIATION+'+$scope.association.associatedModels[0].id+'+'+$scope.association.associatedModels[1].id, amount:1}
+    //]
     
     titleService.setTitle('Association | '+$scope.association.id + ' | CRE8.XYZ');
 
     //BACKEND.. FRONTEND.. HM
-    var validationQuery = {
-        association:[$scope.association.associatedModels[0].id,$scope.association.associatedModels[1].id], 
-        limit:10, 
-        skip:0, 
-        sort:'createdAt DESC'
-    };
-    ValidationModel.get(validationQuery).then(function(validations){
-        $scope.validations = validations.map(function(obj){obj.model='VALIDATION';return obj});
-    });
+    if ($scope.association.associatedModels){
+        var validationQuery = {
+            association:[$scope.association.associatedModels[0].id,$scope.association.associatedModels[1].id], 
+            limit:10, 
+            skip:0, 
+            sort:'createdAt DESC'
+        };
+        ValidationModel.get(validationQuery).then(function(validations){
+            $scope.validations = validations.map(function(obj){obj.model='VALIDATION';return obj});
+        });
+    }
 
     $scope.associationColumn = {
         chart: {zoomType: 'x'},

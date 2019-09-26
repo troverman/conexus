@@ -16,10 +16,10 @@
                         </h1>
                         <h5 style="color:white">
                             <span style="color:white;font-size:10px;">
-                                <a href="#" style="color:white" ng-click="memberQRToggle(item.user)"> <i style="color:white" class="fas fa-qrcode"></i> 0x{{item.user.id}}</a>
+                                <a href="#" style="color:white" ng-click="memberQRToggle(item.user)"> <i style="color:white" class="fas fa-qrcode"></i> {{item.user.id}}</a>
                             </span>
                             <span ng-if="item.project" style="color:gray;font-size:10px;">
-                                <a href="#" style="color:white">, 0x{{item.id}}</a>
+                                <a href="association/{{item.id}}" ui-sref="association({id:item.id})" style="color:white">, {{item.id}}</a>
                             </span>
                         </h5>
                     </div>

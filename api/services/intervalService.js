@@ -1,3 +1,5 @@
+//CRE8.INTERVALSERIVCE
+
 const async = require('async');
 const Q = require('q');
 const request = require('request');
@@ -10,33 +12,25 @@ module.exports = {
 	//'''ORACLE''' to APIS -- > CONTINUOUS WEBSOCKET INPUT TO TOKEN LAYER
 	//APP FOR TIME IN CARDIO..
 	getFitbitData: function(req){
-
 		User.findOne(req.id)
 		.then(function(model) {
-
 			var fitbitPassport = model.passports.filter(function(obj){return obj.provider=='fitbit'});
 			var userId = fitbitPassport[0].identifier;
 			var activity = 'steps';
 			var peroid = '1m'; //1d, 7d, 30d, 1w, 1m
 			var url = 'https://api.fitbit.com/1/user/' + userId + '/activities/' + activity + '/date/today/' + peroid + '.json';
-
 			//NEED API PERMISSIONS... >:|
 			//var url = 'https://api.fitbit.com/1/user/' + userId + '/activities/heart/date/2016-10-31/1d/1sec/time/00:00/00:01.json'
-
 			var model= {
 				url: url,
 				json: true,
 				headers: {'Authorization': ' Bearer ' + fitbitPassport[0].tokens.accessToken}
 			};
-
 			request(model, function (error, response, body) {
 				//console.log(body['activities-heart'])
 				//console.log(body)
 			});
-
-		})
-		
-	
+		});
 	},
 
 	//TODO: RESHAPE | BUILD
@@ -52,15 +46,12 @@ module.exports = {
 		User.find().then(function(userModels){
 			for (x in userModels){
 				(function(userModels, x){
-
 					Time.find({user:userModels[x].id}).limit(10000).populate('task').then(function(timeModels){
 
 						var balances = {};
-						//TOKENS ARE .. 
 						//console.log(userModels[x].username, timeModels.length)
 
 						for (y in timeModels){
-
 							if (!balances[timeModels[y].id]){balances[timeModels[y].id] = parseFloat(timeModels[y].amount)}
 							balances[timeModels[y].id] += parseFloat(timeModels[y].amount);
 
@@ -71,17 +62,14 @@ module.exports = {
 									balances[timeModels[y].task.tags.split(',')[z].replace(/\s/g, '').toUpperCase()] += parseFloat(timeModels[y].amount);
 								}
 							}
-					
 						}
 
 						var balance = Object.assign(balances, userModels[x].balance);
 						if (balance['cre8']!=0){balance['cre8'] = 8};
 						//console.log(balance)
-						
+					
 						User.update({id:userModels[x].id}, {balance:balance}).then(function(userModels){console.log('UPDATE', userModels[0].username)})
-
 					});
-
 				})(userModels, x);
 			}
 		});
@@ -97,14 +85,14 @@ module.exports = {
 				if(!userModels[x].balance['UNIVERSAL']){userModels[x].balance['UNIVERSAL'] = 0}
 				userModels[x].balance['UNIVERSAL'] = userModels[x].balance['UNIVERSAL'] + 1;
 				User.update({id:userModels[x].id}, {balance: userModels[x].balance}).then(function(userModel){
-					console.log('UPDATED', userModel[0].username, userModel[0].balance['UNIVERSAL'])
+					//console.log('UPDATED', userModel[0].username, userModel[0].balance['UNIVERSAL'])
 				});	
 			}
 			Token.find({string:'UNIVERSAL'}).then(function(tokenModels){
 				if (!tokenModels[0].information.inCirculation){tokenModels[0].information.inCirculation = 0;}
 				tokenModels[0].information.inCirculation = parseInt(tokenModels[0].information.inCirculation) + parseInt(userModels.length);
 				Token.update({id:tokenModels[0].id}, tokenModels[0]).then(function(tokenModel){
-					console.log('UPDATED', tokenModel)
+					//console.log('UPDATED', tokenModel)
 				});
 			});
 		});
@@ -154,44 +142,98 @@ module.exports = {
 			});
 		});
 	},
-	
-};
 
-module.exports.intervalService = function(){
+	logOutAll: function(){
+		User.find().then(function(userModels){
+			for (x in userModels){
+				User.update({id:userModels[x].id},{loggedIn:false}).then(function(userModels){});
+			}
+		});
+	},
 
-	//TODO!!! REMOVE THE PRE
+	//UTIL
+	bulkEditFunction:function(){
+		var Q = require('q');
+		var promises = [
+			////Action.find().limit(100).skip(0).sort('createdAt DESC'),
+			////App.find().limit(100).skip(0).sort('createdAt DESC'),
+			////Attention.find().limit(100).skip(0).sort('createdAt DESC'),
+			////Association.find().limit(100).skip(0).sort('createdAt DESC'),
+			////Content.find().limit(420).skip(0).sort('createdAt DESC'),
+			////Item.find().limit(1000).skip(0).sort('createdAt DESC'),
+			////Order.find().limit(1000).skip(0).sort('createdAt DESC'),
+			//////Project.find().limit(100).skip(0).sort('createdAt DESC'),
+			//Reaction.find().limit(10000).skip(0).sort('createdAt DESC'),
+			////Task.find().limit(10000).skip(0).sort('createdAt DESC'),
+			////Time.find().limit(10000).skip(0).sort('createdAt DESC'),
+			////Transaction.find().limit(10000).skip(0).sort('createdAt DESC'),
+			//////User.find().limit(100).skip(0).sort('createdAt DESC'),
+			////Validation.find().limit(10000).skip(0).sort('createdAt DESC')
+		];
+		var type = [
+			////'ACTION',
+			////'APP',
+			////'ATTENTION',
+			////'ASSOCIATION',
+			////'CONTENT',
+			////'ITEM',
+			////'ORDER',
+			//////'PROJECT',
+			//'REACTION',
+			////'TASK',
+			////'TIME',
+			////'TRANSACTION',
+			//////'USER',
+			////'VALIDATION',
+		];
+		Q.all(promises)
+		.then(function(data){
+			console.log('LOAD');
+			var tokenSet = [];
+			for (x in data){
+				for (y in data[x]){
+					//var apps = {reactions:{plus:0,minus:0},attention:{general:0}};
+					//if (data[x][y].data){if (data[x][y].apps){apps = data[x][y].apps;}}
+					//else{data[x][y].data = {};}
+					//if (data[x][y].reactions){apps.reactions = data[x][y].reactions;}
+					//if (data[x][y].attention){apps.attention = data[x][y].attention;}
+					//if (data[x][y].data.applications){apps = data[x][y].data.applications}
+					//data[x][y].data.apps = apps;
+					//console.log(data[x][y].id);
+					//if (type[x] == 'ACTION'){Action.update({id:data[x][y].id}, {data: data[x][y].data}).then(function(data){console.log('UPDATE!', data)})}
+					//if (type[x] == 'APP'){App.update({id:data[x][y].id}, {data: data[x][y].data}).then(function(data){console.log('UPDATE!', data)})}
+					//if (type[x] == 'ASSOCIATION'){Association.update({id:data[x][y].id}, {data: data[x][y].data}).then(function(data){console.log('UPDATE!', data)})}
+					//if (type[x] == 'ATTENTION'){Association.update({id:data[x][y].id}, {data: data[x][y].data}).then(function(data){console.log('UPDATE!', data)})}
+					//if (type[x] == 'CONTENT'){Content.update({id:data[x][y].id}, {data: data[x][y].data}).then(function(data){console.log('UPDATE!', data)})}
+					//if (type[x] == 'ITEM'){Item.update({id:data[x][y].id}, {data: data[x][y].data}).then(function(data){console.log('UPDATE!', data)})}
+					//if (type[x] == 'ORDER'){Order.update({id:data[x][y].id}, {data: data[x][y].data}).then(function(data){console.log('UPDATE!', data)})}
+					//if (type[x] == 'PROJECT'){Project.update({id:data[x][y].id}, {data: data[x][y].data}).then(function(data){console.log('UPDATE!', data)})}
+					//if (type[x] == 'REACTION'){Reaction.update({id:data[x][y].id}, {data: data[x][y].data}).then(function(data){console.log('UPDATE!', data)})}
+					//if (type[x] == 'TASK'){Task.update({id:data[x][y].id}, {data: data[x][y].data}).then(function(data){console.log('UPDATE!', data)})}
+					//if (type[x] == 'TIME'){Time.update({id:data[x][y].id}, {data: data[x][y].data}).then(function(data){console.log('UPDATE!', data)})}
+					//if (type[x] == 'TRANSACTION'){Transaction.update({id:data[x][y].id}, {data: data[x][y].data}).then(function(data){console.log('UPDATE!', data)})}
+					//if (type[x] == 'USER'){User.update({id:data[x][y].id}, {data: data[x][y].data}).then(function(data){console.log('UPDATE!', data)})}
+					//if (type[x] == 'VALIDATION'){Validation.update({id:data[x][y].id}, {data: data[x][y].data}).then(function(data){console.log('UPDATE!', data)})}
+				}
+			}
+		});
+	},
 
-	//PRE-ALPHA. 
-	//setInterval(intervalService.universalTokenProtocolPreAlpha, 8640000);
-	//setInterval(intervalService.reputationBuild, 8640000);
-	//intervalService.reputationBuild();
-	//POPULATE TOKEN -- ALPHA.. 
-	//COALESE CONGRUENT DATA MAPPINGS.. 
-	//TOKEN IS A MAPPING FROM STRING TO PROTOCOLS (WHICH ARE LOGIC MAPS)
-	//setInterval(dataService.buildStringSpace, 3600);
+	//UTIL
+	removeDuplicateTokens:function(){
+		Token.find().limit(1000000).then(function(tokenModels){
+			const lookup = tokenModels.reduce((a, e) => {
+			  a[e.string] = e.string in a ? ++a[e.string] : 0;
+			  return a;
+			}, {});
+			tokenModels = tokenModels.filter(e => lookup[e.string]);
+			console.log(tokenModels);
+			for (x in tokenModels){Token.destroy(tokenModels[x].id, function(err) {console.log('delete token')});}
+		})
+	},
 
-	intervalService.reputationBuild()
-
-
-	//CONNECTION | (VALIDATION - ASSOCIATION)
-
-	//DATA 
-	//MASSAGE TIME :)
-	//utilService.tagsToAssociation('PROJECT', 2)
-	//utilService.tagsToAssociation('TRANSACTION', 2)
-
-	//remove null
-	//remove depreciated data.. :)
-	
-	//Task.find().then(function(taskModels){
-	//	for x in taskModels){
-	//		dataService.buildAssociationFromValidation(taskModels[x]);
-	//	}
-	//});
-
-
-	
-	function populateMerch(){
+	//GENERATOR
+	populateMerch:function(){
 
 		function uuidv4() {return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);return v.toString(16);});};
 		function guid(){function s4() {return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);} return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();};
@@ -289,160 +331,81 @@ module.exports.intervalService = function(){
 				//Item.destroy(itemModels[x].id, function(err) {})
 			}
 		});
+	},
 
-	};
-	//populateMerch();
+	populateData:function(){
 
-	function bulkEditFunction(){
-		var Q = require('q');
-		var promises = [
-			////Action.find().limit(100).skip(0).sort('createdAt DESC'),
-			////App.find().limit(100).skip(0).sort('createdAt DESC'),
-			////Attention.find().limit(100).skip(0).sort('createdAt DESC'),
-			////Association.find().limit(100).skip(0).sort('createdAt DESC'),
-			////Content.find().limit(420).skip(0).sort('createdAt DESC'),
-			////Item.find().limit(1000).skip(0).sort('createdAt DESC'),
-			////Order.find().limit(1000).skip(0).sort('createdAt DESC'),
-			//////Project.find().limit(100).skip(0).sort('createdAt DESC'),
-			//Reaction.find().limit(10000).skip(0).sort('createdAt DESC'),
-			////Task.find().limit(10000).skip(0).sort('createdAt DESC'),
-			////Time.find().limit(10000).skip(0).sort('createdAt DESC'),
-			////Transaction.find().limit(10000).skip(0).sort('createdAt DESC'),
-			//////User.find().limit(100).skip(0).sort('createdAt DESC'),
-			////Validation.find().limit(10000).skip(0).sort('createdAt DESC')
-		];
-		var type = [
-			////'ACTION',
-			////'APP',
-			////'ATTENTION',
-			////'ASSOCIATION',
-			////'CONTENT',
-			////'ITEM',
-			////'ORDER',
-			//////'PROJECT',
-			//'REACTION',
-			////'TASK',
-			////'TIME',
-			////'TRANSACTION',
-			//////'USER',
-			////'VALIDATION',
-		];
-		Q.all(promises)
-		.then(function(data){
-			console.log('LOAD');
-			var tokenSet = [];
-			for (x in data){
-				for (y in data[x]){
-					//var apps = {reactions:{plus:0,minus:0},attention:{general:0}};
-					//if (data[x][y].data){if (data[x][y].apps){apps = data[x][y].apps;}}
-					//else{data[x][y].data = {};}
-					//if (data[x][y].reactions){apps.reactions = data[x][y].reactions;}
-					//if (data[x][y].attention){apps.attention = data[x][y].attention;}
-					//if (data[x][y].data.applications){apps = data[x][y].data.applications}
-					//data[x][y].data.apps = apps;
-					//console.log(data[x][y].id);
-					//if (type[x] == 'ACTION'){Action.update({id:data[x][y].id}, {data: data[x][y].data}).then(function(data){console.log('UPDATE!', data)})}
-					//if (type[x] == 'APP'){App.update({id:data[x][y].id}, {data: data[x][y].data}).then(function(data){console.log('UPDATE!', data)})}
-					//if (type[x] == 'ASSOCIATION'){Association.update({id:data[x][y].id}, {data: data[x][y].data}).then(function(data){console.log('UPDATE!', data)})}
-					//if (type[x] == 'ATTENTION'){Association.update({id:data[x][y].id}, {data: data[x][y].data}).then(function(data){console.log('UPDATE!', data)})}
-					//if (type[x] == 'CONTENT'){Content.update({id:data[x][y].id}, {data: data[x][y].data}).then(function(data){console.log('UPDATE!', data)})}
-					//if (type[x] == 'ITEM'){Item.update({id:data[x][y].id}, {data: data[x][y].data}).then(function(data){console.log('UPDATE!', data)})}
-					//if (type[x] == 'ORDER'){Order.update({id:data[x][y].id}, {data: data[x][y].data}).then(function(data){console.log('UPDATE!', data)})}
-					//if (type[x] == 'PROJECT'){Project.update({id:data[x][y].id}, {data: data[x][y].data}).then(function(data){console.log('UPDATE!', data)})}
-					//if (type[x] == 'REACTION'){Reaction.update({id:data[x][y].id}, {data: data[x][y].data}).then(function(data){console.log('UPDATE!', data)})}
-					//if (type[x] == 'TASK'){Task.update({id:data[x][y].id}, {data: data[x][y].data}).then(function(data){console.log('UPDATE!', data)})}
-					//if (type[x] == 'TIME'){Time.update({id:data[x][y].id}, {data: data[x][y].data}).then(function(data){console.log('UPDATE!', data)})}
-					//if (type[x] == 'TRANSACTION'){Transaction.update({id:data[x][y].id}, {data: data[x][y].data}).then(function(data){console.log('UPDATE!', data)})}
-					//if (type[x] == 'USER'){User.update({id:data[x][y].id}, {data: data[x][y].data}).then(function(data){console.log('UPDATE!', data)})}
-					//if (type[x] == 'VALIDATION'){Validation.update({id:data[x][y].id}, {data: data[x][y].data}).then(function(data){console.log('UPDATE!', data)})}
-				}
-			}
-		});
-	};
-	//bulkEditFunction();
+		//DATA POPULATION
+		//COFFEE DB
+		//VENUE DB
+		//CHURCH DB
+		//LIBRARY DB
+		//COWORK DB
+		//THRIFTSHOP DB
+		//FOODBANK DB
 
-	//MAINTAINCE.. REMOVE DUP TOKENS
-	function removeDuplicateTokens(){
-		Token.find().limit(1000000).then(function(tokenModels){
-			const lookup = tokenModels.reduce((a, e) => {
-			  a[e.string] = e.string in a ? ++a[e.string] : 0;
-			  return a;
-			}, {});
-			tokenModels = tokenModels.filter(e => lookup[e.string]);
-			console.log(tokenModels)
-			for (x in tokenModels){Token.destroy(tokenModels[x].id, function(err) {console.log('delete token')});}
-		})
-	};
-	//removeDuplicateTokens();
+		//TOWN / COUNTY
+		//PARK DB
+			//CLEAN PARK TASK
+			//COMMUNITY EVENT
+				//MOVIE NIGHT
+					//I AM THE AM THE MAYOR THE X THE Y THE Z 
 
-	//LEGACY DATA UPDATE
-	function legacyDataBuild(){
-		//Task.find()
-		//if (taskModels.project){}
-	};
+		//US - utilService.getGeoNamesByParent(6252001, '', 'voetr5', 1);
+		//NC - utilService.getGeoNamesByParent(4482348, '', 'voetr3', -2);
+		//TN - utilService.getGeoNamesByParent(4662168, '', 'voetr1', -100);
+		//INDIA - utilService.getGeoNamesByParent(1269750, '', 'voetr3', -1);
+		//CHINA - utilService.getGeoNamesByParent(1814991, '', 'voetr4', -1);
+		//UK - utilService.getGeoNamesByParent(2635167, '', 'voetr5', -1);
+		//35.9606, -83.9207 // knox
+		//35.996948, -78.899017 // durham
+		//40.730610, -73.935242 // nyc; bushwick
+		//37.773972, -122.431297 // BAY AREA
+		//37.5483, -121.9886 //FREEMONT
+		//35.7578° N, 81.8888° //LAKE JAMES STATE PARK
+		var geoModel = {
+			username:'troverman',
+			lat:'35.7578',
+			lng:'-81.8888',
+			featureCode:'PRK', //PRK, CH, CTRCM, CMN, S.CAFE, S.SCH, LIBR
+			type:'latlng', //parent, latlng
+			radius:'35',
+			parentId:'4482348'
+		};
+		//utilService.getGeoNames(geoModel);
+		//utilService.getNamesWorld();
 
-	function logOut(){
-		User.find().then(function(userModels){
-			for (x in userModels){
-				User.update({id:userModels[x].id},{loggedIn:false}).then(function(userModels){});
-			}
-		});
-	};
-	logOut();
+		//TODO: GOOGLE MAPS & PLACES DB
+		//utilService.googleMaps(model);
+	},
+	
+};
+
+module.exports.intervalService = function(){
+
+	//PRE-ALPHA INTERVALS 
+	setInterval(intervalService.universalTokenProtocolPreAlpha, 8640000);
+	//setInterval(intervalService.privacyTokenProtocolPreAlpha, 8640000);
+	setInterval(intervalService.reputationBuild, 8640000);
+	setInterval(intervalService.logOutAll, 8640000);
+	setInterval(dataService.buildStringSpace, 8640000);
+
+	//DATA UPGRADE..
+	//utilService.tagsToAssociation('PROJECT', 2);
+	//utilService.tagsToAssociation('TRANSACTION', 2);
+	
+	//Transaction.find({}).limit(10000).then(function(transactionModels){
+	//	for (x in transactionModels){
+	//		if(!transactionModels[x].context){transactionModels[x].context = transactionModels[x].tags}
+	//		console.log(transactionModels[x].context)
+	//		Transaction.update({id:transactionModels[x].id}, {context:transactionModels[x].context})
+	//	}
+	//});
 	
 	//DATA SERVICE
 	//dataService.getData();
 	//dataService.traverse();
 	//dataService.tensorBuild();
-
-	//DATA POPULATION
-
-	//COFFEE DB
-	//VENUE DB
-	//CHURCH DB
-	//LIBRARY DB
-	//COWORK DB
-	//THRIFTSHOP DB
-	//FOODBANK DB
-
-	//TOWN / COUNTY
-	//PARK DB
-		//CLEAN PARK TASK
-		//COMMUNITY EVENT
-			//MOVIE NIGHT
-				//I AM THE CM THE MAYOR THE X THE Y THE Z 
-
-	//BREAK OUT THE TASKS INTO CONTENT FOR THE CREATES
-
-	//utilService.getNamesWorld();
-
-	//US - utilService.getGeoNamesByParent(6252001, '', 'voetr5', 1);
-	//NC - utilService.getGeoNamesByParent(4482348, '', 'voetr3', -2);
-	//TN - utilService.getGeoNamesByParent(4662168, '', 'voetr1', -100);
-	//INDIA - utilService.getGeoNamesByParent(1269750, '', 'voetr3', -1);
-	//CHINA - utilService.getGeoNamesByParent(1814991, '', 'voetr4', -1);
-	//UK - utilService.getGeoNamesByParent(2635167, '', 'voetr5', -1);
-
-	//35.9606, -83.9207 // knox
-	//35.996948, -78.899017 // durham
-	//40.730610, -73.935242 // nyc; bushwick
-	//37.773972, -122.431297 // BAY AREA
-	//37.5483, -121.9886 //FREEMONT
-	//35.7578° N, 81.8888° //LAKE JAMES STATE PARK
-
-	var geoModel = {
-		username:'troverman',
-		lat:'35.7578',
-		lng:'-81.8888',
-		featureCode:'PRK', //PRK, CH, CTRCM, CMN, S.CAFE, S.SCH, LIBR
-		type:'latlng', //parent, latlng
-		radius:'35',
-		parentId:'4482348'
-	};
-	//utilService.getGeoNames(geoModel);
-
-	//TODO: GOOGLE MAPS & PLACES DB
-	//utilService.googleMaps(model)
 
 	//PURGE FXN
 	//utilService.purge('(historical)');

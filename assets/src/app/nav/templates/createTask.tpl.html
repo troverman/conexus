@@ -16,7 +16,7 @@
             <p style="color:gray;font-style:italic">Tasks are an abstraction of intentional time, they create linkages between Time & Token Protocols. <a ng-click="informationToggle('CREATETASK')"><i class="fa fa-question-circle"></i></a></p>
             <div class="spacing-10"></div>
             <form role="form" ng-submit="createTask()">
-                <h5>Title</h5>
+                <h4>Title</h4>
                 <input type="text" placeholder="Title" ng-model="newTask.title" class="form-control">
                 <div>
                     <h5>
@@ -31,7 +31,7 @@
                     </tags-input>
                 </div>
                 <div ng-if="associationsAreExpanded">
-                    <h5>Associations </h5>
+                    <h4>Associations </h4>
                     <tags-input min-length="1" placeholder="Associations" ng-model="newTask.associatedModels">
                         <auto-complete source="loadAssociations($query)"></auto-complete>
                     </tags-input>
@@ -41,16 +41,23 @@
                                 {{association.text}} 
                                 <a style="float:right" ng-click="association.isExpanded=!association.isExpanded">
                                     <i class="fas fa-compress-arrows-alt"></i>
-                                    <b>{{association.connection[0].text || 'Default Connection'}}</b>
+                                    <b>
+                                        <span ng-if="!association.isExpanded"> Expand</span> 
+                                        <span ng-if="association.isExpanded"> Hide</span> 
+                                        {{association.connection[0].text || 'Connection'}}
+                                    </b>
                                 </a>
                             </h5>
+
                             <div ng-if="association.isExpanded">
-                                <h4>Default Connection</h4>
+
+                                <h5>Default Connection</h5>
                                 <p>Details & Rules<p>
+                                <tags-input min-length="1" placeholder="{{association.text}} Context" ng-model="association.connection"></tags-input>
+                                <hr>
                             </div>
-                            <tags-input min-length="1" placeholder="{{association.text}} Context" ng-model="association.context">
-                                <auto-complete source="loadTags($query)"></auto-complete>
-                            </tags-input>
+
+                            <tags-input min-length="1" placeholder="{{association.text}} Context" ng-model="association.context"></tags-input>
                             <div class="spacing-5"></div>
                             <div ng-repeat="context in association.context">
                                 <div layout="">
@@ -60,20 +67,20 @@
                                 </div>
                                 <div style="text-align:center"><p style="font-size:9px">{{context.score}}</p></div>
                             </div>
+
+
                         </div>
                     </div>
                 </div>
-                <h5>Location</h5>
+                <h4>Location</h4>
                 <input type="text" placeholder="Location" ng-model="newTask.location" class="form-control">
-                <div class="">
-                    <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options">
-                        <ui-gmap-marker ng-repeat="marker in markers" coords="marker.coords" options="marker.options" idkey="marker.id">
-                            <ui-gmap-window options="windowOptions" closeClick="closeClick()">
-                                <div style="font-size: 15px;"><a href="project/{{marker.url}}" ui-sref="project.activity({path:marker.url})">{{marker.content}}</a></div>
-                            </ui-gmap-window>
-                        </ui-gmap-marker>
-                    </ui-gmap-google-map>
-                </div>
+                <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options">
+                    <ui-gmap-marker ng-repeat="marker in markers" coords="marker.coords" options="marker.options" idkey="marker.id">
+                        <ui-gmap-window options="windowOptions" closeClick="closeClick()">
+                            <div style="font-size: 15px;"><a href="project/{{marker.url}}" ui-sref="project.activity({path:marker.url})">{{marker.content}}</a></div>
+                        </ui-gmap-window>
+                    </ui-gmap-marker>
+                </ui-gmap-google-map>
                 <text-angular ng-model="newTask.content" ta-toolbar="[['p','h1','bold','italics','quote','insertLink', 'html']]"></text-angular>
                 <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newTask.title">create</button>
             </form>

@@ -36,7 +36,14 @@
         </div>
         <div class="spacing-5"></div>
         <span ng-repeat="(key, value) in item.amountSet"><p style="font-weight:800">{{value}} <a ng-click="$event.stopPropagation();" href="market/{{key}}" ui-sref="market({id:key})">{{key}}</a></p></span>
-        <p><a ng-click="$event.stopPropagation()" ng-repeat="tag in item.tags" href="market/{{tag.trim()}}" ui-sref="member({id:tag.trim()})">{{tag.trim()}} </a></p>
+
+
+        <!--SELF AS CONTEXT..-->
+        <!--{{item.associationModels}}-->
+
+        <!--COMPUTE-->
+        <p><a ng-click="$event.stopPropagation()" ng-repeat="context in item.context.split(',')">{{context.trim()}} </a></p>
+        
         <p><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></p>
         <p style="color:gray;font-size:10px">
         	<span style="color:gray" am-time-ago="item.createdAt"></span> •  

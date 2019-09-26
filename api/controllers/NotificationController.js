@@ -17,7 +17,7 @@ module.exports = {
 				.skip(skip)
 				.sort(sort)
 				.then(function(models) {
-					Notification.subscribe(req, models);
+					Notification.subscribe(req, models.map(function(obj){return obj.id}));
 					res.json(models);
 				});
 			}
@@ -27,7 +27,7 @@ module.exports = {
 				.skip(skip)
 				.sort(sort)
 				.then(function(models) {
-					Notification.subscribe(req, models);
+					Notification.subscribe(req, models.map(function(obj){return obj.id}));
 					res.json(models);
 				});
 			}
@@ -39,7 +39,7 @@ module.exports = {
 			.skip(skip)
 			.sort(sort)
 			.then(function(models) {
-				Notification.subscribe(req, models);
+				Notification.subscribe(req, models.map(function(obj){return obj.id}));
 				res.json(models);
 			});
 		}

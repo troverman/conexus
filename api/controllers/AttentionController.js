@@ -1,4 +1,5 @@
 //CRE8.ATTENTION
+const crypto = require('crypto');
 const Q = require('q');
 
 module.exports = {
@@ -14,7 +15,7 @@ module.exports = {
 
 		if(req.query.id){
 			Attention.find({id:id}).limit(limit).skip(skip).sort(sort).then(function(models){
-				Attention.subscribe(req, [models[0]]);
+				Attention.subscribe(req, [models[0].id]);
 				res.json(models[0]);
 			});
 		}
@@ -25,14 +26,13 @@ module.exports = {
 			.skip(skip)
 			.sort(sort)
         	.then(function(models) {
-				Attention.subscribe(req, [models[0]]);
+				Attention.subscribe(req, models.map(function(obj){return obj.id}));
 				res.json(models);
 			});
 		}
 
 		//TODO: MODELS
 		//TODO: CREATOR
-
 		else{
 			Attention.find({})
 			.limit(100)
@@ -51,15 +51,9 @@ module.exports = {
 	//GIVES IT MACHENE ATTENTION.. IE THE MERKLE PROOF (POW)
 	create: function (req, res) {
 
-			//ASYNC
 		function mintTokens(model){
-
 			var protocolTokens = getProtocolTokens(model);
-			//DATA MODEL.. 
-			//TODO REMUX
-			//SOOOON PLZ
-			//updateAssociatedModels(model, protocolTokens);
-
+			updateAssociatedModels(model, protocolTokens);
 		};
 
 		function getProtocolTokens(model){
@@ -76,69 +70,37 @@ module.exports = {
 		};
 
 		function updateAssociatedModels(model, protocolTokens){
-			for (x in model.associatedModels){
-				if (model.associatedModels[x].type == 'CONTENT'){
-					Content.find({id:model.associatedModels[x].id}).then(function(newModel){
-						if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
-						//UPDATE IT.. FLOW THRU PROTOCOL MAPPING..
-						for (y in protocolTokens){
-							if (!newModel[0].data.apps.tokens[protocolTokens[y]]){
-								newModel[0].data.apps.tokens[protocolTokens[y]] = model.amount;
-							}
-							else if (newModel[0].data.apps.tokens[protocolTokens[y]]){
-								newModel[0].data.apps.tokens[protocolTokens[y]] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y]]) + parseInt(model.amount);
-							}
-						}
-						Content.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){})
-					});
-				}
-				if (model.associatedModels[x].type == 'ITEM'){
-					Item.find({id:model.associatedModels[x].id}).then(function(newModel){
-						if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
-						for (y in protocolTokens){
-							if (!newModel[0].data.apps.tokens[protocolTokens[y]]){newModel[0].data.apps.tokens[protocolTokens[y]] = model.amount;}
-							else if (newModel[0].data.apps.tokens[protocolTokens[y]]){newModel[0].data.apps.tokens[protocolTokens[y]] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y]]) + parseInt(model.amount);}
-						}
-						Item.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){})
-					});
-				}
-				if (model.associatedModels[x].type == 'TASK'){
-					Task.find({id:model.associatedModels[x].id}).then(function(newModel){
-						if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
-						for (y in protocolTokens){
-							if (!newModel[0].data.apps.tokens[protocolTokens[y]]){newModel[0].data.apps.tokens[protocolTokens[y]] = model.amount;}
-							else if (newModel[0].data.apps.tokens[protocolTokens[y]]){newModel[0].data.apps.tokens[protocolTokens[y]] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y]]) + parseInt(model.amount);}
-						}
-						Task.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){})
-					});
-				}
-			}
-		};
-
-		//REDUCE.. ITERATE THROUGH TYPES :)
-		function updateAssociatedModelsData(model){
 			for (x in model.associatedModels){		
-				//DEPRECIATE MOEL TYPE DISTINCTION ..
-				//MACHINE ATTENTION BY VALIDATION OF SPECIFIC DATA.. 
-				//REVIEW THE DATA IN THE BLOCK ... 
-				//GIVES IT MACHENE ATTENTION.. IE THE REMKLE PROOF
-				//TODO: MULTI D MAP
 				if (model.app == 'HUMAN'){
 					if (model.associatedModels[x].type == 'ACTION'){
 						Action.find({id:model.associatedModels[x].id}).then(function(newModel){
 							if (!newModel[0].data){newModel[0].data = {apps:{}}}
 							if (!newModel[0].data.apps){newModel[0].data.apps = {}}
-							if (newModel[0].data.apps.attention){newModel[0].data.apps.attention = {general:newModel[0].data.apps.attention.general + model.amount};}
-							else{newModel[0].data.apps.attention = {general:0}}
-							Action.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){Action.publish([newModel[0].id], {verb:'update', data: newModel[0]});});
+							if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
+							for (y in protocolTokens){
+								if (!newModel[0].data.apps.tokens[protocolTokens[y]]){newModel[0].data.apps.tokens[protocolTokens[y]] = 0}
+								newModel[0].data.apps.tokens[protocolTokens[y]] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y]]) + parseInt(model.amount);
+							}
+							if (!newModel[0].data.apps.attention){newModel[0].data.apps.attention = {general:0}}
+							newModel[0].data.apps.attention.general = newModel[0].data.apps.attention.general + model.amount;
+							if (!newModel[0].data.apps.attention[model.creator.username.toUpperCase()]){newModel[0].data.apps.attention[model.creator.username.toUpperCase()] = 0}
+							newModel[0].data.apps.attention[model.creator.username.toUpperCase()] = newModel[0].data.apps.attention[model.creator.username.toUpperCase()] + model.amount;
+							Action.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){Validation.publish([newModel[0].id], {verb:'update', data: newModel[0]});});
 						});
 					}
 					if (model.associatedModels[x].type == 'ATTENTION'){
 						Attention.find({id:model.associatedModels[x].id}).then(function(newModel){
 							if (!newModel[0].data){newModel[0].data = {apps:{}}}
 							if (!newModel[0].data.apps){newModel[0].data.apps = {}}
-							if (newModel[0].data.apps.attention){newModel[0].data.apps.attention = {general:newModel[0].data.apps.attention.general + model.amount};}
-							else{newModel[0].data.apps.attention = {general:0}}
+							if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
+							for (y in protocolTokens){
+								if (!newModel[0].data.apps.tokens[protocolTokens[y]]){newModel[0].data.apps.tokens[protocolTokens[y]] = 0}
+								newModel[0].data.apps.tokens[protocolTokens[y]] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y]]) + parseInt(model.amount);
+							}
+							if (!newModel[0].data.apps.attention){newModel[0].data.apps.attention = {general:0}}
+							newModel[0].data.apps.attention.general = newModel[0].data.apps.attention.general + model.amount;
+							if (!newModel[0].data.apps.attention[model.creator.username.toUpperCase()]){newModel[0].data.apps.attention[model.creator.username.toUpperCase()] = 0}
+							newModel[0].data.apps.attention[model.creator.username.toUpperCase()] = newModel[0].data.apps.attention[model.creator.username.toUpperCase()] + model.amount;
 							Attention.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){Attention.publish([newModel[0].id], {verb:'update', data: newModel[0]});});
 						});
 					}
@@ -146,8 +108,15 @@ module.exports = {
 						App.find({id:model.associatedModels[x].id}).then(function(newModel){
 							if (!newModel[0].data){newModel[0].data = {apps:{}}}
 							if (!newModel[0].data.apps){newModel[0].data.apps = {}}
-							if (newModel[0].data.apps.attention){newModel[0].data.apps.attention = {general:newModel[0].data.apps.attention.general + model.amount};}
-							else{newModel[0].data.apps.attention = {general:0}}
+							if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
+							for (y in protocolTokens){
+								if (!newModel[0].data.apps.tokens[protocolTokens[y]]){newModel[0].data.apps.tokens[protocolTokens[y]] = 0}
+								newModel[0].data.apps.tokens[protocolTokens[y]] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y]]) + parseInt(model.amount);
+							}
+							if (!newModel[0].data.apps.attention){newModel[0].data.apps.attention = {general:0}}
+							newModel[0].data.apps.attention.general = newModel[0].data.apps.attention.general + model.amount;
+							if (!newModel[0].data.apps.attention[model.creator.username.toUpperCase()]){newModel[0].data.apps.attention[model.creator.username.toUpperCase()] = 0}
+							newModel[0].data.apps.attention[model.creator.username.toUpperCase()] = newModel[0].data.apps.attention[model.creator.username.toUpperCase()] + model.amount;
 							App.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){App.publish([newModel[0].id], {verb:'update', data: newModel[0]});});
 						});
 					}
@@ -155,8 +124,15 @@ module.exports = {
 						Association.find({id:model.associatedModels[x].id}).then(function(newModel){
 							if (!newModel[0].data){newModel[0].data = {apps:{}}}
 							if (!newModel[0].data.apps){newModel[0].data.apps = {}}
-							if (newModel[0].data.apps.attention){newModel[0].data.apps.attention = {general:newModel[0].data.apps.attention.general + model.amount};}
-							else{newModel[0].data.apps.attention = {general:0}}
+							if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
+							for (y in protocolTokens){
+								if (!newModel[0].data.apps.tokens[protocolTokens[y]]){newModel[0].data.apps.tokens[protocolTokens[y]] = 0}
+								newModel[0].data.apps.tokens[protocolTokens[y]] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y]]) + parseInt(model.amount);
+							}
+							if (!newModel[0].data.apps.attention){newModel[0].data.apps.attention = {general:0}}
+							newModel[0].data.apps.attention.general = newModel[0].data.apps.attention.general + model.amount;
+							if (!newModel[0].data.apps.attention[model.creator.username.toUpperCase()]){newModel[0].data.apps.attention[model.creator.username.toUpperCase()] = 0}
+							newModel[0].data.apps.attention[model.creator.username.toUpperCase()] = newModel[0].data.apps.attention[model.creator.username.toUpperCase()] + model.amount;
 							Association.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){Association.publish([newModel[0].id], {verb:'update', data: newModel[0]});});
 						});
 					}
@@ -164,33 +140,45 @@ module.exports = {
 						Connection.find({id:model.associatedModels[x].id}).then(function(newModel){
 							if (!newModel[0].data){newModel[0].data = {apps:{}}}
 							if (!newModel[0].data.apps){newModel[0].data.apps = {}}
-							if (newModel[0].data.apps.attention){newModel[0].data.apps.attention = {general:newModel[0].data.apps.attention.general + model.amount};}
-							else{newModel[0].data.apps.attention = {general:0}}
+							if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
+							for (y in protocolTokens){
+								if (!newModel[0].data.apps.tokens[protocolTokens[y]]){newModel[0].data.apps.tokens[protocolTokens[y]] = 0}
+								newModel[0].data.apps.tokens[protocolTokens[y]] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y]]) + parseInt(model.amount);
+							}
+							if (!newModel[0].data.apps.attention){newModel[0].data.apps.attention = {general:0}}
+							newModel[0].data.apps.attention.general = newModel[0].data.apps.attention.general + model.amount;
+							if (!newModel[0].data.apps.attention[model.creator.username.toUpperCase()]){newModel[0].data.apps.attention[model.creator.username.toUpperCase()] = 0}
+							newModel[0].data.apps.attention[model.creator.username.toUpperCase()] = newModel[0].data.apps.attention[model.creator.username.toUpperCase()] + model.amount;
 							Connection.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){Connection.publish([newModel[0].id], {verb:'update', data: newModel[0]});});
 						});
 					}
 					if (model.associatedModels[x].type == 'CONTENT'){
 						Content.find({id:model.associatedModels[x].id}).then(function(newModel){
 
-							//DIMENSIONAL ATTENTION
-							//NEED TO PAY ATTENTION!
+							//TODO:BETTER INIT
 							if (!newModel[0].data){newModel[0].data = {apps:{}}}
 							if (!newModel[0].data.apps){newModel[0].data.apps = {}}
 
-							if (newModel[0].data.apps.attention){
-								if (newModel[0].data.apps.attention.general){
-									newModel[0].data.apps.attention.general = newModel[0].data.apps.attention.general + model.amount;
-								}
-								else{newModel[0].data.apps.attention.general = model.amount;}
-								//for x in protocol.. 
-								//CREATE+ATTENTION+USERNAME
-								if (newModel[0].data.apps.attention[model.creator.toString()]){
-									newModel[0].data.apps.attention[model.creator.toString()] = newModel[0].data.apps.attention[model.creator.toString()] + model.amount;
-								}
-								else{newModel[0].data.apps.attention[model.creator.toString()] = model.amount;}
-							}								
-							else{newModel[0].data.apps.attention = {general:0}}
-							console.log(model.creator, newModel[0].data.apps.attention);
+							//TOKENS (WHAT ABOUT ON ATTENTION MODEL)
+							if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
+							for (y in protocolTokens){
+								if (!newModel[0].data.apps.tokens[protocolTokens[y]]){newModel[0].data.apps.tokens[protocolTokens[y]] = 0}
+								newModel[0].data.apps.tokens[protocolTokens[y]] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y]]) + parseInt(model.amount);
+								//UNIFY ATTENTION MAPPING WITH TOKENS..
+								//hmmmmmm
+								if (!newModel[0].data.apps.attention[protocolTokens[y]]){newModel[0].data.apps.attention[protocolTokens[y]] = 0}
+								newModel[0].data.apps.attention[protocolTokens[y]] = parseInt(newModel[0].data.apps.attention[protocolTokens[y]]) + parseInt(model.amount);
+
+							}
+
+							//GENERAL
+							if (!newModel[0].data.apps.attention){newModel[0].data.apps.attention = {general:0}}
+							newModel[0].data.apps.attention.general = newModel[0].data.apps.attention.general + model.amount;
+
+							//USERNAME
+							if (!newModel[0].data.apps.attention[model.creator.username.toUpperCase()]){newModel[0].data.apps.attention[model.creator.username.toUpperCase()] = 0}
+							newModel[0].data.apps.attention[model.creator.username.toUpperCase()] = newModel[0].data.apps.attention[model.creator.username.toUpperCase()] + model.amount;
+
 							Content.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){Content.publish([newModel[0].id], {verb:'update', data: newModel[0]});});
 						
 						});
@@ -199,13 +187,15 @@ module.exports = {
 						Item.find({id:model.associatedModels[x].id}).then(function(newModel){
 							if (!newModel[0].data){newModel[0].data = {apps:{}}}
 							if (!newModel[0].data.apps){newModel[0].data.apps = {}}
-							if (newModel[0].data.apps.attention){
-								if (newModel[0].data.apps.attention.general){newModel[0].data.apps.attention.general = newModel[0].data.apps.attention.general + model.amount;}
-								else{newModel[0].data.apps.attention.general = model.amount;}
-								if (newModel[0].data.apps.attention[model.creator.toString()]){newModel[0].data.apps.attention[model.creator.toString()] = newModel[0].data.apps.attention[model.creator.toString()] + model.amount;}
-								else{newModel[0].data.apps.attention[model.creator.toString()] = model.amount;}
-							}								
-							else{newModel[0].data.apps.attention = {general:0}}
+							if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
+							for (y in protocolTokens){
+								if (!newModel[0].data.apps.tokens[protocolTokens[y]]){newModel[0].data.apps.tokens[protocolTokens[y]] = 0}
+								newModel[0].data.apps.tokens[protocolTokens[y]] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y]]) + parseInt(model.amount);
+							}
+							if (!newModel[0].data.apps.attention){newModel[0].data.apps.attention = {general:0}}
+							newModel[0].data.apps.attention.general = newModel[0].data.apps.attention.general + model.amount;
+							if (!newModel[0].data.apps.attention[model.creator.username.toUpperCase()]){newModel[0].data.apps.attention[model.creator.username.toUpperCase()] = 0}
+							newModel[0].data.apps.attention[model.creator.username.toUpperCase()] = newModel[0].data.apps.attention[model.creator.username.toUpperCase()] + model.amount;
 							Item.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){Item.publish([newModel[0].id], {verb:'update', data: newModel[0]});});
 						});
 					}
@@ -213,8 +203,15 @@ module.exports = {
 						Order.find({id:model.associatedModels[x].id}).then(function(newModel){
 							if (!newModel[0].data){newModel[0].data = {apps:{}}}
 							if (!newModel[0].data.apps){newModel[0].data.apps = {}}
-							if (newModel[0].data.apps.attention){newModel[0].data.apps.attention = {general:newModel[0].data.apps.attention.general + model.amount};}
-							else{newModel[0].data.apps.attention = {general:0}}
+							if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
+							for (y in protocolTokens){
+								if (!newModel[0].data.apps.tokens[protocolTokens[y]]){newModel[0].data.apps.tokens[protocolTokens[y]] = 0}
+								newModel[0].data.apps.tokens[protocolTokens[y]] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y]]) + parseInt(model.amount);
+							}
+							if (!newModel[0].data.apps.attention){newModel[0].data.apps.attention = {general:0}}
+							newModel[0].data.apps.attention.general = newModel[0].data.apps.attention.general + model.amount;
+							if (!newModel[0].data.apps.attention[model.creator.username.toUpperCase()]){newModel[0].data.apps.attention[model.creator.username.toUpperCase()] = 0}
+							newModel[0].data.apps.attention[model.creator.username.toUpperCase()] = newModel[0].data.apps.attention[model.creator.username.toUpperCase()] + model.amount;
 							Order.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){Order.publish([newModel[0].id], {verb:'update', data: newModel[0]});});
 						});
 					}
@@ -222,13 +219,15 @@ module.exports = {
 						Task.find({id:model.associatedModels[x].id}).then(function(newModel){
 							if (!newModel[0].data){newModel[0].data = {apps:{}}}
 							if (!newModel[0].data.apps){newModel[0].data.apps = {}}
-							if (newModel[0].data.apps.attention){
-								if (newModel[0].data.apps.attention.general){newModel[0].data.apps.attention.general = newModel[0].data.apps.attention.general + model.amount;}
-								else{newModel[0].data.apps.attention.general = model.amount;}
-								if (newModel[0].data.apps.attention[model.creator.toString()]){newModel[0].data.apps.attention[model.creator.toString()] = newModel[0].data.apps.attention[model.creator.toString()] + model.amount;}
-								else{newModel[0].data.apps.attention[model.creator.toString()] = model.amount;}
-							}								
-							else{newModel[0].data.apps.attention = {general:0}}
+							if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
+							for (y in protocolTokens){
+								if (!newModel[0].data.apps.tokens[protocolTokens[y]]){newModel[0].data.apps.tokens[protocolTokens[y]] = 0}
+								newModel[0].data.apps.tokens[protocolTokens[y]] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y]]) + parseInt(model.amount);
+							}
+							if (!newModel[0].data.apps.attention){newModel[0].data.apps.attention = {general:0}}
+							newModel[0].data.apps.attention.general = newModel[0].data.apps.attention.general + model.amount;
+							if (!newModel[0].data.apps.attention[model.creator.username.toUpperCase()]){newModel[0].data.apps.attention[model.creator.username.toUpperCase()] = 0}
+							newModel[0].data.apps.attention[model.creator.username.toUpperCase()] = newModel[0].data.apps.attention[model.creator.username.toUpperCase()] + model.amount;
 							Task.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){Task.publish([newModel[0].id], {verb:'update', data: newModel[0]});});
 						});
 					}
@@ -236,8 +235,15 @@ module.exports = {
 						Time.find({id:model.associatedModels[x].id}).then(function(newModel){
 							if (!newModel[0].data){newModel[0].data = {apps:{}}}
 							if (!newModel[0].data.apps){newModel[0].data.apps = {}}
-							if (newModel[0].data.apps.attention){newModel[0].data.apps.attention = {general:newModel[0].data.apps.attention.general + model.amount};}
-							else{newModel[0].data.apps.attention = {general:0}}
+							if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
+							for (y in protocolTokens){
+								if (!newModel[0].data.apps.tokens[protocolTokens[y]]){newModel[0].data.apps.tokens[protocolTokens[y]] = 0}
+								newModel[0].data.apps.tokens[protocolTokens[y]] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y]]) + parseInt(model.amount);
+							}
+							if (!newModel[0].data.apps.attention){newModel[0].data.apps.attention = {general:0}}
+							newModel[0].data.apps.attention.general = newModel[0].data.apps.attention.general + model.amount;
+							if (!newModel[0].data.apps.attention[model.creator.username.toUpperCase()]){newModel[0].data.apps.attention[model.creator.username.toUpperCase()] = 0}
+							newModel[0].data.apps.attention[model.creator.username.toUpperCase()] = newModel[0].data.apps.attention[model.creator.username.toUpperCase()] + model.amount;
 							Time.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){Time.publish([newModel[0].id], {verb:'update', data: newModel[0]});});
 						});
 					}
@@ -245,8 +251,15 @@ module.exports = {
 						Transaction.find({id:model.associatedModels[x].id}).then(function(newModel){
 							if (!newModel[0].data){newModel[0].data = {apps:{}}}
 							if (!newModel[0].data.apps){newModel[0].data.apps = {}}
-							if (newModel[0].data.apps.attention){newModel[0].data.apps.attention = {general:newModel[0].data.apps.attention.general + model.amount};}
-							else{newModel[0].data.apps.attention = {general:0}}
+							if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
+							for (y in protocolTokens){
+								if (!newModel[0].data.apps.tokens[protocolTokens[y]]){newModel[0].data.apps.tokens[protocolTokens[y]] = 0}
+								newModel[0].data.apps.tokens[protocolTokens[y]] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y]]) + parseInt(model.amount);
+							}
+							if (!newModel[0].data.apps.attention){newModel[0].data.apps.attention = {general:0}}
+							newModel[0].data.apps.attention.general = newModel[0].data.apps.attention.general + model.amount;
+							if (!newModel[0].data.apps.attention[model.creator.username.toUpperCase()]){newModel[0].data.apps.attention[model.creator.username.toUpperCase()] = 0}
+							newModel[0].data.apps.attention[model.creator.username.toUpperCase()] = newModel[0].data.apps.attention[model.creator.username.toUpperCase()] + model.amount;
 							Transaction.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){Transaction.publish([newModel[0].id], {verb:'update', data: newModel[0]});});
 						});
 					}
@@ -254,8 +267,15 @@ module.exports = {
 						Validation.find({id:model.associatedModels[x].id}).then(function(newModel){
 							if (!newModel[0].data){newModel[0].data = {apps:{}}}
 							if (!newModel[0].data.apps){newModel[0].data.apps = {}}
-							if (newModel[0].data.apps.attention){newModel[0].data.apps.attention = {general:newModel[0].data.apps.attention.general + model.amount};}
-							else{newModel[0].data.apps.attention = {general:0}}
+							if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
+							for (y in protocolTokens){
+								if (!newModel[0].data.apps.tokens[protocolTokens[y]]){newModel[0].data.apps.tokens[protocolTokens[y]] = 0}
+								newModel[0].data.apps.tokens[protocolTokens[y]] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y]]) + parseInt(model.amount);
+							}
+							if (!newModel[0].data.apps.attention){newModel[0].data.apps.attention = {general:0}}
+							newModel[0].data.apps.attention.general = newModel[0].data.apps.attention.general + model.amount;
+							if (!newModel[0].data.apps.attention[model.creator.username.toUpperCase()]){newModel[0].data.apps.attention[model.creator.username.toUpperCase()] = 0}
+							newModel[0].data.apps.attention[model.creator.username.toUpperCase()] = newModel[0].data.apps.attention[model.creator.username.toUpperCase()] + model.amount;
 							Validation.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){Validation.publish([newModel[0].id], {verb:'update', data: newModel[0]});});
 						});
 					}
@@ -274,8 +294,9 @@ module.exports = {
 			associatedModels: req.param('associatedModels'),
 			creator: req.param('creator'),
 			data:{apps:{reactions:{plus:0,minus:0},attention:{general:0}}}
-			
 		};
+
+		model.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
 		
 		Attention.create(model)
 		.exec(function(err, model) {
@@ -283,25 +304,16 @@ module.exports = {
 			else {
 
 				User.find({id:model.creator}).then(function(userModel){
-
 					model.creator = userModel[0];
 					//console.log('CREATE ATTENTION', model)
 					Attention.publish([model.id], {verb:'create', data: model});
 					//createEvent(model);
 					//createNotification(model);
 					//createValidation(model);
-					updateAssociatedModelsData(model);
 					mintTokens(model);
-
-
-					//TODO: STANDARDIZE USER STATE....
-					//Viewing string -- decompose..?
+					//TODO: STANDARDIZE USER STATE
 					User.update({id:userModel[0].id}, {status:model.string}).then(function(userModel){})
-
-
-
 					res.json(model);
-
 				});
 				
 			}

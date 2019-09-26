@@ -1,6 +1,7 @@
 //CRE8.ITEM
-const Q = require('q');
+const crypto = require('crypto');
 const mongodb = require('mongodb');
+const Q = require('q');
 
 module.exports = {
 
@@ -176,6 +177,7 @@ module.exports = {
 					associatedModelObj
 				];
 				for (y in model.associatedModels[x].context){newValidation.context[model.associatedModels[x].context[y].text] = model.associatedModels[x].context[y].score;}
+				newValidation.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(newValidation)).digest('hex');
 				Validation.create(newValidation).then(function(newValidationModel){
 					console.log('CREATE VALIDATION', newValidationModel);
 					createAssociation(newValidationModel);

@@ -20,10 +20,11 @@
 						<img ng-click="$event.stopPropagation();renderReputationToggle(member)" style="height:50px;text-align:right;" src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{member.id}}">
 					</div>
 					<div style="float:right;margin:2.5px;" ng-show="currentUser.id != member.id">
-						<a style="padding:10px 15px;color:rgb(125,125,125);text-align:left" ng-show="!isFollowing" class="btn btn-default" ng-click="$event.stopPropagation();follow()">Follow</a>
-						<a style="padding:10px 15px;color:rgb(125,125,125);text-align:left" ng-show="isFollowing" class="btn btn-default" ng-click="$event.stopPropagation();unfollow()">UnFollow</a>
+						<a style="padding:10px 15px;color:rgb(125,125,125);text-align:left" class="btn btn-default" ng-click="$event.stopPropagation();follow(member)">
+							<span ng-if="!isFollowing">Follow</span>
+							<span ng-if="isFollowing">UnFollow</span>
+						</a>
 					</div>
-
 					<h2>{{member.firstName}} {{member.lastName}}</h2>
 					<h3><a ng-click="$event.stopPropagation();renderReputationToggle(member)">@{{member.username}}</a></h3>
 					<p style="font-size:8px;" ng-click="$event.stopPropagation();memberQRToggle(member);"><a style="color:gray"><i class="fas fa-qrcode"></i> {{member.id}}</a></p>
@@ -35,7 +36,6 @@
         				<span ng-if="!member.loggedIn"><i class="fa fa-circle"></i> Offline</span>
         			</p>
 				</div>
-				
 			</div>
 			<md-divider style="color:gray;padding:0px"></md-divider>
 			<div style="padding:0px">

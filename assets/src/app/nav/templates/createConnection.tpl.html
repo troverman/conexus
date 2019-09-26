@@ -20,20 +20,48 @@
 
                 <h5>Title</h5>
                 <input type="text" placeholder= "Title" ng-model="newConnection.info.title" class="form-control">
-    
-                <div class="row">
+                <div class="spacing-10"></div>
+     
+                <h5>Associated Models</h5>
+                <tags-input min-length="1" placeholder="Associated Models" ng-model="newConnection.associatedModels">
+                    <auto-complete min-length="2" source="loadTags($query)"></auto-complete>
+                </tags-input>
+                <div class="spacing-10"></div>
 
-                    <div class="col-sm-12">
-                        <h5>Associated Models</h5>
-                        <tags-input min-length="1" placeholder="Associated Models" ng-model="newConnection.associatedModels">
-                            <auto-complete min-length="2" source="loadTags($query)"></auto-complete>
-                        </tags-input>
+                <h5>Function Builder</h5>
+                <p>App Imports</p>
+                <!--edit, self..-->
+                <!--COINTINS A MAPPING SPACE KERNEL-->
+                <tags-input min-length="1" placeholder="Mappings" ng-model="newConnection.parameters.mapping">
+                    <auto-complete source="loadAssociations($query)"></auto-complete>
+                </tags-input>
+                <input type="text" placeholder="Logic" ng-model="newConnection.parameters.logic" class="form-control">
+                <div class="spacing-10"></div>
+
+                <h5>Context Logic </h5>
+                <tags-input min-length="1" placeholder="Context" ng-model="newConnection.context">
+                    <auto-complete source="loadAssociations($query)"></auto-complete>
+                </tags-input>
+
+                <div style="padding:16px"> 
+                    <div ng-repeat="context in newConnection.context">
+                        
+                        <h5>{{context.text}} Rules</h5>
+                        
+                        <p>Acceptance Threshold</p>
+                        <input type="number" step="0.1"  placeholder="Acceptance Threshold" ng-model="context.threshold" class="form-control">
+                        <md-slider ng-model="context.threshold" step="0.1" flex="" md-discrete="" min="-100" max="100"></md-slider>
+                        
+                        <p>Modification Ratio</p>
+                        <input type="number" step="0.1" placeholder="Modification Ratio" ng-model="context.modificationRatio" class="form-control">
+                        <md-slider ng-model="context.modificationRatio" step="0.1" flex="" md-discrete="" min="-100" max="100"></md-slider>
+                        
+                        <input type="text" placeholder="Rules" ng-model="context.requireValidation" class="form-control">        
+                        <input type="text" placeholder="Logic" ng-model="context.logic" class="form-control">
+                        <div class="spacing-10"></div>
+
                     </div>
-                    
                 </div>
-
-                <h5>Information</h5>
-                <input type="text" placeholder="Information" ng-model="newConnection.information" class="form-control">
 
                 <h5>Description</h5>
                 <text-angular placeholder="Description" ng-model="newConnection.info.description" ta-toolbar="''"></text-angular>

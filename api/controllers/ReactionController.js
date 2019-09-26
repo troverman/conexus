@@ -1,4 +1,5 @@
 //CRE8.REACTION
+const crypto = require('crypto');
 
 module.exports = {
 
@@ -79,21 +80,14 @@ module.exports = {
 
 				//UPDATE CREATOR (USER) BALANCE MAPPING.
 				//TODO: A SET
-				if (model.user.balance[tokenString]){
-					model.user.balance[tokenString] = parseInt(model.user.balance[tokenString]) + parseFloat(model.amount);
-				}
-				else{
-					model.user.balance[tokenString] = parseFloat(model.amount);
-				}
+				if (!model.user.balance[tokenString]){model.user.balance[tokenString] = 0}
+				model.user.balance[tokenString] = parseInt(model.user.balance[tokenString]) + parseFloat(model.amount);
+	
 			}
 
-			User.update({id:model.user.id}, {balance:model.user.balance}).then(function(userModel){
-				console.log('BALANCE:', userModel[0].balance);
-			});
+			User.update({id:model.user.id}, {balance:model.user.balance}).then(function(userModel){});
 
-			//DATA MODEL.. 
-			//TODO REMUX
-			//updateAssociatedModels(model, protocolTokens);
+			updateAssociatedModels(model, protocolTokens);
 
 		};
 
@@ -126,63 +120,19 @@ module.exports = {
 
 		};
 
-		//TODO: REFACTOR AND CONDENSE
-		//INTERMUX THE MODELS
-		//ABSTRACT THIS..
-
-		function updateAssociatedModels(model, protocolTokens){
-			for (x in model.associatedModels){
-				if (model.associatedModels[x].type == 'CONTENT'){
-					Content.find({id:model.associatedModels[x].id}).then(function(newModel){
-						if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
-						//UPDATE IT.. FLOW THRU PROTOCOL MAPPING..
-						for (y in protocolTokens){
-							if (!newModel[0].data.apps.tokens[protocolTokens[y]]){
-								newModel[0].data.apps.tokens[protocolTokens[y]] = model.amount;
-							}
-							else if (newModel[0].data.apps.tokens[protocolTokens[y]]){
-								newModel[0].data.apps.tokens[protocolTokens[y]] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y]]) + parseInt(model.amount);
-							}
-						}
-						Content.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){})
-					});
-				}
-				if (model.associatedModels[x].type == 'ITEM'){
-					Item.find({id:model.associatedModels[x].id}).then(function(newModel){
-						if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
-						for (y in protocolTokens){
-							if (!newModel[0].data.apps.tokens[protocolTokens[y]]){newModel[0].data.apps.tokens[protocolTokens[y]] = model.amount;}
-							else if (newModel[0].data.apps.tokens[protocolTokens[y]]){newModel[0].data.apps.tokens[protocolTokens[y]] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y]]) + parseInt(model.amount);}
-						}
-						Item.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){})
-					});
-				}
-				if (model.associatedModels[x].type == 'TASK'){
-					Task.find({id:model.associatedModels[x].id}).then(function(newModel){
-						if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
-						//UPDATE IT.. FLOW THRU PROTOCOL MAPPING..
-						for (y in protocolTokens){
-							if (!newModel[0].data.apps.tokens[protocolTokens[y]]){
-								newModel[0].data.apps.tokens[protocolTokens[y]] = model.amount;
-							}
-							else if (newModel[0].data.apps.tokens[protocolTokens[y]]){
-								newModel[0].data.apps.tokens[protocolTokens[y]] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y]]) + parseInt(model.amount);
-							}
-						}
-						Task.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){})
-					});
-				}
-			}
-		};
-
 		//REMIX
-		function updateAssociatedModelsData(model){
+		function updateAssociatedModels(model, protocolTokens){
 			for (x in model.associatedModels){
 				if (model.associatedModels[x].type == 'APP'){
 					App.find({id:model.associatedModels[x].id}).then(function(newModel){
 						if (!newModel[0].data.apps.reactions){newModel[0].data.apps.reactions = {};}
-						if (!newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = model.amount;}
-						else if (newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);}
+						if (!newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = 0;}
+						newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);
+						if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
+						for (y in protocolTokens){
+							if (!newModel[0].data.apps.tokens[protocolTokens[y]]){newModel[0].data.apps.tokens[protocolTokens[y]] = 0;}
+							newModel[0].data.apps.tokens[protocolTokens[y]] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y]]) + parseInt(model.amount);
+						}
 						App.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){
 							App.publish([newModel[0].id], {verb:'update', data: newModel[0]});
 							console.log('UPDATE APP ASSOCIATED REACTION DATA');
@@ -192,8 +142,13 @@ module.exports = {
 				if (model.associatedModels[x].type == 'ACTION'){
 					Action.find({id:model.associatedModels[x].id}).then(function(newModel){
 						if (!newModel[0].data.apps.reactions){newModel[0].data.apps.reactions = {};}
-						if (!newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = model.amount;}
-						else if (newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);}
+						if (!newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = 0;}
+						newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);
+						if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
+						for (y in protocolTokens){
+							if (!newModel[0].data.apps.tokens[protocolTokens[y]]){newModel[0].data.apps.tokens[protocolTokens[y]] = 0;}
+							newModel[0].data.apps.tokens[protocolTokens[y]] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y]]) + parseInt(model.amount);
+						}
 						Action.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){
 							Action.publish([newModel[0].id], {verb:'update', data: newModel[0]});
 							console.log('UPDATE ACTION ASSOCIATED REACTION DATA');
@@ -202,12 +157,12 @@ module.exports = {
 							user: newModel[0].user,
 							type: 'REACTION',
 							title: 'New '+model.type,
-							content:model.user.username+' created a '+model.type+' reaction for reaction '+newModel[0].id,
+							content:model.user.username+' created a '+model.type+' reaction for action '+newModel[0].id,
 							data:{
 								apps:{
 									user:model.user, 
 									action:newModel[0], 
-									type:model.type
+									reaction:{id:model.id, type:model.type},
 								}
 							},
 							priority:50,
@@ -217,9 +172,16 @@ module.exports = {
 				}
 				if (model.associatedModels[x].type == 'ASSOCIATION'){
 					Association.find({id:model.associatedModels[x].id}).then(function(newModel){
+
 						if (!newModel[0].data.apps.reactions){newModel[0].data.apps.reactions = {};}
-						if (!newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = model.amount;}
-						else if (newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);}
+						if (!newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = 0;}
+						newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);
+						if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
+						for (y in protocolTokens){
+							if (!newModel[0].data.apps.tokens[protocolTokens[y]]){newModel[0].data.apps.tokens[protocolTokens[y]] = 0;}
+							newModel[0].data.apps.tokens[protocolTokens[y]] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y]]) + parseInt(model.amount);
+						}
+
 						Association.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){
 							Association.publish([newModel[0].id], {verb:'update', data: newModel[0]});
 							console.log('UPDATE ASSOCIATION ASSOCIATED REACTION DATA');
@@ -228,12 +190,12 @@ module.exports = {
 							user: newModel[0].user,
 							type: 'REACTION',
 							title: 'New '+model.type,
-							content:model.user.username+' created a '+model.type+' reaction for reaction '+newModel[0].id,
+							content:model.user.username+' created a '+model.type+' reaction for association '+newModel[0].id,
 							data:{
 								apps:{
 									user:model.user, 
 									association:newModel[0], 
-									type:model.type
+									reaction:{id:model.id, type:model.type},
 								}
 							},
 							priority:50,
@@ -244,21 +206,34 @@ module.exports = {
 				if (model.associatedModels[x].type == 'CONNECTION'){
 					Connection.find({id:model.associatedModels[x].id}).then(function(newModel){
 						if (!newModel[0].data.apps.reactions){newModel[0].data.apps.reactions = {};}
-						if (!newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = model.amount;}
-						else if (newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);}
+						if (!newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = 0;}
+						newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);
+						if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
+						for (y in protocolTokens){
+							if (!newModel[0].data.apps.tokens[protocolTokens[y]]){newModel[0].data.apps.tokens[protocolTokens[y]] = 0;}
+							newModel[0].data.apps.tokens[protocolTokens[y]] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y]]) + parseInt(model.amount);
+						}
 						Connection.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){
 							Connection.publish([newModel[0].id], {verb:'update', data: newModel[0]});
 							console.log('UPDATE CONNECTION ASSOCIATED REACTION DATA');
 						});
 					});
 				}
-
 				if (model.associatedModels[x].type == 'CONTENT'){
 					Content.find({id:model.associatedModels[x].id}).then(function(newModel){
 
+						//REACTION
 						if (!newModel[0].data.apps.reactions){newModel[0].data.apps.reactions = {};}
-						if (!newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = model.amount;}
-						else if (newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);}
+						if (!newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = 0;}
+						newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);
+
+						//TOKENS
+						if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
+						for (y in protocolTokens){
+							if (!newModel[0].data.apps.tokens[protocolTokens[y]]){newModel[0].data.apps.tokens[protocolTokens[y]] = 0;}
+							newModel[0].data.apps.tokens[protocolTokens[y]] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y]]) + parseInt(model.amount);
+						}
+
 						Content.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){
 							console.log('UPDATE CONTENT ASSOCIATED REACTION DATA');
 							Content.publish([newModel[0].id], {verb:'update', data: newModel[0]});
@@ -273,10 +248,9 @@ module.exports = {
 							content:model.user.username+' created a '+model.type+' reaction for content '+newModel[0].id,
 							data:{
 								apps:{
-									reacton:model,
 									user:model.user, 
 									content:newModel[0], 
-									type:model.type
+									reaction:{id:model.id, type:model.type},
 								}
 							},
 							priority:50,
@@ -288,8 +262,13 @@ module.exports = {
 				if (model.associatedModels[x].type == 'ITEM'){
 					Item.find({id:model.associatedModels[x].id}).then(function(newModel){
 						if (!newModel[0].data.apps.reactions){newModel[0].data.apps.reactions = {};}
-						if (!newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = model.amount;}
-						else if (newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);}
+						if (!newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = 0;}
+						newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);
+						if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
+						for (y in protocolTokens){
+							if (!newModel[0].data.apps.tokens[protocolTokens[y]]){newModel[0].data.apps.tokens[protocolTokens[y]] = 0;}
+							newModel[0].data.apps.tokens[protocolTokens[y]] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y]]) + parseInt(model.amount);
+						}
 						Item.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){
 							Item.publish([newModel[0].id], {verb:'update', data: newModel[0]});
 							console.log('UPDATE ITEM ASSOCIATED REACTION DATA');
@@ -303,7 +282,7 @@ module.exports = {
 								apps:{
 									user:model.user, 
 									item:newModel[0], 
-									type:model.type
+									reaction:{id:model.id, type:model.type},
 								}
 							},
 							priority:50,
@@ -314,8 +293,13 @@ module.exports = {
 				if (model.associatedModels[x].type == 'ORDER'){
 					Order.find({id:model.associatedModels[x].id}).then(function(newModel){
 						if (!newModel[0].data.apps.reactions){newModel[0].data.apps.reactions = {};}
-						if (!newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = model.amount;}
-						else if (newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);}
+						if (!newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = 0;}
+						newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);
+						if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
+						for (y in protocolTokens){
+							if (!newModel[0].data.apps.tokens[protocolTokens[y]]){newModel[0].data.apps.tokens[protocolTokens[y]] = 0;}
+							newModel[0].data.apps.tokens[protocolTokens[y]] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y]]) + parseInt(model.amount);
+						}
 						Order.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){
 							Order.publish([newModel[0].id], {verb:'update', data: newModel[0]});
 							console.log('UPDATE ORDER ASSOCIATED REACTION DATA');
@@ -329,7 +313,7 @@ module.exports = {
 								apps:{
 									user:model.user, 
 									order:newModel[0], 
-									type:model.type
+									reaction:{id:model.id, type:model.type},
 								}
 							},
 							priority:50,
@@ -340,8 +324,13 @@ module.exports = {
 				if (model.associatedModels[x].type == 'REACTION'){
 					Reaction.find({id:model.associatedModels[x].id}).then(function(newModel){
 						if (!newModel[0].data.apps.reactions){newModel[0].data.apps.reactions = {};}
-						if (!newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = model.amount;}
-						else if (newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);}
+						if (!newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = 0;}
+						newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);
+						if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
+						for (y in protocolTokens){
+							if (!newModel[0].data.apps.tokens[protocolTokens[y]]){newModel[0].data.apps.tokens[protocolTokens[y]] = 0;}
+							newModel[0].data.apps.tokens[protocolTokens[y]] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y]]) + parseInt(model.amount);
+						}
 						Reaction.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){
 							Reaction.publish([newModel[0].id], {verb:'update', data: newModel[0]});
 							console.log('UPDATE REACTION ASSOCIATED REACTION DATA');
@@ -355,7 +344,7 @@ module.exports = {
 								apps:{
 									user:model.user, 
 									reaction:newModel[0], 
-									type:model.type
+									reaction:{id:model.id, type:model.type},
 								}
 							},
 							priority:50,
@@ -366,8 +355,13 @@ module.exports = {
 				if (model.associatedModels[x].type == 'TASK'){
 					Task.find({id:model.associatedModels[x].id}).then(function(newModel){
 						if (!newModel[0].data.apps.reactions){newModel[0].data.apps.reactions = {};}
-						if (!newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = model.amount;}
-						else if (newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);}
+						if (!newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = 0;}
+						newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);
+						if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
+						for (y in protocolTokens){
+							if (!newModel[0].data.apps.tokens[protocolTokens[y]]){newModel[0].data.apps.tokens[protocolTokens[y]] = 0;}
+							newModel[0].data.apps.tokens[protocolTokens[y]] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y]]) + parseInt(model.amount);
+						}
 						Task.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){
 							Task.publish([newModel[0].id], {verb:'update', data: newModel[0]});
 							console.log('UPDATE TASK ASSOCIATED REACTION DATA');
@@ -382,7 +376,7 @@ module.exports = {
 								apps:{
 									user:model.user, 
 									task:newModel[0], 
-									type:model.type
+									reaction:{id:model.id, type:model.type},
 								}
 							},
 							priority:50,
@@ -394,8 +388,13 @@ module.exports = {
 				if (model.associatedModels[x].type == 'TIME'){
 					Time.find({id:model.associatedModels[x].id}).then(function(newModel){
 						if (!newModel[0].data.apps.reactions){newModel[0].data.apps.reactions = {};}
-						if (!newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = model.amount;}
-						else if (newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);}
+						if (!newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = 0;}
+						newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);
+						if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
+						for (y in protocolTokens){
+							if (!newModel[0].data.apps.tokens[protocolTokens[y]]){newModel[0].data.apps.tokens[protocolTokens[y]] = 0;}
+							newModel[0].data.apps.tokens[protocolTokens[y]] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y]]) + parseInt(model.amount);
+						}
 						Time.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){
 							Time.publish([newModel[0].id], {verb:'update', data: newModel[0]});
 							console.log('UPDATE TIME ASSOCIATED REACTION DATA');
@@ -409,7 +408,7 @@ module.exports = {
 								apps:{
 									user:model.user, 
 									time:newModel[0], 
-									type:model.type
+									reaction:{id:model.id, type:model.type},
 								}
 							},
 							priority:50,
@@ -420,8 +419,13 @@ module.exports = {
 				if (model.associatedModels[x].type == 'TRANSACTION'){
 					Transaction.find({id:model.associatedModels[x].id}).then(function(newModel){
 						if (!newModel[0].data.apps.reactions){newModel[0].data.apps.reactions = {};}
-						if (!newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = model.amount;}
-						else if (newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);}
+						if (!newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = 0;}
+						newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);
+						if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
+						for (y in protocolTokens){
+							if (!newModel[0].data.apps.tokens[protocolTokens[y]]){newModel[0].data.apps.tokens[protocolTokens[y]] = 0;}
+							newModel[0].data.apps.tokens[protocolTokens[y]] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y]]) + parseInt(model.amount);
+						}
 						Transaction.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){
 							Transaction.publish([newModel[0].id], {verb:'update', data: newModel[0]});
 							console.log('UPDATE TRANSACTION ASSOCIATED REACTION DATA');
@@ -435,7 +439,7 @@ module.exports = {
 								apps:{
 									user:model.user, 
 									transaction:newModel[0], 
-									type:model.type
+									reaction:{id:model.id, type:model.type},
 								}
 							},
 							priority:50,
@@ -446,8 +450,13 @@ module.exports = {
 				if (model.associatedModels[x].type == 'VALIDATION'){
 					Validation.find({id:model.associatedModels[x].id}).then(function(newModel){
 						if (!newModel[0].data.apps.reactions){newModel[0].data.apps.reactions = {};}
-						if (!newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = model.amount;}
-						else if (newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);}
+						if (!newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = 0;}
+						newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);
+						if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
+						for (y in protocolTokens){
+							if (!newModel[0].data.apps.tokens[protocolTokens[y]]){newModel[0].data.apps.tokens[protocolTokens[y]] = 0;}
+							newModel[0].data.apps.tokens[protocolTokens[y]] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y]]) + parseInt(model.amount);
+						}
 						Validation.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){
 							Validation.publish([newModel[0].id], {verb:'update', data: newModel[0]});
 							console.log('UPDATE VALIDATION ASSOCIATED REACTION DATA');
@@ -461,7 +470,7 @@ module.exports = {
 								apps:{
 									user:model.user, 
 									validation:newModel[0], 
-									type:model.type
+									reaction:{id:model.id, type:model.type},
 								}
 							},
 							priority:50,
@@ -480,6 +489,7 @@ module.exports = {
 			user: req.param('user'),
 			data:{apps:{reactions:{plus:0,minus:0},attention:{general:0}}}
 		};
+		model.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
 
 		//TODO UPDATE COUNT IN DATA.APPS.REACTION
 
@@ -503,8 +513,6 @@ module.exports = {
 					//TODO: REFACTOR BASED ON AFTER CREATEASSOCIATION..
 						//DATA BASED ON CONNECTION. 
 					//createValidation(itemModel);
-
-					updateAssociatedModelsData(reaction);
 					//createNotification(itemModel);
 
 					mintTokens(reaction);

@@ -1,4 +1,5 @@
 //CRE8.TRANSACTION
+const crypto = require('crypto');
 const Q = require('q');
 
 function getTo(model){
@@ -27,6 +28,7 @@ function getAssociations(model){
 		.skip(0)
 		.sort({'createdAt':-1})
 		.toArray(function (err, associationModels) {
+			console.log('transaction associationModels.length', associationModels.length)
 			if (associationModels.length > 0){
 				associationModels.map(function(obj){obj.id=obj._id; return obj});
 				model.associationModels = associationModels;
@@ -50,8 +52,7 @@ function getAssociations(model){
 					var index = -1;
 					for (x in model.associationModels){
 						for (y in associationModels[x].associatedModels){
-							index++;
-							model.associationModels[x].associatedModels[y].data = populatedModels[index];
+							index++;model.associationModels[x].associatedModels[y].data = populatedModels[index];
 						}
 					}
 					deferred.resolve(model);
@@ -157,34 +158,7 @@ module.exports = {
 				});
 			});
 		}
-
-		//console.log('GET TRANSACTION',req.query)
 		
-
-
-		//DEPRECIATE BELOW
-		if(req.query.project){
-			var project = req.query.project;
-			Transaction.find({project:project})
-			.limit(limit)
-			.skip(skip)
-			.sort(sort)
-			.then(function(models) {
-				res.json(models);
-			});
-		}
-
-		else if(req.query.user && !req.query.amountSet){
-			var user = req.query.user;
-			Transaction.find({user:user})
-			.limit(limit)
-			.skip(skip)
-			.sort(sort)
-			.then(function(models) {
-				res.json(models);
-			});
-		}
-
 		else if(req.query.id){
 			var id = req.query.id;
 			Transaction.find({id:id})
@@ -214,6 +188,49 @@ module.exports = {
 			});
 		}
 
+		//DEPRECIATE BELOW
+		else if(req.query.project){
+			var project = req.query.project;
+			Transaction.find({project:project})
+			.limit(limit)
+			.skip(skip)
+			.sort(sort)
+			.then(function(models) {
+				res.json(models);
+			});
+		}
+
+		else if(req.query.user && !req.query.amountSet){
+			var user = req.query.user;
+			Transaction.find({user:user})
+			.limit(limit)
+			.skip(skip)
+			.sort(sort)
+			.then(function(models) {
+				var promises = [];
+				for (x in models){
+					promises.push(getTo(models[x]));
+					promises.push(getFrom(models[x]));
+				}
+				Q.all(promises).then((populatedModels)=>{
+					var sum = 0;
+					for (x in models){
+						models[x].to = populatedModels[sum];sum++
+						models[x].from = populatedModels[sum];sum++;
+					}
+
+					//LOL
+					var promisesAssociations = [];
+					for (x in models){promisesAssociations.push(getAssociations(models[x]));}
+					Q.all(promisesAssociations).then((populatedModels)=>{
+						for (x in models){models[x] = populatedModels[x];}
+						res.json(models);
+					});
+
+				});
+			});
+		}
+
 		else if(req.query.to){
 			var to = req.query.to;
 			Transaction.find({to:to})
@@ -229,12 +246,18 @@ module.exports = {
 				Q.all(promises).then((populatedModels)=>{
 					var sum = 0;
 					for (x in models){
-						models[x].to = populatedModels[sum];
-						sum++
-						models[x].from = populatedModels[sum];
-						sum++;
+						models[x].to = populatedModels[sum];sum++
+						models[x].from = populatedModels[sum];sum++;
 					}
-					res.json(models);
+
+					//LOL
+					var promisesAssociations = [];
+					for (x in models){promisesAssociations.push(getAssociations(models[x]));}
+					Q.all(promisesAssociations).then((populatedModels)=>{
+						for (x in models){models[x] = populatedModels[x];}
+						res.json(models);
+					});
+
 				});
 			});
 		}
@@ -254,12 +277,18 @@ module.exports = {
 				Q.all(promises).then((populatedModels)=>{
 					var sum = 0;
 					for (x in models){
-						models[x].to = populatedModels[sum];
-						sum++
-						models[x].from = populatedModels[sum];
-						sum++;
+						models[x].to = populatedModels[sum];sum++
+						models[x].from = populatedModels[sum];sum++;
 					}
-					res.json(models);
+
+					//LOL
+					var promisesAssociations = [];
+					for (x in models){promisesAssociations.push(getAssociations(models[x]));}
+					Q.all(promisesAssociations).then((populatedModels)=>{
+						for (x in models){models[x] = populatedModels[x];}
+						res.json(models);
+					});
+
 				});
 			});
 		}
@@ -308,10 +337,8 @@ module.exports = {
 					{to:req.query.user}
 				]
 			};
-
 			andQuery.$and.push(query)
 			andQuery.$and.push(orQuery)
-
 			Transaction.native(function(err, transaction) {
 				transaction.find(andQuery)
 				.limit(limit)
@@ -350,12 +377,16 @@ module.exports = {
 				Q.all(promises).then((populatedModels)=>{
 					var sum = 0;
 					for (x in models){
-						models[x].to = populatedModels[sum];
-						sum++
-						models[x].from = populatedModels[sum];
-						sum++;
+						models[x].to = populatedModels[sum];sum++;
+						models[x].from = populatedModels[sum];sum++;
 					}
-					res.json(models);
+					//LOL
+					var promisesAssociations = [];
+					for (x in models){promisesAssociations.push(getAssociations(models[x]));}
+					Q.all(promisesAssociations).then((populatedModels)=>{
+						for (x in models){models[x] = populatedModels[x];}
+						res.json(models);
+					});
 				});
 			});
 		}
@@ -386,7 +417,6 @@ module.exports = {
 			//SOME CHARTER WHERE THE CREATOR IS WEIGHTED
 			//SOME CHARTER WHERE THE FROM AND TO IS WEIGHTED
 			//IE BUY AN ITEM.. CONTEXTUALIZED VALIDATION
-
 			for (x in model.associatedModels){
 
 				var newValidation = {
@@ -394,6 +424,7 @@ module.exports = {
 					content:model.id + ' VALIDATION',
 
 					//THIS IS DEFINED BY CONNECTION!!!
+					//ATTRIBUTES
 					context: {},
 					reputation: {},		
 
@@ -413,7 +444,6 @@ module.exports = {
 						mapping:['context','reputation'],
 						logic:'context[%context]*reputation[%context]'
 					},
-
 				};
 
 				var associatedModelObj = {};
@@ -431,12 +461,13 @@ module.exports = {
 				for (y in model.associatedModels[x].context){
 					newValidation.context[model.associatedModels[x].context[y].text] = model.associatedModels[x].context[y].score;
 				}
+				
+				newValidation.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(newValidation)).digest('hex');
 
 				Validation.create(newValidation).then(function(newValidationModel){
 					
 					console.log('CREATE VALIDATION', newValidationModel);
 
-					//SELF-ASSOCIATION
 					createAssociation(newValidationModel);
 
 					//GENERALIZED ASSOCIATION
@@ -489,6 +520,12 @@ module.exports = {
 		};
 
 		function createNotification(model){
+
+
+			//IF MODEL.TO == PROJECT
+				//SEND NOTIFICATIONS TO APPROPIATTE USER GROUP 
+					//NOTIFICATION (APP) - PROJECT CONNECTION --> USER PERMS
+
 			var notificationModel = {
 				user: model.to,
 				type: 'TRANSACTION',
@@ -500,6 +537,8 @@ module.exports = {
 			Notification.create(notificationModel).then(function(notification){
 				Notification.publish([notification.id], {verb: 'update', data: notification});
 			});
+
+
 		};
 
 		function mintTokens(model){
@@ -626,7 +665,7 @@ module.exports = {
 			data:{apps:{reactions:{plus:0,minus:0},attention:{general:0}}}
 
 		};
-
+		model.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
 		console.log('CREATE TRANSACTION', model);
 
 		Transaction.create(model)

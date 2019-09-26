@@ -1,5 +1,6 @@
 //CRE8.ORDER
 const Q = require('q');
+const crypto = require('crypto');
 
 module.exports = {
 
@@ -8,28 +9,22 @@ module.exports = {
 		//CREATE THE TENSOR OBJ..
 		//HUGELY HIGH DIM
 		//BUILD UP -- HIGHEST DIM CONNECTION IS BASE
-			//SORT ASSETS.. 
+		//SORT ASSETS.. 
 		function buildMarketV1(baseMarket, orders){
-
 			var market = {};
-
 			for (x in orders){
-
 				//which side of the order?
 				var setAlpha = Object.keys(orders[x].setAlpha).join(',');
 				var setBeta = Object.keys(orders[x].setBeta).join(',');
-
 				//THESE ARE DOODLES IN NO WAY OPTIMUM
 				//asks
 				if (setAlpha.indexOf(baseMarket) == -1){
-
 					//LINK IN ORDERS AND ORDER OBJ ID. && SORT
 					var array = [];
 					for (y in setAlpha.split(',')){array.push(1/(orders[x].setAlpha[setAlpha.split(',')[y]]/orders[x].setBeta[baseMarket]))}
 					if (!market[setAlpha]){market[setAlpha] = [array];}
 					else{market[setAlpha].push(array)}
 				}
-
 				//bids
 				if (setBeta.indexOf(baseMarket) == -1){
 					var array = [];
@@ -37,18 +32,13 @@ module.exports = {
 					if (!market[setBeta]){market[setBeta] = [array];}
 					else{
 						market[setBeta].push(array);
-
 						//multidim lol
 						//square tensor for operations
 				        //market[setBeta] = market[setBeta].sort()
-
 					}
 				}
-
 			}
-
 			return market
-
 		};
 
 		function buildMarket(baseMarket, orders){
@@ -254,7 +244,6 @@ module.exports = {
 			for (x in itemSet){queryAlpha[ "setAlpha."+itemSet[x]] = {$gt: 0};}
 			for (x in itemSet){queryBeta[ "setBeta."+itemSet[x]] = {$gt: 0};}
 
-
 			//COMPLEX LEL
 			var query = { 
 				$or: [
@@ -281,7 +270,6 @@ module.exports = {
 					if (models.length != 0){
 						models = models.map(function(obj){obj.id = obj._id; return obj;});
 
-
 						//var market = buildMarket(item, models);
 						res.json({data:models,market:[]});
 
@@ -305,7 +293,6 @@ module.exports = {
 	create: function (req, res) {
 
 		//DEPRECIATE TOKEN IN FAVOR OF ASSET
-		//REORG.. 
 		function mintTokens(order){
 
 			for (x in Object.keys(order.setAlpha)){
@@ -349,64 +336,63 @@ module.exports = {
 		//ORDERS ASSOCIATION
 		function getProtocolTokens(model){
 			var protocolTokens = ['CRE8', 'CRE8+ORDER'];
-
-
-
-
-
-
-
-
 			return protocolTokens;
 		};
 
 		//TODO
-		//CONNECTION? (ORDER RULZ)
 		function createAssociation(order){
 			
 			//DISCRETE MARKET ASSOCIATION (MARKET PAIR)
-			var associationModel = {
-				model: 'ASSOCIATION',
+			Connection.find({}).limit(1).then(function(connectionModel){
 
-				//type.. of order.. dynamic.. codify these
-				connection:{
-					id:1,
+				var associationModel = {
+
+					model: 'ASSOCIATION',
+					content: JSON.stringify(order.setAlpha)+'to '+ JSON.stringify(order.setBeta),
+
+					//CONNECTION DEFINED>>>>
+					//NEED MARKET DATA MODEL..
+					associatedModels: [
+						{type:'MARKET', id: JSON.stringify(order.setAlpha)},
+						{type:'MARKET', id: JSON.stringify(order.setBeta)}
+					],
+					contextSet:[
+						order.setAlpha,
+						order.setBeta
+					],
+
+					computedContextSet:[],
+					computedLiquidityPool:[],
+
+					//COMPUTED
+					context: {},
+					setAlpha:order.setAlpha,
+					setBeta:order.setBeta,
+
+					data:{apps:{reactions:{plus:0,minus:0},attention:{general:0}}}
+
+				};
+
+				associationModel.connection = {
 					title:'MARKET-MARKET ORDER CONNECTION BETA',
 					parameters:{
 						mapping:['context','reputation','computed'],
 					},
 					computedFrom:'ORDER'
-				},
-				content: JSON.stringify(order.setAlpha)+'to '+ JSON.stringify(order.setBeta),
+				};
 
-				//CONNECTION DEFINED>>>>
-				//NEED MARKET DATA MODEL..
-				associatedModels: [
-					{type:'MARKET', id: JSON.stringify(order.setAlpha)},
-					{type:'MARKET', id: JSON.stringify(order.setBeta)}
-				],
-				contextSet:[
-					order.setAlpha,
-					order.setBeta
-				],
-				computedContextSet:[],
-				computedLiquidityPool:[],
-				//COMPUTED
-				context: {},
-				setAlpha:order.setAlpha,
-				setBeta:order.setBeta,
+				associationModel.connection = connectionModel[0];
 
-				data:{apps:{reactions:{plus:0,minus:0},attention:{general:0}}}
-			};
+				//IF NOT ASSOCIATION CREATE
+				Association.create(associationModel).then(function(newAssociationModel){
+					console.log('NEW ORDER ASSOCIATION', newAssociationModel);
+				});
 
-			//IF NOT ASSOCIATION CREATE
+				//ELSE COMPUTE NEW ORDER BOOK!!! --> START IT UPPPPPPP
+					//VROOM
 
-			Association.create(associationModel).then(function(newAssociationModel){
-				console.log('NEW ORDER ASSOCIATION', newAssociationModel);
 			});
 
-			//ELSE COMPUTE NEW ORDER BOOK!!! --> START IT UPPPPPPP
-				//VROOM
 
 		};
 
@@ -435,6 +421,7 @@ module.exports = {
 			data:{apps:{reactions:{plus:0,minus:0},attention:{general:0}}}
 
 		};
+		model.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
 		console.log('CREATE ORDER', model);
 		Order.create(model)
 		.exec(function(err, order) {

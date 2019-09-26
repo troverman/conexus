@@ -10,8 +10,6 @@ angular.module( 'conexus.projects', [
 				templateUrl: 'projects/index.tpl.html'
 			}
 		},
-
-        //TODO: DEPRECIATE RESOLVE
 		resolve: {
             projects: ['ProjectModel', function(ProjectModel) {
                 return ProjectModel.get({limit:100, skip:0, sort:'createdAt DESC', filter:[]});
@@ -20,7 +18,7 @@ angular.module( 'conexus.projects', [
 	});
 }])
 
-.controller( 'ProjectsCtrl', ['$location', '$rootScope', '$mdSidenav', '$sailsSocket', '$sce', '$scope', 'MemberModel', 'ProjectModel', 'projects', 'SearchModel', function ProjectsController( $location, $rootScope, $mdSidenav, $sailsSocket, $sce, $scope, MemberModel, ProjectModel, projects, SearchModel ) {
+.controller( 'ProjectsCtrl', ['$location', '$rootScope', '$mdSidenav', '$sailsSocket', '$sce', '$scope', 'ProjectModel', 'projects', 'SearchModel', function ProjectsController( $location, $rootScope, $mdSidenav, $sailsSocket, $sce, $scope, ProjectModel, projects, SearchModel ) {
 
     $scope.projects = projects.data.map(function(obj){obj.model = 'PROJECT'; return obj;});
     $scope.projectCount = projects.info.count;
@@ -33,16 +31,6 @@ angular.module( 'conexus.projects', [
             radius:5000
         }
     };
-
-    //TODO: BETTER | ROOTSCOPE
-    if ($rootScope.currentUser){
-        MemberModel.get({user:$rootScope.currentUser.id, limit:100, skip:0, sort:'createdAt DESC'}).then(function(memberProjects){
-            $scope.memberProjects = memberProjects.map(function(obj){
-                obj.project.model = 'PROJECT';
-                return obj.project
-            });
-        });
-    }
 
     $scope.map = {
         center: {latitude: 35.902023, longitude: -84.1507067 },
@@ -280,10 +268,9 @@ angular.module( 'conexus.projects', [
         }
     }, true);
 
-    //TODO: WEBSOCKET
     $sailsSocket.subscribe('project', function (envelope) {
         console.log(envelope)
-        if (envelope.verb == 'create'){$scope.projects.unshift(envelope.data);}
+        if (envelope.verb == 'create'){$scope.projects.unshift(envelope.data);$scope.projectCount++;}//LIMIT TO LIMIT
     });
 
 }]);

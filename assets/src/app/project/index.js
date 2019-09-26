@@ -159,12 +159,11 @@ angular.module( 'conexus.project', [
             connections: ['ConnectionModel', 'project', function(ConnectionModel, project){
                 return ConnectionModel.get({creator:project.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
-            members: ['MemberModel', 'project', function(MemberModel, project) {
-                return MemberModel.get({project:project.id, limit:100, skip:0, sort:'createdAt DESC'});
+            //TODO
+            members: ['AssociationModel', 'project', function(AssociationModel, project) {
+                return [];
+                //return AssociationModel.get({project:project.id, limit:100, skip:0, sort:'createdAt DESC'});
             }]
-           // memberAssociations: ['MemberModel', 'project', function(MemberModel, project) {
-           //     return MemberModel.get({project:project.id, limit:100, skip:0, sort:'createdAt DESC'});
-           // }]
         }
     })
     .state( 'project.positions', {
@@ -244,11 +243,12 @@ angular.module( 'conexus.project', [
     })
 }])
 
-.controller( 'ProjectCtrl', ['$location', '$mdSidenav', '$rootScope', '$scope', '$state', 'MemberModel', 'project', 'SearchModel', 'titleService', 'TransactionModel', 'ValidationModel', function ProjectController( $location, $mdSidenav, $rootScope, $scope, $state, MemberModel, project, SearchModel, titleService, TransactionModel, ValidationModel ) {
+.controller( 'ProjectCtrl', ['$location', '$mdSidenav', '$rootScope', '$scope', '$state', 'project', 'SearchModel', 'titleService', 'TransactionModel', 'ValidationModel', function ProjectController( $location, $mdSidenav, $rootScope, $scope, $state, project, SearchModel, titleService, TransactionModel, ValidationModel ) {
     
     titleService.setTitle(project.title + ' | CRE8.XYZ');
 
     $scope.project = project;
+    $scope.project.model = 'PROJECT';
     if(!$scope.project){$location.path('/')}
 
     $rootScope.markers = [];
@@ -294,7 +294,10 @@ angular.module( 'conexus.project', [
             };
             ValidationModel.create($scope.newValidation).then(function(model) {
                 console.log(model);
+                //connection type
             });
+            $rootScope.pop('Join', $scope.project.title);
+
         }
         else{$mdSidenav('login').toggle()}
     };
@@ -385,7 +388,9 @@ angular.module( 'conexus.project', [
     //LISTENING TO ALL ..
     //TODO: EVENT!!
 
-
+    //TEMP
+    //FRONTEND EXPERIENCE.. COULD DO WATCH SOME VARIABLE .. ADD TO ACTIVITY IF
+    $rootScope.$watch('activityUpdate', function(newValue, oldValue){$scope.activity.unshift(newValue);},true);
 
     //$sailsSocket.subscribe('content', function (envelope) {if (envelope.verb == 'create'){$scope.activity.unshift(envelope.data);}});
     //$sailsSocket.subscribe('task', function (envelope) {if (envelope.verb == 'create'){$scope.activity.unshift(envelope.data);}});
@@ -413,6 +418,7 @@ angular.module( 'conexus.project', [
         }
     });
     $sailsSocket.subscribe('transaction', function (envelope) {
+        console.log(envelope)
         if (envelope.data.to.id == $scope.project.id || envelope.data.from.id == $scope.project.id){$scope.activity.unshift(envelope.data);}
         if (envelope.verb == 'update'){
             var index = $scope.activity.map(function(obj){return obj.id}).indexOf(envelope.data.id);
@@ -949,76 +955,44 @@ angular.module( 'conexus.project', [
 
 }])
 
-.controller( 'ProjectMembersCtrl', ['$location', '$mdSidenav', '$sailsSocket', '$rootScope', '$scope', 'AssociationModel', 'connections' ,'MemberModel', 'members', 'project', 'titleService', function ProjectController( $location, $mdSidenav, $sailsSocket, $rootScope, $scope, AssociationModel, connections, MemberModel, members, project, titleService ) {
-   
+.controller( 'ProjectMembersCtrl', ['$location', '$mdSidenav', '$sailsSocket', '$rootScope', '$scope', 'AssociationModel', 'connections', 'members', 'project', 'titleService', function ProjectController( $location, $mdSidenav, $sailsSocket, $rootScope, $scope, AssociationModel, connections, members, project, titleService ) {
     titleService.setTitle(project.title + ' | Members | CRE8.XYZ');
 
     $scope.connections = connections;
-    $scope.members = members;
-    $scope.newMember = {};
+    
+    //$scope.members = members;
     $scope.project = project;
 
-    $scope.members = $scope.project.associationModels.filter(function(obj){
-        for (x in obj.associatedModels){
-            if (obj.associatedModels[x].type == 'MEMBER'){
-                return obj;
+    if ($scope.project.associationModels){
+        $scope.members = $scope.project.associationModels.filter(function(obj){
+            for (x in obj.associatedModels){
+                if (obj.associatedModels[x].type == 'MEMBER'){
+                    return obj;
+                }
             }
-        }
-    }).map(function(obj) {
-        for (x in obj.associatedModels){
-            if (obj.associatedModels[x].type == 'MEMBER'){
-                //var returnObj = obj.associatedModels[x].data;
-                //returnObj.connection = obj.connection;
-                //returnObj.context = obj.context;
-                var returnObj = obj;
-                returnObj.user =  obj.associatedModels[x].data;
-                returnObj.id = returnObj._id
-                return returnObj;
+        }).map(function(obj) {
+            for (x in obj.associatedModels){
+                if (obj.associatedModels[x].type == 'MEMBER'){
+                    var returnObj = obj;
+                    returnObj.user =  obj.associatedModels[x].data;
+                    returnObj.id = returnObj._id
+                    return returnObj;
+                }
             }
-        }
-    });
-
-    console.log($scope.members);
-    console.log($scope.project);
-
-    //filtering associations
+        });
+    }
 
     //FILTER OUT MEMBER..
-    //for x in ($scope.project.associationModels){
-    //}
-
     //var filter = [{type:'PROJECT',id:project.id},{type:'MEMBER'}];
         //AssociationModel.get({filter:filter, limit:20, skip:0, sort:'createdAt DESC'}).then(function(members){
-    //    console.log(members);
+        //console.log(members);
         //$scope.members = members;
     //});
 
-    $scope.createMember = function() {
-        if ($rootScope.currentUser){
-            $scope.newMember.user = $rootScope.currentUser.id;
-            $scope.newMember.project = project.id;
-            MemberModel.create($scope.newMember).then(function(model) {$scope.newMember = {};});
-        }
-        else{$mdSidenav('login').toggle()}
-    };
-
-    $sailsSocket.subscribe('projetmember', function (envelope) {
-        if (envelope.verb == 'create'){
-            $scope.members.unshift(envelope.data);
-        }
-    });
-
     $sailsSocket.subscribe('association', function (envelope) {
+        console.log(envelope);
         if (envelope.verb == 'create'){
             $scope.members.unshift(envelope.data);
-        }
-    });
-
-    $sailsSocket.subscribe('project', function (envelope) {
-        if (envelope.data.to.id == $scope.project.id || envelope.data.from.id == $scope.project.id){$scope.activity.unshift(envelope.data);}
-        if (envelope.verb == 'update'){
-            var index = $scope.activity.map(function(obj){return obj.id}).indexOf(envelope.data.id);
-            if (index != -1){$scope.activity[index].data = envelope.data.data;}
         }
     });
     

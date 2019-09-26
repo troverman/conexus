@@ -7,7 +7,6 @@ angular.module('models', [
 	'models.content',
 	'models.follower',
 	'models.item',
-	'models.member',
 	'models.notification',
 	'models.order',
 	'models.peer',

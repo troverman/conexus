@@ -1,7 +1,6 @@
 <div class="container">
-    <div ng-if="currentUser.apps.cre8.tutorial && isTutorial">
-        <div ng-include="'tutorial/index.tpl.html'"></div>
-    </div>
+
+    <div ng-if="currentUser.apps.cre8.tutorial && isTutorial"><div ng-include="'tutorial/index.tpl.html'"></div></div>
 
     <div class="spacing-5"></div>
 
@@ -9,7 +8,7 @@
     <div class="row" ng-if="!isTutorial || !currentUser.apps.cre8.tutorial">
 
         <div class="col-sm-4 col-xs-12" style="padding-left:0px;padding-right:0px">
-            <div class="member-card" style="margin-left:10px;margin-right:10px;margin-bottom:0px" ng-click="renderReputationToggle(currentUser)">
+            <div class="member-card" style="margin-left:10px;margin-right:10px;margin-bottom:0px" ng-click="subNavToggle(currentUser)">
                 <div class="member-card-image" style="background-image: url('{{currentUser.coverUrl}}')">
                     <a href="member/{{currentUser.username}}" ui-sref="member.activity({path:currentUser.username})">
                         <img ng-src="{{currentUser.avatarUrl}}" err-src="/images/avatar.png">
@@ -17,9 +16,10 @@
                 </div>
                 <div class="member-card-info">
                     <h4><a href="member/{{currentUser.username}}" ui-sref="member.activity({path:currentUser.username})">{{currentUser.username}}</a></h4>
-                    <p style="color:gray">{{currentUser.status}} <i style="color:#30b257" class="fa fa-circle"></i></i> Online</p>
-                    <p style="color:gray"><b>Total Reputation</b></p>
-                    <p style="color:gray;font-size:11px">{{currentUser.totalWork}}</p>
+                    <p style="color:gray;font-size:12px;">
+                        <span><i style="color:#30b257" class="fa fa-circle"></i> Online</span>
+                        <span ng-if="currentUser.status"><br>{{currentUser.status}}</span>
+                    </p>
                 </div> 
             </div>
         </div>
@@ -38,23 +38,21 @@
             <div class="card" style="margin-top:0px">
                 <div style="padding:16px;">
 
-                    <!--<span style="text-align:left;float:right"><a href="#"><span style="font-size:11px;color:gray">0x{{currentUser.id}}</span><img style="height:50px;" ng-src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{currentUser.id}}"></a></span>-->
-
                     <div ng-show="selectedTab =='INFORMATION'">
                         <h4><a href="member/{{currentUser.username}}" ui-sref="member.activity({path:currentUser.username})">{{currentUser.username}}</a></h4>
                         <p style="font-size:12px;" ng-click="$event.stopPropagation();memberQRToggle(currentUser);"><a style="color:gray"><i class="fas fa-qrcode"></i> {{currentUser.id}}</a></p>
                         <p style="font-size:13px;">
-
-                            <!--<a href="member/{{currentUser.username}}/positions" ui-sref="member.positions({path:currentUser.username})"><i class="fas fa-globe"></i> Value Map</a> | -->
-
                             <a href="member/{{currentUser.username}}/projects" ui-sref="member.projects({path:currentUser.username})">{{currentUser.projectCount || 0}} Projects</a> | 
                             <a href="member/{{currentUser.username}}/followers" ui-sref="member.followers({path:currentUser.username})">{{currentUser.followerCount || 0}} Followers</a> | 
                             <a href="member/{{currentUser.username}}/following" ui-sref="member.following({path:currentUser.username})">{{currentUser.followingCount || 0}} Following</a>
                         </p>
+                        <p style="color:gray"><a href="member/{{currentUser.username}}/assets" ui-sref="member.assets({path:currentUser.username})">{{currentUser.totalWork}} Reputation</a></p>
                     </div>
+
                     <div ng-show="selectedTab =='SUGGESTIONS'">
                         <p style="color:gray;font-style:italic">Coming Soon</p>
                     </div>
+
                     <div ng-show="selectedTab =='VALUEMAP'">
                         <p style="color:gray;font-style:italic">Coming Soon</p>
                     </div>
@@ -76,6 +74,7 @@
                             </div>
                         </div>
                     </div>
+                    
                 </div>
             </div>
         </div>

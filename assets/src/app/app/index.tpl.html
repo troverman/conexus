@@ -32,10 +32,11 @@
             <div ng-if="selectedTab =='INFORMATION'" ng-include="'app/templates/information.tpl.html'"></div>
         </div>
         <div class="card-footer">
-            <a ng-click="$event.stopPropagation();" style="color:grey"><i class="fas fa-eye"></i>  {{app.data.apps.attention.general || 0}}</a>
+            <a ng-click="$event.stopPropagation();renderAttentionToggle(app)" style="color:grey"><i class="fas fa-eye"></i> {{app.data.apps.attention.general || 0}}</a>
             <a ng-click="$event.stopPropagation();createReaction(app, 'plus')"><i class="fa fa-angle-up"></i> {{app.data.apps.reactions.plus || 0}} like </a> 
             <a ng-click="$event.stopPropagation();createReaction(app, 'minus')" ><i class="fa fa-angle-down"></i> {{app.data.apps.reactions.minus || 0}} dislike </a>
             <a ng-click="$event.stopPropagation();contentToggle(app)"><i class="fa fa-comment-o"></i> comment </a>
+            <a ng-click="$event.stopPropagation();validationToggle(app)"><i class="fas fa-check"></i> validate </a>
         </div>
     </div>
     <div ng-if="selectedTab =='PROTOCOLS'" ng-include="'app/templates/protocols.tpl.html'"></div>

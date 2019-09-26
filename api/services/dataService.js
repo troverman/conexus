@@ -1,3 +1,5 @@
+//CRE8.DATASERVICE
+
 //const tf = require('@tensorflow/tfjs');
 //require('@tensorflow/tfjs-node');
 const Q = require('q');
@@ -46,94 +48,25 @@ function removeMirrorDuplicates(array){
 
 function generate(model) {return 100;};
 
+//associationBuild
+//buildAssociatedModels
+//buildAssociationNetwork
+//buildAssociations
+//buildConnections
+//buildStringSpace
+//initOrders
+//getData
+//traverse
+//tensorBuild
+//legacyTraverse
+
 module.exports = {
-
-	buildAssociatedModels:function(model){
-
-		Validation.native(function(err, validation) {
-
-			validation.find({"associatedModels.address":{$in :[model]}})
-			.limit(limit)
-			.skip(skip)
-			.sort({'createdAt':-1})
-			.toArray(function (err, validationModels) {
-				validationModels = validationModels.map(function(obj){
-					obj.id = obj._id;
-					//PROTOCOL. CHARTER.?
-					return obj;
-				});
-
-				//SET OF VALIDATIONS
-				//GET ALL BINARY CONNECTIONS; UNIQUE CONNECTIONS
-				var associationTree = {};
-				for (x in validationModels){
-
-					//IF VALIDATION HAS VALIDATION.. GO 
-						//RECURSION
-
-					//LOOKING AT VALIDATION MODELS // BINARY RELATIONSHIP
-					for (y in validationModels[x].associatedModels){
-						if (!associationTree[validationModels[x].associatedModels[y].address]){
-							associationTree[validationModels[x].associatedModels[y].address] = []
-						}
-
-						//AVERAGE SCORE --> PER DIMENSION..
-						//for z in dimension 
-
-						associationTree[validationModels[x].associatedModels[y].address].push('THE SCORE')
-
-					}
-
-				}
-
-				//SUM VALIDATIONS.. 
-				//WE ARE NOT RESTRICTING ON ON BOTH VALIDATION DIMENSIONS THO : > )
-				var validationSumObj = {};
-
-				//SET OF VALIDATIONS
-				for (y in validationModels){
-
-					//PER DIMENSION IN EACH VALIDATION
-                    for (x in Object.keys(validationModels[y].validation)){
-                        if(!validationSumObj[Object.keys(validationModels[y].validation)[x]]){
-                        	validationSumObj[Object.keys(validationModels[y].validation)[x]]=validationModels[y].validation[Object.keys(validationModels[y].validation)[x]]
-                        }
-                        else{
-                        	validationSumObj[Object.keys(validationModels[y].validation)[x]]+=validationModels[y].validation[Object.keys(validationModels[y].validation)[x]]
-                        }
-                    }
-
-                }
-
-                var associatedModels = [];
-                //BUILD ASSOCIATED MODELS FROM AVERAGE VALIDATIONS ////BASED ON CHARTERS OF RESPECTIVE LINKAGES
-                for (x in Object.keys(validationSumObj)){
-                    associatedModels.push(validationSumObj[Object.keys(validationSumObj)[x]]/validationModels.length);
-                    associatedModels.push(Object.keys(validationSumObj)[x]);
-                }
-
-
-			});
-		});
-
-	},
-
-	//(MODEL []) ASSOCIATED MODELS [] --> {}COMPUTED GRAPH STRUCTURE 
-	buildAssociationNetwork:function(model){
-
-		//BUILD ASSOCIATION OBJECT --> TRAVERSAL OF associatedModels
-										//TRAVERSAL --> LONG TAIL
-		//RETURN JSON OBJECT
-
-	},
-
 
 	//NEED TO POULATE TO TEST..
 	//MAP OUT THE RECURSIVE TREE
 
 	//FOR DEVELOPERS
 	//ASSOCIATION IS A REDUCCTION OF SET OF VALIDATION
-
 	//LEVEL1: VALIDATION, VALIDATION, VALIDATION.
 	//			   |           |           |
 	//LEVEL2:	 V-V-V       V-V-V       V-V-V
@@ -141,7 +74,6 @@ module.exports = {
 	//LEVEL3:    v3v3v3      v3v3v3      v3v3v3
 	//...
 	//LELVE_L:	
-
 	//Compute Association Level L (based on connection rules.. v-v & v-v-n &or defined type)
 
 	//DEFAULT AVERAGE WEIGHTED REP
@@ -159,38 +91,24 @@ module.exports = {
 	//charter expose formulas..? 
 	//.. A_(AV) = CreatorScore(CreatorWeight) + PeerScore(PeerWeight); CreatorWeight + PeerWeight = 1
 
-	//oh boi
-	//mb i need to do complex query 1st .. . 
 	associationBuild: function(model){
-
-		//FOR SOLVING VALIDION LEVELS
-		//MB SOME COOL 2019 JS to do it 
-		//ill do what i know
 
 		//RETURNS TREE OBJ
 		//THEN REDUCETREE OBJ
-		//YAY A PLAN
-		//time to do some tree art
 
 		var deferred = Q.defer();
 		var promises = [[]];
 		var validationTree = {};
-
-		//uhm
 		//we want two functions.. important to compute the tree then reduce. 
 
 		//FACTOR TO DO FROM ASSICATION?
 		function buildVaidationTree(validationModels, parent, level){
-
-
 			//ONE TOO MANY STEPS.. 
 			level++
 			promises.push([]);
 
 			for (x in validationModels){
-
 				promises[level].push(Validation.find({associationModel:validationModels[x].id}));
-
 
 				//nessted obj thoughts - you have the helper functions :) do that instead
 				//if statement.. 
@@ -205,56 +123,36 @@ module.exports = {
 					for (y in validationModelData){
 
 						if (validationModelData[y].length != 0){
-
 							//level++
 							//need some resolve
 							for (z in validationModelData[y]){
-
-								
 								//validationTree.push()
 								//{object.children}
-
 								buildVaidationTree(validationModelData[z].id, validationModels[x], level).then(function(validationTree){
 									deferred.resolve(validationTree);
 								});
 							}
-
 						}
 						else{
-
 							//u a leafff
-
 							//NEED TO KEEP ALL DATA IN TREE / OBJECT
 							//validationTree[parent][level] = {}
-
 							//SOME OBJ HERE.
 							//WERE DONE WITH DATA COLLECTIONS.. DO THE CONNECTION MATH ON LEVEL - 1
 							deferred.resolve(validationTree);
 						}
-
 					}
-
 				});
 			}
 		};
 
 		function reduceValidationTree(validationTree){
-
 			//SOME GOOD ALG HERE
-
 		};
 
 		//buildVaidationTree([],{},0).then(function(validationTree){
 			//reduceValidationTree(validationTree).then(function(associationModel){
 				///Association.update(associationModel);
-
-
-
-
-
-
-
-
 
 
 			//})
@@ -266,7 +164,6 @@ module.exports = {
 		//COMPUTE THE CONNECTION RULES TREE
 		//MOSTY DEFACTO. UNLESS CLERLY ELUCIDATED.. 
 		//(MOST WILL KEEP DEFATCTO LONG CHAIN CONNECTION RULES -- ALBEIT THERE IS ABILTIY TO DEFINE)
-
 
 		Validation.find({
 			associationModels:[
@@ -282,28 +179,23 @@ module.exports = {
 			};
 
 			//NESTED VALIDATION RULES AS CHARTER.. DEFACTO MULT.. THIS IS HOW WE WORK WITH LEVEL TRAVERSAL IN VALIDTION-VALIDATION CHAINS 
-
 			for (x in validationModels){
 
 				//FIND VALIDATIONS FOR THE VALIDATION
 				//if there is a validation - validation
-
 				//PROMISE CHAIN.. NESTED.. COOL 
-
 				Validation.find({associationModel:validationModels[x].id}).then(function(validationModels){
 					
 					//CHECK THE ASSOCIATION OF -VALIDAION CHAIN
 					if (validationModels.length != 0){
 
 						//promises[level] = [];
-
 						level++
 						for (x in validationModels){
 							associationBuild(validationModels[x], level).then(function(associationModel){
 								deferred.resolve(associationModel);
 							});
 						}
-
 					}
 
 					//IF NONE, WE ARE DONE @ THIS LEVEL
@@ -312,7 +204,6 @@ module.exports = {
 						//some object level that is escaping me now 
 						//it is retured one level up to do the calc
 					}
-
 				});
 
 				//TEMP SIMPLE SUM
@@ -333,17 +224,78 @@ module.exports = {
 
 		 	deferred.resolve(associationModel)
 
-
 		});
 		return deferred.promise;
 	},
 
+	buildAssociatedModels:function(model){
 
+		Validation.native(function(err, validation) {
+
+			validation.find({"associatedModels.address":{$in :[model]}})
+			.limit(limit)
+			.skip(skip)
+			.sort({'createdAt':-1})
+			.toArray(function (err, validationModels) {
+				validationModels = validationModels.map(function(obj){
+					obj.id = obj._id;
+					return obj;
+				});
+
+				var associationTree = {};
+				for (x in validationModels){
+
+					//LOOKING AT VALIDATION MODELS // BINARY RELATIONSHIP
+					for (y in validationModels[x].associatedModels){
+						if (!associationTree[validationModels[x].associatedModels[y].address]){
+							associationTree[validationModels[x].associatedModels[y].address] = []
+						}
+
+						associationTree[validationModels[x].associatedModels[y].address].push('THE SCORE')
+					}
+				}
+
+				//SUM VALIDATIONS.. 
+				//WE ARE NOT RESTRICTING ON ON BOTH VALIDATION DIMENSIONS THO : > )
+				var validationSumObj = {};
+
+				//SET OF VALIDATIONS
+				for (y in validationModels){
+					//PER DIMENSION IN EACH VALIDATION
+                    for (x in Object.keys(validationModels[y].validation)){
+                        if(!validationSumObj[Object.keys(validationModels[y].validation)[x]]){
+                        	validationSumObj[Object.keys(validationModels[y].validation)[x]]=validationModels[y].validation[Object.keys(validationModels[y].validation)[x]]
+                        }
+                        else{
+                        	validationSumObj[Object.keys(validationModels[y].validation)[x]]+=validationModels[y].validation[Object.keys(validationModels[y].validation)[x]]
+                        }
+                    }
+
+                }
+
+                var associatedModels = [];
+                //BUILD ASSOCIATED MODELS FROM AVERAGE VALIDATIONS ////BASED ON CHARTERS OF RESPECTIVE LINKAGES
+                for (x in Object.keys(validationSumObj)){
+                    associatedModels.push(validationSumObj[Object.keys(validationSumObj)[x]]/validationModels.length);
+                    associatedModels.push(Object.keys(validationSumObj)[x]);
+                }
+
+			});
+		});
+
+	},
+
+	//(MODEL []) ASSOCIATED MODELS [] --> {}COMPUTED GRAPH STRUCTURE 
+	buildAssociationNetwork:function(model){
+
+		//BUILD ASSOCIATION OBJECT --> TRAVERSAL OF associatedModels
+										//TRAVERSAL --> LONG TAIL
+		//RETURN JSON OBJECT
+
+	},
 
 	//NEED TO POPULATE SOME TO TEST :) 
 	buildAssociations: function(model, level){
-
-		console.log(model);
 
 		var newAssociationModel = {}; 
 
@@ -359,8 +311,6 @@ module.exports = {
 
 			.toArray(function (err, validationModels) {
 
-
-				//IF WE SPECIFICDIRECTION MAXIMUM IS 2 .. --> implicit 1 now
 				if (validationModels.length > 0){
 
 					//GET ASSOCIATIONS WITH MODEL VALIDATION CONTEXT
@@ -373,28 +323,7 @@ module.exports = {
 						}).limit(1000).skip(0).sort({'createdAt':-1})
 						.toArray(function (err, associationModels) {
 
-
-
-
-							//CONNECTION RULES
-							//TODO: CONNECTION RULES
-							//FIND CONNECTION RULES FOR ASSOCIATION..
-							//APPLY MULTIPLIERS ETC (REVIST CHARTER STRUCT) ~ FACTORIZE
-
-							//LET'S DEFINE SOME DISCRETE MODELS TNITE? 
-							//..CREATE MEMBERSHIP
-
-								//REMEBER THRERE IS A LOT OF REFACTORING .. IE PROJECTMEMBER --> ASOOCIATION
-									//FOLLOWER/FOLLOWING --> (DIRECTED) ASSOCIATION
-										//RULES ARE ONLY SELF CAN VALIDATE FOR EX.
-
-
-
-
-							Connection.find({}).then(function(){
-
-							});
-
+							Connection.find({}).then(function(){});
 
 							//IF NO ASSOCIATIONS?--> CREATE!
 							if (associationModels.length == 0){
@@ -439,21 +368,15 @@ module.exports = {
 							}
 						});
 					});
-
 				}
-
 			});
 		});
-
 	},
 
 	buildConnections: function(){
-
 		//APPS AND APP CONNECTIONS
 			//ABSTRACT CORE MODELS TO THE CENTRAL APP MODEL
 			//PROJECT, TASK, TIME --> APP.. 
-
-		//STATIC
 		//App.get();
 		var coreModels = [
 			'ASSOCIATION',
@@ -465,21 +388,15 @@ module.exports = {
 			'PROJECT',
 			'VALIDATION'
 		];
-
 		for (x in coreModels){
 			for (y in coreModels){
 				console.log(coreModels[x], '-', coreModels[y])
 			}
 		}
-
-
 		//POPULATE CONNECTIONS
-			
-
 	},
 
 	buildStringSpace: function(){
-
 		//TODO ASSOCIATION WALK VS PARENT
 		function projectAssociations(id, path){
 			var deferred = Q.defer();
@@ -499,7 +416,6 @@ module.exports = {
 		console.log('GENERATE STRING SPACE!');
 		//WALK THE THE ASSOCIATIONS :) 
 		//LET'S START! 
-
 		var promises = [
 			//ASSOCIATION
 			//ACTION
@@ -1450,12 +1366,10 @@ module.exports = {
 					}
 				});
 			});	
-
 		});
 	},
 
 	initOrders: function(req){
-
 		var newOrderArray = [];
 		for (var i = 0; i<10000; i++){
 			var amount = Math.floor(Math.random()*160)+1;
@@ -1542,7 +1456,6 @@ module.exports = {
 			}
 		});*/	
 	},
-
 
 	getData: function(network, reflective){
 		
@@ -2368,7 +2281,6 @@ module.exports = {
 		//traverse('A');
 		//dataService.getData();
 		//dataService.legacyTraverse(['C'],['A','B'],[1,2]);
-
 	},
 
 	//MAX 5 COMB ASSETS

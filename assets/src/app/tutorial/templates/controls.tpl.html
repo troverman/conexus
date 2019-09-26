@@ -1,6 +1,9 @@
-<div style="text-align:center">
-    <div class="spacing-15"></div>
-    <div ng-click="changePage()" style="text-align:center"><button style="width:50%" class="btn btn-default log-btn">CONTINUE <i class="fa fa-arrow-right"></i></button></div>
-    <div class="spacing-15"></div>
-    <div ng-click="changePage(-1)" style="text-align:center"><button style="width:30%" class="btn btn-default log-btn">SKIP <i class="fa fa-angle-double-right"></i></button></div>
+<div class="card">
+    <div style="padding:0px" class="col-md-9" ng-click="changePage()" style="text-align:center">
+    	<button ng-disabled="stateIsLoadingFeed" class="btn btn-default log-btn">CONTINUE <i class="fa fa-arrow-right"></i></button>
+    </div>
+    <div style="padding:0px" class="col-md-3" ng-click="changePage(-1)" style="text-align:center">
+    	<button ng-disabled="stateIsLoadingFeed" class="btn btn-default log-btn">SKIP <i class="fa fa-angle-double-right"></i></button>
+    </div>
+	<!--<md-progress-linear style="height:2px" ng-if="stateIsLoadingFeed" md-mode="indeterminate"></md-progress-linear>-->
 </div>

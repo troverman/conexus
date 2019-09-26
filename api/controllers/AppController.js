@@ -1,9 +1,55 @@
 //CRE8.APP
+const crypto = require('crypto');
 const Q = require('q');
 
 module.exports = {
 	
 	get: function(req, res) {
+
+		function getAssociations(model){
+			var deferred = Q.defer();
+			Association.native(function(err, association) {
+				association.find({$and : [{"associatedModels.id": {$in:[model.id]}}]})
+				.limit(1000)
+				.skip(0)
+				.sort({'createdAt':-1})
+				.toArray(function (err, associationModels) {
+					if (associationModels.length > 0){
+						associationModels.map(function(obj){obj.id=obj._id; return obj});
+						model.associationModels = associationModels;
+						var promises = [];
+						for (x in model.associationModels){
+							for (y in associationModels[x].associatedModels){
+								if (associationModels[x].associatedModels[y].type=='ACTION'){promises.push(Action.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+								if (associationModels[x].associatedModels[y].type=='APP'){promises.push(App.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+								if (associationModels[x].associatedModels[y].type=='ATTENTION'){promises.push(Attention.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+								if (associationModels[x].associatedModels[y].type=='CONTENT'){promises.push(Content.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+								if (associationModels[x].associatedModels[y].type=='ITEM'){promises.push(Item.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+								if (associationModels[x].associatedModels[y].type=='MEMBER'){promises.push(User.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+								if (associationModels[x].associatedModels[y].type=='PROJECT'){promises.push(Project.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+								if (associationModels[x].associatedModels[y].type=='TASK'){promises.push(Task.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+								if (associationModels[x].associatedModels[y].type=='TIME'){promises.push(Time.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+								if (associationModels[x].associatedModels[y].type=='TRANSACTION'){promises.push(Transaction.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+								if (associationModels[x].associatedModels[y].type=='VALIDATION'){promises.push(Validation.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+							}
+						}
+						Q.all(promises).then((populatedModels)=>{
+							for (x in model.associationModels){
+								for (y in associationModels[x].associatedModels){
+									var index = parseInt(x+y);
+									model.associationModels[x].associatedModels[y].data = populatedModels[index];
+								}
+							}
+							deferred.resolve(model);
+						});
+						model.context = {};
+						for (x in model.associationModels){}
+					}
+					else{deferred.resolve(model);}
+				});
+			});
+			return deferred.promise;
+		};
 
 		var limit = parseInt(req.query.limit) || 1;
 		var skip = parseInt(req.query.skip) || 0;
@@ -19,7 +65,7 @@ module.exports = {
 			.sort(sort)
         	.then(function(models) {
 				App.subscribe(req, [models[0].id]);
-				res.json(models[0]);
+				getAssociations(models[0]).then(function(models){res.json(models);});
 			});
 		}
 
@@ -29,7 +75,7 @@ module.exports = {
 			.skip(skip)
 			.sort(sort)
 			.then(function(models) {
-				App.subscribe(req, models);
+				App.subscribe(req, models.map(function(obj){return obj.id}));
 				res.json(models);
 			});
 		}
@@ -152,6 +198,7 @@ module.exports = {
 			data:{apps:{reactions: {plus:0,minus:0}, attention:{general:0}}}
 
 		};
+		model.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
 
 		console.log('CREATE APP', model);
 		

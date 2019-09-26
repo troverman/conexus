@@ -1,4 +1,5 @@
 //CRE8.TIME
+const crypto = require('crypto');
 const Q = require('q');
 
 module.exports = {
@@ -132,6 +133,7 @@ module.exports = {
 					creator: model.user.id,
 					data:{apps:{reactions:{plus:0,minus:0},attention:{general:0}}}
 				};
+        		newValidation.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(newValidation)).digest('hex');
 
 				//GET CONNECTION
 				newValidation.connection = {
@@ -304,6 +306,8 @@ module.exports = {
 			data:{apps:{reactions:{plus:0,minus:0},attention:{general:0}}}
 
 		};
+
+		model.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
 
 		//TODO: BETTER SOON - && SECURITY
 		User.find({id:model.user}).then(function(userModels){

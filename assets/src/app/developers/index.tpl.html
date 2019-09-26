@@ -92,7 +92,7 @@
                 <h4><b><a href="#TOKENIZATION" du-smooth-scroll>Tokenization Principles</a></b></h4>
                 <h4><b><a href="#CRE8" du-smooth-scroll>CRE8 CORE Protocols</a></b></h4>
                 <h4><b><a href="#IDENTITY" du-smooth-scroll>Identity</a></b></h4>
-                <h4><b><a href="#CONEXAPI" du-smooth-scroll>Conex API</a></b></h4>
+                <h4><b><a href="#API" du-smooth-scroll>Conex API</a></b></h4>
                 <h4><b><a href="#GROUPINTENTION" du-smooth-scroll>Group Coordination</a></b></h4>
                 <h4><b><a href="#VALIDATIONTRAVERSAL" du-smooth-scroll>Association Exploration & Validation Traversals</a></b></h4>
                 <h4><b><a href="#MULTIMARKET" du-smooth-scroll>Multidimensional Market Relations & Traversal</a></b></h4>
@@ -650,7 +650,7 @@ balance[id][hash]++;
     <div class="spacing-15"></div>
 </div>
 
-<div id="CONEXAPI" style="background-color:white;">
+<div id="API" style="background-color:white;">
 
     <div id="CONEXAPIHEADER">
         <div style="background:url('https://source.unsplash.com/1600x900/?explore,discover')" class="imageContainerSmall">
@@ -664,6 +664,7 @@ balance[id][hash]++;
             </div>
         </div>
     </div>
+    
     <div class="spacing-15"></div>
 
     <div id="MODELS" style="background-color:white;">
@@ -689,7 +690,6 @@ balance[id][hash]++;
                         <p><a href="#BLOCK" du-smooth-scroll>Block</a></p>
                         <p><a href="#CONNECTION" du-smooth-scroll>Connection</a></p>
                         <p><a href="#CONTENT" du-smooth-scroll>Content</a></p>
-                        <p><a href="#DATA" du-smooth-scroll>Data</a></p>
                         <p><a href="#EVENT" du-smooth-scroll>Event</a></p>
                         <p><a href="#ITEM" du-smooth-scroll>Item</a></p>
                         <p><a href="#LOCATION" du-smooth-scroll>Location</a></p>
@@ -1140,6 +1140,7 @@ balance[id][hash]++;
 
     <div class="spacing-15"></div>
 
+    <!--
     <div id="DATA" style="background-color:white;min-height:70vh">
         <div class="container">
             <div style="background:url('https://source.unsplash.com/1600x900/?code,information,data')" class="imageContainerSmall">
@@ -1168,6 +1169,38 @@ balance[id][hash]++;
             </div>
         </div>
     </div>
+    <div class="spacing-15"></div>
+    -->
+
+    <div id="EVENT" style="background-color:white;min-height:70vh">
+        <div class="container">
+            <div style="background:url('https://source.unsplash.com/1600x900/?code,information,data,events')" class="imageContainerSmall">
+                <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                    <div style="margin-top: auto;margin-bottom: auto;">
+                        <div class="container">
+                            <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">Event</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="spacing-15"></div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <p style="color:gray;font-style:italic">Events are an agnostic logging of information. Contextual Filters to applications. Tuple (app/model,event,id)</p>
+                </div>
+                <div class="col-sm-6">
+                    <div class="bootstrapHack" style="z-index:auto;">
+                        <div style="margin-left:15px;">
+                            <div class="spacing-5"></div>
+                            <div hljs hljs-language="javascript" hljs-source="eventModel"></div>
+                        </div>
+                    </div>
+                    <p><b>[get, post] /api/event</b></p>
+                </div>
+            </div>
+        </div>
+    </div>-->
+
 
     <div class="spacing-15"></div>
 
@@ -2414,12 +2447,18 @@ balance[id][hash]++;
                         <p>(NxM)/2 Nodes</p> 
                         <div class="spacing-10"></div>
 
+                        <!--
+                        <ul style="padding:0px;" class="member-tabs">
+                            <li><a ng-click="$event.stopPropagation();selectTab('COMBINATORIAL5')">Information</a></li>
+                        </ul>
+                        -->
 
                     </div>
                 </div>
 
                 <div class="spacing-10"></div>
 
+                <!--DO BETTER EXPLORER!!!-->
                 <div>
                     <div style="background:url('https://source.unsplash.com/1600x900/?protocol,code,contract,developer,engineer,computer,complex')" class="imageContainerSmall">
                         <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
@@ -2561,24 +2600,23 @@ balance[id][hash]++;
 
                 <div class="spacing-10"></div>
 
-                <!--
-                <p><b>Combinatorial 5</b></p>
-                <p>SET OF COMB OBJECTS IN N SPACE</p>
-                <p>MAP COMP 5 -> COMP 7</p>
-                <p>HOW MANY 5 in 7?</p>
-                <p>PASCAL</p>
-                <div>
-                    <p>5-5</p>        
-                    <p>nodes</p>
-                    <p>edges</p>
-                    <p>links</p>
-                    <p>5-6</p>  
-                    <p>5-7</p>  
-                    <p>5-N</p>  
+                <div ng-if="selectedCombinatorial == 'COMBINATORIAL5'">
+                    <p><b>Combinatorial 5</b></p>
+                    <p>SET OF COMB OBJECTS IN N SPACE</p>
+                    <p>MAP COMP 5 -> COMP 7</p>
+                    <p>HOW MANY 5 in 7?</p>
+                    <p>PASCAL</p>
+                    <div>
+                        <p>5-5</p>        
+                        <p>nodes</p>
+                        <p>edges</p>
+                        <p>links</p>
+                        <p>5-6</p>  
+                        <p>5-7</p>  
+                        <p>5-N</p>  
+                    </div>
                 </div>
-                <div class="spacing-10"></div>
-                -->
-
+                
                 <div>
                     <div style="background:url('https://source.unsplash.com/1600x900/?protocol,code,contract,developer,engineer,computer,complex')" class="imageContainerSmall">
                         <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  

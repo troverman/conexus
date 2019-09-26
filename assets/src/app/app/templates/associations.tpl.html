@@ -1,26 +1,45 @@
-<!--
-<ul style="padding:0px;" class="member-tabs">
-    <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fa fa-filter"></i> Filter</a></li>
-    <li style="float:right;font-size:14px"><a href="#" ng-click="sortToggle()">Sort By Recent <i class="fa fa-angle-down"></i></a></li>
-    <div style="clear:both"></div>
-</ul>
+<div ng-if="app.associationModels.length>0">
 
-<div class="card">
-    <tags-input style="border:0px;flex-grow:2;" placeholder="Search" ng-model="searchQuery"></tags-input>
-</div>
--->
+    <ul style="padding:0px;" class="member-tabs">
+        <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fa fa-filter"></i> Filter</a></li>
+        <li style="float:right;font-size:14px"><a href="#" ng-click="sortToggle()">Sort By Recent <i class="fa fa-angle-down"></i></a></li>
+        <div style="clear:both"></div>
+    </ul>
 
-<div class="card">
-    <div style="padding:16px;">
-        <h4>Peers</h4>
-        <p>Peers mining in this context</p>
-        <h4>Attention, Content, Reactions</h4>
-        <p>Implicit App-App by dependencies in shared code</p>
-        <h4>Members</h4>
+    <div class="card"><tags-input style="border:0px;flex-grow:2;" placeholder="Search" ng-model="searchQuery"></tags-input></div>
+
+    <div class="card">
+        <div style="padding:16px;">
+            <ul style="padding:0px;" class="member-tabs">
+                <li ng-click="$event.stopPropagation();selectTab('MEMBERS')"><a href="#">Members / Peers</a></li>
+                <li ng-click="$event.stopPropagation();selectTab('ATTENTION')"><a href="#">Attention</a></li>
+                <li ng-click="$event.stopPropagation();selectTab('CONTENT')"><a href="#">Content</a></li>
+                <li ng-click="$event.stopPropagation();selectTab('REACTIONS')"><a href="#">Reactions</a></li>
+                <li ng-click="$event.stopPropagation();selectTab('APPS')"><a href="#">Apps</a></li>
+                <li ng-click="$event.stopPropagation();selectTab('PROTOCOLS')"><a href="#">Protocols</a></li>
+            </ul>
+
+            <div clas="spacing-10"></div>
+            
+            <h4>Members / Peers</h4>
+            <p>Members / Peers valuing data in this application context</p>
+            <h4>Attention</h4>
+            <p>Associated Attention</p>
+            <h4>Content</h4>
+            <p>Associated Content</p>
+            <h4>Reactions</h4>
+            <p>Associated Reactions</p>
+            <h4>Apps</h4>
+            <p>Implicit App-App by dependencies in shared code</p>
+            <h4>Protocols</h4>
+            <p>Associated Protocls</p>
+
+        </div>
     </div>
+
 </div>
 
-<div class="card" ng-repeat="item in associations" ng-click="cardDetailExpand(item)">
+<div class="card" ng-repeat="item in app.associationModels" ng-click="cardDetailExpand(item)">
 	<div style="background:url('https://source.unsplash.com/1600x900/?{{item.tags}}');min-height:auto;" class="imageContainerSmall">
         <div style="background:rgba(0,0,0,0.75);height:auto" class="imageContainerSmallDiv">  
         	<div style="text-align:right;padding:15px;position:absolute;right:0">
@@ -41,10 +60,10 @@
     </div>
     <div class="card-footer">
         <a ng-click="$event.stopPropagation();renderAttentionToggle(item)"  style="color:grey"><i class="fas fa-eye"></i> {{item.data.apps.attention.general || 0}}</a>
-		<a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fa fa-angle-up"></i> {{item.data.apps.reactions.plus || 0}} like </a> 
-        <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fa fa-angle-down"></i> {{item.data.apps.reactions.minus || 0}} dislike </a>
-       	<a ng-click="$event.stopPropagation();contentToggle(item)" style="padding:5px;color:grey" ><i class="fa fa-comment-o"></i> comment </a>
-       	<a ng-click="$event.stopPropagation();validationToggle(item)" style="padding:5px;color:grey" ><i class="fa fa-check"></i> validate </a>
+		<a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fas fa-angle-up"></i> {{item.data.apps.reactions.plus || 0}} like </a> 
+        <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fas fa-angle-down"></i> {{item.data.apps.reactions.minus || 0}} dislike </a>
+       	<a ng-click="$event.stopPropagation();contentToggle(item)" style="padding:5px;color:grey" ><i class="far fa-comment"></i> comment </a>
+       	<a ng-click="$event.stopPropagation();validationToggle(item)" style="padding:5px;color:grey" ><i class="fas fa-check"></i> validate </a>
        	<a ng-click="$event.stopPropagation();" style="padding:0px" class="pull-right" href="association/{{item.id}}" ui-sref="association({id:item.id})"><i class="fas fa-link grey"></i></a>
     </div>
 </div>

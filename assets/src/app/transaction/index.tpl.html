@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
         <div class="card" ng-click="cardDetailToggle(transaction);">
-            <div style="background:url('https://source.unsplash.com/1600x900/?{{transaction.tags}}')" class="imageContainerSmall">
+            <div style="background:url('https://source.unsplash.com/1600x900/?{{transaction.context}}')" class="imageContainerSmall">
                 <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
                     <div style="text-align:right;padding:15px;position:absolute;right:0">
                         <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(transaction)"><i class="fas fa-chevron-down"></i></a>
@@ -22,11 +22,9 @@
                             <li ng-if="false"><a ng-click="$event.stopPropagation();selectTab('ACTIVITY')">Activity</a></li>
                             <li><a ng-click="$event.stopPropagation();selectTab('INFORMATION')">Information</a></li>
                             <li><a ng-click="$event.stopPropagation();selectTab('ASSOCIATIONS')">Associations</a></li>
-                            <li><a ng-click="$event.stopPropagation();selectTab('CONTENT')">Content</a></li>
                             <li><a ng-click="$event.stopPropagation();selectTab('STATS')">Stats</a></li>
+                            <li><a ng-click="$event.stopPropagation();shareToggle(transaction)">Share</a></li>
                             <li><a ng-click="$event.stopPropagation();selectTab('TOKENS')">Tokens</a></li>
-                            <li><a ng-click="$event.stopPropagation();selectTab('SHARE')">Share</a></li>
-
                         </ul>
                     </div>
                 </div>
@@ -71,7 +69,7 @@
                             
                 <span ng-repeat="(key, value) in transaction.amountSet"><p style="font-weight:800">{{value}} <a ng-click="$event.stopPropagation();" href="market/{{key}}" ui-sref="market({id:key})">{{key}}</a></p></span>
 
-                <p><a ng-repeat="tag in transaction.ledger.split(',')" href="market/{{tag.trim()}}" ui-sref="market({id:tag.trim()})">{{tag.trim()}} </a></p>
+                <p><a ng-repeat="context in transaction.context.split(',')">{{context.trim()}} </a></p>
                 <p>{{transaction.content}}</p>
 
             </div>

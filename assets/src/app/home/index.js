@@ -291,7 +291,7 @@ angular.module( 'conexus.home', [
 
 }])
 
-.controller( 'FeedCtrl', ['$location', '$rootScope', '$sailsSocket', '$sce', '$scope', 'ContentModel', 'FollowerModel', 'MemberModel', 'OrderModel', 'PeerModel', 'ProjectModel', 'ReactionModel', 'SearchModel', 'TaskModel', 'titleService', 'UserModel', 'ValidationModel', function HomeController( $location, $rootScope, $sailsSocket, $sce, $scope, ContentModel, FollowerModel, MemberModel, OrderModel, PeerModel, ProjectModel, ReactionModel, SearchModel, TaskModel, titleService, UserModel, ValidationModel ) {
+.controller( 'FeedCtrl', ['$location', '$rootScope', '$sailsSocket', '$sce', '$scope', 'ContentModel', 'FollowerModel', 'OrderModel', 'PeerModel', 'ProjectModel', 'ReactionModel', 'SearchModel', 'TaskModel', 'titleService', 'UserModel', 'ValidationModel', function HomeController( $location, $rootScope, $sailsSocket, $sce, $scope, ContentModel, FollowerModel, OrderModel, PeerModel, ProjectModel, ReactionModel, SearchModel, TaskModel, titleService, UserModel, ValidationModel ) {
 
     $scope.balanceChart = {
         chart: {
@@ -627,7 +627,8 @@ angular.module( 'conexus.home', [
 
         $scope.follow = function(model){
 
-            /*var validationModel = {
+            /*
+            var validationModel = {
                 user:$rootScope.currentUser.id,
                 context:{general:100},
                 associatedModels:[
@@ -649,9 +650,8 @@ angular.module( 'conexus.home', [
                 $scope.members[index].isFollowing = false;
                 $scope.members[index].followerCount--;
                 $rootScope.pop('Unfollowed!', 'You Unfollowed '+ model.username);
-            }*/
-
-
+            }
+            */
 
             $scope.newFollower = {
                 followed:model.id,
@@ -903,48 +903,50 @@ angular.module( 'conexus.home', [
 
         console.log(searchModels);
 
+        //AS MEMBER ASSOCIATIONS....
         //LOL OBV DEPRECIATE
         FollowerModel.getFollowing($rootScope.currentUser).then(function(followers){
+            
             $scope.followers = followers;
-            MemberModel.get({user:$rootScope.currentUser.id, limit:100, skip:0, sort:'createdAt DESC'}).then(function(memberProjects){
-                $scope.memberProjects = memberProjects;
-                TaskModel.get({user:$rootScope.currentUser.id, limit:100, skip:0, sort:'createdAt DESC'}).then(function(memberTasks){
-                    $scope.memberTasks = memberTasks;
-                    OrderModel.get({user:$rootScope.currentUser.id, limit:100, skip:0, sort:'createdAt DESC'}).then(function(positions){
-                        $scope.positions = positions;
-                        $scope.init();
-                        $scope.initTutorial();
-                        $scope.renderBalances();
+            $scope.memberProjects = [];
 
-                        $scope.projects.map(function(obj){
-                            var index = $scope.memberProjects.map(function(obj1){return obj1.id}).indexOf(obj.id);
-                            if (index != -1){obj.isMember = true;}
-                            if (index == -1){obj.isMember = false;}
-                            return obj;
-                        });
+            TaskModel.get({user:$rootScope.currentUser.id, limit:100, skip:0, sort:'createdAt DESC'}).then(function(memberTasks){
+                $scope.memberTasks = memberTasks;
+                OrderModel.get({user:$rootScope.currentUser.id, limit:100, skip:0, sort:'createdAt DESC'}).then(function(positions){
+                    $scope.positions = positions;
+                    $scope.init();
+                    $scope.initTutorial();
+                    $scope.renderBalances();
 
-                        $scope.tasks.map(function(obj){
-                            var index = $scope.memberTasks.map(function(obj1){return obj1.id}).indexOf(obj.id);
-                            if (index != -1){obj.isAssociated = true;}
-                            if (index == -1){obj.isAssociated = false;}
-                            return obj;
-                        });
-
-                        if ($scope.followers ){
-                            $scope.followers = $scope.followers.map(function(obj){return obj.followed});    
-                            $scope.members.map(function(obj){
-                                var index = $scope.followers.map(function(obj1){
-                                    if (obj1){return obj1.id;}
-                                }).indexOf(obj.id);
-                                if (index != -1){obj.isFollowing = true;}
-                                if (index == -1){obj.isFollowing = false;}
-                                return obj;
-                            });
-                        }
-
+                    $scope.projects.map(function(obj){
+                        var index = $scope.memberProjects.map(function(obj1){return obj1.id}).indexOf(obj.id);
+                        if (index != -1){obj.isMember = true;}
+                        if (index == -1){obj.isMember = false;}
+                        return obj;
                     });
+
+                    $scope.tasks.map(function(obj){
+                        var index = $scope.memberTasks.map(function(obj1){return obj1.id}).indexOf(obj.id);
+                        if (index != -1){obj.isAssociated = true;}
+                        if (index == -1){obj.isAssociated = false;}
+                        return obj;
+                    });
+
+                    if ($scope.followers ){
+                        $scope.followers = $scope.followers.map(function(obj){return obj.followed});    
+                        $scope.members.map(function(obj){
+                            var index = $scope.followers.map(function(obj1){
+                                if (obj1){return obj1.id;}
+                            }).indexOf(obj.id);
+                            if (index != -1){obj.isFollowing = true;}
+                            if (index == -1){obj.isFollowing = false;}
+                            return obj;
+                        });
+                    }
+
                 });
             });
+
         });
 
 

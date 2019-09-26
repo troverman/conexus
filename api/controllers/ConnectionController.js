@@ -1,4 +1,5 @@
 //CRE8.CONNECTION
+const crypto = require('crypto');
 const Q = require('q');
 
 module.exports = {
@@ -67,6 +68,7 @@ module.exports = {
 			dataModelBeta: req.param('dataModelBeta'),
 			data:{apps:{reactions:{plus:0,minus:0},attention:{general:0}}}
 		};
+		model.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
 
 		console.log('CREATE CONNECTION', model);
 		

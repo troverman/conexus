@@ -20,6 +20,7 @@ angular.module( 'conexus.account', [
 
     $scope.editAccountToggleVar = false;
     $scope.newAccountInformation = $rootScope.currentUser;
+
     $scope.gpsTracking = true;
     $scope.notifications = true;
     $scope.browserMining = true;
@@ -34,26 +35,17 @@ angular.module( 'conexus.account', [
     $scope.apps = [];
     AppModel.get({limit:100, skip:0, sort:'createdAt DESC'}).then(function(apps){
         $scope.apps = apps;
+        console.log(apps)
     });
 
     //LOL COMPLEX QUERY BETTER FILTERING ETC
     AttentionModel.get({creator:$rootScope.currentUser.id, app:'HUMAN', limit:100, skip:0, sort:'createdAt DESC'}).then(function(humanAttention){
-        if (humanAttention){
-            $scope.humanAttention = humanAttention.map(function(obj){
-                obj.model = 'ATTENTION';
-                return obj
-            });
-        }
+        if (humanAttention){$scope.humanAttention = humanAttention.map(function(obj){obj.model = 'ATTENTION';return obj});}
     });
 
     //CONNECT TO PEER
     AttentionModel.get({creator:$rootScope.currentUser.id, app:'MACHINE', limit:100, skip:0, sort:'createdAt DESC'}).then(function(machineAttention){
-        if (machineAttention){
-            $scope.machineAttention = machineAttention.map(function(obj){
-                obj.model = 'ATTENTION';
-                return obj
-            });
-        }
+        if (machineAttention){$scope.machineAttention = machineAttention.map(function(obj){obj.model = 'ATTENTION';return obj});}
     });
 
     //APPS
@@ -63,10 +55,10 @@ angular.module( 'conexus.account', [
         skip:0, 
         sort:'createdAt DESC'
     };
-    AssociationModel.get(associationQuery).then(function(associations){
-        console.log(associations);
-        $scope.associations = associations;
-    });
+    //AssociationModel.get(associationQuery).then(function(associations){
+    //    console.log(associations);
+    //    $scope.associations = associations;
+    //});
 
     $scope.myApps = $scope.currentUser.apps;
 
@@ -77,6 +69,7 @@ angular.module( 'conexus.account', [
 
     //APP-MEMBER ASSOCIATION (AND DATA)
     //MEMBER-APP DATA
+    //MEMBER APP DATA DEFINED IN MEMBER APP CONNECTION
     console.log($scope.currentUser)
 
     $scope.selectTab = function(model){$scope.selectedTab = model;};
@@ -89,17 +82,9 @@ angular.module( 'conexus.account', [
     };
 
     //TODO: IPFS LINKIN
-	$scope.uploadAvatar = function(file){
-        Upload.upload({url: '/api/user/upload', method: 'POST', data: {picture: file}}).then(function(response){
-			$scope.currentUser.avatarUrl = response.data.amazonUrl;
-            var model = {
-                id: $scope.currentUser.id,
-                avatarUrl: $scope.currentUser.avatarUrl,
-            };
-            UserModel.update(model);
-        },
-        function (evt) {$scope.avatarPercentage = parseInt(100.0 * evt.loaded / evt.total)})
-    };
-
+    //TODO: CREATE IMGAGE CONTENT.. 
+        //CONTENT ASSOCIATIONS :P
+            //DEFINED BY MEMBER-MEMBER CONNECTION :o
+	$scope.uploadAvatar = function(file){};
 
 }]);

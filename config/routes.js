@@ -156,11 +156,6 @@ module.exports.routes = {
   'post /api/project': 'ProjectController.create',
   'delete /api/project/:id': 'ProjectController.destroy',
 
-  /* Project Member routes DEPRECIATE*/
-  'get /api/projectmember': 'ProjectMemberController.get',
-  'post /api/projectmember': 'ProjectMemberController.create',
-  'delete /api/projectmember/:id': 'ProjectMemberController.destroy',
-
   /* Search routes */
   'get /api/search': 'SearchController.search',
   'get /api/search/feed': 'SearchController.getFeed',

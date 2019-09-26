@@ -150,6 +150,7 @@ angular.module( 'conexus.nav', [
             $scope.newConnection = {
                 associatedModels:$rootScope.associatedModels,
                 creator:$rootScope.currentUser.id,
+                context:[{text:'self'}, {text:'general'}]
             };
             $mdSidenav('connection').toggle();
         }
@@ -170,14 +171,16 @@ angular.module( 'conexus.nav', [
                     id:'self',
                     context:[
                         {text:'self', score:100}
-                    ]
+                    ],
+                    connection:[{text:'Content Connection'}]
                 },{
                     type:'MEMBER',
                     text:'MEMBER'+$rootScope.currentUser.id,
                     id:$rootScope.currentUser.id,
                     context:[
                         {text:'self', score:100}
-                    ]
+                    ],
+                    connection:[{text:'Member Connection'}]
                 }],
                 user:$rootScope.currentUser.id,
             };
@@ -193,7 +196,8 @@ angular.module( 'conexus.nav', [
                     text:item.model+'+'+item.id, 
                     context:[
                         {text:'self', score:100}
-                    ]
+                    ],
+                    connection:[{text:item.model+' Connection'}]
                 });
             }
 
@@ -201,10 +205,7 @@ angular.module( 'conexus.nav', [
                 if (newValue !== oldValue) {
                     console.log(newValue);
                     for (x in $scope.newContent.associatedModels){
-                        $scope.newContent.associatedModels[x].context = newValue.map(function(obj){
-                            obj.score = 100;
-                            return obj;
-                        });
+                        $scope.newContent.associatedModels[x].context = newValue.map(function(obj){ obj.score = 100; return obj; });
                     }
                     console.log($scope.newContent.associatedModels);
                 }
@@ -257,8 +258,7 @@ angular.module( 'conexus.nav', [
 
     $scope.expandAdvancedFilter = function(){$scope.filtersAreExpanded = !$scope.filtersAreExpanded;};
 
-
-    //TODO!!!
+    //TODO
     $rootScope.filterToggle = function(type, item, model){
 
         //PASS ALL OBJECTS IN MODEL ^^
@@ -278,9 +278,7 @@ angular.module( 'conexus.nav', [
         $scope.selectAsset = function(item){
             if ($rootScope.selectedAssets.map(function(obj){return obj.text}).indexOf(item)==-1){
                 $rootScope.selectedAssets.push({text:item});
-                $scope.item.assets = $scope.item.assets.filter(function(obj) { 
-                    return obj.element !== item
-                });
+                $scope.item.assets = $scope.item.assets.filter(function(obj) { return obj.element !== item });
             }
             console.log('SELECT ASSET', item, $rootScope.searchQueryNav, $rootScope.searchQuery);
         };
@@ -415,14 +413,16 @@ angular.module( 'conexus.nav', [
                         id:'self',
                         context:[
                             {text:'self', score:100}
-                        ]
+                        ],
+                        connection:[{text:'Item Connection'}]
                     },{
                         type:'MEMBER',
                         text:'MEMBER'+$rootScope.currentUser.id,
                         id:$rootScope.currentUser.id,
                         context:[
                             {text:'self', score:100}
-                        ]
+                        ],
+                        connection:[{text:'Member Connection'}]
                     }
                 ],
                 user:$rootScope.currentUser.id,
@@ -436,7 +436,8 @@ angular.module( 'conexus.nav', [
                     text:item.model+'+'+item.id, 
                     context:[
                         {text:'self', score:100}
-                    ]
+                    ],
+                    connection:[{text:item.model+' Connection'}]
                 });
             }
 
@@ -539,7 +540,8 @@ angular.module( 'conexus.nav', [
                     id:'self',
                     context:[
                         {text:'self', score:100}
-                    ]
+                    ],
+                    connection:[{text:'Self Connection'}]
                 }],
                 user:$rootScope.currentUser.id,
             };
@@ -552,7 +554,8 @@ angular.module( 'conexus.nav', [
                     text:item.model+'+'+item.id, 
                     context:[
                         {text:'self', score:100}
-                    ]
+                    ],
+                    connection:[{text:item.model+' Connection'}]
                 });
             }
 
@@ -575,6 +578,12 @@ angular.module( 'conexus.nav', [
         if($rootScope.currentUser){$mdSidenav('protocol').toggle();}
         else{$mdSidenav('login').toggle();}
     };
+
+    $rootScope.reactionToggle = function(item, type){
+        $scope.closeAllNav();
+        $scope.item = item;
+        $mdSidenav('reaction').toggle();
+    }
 
     //TODO
     $rootScope.renderToggle = function(item, type){
@@ -828,8 +837,6 @@ angular.module( 'conexus.nav', [
 
     };
 
-
-
     //MEMBER CARD TOGGLE | TODO RENAME
     //TODO: REDO REP MAPPING
     $rootScope.renderReputationToggle = function(item){
@@ -837,7 +844,6 @@ angular.module( 'conexus.nav', [
         $scope.item = item;
         if (!$scope.item.user){$scope.item.user = item};
 
-        console.log(item);
         $scope.reputationChart.xAxis.categories = [];
         $scope.reputationChart.series[0].data = [];
         
@@ -853,7 +859,6 @@ angular.module( 'conexus.nav', [
                 $scope.reputationChart.series[0].data.push(sortable[x][1]);
             }
         }
-
         $mdSidenav('renderReputation').toggle();
     };
 
@@ -862,7 +867,6 @@ angular.module( 'conexus.nav', [
 
     $rootScope.selectSort = function(model, direction, time){
         $rootScope.selectedSort = {model:model.toLowerCase(), direction:direction.toLowerCase(), time:time};
-        //ROOTSCOPE WATCHER ON selectedSort change
         $mdSidenav('sort').toggle();
     };
 
@@ -1121,14 +1125,16 @@ angular.module( 'conexus.nav', [
                     id:'self',
                     context:[
                         {text:'self', score:100}
-                    ]
+                    ],
+                    connection:[{text:'Self Connection'}]
                 },{
                     type:'MEMBER',
-                    text:'MEMBER'+$rootScope.currentUser.id,
+                    text:'MEMBER+'+$rootScope.currentUser.id,
                     id:$rootScope.currentUser.id,
                     context:[
                         {text:'self', score:100}
-                    ]
+                    ],
+                    connection:[{text:'Member Connection'}]
                 }],
                 user:$rootScope.currentUser.id,
             };
@@ -1142,7 +1148,8 @@ angular.module( 'conexus.nav', [
                     text:item.model+'+'+item.id, 
                     context:[
                         {text:'self', score:100}
-                    ]
+                    ],
+                    connection:[{text:item.model+ ' Connection'}]
                 });
             }
 
@@ -1172,14 +1179,16 @@ angular.module( 'conexus.nav', [
                     id:'self',
                     context:[
                         {text:'self', score:100}
-                    ]
+                    ],
+                    connection:[{text:'Self Connection'}]
                 },{
                     type:'MEMBER',
                     text:'MEMBER'+$rootScope.currentUser.id,
                     id:$rootScope.currentUser.id,
                     context:[
                         {text:'self', score:100}
-                    ]
+                    ],
+                    connection:[{text:'Member Connection'}]
                 }],
                 user:$rootScope.currentUser.id,
             };
@@ -1193,7 +1202,8 @@ angular.module( 'conexus.nav', [
                     text:item.model+'+'+item.id, 
                     context:[
                         {text:'self', score:100}
-                    ]
+                    ],
+                    connection:[{text:item.model+' Connection'}]
                 });
             }
 
@@ -1354,7 +1364,6 @@ angular.module( 'conexus.nav', [
 
     $rootScope.transactionToggle = function(item, asset){
 
-        //TEMP HAK?
         $scope.newTransaction = {};
         $scope.closeAllNav();
 
@@ -1419,58 +1428,38 @@ angular.module( 'conexus.nav', [
     $rootScope.validationToggle = function(item){
 
         $scope.closeAllNav();
-        $scope.item = item;
+
         if($rootScope.currentUser){
 
             $scope.newValidation = {
-                context: [{text:'self', score:100}],
+                associatedModels:[{
+                    context: [
+                        {text:'self', score:100}
+                    ],
+                    connection:[{text:'Self Connection'}]
+                }],
                 user: $rootScope.currentUser.id,
-                associatedModels:[],
             };
 
-            if($scope.item){
-
-                //GET ASSOCIATED MDOELS
-                //TODO REDETERMINED CONTEXT.. TAGS.. ETC --> PERSPECTIVE
-                //UX SHOULD DO SET in validation sidebar
-                $scope.newValidation.associatedModels = [
-                    {
-                        text:$scope.item.id,
-                        id:$scope.item.id,
-                        type:$scope.item.model,
-                        context: [{text:'self', score:100}]
-                    }
-                ];
-
-                console.log(item);
-
-                if ($scope.item.context){
-                    for (x in $scope.item.context){
-                        $scope.newValidation.context.push({text:$scope.item.context[x]});
-                        $scope.newValidation.associatedModels[0].context.push({score:100,text:$scope.item.context[x]});
-                        $scope.newValidation.context.push({score:100,text:$scope.item.context[x]})
-                    }
-                }
-
-                console.log($scope.newValidation.associatedModels)
-
-                //POTIENTAL VALIDATIONS
-                //$scope.assoicationFilter = [{text:$scope.item.associatedModels[0].id}];
-
+            //item is an array
+            if(item){
+                console.log(item)
+                $scope.item = item;
+                $scope.newValidation.associatedModels.push({
+                    text:$scope.item.id,
+                    id:$scope.item.id,
+                    type:$scope.item.model,
+                    context: [
+                        {text:'self', score:100}
+                    ],
+                    connection:[{text:$scope.item.model+' Connection'}]
+                });
             }
-            
-            //$scope.$watch('context', function(){
-            //    for (x in $scope.context){
-            //        $scope.newValidation.context[$scope.context[x].text] = 0;
-            //    }
-            //}, true);
     
             $scope.$watch('newValidation.context', function(newValue, oldValue){
                 if (newValue !== oldValue) {
-                    console.log(newValue)
                     for (x in $scope.newValidation.context){
                         $scope.newValidation.associatedModels[0].context[$scope.newValidation.context[x].text] = 100;
-                        console.log($scope.newValidation);
                     }
                 }
             }, true);
@@ -1676,6 +1665,12 @@ angular.module( 'conexus.nav', [
             newTransaction.to = newTransaction.to[0].id;
             console.log('CREATE TRANSACTION', $scope.newTransaction);
             $mdSidenav('transaction').close();
+
+
+            //TEMP
+            $rootScope.activityUpdate = $scope.newTransaction;
+
+
             TransactionModel.create(newTransaction).then(function(model){
                $rootScope.pop('New Transaction!', model.id +' '+ model.createdAt);
             });

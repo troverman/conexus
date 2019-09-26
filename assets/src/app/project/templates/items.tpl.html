@@ -72,14 +72,7 @@
                 <li style="float:right;font-size:14px"><a href="#" ng-click="sortToggle()">Sort By Recent <i class="fa fa-angle-down"></i></a></li>
                 <div style="clear:both"></div>
             </ul>
-            <div class="card mobileFix">
-                <form ng-submit="search()" style="display:flex;flex-direction:row;">
-                    <tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search" ng-model="searchQuery"></tags-input>
-                    <div ng-click="search()" style="border:0px;float:right" class="btn btn-default">
-                        <a href="#" role="button"><h5 style="color:black;text-align:right" class="noselect">Search <i class="fa fa-search"></i></h5></a>
-                    </div>
-                </form>
-            </div>
+            <div class="card mobileFix"><tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search" ng-model="searchQuery"></tags-input></div>
             <div ng-repeat="item in items">
                 <div ng-include="'templates/cards/itemCard.tpl.html'"></div>
             </div>

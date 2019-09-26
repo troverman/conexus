@@ -1,7 +1,8 @@
 //CRE8.CONNECTION
 module.exports = {
     attributes: {
-		information: {type: 'json'},
+
+
 		title: {type: 'string'},
 		description: {type: 'string'},
         context:{type: 'string'},
@@ -9,5 +10,14 @@ module.exports = {
     	type:{type: 'string'},
         associatedModels:{type: 'string'},
         data: {type: 'json'},
+
+
+        //TODO: DEFINE
+        //CUSOM CONNECTION DATA MODEL..
+        //DEFINE A DEW CONNECTIONS WITH CUSTOM ATTRIBUTES IN ASSOCIATION
+        //IE FOR DIRECTION ETC
+        attributes:{type:'json'}
+        //for association...
+        //for validation... (validation attributes.. order attributes)
     }
 };

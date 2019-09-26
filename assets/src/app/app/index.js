@@ -32,25 +32,7 @@ angular.module( 'conexus.app', [
         console.log($scope.myApps);
     }
 
-    console.log($scope.app)
-
-    var associationQuery = {
-        app:$scope.app.id, 
-        limit:10, 
-        skip:0, 
-        sort:'createdAt DESC'
-    };
-    AssociationModel.get(associationQuery).then(function(associations){
-        console.log(associations);
-        $scope.associations = associations.map(function(obj){obj.model='ASSOCIATION';return obj});
-    });
-
     titleService.setTitle($scope.app.title + ' | App | CRE8.XYZ');
-
-    //LOOK AT ALL FILES
-    //ASSOCIATED CONTENT (TYPE CODE / PROTOCOL) AS CODE.. 
-    //UNIFY MODEL(S) ?
-    //.git repo.. etc
 
     $scope.selectedTab = 'INFORMATION';
     $scope.selectTab = function(model){$scope.selectedTab = model;};
