@@ -175,7 +175,7 @@ angular.module( 'conexus.nav', [
                     connection:[{text:'Content Connection'}]
                 },{
                     type:'MEMBER',
-                    text:'MEMBER'+$rootScope.currentUser.id,
+                    text:'MEMBER+'+$rootScope.currentUser.id,
                     id:$rootScope.currentUser.id,
                     context:[
                         {text:'self', score:100}
@@ -417,7 +417,7 @@ angular.module( 'conexus.nav', [
                         connection:[{text:'Item Connection'}]
                     },{
                         type:'MEMBER',
-                        text:'MEMBER'+$rootScope.currentUser.id,
+                        text:'MEMBER+'+$rootScope.currentUser.id,
                         id:$rootScope.currentUser.id,
                         context:[
                             {text:'self', score:100}
@@ -441,10 +441,10 @@ angular.module( 'conexus.nav', [
                 });
             }
 
-            $scope.$watch('newTask.context', function(newValue, oldValue){
+            $scope.$watch('newItem.context', function(newValue, oldValue){
                 if (newValue !== oldValue) {
-                    for (x in $scope.newTask.associatedModels){
-                        $scope.newTask.associatedModels[x].context = newValue.map(function(obj){obj.score = 100;return obj;});
+                    for (x in $scope.newItem.associatedModels){
+                        $scope.newItem.associatedModels[x].context = newValue.map(function(obj){obj.score = 100;return obj;});
                     }
                 }
             }, true);
@@ -1183,7 +1183,7 @@ angular.module( 'conexus.nav', [
                     connection:[{text:'Self Connection'}]
                 },{
                     type:'MEMBER',
-                    text:'MEMBER'+$rootScope.currentUser.id,
+                    text:'MEMBER+'+$rootScope.currentUser.id,
                     id:$rootScope.currentUser.id,
                     context:[
                         {text:'self', score:100}
@@ -1483,6 +1483,7 @@ angular.module( 'conexus.nav', [
         $mdSidenav('nav').close();
         $mdSidenav('order').close();
         $mdSidenav('project').close();
+        $mdSidenav('react').close();
         $mdSidenav('render').close();
         $mdSidenav('renderReputation').close();
         $mdSidenav('renderValidation').close();

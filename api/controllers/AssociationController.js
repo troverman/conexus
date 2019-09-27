@@ -4,11 +4,18 @@ const Q = require('q');
 module.exports = {
 
 	get: function(req, res) {
+
+		function parseQuery(queryModel){
+			console.log(queryModel);
+			return queryModel; 
+		};
+
 		var limit = parseInt(req.query.limit) || 1;
 		var skip = parseInt(req.query.skip) || 0;
 		var sort = req.query.sort || 'createdAt DESC';
 		var id = req.query.id;
-		console.log('GET ASSOCIATION', req.query)
+		console.log('GET ASSOCIATION', req.query);
+
 		if(req.query.id){
 			Association.find({id:id})
 			.limit(limit)
@@ -17,10 +24,6 @@ module.exports = {
 			.then(function(models) {
 				if (models[0]){
 					//TODO: DEPRECIATE THIS STYLE
-					//APPRECIATE APP 
-					//APPRECIATE '''DATA''' MODEL
-						//APP HAS STRUCT DATA MODEL 
-							//ALL DATA IN ONE MODEL?
 					var promises = [];
 					for (x in models[0].associatedModels){
 						if (models[0].associatedModels[x].type == 'ACTION'){promises.push(Action.find({id:models[0].associatedModels[x].id}).then(function(models){return models[0];}))}
@@ -48,47 +51,69 @@ module.exports = {
 			});
 		}
 
-		//mm
-		else if (req.query.app){
-			var app = req.query.app;
-			Association.native(function(err, association) {
-				association.find({"associatedModels.id": {$in :[app]}})
-				.limit(1000)
-				.skip(0)
-				.sort({'createdAt':-1})
-				.toArray(function (err, associationModels) {
-					associationModels = associationModels.map(function(obj){obj.id = obj._id; return obj;});
-					res.json(associationModels);
-				});
-			});
-		}
-
 		else if(req.query.filter){
 
-			//GET PROJECT-MEMBER HERE
-			//GET PROJECT-PROJECT HERE
-			//GET MEMBER-MEMBER (FOLLOWER) HERE
-			//COMPLEXISH QUERY HERE
+			var querySet = JSON.parse(req.query.filter);
 
-			Association.native(function(err, association) {
+			var mongoQuery = parseQuery(querySet);
 
-				association.find({
+			//TODO: CONNECTION FILTERS
+				//FOLLOWING & FOLLOWERS! : )
+
+			var query = {
+				$and:[{
 					"associatedModels.id": {
-						$in :[req.query.filter]
+						$in :[mongoQuery.id]
+					},
+					"associatedModels.type": {
+						$in :[mongoQuery.type]
 					}
-				})
-				.limit(1000)
-				.skip(0)
-				.sort({'createdAt':-1})
-				.toArray(function (err, associationModels) {
-					associationModels = associationModels.map(function(obj){obj.id = obj._id; return obj;});
+				}]
+			};
+
+			Association.getDatastore().manager.collection('association')
+			.find(query)
+			.limit(1000)
+			.skip(0)
+			.sort({'createdAt':-1})
+			.toArray(function (err, associationModels) {
+				associationModels = associationModels.map(function(obj){obj.id = obj._id; return obj;});
+				var promises = [];
+				for (x in associationModels){
+					for (y in associationModels[x].associatedModels){
+						if (associationModels[x].associatedModels[y].type=='ACTION'){promises.push(Action.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+						if (associationModels[x].associatedModels[y].type=='APP'){promises.push(App.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+						if (associationModels[x].associatedModels[y].type=='ATTENTION'){promises.push(Attention.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+						if (associationModels[x].associatedModels[y].type=='CONTENT'){promises.push(Content.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+						if (associationModels[x].associatedModels[y].type=='ITEM'){promises.push(Item.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+						if (associationModels[x].associatedModels[y].type=='MEMBER'){promises.push(User.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+						if (associationModels[x].associatedModels[y].type=='PROJECT'){promises.push(Project.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+						if (associationModels[x].associatedModels[y].type=='TASK'){promises.push(Task.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+						if (associationModels[x].associatedModels[y].type=='TIME'){promises.push(Time.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+						if (associationModels[x].associatedModels[y].type=='TRANSACTION'){promises.push(Transaction.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+						if (associationModels[x].associatedModels[y].type=='VALIDATION'){promises.push(Validation.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+					}
+				}
+				Q.all(promises).then((populatedModels)=>{
+					var index = -1 
+					for (x in associationModels){
+						for (y in associationModels[x].associatedModels){index++;associationModels[x].associatedModels[y].data = populatedModels[index];}
+					}
+					//model.context = {};
+					//for (x in model.associationModels){}
+
+					//OKK..
+					//POPULATE USER FOR ASSOCIATAED MODEL DATA &&&&&&&& LINK IN USER / RECURSUVE POPULATION ETC
+					//for (x in associationModels)
+					//	for (y in associationModels[x].associatedModels){
+					//		User.find()
+					//	}
+					//}
+
 					res.json(associationModels);
 				});
-
 			});
-
 		}
 
 	}
-
 };

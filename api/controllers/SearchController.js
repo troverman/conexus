@@ -34,20 +34,18 @@ module.exports = {
 			function getSome(model){	
 				var deferred = Q.defer();
 				if (model.dataModel = 'PROJECT'){
-					Project.native(function(err, project) {
-						project.find(model.query).limit(model.limit).skip(model.skip)
-						.toArray(function (err, models) {
-							if (models){
-								models = models.map(function(obj){obj.id = obj._id; obj.model='PROJECT'; return obj;});
-								deferred.resolve(models)
-							}
-							else{deferred.resolve([])}
-						});
+					Project.getDatastore().manager.collection('project')
+					.find(model.query).limit(model.limit).skip(model.skip)
+					.toArray(function (err, models) {
+						if (models){
+							models = models.map(function(obj){obj.id = obj._id; obj.model='PROJECT'; return obj;});
+							deferred.resolve(models)
+						}
+						else{deferred.resolve([])}
 					});
 					return deferred.promise;
 				}
 			};
-
 		}
 
 		else{

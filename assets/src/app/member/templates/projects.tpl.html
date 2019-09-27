@@ -12,7 +12,13 @@
 		    </div>
 		    <div class="member-card-info">
 		        <h4><a ng-click="$event.stopPropagation();" href="project/{{item.project.urlTitle}}" ui-sref="project.activity({path:item.project.urlTitle})">{{item.project.title}}</a></h4>
-		        <p style="color:gray">{{item.status || 'MEMBER'}} {{project.user.balance[project.project.title] || 0}}</p>
+		       	<p style="color:gray"><a ng-click="$event.stopPropagation();" href="connection/{{item.connection.id}}" ui-sref="connection({id:item.connection.id})">{{item.connection.title}}</p>
+		        <p style="color:gray">{{item.project.title}}: {{item.context}}</p>
+
+		    </div>
+		    <div class="card-footer">
+                <a ng-click="$event.stopPropagation();" href="association/{{item.id}}" ui-sref="association({id:item.id})" style="padding:0px" class="pull-right"><i class="fas fa-link grey"></i></a>
+                <div style="clear:both"></div>
 		    </div>
 		</div>
 	</div>

@@ -19,13 +19,13 @@
                 <h4>Title</h4>
                 <input type="text" placeholder="Title" ng-model="newTask.title" class="form-control">
                 <div>
-                    <h5>
+                    <h4>
                         Context 
                         <a ng-click="expandAssociations()" style="float:right">
                             <span ng-if="!associationsAreExpanded"><i class="fas fa-bezier-curve"></i> Expand</span>
                             <span ng-if="associationsAreExpanded"><i class="fas fa-grip-lines"></i> Hide</span>
                         </a>
-                    </h5>
+                    </h4>
                     <tags-input min-length="1" placeholder="Context" ng-model="newTask.context">
                         <auto-complete min-length="2" source="loadTags($query)"></auto-complete>
                     </tags-input>

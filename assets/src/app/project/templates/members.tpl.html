@@ -31,7 +31,7 @@
 		    </div>
 		   	<div class="card-footer">
 		   		<a ng-click="$event.stopPropagation();validationToggle(item)"><i class="fas fa-check"></i> validate </a>
-                <a ng-click="$event.stopPropagation();reply(item)" href="association/{{item.id}}" ui-sref="association({id:item.id})" style="padding:0px" class="pull-right"><i class="fas fa-link grey"></i></a>
+                <a ng-click="$event.stopPropagation();" href="association/{{item.id}}" ui-sref="association({id:item.id})" style="padding:0px" class="pull-right"><i class="fas fa-link grey"></i></a>
 		   	</div>
 		</div>
 	</div>

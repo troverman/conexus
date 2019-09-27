@@ -1,6 +1,7 @@
 <div class="spacing-5"></div>
 <div class="row">
-	<div class="col-sm-6" ng-repeat="member in followers">
+	<div class="col-sm-6" ng-repeat="item in followers">
+		<!--
 		<div class="member-card" ng-click="renderReputationToggle(member)">
 			<div style="text-align:right;padding:15px;position:absolute;right:0;margin-right:10px">
 		        <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(member)">
@@ -25,5 +26,7 @@
 		        <p style="color:gray">{{member.follower.status}} Offline</p>
 		    </div>
 		</div>
+		-->
+		<div ng-include="'templates/cards/memberCard.tpl.html'"></div>
 	</div>
 </div>

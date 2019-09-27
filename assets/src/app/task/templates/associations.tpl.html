@@ -15,9 +15,26 @@
                 <div>
                     <span ng-repeat="context in task.context">{{context}}, </span>
                 </div>
+
+                <!--LOOP THROUGH APP ASSOCITED MODEL TYPES-->
+                <ul style="padding:0px;" class="member-tabs">
+                    <!--CAN EACH DISCRETE MODEL HAVE APP CONNECTION YEAH META: -->
+                    <li ng-click="$event.stopPropagation();selectTab('APPS')"><a href="#">App</a></li>
+                    <li ng-click="$event.stopPropagation();selectTab('ATTENTION')"><a href="#">Attention</a></li>
+                    <li ng-click="$event.stopPropagation();selectTab('CONTENT')"><a href="#">Content</a></li>
+                    <li ng-click="$event.stopPropagation();selectTab('MEMBER')"><a href="#">Member</a></li>
+                    <li ng-click="$event.stopPropagation();selectTab('PROJECTS')"><a href="#">Project</a></li>
+                    <li ng-click="$event.stopPropagation();selectTab('TASK')"><a href="#">Task</a></li>
+                    <li ng-click="$event.stopPropagation();selectTab('TIME')"><a href="#">Time</a></li>
+                    <li ng-click="$event.stopPropagation();selectTab('REACTIONS')"><a href="#">Reaction</a></li>
+                </ul>
+
+                <!--
                 <tags-input min-length="1" max-tags="1" placeholder="Associations" ng-model="assoicationFilter">
                     <auto-complete source="loadAssociations($query)"></auto-complete>
                 </tags-input>
+                -->
+                
             </div>
         </div>
     </div>

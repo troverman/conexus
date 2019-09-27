@@ -97,11 +97,12 @@ module.exports.routes = {
   'get /api/attention': 'AttentionController.get',
   'post /api/attention': 'AttentionController.create',
 
-  /* Action routes */
-  'get /api/action': 'ActionController.get',
-
   /* Association routes */
   'get /api/association': 'AssociationController.get',
+
+  /* Block routes */
+  'get /api/block': 'BlockController.get',
+  //'post /api/block': 'BlockController.create',
 
   /* Connection routes */
   'get /api/connection': 'ConnectionController.get',
@@ -113,12 +114,8 @@ module.exports.routes = {
   'post /api/content/:id': 'ContentController.update',
   'delete /api/content/:id': 'ContentController.destroy',
 
-   /* Follower routes DEPRECIATE */
-   //TODO: MEMBER-MEMBER ASSOCIATION
-  'get /api/follower/followers/:id': 'FollowerController.getFollowers',
-  'get /api/follower/following/:id': 'FollowerController.getFollowing',
-  'post /api/follower': 'FollowerController.create',
-  'delete /api/follower/:id': 'FollowerController.destroy',
+  /* Event routes */
+  'get /api/event': 'EventController.get',
 
   /* Item routes */
   'get /api/item': 'ItemController.get',
@@ -149,7 +146,6 @@ module.exports.routes = {
 
   /* Project routes */
   'get /api/project': 'ProjectController.get',
-
   //HMM
   'get /api/project/children/:id': 'ProjectController.getChildren',
 
@@ -163,7 +159,6 @@ module.exports.routes = {
   /* Task routes */
   'get /api/task': 'TaskController.get',
   'post /api/task': 'TaskController.create',
-  'delete /api/task/:id': 'TaskController.destroy',
 
   /* Time routes */
   'get /api/time': 'TimeController.get',
@@ -175,7 +170,6 @@ module.exports.routes = {
   /* Transaction routes */
   'get /api/transaction': 'TransactionController.get',
   'post /api/transaction': 'TransactionController.create',
-  'delete /api/transaction/:id': 'TransactionController.destroy',
 
   /* User (MEMBER) routes */
   'get /api/user': 'UserController.get',

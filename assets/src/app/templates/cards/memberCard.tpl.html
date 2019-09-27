@@ -45,10 +45,12 @@
         </p>
     </div>
     <div class="card-footer" style="text-align:center">
-        <a ng-click="$event.stopPropagation();cre8Toggle(item)"><i class="fas fa-expand"></i> Create </a>
+        <!--<a ng-click="$event.stopPropagation();cre8Toggle(item)"><i class="fas fa-expand"></i> Create </a>-->
         <a ng-click="$event.stopPropagation();transactionToggle(item)"><i class="fas fa-plus"></i> Transaction </a>
         <a ng-show="!item.isFollowing" ng-click="$event.stopPropagation();follow(item)"><i class="fas fa-users"></i> Follow </a>
         <a ng-show="item.isFollowing" ng-click="$event.stopPropagation();follow(item)"><i class="fas fa-user"></i> Unfollow</button></a>
-        <a ng-click="$event.stopPropagation();validationToggle(item)"><i class="fas fa-check"></i> validate </a>
+        <a ng-if="item.associationId" ng-click="$event.stopPropagation();" style=";padding:0px;padding-right:5px" class="pull-right" href="association/{{item.associationId}}" ui-sref="association({id:item.associationId})"><i class="fas fa-bezier-curve grey"></i></a>
+
+        <!--<a ng-click="$event.stopPropagation();validationToggle(item)"><i class="fas fa-check"></i> validate </a>-->
     </div>
 </div>

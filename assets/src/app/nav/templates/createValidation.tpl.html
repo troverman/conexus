@@ -16,11 +16,18 @@
             <p style="color:gray;font-style:italic">Validations create value linkages. They form the mechanisms which data is associated. <a ng-click="informationToggle('VALIDATION')" href="#"><i class="fa fa-question-circle"></i></a></p>
             <div class="spacing-10"></div>
 
-            <div class="spacing-100"></div>
-            {{item}}
-            <div class="spacing-100"></div>
+            <!--IF POPULATED DOULBE SELECECTION-->
+            <div ng-repeat="associatedModel in item.associatedModels" style="font-size:14px;">
+                <p class="valueMapButton">
+                    <!--TODO: APP INPUT-->
+                    <span ng-if="associatedModel.type == 'MEMBER'">{{associatedModel.data.username}}</span>
+                    <span ng-if="associatedModel.type == 'PROJECT'">{{associatedModel.data.title}}</span>
+                </p>
+            </div>
 
             <h5>Data</h5>
+
+            <!--SELECTED MODEL-->
             <tags-input min-length="1" placeholder="Associations" ng-model="newValidation.associatedModels">
                 <auto-complete source="loadAssociations($query)"></auto-complete>
             </tags-input>
@@ -31,12 +38,6 @@
             <tags-input min-length="1" placeholder="Context" ng-model="newValidation.context">
                 <auto-complete source="loadAssociations($query)"></auto-complete>
             </tags-input>
-
-            <!--
-            <div ng-repeat="associatedModel in item.associatedModels" style="font-size:14px;font-weight:bold">
-                <p class="valueMapButton">{{associatedModel}}</p>
-            </div>
-            -->
 
             <div ng-repeat="context in newValidation.context track by $index">
                 <div layout="">

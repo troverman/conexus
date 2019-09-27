@@ -9,7 +9,6 @@
                     <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">
                         <a ng-click="$event.stopPropagation();" style="color:white" href="task/{{item.id}}" ui-sref="task({id:item.id})">{{item.title}}</a>
                     </h1>
-                    <!--VARIABLE-->
                     <h5 ng-click="$event.stopPropagation()">
                         <a style="color:white" href="task/{{item.id}}" ui-sref="task({id:item.id})">{{item.id}}</a>
                     </h5>
@@ -29,5 +28,6 @@
         <a ng-click="$event.stopPropagation();contentToggle(item)"><i class="far fa-comment"></i> comment </a>
         <a ng-click="$event.stopPropagation();validationToggle(item)"><i class="fas fa-check"></i> validate </a>
         <a ng-click="$event.stopPropagation();" style="padding:0px" class="pull-right" href="task/{{item.id}}" ui-sref="task({id:item.id})"><i class="fas fa-link grey"></i></a>
+        <a ng-if="item.associationId" ng-click="$event.stopPropagation();" style=";padding:0px;padding-right:5px" class="pull-right" href="association/{{item.associationId}}" ui-sref="association({id:item.associationId})"><i class="fas fa-bezier-curve grey"></i></a>
     </div>
 </div>

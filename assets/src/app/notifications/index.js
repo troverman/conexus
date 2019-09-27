@@ -18,7 +18,7 @@ angular.module( 'conexus.notifications', [
     });
 }])
 
-.controller( 'NotificationsController', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'FollowerModel', 'NotificationModel', 'notifications', 'toaster', function NotificationsController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, FollowerModel, NotificationModel, notifications, toaster) {
+.controller( 'NotificationsController', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'NotificationModel', 'notifications', 'toaster', function NotificationsController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, NotificationModel, notifications, toaster) {
     if(!$rootScope.currentUser){$location.path('/')}
 
     $scope.notifications = notifications.map(function(obj){
@@ -39,18 +39,6 @@ angular.module( 'conexus.notifications', [
             }
         }
         return obj;
-    });
-
-    //TODO
-    FollowerModel.getFollowing($scope.currentUser).then(function(following){
-        $scope.notifications.map(function(obj){
-            if (obj.type == 'FOLLOW' && obj.data.apps){
-                var index = following.map(function(obj1){return obj1.followed.id}).indexOf(obj.data.apps.id)
-                if (index != -1){obj.isFollowing = true;}
-                else{obj.isFollowing = false;}
-            }
-            return obj;
-        });
     });
 
     $scope.filterSet = {
@@ -109,49 +97,6 @@ angular.module( 'conexus.notifications', [
     //TODO: ROOTSCOPE
     //TODO: VALIDATE (MEMBER-MEMBER)
     $scope.follow = function(model){
-
-        $scope.newFollower = {
-            followed:model.data.app.member.id,
-            follower:$scope.currentUser.id,
-        };
-        console.log(model, $scope.newFollower);
-
-        //FOLLOW
-        if (!model.isFollowing){
-            FollowerModel.create($scope.newFollower).then(function(followerModel) {
-                $rootScope.confirm = $scope.newFollower;
-                $rootScope.confirm.modelType = 'FOLLOW';
-                var index = $scope.notifications.map(function(obj){return obj.data.app.member.id}).indexOf($scope.newFollower.followed);
-                $scope.notifications[index].isFollowing = true;
-                toaster.pop({
-                    type:'success',
-                    title: 'Following',
-                    body: 'You are now follwing '+ model.data.app.member.username, 
-                    onShowCallback: function (toast) { 
-                        var audio = new Audio('audio/ping.mp3');
-                        audio.play()
-                        .then(function(audio){console.log(audio)})
-                        .catch(function(err){console.log(err)})
-                    }
-                });
-                $scope.newFollower = {};
-                setTimeout(function () {$mdSidenav('confirm').open()}, 500);
-                setTimeout(function () {$mdSidenav('confirm').close()}, 5000);
-            });
-        }
-
-        //UNFOLLOW
-        if (model.isFollowing){
-            //GET FOLLOWERS
-            //FollowerModel.getFollowing($scope.currentUser).then(function(following){
-            //DROP BY ID
-            //FollowerModel.delete($scope.newFollower).then(function(followerModel){
-            //    var index = $scope.notifications.map(function(obj){return obj.data.app.member.id}).indexOf(newFollower.followed);
-            //    $scope.notifications[index].isFollowing = false;
-            //    console.log('FOLLOWER DELETE', index);
-            //});
-        }
-
     };
 
 }]);

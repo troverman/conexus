@@ -5,7 +5,6 @@ angular.module('models', [
 	'models.attention',
 	'models.connection',
 	'models.content',
-	'models.follower',
 	'models.item',
 	'models.notification',
 	'models.order',

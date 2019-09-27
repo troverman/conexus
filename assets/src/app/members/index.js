@@ -18,7 +18,7 @@ angular.module( 'conexus.members', [
 	});
 }])
 
-.controller( 'MembersCtrl', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'FollowerModel', 'members', 'UserModel', 'ValidationModel', function MembersController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, FollowerModel, members, SearchModel, toaster, UserModel, ValidationModel ) {
+.controller( 'MembersCtrl', ['$mdSidenav', '$rootScope', '$sailsSocket', '$scope', 'members', 'UserModel', 'ValidationModel', function MembersController( $mdSidenav, $rootScope, $sailsSocket, $scope, members, UserModel, ValidationModel ) {
 	
     $scope.members = members.data.map(function(obj){obj.model = 'MEMBER'; return obj;});
     $scope.memberCount = members.info.count;  
@@ -58,16 +58,29 @@ angular.module( 'conexus.members', [
     };
 
     if ($rootScope.currentUser){
-        //memberFollowers
-        $scope.members.map(function(obj){
-            var index = -1; //$scope.followers.map(function(obj1){return obj1.id}).indexOf(obj.id);
-            if (index != -1){obj.isFollowing = true;}
-            if (index == -1){obj.isFollowing = false;}
-            return obj;
-        });
+        if ($rootScope.currentUser.associationModels){
+            $scope.followers = $rootScope.currentUser.associationModels.map(function(obj) {
+                for (x in obj.associatedModels){
+                    if (obj.associatedModels[x].type == 'MEMBER'){
+                        var returnObj = {};
+                        if(obj.associatedModels[x].data){
+                            returnObj = obj.associatedModels[x].data;
+                            returnObj.associationId = obj._id
+                        }
+                        return returnObj;
+                    }
+                }
+            });
+            $scope.members.map(function(obj){
+                var index = $scope.followers.map(function(obj1){return obj1.id}).indexOf(obj.id);
+                if (index != -1){obj.isFollowing = true;}
+                if (index == -1){obj.isFollowing = false;}
+                return obj;
+            });
+        }
     }
 
-    //DO IN NAV
+    //TODO: DO IN NAV
     $scope.follow = function(model){
         if($rootScope.currentUser){
             var validationModel = {
@@ -79,43 +92,23 @@ angular.module( 'conexus.members', [
                 ],
             };
             if (!model.isFollowing){
+                console.log(validationModel)
                 ValidationModel.create(validationModel).then(function(newValidation){
-                    var index = $scope.members.map(function(obj){return obj.id}).indexOf($scope.newFollower.followed);
+                    console.log(newValidation)
+                    var index = $scope.members.map(function(obj){return obj.id}).indexOf(model.id);
                     $scope.members[index].isFollowing = true;
                     $scope.members[index].followerCount++;
                     $rootScope.pop('Following!', 'You are now follwing '+ model.username);
                 });
             }
             if (model.isFollowing){
-                //ValidationModel.create(validationModel).then(function(newValidation){
-                    var index = $scope.members.map(function(obj){return obj.id}).indexOf($scope.newFollower.followed);
-                    $scope.members[index].isFollowing = false;
-                    $scope.members[index].followerCount--;
-                    $rootScope.pop('Unfollowed!', 'You Unfollowed '+ model.username);
-                //});
+                var index = $scope.members.map(function(obj){return obj.id}).indexOf(model.id);
+                $scope.members[index].isFollowing = false;
+                $scope.members[index].followerCount--;
+                $rootScope.pop('Unfollowed!', 'You Unfollowed '+ model.username);
             }
         }
         else{$mdSidenav('login').toggle();}
-
-        /*
-        $scope.newFollower = {
-            followed:model.id,
-            follower:$rootScope.currentUser.id,
-        };
-        if (!model.isFollowing){
-            FollowerModel.create($scope.newFollower).then(function(followerModel) {
-                var index = $scope.members.map(function(obj){return obj.id}).indexOf($scope.newFollower.followed);
-                $scope.members[index].isFollowing = true;
-                $rootScope.pop('Following!', 'You are now follwing '+ model.username);
-                $scope.newFollower = {};
-            });
-        }
-        if (model.isFollowing){
-            $rootScope.pop('Unfollowed!', 'You Unfollowed '+ model.username);
-            var index = $scope.members.map(function(obj){return obj.id}).indexOf($scope.newFollower.followed);
-            $scope.members[index].isFollowing = false;
-        }
-        */
     };
 
     $scope.updateChart = function(){

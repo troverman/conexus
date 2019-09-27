@@ -291,7 +291,7 @@ angular.module( 'conexus.home', [
 
 }])
 
-.controller( 'FeedCtrl', ['$location', '$rootScope', '$sailsSocket', '$sce', '$scope', 'ContentModel', 'FollowerModel', 'OrderModel', 'PeerModel', 'ProjectModel', 'ReactionModel', 'SearchModel', 'TaskModel', 'titleService', 'UserModel', 'ValidationModel', function HomeController( $location, $rootScope, $sailsSocket, $sce, $scope, ContentModel, FollowerModel, OrderModel, PeerModel, ProjectModel, ReactionModel, SearchModel, TaskModel, titleService, UserModel, ValidationModel ) {
+.controller( 'FeedCtrl', ['$location', '$rootScope', '$sailsSocket', '$sce', '$scope', 'ContentModel', 'OrderModel', 'PeerModel', 'ProjectModel', 'ReactionModel', 'SearchModel', 'TaskModel', 'titleService', 'UserModel', 'ValidationModel', function HomeController( $location, $rootScope, $sailsSocket, $sce, $scope, ContentModel, OrderModel, PeerModel, ProjectModel, ReactionModel, SearchModel, TaskModel, titleService, UserModel, ValidationModel ) {
 
     $scope.balanceChart = {
         chart: {
@@ -326,40 +326,8 @@ angular.module( 'conexus.home', [
 
     //TODO: CREATE A TOKEN 'ORBIT' FOR MEMBER
     //TODO: CREATE COMPLEX QUERY / DISCOVER
-    $scope.discover = function(){
-
-        $scope.searchQueryFeed = [];
-        for (x in $scope.followers){
-            if ($scope.followers[x]){$scope.searchQueryFeed.push({type:'MEMBER', id:$scope.followers[x].id, text:$scope.followers[x].username})}
-        }
-
-        for (x in $scope.memberProjects){
-            $scope.searchQueryFeed.push({type:'PROJECT', id:$scope.memberProjects[x].id, text:$scope.memberProjects[x].title});
-        }
-
-        for (x in $scope.memberTasks){
-            $scope.searchQueryFeed.push({type:'TASK', id:$scope.memberTasks[x].id, text:$scope.memberTasks[x].title})
-        }
-
-        for (x in $scope.memberProjects){
-            $scope.suggestedTokens.push({token:$scope.memberProjects[x].urlTitle});
-        }
-        
-        $scope.suggestedTokenTags = $scope.memberProjects.map(function(obj){return obj.tags;});
-        $scope.suggestedTokenTags = [].concat.apply([], $scope.suggestedTokenTags);
-        $scope.suggestedTokenTags = $scope.suggestedTokenTags.filter(function(e){return e});
-        
-        $scope.sortedsuggestedTokenTags = [];
-        for (x in $scope.suggestedTokenTags){
-            var amount = countInArray($scope.suggestedTokenTags, $scope.suggestedTokenTags[x]);
-            if ($scope.sortedsuggestedTokenTags.map(function(obj){return obj.element}).indexOf($scope.suggestedTokenTags[x]) == -1){
-                $scope.sortedsuggestedTokenTags.push({amount:amount, element:$scope.suggestedTokenTags[x]})
-            }
-        }
-        $scope.sortedsuggestedTokenTags.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
-
-
-    };
+    //GET MEMBER ASSOCIATIONS
+    $scope.discover = function(){};
 
     //TODO: MAPPING LOOKUP! 
     $scope.lookupBalance = function(){
@@ -503,6 +471,11 @@ angular.module( 'conexus.home', [
     ];
   
     $scope.initTutorial = function(){
+
+        console.log($rootScope.currentUser);
+
+        //TRANSACTION
+        $scope.coreApps = []
         
         //TODO: APP STRUCT
         //TODO: PEER STRUCT
@@ -580,8 +553,8 @@ angular.module( 'conexus.home', [
                     user:$rootScope.currentUser.id,
                     context:{general:100},
                     associatedModels:[
-                        {type:'MEMBER', id:$rootScope.currentUser.id},
-                        {type:'PROJECT', id:model.id},
+                        {type:'MEMBER',id:$rootScope.currentUser.id},
+                        {type:'PROJECT',id:model.id},
                     ],
                 };
                 ValidationModel.create(validationModel).then(function(model) {
@@ -590,11 +563,8 @@ angular.module( 'conexus.home', [
                 });
             }
             if (model.isMember){
-                //cancel the validation by addative prop
-                //ValidationModel.create(validationModel).then(function(model) {});
-                    $scope.projects[index].isMember = false;
-                    $rootScope.pop('Project Left','You left ' +model.title);
-                //});
+                $scope.projects[index].isMember = false;
+                $rootScope.pop('Project Left','You left ' +model.title);
             }          
         };
 
@@ -624,10 +594,7 @@ angular.module( 'conexus.home', [
             }
         };
 
-
         $scope.follow = function(model){
-
-            /*
             var validationModel = {
                 user:$rootScope.currentUser.id,
                 context:{general:100},
@@ -636,43 +603,20 @@ angular.module( 'conexus.home', [
                     {type:'MEMBER', id:model.id},
                 ],
             };
-
             if (!model.isFollowing){
                 ValidationModel.create(validationModel).then(function(newValidation){
-                    var index = $scope.members.map(function(obj){return obj.id}).indexOf($scope.newFollower.followed);
+                    console.log(newValidation)
+                    var index = $scope.members.map(function(obj){return obj.id}).indexOf(model.id);
                     $scope.members[index].isFollowing = true;
                     $scope.members[index].followerCount++;
                     $rootScope.pop('Following!', 'You are now follwing '+ model.username);
                 });
             }
             if (model.isFollowing){
-                var index = $scope.members.map(function(obj){return obj.id}).indexOf($scope.newFollower.followed);
+                var index = $scope.members.map(function(obj){return obj.id}).indexOf(model.id);
                 $scope.members[index].isFollowing = false;
                 $scope.members[index].followerCount--;
                 $rootScope.pop('Unfollowed!', 'You Unfollowed '+ model.username);
-            }
-            */
-
-            $scope.newFollower = {
-                followed:model.id,
-                follower:$rootScope.currentUser.id,
-            };
-            console.log('CREATE MEMBER-MEMBER ASSOCIATION', $scope.newFollower, model);
-            if (!model.isFollowing){
-                FollowerModel.create($scope.newFollower).then(function(followerModel) {
-                    var index = $scope.members.map(function(obj){return obj.id}).indexOf($scope.newFollower.followed);
-                    $scope.members[index].isFollowing = true;
-                    $scope.members[index].followerCount++;
-                    $rootScope.pop('Following!', 'You are now follwing '+ model.username);
-                    $scope.newFollower = {};
-                });
-            }
-            if (model.isFollowing){
-                var index = $scope.members.map(function(obj){return obj.id}).indexOf($scope.newFollower.followed);
-                $scope.members[index].isFollowing = false;
-                $scope.members[index].followerCount--;
-                $rootScope.pop('Unfollowed!', 'You Unfollowed '+ model.username);
-                $scope.newFollower = {};
             }
         };
         
@@ -879,76 +823,85 @@ angular.module( 'conexus.home', [
 
         $scope.activity = searchModels;
 
-        $scope.contentList = searchModels.filter(function(obj){
-            return obj.model == 'CONTENT';
-        });
-        $scope.members = searchModels.filter(function(obj){
-            return obj.model == 'MEMBER';
-        });
-        $scope.orders = searchModels.filter(function(obj){
-            return obj.model == 'ORDER';
-        });
-        $scope.projects = searchModels.filter(function(obj){
-            return obj.model == 'PROJECT';
-        });
-        $scope.tasks = searchModels.filter(function(obj){
-            return obj.model == 'TASK';
-        });
-        $scope.time = searchModels.filter(function(obj){
-            return obj.model == 'TIME';
-        });
-        $scope.transactions = searchModels.filter(function(obj){
-            return obj.model == 'TRANSACTION';
-        });
+        $scope.contentList = searchModels.filter(function(obj){return obj.model == 'CONTENT';});
+        $scope.members = searchModels.filter(function(obj){return obj.model == 'MEMBER';});
+        $scope.orders = searchModels.filter(function(obj){return obj.model == 'ORDER';});
+        $scope.projects = searchModels.filter(function(obj){return obj.model == 'PROJECT';});
+        $scope.tasks = searchModels.filter(function(obj){return obj.model == 'TASK';});
+        $scope.time = searchModels.filter(function(obj){return obj.model == 'TIME';});
+        $scope.transactions = searchModels.filter(function(obj){return obj.model == 'TRANSACTION';});
 
         console.log(searchModels);
-
-        //AS MEMBER ASSOCIATIONS....
-        //LOL OBV DEPRECIATE
-        FollowerModel.getFollowing($rootScope.currentUser).then(function(followers){
-            
-            $scope.followers = followers;
-            $scope.memberProjects = [];
-
-            TaskModel.get({user:$rootScope.currentUser.id, limit:100, skip:0, sort:'createdAt DESC'}).then(function(memberTasks){
-                $scope.memberTasks = memberTasks;
-                OrderModel.get({user:$rootScope.currentUser.id, limit:100, skip:0, sort:'createdAt DESC'}).then(function(positions){
-                    $scope.positions = positions;
-                    $scope.init();
-                    $scope.initTutorial();
-                    $scope.renderBalances();
-
-                    $scope.projects.map(function(obj){
-                        var index = $scope.memberProjects.map(function(obj1){return obj1.id}).indexOf(obj.id);
-                        if (index != -1){obj.isMember = true;}
-                        if (index == -1){obj.isMember = false;}
-                        return obj;
-                    });
-
-                    $scope.tasks.map(function(obj){
-                        var index = $scope.memberTasks.map(function(obj1){return obj1.id}).indexOf(obj.id);
-                        if (index != -1){obj.isAssociated = true;}
-                        if (index == -1){obj.isAssociated = false;}
-                        return obj;
-                    });
-
-                    if ($scope.followers ){
-                        $scope.followers = $scope.followers.map(function(obj){return obj.followed});    
-                        $scope.members.map(function(obj){
-                            var index = $scope.followers.map(function(obj1){
-                                if (obj1){return obj1.id;}
-                            }).indexOf(obj.id);
-                            if (index != -1){obj.isFollowing = true;}
-                            if (index == -1){obj.isFollowing = false;}
-                            return obj;
-                        });
+        
+        //BETTER
+        if ($rootScope.currentUser.associationModel){
+            $scope.followers = $rootScope.currentUser.associationModels.map(function(obj) {
+                for (x in obj.associatedModels){
+                    if (obj.associatedModels[x].type == 'MEMBER'){
+                        var returnObj = {};
+                        if(obj.associatedModels[x].data){
+                            returnObj = obj.associatedModels[x].data;
+                            returnObj.associationId = obj._id
+                        }
+                        return returnObj;
                     }
+                }
+            });
+            $scope.memberProjects = $rootScope.currentUser.associationModels.map(function(obj) {
+                for (x in obj.associatedModels){
+                    if (obj.associatedModels[x].type == 'PROJECT'){
+                        var returnObj = {};
+                        if(obj.associatedModels[x].data){
+                            returnObj = obj.associatedModels[x].data;
+                            returnObj.associationId = obj._id
+                        }
+                        return returnObj;
+                    }
+                }
+            });
+            $scope.memberTasks = $rootScope.currentUser.associationModels.map(function(obj) {
+                for (x in obj.associatedModels){
+                    if (obj.associatedModels[x].type == 'TASK'){
+                        var returnObj = {};
+                        if(obj.associatedModels[x].data){
+                            returnObj = obj.associatedModels[x].data;
+                            returnObj.associationId = obj._id
+                        }
+                        return returnObj;
+                    }
+                }
+            });
+        }
 
-                });
+
+        OrderModel.get({user:$rootScope.currentUser.id, limit:100, skip:0, sort:'createdAt DESC'}).then(function(positions){
+            
+            $scope.positions = positions;
+            
+            $scope.init();
+            $scope.initTutorial();
+            $scope.renderBalances();
+
+            $scope.projects.map(function(obj){
+                var index = $scope.memberProjects.map(function(obj1){return obj1.id}).indexOf(obj.id);
+                if (index != -1){obj.isMember = true;}
+                if (index == -1){obj.isMember = false;}
+                return obj;
+            });
+            $scope.tasks.map(function(obj){
+                var index = $scope.memberTasks.map(function(obj1){return obj1.id}).indexOf(obj.id);
+                if (index != -1){obj.isAssociated = true;}
+                if (index == -1){obj.isAssociated = false;}
+                return obj;
+            });
+            $scope.members.map(function(obj){
+                var index = $scope.followers.map(function(obj1){return obj1.id}).indexOf(obj.id);
+                if (index != -1){obj.isFollowing = true;}
+                if (index == -1){obj.isFollowing = false;}
+                return obj;
             });
 
         });
-
 
     });
 

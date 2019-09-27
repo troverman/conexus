@@ -41,17 +41,16 @@ module.exports = {
 		}
 
 		else{
-			Token.native(function(err, token) {
-				token.find({})
-				.limit(limit)
-				.skip(skip)
-				.sort({'information.markets':-1, "information.inCirculation": -1, "createdAt": -1})
-				.toArray(function (err, models) {
-					models = models.map(function(obj){ obj.id = obj._id; return obj;});
-					Token.count().then(function(numRecords){
-						var returnObj = {data:models, info:{count:numRecords}};
-						res.json(returnObj);
-					});
+			Token.getDatastore().manager.collection('token')
+			.find({})
+			.limit(limit)
+			.skip(skip)
+			.sort({'information.markets':-1, "information.inCirculation": -1, "createdAt": -1})
+			.toArray(function (err, models) {
+				models = models.map(function(obj){ obj.id = obj._id; return obj;});
+				Token.count().then(function(numRecords){
+					var returnObj = {data:models, info:{count:numRecords}};
+					res.json(returnObj);
 				});
 			});
 		}

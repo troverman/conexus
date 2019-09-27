@@ -8,7 +8,7 @@ module.exports = {
         context:{type: 'string'},
         creator:{type: 'string'},
     	type:{type: 'string'},
-        associatedModels:{type: 'string'},
+        associatedModels:{type: 'json'},
         data: {type: 'json'},
 
 

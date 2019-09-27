@@ -21,7 +21,7 @@ angular.module( 'conexus.content', [
     });
 }])
 
-.controller( 'ContentController', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'content', 'contentList', 'ContentModel', 'ReactionModel', 'titleService', 'UserModel', function ContentController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, content, contentList, ContentModel, ReactionModel, titleService, UserModel ) {
+.controller( 'ContentController', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$scope', 'AssociationModel', 'content', 'contentList', 'ContentModel', 'titleService', function ContentController( $location, $mdSidenav, $rootScope, $sailsSocket, $scope, AssociationModel, content, contentList, ContentModel, titleService ) {
     
     $scope.content = content;
     $scope.content.children = contentList;
@@ -31,6 +31,20 @@ angular.module( 'conexus.content', [
     else{titleService.setTitle('Content | CRE8.XYZ')}
 
     console.log($scope.content, $scope.content.associationModels);
+
+    //GET PARENT CHILD - COMMENT TREE ASSOCIATION BUILD
+    //TODO: NESTED COMMENTS :)
+        //--> GOES TO NESTED VALIDATIONS
+
+    var query = {
+        limit:100,
+        skip:0,
+        sort:'createdAt DESC',
+        filter:JSON.stringify({id:$scope.content.id, type:'CONTENT'})
+    };
+    AssociationModel.get(query).then(function(associations){
+        console.log(associations);
+    });
 
     $scope.tokenChart = {
         chart: {zoomType: 'x'},
@@ -66,7 +80,6 @@ angular.module( 'conexus.content', [
         }
     };
     if ($scope.content.data.apps.tokens){$scope.populateTokenChart();}
-
 
     $scope.content.context = [];
     if ($scope.content.associationModels){

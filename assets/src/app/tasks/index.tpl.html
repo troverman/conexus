@@ -94,14 +94,11 @@
 	    </div>
 
 	    <div class="col-sm-8" style="padding-left:0px;padding-right:0px;">
-
-
 			<div class="card"><button class="btn btn-default log-btn" ng-click="taskToggle()">+ Task</button></div>		
 			<div ng-repeat="item in tasks"><div ng-include="'templates/cards/taskCard.tpl.html'"></div></div>
 			<div ng-show="taskCount > tasks.length" class="card" style="text-align:center" ng-click="loadMore()">
                 <button style="width:100%" class="btn btn-default log-btn">MORE <i class="fa fa-angle-down"></i></button>
             </div>
-
 		</div>
 	</div>
 </div>

@@ -93,8 +93,14 @@ angular.module( 'conexus.project', [
             }
         },
         resolve: {
-            contentList: ['ContentModel', 'project', function(ContentModel, project){
-                return ContentModel.get({project:project.id, limit:100, skip:0, sort:'createdAt DESC'});
+            contentList: ['AssociationModel', 'project', function(AssociationModel, project){
+                var query = {
+                    filter:JSON.stringify({type:'CONTENT', id:project.id}),
+                    limit:100,
+                    skip:0,
+                    sort:'createdAt DESC'
+                };
+                return AssociationModel.get(query);
             }],            
         }
     })
@@ -108,6 +114,13 @@ angular.module( 'conexus.project', [
         },
         resolve: {
             connections: ['ConnectionModel', 'project', function(ConnectionModel, project){
+                var query = {
+                    filter:JSON.stringify({type:'CONNECTION', id:project.id}),
+                    limit:100,
+                    skip:0,
+                    sort:'createdAt DESC'
+                };
+                //return AssociationModel.get(query);
                 return ConnectionModel.get({creator:project.id, limit:100, skip:0, sort:'createdAt DESC'});
             }]
         }
@@ -142,8 +155,14 @@ angular.module( 'conexus.project', [
             }
         },
         resolve: {
-            items: ['project', 'ItemModel', function(project, ItemModel) {
-                return ItemModel.get({filter:[{project:project.id}], limit:100, skip:0, sort:'createdAt DESC'});
+            items: ['AssociationModel', 'project', function(AssociationModel, project) {
+                var query = {
+                    filter:JSON.stringify({type:'ITEM', id:project.id}),
+                    limit:100,
+                    skip:0,
+                    sort:'createdAt DESC'
+                };
+                return AssociationModel.get(query);
             }]
         }
     })
@@ -159,10 +178,14 @@ angular.module( 'conexus.project', [
             connections: ['ConnectionModel', 'project', function(ConnectionModel, project){
                 return ConnectionModel.get({creator:project.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
-            //TODO
             members: ['AssociationModel', 'project', function(AssociationModel, project) {
-                return [];
-                //return AssociationModel.get({project:project.id, limit:100, skip:0, sort:'createdAt DESC'});
+                var query = {
+                    filter:JSON.stringify({type:'MEMBER', id:project.id}),
+                    limit:100,
+                    skip:0,
+                    sort:'createdAt DESC'
+                };
+                return AssociationModel.get(query);
             }]
         }
     })
@@ -176,6 +199,13 @@ angular.module( 'conexus.project', [
         },
         resolve: {
             orders: ['OrderModel', 'project', function(OrderModel, project){
+                var query = {
+                    filter:JSON.stringify({type:'ORDER', id:project.id}),
+                    limit:100,
+                    skip:0,
+                    sort:'createdAt DESC'
+                };
+                //return AssociationModel.get(query);
                 return OrderModel.get({limit:20, skip:0, sort:'createdAt DESC'});
             }],
         }
@@ -189,8 +219,15 @@ angular.module( 'conexus.project', [
             }
         },
         resolve: {
-            //TODO: DEPRECIATE.. 
-            projects: ['project', 'ProjectModel', function(project, ProjectModel){
+            projects: ['AssociationModel', 'project', 'ProjectModel', function(AssociationModel, project, ProjectModel){
+                var query = {
+                    filter:JSON.stringify({type:'PROJECT', id:project.id}),
+                    limit:100,
+                    skip:0,
+                    sort:'createdAt DESC'
+                };
+                //TODO-CONNECTION--BETTER PARAMS
+                //return AssociationModel.get(query);
                 return ProjectModel.getChildren(project);
             }],
         }
@@ -213,8 +250,14 @@ angular.module( 'conexus.project', [
             }
         },
         resolve: {
-            tasks: ['project', 'TaskModel', function(project, TaskModel){
-                return TaskModel.get({project:project.id, limit:10, skip:0, sort:'createdAt DESC'});
+            tasks: ['AssociationModel', 'project', function(AssociationModel, project){
+                var query = {
+                    filter:JSON.stringify({type:'TASK', id:project.id}),
+                    limit:100,
+                    skip:0,
+                    sort:'createdAt DESC'
+                };
+                return AssociationModel.get(query);
             }],
         }
     })
@@ -228,6 +271,13 @@ angular.module( 'conexus.project', [
         },
         resolve: {
             time: ['project', 'TimeModel', function(project, TimeModel) {
+                var query = {
+                    filter:JSON.stringify({type:'TIME', id:project.id}),
+                    limit:100,
+                    skip:0,
+                    sort:'createdAt DESC'
+                };
+                //return AssociationModel.get(query);
                 return TimeModel.get({project:project.id, limit:10, skip:0, sort:'createdAt DESC'});
             }]
         }
@@ -486,40 +536,15 @@ angular.module( 'conexus.project', [
 .controller( 'ProjectContentCtrl', ['$location', '$mdSidenav', '$rootScope', '$sce', '$scope', 'contentList', 'ContentModel', 'project', 'titleService', function ProjectController( $location, $mdSidenav, $rootScope, $sce, $scope, contentList, ContentModel, project, titleService ) {
     
     titleService.setTitle(project.title + ' | Content | CRE8.XYZ'); 
-    $scope.contentList = contentList;
-
-    //TODO: BETTER PROCEDURAL CONTENT
-    if ($scope.contentList.length == 0){
-        $scope.contentList = [];
-        for(var i=0;i < 50;i++){
-
-            var words =["The sky", "above", "the port","was", "the color of television", "tuned", "to", "a dead channel", ".", "All", "this happened", "more or less","." ,"I", "had", "the story", "bit by bit", "from various people", "and", "as generally", "happens", "in such cases", "each time", "it", "was", "a different story","." ,"It", "was", "a pleasure", "to", "burn"];
-            var title = [];
-            var content = [];
-            var tags = [];
-
-            var x = 7;
-            while(--x) title.push(words[Math.floor(Math.random() * words.length)]);
-            
-            var y = 100;
-            while(--y) content.push(words[Math.floor(Math.random() * words.length)]);
-            
-            var z = 10;
-            while(--z) tags.push(words[Math.floor(Math.random() * words.length)]);
-
-            $scope.contentList.push({
-                id:i,
-                model:'CONTENT',
-                title:title.join(' '),
-                content:content.join(' '),
-                tags: tags.join(','),
-                reactions:{plus:0,minus:0},
-                associatedModels:[{type:'PROJECT',address:$scope.project.id}],
-                createdAt:new Date(),
-                user:{username:'CRE8', id:'57ab77fa804f7c11002a78db', avatarUrl:'http://localhost:1337/images/loading.gif'},
-            });
+    $scope.contentList = contentList.map(function(obj) {
+        for (x in obj.associatedModels){
+            if (obj.associatedModels[x].type == 'CONTENT'){
+                var returnObj = obj.associatedModels[x].data;
+                returnObj.associationId = obj._id
+                return returnObj;
+            }
         }
-    }
+    });
 
 }])
     
@@ -895,63 +920,15 @@ angular.module( 'conexus.project', [
 .controller( 'ProjectItemsCtrl', ['$location', '$mdSidenav', '$sailsSocket', '$scope', 'items', 'project', 'titleService', function ProjectMarketplaceController( $location, $mdSidenav, $sailsSocket, $scope, items, project, titleService) {
    
     titleService.setTitle(project.title + ' | Items | CRE8.XYZ');
-
-    $scope.items = items;
-    if ($scope.items.length == 0){
-        $scope.items = [];
-        for(var i=0;i < 50;i++){
-            var items = [
-                {title:'Random Thing', tags:'random,thing,what', content:'This is a random thing', user:{username:'troverman'}},
-                {title:'Eight Print', tags:'eight,symbolism,ethos', content:'This is an eight', user:{username:'troverman'}},
-                {title:'Rare Item', tags:'rare,item,create', content:'This is a Rare Item', user:{username:'troverman'}},
-                {title:'Rare Book', tags:'rare,book,reading,literature', content:'This is a Rare Book', user:{username:'troverman'}},
-                {title:'Rare Cloth', tags:'rare,cloth,supplies,art', content:'This is a Rare Cloth', user:{username:'troverman'}},
-                {title:'Rare Shirt', tags:'rare,clothes,cloth,apparal,shirt', content:'This is a Rare Shit', user:{username:'troverman'}},
-
-            ];
-            var item = items[Math.floor(Math.random()*items.length)];
-
-            $scope.items.push({
-                id:i,
-                title: item.title,
-                content: item.content,
-                tags: item.tags,
-                reactions:{plus:0,minus:0},
-                user:item.user
-            })
-        }
-    }
-    $scope.items.map(function(obj){
-        if(obj.tags){obj.tags=obj.tags.split(',')}
-        return obj;
-    });
-
-    $scope.map = {
-        center: {latitude: 35.902023, longitude: -84.1507067 },
-        zoom: 9
-    };
-    $scope.markers = [];
-    $scope.options = {scrollwheel: false};
-
-    $scope.loadTags = function(){
-        $scope.tags = $scope.items.map(function(obj){
-            return obj.tags;
-        });
-        $scope.tags = [].concat.apply([], $scope.tags);
-        $scope.tags = $scope.tags.filter(function(e){return e});
-        function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0)}
-        $scope.sortedTagArray = [];
-        for (x in $scope.tags){
-            var amount = countInArray($scope.tags, $scope.tags[x]);
-            if ($scope.sortedTagArray.map(function(obj){return obj.element}).indexOf($scope.tags[x]) == -1){
-                $scope.sortedTagArray.push({amount:amount, element:$scope.tags[x]})
+    $scope.items = items.map(function(obj) {
+        for (x in obj.associatedModels){
+            if (obj.associatedModels[x].type == 'ITEM'){
+                var returnObj = obj.associatedModels[x].data;
+                returnObj.associationId = obj._id
+                return returnObj;
             }
         }
-        $scope.sortedTagArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
-    };
-    $scope.loadTags();
-    $scope.sortedAssociationArray = $scope.sortedTagArray;
-    $scope.filterSet = {tags:$scope.sortedTagArray, associations:$scope.sortedAssociationArray, locations:$scope.sortedLocationsArray}
+    });
 
 }])
 
@@ -959,41 +936,21 @@ angular.module( 'conexus.project', [
     titleService.setTitle(project.title + ' | Members | CRE8.XYZ');
 
     $scope.connections = connections;
-    
-    //$scope.members = members;
+    $scope.members = members.map(function(obj) {
+        for (x in obj.associatedModels){
+            if (obj.associatedModels[x].type == 'MEMBER'){
+                var returnObj = obj;
+                returnObj.user = obj.associatedModels[x].data;
+                returnObj.id = returnObj._id
+                return returnObj;
+            }
+        }
+    });
     $scope.project = project;
-
-    if ($scope.project.associationModels){
-        $scope.members = $scope.project.associationModels.filter(function(obj){
-            for (x in obj.associatedModels){
-                if (obj.associatedModels[x].type == 'MEMBER'){
-                    return obj;
-                }
-            }
-        }).map(function(obj) {
-            for (x in obj.associatedModels){
-                if (obj.associatedModels[x].type == 'MEMBER'){
-                    var returnObj = obj;
-                    returnObj.user =  obj.associatedModels[x].data;
-                    returnObj.id = returnObj._id
-                    return returnObj;
-                }
-            }
-        });
-    }
-
-    //FILTER OUT MEMBER..
-    //var filter = [{type:'PROJECT',id:project.id},{type:'MEMBER'}];
-        //AssociationModel.get({filter:filter, limit:20, skip:0, sort:'createdAt DESC'}).then(function(members){
-        //console.log(members);
-        //$scope.members = members;
-    //});
 
     $sailsSocket.subscribe('association', function (envelope) {
         console.log(envelope);
-        if (envelope.verb == 'create'){
-            $scope.members.unshift(envelope.data);
-        }
+        if (envelope.verb == 'create'){$scope.members.unshift(envelope.data);}
     });
     
 }])
@@ -1102,40 +1059,34 @@ angular.module( 'conexus.project', [
 
 .controller( 'ProjectProjectsCtrl', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'project', 'ProjectModel', 'projects', 'titleService', function ProjectController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, project, ProjectModel, projects, titleService ) {
     
-    //TODO: DEPRECIATE
     titleService.setTitle(project.title + ' | Projects | CRE8.XYZ');
-    
     $scope.project = project;
-    $scope.projects = projects;
-
-    //TODO: HMM
-    if ($scope.projects.length == 0){
-        $scope.projects = [];
-        for(var i=0;i < 10;i++){
-            //$scope.projects.push({title:'Project1'});
-        }
-    }
+    $scope.projects = projects
+    //.map(function(obj) {
+    //for (x in obj.associatedModels){
+    //        if (obj.associatedModels[x].type == 'PROJECT'){
+    //            var returnObj = obj.associatedModels[x].data;
+    //            returnObj.associationId = obj._id
+    //            return returnObj;
+    //       }
+    //   }
+    //});
 
     //TODO: LOL
     if ($scope.projects.length > 0){
         var locationProjects = $scope.projects.map(function(obj){if(obj.location){return obj}}).filter(Boolean);
-        console.log(locationProjects);
         if (locationProjects.length > 0){
             if($scope.project.location){
                 $rootScope.map = {
-                    center: {latitude: $scope.project.location.lat, longitude: $scope.project.location.lng },
-                    zoom: 13
+                    center: {latitude: $scope.project.location.lat, longitude: $scope.project.location.lng }, zoom: 13
                 };
             }
             else{
                 $rootScope.map = {
-                    center: {latitude: locationProjects[0].location.lat, longitude: locationProjects[0].location.lng },
-                    zoom: 13
+                    center: {latitude: locationProjects[0].location.lat, longitude: locationProjects[0].location.lng }, zoom: 13
                 };
             }
-            $rootScope.options = {
-               disableDefaultUI: true
-            };
+            $rootScope.options = {disableDefaultUI: true};
             for (x in locationProjects){
                 $rootScope.markers.push({
                     id:locationProjects[x].id,
@@ -1159,95 +1110,17 @@ angular.module( 'conexus.project', [
 .controller( 'ProjectTasksCtrl', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'project', 'ReactionModel', 'TaskModel', 'tasks', 'titleService', function ProjectController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, project, ReactionModel, TaskModel, tasks, titleService ) {
     
     titleService.setTitle(project.title + ' | Tasks | CRE8.XYZ');
-    
-    $scope.newContent = {};
-    $scope.newReaction = {};
-    $scope.newTask = {};
-    $scope.tasks = tasks;
+
     $scope.project = project;
-
-    //TODO: SAMPLE CRYSTAL FUN
-    if ($scope.tasks.length == 0){
-        $scope.tasks = [];
-        for(var i=0;i < 50;i++){
-            var canvas = {
-                id:i,
-                title:'Canvas and Organize Participants',
-                content:'Community Evangelist, doing the leg work of engaging and growing the community! Let\'s Go Door to Door!',
-                tags: 'canvas, organize, register, campaign, community',
-                reactions:{plus:0,minus:0},
-                user:{username:'CRE8', id:'57ab77fa804f7c11002a78db', avatarUrl:'http://localhost:1337/images/loading.gif'},
-                associatedModels:[{type:'PROJECT',address:$scope.project.id}],
-            };
-            var attend = {
-                id:i,
-                title:'Attend Community Events',
-                content:'Attend Community Events, Come out and join us!',
-                tags: 'attend, community, event, presence',
-                reactions:{plus:0,minus:0},
-                user:{username:'CRE8', id:'57ab77fa804f7c11002a78db', avatarUrl:'http://localhost:1337/images/loading.gif'},
-                associatedModels:[{type:'PROJECT',address:$scope.project.id}],
-            };
-            var organize = {
-                id:i,
-                title:'Organize Community Event',
-                content:'Help Cocreate Community Events, Let\'s Collab!',
-                tags: 'create, content, presence',
-                reactions:{plus:0,minus:0},
-                user:{username:'CRE8', id:'57ab77fa804f7c11002a78db', avatarUrl:'http://localhost:1337/images/loading.gif'},
-                associatedModels:[{type:'PROJECT',address:$scope.project.id}],
-            };
-            if (i % 2){$scope.tasks.push(canvas)}
-            else if (i % 3){$scope.tasks.push(attend)}
-            else{$scope.tasks.push(organize)}
-        }
-    }
-
-    $scope.tasks.map(function(obj){
-        obj.model = 'TASK';
-        obj.tokens = [];
-        obj.tokens.push('CRE8');
-        obj.tokens.push('CRE8+TIME');
-        obj.tokens.push('CRE8+TIME+'+obj.title.toUpperCase().replace(/ /g, '-')+'.'+obj.id);
-        obj.tokens.push('CRE8+TIME+'+$scope.project.title.toUpperCase().replace(/ /g, '-')+'.'+$scope.project.id);
-        if (obj.tags){
-            obj.tags = obj.tags.split(',');
-            for (x in obj.tags){
-                console.log(obj.tags[x])
-                obj.tokens.push('CRE8+TIME+'+obj.tags[x].trim().toUpperCase());
-                obj.tokens.push('CRE8+TIME+'+obj.title.toUpperCase().replace(/ /g, '-')+'.'+obj.id+'+'+obj.tags[x].trim().toUpperCase());
-                obj.tokens.push('CRE8+TIME+'+$scope.project.title.toUpperCase().replace(/ /g, '-')+'.'+$scope.project.id+'+'+obj.tags[x].trim().toUpperCase());
+    $scope.tasks = tasks.map(function(obj) {
+        for (x in obj.associatedModels){
+            if (obj.associatedModels[x].type == 'TASK'){
+                var returnObj = obj.associatedModels[x].data;
+                returnObj.associationId = obj._id
+                return returnObj;
             }
         }
-        return obj;
     });
-
-    $scope.filterContent = function(filter) {
-        $rootScope.stateIsLoading = true;
-        TaskModel.get('tag', filter, 20, 0, 'createdAt DESC').then(function(tasks){
-            $rootScope.stateIsLoading = false;
-            $scope.tasks = tasks;
-            $scope.loadTags();
-        });
-    };
-
-    $scope.loadTags = function(){
-        $scope.tags = $scope.tasks.map(function(obj){
-            return obj.tags;;
-        });
-        $scope.tags = [].concat.apply([], $scope.tags);
-        $scope.tags = $scope.tags.filter(function(e){return e});
-        function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0)}
-        $scope.sortedTagArray = [];
-        for (x in $scope.tags){
-            var amount = countInArray($scope.tags, $scope.tags[x]);
-            if ($scope.sortedTagArray.map(function(obj){return obj.element}).indexOf($scope.tags[x]) == -1){
-                $scope.sortedTagArray.push({amount:amount, element:$scope.tags[x]})
-            }
-        }
-        $scope.sortedTagArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
-    }
-    $scope.loadTags();
 
     $sailsSocket.subscribe('task', function (envelope) {
         if (envelope.verb == 'create'){

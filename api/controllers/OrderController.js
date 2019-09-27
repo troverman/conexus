@@ -124,44 +124,43 @@ module.exports = {
 			andQuery.$and.push(query);
 			andQuery.$and.push({ "$where": "return Object.keys(this.setAlpha).length == "+setAlpha.length })
 
-			Order.native(function(err, order) {
-				order.find(andQuery)
-				.limit(limit)
-				.skip(skip)
-				.sort({'createdAt':-1})
-				.toArray(function (err, models) {
-					models = models.map(function(obj){obj.id = obj._id; return obj;});
+			Order.getDatastore().manager.collection('order')
+			.find(andQuery)
+			.limit(limit)
+			.skip(skip)
+			.sort({'createdAt':-1})
+			.toArray(function (err, models) {
+				models = models.map(function(obj){obj.id = obj._id; return obj;});
 
-					//build market then on action add. dont need to build every get
-					//buildMarket(models);
+				//build market then on action add. dont need to build every get
+				//buildMarket(models);
 
-					var promises = [];
-					for (x in models){promises.push(User.find({id:models[x].user.toString()}))}
-					Q.all(promises).then((populatedModels)=>{
-						for (x in models){models[x].user = populatedModels[x][0];}
-						res.json(models);
-					});
+				var promises = [];
+				for (x in models){promises.push(User.find({id:models[x].user.toString()}))}
+				Q.all(promises).then((populatedModels)=>{
+					for (x in models){models[x].user = populatedModels[x][0];}
+					res.json(models);
 				});
 			});
+
 		}
 
 		//?? 
 		else if(req.query.setBeta && !req.query.setAlpha){
 			var query = {};
 			query[ "setBeta."+req.query.setBeta] = {$gt: 0};
-			Order.native(function(err, order) {
-				order.find(query)
-				.limit(limit)
-				.skip(skip)
-				.sort({'createdAt':-1})
-				.toArray(function (err, models) {
-					models = models.map(function(obj){obj.id = obj._id; return obj;});
-					var promises = [];
-					for (x in models){promises.push(User.find({id:models[x].user.toString()}))}
-					Q.all(promises).then((populatedModels)=>{
-						for (x in models){models[x].user = populatedModels[x][0];}
-						res.json(models);
-					});
+			Order.getDatastore().manager.collection('order')
+			.find(query)
+			.limit(limit)
+			.skip(skip)
+			.sort({'createdAt':-1})
+			.toArray(function (err, models) {
+				models = models.map(function(obj){obj.id = obj._id; return obj;});
+				var promises = [];
+				for (x in models){promises.push(User.find({id:models[x].user.toString()}))}
+				Q.all(promises).then((populatedModels)=>{
+					for (x in models){models[x].user = populatedModels[x][0];}
+					res.json(models);
 				});
 			});
 		}
@@ -205,17 +204,15 @@ module.exports = {
 			//setAlpha.troverman = 10
 
 			console.log(andQuery);
-
-			Order.native(function(err, order) {
-				order.find(andQuery)
-				.limit(limit)
-				.skip(skip)
-				.sort({'createdAt':-1})
-				.toArray(function (err, models) {
-					console.log(models);
-					models = models.map(function(obj){obj.id = obj._id; return obj;});
-					res.json(models);
-				});
+			Order.getDatastore().manager.collection('order')
+			.find(andQuery)
+			.limit(limit)
+			.skip(skip)
+			.sort({'createdAt':-1})
+			.toArray(function (err, models) {
+				console.log(models);
+				models = models.map(function(obj){obj.id = obj._id; return obj;});
+				res.json(models);
 			});
 		}
 
@@ -259,29 +256,27 @@ module.exports = {
 			};
 
 			console.log(query)
+			Order.getDatastore().manager.collection('order')
+			.find(query)
+			.limit(limit)
+			.skip(skip)
+			.sort({'createdAt':-1})
+			.toArray(function (err, models) {
+				console.log(models)
+				if (models.length != 0){
+					models = models.map(function(obj){obj.id = obj._id; return obj;});
 
-			Order.native(function(err, order) {
-				order.find(query)
-				.limit(limit)
-				.skip(skip)
-				.sort({'createdAt':-1})
-				.toArray(function (err, models) {
-					console.log(models)
-					if (models.length != 0){
-						models = models.map(function(obj){obj.id = obj._id; return obj;});
+					//var market = buildMarket(item, models);
+					res.json({data:models,market:[]});
 
-						//var market = buildMarket(item, models);
-						res.json({data:models,market:[]});
-
-						//var promises = [];
-						//for (x in models){promises.push(User.find({id:models[x].user.toString()}))}
-						//Q.all(promises).then((populatedModels)=>{
-						//	for (x in models){models[x].user = populatedModels[x][0];}
-						//	res.json({data:models,market:market});
-						//});
-					}
-					else{res.json({data:[],market:{}})}
-				});
+					//var promises = [];
+					//for (x in models){promises.push(User.find({id:models[x].user.toString()}))}
+					//Q.all(promises).then((populatedModels)=>{
+					//	for (x in models){models[x].user = populatedModels[x][0];}
+					//	res.json({data:models,market:market});
+					//});
+				}
+				else{res.json({data:[],market:{}})}
 			});
 
 		}

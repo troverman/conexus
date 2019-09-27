@@ -114,43 +114,6 @@ module.exports = {
 			});
 		}
 
-		else if (req.query.task){
-			//WORK HERE
-			Validation.native(function(err, validation) {
-				validation.find({"associatedModels.address":{$in :[task]}})
-				.limit(limit)
-				.skip(skip)
-				.sort({'createdAt':-1})
-				.toArray(function (err, models) {
-					models = models.map(function(obj){obj.id = obj._id;return obj;});
-					//JOIN TO USER
-					var promises = [];
-					for (x in models){
-						promises.push(User.find({id:models[x].user.toString()}).then(function(userModels){return {user:userModels[0]}}));
-						for (y in models[x].associatedModels){
-							if (models[x].associatedModels[y].type == 'PROJECT'){promises.push(Project.find({id:models[x].associatedModels[y].address}).then(function(projectModels){return {project:projectModels[0]}}))}
-							if (models[x].associatedModels[y].type == 'TASK'){promises.push(Task.find({id:models[x].associatedModels[y].address}).then(function(taskModels){return {task:taskModels[0]}}))}
-							if (models[x].associatedModels[y].type == 'TIME'){promises.push(Time.find({id:models[x].associatedModels[y].address}).then(function(timeModels){return {time:timeModels[0]}}))}
-						}
-					}
-					Q.all(promises).then((populatedModels)=>{
-						var sum = 0;
-						for (x in models){
-							models[x].user = populatedModels[sum].user;
-							sum++;
-							for (y in models[x].associatedModels){
-								if (models[x].associatedModels[y].type == 'PROJECT'){models[x].associatedModels[y].info = populatedModels[sum].project;}
-								if (models[x].associatedModels[y].type == 'TASK'){models[x].associatedModels[y].info = populatedModels[sum].task;}
-								if (models[x].associatedModels[y].type == 'TIME'){models[x].associatedModels[y].info = populatedModels[sum].time;}
-								sum++;
-							}
-						}
-						res.json(models);
-					});
-				});
-			});
-		}
-
 		else if(req.query.user){
 			Validation.find({user:user})
 			.limit(limit)
@@ -206,60 +169,112 @@ module.exports = {
 		};
 
 		function mintTokens(model){
-			var protocolTokens = getProtocolTokens(model);
+			var transactionProtocolTokens = getProtocolTokens(model);
+			for (x in transactionProtocolTokens){
+				var tokenString = transactionProtocolTokens[x]; 
+				(function(tokenString) {
+					Token.find({string:tokenString}).then(function(tokenModels){
+						if (tokenModels.length == 0){
+							var newTokenModel = {
+								string:tokenString,
+								protocols:['CRE8','TRANSACTION'], 
+								information:{inCirculation:model.amount, markets:0},
+								logic:{transferrable:true, mint:'CREATE TIME'}
+							};
+							Token.create(newTokenModel).then(function(model){console.log('TOKEN CREATED', model.string);});
+							model.user.balance[tokenString] = parseFloat(model.amount);
+							User.update({id:model.user.id}, {balance:model.user.balance}).then(function(user){});
+						}
+						else{
+							tokenModels[0].information.inCirculation = parseInt(tokenModels[0].information.inCirculation) + parseFloat(model.amount); 
+							Token.update({id:tokenModels[0].id}, {information:tokenModels[0].information}).then(function(model){console.log('TOKEN UPDATED', model)});
+							if (model.user.balance[tokenString]){model.user.balance[tokenString] = parseInt(model.user.balance[tokenString]) + parseFloat(model.amount);}
+							else{model.user.balance[tokenString] = parseFloat(model.amount);}
+							User.update({id:model.user.id}, {balance:model.user.balance}).then(function(user){});
+						}
+					});
+				})(tokenString);
+			}
 		};
 
 		function getProtocolTokens(model){
-			var protocolTokens = ['CRE8', 'CRE8+VALIDATION'];
+			var protocolTokens = [
+				'CRE8', 
+				'CRE8+VALIDATION', 
+				'CRE8+VALIDATION+'+model.id, 
+			];
+
+			//DATA TO STRING INTREPRETER
+			for (x in Object.keys(model)){
+				var dataType = Object.keys(model)[x].toUpperCase();
+				//[Object object].. recursive. and large.. ie hashem
+				var data = model[Object.keys(model)[x]];
+				var prefix = 'CRE8+VALIDATION';
+				var string = prefix+'+'+dataType+'+'+data;
+				protocolTokens.push(string);
+			};
+
+			//HASH :P
+			//store real data in token model? 
+			for (x in Object.keys(model)){
+				var data = model[Object.keys(model)[x]];
+				var hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(data)).digest('hex');
+				var prefix = 'CRE8+VALIDATION';
+				var string = prefix+'+'+hash;
+				protocolTokens.push(string);
+			};
+
 			return protocolTokens;
 		};
 
 		function createAssociation(newValidationModel){
 			var newAssociationModel = {};
-			Validation.native(function(err, validation) {
-				validation.find({
+			Validation.getDatastore().manager.collection('validation')
+			.find({
+				$and : [
+					{"associatedModels.id": {$in :[newValidationModel.associatedModels[0].id]}}, 
+					{"associatedModels.id": {$in :[newValidationModel.associatedModels[1].id]}},
+				]
+			})
+			.limit(1000)
+			.skip(0)
+			.sort({'createdAt':-1})
+			.toArray(function (err, validationModels) {
+				Association.getDatastore().manager.collection('association')
+				.find({
 					$and : [
-						{"associatedModels.id": {$in :[newValidationModel.associatedModels[0].id]}}, 
-						{"associatedModels.id": {$in :[newValidationModel.associatedModels[1].id]}},
+						{"associatedModels.id": {$in :[validationModels[0].associatedModels[0].id]}},
+						{"associatedModels.id": {$in :[validationModels[0].associatedModels[1].id]}},
 					]
 				})
 				.limit(1000)
 				.skip(0)
 				.sort({'createdAt':-1})
-				.toArray(function (err, validationModels) {
-					Association.native(function(err, association) {
-						association.find({
-							$and : [
-								{"associatedModels.id": {$in :[validationModels[0].associatedModels[0].id]}},
-								{"associatedModels.id": {$in :[validationModels[0].associatedModels[1].id]}},
-							]
-						})
-						.limit(1000)
-						.skip(0)
-						.sort({'createdAt':-1})
-						.toArray(function (err, associationModels) {
-							if (associationModels.length == 0){
-								var newAssociationModel = newValidationModel;
-								newAssociationModel.model = 'ASSOCIATION';
-								newAssociationModel.user = newValidationModel.user.id;
-								Association.create(newAssociationModel).then(function(association){
-									console.log('CREATED ASSOCIATION', association);
-									Association.publish([association.id], {verb: 'update', data: association});
-								});
-							}
-							else{
-								console.log('ASSOCIATION EXISTS -- COMPUTE');
-								//lookup connection here..
-							}
-
-
-							//UPDATE LINKED MODELS & COUNTS?
-
-
+				.toArray(function (err, associationModels) {
+					if (associationModels.length == 0){
+						var newAssociationModel = newValidationModel;
+						newAssociationModel.model = 'ASSOCIATION';
+						newAssociationModel.user = newValidationModel.user.id;
+						Association.create(newAssociationModel).then(function(association){
+							console.log('CREATED ASSOCIATION', association);
+							Association.publish([association.id], {verb: 'update', data: association});
 						});
-					});
+					}
+					else{
+						console.log('ASSOCIATION EXISTS -- COMPUTE');
+						//lookup connection here..
+					}
+					//UPDATE LINKED MODELS & COUNTS?
 				});
 			});
+		};
+
+		function createEvent(model){
+			var eventModel = {
+				verb:'create',
+				model:{id:model.id, type:'VALIDATION'}
+			};
+			Event.create(eventModel);
 		};
 
 		function createNotification(user, model){
@@ -282,10 +297,10 @@ module.exports = {
 					},
 				}
 			};
-			Notification.create(notificationModel).then(function(notification){
-				console.log('CREATE NOTIFICATION', notification);
-				Notification.publish([notification[0].id], {verb: 'create', data: associationModels[0].id});
-			});
+			//Notification.create(notificationModel).then(function(notification){
+			//	console.log('CREATE NOTIFICATION', notification);
+			//	Notification.publish([notification[0].id], {verb: 'create', data: associationModels[0].id});
+			//});
 		};
 
 		var model = {
@@ -304,10 +319,14 @@ module.exports = {
 		};
 
 		if(!model.connection){
+
+			//FIND DEFAULT & DYNAMIC CONNECTIONS
+			//var connectionQuery = {};
+			//Connection.find({}).then(function(){});
+			
 			model.connection = {
 				id:1,
-				type:'HUMAN',
-				title:'STANDARD MULTI, AGNOSTIC MODELS',
+				title:'DEFAULT '+ model.associatedModels.map(function(obj){return obj.type}).join(' '),
 				parameters:{
 					mapping:['context','reputation','computed'],
 					logic:'context[%context]*reputation[%context]'
@@ -337,7 +356,8 @@ module.exports = {
 					Validation.publish([validation.id], {verb: 'create', data: validation.id});
 
 					createAssociation(validation);
-					createNotification(validation);
+					//createNotification(validation);
+					createEvent(validation);
 					mintTokens(validation);
 					res.json(validation);
 
@@ -350,6 +370,14 @@ module.exports = {
 						//	}
 						//}
 					//}
+					//STORED IN APPS? Defined by connection?
+					//data:{
+						//apps:{
+						//	friends:1,
+						//	followers:100,
+						//}
+					//}
+
 
 				}
 			});

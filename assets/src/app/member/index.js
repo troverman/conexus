@@ -19,13 +19,6 @@ angular.module( 'conexus.member', [
 	})
 
     //TODO: APPRECIATE ASSOCIATION MODEL... 
-    //TODO: APPRECIATE ASSOCIATION MODEL... 
-    //TODO: APPRECIATE ASSOCIATION MODEL... 
-    //TODO: APPRECIATE ASSOCIATION MODEL... 
-    //TODO: APPRECIATE ASSOCIATION MODEL... 
-    //TODO: APPRECIATE ASSOCIATION MODEL... 
-    //TODO: APPRECIATE ASSOCIATION MODEL... 
-
     .state( 'member.activity', {
         url: '',
         views: {
@@ -112,8 +105,14 @@ angular.module( 'conexus.member', [
             }
         },
         resolve: {
-            followers: ['member', 'FollowerModel', function(member, FollowerModel) {
-                return FollowerModel.getFollowers(member);
+            followers: ['AssociationModel', 'member', function(AssociationModel, member) {
+                var query = {
+                    filter:JSON.stringify({type:'MEMBER', id:member.id}),
+                    limit:100,
+                    skip:0,
+                    sort:'createdAt DESC'
+                };
+                return AssociationModel.get(query);
             }],
         }
     })
@@ -126,8 +125,14 @@ angular.module( 'conexus.member', [
             }
         },
         resolve: {
-            following: ['member', 'FollowerModel', function(member, FollowerModel) {
-                return FollowerModel.getFollowing(member);
+            following: ['AssociationModel', 'member', function(AssociationModel, member) {
+                var query = {
+                    filter:JSON.stringify({type:'MEMBER', id:member.id}),
+                    limit:100,
+                    skip:0,
+                    sort:'createdAt DESC'
+                };
+                return AssociationModel.get(query);
             }],
         }
     })
@@ -141,6 +146,13 @@ angular.module( 'conexus.member', [
         },
         resolve: {
             items: ['member', 'ItemModel', function(member, ItemModel) {
+                var query = {
+                    filter:JSON.stringify({type:'ITEM', id:member.id}),
+                    limit:100,
+                    skip:0,
+                    sort:'createdAt DESC'
+                };
+                //return AssociationModel.get(query);
                 return ItemModel.get({user:member.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
         }
@@ -173,6 +185,13 @@ angular.module( 'conexus.member', [
         },
         resolve: {
             orders: ['member', 'OrderModel', function(member, OrderModel){
+                var query = {
+                    filter:JSON.stringify({type:'ORDER', id:member.id}),
+                    limit:100,
+                    skip:0,
+                    sort:'createdAt DESC'
+                };
+                //return AssociationModel.get(query);
                 return OrderModel.get({user:member.id, limit:20, skip:0, sort:'createdAt DESC'});
             }],
         }
@@ -188,16 +207,12 @@ angular.module( 'conexus.member', [
         resolve: {
             projects: ['AssociationModel', 'member', function(AssociationModel, member) {
                 var query = {
-                    filter:[
-                        {type:'MEMBER', id:member.id},
-                        {type:'PROJECT'},
-                    ],
+                    filter:JSON.stringify({type:'PROJECT', id:member.id}),
                     limit:100,
                     skip:0,
                     sort:'createdAt DESC'
                 };
-                return []
-                //return AssociationModel.get(query);
+                return AssociationModel.get(query);
             }]
         }
     })
@@ -210,20 +225,14 @@ angular.module( 'conexus.member', [
             }
         },
         resolve: {
-            tasks: ['member', 'TaskModel', function(member, TaskModel) {
-                //SMART QUERY HERE!
-                //UPDATE TO AssociationModel..
-                //var query = {
-                //    filter:[
-                //        {type:'MEMBER', id:member.id},
-                //        {type:'TASK'},
-                //    ],
-                //   limit:100,
-                //    skip:0,
-                //    sort:'createdAt DESC'
-                //};
-                //return AssociationModel.get(query);
-                return TaskModel.get({user:member.id, limit:20, skip:0, sort:'createdAt DESC'});
+            tasks: ['AssociationModel', 'member', function(AssociationModel, member) {
+                var query = {
+                    filter:JSON.stringify({type:'TASK', id:member.id}),
+                    limit:100,
+                    skip:0,
+                    sort:'createdAt DESC'
+                };
+                return AssociationModel.get(query);
             }]
         }
     })
@@ -237,6 +246,13 @@ angular.module( 'conexus.member', [
         },
         resolve: {
             time: ['member', 'TimeModel', function(member, TimeModel) {
+                var query = {
+                    filter:JSON.stringify({type:'TIME', id:member.id}),
+                    limit:100,
+                    skip:0,
+                    sort:'createdAt DESC'
+                };
+                //return AssociationModel.get(query);
                 return TimeModel.get({user:member.id, limit:100, skip:0, sort:'createdAt DESC'});
             }]
         }
@@ -289,7 +305,7 @@ angular.module( 'conexus.member', [
     $scope.actions = actions.map(function(obj){obj.model = 'ACTION'; return obj;});
 }])
 
-.controller( 'MemberActivityCtrl', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', '$stateParams', 'contentList', 'ContentModel', 'FollowerModel', 'member', 'orders', 'ReactionModel', 'time', 'titleService', 'transactionsFrom', 'transactionsTo', function MemberActivityController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, $stateParams, contentList, ContentModel, FollowerModel, member, orders, ReactionModel, time, titleService, transactionsFrom, transactionsTo) {
+.controller( 'MemberActivityCtrl', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', '$stateParams', 'contentList', 'ContentModel', 'member', 'orders', 'ReactionModel', 'time', 'titleService', 'transactionsFrom', 'transactionsTo', function MemberActivityController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, $stateParams, contentList, ContentModel, member, orders, ReactionModel, time, titleService, transactionsFrom, transactionsTo) {
    
     titleService.setTitle($scope.member.username + ' | Activity | CRE8.XYZ');
 
@@ -430,35 +446,6 @@ angular.module( 'conexus.member', [
         credits:{enabled:false},
     };
 
-    $scope.balanceRadial = {
-        chart: {polar: true},
-        series: [{
-            id: 'balance',
-            type: 'area',
-            name: 'Balance',
-            pointPlacement: 'on',
-            data: [],
-            color: 'rgba('+random2+','+random1+','+random3+',0.3)',
-            fillOpacity: 0.3,
-        }],
-        title: {text: ''},
-        xAxis: {
-            title: {text: null},
-            categories: [],
-            tickmarkPlacement: 'on',
-            lineWidth: 0,
-        },
-        yAxis: {
-            title: {text: null},
-            gridLineInterpolation: 'polygon',
-            lineWidth: 0,
-            min: 0,
-        },
-        legend: {enabled: false},
-        tooltip: {shared: true,},
-        credits:{enabled:false},
-    };
-
     $scope.balanceColumn = {
         chart: {zoomType: 'x',},
         series: [{
@@ -480,28 +467,22 @@ angular.module( 'conexus.member', [
         credits:{enabled:false},
     };
 
-    //RADIAL | BALANCE
-    for (x in Object.keys($scope.balance)){
-        $scope.balanceRadial.xAxis.categories.push(Object.keys($scope.balance)[x]);
-        $scope.balanceRadial.series[0].data.push($scope.balance[Object.keys($scope.balance)[x]]);
-    }
-
-    var sortable = [];
+    $scope.sortableSet = [];
     for (x in $scope.balance) {
         if(!isNaN($scope.balance[x]) && $scope.balance[x]!=null && $scope.balance[x]!="undefined" && $scope.balance[x]!="NaN"){
-            sortable.push([x, $scope.balance[x]]);
+            $scope.sortableSet.push([x, $scope.balance[x]]);
         }
     }
-    sortable.sort(function(a, b) {return b[1] - a[1];});
+    $scope.sortableSet.sort(function(a, b) {return b[1] - a[1];});
 
-    for (x in sortable){
+    for (x in $scope.sortableSet){
         if (x < 250){
             $scope.balancePie.series[0].data.push({
-                name: sortable[x][0],
-                y: sortable[x][1],
+                name: $scope.sortableSet[x][0],
+                y: $scope.sortableSet[x][1],
             });
-            $scope.balanceColumn.xAxis.categories.push(sortable[x][0]);
-            $scope.balanceColumn.series[0].data.push(sortable[x][1]);   
+            $scope.balanceColumn.xAxis.categories.push($scope.sortableSet[x][0]);
+            $scope.balanceColumn.series[0].data.push($scope.sortableSet[x][1]);   
         }
     }
     
@@ -531,13 +512,23 @@ angular.module( 'conexus.member', [
 
 }])
 
-.controller( 'MemberFollowersCtrl', ['$sailsSocket', '$scope', '$stateParams', 'FollowerModel', 'followers', 'titleService', function MemberFollowersController($sailsSocket, $scope, $stateParams, FollowerModel, followers, titleService) {
+.controller( 'MemberFollowersCtrl', ['$sailsSocket', '$scope', 'followers', 'titleService', function MemberFollowersController($sailsSocket, $scope, followers, titleService) {
     
     titleService.setTitle($scope.member.username + ' | Followers | CRE8.XYZ');
+
+    console.log(followers);
     
-    $scope.followers = followers.map(function(obj){
-        obj.user = obj.follower;
-        return obj;
+    $scope.followers = followers.map(function(obj) {
+        for (x in obj.associatedModels){
+            if (obj.associatedModels[x].type == 'MEMBER'){
+                var returnObj = {};
+                if(obj.associatedModels[x].data){
+                    returnObj = obj.associatedModels[x].data;
+                    returnObj.associationId = obj._id
+                }
+                return returnObj;
+            }
+        }
     });
 
     $sailsSocket.subscribe('follower', function (envelope) {
@@ -548,13 +539,23 @@ angular.module( 'conexus.member', [
 
 }])
 
-.controller( 'MemberFollowingCtrl', ['$sailsSocket', '$scope', '$stateParams', 'following', 'FollowerModel', 'titleService', function MemberFollowingController($sailsSocket, $scope, $stateParams, following, FollowerModel, titleService) {
+.controller( 'MemberFollowingCtrl', ['$sailsSocket', '$scope', 'following', 'titleService', function MemberFollowingController($sailsSocket, $scope, following, titleService) {
     
     titleService.setTitle($scope.member.username + ' | Following | CRE8.XYZ');
 
-    $scope.following = following.map(function(obj){
-        obj.user = obj.followed;
-        return obj;
+    console.log(following);
+
+    $scope.following = following.map(function(obj) {
+        for (x in obj.associatedModels){
+            if (obj.associatedModels[x].type == 'MEMBER'){
+                var returnObj = {};
+                if(obj.associatedModels[x].data){
+                    returnObj = obj.associatedModels[x].data;
+                    returnObj.associationId = obj._id
+                }
+                return returnObj;
+            }
+        }
     });
 
    $sailsSocket.subscribe('follower', function (envelope) {
@@ -588,7 +589,6 @@ angular.module( 'conexus.member', [
     $scope.filterContent = function(filter) {
         $scope.searchQuery.push({text:filter})
         $rootScope.stateIsLoading = true;
-        //TODO: COMPLEX QUERY
         ItemModel.get({user:$scope.member.id, limit:100, skip:0, sort:'createdAt DESC'}).then(function(items){
             $rootScope.stateIsLoading = false;
             $scope.selectedTag = filter;
@@ -639,13 +639,10 @@ angular.module( 'conexus.member', [
     $scope.loadLocations();
 
     $scope.loadTags = function(){
-
         function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
-
         $scope.tags = $scope.items.map(function(obj){return obj.tags;});
         $scope.tags = [].concat.apply([], $scope.tags);
         $scope.tags = $scope.tags.filter(function(e){return e});
-
         $scope.sortedTagArray = [];
         for (x in $scope.tags){
             var amount = countInArray($scope.tags, $scope.tags[x]);
@@ -653,12 +650,9 @@ angular.module( 'conexus.member', [
                 $scope.sortedTagArray.push({amount:amount, element:$scope.tags[x]})
             }
         }
-
         $scope.sortedTagArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
-
     };
     $scope.loadTags();
-
     $scope.filterSet = {tags:$scope.sortedTagArray, associations:$scope.sortedAssociationArray, locations:$scope.sortedLocationsArray};
 
 }])
@@ -670,69 +664,13 @@ angular.module( 'conexus.member', [
     $scope.member = member;
 
     $scope.searchQuery = [];
+
     $scope.transactionsFrom = transactionsFrom;
     $scope.transactionsTo = transactionsTo;
     $scope.transactions = $scope.transactionsFrom.concat($scope.transactionsTo);
     $scope.transactions = $scope.transactions.map(function(obj){ obj.model = 'TRANSACTION'; return obj;});
 
-    //ON ANY TOKEN MOMENT..  FOR LEDGER.. GOTTA SHOW THE INCOME! -- SOME UNITY
-    //QUERY AGNOSITC MODEL.. AND OR ALL SEARCH LOL
-    //SEARHC MODEL TO SEE TOKEN POTIENTAL.. 
-    //CREATE TIME.. --> +++ TIME TOKENS 
-
-     //DEPRECIATE IDENTIFIER AND AMOUNT
-    if ($scope.transactions.length == 0){
-
-        var timeObject = new Date(); 
-
-        var exampleSetExpense = [
-            {to:'Trevor Overman', tags:'PAYROLL,HUMAN', content:'PAY TREVOR', amountSet:{'USD':500,'CRE8':1}},
-            {to:'Hot Shot Programmer', content:'PAY PROGRAMMER', tags:'PAYROLL,HUMAN'},
-            {to:'Sarah Human', content:'PAY SARAH',  tags:'PAYROLL,HUMAN'},
-            {to:'David Create', content:'PAY DAVID',  tags:'PAYROLL,HUMAN'},
-            {to:'OFFICE SUPPLIES INC', content:'PURCHASE SUPPLIES', tags:'SUPPLIES,HARDWARE,BUSINESS,INFRASTRUCTURE'},
-            {to:'COMPUTER SERVICES INC', content:'PURCHASE TECHNOLOGY', tags:'SERVER,COMPUTER,CLOUD,SERVICES'}
-        ];
-
-        var exampleSetRevenue = [
-            {from:'CUSTOMER', content:'PAYMENT FOR PRODUCTS', tags:'CUSTOMER,EXAMPLE'},
-            {from:'CLIENT', content:'PAYMENT FOR SERVICES',  tags:'CLIENT,SEVICES,DELIVERABLE'},
-        ];
-
-        for (var i=0, t=88; i<t; i++) {
-
-            var randomIndexExpense = Math.floor(Math.random()*exampleSetExpense.length)
-            var randomIndexRevenue = Math.floor(Math.random()*exampleSetRevenue.length)
-
-            $scope.transactionsFrom.push({
-                to: exampleSetExpense[randomIndexExpense].to, 
-                from: {id:$scope.member.id, title:$scope.member.username}, 
-                identifier:'CRE8', 
-                amountSet:{
-                    CRE8: 10*Math.round(0.5*Math.random() * t)
-                }, 
-                content:'SEED EXPENSE', 
-                createdAt:new Date(timeObject.getTime() + 10000 * i), 
-                amount:10*Math.round(0.5*Math.random() * t), 
-                tags:exampleSetExpense[randomIndexExpense].tags, 
-                reactions:{plus:Math.round(Math.random()*10), minus:Math.round(Math.random()*2)}
-            });
-            $scope.transactionsTo.push({
-                to: {id:$scope.member.id, title:$scope.member.username}, 
-                from: exampleSetRevenue[randomIndexRevenue].from, 
-                identifier:'CRE8', 
-                amountSet:{
-                    CRE8: 10*Math.round(0.5*Math.random() * t)
-                },
-                content:'SEED REVENUE', 
-                createdAt:new Date(timeObject.getTime() + 10000 * i),
-                amount:10*Math.round(Math.random() * t),
-                tags: exampleSetRevenue[randomIndexRevenue].tags, 
-                reactions:{plus:Math.round(Math.random()*10), minus:Math.round(Math.random()*2)}
-            });
-        }
-        $scope.transactions = $scope.transactionsFrom.concat($scope.transactionsTo);     
-    }
+    //TRANSACTIONS AND EVENTS
 
     $scope.chart = {
         chart: {
@@ -917,14 +855,6 @@ angular.module( 'conexus.member', [
     $scope.selectAsset = function(asset){
         $rootScope.stateIsLoading = true;
 
-        //TODO: FILTERS.. 
-        //COMPLET FILTER
-        //SEARCH MODEL
-        //SearchModel.search().then(function(transactionModels){
-        //    $scope.transactions = transactionModels;
-        //});
-
-        //is evertrhing an association? ...
         var newQuery = [
             {
                 filter:[
@@ -984,24 +914,12 @@ angular.module( 'conexus.member', [
             user: $scope.member.id
         };
 
-        //console.log(query);
         console.log($location.search().assets)
-
-        //if ($location.search().assets){
-        //    var assetSet = [$location.search().assets];
-        //    assetSet.push(asset);
-        //    $location.search('assets',assetSet);
-        //}
-        //else{
-        //    $location.search('assets',asset);
-        //}
-
         TransactionModel.get(oldQuery, JSON.stringify(newQuery)).then(function(transactionModels){
             $rootScope.stateIsLoading = false;
             $scope.transactions = transactionModels;
             //$scope.updateGraph();
         });
-
     };
 
     $scope.updateGraph = function(){
@@ -1309,19 +1227,14 @@ angular.module( 'conexus.member', [
 
 
     //DO IN RESOLVE!
-    console.log($location.search());
     if ($location.search()){
-        //if assets..
         if ($location.search().assets){$scope.selectAsset($location.search().assets);}
         if ($location.search().type){
             if ($location.search().type.toLowerCase() == 'overview'){$scope.selectOverview();}
             if ($location.search().type.toLowerCase() == 'expense'){$scope.selectExpense();}
             if ($location.search().type.toLowerCase() == 'revenue'){$scope.selectRevenue();}
         }
-        //if ($location.search().associations){}
-        //if ($location.search().tags){}
     }
-
 
 }])
 
@@ -1500,13 +1413,31 @@ angular.module( 'conexus.member', [
 .controller( 'MemberProjectsCtrl', ['$sailsSocket', '$scope', 'projects', 'titleService', function MemberProjectsController($sailsSocket, $scope, projects, titleService) {
     
     titleService.setTitle($scope.member.username + ' | Projects | CRE8.XYZ');
-    $scope.projects = projects;
+    $scope.projects = projects.map(function(obj) {
+        for (x in obj.associatedModels){
+            if (obj.associatedModels[x].type == 'PROJECT'){
+                var returnObj = obj;
+                returnObj.project = obj.associatedModels[x].data;
+                returnObj.id = returnObj._id
+                return returnObj;
+            }
+        }
+    });
 
 }])
 
 .controller( 'MemberTasksCtrl', ['$rootScope', '$sailsSocket', '$scope', 'member', 'tasks', 'titleService', function MemberTimeController($rootScope, $sailsSocket, $scope, member, tasks, titleService) {
     titleService.setTitle($scope.member.username + ' | Tasks | CRE8.XYZ'); 
-    $scope.tasks = tasks.map(function(obj){obj.model = 'TASK';return obj;});
+    $scope.tasks = tasks.map(function(obj) {
+        for (x in obj.associatedModels){
+            if (obj.associatedModels[x].type == 'TASK'){
+                var returnObj = obj.associatedModels[x].data;
+                returnObj.associationId = obj._id
+                return returnObj;
+            }
+        }
+    });
+
     $sailsSocket.subscribe('task', function (envelope) {
         if (envelope.verb == 'create'){if (envelope.data.user == $scope.member.id){$scope.tasks.unshift(envelope.data);}}
         if (envelope.verb == 'update'){
