@@ -1,9 +1,8 @@
 <div class="card">
     <div style="padding:16px">
-
         <div ng-show="!recordingTime">
-
-            <button ng-show="!question" type="submit" class="btn btn-default log-btn" ng-click="askQuestion()">Create Time</button>
+            <button ng-show="!question" type="submit" class="btn btn-default log-btn" ng-click="timeToggle(task)">Create Time</button>
+            <!--<button ng-show="!question" type="submit" class="btn btn-default log-btn" ng-click="askQuestion()">Create Time</button>-->
             <div ng-show="question && !streaming">
                 <h3>Streaming?</h3>
                 <button type="submit" class="btn btn-default log-btn" ng-click="startStreaming()">Yes</button>
@@ -14,11 +13,8 @@
                 <input type="text" placeholder="Link" ng-model="streamUrl" class="form-control">
                 <button style="width:100%;" class="btn btn-default log-btn" ng-click="startTime()">Start Stream</button>
             </div>
-            
         </div>
-
         <div ng-show="recordingTime">
-
             <h3>{{taskTime}}</h3>
             <div ng-if="streaming"><div ng-bind-html="renderStream(streamUrl)"></div></div>
             <div class="spacing-5"></div>
@@ -27,12 +23,8 @@
             <text-angular ng-model="newTime.content" ta-toolbar="[['bold','italics','p','h1','h2','quote','pre','insertLink', 'html']]"></text-angular>
             <div class="spacing-5"></div>
             <button style="width:100%;" class="btn btn-default log-btn" ng-click="submit()">Submit Time</button>
-
         </div>
-
     </div>
 </div>
 
-<div ng-repeat="item in time" ng-click="cardDetailToggle(item)">
-    <div ng-include="'templates/cards/timeCard.tpl.html'"></div>
-</div>
+<div ng-repeat="item in time" ng-click="cardDetailToggle(item)"><div ng-include="'templates/cards/timeCard.tpl.html'"></div></div>

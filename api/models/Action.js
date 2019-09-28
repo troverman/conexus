@@ -1,11 +1,11 @@
 //CRE8.ACTION
+//SAME AS REACTION..
 module.exports = {
     attributes: {
+  	    amount: {type: 'string'},
 		type: {type: 'string'},
-        data: {type: 'json'},
-        amount: {type: 'string'},
-        associatedModels: {type: 'json'},
         user: {model: 'user'},
-        //WEAR, CONSUME, PROTOCOL INPUT INTO ACTIONS.. MANIFOLD SPACE. WITH DIRECTION
+        associatedModels: {type: 'json'},
+        data: {type: 'json'},
     },
 };

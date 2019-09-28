@@ -50,11 +50,17 @@
                     </div>
 
                     <div ng-show="selectedTab =='SUGGESTIONS'">
-                        <p style="color:gray;font-style:italic">Coming Soon</p>
+
+                        <div ng-repeat="item in suggestions">
+                            <a href="{{item.model.toLowerCase()}}/{{item.id}}">{{item.title}}</a>
+                            <p>{{item.description}}</p>
+                        </div>
+                        <p class="btn btn-default" ng-click="shuffleSuggestions()">shuffle</p>
+
                     </div>
 
                     <div ng-show="selectedTab =='VALUEMAP'">
-                        <p style="color:gray;font-style:italic">Coming Soon</p>
+                        <h5>Position Lookup<br><span style="font-size:11px;color:gray">{{currentUser.id}}</span></h5>
                     </div>
 
                     <div ng-show="selectedTab =='BALANCES'">
@@ -85,15 +91,12 @@
     <!--TODO: MOBILE FILTER-->
     <!--TODO: APP INPUT-->
     <div class="row" ng-show="!isTutorial || !currentUser.apps.cre8.tutorial">
-
+        <!--DISCOVERABILITY AREA HERE-->
+        <!--PAST 24HR TIME CONTEXT-->
+        <!--REPUTATION-->
+        <!--PAST SUMMARY; UPCOMING SCHEDULE-->
+        <!--VALUE MAP-->
         <div class="col-sm-4 mobileFix" style="padding-left:0px;padding-right:0px;">
-
-            <!--DISCOVERABILITY AREA HERE-->
-            <!--PAST 24HR TIME CONTEXT-->
-            <!--REPUTATION-->
-            <!--PAST SUMMARY; UPCOMING SCHEDULE-->
-            <!--VALUE MAP-->
-           
             <div class="card" ng-if="sortedTagArray.length > 0" ng-click="filterToggle('DISCOVER', filterSet)">
                 <div style="background:url('https://source.unsplash.com/1600x900/?details,notes,exolore,wonder,connection');min-height:50px" class="imageContainerSmall">
                     <div style="background:rgba(0,0,0,0.75);height:50px" class="imageContainerSmallDiv">  

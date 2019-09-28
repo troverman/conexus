@@ -2,7 +2,7 @@
 module.exports = {
     attributes: {
         title: {type: 'string'},
-        content: {type: 'string'},
+        content: {type: 'string', allowNull: true},
         associatedModels: {type: 'json'},
         context: {type: 'string'},
         location: {type: 'json'},

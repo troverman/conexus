@@ -305,14 +305,19 @@ module.exports = {
 
 		var model = {
 			model: 'VALIDATION',
-
 			connection: req.param('connection'),
+
+			parameters: req.param('parameters'),
+
 			content: req.param('content'),
 
+			//DEPRECIATE--APPRECIATE ASSOCIATION
 			user: req.param('user'),
 			creator: req.param('creator'),
 
 			context: req.param('context'),
+			parameters: req.param('parameters'),
+
 			associatedModels: req.param('associatedModels'),
 
 			data:{apps:{reactions:{plus:0,minus:0},attention:{general:0}}}

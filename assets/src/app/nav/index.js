@@ -82,7 +82,9 @@ angular.module( 'conexus.nav', [
         $scope.newProject = {};
         $scope.newReaction = {};
         $scope.newTask = {};
-        $scope.newTime = {};
+
+        $rootScope.newTime = {};
+
         $scope.newTransaction = {};
         $scope.newValidation = {};
         $scope.newContent.associatedModels = [{text: $rootScope.currentUser.username, type:'PROFILE', id:$rootScope.currentUser.id}];
@@ -172,15 +174,49 @@ angular.module( 'conexus.nav', [
                     context:[
                         {text:'self', score:100}
                     ],
-                    connection:[{text:'Content Connection'}]
+                    connection:[{
+                        id:null,
+                        text:'Content Connection'
+                    }]
                 },{
+
+                    //LOOP AT HOW THIS IS CONVERTED AND PROCESSED ON ContentController vs RENDERING TOO
                     type:'MEMBER',
                     text:'MEMBER+'+$rootScope.currentUser.id,
                     id:$rootScope.currentUser.id,
+                    connection:[{
+
+                        id:null,
+                        text:'Member Connection',
+                        parameters1:{
+                            associatedModels:[{
+                                attributes:{
+                                    label:{type:''},
+                                },
+                            }],
+                            model:[{
+                                context:{type:{}},
+                            }],
+                        },
+                        parameters2:[{
+                            attributes:{
+                                label:{type:''},
+                                context:{type:{}},
+                            },
+                        }],
+
+                    }],
+
+                    //populate from connection
+                    parameters:{
+                        context:{},
+                        label:''
+                    },
+
                     context:[
                         {text:'self', score:100}
                     ],
-                    connection:[{text:'Member Connection'}]
+
                 }],
                 user:$rootScope.currentUser.id,
             };
@@ -188,16 +224,37 @@ angular.module( 'conexus.nav', [
             //IMPLICIT IS REALATION TO ITEM
             //FACTOR TO HAVE SAME STRUCT
             if (item){
+                //connection in item?
                 $scope.item = item;
                 $scope.createDetailToggleVar = false;
                 $scope.newContent.associatedModels.push({
                     type:item.model, 
                     id:item.id, 
                     text:item.model+'+'+item.id, 
+                    connection:[{
+                        id:null,
+                        text:item.model+' Connection',
+                        parameters:[{
+                            type:'model',
+                            attributes:{
+                                context:{type:{}},
+                            },
+                        },
+                        {
+                            type:'associatedModel',
+                            attributes:{
+                                label:{type:''},
+                            },
+                        }],
+                    }],
+                    //populate from connection
+                    parameters:{
+                        context:{},
+                        label:''
+                    },
                     context:[
                         {text:'self', score:100}
                     ],
-                    connection:[{text:item.model+' Connection'}]
                 });
             }
 
@@ -1172,7 +1229,7 @@ angular.module( 'conexus.nav', [
         $scope.closeAllNav();
         if($rootScope.currentUser){
 
-            $scope.newTime = {
+            $rootScope.newTime = {
                 associatedModels:[{
                     type:'TIME',
                     text:'self',
@@ -1196,7 +1253,7 @@ angular.module( 'conexus.nav', [
             if (item){
                 $scope.item = item;
                 $scope.createDetailToggleVar = false;
-                $scope.newTime.associatedModels.push({
+                $rootScope.newTime.associatedModels.push({
                     type:item.model, 
                     id:item.id, 
                     text:item.model+'+'+item.id, 
@@ -1207,19 +1264,18 @@ angular.module( 'conexus.nav', [
                 });
             }
 
-            if (!$scope.newTime.recordingTime){
-                $scope.newTime.startTime = new Date();
-                $scope.newTime.startTime.setMilliseconds(0);
-                $scope.newTime.endTime = new Date();
-                $scope.newTime.endTime.setHours($scope.newTime.endTime.getHours() + 1);
-                $scope.newTime.endTime.setMilliseconds(0);
-                $scope.newTime.amount = 3600;
-                $scope.newTime.type = 'PLANNED';
+            if (!$rootScope.newTime.recordingTime){
+                $rootScope.newTime.startTime = new Date();
+                $rootScope.newTime.startTime.setMilliseconds(0);
+                $rootScope.newTime.endTime = new Date();
+                $rootScope.newTime.endTime.setHours($scope.newTime.endTime.getHours() + 1);
+                $rootScope.newTime.endTime.setMilliseconds(0);
+                $rootScope.newTime.amount = 3600;
                 $scope.recordingTime = false;
                 $scope.streaming = false;
             }
 
-            $scope.selectTypeTime = function(type){$scope.newTime.type = type};
+            $scope.selectTypeTime = function(type){$rootScope.newTime.type = type};
             $scope.startStreaming = function() {$scope.streaming = true;};
             $scope.cancelStreaming = function() {$scope.streaming = false;};
             $scope.renderStream = function(stream){
@@ -1246,72 +1302,28 @@ angular.module( 'conexus.nav', [
                 $scope.recordingTime = true;
                 //TODO: CREATE TIME HERE
                 $scope.startDateTime = new Date();
-                clearInterval($scope.interval);
-                $interval(function(){$scope.updateCount(1, 'task')},1000);
+                //clearInterval($scope.interval);
+                $scope.uniDimensionalTimeInterval = $interval(function(){$scope.updateCount(1, 'task')},1000);
             };
-
-            //HMM VS CREATE TIME
-            $scope.submit = function() {
-                if($scope.recordingTime === false) return false;
-                $scope.recordingTime = false; $scope.streaming = false;
-                var timeModel = {
-                    amount: $rootScope.taskTime,
-                    content: $scope.timeContent,
-                    identifier: $scope.timeIdentifier,
-                    user: $rootScope.currentUser.id,
-                    stream: $scope.streamingId,
-                    type:'LIVE',
-                };
-                $rootScope.stateIsLoading = true;
-                TimeModel.create(timeModel).then(function(newTime){
-                    $rootScope.stateIsLoading = false;
-                    $scope.timeContent = '';
-                    if ($scope.streamingId){
-                        var update = {
-                            id:$scope.streamingId,
-                            time:newTime.id,
-                            parent:newTime.id,
-                            parentModel:'time'
-                        };
-                        ContentModel.update(update).then(function(contentModel){
-                            consooe.log(contentModel)
-                        });
-                    }
-                    $mdSidenav('time').close();
-                    $rootScope.pop('New Time!', newTime.id +' '+ newTime.createdAt); 
-                    $rootScope.taskTime=0;
-                    clearInterval($scope.interval);
-                }); 
-            };
-
+           
             //TODO: UNIFY WITH TIMER
             $scope.updateCount = function(amount, context) {
-
                 //TODO: CREATED AT
                 var currentTime = new Date();
                 $rootScope.taskTime = parseInt((currentTime.getTime() - $scope.startDateTime.getTime()) / 1000);
-
                 //CONTEXT TIME HERE __ IN
                 //context[string]:1
-                if (!$rootScope.timeQ[context]){
-                    $rootScope.timeQ[context] = [];
-                }
-
+                if (!$rootScope.timeQ[context]){$rootScope.timeQ[context] = [];}
                 $rootScope.timeQ[context].push({
-                    context:{
-                        string:'TIME!',
-                        type:'LIVE',
-                    },
+                    context:{string:'TIME!',type:'LIVE'},
                     amount:1
                 });
-
-                //$scope.$apply();
             };
 
-            $scope.$watch('newTime.context', function(newValue, oldValue){
+            $rootScope.$watch('newTime.context', function(newValue, oldValue){
                 if (newValue !== oldValue) {
-                    for (x in $scope.newTime.associatedModels){
-                        $scope.newTime.associatedModels[x].context = newValue.map(function(obj){obj.score = 100;return obj;});
+                    for (x in $rootScope.newTime.associatedModels){
+                        $rootScope.newTime.associatedModels[x].context = newValue.map(function(obj){obj.score = 100;return obj;});
                     }
                 }
             }, true);
@@ -1324,23 +1336,13 @@ angular.module( 'conexus.nav', [
 
     //TODO: IMPROVE
     $rootScope.timerToggle = function(){
-
-        $mdSidenav('subNav').close();
-        $mdSidenav('action').close();
-        $mdSidenav('content').close();
-        $mdSidenav('information').close();
-        $mdSidenav('item').close();
-        $mdSidenav('login').close();
-        $mdSidenav('order').close();
-        $mdSidenav('project').close();
-        $mdSidenav('render').close();
-        $mdSidenav('tokens').close();
-        $mdSidenav('task').close();
-        $mdSidenav('time').close();
-        $mdSidenav('transaction').close();
-        $mdSidenav('validation').close();
-
-        if($rootScope.currentUser){$mdSidenav('timer').toggle();}
+        $scope.closeAllNav();
+        if($rootScope.currentUser){
+            if ($rootScope.taskTime > 0){
+                $scope.selectedTab = 'TASK';
+            }
+            $mdSidenav('timer').toggle();
+        }
         else{$mdSidenav('login').toggle();}
     };
 
@@ -1634,18 +1636,26 @@ angular.module( 'conexus.nav', [
         else{$mdSidenav('login').toggle()}
     };
 
+    //TODO: MULTI D
+    //TIMER UX - LEFT OPEN
     $scope.createTime = function(){
         if($rootScope.currentUser){
-            $scope.newTime.createdAt = $scope.newTime.startTime;
-            if ($scope.newTime.context){
-                $scope.newTime.context = $scope.newTime.context.map(function(obj){
+            $rootScope.newTime.createdAt = $scope.newTime.startTime;
+            if ($rootScope.newTime.context){
+                $rootScope.newTime.context = $scope.newTime.context.map(function(obj){
                     return obj.text;
                 }).join(",");
             }
-            console.log('CREATE TIME', $scope.newTime);
+            if ($rootScope.taskTime){$rootScope.newTime.amount = $rootScope.taskTime}
+            console.log('CREATE TIME', $rootScope.newTime);
             $mdSidenav('time').close();
-            TimeModel.create($scope.newTime).then(function(model){
+            $mdSidenav('timer').close();
+            $interval.cancel($scope.uniDimensionalTimeInterval);
+
+            TimeModel.create($rootScope.newTime).then(function(model){
                 $rootScope.pop('New Time!', model.id +' '+ model.createdAt);
+                //TODO: MULTID
+                $rootScope.taskTime=0;
             });
         }
         else{$mdSidenav('login').toggle()}
@@ -1826,8 +1836,8 @@ angular.module( 'conexus.nav', [
         if($rootScope.currentUser){
             console.log('STARTING ATTENTION', $rootScope.currentUser)
             //if ($rootScope.currentUser.apps.attention.isActive){
-                $interval(function(){$scope.timerFunction(1, 'attention', 'HUMAN')}, 1000);
-                $interval(function(){$scope.timerFunction(1, 'mining', 'MACHINE')}, 1000);
+                $scope.humanAttentionInterval = $interval(function(){$scope.timerFunction(1, 'attention', 'HUMAN')}, 1000);
+                $scope.machineAttentionInterval = $interval(function(){$scope.timerFunction(1, 'mining', 'MACHINE')}, 1000);
             //}
         }
     };

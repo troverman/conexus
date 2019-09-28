@@ -245,7 +245,7 @@ angular.module( 'conexus.member', [
             }
         },
         resolve: {
-            time: ['member', 'TimeModel', function(member, TimeModel) {
+            time: ['AssociationModel', 'member', 'TimeModel', function(AssociationModel, member, TimeModel) {
                 var query = {
                     filter:JSON.stringify({type:'TIME', id:member.id}),
                     limit:100,
@@ -422,10 +422,6 @@ angular.module( 'conexus.member', [
 
     $scope.balance = $scope.member.balance;
     $scope.reputation = $scope.member.reputation;
-
-    var random1 = Math.floor(255*Math.random());
-    var random2 = Math.floor(255*Math.random());
-    var random3 = Math.floor(255*Math.random());
 
     $scope.balancePie = {
         chart: {},
@@ -1482,7 +1478,6 @@ angular.module( 'conexus.member', [
     $scope.options = {scrollwheel: false};
     $scope.time = time;
     $scope.time = time.map(function(obj){
-        //HACK | CONFUSING | REMOVE CREATEDAT AS TIME --> FOCUS ON START AND END PARAMS
         var endTime = new Date();
         var startTime = new Date();
         if (obj.startTime){
@@ -1496,15 +1491,13 @@ angular.module( 'conexus.member', [
             obj.endTime = new Date(obj.createdAt);
             obj.startTime = new Date(endTime.setSeconds(endTime.getSeconds() - parseInt(obj.amount)));
         }
-        if (obj.task){
-            $scope.eventSources.push({
-                title:obj.task.title,
-                start:obj.startTime,
-                end:obj.endTime,
-                allDay:false,
-                url:'time/'+obj.id
-            });
-        }
+        $scope.eventSources.push({
+            title:obj.id,
+            start:obj.startTime,
+            end:obj.endTime,
+            allDay:false,
+            url:'time/'+obj.id
+        });
         return obj;
     });
 

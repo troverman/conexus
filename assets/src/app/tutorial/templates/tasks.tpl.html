@@ -60,8 +60,8 @@
             <div style="padding:16px;">
 
                 <div ng-click="$event.stopPropagation()" style="float:right">
-                    <button ng-click="$event.stopPropagation();interested(item)" ng-if="item.isAssociated == false" class="btn btn-default"><i class="fas fa-check"></i> Interested</button>
-                    <button ng-click="$event.stopPropagation();interested(item)" ng-if="item.isAssociated == true" class="btn btn-default"><i class="fas fa-remove"></i> Cancel Interest</button>
+                    <button ng-click="$event.stopPropagation();interested(item)" ng-if="!item.isAssociated" class="btn btn-default"><i class="fas fa-check"></i> Interested</button>
+                    <button ng-click="$event.stopPropagation();interested(item)" ng-if="item.isAssociated" class="btn btn-default"><i class="fas fa-remove"></i> Cancel Interest</button>
                 </div>
 
                 <p><a ng-click="$event.stopPropagation()" ng-repeat="tag in item.tags track by $index" href="market/{{tag.trim()}}" ui-sref="market({id:tag.trim()})">{{tag.trim()}} </a></p>

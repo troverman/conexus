@@ -12,6 +12,18 @@
         background: rgba(0,43,85,1);
         color: white;
     }
+    .animationIf.ng-enter,
+    .animationIf.ng-leave {
+        -webkit-transition: opacity ease-in-out 0.5s;
+        -moz-transition: opacity ease-in-out 0.5s;
+        -ms-transition: opacity ease-in-out 0.5s;
+        -o-transition: opacity ease-in-out 0.5s;
+        transition: opacity ease-in-out 0.5s;
+    }
+    .animationIf.ng-enter,
+    .animationIf.ng-leave.ng-leave-active {opacity: 0;}
+    .animationIf.ng-leave,
+    .animationIf.ng-enter.ng-enter-active {opacity: 1;}
 </style>
 
 <div class="row">

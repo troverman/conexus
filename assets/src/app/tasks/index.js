@@ -30,7 +30,7 @@ angular.module( 'conexus.tasks', [
 	$scope.skip = 0;
 	$scope.sortText = {'trendingScore DESC':'Trending','createdAt DESC':'Date Created','timeCount DESC': 'Total Time'}
 	$scope.selectedTag = '';
-    $scope.searchQuery = [];
+    $rootScope.searchQuery = [];
 
     $scope.tasks = tasks.data.map(function(obj){
         obj.model = 'TASK';
@@ -120,7 +120,6 @@ angular.module( 'conexus.tasks', [
         });
     };
 
-
     //TODO.. SMART LOCATION FILTER..
     //IF ACTIVE LOCATION FILTER -- > MAP RADIUS :) 
     $scope.filterContent = function(filter) {
@@ -153,23 +152,18 @@ angular.module( 'conexus.tasks', [
         $rootScope.stateIsLoading = true;
         TaskModel.get({limit:100, skip:$scope.skip, sort:$scope.selectedSort}).then(function(tasks) {
             $rootScope.stateIsLoading = false;
-            tasks.map(function(obj){ 
-                obj.model = 'TASK' 
-            });
+            tasks.map(function(obj){ obj.model = 'TASK' });
             Array.prototype.push.apply($scope.tasks, tasks);
-            //$scope.init();
         });
     };
 
-    $scope.$watch('searchQueryNEW' ,function(newValue, oldValue){
+    $rootScope.$watch('searchQuery' ,function(newValue, oldValue){
         if (newValue !== oldValue) {
-
             $rootScope.stateIsLoading = true;
-            $scope.searchQuery = $scope.searchQuery.map(function(obj){
+            $scope.searchQuery = $rootScope.searchQuery.map(function(obj){
                 if (!obj.query && obj.text){obj.query = obj.text}
                 return obj.query
             }).join(',');
-
             TaskModel.get({search:$scope.searchQuery, limit:20, skip:0, sort:'createdAt DESC'}).then(function(models){
                 console.log(models)
                 $rootScope.stateIsLoading = false;
@@ -180,7 +174,6 @@ angular.module( 'conexus.tasks', [
                 });
                 $scope.init();
             });
-
         }
     }, true);
 

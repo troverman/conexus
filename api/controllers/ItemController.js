@@ -111,7 +111,7 @@ module.exports = {
 			.sort(sort)
 			.populate('user') 
 			.then(function(models) {
-				Item.subscribe(req, models);
+				Item.subscribe(req, models.map(function(obj){return obj.id}));
 				res.json(models);
 			});
 		}
@@ -124,7 +124,7 @@ module.exports = {
 			.populate('user')
 			.then(function(models){
 				Item.count().then(function(numRecords){
-					Item.subscribe(req, models);
+					Item.subscribe(req, models.map(function(obj){return obj.id}));
 					var returnObj = {data:models, info:{count:numRecords}};
 					res.json(returnObj);
 				});

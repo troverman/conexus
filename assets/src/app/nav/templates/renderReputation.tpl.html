@@ -43,7 +43,7 @@
                 <span ng-if="!item.user.loggedIn"><i class="fa fa-circle"></i> Offline</span>
             </p>
             <div ng-if="currentUser.id != item.user.id">
-                <img ng-click="memberQRToggle(item.user)" style="height:50px;text-align:left" src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{item.user.id}}">
+                <img ng-click="memberQRToggle(item.user)" style="height:50px;text-align:left" src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{item.user.id}}" ng-src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{item.user.id}}">
                 <a style="padding:10px 15px;color:rgb(125,125,125)" class="btn btn-default" ng-click="$event.stopPropagation();transactionToggle()">Send Tokens</a>
                 <a style="padding:10px 15px;color:rgb(125,125,125)" class="btn btn-default" ng-click="$event.stopPropagation();transactionToggle()">Follow</button></a>
             </div>

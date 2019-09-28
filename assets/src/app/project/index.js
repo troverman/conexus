@@ -483,6 +483,8 @@ angular.module( 'conexus.project', [
     //TODO: DEPREICATE
     titleService.setTitle(project.title + ' | Assets | CRE8.XYZ');
 
+    $scope.balance = $scope.project.data.apps.balance;
+
     $scope.balanceColumn = {
         chart: {
             zoomType: 'x',
@@ -514,11 +516,29 @@ angular.module( 'conexus.project', [
         credits:{enabled:false},
     };
 
-    var array = [1,2,3,4,5];
-    for (x in array){
-        $scope.balanceColumn.xAxis.categories.push('name'+array[x]);
-        $scope.balanceColumn.series[0].data.push(array[x]);   
+    $scope.sortableSet = [];
+    for (x in $scope.balance) {
+        if(!isNaN($scope.balance[x]) && $scope.balance[x]!=null && $scope.balance[x]!="undefined" && $scope.balance[x]!="NaN"){
+            $scope.sortableSet.push([x, $scope.balance[x]]);
+        }
     }
+    $scope.sortableSet.sort(function(a, b) {return b[1] - a[1];});
+
+    for (x in $scope.sortableSet){
+        if (x < 250){
+            $scope.balancePie.series[0].data.push({
+                name: $scope.sortableSet[x][0],
+                y: $scope.sortableSet[x][1],
+            });
+            $scope.balanceColumn.xAxis.categories.push($scope.sortableSet[x][0]);
+            $scope.balanceColumn.series[0].data.push($scope.sortableSet[x][1]);   
+        }
+    }
+    
+    $scope.lookupBalance = function(){
+        if ($scope.balance[$scope.balanceLook]){$scope.balanceLookupValue = $scope.balance[$scope.balanceLook]}
+        if (!$scope.balance[$scope.balanceLook]){$scope.balanceLookupValue = 0}
+    };
 
 }])
 

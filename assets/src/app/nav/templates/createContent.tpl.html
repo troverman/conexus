@@ -73,8 +73,17 @@
                                     </a>
                                 </h5>
                                 <div ng-if="association.isExpanded">
-                                    <h4>Default Connection</h4>
-                                    <p>Details & Rules<p>
+
+
+                                    <h5>Default Connection</h5>
+                                    <p>Parameters & Details<p>
+                                    <span>{{association.connection}}</span>
+
+
+
+
+
+
                                 </div>
                                 <tags-input min-length="1" placeholder="{{association.text}} Context" ng-model="association.context">
                                     <auto-complete source="loadTags($query)"></auto-complete>
@@ -90,6 +99,10 @@
                                     </div>
                                     <div style="text-align:center"><p style="font-size:9px">{{context.score}}</p></div>
                                 </div>
+                                {{association.parameters}}
+
+
+
                             </div>
                         </div>
                     </div>

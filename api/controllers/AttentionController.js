@@ -215,6 +215,10 @@ module.exports = {
 							Order.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){Order.publish([newModel[0].id], {verb:'update', data: newModel[0]});});
 						});
 					}
+					//tokens vs balance
+					if (model.associatedModels[x].type == 'PROJECT'){
+									
+					}
 					if (model.associatedModels[x].type == 'TASK'){
 						Task.find({id:model.associatedModels[x].id}).then(function(newModel){
 							if (!newModel[0].data){newModel[0].data = {apps:{}}}

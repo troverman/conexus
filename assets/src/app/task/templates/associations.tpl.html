@@ -15,7 +15,6 @@
                 <div>
                     <span ng-repeat="context in task.context">{{context}}, </span>
                 </div>
-
                 <!--LOOP THROUGH APP ASSOCITED MODEL TYPES-->
                 <ul style="padding:0px;" class="member-tabs">
                     <!--CAN EACH DISCRETE MODEL HAVE APP CONNECTION YEAH META: -->
@@ -28,13 +27,6 @@
                     <li ng-click="$event.stopPropagation();selectTab('TIME')"><a href="#">Time</a></li>
                     <li ng-click="$event.stopPropagation();selectTab('REACTIONS')"><a href="#">Reaction</a></li>
                 </ul>
-
-                <!--
-                <tags-input min-length="1" max-tags="1" placeholder="Associations" ng-model="assoicationFilter">
-                    <auto-complete source="loadAssociations($query)"></auto-complete>
-                </tags-input>
-                -->
-                
             </div>
         </div>
     </div>

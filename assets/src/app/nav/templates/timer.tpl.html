@@ -27,15 +27,64 @@
             <div class="spacing-15"></div>
 
             <div ng-if="selectedTab=='TASK'">
+                <!--PEOPLE CAN FORGET TO SUBMITE..-->
                 <!--IF MULTI TASKS-->
-                <h4 ng-if="taskTime > 0">{{taskTime}}</h4>
+                <!--SUBMIT, UPDATE, LIFE CYCLE-->
                 <div class="spacing-5"></div>
-                <tags-input min-length="1" ng-model="timeTags" placeholder="Context"></tags-input>
-                <div class="spacing-5"></div>
-                <text-angular ng-model="timeContent" ta-toolbar="[['bold','italics','p','h1','h2','quote','pre','insertLink', 'html']]"></text-angular>
-                <div class="spacing-5"></div>
-                <button style="width:100%;" class="btn btn-default log-btn" ng-click="createTime()">Submit Time</button>
-
+                <form role="form" ng-submit="createTime()">
+                    <div>
+                        <h5>
+                            Context 
+                            <a ng-click="expandAssociations()" style="float:right">
+                                <span ng-if="!associationsAreExpanded"><i class="fas fa-bezier-curve"></i> Expand</span>
+                                <span ng-if="associationsAreExpanded"><i class="fas fa-grip-lines"></i> Hide</span>
+                            </a>
+                        </h5>
+                        <tags-input min-length="1" placeholder="Context" ng-model="newTime.context">
+                            <auto-complete min-length="2" source="loadTags($query)"></auto-complete>
+                        </tags-input>
+                    </div>
+                    <div ng-if="associationsAreExpanded">
+                        <h5>Associations </h5>
+                        <tags-input min-length="1" placeholder="Associations" ng-model="newTime.associatedModels">
+                            <auto-complete source="loadAssociations($query)"></auto-complete>
+                        </tags-input>
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12" ng-repeat="association in newTime.associatedModels">
+                                <h5>
+                                    {{association.text}} 
+                                    <a style="float:right" ng-click="association.isExpanded=!association.isExpanded">
+                                        <i class="fas fa-compress-arrows-alt"></i>
+                                        <b>{{association.connection[0].text || 'Default Connection'}}</b>
+                                    </a>
+                                </h5>
+                                <div ng-if="association.isExpanded">
+                                    <h4>Default Connection</h4>
+                                    <p>Details & Rules<p>
+                                </div>
+                                <tags-input min-length="1" placeholder="{{association.text}} Context" ng-model="association.context">
+                                    <auto-complete source="loadTags($query)"></auto-complete>
+                                </tags-input>
+                                <div class="spacing-5"></div>
+                                <div ng-repeat="context in association.context">
+                                    <div layout="">
+                                        <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{context.text}}</span></div>
+                                        <md-slider ng-model="context.score" step="0.1" flex="" md-discrete="" min="-100" max="100"></md-slider>
+                                        <div flex="10" layout="" layout-align="center center"><p class="md-body-1">{{context.score}}</p></div>
+                                    </div>
+                                    <div style="text-align:center"><p style="font-size:9px">{{context.score}}</p></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h3>{{taskTime}}</h3>
+                    <div ng-if="streaming"> <div ng-bind-html="renderStream(streamUrl)"></div></div>
+                    <div class="spacing-5"></div>
+                    <div class="spacing-5"></div>
+                    <text-angular ng-model="newTime.content" ta-toolbar="[['p','h1','bold','italics','quote','insertLink', 'html']]"></text-angular>
+                    <div class="spacing-5"></div>
+                    <button type="submit" style="width:100%" class="btn btn-default log-btn">create</button>
+                </form>
             </div>
 
             <div ng-if="selectedTab=='ATTENTION'">

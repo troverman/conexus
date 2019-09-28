@@ -1,4 +1,5 @@
 //CRE8.REACTION
+//SAME AS ACTION..
 module.exports = {
 	attributes: {
         amount: {type: 'string'},
@@ -6,11 +7,5 @@ module.exports = {
         user: {model: 'user'},
         associatedModels: {type: 'json'},
         data: {type: 'json'},  
-    },
-    beforeCreate: function(model, next) {
-        next();
-        if (false){
-            Reaction.find({user:model.user, associatedModels:model.associatedModels}).then(function(reactionModel){if (reactionModel.length == 0){next()}});
-        }
     },
 };

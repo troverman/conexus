@@ -124,8 +124,11 @@ module.exports = {
 			});
 		}
 
-		//WE ARE GETTING BY ASSOCIATION -- THIS IS THE MODEL
-			//ASSOCIATED VS CREATOR.. 
+
+
+ 		//STUDY THIS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ 		//QUERY FOR MEMBER-MEMBER
+ 		//QUERY FOR CONNECTION DESCRIPTION
 		else if (req.query.user){
 
 			var member = req.query.user;
@@ -137,7 +140,6 @@ module.exports = {
 				]
 			};
 			var promises = [];
-			
 			Association.getDatastore().manager.collection('association')
 			.find(andQuery).limit(limit).skip(skip).sort({'createdAt':-1})
 			.toArray(function (err, associationModels) {
@@ -150,7 +152,6 @@ module.exports = {
 					}
 				}
 				Q.all(promises).then((populatedModels)=>{
-					//console.log(populatedModels)
 					res.json(populatedModels);
 				});
 			});

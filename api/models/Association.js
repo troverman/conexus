@@ -1,7 +1,19 @@
 //CRE8.ASSOCIATION
 module.exports = {
     attributes: {
-		associatedModels: {type: 'json'}, //[addressArray]
-		context: {type: 'json'}, // {general:[-100,100]}
+
+    	//DEFINE (HIGHER ORDER) LOGIC
+    	connection:{type: 'json'},
+
+    	//PARAMETERS
+    	//{attributes:attribute, ...}
+		parameters: {type: 'json'},
+
+		//[{type:'MODEL', id:1, {parameter}},{...},...]
+		associatedModels: {type: 'json'},
+
+		//{'dimension':score, ..., }
+		context: {type: 'json'},
+
     }
 };
