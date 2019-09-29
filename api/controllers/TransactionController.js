@@ -20,6 +20,8 @@ function getFrom(model){
 	return deferred.promise;
 };
 
+//reduce to data(apps) and events
+
 function getAssociations(model){
 	var deferred = Q.defer();
 	Association.getDatastore().manager.collection('association')

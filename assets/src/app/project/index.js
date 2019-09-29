@@ -34,29 +34,6 @@ angular.module( 'conexus.project', [
                 templateUrl: 'project/templates/activity.tpl.html'
             }
         },
-
-        //TODO: FEED.. COMPLEX QUERY
-        //TODO: EVENT MODEL
-        resolve: {
-            connections: ['ConnectionModel', 'project', function(ConnectionModel, project){
-                return ConnectionModel.get({creator:project.id, limit:100, skip:0, sort:'createdAt DESC'});
-            }],
-            contentList: ['ContentModel', 'project', function(ContentModel, project){
-                return ContentModel.get({project:project.id, limit:100, skip:0, sort:'createdAt DESC'});
-            }],
-            tasks: ['project', 'TaskModel', function(project, TaskModel){
-                return TaskModel.get({project:project.id, limit:100, skip:0, sort:'createdAt DESC'});
-            }],
-            time: ['project', 'TimeModel', function(project, TimeModel){
-                return TimeModel.get({project:project.id, limit:0, skip:0, sort:'createdAt DESC'});
-            }],
-            transactionsFrom: ['TransactionModel', 'project', function(TransactionModel, project) {
-                return TransactionModel.get({from:project.id, limit:100, skip:0, sort:'createdAt DESC'});
-            }],
-            transactionsTo: ['TransactionModel', 'project', function(TransactionModel, project) {
-                return TransactionModel.get({to:project.id, limit:100, skip:0, sort:'createdAt DESC'});
-            }],
-        }
     })
     .state( 'project.assets', {
         url: '/assets',
@@ -74,14 +51,6 @@ angular.module( 'conexus.project', [
                 controller: 'ProjectChannelsCtrl',
                 templateUrl: 'project/templates/channels.tpl.html'
             }
-        },
-        resolve: {
-            channels: [function() {
-                return [{title:'general'},{title:'tasks'},{title:'create'},{title:'task1'}]
-            }],
-            contentList: ['ContentModel', 'project', function(ContentModel, project){
-                return ContentModel.get({project:project.id, limit:100, skip:0, sort:'createdAt DESC'});
-            }],
         }
     })
     .state( 'project.content', {
@@ -270,15 +239,14 @@ angular.module( 'conexus.project', [
             }
         },
         resolve: {
-            time: ['project', 'TimeModel', function(project, TimeModel) {
+            time: ['AssociationModel', 'project', function(AssociationModel, project) {
                 var query = {
                     filter:JSON.stringify({type:'TIME', id:project.id}),
                     limit:100,
                     skip:0,
                     sort:'createdAt DESC'
                 };
-                //return AssociationModel.get(query);
-                return TimeModel.get({project:project.id, limit:10, skip:0, sort:'createdAt DESC'});
+                return AssociationModel.get(query);
             }]
         }
     })
@@ -358,133 +326,51 @@ angular.module( 'conexus.project', [
     titleService.setTitle(project.title + ' | About | CRE8.XYZ');
 }])
 
-.controller( 'ProjectActivityCtrl', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'connections', 'contentList', 'project', 'ReactionModel', 'SearchModel', 'tasks', 'time', 'titleService', 'transactionsFrom', 'transactionsTo', function ProjectActivityController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, connections, contentList, project, ReactionModel, SearchModel, tasks, time, titleService, transactionsFrom, transactionsTo ) {
+.controller( 'ProjectActivityCtrl', ['$location', '$rootScope', '$sailsSocket', '$scope', 'EventModel', 'project', 'SearchModel', 'titleService', function ProjectActivityController( $location, $rootScope, $sailsSocket, $scope, EventModel, project, SearchModel, titleService) {
    
     //TODO: DEPRECIATE
     titleService.setTitle(project.title + ' | Activity | CRE8.XYZ');
-
-    //TODO: FEED.. COMPLEX QUERY
-    //ACTIONS??? EVENTS??? HM
-        //ON CREATE MODEL....
-            //EVENT MODEL (ACTION OR DATA?)
-                //EVENT FOR TOKEN CREATION IS GOOOOOOOD
-            //FOR ACTIVITY.. EVENTS!!!
-    //SUPER SIMPLIFY IS .... GET EVENT MODEL!!!
-        //POPULATE THE DATA FROM THE EVENT
-
-    var query = JSON.stringify([
-        {model:'CONNECTION', limit:20, skip:0, sort:'createdAt DESC', filter:[]},
-        {model:'ITEM', limit:20,skip:0,sort:'createdAt DESC'},
-        {model:'PROJECT', limit:20,skip:0,sort:'createdAt DESC'},
-        {model:'TASK', limit:20,skip:0,sort:'createdAt DESC'},
-        {model:'TIME', limit:20,skip:0,sort:'createdAt DESC'},
-        {model:'TRANSACTION', limit:20,skip:0,sort:'createdAt DESC'},
-        {model:'USER', limit:20,skip:0,sort:'createdAt DESC'}
-    ]);
-    //$scope.stateIsLoadingActivity = true;
-    //SearchModel.getFeed(query).then(function(searchModels){
-    //    $scope.stateIsLoadingIntro = false;
-    //    console.log(searchModels);
-    //    $scope.activity = searchModels;
-    //    $scope.init();
-    //});
-
-    //connections
-    //contentList
-    //tasks
-    //time 
-    //transactionsFrom
-    //transactionsTo  
-    
-    //INIT LOCAL VARIABLES
-    $scope.newContent = {};
-    $scope.newReaction = {};
-    $scope.connections = connections;
-    $scope.contentList = contentList;
+    $scope.activity = [];
     $scope.project = project;
-    $scope.searchQuery = [];
-    $scope.tasks = tasks;
-    $scope.time = time;
-    $scope.transactionsFrom = transactionsFrom;
-    $scope.transactionsTo = transactionsTo;
-    $scope.transactions = $scope.transactionsFrom.concat($scope.transactionsTo);
 
-    $scope.contentList = $scope.contentList.map(function(obj){
-        if (obj.tags){obj.tags = obj.tags.split(',');}
-        obj.model = 'CONTENT';
-        return obj;
+    //TODO: EVENTS
+    var query = {
+        limit:100, 
+        skip:0, 
+        sort:'createdAt DESC',
+        filter:[
+            {}
+        ],
+        //find by modelid
+        model:'ASSOCIATION', 
+        id:project.id, 
+    };
+    $scope.stateIsLoadingActivity = true;
+    EventModel.get(query).then(function(eventModels){
+        $scope.stateIsLoadingIntro = false;
+        //$scope.activity = eventModels;
+        console.log( $scope.activity );
     });
-    $scope.tasks = $scope.tasks.map(function(obj){
-        if (obj.tags){obj.tags = obj.tags.split(',');}
-        obj.model = 'TASK';
-        return obj;
-    });
-    $scope.time = $scope.time.map(function(obj){
-        if (obj.tags){obj.tags = obj.tags.split(',');}
-        obj.model = 'TIME';
-        return obj;
-    });
-    $scope.transactions = $scope.transactions.map(function(obj){
-        if (obj.tags){obj.tags = obj.tags.split(',');}
-        obj.model = 'TRANSACTION';
-        return obj;
-    });
+
+    $rootScope.$watch('event', function(newValue, oldValue){
+        //$scope.activity.unshift(newValue);
+    }, true);
     
-    $scope.activity = [].concat.apply([], [$scope.contentList, $scope.tasks, $scope.time, $scope.transactions]);
-    $scope.activity = $scope.activity.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
-    $scope.activity = $scope.activity.slice(0,100);
-
-
-    //LISTENING TO ALL ..
-    //TODO: EVENT!!
-
-    //TEMP
-    //FRONTEND EXPERIENCE.. COULD DO WATCH SOME VARIABLE .. ADD TO ACTIVITY IF
-    $rootScope.$watch('activityUpdate', function(newValue, oldValue){$scope.activity.unshift(newValue);},true);
-
-    //$sailsSocket.subscribe('content', function (envelope) {if (envelope.verb == 'create'){$scope.activity.unshift(envelope.data);}});
-    //$sailsSocket.subscribe('task', function (envelope) {if (envelope.verb == 'create'){$scope.activity.unshift(envelope.data);}});
-    //$sailsSocket.subscribe('time', function (envelope) {if (envelope.verb == 'create'){$scope.activity.unshift(envelope.data);}});
-    
-    $sailsSocket.subscribe('content', function (envelope) {
-        if (envelope.verb == 'create'){if (envelope.data.user == $scope.project.id){$scope.activity.unshift(envelope.data);}}
-        if (envelope.verb == 'update'){
-            var index = $scope.activity.map(function(obj){return obj.id}).indexOf(envelope.data.id);
-            if (index != -1){$scope.activity[index].data = envelope.data.data;}
-        }
-    });
-    $sailsSocket.subscribe('task', function (envelope) {
-        if (envelope.verb == 'create'){if (envelope.data.user == $scope.project.id){$scope.activity.unshift(envelope.data);}}
-        if (envelope.verb == 'update'){
-            var index = $scope.activity.map(function(obj){return obj.id}).indexOf(envelope.data.id);
-            if (index != -1){$scope.activity[index].data = envelope.data.data;}
-        }
-    });
-    $sailsSocket.subscribe('time', function (envelope) {
-        if (envelope.verb == 'create'){if (envelope.data.user == $scope.project.id){$scope.activity.unshift(envelope.data);}}
-        if (envelope.verb == 'update'){
-            var index = $scope.activity.map(function(obj){return obj.id}).indexOf(envelope.data.id);
-            if (index != -1){$scope.activity[index].data = envelope.data.data;}
-        }
-    });
-    $sailsSocket.subscribe('transaction', function (envelope) {
-        console.log(envelope)
-        if (envelope.data.to.id == $scope.project.id || envelope.data.from.id == $scope.project.id){$scope.activity.unshift(envelope.data);}
-        if (envelope.verb == 'update'){
-            var index = $scope.activity.map(function(obj){return obj.id}).indexOf(envelope.data.id);
-            if (index != -1){$scope.activity[index].data = envelope.data.data;}
-        }
-    });
- 
+    //TEMP | FRONTEND EXPERIENCE.. COULD DO WATCH SOME VARIABLE .. ADD TO ACTIVITY IF
+    $rootScope.$watch('activityUpdate', function(newValue, oldValue){
+        //$scope.activity.unshift(newValue);
+    }, true);
+  
 }])
 
 .controller( 'ProjectAssetsCtrl', ['$scope', 'project', 'titleService', function ProjectAssetsController( $scope, project, titleService ) {
     
     //TODO: DEPREICATE
     titleService.setTitle(project.title + ' | Assets | CRE8.XYZ');
-
-    $scope.balance = $scope.project.data.apps.balance;
-
+    $scope.balance = {};
+    if ( $scope.project.data){
+        $scope.balance = $scope.project.data.apps.balance;
+    }
     $scope.balanceColumn = {
         chart: {
             zoomType: 'x',
@@ -542,18 +428,17 @@ angular.module( 'conexus.project', [
 
 }])
 
-.controller( 'ProjectChannelsCtrl', ['$location', '$mdSidenav', '$sailsSocket', '$sce', '$scope', 'channels', 'contentList', 'project', 'titleService', function ProjectController( $location, $mdSidenav, $sailsSocket, $sce, $scope, channels, contentList, project, titleService ) {
+.controller( 'ProjectChannelsCtrl', ['$location', '$sailsSocket', '$sce', '$scope', 'project', 'titleService', function ProjectController( $location, $sailsSocket, $sce, $scope, project, titleService ) {
     
     //TODO: DEPREICATE
     titleService.setTitle(project.title + ' | Channels | CRE8.XYZ');
-    $scope.channels = channels;
-    $scope.newContent = {};
+    $scope.channels = [{title:'general'},{title:'tasks'},{title:'create'},{title:'task1'}];
+    $scope.contentList = [];
     $scope.project = project;
-    $scope.contentList = contentList;
 
 }])
 
-.controller( 'ProjectContentCtrl', ['$location', '$mdSidenav', '$rootScope', '$sce', '$scope', 'contentList', 'ContentModel', 'project', 'titleService', function ProjectController( $location, $mdSidenav, $rootScope, $sce, $scope, contentList, ContentModel, project, titleService ) {
+.controller( 'ProjectContentCtrl', ['$location', '$rootScope', '$sce', '$scope', 'contentList', 'ContentModel', 'project', 'titleService', function ProjectController( $location, $rootScope, $sce, $scope, contentList, ContentModel, project, titleService ) {
     
     titleService.setTitle(project.title + ' | Content | CRE8.XYZ'); 
     $scope.contentList = contentList.map(function(obj) {
@@ -573,7 +458,7 @@ angular.module( 'conexus.project', [
     $scope.connections = connections.map(function(obj){obj.model = "CONNECTION"; return obj;});
 }])
 
-.controller( 'ProjectLedgerCtrl', ['$interval', '$location', '$mdSidenav', '$rootScope', '$scope', 'project', 'titleService', 'TransactionModel', 'transactions', 'transactionsFrom', 'transactionsTo', function ProjectController( $interval, $location, $mdSidenav, $rootScope, $scope, project, titleService, TransactionModel, transactions, transactionsFrom, transactionsTo ) {
+.controller( 'ProjectLedgerCtrl', ['$interval', '$location', '$rootScope', '$scope', 'project', 'titleService', 'TransactionModel', 'transactions', 'transactionsFrom', 'transactionsTo', function ProjectController( $interval, $location, $rootScope, $scope, project, titleService, TransactionModel, transactions, transactionsFrom, transactionsTo ) {
     
     titleService.setTitle(project.title + ' | Ledger | CRE8.XYZ');
     
@@ -937,7 +822,7 @@ angular.module( 'conexus.project', [
 
 }])
 
-.controller( 'ProjectItemsCtrl', ['$location', '$mdSidenav', '$sailsSocket', '$scope', 'items', 'project', 'titleService', function ProjectMarketplaceController( $location, $mdSidenav, $sailsSocket, $scope, items, project, titleService) {
+.controller( 'ProjectItemsCtrl', ['$location', '$sailsSocket', '$scope', 'items', 'project', 'titleService', function ProjectMarketplaceController( $location, $sailsSocket, $scope, items, project, titleService) {
    
     titleService.setTitle(project.title + ' | Items | CRE8.XYZ');
     $scope.items = items.map(function(obj) {
@@ -952,7 +837,7 @@ angular.module( 'conexus.project', [
 
 }])
 
-.controller( 'ProjectMembersCtrl', ['$location', '$mdSidenav', '$sailsSocket', '$rootScope', '$scope', 'AssociationModel', 'connections', 'members', 'project', 'titleService', function ProjectController( $location, $mdSidenav, $sailsSocket, $rootScope, $scope, AssociationModel, connections, members, project, titleService ) {
+.controller( 'ProjectMembersCtrl', ['$location', '$sailsSocket', '$rootScope', '$scope', 'AssociationModel', 'connections', 'members', 'project', 'titleService', function ProjectController( $location, $sailsSocket, $rootScope, $scope, AssociationModel, connections, members, project, titleService ) {
     titleService.setTitle(project.title + ' | Members | CRE8.XYZ');
 
     $scope.connections = connections;
@@ -1077,7 +962,7 @@ angular.module( 'conexus.project', [
 
 }])
 
-.controller( 'ProjectProjectsCtrl', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'project', 'ProjectModel', 'projects', 'titleService', function ProjectController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, project, ProjectModel, projects, titleService ) {
+.controller( 'ProjectProjectsCtrl', ['$location', '$rootScope', '$sailsSocket', '$sce', '$scope', 'project', 'ProjectModel', 'projects', 'titleService', function ProjectController( $location, $rootScope, $sailsSocket, $sce, $scope, project, ProjectModel, projects, titleService ) {
     
     titleService.setTitle(project.title + ' | Projects | CRE8.XYZ');
     $scope.project = project;
@@ -1127,7 +1012,7 @@ angular.module( 'conexus.project', [
     titleService.setTitle(project.title + ' | Settings | CRE8.XYZ');
 }])
 
-.controller( 'ProjectTasksCtrl', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'project', 'ReactionModel', 'TaskModel', 'tasks', 'titleService', function ProjectController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, project, ReactionModel, TaskModel, tasks, titleService ) {
+.controller( 'ProjectTasksCtrl', ['$location', '$rootScope', '$sailsSocket', '$sce', '$scope', 'project', 'ReactionModel', 'TaskModel', 'tasks', 'titleService', function ProjectController( $location, $rootScope, $sailsSocket, $sce, $scope, project, ReactionModel, TaskModel, tasks, titleService ) {
     
     titleService.setTitle(project.title + ' | Tasks | CRE8.XYZ');
 
@@ -1142,6 +1027,7 @@ angular.module( 'conexus.project', [
         }
     });
 
+
     $sailsSocket.subscribe('task', function (envelope) {
         if (envelope.verb == 'create'){
             $scope.tasks.unshift(envelope.data);
@@ -1150,7 +1036,7 @@ angular.module( 'conexus.project', [
 
 }])
 
-.controller( 'ProjectTimeCtrl', ['$rootScope', '$sailsSocket', '$scope', 'project', 'ReactionModel', 'time', 'titleService', function ProjectTimeController( $rootScope, $sailsSocket, $scope, project, ReactionModel, time, titleService) {
+.controller( 'ProjectTimeCtrl', ['$rootScope', '$sailsSocket', '$scope', 'project', 'time', 'titleService', function ProjectTimeController( $rootScope, $sailsSocket, $scope, project, time, titleService) {
     
     //TODO: DEPRECIATE
     titleService.setTitle(project.title + ' | Time | CRE8.XYZ');
@@ -1177,15 +1063,7 @@ angular.module( 'conexus.project', [
         nowIndicator: true,
         allDaySlot: false,
     };
-    $scope.map = {
-        center: {latitude: 35.902023, longitude: -84.1507067 },
-        zoom: 9
-    };
-    $scope.markers = [];
-    $scope.newReaction = {};
-    $scope.options = {scrollwheel: false};
     
-    $scope.time = time;
     $scope.time = time.map(function(obj){
         var endTime = new Date(obj.createdAt)
         obj.startTime = new Date(endTime.setSeconds(endTime.getSeconds() - obj.amount));

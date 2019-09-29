@@ -1,9 +1,9 @@
 <div class="row">
-	<div ng-show="items.length == 0">
+	<div ng-if="tasks.length == 0">
         <div class="card"><button class="btn btn-default log-btn" ng-click="taskToggle(project)">+ Task</button></div>
 	    <div class="card"><div style="padding:16px;"><span style="color:gray">There's nothing here..</span></div></div>
     </div>
-    <div ng-show="tasks.length > 0" class="col-sm-12" style="padding-left:0px;padding-right:0px;">
+    <div ng-if="tasks.length > 0" class="col-sm-12" style="padding-left:0px;padding-right:0px;">
         <div class="spacing-5 mobileFix"></div>
     	<ul style="padding:0px;" class="member-tabs mobileFix">
             <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER')"><i class="fa fa-filter"></i> Filter</a></li>

@@ -2099,16 +2099,12 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
+    "                <h4>Agent Centric, Custom Peer Compilation</h4>\n" +
+    "                <hr>\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
     "                <h4>The State Machine</h4>\n" +
-    "                <p><a href=\"#PEERMODEL\" du-smooth-scroll>Peers</a>, <a href=\"#TX\" du-smooth-scroll>Txs</a>, and <a href=\"#BLOCK\" du-smooth-scroll>Blocks</a></p>\n" +
-    "                <hr>\n" +
-    "                <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                <h4>Networking Protocols, Data Storage, & High-bandwith Delivery</h4>\n" +
-    "                <hr>\n" +
-    "                <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "                <h4>A Methodology of Consensus</h4>\n" +
+    "                <p><a href=\"#PEERMODEL\" du-smooth-scroll>Peers</a>, <a href=\"#TX\" du-smooth-scroll>Txs</a>, <a href=\"#BLOCK\" du-smooth-scroll>Blocks</a>, and <a>Protocols</p></p>\n" +
     "                <hr>\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
@@ -2116,11 +2112,11 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <hr>\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
-    "                <h4>Context Specific Machine Attention</h4>\n" +
+    "                <h4>Networking Protocols, Data Storage, & High-bandwith Delivery</h4>\n" +
     "                <hr>\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
-    "                <h4>Custom Peer Compilation</h4>\n" +
+    "                <h4>Context Specific Machine Attention</h4>\n" +
     "                <hr>\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
@@ -8695,7 +8691,6 @@ angular.module("nav/templates/createProject.tpl.html", []).run(["$templateCache"
     "                        </div>\n" +
     "                    </div>\n" +
     "\n" +
-    "\n" +
     "                </div>\n" +
     "\n" +
     "                <!--LOCATION ASSOCIATION-->\n" +
@@ -11145,29 +11140,18 @@ angular.module("project/templates/about.tpl.html", []).run(["$templateCache", fu
 angular.module("project/templates/activity.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("project/templates/activity.tpl.html",
     "<div class=\"row\">\n" +
-    "\n" +
-    "    <div ng-show=\"activity.length == 0\">\n" +
+    "    <div ng-if=\"activity.length == 0\">\n" +
     "        <div class=\"card\"><button class=\"btn btn-default log-btn\" ng-click=\"cre8Toggle(project)\">CRE8</button></div>\n" +
-    "        <div class=\"card\">\n" +
-    "            <div style=\"padding:16px;\">\n" +
-    "                <span style=\"color:gray\">There's nothing here..</span>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
+    "        <div class=\"card\"><div style=\"padding:16px;\"><span style=\"color:gray\">There's nothing here..</span></div></div>\n" +
     "    </div>\n" +
-    "\n" +
-    "    <div ng-show=\"activity.length > 0\" class=\"col-sm-12\" style=\"padding-left:0px;padding-right:0px;\">\n" +
+    "    <div ng-if=\"activity.length > 0\" class=\"col-sm-12\" style=\"padding-left:0px;padding-right:0px;\">\n" +
     "        <ul style=\"padding:0px;\" class=\"member-tabs mobileFix\">\n" +
     "            <li class=\"mobileFix\" style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
     "            <li style=\"float:right;font-size:14px\"><a href=\"#\" ng-click=\"sortToggle()\">Sort By Recent <i class=\"fa fa-angle-down\"></i></a></li>\n" +
     "            <div style=\"clear:both\"></div>\n" +
     "        </ul>\n" +
-    "\n" +
-    "        <div class=\"card mobileFix\">\n" +
-    "            <tags-input class=\"\" style=\"border:0px;flex-grow:2;\" placeholder=\"Search\" ng-model=\"searchQuery\"></tags-input>    \n" +
-    "        </div>\n" +
-    "\n" +
+    "        <div class=\"card mobileFix\"><tags-input class=\"\" style=\"border:0px;flex-grow:2;\" placeholder=\"Search\" ng-model=\"searchQuery\"></tags-input></div>\n" +
     "        <div class=\"card\"><button class=\"btn btn-default log-btn\" ng-click=\"cre8Toggle(project)\">CRE8</button></div>\n" +
-    "\n" +
     "        <div ng-repeat=\"item in activity\">\n" +
     "            <div ng-if=\"item.model=='CONTENT'\" ng-click=\"cardDetailToggle(item)\"><div ng-include=\"'templates/cards/contentCard.tpl.html'\"></div></div>\n" +
     "            <div ng-if=\"item.model=='TASK'\" ng-click=\"cardDetailToggle(item)\"><div ng-include=\"'templates/cards/taskCard.tpl.html'\"></div></div>\n" +
@@ -11175,9 +11159,7 @@ angular.module("project/templates/activity.tpl.html", []).run(["$templateCache",
     "            <div ng-if=\"item.model=='TRANSACTION'\" ng-click=\"cardDetailToggle(item)\"><div ng-include=\"'templates/cards/transactionCard.tpl.html'\"></div></div>\n" +
     "        </div>      \n" +
     "    </div>\n" +
-    "\n" +
     "</div>\n" +
-    "\n" +
     "<div class=\"spacing-10\"></div>");
 }]);
 
@@ -11531,11 +11513,13 @@ angular.module("project/templates/projects.tpl.html", []).run(["$templateCache",
     "\n" +
     "<!--ASSOCIATIONS FOR TRAVERSAL-->\n" +
     "<div class=\"row\">\n" +
-    "	<div ng-if=\"currentUser\" class=\"card\">\n" +
-    "    	<button class=\"btn btn-default log-btn\" ng-click=\"projectToggle(project)\">+ Project</button>\n" +
+    "    <div ng-show=\"projects.length == 0\"> \n" +
+    "		<div class=\"card\"><button class=\"btn btn-default log-btn\" ng-click=\"projectToggle(project)\">+ Project</button></div>\n" +
+    "        <div class=\"card\"><div style=\"padding:16px;\"><span style=\"color:gray\">There's nothing here..</span></div></div>\n" +
     "    </div>\n" +
-    "	<div ng-repeat=\"item in projects\" ng-click=\"cardDetailToggle(project)\">\n" +
-    "        <div ng-include=\"'templates/cards/projectCard.tpl.html'\"></div>\n" +
+    "    <div ng-show=\"projects.length > 0\">\n" +
+    "		<div class=\"card\"><button class=\"btn btn-default log-btn\" ng-click=\"projectToggle(project)\">+ Project</button></div>\n" +
+    "		<div ng-repeat=\"item in projects\" ng-click=\"cardDetailToggle(project)\"><div ng-include=\"'templates/cards/projectCard.tpl.html'\"></div></div>\n" +
     "	</div>\n" +
     "</div>");
 }]);
@@ -11569,11 +11553,11 @@ angular.module("project/templates/settings.tpl.html", []).run(["$templateCache",
 angular.module("project/templates/tasks.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("project/templates/tasks.tpl.html",
     "<div class=\"row\">\n" +
-    "	<div ng-show=\"items.length == 0\">\n" +
+    "	<div ng-if=\"tasks.length == 0\">\n" +
     "        <div class=\"card\"><button class=\"btn btn-default log-btn\" ng-click=\"taskToggle(project)\">+ Task</button></div>\n" +
     "	    <div class=\"card\"><div style=\"padding:16px;\"><span style=\"color:gray\">There's nothing here..</span></div></div>\n" +
     "    </div>\n" +
-    "    <div ng-show=\"tasks.length > 0\" class=\"col-sm-12\" style=\"padding-left:0px;padding-right:0px;\">\n" +
+    "    <div ng-if=\"tasks.length > 0\" class=\"col-sm-12\" style=\"padding-left:0px;padding-right:0px;\">\n" +
     "        <div class=\"spacing-5 mobileFix\"></div>\n" +
     "    	<ul style=\"padding:0px;\" class=\"member-tabs mobileFix\">\n" +
     "            <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER')\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
@@ -11592,6 +11576,7 @@ angular.module("project/templates/time.tpl.html", []).run(["$templateCache", fun
     "<div class=\"row\">\n" +
     "    <div ng-show=\"time.length == 0\">\n" +
     "        <div class=\"card\"><div style=\"padding:16px;\"><span style=\"color:gray\">There's nothing here..</span></div></div>\n" +
+    "        <div class=\"card\"><button class=\"btn btn-default log-btn\" ng-click=\"orderToggle()\">+ Time</button></div>\n" +
     "    </div>\n" +
     "    <div ng-show=\"time.length > 0\" class=\"col-xs-12\" style=\"padding-left:0px;padding-right:0px;\">\n" +
     "        <div class=\"card mobileFix\">\n" +
@@ -11602,20 +11587,16 @@ angular.module("project/templates/time.tpl.html", []).run(["$templateCache", fun
     "                </div>\n" +
     "            </form>\n" +
     "        </div>\n" +
-    "        <div class=\"card\">\n" +
-    "            <button class=\"btn btn-default log-btn\" ng-click=\"timeToggle()\">+ Time</button>\n" +
-    "        </div>\n" +
+    "        <div class=\"card\"><button class=\"btn btn-default log-btn\" ng-click=\"timeToggle()\">+ Time</button></div>\n" +
     "        <div class=\"card\">\n" +
     "            <div style=\"padding:16px\">\n" +
     "                <div fc fc-options=\"calendar\" ng-model=\"eventSources\"></div>\n" +
     "            </div>\n" +
     "        </div>\n" +
-    "        <div ng-repeat=\"item in time\" ng-if=\"time.length > 0\">\n" +
-    "            <div ng-include=\"'templates/cards/timeCardLarge.tpl.html'\"></div>\n" +
-    "        </div>\n" +
+    "        <div ng-repeat=\"item in time\" ng-if=\"time.length > 0\"><div ng-include=\"'templates/cards/timeCardLarge.tpl.html'\"></div></div>\n" +
     "    </div>\n" +
     "</div>\n" +
-    "<div class=\"spacing-25\"></div>");
+    "");
 }]);
 
 angular.module("project/templates/validations.tpl.html", []).run(["$templateCache", function($templateCache) {
@@ -14679,16 +14660,17 @@ angular.module("tutorial/templates/valueMapQuestions.tpl.html", []).run(["$templ
     "        <p style=\"color:gray;font-size:12px;font-style:italic\">Select what you believe is worthwile.</p>\n" +
     "        <p style=\"color:gray;font-size:12px;font-style:italic\">Creating a value map furthers a self-empowering mechanism. We create value; though sharing our values and relating them we create value in ourselves, in what we do, and within each other.</p>\n" +
     "\n" +
-    "        <!--<div class=\"row\">\n" +
-    "            <div class=\"col-xs-4\"><img ng-src=\"https://source.unsplash.com/900x900/?value,finance,vote\"></div>\n" +
-    "            <div class=\"col-xs-4\"><img ng-src=\"https://source.unsplash.com/900x900/?humananity,city,community\"></div>\n" +
-    "            <div class=\"col-xs-4\"><img ng-src=\"https://source.unsplash.com/900x900/?code,love,joy\"></div>\n" +
-    "        </div>-->\n" +
+    "        <!--NG-REPEAT VALID APPS WITH QUESTION PACK ASSOCIATION-->\n" +
+    "        <a><b>General</b></a>,\n" +
+    "        <a><b>Health</b></a>,\n" +
+    "        <a><b>Time</b></a>,\n" +
     "\n" +
     "    </div>\n" +
     "</div>\n" +
     "\n" +
     "<div class=\"col-xs-12\" style=\"padding-left:0px;padding-right:0px\">\n" +
+    "   \n" +
+    "    <!--TODO: DYNAMIC-->\n" +
     "    <div class=\"card\">\n" +
     "        <div style=\"background:url('https://source.unsplash.com/1600x900/?love,art,geometry');;min-height:100px\" class=\"imageContainerSmall\">\n" +
     "            <div style=\"background:rgba(0,0,0,0.75);;height:100px\" class=\"imageContainerSmallDiv\">  \n" +
@@ -14705,8 +14687,11 @@ angular.module("tutorial/templates/valueMapQuestions.tpl.html", []).run(["$templ
     "\n" +
     "    <div class=\"card\">\n" +
     "        <div style=\"padding:16px;\">\n" +
+    "            \n" +
+    "            <!--TODO: DYNAMIC-->\n" +
     "            <p style=\"font-style:italic;color:gray;margin:0px;font-size:12px\">Thinking about an archetypal human value profile. Tell us what you believe makes a human thirve.</p>\n" +
     "\n" +
+    "            <!--TODO: NG-REPEAT-->\n" +
     "            <h5>Do you believe in yourself?</h5>\n" +
     "            <div layout=\"\">\n" +
     "                <div flex=\"10\" layout=\"\" layout-align=\"center center\">\n" +
@@ -14748,6 +14733,8 @@ angular.module("tutorial/templates/valueMapQuestions.tpl.html", []).run(["$templ
     "                <div flex=\"10\" layout=\"\" layout-align=\"center center\"><p><b>Yes</b></p></div>\n" +
     "            </div>\n" +
     "            <div style=\"text-align:center\"><p>CRE8+TIME+PROJECT+CRE8</p></div>\n" +
+    "\n" +
+    "            <!--DO YOU BELIEVE IN HONOR-->\n" +
     "\n" +
     "\n" +
     "        </div>\n" +
