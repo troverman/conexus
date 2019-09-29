@@ -593,12 +593,60 @@ angular.module( 'conexus.nav', [
             $scope.newProject = {
                 associatedModels:[{
                     type:'PROJECT',
-                    text:'self',
+                    text:'Project Self',
                     id:'self',
                     context:[
                         {text:'self', score:100}
                     ],
                     connection:[{text:'Self Connection'}]
+                },
+                //NOT ACTUALL CREATING THE CONNECTION HERE.
+                //THESE ARE ASSOCIATIONS
+                {
+                    text:'Project Connection',
+                    description:'Meta Project Connection Rules',
+                    parameters:{
+                        data:{},
+                    },
+                    logic:{},
+                    acceptance:{},
+                    id:null,
+                    connection:null,
+                },
+                {
+                    text:'Project Member',
+                    description:'What defineds Membership in a project',
+                    connection:[{text:'Project Connection'}]
+                },
+                {
+                    text:'Project Order',
+                    description:'Meta Project Connection Rules',
+                    connection:[{text:'Project Connection'}]
+                },
+                {
+                    text:'Project Task',
+                    description:'Meta Project Connection Rules',
+                    connection:[{text:'Project Connection'}]
+                },
+                {
+                    text:'Project Time',
+                    description:'Meta Project Connection Rules',
+                    connection:[{text:'Project Connection'}]
+                },
+                {
+                    text:'Project Task Time',
+                    description:'Meta Project Connection Rules',
+                    connection:[{text:'Project Connection'}]
+                },
+                {
+                    text:'Project Transaction',
+                    description:'Meta Project Connection Rules',
+                    connection:[{text:'Project Connection'}]
+                },
+                {
+                    text:'Project Validation',
+                    description:'Meta Project Connection Rules',
+                    connection:[{text:'Project Connection'}]
                 }],
                 user:$rootScope.currentUser.id,
             };

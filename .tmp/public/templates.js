@@ -8621,6 +8621,8 @@ angular.module("nav/templates/createProject.tpl.html", []).run(["$templateCache"
     "            <div class=\"spacing-10\"></div>\n" +
     "\n" +
     "            <form role=\"form\" ng-submit=\"createProject()\">\n" +
+    "\n" +
+    "                <!--SELF ASSOCIATION-->\n" +
     "                <h5>Title</h5>\n" +
     "                <input type=\"text\" placeholder= \"Title\" ng-model=\"newProject.title\" class=\"form-control\">\n" +
     "\n" +
@@ -8638,51 +8640,65 @@ angular.module("nav/templates/createProject.tpl.html", []).run(["$templateCache"
     "                </div>\n" +
     "\n" +
     "                <div ng-if=\"associationsAreExpanded\">\n" +
+    "\n" +
     "                    <h5>Associations </h5>\n" +
     "                    <tags-input min-length=\"1\" placeholder=\"Associations\" ng-model=\"newProject.associatedModels\">\n" +
     "                        <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
     "                    </tags-input>\n" +
     "                    <div class=\"row\">\n" +
     "                        <div class=\"col-md-12 col-sm-12\" ng-repeat=\"association in newProject.associatedModels\">\n" +
+    "\n" +
+    "\n" +
     "                            <h5>\n" +
     "                                {{association.text}} \n" +
-    "                                <a style=\"float:right\" ng-click=\"association.isExpanded=!association.isExpanded\">\n" +
+    "                                <a ng-if=\"association.connection[0].text\" style=\"float:right\" ng-click=\"association.isExpanded=!association.isExpanded\">\n" +
     "                                    <i class=\"fas fa-compress-arrows-alt\"></i>\n" +
-    "                                    <b>{{association.connection[0].text || 'Default Connection'}}</b>\n" +
+    "                                    <b>{{association.connection[0].text}}</b>\n" +
     "                                </a>\n" +
     "                            </h5>\n" +
+    "\n" +
     "                            <div ng-if=\"association.isExpanded\">\n" +
-    "                                <h4>Default Connection</h4>\n" +
-    "                                <p>Details & Rules<p>\n" +
+    "\n" +
+    "                                <h5>Default Connection</h5>\n" +
+    "                                <p>Parameters & Details<p>\n" +
+    "                                <span>{{association.connection}}</span>\n" +
+    "\n" +
     "                            </div>\n" +
-    "                            <tags-input min-length=\"1\" placeholder=\"{{association.text}} Context\" ng-model=\"association.context\">\n" +
-    "                                <auto-complete source=\"loadTags($query)\"></auto-complete>\n" +
-    "                            </tags-input>\n" +
-    "                            <div class=\"spacing-5\"></div>\n" +
-    "                            <div ng-repeat=\"context in association.context\">\n" +
-    "                                <div layout=\"\">\n" +
-    "                                    <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{context.text}}</span></div>\n" +
-    "                                    <md-slider ng-model=\"context.score\" step=\"0.1\" flex=\"\" md-discrete=\"\" min=\"-100\" max=\"100\"></md-slider>\n" +
-    "                                    <div flex=\"10\" layout=\"\" layout-align=\"center center\"><p class=\"md-body-1\">{{context.score}}</p></div>\n" +
+    "\n" +
+    "                            <!--NG REPEAT PARAMETERS-->\n" +
+    "                                <!--PARAMETER TYPE | ( (NODE / CONNECTION) | (MODEL / ASSOCIATED MODEL) )-->\n" +
+    "\n" +
+    "                            <p style=\"color:grey\">{{association.description}}</p>\n" +
+    "\n" +
+    "                            <div ng-if=\"!association.description\">\n" +
+    "                                <!--OBJECT EDITOR-->\n" +
+    "                                <!--MAKE VARIABLE-->\n" +
+    "                                <!--TODO: TEMPLATES-->\n" +
+    "                                <!--CREATING AN OBJECT-->\n" +
+    "                                <h5>Context</h5>\n" +
+    "                                <tags-input min-length=\"1\" placeholder=\"{{association.text}} Context\" ng-model=\"association.context\">\n" +
+    "                                    <auto-complete source=\"loadTags($query)\"></auto-complete>\n" +
+    "                                </tags-input>\n" +
+    "\n" +
+    "                                <div class=\"spacing-5\"></div>\n" +
+    "\n" +
+    "                                <div ng-repeat=\"context in association.context\">\n" +
+    "                                    <div layout=\"\">\n" +
+    "                                        <div flex=\"10\" layout=\"\" layout-align=\"center center\"><span class=\"md-body-1\">{{context.text}}</span></div>\n" +
+    "                                        <md-slider ng-model=\"context.score\" step=\"0.1\" flex=\"\" md-discrete=\"\" min=\"-100\" max=\"100\"></md-slider>\n" +
+    "                                        <div flex=\"10\" layout=\"\" layout-align=\"center center\"><p class=\"md-body-1\">{{context.score}}</p></div>\n" +
+    "                                    </div>\n" +
+    "                                    <div style=\"text-align:center\"><p style=\"font-size:9px\">{{context.score}}</p></div>\n" +
     "                                </div>\n" +
-    "                                <div style=\"text-align:center\"><p style=\"font-size:9px\">{{context.score}}</p></div>\n" +
     "                            </div>\n" +
+    "\n" +
     "                        </div>\n" +
     "                    </div>\n" +
     "\n" +
-    "                    <h5>Charter </h5>\n" +
-    "                    <h5>ProjectConnection </h5>\n" +
-    "                    <h5>ProjectMember </h5>\n" +
-    "                    <h5>ProjectOrder </h5>\n" +
-    "                    <h5>ProjectProject </h5>\n" +
-    "                    <h5>ProjectTask </h5>\n" +
-    "                    <h5>ProjectTime </h5>\n" +
-    "                    <h5>ProjectTaskTime </h5>\n" +
-    "                    <h5>ProjectTransaction </h5>\n" +
-    "                    <h5>ProjectValidation </h5>\n" +
     "\n" +
     "                </div>\n" +
     "\n" +
+    "                <!--LOCATION ASSOCIATION-->\n" +
     "                <h5>Location</h5>\n" +
     "                <input type=\"text\" placeholder=\"Location\" ng-model=\"newProject.location\" class=\"form-control\">\n" +
     "\n" +
@@ -8696,7 +8712,7 @@ angular.module("nav/templates/createProject.tpl.html", []).run(["$templateCache"
     "                    </ui-gmap-google-map>\n" +
     "                </div>\n" +
     "\n" +
-    "\n" +
+    "                <!--SELF(PROJECT=PROJECT CONNECTION {define data model here by apps}) ASSOCIATION-->\n" +
     "                <h5>Description</h5>\n" +
     "                <text-angular placeholder= \"Description\" ng-model=\"newProject.description\" ta-toolbar=\"''\"></text-angular>\n" +
     "                <button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newProject.title\">create</button>\n" +
