@@ -1179,9 +1179,7 @@ angular.module("association/templates/validations.tpl.html", []).run(["$template
     "    <li style=\"float:right;font-size:14px\"><a href=\"#\" ng-click=\"sortToggle()\">Sort By Recent <i class=\"fa fa-angle-down\"></i></a></li>\n" +
     "    <div style=\"clear:both\"></div>\n" +
     "</ul>\n" +
-    "<div class=\"card\">\n" +
-    "    <tags-input style=\"border:0px;flex-grow:2;\" placeholder=\"Search\" ng-model=\"searchQuery\"></tags-input>\n" +
-    "</div>\n" +
+    "<div class=\"card\"><tags-input style=\"border:0px;flex-grow:2;\" placeholder=\"Search\" ng-model=\"searchQuery\"></tags-input></div>\n" +
     "<div class=\"card\" ng-repeat=\"item in validations\" ng-click=\"cardDetailExpand(item)\">\n" +
     "	<div style=\"background:url('https://source.unsplash.com/1600x900/?{{item.tags}}');min-height:auto;\" class=\"imageContainerSmall\">\n" +
     "        <div style=\"background:rgba(0,0,0,0.75);height:auto\" class=\"imageContainerSmallDiv\">  \n" +
@@ -1713,6 +1711,13 @@ angular.module("content/index.tpl.html", []).run(["$templateCache", function($te
 
 angular.module("content/templates/associations.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("content/templates/associations.tpl.html",
+    "<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "    <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
+    "    <li style=\"float:right;font-size:14px\"><a href=\"#\" ng-click=\"sortToggle()\">Sort By Recent <i class=\"fa fa-angle-down\"></i></a></li>\n" +
+    "    <div style=\"clear:both\"></div>\n" +
+    "</ul>\n" +
+    "<div class=\"card\"><tags-input style=\"border:0px;flex-grow:2;\" placeholder=\"Search\" ng-model=\"searchQuery\"></tags-input></div>\n" +
+    "\n" +
     "<div class=\"card\">\n" +
     "    <div style=\"background:url('https://source.unsplash.com/1600x900/?{{item.tags}}');min-height:auto\" class=\"imageContainerSmall\">\n" +
     "        <div style=\"background:rgba(0,0,0,0.75);height:auto\" class=\"imageContainerSmallDiv\">  \n" +
@@ -1729,7 +1734,7 @@ angular.module("content/templates/associations.tpl.html", []).run(["$templateCac
     "                <!--ALL ASSOCIATIONS && SERLF-ASSOCIATIONS-&FILTER-->\n" +
     "                <h4>Context</h4>\n" +
     "                <div>\n" +
-    "                    <span ng-repeat=\"context in content.context\">{{context}}, </span>\n" +
+    "                    <span ng-repeat=\"(key,value) in content.context\">{{key}}: {{value}}, </span>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
@@ -5521,7 +5526,6 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
 angular.module("item/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("item/index.tpl.html",
     "<style>.ngCytoscape{height: 200px;width:100%;}</style>\n" +
-    "\n" +
     "<div class=\"container\" style=\"padding:0px\">\n" +
     "    <div class=\"card\" ng-click=\"cardDetailToggle(item)\">\n" +
     "        <div class=\"imageContainerSmall\" style=\"background:url('https://source.unsplash.com/1600x900/?{{item.tags}}');\">\n" +

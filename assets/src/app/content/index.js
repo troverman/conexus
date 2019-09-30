@@ -35,16 +35,15 @@ angular.module( 'conexus.content', [
     //GET PARENT CHILD - COMMENT TREE ASSOCIATION BUILD
     //TODO: NESTED COMMENTS :)
         //--> GOES TO NESTED VALIDATIONS
-
-    var query = {
-        limit:100,
-        skip:0,
-        sort:'createdAt DESC',
-        filter:JSON.stringify({id:$scope.content.id, type:'CONTENT'})
-    };
-    AssociationModel.get(query).then(function(associations){
-        console.log(associations);
-    });
+    //var query = {
+    //    limit:100,
+    //    skip:0,
+    //    sort:'createdAt DESC',
+    //    filter:JSON.stringify({id:$scope.content.id, type:'CONTENT'})
+    //};
+    //AssociationModel.get(query).then(function(associations){
+    //    console.log(associations);
+    //});
 
     $scope.tokenChart = {
         chart: {zoomType: 'x'},
@@ -81,19 +80,6 @@ angular.module( 'conexus.content', [
     };
     if ($scope.content.data.apps.tokens){$scope.populateTokenChart();}
 
-    $scope.content.context = [];
-    if ($scope.content.associationModels){
-        for (x in $scope.content.associationModels){
-            for (y in Object.keys($scope.content.associationModels[x].context)){
-                var context = Object.keys($scope.content.associationModels[x].context)[y];
-                $scope.content.context.push(context);
-            }
-        }
-    }
-
-    $scope.marketOutput = [];
-    $scope.newContent = {};
-    $scope.newReaction = {};
     $scope.selectedTab = 'CONTENT';
     $scope.selectTab = function(model){$scope.selectedTab = model;};
 
