@@ -17,6 +17,7 @@ module.exports = {
 				if (associationModels.length > 0){
 					associationModels.map(function(obj){obj.id=obj._id; return obj});
 					model.associationModels = associationModels;
+					model.context = {};
 					var promises = [];
 					for (x in model.associationModels){
 						for (y in associationModels[x].associatedModels){
@@ -32,18 +33,23 @@ module.exports = {
 							if (associationModels[x].associatedModels[y].type=='TRANSACTION'){promises.push(Transaction.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
 							if (associationModels[x].associatedModels[y].type=='VALIDATION'){promises.push(Validation.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
 						}
+						//DEFINED BY CONNECTION
+						for (y in Object.keys(model.associationModels[x].context)){
+							var context = Object.keys(model.associationModels[x].context)[y].toString();
+							if(!model.context[context.toString()]){model.context[context.toString()] = model.associationModels[x].context[context.toString()];}
+							else{model.context[context.toString()] = model.context[context.toString()] + model.associationModels[x].context[context.toString()];}
+						}
 					}
 					Q.all(promises).then((populatedModels)=>{
+						var index = -1 
 						for (x in model.associationModels){
 							for (y in associationModels[x].associatedModels){
-								var index = parseInt(x+y);
+								index++;
 								model.associationModels[x].associatedModels[y].data = populatedModels[index];
 							}
 						}
 						deferred.resolve(model);
 					});
-					model.context = {};
-					for (x in model.associationModels){}
 				}
 				else{deferred.resolve(model);}
 			});
@@ -116,10 +122,15 @@ module.exports = {
 			.sort(sort)
 			.populate('user')
 			.then(function(models) {
-				Task.count({tags:{contains: tag}}).then(function(numRecords){
-					Task.subscribe(req, models);
-					var returnObj = {data:models, info:{count:numRecords}};
-					res.json(returnObj);
+				Task.count().then(function(numRecords){
+					Task.subscribe(req, models.map(function(obj){return obj.id}));
+					var promises = [];
+					for (x in models){promises.push(getAssociations(models[x]));}
+					Q.all(promises).then((populatedModels)=>{
+						for (x in models){models[x] = populatedModels[x];}
+						var returnObj = {data:models, info:{count:numRecords}};
+						res.json(returnObj);
+					});
 				});
 			});
 		}
@@ -163,15 +174,17 @@ module.exports = {
 			.skip(skip)
 			.sort(sort)
 			.populate('user')
-			.then(function(models){
-				//console.log(models)
+			.then(function(models) {
 				Task.count().then(function(numRecords){
 					Task.subscribe(req, models.map(function(obj){return obj.id}));
-					var returnObj = {data:models, info:{count:numRecords}};
-					//console.log(returnObj)
-					res.json(returnObj);
+					var promises = [];
+					for (x in models){promises.push(getAssociations(models[x]));}
+					Q.all(promises).then((populatedModels)=>{
+						for (x in models){models[x] = populatedModels[x];}
+						var returnObj = {data:models, info:{count:numRecords}};
+						res.json(returnObj);
+					});
 				});
-
 			});
 		}
 	},

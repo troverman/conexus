@@ -32,65 +32,57 @@ angular.module( 'conexus.tasks', [
 	$scope.selectedTag = '';
     $rootScope.searchQuery = [];
 
-    $scope.tasks = tasks.data.map(function(obj){
-        obj.model = 'TASK';
-        if (obj.tags){obj.tags = obj.tags.split(',')}
-        return obj;
-    });
+    $scope.tasks = tasks.data.map(function(obj){obj.model = 'TASK'; return obj;});
     $scope.taskCount = tasks.info.count;
 
-    //COMPLEX QUERIES && POPULATION
-
-    //TODO: BETTER
-    $scope.loadAssociations = function(){
-        $scope.associations = $scope.tasks.map(function(obj){
-            //if (obj.project){return obj.project.title;}
-        });
-        $scope.associations = [].concat.apply([], $scope.associations);
-        $scope.associations = $scope.associations.filter(function(e){return e});
-        function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
-        $scope.sortedAssociationArray = [];
-        for (x in $scope.associations){
-            var amount = countInArray($scope.associations, $scope.associations[x]);
-            if ($scope.sortedAssociationArray.map(function(obj){return obj.element}).indexOf($scope.associations[x]) == -1){
-                $scope.sortedAssociationArray.push({amount:amount, element:$scope.associations[x]})
+    $scope.loadAssociations = function(list){
+        var asociationList = [];
+        for (x in list){
+            for (y in list[x].associationModels){
+                for (z in list[x].associationModels[y].associatedModels){
+                    if (list[x].associationModels[y].associatedModels[z].data){
+                        //NON SELF
+                        if (list[x].id != list[x].associationModels[y].associatedModels[z].id){
+                            asociationList.push(list[x].associationModels[y].associatedModels[z].data);
+                        }
+                    }
+                }
             }
         }
-        $scope.sortedAssociationArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
-    };
-
-    $scope.loadLocations = function(){
-        $scope.sortedLocationsArray = ['Chapel Hill', 'Knoxville', 'Los Angeles', 'New York City']
-    };
-
-    $scope.loadTags = function(){
-        $scope.tags = $scope.tasks.map(function(obj){
-            return obj.tags;
-        });
-        $scope.tags = [].concat.apply([], $scope.tags);
-        $scope.tags = $scope.tags.filter(function(e){return e});
         function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
-        $scope.sortedTagArray = [];
-        for (x in $scope.tags){
-            var amount = countInArray($scope.tags, $scope.tags[x]);
-            if ($scope.sortedTagArray.map(function(obj){return obj.element}).indexOf($scope.tags[x]) == -1){
-                $scope.sortedTagArray.push({amount:amount, element:$scope.tags[x]})
+        //TODO SORT BY OCCURANCE OF ASSOCIATION
+        //get value of number of times id map appears, return [obj, number]
+        console.log(asociationList);
+        $scope.asociationList = asociationList;
+    };
+    $scope.loadContext = function(list){
+        var model = {context:{}};
+        for (x in list){
+            if (list[x].context){
+                for (y in Object.keys(list[x].context)){
+                    var context = Object.keys(list[x].context)[y].toString();
+                    if(!model.context[context]){model.context[context] = list[x].context[context];}
+                    else{model.context[context] = model.context[context] + list[x].context[context];}
+                }
             }
         }
-        $scope.sortedTagArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);});     
+        $scope.sortedContext = [];
+        for (x in Object.keys(model.context)){$scope.sortedContext.push([Object.keys(model.context)[x], model.context[Object.keys(model.context)[x]]])}
+        $scope.sortedContext.sort(function(a, b) {return b[1] - a[1]});
+        console.log($scope.sortedContext)
     };
+    $scope.loadLocations = function(list){};
     $scope.init = function(){
-        $scope.loadAssociations();
-        $scope.loadLocations();
-        $scope.loadTags();
-        $scope.filterSet = {associations:$scope.sortedAssociationArray, tags:$scope.sortedTagArray, locations:$scope.sortedLocationArray}
+        $scope.loadAssociations($scope.tasks);
+        $scope.loadContext($scope.tasks);
+        $scope.loadLocations($scope.tasks);
+        $scope.filterSet = {
+            context:$scope.sortedContext, 
+            associations:$scope.asociationList, 
+            location:$scope.sortedLocationArray
+        };
     };
     $scope.init();
-    //TODO: BETTER
-    //COMPLEX QUERIES && POPULATION
-
-
-
 
     //TODO: COMPLEX QUERY && FILTER
     $scope.selectSort = function(sort){
@@ -105,12 +97,9 @@ angular.module( 'conexus.tasks', [
 		});
 	};
 
-
     $scope.search = function(){
         $rootScope.stateIsLoading = true;
-        var search = $scope.searchQuery.map(function(obj){
-            return obj.text;
-        })[0];
+        var search = $scope.searchQuery.map(function(obj){ return obj.text;})[0];
         TaskModel.get({search:search, limit:20, skip:0, sort:'createdAt DESC'}).then(function(tasks){
             $rootScope.stateIsLoading = false;
             $scope.tasks = tasks.map(function(obj){
@@ -126,8 +115,6 @@ angular.module( 'conexus.tasks', [
         $scope.searchQuery.push({text:filter})
         $rootScope.stateIsLoading = true;
         $location.search('context', filter);
-        //$location.search('filter', '{id:\'cool\'}');
-        //TaskModel.get({search:$scope.searchQuery, limit:20, skip:0, sort:'createdAt DESC'}).then(function(models){
         TaskModel.get({tag:filter, limit:20, skip:0, sort:'createdAt DESC'}).then(function(tasks){
             $rootScope.stateIsLoading = false;
             $scope.selectedTag = filter;
@@ -141,12 +128,6 @@ angular.module( 'conexus.tasks', [
         });
     };
 
-    //KINDA HACKY? CAN USE STATES.. ETC
-    console.log($location.search())
-    if ($location.search().tags){
-        $scope.filterContent($location.search().tags);
-    }
-
     $scope.loadMore = function() {
         $scope.skip = $scope.skip + 20;
         $rootScope.stateIsLoading = true;
@@ -156,6 +137,9 @@ angular.module( 'conexus.tasks', [
             Array.prototype.push.apply($scope.tasks, tasks);
         });
     };
+
+    //KINDA HACKY? CAN USE STATES.. ETC
+    if ($location.search().tags){$scope.filterContent($location.search().tags);}
 
     $rootScope.$watch('searchQuery' ,function(newValue, oldValue){
         if (newValue !== oldValue) {

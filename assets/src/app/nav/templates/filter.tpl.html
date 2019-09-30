@@ -36,8 +36,8 @@
                     <tags-input min-length="1" placeholder="Context" ng-model="searchQueryNav.context">
                         <auto-complete source="loadAsset($query)"></auto-complete>
                     </tags-input>
-                    <div ng-repeat="item in item.tags.slice(0,10) track by $index">
-                        <a href="#" ng-click="selectTag(item.element)"><b>{{item.element}}</b></a>
+                    <div ng-repeat="item in item.context.slice(0,10) track by $index">
+                        <a href="#" ng-click="selectTag(item[0])"><b>{{item[0]}}</b></a>
                     </div>
                 </div>
 
@@ -49,7 +49,7 @@
                         <auto-complete source="loadAssociation($query)"></auto-complete>
                     </tags-input>
                     <div ng-repeat="item in item.associations.slice(0,10) track by $index">
-                        <a href="#" ng-click="selectAssociation(item.element)"><b>{{item.element}}</b></a>
+                        <a href="#" ng-click="selectAssociation(item.id)"><b>{{item.title}}</b></a>
                     </div>
                 </div>
 

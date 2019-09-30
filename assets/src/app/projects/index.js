@@ -93,61 +93,55 @@ angular.module( 'conexus.projects', [
     //$scope.getLatLng();
 
 
-    //TODO: IMPROVE :)
-    $scope.loadAssociations = function(){        
-        function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
-        $scope.sortedAssociationArray = [];
-        for (x in $scope.associations){
-            var amount = countInArray($scope.associations, $scope.associations[x]);
-            if ($scope.sortedAssociationArray.map(function(obj){return obj.element}).indexOf($scope.associations[x]) == -1){
-                $scope.sortedAssociationArray.push({amount:amount, element:$scope.associations[x]})
+    $scope.loadAssociations = function(list){
+        var asociationList = [];
+        for (x in list){
+            for (y in list[x].associationModels){
+                for (z in list[x].associationModels[y].associatedModels){
+                    if (list[x].associationModels[y].associatedModels[z].data){
+                        //NON SELF
+                        if (list[x].id != list[x].associationModels[y].associatedModels[z].id){
+                            asociationList.push(list[x].associationModels[y].associatedModels[z].data);
+                        }
+                    }
+                }
             }
         }
-        $scope.sortedAssociationArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
-    };
-    $scope.loadLocations = function(){
-        $scope.tags = $scope.projects.map(function(obj){
-            return obj.location;
-        });
-        $scope.tags = [].concat.apply([], $scope.tags);
-        $scope.tags = $scope.tags.filter(function(e){return e});
         function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
-        $scope.sortedLocationArray = [];
-        for (x in $scope.tags){
-            var amount = countInArray($scope.tags, $scope.tags[x]);
-            if ($scope.sortedLocationArray.map(function(obj){return obj.element}).indexOf($scope.tags[x]) == -1){
-                $scope.sortedLocationArray.push({amount:amount, element:$scope.tags[x]})
+        //TODO SORT BY OCCURANCE OF ASSOCIATION
+        //get value of number of times id map appears, return [obj, number]
+        console.log(asociationList);
+        $scope.asociationList = asociationList;
+    };
+    $scope.loadContext = function(list){
+        var model = {context:{}};
+        for (x in list){
+            console.log(list[x])
+            if (list[x].context){
+                for (y in Object.keys(list[x].context)){
+                    var context = Object.keys(list[x].context)[y].toString();
+                    if(!model.context[context]){model.context[context] = list[x].context[context];}
+                    else{model.context[context] = model.context[context] + list[x].context[context];}
+                }
             }
         }
-        $scope.sortedLocationArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
+        $scope.sortedContext = [];
+        for (x in Object.keys(model.context)){$scope.sortedContext.push([Object.keys(model.context)[x], model.context[Object.keys(model.context)[x]]])}
+        $scope.sortedContext.sort(function(a, b) {return b[1] - a[1]});
+        console.log($scope.sortedContext)
     };
-    $scope.loadTags = function(){
-        $scope.tags = $scope.projects.map(function(obj){
-            var returnObj = {};
-            if(obj.tags){obj.tags = obj.tags.split(',')}
-            returnObj = obj.tags;
-            return returnObj;
-        });
-        $scope.tags = [].concat.apply([], $scope.tags);
-        $scope.tags = $scope.tags.filter(function(e){return e});
-        function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
-        $scope.sortedTagArray = [];
-        for (x in $scope.tags){
-            var amount = countInArray($scope.tags, $scope.tags[x]);
-            if ($scope.sortedTagArray.map(function(obj){return obj.element}).indexOf($scope.tags[x]) == -1){
-                $scope.sortedTagArray.push({amount:amount, element:$scope.tags[x]})
-            }
-        }
-        $scope.sortedTagArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
-    };
+    $scope.loadLocations = function(list){};
     $scope.init = function(){
-        $scope.loadAssociations();
-        $scope.loadLocations();
-        $scope.loadTags();
-        $scope.filterSet = {associations:$scope.sortedAssociationArray, tags:$scope.sortedTagArray, locations:$scope.sortedLocationArray}
+        $scope.loadAssociations($scope.projects);
+        $scope.loadContext($scope.projects);
+        $scope.loadLocations($scope.projects);
+        $scope.filterSet = {
+            context:$scope.sortedContext, 
+            associations:$scope.asociationList, 
+            location:$scope.sortedLocationArray
+        };
     };
     $scope.init();
-    //TODO: IMPROVE :)
 
     //COMPLEX FILTER..
     $scope.filterContent = function(filter) {
@@ -166,12 +160,8 @@ angular.module( 'conexus.projects', [
             $scope.init();
         });
     };
-
-    console.log($location.search());
     
-    if ($location.search().tags){
-        $scope.filterContent($location.search().tags);
-    }
+    if ($location.search().tags){$scope.filterContent($location.search().tags);}
 
     //TODO: FILTER!
     $scope.loadMore = function() {

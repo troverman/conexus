@@ -10,25 +10,17 @@
         </div>
     </div>
 </div>
-
+<div class="spacing-10"></div>
 <div class="container">
-
-    <div class="spacing-10"></div>
-
     <div class="row">
-
         <ul style="padding:0px;" class="member-tabs">
             <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fa fa-filter"></i> Filter</a></li>
-
             <li ng-if="!locationFilter" style="float:left;font-size:14px"><a href="#" ng-click="getLatLng()"><i class="fa fa-map-marker"></i> Location</a></li>
             <li ng-if="locationFilter" style="float:left;font-size:14px;"><a style="color:#002c54" href="#"><i class="fa fa-map-marker"></i> Location</a></li>
-
             <li style="float:right;font-size:14px"><a href="#" ng-click="sortToggle()">Sort By Recent <i class="fa fa-angle-down"></i></a></li>
             <div style="clear:both"></div>
         </ul>
-
         <div class="card"><tags-input style="border:0px;flex-grow:2;" placeholder="Search" ng-model="searchQuery"></tags-input></div>
-
         <div class="card" ng-click="filterToggle('DISCOVER', filterSet)">
             <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options">
                 <ui-gmap-marker ng-click="$event.stopPropagation()" ng-repeat="marker in markers" coords="marker.coords" options="marker.options" idkey="marker.id">
@@ -40,21 +32,11 @@
             </ui-gmap-circle>
             </ui-gmap-google-map>
         </div>
-
-        <div class="card">
-            <button class="btn btn-default log-btn" ng-click="projectToggle()">+ project</button>
-        </div>
-
-        <div ng-repeat="item in projects">
-            <div ng-include="'templates/cards/projectCard.tpl.html'"></div>
-        </div>
-
+        <div class="card"><button class="btn btn-default log-btn" ng-click="projectToggle()">+ project</button></div>
+        <div ng-repeat="item in projects"><div ng-include="'templates/cards/projectCard.tpl.html'"></div></div>
         <div ng-show="projectCount > projects.length" ng-click="loadMore()" class="card">
             <button style="width:100%" class="btn btn-default log-btn">MORE <i class="fa fa-angle-down"></i></button>
         </div>
-
     </div>
-
 </div>
-
-<div class="spacing-50"></div>
+<div class="spacing-25"></div>

@@ -20,10 +20,7 @@ angular.module( 'conexus.items', [
 
 .controller( 'ItemsCtrl', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$scope', '$stateParams', 'ItemModel', 'items', 'ReactionModel', function ItemsController( $location, $mdSidenav, $rootScope, $sailsSocket, $scope, $stateParams, ItemModel, items, ReactionModel ) {
 
-    $scope.newItem = {};
-    $scope.newReaction = {};
     $scope.stateParams = $stateParams;
-    
     $scope.items = items.data.map(function(obj){obj.model = 'ITEM'; return obj;});
     $scope.itemCount = items.info.count;
 
@@ -33,48 +30,54 @@ angular.module( 'conexus.items', [
     $scope.skip = 0;
     $scope.sortedLocationArray = [{element:'Knoxville, TN'}, {element:'New York City'}, {element:'Chapel Hill'}];
 
-    $scope.loadAssets = function(){
-        $scope.assets = $scope.items.map(function(obj){
-            if(obj.identiferSet){obj.identiferSet = obj.identiferSet.split(',');}
-            returnObj = obj.identiferSet;
-            return returnObj;
-        });
-        $scope.assets = [].concat.apply([], $scope.assets);
-        $scope.assets = $scope.assets.filter(function(e){return e}); 
-        function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
-        $scope.sortedAssetArray = [];
-        for (x in $scope.assets){
-            var amount = countInArray($scope.assets, $scope.assets[x]);
-            if ($scope.sortedAssetArray.map(function(obj){return obj.element}).indexOf($scope.assets[x]) == -1){
-                $scope.sortedAssetArray.push({amount:amount, element:$scope.assets[x]})
+     $scope.loadAssociations = function(list){
+        var asociationList = [];
+        for (x in list){
+            for (y in list[x].associationModels){
+                for (z in list[x].associationModels[y].associatedModels){
+                    if (list[x].associationModels[y].associatedModels[z].data){
+                        //NON SELF
+                        if (list[x].id != list[x].associationModels[y].associatedModels[z].id){
+                            asociationList.push(list[x].associationModels[y].associatedModels[z].data);
+                        }
+                    }
+                }
             }
         }
-        $scope.sortedAssetArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
-    };
-    $scope.loadAssets();
-
-    $scope.loadTags = function(){
-        $scope.tags = $scope.items.map(function(obj){
-            var returnObj = {};
-            if(obj.tags){obj.tags = obj.tags.split(',')}
-            returnObj = obj.tags;
-            return returnObj;
-        });
-        $scope.tags = [].concat.apply([], $scope.tags);
-        $scope.tags = $scope.tags.filter(function(e){return e}); 
         function countInArray(array, value) {return array.reduce(function(n, x){ return n + (x === value)}, 0);}
-        $scope.sortedTagArray = [];
-        for (x in $scope.tags){
-            var amount = countInArray($scope.tags, $scope.tags[x]);
-            if ($scope.sortedTagArray.map(function(obj){return obj.element}).indexOf($scope.tags[x]) == -1){
-                $scope.sortedTagArray.push({amount:amount, element:$scope.tags[x]})
+        //TODO SORT BY OCCURANCE OF ASSOCIATION
+        //get value of number of times id map appears, return [obj, number]
+        console.log(asociationList);
+        $scope.asociationList = asociationList;
+    };
+    $scope.loadContext = function(list){
+        var model = {context:{}};
+        for (x in list){
+            if (list[x].context){//context is a vector
+                for (y in Object.keys(list[x].context)){
+                    var context = Object.keys(list[x].context)[y].toString();
+                    if(!model.context[context]){model.context[context] = list[x].context[context];}
+                    else{model.context[context] = model.context[context] + list[x].context[context];}
+                }
             }
         }
-        $scope.sortedTagArray.sort(function(a,b) {return (a.amount < b.amount) ? 1 : ((b.amount < a.amount) ? -1 : 0);}); 
+        $scope.sortedContext = [];
+        for (x in Object.keys(model.context)){$scope.sortedContext.push([Object.keys(model.context)[x], model.context[Object.keys(model.context)[x]]])}
+        $scope.sortedContext.sort(function(a, b) {return b[1] - a[1]});
+        console.log($scope.sortedContext)
     };
-    $scope.loadTags();
-
-    $scope.filterSet = {tags:$scope.sortedTagArray, associations:$scope.sortedAssociationArray, locations:$scope.sortedLocationArray}
+    $scope.loadLocations = function(list){$scope.sortedLocationArray=[]};
+    $scope.init = function(){
+        $scope.loadAssociations($scope.items);
+        $scope.loadContext($scope.items);
+        $scope.loadLocations($scope.items);
+        $scope.filterSet = {
+            context:$scope.sortedContext, 
+            associations:$scope.asociationList, 
+            location:$scope.sortedLocationArray
+        };
+    };
+    $scope.init();
 
     $scope.filterContent = function(filter) {
         $scope.searchQuery.push({text:filter});
@@ -85,7 +88,7 @@ angular.module( 'conexus.items', [
             $scope.selectedTag = filter;
             $scope.items = items.data;
             $scope.itemCount = items.info.count;
-            $scope.loadTags();
+            $scope.init();
         });
     };
 
@@ -95,13 +98,11 @@ angular.module( 'conexus.items', [
         ItemModel.get({limit:20, skip:$scope.skip, sort:$scope.selectedSort}).then(function(items) {
             $rootScope.stateIsLoading = false;
             Array.prototype.push.apply($scope.items, items);
-            $scope.loadTags();
+            $scope.init();
         });
     };
 
-    if ($location.search().context){
-        $scope.filterContent($location.search().context);
-    }
+    if ($location.search().context){$scope.filterContent($location.search().context);}
 
     $sailsSocket.subscribe('item', function (envelope) {
         console.log(envelope);

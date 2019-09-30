@@ -11,9 +11,8 @@
 <div class="spacing-10"></div>
 <div class="container">
     <div class="row">
-        <!--TODO FILTER BUTTON-->
-        <div ng-show="false && sortedTagArray.length > 0" class="col-sm-3 mobileFix" style="padding-left:0px;padding-right:0px;">
-            <div class="card" ng-click="filterToggle('DISCOVER')">
+        <div class="col-sm-4 mobileFix" style="padding-left:0px;padding-right:0px;">
+            <div ng-if="filterSet.associations.length > 0" class="card" ng-click="filterToggle('DISCOVER')">
                 <div style="background:url('https://source.unsplash.com/1600x900/?details,notes,explore,wonder,connection,create');height:50px;min-height:50px" class="imageContainerSmall">
                     <div style="background:rgba(0,0,0,0.75);height:50px" class="imageContainerSmallDiv">  
                         <div style="margin-top: auto;margin-bottom: auto;">
@@ -24,12 +23,12 @@
                     </div>
                 </div>
                 <div style="padding:16px;">
-                    <div ng-repeat="association in sortedAssociationArray" ng-click="$event.stopPropagation()">
-                        <a ng-click="filterContent(tag.element)"><b>{{association.element}}</b></a>
+                    <div ng-repeat="association in filterSet.associations" ng-click="$event.stopPropagation()">
+                        <a ng-click="filterContent(association.id)"><b>{{association.title}}</b></a>
                     </div>
                 </div>
             </div>
-            <div class="card" ng-click="filterToggle('DISCOVER')">
+            <div ng-if="filterSet.context.length > 0" class="card" ng-click="filterToggle('DISCOVER')">
                 <div style="background:url('https://source.unsplash.com/1600x900/?details,notes,explore,wonder,connection,create,content,creation');height:50px;min-height:50px" class="imageContainerSmall">
                     <div style="background:rgba(0,0,0,0.75);height:50px" class="imageContainerSmallDiv">  
                         <div style="margin-top: auto;margin-bottom: auto;">
@@ -40,12 +39,12 @@
                     </div>
                 </div>
                 <div style="padding:16px;">
-                    <div ng-repeat="tag in sortedTagArray" ng-click="$event.stopPropagation()">
-                        <a ng-click="filterContent(tag.element)"><b>{{tag.element}}</b></a>
+                    <div ng-repeat="context in filterSet.context" ng-click="$event.stopPropagation()">
+                        <a ng-click="filterContent(context[0])"><b>{{context[0]}}</b></a>
                     </div>
                 </div>
             </div>
-            <div class="card" ng-click="filterToggle('DISCOVER')">
+            <div ng-if="filterSet.locations.length > 0" class="card" ng-click="filterToggle('DISCOVER')">
                 <div style="background:url('https://source.unsplash.com/1600x900/?details,notes,explore,wonder,connection,create,content,creation,map,globe');height:50px;min-height:50px" class="imageContainerSmall">
                     <div style="background:rgba(0,0,0,0.75);height:50px" class="imageContainerSmallDiv">  
                         <div style="margin-top: auto;margin-bottom: auto;">
@@ -56,13 +55,13 @@
                     </div>
                 </div>
                 <div style="padding:16px;">
-                    <div ng-repeat="location in sortedLocationArray" ng-click="$event.stopPropagation()">
-                        <a ng-click="filterContent(tag.element)"><b>{{location}}</b></a>
+                    <div ng-repeat="location in filterSet.locations" ng-click="$event.stopPropagation()">
+                        <a ng-click="filterContent(locations)"><b>{{location}}</b></a>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-sm-12" style="padding-left:0px;padding-right:0px;">
+        <div class="col-sm-8" style="padding-left:0px;padding-right:0px;">
             <div class="spacing-5"></div>
             <ul style="padding:0px;" class="member-tabs">
                 <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fa fa-filter"></i> Filter</a></li>

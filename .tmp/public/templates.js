@@ -1901,9 +1901,8 @@ angular.module("contentList/index.tpl.html", []).run(["$templateCache", function
     "<div class=\"spacing-10\"></div>\n" +
     "<div class=\"container\">\n" +
     "    <div class=\"row\">\n" +
-    "        <!--TODO FILTER BUTTON-->\n" +
-    "        <div ng-show=\"false && sortedTagArray.length > 0\" class=\"col-sm-3 mobileFix\" style=\"padding-left:0px;padding-right:0px;\">\n" +
-    "            <div class=\"card\" ng-click=\"filterToggle('DISCOVER')\">\n" +
+    "        <div class=\"col-sm-4 mobileFix\" style=\"padding-left:0px;padding-right:0px;\">\n" +
+    "            <div ng-if=\"filterSet.associations.length > 0\" class=\"card\" ng-click=\"filterToggle('DISCOVER')\">\n" +
     "                <div style=\"background:url('https://source.unsplash.com/1600x900/?details,notes,explore,wonder,connection,create');height:50px;min-height:50px\" class=\"imageContainerSmall\">\n" +
     "                    <div style=\"background:rgba(0,0,0,0.75);height:50px\" class=\"imageContainerSmallDiv\">  \n" +
     "                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
@@ -1914,12 +1913,12 @@ angular.module("contentList/index.tpl.html", []).run(["$templateCache", function
     "                    </div>\n" +
     "                </div>\n" +
     "                <div style=\"padding:16px;\">\n" +
-    "                    <div ng-repeat=\"association in sortedAssociationArray\" ng-click=\"$event.stopPropagation()\">\n" +
-    "                        <a ng-click=\"filterContent(tag.element)\"><b>{{association.element}}</b></a>\n" +
+    "                    <div ng-repeat=\"association in filterSet.associations\" ng-click=\"$event.stopPropagation()\">\n" +
+    "                        <a ng-click=\"filterContent(association.id)\"><b>{{association.title}}</b></a>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
-    "            <div class=\"card\" ng-click=\"filterToggle('DISCOVER')\">\n" +
+    "            <div ng-if=\"filterSet.context.length > 0\" class=\"card\" ng-click=\"filterToggle('DISCOVER')\">\n" +
     "                <div style=\"background:url('https://source.unsplash.com/1600x900/?details,notes,explore,wonder,connection,create,content,creation');height:50px;min-height:50px\" class=\"imageContainerSmall\">\n" +
     "                    <div style=\"background:rgba(0,0,0,0.75);height:50px\" class=\"imageContainerSmallDiv\">  \n" +
     "                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
@@ -1930,12 +1929,12 @@ angular.module("contentList/index.tpl.html", []).run(["$templateCache", function
     "                    </div>\n" +
     "                </div>\n" +
     "                <div style=\"padding:16px;\">\n" +
-    "                    <div ng-repeat=\"tag in sortedTagArray\" ng-click=\"$event.stopPropagation()\">\n" +
-    "                        <a ng-click=\"filterContent(tag.element)\"><b>{{tag.element}}</b></a>\n" +
+    "                    <div ng-repeat=\"context in filterSet.context\" ng-click=\"$event.stopPropagation()\">\n" +
+    "                        <a ng-click=\"filterContent(context[0])\"><b>{{context[0]}}</b></a>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
-    "            <div class=\"card\" ng-click=\"filterToggle('DISCOVER')\">\n" +
+    "            <div ng-if=\"filterSet.locations.length > 0\" class=\"card\" ng-click=\"filterToggle('DISCOVER')\">\n" +
     "                <div style=\"background:url('https://source.unsplash.com/1600x900/?details,notes,explore,wonder,connection,create,content,creation,map,globe');height:50px;min-height:50px\" class=\"imageContainerSmall\">\n" +
     "                    <div style=\"background:rgba(0,0,0,0.75);height:50px\" class=\"imageContainerSmallDiv\">  \n" +
     "                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
@@ -1946,13 +1945,13 @@ angular.module("contentList/index.tpl.html", []).run(["$templateCache", function
     "                    </div>\n" +
     "                </div>\n" +
     "                <div style=\"padding:16px;\">\n" +
-    "                    <div ng-repeat=\"location in sortedLocationArray\" ng-click=\"$event.stopPropagation()\">\n" +
-    "                        <a ng-click=\"filterContent(tag.element)\"><b>{{location}}</b></a>\n" +
+    "                    <div ng-repeat=\"location in filterSet.locations\" ng-click=\"$event.stopPropagation()\">\n" +
+    "                        <a ng-click=\"filterContent(locations)\"><b>{{location}}</b></a>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
-    "        <div class=\"col-sm-12\" style=\"padding-left:0px;padding-right:0px;\">\n" +
+    "        <div class=\"col-sm-8\" style=\"padding-left:0px;padding-right:0px;\">\n" +
     "            <div class=\"spacing-5\"></div>\n" +
     "            <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
     "                <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
@@ -2103,6 +2102,8 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <hr>\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
+    "                <!--APPS-->\n" +
+    "\n" +
     "                <h4>The State Machine</h4>\n" +
     "                <p><a href=\"#PEERMODEL\" du-smooth-scroll>Peers</a>, <a href=\"#TX\" du-smooth-scroll>Txs</a>, <a href=\"#BLOCK\" du-smooth-scroll>Blocks</a>, and <a>Protocols</p></p>\n" +
     "                <hr>\n" +
@@ -2120,6 +2121,10 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <hr>\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
+    "                <!--<h4>A Methodology of Consensus</h4>\n" +
+    "                <hr>\n" +
+    "                <div class=\"spacing-10\"></div>-->\n" +
+    "                \n" +
     "                <h4>Code Base</h4>\n" +
     "                <p style=\"color:gray;font-style:italic\">Contribution is readily and excitedly accepted. All CRE8 Clients follow transparent governance principles.</p>\n" +
     "                <hr>\n" +
@@ -5962,17 +5967,9 @@ angular.module("items/index.tpl.html", []).run(["$templateCache", function($temp
     "</div>\n" +
     "\n" +
     "<div class=\"container\">\n" +
-    "\n" +
-    "	<!--FILTER BY CURRENCIES / PRICES I WANT TO PAY BASED ON MM.. RECURSIVE LIQUIDITY TRACE-->\n" +
-    "	<!--\n" +
-    "	TODO: Better Form.. add [] + \n" +
-    "	<input placeholder=\"identiferSet\" type=\"text\" ng-model=\"newItem.ArrayManifolds\" class=\"form-control\"> [] ill talk this or this or this and this\n" +
-    "	[], [], [[],[]]\n" +
-    "	-->\n" +
-    "\n" +
     "	<div class=\"row\">\n" +
     "		<div class=\"col-sm-3 mobileFix\" style=\"padding-left:0px;padding-right:0px;\">\n" +
-    "			 <div ng-if=\"sortedTagArray.length > 0\" class=\"card\" ng-click=\"filterToggle('DISCOVER',filterSet)\">\n" +
+    "			<div ng-if=\"filterSet.context.length > 0\" class=\"card\" ng-click=\"filterToggle('DISCOVER',filterSet)\">\n" +
     "			 	<div style=\"background:url('https://source.unsplash.com/1600x900/?details,notes,explore,wonder');min-height:auto\" class=\"imageContainerSmall\">\n" +
     "				    <div style=\"background:rgba(0,0,0,0.75);height:auto\" class=\"imageContainerSmallDiv\">  \n" +
     "				        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
@@ -5983,12 +5980,12 @@ angular.module("items/index.tpl.html", []).run(["$templateCache", function($temp
     "				    </div>\n" +
     "				</div>\n" +
     "	            <div style=\"padding:16px;\">\n" +
-    "	                <div ng-repeat=\"tag in sortedTagArray.slice(0,20)\" ng-click=\"$event.stopPropagation()\">\n" +
-    "	                    <a ng-click=\"filterContent(tag.element)\"><b>{{tag.element}}</b></a>\n" +
+    "	                <div ng-repeat=\"context in filterSet.context.slice(0,20)\" ng-click=\"$event.stopPropagation()\">\n" +
+    "	                    <a ng-click=\"filterContent(context[0])\"><b>{{context[0]}}</b></a>\n" +
     "	                </div>\n" +
     "	            </div>\n" +
     "	        </div>\n" +
-    "		    <div ng-if=\"sortedAssociationArray.length > 0\" class=\"card\" ng-click=\"filterToggle('DISCOVER',filterSet)\">\n" +
+    "		    <div ng-if=\"filterSet.associations.length > 0\" class=\"card\" ng-click=\"filterToggle('DISCOVER',filterSet)\">\n" +
     "		    	<div style=\"background:url('https://source.unsplash.com/1600x900/?connection,code,explore,wonder,graph,node');min-height:auto\" class=\"imageContainerSmall\">\n" +
     "				    <div style=\"background:rgba(0,0,0,0.75);height:auto\" class=\"imageContainerSmallDiv\">  \n" +
     "				        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
@@ -5999,12 +5996,12 @@ angular.module("items/index.tpl.html", []).run(["$templateCache", function($temp
     "				    </div>\n" +
     "				</div>\n" +
     "	            <div style=\"padding:16px;\">\n" +
-    "	                <div ng-repeat=\"association in sortedAssociationArray\" ng-click=\"$event.stopPropagation()\">\n" +
-    "	                    <a ng-click=\"filterContent(association.element)\"><b>{{association.element}}</b></a>\n" +
+    "	                <div ng-repeat=\"association in filterSet.associations\" ng-click=\"$event.stopPropagation()\">\n" +
+    "	                    <a ng-click=\"filterContent(association.id)\"><b>{{association.title}}</b></a>\n" +
     "	                </div>\n" +
     "	            </div>\n" +
     "	        </div>\n" +
-    "	        <div ng-if=\"locations.length > 0\" class=\"card\" ng-click=\"filterToggle('DISCOVER',filterSet)\">\n" +
+    "	        <div ng-if=\"filterSet.locations.length > 0\" class=\"card\" ng-click=\"filterToggle('DISCOVER',filterSet)\">\n" +
     "	        	<div style=\"background:url('https://source.unsplash.com/1600x900/?location,forest,city,map');min-height:auto\" class=\"imageContainerSmall\">\n" +
     "				    <div style=\"background:rgba(0,0,0,0.75);height:auto\" class=\"imageContainerSmallDiv\">  \n" +
     "				        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
@@ -6039,15 +6036,12 @@ angular.module("items/index.tpl.html", []).run(["$templateCache", function($temp
     "		</div>\n" +
     "\n" +
     "		<div class=\"col-sm-9\" style=\"padding-left:0px;padding-right:0px;\">\n" +
-    "\n" +
     "			<div class=\"spacing-5\"></div>\n" +
-    "\n" +
     "			<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
     "                <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER',filterSet, item)\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
     "                <li style=\"float:right;font-size:14px\"><a href=\"#\" ng-click=\"sortToggle()\">Sort By Recent <i class=\"fa fa-angle-down\"></i></a></li>\n" +
     "                <div style=\"clear:both\"></div>\n" +
     "            </ul>\n" +
-    "\n" +
     "		    <div class=\"card\">\n" +
     "		        <form style=\"display:flex;flex-direction:row;\">\n" +
     "                    <tags-input class=\"\" style=\"border:0px;flex-grow:2;\" min-length=\"1\" placeholder=\"Search\" ng-model=\"searchQuery\"></tags-input>\n" +
@@ -6058,27 +6052,15 @@ angular.module("items/index.tpl.html", []).run(["$templateCache", function($temp
     "		            </div>\n" +
     "		        </form>\n" +
     "		    </div>\n" +
-    "\n" +
-    "			<div class=\"card\">\n" +
-    "				<button class=\"btn btn-default log-btn\" ng-click=\"itemToggle()\">+ Item</button>\n" +
-    "			</div>\n" +
-    "\n" +
-    "			<div ng-repeat=\"item in items\">\n" +
-    "				<div ng-include=\"'templates/cards/itemCard.tpl.html'\"></div>\n" +
-    "			</div>\n" +
-    "\n" +
+    "			<div class=\"card\"><button class=\"btn btn-default log-btn\" ng-click=\"itemToggle()\">+ Item</button></div>\n" +
+    "			<div ng-repeat=\"item in items\"><div ng-include=\"'templates/cards/itemCard.tpl.html'\"></div></div>\n" +
     "			<div ng-show=\"true\" class=\"card\" style=\"text-align:center\" ng-click=\"loadMore()\">\n" +
     "                <button style=\"width:100%\" class=\"btn btn-default log-btn\">MORE <i class=\"fa fa-angle-down\"></i></button>\n" +
     "            </div>\n" +
-    "\n" +
     "		</div>\n" +
     "	</div>\n" +
-    "\n" +
-    "	<div class=\"spacing-10\"></div>\n" +
-    "\n" +
     "</div>\n" +
-    "\n" +
-    "<div class=\"spacing-50\"></div>");
+    "<div class=\"spacing-25\"></div>");
 }]);
 
 angular.module("login/index.tpl.html", []).run(["$templateCache", function($templateCache) {
@@ -9214,8 +9196,8 @@ angular.module("nav/templates/filter.tpl.html", []).run(["$templateCache", funct
     "                    <tags-input min-length=\"1\" placeholder=\"Context\" ng-model=\"searchQueryNav.context\">\n" +
     "                        <auto-complete source=\"loadAsset($query)\"></auto-complete>\n" +
     "                    </tags-input>\n" +
-    "                    <div ng-repeat=\"item in item.tags.slice(0,10) track by $index\">\n" +
-    "                        <a href=\"#\" ng-click=\"selectTag(item.element)\"><b>{{item.element}}</b></a>\n" +
+    "                    <div ng-repeat=\"item in item.context.slice(0,10) track by $index\">\n" +
+    "                        <a href=\"#\" ng-click=\"selectTag(item[0])\"><b>{{item[0]}}</b></a>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "\n" +
@@ -9227,7 +9209,7 @@ angular.module("nav/templates/filter.tpl.html", []).run(["$templateCache", funct
     "                        <auto-complete source=\"loadAssociation($query)\"></auto-complete>\n" +
     "                    </tags-input>\n" +
     "                    <div ng-repeat=\"item in item.associations.slice(0,10) track by $index\">\n" +
-    "                        <a href=\"#\" ng-click=\"selectAssociation(item.element)\"><b>{{item.element}}</b></a>\n" +
+    "                        <a href=\"#\" ng-click=\"selectAssociation(item.id)\"><b>{{item.title}}</b></a>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "\n" +
@@ -11575,8 +11557,8 @@ angular.module("project/templates/time.tpl.html", []).run(["$templateCache", fun
   $templateCache.put("project/templates/time.tpl.html",
     "<div class=\"row\">\n" +
     "    <div ng-show=\"time.length == 0\">\n" +
-    "        <div class=\"card\"><div style=\"padding:16px;\"><span style=\"color:gray\">There's nothing here..</span></div></div>\n" +
     "        <div class=\"card\"><button class=\"btn btn-default log-btn\" ng-click=\"orderToggle()\">+ Time</button></div>\n" +
+    "        <div class=\"card\"><div style=\"padding:16px;\"><span style=\"color:gray\">There's nothing here..</span></div></div>\n" +
     "    </div>\n" +
     "    <div ng-show=\"time.length > 0\" class=\"col-xs-12\" style=\"padding-left:0px;padding-right:0px;\">\n" +
     "        <div class=\"card mobileFix\">\n" +
@@ -11618,25 +11600,17 @@ angular.module("projects/index.tpl.html", []).run(["$templateCache", function($t
     "        </div>\n" +
     "    </div>\n" +
     "</div>\n" +
-    "\n" +
+    "<div class=\"spacing-10\"></div>\n" +
     "<div class=\"container\">\n" +
-    "\n" +
-    "    <div class=\"spacing-10\"></div>\n" +
-    "\n" +
     "    <div class=\"row\">\n" +
-    "\n" +
     "        <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
     "            <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
-    "\n" +
     "            <li ng-if=\"!locationFilter\" style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"getLatLng()\"><i class=\"fa fa-map-marker\"></i> Location</a></li>\n" +
     "            <li ng-if=\"locationFilter\" style=\"float:left;font-size:14px;\"><a style=\"color:#002c54\" href=\"#\"><i class=\"fa fa-map-marker\"></i> Location</a></li>\n" +
-    "\n" +
     "            <li style=\"float:right;font-size:14px\"><a href=\"#\" ng-click=\"sortToggle()\">Sort By Recent <i class=\"fa fa-angle-down\"></i></a></li>\n" +
     "            <div style=\"clear:both\"></div>\n" +
     "        </ul>\n" +
-    "\n" +
     "        <div class=\"card\"><tags-input style=\"border:0px;flex-grow:2;\" placeholder=\"Search\" ng-model=\"searchQuery\"></tags-input></div>\n" +
-    "\n" +
     "        <div class=\"card\" ng-click=\"filterToggle('DISCOVER', filterSet)\">\n" +
     "            <ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\">\n" +
     "                <ui-gmap-marker ng-click=\"$event.stopPropagation()\" ng-repeat=\"marker in markers\" coords=\"marker.coords\" options=\"marker.options\" idkey=\"marker.id\">\n" +
@@ -11648,24 +11622,14 @@ angular.module("projects/index.tpl.html", []).run(["$templateCache", function($t
     "            </ui-gmap-circle>\n" +
     "            </ui-gmap-google-map>\n" +
     "        </div>\n" +
-    "\n" +
-    "        <div class=\"card\">\n" +
-    "            <button class=\"btn btn-default log-btn\" ng-click=\"projectToggle()\">+ project</button>\n" +
-    "        </div>\n" +
-    "\n" +
-    "        <div ng-repeat=\"item in projects\">\n" +
-    "            <div ng-include=\"'templates/cards/projectCard.tpl.html'\"></div>\n" +
-    "        </div>\n" +
-    "\n" +
+    "        <div class=\"card\"><button class=\"btn btn-default log-btn\" ng-click=\"projectToggle()\">+ project</button></div>\n" +
+    "        <div ng-repeat=\"item in projects\"><div ng-include=\"'templates/cards/projectCard.tpl.html'\"></div></div>\n" +
     "        <div ng-show=\"projectCount > projects.length\" ng-click=\"loadMore()\" class=\"card\">\n" +
     "            <button style=\"width:100%\" class=\"btn btn-default log-btn\">MORE <i class=\"fa fa-angle-down\"></i></button>\n" +
     "        </div>\n" +
-    "\n" +
     "    </div>\n" +
-    "\n" +
     "</div>\n" +
-    "\n" +
-    "<div class=\"spacing-50\"></div>");
+    "<div class=\"spacing-25\"></div>");
 }]);
 
 angular.module("protocol/index.tpl.html", []).run(["$templateCache", function($templateCache) {
@@ -12480,7 +12444,6 @@ angular.module("task/templates/tokens.tpl.html", []).run(["$templateCache", func
 angular.module("tasks/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("tasks/index.tpl.html",
     "<style type=\"text/css\">.angular-google-map-container{height: 200px;}</style>\n" +
-    "\n" +
     "<div style=\"background:url('https://source.unsplash.com/1600x900/?community');overflow:visible\" class=\"imageContainerSmall\">\n" +
     "    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
@@ -12491,23 +12454,16 @@ angular.module("tasks/index.tpl.html", []).run(["$templateCache", function($temp
     "        </div>\n" +
     "    </div>\n" +
     "</div>\n" +
-    "\n" +
     "<div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "<!--TODO: TOKEN OUPUT FILTERS-->\n" +
     "<div class=\"container\">\n" +
-    "\n" +
     "	<div class=\"row\">\n" +
-    "\n" +
     "	    <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
     "            <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
     "            <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-map-marker\"></i> Location</a></li>\n" +
     "			<li style=\"float:right;font-size:14px\"><a href=\"#\" ng-click=\"sortToggle()\">Sort By Recent <i class=\"fa fa-angle-down\"></i></a></li>\n" +
     "            <div style=\"clear:both\"></div>\n" +
     "        </ul>\n" +
-    "\n" +
     "        <div class=\"card\"><tags-input class=\"\" style=\"border:0px;flex-grow:2;\" min-length=\"1\" placeholder=\"Search\" ng-model=\"searchQuery\"></tags-input></div>\n" +
-    "\n" +
     "		<!--if location selected-->\n" +
     "		<div class=\"card\">\n" +
     "            <ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\">\n" +
@@ -12518,14 +12474,11 @@ angular.module("tasks/index.tpl.html", []).run(["$templateCache", function($temp
     "                </ui-gmap-marker>\n" +
     "            </ui-gmap-google-map>\n" +
     "        </div>\n" +
-    "\n" +
     "    </div>\n" +
-    "\n" +
     "	<div class=\"row\">\n" +
-    "\n" +
     "	    <div class=\"col-sm-4\" style=\"padding-left:0px;padding-right:0px;\">\n" +
-    "	        <div class=\"card\" ng-click=\"filterToggle('DISCOVER', filterSet)\">\n" +
-    "			 	<div style=\"background:url('https://source.unsplash.com/1600x900/?details,notes,explore,wonder');height:50px;min-height:50px\" class=\"imageContainerSmall\">\n" +
+    "	        <div ng-if=\"filterSet.context.length > 0\" class=\"card\" ng-click=\"filterToggle('DISCOVER', filterSet)\">\n" +
+    "			 	<div style=\"background:url('https://source.unsplash.com/1600x900/?details,notes,explore,wonder');min-height:50px\" class=\"imageContainerSmall\">\n" +
     "				    <div style=\"background:rgba(0,0,0,0.75);height:50px\" class=\"imageContainerSmallDiv\">  \n" +
     "				        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "			        		<div style=\"padding:15px;\">\n" +
@@ -12535,13 +12488,13 @@ angular.module("tasks/index.tpl.html", []).run(["$templateCache", function($temp
     "				    </div>\n" +
     "				</div>\n" +
     "	            <div style=\"padding:16px;\">\n" +
-    "	                <div ng-repeat=\"tag in sortedTagArray\" ng-click=\"$event.stopPropagation();filterContent(tag.element)\">\n" +
-    "	                    <a><b>{{tag.element}}</b></a>\n" +
+    "	                <div ng-repeat=\"context in filterSet.context\" ng-click=\"$event.stopPropagation()\">\n" +
+    "	                    <a><b>{{context[0]}}</b></a>\n" +
     "	                </div>\n" +
     "	            </div>\n" +
     "	        </div>\n" +
-    "		    <div class=\"card\" ng-if=\"sortedAssociationArray.length > 0\" ng-click=\"filterToggle('DISCOVER', filterSet)\">\n" +
-    "		    	<div style=\"background:url('https://source.unsplash.com/1600x900/?location,forest,city,map');height:100px;min-height:50px\" class=\"imageContainerSmall\">\n" +
+    "		    <div ng-if=\"filterSet.associations.length > 0\"  class=\"card\" ng-click=\"filterToggle('DISCOVER', filterSet)\">\n" +
+    "		    	<div style=\"background:url('https://source.unsplash.com/1600x900/?location,forest,city,map');min-height:50px\" class=\"imageContainerSmall\">\n" +
     "				    <div style=\"background:rgba(0,0,0,0.75);height:50px\" class=\"imageContainerSmallDiv\">  \n" +
     "				        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "			        		<div style=\"padding:15px;\">\n" +
@@ -12551,13 +12504,13 @@ angular.module("tasks/index.tpl.html", []).run(["$templateCache", function($temp
     "				    </div>\n" +
     "				</div>\n" +
     "	            <div style=\"padding:16px;\">\n" +
-    "	                <div ng-repeat=\"association in sortedAssociationArray\" ng-click=\"$event.stopPropagation();filterContent(association.element);\">\n" +
-    "	                    <a><b>{{association.element}}</b></a>\n" +
+    "	                <div ng-repeat=\"association in filterSet.associations\" ng-click=\"$event.stopPropagation()\">\n" +
+    "	                    <a><b>{{association.title}}</b></a>\n" +
     "	                </div>\n" +
     "	            </div>\n" +
     "	        </div>\n" +
-    "	        <div class=\"card\" ng-click=\"filterToggle('DISCOVER', filterSet)\">\n" +
-    "	        	<div style=\"background:url('https://source.unsplash.com/1600x900/?location,forest,city,map');height:50px;min-height:50px\" class=\"imageContainerSmall\">\n" +
+    "	        <div ng-if=\"filterSet.locations.length > 0\" class=\"card\" ng-click=\"filterToggle('DISCOVER', filterSet)\">\n" +
+    "	        	<div style=\"background:url('https://source.unsplash.com/1600x900/?location,forest,city,map');min-height:50px\" class=\"imageContainerSmall\">\n" +
     "				    <div style=\"background:rgba(0,0,0,0.75);height:50px\" class=\"imageContainerSmallDiv\">  \n" +
     "				        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "			        		<div style=\"padding:15px;\">\n" +
@@ -12567,13 +12520,12 @@ angular.module("tasks/index.tpl.html", []).run(["$templateCache", function($temp
     "				    </div>\n" +
     "				</div>\n" +
     "	            <div style=\"padding:16px;\">\n" +
-    "	                <div ng-repeat=\"location in sortedLocationsArray\" ng-click=\"$event.stopPropagation();filterContent(location.element)\">\n" +
+    "	                <div ng-repeat=\"location in filterSet.locations\" ng-click=\"$event.stopPropagation()\">\n" +
     "	                    <a><b>{{location}}</b></a>\n" +
     "	                </div>\n" +
     "	            </div>\n" +
     "	        </div>\n" +
     "	    </div>\n" +
-    "\n" +
     "	    <div class=\"col-sm-8\" style=\"padding-left:0px;padding-right:0px;\">\n" +
     "			<div class=\"card\"><button class=\"btn btn-default log-btn\" ng-click=\"taskToggle()\">+ Task</button></div>		\n" +
     "			<div ng-repeat=\"item in tasks\"><div ng-include=\"'templates/cards/taskCard.tpl.html'\"></div></div>\n" +
@@ -12582,9 +12534,7 @@ angular.module("tasks/index.tpl.html", []).run(["$templateCache", function($temp
     "            </div>\n" +
     "		</div>\n" +
     "	</div>\n" +
-    "</div>\n" +
-    "\n" +
-    "<div class=\"spacing-50\"></div>");
+    "</div>");
 }]);
 
 angular.module("templates/cards/actionCard.tpl.html", []).run(["$templateCache", function($templateCache) {

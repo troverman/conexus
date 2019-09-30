@@ -7,7 +7,6 @@ module.exports = {
 	get: function(req, res) {
 
 		function getAssociations(model){
-			console.log(model.id)
 			var deferred = Q.defer();
 			Association.getDatastore().manager.collection('association')
 			.find({$and : [{"associatedModels.id": {$in:[model.id]}}]})
@@ -18,6 +17,7 @@ module.exports = {
 				if (associationModels.length > 0){
 					associationModels.map(function(obj){obj.id=obj._id; return obj});
 					model.associationModels = associationModels;
+					model.context = {};
 
 					//LOL!
 					var promises = [];
@@ -35,25 +35,35 @@ module.exports = {
 							if (associationModels[x].associatedModels[y].type=='TRANSACTION'){promises.push(Transaction.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
 							if (associationModels[x].associatedModels[y].type=='VALIDATION'){promises.push(Validation.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
 						}
-					}
 
+						//model.context = Object.assign(model.context, model.associationModels[x].context);
+						//console.log(model.associationModels[x].context)
+
+				        //THIS IS CONNECTION DEFINED SOO..
+				        //BUT WANT CONTEXT TO PERMIEATE GOOD FILTERS SO DEFAULT CONNECTIONS HAVE CONTEXT RENDERED BY CREATE NICLEY 
+
+						for (y in Object.keys(model.associationModels[x].context)){
+							var context = Object.keys(model.associationModels[x].context)[y].toString();
+							if(!model.context[context.toString()]){
+								model.context[context.toString()] = model.associationModels[x].context[context.toString()];
+							}
+							else{
+								model.context[context.toString()] = model.context[context.toString()] + model.associationModels[x].context[context.toString()];
+							}
+						}
+
+					}
+					
 					Q.all(promises).then((populatedModels)=>{
-						//console.log(populatedModels)
+						var index = -1 
 						for (x in model.associationModels){
 							for (y in associationModels[x].associatedModels){
-								var index = parseInt(x+y);
+								index++;
 								model.associationModels[x].associatedModels[y].data = populatedModels[index];
-								//console.log(populatedModels[index])
 							}
 						}
 						deferred.resolve(model);
 					});
-
-					//CONTEXT IS AVG 
-					model.context = {};
-					for (x in model.associationModels){
-						//model.context[]
-					}
 
 				}
 				else{deferred.resolve(model);}
@@ -149,15 +159,20 @@ module.exports = {
 
 		else{
 			Content.find({})
-			.limit(20)
+			.limit(limit)
 			.skip(skip)
 			.sort(sort)
 			.populate('user')
 			.then(function(models) {
 				Content.count().then(function(numRecords){
 					Content.subscribe(req, models.map(function(obj){return obj.id}));
-					var returnObj = {data:models, info:{count:numRecords}};
-					res.json(returnObj);
+					var promises = [];
+					for (x in models){promises.push(getAssociations(models[x]));}
+					Q.all(promises).then((populatedModels)=>{
+						for (x in models){models[x] = populatedModels[x];}
+						var returnObj = {data:models, info:{count:numRecords}};
+						res.json(returnObj);
+					});
 				});
 			});
 		}

@@ -323,6 +323,7 @@ angular.module( 'conexus.nav', [
         $scope.closeAllNav();
         $scope.locationFilter = {};
         $scope.locationFilter.distance = 10;
+
         //POSTIONS / MARKETS // LEDGER
         $scope.item = item;
         $scope.type = type;
@@ -372,7 +373,7 @@ angular.module( 'conexus.nav', [
 
         };
 
-        $scope.selectTag = function(item){
+        $scope.selectContext = function(item){
 
             var selectedLimit = 100;
             var selectedSkip = 0;
@@ -407,20 +408,14 @@ angular.module( 'conexus.nav', [
 
             $scope.updatedQuery.push(query);
 
-
-            //DO A FILTER OF SEARCHQUERY OF TYPE TAGS
+            //DO A FILTER OF SEARCHQUERY OF TYPE CONTEXT
             if ($rootScope.searchQueryNav.context.map(function(obj){return obj.text}).indexOf(item)==-1){
-                
                 $rootScope.searchQueryNav.context.push({
                     text:item, 
                     query:item, 
                 });
-
                 //$scope.init();
-
-                $scope.item.tags = $scope.item.tags.filter(function(obj) { 
-                    return obj.element !== item
-                });
+                $scope.item.context = $scope.item.context.filter(function(obj) { return obj.element !== item});
             }
 
             console.log('SELECT CONTEXT', item, $rootScope.searchQueryNav, $rootScope.searchQuery);
@@ -1995,7 +1990,7 @@ angular.module( 'conexus.nav', [
 
     //TODO! IMPORTANT
     $scope.loadContext = function(query){
-        console.log('loadTags', query);
+        console.log('loadContext', query);
         var deferred = $q.defer();
         var searchModels = [];
         deferred.resolve(searchModels);

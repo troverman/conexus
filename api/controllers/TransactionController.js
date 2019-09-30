@@ -49,6 +49,12 @@ function getAssociations(model){
 					if (associationModels[x].associatedModels[y].type=='TRANSACTION'){promises.push(Transaction.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
 					if (associationModels[x].associatedModels[y].type=='VALIDATION'){promises.push(Validation.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
 				}
+				//DEFINED BY CONNECTION
+				for (y in Object.keys(model.associationModels[x].context)){
+					var context = Object.keys(model.associationModels[x].context)[y].toString();
+					if(!model.context[context.toString()]){model.context[context.toString()] = model.associationModels[x].context[context.toString()];}
+					else{model.context[context.toString()] = model.context[context.toString()] + model.associationModels[x].context[context.toString()];}
+				}
 			}
 			Q.all(promises).then((populatedModels)=>{
 				var index = -1;
