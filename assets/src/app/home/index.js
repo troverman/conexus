@@ -355,6 +355,7 @@ angular.module( 'conexus.home', [
 
     $scope.selectTab = function(model){$scope.selectedTab = model;};
 
+
     $scope.isTutorial = true;
     //TODO: FACTOR THIS BAD BOY
     //CUSTOM CONTROLLER..
@@ -368,11 +369,101 @@ angular.module( 'conexus.home', [
         {model:'APP', title:'Attention Tokenization', description:'Required for Attention Tokenization'},
         {model:'APP', title:'Location Tokenization', description:'Required for Location Tokenization'},
     ];
-    $scope.coreApps = [];
 
-    $rootScope.baseToken = {text:'UNIVERSAL TOKEN', description:'Universal Token Position; protocol where every member creates one Universal Token per day to serve an an eglatarian value position.'}
-    $rootScope.baseManifold = {text:'+SPONSOR+ONMINT+'+$rootScope.currentUser.id, description:'Sponsorship On Mint postions have a triggering action potiental \'on mint\' of the specified token root the manifold (TOKEN+SPONSOR).'}
-    $rootScope.orderType = {text:'Continual', description:'Continual Market Orders will fill as long as there is liquidity. Useful for token protocols with ongoing minting logic'}
+    //CORECORE
+        //IE RUST STuFF
+        //IE RUN TIME
+        //ALL THINGS SHOULD BE IN CONTRACT CODE. IE APP PROTOCOL
+
+    $scope.coreApps = [
+        //network - code which has its own runtime - lol 
+        {model:'CORE', title:'Runtime', description:'', data:{}},
+            //pow
+        {model:'PROTOCOL', title:'Protocol', description:''}, //code struct string data
+        {model:'CONNECTION', title:'Connection', description:''},
+        {model:'VALIDATION', title:'Validation', description:''},
+        {model:'ASSOCIATION', title:'Association', description:''},
+
+        {model:'APP', title:'App', description:''},
+        {model:'APP', title:'Event', description:'', data:{}},
+        {model:'APP', title:'Block', description:''},
+        {model:'APP', title:'Member', description:''},
+        {model:'APP', title:'Balance', description:'Multidimensional string to balance mapping - protocols govern reputation and token ownership'},
+        {model:'APP', title:'Communication', description:'networking application - tokenized peers for package transfer'},
+        {model:'APP', title:'Attention', description:'mining reward'},
+
+    ];
+
+    $scope.xyzApps = [
+
+        {model:'APP', title:'Action', description:''}, //apps create 2nd order connections to define a data model
+        {model:'APP', title:'Asset', description:''},
+        {model:'APP', title:'Content', description:''},
+        {model:'APP', title:'Item', description:''},
+        {model:'APP', title:'Location', description:''},
+        {model:'APP', title:'Notification', description:''},
+        {model:'APP', title:'Project', description:''},
+        {model:'APP', title:'Reaction', description:''},
+        {model:'APP', title:'Task', description:''},
+        {model:'APP', title:'Time', description:''},
+        {model:'APP', title:'Transaction', description:''},
+
+    ];
+
+    $scope.apps = [].concat.apply([], [$scope.apps, $scope.coreApps, $scope.xyzApps])
+
+
+    //build .asm
+    $scope.compilePeer= function(){
+        for (x in $scope.apps){
+            console.log($scope.apps[x].data)
+        }
+
+        //LOOP THRU SELECTED APPS
+        //MY PEER VERSION IS THE HASH
+        //
+
+    };
+
+    //DO YOU BELIEVE IN HONOR
+    //TODO: PACKS
+    $scope.selectPack = function(model){
+         $scope.selectedPack = model;
+    };
+
+    $scope.packs=[
+        {title:'General', description:'Thinking about an archetypal human value profile. Tell us what you believe makes a human thirve.'}
+    ];
+    
+    $scope.selectedPack = $scope.packs[0];
+
+    $scope.questions = [
+        {type:'onedimension slider', question:'Do you believe in yourself?', assetString:$rootScope.currentUser.username.toUpperCase()+'+BELIEF', response:100, answer:['no','yes']},
+        {type:'onedimension slider', question:'Do you believe in your ability to create?', assetString:$rootScope.currentUser.username.toUpperCase()+'+CREATE', response:100, answer:['no','yes']},
+        {type:'onedimension slider', question:'Do you believe your time is valuable?', assetString:'CRE8+TIME+'+$rootScope.currentUser.username.toUpperCase(), response:100, answer:['no','yes']},
+        {type:'onedimension slider', question:'Do you believe everyones time is valuable?', assetString:'CRE8+TIME', response:100, answer:['no','yes']},
+        {type:'onedimension slider', question:'Do you believe our time is valuable?', assetString:'CRE8+TIME+PROJECT+CRE8', response:100, answer:['no','yes']},
+    ];
+
+    $rootScope.baseToken = {
+        text:'UNIVERSAL', 
+        description:'Universal Token Position; protocol where every member creates one Universal Token per day to serve an an eglatarian value position.'
+    };
+    $rootScope.baseManifold = {
+        text:'+SPONSOR+ONMINT+'+$rootScope.currentUser.id, 
+        description:'Sponsorship On Mint postions have a triggering action potiental \'on mint\' of the specified token root the manifold (TOKEN+SPONSOR).'
+    };
+    $rootScope.orderType = {
+        text:'Continual', 
+        description:'Continual Market Orders will fill as long as there is liquidity. Useful for token protocols with ongoing minting logic'
+    };
+    
+
+
+
+
+
+
     $scope.chartMapTotal = {
         chart: {
             polar: true,
@@ -695,32 +786,45 @@ angular.module( 'conexus.home', [
             $scope.pieTotal.series[0].data = data;
         };
 
-        //TODO: VM CONTROLS ETC
-        //PREPOPULATE ? GENERATOR FROM SUGGESTIONS IS THE WAY - IS THE KEY
-        //OLDISH
+        //TODO:PREPOPULATE GENERATOR FROM SUGGESTIONS IS THE WAY - IS THE KEY
+        //token: UNIVERSAL,TROVERMAN == GESTALT. SO WE CREATE THIS TOO (AND)
+        //CONNECTION
         $scope.createPosition = function(model){
-            if($scope.newOrder.map(function(obj){return obj[1].identifier.split('+')[2]}).indexOf(model) == -1){
-                
+            
+            $scope.newOrder.push({
 
-                var setAlpha = {'UNIVERSALTOKEN':1};
-                var setBeta = {};
-                setBeta['CRE8+TIME+'+model.toUpperCase()+'+ONMINT+SPONSOR+[ADDRESS]'] = 3600;
+                associatedModels:[
 
+                    {market:'UNIVERSAL', amount:1, direction:'SELL', collateral:{}}, //ASSOCIATION OWNES THE TOKENS IF COLLATERAL --> GIVES IT FLOW
+                    //{market:$rootScope.currentUser.username.toUpperCase(), amount:1, direction:'SELL'},
+                    
+                    {market:'CRE8+TIME+'+model.model.toUpperCase()+'+'+model.id+'+ONMINT+SPONSOR+'+$rootScope.currentUser.id, amount:3600, direction:'BUY'},
 
-                //TODO: ASSOCIATION STRUCT
-                $scope.newOrderNEW.push({
-                    setAlpha:setAlpha,
-                    setBeta:setBeta,
+                    //{market:'CRE8+TIME+LOVE+ONMINT+SPONSOR+'+$rootScope.currentUser.id, amount:3600, direction:'BUY'},
+                    //{market:'CRE8+TIME+CREATIVITY+ONMINT+SPONSOR+'+$rootScope.currentUser.id, amount:3600, direction:'BUY'},
+
+                ],
+                parameters:{
                     type:'ONBOOK',
-                    status:'CONTINUAL'
-                });
-                $scope.newOrder.push([
-                    {amount:1, identifier:'UNIVERSALTOKEN'}, 
-                    {amount:3600, identifier:'CRE8+TIME+'+model.toUpperCase()+'+ONMINT+SPONSOR+'+$rootScope.currentUser.id}
-                ]);
+                    status:'CONTINUAL',
+                },
+                connection:{
+                    parameters:{
+                        type:'string',
+                        status:'string',
+                        amount:'int',
+                        market:'string',
+                        direction:'string'
+                    },
+                }
 
+            });
 
-            }   
+        };
+
+        //TODO: SUBMITS VALUE MAP
+        $scope.createOrder = function(){
+            $scope.positions = $scope.newOrder;
         };
 
         $scope.removePosition = function(model){

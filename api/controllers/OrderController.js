@@ -6,10 +6,6 @@ module.exports = {
 
 	get: function(req, res) {
 
-		//CREATE THE TENSOR OBJ..
-		//HUGELY HIGH DIM
-		//BUILD UP -- HIGHEST DIM CONNECTION IS BASE
-		//SORT ASSETS.. 
 		function buildMarketV1(baseMarket, orders){
 			var market = {};
 			for (x in orders){
@@ -57,15 +53,8 @@ module.exports = {
 					if (!market[setBeta]){market[setBeta] = [array];}
 					else{market[setBeta].push(array);}
 				}
-
 			}
 			return market;
-
-			//SET OF ORDERS WHERE ORDER M 
-			//Set of Orders O Where Market M is
-			//:p
-			//..
-			
 		};
 
 		var limit = parseInt(req.query.limit) || 1;
@@ -330,7 +319,11 @@ module.exports = {
 
 		//ORDERS ASSOCIATION
 		function getProtocolTokens(model){
-			var protocolTokens = ['CRE8', 'CRE8+ORDER'];
+			var protocolTokens = [
+				'CRE8', 
+				'CRE8+ORDER',
+				'CRE8+ORDER+'+model.id,
+			];
 			return protocolTokens;
 		};
 
@@ -376,7 +369,7 @@ module.exports = {
 					computedFrom:'ORDER'
 				};
 
-				associationModel.connection = connectionModel[0];
+				//associationModel.connection = connectionModel[0];
 
 				//IF NOT ASSOCIATION CREATE
 				Association.create(associationModel).then(function(newAssociationModel){
@@ -402,7 +395,6 @@ module.exports = {
 		var model = {
 			model: 'ORDER',
 
-			//DATA -- MODEL (APP)
 			setAlpha: req.param('setAlpha'),
 			setBeta: req.param('setBeta'),
 			orderSet:[req.param('setAlpha'), req.param('setBeta')],

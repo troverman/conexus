@@ -18,9 +18,9 @@
             <form role="form" ng-submit="createTime()">
 
                 <div>
-                    <h5>
+                    <h5 ng-click="expandAssociations()">
                         Context 
-                        <a ng-click="expandAssociations()" style="float:right">
+                        <a style="float:right">
                             <span ng-if="!associationsAreExpanded"><i class="fas fa-bezier-curve"></i> Expand</span>
                             <span ng-if="associationsAreExpanded"><i class="fas fa-grip-lines"></i> Hide</span>
                         </a>
@@ -37,9 +37,9 @@
                     </tags-input>
                     <div class="row">
                         <div class="col-md-12 col-sm-12" ng-repeat="association in newTime.associatedModels">
-                            <h5>
+                            <h5 ng-click="association.isExpanded=!association.isExpanded">
                                 {{association.text}} 
-                                <a style="float:right" ng-click="association.isExpanded=!association.isExpanded">
+                                <a style="float:right">
                                     <i class="fas fa-compress-arrows-alt"></i>
                                     <b>{{association.connection[0].text || 'Default Connection'}}</b>
                                 </a>

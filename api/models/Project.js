@@ -1,6 +1,9 @@
 //CRE8.PROJECT
 module.exports = {
 	attributes: {
+        
+        //DEPRECIATE
+        model: {type: 'string', defaultsTo: 'PROJECT'},
 
         title: {type: 'string'},
         description: {type: 'string', allowNull:true},
@@ -19,6 +22,7 @@ module.exports = {
 
         data: {type: 'json'},
         dataHash: {type: 'string'},
+        hash: {type: 'string'},
        
         //COUNTS
         //TODO: APPS - DATA ?? REACTIONS.. ..association mapping?
@@ -29,6 +33,8 @@ module.exports = {
         taskCount: {type: 'number',defaultsTo: 0},
         timeCount: {type: 'number',defaultsTo: 0},
         liveCount: {type: 'number',defaultsTo: 0},
+
+
     },
     afterCreate: function (model, next) {
         var colorArray = ['2ab996', '24242e', 'ff6a6a', 'ddbea8'];

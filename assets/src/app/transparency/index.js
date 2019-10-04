@@ -10,19 +10,12 @@ angular.module( 'conexus.transparency', [
 				templateUrl: 'transparency/index.tpl.html'
 			}
 		},
-
         resolve: {
             peers: ['PeerModel', function(PeerModel){
                 return PeerModel.get({limit:100, skip:0, sort:'createdAt DESC'});
             }],
         }
-
 	});
-    uiGmapGoogleMapApiProvider.configure({
-        key: 'AIzaSyBmbow2vLk6EMs0RT6r8U-umNzlkCNLrVY',
-        v: '3.20',
-        libraries: 'weather,geometry,visualization'
-    });
 }])
 
 .controller( 'TransparencyCtrl', ['$scope', 'titleService', 'peers', function TransparencyController( $scope, titleService, peers ) {

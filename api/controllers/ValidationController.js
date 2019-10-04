@@ -88,29 +88,32 @@ module.exports = {
 
 		else if (req.query.association){
 			var association = req.query.association;
-			Validation.native(function(err, validation) {
-				validation.find({
-					$or:[
-						{$and:[
+			Validation.getDatastore().manager.collection('validation')
+			.find({
+				$or:[
+					{
+						$and:[
 							{"associatedModels.id": {$in :[association[0]]}},
 							{"associatedModels.id": {$in :[association[1]]}},
-						]},
-						{$and:[
+						]
+					},
+					{
+						$and:[
 							{"associatedModels.id": {$in :[association[1]]}},
 							{"associatedModels.id": {$in :[association[0]]}},
-						]}
-					]
-				})
-				.limit(1000)
-				.skip(0)
-				.sort({'createdAt':-1})
-				.toArray(function (err, validationModels) {
-					console.log(validationModels);
-					validationModels = validationModels.map(function(obj){obj.id = obj._id.toString(); return obj;});
-					console.log(validationModels.map(function(obj){return obj.id;}))
-					Validation.subscribe(req, validationModels.map(function(obj){return obj.id;}));
-					res.json(validationModels);
-				});
+						]
+					}
+				]
+			})
+			.limit(1000)
+			.skip(0)
+			.sort({'createdAt':-1})
+			.toArray(function (err, validationModels) {
+				console.log(validationModels);
+				validationModels = validationModels.map(function(obj){obj.id = obj._id.toString(); return obj;});
+				console.log(validationModels.map(function(obj){return obj.id;}))
+				Validation.subscribe(req, validationModels.map(function(obj){return obj.id;}));
+				res.json(validationModels);
 			});
 		}
 
@@ -197,6 +200,13 @@ module.exports = {
 			}
 		};
 
+
+		//CONNECTION..
+		//DISCRETE TOKEN DATA
+		//-->HASH, FLATTEN (ALL, AND)
+		//2ND ORDER SELF CONNECTION ATTRIBUTES = APP DEFINED CUSTOM DATA MODEL
+		//CONNETION TOKEN PARAMS...........!
+		//FUNCTIONAL
 		function getProtocolTokens(model){
 			var protocolTokens = [
 				'CRE8', 
@@ -323,7 +333,7 @@ module.exports = {
 			data:{apps:{reactions:{plus:0,minus:0},attention:{general:0}}}
 		};
 
-		if(!model.connection){
+		//if(!model.connection){
 
 			//FIND DEFAULT & DYNAMIC CONNECTIONS
 			//var connectionQuery = {};
@@ -333,7 +343,11 @@ module.exports = {
 				id:1,
 				title:'DEFAULT '+ model.associatedModels.map(function(obj){return obj.type}).join(' '),
 				parameters:{
-					mapping:['context','reputation','computed'],
+					mapping:[
+						'context',
+						'reputation',
+						'computed'
+					],
 					logic:'context[%context]*reputation[%context]'
 				},
 			};
@@ -343,7 +357,8 @@ module.exports = {
 					model[model.connection.parameters.mapping[y]] = {};
 				}
 			}
-		}
+
+		//}
 
 		model.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
 

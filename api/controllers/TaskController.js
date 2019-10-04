@@ -2,6 +2,28 @@
 const Q = require('q');
 const crypto = require('crypto');
 
+function googleGeoCodeService(model){
+	var deferred = Q.defer();
+	//TODO: SECURITY! HIDE THIS.. SECRET INFORMATION.. NEED ENCRYPTION.
+	var googleMapsClient = require('@google/maps').createClient({
+		key: 'AIzaSyDcTGxD4H3lnx84u8EPcbh7PodbsEyzbg4'
+	});
+	googleMapsClient.geocode({address: model.location}, function(err, response) {
+		location = null;
+		if (!err) {
+			location = {
+				address:response.json.results[0].formatted_address,
+				lat:parseFloat(response.json.results[0].geometry.location.lat),
+				lng:parseFloat(response.json.results[0].geometry.location.lng),
+				coordinates: [parseFloat(response.json.results[0].geometry.location.lng), parseFloat(response.json.results[0].geometry.location.lat)],
+			};
+			deferred.resolve(location);
+		}
+		else{deferred.resolve(location);}
+	});
+	return deferred.promise;
+};
+
 module.exports = {
 
 	get: function(req, res) {
@@ -189,20 +211,23 @@ module.exports = {
 		}
 	},
 
-	//TODO
 	create: function (req, res) {
 
-		function createEvent(model){
+		function createEvent(model, verb){
 			var eventModel = {
-				type:'create',
 				model:{
-					id:model.id, //hash
-					type:model.model //app
+					id:model.id,//hash
+					type:model.model//app
 				},
-				data:{},
+				verb: verb, //or type
+				//data:{}
 			};
-			Event.create(eventModel);
+			Event.create(eventModel).then(function(model){
+				console.log('CREATE EVENT', model);
+				Event.publish([model.id], {verb: 'create', data: model});
+			});
 		};
+
 
 		function createNotification(model){
 
@@ -211,6 +236,7 @@ module.exports = {
 		function createValidation(model){
 			for (x in model.associatedModels){
 				var newValidation = {
+					model:'VALIDATION',
 					content:model.id + ' VALIDATION',
 					user: model.user.id,
 					creator: model.user.id,
@@ -223,7 +249,7 @@ module.exports = {
 					parameters:{
 						mapping:['context','reputation','computed'],
 						attributes:{
-							context:'string->int', //lang lang interpol
+							context:'string->int',//{string:int} //lang lang interpol
 							reputation:'string->int',
 							computed:'string:->int'
 						},
@@ -245,6 +271,8 @@ module.exports = {
 				for (y in model.associatedModels[x].context){newValidation.context[model.associatedModels[x].context[y].text] = model.associatedModels[x].context[y].score;}
 				Validation.create(newValidation).then(function(newValidationModel){
 					console.log('CREATE VALIDATION', newValidationModel);
+					createEvent(newValidationModel, 'create');
+					newValidationModel.model = 'ASSOCIATION';
 					createAssociation(newValidationModel);
 				});
 			}
@@ -319,14 +347,15 @@ module.exports = {
 		};
 
 		//TODO ASSOIATION..
+		//EVENT CENTRIC FACTORING
 		function getProtocolTokens(model){
-			var protocolTokens = ['CRE8', 'CRE8+TASK', 'CRE8+TSK+'+model.id];
-			if (model.tags){
-				for (x in model.tags.split(',')){
-					protocolTokens.push(model.tags.split(',')[x].toUpperCase());
-					protocolTokens.push('CRE8+TASK+'+model.tags.split(',')[x].toUpperCase());
-				}
-			}
+			var protocolTokens = [
+				'CRE8', 
+				'CRE8+TASK', 
+				'CRE8+TASK+'+model.id
+				//context
+			];
+			
 			return protocolTokens;
 		};
 
@@ -349,26 +378,36 @@ module.exports = {
 		model.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
 		console.log('CREATE TASK', model);
 		Task.create(model)
-		.exec(function(err, model) {
+		.exec(function(err, task) {
 			if (err) {return console.log(err);}
 			else {
 
-				User.find({id:model.user}).then(function(userModels){
-					//if (model.location){
-					//	googleGeoCodeService(project).then(function(location){});
-					//}
+				//TODO: BETTER SETUP
+				//TODO: BETTER 'EXTERNAL' UTILITY
+				User.find({id:task.user}).then(function(userModels){
+
+					if(task._id){project.id = project._id.toString()}
 					model.associatedModels = req.param('associatedModels');
 					model.user = userModels[0];
-					
-					Task.subscribe(req, [model.id]);
-					Task.publish([model.id], {verb: 'create', data: model});
 
-					createEvent(model);
-					createNotification(model);
-					createValidation(model);
-					mintTokens(model);
-					res.json(model);
+					googleGeoCodeService(task).then(function(location){
+						
+						task.location = location;
+						
+						Task.update({id:task.id}, {location:location}).then(function(taskModel){
+							console.log('UPDATE PROJECT LOCATION -- GEO CODE');
+										
+							Task.subscribe(req, [task.id]);
+							Task.publish([model.id], {verb: 'create', data: taskModel});
 
+							createEvent(task, 'create');
+							createNotification(task);
+							createValidation(task);
+							mintTokens(task);
+							res.json(task);
+
+						});
+					});
 				});
 
 			}

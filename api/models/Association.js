@@ -2,6 +2,9 @@
 module.exports = {
     attributes: {
 
+        //DEPRECIATE
+        model: {type: 'string', defaultsTo: 'ASSOCIATION'},
+
     	//DEFINE (HIGHER ORDER) LOGIC
     	connection:{type: 'json'},
 

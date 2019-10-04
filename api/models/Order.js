@@ -2,9 +2,11 @@
 module.exports = {
 	attributes: {
 
+		//DEPRECIATE
+        model: {type: 'string', defaultsTo: 'ORDER'},
+
         info: {type: 'json'},
         information: {type: 'json'},
-        model: {type: 'string', defaultsTo: 'ORDER'},
 
 		creator: {type: 'string'},
 		user: {model: 'user'},

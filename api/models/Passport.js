@@ -13,6 +13,10 @@ function hashPassword (passport, next) {
 
 module.exports = {
     attributes: {
+        
+        //DEPRECIATE
+        model: {type: 'string', defaultsTo: 'PASSPORT'},
+        
         protocol: { type: 'string', required: true },
         password: { type: 'string', minLength: 8 },
         provider: { type: 'string' },

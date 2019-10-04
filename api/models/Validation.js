@@ -4,6 +4,10 @@
 
 module.exports = {
 	attributes: {
+        
+        //DEPRECIATE
+        model: {type: 'string', defaultsTo: 'VALIDATION'},
+
         associatedModels: {type: 'json'},
 
         //APPS - CONFIG - CONNECTION PARAMS

@@ -2,8 +2,8 @@
     <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
         <div style="margin-top: auto;margin-bottom: auto;">
         	<div class="container">
-            	<h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Tx</h1>
-            	<h5 style="color:white">764a1522cb582c42a5af644ab</h5>
+            	<h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Event</h1>
+            	<h5 style="color:white">{{event.id}}</h5>
             </div>
         </div>
     </div>
@@ -23,6 +23,7 @@
 				    </div>
 				</div>
 				<div style="padding:16px;">
+
 					<p style="font-style:italic;color:gray;margin:0px"><b>Chain ID:</b> <a>1</a>(Main Chain)</p>
 					<p style="font-style:italic;color:gray;margin:0px"><b>Block Height:</b> 564366</p>
 					<p style="font-style:italic;color:gray;margin:0px"><b>Block Number:</b> <a href="block/564365" ui-sref="block({id:564365})">564365</a></p>
@@ -30,6 +31,7 @@
 					<p style="font-style:italic;color:gray;margin:0px"><b>Verification Type:</b> <a href="">Proof Of Work</a> (PoeT 141.112)</p>
 					<p style="font-style:italic;color:gray;margin:0px"><b>Peer(s):</b> <a href="member/troverman" ui-sref="member.activity({path:'troverman'})">caf644ab582c42a56759764a15226ed2a1fa</a></p>
 					<p style="font-style:italic;color:gray;margin:0px"><b>Block</b> <a>564366</a></p>
+
 					<p style="font-style:italic;color:gray;margin:0px">
 						<b>Data</b> <br>
 						000000000000000000000000caf644ab582c42a56759764a15226ed2a1fa<br>
@@ -42,6 +44,9 @@
 						000000000000000000000000caf644ab582c42a56759764a15226ed2a1fa<br>
 					</p>
 					<p style="font-style:italic;color:gray;margin:0px">Function Calls, State Modification</p>
+
+
+
 				</div>
 				<div class="card-footer">
                     <a style="color:grey" href="content/{{item.id}}" ui-sref="content({id:item.id})">

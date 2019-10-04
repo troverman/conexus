@@ -19,14 +19,20 @@
 
             <form role="form" ng-submit="createProject()">
 
-                <!--SELF ASSOCIATION-->
                 <h5>Title</h5>
                 <input type="text" placeholder= "Title" ng-model="newProject.title" class="form-control">
 
+                <!--
+                <h5>Connections</h5>
+                <tags-input min-length="1" placeholder="Connections" ng-model="newProject.associatedConnections">
+                    <auto-complete source="loadAssociations($query)"></auto-complete>
+                </tags-input>
+                -->
+
                 <div>
-                    <h5>
+                    <h5 ng-click="expandAssociations()">
                         Context 
-                        <a ng-click="expandAssociations()" style="float:right">
+                        <a style="float:right">
                             <span ng-if="!associationsAreExpanded"><i class="fas fa-bezier-curve"></i> Expand</span>
                             <span ng-if="associationsAreExpanded"><i class="fas fa-grip-lines"></i> Hide</span>
                         </a>
@@ -46,9 +52,9 @@
                         <div class="col-md-12 col-sm-12" ng-repeat="association in newProject.associatedModels">
 
 
-                            <h5>
+                            <h5 ng-click="association.isExpanded=!association.isExpanded">
                                 {{association.text}} 
-                                <a ng-if="association.connection[0].text" style="float:right" ng-click="association.isExpanded=!association.isExpanded">
+                                <a ng-if="association.connection[0].text" style="float:right">
                                     <i class="fas fa-compress-arrows-alt"></i>
                                     <b>{{association.connection[0].text}}</b>
                                 </a>
@@ -98,6 +104,7 @@
                 <h5>Location</h5>
                 <input type="text" placeholder="Location" ng-model="newProject.location" class="form-control">
 
+                <!--
                 <div class="">
                     <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options">
                         <ui-gmap-marker ng-repeat="marker in markers" coords="marker.coords" options="marker.options" idkey="marker.id">
@@ -107,6 +114,7 @@
                         </ui-gmap-marker>
                     </ui-gmap-google-map>
                 </div>
+                -->
 
                 <!--SELF(PROJECT=PROJECT CONNECTION {define data model here by apps}) ASSOCIATION-->
                 <h5>Description</h5>

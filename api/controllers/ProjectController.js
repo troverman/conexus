@@ -3,6 +3,30 @@ const crypto = require('crypto');
 const mongodb = require('mongodb');
 const Q = require('q');
 
+//PUT IN UTIL SERVICE
+//EXTERNAL
+function googleGeoCodeService(model){
+	var deferred = Q.defer();
+	//TODO: SECURITY! HIDE THIS.. SECRET INFORMATION.. NEED ENCRYPTION.
+	var googleMapsClient = require('@google/maps').createClient({
+		key: 'AIzaSyDcTGxD4H3lnx84u8EPcbh7PodbsEyzbg4'
+	});
+	googleMapsClient.geocode({address: model.location}, function(err, response) {
+		location = null;
+		if (!err) {
+			location = {
+				address:response.json.results[0].formatted_address,
+				lat:parseFloat(response.json.results[0].geometry.location.lat),
+				lng:parseFloat(response.json.results[0].geometry.location.lng),
+				coordinates: [parseFloat(response.json.results[0].geometry.location.lng), parseFloat(response.json.results[0].geometry.location.lat)],
+			};
+			deferred.resolve(location);
+		}
+		else{deferred.resolve(location);}
+	});
+	return deferred.promise;
+};
+
 module.exports = {
 
 	get: function(req, res) {
@@ -174,103 +198,98 @@ module.exports = {
 				});
 			});
 		}
-
-	},
-
-	//KINDA HACKY
-	getByUrl: function(req, res) {
-		Project.find()
-		.where({
-		  or: [
-		    {urlTitle: req.param('path')},
-		    {id: req.param('path')}
-		]})
-		.then(function(model) {
-			//for x in // multiple parents
-			Project.find({id:model[0].parent}).then(function(parentModel){
-				model[0].parent = parentModel[0];
-				Project.subscribe(req, [model[0].id]);
-				res.json(model[0]);
-			});
-		});
-	},
-
-	getChildren: function(req, res) {
-		Project.find({parent: req.param('id').toString()})
-		.then(function(model) {
-			res.json(model);
-		})
 	},
 
 	create: function (req, res) {
-
-		function googleGeoCodeService(model){
-			var deferred = Q.defer();
-			//TODO: SECURITY! HIDE THIS.. SECRET INFORMATION.. NEED ENCRYPTION.
-			var googleMapsClient = require('@google/maps').createClient({
-				key: 'AIzaSyDcTGxD4H3lnx84u8EPcbh7PodbsEyzbg4'
-			});
-			googleMapsClient.geocode({address: model.location}, function(err, response) {
-				location = null;
-				if (!err) {
-					location = {
-						address:response.json.results[0].formatted_address,
-						lat:parseFloat(response.json.results[0].geometry.location.lat),
-						lng:parseFloat(response.json.results[0].geometry.location.lng),
-						coordinates: [parseFloat(response.json.results[0].geometry.location.lng), parseFloat(response.json.results[0].geometry.location.lat)],
-					};
-					deferred.resolve(location);
-				}
-				else{deferred.resolve(location);}
-			});
-			return deferred.promise;
-		};
-
-		function createEvent(model){
+	
+		function createEvent(model, verb){
 			var eventModel = {
-				type:'create',
 				model:{id:model.id,type:model.model},
-				data:{},
+				verb: verb,
 			};
-			Event.create(eventModel);
+			Event.create(eventModel).then(function(model){
+				console.log('CREATE EVENT', model);
+				Event.publish([model.id], {verb: 'create', data: model});
+			});
 		};
 
 		function createNotification(model){};
 
+		//LET'S GO
+		//TODO: PARAMETERS
+			//SUPER SET OF CONTEXT
 		function createValidation(model){
+
 			for (x in model.associatedModels){
+
 				var newValidation = {
 					content:model.id + ' VALIDATION',
 					user: model.user.id,
 					creator: model.user.id,
-					data:{apps:{reactions: {plus:0,minus:0},attention:{general:0}}}
-
+					parameters:{},
+					context:{},
+					data:{apps:{reactions: {plus:0,minus:0},attention:{general:0}}},
 				};
+
+				//NO HARDCODE!
 				newValidation.connection = {
-					id:1,
-					type:'HUMAN',
-					title:'STANDARD MULTI, AGNOSTIC MODELS',
+					id:null,
+					title:'DEFAULT',
 					parameters:{
-						mapping:['context','reputation','computed'],
+						mapping:[
+							'context',
+							'reputation',
+							'computed'
+						],
 						logic:'context[%context]*reputation[%context]'
 					},
 				};
+
 				//CONNECTION DEFINED MAPPINGS
 				for (y in newValidation.connection.parameters.mapping){
-					newValidation[newValidation.connection.parameters.mapping[y]] = {};
+					newValidation.parameters[newValidation.connection.parameters.mapping[y]] = {};
 				}
+
 				var associatedModelObj = {};
-				if (model.associatedModels[x].id.toLowerCase() == 'self'){associatedModelObj = {type:model.model, id:model.id}}
-				else{associatedModelObj = {type:model.associatedModels[x].type, id:model.associatedModels[x].id};}
-				newValidation.associatedModels = [
-					{type:model.model, id:model.id},
-					associatedModelObj
-				];
-				for (y in model.associatedModels[x].context){newValidation.context[model.associatedModels[x].context[y].text] = model.associatedModels[x].context[y].score;}
-				Validation.create(newValidation).then(function(newValidationModel){
-					console.log('CREATE VALIDATION', newValidationModel);
-					createAssociation(newValidationModel);
-				});
+
+				//NO HARDCODE
+				if (model.associatedModels[x].id){
+
+					//Connection.find({model.associatedModels[x].connection}).then(function(connectionModels){});
+
+					if (model.associatedModels[x].id.toLowerCase() == 'self'){
+						associatedModelObj = {type:model.model, id:model.id}
+					}
+
+					else{
+						associatedModelObj = {type:model.associatedModels[x].type, id:model.associatedModels[x].id};
+					}
+
+					newValidation.associatedModels = [
+						{type:model.model, id:model.id},
+						associatedModelObj
+					];
+
+					for (y in model.associatedModels[x].context){
+						newValidation.context[model.associatedModels[x].context[y].text] = model.associatedModels[x].context[y].score;
+					}
+
+					Validation.create(newValidation).then(function(newValidationModel){
+						console.log('CREATE VALIDATION', newValidationModel);
+						createAssociation(newValidationModel);
+					});
+
+				}
+
+				else{
+
+					Connection.find().then(function(connectionModels){
+						console.log('NO ID!!!!');
+						//console.log(connectionModels);
+					});
+
+				}
+
 			}
 		};
 
@@ -319,7 +338,14 @@ module.exports = {
 		//FACTOR TO RETURN ENTIER TOKEN MODEL
 		function getProtocolTokens(model){
 			//give all (init) project tokens to creator-->1?
-			var protocolTokens = ['CRE8', 'CRE8+PROJECT', model.title.toUpperCase()];
+
+			//MANIFOLD.. SEPERATE FROM (EVENT) ACTION
+			var protocolTokens = [
+				'CRE8', 
+				'CRE8+PROJECT', 
+				'CRE8+PROJECT+'+model.id,
+				model.title.toUpperCase()
+			];
 			return protocolTokens;
 		};
 
@@ -344,6 +370,7 @@ module.exports = {
 
 		console.log('CREATE PROJECT', model);
 
+		//TODO: READ
 		//CREATEING SELF DEFINED VALIDATIONS OF SOME TYPE CREATES THE MDOEL
 			//INSIDE OUT HERE
 			//ONLY 'CREATE' IS VALIDATE?
@@ -359,8 +386,6 @@ module.exports = {
 					project.associatedModels = req.param('associatedModels');
 					project.user = userModels[0];
 
-					console.log(project);
-
 					googleGeoCodeService(project).then(function(location){
 				
 						project.location = location;
@@ -368,41 +393,36 @@ module.exports = {
 						Project.update({id:project._id.toString()}, {location:location}).then(function(projectModel){
 							
 							console.log('UPDATE PROJECT LOCATION -- GEO CODE');
-							console.log(projectModel);
 
 							Project.subscribe(req, [project.id]);
 							Project.publish([projectModel[0].id], {verb: 'create', data: projectModel[0]});
 
-							createEvent(project);
+							createEvent(project, 'create');
 							createNotification(project);
 							createValidation(project);
 
+							//TODO: DEFINE CONNECTION PERMISSIONS
 							//createCharter()
-							//initCharter.. 
-
 								//Project-Connection
 								//(Project-Association)
-
 								//Project-Member - Creator 
 								//Project-Member - Member
-
 								//Project-Order
 								//Project-Validation
-
 								//Project-Task
 								//Project-Task-Time
 								//Project-Transaction
-
 								//Project-Item
 								//Project-Content
-
-							//createProjectMember
 
 							//INVERT THIS..
 								//DEFINE THE CREATION OF PROJECT BY VALDIDATION
 									//NOT CREATE -- GET WHAT WE CREATE THEN VALIDATE ?
 
-							//TODO: DEFINE CONNECTION PERMISSIONS.. CREATOR PERMS ETC 
+							//TODO: - CREATOR ASSOCIATIONS TO ALL ???? !!!!! (HMM)
+							
+							//createProjectMember
+							//HARDCODE PROJECT CREATOR
 							var newValidation = {
 				                creator:project.user.id,
 				                user:project.user.id,
@@ -427,7 +447,7 @@ module.exports = {
 							});
 			
 							mintTokens(project);
-							res.json(model);
+							res.json(project);
 
 						});
 					});

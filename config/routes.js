@@ -102,7 +102,7 @@ module.exports.routes = {
 
   /* Block routes */
   'get /api/block': 'BlockController.get',
-  //'post /api/block': 'BlockController.create',
+  'post /api/block': 'BlockController.create',
 
   /* Connection routes */
   'get /api/connection': 'ConnectionController.get',
@@ -112,7 +112,6 @@ module.exports.routes = {
   'get /api/content': 'ContentController.get',
   'post /api/content': 'ContentController.create',
   'post /api/content/:id': 'ContentController.update',
-  'delete /api/content/:id': 'ContentController.destroy',
 
   /* Event routes */
   'get /api/event': 'EventController.get',
@@ -120,7 +119,6 @@ module.exports.routes = {
   /* Item routes */
   'get /api/item': 'ItemController.get',
   'post /api/item': 'ItemController.create',
-  'delete /api/item/:id': 'ItemController.destroy',
 
   /* Location routes */
   'get /api/location': 'LocationController.get',
@@ -133,12 +131,10 @@ module.exports.routes = {
   /* Order routes */
   'get /api/order': 'OrderController.get',
   'post /api/order': 'OrderController.create',
-  'delete /api/post/:id': 'OrderController.destroy',
 
   /* Reaction routes */
   'get /api/reaction': 'ReactionController.get',
   'post /api/reaction': 'ReactionController.create',
-  'delete /api/reaction/:id': 'ReactionController.destroy',
 
   /* Peer routes */
   'get /api/peer': 'PeerController.get',
@@ -146,11 +142,7 @@ module.exports.routes = {
 
   /* Project routes */
   'get /api/project': 'ProjectController.get',
-  //HMM
-  'get /api/project/children/:id': 'ProjectController.getChildren',
-
   'post /api/project': 'ProjectController.create',
-  'delete /api/project/:id': 'ProjectController.destroy',
 
   /* Search routes */
   'get /api/search': 'SearchController.search',

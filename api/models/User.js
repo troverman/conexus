@@ -2,6 +2,7 @@
 //TODO: TO MEMBER
 module.exports = {
     attributes: {
+        model: {type: 'string', defaultsTo: 'MEMBER'},
 
         avatarUrl: {type: 'string', defaultsTo: 'images/avatar.png'},
         coverUrl: {type: 'string'},

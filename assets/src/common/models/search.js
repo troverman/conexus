@@ -27,12 +27,7 @@ angular.module('models.search', ['services', 'sails.io',])
         return $sailsSocket.get(url, query).then(success, error);
     };
 
-    var success = function(response) {
-        return response.data;
-    };
-
-    var error = function(error) {
-        console.log(error);
-    };
+    var success = function(response) {return response.data;};
+    var error = function(error) {console.log(error);};
     
 }]);

@@ -29,11 +29,7 @@
 	            </div>
 	        </div>
 	        <hr style="margin:0px;">
-
-			<div style="padding:16px">
-				<div ng-if="selectedTab =='INFORMATION'" ng-include="'association/templates/information.tpl.html'"></div>
-			</div>
-			
+			<div style="padding:16px"><div ng-if="selectedTab =='INFORMATION'" ng-include="'association/templates/information.tpl.html'"></div></div>
 			<div class="card-footer">
         		<a ng-click="$event.stopPropagation();renderAttentionToggle(association)"  style="color:grey"><i class="fas fa-eye"></i> {{association.data.apps.attention.general || 0}}</a>
 				<a ng-click="$event.stopPropagation();createReaction(association, 'plus')"><i class="fa fa-angle-up"></i> {{association.data.apps.reactions.plus || 0}} like </a> 
@@ -41,7 +37,6 @@
 		       	<a ng-click="$event.stopPropagation();contentToggle(association)" style="padding:5px;color:grey"><i class="fa fa-comment-o"></i> comment </a>
 			    <a ng-click="$event.stopPropagation();validationToggle(association)"><i class="fas fa-check"></i> validate </a>
 		    </div>
-	
 		</div>
 		<div ng-if="selectedTab =='CONTENT'" ng-include="'association/templates/content.tpl.html'"></div>
         <div ng-if="selectedTab =='TOKENS'" ng-include="'association/templates/tokens.tpl.html'"></div>

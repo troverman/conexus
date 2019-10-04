@@ -116,6 +116,21 @@ module.exports = {
 			//protocolTokens.push('CRE8+REACTION+CREATE+'+Object.keys(model.amountSet)[x]);
 			//protocolTokens.push('CRE8+REACTION+SEND+'+Object.keys(model.amountSet)[x]+'+TO+'+model.to.id);
 
+			//HASH :P
+			var hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
+			var prefix = 'CRE8+REACTION';
+			var string = prefix+'+'+hash;
+			protocolTokens.push(string);
+
+			//store real data in token model? 
+			for (x in Object.keys(model)){
+				var data = model[Object.keys(model)[x]];
+				var hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(data)).digest('hex');
+				var prefix = 'CRE8+REACTION';
+				var string = prefix+'+'+hash;
+				protocolTokens.push(string);
+			};
+
 			return protocolTokens;
 
 		};

@@ -105,12 +105,20 @@ module.exports = {
 
 		function createEvent(model){
 			var eventModel = {
-				type:'create',
-				model:{
-					id:model.id,
-					type:model.model
+				verb:'create',
+				model:model,
+				//hash:{model:id},
+				//{
+					///id:model.id,
+					//type:model.model
+				//},
+				creator:model.user,
+				data:{
+					attention:{},
+					reactions:{},
+					validation:{},//hmm validation vs attention from pow view
+					model:model
 				},
-				data:{},
 			};
 			Event.create(eventModel);
 		};

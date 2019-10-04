@@ -1,5 +1,4 @@
-angular.module( 'conexus.content', [
-])
+angular.module( 'conexus.content', [])
 
 .config(['$stateProvider', function config( $stateProvider ) {
     $stateProvider.state( 'content', {
@@ -24,6 +23,7 @@ angular.module( 'conexus.content', [
 .controller( 'ContentController', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$scope', 'AssociationModel', 'content', 'contentList', 'ContentModel', 'titleService', function ContentController( $location, $mdSidenav, $rootScope, $sailsSocket, $scope, AssociationModel, content, contentList, ContentModel, titleService ) {
     
     $scope.content = content;
+
     $scope.content.children = contentList;
 
     if(!$scope.content){$location.path('/')}

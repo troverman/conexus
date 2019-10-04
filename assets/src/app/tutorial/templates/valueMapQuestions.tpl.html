@@ -45,54 +45,21 @@
         <div style="padding:16px;">
             
             <!--TODO: DYNAMIC-->
-            <p style="font-style:italic;color:gray;margin:0px;font-size:12px">Thinking about an archetypal human value profile. Tell us what you believe makes a human thirve.</p>
+            <h5>{{selectedPack.title}}</h5>
+            <p style="font-style:italic;color:gray;margin:0px;font-size:12px">{{selectedPack.description}}</p>
 
-            <!--TODO: NG-REPEAT-->
-            <h5>Do you believe in yourself?</h5>
-            <div layout="">
-                <div flex="10" layout="" layout-align="center center">
-                    <p><b>No</b></p>
+            <div ng-repeat="item in questions">
+                <h5>{{item.question}}</h5>
+                <!--TODO: QUESTION TYPES-->
+                <!--TYPE 1 DIMENSION SLIDER-->
+                <div layout="">
+                    <div flex="10" layout="" layout-align="center center"><p><b>{{item.answer[0]}}</b></p></div>
+                    <md-slider step="0.1" flex="" md-discrete="" ng-model="item.response" step="1" min="-100" max="100" aria-label="{{item.question}}"></md-slider>
+                    <div flex="10" layout="" layout-align="center center"><p><b>{{item.answer[1]}}</b></p></div>
                 </div>
-                <md-slider step="0.1" flex="" md-discrete="" ng-model="SELF" step="1" min="-100" max="100" aria-label="{{key}}"></md-slider>
-                <div flex="10" layout="" layout-align="center center"><p><b>Yes</b></p></div>
+                <div style="text-align:center"><p>{{item.assetString}}</p></div><!--HMM-->
+                <hr>
             </div>
-            <div style="text-align:center"><p>{{currentUser.username}}+BELIEF</p></div>
-            <h5>Do you believe in your ability to create?</h5>
-            <div layout="">
-                <div flex="10" layout="" layout-align="center center"><p><b>No</b></p></div>
-                <md-slider step="0.1" flex="" md-discrete="" ng-model="BELIEVE" step="1" min="-100" max="100" aria-label="{{key}}"></md-slider>
-                <div flex="10" layout="" layout-align="center center"><p><b>Yes</b></p></div>
-            </div>
-            <div style="text-align:center"><p>{{currentUser.username}}+CREATE</p></div>
-
-            <h5>Do you believe your time is valuable?</h5>
-            <div layout="">
-                <div flex="10" layout="" layout-align="center center"><p><b>No</b></p></div>
-                <md-slider step="0.1" flex="" md-discrete="" ng-model="CRE8TIMEMEMBER" step="1" min="-100" max="100" aria-label="{{key}}"></md-slider>
-                <div flex="10" layout="" layout-align="center center"><p><b>Yes</b></p></div>
-            </div>
-            <div style="text-align:center"><p>{{currentUser.username}}+TIME</p></div>
-            <hr>
-
-            <h5>Do you believe everyones time is valuable?</h5>
-            <div layout="">
-                <div flex="10" layout="" layout-align="center center"><p><b>No</b></p></div>
-                <md-slider step="0.1" flex="" md-discrete="" ng-model="CRE8TIME" step="1" min="-100" max="100" aria-label="{{key}}"></md-slider>
-                <div flex="10" layout="" layout-align="center center"><p><b>Yes</b></p></div>
-            </div>
-            <div style="text-align:center"><p>CRE8+TIME</p></div>
-
-            <h5>Do you believe our time is valuable?</h5>
-            <div layout="">
-                <div flex="10" layout="" layout-align="center center"><p><b>No</b></p></div>
-                <md-slider step="0.1" flex="" md-discrete="" ng-model="CRE8PROJECT" step="1" min="-100" max="100" aria-label="{{key}}"></md-slider>
-                <div flex="10" layout="" layout-align="center center"><p><b>Yes</b></p></div>
-            </div>
-            <div style="text-align:center"><p>CRE8+TIME+PROJECT+CRE8</p></div>
-
-            <!--DO YOU BELIEVE IN HONOR-->
-
-
         </div>
     </div>
 

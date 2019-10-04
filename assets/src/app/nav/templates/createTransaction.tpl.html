@@ -47,9 +47,9 @@
                     <div style="clear:both"></div>
                 </div>
 
-                <h5>
+                <h5 ng-click="expandAssociations()">
                     Context 
-                    <a ng-if="newTransaction.context.length > 0" ng-click="expandAssociations()" style="float:right">
+                    <a ng-if="newTransaction.context.length > 0" style="float:right">
                         <span ng-if="!associationsAreExpanded"><i class="fas fa-bezier-curve"></i> Expand</span>
                         <span ng-if="associationsAreExpanded"><i class="fas fa-grip-lines"></i> Hide</span>
                     </a>

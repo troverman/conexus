@@ -20,12 +20,7 @@ angular.module('models.peer', ['services', 'sails.io',])
         return $sailsSocket.post(url, newModel).then(success, error);
     };
 
-    var success = function(response) {
-        return response.data;
-    };
-
-    var error = function(error) {
-        console.log(error);
-    };
+    var success = function(response) {return response.data;};
+    var error = function(error) {console.log(error);};
     
 }]);

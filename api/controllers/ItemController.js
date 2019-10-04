@@ -3,6 +3,11 @@ const crypto = require('crypto');
 const mongodb = require('mongodb');
 const Q = require('q');
 
+//DEPRECIATE MODEL AND TYPE 
+//APPREACIATE APP ID //APPRECIATE SELF CONNECTION ATTRIBUTES :o
+	//DEPRECIATE 'CLASSIC' MONGO
+		//REDUCE
+
 module.exports = {
 
 	get: function(req, res) {
@@ -146,22 +151,21 @@ module.exports = {
 
 	create: function (req, res) {
 
-		const crypto = require('crypto');
-
-		function createEvent(model){
+		function createEvent(model, verb){
 			var eventModel = {
-				type:'create',
-				model:{
-					id:model.id,
-					type:model.model
-				},
+				model:{id:model.id,type:model.model},
+				verb: verb,
 			};
-			Event.create(eventModel);
+			Event.create(eventModel).then(function(model){
+				console.log('CREATE EVENT', model);
+				Event.publish([model.id], {verb: 'create', data: model});
+			});
 		};
 
 		function createValidation(model){
 			for (x in model.associatedModels){
 				var newValidation = {
+					model:'VALIDATION',
 					content:model.id + ' VALIDATION',
 					user: model.user.id,
 					creator: model.user.id,
@@ -191,6 +195,8 @@ module.exports = {
 				newValidation.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(newValidation)).digest('hex');
 				Validation.create(newValidation).then(function(newValidationModel){
 					console.log('CREATE VALIDATION', newValidationModel);
+					createEvent(newValidationModel, 'create');
+					newValidationModel.model = 'ASSOCIATION';
 					createAssociation(newValidationModel);
 				});
 			}
@@ -223,11 +229,10 @@ module.exports = {
 						Association.create(newAssociationModel).then(function(association){
 							console.log('CREATE ASSOCIATION', association);
 							Association.publish([association.id], {verb: 'create', data: association});
+							createEvent(association, 'create');
 						});
 					}
-					else{
-						console.log('ASSOCIATION EXISTS -- COMPUTE')
-					}
+					else{createEvent(association, 'update');}
 				});
 			});
 		};
@@ -239,8 +244,20 @@ module.exports = {
 			var protocolTokens = getProtocolTokens(model);
 		};
 
+		//CHANGE TO VERBS?
+		//GET FROM CONNECTION? --> IT"S IN DATA MODEL
 		function getProtocolTokens(model){
-			var protocolTokens = ['CRE8', 'CRE8+ITEM'];
+			var protocolTokens = [
+				'CRE8', 
+				'CRE8+ITEM',
+				'CRE8+ITEM+'+model.id,
+			];
+			
+			//FOR X IN 
+			var hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
+			var prefix = 'CRE8+ITEM';
+			var string = prefix+'+'+hash;
+			protocolTokens.push(string);
 			return protocolTokens;
 		};
 
@@ -286,10 +303,10 @@ module.exports = {
 					itemModel.user = userModels[0];
 					Item.subscribe(req, [itemModel]);
 					Item.publish([itemModel.id], {verb: 'create', data: itemModel});
-					//createEvent(itemModel);
+					createEvent(itemModel, 'create');
 					createNotification(itemModel);
 					createValidation(itemModel);
-					//mintTokens(itemModel);
+					mintTokens(itemModel);
 					res.json(itemModel);
 				});
 			}

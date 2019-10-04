@@ -586,63 +586,161 @@ angular.module( 'conexus.nav', [
         if($rootScope.currentUser){
 
             $scope.newProject = {
-                associatedModels:[{
-                    type:'PROJECT',
-                    text:'Project Self',
-                    id:'self',
-                    context:[
-                        {text:'self', score:100}
-                    ],
-                    connection:[{text:'Self Connection'}]
-                },
-                //NOT ACTUALL CREATING THE CONNECTION HERE.
-                //THESE ARE ASSOCIATIONS
-                {
-                    text:'Project Connection',
-                    description:'Meta Project Connection Rules',
-                    parameters:{
-                        data:{},
+                associatedModels:[
+                    {
+                        type:'CONNECTION',
+                        text:'Project Connection Meta',
+                        description:'Meta Project Connection Rules',
+                        parameters:{data:{}},
+                        logic:{},
+                        acceptance:{},
+                        connection:null,
                     },
-                    logic:{},
-                    acceptance:{},
-                    id:null,
-                    connection:null,
-                },
-                {
-                    text:'Project Member',
-                    description:'What defineds Membership in a project',
-                    connection:[{text:'Project Connection'}]
-                },
-                {
-                    text:'Project Order',
-                    description:'Meta Project Connection Rules',
-                    connection:[{text:'Project Connection'}]
-                },
-                {
-                    text:'Project Task',
-                    description:'Meta Project Connection Rules',
-                    connection:[{text:'Project Connection'}]
-                },
-                {
-                    text:'Project Time',
-                    description:'Meta Project Connection Rules',
-                    connection:[{text:'Project Connection'}]
-                },
-                {
-                    text:'Project Task Time',
-                    description:'Meta Project Connection Rules',
-                    connection:[{text:'Project Connection'}]
-                },
-                {
-                    text:'Project Transaction',
-                    description:'Meta Project Connection Rules',
-                    connection:[{text:'Project Connection'}]
-                },
-                {
-                    text:'Project Validation',
-                    description:'Meta Project Connection Rules',
-                    connection:[{text:'Project Connection'}]
-                }],
+                    //2nd degree defines the attributes. now we are validation and changing? 
+                    //allow for custom
+                    {
+                        type:'CONNECTION',
+                        text:'Project Self Connection',
+                        description:'What defines project attributes and validation',
+                        connection:[{text:'Project Connection'}]
+                    },
+                    {
+                        type:'CONNECTION',
+                        text:'Project Member Connection',
+                        description:'What defines General membership rules in a project',
+                        connection:[{text:'Project Connection'}]
+                    },
+                    {
+                        type:'CONNECTION',
+                        text:'Project Creator Connection',
+                        description:'What defines Creator Membership rules in a project',
+                        connection:[{text:'Project Connection'}]
+                    },
+                    {
+                        type:'CONNECTION',
+                        text:'Project Order Connection',
+                        description:'Meta Project Connection Rules',
+                        connection:[{text:'Project Connection'}]
+                    },
+                    {
+                        type:'CONNECTION',
+                        text:'Project Task Connection',
+                        description:'Meta Project Connection Rules',
+                        connection:[{text:'Project Connection'}]
+                    },
+                    {
+                        type:'CONNECTION',
+                        text:'Project Time Connection',
+                        description:'Meta Project Connection Rules',
+                        connection:[{text:'Project Connection'}]
+                    },
+                    {
+                        type:'CONNECTION',
+                        text:'Project Task Time Connection',
+                        description:'Meta Project Connection Rules',
+                        connection:[{text:'Project Connection'}]
+                    },
+                    {
+                        type:'CONNECTION',
+                        text:'Project Transaction Connection',
+                        description:'Meta Project Connection Rules',
+                        connection:[{text:'Project Connection'}]
+                    },
+                    {
+                        type:'CONNECTION',
+                        text:'Project Validation Connection',
+                        description:'Meta Project Connection Rules',
+                        connection:[{text:'Project Connection'}]
+                    },
+
+
+                    {
+                        type:'PROJECT',
+                        text:'Project Self',
+                        id:'self',
+                        context:[
+                            {text:'self', score:100}
+                        ],
+                        connection:[{text:'Project Self Connection'}]
+                    },
+                    {
+                        type:'MEMBER',
+                        text:'Project Creator',
+                        description:'You are the Project Creator',
+                        connection:[{text:'Project Creator Connection'}],
+                    },
+                    {
+                        type:'MEMBER',
+                        text:'Project Member',
+                        description:'You are a Project Member',
+                        connection:[{text:'Project Member Connection'}]
+                    }
+                ],
+                associatedConnections:[
+                    {
+                        type:'CONNECTION',
+                        text:'Project Connection Meta',
+                        description:'Meta Project Connection Rules',
+                        parameters:{data:{}},
+                        logic:{},
+                        acceptance:{},
+                        connection:null,
+                    },
+                    {
+                        type:'CONNECTION',
+                        text:'Project Self Connection',
+                        description:'What defines project attributes and validation',
+                        connection:[{text:'Project Connection'}]
+                    },
+                    {
+                        type:'CONNECTION',
+                        text:'Project Member Connection',
+                        description:'What defines General membership rules in a project',
+                        connection:[{text:'Project Connection'}]
+                    },
+                    {
+                        type:'CONNECTION',
+                        text:'Project Creator Connection',
+                        description:'What defines Creator Membership rules in a project',
+                        connection:[{text:'Project Connection'}]
+                    },
+                    {
+                        type:'CONNECTION',
+                        text:'Project Order Connection',
+                        description:'Meta Project Connection Rules',
+                        connection:[{text:'Project Connection'}]
+                    },
+                    {
+                        type:'CONNECTION',
+                        text:'Project Task Connection',
+                        description:'Meta Project Connection Rules',
+                        connection:[{text:'Project Connection'}]
+                    },
+                    {
+                        type:'CONNECTION',
+                        text:'Project Time Connection',
+                        description:'Meta Project Connection Rules',
+                        connection:[{text:'Project Connection'}]
+                    },
+                    {
+                        type:'CONNECTION',
+                        text:'Project Task Time Connection',
+                        description:'Meta Project Connection Rules',
+                        connection:[{text:'Project Connection'}]
+                    },
+                    {
+                        type:'CONNECTION',
+                        text:'Project Transaction Connection',
+                        description:'Meta Project Connection Rules',
+                        connection:[{text:'Project Connection'}]
+                    },
+                    {
+                        type:'CONNECTION',
+                        text:'Project Validation Connection',
+                        description:'Meta Project Connection Rules',
+                        connection:[{text:'Project Connection'}]
+                    }
+                ],
                 user:$rootScope.currentUser.id,
             };
             
@@ -1499,6 +1597,21 @@ angular.module( 'conexus.nav', [
                     ],
                     connection:[{text:$scope.item.model+' Connection'}]
                 });
+            }
+
+            if(item.associatedModels){
+                $scope.newValidation.associatedModels = [];
+                for (x in item.associatedModels){
+                    $scope.newValidation.associatedModels.push({
+                        text:item.associatedModels[x].id,
+                        id:item.associatedModels[x].id,
+                        type:$scope.item.model,
+                        context: [
+                            {text:'self', score:100}
+                        ],
+                        connection:[{text:$scope.item.model+' Connection'}]
+                    });
+                }
             }
     
             $scope.$watch('newValidation.context', function(newValue, oldValue){

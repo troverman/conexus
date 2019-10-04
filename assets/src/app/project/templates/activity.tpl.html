@@ -12,6 +12,10 @@
         <div class="card mobileFix"><tags-input class="" style="border:0px;flex-grow:2;" placeholder="Search" ng-model="searchQuery"></tags-input></div>
         <div class="card"><button class="btn btn-default log-btn" ng-click="cre8Toggle(project)">CRE8</button></div>
         <div ng-repeat="item in activity">
+
+            <!--<div ng-include="'templates/cards/contentCard.tpl.html'"></div>-->
+            <!--TODO:RESTRUCT EVENT-->
+
             <div ng-if="item.model=='CONTENT'" ng-click="cardDetailToggle(item)"><div ng-include="'templates/cards/contentCard.tpl.html'"></div></div>
             <div ng-if="item.model=='TASK'" ng-click="cardDetailToggle(item)"><div ng-include="'templates/cards/taskCard.tpl.html'"></div></div>
             <div ng-if="item.model=='TIME'" ng-click="cardDetailToggle(item)"><div ng-include="'templates/cards/timeCard.tpl.html'"></div></div>

@@ -62,6 +62,7 @@ angular.module( 'conexus.project', [
             }
         },
         resolve: {
+            //TODO-CONNECTION--BETTER PARAMS
             contentList: ['AssociationModel', 'project', function(AssociationModel, project){
                 var query = {
                     filter:JSON.stringify({type:'CONTENT', id:project.id}),
@@ -82,15 +83,14 @@ angular.module( 'conexus.project', [
             }
         },
         resolve: {
-            connections: ['ConnectionModel', 'project', function(ConnectionModel, project){
+            connections: ['AssociationModel', 'project', function(AssociationModel, project){
                 var query = {
                     filter:JSON.stringify({type:'CONNECTION', id:project.id}),
                     limit:100,
                     skip:0,
                     sort:'createdAt DESC'
                 };
-                //return AssociationModel.get(query);
-                return ConnectionModel.get({creator:project.id, limit:100, skip:0, sort:'createdAt DESC'});
+                return AssociationModel.get(query);
             }]
         }
     })
@@ -144,9 +144,6 @@ angular.module( 'conexus.project', [
             }
         },
         resolve: {
-            connections: ['ConnectionModel', 'project', function(ConnectionModel, project){
-                return ConnectionModel.get({creator:project.id, limit:100, skip:0, sort:'createdAt DESC'});
-            }],
             members: ['AssociationModel', 'project', function(AssociationModel, project) {
                 var query = {
                     filter:JSON.stringify({type:'MEMBER', id:project.id}),
@@ -174,8 +171,7 @@ angular.module( 'conexus.project', [
                     skip:0,
                     sort:'createdAt DESC'
                 };
-                //return AssociationModel.get(query);
-                return OrderModel.get({limit:20, skip:0, sort:'createdAt DESC'});
+                return AssociationModel.get(query);
             }],
         }
     })
@@ -188,16 +184,14 @@ angular.module( 'conexus.project', [
             }
         },
         resolve: {
-            projects: ['AssociationModel', 'project', 'ProjectModel', function(AssociationModel, project, ProjectModel){
+            projects: ['AssociationModel', 'project', function(AssociationModel, project){
                 var query = {
                     filter:JSON.stringify({type:'PROJECT', id:project.id}),
                     limit:100,
                     skip:0,
                     sort:'createdAt DESC'
                 };
-                //TODO-CONNECTION--BETTER PARAMS
-                //return AssociationModel.get(query);
-                return ProjectModel.getChildren(project);
+                return AssociationModel.get(query);
             }],
         }
     })
@@ -299,6 +293,7 @@ angular.module( 'conexus.project', [
                 creator:$rootScope.currentUser.id,
                 user:$rootScope.currentUser.id,
                 content:'Request for Membership',
+                //TODO: CONNECTION
                 associatedModels:[
                     {type:'MEMBER', id:$rootScope.currentUser.id},
                     {type:'PROJECT', id:project.id},
@@ -308,11 +303,12 @@ angular.module( 'conexus.project', [
                 },
                 connection:{},
                 information:{},
-                parameters:{},
+                parameters:{
+                    context:{general:100},
+                },
             };
             ValidationModel.create($scope.newValidation).then(function(model) {
                 console.log(model);
-                //connection type
             });
             $rootScope.pop('Join', $scope.project.title);
 
@@ -330,6 +326,7 @@ angular.module( 'conexus.project', [
    
     //TODO: DEPRECIATE
     titleService.setTitle(project.title + ' | Activity | CRE8.XYZ');
+    
     $scope.activity = [];
     $scope.project = project;
 
@@ -348,7 +345,11 @@ angular.module( 'conexus.project', [
     $scope.stateIsLoadingActivity = true;
     EventModel.get(query).then(function(eventModels){
         $scope.stateIsLoadingIntro = false;
-        //$scope.activity = eventModels;
+        $scope.activity = eventModels.map(function(obj){
+            obj.model = obj.model.data;
+            obj.model.verb = obj.verb;
+            return obj.model
+        });
         console.log( $scope.activity );
     });
 
@@ -837,10 +838,11 @@ angular.module( 'conexus.project', [
 
 }])
 
-.controller( 'ProjectMembersCtrl', ['$location', '$sailsSocket', '$rootScope', '$scope', 'AssociationModel', 'connections', 'members', 'project', 'titleService', function ProjectController( $location, $sailsSocket, $rootScope, $scope, AssociationModel, connections, members, project, titleService ) {
+.controller( 'ProjectMembersCtrl', ['$location', '$sailsSocket', '$rootScope', '$scope', 'AssociationModel', 'members', 'project', 'titleService', function ProjectController( $location, $sailsSocket, $rootScope, $scope, AssociationModel, members, project, titleService ) {
     titleService.setTitle(project.title + ' | Members | CRE8.XYZ');
 
-    $scope.connections = connections;
+    //TODO: GET PROJECT-MEMBER CONNECTIONS
+
     $scope.members = members.map(function(obj) {
         for (x in obj.associatedModels){
             if (obj.associatedModels[x].type == 'MEMBER'){

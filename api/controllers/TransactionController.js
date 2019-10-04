@@ -2,6 +2,17 @@
 const crypto = require('crypto');
 const Q = require('q');
 
+function createEvent(model, verb){
+	var eventModel = {
+		model:{id:model.id,type:model.model},
+		verb: verb,
+	};
+	Event.create(eventModel).then(function(model){
+		console.log('CREATE EVENT', model);
+		Event.publish([model.id], {verb: 'create', data: model});
+	});
+};
+
 function getTo(model){
 	var deferred = Q.defer();
 	User.find({id:model.to}).then(function(userModels){
@@ -50,10 +61,13 @@ function getAssociations(model){
 					if (associationModels[x].associatedModels[y].type=='VALIDATION'){promises.push(Validation.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
 				}
 				//DEFINED BY CONNECTION
-				for (y in Object.keys(model.associationModels[x].context)){
-					var context = Object.keys(model.associationModels[x].context)[y].toString();
-					if(!model.context[context.toString()]){model.context[context.toString()] = model.associationModels[x].context[context.toString()];}
-					else{model.context[context.toString()] = model.context[context.toString()] + model.associationModels[x].context[context.toString()];}
+				if (model.associationModels[x].context){
+					for (y in Object.keys(model.associationModels[x].context)){
+						var context = Object.keys(model.associationModels[x].context)[y].toString();
+						if (!model.context){model.context = {}}
+						if(!model.context[context.toString()]){model.context[context.toString()] = model.associationModels[x].context[context.toString()];}
+						else{model.context[context.toString()] = model.context[context.toString()] + model.associationModels[x].context[context.toString()];}
+					}
 				}
 			}
 			Q.all(promises).then((populatedModels)=>{
@@ -401,14 +415,6 @@ module.exports = {
 
 	create: function (req, res) {
 
-		function createEvent(model){
-			var eventModel = {
-				verb:'create',
-				model:{id:model.id,type:'CONTENT'}
-			};
-			Event.create(eventModel);
-		};
-
 		//IMPLICIT VALIDATIONS REPLACE 'user'? what about 'creator'
 		//DEPRECAITE TO.. FROM????? --> VALIDATION / ASSOCIATION IS MAIN DATA MODEL ...
 		//MEMBER->TRANSACTION
@@ -706,7 +712,7 @@ module.exports = {
 						transactionModel.to = populatedModels[0];
 						transactionModel.from = populatedModels[1];
 						Transaction.publish([transactionModel.id], {verb: 'update', data: transactionModel});
-						createEvent(transactionModel);
+						createEvent(transactionModel, 'create');
 						createNotification(transactionModel);
 						createValidation(transactionModel);
 						mintTokens(transactionModel);

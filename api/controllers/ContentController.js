@@ -2,6 +2,17 @@
 const Q = require('q');
 const crypto = require('crypto');
 
+function createEvent(model, verb){
+	var eventModel = {
+		model:{id:model.id,type:model.model},
+		verb: verb,
+	};
+	Event.create(eventModel).then(function(model){
+		console.log('CREATE EVENT', model);
+		Event.publish([model.id], {verb: 'create', data: model});
+	});
+};
+
 module.exports = {
 	
 	get: function(req, res) {
@@ -85,8 +96,17 @@ module.exports = {
 			.sort(sort)
 			.populate('user')
         	.then(function(models){
+
+        		//ATTENTION???
+        		//PRIMITIVE MACHINE ATTENTION
+        		//MACHINE REPPUTATION
+        			//APP-PROTOCOL-CONNECTION LOGIC WRT MACHINE REP && RATE LIMITS ETC
+        		//THIS IS MACHINENE ATTENTION VS 'ATTENTION TIMER' DUP
+        		//THERE IS AN ARTECTICTURE DESIGN PATTERN THAT DOES THIS
+        		createEvent(models[0], 'view');
 				Content.subscribe(req, [models[0].id]);
 				getAssociations(models[0]).then(function(models){res.json(models);});
+
 			});
 		}
 
@@ -180,15 +200,6 @@ module.exports = {
 
 	create: function (req, res) {
 
-		//APP - DATA () --> EVENT --> 
-		function createEvent(model){
-			var eventModel = {
-				verb:'create',
-				model:{id:model.id,type:'CONTENT'}
-			};
-			Event.create(eventModel);
-		};
-
 		function createNotification(model){
 			//<-- ASSOCIATIONS -->
 			//SEND NOTIFICATIONS TO FOLLOWERS
@@ -198,71 +209,58 @@ module.exports = {
 
 		//TODO: CONNECTION!
 		function createValidation(model){
-
 			//validation set
 			for (x in model.associatedModels){
-
 				var newValidation = {
 					content:model.id + ' VALIDATION',
 					context: {},
 					reputation: {},					
-
 					//UNIFY AND ALLOW FOR PROJECT TO CREATE
 					user: model.user.id,
 					creator: model.user.id,
-
 					data:{apps:{reactions: {plus:0,minus:0}, attention:{general:0}}}
 				};
-
 				//DEFAULT CONNECTION???? 
 				//SCOPE VARIABLES
 				//FOR COMMENTS (PARENT CHILD.. )
 				//CONTENT-CONTENT COMMENT (1st in order is parent)
 				//MODEL-CONTENT COMMENT
 				//Connection.find({}).then(function(connectionModel){
-
-					newValidation.connection = {
-						type:'HUMAN',
-						parameters:{charter:'STANDARD MULTIPLICATIVE'},
-					};
-
-					//newValidation.connection = connectionModel[0];
-
-					var associatedModelObj = {};
-					if (model.associatedModels[x].id.toLowerCase() == 'self'){associatedModelObj = {type:model.model, id:model.id}}
-					else{associatedModelObj = {
-						type:model.associatedModels[x].type,
-						id:model.associatedModels[x].id};
-					}
-
-					newValidation.associatedModels = [
-						{type:model.model, id:model.id},
-						associatedModelObj
-					];
-
-					//LIST -> OBJ
-					for (y in model.associatedModels[x].context){
-						newValidation.context[model.associatedModels[x].context[y].text] = model.associatedModels[x].context[y].score;
-					}
-					
-					newValidation.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(newValidation)).digest('hex');
-
-					Validation.create(newValidation).then(function(newValidationModel){
-						console.log('CREATE VALIDATION', newValidationModel);
-						createAssociation(newValidationModel)
-					});
-
+				//newValidation.connection = connectionModel[0];
+				newValidation.connection = {
+					parameters:{
+						context:{},
+					},
+				};
+				var associatedModelObj = {};
+				if (model.associatedModels[x].id.toLowerCase() == 'self'){associatedModelObj = {type:model.model, id:model.id}}
+				else{associatedModelObj = {
+					type:model.associatedModels[x].type,
+					id:model.associatedModels[x].id};
+				}
+				newValidation.associatedModels = [
+					{type:model.model, id:model.id},
+					associatedModelObj
+				];
+				//LIST -> OBJ
+				for (y in model.associatedModels[x].context){
+					newValidation.context[model.associatedModels[x].context[y].text] = model.associatedModels[x].context[y].score;
+				}
+				newValidation.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(newValidation)).digest('hex');
+				Validation.create(newValidation).then(function(newValidationModel){
+					console.log('CREATE VALIDATION', newValidationModel);
+					createEvent(newValidationModel, 'create');
+					createAssociation(newValidationModel)
+				});
 				//});
-
 			}
-
 		};
 
 		//TODO: CONNECTION && ++
 		function createAssociation(newValidationModel){
 			//COMPUTE ASSOCIATION HERE
-			var newAssociationModel = {}; 
 			//FIND ALL VALIDATIONS FOR SPECIFIC ASSOCIATED MODELS
+			var newAssociationModel = {}; 
 			Validation.getDatastore().manager.collection('validation')
 			.find({$and : [{"associatedModels.id": {$in :[newValidationModel.associatedModels[0].id]}}, {"associatedModels.id": {$in :[newValidationModel.associatedModels[1].id]}},]})
 			.limit(1000)
@@ -285,11 +283,10 @@ module.exports = {
 						Association.create(newAssociationModel).then(function(association){
 							console.log('CREATED ASSOCIATION', association);
 							Association.publish(association.id, {verb: 'create', data: association});
+							createEvent(association, 'create');
 						});
 					}
-					else{
-						console.log('ASSOCIATION EXISTS -- COMPUTE')
-					}
+					else{createEvent(association, 'update');}
 				});
 			});
 		};
@@ -299,8 +296,23 @@ module.exports = {
 		};
 
 		function getProtocolTokens(model){
-			var protocolTokens = ['CRE8', 'CRE8+CONTENT', model.id, 'CRE8+CONTENT+'+model.id ];
+			
+			var protocolTokens = [
+				'CRE8', 
+				'CRE8+CONTENT', 
+				'CRE8+CONTENT+'+model.id
+			];
+
+			//HASH :P
+			//AGGREGATE.
+			//DO FOR X IN 
+			var hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
+			var prefix = 'CRE8+CONTENT';
+			var string = prefix+'+'+hash;
+			protocolTokens.push(string);
+
 			return protocolTokens;
+
 		};
 
 		var model = {
@@ -311,8 +323,17 @@ module.exports = {
 			content: req.param('content'),
 
 			user: req.param('user'),
-			creator: req.param('user'),			
-			data:{apps:{reactions:{plus:0, minus:0},attention:{general:0}}}
+			creator: req.param('user'),	
+					
+			data:{
+				apps:{
+					reactions:{plus:0, minus:0},
+					attention:{general:0},
+					//tokens:{},
+						//manifold:{},
+					//balance:{},
+				}
+			}
 
 		};
 
@@ -334,7 +355,7 @@ module.exports = {
 					Content.subscribe(req, [model.id]);
 					Content.publish(model.id, {verb: 'create', data: model});
 					
-					createEvent(model);
+					createEvent(model, 'create');
 					createNotification(model);
 					createValidation(model);
 					mintTokens(model);

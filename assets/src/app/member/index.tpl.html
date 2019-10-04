@@ -26,7 +26,7 @@
 						</a>
 					</div>
 					<h2>{{member.firstName}} {{member.lastName}}</h2>
-					<h3><a ng-click="$event.stopPropagation();renderReputationToggle(member)">@{{member.username}}</a></h3>
+					<h3><a href="member/{{member.username}}" ui-sref="member.activity({path:member.username})">@{{member.username}}</a></h3>
 					<p style="font-size:8px;" ng-click="$event.stopPropagation();memberQRToggle(member);"><a style="color:gray"><i class="fas fa-qrcode"></i> {{member.id}}</a></p>
         			<p style="color:gray;font-size:12px;">
         				<span ng-if="member.loggedIn">
@@ -52,6 +52,7 @@
                     <div style="clear:both"></div>
                 </ul>
             </div>
+            <md-progress-linear style="height:2px" ng-if="stateIsLoadingActivity" md-mode="indeterminate"></md-progress-linear>
 		</div>
 	</div>
 	<div class="container">
@@ -68,6 +69,7 @@
 		<div ui-view="memberProjects"></div>
 		<div ui-view="memberTasks"></div>
 		<div ui-view="memberTime"></div>
+		<div ui-view="memberValidations"></div>
 	</div>
 	<div class="spacing-25"></div>
 </div>

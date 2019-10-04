@@ -1,6 +1,10 @@
 //CRE8.LOCATION
 module.exports = {
     attributes: {
+        
+    	//DEPRECIATE
+        model: {type: 'string', defaultsTo: 'LOCATION'},
+        
         lat:{type: 'string'},
         lng:{type: 'string'},
         creator:{type: 'string'},

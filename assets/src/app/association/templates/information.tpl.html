@@ -1,29 +1,37 @@
 <div>
-    <h5>Connection</h5>
+    <!--<h4>Nodes</h4>-->
+    <!--<h4>Associated Models</h4>-->
+    <h4>Data</h4>
+    <div ng-repeat="item in association.associatedModels">
+        <p>
+            <b><a href="{{item.type.toLowerCase()}}/{{item.data.title || item.data.id}}">{{item.data.title || item.data.id}}</a></b>
+        </p>
+    </div>
+</div>
+
+<div class="spacing-5"></div>
+
+
+<div>
+    <h4>Connection</h4>
+    <!--<h4>Edge</h4>-->
     <b><a href="connection/self" ui-sref="connection({id:connection.id})">{{connection.title}}</a></b>
-    <p>{{connection.description}}</p>
+    <!--TEMPLATE..RENDER-->
+    <p style="font-style:italic;color:gray">{{connection.description}}</p>
     <div class="spacing-5"></div>
 
-    {{connection.associatedModels}}
-    <div class="spacing-5"></div>
-
-    <p><b>Connection Information</b></p>
-    <p>Attributes</p>
-    <p>{{connection.information}}</p>
+    <h5>Parameters</h5>
+    <div hljs hljs-language="javascript"  hljs-source="parameters"></div>
 
 </div>
 
 <div class="spacing-5"></div>
 
-<h5><b>Associated Models</b></h5>
-<div ng-repeat="item in association.associatedModels">
-    <p>
-        {{item.type}}
-        <b><a href="{{item.type.toLowerCase()}}/{{item.data.title || item.data.id}}">{{item.data.title || item.data.id}}</a></b>
-    </p>
+<div>
+    <h4>Association</h4>
 </div>
 
-<div class="spacing-5"></div>
+<div class="spacing-10"></div>
 
 <!--GENERATED SUMMARY-->
 <!--TREE OF VALIDATION-->

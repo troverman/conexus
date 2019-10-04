@@ -1,6 +1,10 @@
 //CRE8.PEER
 module.exports = {
     attributes: {
+        
+        //DEPRECIATE
+        model: {type: 'string', defaultsTo: 'PEER'},
+
 		info: {type: 'json'},
 		information: {type: 'json'},
 		reputation: {type: 'json'}, // MOSTSLY BLOCK IDNETIFERS.. AND IMMUTABLE TOTAL MACHIENE ATTENTION -- ? YES

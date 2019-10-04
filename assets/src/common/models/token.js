@@ -22,12 +22,8 @@ angular.module('models.token', ['services', 'sails.io',])
         return $sailsSocket.post(url, newModel).then(success, error);
     };
 
-    var success = function(response) {
-        return response.data;
-    };
+    var success = function(response) {return response.data;};
 
-    var error = function(error) {
-        console.log(error);
-    };
+    var error = function(error) {console.log(error);};
 
 }]);

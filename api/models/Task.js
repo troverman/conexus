@@ -1,6 +1,9 @@
 //CRE8.TASK
 module.exports = {
     attributes: {
+        //DEPRECIATE
+        model: {type: 'string', defaultsTo: 'TASK'},
+
         title: {type: 'string'},
         content: {type: 'string', allowNull: true},
         associatedModels: {type: 'json'},
@@ -8,11 +11,11 @@ module.exports = {
         location: {type: 'json'},
         user: {model: 'user'},
         creator: {type: 'string'},
+
         //COUNT.. DATA.. CONNECTED APPS..
         information: {type: 'json'},
-        //WHOS VIEWING.. ETC
-        //status: {type: 'string', defaultsTo: 'Pending'},
         data: {type: 'json'},
+        
     },
 };
 

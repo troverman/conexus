@@ -34,6 +34,7 @@ angular.module( 'conexus', [
     'conexus.contentList',
     'conexus.developers',
     'conexus.discover',
+    'conexus.event',
     'conexus.footer',
     'conexus.market',
     'conexus.markets',
@@ -60,10 +61,9 @@ angular.module( 'conexus', [
     'conexus.time',
     'conexus.transaction',
     'conexus.transparency',
-    'conexus.tx',
     'conexus.validation',
 ])
-.config(['$locationProvider', '$mdThemingProvider', '$stateProvider', '$urlRouterProvider', function myAppConfig ( $locationProvider, $mdThemingProvider, $stateProvider, $urlRouterProvider ) {
+.config(['$locationProvider', '$mdThemingProvider', '$stateProvider', '$urlRouterProvider', 'uiGmapGoogleMapApiProvider', function myAppConfig ( $locationProvider, $mdThemingProvider, $stateProvider, $urlRouterProvider, uiGmapGoogleMapApiProvider ) {
     $mdThemingProvider.disableTheming();
     $urlRouterProvider.rule(function($injector, $location) {
         var path = $location.path();
@@ -79,6 +79,13 @@ angular.module( 'conexus', [
         else {window.location = $location.$$absUrl;}
     });
     $locationProvider.html5Mode(true);
+
+    //SECURITY.. EXTERNALS.. (PAY FOR THIS RENDER OKAY WITH TOKENS )
+    uiGmapGoogleMapApiProvider.configure({
+        key: 'AIzaSyBmbow2vLk6EMs0RT6r8U-umNzlkCNLrVY',
+        v: '3.20',
+        libraries: 'weather,geometry,visualization'
+    });
 
 }])
 .run(function run(){moment.locale('en')})

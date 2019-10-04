@@ -18,4 +18,5 @@ angular.module('models.event', ['services', 'sails.io',])
     
     var success = function(response) {return response.data;};
     var error = function(error) {console.log(error);};
+    
 }]);

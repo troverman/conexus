@@ -29,12 +29,7 @@ angular.module('models.task', ['services', 'sails.io',])
         return $sailsSocket.delete(url).then(success, error);
     };
 
-    var success = function(response) {
-        return response.data;
-    };
-
-    var error = function(error) {
-        console.log(error);
-    };
+    var success = function(response) {return response.data;};
+    var error = function(error) {console.log(error);};
     
 }]);

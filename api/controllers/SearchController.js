@@ -1,6 +1,10 @@
 //CRE8.SEARCH
 const Q = require('q');
 
+//const core = require('CORE');
+//TODO:: DOCUMENT AND MAP
+//core.parseQuery....
+
 function getTo(model){
 	var deferred = Q.defer();
 	User.find({id:model.to}).then(function(userModels){
@@ -19,18 +23,215 @@ function getFrom(model){
 	return deferred.promise;
 };
 
+function getAssociations(model){
+	var deferred = Q.defer();
+	Association.getDatastore().manager.collection('association')
+	.find({$and : [{"associatedModels.id": {$in:[model.id]}}]}).limit(1000).skip(0).sort({'createdAt':-1})
+	.toArray(function (err, associationModels) {
+		if (associationModels.length > 0){
+			associationModels.map(function(obj){obj.id=obj._id; return obj});
+			model.associationModels = associationModels;
+			model.context = {};
+			var promises = [];
+			for (x in model.associationModels){
+				for (y in associationModels[x].associatedModels){
+					if (associationModels[x].associatedModels[y].type=='ACTION'){promises.push(Action.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+					if (associationModels[x].associatedModels[y].type=='APP'){promises.push(App.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+					if (associationModels[x].associatedModels[y].type=='ATTENTION'){promises.push(Attention.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+					if (associationModels[x].associatedModels[y].type=='CONTENT'){promises.push(Content.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+					if (associationModels[x].associatedModels[y].type=='ITEM'){promises.push(Item.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+					if (associationModels[x].associatedModels[y].type=='MEMBER'){promises.push(User.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+					if (associationModels[x].associatedModels[y].type=='PROJECT'){promises.push(Project.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+					if (associationModels[x].associatedModels[y].type=='TASK'){promises.push(Task.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+					if (associationModels[x].associatedModels[y].type=='TIME'){promises.push(Time.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+					if (associationModels[x].associatedModels[y].type=='TRANSACTION'){promises.push(Transaction.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+					if (associationModels[x].associatedModels[y].type=='VALIDATION'){promises.push(Validation.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+				}
+				//DEFINED BY CONNECTION
+				if (model.associationModels[x].context){
+					for (y in Object.keys(model.associationModels[x].context)){
+						var context = Object.keys(model.associationModels[x].context)[y].toString();
+						if(!model.context[context.toString()]){model.context[context.toString()] = model.associationModels[x].context[context.toString()];}
+						else{model.context[context.toString()] = model.context[context.toString()] + model.associationModels[x].context[context.toString()];}
+					}
+				}
+			}
+			Q.all(promises).then((populatedModels)=>{
+				var index = -1 
+				for (x in model.associationModels){
+					for (y in associationModels[x].associatedModels){
+						index++;
+						model.associationModels[x].associatedModels[y].data = populatedModels[index];
+					}
+				}
+				deferred.resolve(model);
+			});
+		}
+		else{deferred.resolve(model);}
+	});
+	return deferred.promise;
+};
+
+//RATING: SILVER
+var query = [{
+    "filter": [
+        {
+            "model": "Association, Task, Project",
+            "modelParam": "association, id, location, query, tag, ...",
+            "query": "query",
+            "association": {
+                "population": "boolean",
+                "depth": "integer"
+            },
+            "params": {
+                "limit": "integer",
+                "skip": "integer",
+                "sort": "modelParam sortParam"
+            },
+            "chain": "logic ['AND','OR']"
+        }
+    ],
+    "params": {
+        "limit": "integer",
+        "skip": "integer",
+        "sort": "modelParam sortParam"
+    },
+    "chain": "logic ['AND','OR']"
+}];
+
+function parseQuery(queryModel){
+	var mongoQuery = {
+		filter:{
+			$or:[],
+			$and:[]
+		},
+		params:{
+			limit:1,
+			skip:0,
+			sort:{'createdAt':-1}
+		}
+	};
+	var mongoQuery = {
+		$or:[],
+		$and:[]
+	};
+	for (x in queryModel){
+		if (queryModel[x].chain){
+			var topBool = null;
+			if (queryModel[x].chain == 'AND'){topBool = '$and';}
+			if (queryModel[x].chain == 'OR'){topBool = '$or';}
+		}
+		if (queryModel[x].filter){
+			for (y in queryModel[x].filter){
+				var queryObj = {};
+				queryObj[queryModel[x].filter[y].modelParam] = queryModel[x].filter[y].query;
+				if (!queryModel[x].filter[y].chain){mongoQuery[topBool].push(queryObj);}
+				if (queryModel[x].filter[y].chain){
+					if (queryModel[x].filter[y].chain == 'AND'){
+						if (topBool){
+							var index = mongoQuery[topBool].map(function(obj){return Object.keys(obj)[0]}).indexOf('$and');
+							if (index ==-1){mongoQuery[topBool].push({$and:[queryObj]});}
+							else{mongoQuery[topBool][index]['$and'].push(queryObj);}
+						}
+					}
+					if (queryModel[x].filter[y].chain == 'OR'){
+						if (topBool){
+							var index = mongoQuery[topBool].map(function(obj){return Object.keys(obj)[0]}).indexOf('$or');
+							if (index ==-1){mongoQuery[topBool].push({$or:[queryObj]});}
+							else{mongoQuery[topBool][index]['$or'].push(queryObj);}
+						}
+					}
+				}
+			}
+		}
+	}
+	if (mongoQuery.$or.length == 0){ delete mongoQuery.$or}
+	if (mongoQuery.$and.length == 0){ delete mongoQuery.$and}
+	return mongoQuery
+};
+
+
+//TODO.. ALL MODELS ARE APP DEFINED
+	//data models are contined within apps 
+	//simplify to data 
+
+	//APP {protocol, data}
+		//APP, DATA
+			//APP (set {protocol, data} - bundle)
+				//APP DEFINES (DATA MODEL)
+				//data.find({app:'PROJECT', model:'PROJECT'})
+
+
 module.exports = {
 
 	//CAN HANDLE ALL API CALLS..
-	search: function (req, res) {
 
-		console.log('SEARCH!')
+	get: function (req, res) {
+
+		if (req.query){
+
+			//<< SO MUCH ABSTRACTION >> 
+
+			//PARSE QUERY
+			var query = JSON.parse(req.query);
+			var documentQuery = parseQuery(query);
+
+			//DATA - && EVENT MERGE
+
+			//TODO: CONNECT TO ''''''''TRIE'''''''' ~ BLOCK MESH 
+				//FOR VALIDATION 
+					//BUILD DOCUMENT DB IN PEER
+
+					//ON CONECTED PEER EVENT
+					//ON EVENT ... IS THIS VALID?
+										//FROM WHO'S CONTEXT - IN THE EVENT YOU NEED TO PASS YOUR POINT IN HISTORY (LAST (RELATIVE) VALID ROOT)
+												//MESH '''DOT''' PRODUCT
+						//YEAH? GIMMIE SOME REPUTATION
+							//FROM ALL THE FUNCTIONS I RAN.
+								//CAN BE VALIDATED --- FOLLOWS CONNECTION - ASSOCIATION MODEL
+
+								//^^ CREATES YOUR TRUTH (CHAIN - MESH - DATA LATTICE) ||||| AND THIS IS SHARED //--my events
+																								// || META FUNCTION TO CREATE OVERLAY (STILL SUBJ) -- SHARED HISTORY
+																									//--get events
+									//YEAP THIS IS WHY YOURE MINTING ''''YOUR'''' CONTEXT TOKEN
+										//NO OBJECTIVE TRUTH TRULY
+
+								//machine attention is inherently self defined
+								//homermorphic network 
+
+
+			//look for has of data... ie id
+
+			//reduce all to events
+
+			Event.getDatastore().manager.collection('event')
+			.find(documentQuery)
+			.limit(1000)
+			.skip(0)
+			.sort({'createdAt':-1})
+			.toArray(function (err, associationModels) {
+
+			});
+
+			//vernacular, let chain = truth
+			//listen to blocks (as event bundle)
+				//with context
+					//if traversal is good add to subjective truth
+						//with events from validation
+
+						//always ingesting and validating my personal truth
+							//uncle?
+
+
+		}
+
+
+	},
+
+	search: function (req, res) {
 
 		if (!req.query.query){
 
-			function parseQueryMongo(querySet){};
-			function parseQueryOrbit(querySet){};
-	
 			function getSome(model){	
 				var deferred = Q.defer();
 				if (model.dataModel = 'PROJECT'){
@@ -190,25 +391,10 @@ module.exports = {
 		}
 	},
 
-	//COMPLEX QUERY :)
 	getFeed: function (req, res) {
 
-		//data models are contined within apps 
-			//simplify to data ?? hm
-
 		var searchQuery = JSON.parse(req.query.query);
-
 		console.log(searchQuery);
-
-		//TODO.. ALL MODELS ARE APP DEFINED. 
-			//APP {protocol, data}
-				//APP, DATA
-					//APP (set {protocol, data} - bundle)
-						//APP DEFINES (DATA MODEL)
-						//HMMM
-						//data.find({app:'PROJECT', model:'PROJECT'})
-
-
 		var promises = [];
 		for (x in searchQuery){
 			if (searchQuery[x].model =='ACTION'){promises.push(Action.find().limit(10).skip(0).sort('createdAt DESC').then(function(models){Action.subscribe(req, models.map((obj)=>obj.id));return {action:models}}))}
@@ -233,14 +419,12 @@ module.exports = {
 				if (obj.app){returnObj = obj.app.map(function(anObj){anObj.model = 'APP'; return anObj;}); }
 				if (obj.content){
 					returnObj = obj.content.map(function(anObj){
-						if (anObj.tags){anObj.tags = anObj.tags.split(',')}
 						anObj.model = 'CONTENT';
 						return anObj;
 					}); 
 				}
 				if (obj.item){
 					returnObj = obj.item.map(function(anObj){
-						if (anObj.tags){anObj.tags = anObj.tags.split(',')}
 						anObj.model = 'ITEM';
 						return anObj;
 					}); 
@@ -254,21 +438,18 @@ module.exports = {
 				if (obj.project){returnObj = obj.project.map(function(anObj){anObj.model = 'PROJECT'; return anObj;}); }
 				if (obj.task){
 					returnObj = obj.task.map(function(anObj){
-						if (anObj.tags){anObj.tags = anObj.tags.split(',')}
 						anObj.model = 'TASK';
 						return anObj;
 					}); 
 				}
 				if (obj.time){
 					returnObj = obj.time.map(function(anObj){
-						if (anObj.tags){anObj.tags = anObj.tags.split(',')}
 						anObj.model = 'TIME';
 						return anObj;	
 					}); 
 				}
 				if (obj.transaction){
 					returnObj = obj.transaction.map(function(anObj){
-						if (anObj.tags){anObj.tags = anObj.tags.split(',')}
 						anObj.model = 'TRANSACTION';
 						return anObj;
 					}); 
@@ -280,18 +461,16 @@ module.exports = {
 		    var activity = [].concat.apply([], populatedModels);
 		    activity = activity.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
 		    activity = activity.slice(0,100);
+
 		    console.log('length!', activity.length);
 
 		    //USER PROMISES
 		    var userPromises = [];
 		    for (x in activity){userPromises.push(User.find({id:activity[x].user}))}
     		Q.all(userPromises).then((populatedUserModels)=>{
-    			console.log('made it');
     			for (x in activity){activity[x].user = populatedUserModels[x][0]}
-    			//getFrom, getTo
 				res.json(activity);
     		});
-
 		});
 
 

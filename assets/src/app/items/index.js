@@ -1,5 +1,4 @@
-angular.module( 'conexus.items', [
-])
+angular.module( 'conexus.items', [])
 
 .config(['$stateProvider', function config( $stateProvider ) {
 	$stateProvider.state( 'items', {

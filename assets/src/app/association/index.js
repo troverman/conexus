@@ -25,15 +25,34 @@ angular.module( 'conexus.association', [
 
     if(!$scope.association){$location.path('/')}
 
+    //TODO: STRUCT
     $scope.connection = {
         title:'Default Connection',
         description:'this is the default connection',
-        context:{lol:100},
-        type:'PRACTICE',
-        information:{
-            direction:{},
+        parameters:{
+
+            attributes:{
+                context:{},
+                direction:'',
+            },
+
+            context:{},
+            direction:'',
+
+            mapping:[
+
+                {context:['{string->int}']},
+                {direction:'string->int'},
+
+                {reputation:'string->int'},
+
+                {computed:'string->int'},
+
+            ],
+
+            logic:'context[%context]*reputation[%context]'
+
         },
-        logic:{},
         data:{
             self:{},
             apps:{
@@ -41,21 +60,37 @@ angular.module( 'conexus.association', [
                 attention:{general:0}
             }
         },
+        id:null
+    };
 
-        modelAlpha:'CONTENT',
-        modelBeta:'CONTENT',
-        creator:'troverman',
-        id:1
-    }
+    $scope.parameters = JSON.stringify({
+        attributes:{
+            context:{},
+            direction:'',
+        },
+        context:{},
+        direction:'',
+        mapping:[
+            {context:['{string->int}']},
+            {direction:'string->int'},
+            {reputation:'string->int'},
+            {computed:'string->int'},
+        ],
+        logic:'context[%context]*reputation[%context]'
+    }, null, 4);
 
-    console.log($scope.association);
 
-    //$scope.tokens = [
-    //    {string:'CRE8+ASSOCIATION+'+$scope.association.id, amount:1},
-    //    {string:'CRE8+ASSOCIATION+'+$scope.association.associatedModels[0].id+'+'+$scope.association.associatedModels[1].id, amount:1}
-    //]
+    //TODO: ABSTRACT TOKENS VS DISCRETE TOKENS IN MODEL BALANCE
+        //MOEL BALANCE VS TOKENS :)
+            //'TOKENS' MAPPING CAN BE ABSTRACT PROTOCOL
+                //BALANCE IS WHAT WE HAVE NOW (IN MODEL)
+                    //MODEL - TRANSACTION CONNECTION ? 
+                        //WHO CAN SEND MODEL TOKENS 
+                            //ABSTRACT THE PROJECT
     
     titleService.setTitle('Association | '+$scope.association.id + ' | CRE8.XYZ');
+
+    $scope.selectedTab = 'INFORMATION';
 
     //BACKEND.. FRONTEND.. HM
     if ($scope.association.associatedModels){
@@ -110,7 +145,6 @@ angular.module( 'conexus.association', [
         $scope.associationColumn.xAxis.categories.push($scope.contextList[x][0]);
     }
 
-    $scope.selectedTab = 'INFORMATION';
     $scope.selectTab = function(model){$scope.selectedTab = model;};
 
     $sailsSocket.subscribe('association', function (envelope) {

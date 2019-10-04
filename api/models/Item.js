@@ -2,7 +2,9 @@
 module.exports = {
 
 	attributes: {
-
+        //DEPRECIATE
+        model: {type: 'string', defaultsTo: 'ITEM'},
+        
         title: {type: 'string'},
         associatedModels: {type: 'json'}, 
         context: {type: 'string'},

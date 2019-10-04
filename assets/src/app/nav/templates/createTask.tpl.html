@@ -16,30 +16,30 @@
             <p style="color:gray;font-style:italic">Tasks are an abstraction of intentional time, they create linkages between Time & Token Protocols. <a ng-click="informationToggle('CREATETASK')"><i class="fa fa-question-circle"></i></a></p>
             <div class="spacing-10"></div>
             <form role="form" ng-submit="createTask()">
-                <h4>Title</h4>
+                <h5>Title</h5>
                 <input type="text" placeholder="Title" ng-model="newTask.title" class="form-control">
                 <div>
-                    <h4>
+                    <h5 ng-click="expandAssociations()" >
                         Context 
-                        <a ng-click="expandAssociations()" style="float:right">
+                        <a style="float:right">
                             <span ng-if="!associationsAreExpanded"><i class="fas fa-bezier-curve"></i> Expand</span>
                             <span ng-if="associationsAreExpanded"><i class="fas fa-grip-lines"></i> Hide</span>
                         </a>
-                    </h4>
+                    </h5>
                     <tags-input min-length="1" placeholder="Context" ng-model="newTask.context">
                         <auto-complete min-length="2" source="loadTags($query)"></auto-complete>
                     </tags-input>
                 </div>
                 <div ng-if="associationsAreExpanded">
-                    <h4>Associations </h4>
+                    <h5>Associations</h5>
                     <tags-input min-length="1" placeholder="Associations" ng-model="newTask.associatedModels">
                         <auto-complete source="loadAssociations($query)"></auto-complete>
                     </tags-input>
                     <div class="row">
                         <div class="col-md-12 col-sm-12" ng-repeat="association in newTask.associatedModels">
-                            <h5>
+                            <h5 ng-click="association.isExpanded=!association.isExpanded">
                                 {{association.text}} 
-                                <a style="float:right" ng-click="association.isExpanded=!association.isExpanded">
+                                <a style="float:right">
                                     <i class="fas fa-compress-arrows-alt"></i>
                                     <b>
                                         <span ng-if="!association.isExpanded"> Expand</span> 
@@ -48,15 +48,12 @@
                                     </b>
                                 </a>
                             </h5>
-
                             <div ng-if="association.isExpanded">
-
                                 <h5>Default Connection</h5>
                                 <p>Details & Rules<p>
                                 <tags-input min-length="1" placeholder="{{association.text}} Context" ng-model="association.connection"></tags-input>
                                 <hr>
                             </div>
-
                             <tags-input min-length="1" placeholder="{{association.text}} Context" ng-model="association.context"></tags-input>
                             <div class="spacing-5"></div>
                             <div ng-repeat="context in association.context">
@@ -67,13 +64,12 @@
                                 </div>
                                 <div style="text-align:center"><p style="font-size:9px">{{context.score}}</p></div>
                             </div>
-
-
                         </div>
                     </div>
                 </div>
-                <h4>Location</h4>
+                <h5>Location</h5>
                 <input type="text" placeholder="Location" ng-model="newTask.location" class="form-control">
+                <!--
                 <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options">
                     <ui-gmap-marker ng-repeat="marker in markers" coords="marker.coords" options="marker.options" idkey="marker.id">
                         <ui-gmap-window options="windowOptions" closeClick="closeClick()">
@@ -81,6 +77,8 @@
                         </ui-gmap-window>
                     </ui-gmap-marker>
                 </ui-gmap-google-map>
+                -->
+                <h5>Description</h5>
                 <text-angular ng-model="newTask.content" ta-toolbar="[['p','h1','bold','italics','quote','insertLink', 'html']]"></text-angular>
                 <button type="submit" style="width:100%" class="btn btn-default log-btn" ng-disabled="!newTask.title">create</button>
             </form>

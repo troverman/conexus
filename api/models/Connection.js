@@ -2,6 +2,8 @@
 module.exports = {
     attributes: {
 
+        //DEPRECIATE
+        model: {type: 'string', defaultsTo: 'CONNECTION'},
 
 		title: {type: 'string'},
 		description: {type: 'string'},
@@ -19,5 +21,6 @@ module.exports = {
         attributes:{type:'json'}
         //for association...
         //for validation... (validation attributes.. order attributes)
+        
     }
 };
