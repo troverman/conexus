@@ -1,32 +1,31 @@
 angular.module( 'conexus.nav', [
 ])
 
-.controller( 'NavCtrl', ['$http', '$interval', '$location', '$mdSidenav', '$q', '$rootScope', '$sailsSocket', '$sce', '$scope', '$state', '$window', 'ActionModel', 'AttentionModel', 'AppModel', 'ConnectionModel', 'ContentModel', 'cytoData', 'ItemModel', 'NotificationModel', 'OrderModel', 'ProjectModel', 'ReactionModel', 'SearchModel', 'TaskModel', 'TimeModel', 'toaster', 'TransactionModel', 'ValidationModel', 'UserModel', function NavController( $http, $interval, $location, $mdSidenav, $q, $rootScope, $sailsSocket, $sce, $scope, $state, $window, ActionModel, AttentionModel, AppModel, ConnectionModel, ContentModel, cytoData, ItemModel, NotificationModel, OrderModel, ProjectModel, ReactionModel, SearchModel, TaskModel, TimeModel, toaster, TransactionModel, ValidationModel, UserModel ) {
+.controller( 'NavCtrl', ['$http', '$interval', '$location', '$mdSidenav', '$q', '$rootScope', '$sailsSocket', '$sce', '$scope', '$state', '$timeout', '$window', 'ActionModel', 'AttentionModel', 'AppModel', 'ConnectionModel', 'ContentModel', 'cytoData', 'ItemModel', 'NotificationModel', 'OrderModel', 'ProjectModel', 'ReactionModel', 'SearchModel', 'TaskModel', 'TimeModel', 'toaster', 'TransactionModel', 'ValidationModel', 'UserModel', function NavController( $http, $interval, $location, $mdSidenav, $q, $rootScope, $sailsSocket, $sce, $scope, $state, $timeout, $window, ActionModel, AttentionModel, AppModel, ConnectionModel, ContentModel, cytoData, ItemModel, NotificationModel, OrderModel, ProjectModel, ReactionModel, SearchModel, TaskModel, TimeModel, toaster, TransactionModel, ValidationModel, UserModel ) {
 
     //TODO: IN APP.JS
     //STATE CHANGE LOGIC
+    //ERR: ERR SPAM FROM HERE
     $rootScope.$on("$stateChangeStart", function() {
-        //VIEW GENERATION
-        $scope.closeAllNav();
+        $timeout(function () {$scope.closeAllNav();});
     });
-
-    $scope.directedGraphElements = {};
 
     //TODO: ROOTSCOPE ITEM
     //FUNCTION IN CREATE TOGGLE MAIN NAV
 
     //INITALIZE LOCAL VARIABLES
     $scope.associationsAreExpanded = false;
-    $scope.chart = {};
     $scope.attentionChart = {};
+    $scope.chart = {};
+    $scope.directedGraphElements = {};
     $scope.inputVector = [];
+    $scope.item = {};
+    $scope.inverted = false;
+    $scope.isInformation = false;
     $scope.map = {center: {latitude: 35.902023, longitude: -84.1507067 }, zoom: 9};
     $scope.newLogin = {};
     $scope.outputMatix = [];
     $scope.outputVector = [];
-    $scope.item = {};
-    $scope.inverted = false;
-    $scope.isInformation = false;
     $scope.reputationChart = {
         chart: {zoomType: 'x'},
         series: [{
@@ -1641,7 +1640,7 @@ angular.module( 'conexus.nav', [
         $mdSidenav('nav').close();
         $mdSidenav('order').close();
         $mdSidenav('project').close();
-        $mdSidenav('react').close();
+        $mdSidenav('reaction').close();
         $mdSidenav('render').close();
         $mdSidenav('renderReputation').close();
         $mdSidenav('renderValidation').close();

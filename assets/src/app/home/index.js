@@ -711,7 +711,7 @@ angular.module( 'conexus.home', [
         {
             pack:'Human',
             type:'onedimension slider', 
-            question:'Is shelter valuable?', 
+            question:'Is community valuable?', 
             assetString:'CRE8+TIME+SHELTER', 
             response:0, 
             answer:['no','yes']
@@ -759,9 +759,40 @@ angular.module( 'conexus.home', [
     };
     
 
+    //TODO
+    $scope.$watch('questions', function(newValue, oldValue){
+        if (oldValue != newValue){
 
+            //GET ELEMENT FROM NEW VALUE ARRAY? 
+            console.log(newValue);
 
-
+            var index = -1
+            if(index !=-1){
+                $scope.newOrder[index] = {
+                    associatedModels:[
+                        {market:'UNIVERSAL', amount:1, direction:'SELL'},
+                        {market:'UNIVERSAL', amount:1, direction:'BUY'},
+                    ],
+                    parameters:{
+                        type:'ONBOOK',
+                        status:'CONTINUAL',
+                    },
+                    connection:{},
+                };
+            }
+            $scope.newOrder.push({
+                associatedModels:[
+                    {market:'UNIVERSAL', amount:1, direction:'SELL'},
+                    {market:'UNIVERSAL', amount:1, direction:'BUY'},
+                ],
+                parameters:{
+                    type:'ONBOOK',
+                    status:'CONTINUAL',
+                },
+                connection:{},
+            });
+        }
+    }, true);
 
 
     $scope.chartMapTotal = {
@@ -1077,13 +1108,13 @@ angular.module( 'conexus.home', [
         
         //PERFORMANCE....
         $scope.updateChartTotal = function(){
-            $scope.chartMapTotal.xAxis.categories = $scope.newOrder.map(function(obj){return obj[1].identifier.split('+')[2]});
-            $scope.chartMapTotal.series[0].data = $scope.newOrder.map(function(obj){return obj[0].amount});
+            //$scope.chartMapTotal.xAxis.categories = $scope.newOrder.map(function(obj){return obj[1].identifier.split('+')[2]});
+            //$scope.chartMapTotal.series[0].data = $scope.newOrder.map(function(obj){return obj[0].amount});
         };
 
         $scope.updatePieTotal = function(){
-            var data = $scope.newOrder.map(function(obj){return {name: obj[1].identifier.split('+')[2], y:obj[0].amount}})
-            $scope.pieTotal.series[0].data = data;
+            //var data = $scope.newOrder.map(function(obj){return {name: obj[1].identifier.split('+')[2], y:obj[0].amount}})
+            //$scope.pieTotal.series[0].data = data;
         };
 
         //TODO:PREPOPULATE GENERATOR FROM SUGGESTIONS IS THE WAY - IS THE KEY
