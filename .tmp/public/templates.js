@@ -7739,45 +7739,38 @@ angular.module("nav/index.tpl.html", []).run(["$templateCache", function($templa
     "    <div ng-include=\"'nav/templates/cardDetail.tpl.html'\"></div>\n" +
     "\n" +
     "    <!--APP MODEL ACTIONS...-->\n" +
-    "    <div ng-if=\"newAction\" ng-include=\"'nav/templates/createAction.tpl.html'\"></div>\n" +
-    "    <div ng-if=\"currentUser\" ng-include=\"'nav/templates/createApp.tpl.html'\"></div>\n" +
-    "    <div ng-if=\"currentUser\" ng-include=\"'nav/templates/create.tpl.html'\"></div>\n" +
-    "    <div ng-if=\"currentUser\" ng-include=\"'nav/templates/createConnection.tpl.html'\"></div>\n" +
-    "    <div ng-if=\"currentUser\" ng-include=\"'nav/templates/createContent.tpl.html'\"></div>\n" +
-    "    <div ng-if=\"currentUser\" ng-include=\"'nav/templates/createItem.tpl.html'\"></div>\n" +
-    "    <div ng-if=\"currentUser\" ng-include=\"'nav/templates/createOrder.tpl.html'\"></div>\n" +
-    "    <div ng-if=\"currentUser\" ng-include=\"'nav/templates/createProject.tpl.html'\"></div>\n" +
-    "    <div ng-if=\"currentUser\" ng-include=\"'nav/templates/createProtocol.tpl.html'\"></div>\n" +
-    "    <div ng-if=\"currentUser\" ng-include=\"'nav/templates/createTask.tpl.html'\"></div>\n" +
-    "    <div ng-if=\"currentUser\" ng-include=\"'nav/templates/createTime.tpl.html'\"></div>\n" +
-    "    <div ng-if=\"currentUser\" ng-include=\"'nav/templates/createTransaction.tpl.html'\"></div>\n" +
-    "    <div ng-if=\"currentUser\" ng-include=\"'nav/templates/createValidation.tpl.html'\"></div>\n" +
+    "    <div ng-include=\"'nav/templates/createAction.tpl.html'\"></div>\n" +
+    "    <div ng-include=\"'nav/templates/createApp.tpl.html'\"></div>\n" +
+    "    <div ng-include=\"'nav/templates/create.tpl.html'\"></div>\n" +
+    "    <div ng-include=\"'nav/templates/createConnection.tpl.html'\"></div>\n" +
+    "    <div ng-include=\"'nav/templates/createContent.tpl.html'\"></div>\n" +
+    "    <div ng-include=\"'nav/templates/createItem.tpl.html'\"></div>\n" +
+    "    <div ng-include=\"'nav/templates/createOrder.tpl.html'\"></div>\n" +
+    "    <div ng-include=\"'nav/templates/createProject.tpl.html'\"></div>\n" +
+    "    <div ng-include=\"'nav/templates/createProtocol.tpl.html'\"></div>\n" +
+    "    <div ng-include=\"'nav/templates/createTask.tpl.html'\"></div>\n" +
+    "    <div ng-include=\"'nav/templates/createTime.tpl.html'\"></div>\n" +
+    "    <div ng-include=\"'nav/templates/createTransaction.tpl.html'\"></div>\n" +
+    "    <div ng-include=\"'nav/templates/createValidation.tpl.html'\"></div>\n" +
     "\n" +
     "    <div ng-include=\"'nav/templates/filter.tpl.html'\"></div>\n" +
-    "\n" +
     "    <!--TODO: PROPER COLLAPSE ORDER-->\n" +
     "    <div ng-include=\"'nav/templates/information.tpl.html'\"></div>\n" +
-    "\n" +
-    "    <div ng-if=\"!currentUser\" ng-include=\"'nav/templates/login.tpl.html'\"></div>\n" +
-    "\n" +
+    "    <div ng-include=\"'nav/templates/login.tpl.html'\"></div>\n" +
     "    <div ng-include=\"'nav/templates/market.tpl.html'\"></div>\n" +
     "    <div ng-include=\"'nav/templates/nav.tpl.html'\"></div>\n" +
     "    <div ng-include=\"'nav/templates/qr.tpl.html'\"></div>\n" +
     "    <div ng-include=\"'nav/templates/register.tpl.html'\"></div>\n" +
-    "\n" +
     "    <div ng-include=\"'nav/templates/reaction.tpl.html'\"></div>\n" +
     "    <div ng-include=\"'nav/templates/render.tpl.html'\"></div>\n" +
     "    <div ng-include=\"'nav/templates/renderAttention.tpl.html'\"></div>\n" +
     "    <div ng-include=\"'nav/templates/renderReputation.tpl.html'\"></div>\n" +
     "    <div ng-include=\"'nav/templates/renderValidation.tpl.html'\"></div>\n" +
-    "\n" +
     "    <div ng-include=\"'nav/templates/share.tpl.html'\"></div>\n" +
     "    <div ng-include=\"'nav/templates/sort.tpl.html'\"></div>\n" +
     "    <div ng-include=\"'nav/templates/stats.tpl.html'\"></div>\n" +
-    "\n" +
     "    <div ng-include=\"'nav/templates/subNav.tpl.html'\"></div>\n" +
-    "\n" +
-    "    <div ng-if=\"currentUser\" ng-include=\"'nav/templates/timer.tpl.html'\"></div>\n" +
+    "    <div ng-include=\"'nav/templates/timer.tpl.html'\"></div>\n" +
     "    <div ng-include=\"'nav/templates/tokens.tpl.html'\"></div>\n" +
     "\n" +
     "    <div class=\"navbar navbar-inverse navbar-fixed-top header\" role=\"navigation\">\n" +
@@ -8022,7 +8015,7 @@ angular.module("nav/templates/create.tpl.html", []).run(["$templateCache", funct
 angular.module("nav/templates/createAction.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("nav/templates/createAction.tpl.html",
     "<md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"action\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;min-width:50%;max-width:100%\">\n" +
-    "    <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
+    "    <div ng-if=\"currentUser\" class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
     "        <div class=\"spacing-25\"></div>\n" +
     "        <div style=\"background:url('https://source.unsplash.com/1600x900/?explode,erupt,action,create')\" class=\"imageContainerSmall\">\n" +
     "            <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
@@ -8063,7 +8056,7 @@ angular.module("nav/templates/createAction.tpl.html", []).run(["$templateCache",
 angular.module("nav/templates/createApp.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("nav/templates/createApp.tpl.html",
     "<md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"app\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;min-width:50%;max-width:100%\">\n" +
-    "    <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
+    "    <div ng-if=\"currentUser\" class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
     "        <div class=\"spacing-25\"></div>\n" +
     "        <div style=\"background:url('https://source.unsplash.com/1600x900/?explode,erupt,action,create')\" class=\"imageContainerSmall\">\n" +
     "            <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
@@ -8125,7 +8118,7 @@ angular.module("nav/templates/createApp.tpl.html", []).run(["$templateCache", fu
 angular.module("nav/templates/createConnection.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("nav/templates/createConnection.tpl.html",
     "<md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"connection\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;min-width:50%;max-width:100%\">\n" +
-    "    <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
+    "    <div ng-if=\"currentUser\" class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
     "        <div class=\"spacing-25\"></div>\n" +
     "        <div style=\"background:url('https://source.unsplash.com/1600x900/?code,coordination,government')\" class=\"imageContainerSmall\">\n" +
     "            <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
@@ -8203,10 +8196,8 @@ angular.module("nav/templates/createConnection.tpl.html", []).run(["$templateCac
 angular.module("nav/templates/createContent.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("nav/templates/createContent.tpl.html",
     "<md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"content\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;min-width:50%;max-width:100%\">\n" +
-    "    <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
-    "\n" +
+    "    <div ng-if=\"currentUser\" class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
     "        <div class=\"spacing-25\"></div>\n" +
-    "\n" +
     "        <div style=\"background:url('https://source.unsplash.com/1600x900/?create,code,paint')\" class=\"imageContainerSmall\">\n" +
     "            <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "                <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
@@ -8335,16 +8326,9 @@ angular.module("nav/templates/createItem.tpl.html", []).run(["$templateCache", f
   $templateCache.put("nav/templates/createItem.tpl.html",
     "<style type=\"text/css\">.angular-google-map-container{height: 200px;}</style>\n" +
     "\n" +
-    "<md-sidenav \n" +
-    "    class=\"md-sidenav-right md-whiteframe-z2\" \n" +
-    "    md-component-id=\"item\" \n" +
-    "    md-is-locked-open=\"false\" \n" +
-    "    style=\"position:fixed;background-color:white;min-width:50%;max-width:100%\">\n" +
-    "\n" +
-    "    <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
-    "\n" +
+    "<md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"item\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;min-width:50%;max-width:100%\">\n" +
+    "    <div ng-if=\"currentUser\" class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
     "        <div class=\"spacing-25\"></div>\n" +
-    "        \n" +
     "        <div style=\"background:url('https://source.unsplash.com/1600x900/?connect,pattern,scrap,assortment,clothes')\" class=\"imageContainerSmall\">\n" +
     "            <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "                <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
@@ -8510,7 +8494,7 @@ angular.module("nav/templates/createItem.tpl.html", []).run(["$templateCache", f
 angular.module("nav/templates/createOrder.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("nav/templates/createOrder.tpl.html",
     "<md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"order\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;min-width:50%;max-width:100%\">\n" +
-    "    <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
+    "    <div ng-if=\"currentUser\" class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
     "        <div class=\"spacing-25\"></div>\n" +
     "        <div style=\"background:url('https://source.unsplash.com/1600x900/?connections,network,pattern')\" class=\"imageContainerSmall\">\n" +
     "            <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
@@ -8607,7 +8591,7 @@ angular.module("nav/templates/createProject.tpl.html", []).run(["$templateCache"
   $templateCache.put("nav/templates/createProject.tpl.html",
     "<style type=\"text/css\">.angular-google-map-container{height: 200px;}</style>\n" +
     "<md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"project\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;min-width:50%;max-width:100%\">\n" +
-    "    <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
+    "    <div ng-if=\"currentUser\" class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
     "        <div class=\"spacing-25\"></div>\n" +
     "        <div style=\"background:url('https://source.unsplash.com/1600x900/?code,coordination,government')\" class=\"imageContainerSmall\">\n" +
     "            <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
@@ -8737,7 +8721,7 @@ angular.module("nav/templates/createProject.tpl.html", []).run(["$templateCache"
 angular.module("nav/templates/createProtocol.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("nav/templates/createProtocol.tpl.html",
     "<md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"protocol\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;min-width:50%;max-width:100%\">\n" +
-    "    <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
+    "    <div  ng-if=\"currentUser\" class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
     "        <div class=\"spacing-25\"></div>\n" +
     "        <div style=\"background:url('https://source.unsplash.com/1600x900/?explode,erupt,action,create')\" class=\"imageContainerSmall\">\n" +
     "            <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
@@ -8780,7 +8764,7 @@ angular.module("nav/templates/createTask.tpl.html", []).run(["$templateCache", f
   $templateCache.put("nav/templates/createTask.tpl.html",
     "<style type=\"text/css\">.angular-google-map-container{height: 200px;}</style>\n" +
     "<md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"task\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;min-width:50%;max-width:100%\">\n" +
-    "    <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
+    "    <div ng-if=\"currentUser\" class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
     "        <div class=\"spacing-25\"></div>\n" +
     "        <div style=\"background:url('https://source.unsplash.com/1600x900/?code')\" class=\"imageContainerSmall\">\n" +
     "            <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
@@ -8870,7 +8854,7 @@ angular.module("nav/templates/createTask.tpl.html", []).run(["$templateCache", f
 angular.module("nav/templates/createTime.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("nav/templates/createTime.tpl.html",
     "<md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"time\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;min-width:50%;max-width:100%\">\n" +
-    "    <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
+    "    <div ng-if=\"currentUser\" class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
     "        <div class=\"spacing-25\"></div>\n" +
     "        <div style=\"background:url('https://source.unsplash.com/1600x900/?time')\" class=\"imageContainerSmall\">\n" +
     "            <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
@@ -9002,7 +8986,7 @@ angular.module("nav/templates/createTime.tpl.html", []).run(["$templateCache", f
 angular.module("nav/templates/createTransaction.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("nav/templates/createTransaction.tpl.html",
     "<md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"transaction\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;min-width:50%;max-width:100%\">\n" +
-    "    <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
+    "    <div ng-if=\"currentUser\" class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
     "        <div class=\"spacing-25\"></div>\n" +
     "        <div style=\"background:url('https://source.unsplash.com/1600x900/?transaction,trade')\" class=\"imageContainerSmall\">\n" +
     "            <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
@@ -9125,7 +9109,7 @@ angular.module("nav/templates/createTransaction.tpl.html", []).run(["$templateCa
 angular.module("nav/templates/createValidation.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("nav/templates/createValidation.tpl.html",
     "<md-sidenav class=\"md-sidenav-right md-whiteframe-z2\" md-component-id=\"validation\" md-is-locked-open=\"false\" style=\"position:fixed;background-color:white;min-width:50%;max-width:100%\">\n" +
-    "    <div class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
+    "    <div ng-if=\"currentUser\" class=\"md-list-item-text\" layout=\"column\" style=\"height:100%;\">\n" +
     "        <div class=\"spacing-25\"></div>\n" +
     "        <div style=\"background:url('https://source.unsplash.com/1600x900/?code,consensus')\" class=\"imageContainerSmall\">\n" +
     "            <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
@@ -9418,11 +9402,13 @@ angular.module("nav/templates/filter.tpl.html", []).run(["$templateCache", funct
     "\n" +
     "            <div ng-if=\"type=='VALUEMAP'\">\n" +
     "\n" +
-    "                <tags-input min-length=\"1\" placeholder=\"Base Asset\" ng-model=\"baseToken\">\n" +
+    "                <tags-input min-length=\"1\" placeholder=\"Base Asset\" ng-model=\"baseTokenSet\">\n" +
     "                    <auto-complete source=\"loadAsset($query)\"></auto-complete>\n" +
     "                </tags-input>\n" +
-    "                <h5>{{baseToken.text}}</h5>\n" +
-    "                <p>{{baseToken.description}}</p>\n" +
+    "                <div ng-repeat=\"token in baseTokenSet\">\n" +
+    "                    <h5>{{token.text}}</h5>\n" +
+    "                    <p>{{token.description}}</p>\n" +
+    "                </div>\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
     "                <tags-input min-length=\"1\" placeholder=\"Manifold\" ng-model=\"baseManifold\">\n" +
@@ -9434,6 +9420,7 @@ angular.module("nav/templates/filter.tpl.html", []).run(["$templateCache", funct
     "\n" +
     "                <h5>{{orderType.text}}</h5>\n" +
     "                <p>{{orderType.description}}</p>\n" +
+    "\n" +
     "                <ul class=\"nav nav-pills nav-stacked contentType\">\n" +
     "                    <li ng-class=\"{active: orderType.text=='Continual'}\" ng-click=\"selectType('CONTINUAL')\"><a href=\"#\">Continual on Books</a></li>\n" +
     "                    <li ng-class=\"{active: selectedType=='DISCRETE'}\" ng-click=\"selectType('DISCRETE')\"><a href=\"#\">Discrete on Books</a></li>\n" +
@@ -9441,6 +9428,7 @@ angular.module("nav/templates/filter.tpl.html", []).run(["$templateCache", funct
     "                    <li ng-class=\"{active: selectedType=='IOC'}\" ng-click=\"selectType('IOC')\"><a href=\"#\">Immediate or Cancel</a></li>\n" +
     "                    <li ng-class=\"{active: selectedType=='LIMIT'}\" ng-click=\"selectType('LIMIT')\"><a href=\"#\">Limit</a></li>\n" +
     "                </ul>\n" +
+    "\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "            </div>\n" +
     "\n" +
@@ -9466,6 +9454,9 @@ angular.module("nav/templates/information.tpl.html", []).run(["$templateCache", 
     "        </div>\n" +
     "        <div style=\"padding:16px;\">\n" +
     "            <div class=\"spacing-25\"></div>\n" +
+    "             <div ng-if=\"informationType == 'ASSOCIATIONS'\">\n" +
+    "                <p>Associations are computed though validation traversal.</p>\n" +
+    "            </div>\n" +
     "            <div ng-if=\"informationType == 'CREATEACTION'\">\n" +
     "                <p>Actions are a verb in the string Language. Actions extend items, and act as verbs upon items. 'USE+ITEM'</p>\n" +
     "            </div>\n" +
@@ -9492,34 +9483,39 @@ angular.module("nav/templates/information.tpl.html", []).run(["$templateCache", 
     "            </div>\n" +
     "            <div ng-if=\"informationType == 'CREATEVALIDATION'\">\n" +
     "            </div>\n" +
-    "            <div ng-if=\"informationType == 'TOKEN'\">\n" +
-    "                <p>The UniversalToken onMint Market Postion Signifies that the creator of the instrument will transfer UniversalToken onMint of the specified asset.</p>\n" +
-    "                <p>Each Memeber is given 1 Universal Token per second</p>\n" +
-    "            </div>  \n" +
     "            <div ng-if=\"informationType == 'IDENTIFERSET'\">\n" +
     "            </div>\n" +
-    "            <!--DEP-->\n" +
+    "             <!--DEP-->\n" +
     "            <div ng-if=\"informationType == 'MARKETLIQUIDITY'\">\n" +
-    "                <p style=\"color:gray;font-style:italic\">Enter your desired output for tokens based on liquidy in the MultiMarket. The CRE8 network will perform matching operations and create a series of orders which fulfill the token conversion. The perspective we look at the multimarket gives us traversing rules and computationally efficient conversion paths. Through the assistance of tensor-based neural networks we create a hyper-vector perspective formed though relations of the aggregate of our value maps.</p>\n" +
+    "                <p style=\"color:gray;font-style:italic\">\n" +
+    "                    Enter your desired output for tokens based on liquidy in the MultiMarket. The CRE8 network will perform matching operations and create a series of orders which fulfill the token conversion. The perspective we look at the multimarket gives us traversing rules and computationally efficient conversion paths. Through the assistance of tensor-based neural networks we create a hyper-vector perspective formed though relations of the aggregate of our value maps.\n" +
+    "                </p>\n" +
     "                `{({}_1, =, alpha_1A,+,beta_1B,=,gamma_1C),({}_2, =, alpha_2A,+,beta_2B,=,gamma_2C),(vdots,,,,,,),({}_n, =, delta_nA,+,epsilon_nB,=,zeta_nC):}`\n" +
-    "            </div>\n" +
-    "            <div ng-if=\"informationType == 'ASSOCIATIONS'\">\n" +
-    "                <p>Associations are computed though validation traversal.</p>\n" +
     "            </div>\n" +
     "            <div ng-if=\"informationType == 'PROTOCOLS'\">\n" +
     "                <p>Protocols create plugins to the string space; they create token action potientals though the interplay and interaction of data.</p>\n" +
     "                <p>A bundle of protocols create an Application.</p>\n" +
     "            </div>\n" +
+    "\n" +
+    "            <div ng-if=\"informationType == 'Sharing Consent Agreement'\">\n" +
+    "                <p>Engaging with peers in the network and sharing with them. Information is given tokenized value with awareness. This responsibility is two way, know that what you put out will be seen and consumed. Thereby, follow our <a>guidelines</a> & respect consentual sharing.</p>\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <div ng-if=\"informationType == 'TOKEN'\">\n" +
+    "                <p>The UniversalToken onMint Market Postion Signifies that the creator of the instrument will transfer UniversalToken onMint of the specified asset.</p>\n" +
+    "                <p>Each Memeber is given 1 Universal Token per second</p>\n" +
+    "            </div>  \n" +
     "            <div ng-if=\"informationType == 'VALUEMAP'\">\n" +
     "                <p>Value Map Controls</p>\n" +
     "            </div>\n" +
     "            <div ng-if=\"informationType == 'VALIDATION'\">\n" +
-    "                <p>Validations create linkages within the CRE8 ecosystem. Validations allow for context-specific consensus. CRE8 supports multiple validation types including human validated proof of work (HVpoW), probabilistic trained validation (PtV), and modular app-specific validation. The connections and validation intention within CRE8 is rich. Validations allow for recursive layering.</p>\n" +
+    "                <p>\n" +
+    "                    Validations create linkages within the CRE8 ecosystem. Validations allow for context-specific consensus. CRE8 supports multiple validation types including human validated proof of work (HVpoW), probabilistic trained validation (PtV), and modular app-specific validation. The connections and validation intention within CRE8 is rich. Validations allow for recursive layering.\n" +
+    "                </p>\n" +
     "                <!--VALIDATION IMAGE-->\n" +
     "                <p>Associations are computed though validation traversal.</p>\n" +
     "                <p>`A = sum_(i=0)^n sum_(i=0)^n V_{i_{a-z}`</p>\n" +
     "            </div>\n" +
-    "\n" +
     "\n" +
     "        </div>\n" +
     "    </div>\n" +
@@ -10804,22 +10800,7 @@ angular.module("order/index.tpl.html", []).run(["$templateCache", function($temp
 
 angular.module("order/templates/content.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("order/templates/content.tpl.html",
-    "<div class=\"card\" ng-repeat=\"item in contentList\">\n" +
-    "    <div style=\"padding:16px\">\n" +
-    "        <div>\n" +
-    "            <img class=\"card-avatar\" ng-src=\"{{item.user.avatarUrl}}\" src=\"{{item.user.avatarUrl}}\" err-src=\"/images/avatar.png\">\n" +
-    "            <a style=\"display:inline;font-weight:600;margin-left:5px\" href=\"member/{{item.user.username}}\" ui-sref=\"member.activity({path:item.user.username})\">{{item.user.username}}</a>\n" +
-    "            <p style=\"display:inline;font-size:10px;color:gray;margin-left:5px\" am-time-ago=\"item.createdAt\"></p>\n" +
-    "        </div> \n" +
-    "        <div style=\"margin-left:42px\"><span style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span></div>\n" +
-    "    </div>\n" +
-    "    <div class=\"\" style=\"padding: 8px 16px 8px;background-color: #f9f9f9\">\n" +
-    "        <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"createReaction(item, 'plus')\"><i class=\"fa fa-angle-up\"></i> {{item.data.apps.reactions.plus}} like </a> \n" +
-    "        <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"createReaction(item, 'minus')\" ><i class=\"fa fa-angle-down\"></i> {{item.data.apps.reactions.minus}} dislike </a>\n" +
-    "        <a style=\"padding:5px;color:grey\" href=\"#\" ng-click=\"reply(item)\"><i class=\"fa fa-comment-o\"></i> comment </a>\n" +
-    "        <a style=\"color:grey\" class=\"pull-right\" href=\"content/{{item.id}}\" ui-sref=\"content({id:item.id})\"><i class=\"fa fa-link grey\"></i></a>\n" +
-    "    </div>\n" +
-    "</div>");
+    "");
 }]);
 
 angular.module("order/templates/information.tpl.html", []).run(["$templateCache", function($templateCache) {
@@ -12940,7 +12921,7 @@ angular.module("templates/cards/orderCard.tpl.html", []).run(["$templateCache", 
     "        <a ng-click=\"$event.stopPropagation();createReaction(item, 'plus')\"><i class=\"fas fa-angle-up\"></i> {{item.data.apps.reactions.plus || 0 }} like </a> \n" +
     "        <a ng-click=\"$event.stopPropagation();createReaction(item, 'minus')\" ><i class=\"fas fa-angle-down\"></i> {{item.data.apps.reactions.minus || 0 }} dislike </a>\n" +
     "        <a ng-click=\"$event.stopPropagation();contentToggle(item)\"><i class=\"far fa-comment\"></i> comment </a>\n" +
-    "        <a ng-click=\"$event.stopPropagation();\" class=\"pull-right\" style=\"padding:0px;\" href=\"order/{{item.id}}\" ui-sref=\"order({id:item.id})\"><i class=\"fa fa-link grey\"></i></a>\n" +
+    "        <a ng-click=\"$event.stopPropagation();\" class=\"pull-right\" style=\"padding:0px;\" href=\"order/{{item.id}}\" ui-sref=\"order({id:item.id})\"><i class=\"fas fa-link grey\"></i></a>\n" +
     "    </div>        \n" +
     "</div>");
 }]);
@@ -13874,8 +13855,8 @@ angular.module("tutorial/templates/intro.tpl.html", []).run(["$templateCache", f
     "                </div>\n" +
     "            </div>\n" +
     "            <div style=\"padding:16px;text-align:center\">\n" +
-    "                <p style=\"color:gray;font-style:italic\">All information given to CRE8 comes from a place of <b>mutual consent</b>.<p>\n" +
-    "                <p style=\"font-size:11px\"><a ng-click=\"informationToggle('INFORMATION SHARING CONSENT')\" href=\"#\"> <i class=\"fa fa-question-circle\"></i> Learn More</a></p> \n" +
+    "                <p style=\"color:gray;font-style:italic\">All information shared with CRE8 comes from a place of <b>mutual consent</b>.<p>\n" +
+    "                <p style=\"font-size:11px\"><a ng-click=\"informationToggle('Sharing Consent Agreement')\" href=\"#\"> <i class=\"fa fa-question-circle\"></i> Learn More</a></p> \n" +
     "                <div layout=\"row\" layout-align=\"center center\" flex=\"100\">\n" +
     "                    <p><md-switch style=\"\" ng-model=\"consentAgreement\" aria-label=\"Consent Agreement\"></md-switch></p>\n" +
     "                </div>\n" +
@@ -14447,8 +14428,7 @@ angular.module("tutorial/templates/valueMapBuilder.tpl.html", []).run(["$templat
     "        </div>\n" +
     "    </div>\n" +
     "    <div style=\"padding:16px;\">\n" +
-    "        <p style=\"color:gray;font-size:12px;font-style:italic\">Select what you believe is worthwile.</p>\n" +
-    "        <p style=\"color:gray;font-size:12px;font-style:italic\">Creating a value map furthers a self-empowering mechanism. We create value; though sharing our values and relating them we create value in ourselves, in what we do, and within each other.</p>\n" +
+    "        <p style=\"color:gray;font-size:12px;font-style:italic\">Creating a value map furthers a self-empowering mechanism. We create value; though sharing our values and relating them we create value in ourselves, in what we do, and in each other. What you believe is valuable?</p>\n" +
     "    </div>\n" +
     "</div>\n" +
     "\n" +
@@ -14457,9 +14437,7 @@ angular.module("tutorial/templates/valueMapBuilder.tpl.html", []).run(["$templat
     "    <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
     "        <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
     "        <li style=\"float:left;font-size:14px\">\n" +
-    "            <a href=\"#\" ng-click=\"filterToggle('VALUEMAP')\">\n" +
-    "                <i class=\"fas fa-coins\"></i> Base Token <span style=\"font-size:10px;color:gray\">{{baseToken.text}}</span>\n" +
-    "            </a>\n" +
+    "            <a href=\"#\" ng-click=\"filterToggle('VALUEMAP')\"><i class=\"fas fa-coins\"></i> Base Token <span style=\"font-size:10px;color:gray\">{{baseToken.text}}</span></a>\n" +
     "        </li>\n" +
     "        <li style=\"float:left;font-size:14px\">\n" +
     "            <a href=\"#\" ng-click=\"filterToggle('VALUEMAP')\"><i class=\"fas fa-infinity\"></i> Manifold <span style=\"font-size:10px;color:gray\">{{baseManifold.text}}</span></a>\n" +
@@ -14478,9 +14456,8 @@ angular.module("tutorial/templates/valueMapBuilder.tpl.html", []).run(["$templat
     "                    <div style=\"clear:both\"></div>\n" +
     "                </div> \n" +
     "                <div style=\"margin-top: auto;margin-bottom: auto;padding:15px;\">\n" +
-    "                    <h1 style=\"text-align:left;color:rgba(255,255,255,0.9);font-weight:400;\">{{baseToken.text}}</h1>\n" +
-    "                    <h5 style=\"color:white;\">{{baseManifold.text}}</h5>\n" +
-    "                    <!--<h5 style=\"color:white;\">{{orderType.text}}</h5>-->\n" +
+    "                    <h1 style=\"text-align:left;color:rgba(255,255,255,0.9);font-weight:400;\">{{baseTokenSet[0].text}}</h1>\n" +
+    "                    <h5 style=\"color:white;\">{{baseManifold[0].text}}</h5>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
@@ -14491,46 +14468,52 @@ angular.module("tutorial/templates/valueMapBuilder.tpl.html", []).run(["$templat
     "    <div class=\"card\">\n" +
     "        <div style=\"padding:16px\">\n" +
     "            <div class=\"spacing-10\"></div>\n" +
-    "            <p style=\"color:gray;font-style:italic\">{{baseToken.description}}</p>\n" +
-    "            <p style=\"color:gray;font-style:italic\">{{baseManifold.description}}</p>\n" +
+    "            <p style=\"color:gray;font-style:italic\">{{baseToken[0].description}}</p>\n" +
+    "            <p style=\"color:gray;font-style:italic\">{{baseManifold[0].description}}</p>\n" +
     "            <p style=\"color:gray;font-style:italic\">{{orderType.description}}</p>\n" +
     "            <div class=\"spacing-10\"></div>\n" +
     "            <p style=\"color:gray;font-style:italic;font-weight:bold\">Select the following of interest to you.</p>\n" +
     "        </div>\n" +
     "    </div>\n" +
-    "   \n" +
     "\n" +
-    "   <!-- PRE POPULATE WITH MEMBER ASSOCIATIONS (SELECTED IN TUTORIAL)-->\n" +
-    "   <!-- RENDER AS 'DISCOVER' -->\n" +
-    "   <!--\n" +
-    "   <div ng-repeat=\"item in activity\">\n" +
-    "        <div ng-if=\"item.model=='CONTENT'\"  ng-include=\"'templates/cards/contentCard.tpl.html'\"></div>\n" +
-    "        <div ng-if=\"item.model=='PROJECT'\"  ng-include=\"'templates/cards/projectCard.tpl.html'\"></div>\n" +
+    "    <!-- PRE POPULATE WITH MEMBER ASSOCIATIONS (SELECTED IN TUTORIAL)-->\n" +
+    "    <div ng-repeat=\"item in memberTasks\">\n" +
     "        <div ng-if=\"item.model=='TASK'\"  ng-include=\"'templates/cards/taskCard.tpl.html'\"></div>\n" +
-    "        <div ng-if=\"item.model=='TRANSACTION'\" ng-include=\"'templates/cards/transactionCard.tpl.html'\"></div>\n" +
-    "    </div>  \n" +
-    "    -->\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <!--SELECT PROJECT ACTIONS-->\n" +
+    "    <div ng-repeat=\"item in memberProjects\">\n" +
+    "        <div ng-if=\"item.model=='PROJECT'\"  ng-include=\"'templates/cards/projectCard.tpl.html'\"></div>\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <div ng-repeat=\"item in memberProjects\">\n" +
+    "        <div ng-if=\"item.model=='PROJECT'\"  ng-include=\"'templates/cards/projectCard.tpl.html'\"></div>\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <!--SELECT ASSOCIATIONS IS EXCITE-->\n" +
+    "\n" +
     "\n" +
     "    <div class=\"card\">\n" +
-    "        <div style=\"padding:16px\">  \n" +
-    "            <div style=\"font-size:14px;font-weight:bold\">\n" +
-    "                <span ng-click=\"createPosition(item)\" ng-repeat=\"item in sortedTagArray\">\n" +
-    "                    <p class=\"valueMapButton\">{{item.element}}</p>\n" +
-    "                </span>\n" +
+    "        <div style=\"font-size:14px;font-weight:bold\">\n" +
+    "            <span ng-click=\"createPosition(item)\" ng-repeat=\"item in sortedTagArray\">\n" +
+    "                <p class=\"valueMapButton\">{{item.element}}</p>\n" +
+    "            </span>\n" +
     "\n" +
-    "                <!--ELEMENTALS?-->\n" +
-    "                <!--CONTEXT PACK.-->\n" +
     "\n" +
-    "                <span ng-click=\"createPosition(item)\" ng-repeat=\"item in projects\">\n" +
-    "                    <p class=\"valueMapButton\">Project {{item.title}}</p>\n" +
-    "                </span>\n" +
-    "                <span ng-click=\"createPosition(item)\" ng-repeat=\"item in tasks\">\n" +
-    "                    <p class=\"valueMapButton\">Task {{item.title}}</p>\n" +
-    "                </span>\n" +
-    "                <span ng-click=\"createPosition(item)\" ng-repeat=\"item in members\">\n" +
-    "                    <p class=\"valueMapButton\">Member {{item.username}}</p>\n" +
-    "                </span>\n" +
-    "            </div>\n" +
+    "            <!--ELEMENTALS?-->\n" +
+    "            <!--CONTEXT PACK.-->\n" +
+    "\n" +
+    "            <span ng-click=\"createPosition(item)\" ng-repeat=\"item in projects\">\n" +
+    "                <p class=\"valueMapButton\">Project {{item.title}}</p>\n" +
+    "            </span>\n" +
+    "            <span ng-click=\"createPosition(item)\" ng-repeat=\"item in tasks\">\n" +
+    "                <p class=\"valueMapButton\">Task {{item.title}}</p>\n" +
+    "            </span>\n" +
+    "            <span ng-click=\"createPosition(item)\" ng-repeat=\"item in members\">\n" +
+    "                <p class=\"valueMapButton\">Member {{item.username}}</p>\n" +
+    "            </span>\n" +
+    "\n" +
+    "\n" +
     "        </div>\n" +
     "    </div>\n" +
     "\n" +
@@ -14618,18 +14601,47 @@ angular.module("tutorial/templates/valueMapQuestions.tpl.html", []).run(["$templ
     "    <div style=\"padding:16px;\">\n" +
     "        <p style=\"color:gray;font-size:12px;font-style:italic\">Select what you believe is worthwile.</p>\n" +
     "        <p style=\"color:gray;font-size:12px;font-style:italic\">Creating a value map furthers a self-empowering mechanism. We create value; though sharing our values and relating them we create value in ourselves, in what we do, and within each other.</p>\n" +
-    "\n" +
-    "        <!--NG-REPEAT VALID APPS WITH QUESTION PACK ASSOCIATION-->\n" +
-    "        <a><b>General</b></a>,\n" +
-    "        <a><b>Health</b></a>,\n" +
-    "        <a><b>Time</b></a>,\n" +
-    "\n" +
     "    </div>\n" +
     "</div>\n" +
     "\n" +
     "<div class=\"col-xs-12\" style=\"padding-left:0px;padding-right:0px\">\n" +
+    "\n" +
+    "    <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "        <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
+    "        <li style=\"float:left;font-size:14px\">\n" +
+    "            <a href=\"#\" ng-click=\"filterToggle('VALUEMAP')\">\n" +
+    "                <i class=\"fas fa-coins\"></i> Base Token <span style=\"font-size:10px;color:gray\">{{baseToken.text}}</span>\n" +
+    "            </a>\n" +
+    "        </li>\n" +
+    "        <li style=\"float:left;font-size:14px\">\n" +
+    "            <a href=\"#\" ng-click=\"filterToggle('VALUEMAP')\"><i class=\"fas fa-infinity\"></i> Manifold <span style=\"font-size:10px;color:gray\">{{baseManifold.text}}</span></a>\n" +
+    "        </li>\n" +
+    "        <li style=\"float:left;font-size:14px\">\n" +
+    "            <a href=\"#\" ng-click=\"filterToggle('VALUEMAP')\"><i class=\"fas fa-dna\"></i> Type <span style=\"font-size:10px;color:gray\">{{orderType.text}}</span></a>\n" +
+    "        </li>\n" +
+    "        <div style=\"clear:both\"></div>\n" +
+    "    </ul>\n" +
     "   \n" +
-    "    <!--TODO: DYNAMIC-->\n" +
+    "    <div class=\"card\">\n" +
+    "        <div style=\"background:url('https://source.unsplash.com/1600x900/?love,art,geometry');;min-height:150px\" class=\"imageContainerSmall\">\n" +
+    "            <div style=\"background:rgba(0,0,0,0.75);;height:150px\" class=\"imageContainerSmallDiv\">  \n" +
+    "                <div style=\"text-align:right;padding:15px;position:absolute;right:0\">\n" +
+    "                    <a style=\"color:white;\" ng-click=\"$event.stopPropagation();cardDetailToggle(item)\"><i class=\"fas fa-universal-access\"></i></a>\n" +
+    "                </div> \n" +
+    "                <div style=\"margin-top: auto;margin-bottom: auto;padding:15px;\">\n" +
+    "                    <h1 style=\"text-align:left;color:rgba(255,255,255,0.9);font-weight:400;font-size:35px\">Value Map Questions</h1>\n" +
+    "                    <h5 style=\"color:white\">{{baseToken.text}}</h5>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <div class=\"card\"><tags-input class=\"\" style=\"border:0px;flex-grow:2;\" min-length=\"1\" placeholder=\"Search\" ng-model=\"searchQueryArray\"></tags-input></div>\n" +
+    "\n" +
+    "    <div class=\"card\">\n" +
+    "        <span style=\"font-size:14px;font-weight:bold\" ng-click=\"selectPack(item)\" ng-repeat=\"item in packs\"><p class=\"valueMapButton\">{{item.title}}</p></span>\n" +
+    "    </div>\n" +
+    "\n" +
     "    <div class=\"card\">\n" +
     "        <div style=\"background:url('https://source.unsplash.com/1600x900/?love,art,geometry');;min-height:100px\" class=\"imageContainerSmall\">\n" +
     "            <div style=\"background:rgba(0,0,0,0.75);;height:100px\" class=\"imageContainerSmallDiv\">  \n" +
@@ -14637,21 +14649,16 @@ angular.module("tutorial/templates/valueMapQuestions.tpl.html", []).run(["$templ
     "                    <a style=\"color:white;\" ng-click=\"$event.stopPropagation();cardDetailToggle(item)\"><i class=\"fas fa-universal-access\"></i></a>\n" +
     "                </div> \n" +
     "                <div style=\"margin-top: auto;margin-bottom: auto;padding:15px;\">\n" +
-    "                    <h1 style=\"text-align:left;color:rgba(255,255,255,0.9);font-weight:400;font-size:35px\">Value Map Questions & Survey</h1>\n" +
-    "                    <h5 style=\"color:white\">General Value Profile</h5>\n" +
+    "                    <h1 style=\"text-align:left;color:rgba(255,255,255,0.9);font-weight:400;font-size:35px\">{{selectedPack.title}}</h1>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
-    "    </div>\n" +
-    "\n" +
-    "    <div class=\"card\">\n" +
     "        <div style=\"padding:16px;\">\n" +
     "            \n" +
     "            <!--TODO: DYNAMIC-->\n" +
-    "            <h5>{{selectedPack.title}}</h5>\n" +
     "            <p style=\"font-style:italic;color:gray;margin:0px;font-size:12px\">{{selectedPack.description}}</p>\n" +
     "\n" +
-    "            <div ng-repeat=\"item in questions\">\n" +
+    "            <div ng-repeat=\"item in selectedQuestions\">\n" +
     "                <h5>{{item.question}}</h5>\n" +
     "                <!--TODO: QUESTION TYPES-->\n" +
     "                <!--TYPE 1 DIMENSION SLIDER-->\n" +
@@ -14665,25 +14672,9 @@ angular.module("tutorial/templates/valueMapQuestions.tpl.html", []).run(["$templ
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
+    "    \n" +
+    "    <div class=\"card\"><button ng-click=\"createOrder()\" style=\"width:100%\" class=\"btn btn-default log-btn\">CREATE POSITION</button></div>\n" +
     "\n" +
-    "    <div class=\"card\" ng-if=\"false\">\n" +
-    "        <div style=\"background:url('https://source.unsplash.com/1600x900/?rest,exercise,work,play')\" class=\"imageContainerSmall\">\n" +
-    "            <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                <div style=\"margin-top: auto;margin-bottom: auto;padding:15px;\">\n" +
-    "                    <h1 style=\"text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;font-size:35px\">Intentional Value Profile</h1>\n" +
-    "                    <p style=\"color:white;\">Development through CRE8</p>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "        <div style=\"padding:16px;\">\n" +
-    "            <p>TASKS</p>\n" +
-    "            <p>PROJECTS</p>\n" +
-    "            <p>TRANSACTIONS</p>\n" +
-    "            <p>ACTIONS</p>\n" +
-    "            <p>CONTENT</p>\n" +
-    "            <p>APPS</p>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
     "</div>");
 }]);
 

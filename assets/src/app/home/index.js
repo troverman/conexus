@@ -288,7 +288,6 @@ angular.module( 'conexus.home', [
         }
     });
 
-
 }])
 
 .controller( 'FeedCtrl', ['$location', '$rootScope', '$sailsSocket', '$sce', '$scope', 'ContentModel', 'OrderModel', 'PeerModel', 'ProjectModel', 'ReactionModel', 'SearchModel', 'TaskModel', 'titleService', 'UserModel', 'ValidationModel', function HomeController( $location, $rootScope, $sailsSocket, $sce, $scope, ContentModel, OrderModel, PeerModel, ProjectModel, ReactionModel, SearchModel, TaskModel, titleService, UserModel, ValidationModel ) {
@@ -362,6 +361,10 @@ angular.module( 'conexus.home', [
     //\\//\\//\\//\\//
     //TUTORIAL\\//\\//
     //\\//\\//\\//\\//
+
+    //WATCH?
+    //GET ASSOCIATION MODELS
+    //SEPERATE QUERIES..
     
     //CORE APPS
     $scope.apps = [
@@ -407,6 +410,7 @@ angular.module( 'conexus.home', [
         {model:'APP', title:'Task', description:''},
         {model:'APP', title:'Time', description:''},
         {model:'APP', title:'Transaction', description:''},
+        {model:'APP', title:'Tutorial', description:''},
 
     ];
 
@@ -425,34 +429,330 @@ angular.module( 'conexus.home', [
 
     };
 
-    //DO YOU BELIEVE IN HONOR
     //TODO: PACKS
     $scope.selectPack = function(model){
-         $scope.selectedPack = model;
+        $scope.selectedPack = model;
+        $scope.selectedQuestions = $scope.questions.filter(function(obj){
+            return obj.pack == model.title;
+        });
     };
 
-    $scope.packs=[
-        {title:'General', description:'Thinking about an archetypal human value profile. Tell us what you believe makes a human thirve.'}
+    $scope.packs = [
+        {
+            title:'General', 
+            description:'Thinking about an archetypal human value profile. Tell us what you believe makes a human thirve.'
+        },
+        {
+            title:'Health', 
+            description:'How can we be happy, healthly, and strong?'
+        },
+        {
+            title:'Time', 
+            description:'Our Intentional Time encodes who we are as an archetypal human value profile. What time is of value?'
+        },
+        {
+            title:'Governance', 
+            description:'Conduct the policy, actions, and affairs of (a state, organization, or people)'
+        },
+        {
+            title:'Principles', 
+            description:'A fundamental truth or proposition that serves as the foundation for a system of belief or behavior or for a chain of reasoning.'
+        },
+        {
+            title:'Religion', 
+            description:'Religion is a social-cultural system of designated behaviors and practices, morals, worldviews, texts, sanctified places, prophecies, ethics, or organizations, that relates humanity to supernatural, transcendental, or spiritual elements.'
+        },
+        {
+            title:'Human', 
+            description:'Basic Values'
+        },
+        {
+            title:'Personal Goals', 
+            description:'What do I want for myself?'
+        },
     ];
-    
-    $scope.selectedPack = $scope.packs[0];
 
     $scope.questions = [
-        {type:'onedimension slider', question:'Do you believe in yourself?', assetString:$rootScope.currentUser.username.toUpperCase()+'+BELIEF', response:100, answer:['no','yes']},
-        {type:'onedimension slider', question:'Do you believe in your ability to create?', assetString:$rootScope.currentUser.username.toUpperCase()+'+CREATE', response:100, answer:['no','yes']},
-        {type:'onedimension slider', question:'Do you believe your time is valuable?', assetString:'CRE8+TIME+'+$rootScope.currentUser.username.toUpperCase(), response:100, answer:['no','yes']},
-        {type:'onedimension slider', question:'Do you believe everyones time is valuable?', assetString:'CRE8+TIME', response:100, answer:['no','yes']},
-        {type:'onedimension slider', question:'Do you believe our time is valuable?', assetString:'CRE8+TIME+PROJECT+CRE8', response:100, answer:['no','yes']},
+        {
+            pack:'General', 
+            type:{type:'slider',dimension:''}, 
+            question:'Do you believe in yourself?', 
+            assetString:$rootScope.currentUser.username.toUpperCase()+'+BELIEF', 
+            response:0, 
+            answer:['no','yes']
+        },
+        {
+            pack:'General', 
+            type:'onedimension slider', 
+            question:'Do you believe in your ability to create?', 
+            assetString:$rootScope.currentUser.username.toUpperCase()+'+CREATE', 
+            response:0, 
+            answer:['no','yes']
+        },
+        {
+            pack:'General', 
+            type:'onedimension slider', 
+            question:'Do you believe your time is valuable?', 
+            assetString:'CRE8+TIME+'+$rootScope.currentUser.username.toUpperCase(), 
+            response:0, 
+            answer:['no','yes']
+        },
+        {
+            pack:'General', 
+            type:'onedimension slider', 
+            question:'Do you believe everyones time is valuable?', 
+            assetString:'CRE8+TIME', 
+            response:0, 
+            answer:['no','yes']
+        },
+        {
+            pack:'General',
+            type:'onedimension slider', 
+            question:'Do you believe our time is valuable?', 
+            assetString:'CRE8+TIME+PROJECT+CRE8', 
+            response:0, 
+            answer:['no','yes']
+        },
+        {
+            pack:'Health',
+            type:'onedimension slider', 
+            question:'Is exercise valuable?', 
+            assetString:'CRE8+TIME+EXERCISE', 
+            response:0, 
+            answer:['no','yes']
+        },
+        {
+            pack:'Health',
+            type:'onedimension slider', 
+            question:'Do you think running is valuable?', 
+            assetString:'CRE8+TIME+RUNNING', 
+            response:0, 
+            answer:['no','yes']
+        },
+        {
+            pack:'Health',
+            type:'onedimension slider', 
+            question:'Is the sauna valuable?', 
+            assetString:'CRE8+TIME+SAUNA', 
+            response:0, 
+            answer:['no','yes']
+        },
+        {
+            pack:'Health',
+            type:'onedimension slider', 
+            question:'Are ice baths valuable?', 
+            assetString:'CRE8+TIME+ICEBATH', 
+            response:0, 
+            answer:['no','yes']
+        },
+        {
+            pack:'Health',
+            type:'onedimension slider', 
+            question:'Is climbing is valuable?', 
+            assetString:'CRE8+TIME+CLIMBING', 
+            response:0, 
+            answer:['no','yes']
+        },
+
+        {
+            pack:'Health',
+            type:'onedimension slider', 
+            question:'Is rest valuable?', 
+            assetString:'CRE8+TIME+REST', 
+            response:0, 
+            answer:['no','yes']
+        },
+
+        {
+            pack:'Religion',
+            type:'onedimension slider', 
+            question:'Do you believe in god?', 
+            assetString:'CRE8+TIME+GOD', 
+            response:0, 
+            answer:['no','yes']
+        },
+        {
+            pack:'Religion',
+            type:'onedimension slider', 
+            question:'Is religion a good force?', 
+            assetString:'CRE8+TIME+RELIGION', 
+            response:0, 
+            answer:['no','yes']
+        },
+        {
+            pack:'Religion',
+            type:'onedimension slider', 
+            question:'Is Christianity a good force?', 
+            assetString:'CRE8+TIME+CHRISTANITY', 
+            response:0, 
+            answer:['no','yes']
+        },
+        {
+            pack:'Religion',
+            type:'onedimension slider', 
+            question:'Is Islam a good force?', 
+            assetString:'CRE8+TIME+ISALM', 
+            response:0, 
+            answer:['no','yes']
+        },
+        {
+            pack:'Religion',
+            type:'onedimension slider', 
+            question:'Is Buddhism a good force?', 
+            assetString:'CRE8+TIME+BUDDHISM', 
+            response:0, 
+            answer:['no','yes']
+        },
+        {
+            pack:'Religion',
+            type:'onedimension slider', 
+            question:'Is Hinduism a good force?', 
+            assetString:'CRE8+TIME+HINDUISM', 
+            response:0, 
+            answer:['no','yes']
+        },
+        {
+            pack:'Principles',
+            type:'onedimension slider', 
+            question:'Do you believe in honor?', 
+            assetString:'CRE8+TIME+HONOR', 
+            response:0, 
+            answer:['no','yes']
+        },
+        {
+            pack:'Governance',
+            type:'onedimension slider', 
+            question:'Is democracy valuable?', 
+            assetString:'CRE8+TIME+DEMOCRACY', 
+            response:0, 
+            answer:['no','yes']
+        },
+        {
+            pack:'Governance',
+            type:'onedimension slider', 
+            question:'Is voting?', 
+            assetString:'CRE8+VALIDATION+DEMOCRACY', 
+            response:0, 
+            answer:['no','yes']
+        },
+        {
+            pack:'Governance',
+            type:'onedimension slider', 
+            question:'Is communism valuable?', 
+            assetString:'CRE8+TIME+COMMUNISM', 
+            response:0, 
+            answer:['no','yes']
+        },
+        {
+            pack:'Governance',
+            type:'onedimension slider', 
+            question:'Is socalism valuable?', 
+            assetString:'CRE8+TIME+SOCALISM', 
+            response:0, 
+            answer:['no','yes']
+        },
+        {
+            pack:'Governance',
+            type:'onedimension slider', 
+            question:'Is the party system valuable?', 
+            assetString:'CRE8+TIME+POLITICALPARTY', 
+            response:0, 
+            answer:['no','yes']
+        },
+        {
+            pack:'Governance',
+            type:'onedimension slider', 
+            question:'Are republicans valuable?', 
+            assetString:'CRE8+TIME+REPUBLICAN', 
+            response:0, 
+            answer:['no','yes']
+        },
+        {
+            pack:'Governance',
+            type:'onedimension slider', 
+            question:'Are democrats valuable?', 
+            assetString:'CRE8+TIME+DEMOCRAT', 
+            response:0, 
+            answer:['no','yes']
+        },
+        {
+            pack:'Governance',
+            type:'onedimension slider', 
+            question:'Is politics valuable?', 
+            assetString:'CRE8+TIME+POLITICS', 
+            response:0, 
+            answer:['no','yes']
+        },
+        {
+            pack:'Human',
+            type:'onedimension slider', 
+            question:'Is food valuable?', 
+            assetString:'CRE8+TIME+FOOD', 
+            response:0, 
+            answer:['no','yes']
+        },
+        {
+            pack:'Human',
+            type:'onedimension slider', 
+            question:'Is water valuable?', 
+            assetString:'CRE8+TIME+WATER', 
+            response:0, 
+            answer:['no','yes']
+        },
+        {
+            pack:'Human',
+            type:'onedimension slider', 
+            question:'Is shelter valuable?', 
+            assetString:'CRE8+TIME+SHELTER', 
+            response:0, 
+            answer:['no','yes']
+        },
+
+        {
+            pack:'Human',
+            type:'onedimension slider', 
+            question:'Is shelter valuable?', 
+            assetString:'CRE8+TIME+SHELTER', 
+            response:0, 
+            answer:['no','yes']
+        },
+
+        {
+            pack:'Time',
+            type:'onedimension slider', 
+            question:'Is learning valuable?', 
+            assetString:'CRE8+TIME+LEANRING', 
+            response:0, 
+            answer:['no','yes']
+        },
+
+        {
+            pack:'Personal Goals',
+            type:'onedimension slider', 
+            question:'Art?', 
+            assetString:'CRE8+TIME+PERSONAL', 
+            response:0, 
+            answer:['no','yes']
+        },
+
     ];
 
-    $rootScope.baseToken = {
+    //watch question ansers to create order
+
+
+    $scope.selectPack($scope.packs[0]);
+
+    $rootScope.baseTokenSet = [{
         text:'UNIVERSAL', 
-        description:'Universal Token Position; protocol where every member creates one Universal Token per day to serve an an eglatarian value position.'
-    };
-    $rootScope.baseManifold = {
+        description:'Universal Position; protocol where every member creates one Universal Token per day to serve an an eglatarian value position.'
+    },{
+        text:$rootScope.currentUser.username.toUpperCase(),
+        description:'Member Personal Asset. Repreasenting individual value.'
+    }];
+    $rootScope.baseManifold = [{
         text:'+SPONSOR+ONMINT+'+$rootScope.currentUser.id, 
         description:'Sponsorship On Mint postions have a triggering action potiental \'on mint\' of the specified token root the manifold (TOKEN+SPONSOR).'
-    };
+    }];
     $rootScope.orderType = {
         text:'Continual', 
         description:'Continual Market Orders will fill as long as there is liquidity. Useful for token protocols with ongoing minting logic'
@@ -795,8 +1095,9 @@ angular.module( 'conexus.home', [
 
                 associatedModels:[
 
+                    //$rootScope.baseTokenSet
                     {market:'UNIVERSAL', amount:1, direction:'SELL', collateral:{}}, //ASSOCIATION OWNES THE TOKENS IF COLLATERAL --> GIVES IT FLOW
-                    //{market:$rootScope.currentUser.username.toUpperCase(), amount:1, direction:'SELL'},
+                    {market:$rootScope.currentUser.username.toUpperCase(), amount:1, direction:'SELL'},
                     
                     {market:'CRE8+TIME+'+model.model.toUpperCase()+'+'+model.id+'+ONMINT+SPONSOR+'+$rootScope.currentUser.id, amount:3600, direction:'BUY'},
 
@@ -897,6 +1198,11 @@ angular.module( 'conexus.home', [
             
             //TODO: WAY BETTER
             if ($rootScope.currentUser.associationModels){
+
+
+
+
+
                 //COULD GET EACH VS ALL IN ONE
                 $scope.followers = $rootScope.currentUser.associationModels.filter(function(obj) {
                     for (x in obj.associatedModels){
@@ -975,6 +1281,18 @@ angular.module( 'conexus.home', [
                     if (index == -1){obj.isAssociated = false;}
                     return obj;
                 });
+
+
+
+
+                //$scope.memberAssociations = $rootScope.currentUser.associationModels.map(function(obj){return obj.associatedModels});
+
+
+
+
+
+
+
             }
             $scope.init();
             $scope.initTutorial();

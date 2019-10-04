@@ -550,6 +550,7 @@ module.exports = {
 
 		};
 
+		//TODO: IN ROOT
 		function mintTokens(model){
 			var transactionProtocolTokens = getProtocolTokens(model);
 			for (x in transactionProtocolTokens){
@@ -566,7 +567,10 @@ module.exports = {
 								information:{inCirculation:model.amount, markets:0},
 								logic:{transferrable:true, mint:'CREATE TIME'}
 							};
-							Token.create(newTokenModel).then(function(model){console.log('TOKEN CREATED', model.string);});
+							Token.create(newTokenModel).then(function(model){
+								createEvent(newTokenModel, 'create');
+								console.log('TOKEN CREATED', model.string);
+							});
 							//TO, FROM
 							model.user.balance[tokenString] = parseFloat(model.amount);
 							User.update({id:model.user.id}, {balance:model.user.balance}).then(function(user){});

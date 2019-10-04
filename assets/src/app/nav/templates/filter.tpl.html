@@ -220,11 +220,13 @@
 
             <div ng-if="type=='VALUEMAP'">
 
-                <tags-input min-length="1" placeholder="Base Asset" ng-model="baseToken">
+                <tags-input min-length="1" placeholder="Base Asset" ng-model="baseTokenSet">
                     <auto-complete source="loadAsset($query)"></auto-complete>
                 </tags-input>
-                <h5>{{baseToken.text}}</h5>
-                <p>{{baseToken.description}}</p>
+                <div ng-repeat="token in baseTokenSet">
+                    <h5>{{token.text}}</h5>
+                    <p>{{token.description}}</p>
+                </div>
                 <div class="spacing-10"></div>
 
                 <tags-input min-length="1" placeholder="Manifold" ng-model="baseManifold">
@@ -236,6 +238,7 @@
 
                 <h5>{{orderType.text}}</h5>
                 <p>{{orderType.description}}</p>
+
                 <ul class="nav nav-pills nav-stacked contentType">
                     <li ng-class="{active: orderType.text=='Continual'}" ng-click="selectType('CONTINUAL')"><a href="#">Continual on Books</a></li>
                     <li ng-class="{active: selectedType=='DISCRETE'}" ng-click="selectType('DISCRETE')"><a href="#">Discrete on Books</a></li>
@@ -243,6 +246,7 @@
                     <li ng-class="{active: selectedType=='IOC'}" ng-click="selectType('IOC')"><a href="#">Immediate or Cancel</a></li>
                     <li ng-class="{active: selectedType=='LIMIT'}" ng-click="selectType('LIMIT')"><a href="#">Limit</a></li>
                 </ul>
+
                 <div class="spacing-10"></div>
             </div>
 
