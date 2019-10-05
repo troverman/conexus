@@ -8865,13 +8865,11 @@ angular.module("nav/templates/createTime.tpl.html", []).run(["$templateCache", f
     "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
-    "\n" +
     "        <div style=\"padding:16px\">\n" +
     "            <div class=\"spacing-15\"></div>\n" +
     "            <p style=\"color:gray;font-style:italic\">Time & Intention unite. Token Protocols propogate value interactions. <a ng-click=\"informationToggle('CREATETIME')\"><i class=\"fa fa-question-circle\"></i></a></p>\n" +
     "            <div class=\"spacing-10\"></div>\n" +
     "            <form role=\"form\" ng-submit=\"createTime()\">\n" +
-    "\n" +
     "                <div>\n" +
     "                    <h5 ng-click=\"expandAssociations()\">\n" +
     "                        Context \n" +
@@ -8884,7 +8882,6 @@ angular.module("nav/templates/createTime.tpl.html", []).run(["$templateCache", f
     "                        <auto-complete min-length=\"2\" source=\"loadTags($query)\"></auto-complete>\n" +
     "                    </tags-input>\n" +
     "                </div>\n" +
-    "                \n" +
     "                <div ng-if=\"associationsAreExpanded\">\n" +
     "                    <h5>Associations </h5>\n" +
     "                    <tags-input min-length=\"1\" placeholder=\"Associations\" ng-model=\"newTime.associatedModels\">\n" +
@@ -8918,14 +8915,11 @@ angular.module("nav/templates/createTime.tpl.html", []).run(["$templateCache", f
     "                        </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
-    "\n" +
     "                <ul class=\"nav nav-pills nav-justified contentTyle\">\n" +
     "                    <li ng-class=\"{active: newTime.type=='PLANNED'}\" ng-click=\"selectTypeTime('PLANNED')\"><a>RETROACTIVE OR PLANNED</a></li>\n" +
     "                    <li ng-class=\"{active: newTime.type=='LIVE'}\" ng-click=\"selectTypeTime('LIVE')\"><a>LIVE</a></li>\n" +
     "                </ul>\n" +
-    "\n" +
     "                <div ng-if=\"newTime.type == 'LIVE'\">\n" +
-    "\n" +
     "                    <div ng-show=\"!recordingTime\">\n" +
     "                        <div ng-show=\"!streaming\">\n" +
     "                            <h3>Streaming?</h3>\n" +
@@ -8948,13 +8942,10 @@ angular.module("nav/templates/createTime.tpl.html", []).run(["$templateCache", f
     "                        <div class=\"spacing-5\"></div>\n" +
     "                        <text-angular ng-model=\"newTime.content\" ta-toolbar=\"[['p','h1','bold','italics','quote','insertLink', 'html']]\"></text-angular>\n" +
     "                        <div class=\"spacing-5\"></div>\n" +
-    "                        <a ng-click=\"submit()\" style=\"width:100%\" class=\"btn btn-default log-btn\">create</a>\n" +
+    "                        <a ng-click=\"createTime()\" style=\"width:100%\" class=\"btn btn-default log-btn\">create</a>\n" +
     "                    </div>            \n" +
-    "\n" +
     "                </div>\n" +
-    "\n" +
     "                <div ng-if=\"newTime.type == 'PLANNED'\">\n" +
-    "\n" +
     "                    <div class=\"row\">\n" +
     "                        <div class=\"col-sm-6\">\n" +
     "                            <h5>Start Time</h5>\n" +
@@ -8970,11 +8961,8 @@ angular.module("nav/templates/createTime.tpl.html", []).run(["$templateCache", f
     "                    <input type=\"number\" step=\"1\" placeholder=\"Amount\" ng-model=\"newTime.amount\" class=\"form-control\">\n" +
     "                    \n" +
     "                    <text-angular ng-model=\"newTime.content\" ta-toolbar=\"[['p','h1','bold','italics','quote','insertLink', 'html']]\"></text-angular>\n" +
-    "                    <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newTime.amount\">create</button>\n" +
-    "\n" +
+    "                    <button ng-click=\"createTime()\" type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newTime.amount\">create</button>\n" +
     "                </div>\n" +
-    "\n" +
-    "\n" +
     "            </form>\n" +
     "        </div>\n" +
     "\n" +
@@ -14641,9 +14629,13 @@ angular.module("validation/templates/information.tpl.html", []).run(["$templateC
     "\n" +
     "<div class=\"spacing-5\"></div>\n" +
     "\n" +
-    "<p><a ng-click=\"informationToggle('Association')\">Association</a></p>\n" +
+    "<p>Association</p>\n" +
     "\n" +
-    "<p><a ng-click=\"informationToggle('VOTINGPROTOCOL - MULTIPLICATIVE')\">Charter: Multipliticative </a></p>\n" +
+    "<p>Connection</p>\n" +
+    "\n" +
+    "{{validation.connection}}\n" +
+    "\n" +
+    "{{validation}}\n" +
     "\n" +
     "<div class=\"spacing-5\"></div>\n" +
     "\n" +
