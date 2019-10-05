@@ -4,10 +4,10 @@
 
     <div class="spacing-5"></div>
 
-    <!--CONSENT FORM SEPERATE-->
     <div class="row" ng-if="!isTutorial || !currentUser.apps.cre8.tutorial">
 
         <div class="col-sm-4 col-xs-12" style="padding-left:0px;padding-right:0px">
+    
             <div class="member-card" style="margin-left:10px;margin-right:10px;margin-bottom:0px" ng-click="subNavToggle(currentUser)">
                 <div class="member-card-image" style="background-image: url('{{currentUser.coverUrl}}')">
                     <a href="member/{{currentUser.username}}" ui-sref="member.activity({path:currentUser.username})">
@@ -15,175 +15,177 @@
                     </a>
                 </div>
                 <div class="member-card-info">
+
                     <h4><a href="member/{{currentUser.username}}" ui-sref="member.activity({path:currentUser.username})">{{currentUser.username}}</a></h4>
+                    
+                    <p style="font-size:12px;" ng-click="$event.stopPropagation();memberQRToggle(currentUser);"><a style="color:gray"><i class="fas fa-qrcode"></i> {{currentUser.id}}</a></p>
+
                     <p style="color:gray;font-size:12px;">
                         <span><i style="color:#30b257" class="fa fa-circle"></i> Online</span>
                         <span ng-if="currentUser.status"><br>{{currentUser.status}}</span>
                     </p>
+
+                    <p style="font-size:13px;">
+                        <a href="member/{{currentUser.username}}/projects" ui-sref="member.projects({path:currentUser.username})">{{currentUser.projectCount || 0}} Projects</a> | 
+                        <a href="member/{{currentUser.username}}/followers" ui-sref="member.followers({path:currentUser.username})">{{currentUser.followerCount || 0}} Followers</a> | 
+                        <a href="member/{{currentUser.username}}/following" ui-sref="member.following({path:currentUser.username})">{{currentUser.followingCount || 0}} Following</a>
+                    </p>
+                    
+                    <p style="color:gray"><a href="member/{{currentUser.username}}/assets" ui-sref="member.assets({path:currentUser.username})">{{currentUser.totalWork}} Reputation</a></p>
+
                 </div> 
             </div>
-        </div>
 
-        <!--REPUTATION / BALANCE MAPPING && VALUE MAP-->
-        <!--APP INPUT-->
-        <div class="col-sm-8 col-xs-12" style="padding-left:0px;padding-right:0px">
-            <div class="spacing-5"></div>
-            <ul style="padding:0px;" class="member-tabs">
-                <li style="float:left;font-size:14px"><a href="#" ng-click="selectTab('INFORMATION')"><i class="fas fa-passport"></i> Information</a></li>
-                <li style="float:left;font-size:14px"><a href="#" ng-click="selectTab('SUGGESTIONS')"><i class="fas fa-exclamation"></i><i class="fas fa-question"></i> Suggestions</a></li>
-                <li style="float:left;font-size:14px"><a href="#" ng-click="selectTab('VALUEMAP')"><i class="fas fa-globe"></i> Value Map</a></li>
-                <li style="float:left;font-size:14px"><a href="#" ng-click="selectTab('BALANCES')"><i class="fas fa-universal-access"></i> Balances</a></li>
-                <div style="clear:both"></div>
-            </ul>
-            <div class="card" style="margin-top:0px">
-                <div style="padding:16px;">
-
-                    <div ng-show="selectedTab =='INFORMATION'">
-                        <h4><a href="member/{{currentUser.username}}" ui-sref="member.activity({path:currentUser.username})">{{currentUser.username}}</a></h4>
-                        <p style="font-size:12px;" ng-click="$event.stopPropagation();memberQRToggle(currentUser);"><a style="color:gray"><i class="fas fa-qrcode"></i> {{currentUser.id}}</a></p>
-                        <p style="font-size:13px;">
-                            <a href="member/{{currentUser.username}}/projects" ui-sref="member.projects({path:currentUser.username})">{{currentUser.projectCount || 0}} Projects</a> | 
-                            <a href="member/{{currentUser.username}}/followers" ui-sref="member.followers({path:currentUser.username})">{{currentUser.followerCount || 0}} Followers</a> | 
-                            <a href="member/{{currentUser.username}}/following" ui-sref="member.following({path:currentUser.username})">{{currentUser.followingCount || 0}} Following</a>
-                        </p>
-                        <p style="color:gray"><a href="member/{{currentUser.username}}/assets" ui-sref="member.assets({path:currentUser.username})">{{currentUser.totalWork}} Reputation</a></p>
-                    </div>
-
-                    <div ng-show="selectedTab =='SUGGESTIONS'">
-
-                        <div ng-repeat="item in suggestions">
-                            <a href="{{item.model.toLowerCase()}}/{{item.id}}">{{item.title}}</a>
-                            <p>{{item.description}}</p>
-                        </div>
-                        <p class="btn btn-default" ng-click="shuffleSuggestions()">shuffle</p>
-
-                    </div>
-
-                    <div ng-show="selectedTab =='VALUEMAP'">
-                        <h5>Position Lookup<br><span style="font-size:11px;color:gray">{{currentUser.id}}</span></h5>
-                    </div>
-
-                    <div ng-show="selectedTab =='BALANCES'">
-                        <div class="row">
-                            <div><highchart config="balanceChart"></highchart></div>
-                            <div class="col-xs-12">
-                                <h5>Balance Lookup <br><span style="font-size:11px;color:gray">{{currentUser.id}}</span></h5>
-                                <form ng-submit="lookupBalance()" style="display:flex;flex-direction:row;">
-                                    <input ng-model="$root.balanceLook" style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder="Asset">
-                                    <div ng-click="lookupBalance()" style="border:0px;float:right" class="btn btn-default">
-                                        <a href="#"><h5 style="color:black;text-align:right" class="noselect"> <i class="fa fa-search"></i></h5></a>
-                                    </div>
-                                </form>
-                                <div ng-show="balanceLookupValue !== undefined">
-                                    <h5><a href="market/{{balanceLook}}" ui-sref="market({id:balanceLook})">{{balanceLook}}</a> | {{balanceLookupValue}}</h5>
+            <!--TODO: DISCOVERABILITY AREA HERE-->
+            <div class="mobileFix">
+                <div class="card" ng-if="sortedTagArray.length > 0" ng-click="filterToggle('DISCOVER', filterSet)">
+                    <div style="background:url('https://source.unsplash.com/1600x900/?details,notes,exolore,wonder,connection');min-height:50px" class="imageContainerSmall">
+                        <div style="background:rgba(0,0,0,0.75);height:50px" class="imageContainerSmallDiv">  
+                            <div style="margin-top: auto;margin-bottom: auto;">
+                                <div class="container">
+                                    <h1 style="text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;">Context</h1>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
+                    <div style="padding:16px;">
+                        <div ng-repeat="tag in sortedTagArray" ng-click="$event.stopPropagation();filterContent(tag.element)">
+                            <a><b>{{tag.element}}</b></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" ng-if="sortedAssociationArray.length > 0" ng-click="filterToggle('DISCOVER', filterSet)">
+                    <div style="background:url('https://source.unsplash.com/1600x900/?details,notes,exolire,wonder,data,city');min-height:50px" class="imageContainerSmall">
+                        <div style="background:rgba(0,0,0,0.75);height:50px" class="imageContainerSmallDiv">  
+                            <div style="margin-top: auto;margin-bottom: auto;">
+                                <div class="container">
+                                    <h1 style="text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;">Associations</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="padding:16px;">
+                        <div ng-repeat="association in sortedAssociationArray" ng-click="$event.stopPropagation();filterContent(tag.element)">
+                            <a><b>{{association.element}}</b></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" ng-if="locations.length > 0" ng-click="filterToggle('DISCOVER', filterSet)">
+                    <div style="background:url('https://source.unsplash.com/1600x900/?details,notes,exolire,wonder,city,country,forest,mountain,fire,mesa');min-height:50px" class="imageContainerSmall">
+                        <div style="background:rgba(0,0,0,0.75);height:50px" class="imageContainerSmallDiv">  
+                            <div style="margin-top: auto;margin-bottom: auto;">
+                                <div class="container">
+                                    <h1 style="text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;">Locations</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="padding:16px;">
+                        <div ng-repeat="location in locations" ng-click="$event.stopPropagation();filterContent(tag.element)">
+                            <a>{{location}}</a>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+        </div>
+
+        <div class="col-sm-8 col-xs-12" style="padding-left:0px;padding-right:0px;">
+            <div class="card" ng-click="filterToggle('DISCOVER', filterSet)">
+                <div style="background:url('https://source.unsplash.com/1600x900/?explore,discover');min-height:135px" class="imageContainerSmall">
+                    <div style="background:rgba(0,0,0,0.75);height:135px" class="imageContainerSmallDiv">  
+                        <div style="text-align:right;padding:15px;position:absolute;right:0">
+                            <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><i class="fas fa-chevron-down"></i></a>
+                        </div> 
+                        <div style="margin-top: auto;margin-bottom: auto;">
+                            <div style="padding:15px">
+                                <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">Feed</h1>
+                                <!--SELECTED /ACTIVE FILTERS-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="background-color:white">
+                    <div class="member-tab-container" style="padding-left:0px">
+                        <div style="text-align:center">
+                            <ul style="padding:0px;" class="member-tabs">
+                                <li ng-click="$event.stopPropagation();selectTab('ACTIVITY');" style="font-size:14px"><a><i class="fas fa-th-list"></i> Activity</a></li>
+                                <li ng-click="$event.stopPropagation();selectTab('BALANCES');" style="font-size:14px"><a><i class="fas fa-universal-access"></i> Balances</a></li>
+                                <li ng-click="$event.stopPropagation();selectTab('SUGGESTIONS');" style="font-size:14px"><a><i class="fas fa-exclamation"></i><i class="fas fa-question"></i> Suggestions</a></li>
+                                <li ng-click="$event.stopPropagation();selectTab('VALUEMAP');" style="font-size:14px"><a><i class="fas fa-globe"></i> Value Map</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--TODO: DISCOVERABILITY AREA HERE-->
+            <div ng-if="selectedTab =='ACTIVITY'">
+
+                <ul style="padding:0px;" class="member-tabs">
+                    <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fa fa-filter"></i> Filter</a></li>
+                    <li style="float:right;font-size:14px"><a href="#" ng-click="sortToggle()">Sort By Recent <i class="fa fa-angle-down"></i></a></li>
+                    <div style="clear:both"></div>
+                </ul>
+
+                <div class="card">
+                    <tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search" ng-model="searchQuery"></tags-input>
+                    <md-progress-linear style="height:2px" ng-if="stateIsLoadingFeed" md-mode="indeterminate"></md-progress-linear>
+                </div>
+
+                <div class="card" style="margin-top:0px;"><button class="btn btn-default log-btn" ng-click="cre8Toggle()">CRE8</button></div>
+                <div class="card" ng-show="activity.length == 0"><div style="padding:16px;"><span style="color:gray" >There's nothing here..</span></div></div>
+
+                <div ng-repeat="item in activity">
+                    <div ng-if="item.model=='CONTENT'" ng-include="'templates/cards/contentCard.tpl.html'"></div>
+                    <div ng-if="item.model=='PROJECT'" ng-include="'templates/cards/projectCard.tpl.html'"></div>
+                    <div ng-if="item.model=='TASK'" ng-include="'templates/cards/taskCard.tpl.html'"></div>
+                    <div ng-if="item.model=='TIME'" ng-include="'templates/cards/timeCard.tpl.html'"></div>
+                </div>
+
+            </div>
+
+            <div ng-if="selectedTab =='BALANCES'">
+                <div class="card">
+                    <div style="padding:16px">
+                        <div><highchart config="balanceChart"></highchart></div>
+                        <h5>Balance Lookup <br><span style="font-size:11px;color:gray">{{currentUser.id}}</span></h5>
+                        <form ng-submit="lookupBalance()" style="display:flex;flex-direction:row;">
+                            <input ng-model="$root.balanceLook" style="border:0px;flex-grow:2;" class="form-control" type="text" placeholder="Asset">
+                            <div ng-click="lookupBalance()" style="border:0px;float:right" class="btn btn-default">
+                                <a href="#"><h5 style="color:black;text-align:right" class="noselect"> <i class="fa fa-search"></i></h5></a>
+                            </div>
+                        </form>
+                        <div ng-show="balanceLookupValue !== undefined">
+                            <h5><a href="market/{{balanceLook}}" ui-sref="market({id:balanceLook})">{{balanceLook}}</a> | {{balanceLookupValue}}</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div ng-if="selectedTab =='SUGGESTIONS'">
+                <div class="card" ng-repeat="item in suggestions">
+                    <div style="padding:16px">
+                        <h3><a href="{{item.model.toLowerCase()}}/{{item.id}}">{{item.title}}</a></h3>
+                        <p>{{item.description}}</p>
+                        <button class="btn btn-default log-btn" ng-click="shuffleSuggestions()">Create</button>
+                    </div>
+                </div>
+                <div class="card"><button class="btn btn-default log-btn" ng-click="shuffleSuggestions()">More</button></div>
+            </div>
+
+            <!--PAST SUMMARY; UPCOMING SCHEDULE-->
+
+            <div ng-if="selectedTab =='VALUEMAP'">
+                <div class="card">
+                    <div style="padding:16px">
+                        <h5>Position Lookup<br><span style="font-size:11px;color:gray">{{currentUser.id}}</span></h5>
+                    </div>
+                </div>
+                <!--TEMP-->
+                <div ng-include="'tutorial/templates/valueMapBuilder.tpl.html'"></div>
+            </div>
+
         </div>
     </div>
-    
-    <div class="spacing-5"></div>
-
-    <!--TODO: MOBILE FILTER-->
-    <!--TODO: APP INPUT-->
-    <div class="row" ng-show="!isTutorial || !currentUser.apps.cre8.tutorial">
-        <!--DISCOVERABILITY AREA HERE-->
-        <!--PAST 24HR TIME CONTEXT-->
-        <!--REPUTATION-->
-        <!--PAST SUMMARY; UPCOMING SCHEDULE-->
-        <!--VALUE MAP-->
-        <div class="col-sm-4 mobileFix" style="padding-left:0px;padding-right:0px;">
-            <div class="card" ng-if="sortedTagArray.length > 0" ng-click="filterToggle('DISCOVER', filterSet)">
-                <div style="background:url('https://source.unsplash.com/1600x900/?details,notes,exolore,wonder,connection');min-height:50px" class="imageContainerSmall">
-                    <div style="background:rgba(0,0,0,0.75);height:50px" class="imageContainerSmallDiv">  
-                        <div style="margin-top: auto;margin-bottom: auto;">
-                            <div class="container">
-                                <h1 style="text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;">Context</h1>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div style="padding:16px;">
-                    <div ng-repeat="tag in sortedTagArray" ng-click="$event.stopPropagation();filterContent(tag.element)">
-                        <a><b>{{tag.element}}</b></a>
-                    </div>
-                </div>
-            </div>
-            <div class="card" ng-if="sortedAssociationArray.length > 0" ng-click="filterToggle('DISCOVER', filterSet)">
-                <div style="background:url('https://source.unsplash.com/1600x900/?details,notes,exolire,wonder,data,city');min-height:50px" class="imageContainerSmall">
-                    <div style="background:rgba(0,0,0,0.75);height:50px" class="imageContainerSmallDiv">  
-                        <div style="margin-top: auto;margin-bottom: auto;">
-                            <div class="container">
-                                <h1 style="text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;">Associations</h1>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div style="padding:16px;">
-                    <div ng-repeat="association in sortedAssociationArray" ng-click="$event.stopPropagation();filterContent(tag.element)">
-                        <a><b>{{association.element}}</b></a>
-                    </div>
-                </div>
-            </div>
-            <div class="card" ng-if="locations.length > 0" ng-click="filterToggle('DISCOVER', filterSet)">
-                <div style="background:url('https://source.unsplash.com/1600x900/?details,notes,exolire,wonder,city,country,forest,mountain,fire,mesa');min-height:50px" class="imageContainerSmall">
-                    <div style="background:rgba(0,0,0,0.75);height:50px" class="imageContainerSmallDiv">  
-                        <div style="margin-top: auto;margin-bottom: auto;">
-                            <div class="container">
-                                <h1 style="text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;">Locations</h1>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div style="padding:16px;">
-                    <div ng-repeat="location in locations" ng-click="$event.stopPropagation();filterContent(tag.element)">
-                        <a>{{location}}</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-sm-8" style="padding-left:0px;padding-right:0px;">
-
-            <ul style="padding:0px;" class="member-tabs">
-                <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fa fa-filter"></i> Filter</a></li>
-                <!--
-                <li ng-if="currentUser" style="float:left;font-size:14px"><a href="member/{{currentUser.username}}/followers" ng-click="getMyFollowers()"><i class="fa fa-users"></i> Following</a></li>
-                <li ng-if="currentUser" style="float:left;font-size:14px"><a href="member/{{currentUser.username}}/projects" ng-click="getMyProjects()"><i class="fas fa-project-diagram"></i> My Projects</a></li>
-                -->
-                <li style="float:right;font-size:14px"><a href="#" ng-click="sortToggle()">Sort By Recent <i class="fa fa-angle-down"></i></a></li>
-                <div style="clear:both"></div>
-            </ul>
-
-            <div class="card">
-                <tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search" ng-model="searchQuery"></tags-input>
-                <md-progress-linear style="height:2px" ng-if="stateIsLoadingFeed" md-mode="indeterminate"></md-progress-linear>
-            </div>
-
-            <div class="card" style="margin-top:0px;">
-                <button class="btn btn-default log-btn" ng-click="cre8Toggle()">CRE8</button>
-            </div>
-
-            <div class="card" ng-show="activity.length == 0">
-                <div style="padding:16px;">
-                    <span style="color:gray" >There's nothing here..</span>
-                </div>
-            </div>
-
-            <div ng-repeat="item in activity">
-                <div ng-if="item.model=='CONTENT'" ng-include="'templates/cards/contentCard.tpl.html'"></div>
-                <div ng-if="item.model=='PROJECT'" ng-include="'templates/cards/projectCard.tpl.html'"></div>
-                <div ng-if="item.model=='TASK'" ng-include="'templates/cards/taskCard.tpl.html'"></div>
-                <div ng-if="item.model=='TIME'" ng-include="'templates/cards/timeCard.tpl.html'"></div>
-            </div>
-        </div>
-
-    </div>
-
 </div>
-
-<div class="spacing-25"></div>

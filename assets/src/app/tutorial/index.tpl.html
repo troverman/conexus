@@ -1,59 +1,9 @@
-<style>
-    .valueMapButton{
-        margin: 2px;
-        padding: 0 5px;
-        display: inline-block;
-        float: left;
-        font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
-        height: 40px;
-        line-height: 40px;
-        border: 2px solid #acacac;
-        border-radius: 3px;
-        background: rgba(0,43,85,1);
-        color: white;
-    }
-    .animationIf.ng-enter,
-    .animationIf.ng-leave {
-        -webkit-transition: opacity ease-in-out 0.5s;
-        -moz-transition: opacity ease-in-out 0.5s;
-        -ms-transition: opacity ease-in-out 0.5s;
-        -o-transition: opacity ease-in-out 0.5s;
-        transition: opacity ease-in-out 0.5s;
-    }
-    .animationIf.ng-enter,
-    .animationIf.ng-leave.ng-leave-active {opacity: 0;}
-    .animationIf.ng-leave,
-    .animationIf.ng-enter.ng-enter-active {opacity: 1;}
-</style>
-
 <div class="row">
-
-    <div ng-show="pageNumber == 0">
-        <div ng-include="'tutorial/templates/intro.tpl.html'"></div>
-    </div>
-
-    <div ng-show="pageNumber == 1">
-        <div ng-include="'tutorial/templates/valueMap.tpl.html'"></div>
-    </div>
- 
-    <div ng-if="pageNumber == 2">
-        <div ng-include="'tutorial/templates/projects.tpl.html'"></div>
-    </div>
-
-    <div ng-if="pageNumber == 3">
-        <div ng-include="'tutorial/templates/tasks.tpl.html'"></div>
-    </div>
-
-    <div ng-if="pageNumber == 4">
-        <div ng-include="'tutorial/templates/members.tpl.html'"></div>
-    </div>
-
-    <div ng-if="pageNumber == 5">
-        <div ng-include="'tutorial/templates/valueMapUpdate.tpl.html'"></div>
-    </div>
-
-    <div ng-if="pageNumber == 6" ng-click="">
-        <div ng-include="'tutorial/templates/create.tpl.html'"></div>
-    </div>
-    
+    <div ng-show="pageNumber == 0"><div ng-include="'tutorial/templates/intro.tpl.html'"></div></div>
+    <div ng-show="pageNumber == 1"><div ng-include="'tutorial/templates/valueMap.tpl.html'"></div></div>
+    <div ng-if="pageNumber == 2"><div ng-include="'tutorial/templates/projects.tpl.html'"></div></div>
+    <div ng-if="pageNumber == 3"><div ng-include="'tutorial/templates/tasks.tpl.html'"></div></div>
+    <div ng-if="pageNumber == 4"><div ng-include="'tutorial/templates/members.tpl.html'"></div></div>
+    <div ng-if="pageNumber == 5"><div ng-include="'tutorial/templates/valueMapUpdate.tpl.html'"></div></div>
+    <div ng-if="pageNumber == 6" ng-click=""><div ng-include="'tutorial/templates/create.tpl.html'"></div></div>
 </div>

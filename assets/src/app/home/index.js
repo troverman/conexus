@@ -315,18 +315,56 @@ angular.module( 'conexus.home', [
         yAxis: {title: {text: null}},
         credits:{enabled:false},
     };
-    $scope.selectedTab = 'INFORMATION';
+    $scope.selectedTab = 'ACTIVITY';
+
+    //TODO: FORMAT
     $scope.suggestions = [
-        {model:'TASK', id:'5ba1cf2f3196c813001703d9', title:'Rest', description:'Rest', rationale:'Human Activity - Value Map'},
-        {model:'TASK', id:'5ba1cf2f3196c813001703d9', title:'Run', description:'Rest', rationale:'Human Activity - Value Map'},
-        {model:'TASK', id:'5ba1cf2f3196c813001703d9', title:'Exercise', description:'Rest', rationale:'Human Activity - Value Map'},
-        {model:'TASK', id:'5ba1cf2f3196c813001703d9', title:'Stretch', description:'Rest', rationale:'Human Activity - Value Map'},
-        {model:'TASK', id:'5ba1cf2f3196c813001703d9', title:'Hack', description:'Rest', rationale:'Human Activity - Value Map'},
-        {model:'TASK', id:'5ba1cf2f3196c813001703d9', title:'Message', description:'Rest', rationale:'Human Activity - Value Map'},
-        {model:'TASK', id:'5ba1cf2f3196c813001703d9', title:'Comunicate', description:'Rest', rationale:'Human Activity - Value Map'},
-        {model:'TASK', id:'5ba1cf2f3196c813001703d9', title:'Drink Water', description:'Rest', rationale:'Human Activity - Value Map'},
-        {model:'TASK', id:'5ba1cf2f3196c813001703d9', title:'Eat Food', description:'Rest', rationale:'Human Activity - Value Map'},
-        {model:'TASK', id:'5ba1cf2f3196c813001703d9', title:'Breathe', description:'Rest', rationale:'Human Activity - Value Map'},
+        {
+            model:'TASK', 
+            id:'5ba1cf2f3196c813001703d9', 
+            title:'Rest', 
+            description:'Rest', 
+            rationale:'Human Activity - Value Map', 
+            action:{
+                verb:'CREATE',
+                model:'TIME',
+                associatedModels:[
+                    {
+                        type:'TASK',
+                        id:'rest task', 
+                        parameters:{
+                            context:{
+                                'self':100
+                            }
+                        }
+                    },{
+                        type:'TIME',
+                        id:'self', 
+                        parameters:{
+                            context:{
+                                'self':100
+                            }
+                        }
+                    },{
+                        type:'MEMBER',
+                        id:$rootScope.currentUser.id, 
+                        parameters:{
+                            context:{
+                                'self':100
+                            }
+                        }
+                    },
+                ],
+            },
+        },
+        {model:'TASK', id:'5ba1cf2f3196c813001703d9', title:'Run', description:'Go Create Running Time', rationale:'Human Activity - Value Map'},
+        {model:'TASK', id:'5ba1cf2f3196c813001703d9', title:'Exercise', description:'Create Exercise Time', rationale:'Human Activity - Value Map'},
+        {model:'TASK', id:'5ba1cf2f3196c813001703d9', title:'Stretch', description:'Create Stretching Time', rationale:'Human Activity - Value Map'},
+        {model:'TASK', id:'5ba1cf2f3196c813001703d9', title:'Hack', description:'Create Hacking Time', rationale:'Human Activity - Value Map'},
+        {model:'TASK', id:'5ba1cf2f3196c813001703d9', title:'Message', description:'Message your friends, create message content', rationale:'Human Activity - Value Map'},
+        {model:'TASK', id:'5ba1cf2f3196c813001703d9', title:'Drink Water', description:'Be a healthy human, perfom the drink water action', rationale:'Human Activity - Value Map'},
+        {model:'TASK', id:'5ba1cf2f3196c813001703d9', title:'Eat Food', description:'Be a healthy human, perfom the eat food action', rationale:'Human Activity - Value Map'},
+        {model:'TASK', id:'5ba1cf2f3196c813001703d9', title:'Breathe', description:'Be a healthy human, perfom the breathe water action', rationale:'Human Activity - Value Map'},
     ];
 
     //TODO: CREATE A TOKEN 'ORBIT' FOR MEMBER
@@ -780,7 +818,8 @@ angular.module( 'conexus.home', [
                     connection:{},
                 };
             }
-            $scope.newOrder.push({
+            
+            var newOrder = {
                 associatedModels:[
                     {market:'UNIVERSAL', amount:1, direction:'SELL'},
                     {market:'UNIVERSAL', amount:1, direction:'BUY'},
@@ -790,7 +829,10 @@ angular.module( 'conexus.home', [
                     status:'CONTINUAL',
                 },
                 connection:{},
-            });
+            };
+
+            //$scope.newOrder.push(newOrder);
+
         }
     }, true);
 
@@ -906,7 +948,7 @@ angular.module( 'conexus.home', [
             else{$scope.pageNumber++}
             if ($scope.pageNumber<0 || $scope.pageNumber>6){
                 $scope.isTutorial = !$scope.isTutorial;
-                $scope.selectedTab = 'INFORMATION';
+                $scope.selectedTab = 'ACTIVITY';
             }
         };
 

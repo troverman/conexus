@@ -5110,10 +5110,10 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "\n" +
     "    <div class=\"spacing-5\"></div>\n" +
     "\n" +
-    "    <!--CONSENT FORM SEPERATE-->\n" +
     "    <div class=\"row\" ng-if=\"!isTutorial || !currentUser.apps.cre8.tutorial\">\n" +
     "\n" +
     "        <div class=\"col-sm-4 col-xs-12\" style=\"padding-left:0px;padding-right:0px\">\n" +
+    "    \n" +
     "            <div class=\"member-card\" style=\"margin-left:10px;margin-right:10px;margin-bottom:0px\" ng-click=\"subNavToggle(currentUser)\">\n" +
     "                <div class=\"member-card-image\" style=\"background-image: url('{{currentUser.coverUrl}}')\">\n" +
     "                    <a href=\"member/{{currentUser.username}}\" ui-sref=\"member.activity({path:currentUser.username})\">\n" +
@@ -5121,178 +5121,180 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                    </a>\n" +
     "                </div>\n" +
     "                <div class=\"member-card-info\">\n" +
+    "\n" +
     "                    <h4><a href=\"member/{{currentUser.username}}\" ui-sref=\"member.activity({path:currentUser.username})\">{{currentUser.username}}</a></h4>\n" +
+    "                    \n" +
+    "                    <p style=\"font-size:12px;\" ng-click=\"$event.stopPropagation();memberQRToggle(currentUser);\"><a style=\"color:gray\"><i class=\"fas fa-qrcode\"></i> {{currentUser.id}}</a></p>\n" +
+    "\n" +
     "                    <p style=\"color:gray;font-size:12px;\">\n" +
     "                        <span><i style=\"color:#30b257\" class=\"fa fa-circle\"></i> Online</span>\n" +
     "                        <span ng-if=\"currentUser.status\"><br>{{currentUser.status}}</span>\n" +
     "                    </p>\n" +
+    "\n" +
+    "                    <p style=\"font-size:13px;\">\n" +
+    "                        <a href=\"member/{{currentUser.username}}/projects\" ui-sref=\"member.projects({path:currentUser.username})\">{{currentUser.projectCount || 0}} Projects</a> | \n" +
+    "                        <a href=\"member/{{currentUser.username}}/followers\" ui-sref=\"member.followers({path:currentUser.username})\">{{currentUser.followerCount || 0}} Followers</a> | \n" +
+    "                        <a href=\"member/{{currentUser.username}}/following\" ui-sref=\"member.following({path:currentUser.username})\">{{currentUser.followingCount || 0}} Following</a>\n" +
+    "                    </p>\n" +
+    "                    \n" +
+    "                    <p style=\"color:gray\"><a href=\"member/{{currentUser.username}}/assets\" ui-sref=\"member.assets({path:currentUser.username})\">{{currentUser.totalWork}} Reputation</a></p>\n" +
+    "\n" +
     "                </div> \n" +
     "            </div>\n" +
-    "        </div>\n" +
     "\n" +
-    "        <!--REPUTATION / BALANCE MAPPING && VALUE MAP-->\n" +
-    "        <!--APP INPUT-->\n" +
-    "        <div class=\"col-sm-8 col-xs-12\" style=\"padding-left:0px;padding-right:0px\">\n" +
-    "            <div class=\"spacing-5\"></div>\n" +
-    "            <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
-    "                <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"selectTab('INFORMATION')\"><i class=\"fas fa-passport\"></i> Information</a></li>\n" +
-    "                <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"selectTab('SUGGESTIONS')\"><i class=\"fas fa-exclamation\"></i><i class=\"fas fa-question\"></i> Suggestions</a></li>\n" +
-    "                <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"selectTab('VALUEMAP')\"><i class=\"fas fa-globe\"></i> Value Map</a></li>\n" +
-    "                <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"selectTab('BALANCES')\"><i class=\"fas fa-universal-access\"></i> Balances</a></li>\n" +
-    "                <div style=\"clear:both\"></div>\n" +
-    "            </ul>\n" +
-    "            <div class=\"card\" style=\"margin-top:0px\">\n" +
-    "                <div style=\"padding:16px;\">\n" +
-    "\n" +
-    "                    <div ng-show=\"selectedTab =='INFORMATION'\">\n" +
-    "                        <h4><a href=\"member/{{currentUser.username}}\" ui-sref=\"member.activity({path:currentUser.username})\">{{currentUser.username}}</a></h4>\n" +
-    "                        <p style=\"font-size:12px;\" ng-click=\"$event.stopPropagation();memberQRToggle(currentUser);\"><a style=\"color:gray\"><i class=\"fas fa-qrcode\"></i> {{currentUser.id}}</a></p>\n" +
-    "                        <p style=\"font-size:13px;\">\n" +
-    "                            <a href=\"member/{{currentUser.username}}/projects\" ui-sref=\"member.projects({path:currentUser.username})\">{{currentUser.projectCount || 0}} Projects</a> | \n" +
-    "                            <a href=\"member/{{currentUser.username}}/followers\" ui-sref=\"member.followers({path:currentUser.username})\">{{currentUser.followerCount || 0}} Followers</a> | \n" +
-    "                            <a href=\"member/{{currentUser.username}}/following\" ui-sref=\"member.following({path:currentUser.username})\">{{currentUser.followingCount || 0}} Following</a>\n" +
-    "                        </p>\n" +
-    "                        <p style=\"color:gray\"><a href=\"member/{{currentUser.username}}/assets\" ui-sref=\"member.assets({path:currentUser.username})\">{{currentUser.totalWork}} Reputation</a></p>\n" +
-    "                    </div>\n" +
-    "\n" +
-    "                    <div ng-show=\"selectedTab =='SUGGESTIONS'\">\n" +
-    "\n" +
-    "                        <div ng-repeat=\"item in suggestions\">\n" +
-    "                            <a href=\"{{item.model.toLowerCase()}}/{{item.id}}\">{{item.title}}</a>\n" +
-    "                            <p>{{item.description}}</p>\n" +
-    "                        </div>\n" +
-    "                        <p class=\"btn btn-default\" ng-click=\"shuffleSuggestions()\">shuffle</p>\n" +
-    "\n" +
-    "                    </div>\n" +
-    "\n" +
-    "                    <div ng-show=\"selectedTab =='VALUEMAP'\">\n" +
-    "                        <h5>Position Lookup<br><span style=\"font-size:11px;color:gray\">{{currentUser.id}}</span></h5>\n" +
-    "                    </div>\n" +
-    "\n" +
-    "                    <div ng-show=\"selectedTab =='BALANCES'\">\n" +
-    "                        <div class=\"row\">\n" +
-    "                            <div><highchart config=\"balanceChart\"></highchart></div>\n" +
-    "                            <div class=\"col-xs-12\">\n" +
-    "                                <h5>Balance Lookup <br><span style=\"font-size:11px;color:gray\">{{currentUser.id}}</span></h5>\n" +
-    "                                <form ng-submit=\"lookupBalance()\" style=\"display:flex;flex-direction:row;\">\n" +
-    "                                    <input ng-model=\"$root.balanceLook\" style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder=\"Asset\">\n" +
-    "                                    <div ng-click=\"lookupBalance()\" style=\"border:0px;float:right\" class=\"btn btn-default\">\n" +
-    "                                        <a href=\"#\"><h5 style=\"color:black;text-align:right\" class=\"noselect\"> <i class=\"fa fa-search\"></i></h5></a>\n" +
-    "                                    </div>\n" +
-    "                                </form>\n" +
-    "                                <div ng-show=\"balanceLookupValue !== undefined\">\n" +
-    "                                    <h5><a href=\"market/{{balanceLook}}\" ui-sref=\"market({id:balanceLook})\">{{balanceLook}}</a> | {{balanceLookupValue}}</h5>\n" +
+    "            <!--TODO: DISCOVERABILITY AREA HERE-->\n" +
+    "            <div class=\"mobileFix\">\n" +
+    "                <div class=\"card\" ng-if=\"sortedTagArray.length > 0\" ng-click=\"filterToggle('DISCOVER', filterSet)\">\n" +
+    "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?details,notes,exolore,wonder,connection');min-height:50px\" class=\"imageContainerSmall\">\n" +
+    "                        <div style=\"background:rgba(0,0,0,0.75);height:50px\" class=\"imageContainerSmallDiv\">  \n" +
+    "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                                <div class=\"container\">\n" +
+    "                                    <h1 style=\"text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;\">Context</h1>\n" +
     "                                </div>\n" +
     "                            </div>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
-    "                    \n" +
+    "                    <div style=\"padding:16px;\">\n" +
+    "                        <div ng-repeat=\"tag in sortedTagArray\" ng-click=\"$event.stopPropagation();filterContent(tag.element)\">\n" +
+    "                            <a><b>{{tag.element}}</b></a>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "                <div class=\"card\" ng-if=\"sortedAssociationArray.length > 0\" ng-click=\"filterToggle('DISCOVER', filterSet)\">\n" +
+    "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?details,notes,exolire,wonder,data,city');min-height:50px\" class=\"imageContainerSmall\">\n" +
+    "                        <div style=\"background:rgba(0,0,0,0.75);height:50px\" class=\"imageContainerSmallDiv\">  \n" +
+    "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                                <div class=\"container\">\n" +
+    "                                    <h1 style=\"text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;\">Associations</h1>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                    <div style=\"padding:16px;\">\n" +
+    "                        <div ng-repeat=\"association in sortedAssociationArray\" ng-click=\"$event.stopPropagation();filterContent(tag.element)\">\n" +
+    "                            <a><b>{{association.element}}</b></a>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "                <div class=\"card\" ng-if=\"locations.length > 0\" ng-click=\"filterToggle('DISCOVER', filterSet)\">\n" +
+    "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?details,notes,exolire,wonder,city,country,forest,mountain,fire,mesa');min-height:50px\" class=\"imageContainerSmall\">\n" +
+    "                        <div style=\"background:rgba(0,0,0,0.75);height:50px\" class=\"imageContainerSmallDiv\">  \n" +
+    "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                                <div class=\"container\">\n" +
+    "                                    <h1 style=\"text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;\">Locations</h1>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                    <div style=\"padding:16px;\">\n" +
+    "                        <div ng-repeat=\"location in locations\" ng-click=\"$event.stopPropagation();filterContent(tag.element)\">\n" +
+    "                            <a>{{location}}</a>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
+    "\n" +
+    "        </div>\n" +
+    "\n" +
+    "        <div class=\"col-sm-8 col-xs-12\" style=\"padding-left:0px;padding-right:0px;\">\n" +
+    "            <div class=\"card\" ng-click=\"filterToggle('DISCOVER', filterSet)\">\n" +
+    "                <div style=\"background:url('https://source.unsplash.com/1600x900/?explore,discover');min-height:135px\" class=\"imageContainerSmall\">\n" +
+    "                    <div style=\"background:rgba(0,0,0,0.75);height:135px\" class=\"imageContainerSmallDiv\">  \n" +
+    "                        <div style=\"text-align:right;padding:15px;position:absolute;right:0\">\n" +
+    "                            <a style=\"color:white;\" ng-click=\"$event.stopPropagation();cardDetailToggle(item)\"><i class=\"fas fa-chevron-down\"></i></a>\n" +
+    "                        </div> \n" +
+    "                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                            <div style=\"padding:15px\">\n" +
+    "                                <h1 style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\">Feed</h1>\n" +
+    "                                <!--SELECTED /ACTIVE FILTERS-->\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "                <div style=\"background-color:white\">\n" +
+    "                    <div class=\"member-tab-container\" style=\"padding-left:0px\">\n" +
+    "                        <div style=\"text-align:center\">\n" +
+    "                            <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "                                <li ng-click=\"$event.stopPropagation();selectTab('ACTIVITY');\" style=\"font-size:14px\"><a><i class=\"fas fa-th-list\"></i> Activity</a></li>\n" +
+    "                                <li ng-click=\"$event.stopPropagation();selectTab('BALANCES');\" style=\"font-size:14px\"><a><i class=\"fas fa-universal-access\"></i> Balances</a></li>\n" +
+    "                                <li ng-click=\"$event.stopPropagation();selectTab('SUGGESTIONS');\" style=\"font-size:14px\"><a><i class=\"fas fa-exclamation\"></i><i class=\"fas fa-question\"></i> Suggestions</a></li>\n" +
+    "                                <li ng-click=\"$event.stopPropagation();selectTab('VALUEMAP');\" style=\"font-size:14px\"><a><i class=\"fas fa-globe\"></i> Value Map</a></li>\n" +
+    "                            </ul>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <!--TODO: DISCOVERABILITY AREA HERE-->\n" +
+    "            <div ng-if=\"selectedTab =='ACTIVITY'\">\n" +
+    "\n" +
+    "                <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "                    <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
+    "                    <li style=\"float:right;font-size:14px\"><a href=\"#\" ng-click=\"sortToggle()\">Sort By Recent <i class=\"fa fa-angle-down\"></i></a></li>\n" +
+    "                    <div style=\"clear:both\"></div>\n" +
+    "                </ul>\n" +
+    "\n" +
+    "                <div class=\"card\">\n" +
+    "                    <tags-input class=\"\" style=\"border:0px;flex-grow:2;\" min-length=\"1\" placeholder=\"Search\" ng-model=\"searchQuery\"></tags-input>\n" +
+    "                    <md-progress-linear style=\"height:2px\" ng-if=\"stateIsLoadingFeed\" md-mode=\"indeterminate\"></md-progress-linear>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"card\" style=\"margin-top:0px;\"><button class=\"btn btn-default log-btn\" ng-click=\"cre8Toggle()\">CRE8</button></div>\n" +
+    "                <div class=\"card\" ng-show=\"activity.length == 0\"><div style=\"padding:16px;\"><span style=\"color:gray\" >There's nothing here..</span></div></div>\n" +
+    "\n" +
+    "                <div ng-repeat=\"item in activity\">\n" +
+    "                    <div ng-if=\"item.model=='CONTENT'\" ng-include=\"'templates/cards/contentCard.tpl.html'\"></div>\n" +
+    "                    <div ng-if=\"item.model=='PROJECT'\" ng-include=\"'templates/cards/projectCard.tpl.html'\"></div>\n" +
+    "                    <div ng-if=\"item.model=='TASK'\" ng-include=\"'templates/cards/taskCard.tpl.html'\"></div>\n" +
+    "                    <div ng-if=\"item.model=='TIME'\" ng-include=\"'templates/cards/timeCard.tpl.html'\"></div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <div ng-if=\"selectedTab =='BALANCES'\">\n" +
+    "                <div class=\"card\">\n" +
+    "                    <div style=\"padding:16px\">\n" +
+    "                        <div><highchart config=\"balanceChart\"></highchart></div>\n" +
+    "                        <h5>Balance Lookup <br><span style=\"font-size:11px;color:gray\">{{currentUser.id}}</span></h5>\n" +
+    "                        <form ng-submit=\"lookupBalance()\" style=\"display:flex;flex-direction:row;\">\n" +
+    "                            <input ng-model=\"$root.balanceLook\" style=\"border:0px;flex-grow:2;\" class=\"form-control\" type=\"text\" placeholder=\"Asset\">\n" +
+    "                            <div ng-click=\"lookupBalance()\" style=\"border:0px;float:right\" class=\"btn btn-default\">\n" +
+    "                                <a href=\"#\"><h5 style=\"color:black;text-align:right\" class=\"noselect\"> <i class=\"fa fa-search\"></i></h5></a>\n" +
+    "                            </div>\n" +
+    "                        </form>\n" +
+    "                        <div ng-show=\"balanceLookupValue !== undefined\">\n" +
+    "                            <h5><a href=\"market/{{balanceLook}}\" ui-sref=\"market({id:balanceLook})\">{{balanceLook}}</a> | {{balanceLookupValue}}</h5>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <div ng-if=\"selectedTab =='SUGGESTIONS'\">\n" +
+    "                <div class=\"card\" ng-repeat=\"item in suggestions\">\n" +
+    "                    <div style=\"padding:16px\">\n" +
+    "                        <h3><a href=\"{{item.model.toLowerCase()}}/{{item.id}}\">{{item.title}}</a></h3>\n" +
+    "                        <p>{{item.description}}</p>\n" +
+    "                        <button class=\"btn btn-default log-btn\" ng-click=\"shuffleSuggestions()\">Create</button>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "                <div class=\"card\"><button class=\"btn btn-default log-btn\" ng-click=\"shuffleSuggestions()\">More</button></div>\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <!--PAST SUMMARY; UPCOMING SCHEDULE-->\n" +
+    "\n" +
+    "            <div ng-if=\"selectedTab =='VALUEMAP'\">\n" +
+    "                <div class=\"card\">\n" +
+    "                    <div style=\"padding:16px\">\n" +
+    "                        <h5>Position Lookup<br><span style=\"font-size:11px;color:gray\">{{currentUser.id}}</span></h5>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "                <!--TEMP-->\n" +
+    "                <div ng-include=\"'tutorial/templates/valueMapBuilder.tpl.html'\"></div>\n" +
+    "            </div>\n" +
+    "\n" +
     "        </div>\n" +
     "    </div>\n" +
-    "    \n" +
-    "    <div class=\"spacing-5\"></div>\n" +
-    "\n" +
-    "    <!--TODO: MOBILE FILTER-->\n" +
-    "    <!--TODO: APP INPUT-->\n" +
-    "    <div class=\"row\" ng-show=\"!isTutorial || !currentUser.apps.cre8.tutorial\">\n" +
-    "        <!--DISCOVERABILITY AREA HERE-->\n" +
-    "        <!--PAST 24HR TIME CONTEXT-->\n" +
-    "        <!--REPUTATION-->\n" +
-    "        <!--PAST SUMMARY; UPCOMING SCHEDULE-->\n" +
-    "        <!--VALUE MAP-->\n" +
-    "        <div class=\"col-sm-4 mobileFix\" style=\"padding-left:0px;padding-right:0px;\">\n" +
-    "            <div class=\"card\" ng-if=\"sortedTagArray.length > 0\" ng-click=\"filterToggle('DISCOVER', filterSet)\">\n" +
-    "                <div style=\"background:url('https://source.unsplash.com/1600x900/?details,notes,exolore,wonder,connection');min-height:50px\" class=\"imageContainerSmall\">\n" +
-    "                    <div style=\"background:rgba(0,0,0,0.75);height:50px\" class=\"imageContainerSmallDiv\">  \n" +
-    "                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                            <div class=\"container\">\n" +
-    "                                <h1 style=\"text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;\">Context</h1>\n" +
-    "                            </div>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "                <div style=\"padding:16px;\">\n" +
-    "                    <div ng-repeat=\"tag in sortedTagArray\" ng-click=\"$event.stopPropagation();filterContent(tag.element)\">\n" +
-    "                        <a><b>{{tag.element}}</b></a>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "            <div class=\"card\" ng-if=\"sortedAssociationArray.length > 0\" ng-click=\"filterToggle('DISCOVER', filterSet)\">\n" +
-    "                <div style=\"background:url('https://source.unsplash.com/1600x900/?details,notes,exolire,wonder,data,city');min-height:50px\" class=\"imageContainerSmall\">\n" +
-    "                    <div style=\"background:rgba(0,0,0,0.75);height:50px\" class=\"imageContainerSmallDiv\">  \n" +
-    "                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                            <div class=\"container\">\n" +
-    "                                <h1 style=\"text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;\">Associations</h1>\n" +
-    "                            </div>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "                <div style=\"padding:16px;\">\n" +
-    "                    <div ng-repeat=\"association in sortedAssociationArray\" ng-click=\"$event.stopPropagation();filterContent(tag.element)\">\n" +
-    "                        <a><b>{{association.element}}</b></a>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "            <div class=\"card\" ng-if=\"locations.length > 0\" ng-click=\"filterToggle('DISCOVER', filterSet)\">\n" +
-    "                <div style=\"background:url('https://source.unsplash.com/1600x900/?details,notes,exolire,wonder,city,country,forest,mountain,fire,mesa');min-height:50px\" class=\"imageContainerSmall\">\n" +
-    "                    <div style=\"background:rgba(0,0,0,0.75);height:50px\" class=\"imageContainerSmallDiv\">  \n" +
-    "                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                            <div class=\"container\">\n" +
-    "                                <h1 style=\"text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;\">Locations</h1>\n" +
-    "                            </div>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "                <div style=\"padding:16px;\">\n" +
-    "                    <div ng-repeat=\"location in locations\" ng-click=\"$event.stopPropagation();filterContent(tag.element)\">\n" +
-    "                        <a>{{location}}</a>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "\n" +
-    "        <div class=\"col-sm-8\" style=\"padding-left:0px;padding-right:0px;\">\n" +
-    "\n" +
-    "            <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
-    "                <li style=\"float:left;font-size:14px\"><a href=\"#\" ng-click=\"filterToggle('DISCOVER', filterSet)\"><i class=\"fa fa-filter\"></i> Filter</a></li>\n" +
-    "                <!--\n" +
-    "                <li ng-if=\"currentUser\" style=\"float:left;font-size:14px\"><a href=\"member/{{currentUser.username}}/followers\" ng-click=\"getMyFollowers()\"><i class=\"fa fa-users\"></i> Following</a></li>\n" +
-    "                <li ng-if=\"currentUser\" style=\"float:left;font-size:14px\"><a href=\"member/{{currentUser.username}}/projects\" ng-click=\"getMyProjects()\"><i class=\"fas fa-project-diagram\"></i> My Projects</a></li>\n" +
-    "                -->\n" +
-    "                <li style=\"float:right;font-size:14px\"><a href=\"#\" ng-click=\"sortToggle()\">Sort By Recent <i class=\"fa fa-angle-down\"></i></a></li>\n" +
-    "                <div style=\"clear:both\"></div>\n" +
-    "            </ul>\n" +
-    "\n" +
-    "            <div class=\"card\">\n" +
-    "                <tags-input class=\"\" style=\"border:0px;flex-grow:2;\" min-length=\"1\" placeholder=\"Search\" ng-model=\"searchQuery\"></tags-input>\n" +
-    "                <md-progress-linear style=\"height:2px\" ng-if=\"stateIsLoadingFeed\" md-mode=\"indeterminate\"></md-progress-linear>\n" +
-    "            </div>\n" +
-    "\n" +
-    "            <div class=\"card\" style=\"margin-top:0px;\">\n" +
-    "                <button class=\"btn btn-default log-btn\" ng-click=\"cre8Toggle()\">CRE8</button>\n" +
-    "            </div>\n" +
-    "\n" +
-    "            <div class=\"card\" ng-show=\"activity.length == 0\">\n" +
-    "                <div style=\"padding:16px;\">\n" +
-    "                    <span style=\"color:gray\" >There's nothing here..</span>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "\n" +
-    "            <div ng-repeat=\"item in activity\">\n" +
-    "                <div ng-if=\"item.model=='CONTENT'\" ng-include=\"'templates/cards/contentCard.tpl.html'\"></div>\n" +
-    "                <div ng-if=\"item.model=='PROJECT'\" ng-include=\"'templates/cards/projectCard.tpl.html'\"></div>\n" +
-    "                <div ng-if=\"item.model=='TASK'\" ng-include=\"'templates/cards/taskCard.tpl.html'\"></div>\n" +
-    "                <div ng-if=\"item.model=='TIME'\" ng-include=\"'templates/cards/timeCard.tpl.html'\"></div>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "\n" +
-    "    </div>\n" +
-    "\n" +
-    "</div>\n" +
-    "\n" +
-    "<div class=\"spacing-25\"></div>");
+    "</div>");
 }]);
 
 angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", function($templateCache) {
@@ -8965,10 +8967,8 @@ angular.module("nav/templates/createTime.tpl.html", []).run(["$templateCache", f
     "                </div>\n" +
     "            </form>\n" +
     "        </div>\n" +
-    "\n" +
     "    </div>\n" +
-    "</md-sidenav>\n" +
-    "");
+    "</md-sidenav>");
 }]);
 
 angular.module("nav/templates/createTransaction.tpl.html", []).run(["$templateCache", function($templateCache) {
@@ -13707,64 +13707,14 @@ angular.module("transparency/index.tpl.html", []).run(["$templateCache", functio
 
 angular.module("tutorial/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("tutorial/index.tpl.html",
-    "<style>\n" +
-    "    .valueMapButton{\n" +
-    "        margin: 2px;\n" +
-    "        padding: 0 5px;\n" +
-    "        display: inline-block;\n" +
-    "        float: left;\n" +
-    "        font: 14px \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n" +
-    "        height: 40px;\n" +
-    "        line-height: 40px;\n" +
-    "        border: 2px solid #acacac;\n" +
-    "        border-radius: 3px;\n" +
-    "        background: rgba(0,43,85,1);\n" +
-    "        color: white;\n" +
-    "    }\n" +
-    "    .animationIf.ng-enter,\n" +
-    "    .animationIf.ng-leave {\n" +
-    "        -webkit-transition: opacity ease-in-out 0.5s;\n" +
-    "        -moz-transition: opacity ease-in-out 0.5s;\n" +
-    "        -ms-transition: opacity ease-in-out 0.5s;\n" +
-    "        -o-transition: opacity ease-in-out 0.5s;\n" +
-    "        transition: opacity ease-in-out 0.5s;\n" +
-    "    }\n" +
-    "    .animationIf.ng-enter,\n" +
-    "    .animationIf.ng-leave.ng-leave-active {opacity: 0;}\n" +
-    "    .animationIf.ng-leave,\n" +
-    "    .animationIf.ng-enter.ng-enter-active {opacity: 1;}\n" +
-    "</style>\n" +
-    "\n" +
     "<div class=\"row\">\n" +
-    "\n" +
-    "    <div ng-show=\"pageNumber == 0\">\n" +
-    "        <div ng-include=\"'tutorial/templates/intro.tpl.html'\"></div>\n" +
-    "    </div>\n" +
-    "\n" +
-    "    <div ng-show=\"pageNumber == 1\">\n" +
-    "        <div ng-include=\"'tutorial/templates/valueMap.tpl.html'\"></div>\n" +
-    "    </div>\n" +
-    " \n" +
-    "    <div ng-if=\"pageNumber == 2\">\n" +
-    "        <div ng-include=\"'tutorial/templates/projects.tpl.html'\"></div>\n" +
-    "    </div>\n" +
-    "\n" +
-    "    <div ng-if=\"pageNumber == 3\">\n" +
-    "        <div ng-include=\"'tutorial/templates/tasks.tpl.html'\"></div>\n" +
-    "    </div>\n" +
-    "\n" +
-    "    <div ng-if=\"pageNumber == 4\">\n" +
-    "        <div ng-include=\"'tutorial/templates/members.tpl.html'\"></div>\n" +
-    "    </div>\n" +
-    "\n" +
-    "    <div ng-if=\"pageNumber == 5\">\n" +
-    "        <div ng-include=\"'tutorial/templates/valueMapUpdate.tpl.html'\"></div>\n" +
-    "    </div>\n" +
-    "\n" +
-    "    <div ng-if=\"pageNumber == 6\" ng-click=\"\">\n" +
-    "        <div ng-include=\"'tutorial/templates/create.tpl.html'\"></div>\n" +
-    "    </div>\n" +
-    "    \n" +
+    "    <div ng-show=\"pageNumber == 0\"><div ng-include=\"'tutorial/templates/intro.tpl.html'\"></div></div>\n" +
+    "    <div ng-show=\"pageNumber == 1\"><div ng-include=\"'tutorial/templates/valueMap.tpl.html'\"></div></div>\n" +
+    "    <div ng-if=\"pageNumber == 2\"><div ng-include=\"'tutorial/templates/projects.tpl.html'\"></div></div>\n" +
+    "    <div ng-if=\"pageNumber == 3\"><div ng-include=\"'tutorial/templates/tasks.tpl.html'\"></div></div>\n" +
+    "    <div ng-if=\"pageNumber == 4\"><div ng-include=\"'tutorial/templates/members.tpl.html'\"></div></div>\n" +
+    "    <div ng-if=\"pageNumber == 5\"><div ng-include=\"'tutorial/templates/valueMapUpdate.tpl.html'\"></div></div>\n" +
+    "    <div ng-if=\"pageNumber == 6\" ng-click=\"\"><div ng-include=\"'tutorial/templates/create.tpl.html'\"></div></div>\n" +
     "</div>\n" +
     "");
 }]);

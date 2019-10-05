@@ -68,6 +68,19 @@ tags-input .autocomplete .suggestion-item.selected{background-color:#002a56;}
 
 .angular-google-map-container { height: 350px; }
 
+.animationIf.ng-enter,
+.animationIf.ng-leave {
+    -webkit-transition: opacity ease-in-out 0.5s;
+    -moz-transition: opacity ease-in-out 0.5s;
+    -ms-transition: opacity ease-in-out 0.5s;
+    -o-transition: opacity ease-in-out 0.5s;
+    transition: opacity ease-in-out 0.5s;
+}
+.animationIf.ng-enter,
+.animationIf.ng-leave.ng-leave-active {opacity: 0;}
+.animationIf.ng-leave,
+.animationIf.ng-enter.ng-enter-active {opacity: 1;}
+
 .avatar {
     position:absolute;
     top:6.4em;
@@ -617,6 +630,20 @@ tags-input .autocomplete .suggestion-item.selected{background-color:#002a56;}
 }
 
 .toast-success {background-color: #002c54;}
+
+.valueMapButton{
+    margin: 2px;
+    padding: 0 5px;
+    display: inline-block;
+    float: left;
+    font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
+    height: 40px;
+    line-height: 40px;
+    border: 2px solid #acacac;
+    border-radius: 3px;
+    background: rgba(0,43,85,1);
+    color: white;
+}
 
 .video {
     position:absolute;
