@@ -1,0 +1,79 @@
+ <div class="card" ng-click="cardDetailExpand()">
+    <div style="background:url('https://source.unsplash.com/1600x900/?math,geometry,fractal,data,finance')" class="imageContainerSmall">
+        <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+            <div style="text-align:right;padding:15px;position:absolute;right:0">
+                <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
+                    <i class="fas fa-universal-access"></i>
+                </a>
+            </div> 
+            <div style="margin-top: auto;margin-bottom: auto;padding:15px">
+                <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Update Your Value Map</h1>
+                <p style="color:white;">Now that we know more about you</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- PRE POPULATE WITH MEMBER ASSOCIATIONS (SELECTED IN TUTORIAL)-->
+<div ng-repeat="item in memberTasks">
+    <div ng-if="item.model=='TASK'"  ng-include="'templates/cards/taskCard.tpl.html'"></div>
+</div>
+
+<!--SELECT PROJECT ACTIONS-->
+<div ng-repeat="item in memberProjects">
+    <div ng-if="item.model=='PROJECT'"  ng-include="'templates/cards/projectCard.tpl.html'"></div>
+</div>
+
+<div ng-repeat="item in memberProjects">
+    <div ng-if="item.model=='PROJECT'"  ng-include="'templates/cards/projectCard.tpl.html'"></div>
+</div>
+
+<!--SELECT ASSOCIATIONS IS EXCITE-->
+<div class="card">
+    <div style="font-size:14px;font-weight:bold">
+        <span ng-click="createPosition(item)" ng-repeat="item in sortedTagArray">
+            <p class="valueMapButton">{{item.element}}</p>
+        </span>
+        <!--ELEMENTALS?-->
+        <!--CONTEXT PACK.-->
+        <span ng-click="createPosition(item)" ng-repeat="item in projects">
+            <p class="valueMapButton">Project {{item.title}}</p>
+        </span>
+        <span ng-click="createPosition(item)" ng-repeat="item in tasks">
+            <p class="valueMapButton">Task {{item.title}}</p>
+        </span>
+        <span ng-click="createPosition(item)" ng-repeat="item in members">
+            <p class="valueMapButton">Member {{item.username}}</p>
+        </span>
+    </div>
+</div>
+<div class="card" ng-if="newOrder.length > 0">
+    <div style="background:url('https://source.unsplash.com/1600x900/?love,art,geometry');min-height:150px;" class="imageContainerSmall">
+        <div style="background:rgba(0,0,0,0.75);height:150px;" class="imageContainerSmallDiv">  
+            <div style="text-align:right;padding:15px;position:absolute;right:0">
+                <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><i class="fas fa-universal-access"></i></a>
+                <div style="clear:both"></div>
+            </div> 
+            <div style="margin-top: auto;margin-bottom: auto;padding:15px;">
+                <h1 style="text-align:left;color:rgba(255,255,255,0.9);font-weight:400;">My Positions</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card" ng-if="newOrder.length > 0" ng-repeat="item in newOrder">
+    <div style="padding:16px">
+        <div ng-repeat="association in item.associatedModels">
+            <div style="text-align:center">
+                <span>{{association.direction}}</span>
+                <span>{{association.amount}}</span>
+                <a href="#">{{association.market}}</a>
+            </div>
+            <div layout="">
+                <md-slider step="0.1" flex="" md-discrete="" ng-model="association.amount" step="1" min="0" max="100" aria-label="Amount"></md-slider>
+            </div>
+        </div>  
+        <a href="#" ng-click="removePosition(item)"><i class="fas fa-remove"></i></a>
+    </div>
+</div>
+<div class="spacing-10"></div>
+<div ng-include="'tutorial/templates/controls.tpl.html'"></div>

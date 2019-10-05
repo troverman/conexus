@@ -414,7 +414,7 @@ angular.module( 'conexus.home', [
 
     ];
 
-    $scope.apps = [].concat.apply([], [$scope.apps, $scope.coreApps, $scope.xyzApps])
+    //$scope.apps = [].concat.apply([], [$scope.apps, $scope.coreApps, $scope.xyzApps])
 
 
     //build .asm
