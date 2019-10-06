@@ -1,9 +1,17 @@
 <div class="card" style="margin-top:0px;">
     <div style="background:url('https://source.unsplash.com/1600x900/?personal,energy,joyful,humuan,data,code')" class="imageContainerSmall">
         <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
-            <div style="padding:15px;margin-top: auto;margin-bottom: auto;">
-                <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">Share With Us</h1>
+            <div style="text-align:right;padding:15px;position:absolute;right:0">
+                <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><i class="fas fa-passport"></i></a>
+            </div> 
+            <div style="padding:15px;margin-top: auto;margin-bottom: auto;text-align:center">
+                <!--
+                <h1 style="font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">Share With Us</h1>
                 <h5><a style="color:white" href="/account"  ui-sref="account"><i class="fas fa-passport"></i> Account Information</a></h5>
+                -->
+                <h1><a style="font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;" href="/account"  ui-sref="account">Account Information</a></h1>
+                <!--<h5><a style="color:white" href="/account"  ui-sref="account">{{currentUser.id}}</a></h5>-->
+                <h5><a style="color:white" href="/account"  ui-sref="account">Share With Us</a></h5>
             </div>
         </div>
     </div>

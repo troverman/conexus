@@ -880,7 +880,29 @@ angular.module( 'conexus.home', [
     $scope.newOrder = [];
     $scope.newOrderNEW = [];
     $scope.options = {scrollwheel: false};
+    
+    $scope.pageList = [
+
+        //{title:'welcome'},
+
+        {title:'information'},
+        {title:'apps'},
+
+        {title:'valuemap'},
+        {title:'projects'},
+        {title:'tasks'},
+        {title:'members'},
+
+        {title:'update'},
+
+        {title:'create'},
+
+    ];
+
     $scope.pageNumber = 0;
+
+
+
     $scope.pieTotal = {
         chart: {},
         series: [{

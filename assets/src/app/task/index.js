@@ -27,11 +27,15 @@ angular.module( 'conexus.task', [])
     $scope.directedGraphElements = {};
     $scope.selectedTab = 'TIME';
 
+
     //TODO:ASSOCIATED MODELS
 
     //TODO:AssociatedTime
     //var timeQuery = {};
-    //$scope.selectAssociations(timeQuery)
+    //$scope.selectAssociations(timeQuery);
+    //OR -- TIME.associationModels
+
+
     TimeModel.get({task:task.id, limit:100, skip:0, sort:'createdAt DESC'}).then(function(timeModels){
         $scope.time = timeModels.map(function(obj){obj.model = 'TIME'; return obj;});
     });

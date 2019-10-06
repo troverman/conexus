@@ -37,7 +37,10 @@
 
             <div class="spacing-10"></div>
 
+            <!--BUDLE THE VALIDATIONS-->
             <h5>Parameters</h5>
+            {{item.associationModels}}
+            {{item.connection}}
             <!--CONNECTION-->
 
             <h5>Context</h5>
@@ -45,7 +48,7 @@
                 <auto-complete source="loadAssociations($query)"></auto-complete>
             </tags-input>
 
-            <div ng-repeat="context in newValidation.context track by $index">
+            <div ng-repeat="context in newValidation.context">
                 <div layout="">
                     <div flex="10" layout="" layout-align="center center">
                         <p><b>{{context.text}}</b></p>
@@ -55,7 +58,6 @@
                         <p class="md-body-1">{{context.score}}</p>
                     </div>
                 </div>
-                <div style="text-align:center"><p style="font-size:9px">{{reputation[context.text] || 0}}</p></div>
             </div>
 
             <div class="spacing-10"></div>

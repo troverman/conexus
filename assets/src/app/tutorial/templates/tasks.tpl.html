@@ -1,48 +1,21 @@
- <div class="card" ng-click="cardDetailExpand()">
-    <div style="background:url('https://source.unsplash.com/1600x900/?business,service,civic,create,art,movies,action')" class="imageContainerSmall">
-        <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
-            <div style="text-align:right;padding:15px;position:absolute;right:0">
-                <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
-                    <i class="fas fa-layer-group"></i> 
-                </a>
-            </div> 
-            <div style="margin-top: auto;margin-bottom: auto;padding:15px;">
-                <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;font-size:35px">Tasks</h1>
-                <p style="color:white;">Coordinate with Intention. Get Involved.</p>
+<div class="row"> 
+    <div class="card" ng-click="cardDetailExpand()">
+        <div style="background:url('https://source.unsplash.com/1600x900/?business,service,civic,create,art,movies,action')" class="imageContainerSmall">
+            <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                <div style="text-align:right;padding:15px;position:absolute;right:0">
+                    <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><i class="fas fa-layer-group"></i> </a>
+                </div> 
+                <div style="margin-top: auto;margin-bottom: auto;padding:15px;text-align:center">
+                    <h1 style="font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;font-size:35px">Tasks</h1>
+                    <p style="color:white;">Coordinate with Intention. Get Involved.</p>
+                </div>
             </div>
         </div>
     </div>
-    <!--
-    <div style="padding:16px;">
-        <p style="color:gray;font-size:12px;font-style:italic">Select what you believe is worthwile.</p>
-        <p style="color:gray;font-size:12px;font-style:italic">The more detailed your dimensional vote the stronger the effect.</p>
-        <div class="row">
-            <div class="col-xs-4"><img src="https://source.unsplash.com/900x900/?value,finance,vote"></div>
-            <div class="col-xs-4"><img src="https://source.unsplash.com/900x900/?humananity,city,community"></div>
-            <div class="col-xs-4"><img src="https://source.unsplash.com/900x900/?code,love,joy"></div>
-        </div>
-    </div>
-    -->
 </div>
-
-<!--FILTER TEMPLATE-->
-<!--
-<ul style="padding:0px;" class="member-tabs">
-    <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fa fa-filter"></i> Filter</a></li>
-    <li style="float:right;font-size:14px"><a href="#" ng-click="sortToggle()">Sort By Recent <i class="fa fa-angle-down"></i></a></li>
-    <div style="clear:both"></div>
-</ul>
-
-<div class="card">
-    <tags-input class="" min-length="1" placeholder="Search" ng-model="searchQuery"></tags-input>
-</div>
--->
-
-<!--ACTIVE FILTERS-->
-<div>
+<div class="row">
     <div ng-repeat="item in tasks" class="col-xs-12" style="padding:0px">
         <div class="card" ng-click="cardDetailToggle(item)">
-
             <div style="background:url('https://source.unsplash.com/1600x900/?{{item.tags}}');min-height:100px" class="imageContainerSmall">
                 <div style="background:rgba(0,0,0,0.75);height:100px" class="imageContainerSmallDiv">
                     <div style="text-align:right;padding:15px;position:absolute;right:0">
@@ -58,12 +31,10 @@
                 </div>
             </div>
             <div style="padding:16px;">
-
                 <div ng-click="$event.stopPropagation()" style="float:right">
                     <button ng-click="$event.stopPropagation();interested(item)" ng-if="!item.isAssociated" class="btn btn-default"><i class="fas fa-check"></i> Interested</button>
                     <button ng-click="$event.stopPropagation();interested(item)" ng-if="item.isAssociated" class="btn btn-default"><i class="fas fa-remove"></i> Cancel Interest</button>
                 </div>
-
                 <p><a ng-click="$event.stopPropagation()" ng-repeat="tag in item.tags track by $index" href="market/{{tag.trim()}}" ui-sref="market({id:tag.trim()})">{{tag.trim()}} </a></p>
                 <p><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></p>
                 <span style="color:gray" am-time-ago="item.createdAt"></span>

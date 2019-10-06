@@ -1,11 +1,7 @@
-<div class="container">
-
-    <div ng-if="currentUser.apps.cre8.tutorial && isTutorial"><div ng-include="'tutorial/index.tpl.html'"></div></div>
-
-    <div class="spacing-5"></div>
-
-    <div class="row" ng-if="!isTutorial || !currentUser.apps.cre8.tutorial">
-
+<!--TODO: CONTROLLER && STATE: RENAME TO INTO-->
+<div ng-if="isTutorial" ng-include="'tutorial/index.tpl.html'"></div>
+<div ng-if="!isTutorial" class="container">
+    <div class="row">
         <div class="col-sm-4 col-xs-12" style="padding-left:0px;padding-right:0px">
     
             <div class="member-card" style="margin-left:10px;margin-right:10px;margin-bottom:0px" ng-click="subNavToggle(currentUser)">
@@ -87,9 +83,7 @@
                     </div>
                 </div>
             </div>
-
         </div>
-
         <div class="col-sm-8 col-xs-12" style="padding-left:0px;padding-right:0px;">
             <div class="card" ng-click="filterToggle('DISCOVER', filterSet)">
                 <div style="background:url('https://source.unsplash.com/1600x900/?explore,discover');min-height:135px" class="imageContainerSmall">
@@ -97,12 +91,12 @@
                         <div style="text-align:right;padding:15px;position:absolute;right:0">
                             <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><i class="fas fa-chevron-down"></i></a>
                         </div> 
-                        <div style="margin-top: auto;margin-bottom: auto;">
-                            <div style="padding:15px">
-                                <h1 style="text-transform: capitalize;text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">Feed</h1>
-                                <!--{{selectedTab.toLowerCase()}}-->
-                                <!--SELECTED /ACTIVE FILTERS-->
-                            </div>
+                        <div style="margin-top: auto;margin-bottom: auto;text-align:center;padding:15px">
+                            <!--PERSONALIZED MESSAGE??-->
+                            <h1 style="text-transform: capitalize;;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">{{selectedTab.toLowerCase()}}</h1>
+                            <h5 style="color:white">{{currentUser.username}}</h5>
+                            <!--Feed-->
+                            <!--SELECTED /ACTIVE FILTERS-->
                         </div>
                     </div>
                 </div>
@@ -208,7 +202,6 @@
                 <!--TEMP-->
                 <div ng-include="'tutorial/templates/valueMapBuilder.tpl.html'"></div>
             </div>
-
         </div>
     </div>
 </div>

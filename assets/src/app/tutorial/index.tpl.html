@@ -1,9 +1,22 @@
-<div class="row">
-    <div ng-show="pageNumber == 0"><div ng-include="'tutorial/templates/intro.tpl.html'"></div></div>
-    <div ng-show="pageNumber == 1"><div ng-include="'tutorial/templates/valueMap.tpl.html'"></div></div>
-    <div ng-if="pageNumber == 2"><div ng-include="'tutorial/templates/projects.tpl.html'"></div></div>
-    <div ng-if="pageNumber == 3"><div ng-include="'tutorial/templates/tasks.tpl.html'"></div></div>
-    <div ng-if="pageNumber == 4"><div ng-include="'tutorial/templates/members.tpl.html'"></div></div>
-    <div ng-if="pageNumber == 5"><div ng-include="'tutorial/templates/valueMapUpdate.tpl.html'"></div></div>
-    <div ng-if="pageNumber == 6" ng-click=""><div ng-include="'tutorial/templates/create.tpl.html'"></div></div>
-</div>
+<!--TODO: SHOW INTRO IN HEADER-->
+<!--TODO: INTRO CONTROLLER.. & SHOW PAGE PROGRESS.. eight pages-->
+<!--<div ng-include="'tutorial/templates/intro.tpl.html'"></div>-->
+<!--<div ng-if="consentAgreement">-->
+<div ng-show="pageNumber == 0"><div ng-include="'tutorial/templates/intro.tpl.html'"></div></div>
+
+	<!--INFO-->
+	<!--APPS-->
+	<!--
+	<div ng-show="pageNumber == 1"><div class="container" ng-include="'tutorial/templates/memberInformation.tpl.html'"></div></div>
+	<div ng-show="pageNumber == 2"><div class="container" ng-include="'tutorial/templates/memberApps.tpl.html'"></div></div>
+	-->
+
+<div ng-show="pageNumber == 1"><div class="container" ng-include="'tutorial/templates/valueMap.tpl.html'"></div></div>
+<div ng-if="pageNumber == 2"><div class="container" ng-include="'tutorial/templates/projects.tpl.html'"></div></div>
+<div ng-if="pageNumber == 3"><div class="container" ng-include="'tutorial/templates/tasks.tpl.html'"></div></div>
+<div ng-if="pageNumber == 4"><div class="container" ng-include="'tutorial/templates/members.tpl.html'"></div></div>
+<div ng-if="pageNumber == 5"><div class="container" ng-include="'tutorial/templates/valueMapUpdate.tpl.html'"></div></div>
+<div ng-if="pageNumber == 6"><div class="container" ng-include="'tutorial/templates/create.tpl.html'"></div></div>
+<!--</div>-->
+<!--TODO: BETTER CONTROLS-->
+	<!--SHOW PAGE NUM AND PAGE LIST-->
