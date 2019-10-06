@@ -1,5 +1,4 @@
-angular.module( 'conexus.task', [
-])
+angular.module( 'conexus.task', [])
 
 .config(['$stateProvider', function config( $stateProvider ) {
     $stateProvider.state( 'task', {
@@ -10,41 +9,33 @@ angular.module( 'conexus.task', [
                 templateUrl: 'task/index.tpl.html'
             }
         },
-
-        //TODO: DEPRECIATE RESOLVE
         resolve: {
             task: ['$stateParams', 'TaskModel', function($stateParams, TaskModel){
                 return TaskModel.get({id:$stateParams.id, limit:1, skip:0, sort:'createdAt DESC'});
-            }],
-            time: ['TimeModel', 'task', function(TimeModel, task){
-                return TimeModel.get({task:task.id, limit:100, skip:0, sort:'createdAt DESC'});
             }],
         }
     });
 }])
 
-.controller( 'TaskController', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'ContentModel', 'task', 'TaskModel', 'time', 'TimeModel', 'titleService', 'toaster', function TaskController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, ContentModel, task, TaskModel, time, TimeModel, titleService, toaster) {
+.controller( 'TaskController', ['$location', '$rootScope', '$sailsSocket', '$scope', 'ContentModel', 'task', 'TaskModel', 'TimeModel', 'titleService', function TaskController( $location, $rootScope, $sailsSocket, $scope, ContentModel, task, TaskModel, TimeModel, titleService) {
 
     $scope.task = task;
     if(!$scope.task){$location.path('/')}
     $scope.task.model = 'TASK';
     titleService.setTitle($scope.task.title + ' | Task | CRE8.XYZ');
-   
-
-
     
-    $scope.newTime = {};
-    $scope.question = false;
-    $scope.recordingTime = false;
+    $scope.directedGraphElements = {};
     $scope.selectedTab = 'TIME';
-    $scope.streaming = false;
-    $scope.streamingId = null;
-    $scope.streamUrl = '';
-    $rootScope.taskTime = 0;
 
+    //TODO:ASSOCIATED MODELS
 
-
-
+    //TODO:AssociatedTime
+    //var timeQuery = {};
+    //$scope.selectAssociations(timeQuery)
+    TimeModel.get({task:task.id, limit:100, skip:0, sort:'createdAt DESC'}).then(function(timeModels){
+        $scope.time = timeModels.map(function(obj){obj.model = 'TIME'; return obj;});
+    });
+    
     //TODO: COMPUTE CONTEXT
     $scope.task.context = [];
     if ($scope.task.associationModels){
@@ -55,8 +46,21 @@ angular.module( 'conexus.task', [
             }
         }
     }
+
+    $scope.selectAssociations = function(model){
+        var query = {
+
+
+        };
+        //AssociationModel.get(query).then(function(associationModels){
+        //    $scope.associations = associationModels;
+        //});
+    };
+
     console.log($scope.task.context);
 
+    //TODO: COMPONENTS
+    $scope.selectTab = function(model){$scope.selectedTab = model;};
     $scope.tokenChart = {
         chart: {zoomType: 'x'},
         series: [{
@@ -91,7 +95,6 @@ angular.module( 'conexus.task', [
         }
     };
     if ($scope.task.data.apps.tokens){$scope.populateTokenChart();}
-
     $scope.renderStats = function(){
         $scope.statsChart = {
             chart: {
@@ -155,95 +158,6 @@ angular.module( 'conexus.task', [
         }
     };
     $scope.renderStats();
-    
-    $scope.time = time.map(function(obj){obj.model = 'TIME'; return obj;});
-
-    $scope.renderStream = function(stream){
-        var html = '<iframe width="510" height="265" src="'+stream+'" frameborder="0" allowfullscreen></iframe>'
-        return $sce.trustAsHtml(html);
-    };
-
-    $scope.selectTab = function(model){$scope.selectedTab = model;};
-    $scope.showValidationImplicitToggle = function(){$scope.showValidationImplicitToggleVar = !$scope.showValidationImplicitToggleVar};
-
-
-
-    //DEPRECIATE
-    $scope.askQuestion = function() {
-        if ($rootScope.currentUser){$scope.question = true;}
-        else{$mdSidenav('login').toggle();}
-    };
-    $scope.startStreaming = function() {
-        if ($rootScope.currentUser){$scope.streaming = true;  }
-        else{$mdSidenav('login').toggle();}
-    };
-    $scope.startTime = function() {
-        if ($rootScope.currentUser){
-            if ($scope.streaming){
-                $scope.newContent = {
-                    type:'video',
-                    title: $scope.task.title,
-                    content: '<iframe width="510" height="265" src="'+$scope.streamUrl+'" frameborder="0" allowfullscreen></iframe>',
-                    user: $rootScope.currentUser.id,
-                };
-                ContentModel.create($scope.newContent).then(function(contentModel){
-                    console.log('create', contentModel);
-                    $scope.streamingId = contentModel.id;
-                });
-            }
-            $scope.startDateTime = new Date();
-            $scope.newTime = {
-                amount: 0,
-                type:'LIVE',
-                content: null,
-                user: $rootScope.currentUser.id,
-                creator: $rootScope.currentUser.id,
-                associatedModels:[{
-                    context:{general:100},
-                    associatedModels:[{type:'TASK', id:$scope.task.id}]
-                }],
-            };
-            if($scope.recordingTime === true) return false;
-            $scope.recordingTime = true;
-            $rootScope.pop($scope.task.title, 'You\'re gonna earn some tokens');
-            $scope.interval = setInterval($scope.updateCount, 1000);
-        }
-        else{$mdSidenav('login').toggle();}
-    };
-    $scope.submit = function() {
-        if($scope.recordingTime === false) return false;
-        $scope.recordingTime = false; $scope.question = false; $scope.streaming = false;
-        //TODO: FLOW 
-        $scope.newTime.amount = $rootScope.taskTime;
-        $scope.newTime.stream = $scope.streamingId;
-        TimeModel.create($scope.newTime).then(function(model){
-            $scope.time.unshift(model);
-            $scope.timeContent = '';
-            if ($scope.streamingId){
-                var update = {};
-                update.id = $scope.streamingId;
-                update.time = model.id;
-                update.parent = model.id;
-                update.parentModel = 'time';
-                ContentModel.update(update).then(function(contentModel){
-                    console.log(contentModel)
-                });
-            }
-        }); 
-        $rootScope.taskTime=0;
-        clearInterval($scope.interval);
-    };
-    //DEPRECIATE
-
-
-
-    $scope.updateCount = function() {
-        var currentTime = new Date();
-        $rootScope.taskTime = parseInt((currentTime.getTime() - $scope.startDateTime.getTime()) / 1000);
-        $scope.$apply();
-    };
-
-    $scope.directedGraphElements = {};
     $scope.renderAssociations = function(item){
         $scope.item = item;
         for (x in $scope.item.associatedModels){
@@ -269,10 +183,11 @@ angular.module( 'conexus.task', [
                 $scope.directedGraphElements[$scope.item.associatedModels[0].id+'-'+$scope.item.associatedModels[x].id] = edgeModel;
             }
         }
-
     };
     $scope.renderAssociations(task);
 
+
+    //TODO: SOCKETS
     $sailsSocket.subscribe('task', function (envelope) {
         console.log(envelope)
         if (envelope.verb == 'update'){
@@ -282,14 +197,12 @@ angular.module( 'conexus.task', [
             }
         }
     });
-
     $sailsSocket.subscribe('association', function (envelope) {
         if (envelope.verb == 'update'){
             var index = $scope.associations.map(function(obj){return obj.id}).indexOf(envelope.data.id);
             if (index != -1){$scope.associations[index] = envelope.data;}
         }
     });
-
     $sailsSocket.subscribe('content', function (envelope) {if (envelope.verb == 'create'){$scope.content.unshift(envelope.data);}});
     $sailsSocket.subscribe('time', function (envelope) {if (envelope.verb == 'create'){$scope.time.unshift(envelope.data);}});
 

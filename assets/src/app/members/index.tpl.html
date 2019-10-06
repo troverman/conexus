@@ -16,9 +16,7 @@
             <li style="float:right;font-size:14px"><a href="#" ng-click="sortToggle()">Sort By Recent <i class="fa fa-angle-down"></i></a></li>
             <div style="clear:both"></div>
         </ul>
-        <div class="card">
-            <tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search" ng-model="searchQuery"></tags-input>
-        </div>
+        <div class="card"><tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search" ng-model="searchQuery"></tags-input></div>
         <div class="card">
             <div style="padding:16px;">
                 <div class="row">
@@ -29,9 +27,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-6" ng-repeat="item in members" style="padding-left:10px;padding-right:10px;">
-            <div ng-include="'templates/cards/memberCard.tpl.html'"></div>
-        </div>
+        <div class="col-sm-6" ng-repeat="item in members" style="padding-left:10px;padding-right:10px;"><div ng-include="'templates/cards/memberCard.tpl.html'"></div></div>
     </div>
     <div class="spacing-10"></div>
 </div>

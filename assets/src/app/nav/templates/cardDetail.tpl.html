@@ -56,8 +56,11 @@
             </h4>
 
             <h4 ng-if="item.model=='PROJECT'" ng-click="validationToggle(item)" class="nav-links"><a>Request To Join <i style="float:right" class="fas fa-users"></i></a></h4>
+            
+            <h4 ng-if="item.model=='TASK'" ng-click="timeToggle(item)" class="nav-links"><a>Create Time <i style="float:right" class="fas fa-atom"></i></a></h4>
+            <!--<h4 ng-if="item.model=='TASK'" ng-click="cre8Toggle(item)" class="nav-links"><a>Create <i style="float:right" class="fas fa-atom"></i></a></h4>-->
 
-            <h4 ng-click="renderValidationToggle(item)" class="nav-links"><a>Associations <i style="float:right" class="fas fa-bezier-curve"></i></a></h4>
+            <h4 ng-click="renderAssociationToggle(item)" class="nav-links"><a>Associations <i style="float:right" class="fas fa-bezier-curve"></i></a></h4>
 
             <h4 ng-click="statsToggle(item)" class="nav-links"><a>Stats <i style="float:right" class="fa fa-eye"></i></a></h4>
             <!--token action potiental-->

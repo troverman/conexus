@@ -45,6 +45,7 @@ angular.module( 'conexus.content', [])
     //    console.log(associations);
     //});
 
+    $scope.selectedTab = 'CONTENT';
     $scope.tokenChart = {
         chart: {zoomType: 'x'},
         series: [{
@@ -65,7 +66,7 @@ angular.module( 'conexus.content', [])
         yAxis: {title: {text: null}},
         credits:{enabled:false},
     };
-     $scope.populateTokenChart = function(){
+    $scope.populateTokenChart = function(){
         $scope.sortableSet = [];
         $scope.tokenChart.xAxis.categories = [];
         $scope.tokenChart.series[0].data = [];
@@ -80,7 +81,70 @@ angular.module( 'conexus.content', [])
     };
     if ($scope.content.data.apps.tokens){$scope.populateTokenChart();}
 
-    $scope.selectedTab = 'CONTENT';
+    $scope.renderStats = function(){
+        $scope.statsChart = {
+            chart: {
+                zoomType: 'x',
+            },
+            series: [],
+            title: {text: ''},
+            xAxis: {
+                type: 'datetime',
+                currentMin: 0,
+                currentMax: 20,
+                title: null,
+                crosshair: true,
+                gridLineWidth: 0.5,
+                gridLineColor: 'grey'
+            },
+            yAxis: [{
+                title: {text: null},
+            }],
+            credits:{enabled:false},
+            plotOptions: {spline: {marker: {enabled: false}}, sma: {marker: {enabled: false}}}
+        };
+        $scope.statsChart.series = [];
+        $scope.statsChart.series.push({
+            id: 'content',
+            type: 'spline',
+            name: 'Content',
+            data: []
+        });
+        $scope.statsChart.series.push({
+            id: 'time',
+            type: 'spline',
+            name: 'Time',
+            data: []
+        });
+        $scope.statsChart.series.push({
+            id: 'validation',
+            type: 'spline',
+            name: 'Validations',
+            data: []
+        });
+        for(var i=0;i<100;i++){
+            var date = new Date();
+            date.setTime(date.getTime() - (60*60*1000*(1000-i)));
+            if (i == 0){
+                $scope.statsChart.series[0].data.push([date.getTime(),Math.floor(150*Math.random())])
+                $scope.statsChart.series[1].data.push([date.getTime(),Math.floor(20*Math.random())])
+            }
+            else{
+                var random = 1.21*Math.random();
+                var random1 = Math.random();
+                if (random > random1){
+                    $scope.statsChart.series[0].data.push([date.getTime(),$scope.statsChart.series[0].data[i-1][1]+3*Math.random()])
+                    $scope.statsChart.series[1].data.push([date.getTime(),20*Math.random()])
+                }
+                else{
+                    $scope.statsChart.series[0].data.push([date.getTime(),$scope.statsChart.series[0].data[i-1][1]-3*Math.random()])
+                    $scope.statsChart.series[1].data.push([date.getTime(),20*Math.random()])
+                }
+            }
+        }
+    };
+    $scope.renderStats();
+
     $scope.selectTab = function(model){$scope.selectedTab = model;};
 
     //TODO: FINALIZE..

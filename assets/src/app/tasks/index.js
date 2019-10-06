@@ -28,7 +28,6 @@ angular.module( 'conexus.tasks', [
     $scope.newReaction = {};
 	$scope.selectedSort = 'createdAt DESC';
 	$scope.skip = 0;
-	$scope.sortText = {'trendingScore DESC':'Trending','createdAt DESC':'Date Created','timeCount DESC': 'Total Time'}
 	$scope.selectedTag = '';
     $rootScope.searchQuery = [];
 
@@ -83,19 +82,6 @@ angular.module( 'conexus.tasks', [
         };
     };
     $scope.init();
-
-    //TODO: COMPLEX QUERY && FILTER
-    $scope.selectSort = function(sort){
-		$scope.selectedSort = sort;
-		$rootScope.stateIsLoading = true;
-        TaskModel.get({limit:100, skip:$scope.skip, sort:$scope.selectedSort}).then(function(tasks) {
-			$rootScope.stateIsLoading = false;
-			$scope.tasks = tasks.map(function(obj){
-                if (obj.tags){obj.tags = obj.tags.split(',')}
-                return obj;
-            });
-		});
-	};
 
     $scope.search = function(){
         $rootScope.stateIsLoading = true;
@@ -161,6 +147,8 @@ angular.module( 'conexus.tasks', [
         }
     }, true);
 
+
+    //SOCKETS
     $sailsSocket.subscribe('task', function (envelope) {
         console.log(envelope);
         if (envelope.verb == 'create'){$scope.tasks.unshift(envelope.data);}

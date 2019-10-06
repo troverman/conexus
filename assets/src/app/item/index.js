@@ -11,6 +11,8 @@ angular.module( 'conexus.item', [
 			}
 		},
         resolve:{
+
+            //TODO: CONTROLLERS -- LIKE MEMBER AND PROJECT
             item: ['$stateParams', 'ItemModel', function($stateParams, ItemModel) {
                 return ItemModel.get({id:$stateParams.id, limit:1, skip:0, sort:'createdAt DESC'});
             }],
@@ -35,9 +37,8 @@ angular.module( 'conexus.item', [
     $scope.item = item;
     if($scope.item.length == 0){$location.path('/')}
     titleService.setTitle($scope.item.title+' | Item | CRE8.XYZ');
-
-    console.log($scope.item, $scope.item.associationModels);
-
+    
+    //TODO: COMPUTE
     $scope.item.context = [];
     if ($scope.item.associationModels){
         for (x in $scope.item.associationModels){
@@ -47,7 +48,11 @@ angular.module( 'conexus.item', [
             }
         }
     }
+
+    //TODO:ASSOCIATED MODELS
+
     console.log($scope.item.context);
+    console.log($scope.item, $scope.item.associationModels);
 
     $scope.tokenChart = {
         chart: {zoomType: 'x'},
@@ -84,8 +89,76 @@ angular.module( 'conexus.item', [
     };
     if ($scope.item.data.apps.tokens){$scope.populateTokenChart();}
 
+    $scope.renderStats = function(){
+        $scope.statsChart = {
+            chart: {
+                zoomType: 'x',
+            },
+            series: [],
+            title: {text: ''},
+            xAxis: {
+                type: 'datetime',
+                currentMin: 0,
+                currentMax: 20,
+                title: null,
+                crosshair: true,
+                gridLineWidth: 0.5,
+                gridLineColor: 'grey'
+            },
+            yAxis: [{
+                title: {text: null},
+            }],
+            credits:{enabled:false},
+            plotOptions: {spline: {marker: {enabled: false}}, sma: {marker: {enabled: false}}}
+        };
+        $scope.statsChart.series = [];
+        $scope.statsChart.series.push({
+            id: 'content',
+            type: 'spline',
+            name: 'Content',
+            data: []
+        });
+        $scope.statsChart.series.push({
+            id: 'time',
+            type: 'spline',
+            name: 'Time',
+            data: []
+        });
+        $scope.statsChart.series.push({
+            id: 'validation',
+            type: 'spline',
+            name: 'Validations',
+            data: []
+        });
+        for(var i=0;i<100;i++){
+            var date = new Date();
+            date.setTime(date.getTime() - (60*60*1000*(1000-i)));
+            if (i == 0){
+                $scope.statsChart.series[0].data.push([date.getTime(),Math.floor(150*Math.random())])
+                $scope.statsChart.series[1].data.push([date.getTime(),Math.floor(20*Math.random())])
+            }
+            else{
+                var random = 1.21*Math.random();
+                var random1 = Math.random();
+                if (random > random1){
+                    $scope.statsChart.series[0].data.push([date.getTime(),$scope.statsChart.series[0].data[i-1][1]+3*Math.random()])
+                    $scope.statsChart.series[1].data.push([date.getTime(),20*Math.random()])
+                }
+                else{
+                    $scope.statsChart.series[0].data.push([date.getTime(),$scope.statsChart.series[0].data[i-1][1]-3*Math.random()])
+                    $scope.statsChart.series[1].data.push([date.getTime(),20*Math.random()])
+                }
+            }
+        }
+    };
+    $scope.renderStats();
+
     //VERBS FOR THE ITEM ARE?? 
     $scope.actions = actions;
+    $scope.elementsObj = {};
+    //TODO: TRAVERSE!!
+    $scope.inputVector = []; 
+    $scope.inputVectorWeight = [];
     $scope.orders = orders.data.map(function(obj){
         var elementsObj = {};
         for (y in Object.keys(obj.setAlpha)){
@@ -121,32 +194,7 @@ angular.module( 'conexus.item', [
         obj.model = 'ORDER';
         return obj
     });
-    $scope.transactions = transactions;
-
-    //TODO: COMPLEX QUERY
-    ContentModel.get({item:item.id, limit:20, skip:0, sort:'createdAt DESC'}).then(function(contentList){
-        $scope.contentList = contentList;
-    });
-
-    //TODO: OWNERSHIP HISTORY -- AS ACTION
-    //AS TRANSACTION WITH ITEM ID
-    //GENERATORS.. ACTIONS.. (trans)actions
-    //EVERY TRANSACTION TOKEN IS AN ITEM..? EVERY UNIQUE TOKEN IS AN ITEM --> TOKEN AND ITEM UNITY?  .. // /token and /item unity
-        //INTERLINK
-        //items owning tokens (usd .. )
-    //OrderModel.get()..
-
-
-    $scope.selectedTab = 'INFORMATION';
-    $scope.selectTab = function(model){$scope.selectedTab = model;};
-
-
-    //TODO: TRAVERSE!!
-    $scope.inputVector = []; 
-    $scope.inputVectorWeight = [];
-    $scope.newReaction = {};
     $scope.outputVector = [];
-
     //market vs discrete orders
     $scope.layout = {name: 'cola', coolingFactor: 0, animate: true};
     $scope.options = {
@@ -154,6 +202,7 @@ angular.module( 'conexus.item', [
         maxZoom:10,
         minZoom:0.1,
     };
+    $scope.selectedTab = 'INFORMATION';
     $scope.style = [
         {
             "selector": "core",
@@ -262,11 +311,9 @@ angular.module( 'conexus.item', [
             }
         }
     ];
+    $scope.transactions = transactions;
 
-    $scope.elementsObj = {};
-
-    //SET POSITIONS AS COMBINATORIALS
-    //..//TODO
+    //TODO: SET POSITIONS AS COMBINATORIALS
     $scope.renderGraph = function(orders){
         $scope.elementsObj = {};
 
@@ -347,28 +394,19 @@ angular.module( 'conexus.item', [
             }
 
         }
-
     };
     $scope.renderGraph($scope.orders);
 
+    $scope.selectTab = function(model){$scope.selectedTab = model;};
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    //TODO: OWNERSHIP HISTORY -- AS ACTION
+    //AS TRANSACTION WITH ITEM ID
+    //GENERATORS.. ACTIONS.. (trans)actions
+    //EVERY TRANSACTION TOKEN IS AN ITEM..? EVERY UNIQUE TOKEN IS AN ITEM --> TOKEN AND ITEM UNITY?  .. // /token and /item unity
+        //INTERLINK
+        //items owning tokens (usd .. )
 
     //TODO: IF VERIFIED ORDER CAN RATE | TOOMUCH RN
     //TODO: VENDER FUNXTIONAL RECIPEIENT? 
@@ -435,6 +473,4 @@ angular.module( 'conexus.item', [
         }
     });
 
-
-    
 }]);

@@ -282,8 +282,7 @@ angular.module( 'conexus.nav', [
 
     $rootScope.cre8Toggle = function(item){
         $scope.closeAllNav();
-        if($rootScope.currentUser){$scope.item = item;$mdSidenav('cre8').toggle();}
-        else{$mdSidenav('login').toggle();}
+        $scope.item = item;$mdSidenav('cre8').toggle();
     };
 
     //TODO: EXPAND
@@ -929,22 +928,14 @@ angular.module( 'conexus.nav', [
     };
 
     $rootScope.renderMarketToggle = function(item){
-
         $scope.closeAllNav();
         $scope.item = item;
-
         $mdSidenav('market').toggle()
-
     };
 
-    $rootScope.renderValidationToggle = function(item){
-        
+    $rootScope.renderAssociationToggle = function(item){
         $scope.closeAllNav();
         $scope.item = item;
-        $scope.assoicationFilter = [{text:$scope.item.associatedModels[0].id}];
-
-        //TODO: GET ASSOCIATIONS
-        //TODO: ASSOCIATION MODEL
         for (x in $scope.item.associatedModels){
             var nodeModel = {
                 group:'nodes',
@@ -968,70 +959,7 @@ angular.module( 'conexus.nav', [
                 $scope.directedGraphElements[$scope.item.associatedModels[0].id+'-'+$scope.item.associatedModels[x].id] = edgeModel;
             }
         }
-
-        //TODO: QUERY
-        var validationQueryModel = {
-            limit:100,
-            skip:0,
-            sort:'createdAt DESC',
-            //associatedModels:[]
-        };
-
-        ValidationModel.get(validationQueryModel).then(function(validationModels){
-
-            $scope.validationColumnRender = {
-                chart: {zoomType: 'x'},
-                series: [{
-                    id: 'validation',
-                    type: 'column',
-                    name: 'Validation',
-                    data: [],
-                    yAxis: 0
-                }],
-                title: {text: ''},
-                xAxis: {
-                    crosshair: true,
-                    gridLineWidth: 0.5,
-                    gridLineColor: 'grey',
-                    title: {text: null},
-                    categories: [],
-                },
-                yAxis: [
-                    {title: {text: null}},
-                    {title: {text: null}},
-                    {title: {text: null}}
-                ],
-                legend: {enabled: false},
-                credits:{enabled:false},
-                plotOptions: {column: {minPointLength: 3}},
-            };
-
-            $scope.validations = validationModels;
-
-            //TODO: SORED IN ASSOCIATION
-            $scope.validationSumObj = {};
-
-            //TODO: THIS IS DONE ON BACKEND
-            //TODO: ASSOCIATION
-            if ($scope.validations.length > 0){
-                for (y in $scope.validations){
-                    for (x in Object.keys($scope.validations[y].validation)){
-                        if(!$scope.validationSumObj[Object.keys($scope.validations[y].validation)[x]]){$scope.validationSumObj[Object.keys($scope.validations[y].validation)[x]]=$scope.validations[y].validation[Object.keys($scope.validations[y].validation)[x]]}
-                        else{$scope.validationSumObj[Object.keys($scope.validations[y].validation)[x]]+=$scope.validations[y].validation[Object.keys($scope.validations[y].validation)[x]]}
-                    }
-                }
-                for (x in Object.keys($scope.validationSumObj)){
-                    $scope.validationColumnRender.series[0].data.push($scope.validationSumObj[Object.keys($scope.validationSumObj)[x]]/$scope.validations.length);
-                    $scope.validationColumnRender.xAxis.categories.push(Object.keys($scope.validationSumObj)[x]);
-                }
-            }
-
-        });
-    
-        $mdSidenav('renderValidation').toggle().then(function(){
-            $scope.renderGraph('circle');
-        });
-
+        $mdSidenav('renderAssociation').toggle();
     };
 
     //MEMBER CARD TOGGLE | TODO RENAME
