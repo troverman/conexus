@@ -391,6 +391,7 @@ angular.module( 'conexus.home', [
     };
 
     $scope.selectTab = function(model){$scope.selectedTab = model;};
+    $scope.selectTabIntro = function(model){$scope.selectedTabIntro = model;};
 
 
     $scope.isTutorial = true;
@@ -884,24 +885,17 @@ angular.module( 'conexus.home', [
     $scope.pageList = [
 
         //{title:'welcome'},
-
-        {title:'information'},
-        {title:'apps'},
-
-        {title:'valuemap'},
-        {title:'projects'},
-        {title:'tasks'},
-        {title:'members'},
-
-        {title:'update'},
-
-        {title:'create'},
+        {title:'Information', id:0},
+        {title:'Value Map', id:1},
+        {title:'Projects', id:2},
+        {title:'Tasks', id:3},
+        {title:'Members', id:4},
+        {title:'Update', id:5},
+        {title:'Create', id:6},
 
     ];
 
     $scope.pageNumber = 0;
-
-
 
     $scope.pieTotal = {
         chart: {},
@@ -926,6 +920,7 @@ angular.module( 'conexus.home', [
         credits:{enabled:false},
     };
     $scope.selectedTab = 'QUESTIONS';
+    $scope.selectedTabIntro = 'Basic Info';
     $scope.sortedTagArray = [
         {element:'LOVE'},
         {element:'ART'},
@@ -966,7 +961,7 @@ angular.module( 'conexus.home', [
 
         $scope.changePage = function(page){
             window.scrollTo(0, 0);
-            if (page){$scope.pageNumber = page}
+            if (page){$scope.pageNumber = parseInt(page)}
             else{$scope.pageNumber++}
             if ($scope.pageNumber<0 || $scope.pageNumber>6){
                 $scope.isTutorial = !$scope.isTutorial;

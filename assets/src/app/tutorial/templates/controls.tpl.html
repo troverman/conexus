@@ -1,4 +1,5 @@
 <div class="row">
+
 	<div class="card">
 	    <div style="padding:0px" class="col-md-9" ng-click="changePage()" style="text-align:center">
 	    	<button ng-disabled="stateIsLoadingFeed" class="btn btn-default log-btn">CONTINUE <i class="fa fa-arrow-right"></i></button>
@@ -8,4 +9,37 @@
 	    </div>
 		<!--<md-progress-linear style="height:2px" ng-if="stateIsLoadingFeed" md-mode="indeterminate"></md-progress-linear>-->
 	</div>
+
+	<style>
+	.pageSelected {
+	    margin: 2px;
+	    padding: 0 5px;
+	    display: inline-block;
+	    font: 16px "Helvetica Neue", Helvetica, Arial, sans-serif;
+	    height: 40px;
+	    line-height: 40px;
+	    border: 2px solid #acacac;
+	    border-radius: 3px;
+	    background: rgba(0,43,85,1);
+	    color: white;
+	    font-weight: 700
+	}
+	.pageSelected:hover{color:white;}
+
+	</style>
+	<!--TODO: DYNAMIC-->
+	<div style="text-align:center">
+		<h5>
+			<!--<span ng-repeat="item in ">-->
+			<a ng-class="{'pageSelected':pageNumber==0}" href="#" ng-click="changePage('0')"> Information</a> <i class="fa fa-arrow-right"></i> 
+			<a ng-class="{'pageSelected':pageNumber==1}" href="#" ng-click="changePage(1)"> Value Map</a> <i class="fa fa-arrow-right"></i>
+			<a ng-class="{'pageSelected':pageNumber==2}" href="#" ng-click="changePage(2)"> Projects</a> <i class="fa fa-arrow-right"></i>
+			<a ng-class="{'pageSelected':pageNumber==3}" href="#" ng-click="changePage(3)"> Tasks</a> <i class="fa fa-arrow-right"></i>
+			<a ng-class="{'pageSelected':pageNumber==4}" href="#" ng-click="changePage(4)"> Members</a> <i class="fa fa-arrow-right"></i>
+			<a ng-class="{'pageSelected':pageNumber==5}" href="#" ng-click="changePage(5)"> Update</a> <i class="fa fa-arrow-right"></i>
+			<a ng-class="{'pageSelected':pageNumber==6}" href="#" ng-click="changePage(6)"> Create</a>
+		</h5>
+	</div>
+
+
 </div>

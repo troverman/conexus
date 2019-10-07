@@ -175,7 +175,12 @@ angular.module( 'conexus.nav', [
                     ],
                     connection:[{
                         id:null,
-                        text:'Content Connection'
+                        text:'Content Connection',
+                        //2nd order connection 
+                        parameters:{
+                            title:'',
+                            context:{},
+                        }
                     }]
                 },{
 

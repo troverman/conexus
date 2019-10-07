@@ -5112,6 +5112,7 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "<!--TODO: CONTROLLER && STATE: RENAME TO INTO-->\n" +
     "<div ng-if=\"isTutorial\" ng-include=\"'tutorial/index.tpl.html'\"></div>\n" +
     "<div ng-if=\"!isTutorial\" class=\"container\">\n" +
+    "    <div class=\"spacing-5\"></div>\n" +
     "    <div class=\"row\">\n" +
     "        <div class=\"col-sm-4 col-xs-12\" style=\"padding-left:0px;padding-right:0px\">\n" +
     "    \n" +
@@ -6848,6 +6849,8 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function($tem
     "            </div>\n" +
     "			<div style=\"padding:16px\">\n" +
     "				<div style=\"text-align:left\">\n" +
+    "					<!--TODO: MOBILE-->\n" +
+    "					<!--TODO: PROJECT TOO-->\n" +
     "					<div style=\"float:right\">\n" +
     "						<a style=\"padding:10px 15px;color:rgb(125,125,125);text-align:left\" class=\"btn btn-default\" ng-click=\"$event.stopPropagation();transactionToggle(member)\">+Transaction</a>\n" +
     "						<img ng-click=\"$event.stopPropagation();renderReputationToggle(member)\" style=\"height:50px;text-align:right;\" src=\"https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{member.id}}\">\n" +
@@ -6858,8 +6861,9 @@ angular.module("member/index.tpl.html", []).run(["$templateCache", function($tem
     "							<span ng-if=\"isFollowing\">UnFollow</span>\n" +
     "						</a>\n" +
     "					</div>\n" +
+    "					<!--TODO: MOBILE-->\n" +
     "					<h2>{{member.firstName}} {{member.lastName}}</h2>\n" +
-    "					<h3><a href=\"member/{{member.username}}\" ui-sref=\"member.activity({path:member.username})\">@{{member.username}}</a></h3>\n" +
+    "					<h3><a href=\"member/{{member.username}}\" ui-sref=\"member.activity({path:member.username})\" ng-click=\"$event.stopPropagation();\">@{{member.username}}</a></h3>\n" +
     "					<p style=\"font-size:8px;\" ng-click=\"$event.stopPropagation();memberQRToggle(member);\"><a style=\"color:gray\"><i class=\"fas fa-qrcode\"></i> {{member.id}}</a></p>\n" +
     "        			<p style=\"color:gray;font-size:12px;\">\n" +
     "        				<span ng-if=\"member.loggedIn\">\n" +
@@ -7864,29 +7868,41 @@ angular.module("nav/templates/cardDetail.tpl.html", []).run(["$templateCache", f
     "\n" +
     "            <h4 ng-click=\"renderToggle(item)\" class=\"nav-links\"><a>Information <i style=\"float:right\" class=\"fas fa-info\"></i></a></h4>\n" +
     "\n" +
-    "            <h4 ng-if=\"item.model=='ITEM'\" ng-click=\"actionToggle(item)\" class=\"nav-links\">\n" +
-    "                <a>Create Action <i style=\"float:right\" class=\"fas fa-atom\"></i></a>\n" +
-    "            </h4>\n" +
+    "            <!--ASSOCIATE (VALIDATE) VS (GENERAL) CREATE-->\n" +
+    "            \n" +
+    "            <!--CREATE CONTENT AND ASSOCIATE-->\n" +
+    "            <h4 ng-if=\"item.model=='CONTENT'\" ng-click=\"contentToggle(item)\" class=\"nav-links\"><a>Comment <i style=\"float:right\" class=\"far fa-comment\"></i></a></h4>\n" +
+    "            \n" +
+    "            <!--CREATE REACTION AND ASSOCIATE-->\n" +
+    "            <h4 ng-if=\"item.model=='CONTENT'\" ng-click=\"reactionToggle(item)\" class=\"nav-links\"><a>React <i style=\"float:right\" class=\"fas fa-plus\"></i></a></h4>\n" +
+    "            \n" +
+    "            <!--ASSOCIATE AND VALIDATE.. ONE CLICK.. (INTERESTED (ASSOC)) VS +VALIDATION -> + VALIDATION SHOULD BE SMART + KINDA AGNOSTIC-->\n" +
+    "            <h4 ng-if=\"item.model=='CONTENT'\" ng-click=\"validationToggle(item)\" class=\"nav-links\"><a>Validate <i style=\"float:right\" class=\"fas fa-check\"></i></a></h4>\n" +
+    "\n" +
+    "            <h4 ng-if=\"item.model=='ITEM'\" ng-click=\"actionToggle(item)\" class=\"nav-links\"><a>Create Action <i style=\"float:right\" class=\"fas fa-atom\"></i></a></h4>\n" +
     "            <h4 ng-if=\"item.model=='ITEM'\" ng-click=\"\" class=\"nav-links\">\n" +
     "                <a ng-if=\"currentUser.id == item.user.id\" ng-click=\"transactionToggle(null, item.id)\">Send Item <i style=\"float:right\" class=\"fas fa-paper-plane\"></i></a>\n" +
     "                <a ng-if=\"currentUser.id != item.user.id\" ng-click=\"orderToggle(item)\">Purchase Item <i style=\"float:right\" class=\"fas fa-shopping-cart\"></i></a>\n" +
     "            </h4>\n" +
-    "            <h4 ng-if=\"item.model=='ITEM'\" ng-click=\"renderMarketToggle(item)\" class=\"nav-links\">\n" +
+    "            <h4 ng-if=\"false && item.model=='ITEM'\" ng-click=\"renderMarketToggle(item)\" class=\"nav-links\">\n" +
     "                <a ng-if=\"currentUser.id == item.user.id\">Liquidity <i style=\"float:right\" class=\"fas fa-exchange-alt\"></i></a>\n" +
     "            </h4>\n" +
     "\n" +
     "            <h4 ng-if=\"item.model=='PROJECT'\" ng-click=\"validationToggle(item)\" class=\"nav-links\"><a>Request To Join <i style=\"float:right\" class=\"fas fa-users\"></i></a></h4>\n" +
     "            \n" +
+    "            <!--CREATE TIME AND ASSOCIATE-->\n" +
     "            <h4 ng-if=\"item.model=='TASK'\" ng-click=\"timeToggle(item)\" class=\"nav-links\"><a>Create Time <i style=\"float:right\" class=\"fas fa-atom\"></i></a></h4>\n" +
-    "            <!--<h4 ng-if=\"item.model=='TASK'\" ng-click=\"cre8Toggle(item)\" class=\"nav-links\"><a>Create <i style=\"float:right\" class=\"fas fa-atom\"></i></a></h4>-->\n" +
+    "            <!--CREATE GENERALLY AND ASSOCIATE-->\n" +
+    "            <h4 ng-if=\"false && item.model=='TASK'\" ng-click=\"cre8Toggle(item)\" class=\"nav-links\"><a>Create <i style=\"float:right\" class=\"fas fa-atom\"></i></a></h4>\n" +
+    "\n" +
+    "            <h4 ng-if=\"item.model=='TIME'\" ng-click=\"validationToggle(item)\" class=\"nav-links\"><a>Validate <i style=\"float:right\" class=\"fas fa-check\"></i></a></h4>\n" +
+    "\n" +
     "\n" +
     "            <h4 ng-click=\"renderAssociationToggle(item)\" class=\"nav-links\"><a>Associations <i style=\"float:right\" class=\"fas fa-bezier-curve\"></i></a></h4>\n" +
-    "\n" +
     "            <h4 ng-click=\"statsToggle(item)\" class=\"nav-links\"><a>Stats <i style=\"float:right\" class=\"fa fa-eye\"></i></a></h4>\n" +
-    "            <!--token action potiental-->\n" +
-    "\n" +
     "            <h4 ng-if=\"item.model!='TOKEN'\"  ng-click=\"tokensToggle(item)\" class=\"nav-links\"><a>Tokens <i style=\"float:right\" class=\"fas fa-coins\"></i></a></h4>\n" +
     "            <h4 ng-click=\"shareToggle(item)\" class=\"nav-links\"><a>Share <i style=\"float:right\" class=\"fas fa-share\"></i></a></h4>\n" +
+    "\n" +
     "\n" +
     "        </div>\n" +
     "    </div>\n" +
@@ -13722,6 +13738,7 @@ angular.module("tutorial/index.tpl.html", []).run(["$templateCache", function($t
 angular.module("tutorial/templates/controls.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("tutorial/templates/controls.tpl.html",
     "<div class=\"row\">\n" +
+    "\n" +
     "	<div class=\"card\">\n" +
     "	    <div style=\"padding:0px\" class=\"col-md-9\" ng-click=\"changePage()\" style=\"text-align:center\">\n" +
     "	    	<button ng-disabled=\"stateIsLoadingFeed\" class=\"btn btn-default log-btn\">CONTINUE <i class=\"fa fa-arrow-right\"></i></button>\n" +
@@ -13731,6 +13748,39 @@ angular.module("tutorial/templates/controls.tpl.html", []).run(["$templateCache"
     "	    </div>\n" +
     "		<!--<md-progress-linear style=\"height:2px\" ng-if=\"stateIsLoadingFeed\" md-mode=\"indeterminate\"></md-progress-linear>-->\n" +
     "	</div>\n" +
+    "\n" +
+    "	<style>\n" +
+    "	.pageSelected {\n" +
+    "	    margin: 2px;\n" +
+    "	    padding: 0 5px;\n" +
+    "	    display: inline-block;\n" +
+    "	    font: 16px \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n" +
+    "	    height: 40px;\n" +
+    "	    line-height: 40px;\n" +
+    "	    border: 2px solid #acacac;\n" +
+    "	    border-radius: 3px;\n" +
+    "	    background: rgba(0,43,85,1);\n" +
+    "	    color: white;\n" +
+    "	    font-weight: 700\n" +
+    "	}\n" +
+    "	.pageSelected:hover{color:white;}\n" +
+    "\n" +
+    "	</style>\n" +
+    "	<!--TODO: DYNAMIC-->\n" +
+    "	<div style=\"text-align:center\">\n" +
+    "		<h5>\n" +
+    "			<!--<span ng-repeat=\"item in \">-->\n" +
+    "			<a ng-class=\"{'pageSelected':pageNumber==0}\" href=\"#\" ng-click=\"changePage('0')\"> Information</a> <i class=\"fa fa-arrow-right\"></i> \n" +
+    "			<a ng-class=\"{'pageSelected':pageNumber==1}\" href=\"#\" ng-click=\"changePage(1)\"> Value Map</a> <i class=\"fa fa-arrow-right\"></i>\n" +
+    "			<a ng-class=\"{'pageSelected':pageNumber==2}\" href=\"#\" ng-click=\"changePage(2)\"> Projects</a> <i class=\"fa fa-arrow-right\"></i>\n" +
+    "			<a ng-class=\"{'pageSelected':pageNumber==3}\" href=\"#\" ng-click=\"changePage(3)\"> Tasks</a> <i class=\"fa fa-arrow-right\"></i>\n" +
+    "			<a ng-class=\"{'pageSelected':pageNumber==4}\" href=\"#\" ng-click=\"changePage(4)\"> Members</a> <i class=\"fa fa-arrow-right\"></i>\n" +
+    "			<a ng-class=\"{'pageSelected':pageNumber==5}\" href=\"#\" ng-click=\"changePage(5)\"> Update</a> <i class=\"fa fa-arrow-right\"></i>\n" +
+    "			<a ng-class=\"{'pageSelected':pageNumber==6}\" href=\"#\" ng-click=\"changePage(6)\"> Create</a>\n" +
+    "		</h5>\n" +
+    "	</div>\n" +
+    "\n" +
+    "\n" +
     "</div>");
 }]);
 
@@ -13769,7 +13819,9 @@ angular.module("tutorial/templates/intro.tpl.html", []).run(["$templateCache", f
     "        </div>\n" +
     "    </div>\n" +
     "</div>\n" +
-    "<div class=\"spacing-5\"></div>\n" +
+    "\n" +
+    "<div class=\"spacing-10\"></div>\n" +
+    "\n" +
     "<div class=\"container\">\n" +
     "    <div class=\"row\">\n" +
     "\n" +
@@ -13808,11 +13860,11 @@ angular.module("tutorial/templates/intro.tpl.html", []).run(["$templateCache", f
     "\n" +
     "        <div ng-if=\"consentAgreement\" class=\"col-xs-12 animationIf\" style=\"padding-right:0px;padding-left:0px\">\n" +
     "            <div ng-include=\"'tutorial/templates/memberInformation.tpl.html'\"></div>\n" +
-    "            <div ng-include=\"'tutorial/templates/memberApps.tpl.html'\"></div>\n" +
+    "            <!--<div ng-include=\"'tutorial/templates/memberApps.tpl.html'\"></div>-->\n" +
     "        </div>\n" +
     "\n" +
     "    </div>\n" +
-    "    <div ng-if=\"consentAgreement\" ng-include=\"'tutorial/templates/controls.tpl.html'\"></div>\n" +
+    "    <div style=\"max-width:600px;margin:5px auto;\" ng-if=\"consentAgreement\" ng-include=\"'tutorial/templates/controls.tpl.html'\"></div>\n" +
     "</div>");
 }]);
 
@@ -13874,7 +13926,7 @@ angular.module("tutorial/templates/memberApps.tpl.html", []).run(["$templateCach
 
 angular.module("tutorial/templates/memberInformation.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("tutorial/templates/memberInformation.tpl.html",
-    "<div class=\"card\" style=\"margin-top:0px;\">\n" +
+    "<div class=\"card\" style=\"margin:0 auto;margin-top:0px;max-width:600px\">\n" +
     "    <div style=\"background:url('https://source.unsplash.com/1600x900/?personal,energy,joyful,humuan,data,code')\" class=\"imageContainerSmall\">\n" +
     "        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
     "            <div style=\"text-align:right;padding:15px;position:absolute;right:0\">\n" +
@@ -13885,61 +13937,111 @@ angular.module("tutorial/templates/memberInformation.tpl.html", []).run(["$templ
     "                <h1 style=\"font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\">Share With Us</h1>\n" +
     "                <h5><a style=\"color:white\" href=\"/account\"  ui-sref=\"account\"><i class=\"fas fa-passport\"></i> Account Information</a></h5>\n" +
     "                -->\n" +
-    "                <h1><a style=\"font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\" href=\"/account\"  ui-sref=\"account\">Account Information</a></h1>\n" +
+    "                <h1><a style=\"font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\" href=\"/account\"  ui-sref=\"account\">Account Setup</a></h1>\n" +
     "                <!--<h5><a style=\"color:white\" href=\"/account\"  ui-sref=\"account\">{{currentUser.id}}</a></h5>-->\n" +
-    "                <h5><a style=\"color:white\" href=\"/account\"  ui-sref=\"account\">Share With Us</a></h5>\n" +
+    "                <h5 style=\"color:white;text-transform:capitalize\">{{selectedTabIntro}}</h5>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
+    "    <div style=\"background-color:white\">\n" +
+    "        <div class=\"member-tab-container\" style=\"padding-left:0px\">\n" +
+    "            <div style=\"text-align:left\">\n" +
+    "                <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
+    "                     <li><a ng-click=\"$event.stopPropagation();selectTabIntro('Basic Info')\">Information</a></li>\n" +
+    "                    <li><a ng-click=\"$event.stopPropagation();selectTabIntro('Applications')\">Applications</a></li>\n" +
+    "                </ul>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "    <hr style=\"margin:0px;\">\n" +
     "    <div style=\"padding:16px;\">\n" +
-    "        <form role=\"form\" ng-submit=\"editAccount()\">\n" +
+    "        <div ng-if=\"selectedTabIntro == 'Basic Info'\">\n" +
+    "            <form role=\"form\" ng-submit=\"editAccount()\">\n" +
     "\n" +
-    "            <div style=\"padding:0px\" class=\"col-xs-6\">\n" +
-    "                <h5>Avatar URL</h5>\n" +
-    "                <input type=\"text\" ng-model=\"newAccountInformation.avatarUrl\" placeholder=\"Avatar Url\" class=\"form-control\">\n" +
+    "                <div style=\"padding:0px\" class=\"col-xs-6\">\n" +
+    "                    <h5>Avatar URL</h5>\n" +
+    "                    <input type=\"text\" ng-model=\"newAccountInformation.avatarUrl\" placeholder=\"Avatar Url\" class=\"form-control\">\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div style=\"padding:0px\" class=\"col-xs-6\">\n" +
+    "                    <h5>Cover URL</h5>\n" +
+    "                    <input type=\"text\" ng-model=\"newAccountInformation.coverUrl\" placeholder=\"Cover Url\" class=\"form-control\">\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div style=\"padding:0px\" class=\"col-xs-12\">\n" +
+    "                    <h5>Username</h5>\n" +
+    "                    <input type=\"text\" ng-model=\"newAccountInformation.username\" placeholder=\"Username\" class=\"form-control\">\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div style=\"padding:0px\" class=\"col-xs-6\">\n" +
+    "                    <h5>Email</h5>\n" +
+    "                    <input type=\"text\" ng-model=\"newAccountInformation.email\" placeholder=\"Email\" class=\"form-control\">\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div style=\"padding:0px\" class=\"col-xs-6\">\n" +
+    "                    <h5>Phone Number</h5>\n" +
+    "                    <input type=\"text\" ng-model=\"newAccountInformation.phoneNumber\" placeholder=\"Phone Number\" class=\"form-control\">\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div style=\"padding:0px\" class=\"col-xs-6\">\n" +
+    "                    <h5>First Name</h5>\n" +
+    "                    <input type=\"text\" ng-model=\"newAccountInformation.firstName\" placeholder=\"First Name\" class=\"form-control\">\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div style=\"padding:0px\" class=\"col-xs-6\">\n" +
+    "                    <h5>Last Name</h5>\n" +
+    "                    <input type=\"text\" ng-model=\"newAccountInformation.lastName\" placeholder=\"Last Name\" class=\"form-control\">\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div style=\"padding:0px\" class=\"col-xs-12\">\n" +
+    "                    <h5>Date Of Birth</h5>\n" +
+    "                    <input type=\"date\" ng-model=\"newAccountInformation.dateOfBirth\" placeholder=\"Date of Birth\" class=\"form-control\">\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div style=\"clear:both\"></div>\n" +
+    "                <div class=\"spacing-10\"></div>\n" +
+    "\n" +
+    "                <button type=\"submit\" class=\"btn btn-default log-btn\">Save Information</button>\n" +
+    "            </form>\n" +
+    "        </div>\n" +
+    "        <div ng-if=\"selectedTabIntro == 'Applications'\">\n" +
+    "            <div class=\"col-lg-12 col-sm-12\" ng-repeat=\"item in apps\" style=\"padding-left:0px;padding-right:0px;\">\n" +
+    "                <div class=\"card\" ng-click=\"cardDetailToggle(item)\">\n" +
+    "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?{{item.tags}},code');min-height:100px\" class=\"imageContainerSmall\">\n" +
+    "                        <div style=\"background:rgba(0,0,0,0.75);height:100px\" class=\"imageContainerSmallDiv\">  \n" +
+    "                            <div style=\"text-align:right;padding:15px;position:absolute;right:0\">\n" +
+    "                                <a style=\"color:white;\" ng-click=\"$event.stopPropagation();cardDetailToggle(item)\"><i class=\"fas fa-chevron-down\"></i></a>\n" +
+    "                            </div> \n" +
+    "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                                <div style=\"padding:15px\">\n" +
+    "                                    <h1 style=\"text-align:left;font-size:30px;color:rgba(255,255,255,0.9);font-weight:400;\">\n" +
+    "                                        <a ng-click=\"$event.stopPropagation();\" style=\"color:white\" href=\"app/{{item.id}}\" ui-sref=\"app({id:item.id})\">{{item.title}}</a>\n" +
+    "                                    </h1>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                    <div style=\"padding:16px;min-height:100px;\">\n" +
+    "                        <p><span style=\"display:inline\" ng-bind-html=\"renderContent(item.description)\"></span></p>\n" +
+    "                        <div ng-click=\"$event.stopPropagation();\">\n" +
+    "                            <div layout=\"row\" layout-align=\"left\" flex=\"100\">\n" +
+    "                                <form role=\"form\" ng-submit=\"editAccount()\">\n" +
+    "                                    <md-switch ng-change=\"editAccount()\" ng-model=\"newAccountInformation.apps.cre8[item.title]\" aria-label=\"Location Attention\"></md-switch>\n" +
+    "                                </form>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
     "            </div>\n" +
-    "\n" +
-    "            <div style=\"padding:0px\" class=\"col-xs-6\">\n" +
-    "                <h5>Cover URL</h5>\n" +
-    "                <input type=\"text\" ng-model=\"newAccountInformation.coverUrl\" placeholder=\"Cover Url\" class=\"form-control\">\n" +
-    "            </div>\n" +
-    "\n" +
-    "            <div style=\"padding:0px\" class=\"col-xs-12\">\n" +
-    "                <h5>Username</h5>\n" +
-    "                <input type=\"text\" ng-model=\"newAccountInformation.username\" placeholder=\"Username\" class=\"form-control\">\n" +
-    "            </div>\n" +
-    "\n" +
-    "            <div style=\"padding:0px\" class=\"col-xs-6\">\n" +
-    "                <h5>Email</h5>\n" +
-    "                <input type=\"text\" ng-model=\"newAccountInformation.email\" placeholder=\"Email\" class=\"form-control\">\n" +
-    "            </div>\n" +
-    "\n" +
-    "            <div style=\"padding:0px\" class=\"col-xs-6\">\n" +
-    "                <h5>Phone Number</h5>\n" +
-    "                <input type=\"text\" ng-model=\"newAccountInformation.phoneNumber\" placeholder=\"Phone Number\" class=\"form-control\">\n" +
-    "            </div>\n" +
-    "\n" +
-    "            <div style=\"padding:0px\" class=\"col-xs-6\">\n" +
-    "                <h5>First Name</h5>\n" +
-    "                <input type=\"text\" ng-model=\"newAccountInformation.firstName\" placeholder=\"First Name\" class=\"form-control\">\n" +
-    "            </div>\n" +
-    "\n" +
-    "            <div style=\"padding:0px\" class=\"col-xs-6\">\n" +
-    "                <h5>Last Name</h5>\n" +
-    "                <input type=\"text\" ng-model=\"newAccountInformation.lastName\" placeholder=\"Last Name\" class=\"form-control\">\n" +
-    "            </div>\n" +
-    "\n" +
-    "            <div style=\"padding:0px\" class=\"col-xs-12\">\n" +
-    "                <h5>Date Of Birth</h5>\n" +
-    "                <input type=\"date\" ng-model=\"newAccountInformation.dateOfBirth\" placeholder=\"Date of Birth\" class=\"form-control\">\n" +
-    "            </div>\n" +
-    "\n" +
     "            <div style=\"clear:both\"></div>\n" +
-    "            <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "            <button type=\"submit\" class=\"btn btn-default log-btn\">Save Information</button>\n" +
-    "\n" +
-    "        </form>\n" +
+    "            <div class=\"spacing-5\"></div>\n" +
+    "            <p style=\"text-align:center\"><a href=\"/account\" ui-sref=\"account\"><b><i class=\"fas fa-passport\"></i> More Apps in Account Settings</b></a></p>\n" +
+    "            <div class=\"spacing-5\"></div>\n" +
+    "            <div class=\"card\">\n" +
+    "                <button type=\"submit\" class=\"btn btn-default log-btn\"><span ng-if=\"!stateIsLoadingFeed\">Compile Peer</span> <span ng-if=\"stateIsLoadingFeed\">Compiling Peer</span></button>\n" +
+    "                <md-progress-linear style=\"height:2px\" ng-if=\"stateIsLoadingFeed\" md-mode=\"indeterminate\"></md-progress-linear>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
     "    </div>\n" +
     "</div>");
 }]);
@@ -14046,11 +14148,11 @@ angular.module("tutorial/templates/tasks.tpl.html", []).run(["$templateCache", f
     "                </div>\n" +
     "            </div>\n" +
     "            <div style=\"padding:16px;\">\n" +
+    "                <!--NON TEMPLATE -->\n" +
     "                <div ng-click=\"$event.stopPropagation()\" style=\"float:right\">\n" +
     "                    <button ng-click=\"$event.stopPropagation();interested(item)\" ng-if=\"!item.isAssociated\" class=\"btn btn-default\"><i class=\"fas fa-check\"></i> Interested</button>\n" +
     "                    <button ng-click=\"$event.stopPropagation();interested(item)\" ng-if=\"item.isAssociated\" class=\"btn btn-default\"><i class=\"fas fa-remove\"></i> Cancel Interest</button>\n" +
     "                </div>\n" +
-    "                <p><a ng-click=\"$event.stopPropagation()\" ng-repeat=\"tag in item.tags track by $index\" href=\"market/{{tag.trim()}}\" ui-sref=\"market({id:tag.trim()})\">{{tag.trim()}} </a></p>\n" +
     "                <p><span style=\"display:inline\" ng-bind-html=\"renderContent(item.content)\"></span></p>\n" +
     "                <span style=\"color:gray\" am-time-ago=\"item.createdAt\"></span>\n" +
     "            </div>\n" +

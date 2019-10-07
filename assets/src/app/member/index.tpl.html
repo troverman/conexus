@@ -15,6 +15,8 @@
             </div>
 			<div style="padding:16px">
 				<div style="text-align:left">
+					<!--TODO: MOBILE-->
+					<!--TODO: PROJECT TOO-->
 					<div style="float:right">
 						<a style="padding:10px 15px;color:rgb(125,125,125);text-align:left" class="btn btn-default" ng-click="$event.stopPropagation();transactionToggle(member)">+Transaction</a>
 						<img ng-click="$event.stopPropagation();renderReputationToggle(member)" style="height:50px;text-align:right;" src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{member.id}}">
@@ -25,8 +27,9 @@
 							<span ng-if="isFollowing">UnFollow</span>
 						</a>
 					</div>
+					<!--TODO: MOBILE-->
 					<h2>{{member.firstName}} {{member.lastName}}</h2>
-					<h3><a href="member/{{member.username}}" ui-sref="member.activity({path:member.username})">@{{member.username}}</a></h3>
+					<h3><a href="member/{{member.username}}" ui-sref="member.activity({path:member.username})" ng-click="$event.stopPropagation();">@{{member.username}}</a></h3>
 					<p style="font-size:8px;" ng-click="$event.stopPropagation();memberQRToggle(member);"><a style="color:gray"><i class="fas fa-qrcode"></i> {{member.id}}</a></p>
         			<p style="color:gray;font-size:12px;">
         				<span ng-if="member.loggedIn">

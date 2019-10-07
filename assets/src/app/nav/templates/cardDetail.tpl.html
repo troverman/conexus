@@ -44,29 +44,41 @@
 
             <h4 ng-click="renderToggle(item)" class="nav-links"><a>Information <i style="float:right" class="fas fa-info"></i></a></h4>
 
-            <h4 ng-if="item.model=='ITEM'" ng-click="actionToggle(item)" class="nav-links">
-                <a>Create Action <i style="float:right" class="fas fa-atom"></i></a>
-            </h4>
+            <!--ASSOCIATE (VALIDATE) VS (GENERAL) CREATE-->
+            
+            <!--CREATE CONTENT AND ASSOCIATE-->
+            <h4 ng-if="item.model=='CONTENT'" ng-click="contentToggle(item)" class="nav-links"><a>Comment <i style="float:right" class="far fa-comment"></i></a></h4>
+            
+            <!--CREATE REACTION AND ASSOCIATE-->
+            <h4 ng-if="item.model=='CONTENT'" ng-click="reactionToggle(item)" class="nav-links"><a>React <i style="float:right" class="fas fa-plus"></i></a></h4>
+            
+            <!--ASSOCIATE AND VALIDATE.. ONE CLICK.. (INTERESTED (ASSOC)) VS +VALIDATION -> + VALIDATION SHOULD BE SMART + KINDA AGNOSTIC-->
+            <h4 ng-if="item.model=='CONTENT'" ng-click="validationToggle(item)" class="nav-links"><a>Validate <i style="float:right" class="fas fa-check"></i></a></h4>
+
+            <h4 ng-if="item.model=='ITEM'" ng-click="actionToggle(item)" class="nav-links"><a>Create Action <i style="float:right" class="fas fa-atom"></i></a></h4>
             <h4 ng-if="item.model=='ITEM'" ng-click="" class="nav-links">
                 <a ng-if="currentUser.id == item.user.id" ng-click="transactionToggle(null, item.id)">Send Item <i style="float:right" class="fas fa-paper-plane"></i></a>
                 <a ng-if="currentUser.id != item.user.id" ng-click="orderToggle(item)">Purchase Item <i style="float:right" class="fas fa-shopping-cart"></i></a>
             </h4>
-            <h4 ng-if="item.model=='ITEM'" ng-click="renderMarketToggle(item)" class="nav-links">
+            <h4 ng-if="false && item.model=='ITEM'" ng-click="renderMarketToggle(item)" class="nav-links">
                 <a ng-if="currentUser.id == item.user.id">Liquidity <i style="float:right" class="fas fa-exchange-alt"></i></a>
             </h4>
 
             <h4 ng-if="item.model=='PROJECT'" ng-click="validationToggle(item)" class="nav-links"><a>Request To Join <i style="float:right" class="fas fa-users"></i></a></h4>
             
+            <!--CREATE TIME AND ASSOCIATE-->
             <h4 ng-if="item.model=='TASK'" ng-click="timeToggle(item)" class="nav-links"><a>Create Time <i style="float:right" class="fas fa-atom"></i></a></h4>
-            <!--<h4 ng-if="item.model=='TASK'" ng-click="cre8Toggle(item)" class="nav-links"><a>Create <i style="float:right" class="fas fa-atom"></i></a></h4>-->
+            <!--CREATE GENERALLY AND ASSOCIATE-->
+            <h4 ng-if="false && item.model=='TASK'" ng-click="cre8Toggle(item)" class="nav-links"><a>Create <i style="float:right" class="fas fa-atom"></i></a></h4>
+
+            <h4 ng-if="item.model=='TIME'" ng-click="validationToggle(item)" class="nav-links"><a>Validate <i style="float:right" class="fas fa-check"></i></a></h4>
+
 
             <h4 ng-click="renderAssociationToggle(item)" class="nav-links"><a>Associations <i style="float:right" class="fas fa-bezier-curve"></i></a></h4>
-
             <h4 ng-click="statsToggle(item)" class="nav-links"><a>Stats <i style="float:right" class="fa fa-eye"></i></a></h4>
-            <!--token action potiental-->
-
             <h4 ng-if="item.model!='TOKEN'"  ng-click="tokensToggle(item)" class="nav-links"><a>Tokens <i style="float:right" class="fas fa-coins"></i></a></h4>
             <h4 ng-click="shareToggle(item)" class="nav-links"><a>Share <i style="float:right" class="fas fa-share"></i></a></h4>
+
 
         </div>
     </div>

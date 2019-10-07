@@ -31,11 +31,11 @@
                 </div>
             </div>
             <div style="padding:16px;">
+                <!--NON TEMPLATE -->
                 <div ng-click="$event.stopPropagation()" style="float:right">
                     <button ng-click="$event.stopPropagation();interested(item)" ng-if="!item.isAssociated" class="btn btn-default"><i class="fas fa-check"></i> Interested</button>
                     <button ng-click="$event.stopPropagation();interested(item)" ng-if="item.isAssociated" class="btn btn-default"><i class="fas fa-remove"></i> Cancel Interest</button>
                 </div>
-                <p><a ng-click="$event.stopPropagation()" ng-repeat="tag in item.tags track by $index" href="market/{{tag.trim()}}" ui-sref="market({id:tag.trim()})">{{tag.trim()}} </a></p>
                 <p><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></p>
                 <span style="color:gray" am-time-ago="item.createdAt"></span>
             </div>
