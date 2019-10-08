@@ -10417,7 +10417,7 @@ angular.module("nav/templates/subNav.tpl.html", []).run(["$templateCache", funct
     "                <h4 class=\"nav-links\"><a href=\"project/{{item.urlTitle}}/content\" ui-sref=\"project.content({path:item.urlTitle})\">Content</a></h4>\n" +
     "                <h4 class=\"nav-links\"><a href=\"project/{{item.urlTitle}}/items\" ui-sref=\"project.items({path:item.urlTitle})\">Items</a></h4>\n" +
     "                <h4 class=\"nav-links\"><a href=\"project/{{item.urlTitle}}/ledger\" ui-sref=\"project.ledger({path:item.urlTitle})\">Ledger</a></h4>\n" +
-    "                <h4 class=\"nav-links\"><a href=\"project/{{item.urlTitle}}/members\" ui-sref=\"project.members({path:item.urlTitle})\">{{item.memberCount}} Members</a></h4>\n" +
+    "                <h4 class=\"nav-links\"><a href=\"project/{{item.urlTitle}}/members\" ui-sref=\"project.members({path:item.urlTitle})\">Members</a></h4>\n" +
     "                <h4 class=\"nav-links\"><a href=\"project/{{item.urlTitle}}/positions\" ui-sref=\"project.positions({path:item.urlTitle})\">Positions</a></h4>\n" +
     "                <h4 class=\"nav-links\"><a href=\"project/{{item.urlTitle}}/projects\" ui-sref=\"project.projects({path:item.urlTitle})\">Projects</a></h4>\n" +
     "                <h4 class=\"nav-links\"><a href=\"project/{{item.urlTitle}}/tasks\" ui-sref=\"project.tasks({path:item.urlTitle})\">Tasks</a></h4>\n" +
@@ -10429,12 +10429,12 @@ angular.module("nav/templates/subNav.tpl.html", []).run(["$templateCache", funct
     "                <h4 class=\"nav-links\"><a href=\"member/{{item.username}}/actions\" ui-sref=\"member.actions({path:item.username})\">Actions</a></h4>\n" +
     "                <h4 class=\"nav-links\"><a href=\"member/{{item.username}}/assets\" ui-sref=\"member.assets({path:item.username})\">Assets</a></h4>\n" +
     "                <h4 class=\"nav-links\"><a href=\"member/{{item.username}}/content\" ui-sref=\"member.content({path:item.username})\">Content</a></h4>\n" +
-    "                <h4 class=\"nav-links\"><a href=\"member/{{item.username}}/followers\" ui-sref=\"member.followers({path:item.username})\">{{item.followerCount}} Followers</a></h4>\n" +
-    "                <h4 class=\"nav-links\"><a href=\"member/{{item.username}}/following\" ui-sref=\"member.following({path:item.username})\">{{item.followingCount}} Following</a></h4>\n" +
+    "                <h4 class=\"nav-links\"><a href=\"member/{{item.username}}/followers\" ui-sref=\"member.followers({path:item.username})\">Followers</a></h4>\n" +
+    "                <h4 class=\"nav-links\"><a href=\"member/{{item.username}}/following\" ui-sref=\"member.following({path:item.username})\">Following</a></h4>\n" +
     "                <h4 class=\"nav-links\"><a href=\"member/{{item.username}}/items\" ui-sref=\"member.items({path:item.username})\">Items</a></h4>\n" +
     "                <h4 class=\"nav-links\"><a href=\"member/{{item.username}}/ledger\" ui-sref=\"member.ledger({path:item.username})\">Ledger</a></h4>\n" +
     "                <h4 class=\"nav-links\"><a href=\"member/{{item.username}}/positions\" ui-sref=\"member.positions({path:item.username})\">Positions</a></h4>\n" +
-    "                <h4 class=\"nav-links\"><a href=\"member/{{item.username}}/projects\" ui-sref=\"member.projects({path:item.username})\">{{item.projectCount}} Projects</a></h4>\n" +
+    "                <h4 class=\"nav-links\"><a href=\"member/{{item.username}}/projects\" ui-sref=\"member.projects({path:item.username})\">Projects</a></h4>\n" +
     "                <h4 class=\"nav-links\"><a href=\"member/{{item.username}}/tasks\" ui-sref=\"member.tasks({path:item.username})\">Tasks</a></h4>\n" +
     "                <h4 class=\"nav-links\"><a href=\"member/{{item.username}}/time\" ui-sref=\"member.time({path:item.username})\">Time</a></h4>\n" +
     "            </div>\n" +
@@ -11198,14 +11198,13 @@ angular.module("project/templates/about.tpl.html", []).run(["$templateCache", fu
     "    \n" +
     "	<div class=\"card\">\n" +
     "\n" +
-    "        <div ng-click=\"cardDetailExpand()\" style=\"background:url('https://source.unsplash.com/1600x900/?business,service,civic,create,art,movies,action');min-height:100px\" class=\"imageContainerSmall\">\n" +
+    "        <div style=\"background:url('https://source.unsplash.com/1600x900/?business,service,civic,create,art,movies,action');min-height:100px\" class=\"imageContainerSmall\">\n" +
     "            <div style=\"background:rgba(0,0,0,0.75);height:100px\" class=\"imageContainerSmallDiv\">  \n" +
     "                <div style=\"text-align:right;padding:15px;position:absolute;right:0\">\n" +
-    "                    <a style=\"color:white;\" ng-click=\"$event.stopPropagation();cardDetailToggle(item)\"><i class=\"fas fa-layer-group\"></i> </a>\n" +
+    "                    <a style=\"color:white;\"><i class=\"fas fa-info\"></i> </a>\n" +
     "                </div> \n" +
     "                <div style=\"margin-top: auto;margin-bottom: auto;padding:15px;text-align:left\">\n" +
-    "                    <h1 style=\"font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;font-size:35px\">{{project.title}}</h1>\n" +
-    "                    <p style=\"color:white;\">Information</p>\n" +
+    "                    <h1 style=\"font-size:25px;color:rgba(255,255,255,0.9);font-weight:400;font-size:35px\">Information</h1>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
@@ -11249,12 +11248,7 @@ angular.module("project/templates/about.tpl.html", []).run(["$templateCache", fu
     "                <div class=\"spacing-10\"></div>\n" +
     "            </div>\n" +
     "\n" +
-    "            <!--INFO.. COUNTS-->\n" +
-    "            <h4>Associations</h4>\n" +
-    "            <p><b>Members</b>: <a>{{project.memberCount || 0}}</a>, <b>Tasks</b>: <a>{{project.taskCount || 0}}</a>, <b>Time</b>: <a>{{project.timeCount||0 }}</a></p>\n" +
-    "            <div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "            <h4>Token Manifolds</h4>\n" +
+    "            <h4>Asset Manifolds</h4>\n" +
     "            <p>\n" +
     "                <a href=\"market/PROJECT+{{project.urlTitle.toUpperCase()}}\" ui-sref=\"market({id:project.urlTitle.toUpperCase()})\">PROJECT+{{project.urlTitle.toUpperCase()}}+</a>, \n" +
     "                <a href=\"market/PROJECT+{{project.urlTitle.toUpperCase()}}+TASK\">PROJECT+{{project.urlTitle.toUpperCase()}}+TASK</a>, \n" +
@@ -11262,8 +11256,19 @@ angular.module("project/templates/about.tpl.html", []).run(["$templateCache", fu
     "            </p>\n" +
     "            <div class=\"spacing-10\"></div>\n" +
     "\n" +
-    "            <!--<h4>Apps</h4>\n" +
-    "            <div class=\"spacing-10\"></div>-->\n" +
+    "            <!--\n" +
+    "            <h4>Apps</h4>\n" +
+    "            <div class=\"spacing-10\"></div>\n" +
+    "            -->\n" +
+    "\n" +
+    "            <h4>Associations</h4>\n" +
+    "            <p>\n" +
+    "                <b>Members</b>: <a>{{project.data.apps.associations.members || 0}}</a>, \n" +
+    "                <b>Tasks</b>: <a>{{project.data.apps.associations.time || 0}}</a>, \n" +
+    "                <b>Time</b>: <a>{{project.data.apps.associations.members ||0 }}</a>\n" +
+    "            </p>\n" +
+    "            <div class=\"spacing-10\"></div>\n" +
+    "\n" +
     "\n" +
     "        </div>\n" +
     "    </div>\n" +
