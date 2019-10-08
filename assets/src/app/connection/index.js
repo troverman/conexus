@@ -18,14 +18,23 @@ angular.module( 'conexus.connection', [
 	});
 }])
 
-.controller( 'ConnectionCtrl', ['$location', '$rootScope', '$sailsSocket', '$sce', '$scope', 'connection', 'titleService', function ConnectionController( $location, $rootScope, $sailsSocket, $sce, $scope, connection, titleService ) {
+.controller( 'ConnectionCtrl', ['$location', '$rootScope', '$sailsSocket', '$sce', '$scope', 'AssociationModel', 'connection', 'titleService', function ConnectionController( $location, $rootScope, $sailsSocket, $sce, $scope, AssociationModel, connection, titleService ) {
     titleService.setTitle('Connection | CRE8.XYZ');
     $scope.connection = connection;
-    $scope.connection.model = 'CONNECTION';
     if(!$scope.connection){$location.path('/')}
         
 	$scope.selectedTab = 'INFORMATION';
     $scope.selectTab = function(model){$scope.selectedTab = model;};
+
+    var query = {
+        filter:JSON.stringify({id:connection.id}),
+        limit:100,
+        skip:0,
+        sort:'createdAt DESC'
+    };
+    AssociationModel.get(query).then(function(associations){
+        $scope.associations = associations;
+    });
 
     $sailsSocket.subscribe('connection', function (envelope) {
         console.log(envelope)

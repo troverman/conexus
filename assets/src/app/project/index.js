@@ -318,7 +318,7 @@ angular.module( 'conexus.project', [
 
 }])
 
-.controller( 'ProjectAboutCtrl', ['$location', '$sailsSocket', '$sce', '$scope', '$stateParams', 'project', 'titleService', function ProjectAboutController( $location, $sailsSocket, $sce, $scope, $stateParams, project, titleService) {
+.controller( 'ProjectAboutCtrl', ['$location', '$sailsSocket', '$scope', '$stateParams', 'project', 'titleService', function ProjectAboutController( $location, $sailsSocket, $scope, $stateParams, project, titleService) {
     titleService.setTitle(project.title + ' | About | CRE8.XYZ');
 }])
 
@@ -429,7 +429,7 @@ angular.module( 'conexus.project', [
 
 }])
 
-.controller( 'ProjectChannelsCtrl', ['$location', '$sailsSocket', '$sce', '$scope', 'project', 'titleService', function ProjectController( $location, $sailsSocket, $sce, $scope, project, titleService ) {
+.controller( 'ProjectChannelsCtrl', ['$location', '$sailsSocket', '$scope', 'project', 'titleService', function ProjectController( $location, $sailsSocket, $scope, project, titleService ) {
     
     //TODO: DEPREICATE
     titleService.setTitle(project.title + ' | Channels | CRE8.XYZ');
@@ -439,7 +439,7 @@ angular.module( 'conexus.project', [
 
 }])
 
-.controller( 'ProjectContentCtrl', ['$location', '$rootScope', '$sce', '$scope', 'contentList', 'ContentModel', 'project', 'titleService', function ProjectController( $location, $rootScope, $sce, $scope, contentList, ContentModel, project, titleService ) {
+.controller( 'ProjectContentCtrl', ['$location', '$rootScope', '$scope', 'contentList', 'ContentModel', 'project', 'titleService', function ProjectController( $location, $rootScope, $scope, contentList, ContentModel, project, titleService ) {
     
     titleService.setTitle(project.title + ' | Content | CRE8.XYZ'); 
     $scope.contentList = contentList.map(function(obj) {
@@ -456,7 +456,17 @@ angular.module( 'conexus.project', [
     
 .controller( 'ProjectCharterCtrl', ['$sailsSocket', '$scope', 'connections', 'project', 'titleService', function ProjectController( $sailsSocket, $scope, connections, project, titleService ) {
     titleService.setTitle(project.title + ' | Charter | CRE8.XYZ');
-    $scope.connections = connections.map(function(obj){obj.model = "CONNECTION"; return obj;});
+    $scope.connections = connections.map(function(obj) {
+        for (x in obj.associatedModels){
+            if (obj.associatedModels[x].type == 'CONNECTION'){
+                var returnObj = obj.associatedModels[x].data;
+                returnObj.associationId = obj._id
+                return returnObj;
+            }
+        }
+    });
+    console.log( $scope.connections,connections)
+
 }])
 
 .controller( 'ProjectLedgerCtrl', ['$interval', '$location', '$rootScope', '$scope', 'project', 'titleService', 'TransactionModel', 'transactions', 'transactionsFrom', 'transactionsTo', function ProjectController( $interval, $location, $rootScope, $scope, project, titleService, TransactionModel, transactions, transactionsFrom, transactionsTo ) {
@@ -964,7 +974,7 @@ angular.module( 'conexus.project', [
 
 }])
 
-.controller( 'ProjectProjectsCtrl', ['$location', '$rootScope', '$sailsSocket', '$sce', '$scope', 'project', 'ProjectModel', 'projects', 'titleService', function ProjectController( $location, $rootScope, $sailsSocket, $sce, $scope, project, ProjectModel, projects, titleService ) {
+.controller( 'ProjectProjectsCtrl', ['$location', '$rootScope', '$sailsSocket', '$scope', 'project', 'ProjectModel', 'projects', 'titleService', function ProjectController( $location, $rootScope, $sailsSocket, $scope, project, ProjectModel, projects, titleService ) {
     
     titleService.setTitle(project.title + ' | Projects | CRE8.XYZ');
     $scope.project = project;
@@ -1014,7 +1024,7 @@ angular.module( 'conexus.project', [
     titleService.setTitle(project.title + ' | Settings | CRE8.XYZ');
 }])
 
-.controller( 'ProjectTasksCtrl', ['$location', '$rootScope', '$sailsSocket', '$sce', '$scope', 'project', 'ReactionModel', 'TaskModel', 'tasks', 'titleService', function ProjectController( $location, $rootScope, $sailsSocket, $sce, $scope, project, ReactionModel, TaskModel, tasks, titleService ) {
+.controller( 'ProjectTasksCtrl', ['$location', '$rootScope', '$sailsSocket', '$scope', 'project', 'TaskModel', 'tasks', 'titleService', function ProjectController( $location, $rootScope, $sailsSocket, $scope, project, TaskModel, tasks, titleService ) {
     
     titleService.setTitle(project.title + ' | Tasks | CRE8.XYZ');
 

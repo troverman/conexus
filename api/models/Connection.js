@@ -5,22 +5,20 @@ module.exports = {
         //DEPRECIATE
         model: {type: 'string', defaultsTo: 'CONNECTION'},
 
+        //2nd order parameters
 		title: {type: 'string'},
 		description: {type: 'string'},
         context:{type: 'string'},
         creator:{type: 'string'},
     	type:{type: 'string'},
         associatedModels:{type: 'json'},
-        data: {type: 'json'},
 
+        data: {type: 'json'},
 
         //TODO: DEFINE
         //CUSOM CONNECTION DATA MODEL..
-        //DEFINE A DEW CONNECTIONS WITH CUSTOM ATTRIBUTES IN ASSOCIATION
-        //IE FOR DIRECTION ETC
-        attributes:{type:'json'}
-        //for association...
-        //for validation... (validation attributes.. order attributes)
-        
+        attributes:{type:'json'},
+        parameters:{type:'json'}
+
     }
 };

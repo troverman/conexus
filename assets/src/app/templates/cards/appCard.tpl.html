@@ -24,5 +24,6 @@
         <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fas fa-angle-down"></i> {{item.data.apps.reactions.minus || 0 }} dislike </a>
         <a ng-click="$event.stopPropagation();contentToggle(item)"><i class="far fa-comment"></i> comment </a>
         <a ng-click="$event.stopPropagation();" class="pull-right" style="padding:0px;" href="app/{{item.id}}" ui-sref="app({id:item.id})"><i class="fas fa-link grey"></i></a>
+        <a ng-if="item.associationId" ng-click="$event.stopPropagation();" style=";padding:0px;padding-right:5px" class="pull-right" href="association/{{item.associationId}}" ui-sref="association({id:item.associationId})"><i class="fas fa-bezier-curve grey"></i></a>
     </div>
 </div>

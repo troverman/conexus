@@ -20,7 +20,7 @@ angular.module( 'conexus.tasks', [
 	});
 }])
 
-.controller( 'TasksCtrl', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'TaskModel', 'tasks', function TasksController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, TaskModel, tasks ) {
+.controller( 'TasksCtrl', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$scope', 'TaskModel', 'tasks', function TasksController( $location, $mdSidenav, $rootScope, $sailsSocket, $scope, TaskModel, tasks ) {
 	
     $scope.map = {center: {latitude: 35.902023, longitude: -84.1507067 }, zoom: 9};
     $scope.markers = [];

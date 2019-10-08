@@ -202,6 +202,26 @@ module.exports = {
 							Item.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){Item.publish([newModel[0].id], {verb:'update', data: newModel[0]});});
 						});
 					}
+
+					//TODO: BALANCES
+					if (false && model.associatedModels[x].type == 'MEMBER'){
+
+						User.find({id:model.associatedModels[x].id}).then(function(newModel){
+							if (!newModel[0].data){newModel[0].data = {apps:{}}}
+							if (!newModel[0].data.apps){newModel[0].data.apps = {}}
+							if (!newModel[0].data.apps.balance){newModel[0].data.apps.balance = {};}
+							for (y in protocolTokens){
+								if (!newModel[0].data.apps.balance[protocolTokens[y]]){newModel[0].data.apps.balance[protocolTokens[y]] = 0}
+								newModel[0].data.apps.balance[protocolTokens[y]] = parseInt(newModel[0].data.apps.balance[protocolTokens[y]]) + parseInt(model.amount);
+							}
+							if (!newModel[0].data.apps.attention){newModel[0].data.apps.attention = {general:0}}
+							newModel[0].data.apps.attention.general = newModel[0].data.apps.attention.general + model.amount;
+							if (!newModel[0].data.apps.attention[model.creator.username.toUpperCase()]){newModel[0].data.apps.attention[model.creator.username.toUpperCase()] = 0}
+							newModel[0].data.apps.attention[model.creator.username.toUpperCase()] = newModel[0].data.apps.attention[model.creator.username.toUpperCase()] + model.amount;
+							User.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){User.publish([newModel[0].id], {verb:'update', data: newModel[0]});});
+						});
+									
+					}
 					if (model.associatedModels[x].type == 'ORDER'){
 						Order.find({id:model.associatedModels[x].id}).then(function(newModel){
 							if (!newModel[0].data){newModel[0].data = {apps:{}}}
@@ -219,7 +239,22 @@ module.exports = {
 						});
 					}
 					//tokens vs balance
-					if (model.associatedModels[x].type == 'PROJECT'){
+					if (false && model.associatedModels[x].type == 'PROJECT'){
+						console.log(model.associatedModels[x])
+						Project.find({urlTitle:model.associatedModels[x].id}).then(function(newModel){
+							if (!newModel[0].data){newModel[0].data = {apps:{}}}
+							if (!newModel[0].data.apps){newModel[0].data.apps = {}}
+							if (!newModel[0].data.apps.balance){newModel[0].data.apps.balance = {};}
+							for (y in protocolTokens){
+								if (!newModel[0].data.apps.balance[protocolTokens[y]]){newModel[0].data.apps.balance[protocolTokens[y]] = 0}
+								newModel[0].data.apps.balance[protocolTokens[y]] = parseInt(newModel[0].data.apps.balance[protocolTokens[y]]) + parseInt(model.amount);
+							}
+							if (!newModel[0].data.apps.attention){newModel[0].data.apps.attention = {general:0}}
+							newModel[0].data.apps.attention.general = newModel[0].data.apps.attention.general + model.amount;
+							if (!newModel[0].data.apps.attention[model.creator.username.toUpperCase()]){newModel[0].data.apps.attention[model.creator.username.toUpperCase()] = 0}
+							newModel[0].data.apps.attention[model.creator.username.toUpperCase()] = newModel[0].data.apps.attention[model.creator.username.toUpperCase()] + model.amount;
+							Project.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){Project.publish([newModel[0].id], {verb:'update', data: newModel[0]});});
+						});
 									
 					}
 					if (model.associatedModels[x].type == 'TASK'){

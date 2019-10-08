@@ -1500,51 +1500,85 @@ angular.module( 'conexus.nav', [
         else{$mdSidenav('login').toggle();}
     };
 
-    $rootScope.validationToggle = function(item){
+    $rootScope.validationToggle = function(item, item1){
+
+        $scope.addToAssociatedModels = function(model){
+            console.log(model)
+            var associatedModels = {
+                id:model.id,
+                type:model.model || 'MEMBER',
+            };
+            //hmm
+            associatedModels.text = (model.title || model.username || model.amount) + ' ( ' + (associatedModels.type || '') + ' ' + model.id + ' )'
+            $scope.newValidation.associatedModels.push(associatedModels);
+        };
 
         $scope.closeAllNav();
 
         if($rootScope.currentUser){
 
             $scope.newValidation = {
-                associatedModels:[{
-                    context: [
-                        {text:'self', score:100}
-                    ],
-                    connection:[{text:'Self Connection'}]
-                }],
+                associatedModels:[],
+                //HMM
                 user: $rootScope.currentUser.id,
             };
+            //connection-connection app defined 2nd order has a creator parameter
 
-            //item is an array
+            //TODO: ITEM (MODEL) AS ARRAY
             if(item){
-                console.log(item)
+
+                console.log(item);
                 $scope.item = item;
-                $scope.newValidation.associatedModels.push({
-                    text:$scope.item.id,
+                var associatedModels = {
                     id:$scope.item.id,
                     type:$scope.item.model,
-                    context: [
-                        {text:'self', score:100}
-                    ],
-                    connection:[{text:$scope.item.model+' Connection'}]
+                    //context: [
+                    //    {text:'self', score:100}
+                    //],
+                    //connection:[{text:$scope.item.model+' Connection'}]
+                };
+
+                //hmm
+                if (associatedModels.type=='TIME'){associatedModels.text = $scope.item.model + ' ' + $scope.item.id}
+                else{associatedModels.text = $scope.item.title + ' ( ' + $scope.item.model + ' ' + $scope.item.id + ' )'}
+
+                //for (x in $scope.item){
+                $scope.newValidation.associatedModels.push(associatedModels);
+                //}
+
+            }
+
+            if(item1){
+                $scope.newValidation.associatedModels.push({
+                    text:$scope.item1.title + ' ( ' + $scope.item1.id + ' )',
+                    id:$scope.item1.id,
+                    type:$scope.item.model,
                 });
             }
 
-            if(item.associatedModels){
-                $scope.newValidation.associatedModels = [];
-                for (x in item.associatedModels){
-                    $scope.newValidation.associatedModels.push({
-                        text:item.associatedModels[x].id,
-                        id:item.associatedModels[x].id,
-                        type:$scope.item.model,
-                        context: [
-                            {text:'self', score:100}
-                        ],
-                        connection:[{text:$scope.item.model+' Connection'}]
-                    });
-                }
+            if(!item1){
+                $scope.newValidation.associatedModels.push({
+                    text:'CRE8'+ ' ( PROJECT 5923b9cc5aac131100cab1c1 )',
+                    id:'5923b9cc5aac131100cab1c1',
+                    type:'PROJECT',
+                });
             }
+
+
+            //if(item.associatedModels){
+            //    $scope.newValidation.associatedModels = [];
+            //    for (x in item.associatedModels){
+            //        $scope.newValidation.associatedModels.push({
+            //            text:item.associatedModels[x].id,
+            //            id:item.associatedModels[x].id,
+            //            type:$scope.item.model,
+            //            context: [
+            //                {text:'self', score:100}
+            //            ],
+            //            connection:[{text:$scope.item.model+' Connection'}]
+            //        });
+            //    }
+            //}
     
             $scope.$watch('newValidation.context', function(newValue, oldValue){
                 if (newValue !== oldValue) {
@@ -1553,6 +1587,8 @@ angular.module( 'conexus.nav', [
                     }
                 }
             }, true);
+
+            console.log($scope.newValidation);
 
             $mdSidenav('validation').toggle();
         }
@@ -1852,10 +1888,15 @@ angular.module( 'conexus.nav', [
         //HUMAN AND MACHINE ARE ONE .. HAVE TO BE ON TO RUN? 
             //SHOULDNT BE TURNED OFF AND SHOULD RUN IN CONCERT
 
+
+        //TODO: BETTER STATE INFO
+        //ERR: FORMATING AND UPDATING MODELS
         var string = '';
         string += $state.current.name.toUpperCase().replace('.','+');
+        //console.log($state.current.name.toUpperCase().replace('.','+'))
+
         if ($state.params[Object.keys($state.params)[0]]){
-            string += '+'+$state.params[Object.keys($state.params)[0]];
+            string += '+'+$state.params[Object.keys($state.params)[0]].toUpperCase();
         }
         string += '+'+model.toUpperCase()+'+ATTENTION';
 
@@ -1884,9 +1925,12 @@ angular.module( 'conexus.nav', [
         });
 
         var associatedModels = null
+
+        //ERR
         if (string.split('+').length > 1){
             associatedModels = [{type:string.split('+')[0], id:string.split('+')[1]}]
         }
+
         var attentionModel = {
             app: model,
             amount:1, 

@@ -237,6 +237,7 @@ module.exports = {
 			return protocolTokens;
 		};
 
+		//ERR
 		function createAssociation(newValidationModel){
 			var newAssociationModel = {};
 			Validation.getDatastore().manager.collection('validation')
@@ -271,7 +272,7 @@ module.exports = {
 						});
 					}
 					else{
-						console.log('ASSOCIATION EXISTS -- COMPUTE');
+						console.log('ASSOCIATION EXISTS -- COMPUTE', associationModels);
 						//lookup connection here..
 					}
 					//UPDATE LINKED MODELS & COUNTS?

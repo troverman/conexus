@@ -17,27 +17,32 @@ angular.module( 'conexus.task', [])
     });
 }])
 
-.controller( 'TaskController', ['$location', '$rootScope', '$sailsSocket', '$scope', 'ContentModel', 'task', 'TaskModel', 'TimeModel', 'titleService', function TaskController( $location, $rootScope, $sailsSocket, $scope, ContentModel, task, TaskModel, TimeModel, titleService) {
+.controller( 'TaskController', ['$location', '$rootScope', '$sailsSocket', '$scope', 'AssociationModel', 'task', 'titleService', function TaskController( $location, $rootScope, $sailsSocket, $scope, AssociationModel, task, titleService) {
 
     $scope.task = task;
     if(!$scope.task){$location.path('/')}
-    $scope.task.model = 'TASK';
+
     titleService.setTitle($scope.task.title + ' | Task | CRE8.XYZ');
-    
-    $scope.directedGraphElements = {};
-    $scope.selectedTab = 'TIME';
 
-
-    //TODO:ASSOCIATED MODELS
-
-    //TODO:AssociatedTime
-    //var timeQuery = {};
-    //$scope.selectAssociations(timeQuery);
-    //OR -- TIME.associationModels
-
-
-    TimeModel.get({task:task.id, limit:100, skip:0, sort:'createdAt DESC'}).then(function(timeModels){
-        $scope.time = timeModels.map(function(obj){obj.model = 'TIME'; return obj;});
+    //DUPS ON COMPOUND..
+    var query = {
+        filter:JSON.stringify({id:task.id, type:'TIME'}),
+        limit:100,
+        skip:0,
+        sort:'createdAt DESC'
+    };
+    AssociationModel.get(query).then(function(associations){
+        $scope.associations = associations;
+        $scope.time = associations.map(function(obj) {
+            for (x in obj.associatedModels){
+                if (obj.associatedModels[x].type == 'TIME'){
+                    var returnObj = obj.associatedModels[x].data;
+                    returnObj.associationId = obj._id
+                    return returnObj;
+                }
+            }
+        });
+        console.log(associations);
     });
     
     //TODO: COMPUTE CONTEXT
@@ -51,20 +56,8 @@ angular.module( 'conexus.task', [])
         }
     }
 
-    $scope.selectAssociations = function(model){
-        var query = {
-
-
-        };
-        //AssociationModel.get(query).then(function(associationModels){
-        //    $scope.associations = associationModels;
-        //});
-    };
-
-    console.log($scope.task.context);
-
-    //TODO: COMPONENTS
-    $scope.selectTab = function(model){$scope.selectedTab = model;};
+    
+    $scope.selectedTab = 'TIME';
     $scope.tokenChart = {
         chart: {zoomType: 'x'},
         series: [{
@@ -85,6 +78,9 @@ angular.module( 'conexus.task', [])
         yAxis: {title: {text: null}},
         credits:{enabled:false},
     };
+
+    //TODO: COMPONENTS
+    $scope.selectTab = function(model){$scope.selectedTab = model;};
     $scope.populateTokenChart = function(){
         $scope.sortableSet = [];
         $scope.tokenChart.xAxis.categories = [];

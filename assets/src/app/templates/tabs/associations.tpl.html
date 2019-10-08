@@ -11,13 +11,11 @@
     <div style="padding:16px;">
         <div class="row">
             <div class="col-sm-12">
+                <!--ALL ASSOCIATIONS && SERLF-ASSOCIATIONS-&FILTER-->
                 <h4>Context</h4>
                 <div>
-                    <span ng-repeat="context in task.context">{{context}}, </span>
+                    <span ng-repeat="(key,value) in content.context">{{key}}: {{value}}, </span>
                 </div>
-                <tags-input min-length="1" max-tags="1" placeholder="Associations" ng-model="assoicationFilter">
-                    <auto-complete source="loadAssociations($query)"></auto-complete>
-                </tags-input>
             </div>
         </div>
     </div>
@@ -28,8 +26,7 @@
     <div style="clear:both"></div>
 </ul>
 <div class="card"><tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search" ng-model="searchQuery"></tags-input></div>
-
-<div class="card" ng-repeat="item in associations" ng-click="cardDetailExpand(item)">
+<div class="card" ng-repeat="item in content.associationModels" ng-click="cardDetailExpand(item)">
     <div style="background:url('https://source.unsplash.com/1600x900/?{{item.tags}}');min-height:auto;" class="imageContainerSmall">
         <div style="background:rgba(0,0,0,0.75);height:auto" class="imageContainerSmallDiv">  
             <div style="text-align:right;padding:15px;position:absolute;right:0">

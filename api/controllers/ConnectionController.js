@@ -144,7 +144,7 @@ module.exports = {
 
 			title:req.param('title'),
 			description:req.param('description'),
-			information: req.param('information'),
+			information: req.param('information'), //parameters?
 			associatedModels: req.param('associatedModels'),//id, type..
 			data:{apps:{reactions:{plus:0,minus:0},attention:{general:0}}}
 

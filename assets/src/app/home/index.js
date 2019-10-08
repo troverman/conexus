@@ -506,6 +506,10 @@ angular.module( 'conexus.home', [
             description:'Basic Values'
         },
         {
+            title:'Location', 
+            description:'Near Me'
+        },
+        {
             title:'Personal Goals', 
             description:'What do I want for myself?'
         },
@@ -774,9 +778,36 @@ angular.module( 'conexus.home', [
             answer:['no','yes']
         },
 
-    ];
 
-    //watch question ansers to create order
+        //VARIABLE
+        //DO ALL COUNTRIES
+        {
+            pack:'Location',
+            type:'onedimension slider', 
+            question:'Is Knoxville Valuable', 
+            assetString:'CRE8+TIME+KNOXVILLE', 
+            response:0, 
+            answer:['no','yes']
+        },
+        //..
+        {
+            pack:'Location',
+            type:'onedimension slider', 
+            question:'Is Tennessee Valuable', 
+            assetString:'CRE8+TIME+TENNESSEE', 
+            response:0, 
+            answer:['no','yes']
+        },
+        //
+        {
+            pack:'Location',
+            type:'onedimension slider', 
+            question:'Is the United States Valuable', 
+            assetString:'CRE8+TIME+USA', 
+            response:0, 
+            answer:['no','yes']
+        },
+    ];
 
 
     $scope.selectPack($scope.packs[0]);
@@ -804,13 +835,11 @@ angular.module( 'conexus.home', [
 
             //GET ELEMENT FROM NEW VALUE ARRAY? 
             console.log(newValue);
-
-            var index = -1
-            if(index !=-1){
-                $scope.newOrder[index] = {
+            for (x in newValue){
+                var newOrder = {
                     associatedModels:[
                         {market:'UNIVERSAL', amount:1, direction:'SELL'},
-                        {market:'UNIVERSAL', amount:1, direction:'BUY'},
+                        {market:newValue[x].assetString, amount:newValue[x].amount, direction:'BUY'},
                     ],
                     parameters:{
                         type:'ONBOOK',
@@ -818,22 +847,9 @@ angular.module( 'conexus.home', [
                     },
                     connection:{},
                 };
+                $scope.newOrder.push(newOrder);
+
             }
-            
-            var newOrder = {
-                associatedModels:[
-                    {market:'UNIVERSAL', amount:1, direction:'SELL'},
-                    {market:'UNIVERSAL', amount:1, direction:'BUY'},
-                ],
-                parameters:{
-                    type:'ONBOOK',
-                    status:'CONTINUAL',
-                },
-                connection:{},
-            };
-
-            //$scope.newOrder.push(newOrder);
-
         }
     }, true);
 
@@ -920,7 +936,7 @@ angular.module( 'conexus.home', [
         credits:{enabled:false},
     };
     $scope.selectedTab = 'QUESTIONS';
-    $scope.selectedTabIntro = 'Basic Info';
+    $scope.selectedTabIntro = 'Basic Information';
     $scope.sortedTagArray = [
         {element:'LOVE'},
         {element:'ART'},
@@ -1018,7 +1034,7 @@ angular.module( 'conexus.home', [
                         lng:position.coords.longitude
                     };
                     $scope.map = {center: {latitude:  $rootScope.currentUser.location.lat, longitude:  $rootScope.currentUser.location.lng}, zoom: 14};
-                    ProjectModel.get({location:[lng,lat], limit:10, skip:0}).then(function(projects){
+                    ProjectModel.get({location:[$rootScope.currentUser.location.lng,$rootScope.currentUser.location.lat], limit:10, skip:0}).then(function(projects){
                         $scope.projects = projects;
                         $scope.markers = [];
                         //TODO: HELPER CONTAINER FUNCTIONS

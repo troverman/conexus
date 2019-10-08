@@ -47,6 +47,7 @@ module.exports = {
 							if (associationModels[x].associatedModels[y].type=='ACTION'){promises.push(Action.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
 							if (associationModels[x].associatedModels[y].type=='APP'){promises.push(App.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
 							if (associationModels[x].associatedModels[y].type=='ATTENTION'){promises.push(Attention.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+							if (associationModels[x].associatedModels[y].type=='CONNECTION'){promises.push(Connection.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
 							if (associationModels[x].associatedModels[y].type=='CONTENT'){promises.push(Content.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
 							if (associationModels[x].associatedModels[y].type=='ITEM'){promises.push(Item.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
 							if (associationModels[x].associatedModels[y].type=='MEMBER'){promises.push(User.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
@@ -231,9 +232,18 @@ module.exports = {
 					data:{apps:{reactions: {plus:0,minus:0},attention:{general:0}}},
 				};
 
+
+				Connection.find().then(function(connectionModels){
+					console.log(connectionModels);
+
+
+
+				});
+
+
 				//NO HARDCODE!
 				newValidation.connection = {
-					id:null,
+					id: null,
 					title:'DEFAULT',
 					parameters:{
 						mapping:[
@@ -277,6 +287,7 @@ module.exports = {
 					Validation.create(newValidation).then(function(newValidationModel){
 						console.log('CREATE VALIDATION', newValidationModel);
 						createAssociation(newValidationModel);
+						createEvent(newValidationModel, 'create');
 					});
 
 				}
@@ -321,6 +332,7 @@ module.exports = {
 						var newAssociationModel = newValidationModel;
 						Association.create(newAssociationModel).then(function(association){
 							console.log('CREATED ASSOCIATION', association);
+							createEvent(newValidationModel, 'create');
 							Association.publish([association.id], {verb: 'create', data: association});
 						});
 					}

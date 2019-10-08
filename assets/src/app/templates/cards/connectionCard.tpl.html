@@ -7,16 +7,15 @@
             <div style="margin-top: auto;margin-bottom: auto;">
                 <div style="padding:15px;">
                     <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">
-                        <a ng-click="$event.stopPropagation();" style="color:white" href="connection/{{item.id}}" ui-sref="connection({id:item.id})">{{item.info.title}}</a>
+                        <a ng-click="$event.stopPropagation();" style="color:white" href="connection/{{item.id}}" ui-sref="connection({id:item.id})">{{item.title}}</a>
                     </h1>
                 </div>
             </div>
         </div>
     </div>
     <div style="padding:16px;">
-        <h5>{{item.dataModelAlpha}} - {{item.dataModelBeta}}</h5>
-        <div ng-bind-html="renderContent(item.info.description)"></div>
-        <p><span am-time-ago="item.createdAt"></span></p>
+        <div ng-bind-html="renderContent(item.description)"></div>
+        <span style="color:gray" am-time-ago="item.createdAt"></span>
     </div>
     <div class="card-footer">
         <a ng-click="$event.stopPropagation();renderAttentionToggle(item)" style="color:grey"><i class="fas fa-eye"></i> {{item.data.apps.attention.general || 0}}</a>
@@ -25,6 +24,6 @@
         <a ng-click="$event.stopPropagation();contentToggle(item)"><i class="far fa-comment"></i> comment </a>
         <a ng-click="$event.stopPropagation();validationToggle(item, model)"><i class="fa fa-check"></i> validate </a>
         <a ng-click="$event.stopPropagation()" style="padding:0px" class="pull-right" href="connection/{{item.id}}" ui-sref="connection({id:item.id})"><i class="fas fa-link grey"></i></a>
-        <a ng-if="item.associationId" ng-click="$event.stopPropagation();" style=";padding:0px;padding-right:5px" class="pull-right" href="association/{{item.associationId}}" ui-sref="association({id:item.associationId})"><i class="fas fa-bezier-curve grey"></i></a>
+        <a ng-if="item.associationId" ng-click="$event.stopPropagation();" style="padding:0px;padding-right:5px" class="pull-right" href="association/{{item.associationId}}" ui-sref="association({id:item.associationId})"><i class="fas fa-bezier-curve grey"></i></a>
     </div>
 </div>

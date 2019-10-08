@@ -30,6 +30,7 @@ angular.module( 'conexus', [
     'conexus.attention',
     'conexus.block',
     'conexus.connection',
+    'conexus.connections',
     'conexus.content',
     'conexus.contentList',
     'conexus.developers',

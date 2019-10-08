@@ -17,7 +17,15 @@ angular.module( 'conexus.member', [
             }],
         }
 	})
-
+    .state( 'member.about', {
+        url: '/about',
+        views: {
+            "memberAbout": {
+                controller: 'MemberAboutCtrl',
+                templateUrl: 'member/templates/about.tpl.html'
+            }
+        }
+    })
     .state( 'member.activity', {
         url: '',
         views: {
@@ -27,13 +35,24 @@ angular.module( 'conexus.member', [
             }
         },
     })
-    .state( 'member.about', {
-        url: '/about',
+    .state( 'member.apps', {
+        url: '/apps',
         views: {
-            "memberAbout": {
-                controller: 'MemberAboutCtrl',
-                templateUrl: 'member/templates/about.tpl.html'
+            "memberApps": {
+                controller: 'MemberAppsCtrl',
+                templateUrl: 'member/templates/apps.tpl.html'
             }
+        },
+        resolve: {
+            apps: ['AssociationModel', 'member', function(AssociationModel, member) {
+                var query = {
+                    filter:JSON.stringify({type:'APP', id:member.id}),
+                    limit:100,
+                    skip:0,
+                    sort:'createdAt DESC'
+                };
+                return AssociationModel.get(query);
+            }]
         }
     })
     .state( 'member.assets', {
@@ -296,7 +315,7 @@ angular.module( 'conexus.member', [
     $scope.actions = actions.map(function(obj){obj.model = 'ACTION'; return obj;});
 }])
 
-.controller( 'MemberActivityCtrl', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', '$stateParams', 'ContentModel', 'member', 'titleService', function MemberActivityController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, $stateParams, ContentModel, member, titleService) {
+.controller( 'MemberActivityCtrl', ['$mdSidenav', '$rootScope', '$sailsSocket', '$scope', '$stateParams', 'EventModel', 'member', 'titleService', function MemberActivityController( $mdSidenav, $rootScope, $sailsSocket, $scope, $stateParams, EventModel, member, titleService) {
    
     titleService.setTitle($scope.member.username + ' | Activity | CRE8.XYZ');
     
@@ -315,7 +334,7 @@ angular.module( 'conexus.member', [
         ],
         //find by modelid
         model:'ASSOCIATION', 
-        id:project.id, 
+        id:member.id, 
     };
     $scope.stateIsLoadingActivity = true;
     EventModel.get(query).then(function(eventModels){
@@ -366,6 +385,19 @@ angular.module( 'conexus.member', [
         }
     });
 
+}])
+
+.controller( 'MemberAppsCtrl', ['$sailsSocket', '$scope', 'apps', 'titleService', function MemberAboutController($sailsSocket, $scope, apps, titleService) {
+    titleService.setTitle($scope.member.username + ' | Apps | CRE8.XYZ');
+    $scope.apps = apps.map(function(obj) {
+        for (x in obj.associatedModels){
+            if (obj.associatedModels[x].type == 'APP'){
+                var returnObj = obj.associatedModels[x].data;
+                returnObj.associationId = obj._id
+                return returnObj;
+            }
+        }
+    });
 }])
 
 .controller( 'MemberAssetsCtrl', ['$scope', 'titleService', function MemberAssetsCtrl( $scope, titleService ) {
@@ -441,7 +473,7 @@ angular.module( 'conexus.member', [
 
 }])
 
-.controller( 'MemberContentCtrl', ['$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', '$stateParams', 'contentList', 'ReactionModel', 'titleService', function MemberContentController( $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, $stateParams, contentList, ReactionModel, titleService) {
+.controller( 'MemberContentCtrl', ['$mdSidenav', '$rootScope', '$sailsSocket', '$scope', '$stateParams', 'contentList', 'titleService', function MemberContentController( $mdSidenav, $rootScope, $sailsSocket, $scope, $stateParams, contentList, titleService) {
    
     titleService.setTitle($scope.member.username + ' | Content | CRE8.XYZ');
 
@@ -1179,7 +1211,7 @@ angular.module( 'conexus.member', [
 
 }])
 
-.controller( 'MemberPositionsCtrl', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$scope', '$stateParams', 'member', 'OrderModel', 'orders', 'ReactionModel', 'titleService', function MemberPositionsController( $location, $mdSidenav, $rootScope, $sailsSocket, $scope, $stateParams, member, OrderModel, orders, ReactionModel, titleService) {
+.controller( 'MemberPositionsCtrl', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$scope', '$stateParams', 'member', 'OrderModel', 'orders', 'titleService', function MemberPositionsController( $location, $mdSidenav, $rootScope, $sailsSocket, $scope, $stateParams, member, OrderModel, orders, titleService) {
     
     titleService.setTitle($scope.member.username + ' | Positions | CRE8.XYZ');
 
@@ -1389,7 +1421,7 @@ angular.module( 'conexus.member', [
 
 }])
 
-.controller( 'MemberTimeCtrl', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$scope', '$stateParams', 'member', 'ReactionModel', 'time', 'TimeModel', 'titleService', function MemberTimeController( $location, $mdSidenav, $rootScope, $sailsSocket, $scope, $stateParams, member, ReactionModel, time, TimeModel, titleService) {
+.controller( 'MemberTimeCtrl', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$scope', '$stateParams', 'member', 'time', 'TimeModel', 'titleService', function MemberTimeController( $location, $mdSidenav, $rootScope, $sailsSocket, $scope, $stateParams, member, time, TimeModel, titleService) {
     
     titleService.setTitle($scope.member.username + ' | Time | CRE8.XYZ');
 

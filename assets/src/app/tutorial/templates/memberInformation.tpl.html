@@ -9,7 +9,7 @@
                 <h1 style="font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">Share With Us</h1>
                 <h5><a style="color:white" href="/account"  ui-sref="account"><i class="fas fa-passport"></i> Account Information</a></h5>
                 -->
-                <h1><a style="font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;" href="/account"  ui-sref="account">Account Setup</a></h1>
+                <h1><a style="font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;" href="/account"  ui-sref="account">Account Settings</a></h1>
                 <!--<h5><a style="color:white" href="/account"  ui-sref="account">{{currentUser.id}}</a></h5>-->
                 <h5 style="color:white;text-transform:capitalize">{{selectedTabIntro}}</h5>
             </div>
@@ -19,7 +19,7 @@
         <div class="member-tab-container" style="padding-left:0px">
             <div style="text-align:left">
                 <ul style="padding:0px;" class="member-tabs">
-                     <li><a ng-click="$event.stopPropagation();selectTabIntro('Basic Info')">Information</a></li>
+                     <li><a ng-click="$event.stopPropagation();selectTabIntro('Basic Information')">Information</a></li>
                     <li><a ng-click="$event.stopPropagation();selectTabIntro('Applications')">Applications</a></li>
                 </ul>
             </div>
@@ -27,7 +27,8 @@
     </div>
     <hr style="margin:0px;">
     <div style="padding:16px;">
-        <div ng-if="selectedTabIntro == 'Basic Info'">
+        <!--PASSPORTS.. -->
+        <div ng-if="selectedTabIntro == 'Basic Information'">
             <form role="form" ng-submit="editAccount()">
 
                 <div style="padding:0px" class="col-xs-6">
