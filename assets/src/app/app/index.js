@@ -35,7 +35,15 @@ angular.module( 'conexus.app', [
     titleService.setTitle($scope.app.title + ' | App | CRE8.XYZ');
 
     $scope.selectedTab = 'INFORMATION';
+    $scope.selectedTabProtocol = 'PROTOCOLS-PROTOCOLS';
+
+    //or item components :) ;o ;P :P 
+    $scope.protocols = [{
+        title:'test protocol', id:1
+    }]
+
     $scope.selectTab = function(model){$scope.selectedTab = model;};
+    $scope.selectTabProtocol = function(model){$scope.selectedTabProtocol = model;};
 
     $scope.associateApp = function(model){
         if ($rootScope.currentUser){

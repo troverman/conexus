@@ -265,20 +265,22 @@
                 <h4>Application Design</h4>
                 <h5>An Immutable JSON Structure</h5>
                 <hr>
-                <div class="spacing-10"></div>
 
                 <h4>Modularility of Structure</h4>
-
-                <h4>Permissioning</h4>
-                <span>@decorations</span>
-                <h4>Templating</h4>
+                <!--<h5>NPM | node_modules</h5>-->
+                <h5>Permissioning</h5>
+                <span>Connections & @decorations</span>
+                <h5>Client Templating</h5>
                 <span>JSX. Compiles to Peer Views</span>
 
+                <!--RENDERING?? glitch.com-->
+                
+                <!--TODO: REDUCE AND EXPAND-->
+                <!--(strucutre :)-->
+                <!--
                 <h5>String</h5>
-
                 <h5>Data Models</h5>
                 <h5>Associations</h5>
-
                 <h5>STRUCTURE</h5>
                 <h5>get</h5>
                 <h5>create</h5>
@@ -286,6 +288,7 @@
                 <h5>export</h5>
                 <h5>data</h5>
                 <h5>views</h5>
+                -->
 
             </div>
             <div class="col-sm-6 col-xs-12" style="padding-left:0px;max-width: none;">
@@ -310,6 +313,14 @@ Immutable JSON Connection
                 logic: {type:'json'},
             }
         }
+    ],
+
+    //DEFINE PERMISSIONS (AND (2nd order-self connection) MODEL)
+    connections:[
+        {id:1, title:'APP META CONNECTION', type:'CONNECTION'},
+        {id:2, title:'APP SELF CONNECTION', type:'SELF'},
+        {id:3, title:'APP APP CONNECTION', type:'APP'},
+        {id:4, title:'APP MEMBER', type:'MEMBER'},
     ],
 
     //DEFINE ASSOCIATIONS / IMPORTS
@@ -345,12 +356,10 @@ Immutable JSON Connection
     @isProjectMember
     identityFunction:function(){}
 
-    //FRONTEND; JSX;
+    //JSX;
+    //APP DEFINED ROUTES. 
+    //APP IMPORTS (MODULAR)
     views:{
-        //APP DEFINED ROUTES. 
-        //-- COMPILES TO APP INBROWER & NATIVLY IN APP
-        //CORE CONTAINS THE BUILDER
-        //EXAMPLE - Explose templates from import
         templates:{
             nav:{},
             sidebar:{},
@@ -383,6 +392,7 @@ Immutable JSON Connection
     </div>
 </div>
 
+<!--CONNECTIONS-->
 <div id="TOKENIZATION" style="background-color:white;min-height:70vh">
     <div style="background:url('https://source.unsplash.com/1600x900/?token,code')" class="imageContainerSmall">
         <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  

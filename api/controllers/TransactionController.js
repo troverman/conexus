@@ -2,9 +2,14 @@
 const crypto = require('crypto');
 const Q = require('q');
 
+//TODO: DEPRECIATE -- to ; from
+	//APPRECIATE
+		--> //ASSOCIATION with to, from 
+
+//PROBLEM -- QUERY BY 'populated' ASSOCIATED MODELS OF data.model
 function createEvent(model, verb){
 	var eventModel = {
-		model:{id:model.id,type:model.model},
+		data: model,
 		verb: verb,
 	};
 	Event.create(eventModel).then(function(model){

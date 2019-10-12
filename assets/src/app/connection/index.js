@@ -26,6 +26,12 @@ angular.module( 'conexus.connection', [
 	$scope.selectedTab = 'INFORMATION';
     $scope.selectTab = function(model){$scope.selectedTab = model;};
 
+    //we reduce the self association chains 
+    //what is a validaion topologically .. subset of association 
+    //(association=association ( how it defines itself ) is validation tree 
+    //connection-connection reduction
+
+
     var query = {
         filter:JSON.stringify({id:connection.id}),
         limit:100,

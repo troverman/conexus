@@ -11,28 +11,37 @@
     <div class="card">
         <div style="padding:16px;">
             <ul style="padding:0px;" class="member-tabs">
-                <li ng-click="$event.stopPropagation();selectTab('MEMBERS')"><a>Members</a></li>
-                <li ng-click="$event.stopPropagation();selectTab('ATTENTION')"><a>Attention</a></li>
-                <li ng-click="$event.stopPropagation();selectTab('CONTENT')"><a>Content</a></li>
-                <li ng-click="$event.stopPropagation();selectTab('REACTIONS')"><a>Reactions</a></li>
                 <li ng-click="$event.stopPropagation();selectTab('APPS')"><a>Apps</a></li>
+                <li ng-click="$event.stopPropagation();selectTab('ATTENTION')"><a>Attention</a></li>
+                <li ng-click="$event.stopPropagation();selectTab('CONNECTION')"><a>Connections</a></li>
+                <li ng-click="$event.stopPropagation();selectTab('CONTENT')"><a>Content</a></li>
+                <li ng-click="$event.stopPropagation();selectTab('MEMBERS')"><a>Members</a></li>
                 <li ng-click="$event.stopPropagation();selectTab('PROTOCOLS')"><a>Protocols</a></li>
+                <li ng-click="$event.stopPropagation();selectTab('REACTIONS')"><a>Reactions</a></li>
             </ul>
 
             <div clas="spacing-10"></div>
-            
-            <h4>Members / Peers</h4>
-            <p>Members / Peers valuing data in this application context</p>
+
+            <h4>Apps</h4>
+            <p>App-App dependencies in code sharing</p>
+        
             <h4>Attention</h4>
             <p>Associated Attention</p>
+
+            <h4>Connections</h4>
+            <p>Parameters governing discrete app-specific relationships with other applications.</p>
+
             <h4>Content</h4>
             <p>Associated Content</p>
+
+            <h4>Members</h4>
+            <p>Members as peers valuing data & logic in this application's context</p>
+
+            <h4>Protocols</h4>
+            <p>Associated Application Protocls</p>
+
             <h4>Reactions</h4>
             <p>Associated Reactions</p>
-            <h4>Apps</h4>
-            <p>Implicit App-App by dependencies in shared code</p>
-            <h4>Protocols</h4>
-            <p>Associated Protocls</p>
 
         </div>
     </div>

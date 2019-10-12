@@ -11,8 +11,7 @@
 
 <div class="container">
     <div class="row">
-
-        <div class="col-xs-12" style="padding-right:10px;padding-left:10px">
+        <div class="col-xs-12">
             <div style="max-width:600px;margin:0 auto;" class="member-card" ng-click="subNavToggle(currentUser)">
                 <!--
                 <div style="text-align:right;padding:15px;position:absolute;right:0">
@@ -45,7 +44,7 @@
 
         </div>
 
-        <div ng-if="consentAgreement" class="col-xs-12 animationIf" style="padding-right:0px;padding-left:0px">
+        <div ng-if="consentAgreement" class="col-xs-12 animationIf">
             <div ng-include="'tutorial/templates/memberInformation.tpl.html'"></div>
             <!--<div ng-include="'tutorial/templates/memberApps.tpl.html'"></div>-->
         </div>

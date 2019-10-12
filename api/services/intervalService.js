@@ -393,6 +393,81 @@ module.exports.intervalService = function(){
 	//DATA UPGRADE..
 	//utilService.tagsToAssociation('PROJECT', 2);
 	//utilService.tagsToAssociation('TRANSACTION', 2);
+
+	//APP DEV IS CONNECTION DESIGN 
+		//CONNECTION WRT TOKEN PROTOCOLS
+			//MULTI CONNECTIONS
+
+	//LEGACY
+	//FOLLOWERS TO ASSOCIATION
+	function followersToAssociation(){
+		Follower.find({}).limit(1000).skip(0).sort('createdAt DESC').then(function(followerModels){
+			console.log(followerModels);
+			for (x in followerModels){
+
+				//FINALIZE 'CONTEXT + PARAMETERS'
+				//SOURCE AND TARGET (PEER VALIDATION) IN CONNECTION IS BY MANIFOLD REPUTATION MULTIPLIERS 
+					//IN PROTOCOL... IN CONNECTION 'CODE' (OHHHHHH WOW), DEFIN THAT ONLY MEMBER AND ASSIGN THEM SELVES AS SOURCE 
+						//.. SOMTHIN. LOL :) 
+
+
+				//SCOPE
+				//GET CONNECTION
+					//REUCTION FUNCTION DEFINED
+
+				(function(followerModels, x){
+					//DEFAULT FOLLOWER CONNECTION
+					Connection.find().then(function(connectionModel){
+
+						var validationModel = {
+							creator:followerModels[x].follower,
+							associatedModels:[
+								{
+									type:'MEMBER', 
+									id:followerModels[x].follower, 
+									context:{
+										label:'source'
+									}
+								},
+								{
+									type:'MEMBER', 
+									id:followerModels[x].followed, 
+									context:{
+										label:'target'
+									}
+								}
+							],
+							connection:connectionModel[0]
+						};
+
+						console.log()
+
+
+						//CREATE VALIDATION
+						//Validation.create(validationModel).then(function(validationModels){
+
+							//REDUCTION FUNCTION (CONNECTION DEFINED)
+							//EASYHERE
+								//CONNECITION AGNOSTIC?
+									//IE COMPUTED NOT STORED?
+										//YEE... WE CAN COMPUTE 
+										//I WANNA SEE THE ASSOCIATION WITH ANOTHER CONNECTION --> EASY FRONT END FLOW? 
+												//YA RECOMPUTE ALGS ARE EASY
+
+
+							//CREATE ASSOCIATION
+							//Association.create(validationModel).then(function(validationModels){});
+
+						//});
+
+					});
+		    	})(followerModels, x)
+
+
+			}
+		});
+	};
+	//followersToAssociation();
 	
 	//Transaction.find({}).limit(10000).then(function(transactionModels){
 	//	for (x in transactionModels){

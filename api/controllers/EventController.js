@@ -14,7 +14,6 @@ module.exports = {
 		//TODO: AUDIT 
 		if(req.query.id){
 			Event.find({id:req.query.id})
-			.find()
 			.limit(limit)
 			.skip(skip)
 			.sort(sort)

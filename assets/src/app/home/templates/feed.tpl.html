@@ -33,9 +33,21 @@
                 </div> 
             </div>
 
-            <!--TODO: DISCOVERABILITY AREA HERE-->
+            <!--TODO: DISCOVERABILITY ETC AREA HERE-->
             <div class="mobileFix">
-                <div class="card" ng-if="sortedTagArray.length > 0" ng-click="filterToggle('DISCOVER', filterSet)">
+
+                <div class="card" ng-if="false">
+                    <div class="padding:16px:">
+                        <ul class="nav nav-pills">
+                            <li ng-class="{active: selectTab=='ACTIVITY'}" ng-click="selectTab('ACTIVITY')"><i class="fas fa-th-list"></i> Activity</li>
+                            <li ng-class="{active: selectTab=='BALANCES'}" ng-click="selectTab('BALANCES')"><i class="fas fa-universal-access"></i> Balances</li>
+                            <li ng-class="{active: selectTab=='SUGGESTIONS'}" ng-click="selectTab('SUGGESTIONS')"><i class="fas fa-exclamation"></i><i class="fas fa-question"></i> Suggestions</li>
+                            <li ng-class="{active: selectTab=='VALUE MAP'}" ng-click="selectTab('VALUE MAP')"><i class="fas fa-globe"></i> Value Map</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card" ng-if="false && sortedTagArray.length > 0" ng-click="filterToggle('DISCOVER', filterSet)">
                     <div style="background:url('https://source.unsplash.com/1600x900/?details,notes,exolore,wonder,connection');min-height:50px" class="imageContainerSmall">
                         <div style="background:rgba(0,0,0,0.75);height:50px" class="imageContainerSmallDiv">  
                             <div style="margin-top: auto;margin-bottom: auto;">
@@ -51,7 +63,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="card" ng-if="sortedAssociationArray.length > 0" ng-click="filterToggle('DISCOVER', filterSet)">
+
+                <div class="card" ng-if="false && sortedAssociationArray.length > 0" ng-click="filterToggle('DISCOVER', filterSet)">
                     <div style="background:url('https://source.unsplash.com/1600x900/?details,notes,exolire,wonder,data,city');min-height:50px" class="imageContainerSmall">
                         <div style="background:rgba(0,0,0,0.75);height:50px" class="imageContainerSmallDiv">  
                             <div style="margin-top: auto;margin-bottom: auto;">
@@ -67,7 +80,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="card" ng-if="locations.length > 0" ng-click="filterToggle('DISCOVER', filterSet)">
+
+                <div class="card" ng-if="false && locations.length > 0" ng-click="filterToggle('DISCOVER', filterSet)">
                     <div style="background:url('https://source.unsplash.com/1600x900/?details,notes,exolire,wonder,city,country,forest,mountain,fire,mesa');min-height:50px" class="imageContainerSmall">
                         <div style="background:rgba(0,0,0,0.75);height:50px" class="imageContainerSmallDiv">  
                             <div style="margin-top: auto;margin-bottom: auto;">
@@ -83,6 +97,7 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
         <div class="col-sm-8 col-xs-12" style="padding-left:0px;padding-right:0px;">

@@ -364,7 +364,7 @@ angular.module( 'conexus.home', [
         {model:'TASK', id:'5ba1cf2f3196c813001703d9', title:'Message', description:'Message your friends, create message content', rationale:'Human Activity - Value Map'},
         {model:'TASK', id:'5ba1cf2f3196c813001703d9', title:'Drink Water', description:'Be a healthy human, perfom the drink water action', rationale:'Human Activity - Value Map'},
         {model:'TASK', id:'5ba1cf2f3196c813001703d9', title:'Eat Food', description:'Be a healthy human, perfom the eat food action', rationale:'Human Activity - Value Map'},
-        {model:'TASK', id:'5ba1cf2f3196c813001703d9', title:'Breathe', description:'Be a healthy human, perfom the breathe water action', rationale:'Human Activity - Value Map'},
+        {model:'TASK', id:'5ba1cf2f3196c813001703d9', title:'Breathe', description:'Be a healthy human, perfom the breathe air action', rationale:'Human Activity - Value Map'},
     ];
 
     //TODO: CREATE A TOKEN 'ORBIT' FOR MEMBER

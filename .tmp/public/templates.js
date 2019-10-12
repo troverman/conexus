@@ -862,28 +862,37 @@ angular.module("app/templates/associations.tpl.html", []).run(["$templateCache",
     "    <div class=\"card\">\n" +
     "        <div style=\"padding:16px;\">\n" +
     "            <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
-    "                <li ng-click=\"$event.stopPropagation();selectTab('MEMBERS')\"><a>Members</a></li>\n" +
-    "                <li ng-click=\"$event.stopPropagation();selectTab('ATTENTION')\"><a>Attention</a></li>\n" +
-    "                <li ng-click=\"$event.stopPropagation();selectTab('CONTENT')\"><a>Content</a></li>\n" +
-    "                <li ng-click=\"$event.stopPropagation();selectTab('REACTIONS')\"><a>Reactions</a></li>\n" +
     "                <li ng-click=\"$event.stopPropagation();selectTab('APPS')\"><a>Apps</a></li>\n" +
+    "                <li ng-click=\"$event.stopPropagation();selectTab('ATTENTION')\"><a>Attention</a></li>\n" +
+    "                <li ng-click=\"$event.stopPropagation();selectTab('CONNECTION')\"><a>Connections</a></li>\n" +
+    "                <li ng-click=\"$event.stopPropagation();selectTab('CONTENT')\"><a>Content</a></li>\n" +
+    "                <li ng-click=\"$event.stopPropagation();selectTab('MEMBERS')\"><a>Members</a></li>\n" +
     "                <li ng-click=\"$event.stopPropagation();selectTab('PROTOCOLS')\"><a>Protocols</a></li>\n" +
+    "                <li ng-click=\"$event.stopPropagation();selectTab('REACTIONS')\"><a>Reactions</a></li>\n" +
     "            </ul>\n" +
     "\n" +
     "            <div clas=\"spacing-10\"></div>\n" +
-    "            \n" +
-    "            <h4>Members / Peers</h4>\n" +
-    "            <p>Members / Peers valuing data in this application context</p>\n" +
+    "\n" +
+    "            <h4>Apps</h4>\n" +
+    "            <p>App-App dependencies in code sharing</p>\n" +
+    "        \n" +
     "            <h4>Attention</h4>\n" +
     "            <p>Associated Attention</p>\n" +
+    "\n" +
+    "            <h4>Connections</h4>\n" +
+    "            <p>Parameters governing discrete app-specific relationships with other applications.</p>\n" +
+    "\n" +
     "            <h4>Content</h4>\n" +
     "            <p>Associated Content</p>\n" +
+    "\n" +
+    "            <h4>Members</h4>\n" +
+    "            <p>Members as peers valuing data & logic in this application's context</p>\n" +
+    "\n" +
+    "            <h4>Protocols</h4>\n" +
+    "            <p>Associated Application Protocls</p>\n" +
+    "\n" +
     "            <h4>Reactions</h4>\n" +
     "            <p>Associated Reactions</p>\n" +
-    "            <h4>Apps</h4>\n" +
-    "            <p>Implicit App-App by dependencies in shared code</p>\n" +
-    "            <h4>Protocols</h4>\n" +
-    "            <p>Associated Protocls</p>\n" +
     "\n" +
     "        </div>\n" +
     "    </div>\n" +
@@ -924,9 +933,11 @@ angular.module("app/templates/information.tpl.html", []).run(["$templateCache", 
   $templateCache.put("app/templates/information.tpl.html",
     "<h5>Context</h5>\n" +
     "<p><a ng-repeat=\"tag in app.tags.split(',') track by $index\" ng-click=\"$event.stopPropagation();\">{{tag}} </a></p>\n" +
+    "\n" +
     "<div class=\"spacing-10\"></div>\n" +
     "\n" +
     "<div><span style=\"display:inline\" ng-bind-html=\"renderContent(app.description)\"></span></div>\n" +
+    "\n" +
     "<div class=\"spacing-10\"></div>\n" +
     "\n" +
     "<div ng-if=\"currentUser\" ng-click=\"$event.stopPropagation();\">\n" +
@@ -942,10 +953,114 @@ angular.module("app/templates/protocols.tpl.html", []).run(["$templateCache", fu
     "<div class=\"card\">\n" +
     "	<div style=\"padding:16px;\">\n" +
     "		<ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
-    "		    <li ng-click=\"$event.stopPropagation();selectTab('PROTOCOLS-UI')\"><a>UI Extensions</a></li>\n" +
-    "		    <li ng-click=\"$event.stopPropagation();selectTab('PROTOCOLS-PROTOCOLS')\"><a>Protocols</a></li>\n" +
+    "		    <li ng-click=\"$event.stopPropagation();selectTabProtocol('PROTOCOLS-UI')\"><a>UI Extensions</a></li>\n" +
+    "		    <li ng-click=\"$event.stopPropagation();selectTabProtocol('PROTOCOLS-PROTOCOLS')\"><a>Protocols</a></li>\n" +
     "		</ul>\n" +
-    "		<div hljs hljs-language=\"javascript\" hljs-source=\"app.protocols\"></div>\n" +
+    "\n" +
+    "        <div ng-if=\"selectedTabProtocol == 'PROTOCOLS-UI'\">\n" +
+    "\n" +
+    "            <h4>Building an experience</h4>\n" +
+    "            <h4>Templates & Components</h4>\n" +
+    "            <h4>JSX</h4>\n" +
+    "            <h4>Nav</h4>\n" +
+    "            <h4>Footer</h4>\n" +
+    "\n" +
+    "<div hljs hljs-language=\"javascript\">\n" +
+    "//IMPORTS | PROTOCOLS\n" +
+    "export default class COMPONENT extends React.Component {\n" +
+    "    function = () => {\n" +
+    "        //DO SOMETHING\n" +
+    "    };\n" +
+    "    render() {\n" +
+    "        return (\n" +
+    "            //HTML HERE\n" +
+    "        );\n" +
+    "    }\n" +
+    "}\n" +
+    "</div>\n" +
+    "\n" +
+    "        </div>\n" +
+    "        <div ng-if=\"selectedTabProtocol =='PROTOCOLS-PROTOCOLS'\">\n" +
+    "\n" +
+    "            <h5>App Imports</h5>\n" +
+    "\n" +
+    "            var importedProtocol = require('APP:ID');\n" +
+    "\n" +
+    "            {{protocols}}\n" +
+    "\n" +
+    "            <div hljs hljs-language=\"javascript\" hljs-source=\"app.protocols\"></div>\n" +
+    "\n" +
+    "        </div>\n" +
+    "\n" +
+    "<div hljs hljs-language=\"javascript\">\n" +
+    "\n" +
+    "Immutable JSON Connection\n" +
+    "\n" +
+    "{\n" +
+    "    //CORE DATA\n" +
+    "    string:\"New Protocol\",\n" +
+    "\n" +
+    "    //DEFINE DATA MODEL\n" +
+    "    dataModels: [\n" +
+    "        {\n" +
+    "            title: 'Protocol',\n" +
+    "            attributes:{\n" +
+    "                title: {type:'string'},\n" +
+    "                permissions: {type:'json'},\n" +
+    "                logic: {type:'json'},\n" +
+    "            }\n" +
+    "        }\n" +
+    "    ],\n" +
+    "\n" +
+    "    //DEFINE ASSOCIATIONS / IMPORTS\n" +
+    "    associations:[\n" +
+    "        {id:1, title:'STRUCTURE', type:'APP'},\n" +
+    "        {id:2, title:'LANGUAGE', type:'APP'},\n" +
+    "        {id:3, title:'CONGRUENCE', type:'APP'},\n" +
+    "        {id:4, title:'MANIFOLD', type:'APP'},\n" +
+    "    ],\n" +
+    "\n" +
+    "    //STRUCTURE FUNCTIONS\n" +
+    "    get: function(req, res) {},\n" +
+    "    create: function (req, res) {\n" +
+    "        var newProtocol = req.body;\n" +
+    "        if(logic){\n" +
+    "            Protocol.create(newProtocol).then((newProtocol)=>{});\n" +
+    "        }\n" +
+    "    },\n" +
+    "    self:function(req, res) {},\n" +
+    "\n" +
+    "    //ASSOCIATED DATA EXPORT\n" +
+    "    export:function(req, res) {},\n" +
+    "\n" +
+    "    //ASSOCIATED APP(S) OVERRIDE\n" +
+    "    data:{app:{reaction:{plus:function(req,res){}}}},\n" +
+    "\n" +
+    "    //CUSTOM FUNCTIONS\n" +
+    "    custom: function (req, res) {console.log('can code plz?')},\n" +
+    "    onCall:function(){},\n" +
+    "    onMyAction:function(){},\n" +
+    "\n" +
+    "    @decorators\n" +
+    "    @isProjectMember\n" +
+    "    identityFunction:function(){}\n" +
+    "\n" +
+    "    //FRONTEND; JSX;\n" +
+    "    views:{\n" +
+    "        //APP DEFINED ROUTES. \n" +
+    "        //-- COMPILES TO APP INBROWER & NATIVLY IN APP\n" +
+    "        //CORE CONTAINS THE BUILDER\n" +
+    "        //EXAMPLE - Explose templates from import\n" +
+    "        templates:{\n" +
+    "            nav:{},\n" +
+    "            sidebar:{},\n" +
+    "            feed:{},\n" +
+    "        }\n" +
+    "    }\n" +
+    "}\n" +
+    "\n" +
+    "</div>\n" +
+    "\n" +
     "	</div>\n" +
     "</div>");
 }]);
@@ -2266,20 +2381,22 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <h4>Application Design</h4>\n" +
     "                <h5>An Immutable JSON Structure</h5>\n" +
     "                <hr>\n" +
-    "                <div class=\"spacing-10\"></div>\n" +
     "\n" +
     "                <h4>Modularility of Structure</h4>\n" +
-    "\n" +
-    "                <h4>Permissioning</h4>\n" +
-    "                <span>@decorations</span>\n" +
-    "                <h4>Templating</h4>\n" +
+    "                <!--<h5>NPM | node_modules</h5>-->\n" +
+    "                <h5>Permissioning</h5>\n" +
+    "                <span>Connections & @decorations</span>\n" +
+    "                <h5>Client Templating</h5>\n" +
     "                <span>JSX. Compiles to Peer Views</span>\n" +
     "\n" +
+    "                <!--RENDERING?? glitch.com-->\n" +
+    "                \n" +
+    "                <!--TODO: REDUCE AND EXPAND-->\n" +
+    "                <!--(strucutre :)-->\n" +
+    "                <!--\n" +
     "                <h5>String</h5>\n" +
-    "\n" +
     "                <h5>Data Models</h5>\n" +
     "                <h5>Associations</h5>\n" +
-    "\n" +
     "                <h5>STRUCTURE</h5>\n" +
     "                <h5>get</h5>\n" +
     "                <h5>create</h5>\n" +
@@ -2287,6 +2404,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                <h5>export</h5>\n" +
     "                <h5>data</h5>\n" +
     "                <h5>views</h5>\n" +
+    "                -->\n" +
     "\n" +
     "            </div>\n" +
     "            <div class=\"col-sm-6 col-xs-12\" style=\"padding-left:0px;max-width: none;\">\n" +
@@ -2311,6 +2429,14 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "                logic: {type:'json'},\n" +
     "            }\n" +
     "        }\n" +
+    "    ],\n" +
+    "\n" +
+    "    //DEFINE PERMISSIONS (AND (2nd order-self connection) MODEL)\n" +
+    "    connections:[\n" +
+    "        {id:1, title:'APP META CONNECTION', type:'CONNECTION'},\n" +
+    "        {id:2, title:'APP SELF CONNECTION', type:'SELF'},\n" +
+    "        {id:3, title:'APP APP CONNECTION', type:'APP'},\n" +
+    "        {id:4, title:'APP MEMBER', type:'MEMBER'},\n" +
     "    ],\n" +
     "\n" +
     "    //DEFINE ASSOCIATIONS / IMPORTS\n" +
@@ -2346,12 +2472,10 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "    @isProjectMember\n" +
     "    identityFunction:function(){}\n" +
     "\n" +
-    "    //FRONTEND; JSX;\n" +
+    "    //JSX;\n" +
+    "    //APP DEFINED ROUTES. \n" +
+    "    //APP IMPORTS (MODULAR)\n" +
     "    views:{\n" +
-    "        //APP DEFINED ROUTES. \n" +
-    "        //-- COMPILES TO APP INBROWER & NATIVLY IN APP\n" +
-    "        //CORE CONTAINS THE BUILDER\n" +
-    "        //EXAMPLE - Explose templates from import\n" +
     "        templates:{\n" +
     "            nav:{},\n" +
     "            sidebar:{},\n" +
@@ -2384,6 +2508,7 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "    </div>\n" +
     "</div>\n" +
     "\n" +
+    "<!--CONNECTIONS-->\n" +
     "<div id=\"TOKENIZATION\" style=\"background-color:white;min-height:70vh\">\n" +
     "    <div style=\"background:url('https://source.unsplash.com/1600x900/?token,code')\" class=\"imageContainerSmall\">\n" +
     "        <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
@@ -5161,9 +5286,21 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                </div> \n" +
     "            </div>\n" +
     "\n" +
-    "            <!--TODO: DISCOVERABILITY AREA HERE-->\n" +
+    "            <!--TODO: DISCOVERABILITY ETC AREA HERE-->\n" +
     "            <div class=\"mobileFix\">\n" +
-    "                <div class=\"card\" ng-if=\"sortedTagArray.length > 0\" ng-click=\"filterToggle('DISCOVER', filterSet)\">\n" +
+    "\n" +
+    "                <div class=\"card\" ng-if=\"false\">\n" +
+    "                    <div class=\"padding:16px:\">\n" +
+    "                        <ul class=\"nav nav-pills\">\n" +
+    "                            <li ng-class=\"{active: selectTab=='ACTIVITY'}\" ng-click=\"selectTab('ACTIVITY')\"><i class=\"fas fa-th-list\"></i> Activity</li>\n" +
+    "                            <li ng-class=\"{active: selectTab=='BALANCES'}\" ng-click=\"selectTab('BALANCES')\"><i class=\"fas fa-universal-access\"></i> Balances</li>\n" +
+    "                            <li ng-class=\"{active: selectTab=='SUGGESTIONS'}\" ng-click=\"selectTab('SUGGESTIONS')\"><i class=\"fas fa-exclamation\"></i><i class=\"fas fa-question\"></i> Suggestions</li>\n" +
+    "                            <li ng-class=\"{active: selectTab=='VALUE MAP'}\" ng-click=\"selectTab('VALUE MAP')\"><i class=\"fas fa-globe\"></i> Value Map</li>\n" +
+    "                        </ul>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "\n" +
+    "                <div class=\"card\" ng-if=\"false && sortedTagArray.length > 0\" ng-click=\"filterToggle('DISCOVER', filterSet)\">\n" +
     "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?details,notes,exolore,wonder,connection');min-height:50px\" class=\"imageContainerSmall\">\n" +
     "                        <div style=\"background:rgba(0,0,0,0.75);height:50px\" class=\"imageContainerSmallDiv\">  \n" +
     "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
@@ -5179,7 +5316,8 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                        </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
-    "                <div class=\"card\" ng-if=\"sortedAssociationArray.length > 0\" ng-click=\"filterToggle('DISCOVER', filterSet)\">\n" +
+    "\n" +
+    "                <div class=\"card\" ng-if=\"false && sortedAssociationArray.length > 0\" ng-click=\"filterToggle('DISCOVER', filterSet)\">\n" +
     "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?details,notes,exolire,wonder,data,city');min-height:50px\" class=\"imageContainerSmall\">\n" +
     "                        <div style=\"background:rgba(0,0,0,0.75);height:50px\" class=\"imageContainerSmallDiv\">  \n" +
     "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
@@ -5195,7 +5333,8 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                        </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
-    "                <div class=\"card\" ng-if=\"locations.length > 0\" ng-click=\"filterToggle('DISCOVER', filterSet)\">\n" +
+    "\n" +
+    "                <div class=\"card\" ng-if=\"false && locations.length > 0\" ng-click=\"filterToggle('DISCOVER', filterSet)\">\n" +
     "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?details,notes,exolire,wonder,city,country,forest,mountain,fire,mesa');min-height:50px\" class=\"imageContainerSmall\">\n" +
     "                        <div style=\"background:rgba(0,0,0,0.75);height:50px\" class=\"imageContainerSmallDiv\">  \n" +
     "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
@@ -5211,6 +5350,7 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                        </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +
+    "\n" +
     "            </div>\n" +
     "        </div>\n" +
     "        <div class=\"col-sm-8 col-xs-12\" style=\"padding-left:0px;padding-right:0px;\">\n" +
@@ -8064,10 +8204,20 @@ angular.module("nav/templates/createApp.tpl.html", []).run(["$templateCache", fu
     "                <text-angular ng-model=\"newApp.protocol.code\" ta-toolbar=\"[['p','h1','bold','italics','quote','ol','ul','insertLink','insertImage','html']]\"></text-angular>\n" +
     "                <!--ngRepeat-->\n" +
     "\n" +
+    "                <!--TODO: INIT CONNECTIONS-->\n" +
+    "\n" +
+    "                    <!--META (APP CONNECTION CONNECTION.. AND APP SELF) IS CREATOR-->\n" +
+    "                        <!--CAN BE MEBERSHIP OF PROJECT ;)-->\n" +
+    "\n" +
+    "                    <!--PERMS-->\n" +
+    "                    <!--WANT MEMBERSHIP?-->\n" +
+    "                        <!--CODE HERE - WANT PERMS? BUILDER AND CODE-->\n" +
+    "                    <!--CAN OTHER APPS IMPORT? DATA YOU NEED.. -->\n" +
+    "\n" +
+    "\n" +
     "                <div class=\"spacing-5\"></div>\n" +
     "\n" +
-    "                <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newApp.title\">create</button\n" +
-    "                    >\n" +
+    "                <button type=\"submit\" style=\"width:100%\" class=\"btn btn-default log-btn\" ng-disabled=\"!newApp.title\">create</button>\n" +
     "            </form>\n" +
     "        </div>\n" +
     "    </div>\n" +
@@ -8097,7 +8247,7 @@ angular.module("nav/templates/createConnection.tpl.html", []).run(["$templateCac
     "            <form role=\"form\" ng-submit=\"createConnection()\">\n" +
     "\n" +
     "                <h5>Title</h5>\n" +
-    "                <input type=\"text\" placeholder= \"Title\" ng-model=\"newConnection.info.title\" class=\"form-control\">\n" +
+    "                <input type=\"text\" placeholder= \"Title\" ng-model=\"newConnection.title\" class=\"form-control\">\n" +
     "                <div class=\"spacing-10\"></div>\n" +
     "     \n" +
     "                <h5>Associated Models</h5>\n" +
@@ -8142,8 +8292,8 @@ angular.module("nav/templates/createConnection.tpl.html", []).run(["$templateCac
     "                </div>\n" +
     "\n" +
     "                <h5>Description</h5>\n" +
-    "                <text-angular placeholder=\"Description\" ng-model=\"newConnection.info.description\" ta-toolbar=\"''\"></text-angular>\n" +
-    "                <button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newConnection.info.description\">create</button>\n" +
+    "                <text-angular placeholder=\"Description\" ng-model=\"newConnection.description\" ta-toolbar=\"''\"></text-angular>\n" +
+    "                <button type=\"submit\" class=\"btn btn-default log-btn\" ng-disabled=\"!newConnection.title\">create</button>\n" +
     "\n" +
     "            </form>\n" +
     "                \n" +
@@ -14319,8 +14469,7 @@ angular.module("tutorial/templates/intro.tpl.html", []).run(["$templateCache", f
     "\n" +
     "<div class=\"container\">\n" +
     "    <div class=\"row\">\n" +
-    "\n" +
-    "        <div class=\"col-xs-12\" style=\"padding-right:10px;padding-left:10px\">\n" +
+    "        <div class=\"col-xs-12\">\n" +
     "            <div style=\"max-width:600px;margin:0 auto;\" class=\"member-card\" ng-click=\"subNavToggle(currentUser)\">\n" +
     "                <!--\n" +
     "                <div style=\"text-align:right;padding:15px;position:absolute;right:0\">\n" +
@@ -14353,7 +14502,7 @@ angular.module("tutorial/templates/intro.tpl.html", []).run(["$templateCache", f
     "\n" +
     "        </div>\n" +
     "\n" +
-    "        <div ng-if=\"consentAgreement\" class=\"col-xs-12 animationIf\" style=\"padding-right:0px;padding-left:0px\">\n" +
+    "        <div ng-if=\"consentAgreement\" class=\"col-xs-12 animationIf\">\n" +
     "            <div ng-include=\"'tutorial/templates/memberInformation.tpl.html'\"></div>\n" +
     "            <!--<div ng-include=\"'tutorial/templates/memberApps.tpl.html'\"></div>-->\n" +
     "        </div>\n" +
