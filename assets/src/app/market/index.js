@@ -17,16 +17,36 @@ angular.module( 'conexus.market', [
             token: ['$stateParams', 'TokenModel', function($stateParams, TokenModel) {
                 return TokenModel.get({string:$stateParams.id, limit:1, skip:0, sort:'createdAt DESC'});
             }],
+            associations: ['$stateParams', 'AssociationModel', function($stateParams, AssociationModel) {
+                 var query = {
+                    //BY MARKET ID -- > MARKET IS COMBINATORIAL (ASSET) --> COMBINATORIAL ITEMS AND THEIR ASSOCIATIONS; UNIT FOR COMBINATORIAL ITEM? 
+                            //ITS AN ASSOCIATION LOL
+                        //ITEM COMPOSITION
+                    filter:JSON.stringify({
+                        type:'MARKET', 
+                        //id:$stateParams.id
+                    }),
+                    limit:100,
+                    skip:0,
+                    sort:'createdAt DESC'
+                };
+                return AssociationModel.get(query);
+            }],
         }
 	});
 }])
 
-.controller( 'MarketCtrl', [ '$rootScope', '$scope', '$stateParams', 'cytoData', 'OrderModel', 'orders', 'titleService', 'token', function MarketController( $rootScope, $scope, $stateParams, cytoData, OrderModel, orders, titleService, token ) {
+.controller( 'MarketCtrl', [ '$rootScope', '$scope', '$stateParams', 'associations', 'cytoData', 'OrderModel', 'orders', 'titleService', 'token', function MarketController( $rootScope, $scope, $stateParams, associations, cytoData, OrderModel, orders, titleService, token ) {
    
     $scope.stateParams = $stateParams;
     
     titleService.setTitle('Market | ' + $stateParams.id + ' | CRE8.XYZ');
     
+    //SORT BY LIQUIDITY (PARAM OF ASSOCIATION)
+    $scope.markets = associations;
+
+    console.log(associations)
+
     $scope.directedGraphLayout = {name: 'grid',coolingFactor:0,animate: true};
     $scope.elementsObj = {};
 
@@ -224,13 +244,7 @@ angular.module( 'conexus.market', [
     $scope.renderImmutableMarket = JSON.stringify($scope.immutableMarket, null, 2);
     $scope.renderImmutableMarketNEW = JSON.stringify($scope.market, null, 2);
 
-    var test = {};
-    for (x in $scope.orders){
-        //normaiize..
-        console.log(Object.keys($scope.orders[x].setAlpha));
-        console.log(Object.keys($scope.orders[x].setBeta));
-    }
-
+   
     //VALIDATION (ORDER), ASSOCIATION (LIQUIDITY)//
         //connection type and scalar... 
 

@@ -284,6 +284,8 @@ module.exports = {
 							console.log('CREATED ASSOCIATION', association);
 							Association.publish(association.id, {verb: 'create', data: association});
 							createEvent(association, 'create');
+							//JSON STRUCT CONTAINS IMMUTABLE MINT FUNCTION (STRUCTURE)
+							//mintTokens()
 						});
 					}
 					else{createEvent(association, 'update');}
@@ -295,25 +297,78 @@ module.exports = {
 			var protocolTokens = getProtocolTokens(model);
 		};
 
+		//TODO: FACTOR
 		function getProtocolTokens(model){
 			
+			//change model to app
 			var protocolTokens = [
 				'CRE8', 
-				'CRE8+CONTENT', 
-				'CRE8+CONTENT+'+model.id
+				'CRE8+'+model.model, 
+				'CRE8+'+model.model+'+'+model.id,
 			];
 
-			//HASH :P
-			//AGGREGATE.
-			//DO FOR X IN 
+			//GET APP PROTOCOL HERE-->
+			//THIS ABOUT ABSTRACT STRUCTURE / BUILDER FOR TOKENS
+			//HARDCODE NOW
+			if (model.model == 'ACTION'){}
+			if (model.model == 'APP'){}
+			if (model.model == 'ASSOCIATION'){
+
+				//TODO
+				var string ='CRE8+ASSOCIATION+'
+				console.log(model);
+				//LINK THE ASSOCIATIONS
+
+				//DO AS .map().join
+				//TODO: ' , ' grammer
+				for (x in model.associatedModels){
+					//TODO: STANDARDIZE DATA IN ASSOCIATEDMODELS
+					string = string + '+' + model.associatedModels[x].type + '+' + model.associatedModels[x].id;
+					model.associatedModels[x].type
+				}
+				//protocolTokens.push(string);
+
+			}
+			if (model.model == 'ATTENTION'){} 
+			if (model.model == 'CONTENT'){}
+			if (model.model == 'ITEM'){}
+			if (model.model == 'PROJECT'){}
+			if (model.model == 'REACTION'){} 
+			if (model.model == 'TASK'){}
+			if (model.model == 'TIME'){}
+			if (model.model == 'TRANSACTION'){}
+			if (model.model == 'VALIDATION'){}
+
+			//TYPES OF STRING SERILIZATION
+
+			//DATA MODEL OBJ TO STRING
+			for (x in Object.keys(model)){
+				var dataType = Object.keys(model)[x].toUpperCase();
+				var data = model[Object.keys(model)[x]];
+				var prefix = 'CRE8+'+model.model;
+				var string = prefix+'+'+dataType+'+'+data;
+				protocolTokens.push(string);
+			};
+
+			//SHA256 HASH DIGEST OF DATA SIGNED WITH CRE8
+			for (x in Object.keys(model)){
+				var data = model[Object.keys(model)[x]];
+				var hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(data)).digest('hex');
+				var prefix = 'CRE8+'+model.model;
+				var string = prefix+'+'+hash;
+				protocolTokens.push(string);
+			};
+
+			//SHA256 HASH DIGEST OF AGGREGATE DATA SIGNED WITH CRE8
 			var hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
-			var prefix = 'CRE8+CONTENT';
+			var prefix = 'CRE8+'+model.model;
 			var string = prefix+'+'+hash;
 			protocolTokens.push(string);
 
 			return protocolTokens;
 
 		};
+
 
 		var model = {
 			model: 'CONTENT',

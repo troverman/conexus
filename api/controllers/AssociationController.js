@@ -120,7 +120,7 @@ module.exports = {
 		else if(req.query.filter){
 
 			var querySet = JSON.parse(req.query.filter);
-
+			console.log(querySet)
 			//JSON.stringify({type:'CONTENT', id:member.id}),
 
 
@@ -184,4 +184,5 @@ module.exports = {
 		}
 
 	}
+	
 };

@@ -341,8 +341,8 @@ module.exports = {
 					//CONNECTION DEFINED>>>>
 					//NEED MARKET DATA MODEL..
 					associatedModels: [
-						{type:'MARKET', id: JSON.stringify(order.setAlpha)},
-						{type:'MARKET', id: JSON.stringify(order.setBeta)}
+						{type:'MARKET', id: JSON.stringify(order.setAlpha), context:{}},
+						{type:'MARKET', id: JSON.stringify(order.setBeta), context:{}}
 					],
 					contextSet:[
 						order.setAlpha,
@@ -364,9 +364,9 @@ module.exports = {
 				associationModel.connection = {
 					title:'MARKET-MARKET ORDER CONNECTION BETA',
 					parameters:{
-						mapping:['context','reputation','computed'],
 					},
 					computedFrom:'ORDER'
+					logic:[],//what to do on create new order]
 				};
 
 				//associationModel.connection = connectionModel[0];
