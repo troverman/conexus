@@ -1896,7 +1896,7 @@ angular.module( 'conexus.nav', [
         //console.log($state.current.name.toUpperCase().replace('.','+'))
 
         if ($state.params[Object.keys($state.params)[0]]){
-            string += '+'+$state.params[Object.keys($state.params)[0]].toUpperCase();
+            string += '+'+$state.params[Object.keys($state.params)[0]]//.toUpperCase();
         }
         string += '+'+model.toUpperCase()+'+ATTENTION';
 

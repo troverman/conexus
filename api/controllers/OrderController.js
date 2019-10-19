@@ -365,7 +365,7 @@ module.exports = {
 					title:'MARKET-MARKET ORDER CONNECTION BETA',
 					parameters:{
 					},
-					computedFrom:'ORDER'
+					computedFrom:'ORDER',
 					logic:[],//what to do on create new order]
 				};
 
