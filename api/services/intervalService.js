@@ -6,29 +6,6 @@ const request = require('request');
 
 module.exports = {
 
-	
-	getFitbitData: function(req){
-		User.findOne(req.id)
-		.then(function(model) {
-			var fitbitPassport = model.passports.filter(function(obj){return obj.provider=='fitbit'});
-			var userId = fitbitPassport[0].identifier;
-			var activity = 'steps';
-			var peroid = '1m'; //1d, 7d, 30d, 1w, 1m
-			var url = 'https://api.fitbit.com/1/user/' + userId + '/activities/' + activity + '/date/today/' + peroid + '.json';
-			//NEED API PERMISSIONS... >:|
-			//var url = 'https://api.fitbit.com/1/user/' + userId + '/activities/heart/date/2016-10-31/1d/1sec/time/00:00/00:01.json'
-			var model= {
-				url: url,
-				json: true,
-				headers: {'Authorization': ' Bearer ' + fitbitPassport[0].tokens.accessToken}
-			};
-			request(model, function (error, response, body) {
-				//console.log(body['activities-heart'])
-				//console.log(body)
-			});
-		});
-	},
-
 	//TODO: RESHAPE | BUILD
 	//FOR THIS TO SCALE WE NEED A DATA MODEL 
 	//REDO THIS LOL
@@ -405,7 +382,6 @@ module.exports.intervalService = function(){
 				//SOURCE AND TARGET (PEER VALIDATION) IN CONNECTION IS BY MANIFOLD REPUTATION MULTIPLIERS 
 					//IN PROTOCOL... IN CONNECTION 'CODE' (OHHHHHH WOW), DEFIN THAT ONLY MEMBER AND ASSIGN THEM SELVES AS SOURCE 
 						//.. SOMTHIN. LOL :) 
-
 
 				//SCOPE
 				//GET CONNECTION

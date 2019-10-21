@@ -49,7 +49,7 @@ module.exports.passport = {
       clientID: '229VSS',
       clientSecret: 'ad0ea5803c56be0754e186b356abc90b',
       callbackURL: 'https://www.cre8.xyz/auth/fitbit/callback',
-      scope: ['activity','heartrate','location','profile']
+      scope: ['activity','heartrate','location','profile', 'sleep']
     }
   },
 

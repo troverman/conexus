@@ -129,8 +129,6 @@ module.exports = {
 
 		function getProtocolTokens(model){
 
-			var protocolTokens = [];
-
 			//json struct for token distribution
 			//ASSOCIATIONS ARE KEY
 

@@ -19,14 +19,11 @@ module.exports = {
     callback: function (req, res) {
         passport.callback(req, res, function (err, user) {
             if(user){if (user._id){user.id = user._id;}}
-            console.log(err, user)
             req.login(user, function (err) {
-                console.log(err);
                 if (err) {res.redirect('/login');}
                 else {
 
                     //ON AUTH / LOGIN
-
                     user.loggedIn = true;
                     req.session.User = user;
 
@@ -35,16 +32,10 @@ module.exports = {
                     });
 
                     //if user is mining
-                    Peer.find({}).then(function(){
-
-                    });
+                    Peer.find({}).then(function(){});
 
                     //FIND ALL ASSOCIATIONS FOR USER
-                    Association.find({}).then(function(){
-
-                    });
-
-                    //ORDERS TOO..
+                    Association.find({}).then(function(){});
 
                     //POST SESSION IN VIEW
                     //DECENTRALIZE SESSION MANAGEMENT...
@@ -52,7 +43,6 @@ module.exports = {
                     //SOLVES THE PROBLEM OF JUST .id RENDER
 
                     //TODO:APP INPUT --> ON LOGIN
-                    console.log(user, 'now get data..')
 
                     //TODO: REPACKAGE FITBIT --> CORE LOGIN PROTOCOL.. && INTERVAL START
                     //'LOGOUT AUTO AFTER X ACTIVITY.. '--> LAST ACTIVITY FLAG FOR USER CARD.. SMART COLOR FADE VS BINARY LOGGED IN :) 

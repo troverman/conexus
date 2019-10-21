@@ -1,6 +1,7 @@
 //FITBIT APP
-const async = require('async');
-const Q = require('q');
+
+//require core
+//require ...
 const request = require('request');
 
 module.exports = {
@@ -13,34 +14,111 @@ module.exports = {
 
 	//TODO: PASSPORTS AS AN APP / PROTOCOL
 
+	dataModel:[],
+
 	getData: function(req){
-		console.log(req.id)
+
+
+		//APP SPECIFIC MANIS
+		//TODO: STRUCTURE TOKEN MINTING
+		function getProtocolTokens(model){
+
+			//TOKENS FOR STEPS
+			//TOKENS FOR HEARTRATE
+			//STORE AS DATA MODEL!
+			//IE FOR VALIDATION
+				//EVENT..
+				//type fitbit_step
+				//type fitbit_sleep
+				//tpye fitbit_heart
+				//tpye fitbit_floors
+				//tpye fitbit_distance
+
+			//STEPS
+				//FITBIT+STEPS
+				//FITBIT+DATE+STEPS
+						//what date format
+
+			//FLOORS
+				//FITBIT+FLOORS
+
+			//DISTANCE
+				//FITBIT+DISTANCE
+
+			//SLEEP
+				//FITBIT+SLEEP
+				//FIT
+
+			//{ 'activities-steps':[ { dateTime: '2019-09-20', value: '2445' }}
+
+			var protocolTokens = [{
+				tokenString:'CRE8+FITBIT',
+				associatedModels:[
+					{type:'MEMBER', id:model.id},
+				],
+				amount:model.amount
+			}];
+
+		};
+
+		function mintTokens(model){
+
+		};
+
+		console.log(req.id);
+		//TODO: DEPRECIATE POPULATE
+		//TODO: LOAD USER APPS
+
 		User.find({id:req.id})
 		.populate('passports')
 		.then(function(model) {
-			console.log(model[0])
+
 			var fitbitPassport = model[0].passports.filter(function(obj){return obj.provider=='fitbit'});
 			var userId = fitbitPassport[0].identifier;
-			var activity = 'steps';
+			
+			var activity = 'sleep'; //heart, floors, distance, steps
 			var peroid = '1m'; //1d, 7d, 30d, 1w, 1m
-			var url = 'https://api.fitbit.com/1/user/' + userId + '/activities/' + activity + '/date/today/' + peroid + '.json';
-			//NEED API PERMISSIONS... >:|
-			//var url = 'https://api.fitbit.com/1/user/' + userId + '/activities/heart/date/2016-10-31/1d/1sec/time/00:00/00:01.json'
+			var url = 'https://api.fitbit.com/1.2/user/' + userId + '/activities/' + activity + '/date/today/' + peroid + '.json';
+			
+			//SLEEP
+			var today = new Date().toISOString().slice(0,10);
+			var url = 'https://api.fitbit.com/1.2/user/' + userId + '/sleep/date/' + today + '.json';
+
+			//var url = 'https://api.fitbit.com/1.2/user/' + userId + '/activities/heart/date/2016-10-31/1d/1sec/time/00:00/00:01.json'
 			var model= {
 				url: url,
 				json: true,
 				headers: {'Authorization': ' Bearer ' + fitbitPassport[0].tokens.accessToken}
 			};
+
 			request(model, function (error, response, body) {
-				console.log(body['activities-heart'])
-				console.log(body)
+				//console.log(body['activities-heart'])
+				console.dir(body, { depth: null })
 			});
+
 
 		});
 
 	},
 
-	createPassport:function(){
+
+	tokens: function(req){
+
+		//SLEEP
+		//STEPS
+		//HEARTRATE
+
+	},
+
+	//DEFINE PASSPORT
+	passport: function(req){
+
+		//FUNCTION TO CONNECT FITBIT -- GIVE LIFE TIME TOKENS
+
+	},
+
+
+	connect: function(req){
 
 	},
 
