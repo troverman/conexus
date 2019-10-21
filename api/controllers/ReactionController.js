@@ -224,7 +224,9 @@ module.exports = {
 			return protocolTokens;
 		};
 
-		//TODO
+		//TODO: REFACTOR
+		//TOOD: BALANCES AND TOKENS UNITY
+		//FOR ALL APPS THAT IMPORT REACTIONS; inclue helpercode
 		function updateAssociatedModels(model, protocolTokens){
 			for (x in model.associatedModels){
 				if (model.associatedModels[x].type == 'APP'){
@@ -234,8 +236,8 @@ module.exports = {
 						newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);
 						if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
 						for (y in protocolTokens){
-							if (!newModel[0].data.apps.tokens[protocolTokens[y]]){newModel[0].data.apps.tokens[protocolTokens[y]] = 0;}
-							newModel[0].data.apps.tokens[protocolTokens[y]] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y]]) + parseInt(model.amount);
+							if (!newModel[0].data.apps.tokens[protocolTokens[y].tokenString]){newModel[0].data.apps.tokens[protocolTokens[y].tokenString] = 0;}
+							newModel[0].data.apps.tokens[protocolTokens[y].tokenString] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y].tokenString]) + parseInt(model.amount);
 						}
 						App.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){
 							App.publish([newModel[0].id], {verb:'update', data: newModel[0]});
@@ -250,8 +252,8 @@ module.exports = {
 						newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);
 						if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
 						for (y in protocolTokens){
-							if (!newModel[0].data.apps.tokens[protocolTokens[y]]){newModel[0].data.apps.tokens[protocolTokens[y]] = 0;}
-							newModel[0].data.apps.tokens[protocolTokens[y]] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y]]) + parseInt(model.amount);
+							if (!newModel[0].data.apps.tokens[protocolTokens[y].tokenString]){newModel[0].data.apps.tokens[protocolTokens[y].tokenString] = 0;}
+							newModel[0].data.apps.tokens[protocolTokens[y].tokenString] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y].tokenString]) + parseInt(model.amount);
 						}
 						Action.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){
 							Action.publish([newModel[0].id], {verb:'update', data: newModel[0]});
@@ -282,8 +284,8 @@ module.exports = {
 						newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);
 						if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
 						for (y in protocolTokens){
-							if (!newModel[0].data.apps.tokens[protocolTokens[y]]){newModel[0].data.apps.tokens[protocolTokens[y]] = 0;}
-							newModel[0].data.apps.tokens[protocolTokens[y]] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y]]) + parseInt(model.amount);
+							if (!newModel[0].data.apps.tokens[protocolTokens[y].tokenString]){newModel[0].data.apps.tokens[protocolTokens[y].tokenString] = 0;}
+							newModel[0].data.apps.tokens[protocolTokens[y].tokenString] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y].tokenString]) + parseInt(model.amount);
 						}
 
 						Association.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){
@@ -314,8 +316,8 @@ module.exports = {
 						newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);
 						if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
 						for (y in protocolTokens){
-							if (!newModel[0].data.apps.tokens[protocolTokens[y]]){newModel[0].data.apps.tokens[protocolTokens[y]] = 0;}
-							newModel[0].data.apps.tokens[protocolTokens[y]] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y]]) + parseInt(model.amount);
+							if (!newModel[0].data.apps.tokens[protocolTokens[y].tokenString]){newModel[0].data.apps.tokens[protocolTokens[y].tokenString] = 0;}
+							newModel[0].data.apps.tokens[protocolTokens[y].tokenString] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y].tokenString]) + parseInt(model.amount);
 						}
 						Connection.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){
 							Connection.publish([newModel[0].id], {verb:'update', data: newModel[0]});
@@ -334,8 +336,8 @@ module.exports = {
 						//TOKENS
 						if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
 						for (y in protocolTokens){
-							if (!newModel[0].data.apps.tokens[protocolTokens[y]]){newModel[0].data.apps.tokens[protocolTokens[y]] = 0;}
-							newModel[0].data.apps.tokens[protocolTokens[y]] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y]]) + parseInt(model.amount);
+							if (!newModel[0].data.apps.tokens[protocolTokens[y].tokenString]){newModel[0].data.apps.tokens[protocolTokens[y].tokenString] = 0;}
+							newModel[0].data.apps.tokens[protocolTokens[y].tokenString] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y].tokenString]) + parseInt(model.amount);
 						}
 
 						Content.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){
@@ -370,8 +372,8 @@ module.exports = {
 						newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);
 						if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
 						for (y in protocolTokens){
-							if (!newModel[0].data.apps.tokens[protocolTokens[y]]){newModel[0].data.apps.tokens[protocolTokens[y]] = 0;}
-							newModel[0].data.apps.tokens[protocolTokens[y]] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y]]) + parseInt(model.amount);
+							if (!newModel[0].data.apps.tokens[protocolTokens[y].tokenString]){newModel[0].data.apps.tokens[protocolTokens[y].tokenString] = 0;}
+							newModel[0].data.apps.tokens[protocolTokens[y].tokenString] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y].tokenString]) + parseInt(model.amount);
 						}
 						Item.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){
 							Item.publish([newModel[0].id], {verb:'update', data: newModel[0]});
@@ -401,8 +403,8 @@ module.exports = {
 						newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);
 						if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
 						for (y in protocolTokens){
-							if (!newModel[0].data.apps.tokens[protocolTokens[y]]){newModel[0].data.apps.tokens[protocolTokens[y]] = 0;}
-							newModel[0].data.apps.tokens[protocolTokens[y]] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y]]) + parseInt(model.amount);
+							if (!newModel[0].data.apps.tokens[protocolTokens[y].tokenString]){newModel[0].data.apps.tokens[protocolTokens[y].tokenString] = 0;}
+							newModel[0].data.apps.tokens[protocolTokens[y].tokenString] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y].tokenString]) + parseInt(model.amount);
 						}
 						Order.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){
 							Order.publish([newModel[0].id], {verb:'update', data: newModel[0]});
@@ -432,8 +434,8 @@ module.exports = {
 						newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);
 						if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
 						for (y in protocolTokens){
-							if (!newModel[0].data.apps.tokens[protocolTokens[y]]){newModel[0].data.apps.tokens[protocolTokens[y]] = 0;}
-							newModel[0].data.apps.tokens[protocolTokens[y]] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y]]) + parseInt(model.amount);
+							if (!newModel[0].data.apps.tokens[protocolTokens[y].tokenString]){newModel[0].data.apps.tokens[protocolTokens[y].tokenString] = 0;}
+							newModel[0].data.apps.tokens[protocolTokens[y].tokenString] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y].tokenString]) + parseInt(model.amount);
 						}
 						Reaction.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){
 							Reaction.publish([newModel[0].id], {verb:'update', data: newModel[0]});
@@ -463,8 +465,8 @@ module.exports = {
 						newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);
 						if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
 						for (y in protocolTokens){
-							if (!newModel[0].data.apps.tokens[protocolTokens[y]]){newModel[0].data.apps.tokens[protocolTokens[y]] = 0;}
-							newModel[0].data.apps.tokens[protocolTokens[y]] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y]]) + parseInt(model.amount);
+							if (!newModel[0].data.apps.tokens[protocolTokens[y].tokenString]){newModel[0].data.apps.tokens[protocolTokens[y].tokenString] = 0;}
+							newModel[0].data.apps.tokens[protocolTokens[y].tokenString] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y].tokenString]) + parseInt(model.amount);
 						}
 						Task.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){
 							Task.publish([newModel[0].id], {verb:'update', data: newModel[0]});
@@ -496,8 +498,8 @@ module.exports = {
 						newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);
 						if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
 						for (y in protocolTokens){
-							if (!newModel[0].data.apps.tokens[protocolTokens[y]]){newModel[0].data.apps.tokens[protocolTokens[y]] = 0;}
-							newModel[0].data.apps.tokens[protocolTokens[y]] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y]]) + parseInt(model.amount);
+							if (!newModel[0].data.apps.tokens[protocolTokens[y].tokenString]){newModel[0].data.apps.tokens[protocolTokens[y].tokenString] = 0;}
+							newModel[0].data.apps.tokens[protocolTokens[y].tokenString] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y].tokenString]) + parseInt(model.amount);
 						}
 						Time.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){
 							Time.publish([newModel[0].id], {verb:'update', data: newModel[0]});
@@ -527,8 +529,8 @@ module.exports = {
 						newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);
 						if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
 						for (y in protocolTokens){
-							if (!newModel[0].data.apps.tokens[protocolTokens[y]]){newModel[0].data.apps.tokens[protocolTokens[y]] = 0;}
-							newModel[0].data.apps.tokens[protocolTokens[y]] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y]]) + parseInt(model.amount);
+							if (!newModel[0].data.apps.tokens[protocolTokens[y].tokenString]){newModel[0].data.apps.tokens[protocolTokens[y].tokenString] = 0;}
+							newModel[0].data.apps.tokens[protocolTokens[y].tokenString] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y].tokenString]) + parseInt(model.amount);
 						}
 						Transaction.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){
 							Transaction.publish([newModel[0].id], {verb:'update', data: newModel[0]});
@@ -558,8 +560,8 @@ module.exports = {
 						newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);
 						if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
 						for (y in protocolTokens){
-							if (!newModel[0].data.apps.tokens[protocolTokens[y]]){newModel[0].data.apps.tokens[protocolTokens[y]] = 0;}
-							newModel[0].data.apps.tokens[protocolTokens[y]] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y]]) + parseInt(model.amount);
+							if (!newModel[0].data.apps.tokens[protocolTokens[y].tokenString]){newModel[0].data.apps.tokens[protocolTokens[y].tokenString] = 0;}
+							newModel[0].data.apps.tokens[protocolTokens[y].tokenString] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y].tokenString]) + parseInt(model.amount);
 						}
 						Validation.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){
 							Validation.publish([newModel[0].id], {verb:'update', data: newModel[0]});
