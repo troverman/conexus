@@ -14591,8 +14591,8 @@ angular.module("tutorial/templates/memberInformation.tpl.html", []).run(["$templ
     "        <div class=\"member-tab-container\" style=\"padding-left:0px\">\n" +
     "            <div style=\"text-align:left\">\n" +
     "                <ul style=\"padding:0px;\" class=\"member-tabs\">\n" +
-    "                     <li><a ng-click=\"$event.stopPropagation();selectTabIntro('Basic Information')\">Information</a></li>\n" +
-    "                    <li><a ng-click=\"$event.stopPropagation();selectTabIntro('Applications')\">Applications</a></li>\n" +
+    "                    <li ng-click=\"$event.stopPropagation();selectTabIntro('Basic Information')\"><a>Information</a></li>\n" +
+    "                    <li ng-click=\"$event.stopPropagation();selectTabIntro('Applications')\"><a>Applications</a></li>\n" +
     "                </ul>\n" +
     "            </div>\n" +
     "        </div>\n" +

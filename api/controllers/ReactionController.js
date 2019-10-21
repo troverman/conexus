@@ -3,6 +3,31 @@ const crypto = require('crypto');
 
 module.exports = {
 
+	//HYBRID UPGRADE
+	//DATA MODEL HERE
+	dataModels: [
+        {
+            title: 'Reaction',
+            attributes: {
+		        model: {type: 'string', defaultsTo: 'REACTION'},
+		        amount: {type: 'string'},
+		        type: {type: 'string'},
+		        user: {model: 'user'},
+		        associatedModels: {type: 'json'},
+		        data: {type: 'json'},  
+		    },
+        }
+    ],
+
+    //DEFINE PERMISSIONS (AND (2nd order-self connection) MODEL)
+    //DEFAULT CONNECTIONS HERE/ INIT
+    connections:[
+        {id:1, title:'APP META CONNECTION', type:'CONNECTION'},
+        {id:2, title:'APP SELF CONNECTION', type:'SELF'},
+        {id:3, title:'APP APP CONNECTION', type:'APP'},
+        {id:4, title:'APP MEMBER', type:'MEMBER'},
+    ],
+
 	get: function(req, res) {
 
 		var limit = req.query.limit;
@@ -50,92 +75,156 @@ module.exports = {
 			});
 		};
 
-		//ASYNC
 		function mintTokens(model){
-
 			var protocolTokens = getProtocolTokens(model);
-
 			for (x in protocolTokens){
-
-				var tokenString = protocolTokens[x];
-
 				//CREATE AND UPDATE TOKEN STRUCT
-				(function(tokenString) {
+				(function(protocolTokens, x) {
 					Token.find({string:tokenString}).then(function(tokenModels){
 						if (tokenModels.length == 0){
 							var newTokenModel = {
-								string:tokenString,
-								protocols:['CRE8','REACTION'], 
-								information:{inCirculation:model.amount, markets:0},
-								logic:{transferrable:true, mint:'CREATE REACTION'}
+								string:protocolTokens[x].tokenString,
+								protocols:[
+									'CRE8',
+									'REACTION'
+								], 
+								information:{
+									inCirculation:protocolTokens[x].amount, 
+									markets:0
+								},
+								logic:{
+									transferrable:true, 
+									mint:'CREATE REACTION'
+								}
 							};
-							Token.create(newTokenModel).then(function(model){console.log('TOKEN CREATED', model.string);});
+							Token.create(newTokenModel).then(function(model){
+								console.log('TOKEN CREATED', model.string);
+							});
 						}
 						else{
-							tokenModels[0].information.inCirculation = parseInt(tokenModels[0].information.inCirculation) + parseFloat(model.amount); 
-							Token.update({id:tokenModels[0].id}, {information:tokenModels[0].information}).then(function(model){console.log('TOKEN UPDATED', model[0].string)});
+							tokenModels[0].information.inCirculation = parseInt(tokenModels[0].information.inCirculation) + parseFloat(protocolTokens[x].amount); 
+							Token.update({id:tokenModels[0].id}, {information:tokenModels[0].information}).then(function(model){
+								console.log('TOKENS IN CIRCULATION UPDATED:', model[0].string)
+							});
 						}
 					});
-				})(tokenString);
+				})(protocolTokens, x);
 
-				//UPDATE CREATOR (USER) BALANCE MAPPING.
-				//TODO: A SET
-				if (!model.user.balance[tokenString]){model.user.balance[tokenString] = 0}
-				model.user.balance[tokenString] = parseInt(model.user.balance[tokenString]) + parseFloat(model.amount);
-	
+				//TODO: UPDATE BASED ON AGENT
+
 			}
 
+			//TODO: REFACTOR
+			//TODO: DEPRECIATE '.USER'
+			//TODO: APPRECIATE 'CREATOR / MEMBMER' ASSOCIATION (CONNECTIONS DEFINED IN APP TOO AKA HERE!)
+			//UPDATE MULTIPLE AGENTS
+			for (x in protocolTokens){
+				if (!model.user.balance[protocolTokens[x].tokenString]){model.user.balance[protocolTokens[x].tokenString] = 0}
+				model.user.balance[protocolTokens[x].tokenString] = parseInt(model.user.balance[protocolTokens[x].tokenString]) + parseFloat(model.amount);
+			}
 			User.update({id:model.user.id}, {balance:model.user.balance}).then(function(userModel){});
-
 			updateAssociatedModels(model, protocolTokens);
 
 		};
 
-		//FACTOR TO RETURN ENTIER TOKEN MODEL
-		//CONDIFY AMOUNT
 		function getProtocolTokens(model){
 
-			//WHO ARE THE AGENTS GETTING TOKENS?
-			//CREATOR
-				//ALL DATA MODELS GET THE HISTORY ON THE APP DATA
+			var protocolTokens = [];
 
-				//CREATOR
-					//MODEL CREATOR (RECIEVOR)
-						//MODEL
+			//json struct for token distribution
+			//ASSOCIATIONS ARE KEY
+
+			//TEMP
+			//OKAY SO YIKES DEPRECIATE MODEL TYPE OR WE GET THE NASTY DESIGN PATTERN
+			//for (x in model.associatedModels){
+			//	model.associatedModels[x]
+			//}
+
+			//CREATOR, MODEL, MODEL OWNER.. 
+			//MODEL
+			//TODO: LOOP -- FORMALIZE
+			//UNITY WITH tokens --ON MODEL and balances -- factor code
+			//TODO: DEFRECIATE TYPE?
+			//OWNER OF MODEL -- an association of type owner -- what about connection token logic -- ie we load this guy in -- opiniated 
 
 			//TODO: CREATOR AND RECIEVER AND TYPE
-			var protocolTokens = [
-				'CRE8', 
-				'CRE8+REACTION', 
-				'CRE8+REACTION+'+model.id, 
-				'CRE8+REACTION+'+model.type.toUpperCase(),
-				'CRE8+REACTION+'+model.user.username.toUpperCase(),
-				'CRE8+REACTION+'+model.user.username.toUpperCase()+'+'+model.type.toUpperCase(),
-			];
+			//TODO: VERBS? VIA AGENTS
 
 			//protocolTokens.push('CRE8+REACTION+CREATE+'+Object.keys(model.amountSet)[x]);
 			//protocolTokens.push('CRE8+REACTION+SEND+'+Object.keys(model.amountSet)[x]+'+TO+'+model.to.id);
+			
+			var protocolTokens = [
+				{
+					tokenString:'CRE8',
+					associatedModels:[
+						{type:'MEMBER', id:model.user.id},
+						{type:model.associatedModels[0].type, id:model.associatedModels[0].id},
+						//{type:model.associatedModels[0].type, id:model.associatedModels[0].id},
+					],
+					amount:model.amount
+				},
+				{
+					tokenString:'CRE8+REACTION',
+					associatedModels:[{type:'MEMBER', id:model.user.id}],
+					amount:model.amount
+				},
+				{
+					tokenString:'CRE8+REACTION',
+					associatedModels:[{type:'MEMBER', id:model.user.id}],
+					amount:model.amount
+				},
+				{
+					tokenString:'CRE8+REACTION+'+model.id, 
+					associatedModels:[{type:'MEMBER', id:model.user.id}],
+					amount:model.amount
+				},
+				{
+					tokenString:'CRE8+REACTION+'+model.type.toUpperCase(),
+					associatedModels:[{type:'MEMBER', id:model.user.id}],
+					amount:model.amount
 
-			//HASH :P
+				},
+				{
+					tokenString:'CRE8+REACTION+'+model.user.username.toUpperCase(),
+					associatedModels:[{type:'MEMBER', id:model.user.id}],
+					amount:model.amount
+
+				},
+				{
+					tokenString:'CRE8+REACTION+'+model.user.username.toUpperCase()+'+'+model.type.toUpperCase(),
+					associatedModels:[{type:'MEMBER', id:model.user.id}],
+					amount:model.amount
+				},
+			];
+
+			//HASH
 			var hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
 			var prefix = 'CRE8+REACTION';
-			var string = prefix+'+'+hash;
-			protocolTokens.push(string);
+			var hashString = prefix+'+'+hash;
+			protocolTokens.push({
+				tokenString:hashString,
+				associatedModels:[{type:'MEMBER', id:model.user.id}],
+				amount:model.amount
+			});
 
-			//store real data in token model? 
+			//PLURALISM HASH
+			//GOOP
 			for (x in Object.keys(model)){
 				var data = model[Object.keys(model)[x]];
 				var hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(data)).digest('hex');
 				var prefix = 'CRE8+REACTION';
-				var string = prefix+'+'+hash;
-				protocolTokens.push(string);
+				var flatObjString = prefix+'+'+hash;
+				protocolTokens.push({
+					tokenString:flatObjString,
+					associatedModels:[{type:'MEMBER', id:model.user.id}],
+					amount:model.amount
+				});
 			};
 
 			return protocolTokens;
-
 		};
 
-		//REMIX
+		//TODO
 		function updateAssociatedModels(model, protocolTokens){
 			for (x in model.associatedModels){
 				if (model.associatedModels[x].type == 'APP'){
@@ -498,7 +587,6 @@ module.exports = {
 
 		var model = {
 			model: 'REACTION',
-			//associatedModels: req.param('associatedModels'),
 			amount: req.param('amount'),
 			type: req.param('type'),
 			user: req.param('user'),
@@ -506,31 +594,28 @@ module.exports = {
 		};
 		model.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
 
-		//TODO UPDATE COUNT IN DATA.APPS.REACTION
-
 		Reaction.create(model)
 		.exec(function(err, reaction) {
 			if (err) {return console.log(err);}
 			else {
 
-				console.log('CREATE REACTION', reaction);
 
+				//TODO: AGNOSTIC DATA / APP
 				User.find({id:model.user}).then(function(userModel){
 					
 					reaction.associatedModels = req.param('associatedModels'),
 					reaction.user = userModel[0];
-					
 					Reaction.publish([reaction.id], {verb:'create', data: reaction});
-					
 					mintTokens(reaction);
 
 					//TODO: CREATE VALIDATIONS / ASSOCIATIONS
 					//TODO: REFACTOR BASED ON AFTER CREATEASSOCIATION..
 						//DATA BASED ON CONNECTION. 
-					//createValidation(itemModel);
-					//createNotification(itemModel);
 
-					mintTokens(reaction);
+					//TOKEN PROTOCLS IN ASSOCIATION...
+					//createValidation(itemModel);
+
+					console.log('CREATE REACTION', reaction);
 					res.json(reaction);
 
 				});

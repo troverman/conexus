@@ -18,7 +18,8 @@ module.exports = {
 
     callback: function (req, res) {
         passport.callback(req, res, function (err, user) {
-            if (user._id){user.id = user._id;}
+            if(user){if (user._id){user.id = user._id;}}
+            console.log(err, user)
             req.login(user, function (err) {
                 console.log(err);
                 if (err) {res.redirect('/login');}
@@ -55,7 +56,7 @@ module.exports = {
 
                     //TODO: REPACKAGE FITBIT --> CORE LOGIN PROTOCOL.. && INTERVAL START
                     //'LOGOUT AUTO AFTER X ACTIVITY.. '--> LAST ACTIVITY FLAG FOR USER CARD.. SMART COLOR FADE VS BINARY LOGGED IN :) 
-                    //intervalService.getFitbitData(user);
+                    fitbitApp.getData(user);
 
                     console.log('currently logged in user is: ' + req.user.username);
                     res.json(user);

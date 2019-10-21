@@ -81,10 +81,7 @@ angular.module( 'conexus.account', [
         if (!$scope.balance[$scope.balanceLook]){$scope.balanceLookupValue = 0}
     };
 
-    //TODO: IPFS LINKIN
-    //TODO: CREATE IMGAGE CONTENT.. 
-        //CONTENT ASSOCIATIONS :P
-            //DEFINED BY MEMBER-MEMBER CONNECTION :o
+    //TODO:
 	$scope.uploadAvatar = function(file){};
 
 }]);

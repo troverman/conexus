@@ -1,3 +1,5 @@
+const request = require('request');
+
 //CRE8.USER
 //TODO: TO MEMBER
 module.exports = {
@@ -55,8 +57,6 @@ module.exports = {
 
     //TODO
     afterCreate: function(model, next){
-
-        const request = require('request');
 
         var colorArray = ['2ab996', '24242e', 'ff6a6a', 'ddbea8'];
         var colorInt = Math.floor(Math.random() * (colorArray.length + 1));

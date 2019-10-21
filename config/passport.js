@@ -1,8 +1,3 @@
-/**
- * Passport configuration
- */
-
-
 
 //TODO: PASSPORT APPS.. 
 module.exports.passport = {
@@ -31,7 +26,7 @@ module.exports.passport = {
     options: {
       clientID: '1660847900851145',
       clientSecret: '6eecbdb480a617f3e9b4c7e0c3f89665',
-      scope: ['email'] /* email is necessary for login behavior */
+      scope: ['email']
     }
   },
 
@@ -42,7 +37,7 @@ module.exports.passport = {
     options: {
       clientID: '956713988528-86j1pkii5m9o8c1vfmb8qcbq2eot784d.apps.googleusercontent.com',
       clientSecret: 'TiuwOilqlUC4dtxOXbyhdqu2',
-      scope: ['email'] /* email is necessary for login behavior */
+      scope: ['email']
     }
   },
 

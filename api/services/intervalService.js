@@ -6,11 +6,7 @@ const request = require('request');
 
 module.exports = {
 
-	//TODO: MOVE OUT OF INTERVAL
-	//TODO: TOKENIZE LOCATION | EXERCISE
-	//TODO: MODULATE TO APP INPUT .. IE INTERVAL CONTRACT.. ON LOGIN OPERAND -- ... 
-	//'''ORACLE''' to APIS -- > CONTINUOUS WEBSOCKET INPUT TO TOKEN LAYER
-	//APP FOR TIME IN CARDIO..
+	
 	getFitbitData: function(req){
 		User.findOne(req.id)
 		.then(function(model) {

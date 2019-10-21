@@ -1359,16 +1359,16 @@ angular.module( 'conexus.nav', [
             $scope.startTime = function() {
                 //CONTENT VS TIME VS ITEM VS 
                 if ($scope.streaming){
+                    //TODO: UNITY
                     $scope.newContent = {
                         type:'video',
-                        title: $scope.task.title,
-                        context: $scope.task.title + ',stream,work,' + $scope.task.project.title,
+                        title: 'Streaming '+$rootScope.currentUser.username,
+                        context: 'stream,work',
                         content: '<iframe width="510" height="265" src="'+$scope.streamUrl+'" frameborder="0" allowfullscreen></iframe>', //BUILD FOR EMBED
                         user: $rootScope.currentUser.id,
                     };
                     ContentModel.create($scope.newContent).then(function(contentModel){
                         console.log('CREATE STREAMING CONTENT', contentModel)
-                        $scope.streamingId = contentModel.id;
                     });
                 }
                 if($scope.recordingTime === true) return false;
