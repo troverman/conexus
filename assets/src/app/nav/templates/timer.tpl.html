@@ -78,7 +78,7 @@
                         </div>
                     </div>
                     <h3>{{taskTime}}</h3>
-                    <div ng-if="streaming"> <div ng-bind-html="renderStream(streamUrl)"></div></div>
+                    <div ng-if="streaming"> <div ng-bind-html="renderStream(newTime.streamUrl)"></div></div>
                     <div class="spacing-5"></div>
                     <div class="spacing-5"></div>
                     <text-angular ng-model="newTime.content" ta-toolbar="[['p','h1','bold','italics','quote','insertLink', 'html']]"></text-angular>

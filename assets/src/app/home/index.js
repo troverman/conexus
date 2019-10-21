@@ -417,10 +417,14 @@ angular.module( 'conexus.home', [
         //IE RUN TIME
         //ALL THINGS SHOULD BE IN CONTRACT CODE. IE APP PROTOCOL
 
+        //after some research into interpretation and compilation, language agnostic design architecture is strong
+
+
     $scope.coreApps = [
+
         //network - code which has its own runtime - lol 
         {model:'CORE', title:'Runtime', description:'', data:{}},
-            //pow
+
         {model:'PROTOCOL', title:'Protocol', description:''}, //code struct string data
         {model:'CONNECTION', title:'Connection', description:''},
         {model:'VALIDATION', title:'Validation', description:''},
@@ -455,6 +459,7 @@ angular.module( 'conexus.home', [
 
     //$scope.apps = [].concat.apply([], [$scope.apps, $scope.coreApps, $scope.xyzApps])
 
+    //confidence in the direction , knowing theres 100 miles to go - let's move
 
     //build .asm
     $scope.compilePeer= function(){

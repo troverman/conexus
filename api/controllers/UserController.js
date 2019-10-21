@@ -52,6 +52,7 @@ module.exports = {
 		var sort = req.query.sort || 'createdAt DESC';
 		var id = req.query.id;
 		var username = req.query.username;
+		
 		console.log('GET USER', req.query);
 
 		if (req.query.id || req.query.username){
@@ -67,7 +68,7 @@ module.exports = {
 
 			User.getDatastore().manager.collection('user').find(query).limit(limit).skip(skip).sort({'createdAt':-1}).toArray(function (err, models) {
 				if (models.length > 0){
-					console.log(models)
+					//console.log(models)
 					var userModel = models[0];
 					userModel.id = userModel._id.toString();
 					User.subscribe(req, [models[0].id]);

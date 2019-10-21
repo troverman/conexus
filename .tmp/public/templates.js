@@ -2416,8 +2416,15 @@ angular.module("developers/index.tpl.html", []).run(["$templateCache", function(
     "Immutable JSON Connection\n" +
     "\n" +
     "{\n" +
+    "    \n" +
     "    //CORE DATA\n" +
     "    string:\"New Protocol\",\n" +
+    "\n" +
+    "    //language agnostic (strength for pythonic ml models to be rendered on a decentralized network );\n" +
+    "    //structured as connection\n" +
+    "    //language, compiler, \n" +
+    "\n" +
+    "    language:'javascript',\n" +
     "\n" +
     "    //DEFINE DATA MODEL\n" +
     "    dataModels: [\n" +
@@ -9037,16 +9044,17 @@ angular.module("nav/templates/createTime.tpl.html", []).run(["$templateCache", f
     "                            <a class=\"btn btn-default log-btn\" ng-click=\"startTime()\">No</a>\n" +
     "                        </div>\n" +
     "                        <div ng-show=\"streaming\">\n" +
-    "                            <input type=\"text\" placeholder=\"Link\" ng-model=\"streamUrl\" class=\"form-control\">\n" +
-    "                            <input type=\"text\" placeholder=\"IFPS SECRET\" ng-model=\"timeContent\" class=\"form-control\">\n" +
-    "                            <input type=\"text\" placeholder=\"IFPS KEY\" ng-model=\"timeContent\" class=\"form-control\">\n" +
-    "                            <a style=\"width:100%;\" class=\"btn btn-default log-btn\" ng-click=\"startTime()\">Start Stream</a>\n" +
+    "                            <!--TODO: UPDATE UX-->\n" +
+    "                            <!--TODO: NATIVE CREATE STREAMING APP; RTMP SERVER ON NODE (LIVE PEER)-->\n" +
+    "                            <p style=\"color:gray;font-style:italic\">Direct Embed Link i.e. https://www.youtube.com/embed/{id}</p>\n" +
+    "                            <input type=\"text\" placeholder=\"Link\" ng-model=\"newTime.streamUrl\" class=\"form-control\">\n" +
+    "                            <a ng-disabled=\"!newTime.streamUrl\" style=\"width:100%;\" class=\"btn btn-default log-btn\" ng-click=\"startTime()\">Start Stream</a>\n" +
     "                            <a style=\"width:100%;\" class=\"btn btn-default log-btn\" ng-click=\"cancelStreaming()\">Back</a>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
     "                    <div ng-show=\"recordingTime\">\n" +
     "                        <h3>{{taskTime}}</h3>\n" +
-    "                        <div ng-if=\"streaming\"> <div ng-bind-html=\"renderStream(streamUrl)\"></div></div>\n" +
+    "                        <div ng-if=\"streaming\"> <div ng-bind-html=\"renderStream(newTime.streamUrl)\"></div></div>\n" +
     "                        <div class=\"spacing-5\"></div>\n" +
     "                        <div class=\"spacing-5\"></div>\n" +
     "                        <text-angular ng-model=\"newTime.content\" ta-toolbar=\"[['p','h1','bold','italics','quote','insertLink', 'html']]\"></text-angular>\n" +
@@ -10676,7 +10684,7 @@ angular.module("nav/templates/timer.tpl.html", []).run(["$templateCache", functi
     "                        </div>\n" +
     "                    </div>\n" +
     "                    <h3>{{taskTime}}</h3>\n" +
-    "                    <div ng-if=\"streaming\"> <div ng-bind-html=\"renderStream(streamUrl)\"></div></div>\n" +
+    "                    <div ng-if=\"streaming\"> <div ng-bind-html=\"renderStream(newTime.streamUrl)\"></div></div>\n" +
     "                    <div class=\"spacing-5\"></div>\n" +
     "                    <div class=\"spacing-5\"></div>\n" +
     "                    <text-angular ng-model=\"newTime.content\" ta-toolbar=\"[['p','h1','bold','italics','quote','insertLink', 'html']]\"></text-angular>\n" +

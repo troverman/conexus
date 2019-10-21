@@ -73,16 +73,17 @@
                             <a class="btn btn-default log-btn" ng-click="startTime()">No</a>
                         </div>
                         <div ng-show="streaming">
-                            <input type="text" placeholder="Link" ng-model="streamUrl" class="form-control">
-                            <input type="text" placeholder="IFPS SECRET" ng-model="timeContent" class="form-control">
-                            <input type="text" placeholder="IFPS KEY" ng-model="timeContent" class="form-control">
-                            <a style="width:100%;" class="btn btn-default log-btn" ng-click="startTime()">Start Stream</a>
+                            <!--TODO: UPDATE UX-->
+                            <!--TODO: NATIVE CREATE STREAMING APP; RTMP SERVER ON NODE (LIVE PEER)-->
+                            <p style="color:gray;font-style:italic">Direct Embed Link i.e. https://www.youtube.com/embed/{id}</p>
+                            <input type="text" placeholder="Link" ng-model="newTime.streamUrl" class="form-control">
+                            <a ng-disabled="!newTime.streamUrl" style="width:100%;" class="btn btn-default log-btn" ng-click="startTime()">Start Stream</a>
                             <a style="width:100%;" class="btn btn-default log-btn" ng-click="cancelStreaming()">Back</a>
                         </div>
                     </div>
                     <div ng-show="recordingTime">
                         <h3>{{taskTime}}</h3>
-                        <div ng-if="streaming"> <div ng-bind-html="renderStream(streamUrl)"></div></div>
+                        <div ng-if="streaming"> <div ng-bind-html="renderStream(newTime.streamUrl)"></div></div>
                         <div class="spacing-5"></div>
                         <div class="spacing-5"></div>
                         <text-angular ng-model="newTime.content" ta-toolbar="[['p','h1','bold','italics','quote','insertLink', 'html']]"></text-angular>

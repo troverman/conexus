@@ -6,6 +6,7 @@
 	//create time (AND) (PLURALISM) fitbit_sleep
 
 const request = require('request');
+const Q = require('q');
 
 module.exports = {
 
@@ -21,12 +22,221 @@ module.exports = {
 	connections:[],
 	dataModel:[],
 
+	//TEST
+	language: 'Javascript',
+	compiler:'V8',
+
+	//I BROKE IT 
+	//okay gotta go! resume in 2 hrs see ya!
 	getData: function(req){
 
 		//console.log(fitbitApp.import.request)
 
 		//APP SPECIFIC MANIS
 		//TODO: STRUCTURE TOKEN MINTING
+		//IS THIS NEEDED?
+		//JUST BC YOU CAN REDUCE DOESNT MEAN YOU HAVE TOO, PLURALISM IS THE PARADOX
+
+		//TODO: ERR HANDLING
+		function getSteps(model){
+			var deferred = Q.defer();		
+			var requestModel= {
+				url: 'https://api.fitbit.com/1.2/user/' + model.userId + '/activities/steps/date/today/'+model.timeQuery+'.json',
+				json: true,
+				headers: {'Authorization': ' Bearer ' + model.accessToken}
+			};
+			console.log(requestModel)
+			request(model, function (error, response, body) {
+				console.log(error, response, body)
+				deferred.resolve(body['activities-steps']);
+			});
+			return deferred.promise;
+		};
+		//function createSteps(model){};
+
+		function getHeartRate(model){
+			var deferred = Q.defer();		
+			var requestModel= {
+				json: true,
+				url: 'https://api.fitbit.com/1.2/user/' + model.userId + '/activities/heart/date/today/'+model.timeQuery+'.json',
+				headers: {'Authorization': ' Bearer ' + model.accessToken}
+			};
+			request(model, function (error, response, body) {deferred.resolve(body['activities-heart']);});
+			return deferred.promise;
+		};
+		//function createHeartRate(model){};
+		//function createTime(model){};
+
+		function getFloors(model){
+			var deferred = Q.defer();		
+			var requestModel= {
+				json: true,
+				url: 'https://api.fitbit.com/1.2/user/' + model.userId + '/activities/floors/date/today/'+model.timeQuery+'.json',
+				headers: {'Authorization': ' Bearer ' + model.accessToken}
+			};
+			request(model, function (error, response, body) {deferred.resolve(body['activities-floors']);});
+			return deferred.promise;
+		};
+		//function createFloor(model){};
+
+		//function getElevation(model){};
+		//function createElevation(model){};
+
+		function getDistance(model){
+			var deferred = Q.defer();		
+			var requestModel= {
+				json: true,
+				url: 'https://api.fitbit.com/1.2/user/' + model.userId + '/activities/distance/date/today/'+model.timeQuery+'.json',
+				headers: {'Authorization': ' Bearer ' + model.accessToken}
+			};
+			request(model, function (error, response, body) {deferred.resolve(body['activities-floors']);});
+			return deferred.promise;
+		};
+		//function createDistance(model){};
+
+		//TODO: UNIFY DISTANCE PARAM W DIFF ENDPOINT SPECS
+		function getSleep(model){
+			var today = new Date().toISOString().slice(0,10);
+			var requestModel= {
+				json: true,
+				url: 'https://api.fitbit.com/1.2/user/' + model.userId + '/sleep/date/' + today + '.json',
+				headers: {'Authorization': ' Bearer ' + model.accessToken}
+			};
+			request(model, function (error, response, body) {
+				deferred.resolve(body);
+			});
+			return deferred.promise;
+		};
+		//function createSleep(model){};
+		//function createTime(model){};
+
+		//function getCalories(model){};
+		//function createCalories(model){};
+
+		//TODO: CUSTOM DATA MODELS VIA APPLICATIONS
+		//fitbit time vs time
+		//function minutesSedentary(){} --> time
+
+		console.log(req.id);
+		//TODO: LOAD USER APPS
+		User.find({id:req.id})
+		//TODO: DEPRECIATE POPULATE
+		.populate('passports')
+		.then(function(model) {
+
+			//TODO: DEPRECIATE PASSPORT, APPRECIATE APP-MEMBER CONNECTION
+			var fitbitPassport = model[0].passports.filter(function(obj){return obj.provider=='fitbit'});
+
+			if (fitbitPassport){
+
+				//TODO: ENCRYPT ACCESS TOKEN STORAGE -- STORE KEYS IN LOCAL PEER
+				model.userId = fitbitPassport[0].identifier;
+				model.accessToken = fitbitPassport[0].tokens.accessToken;
+				model.timeQuery = '1d';
+
+				//if date token already exists dont add? 
+				//only get tokay and interval?
+				//look at data model actually
+
+				//fitbitApp.get.steps
+				getSteps(model).then(function(activity) {
+
+					//use token grammer..
+					//token model vs discrete 
+					//var grammer = fitbitApp.tokens({type:'steps' data:activity});
+					//hmm
+					var tokens = [];
+					for (x in activity){
+						tokens.push({tokenSting:'FITBIT+STEPS', amount: parseFloat(activity[x].value)});
+						tokens.push({tokenSting:'FITBIT+STEPS+DATE'+activity[x].dateTime, amount: parseFloat(activity[x].value)});
+					}
+
+				});
+
+				//fitbitApp.get.distance
+				getDistance(model).then(function(activity) {
+
+					var activity = body['activities-distance'];
+					for (x in activity){
+						tokens.push({tokenSting:'FITBIT+DISTANCE', amount: activity[x].value});
+						tokens.push({tokenSting:'FITBIT+DISTANCE+'+activity[x].dateTime, amount: parseFloat(activity[x].value)});
+					}
+					console.log(tokens);
+
+				});
+
+				getHeartRate(model).then(function(activity) {
+
+					var tokens = [];
+					for (x in activity){
+
+						activity.value.restingHeartRate;
+						activity.dateTime;
+
+						for (y in activity.value.heartRateZones){
+							activity.value.heartRateZones[y].max;
+							activity.value.heartRateZones[y].min;
+							activity.value.heartRateZones[y].minutes;
+							activity.value.heartRateZones[y].name;
+							activity.value.heartRateZones[y].caloriesOut;
+						}
+					}
+
+				});
+
+				getFloors(model).then(function(activity) {
+
+					var tokens = [];
+					for (x in activity){
+						tokens.push({tokenSting:'FITBIT+FLOORS', amount: activity[x].value});
+						tokens.push({tokenSting:'FITBIT+FLOORS+'+activity[x].dateTime, amount: parseFloat(activity[x].value)});
+					}
+					console.log(tokens);
+
+
+				});
+
+				getSleep(model).then(function(activity) {
+
+					console.log(activity)
+
+				});
+
+			}
+
+		});
+
+	},
+
+
+	//STATIC CODE -- FORMALIZE A TOKEN PROTOCOL
+	tokens: function(model){
+
+		//soon
+		//strucutre is worth it -- ~~!
+		//const tokenModel = {
+			//fitbit:{
+				//steps:{
+					//date, self
+				//},
+			//}
+		//}
+
+		//var protocolTokens = [];
+		//freestyle
+		if (model.type == 'steps'){
+			for (x in model.data){
+
+			}
+			return {
+
+			}
+		}
+
+		function mintTokens(model){
+			var timeProtocolTokens = getProtocolTokens(model);
+		};
+
 		function getProtocolTokens(model){
 
 			//activities/calories
@@ -73,153 +283,23 @@ module.exports = {
 				//FITBIT+HEART
 					//ZONE
 
-			var protocolTokens = [{
-				tokenString:'CRE8+FITBIT',
-				associatedModels:[
-					{type:'MEMBER', id:model.id},
-				],
-				amount:model.amount
-			}];
+			//SLEEP
+			//STEPS
+			//HEARTRATE
+
+			//return protocolTokens;
 
 		};
-
-		function mintTokens(model){};
-
-
-		//IS THIS NEEDED?
-		//JUST BC YOU CAN REDUCE DOESNT MEAN YOU HAVE TOO, PLURALISM IS THE PARADOX
-		function getSteps(model){
-			var url = 'https://api.fitbit.com/1.2/user/' + model.userId + '/activities/steps/date/today/' + peroid + '.json';
-
-		};
-		function createSteps(model){};
-
-		function getHeartRate(model){};
-		function createHeartRate(model){};
-		//function createTime(model){};
-
-		function getFloors(model){};
-		function createFloor(model){};
-
-		function getElevation(model){};
-		function createElevation(model){};
-
-		function getDistance(model){};
-		function createDistance(model){};
-
-		function getSleep(model){};
-		function createSleep(model){};
-		//function createTime(model){};
-
-		function getCalories(model){};
-		function createCalories(model){};
-
-		//fitbit time vs time
-		//function minutesSedentary(){} --> time
-
-		console.log(req.id);
-		//TODO: DEPRECIATE POPULATE
-		//TODO: LOAD USER APPS
-
-		User.find({id:req.id})
-		.populate('passports')
-		.then(function(model) {
-
-			var fitbitPassport = model[0].passports.filter(function(obj){return obj.provider=='fitbit'});
-
-			if (fitbitPassport){
-				var userId = fitbitPassport[0].identifier;
-				
-				var activity = 'distance'; //heart, floors, distance, steps
-				var peroid = '1m'; //1d, 7d, 30d, 1w, 1m
-				var url = 'https://api.fitbit.com/1.2/user/' + userId + '/activities/' + activity + '/date/today/' + peroid + '.json';
-				
-				//SLEEP
-				//var today = new Date().toISOString().slice(0,10);
-				//var url = 'https://api.fitbit.com/1.2/user/' + userId + '/sleep/date/' + today + '.json';
-
-				//MEH
-				//HEART RATE REALTIME
-				//var url = 'https://api.fitbit.com/1.2/user/' + userId + '/activities/heart/date/2016-10-31/1d/1sec/time/00:00/00:01.json'
-				
-				//TODO: ENCRYPT ACCESS TOKEN STORAGE -- STORE KEYS IN LOCAL PEER
-				var model= {
-					url: url,
-					json: true,
-					headers: {'Authorization': ' Bearer ' + fitbitPassport[0].tokens.accessToken}
-				};
-
-				request(model, function (error, response, body) {
-					console.log('TEST HELLO!!', error)
-					//console.log(body['activities-heart'])
-					console.dir(body, { depth: null });
-
-					var activity = body['activities-steps'];
-					var tokens = [];
-					for (x in activity){
-						tokens.push({tokenSting:'FITBIT+STEPS', amount: parseFloat(activity[x].value)});
-						tokens.push({tokenSting:'FITBIT+STEPS+'+activity[x].dateTime, amount: parseFloat(activity[x].value)});
-					}
-
-					//if date token already exists dont add? 
-					//only get tokay and interval?
-					//look at data model actually
-					//console.log(tokens);
-
-					var activity = body['activities-heart'];
-					var tokens = [];
-					for (x in activity){
-
-						activity.value.restingHeartRate;
-						activity.dateTime;
-
-						for (y in activity.value.heartRateZones){
-
-							activity.value.heartRateZones[y].max;
-							activity.value.heartRateZones[y].min;
-							activity.value.heartRateZones[y].minutes;
-							activity.value.heartRateZones[y].name;
-							activity.value.heartRateZones[y].caloriesOut;
-
-						}
-					}
-
-
-					var activity = body['activities-floors'];
-					var tokens = [];
-					for (x in activity){
-						tokens.push({tokenSting:'FITBIT+FLOORS', amount: activity[x].value});
-						tokens.push({tokenSting:'FITBIT+FLOORS+'+activity[x].dateTime, amount: parseFloat(activity[x].value)});
-					}
-					console.log(tokens);
-
-					var activity = body['activities-distance'];
-					for (x in activity){
-						tokens.push({tokenSting:'FITBIT+DISTANCE', amount: activity[x].value});
-						tokens.push({tokenSting:'FITBIT+DISTANCE+'+activity[x].dateTime, amount: parseFloat(activity[x].value)});
-					}
-					console.log(tokens);
-
-
-				});
-
-			}
-
-		});
-
-	},
-
-
-	tokens: function(req){
-
-		//SLEEP
-		//STEPS
-		//HEARTRATE
 
 	},
 
 	//DEFINE PASSPORT
 	//FITBIT PASSPORT APP (PROTOCOL)
+	//THIS 'COULD BE' A PASSPORT, AKA LOGIN WITH FITBIT
+	//THIS ALSO COULD BE THE APP-MEMBER ASSOCIATION .. 
+		//GET DATA; WITHOUT AUTH FOR ACCOUNT
+			//SMARTER
+
 	passport: function(req){
 
 		//TODO

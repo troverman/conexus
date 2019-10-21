@@ -1364,7 +1364,7 @@ angular.module( 'conexus.nav', [
                         type:'video',
                         title: 'Streaming '+$rootScope.currentUser.username,
                         context: 'stream,work',
-                        content: '<iframe width="510" height="265" src="'+$scope.streamUrl+'" frameborder="0" allowfullscreen></iframe>', //BUILD FOR EMBED
+                        content: '<iframe width="510" height="265" src="'+$scope.newTime.streamUrl+'" frameborder="0" allowfullscreen></iframe>', //BUILD FOR EMBED
                         user: $rootScope.currentUser.id,
                     };
                     ContentModel.create($scope.newContent).then(function(contentModel){
