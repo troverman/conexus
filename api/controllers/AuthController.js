@@ -52,15 +52,15 @@ module.exports = {
                     //TODO: REFRESH TOKENS 
 
                     //TODO: INIT APPS....
-                    var provider = 'fitbit';
-                    var options = {scope:['activity','heartrate','location','profile', 'sleep']};
-                    //HMM
-                    passport.authenticate(provider, options)(req, res, req.next).then(function(){
+                    //var provider = 'fitbit';
+                    //var options = {scope:['activity','heartrate','location','profile', 'sleep']};
+                    //HMM -- BAD
+                    //passport.authenticate(provider, options)(req, res, req.next).then(function(){
                         fitbitApp.getData(user);
                         //mmm
                         //master interval 
                         //setInterval(fitbitApp.getData.bind(null, user), 8640000);
-                    });
+                    //});
 
                     console.log('currently logged in user is: ' + req.user.username);
 
