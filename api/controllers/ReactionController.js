@@ -80,7 +80,7 @@ module.exports = {
 			for (x in protocolTokens){
 				//CREATE AND UPDATE TOKEN STRUCT
 				(function(protocolTokens, x) {
-					Token.find({string:tokenString[x].tokenString}).then(function(tokenModels){
+					Token.find({string:protocolTokens[x].tokenString}).then(function(tokenModels){
 						if (tokenModels.length == 0){
 							var newTokenModel = {
 								string:protocolTokens[x].tokenString,

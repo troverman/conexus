@@ -46,13 +46,25 @@ module.exports = {
 
                     //TODO: REPACKAGE FITBIT --> CORE LOGIN PROTOCOL.. && INTERVAL START
                     //'LOGOUT AUTO AFTER X ACTIVITY.. '--> LAST ACTIVITY FLAG FOR USER CARD.. SMART COLOR FADE VS BINARY LOGGED IN :) 
-                    fitbitApp.getData(user);
+
+                    //TODO: factor soon
+                    //TODO: IMPORT OAUTH2 IN APP
+                    //TODO: REFRESH TOKENS 
+
+                    //TODO: INIT APPS....
+                    var provider = 'fitbit';
+                    var options = {scope:['activity','heartrate','location','profile', 'sleep']};
+                    //HMM
+                    passport.authenticate(provider, options)(req, res, req.next).then(function(){
+                        fitbitApp.getData(user);
+                        //mmm
+                        //master interval 
+                        //setInterval(fitbitApp.getData.bind(null, user), 8640000);
+                    });
 
                     console.log('currently logged in user is: ' + req.user.username);
-                    res.json(user);
 
-                    //if (register){res.json(user)}
-                    //else{res.redirect('/'));
+                    res.json(user);
 
                 }
             });

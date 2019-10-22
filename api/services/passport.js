@@ -71,6 +71,7 @@ passport.endpoint = function (req, res) {
     var options    = {};
     if (!strategies.hasOwnProperty(provider)) {return res.redirect('/login');}
     if (strategies[provider].hasOwnProperty('scope')) {options.scope = strategies[provider].scope;}
+    //console.log(provider, options);
     this.authenticate(provider, options)(req, res, req.next);
 };
 

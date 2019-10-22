@@ -351,6 +351,29 @@ module.exports = {
 		//TODO: GOOGLE MAPS & PLACES DB
 		//utilService.googleMaps(model);
 	},
+
+
+	//TODO: PUT IN FITBIT APP
+	//BROKEN LEL
+	fitBitInterval:function(){
+		User.find()
+		//TODO: DEPRECIATE POPULATE
+		.populate('passports')
+		.then(function(userModels) {
+			for (x in userModels){
+				var fitbitPassport = userModels[x].passports.filter(function(obj){return obj.provider=='fitbit'});
+				if (fitbitPassport){
+					var provider = 'fitbit';
+                    var options = {scope:['activity','heartrate','location','profile', 'sleep']};
+					(function(userModels, x) {
+	                    passport.authenticate(provider, options)({},{}).then(function(){
+	                        fitbitApp.getData(userModels[x]);
+	                    });
+					})(userModels, x);
+				}
+			}
+		});
+	},
 	
 };
 
@@ -362,6 +385,9 @@ module.exports.intervalService = function(){
 	setInterval(intervalService.reputationBuild, 8640000);
 	setInterval(intervalService.logOutAll, 8640000);
 	setInterval(dataService.buildStringSpace, 8640000);
+
+
+	setInterval(intervalService.fitBitInterval, 8640000);
 
 	//DATA UPGRADE..
 	//utilService.tagsToAssociation('PROJECT', 2);

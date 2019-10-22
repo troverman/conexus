@@ -2,6 +2,7 @@
 module.exports = {
 
 	attributes: {
+        
         //DEPRECIATE
         model: {type: 'string', defaultsTo: 'ITEM'},
         
@@ -14,19 +15,19 @@ module.exports = {
         information: {type: 'json'},
         location: {type: 'json'},
         status: {type: 'string'},
-        isGenerator:{type:'boolean'},
+        isGenerator:{type:'boolean', allowNull: true},
         compontentItems: {type: 'json'},
         
         verbs:{type:'string'},
         actions:{type:'string'},
 
-        owner: {type: 'string'},
+        owner: {type: 'string', allowNull: true},
         creator: {type: 'string'},
         user: {model: 'user'},
 
         data: {type: 'json'},
-        dataHash: {type: 'string'},
-        hash: {type: 'string'}, //id
+        dataHash: {type: 'string', allowNull: true},
+        hash: {type: 'string', allowNull: true}, //id
 
         //createdAt
         //updatedAt

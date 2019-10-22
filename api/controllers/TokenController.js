@@ -16,6 +16,7 @@ module.exports = {
 
 		console.log('GET TOKEN', req.query)
 
+		//ERR
 		if (req.query.string){
 			Token.find({string:req.query.string})
 			.limit(limit)
