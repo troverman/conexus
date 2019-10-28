@@ -453,7 +453,7 @@ angular.module( 'conexus.project', [
     });
 
 }])
-    
+
 .controller( 'ProjectCharterCtrl', ['$sailsSocket', '$scope', 'connections', 'project', 'titleService', function ProjectController( $sailsSocket, $scope, connections, project, titleService ) {
     titleService.setTitle(project.title + ' | Charter | CRE8.XYZ');
     $scope.connections = connections.map(function(obj) {
@@ -465,7 +465,7 @@ angular.module( 'conexus.project', [
             }
         }
     });
-    console.log( $scope.connections,connections)
+    console.log( $scope.connections, connections )
 
 }])
 

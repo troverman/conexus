@@ -8,7 +8,7 @@
 	                </div>
 			        <div style="margin-top: auto;margin-bottom: auto;text-align:center">
 			        	<div style="padding:15px">
-			            	<h1 style="font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">{{connection.title}}</h1>
+			            	<h1 style="font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">{{connection.title}}</h1>
 			            	<h5 style="color:white">Connection</h5>
 			            	<h5 style="color:white">{{connection.id}}</h5>
 			            </div>
@@ -38,13 +38,12 @@
         		<span style="display:inline" ng-bind-html="renderContent(connection.description)"></span>
 				<div class="spacing-10"></div>
 
+				<!--
 				<h4>Information</h4>
 				<p>{{connection.information}}</p>
 				<div class="spacing-10"></div>
-
-				<!--<h4>Parameters</h4>
-				<div class="spacing-10"></div>-->
-
+				-->
+				
 				<h4>Context</h4>
 				<!--CHANGE TO CONTEXT -->
 				<!--THE ANSWER IS ALWASY BOTH-->
@@ -54,35 +53,38 @@
 				<!--DEFINES SPECIFIC CONTEXT.. -->
 				<!--
 				context:{	
-
 					context:{
 						string:int
 					},
-
 					parameterField1:parameterValue1,
 					...
 					.
 
 				}
 				-->
+				<div hljs hljs-language="javascript"  hljs-source="parameters"></div>
 				<div class="spacing-10"></div>
 
 				<h4>Mapping</h4>
 				{{connection.parameters.attributes}}
+				<!--IE REPUTATION-->
 				<div class="spacing-10"></div>
 
 				<h4>Logic</h4>
 				{{connection.parameters.logic}}
+				<highchart config="chart"></highchart>
+				<!--IE MULTIPLICITIVE-->
 				<div class="spacing-10"></div>
 
 				<h4>Reduction</h4>
 				{{connection.parameters.reduction}}
+				<!--DEFINE AS SIMPLE 'GRAMMER' ; see CONTEXT FREE GRAMMER-->
 				<div class="spacing-10"></div>
 
 				<h4>Rules</h4>
 				<h5>Acceptance</h5>
+				<!--THRESHOLD-->
 				<div class="spacing-10"></div>
-
 				
 			</div>
 			<div class="card-footer">

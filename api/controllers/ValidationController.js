@@ -171,7 +171,7 @@ module.exports = {
 			return deferred.promise;
 		};
 
-		function mintTokens(model){
+		function createTokens(model){
 			var transactionProtocolTokens = getProtocolTokens(model);
 			for (x in transactionProtocolTokens){
 				var tokenString = transactionProtocolTokens[x]; 
@@ -379,7 +379,7 @@ module.exports = {
 					createAssociation(validation);
 					//createNotification(validation);
 					createEvent(validation);
-					mintTokens(validation);
+					createTokens(validation);
 					res.json(validation);
 
 					//UPDATE COUNTS..

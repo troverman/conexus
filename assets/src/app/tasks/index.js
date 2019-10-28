@@ -30,7 +30,7 @@ angular.module( 'conexus.tasks', [
 	$scope.skip = 0;
 	$scope.selectedTag = '';
     $rootScope.searchQuery = [];
-
+    console.log(tasks)
     $scope.tasks = tasks.data.map(function(obj){obj.model = 'TASK'; return obj;});
     $scope.taskCount = tasks.info.count;
 

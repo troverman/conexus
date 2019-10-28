@@ -146,13 +146,24 @@ angular.module( 'conexus.nav', [
      $rootScope.connectionToggle = function(item){
         $scope.closeAllNav();
         if($rootScope.currentUser){
-
             $scope.item = item;
             $scope.newConnection = {
-                associatedModels:$rootScope.associatedModels,
+                associatedModels:[],//ROOTSCOPE
+                //REMOVE CREATOR IN FAVOR OF ASSOCIATED CREATOR
+                    //BEWARE OF A CHAIN
                 creator:$rootScope.currentUser.id,
                 context:[{text:'self'}, {text:'general'}]
             };
+
+            //if (item){
+            //    $scope.newConnection.associatedModels.push({
+            //       type:item.model, id:item.id, text:item.model + ' ' + item.title
+            //    });
+                //GET EXTENDED CHAIN CONNECTION LOGIC FROM ITEM ~ 
+            //}
+
+            
+
             $mdSidenav('connection').toggle();
         }
         else{$mdSidenav('login').toggle();}

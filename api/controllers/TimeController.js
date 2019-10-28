@@ -4,6 +4,14 @@ const Q = require('q');
 
 module.exports = {
 
+	//import: { request: require('request') },
+	connections:[],
+	//type CRE8_TIME
+	dataModel:[],
+	language: 'Javascript',
+	compiler:'V8',
+	tokens:{},
+
 	get: function(req, res) {
 
 		function getAssociations(model){
@@ -213,81 +221,69 @@ module.exports = {
 			//TO NOTIFICATION PERMS
 		};
 
-		function mintTokens(model){
-
-			var timeProtocolTokens = getProtocolTokens(model);
-
-			//ASYNC SCOPING IS THE FIX IT SEEMS
-			for (x in timeProtocolTokens){
-				var tokenString = timeProtocolTokens[x];
-				(function(tokenString) {
-					Token.find({string:tokenString}).then(function(tokenModels){
+		function createTokens(model){
+			var tokens = getTokens(model);
+			for (x in tokens){
+				(function(tokens, x) {
+					Token.find({string:tokens[x].string}).then(function(tokenModels){
 						if (tokenModels.length == 0){
 							var newTokenModel = {
-								string:tokenString,
+								string:tokens[x].string,
 								protocols:['CRE8','TIME'], 
 								information:{inCirculation:model.amount, markets:0},
 								logic:{transferrable:true, mint:'CREATE TIME'}
 							};
 							Token.create(newTokenModel).then(function(model){console.log('TOKEN CREATED', model.string);});
-							model.user.balance[tokenString] = parseFloat(model.amount);
-							//PERHAPS NEW MODEL
-							User.update({id:model.user.id}, {balance:model.user.balance}).then(function(user){
-								console.log('USER BALANCE UPDATED', tokenString);
-							});
+							model.user.balance[tokens[x].string] = parseFloat(model.amount);
+							//TODO: PERHAPS NEW MODEL
+							User.update({id:model.user.id}, {balance:model.user.balance}).then(function(user){console.log('USER BALANCE UPDATED', tokens[x].string);});
 						}
-
 						else{
 							tokenModels[0].information.inCirculation = parseInt(tokenModels[0].information.inCirculation) + parseFloat(model.amount); 
 							Token.update({id:tokenModels[0].id}, {information:tokenModels[0].information}).then(function(model){console.log('TOKEN UPDATED', model)});
-							if (model.user.balance[tokenString]){model.user.balance[tokenString] = parseInt(model.user.balance[tokenString]) + parseFloat(model.amount);}
-							else{model.user.balance[tokenString] = parseFloat(model.amount);}
-							//DEPRECIATE REPUTATION
-							User.update({id:model.user.id}, {balance:model.user.balance}).then(function(user){
-								console.log('USER BALANCE UPDATED', tokenString);
-							});
+							if (model.user.balance[tokens[x].string]){model.user.balance[tokens[x].string] = parseInt(model.user.balance[tokens[x].string]) + parseFloat(model.amount);}
+							else{model.user.balance[tokens[x].string] = parseFloat(model.amount);}
+							User.update({id:model.user.id}, {balance:model.user.balance}).then(function(user){console.log('USER BALANCE UPDATED', tokens[x].string);});
 						}
 					});
-				})(tokenString);
+				})(tokens, x);
 			}
-
 			//UPDATE BALANCE AND REP ETC
 			//UPDATE TOTAL WORK
 			//ALWAYS UPDATE BALANCE MAPPING
 			model.user.totalWork = parseInt(model.user.totalWork) + parseInt(model.amount);
 			User.update({id:model.user.id}, {totalWork:model.user.totalWork}).then(function(user){});
-
 		};
 
-		//FACTOR TO RETURN TOKEN MODEL 
-		function getProtocolTokens(model){
-			var timeProtocolTokens = [
-				'CRE8', 
-				'CRE8+TIME', 
-				'CRE8+TIME+'+model.id
-			];
-			return timeProtocolTokens;
+		function getTokens(model){
+			var tokens = [{
+				string:'CRE8',
+				associatedModels:[{type:'MEMBER', id:model.user.id}],
+				amount:model.amount
+			},{
+				string:'CRE8+TIME',
+				associatedModels:[{type:'MEMBER', id:model.user.id}],
+				amount:model.amount
+			},{
+				string:'CRE8+TIME+'+model.id,
+				associatedModels:[{type:'MEMBER', id:model.user.id}],
+				amount:model.amount
+			}];
+			return tokens;
 		};
 
 		var model = {
 			model: 'TIME',
-
 			amount: req.param('amount'),
-
 			content: req.param('content'),
-
 			stream: req.param('stream'),
 			source: req.param('source'), 
 			startTime: req.param('startTime'),
-
 			context: req.param('context'),
-
 			//UNIFY
 			user: req.param('user'),
 			creator: req.param('user'),
-		
 			data:{apps:{reactions:{plus:0,minus:0},attention:{general:0}}}
-
 		};
 
 		model.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
@@ -300,14 +296,18 @@ module.exports = {
 			.exec(function(err, time) {
 				if (err) {return console.log(err);}
 				else {
+
 					time.associatedModels = req.param('associatedModels');
 					time.user = userModels[0];
 					Time.publish([time.id], {verb: 'create', data: time});
+
 					createEvent(time);
 					createNotification(time);
 					createValidation(time);
-					mintTokens(time);
+					createTokens(time);
+
 					res.json(time);
+
 				}
 			});
 		});

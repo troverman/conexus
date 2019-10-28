@@ -1457,7 +1457,7 @@ angular.module("connection/index.tpl.html", []).run(["$templateCache", function(
     "	                </div>\n" +
     "			        <div style=\"margin-top: auto;margin-bottom: auto;text-align:center\">\n" +
     "			        	<div style=\"padding:15px\">\n" +
-    "			            	<h1 style=\"font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;\">{{connection.title}}</h1>\n" +
+    "			            	<h1 style=\"font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\">{{connection.title}}</h1>\n" +
     "			            	<h5 style=\"color:white\">Connection</h5>\n" +
     "			            	<h5 style=\"color:white\">{{connection.id}}</h5>\n" +
     "			            </div>\n" +
@@ -1487,13 +1487,12 @@ angular.module("connection/index.tpl.html", []).run(["$templateCache", function(
     "        		<span style=\"display:inline\" ng-bind-html=\"renderContent(connection.description)\"></span>\n" +
     "				<div class=\"spacing-10\"></div>\n" +
     "\n" +
+    "				<!--\n" +
     "				<h4>Information</h4>\n" +
     "				<p>{{connection.information}}</p>\n" +
     "				<div class=\"spacing-10\"></div>\n" +
-    "\n" +
-    "				<!--<h4>Parameters</h4>\n" +
-    "				<div class=\"spacing-10\"></div>-->\n" +
-    "\n" +
+    "				-->\n" +
+    "				\n" +
     "				<h4>Context</h4>\n" +
     "				<!--CHANGE TO CONTEXT -->\n" +
     "				<!--THE ANSWER IS ALWASY BOTH-->\n" +
@@ -1503,35 +1502,38 @@ angular.module("connection/index.tpl.html", []).run(["$templateCache", function(
     "				<!--DEFINES SPECIFIC CONTEXT.. -->\n" +
     "				<!--\n" +
     "				context:{	\n" +
-    "\n" +
     "					context:{\n" +
     "						string:int\n" +
     "					},\n" +
-    "\n" +
     "					parameterField1:parameterValue1,\n" +
     "					...\n" +
     "					.\n" +
     "\n" +
     "				}\n" +
     "				-->\n" +
+    "				<div hljs hljs-language=\"javascript\"  hljs-source=\"parameters\"></div>\n" +
     "				<div class=\"spacing-10\"></div>\n" +
     "\n" +
     "				<h4>Mapping</h4>\n" +
     "				{{connection.parameters.attributes}}\n" +
+    "				<!--IE REPUTATION-->\n" +
     "				<div class=\"spacing-10\"></div>\n" +
     "\n" +
     "				<h4>Logic</h4>\n" +
     "				{{connection.parameters.logic}}\n" +
+    "				<highchart config=\"chart\"></highchart>\n" +
+    "				<!--IE MULTIPLICITIVE-->\n" +
     "				<div class=\"spacing-10\"></div>\n" +
     "\n" +
     "				<h4>Reduction</h4>\n" +
     "				{{connection.parameters.reduction}}\n" +
+    "				<!--DEFINE AS SIMPLE 'GRAMMER' ; see CONTEXT FREE GRAMMER-->\n" +
     "				<div class=\"spacing-10\"></div>\n" +
     "\n" +
     "				<h4>Rules</h4>\n" +
     "				<h5>Acceptance</h5>\n" +
+    "				<!--THRESHOLD-->\n" +
     "				<div class=\"spacing-10\"></div>\n" +
-    "\n" +
     "				\n" +
     "			</div>\n" +
     "			<div class=\"card-footer\">\n" +
@@ -5431,7 +5433,7 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                        </form>\n" +
     "                        <div ng-show=\"balanceLookupValue !== undefined\">\n" +
     "                            <h5>\n" +
-    "                                <img style=\"border-radius:100%;height:32px;padding-right:5px;\" ng-src=\"http://identicon-1132.appspot.com/{{balanceLook}}?s=8&p=8&f=png\">\n" +
+    "                                <img style=\"border-radius:100%;height:32px;padding-right:5px;\" ng-src=\"http://identicon-1132.appspot.com/{{balanceLook.split('+').join('').split('-').join('')}}?s=8&p=8&f=png\">\n" +
     "                                <a href=\"market/{{balanceLook}}\" ui-sref=\"market({id:balanceLook})\">{{balanceLook}}</a>: {{balanceLookupValue}}\n" +
     "                            </h5>\n" +
     "                        </div>\n" +
@@ -5445,7 +5447,11 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "                            </thead>\n" +
     "                            <tbody>\n" +
     "                                <tr ng-repeat=\"item in sortableSet\">\n" +
-    "                                    <td><img style=\"border-radius:100%;height:32px;padding-right:5px;\" ng-src=\"http://identicon-1132.appspot.com/{{item[0]}}?s=8&p=8&f=png\"><a href=\"market/{{item[0]}}\" ui-sref=\"market({id:item[0]})\">{{item[0]}}</a></td>\n" +
+    "                                    <td>\n" +
+    "                                        <a href=\"market/{{item[0]}}\" ui-sref=\"market({id:item[0]})\">\n" +
+    "                                            <img style=\"border-radius:100%;height:32px;padding-right:5px;\" ng-src=\"http://identicon-1132.appspot.com/{{item[0].split('+').join('').split('-').join('')}}?s=8&p=8&f=png\">{{item[0]}}\n" +
+    "                                        </a>\n" +
+    "                                    </td>\n" +
     "                                    <td>{{item[1]}}</td>\n" +
     "                                </tr>\n" +
     "                            </tbody>\n" +
@@ -5457,14 +5463,24 @@ angular.module("home/templates/feed.tpl.html", []).run(["$templateCache", functi
     "            <!--MODIFIED FEED FORMAT WITH CARDS.. TO START THE ACTION -->\n" +
     "            <!--ACTIONS AND CREATES -->\n" +
     "            <div ng-if=\"selectedTab =='SUGGESTIONS'\">\n" +
-    "                <div class=\"card\" ng-repeat=\"item in suggestions\">\n" +
+    "                <div class=\"card\" ng-repeat=\"item in suggestions\" ng-click=\"$event.stopPropagation();cardDetailToggle(item)\">\n" +
+    "                    <div style=\"background:url('https://source.unsplash.com/1600x900/?{{item.tags}}');min-height:auto\" class=\"imageContainerSmall\">\n" +
+    "                        <div style=\"background:rgba(0,0,0,0.75);height:auto\" class=\"imageContainerSmallDiv\">  \n" +
+    "                            <div style=\"text-align:right;padding:15px;position:absolute;right:0\"><a style=\"color:white;\"><i class=\"fas fa-chevron-down\"></i></a></div> \n" +
+    "                            <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
+    "                                <div style=\"width:100%;padding:15px\">\n" +
+    "                                    <h1 ng-click=\"$event.stopPropagation();\" style=\"text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;\"><a style=\"color:white\" href=\"{{item.model.toLowerCase()}}/{{item.id}}\">{{item.title}}</a></h1>\n" +
+    "                                </div>\n" +
+    "                            </div>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
     "                    <div style=\"padding:16px\">\n" +
-    "                        <h3><a href=\"{{item.model.toLowerCase()}}/{{item.id}}\">{{item.title}}</a></h3>\n" +
     "                        <p>{{item.description}}</p>\n" +
-    "                        <!--<button class=\"btn btn-default log-btn\" ng-click=\"shuffleSuggestions()\">Create</button>-->\n" +
     "                    </div>\n" +
     "                </div>\n" +
-    "                <div class=\"card\"><button class=\"btn btn-default log-btn\" ng-click=\"shuffleSuggestions()\">More</button></div>\n" +
+    "\n" +
+    "                <div class=\"card\"><button class=\"btn btn-default log-btn\" ng-click=\"shuffleArray(suggestions)\">More</button></div>\n" +
+    "\n" +
     "            </div>\n" +
     "\n" +
     "            <!--PAST SUMMARY; UPCOMING SCHEDULE-->\n" +
@@ -8267,6 +8283,8 @@ angular.module("nav/templates/createConnection.tpl.html", []).run(["$templateCac
     "                <p>App Imports</p>\n" +
     "                <!--edit, self..-->\n" +
     "                <!--COINTINS A MAPPING SPACE KERNEL-->\n" +
+    "                <!--STEP UP-->\n" +
+    "                <!--MOST OF THIS COMES AUTOMATICALLY; DONT FORCE-->\n" +
     "                <tags-input min-length=\"1\" placeholder=\"Mappings\" ng-model=\"newConnection.parameters.mapping\">\n" +
     "                    <auto-complete source=\"loadAssociations($query)\"></auto-complete>\n" +
     "                </tags-input>\n" +
@@ -11557,7 +11575,7 @@ angular.module("project/templates/charter.tpl.html", []).run(["$templateCache", 
   $templateCache.put("project/templates/charter.tpl.html",
     "<div class=\"row\">\n" +
     "    <div ng-if=\"connections.length == 0\">\n" +
-    "        <div class=\"card\"><button class=\"btn btn-default log-btn\" ng-click=\"connectionToggle()\">+ Connection</button></div>\n" +
+    "        <div class=\"card\"><button class=\"btn btn-default log-btn\" ng-click=\"connectionToggle(project)\">+ Connection</button></div>\n" +
     "        <div class=\"card\"><div style=\"padding:16px;\"><span style=\"color:gray\">There's nothing here..</span></div></div>\n" +
     "        <!--NEED A PLACE TO DISCOVER OR RECCOMEND-->\n" +
     "    </div>\n" +
@@ -11571,7 +11589,7 @@ angular.module("project/templates/charter.tpl.html", []).run(["$templateCache", 
     "            <div style=\"clear:both\"></div>\n" +
     "        </ul>\n" +
     "        <div class=\"card mobileFix\"><tags-input class=\"\" style=\"border:0px;flex-grow:2;\" min-length=\"1\" placeholder=\"Search\" ng-model=\"searchQuery\"></tags-input></div>\n" +
-    "        <div class=\"card\"><button class=\"btn btn-default log-btn\" ng-click=\"connectionToggle()\">+ Connection</button></div>\n" +
+    "        <div class=\"card\"><button class=\"btn btn-default log-btn\" ng-click=\"connectionToggle(project)\">+ Connection</button></div>\n" +
     "        <div ng-repeat=\"item in connections\"><div ng-include=\"'templates/cards/connectionCard.tpl.html'\"></div></div>\n" +
     "    </div>\n" +
     "</div>\n" +

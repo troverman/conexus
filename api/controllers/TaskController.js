@@ -116,27 +116,7 @@ module.exports = {
 			});
 		}
 
-		//TODO: DEPRECIATE
-		else if(req.query.search){
-			Task.find()
-			.where({
-				or: [
-					{content: {contains: search}},
-					{tags: {contains: search}},
-					{title: {contains: search}},
-					{user: {contains: search}}
-				]
-			})
-			.limit(limit)
-			.skip(skip)
-			.sort(sort)
-			.populate('user')
-			.then(function(models) {
-				Task.subscribe(req, models);
-				res.json(models);
-			});	
-		}
-
+		//DEPERCIATE
 		else if (req.query.tag){
 			Task.find({tags:{contains: tag}})
 			.limit(limit)
@@ -156,8 +136,6 @@ module.exports = {
 				});
 			});
 		}
-
-
 
  		//STUDY THIS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
  		//QUERY FOR MEMBER-MEMBER

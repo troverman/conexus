@@ -128,6 +128,8 @@ module.exports = {
 	//TODO: UPDATE
 	getData: function(req){
 
+		console.log('FITBIT APP!')
+
 		//TODO: DEPRECIATE.. 
 		//TODO: PASS USER OBJ THRU FXNs
 		const userIdTemp = req.id;
@@ -195,6 +197,8 @@ module.exports = {
 					//fitbitApp.tokens.tempTokenMintProofOfConcept(tokens);
 				});	
 				
+
+				//SCALING ON HEARTRATE
 				/*
 				fitbitApp.get.heart(model).then(function(activity) {
 
@@ -497,7 +501,6 @@ module.exports = {
 	//INITIAL CONNECT
 	connect: function(req){
 		//INTI WITH 1 yr
-
 	},
 
 	//TODO: OAUTH2

@@ -23,7 +23,7 @@ module.exports = {
 			.skip(skip)
 			.sort(sort)
 			.then(function(models) {
-				Token.subscribe(req, [models[0].id]);
+				//Token.subscribe(req, [models[0].id]);
 				res.json(models);
 			});
 		}

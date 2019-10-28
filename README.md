@@ -15,7 +15,7 @@
 > - Proof of Attention. Proof of Intention. Governance as Data Connection Protocols. Democratic & Reputation Weighted Governance.
 
 ## Asset Balance Mapping
-> Multidimensional Asset data-structures with balances specified by string identifiers create emergent properties within cryptoeconomic systems that introduce valuable approaches to mechanism design. Hashed Data String Assets are Emergent.
+> Multidimensional Asset data-structures with balances specified by string identifiers create emergent properties within cryptoeconomic systems that introduce valuable approaches to mechanism design. Hashed Data String Assets are Emergent economic systems.
 
 ## [Application Design](https://www.cre8.xyz/apps)
 > Applications are a set of modular protocols which plug into an asset string space. Application creation and collaboration is facilitated though [projects](https://www.cre8.xyz/projects).
@@ -86,8 +86,8 @@
 ```javascript
 var query = [{
     filter:[{
-        model:'Association, Task, Project',
-        modelParam:'association, id, location, query, tag, ...',
+        type:'Association, Task, Project',
+        parameter:'association, id, location, query, tag, ...',
         query:'query',
         association:{
             population:'boolean',

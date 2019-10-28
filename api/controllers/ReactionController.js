@@ -3,131 +3,24 @@ const crypto = require('crypto');
 
 module.exports = {
 
-	//HYBRID UPGRADE
-	//DATA MODEL HERE
-	dataModels: [
-        {
-            title: 'Reaction',
-            attributes: {
-		        model: {type: 'string', defaultsTo: 'REACTION'},
-		        amount: {type: 'string'},
-		        type: {type: 'string'},
-		        user: {model: 'user'},
-		        associatedModels: {type: 'json'},
-		        data: {type: 'json'},  
-		    },
-        }
-    ],
-
-    //DEFINE PERMISSIONS (AND (2nd order-self connection) MODEL)
-    //DEFAULT CONNECTIONS HERE/ INIT
-    connections:[
-        {id:1, title:'APP META CONNECTION', type:'CONNECTION'},
-        {id:2, title:'APP SELF CONNECTION', type:'SELF'},
-        {id:3, title:'APP APP CONNECTION', type:'APP'},
-        {id:4, title:'APP MEMBER', type:'MEMBER'},
-    ],
+	//import: { request: require('crypto') },
+	connections:[],
+	//type CRE8_REACTION
+	dataModel:[],
+	language: 'Javascript',
+	compiler:'V8',
+	tokens:{},
 
 	get: function(req, res) {
-
 		var limit = req.query.limit;
 		var skip = req.query.skip;
 		var sort = req.query.sort;
-
 		console.log('GET REACTION', req.query);
-
-		if(req.query.id){
-			var id = req.query.id;
-			Reaction.find({id:id})
-			.limit(limit)
-			.skip(skip)
-			.sort(sort)
-			.populate('user')
-			.then(function(models) {
-				Reaction.subscribe(req, models);
-				res.json(models[0]);
-			});
-		}
-
-		if(req.query.user){
-			var user = req.query.user;
-			Reaction.find({user:user})
-			.limit(limit)
-			.skip(skip)
-			.sort(sort)
-			.populate('user')
-			.then(function(models) {
-				Reaction.subscribe(req, models);
-				res.json(models);
-			});
-		}
-
-		else{res.json([]);}
-
 	},
 
 	create: function (req, res) {
 
-		function createNotification(notificationModel){
-			Notification.create(notificationModel).then(function(model){
-				console.log('CREATE NOTIFICATION', model);
-				Notification.publish([model.id], {verb: 'create', data: model});
-			});
-		};
-
-		function mintTokens(model){
-			var protocolTokens = getProtocolTokens(model);
-			for (x in protocolTokens){
-				//CREATE AND UPDATE TOKEN STRUCT
-				(function(protocolTokens, x) {
-					Token.find({string:protocolTokens[x].tokenString}).then(function(tokenModels){
-						if (tokenModels.length == 0){
-							var newTokenModel = {
-								string:protocolTokens[x].tokenString,
-								protocols:[
-									'CRE8',
-									'REACTION'
-								], 
-								information:{
-									inCirculation:protocolTokens[x].amount, 
-									markets:0
-								},
-								logic:{
-									transferrable:true, 
-									mint:'CREATE REACTION'
-								}
-							};
-							Token.create(newTokenModel).then(function(model){
-								console.log('TOKEN CREATED', model.string);
-							});
-						}
-						else{
-							tokenModels[0].information.inCirculation = parseInt(tokenModels[0].information.inCirculation) + parseFloat(protocolTokens[x].amount); 
-							Token.update({id:tokenModels[0].id}, {information:tokenModels[0].information}).then(function(model){
-								console.log('TOKENS IN CIRCULATION UPDATED:', model[0].string)
-							});
-						}
-					});
-				})(protocolTokens, x);
-
-				//TODO: UPDATE BASED ON AGENT
-
-			}
-
-			//TODO: REFACTOR
-			//TODO: DEPRECIATE '.USER'
-			//TODO: APPRECIATE 'CREATOR / MEMBMER' ASSOCIATION (CONNECTIONS DEFINED IN APP TOO AKA HERE!)
-			//UPDATE MULTIPLE AGENTS
-			for (x in protocolTokens){
-				if (!model.user.balance[protocolTokens[x].tokenString]){model.user.balance[protocolTokens[x].tokenString] = 0}
-				model.user.balance[protocolTokens[x].tokenString] = parseInt(model.user.balance[protocolTokens[x].tokenString]) + parseFloat(model.amount);
-			}
-			User.update({id:model.user.id}, {balance:model.user.balance}).then(function(userModel){});
-			updateAssociatedModels(model, protocolTokens);
-
-		};
-
-		function getProtocolTokens(model){
+		function getTokens(model){
 
 			//json struct for token distribution
 			//ASSOCIATIONS ARE KEY
@@ -148,10 +41,10 @@ module.exports = {
 			//TODO: CREATOR AND RECIEVER AND TYPE
 			//TODO: VERBS? VIA AGENTS
 
-			//protocolTokens.push('CRE8+REACTION+CREATE+'+Object.keys(model.amountSet)[x]);
-			//protocolTokens.push('CRE8+REACTION+SEND+'+Object.keys(model.amountSet)[x]+'+TO+'+model.to.id);
+			//tokens.push('CRE8+REACTION+CREATE+'+Object.keys(model.amountSet)[x]);
+			//tokens.push('CRE8+REACTION+SEND+'+Object.keys(model.amountSet)[x]+'+TO+'+model.to.id);
 			
-			var protocolTokens = [
+			var tokens = [
 				{
 					tokenString:'CRE8',
 					associatedModels:[
@@ -199,7 +92,7 @@ module.exports = {
 			var hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
 			var prefix = 'CRE8+REACTION';
 			var hashString = prefix+'+'+hash;
-			protocolTokens.push({
+			tokens.push({
 				tokenString:hashString,
 				associatedModels:[{type:'MEMBER', id:model.user.id}],
 				amount:model.amount
@@ -212,20 +105,79 @@ module.exports = {
 				var hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(data)).digest('hex');
 				var prefix = 'CRE8+REACTION';
 				var flatObjString = prefix+'+'+hash;
-				protocolTokens.push({
+				tokens.push({
 					tokenString:flatObjString,
 					associatedModels:[{type:'MEMBER', id:model.user.id}],
 					amount:model.amount
 				});
 			};
 
-			return protocolTokens;
+			return tokens;
 		};
+
+		function createTokens(model){
+			var tokens = getTokens(model);
+			for (x in tokens){
+				//CREATE AND UPDATE TOKEN STRUCT
+				(function(tokens, x) {
+					Token.find({string:tokens[x].tokenString}).then(function(tokenModels){
+						if (tokenModels.length == 0){
+							var newTokenModel = {
+								string:tokens[x].tokenString,
+								protocols:[
+									'CRE8',
+									'REACTION'
+								], 
+								information:{
+									inCirculation:tokens[x].amount, 
+									markets:0
+								},
+								logic:{
+									transferrable:true, 
+									mint:'CREATE REACTION'
+								}
+							};
+							Token.create(newTokenModel).then(function(model){
+								console.log('TOKEN CREATED', model.string);
+							});
+						}
+						else{
+							tokenModels[0].information.inCirculation = parseInt(tokenModels[0].information.inCirculation) + parseFloat(tokens[x].amount); 
+							Token.update({id:tokenModels[0].id}, {information:tokenModels[0].information}).then(function(model){
+								console.log('TOKENS IN CIRCULATION UPDATED:', model[0].string)
+							});
+						}
+					});
+				})(tokens, x);
+				//TODO: UPDATE BASED ON AGENT
+			}
+
+			//TODO: REFACTOR
+			//TODO: DEPRECIATE '.USER'
+			//TODO: APPRECIATE 'CREATOR / MEMBMER' ASSOCIATION (CONNECTIONS DEFINED IN APP TOO AKA HERE!)
+			//UPDATE MULTIPLE AGENTS
+			for (x in tokens){
+				if (!model.user.balance[tokens[x].tokenString]){model.user.balance[tokens[x].tokenString] = 0}
+				model.user.balance[tokens[x].tokenString] = parseInt(model.user.balance[tokens[x].tokenString]) + parseFloat(model.amount);
+			}
+			User.update({id:model.user.id}, {balance:model.user.balance}).then(function(userModel){});
+			updateAssociatedModels(model, tokens);
+		};
+
+		function createNotification(notificationModel){
+			Notification.create(notificationModel).then(function(model){
+				console.log('CREATE NOTIFICATION', model);
+				Notification.publish([model.id], {verb: 'create', data: model});
+			});
+		};
+
+		function createValidation(model){};
+		function createAssociation(model){};
 
 		//TODO: REFACTOR
 		//TOOD: BALANCES AND TOKENS UNITY
 		//FOR ALL APPS THAT IMPORT REACTIONS; inclue helpercode
-		function updateAssociatedModels(model, protocolTokens){
+		function updateAssociatedModels(model, tokens){
 			for (x in model.associatedModels){
 				if (model.associatedModels[x].type == 'APP'){
 					App.find({id:model.associatedModels[x].id}).then(function(newModel){
@@ -233,9 +185,9 @@ module.exports = {
 						if (!newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = 0;}
 						newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);
 						if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
-						for (y in protocolTokens){
-							if (!newModel[0].data.apps.tokens[protocolTokens[y].tokenString]){newModel[0].data.apps.tokens[protocolTokens[y].tokenString] = 0;}
-							newModel[0].data.apps.tokens[protocolTokens[y].tokenString] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y].tokenString]) + parseInt(model.amount);
+						for (y in tokens){
+							if (!newModel[0].data.apps.tokens[tokens[y].tokenString]){newModel[0].data.apps.tokens[tokens[y].tokenString] = 0;}
+							newModel[0].data.apps.tokens[tokens[y].tokenString] = parseInt(newModel[0].data.apps.tokens[tokens[y].tokenString]) + parseInt(model.amount);
 						}
 						App.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){
 							App.publish([newModel[0].id], {verb:'update', data: newModel[0]});
@@ -249,9 +201,9 @@ module.exports = {
 						if (!newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = 0;}
 						newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);
 						if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
-						for (y in protocolTokens){
-							if (!newModel[0].data.apps.tokens[protocolTokens[y].tokenString]){newModel[0].data.apps.tokens[protocolTokens[y].tokenString] = 0;}
-							newModel[0].data.apps.tokens[protocolTokens[y].tokenString] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y].tokenString]) + parseInt(model.amount);
+						for (y in tokens){
+							if (!newModel[0].data.apps.tokens[tokens[y].tokenString]){newModel[0].data.apps.tokens[tokens[y].tokenString] = 0;}
+							newModel[0].data.apps.tokens[tokens[y].tokenString] = parseInt(newModel[0].data.apps.tokens[tokens[y].tokenString]) + parseInt(model.amount);
 						}
 						Action.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){
 							Action.publish([newModel[0].id], {verb:'update', data: newModel[0]});
@@ -281,9 +233,9 @@ module.exports = {
 						if (!newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = 0;}
 						newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);
 						if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
-						for (y in protocolTokens){
-							if (!newModel[0].data.apps.tokens[protocolTokens[y].tokenString]){newModel[0].data.apps.tokens[protocolTokens[y].tokenString] = 0;}
-							newModel[0].data.apps.tokens[protocolTokens[y].tokenString] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y].tokenString]) + parseInt(model.amount);
+						for (y in tokens){
+							if (!newModel[0].data.apps.tokens[tokens[y].tokenString]){newModel[0].data.apps.tokens[tokens[y].tokenString] = 0;}
+							newModel[0].data.apps.tokens[tokens[y].tokenString] = parseInt(newModel[0].data.apps.tokens[tokens[y].tokenString]) + parseInt(model.amount);
 						}
 
 						Association.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){
@@ -313,9 +265,9 @@ module.exports = {
 						if (!newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = 0;}
 						newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);
 						if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
-						for (y in protocolTokens){
-							if (!newModel[0].data.apps.tokens[protocolTokens[y].tokenString]){newModel[0].data.apps.tokens[protocolTokens[y].tokenString] = 0;}
-							newModel[0].data.apps.tokens[protocolTokens[y].tokenString] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y].tokenString]) + parseInt(model.amount);
+						for (y in tokens){
+							if (!newModel[0].data.apps.tokens[tokens[y].tokenString]){newModel[0].data.apps.tokens[tokens[y].tokenString] = 0;}
+							newModel[0].data.apps.tokens[tokens[y].tokenString] = parseInt(newModel[0].data.apps.tokens[tokens[y].tokenString]) + parseInt(model.amount);
 						}
 						Connection.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){
 							Connection.publish([newModel[0].id], {verb:'update', data: newModel[0]});
@@ -333,9 +285,9 @@ module.exports = {
 
 						//TOKENS
 						if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
-						for (y in protocolTokens){
-							if (!newModel[0].data.apps.tokens[protocolTokens[y].tokenString]){newModel[0].data.apps.tokens[protocolTokens[y].tokenString] = 0;}
-							newModel[0].data.apps.tokens[protocolTokens[y].tokenString] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y].tokenString]) + parseInt(model.amount);
+						for (y in tokens){
+							if (!newModel[0].data.apps.tokens[tokens[y].tokenString]){newModel[0].data.apps.tokens[tokens[y].tokenString] = 0;}
+							newModel[0].data.apps.tokens[tokens[y].tokenString] = parseInt(newModel[0].data.apps.tokens[tokens[y].tokenString]) + parseInt(model.amount);
 						}
 
 						Content.update({id:newModel[0].id}, {data:newModel[0].data}).then(function(newModel){
@@ -369,9 +321,9 @@ module.exports = {
 						if (!newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = 0;}
 						newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);
 						if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
-						for (y in protocolTokens){
-							if (!newModel[0].data.apps.tokens[protocolTokens[y].tokenString]){newModel[0].data.apps.tokens[protocolTokens[y].tokenString] = 0;}
-							newModel[0].data.apps.tokens[protocolTokens[y].tokenString] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y].tokenString]) + parseInt(model.amount);
+						for (y in tokens){
+							if (!newModel[0].data.apps.tokens[tokens[y].tokenString]){newModel[0].data.apps.tokens[tokens[y].tokenString] = 0;}
+							newModel[0].data.apps.tokens[tokens[y].tokenString] = parseInt(newModel[0].data.apps.tokens[tokens[y].tokenString]) + parseInt(model.amount);
 						}
 						Item.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){
 							Item.publish([newModel[0].id], {verb:'update', data: newModel[0]});
@@ -400,9 +352,9 @@ module.exports = {
 						if (!newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = 0;}
 						newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);
 						if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
-						for (y in protocolTokens){
-							if (!newModel[0].data.apps.tokens[protocolTokens[y].tokenString]){newModel[0].data.apps.tokens[protocolTokens[y].tokenString] = 0;}
-							newModel[0].data.apps.tokens[protocolTokens[y].tokenString] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y].tokenString]) + parseInt(model.amount);
+						for (y in tokens){
+							if (!newModel[0].data.apps.tokens[tokens[y].tokenString]){newModel[0].data.apps.tokens[tokens[y].tokenString] = 0;}
+							newModel[0].data.apps.tokens[tokens[y].tokenString] = parseInt(newModel[0].data.apps.tokens[tokens[y].tokenString]) + parseInt(model.amount);
 						}
 						Order.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){
 							Order.publish([newModel[0].id], {verb:'update', data: newModel[0]});
@@ -431,9 +383,9 @@ module.exports = {
 						if (!newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = 0;}
 						newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);
 						if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
-						for (y in protocolTokens){
-							if (!newModel[0].data.apps.tokens[protocolTokens[y].tokenString]){newModel[0].data.apps.tokens[protocolTokens[y].tokenString] = 0;}
-							newModel[0].data.apps.tokens[protocolTokens[y].tokenString] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y].tokenString]) + parseInt(model.amount);
+						for (y in tokens){
+							if (!newModel[0].data.apps.tokens[tokens[y].tokenString]){newModel[0].data.apps.tokens[tokens[y].tokenString] = 0;}
+							newModel[0].data.apps.tokens[tokens[y].tokenString] = parseInt(newModel[0].data.apps.tokens[tokens[y].tokenString]) + parseInt(model.amount);
 						}
 						Reaction.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){
 							Reaction.publish([newModel[0].id], {verb:'update', data: newModel[0]});
@@ -462,9 +414,9 @@ module.exports = {
 						if (!newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = 0;}
 						newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);
 						if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
-						for (y in protocolTokens){
-							if (!newModel[0].data.apps.tokens[protocolTokens[y].tokenString]){newModel[0].data.apps.tokens[protocolTokens[y].tokenString] = 0;}
-							newModel[0].data.apps.tokens[protocolTokens[y].tokenString] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y].tokenString]) + parseInt(model.amount);
+						for (y in tokens){
+							if (!newModel[0].data.apps.tokens[tokens[y].tokenString]){newModel[0].data.apps.tokens[tokens[y].tokenString] = 0;}
+							newModel[0].data.apps.tokens[tokens[y].tokenString] = parseInt(newModel[0].data.apps.tokens[tokens[y].tokenString]) + parseInt(model.amount);
 						}
 						Task.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){
 							Task.publish([newModel[0].id], {verb:'update', data: newModel[0]});
@@ -495,9 +447,9 @@ module.exports = {
 						if (!newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = 0;}
 						newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);
 						if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
-						for (y in protocolTokens){
-							if (!newModel[0].data.apps.tokens[protocolTokens[y].tokenString]){newModel[0].data.apps.tokens[protocolTokens[y].tokenString] = 0;}
-							newModel[0].data.apps.tokens[protocolTokens[y].tokenString] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y].tokenString]) + parseInt(model.amount);
+						for (y in tokens){
+							if (!newModel[0].data.apps.tokens[tokens[y].tokenString]){newModel[0].data.apps.tokens[tokens[y].tokenString] = 0;}
+							newModel[0].data.apps.tokens[tokens[y].tokenString] = parseInt(newModel[0].data.apps.tokens[tokens[y].tokenString]) + parseInt(model.amount);
 						}
 						Time.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){
 							Time.publish([newModel[0].id], {verb:'update', data: newModel[0]});
@@ -526,9 +478,9 @@ module.exports = {
 						if (!newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = 0;}
 						newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);
 						if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
-						for (y in protocolTokens){
-							if (!newModel[0].data.apps.tokens[protocolTokens[y].tokenString]){newModel[0].data.apps.tokens[protocolTokens[y].tokenString] = 0;}
-							newModel[0].data.apps.tokens[protocolTokens[y].tokenString] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y].tokenString]) + parseInt(model.amount);
+						for (y in tokens){
+							if (!newModel[0].data.apps.tokens[tokens[y].tokenString]){newModel[0].data.apps.tokens[tokens[y].tokenString] = 0;}
+							newModel[0].data.apps.tokens[tokens[y].tokenString] = parseInt(newModel[0].data.apps.tokens[tokens[y].tokenString]) + parseInt(model.amount);
 						}
 						Transaction.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){
 							Transaction.publish([newModel[0].id], {verb:'update', data: newModel[0]});
@@ -557,9 +509,9 @@ module.exports = {
 						if (!newModel[0].data.apps.reactions[model.type]){newModel[0].data.apps.reactions[model.type] = 0;}
 						newModel[0].data.apps.reactions[model.type] = parseInt(newModel[0].data.apps.reactions[model.type]) + parseInt(model.amount);
 						if (!newModel[0].data.apps.tokens){newModel[0].data.apps.tokens = {};}
-						for (y in protocolTokens){
-							if (!newModel[0].data.apps.tokens[protocolTokens[y].tokenString]){newModel[0].data.apps.tokens[protocolTokens[y].tokenString] = 0;}
-							newModel[0].data.apps.tokens[protocolTokens[y].tokenString] = parseInt(newModel[0].data.apps.tokens[protocolTokens[y].tokenString]) + parseInt(model.amount);
+						for (y in tokens){
+							if (!newModel[0].data.apps.tokens[tokens[y].tokenString]){newModel[0].data.apps.tokens[tokens[y].tokenString] = 0;}
+							newModel[0].data.apps.tokens[tokens[y].tokenString] = parseInt(newModel[0].data.apps.tokens[tokens[y].tokenString]) + parseInt(model.amount);
 						}
 						Validation.update({id:newModel[0].id},{data:newModel[0].data}).then(function(){
 							Validation.publish([newModel[0].id], {verb:'update', data: newModel[0]});
@@ -592,28 +544,29 @@ module.exports = {
 			user: req.param('user'),
 			data:{apps:{reactions:{plus:0,minus:0},attention:{general:0}}}
 		};
+
 		model.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
 
 		Reaction.create(model)
 		.exec(function(err, reaction) {
 			if (err) {return console.log(err);}
 			else {
-
-
 				//TODO: AGNOSTIC DATA / APP
 				User.find({id:model.user}).then(function(userModel){
 					
 					reaction.associatedModels = req.param('associatedModels'),
 					reaction.user = userModel[0];
+					
 					Reaction.publish([reaction.id], {verb:'create', data: reaction});
-					mintTokens(reaction);
+
+					createTokens(reaction);
 
 					//TODO: CREATE VALIDATIONS / ASSOCIATIONS
 					//TODO: REFACTOR BASED ON AFTER CREATEASSOCIATION..
 						//DATA BASED ON CONNECTION. 
 
 					//TOKEN PROTOCLS IN ASSOCIATION...
-					//createValidation(itemModel);
+					//createValidation(reaction);
 
 					console.log('CREATE REACTION', reaction);
 					res.json(reaction);
@@ -621,8 +574,5 @@ module.exports = {
 				});
 			}
 		});
-
 	},
-
 };
-

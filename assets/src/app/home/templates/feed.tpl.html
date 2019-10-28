@@ -171,7 +171,7 @@
                         </form>
                         <div ng-show="balanceLookupValue !== undefined">
                             <h5>
-                                <img style="border-radius:100%;height:32px;padding-right:5px;" ng-src="http://identicon-1132.appspot.com/{{balanceLook}}?s=8&p=8&f=png">
+                                <img style="border-radius:100%;height:32px;padding-right:5px;" ng-src="http://identicon-1132.appspot.com/{{balanceLook.split('+').join('').split('-').join('')}}?s=8&p=8&f=png">
                                 <a href="market/{{balanceLook}}" ui-sref="market({id:balanceLook})">{{balanceLook}}</a>: {{balanceLookupValue}}
                             </h5>
                         </div>
@@ -185,7 +185,11 @@
                             </thead>
                             <tbody>
                                 <tr ng-repeat="item in sortableSet">
-                                    <td><img style="border-radius:100%;height:32px;padding-right:5px;" ng-src="http://identicon-1132.appspot.com/{{item[0]}}?s=8&p=8&f=png"><a href="market/{{item[0]}}" ui-sref="market({id:item[0]})">{{item[0]}}</a></td>
+                                    <td>
+                                        <a href="market/{{item[0]}}" ui-sref="market({id:item[0]})">
+                                            <img style="border-radius:100%;height:32px;padding-right:5px;" ng-src="http://identicon-1132.appspot.com/{{item[0].split('+').join('').split('-').join('')}}?s=8&p=8&f=png">{{item[0]}}
+                                        </a>
+                                    </td>
                                     <td>{{item[1]}}</td>
                                 </tr>
                             </tbody>
@@ -197,14 +201,24 @@
             <!--MODIFIED FEED FORMAT WITH CARDS.. TO START THE ACTION -->
             <!--ACTIONS AND CREATES -->
             <div ng-if="selectedTab =='SUGGESTIONS'">
-                <div class="card" ng-repeat="item in suggestions">
+                <div class="card" ng-repeat="item in suggestions" ng-click="$event.stopPropagation();cardDetailToggle(item)">
+                    <div style="background:url('https://source.unsplash.com/1600x900/?{{item.tags}}');min-height:auto" class="imageContainerSmall">
+                        <div style="background:rgba(0,0,0,0.75);height:auto" class="imageContainerSmallDiv">  
+                            <div style="text-align:right;padding:15px;position:absolute;right:0"><a style="color:white;"><i class="fas fa-chevron-down"></i></a></div> 
+                            <div style="margin-top: auto;margin-bottom: auto;">
+                                <div style="width:100%;padding:15px">
+                                    <h1 ng-click="$event.stopPropagation();" style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;"><a style="color:white" href="{{item.model.toLowerCase()}}/{{item.id}}">{{item.title}}</a></h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div style="padding:16px">
-                        <h3><a href="{{item.model.toLowerCase()}}/{{item.id}}">{{item.title}}</a></h3>
                         <p>{{item.description}}</p>
-                        <!--<button class="btn btn-default log-btn" ng-click="shuffleSuggestions()">Create</button>-->
                     </div>
                 </div>
-                <div class="card"><button class="btn btn-default log-btn" ng-click="shuffleSuggestions()">More</button></div>
+
+                <div class="card"><button class="btn btn-default log-btn" ng-click="shuffleArray(suggestions)">More</button></div>
+
             </div>
 
             <!--PAST SUMMARY; UPCOMING SCHEDULE-->

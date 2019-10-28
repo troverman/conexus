@@ -19,6 +19,7 @@ module.exports = {
 			.sort(sort)
         	.then(function(models){
         		//UPDATE TO APP DEFINED DATA MODEL
+        		//REPLACE TYPE WITH APP ID
         		var promises = [];
         		for (x in models){
 					if (models[x].model.type=='ACTION'){promises.push(Action.find({id:models[x].model.id}).then(function(models){return models[0]}))}

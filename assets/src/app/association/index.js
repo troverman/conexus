@@ -79,7 +79,6 @@ angular.module( 'conexus.association', [
         logic:'context[%context]*reputation[%context]'
     }, null, 4);
 
-
     //TODO: ABSTRACT TOKENS VS DISCRETE TOKENS IN MODEL BALANCE
         //MOEL BALANCE VS TOKENS :)
             //'TOKENS' MAPPING CAN BE ABSTRACT PROTOCOL
