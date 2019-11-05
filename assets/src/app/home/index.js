@@ -1215,7 +1215,7 @@ angular.module( 'conexus.home', [
                     {market:'UNIVERSAL', amount:1, direction:'SELL', collateral:{}}, //ASSOCIATION OWNES THE TOKENS IF COLLATERAL --> GIVES IT FLOW
                     {market:$rootScope.currentUser.username.toUpperCase(), amount:1, direction:'SELL'},
                     
-                    {market:'CRE8+TIME+'+model.model.toUpperCase()+'+'+model.id+'+ONMINT+SPONSOR+'+$rootScope.currentUser.id, amount:3600, direction:'BUY'},
+                    {market:'CRE8+TIME+'+model.id+'+ONMINT+SPONSOR+'+$rootScope.currentUser.id, amount:3600, direction:'BUY'},
 
                     //{market:'CRE8+TIME+LOVE+ONMINT+SPONSOR+'+$rootScope.currentUser.id, amount:3600, direction:'BUY'},
                     //{market:'CRE8+TIME+CREATIVITY+ONMINT+SPONSOR+'+$rootScope.currentUser.id, amount:3600, direction:'BUY'},
