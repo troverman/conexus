@@ -191,7 +191,7 @@ module.exports = {
 					{type:model.model, id:model.id},
 					associatedModelObj
 				];
-				for (y in model.associatedModels[x].context){newValidation.context[model.associatedModels[x].context[y].text] = model.associatedModels[x].context[y].score;}
+				for (y in model.associatedModels[x].context){newValidation.context[model.associatedModels[x].context[y].text] = model.associatedModels[x].context[y].score;}				
 				newValidation.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(newValidation)).digest('hex');
 				Validation.create(newValidation).then(function(newValidationModel){
 					console.log('CREATE VALIDATION', newValidationModel);
@@ -299,7 +299,7 @@ module.exports = {
 			if (err) {return console.log(err);}
 			else {
 				User.find({id:model.user}).then(function(userModels){
-					itemModel.associatedModels = req.param('associatedModels');
+					itemModel.associatedModels = req.param('associatedModels') || [];
 					itemModel.user = userModels[0];
 					Item.subscribe(req, [itemModel]);
 					Item.publish([itemModel.id], {verb: 'create', data: itemModel});
