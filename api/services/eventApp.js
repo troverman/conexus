@@ -1,4 +1,3 @@
-
 //CRE8.EVENT.ALPHA
 
 //recursive..
@@ -21,11 +20,41 @@ module.exports = {
 
 	connections:[
 		{
-			type:'connection', 
 			id:'self', 
-			params:{
-				//DATA MODEL.
-			}	
+			type:'connection', 	
+			connections:[{
+				id:'self'
+				type:'event',
+				params:{
+					//DATA MODEL 
+					// EVENT IS AN OBJECT WITH CONSENSUS INFO
+					id:'' //HASH OF THE DATA OBJECT
+
+					//COULD BE FOR PLUGIN CONSENSUS APP . . . 
+					//THE RESPECTIVE FORSET HASHES
+						//MULTI MERKEL ROOTS
+						//VARIENT CONSENSUS
+
+						//TODO: 
+						//CONSENSUS MECHENISM IS WRITTEN IN CREATE
+						//PARSE THE HASHES AND CONNECTION HASHES  . . .
+							//RES{	
+									//[]..score
+
+							//}	
+
+					//MULTIDIMESNIONAL CONSENSUS
+					connectionHashes:[],
+
+					//MAPPING OF ALL ATTENTION / VALIDATIONS & ACTIONS ON EVENT  . . . 
+					tokens:[],
+
+					//event data 
+					data:[],
+
+				},
+
+			}],
 		}
 	],
 

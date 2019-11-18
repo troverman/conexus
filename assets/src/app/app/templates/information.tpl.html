@@ -8,8 +8,21 @@
 <div class="spacing-10"></div>
 
 <div ng-if="currentUser" ng-click="$event.stopPropagation();">
+
+	<!--TODO: APP MEMBER CONNECTION-->
     <p><b>Enable</b></p>
-    <p>
     <md-switch ng-click="associateApp(app)" ng-model="app.isAssociated" aria-label="isAssociated"></md-switch>
-    <p>Custom Data Parameters and Configuration</p>
+	
+
+    {{memberConnections}}
+
+    <div ng-repeat="connection in memberConnections">
+    	{{connection}}
+    </div>
+
+    <!--BASED ON APP-MEMBER CONNECTION-->
+
+
+
+
 </div>
