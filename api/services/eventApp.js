@@ -23,12 +23,12 @@ module.exports = {
 			id:'self', 
 			type:'connection', 	
 			connections:[{
-				id:'self'
+				id:'self',
 				type:'event',
 				params:{
 					//DATA MODEL 
 					// EVENT IS AN OBJECT WITH CONSENSUS INFO
-					id:'' //HASH OF THE DATA OBJECT
+					id:'', //HASH OF THE DATA OBJECT
 
 					//COULD BE FOR PLUGIN CONSENSUS APP . . . 
 					//THE RESPECTIVE FORSET HASHES

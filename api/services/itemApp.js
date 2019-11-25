@@ -17,7 +17,7 @@ module.exports = {
 		id:'self',
 		connections:[{
 			type:'item',
-			id:'self'
+			id:'self',
 			connections:[{		
 
 			}]
@@ -33,7 +33,7 @@ module.exports = {
 		id:'self',
 		connections:[{
 			type:'item',
-			id:'self'
+			id:'self',
 			connections:[{	
 
 			params:{}	

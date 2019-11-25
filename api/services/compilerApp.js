@@ -1,14 +1,36 @@
-
 //CRE8.COMPILER.ALPHA
-//HELPER MODULE THAT RECIEVES STREAMING DATA 
 
 module.exports = {
 
-	//IMPORT GOOGLE APP! ( AND OTHER PROVIDERS (FOR HISTORICAL) -- ALLOW PERMISSIONS FOR LOCATION VIA NATIVE CALLS)
-		//BUILD IN CONTINGENCY CHECKS AS PLUGIN 
-			//PREVENT SPOOFING
+	//meta circular evaluator
 
-	//I KNOW IT'S POSSIBLE`
+	//eval loop
+		//point to language
+			//point to target 
+			//define types like function 
+				//re lisp eval 
+				//lisp is a data struct and code
+					//soo (a, b, eval ())
+
+
+	//TRAVERSE THE STRUCTURE OF CONNECTIONS 
+	traverse:function(connections, depth){
+		for (x in connections){
+			if (connections[x].connections){depth++;traverse(connections[x].connections, depth);}
+			else{
+
+				//init(connections[x]);
+
+			}
+		}
+	},
+
+	//NEW APPS FOR EACH GRAMMER
+	//grammer is a self connection with parameters of 
+	//nsymbol types --> 
+	grammer:{
+
+	},
 	
 	connections:[{
 		type:'connection', 
@@ -21,7 +43,7 @@ module.exports = {
 
 		connections:[{
 			type:'language1',
-			id:'self'
+			id:'self',
 			connections:[{
 
 				type:'connection', 

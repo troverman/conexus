@@ -12,7 +12,7 @@ const Q = require('q');
 
 module.exports = {
 
-	//import: { request: require('request') },
+	import: { request: require('request') },
 
 	//TODO:
 	connections:[
