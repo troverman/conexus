@@ -2,6 +2,8 @@
 //TODO: LOCAL SESSION
 //LOCAL VS NON LOCAL AUTH AND IDENTITY
 
+//AUTH / SESSION APP
+
 module.exports = {
 
     logout: function (req, res) {

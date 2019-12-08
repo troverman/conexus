@@ -2,6 +2,7 @@
 const Q = require('q');
 const crypto = require('crypto');
 
+//GOOGLEAPP
 function googleGeoCodeService(model){
 	var deferred = Q.defer();
 	//TODO: SECURITY! HIDE THIS.. SECRET INFORMATION.. NEED ENCRYPTION.
@@ -376,7 +377,18 @@ module.exports = {
 		});
 	},
 
-	update:function (req, res) {},
-
 };
+
+//CRE8.TASK
+//module.exports = {
+//	get: async function(req, res) {
+//		var model = await actionApp.get(req); 
+//		res.json(model);
+//	},
+//	update: async function (req, res) {
+//		var newModel = await actionApp.create(req);
+//		res.json(newModel);
+//	}
+//};
+
 

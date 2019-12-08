@@ -2,32 +2,7 @@
 const crypto = require('crypto');
 const Q = require('q');
 
-//TODO: DEPRECIATE -- to ; from
-	//APPRECIATE
-		--> //ASSOCIATION with to, from 
-
-//PROBLEM -- QUERY BY 'populated' ASSOCIATED MODELS OF data.model
-
-function getTo(model){
-	var deferred = Q.defer();
-	User.find({id:model.to}).then(function(userModels){
-		if (userModels.length == 0){Project.find({id:model.to}).then(function(projectModels){deferred.resolve(projectModels[0])})}
-		else{deferred.resolve(userModels[0])}
-	})
-	return deferred.promise;
-};
-
-function getFrom(model){
-	var deferred = Q.defer();
-	User.find({id:model.from}).then(function(userModels){
-		if (userModels.length == 0){Project.find({id:model.from}).then(function(projectModels){deferred.resolve(projectModels[0])})}
-		else{deferred.resolve(userModels[0])}
-	});
-	return deferred.promise;
-};
-
 //reduce to data(apps) and events
-
 function getAssociations(model){
 	var deferred = Q.defer();
 	Association.getDatastore().manager.collection('association')
@@ -82,60 +57,7 @@ function getAssociations(model){
 
 module.exports = {
 
-	get: function(req, res) {
-
-		//RATING: SILVER
-		function parseQuery(queryModel){
-			//THINK
-			var mongoQuery = {
-				filter:{
-					$or:[],
-					$and:[]
-				},
-				params:{
-					limit:1,
-					skip:0,
-					sort:{'createdAt':-1}
-				}
-			};
-			var mongoQuery = {
-				$or:[],
-				$and:[]
-			};
-			for (x in queryModel){
-				if (queryModel[x].chain){
-					var topBool = null;
-					if (queryModel[x].chain == 'AND'){topBool = '$and';}
-					if (queryModel[x].chain == 'OR'){topBool = '$or';}
-				}
-				if (queryModel[x].filter){
-					for (y in queryModel[x].filter){
-						var queryObj = {};
-						queryObj[queryModel[x].filter[y].modelParam] = queryModel[x].filter[y].query;
-						if (!queryModel[x].filter[y].chain){mongoQuery[topBool].push(queryObj);}
-						if (queryModel[x].filter[y].chain){
-							if (queryModel[x].filter[y].chain == 'AND'){
-								if (topBool){
-									var index = mongoQuery[topBool].map(function(obj){return Object.keys(obj)[0]}).indexOf('$and');
-									if (index ==-1){mongoQuery[topBool].push({$and:[queryObj]});}
-									else{mongoQuery[topBool][index]['$and'].push(queryObj);}
-								}
-							}
-							if (queryModel[x].filter[y].chain == 'OR'){
-								if (topBool){
-									var index = mongoQuery[topBool].map(function(obj){return Object.keys(obj)[0]}).indexOf('$or');
-									if (index ==-1){mongoQuery[topBool].push({$or:[queryObj]});}
-									else{mongoQuery[topBool][index]['$or'].push(queryObj);}
-								}
-							}
-						}
-					}
-				}
-			}
-			if (mongoQuery.$or.length == 0){ delete mongoQuery.$or}
-			if (mongoQuery.$and.length == 0){ delete mongoQuery.$and}
-			return mongoQuery
-		};
+	get: async function(req, res) {
 
 		var limit = parseInt(req.query.limit) || 1;
 		var skip = parseInt(req.query.skip) || 0;
@@ -143,7 +65,7 @@ module.exports = {
 		
 		if (req.query.query){
 			var querySet = JSON.parse(req.query.query);
-			var mongoQuery = parseQuery(querySet);
+			var mongoQuery = mongoApp.parseQuery(querySet);
 			console.log(JSON.stringify(mongoQuery, null, 4));
 			Transaction.native(function(err, transaction) {
 				transaction.find(mongoQuery)
@@ -156,8 +78,8 @@ module.exports = {
 					//console.log(models)
 					//var promises = [];
 					//for (x in models){
-					//	promises.push(getTo(models[x]));
-					//	promises.push(getFrom(models[x]));
+					//	promises.push(transactionApp.getTo(models[x]));
+					//	promises.push(transactionApp.getFrom(models[x]));
 					//}
 					//Q.all(promises).then((populatedModels)=>{
 					//	var sum = 0;
@@ -184,8 +106,8 @@ module.exports = {
 			.then(function(models) {
 				var promises = [];
 				for (x in models){
-					promises.push(getTo(models[x]));
-					promises.push(getFrom(models[x]));
+					promises.push(transactionApp.getTo(models[x]));
+					promises.push(transactionApp.getFrom(models[x]));
 				}
 				Q.all(promises).then((populatedModels)=>{
 					var sum = 0;
@@ -225,8 +147,8 @@ module.exports = {
 			.then(function(models) {
 				var promises = [];
 				for (x in models){
-					promises.push(getTo(models[x]));
-					promises.push(getFrom(models[x]));
+					promises.push(transactionApp.getTo(models[x]));
+					promises.push(transactionApp.getFrom(models[x]));
 				}
 				Q.all(promises).then((populatedModels)=>{
 					var sum = 0;
@@ -256,8 +178,8 @@ module.exports = {
 			.then(function(models) {
 				var promises = [];
 				for (x in models){
-					promises.push(getTo(models[x]));
-					promises.push(getFrom(models[x]));
+					promises.push(transactionApp.getTo(models[x]));
+					promises.push(transactionApp.getFrom(models[x]));
 				}
 				Q.all(promises).then((populatedModels)=>{
 					var sum = 0;
@@ -287,8 +209,8 @@ module.exports = {
 			.then(function(models) {
 				var promises = [];
 				for (x in models){
-					promises.push(getTo(models[x]));
-					promises.push(getFrom(models[x]));
+					promises.push(transactionApp.getTo(models[x]));
+					promises.push(transactionApp.getFrom(models[x]));
 				}
 				Q.all(promises).then((populatedModels)=>{
 					var sum = 0;
@@ -325,8 +247,8 @@ module.exports = {
 					models = models.map(function(obj){obj.id = obj._id;return obj;});
 					var promises = [];
 					for (x in models){
-						promises.push(getTo(models[x]));
-						promises.push(getFrom(models[x]));
+						promises.push(transactionApp.getTo(models[x]));
+						promises.push(transactionApp.getFrom(models[x]));
 					}
 					Q.all(promises).then((populatedModels)=>{
 						var sum = 0;
@@ -364,8 +286,8 @@ module.exports = {
 					models = models.map(function(obj){obj.id = obj._id;return obj;});
 					var promises = [];
 					for (x in models){
-						promises.push(getTo(models[x]));
-						promises.push(getFrom(models[x]));
+						promises.push(transactionApp.getTo(models[x]));
+						promises.push(transactionApp.getFrom(models[x]));
 					}
 					Q.all(promises).then((populatedModels)=>{
 						var sum = 0;
@@ -380,35 +302,28 @@ module.exports = {
 		}
 
 		else{
-			Transaction.find({})
-			.limit(limit)
-			.skip(skip)
-			.sort(sort)
-			.then(function(models) {
-				var promises = [];
-				for (x in models){
-					promises.push(getTo(models[x]));
-					promises.push(getFrom(models[x]));
-				}
-				Q.all(promises).then((populatedModels)=>{
-					var sum = 0;
-					for (x in models){
-						models[x].to = populatedModels[sum];sum++;
-						models[x].from = populatedModels[sum];sum++;
-					}
-					//LOL
-					var promisesAssociations = [];
-					for (x in models){promisesAssociations.push(getAssociations(models[x]));}
-					Q.all(promisesAssociations).then((populatedModels)=>{
-						for (x in models){models[x] = populatedModels[x];}
-						res.json(models);
-					});
-				});
-			});
+
+			var models = await Transaction.find({}).limit(limit).skip(skip).sort(sort);
+
+			var promises = [];
+			for (x in models){promises.push(transactionApp.getTo(models[x]));promises.push(transactionApp.getFrom(models[x]));}
+			var populatedModels = await Q.all(promises);
+			var sum = 0;
+			for (x in models){models[x].to = populatedModels[sum];sum++;models[x].from = populatedModels[sum];sum++;}
+
+			//LOL
+			var promisesAssociations = [];
+			for (x in models){promisesAssociations.push(getAssociations(models[x]));}
+			var populatedAssociations = await Q.all(promisesAssociations);
+			for (x in models){models[x] = populatedAssociations[x];}
+
+			res.json(models);
+			
 		}
+		
 	},
 
-	create: function (req, res) {
+	create: async function (req, res) {
 
 		//IMPLICIT VALIDATIONS REPLACE 'user'? what about 'creator'
 		//DEPRECAITE TO.. FROM????? --> VALIDATION / ASSOCIATION IS MAIN DATA MODEL ...
@@ -524,133 +439,7 @@ module.exports = {
 				});
 			});
 		};
-
-		function createNotification(model){
-
-			//IF MODEL.TO == PROJECT
-				//SEND NOTIFICATIONS TO APPROPIATTE USER GROUP 
-					//NOTIFICATION (APP) - PROJECT CONNECTION --> USER PERMS
-
-			var notificationModel = {
-				user: model.to,
-				type: 'TRANSACTION',
-				title: 'New Transaction',
-				content:model.from+' sent you '+model.amountSet,
-				data:{apps:{transaction: model}},
-				priority:77,//defined by user
-			};
-			Notification.create(notificationModel).then(function(notification){
-				Notification.publish([notification.id], {verb: 'update', data: notification});
-			});
-
-		};
-
-		//TODO: IN ROOT
-		function mintTokens(model){
-			var transactionProtocolTokens = getProtocolTokens(model);
-			for (x in transactionProtocolTokens){
-				var tokenString = transactionProtocolTokens[x]; 
-
-				console.log(tokenString);
-
-				(function(tokenString) {
-					Token.find({string:tokenString}).then(function(tokenModels){
-						if (tokenModels.length == 0){
-							var newTokenModel = {
-								string:tokenString,
-								protocols:['CRE8','TRANSACTION'], 
-								information:{inCirculation:model.amount, markets:0},
-								logic:{transferrable:true, mint:'CREATE TIME'}
-							};
-							Token.create(newTokenModel).then(function(model){
-								eventApp.create(newTokenModel);
-								console.log('TOKEN CREATED', model.string);
-							});
-							//TO, FROM
-							model.user.balance[tokenString] = parseFloat(model.amount);
-							User.update({id:model.user.id}, {balance:model.user.balance}).then(function(user){});
-						}
-						else{
-							tokenModels[0].information.inCirculation = parseInt(tokenModels[0].information.inCirculation) + parseFloat(model.amount); 
-							Token.update({id:tokenModels[0].id}, {information:tokenModels[0].information}).then(function(model){console.log('TOKEN UPDATED', model)});
-							//TO, FROM
-							if (model.user.balance[tokenString]){model.user.balance[tokenString] = parseInt(model.user.balance[tokenString]) + parseFloat(model.amount);}
-							else{model.user.balance[tokenString] = parseFloat(model.amount);}
-							User.update({id:model.user.id}, {balance:model.user.balance}).then(function(user){});
-						}
-					});
-				})(tokenString);
-
-				//UPDATE TRANSACTION MODEL..
-				//ATTENTION + REACTION + PROTOCOL + ASSOCIATION + ALL TOKENS IN CONTEXT
-
-				//data.apps.tokens = {
-				//}
-
-			}
-		};
-
-		function getProtocolTokens(model){
-
-			//TODO: STANDARDIZE VERBS
-			//TODO: MULTI PARTIES GET TOKENS.. TO; FROM
-			//CRE8+SEND
-			//CRE8+RECIEVE
-
-			var protocolTokens = [
-
-				//goes to both?
-				'CRE8', 
-				'CRE8+TRANSACTION', 
-				'CRE8+TRANSACTION+'+model.id, 
-
-				//goes to 'from'
-				'CRE8+TRANSACTION+SEND',
-				'CRE8+TRANSACTION+SEND+'+model.id, 
-				'CRE8+TRANSACTION+SEND+TO+'+model.to.id,
-
-				//HM
-				//goes to 'to'
-				'CRE8+TRANSACTION+RECIEVE',
-				'CRE8+TRANSACTION+RECIEVE+'+model.id, 
-				'CRE8+TRANSACTION+RECIEVE+FROM+'+model.from.id, 
-
-			];
-
-			for (x in Object.keys(model.amountSet)){
-
-				protocolTokens.push('CRE8+TRANSACTION+SEND+'+Object.keys(model.amountSet)[x]);
-				protocolTokens.push('CRE8+TRANSACTION+SEND+'+Object.keys(model.amountSet)[x]+'+TO+'+model.to.id);
-
-				protocolTokens.push('CRE8+TRANSACTION+RECIEVE+'+Object.keys(model.amountSet)[x]);
-				protocolTokens.push('CRE8+TRANSACTION+RECIEVE+'+Object.keys(model.amountSet)[x]+'+FROM+'+model.to.id);
-
-				if (model.context){
-					for (y in model.context.split(',')){
-						protocolTokens.push('CRE8+TRANSACTION+'+Object.keys(model.amountSet)[x]+'+'+model.context.split(',')[y].toUpperCase());
-						protocolTokens.push('CRE8+TRANSACTION+SEND+'+Object.keys(model.amountSet)[x]+'+'+model.context.split(',')[y].toUpperCase());
-						protocolTokens.push('CRE8+TRANSACTION+RECIEVE+'+Object.keys(model.amountSet)[x]+'+'+model.context.split(',')[y].toUpperCase());
-					}
-				}
-
-			}
-
-			//TODO:... CONTEXT
-			//THINK ABOUT ASSOCIATION WRT SELF-ASSOCATION
-			if (model.context){
-				for (x in model.context.split(',')){
-					protocolTokens.push('CRE8+TRANSACTION+'+model.context.split(',')[x].toUpperCase());
-					protocolTokens.push('CRE8+TRANSACTION+SEND+'+model.context.split(',')[x].toUpperCase());
-					protocolTokens.push('CRE8+TRANSACTION+RECIEVE+'+model.context.split(',')[x].toUpperCase());
-				}
-			}
-
-			//return based on who recieved the toks?
-			//[id,tok]
-
-			return protocolTokens;
-		};
-
+	
 		var model = {
 
 			model: 'TRANSACTION',
@@ -676,52 +465,52 @@ module.exports = {
 		model.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
 		console.log('CREATE TRANSACTION', model);
 
-		Transaction.create(model)
-		.exec(function(err, transactionModel) {
-			if (err) {return console.log(err);}
-			else {
-	
-				//ITEM ACTIONS.. 			
-				//IF GENERATOR
-				//CONTENT OWNERSHIP? --> CONTENT AND ITEM 
-				//.. ATTENTION(ASSET) TOKEN RIGHTS.. 
-				for (x in Object.keys(transactionModel.amountSet)){
-					Item.find({id:Object.keys(transactionModel.amountSet)[x]}).then(function(itemModels){
-						if (itemModels.length!=0){
-							Item.update({id:itemModels[0].id}, {user:transactionModel.to, owner:transactionModel.to}).then(function(updatedItemModel){
-								console.log('UPDATED: ITEM OWNERSHIP TRANSFERRED', updatedItemModel);
-							});
-						}
-					});
-				}
+		var transactionModel = await Transaction.create(model);
 
-				//HMM
-				transactionModel.associatedModels = req.param('associatedModels');
-
-				//MESSY CODE
-				// .. POPULATE ASSOCIATIONS
-				var promises = [];
-				promises.push(getTo(transactionModel));
-				promises.push(getFrom(transactionModel));
-
-				Q.all(promises).then((populatedModels)=>{
-					User.find({id:model.user}).then(function(userModels){
-
-						transactionModel.user = userModels[0];
-						transactionModel.to = populatedModels[0];
-						transactionModel.from = populatedModels[1];
-						Transaction.publish([transactionModel.id], {verb: 'update', data: transactionModel});
-						eventApp.create(transactionModel);
-						createNotification(transactionModel);
-						createValidation(transactionModel);
-						mintTokens(transactionModel);
-						res.json(transactionModel);
-
-					});
-				});
+		//ITEM ACTIONS.. 			
+		//IF GENERATOR
+		//CONTENT OWNERSHIP? --> CONTENT AND ITEM 
+		//.. ATTENTION(ASSET) TOKEN RIGHTS.. 
+		for (x in Object.keys(transactionModel.amountSet)){
+			var itemModels = await Item.find({id:Object.keys(transactionModel.amountSet)[x]});
+			if (itemModels.length!=0){
+				var updatedItem = await Item.update({id:itemModels[0].id}, {user:transactionModel.to, owner:transactionModel.to})
+				console.log('UPDATED: ITEM OWNERSHIP TRANSFERRED', updatedItem);
 			}
-		});
+		}
+
+		//HMM
+		transactionModel.associatedModels = req.param('associatedModels');
+
+		var promises = [transactionApp.getTo(transactionModel), transactionApp.getFrom(transactionModel)];
+		var populatedModels = await Q.all(promises);
+		var userModels = await User.find({id:model.user});
+		transactionModel.user = userModels[0];
+		transactionModel.to = populatedModels[0];
+		transactionModel.from = populatedModels[1];
+
+		Transaction.publish([transactionModel.id], {verb: 'update', data: transactionModel});
+		
+		createValidation(transactionModel);
+
+		transactionApp.tokens.create(transactionModel);
+		eventApp.create(transactionModel);
+		notificationApp.create.transaction(transactionModel);
+
+		res.json(transactionModel);
+
 	},
 	
 };
 
+//CRE8.TRANSACTION
+//module.exports = {
+//	get: async function(req, res) {
+//		var model = await actionApp.get(req); 
+//		res.json(model);
+//	},
+//	update: async function (req, res) {
+//		var newModel = await actionApp.create(req);
+//		res.json(newModel);
+//	}
+//};

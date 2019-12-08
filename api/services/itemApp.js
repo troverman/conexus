@@ -25,6 +25,7 @@ module.exports = {
 		request: require('request'),
 		Q: require('q'),
 		//event: require('event'),
+			//IMPORT DATABASE CONNECTION 
 	},
 
 
@@ -72,15 +73,42 @@ module.exports = {
 
 	},
 
+	get: async function(req){
+
+	},
+
 	create: function(req, res, params){
 
 		//EventApp.create({})
 
 	},
 
+	create: async function(req){
+
+	},
+
 	//EACH PROTOCOL / APP ADDS TO THE VALUE LANGUAGE.. 
 	//3rd layer of compilation . . 
 	tokens:{
+		//CHANGE TO VERBS?
+		//GET FROM CONNECTION? --> IT"S IN DATA MODEL
+		get:function(model){
+			var protocolTokens = [
+				'CRE8', 
+				'CRE8+ITEM',
+				'CRE8+ITEM+'+model.id,
+			];
+			//FOR X IN 
+			var hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
+			var prefix = 'CRE8+ITEM';
+			var string = prefix+'+'+hash;
+			protocolTokens.push(string);
+			return protocolTokens;
+		},
+		create:function(model){
+			var protocolTokens = itemApp.tokens.get(model);
+			//
+		},
 		//functional bridge between data events and tokenization
 	},
 

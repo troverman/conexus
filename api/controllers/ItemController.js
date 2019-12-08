@@ -81,16 +81,13 @@ module.exports = {
 		console.log('GET ITEM', req.query);
 
 		if(req.query.id){
-
 			//LOL WOW
 			//EITHER HASH OR ID...
 			//REDUCE ~? ALBEIT IS THERE STRENGTH IN A MULTI-IDENTIFER STRUCT? ~ PLURLALITY IS A STRENGTH (?)
-
 			var id = req.query.id;
 			var query = {};
 			if (mongodb.ObjectID.isValid(id)){query = { "_id": { $eq: mongodb.ObjectID(id) } }}
 			else{query = { dataHash: id}}
-
 			Item.getDatastore().manager.collection('item').find(query).limit(limit).skip(skip).sort({'createdAt':-1}).toArray(function (err, models) {
 				console.log('leal');
 				if (models.length > 0){
@@ -108,58 +105,35 @@ module.exports = {
 
 		else if (req.query.tag){
 			var tag = req.query.tag;
-			Item.find({tags:{contains: tag}})
-			.limit(limit)
-			.skip(skip)
-			.sort(sort)
-			.populate('user')
-			.then(function(models) {
-
-				Item.count({tags:{contains: tag}}).then(function(numRecords){
-					Item.subscribe(req, models);
-					var returnObj = {data:models, info:{count:numRecords}};
-					res.json(returnObj);
-				});
-
-			});
+			var models = await Item.find({tags:{contains: tag}}).limit(limit).skip(skip).sort(sort).populate('user')
+			var numRecords = await Item.count({tags:{contains: tag}});
+			Item.subscribe(req, models);
+			var returnObj = {data:models, info:{count:numRecords}};
+			res.json(returnObj);
 		}
 
 		else if (req.query.user){
 			var user = req.query.user;
-			Item.find({user:user})
-			.limit(limit)
-			.skip(skip)
-			.sort(sort)
-			.populate('user') 
-			.then(function(models) {
-				Item.subscribe(req, models.map(function(obj){return obj.id}));
-				res.json(models);
-			});
+			var models = await Item.find({user:user}).limit(limit).skip(skip).sort(sort).populate('user') 
+			Item.subscribe(req, models.map(function(obj){return obj.id}));
+			res.json(models);
 		}
 
 		else{
-			Item.find({})
-			.limit(limit)
-			.skip(skip)
-			.sort(sort)
-			.populate('user')
-			.then(function(models) {
-				Item.count().then(function(numRecords){
-					Item.subscribe(req, models.map(function(obj){return obj.id}));
-					var promises = [];
-					for (x in models){promises.push(getAssociations(models[x]));}
-					Q.all(promises).then((populatedModels)=>{
-						for (x in models){models[x] = populatedModels[x];}
-						var returnObj = {data:models, info:{count:numRecords}};
-						res.json(returnObj);
-					});
-				});
-			});
+			var models = await Item.find({}).limit(limit).skip(skip).sort(sort).populate('user');
+			var numRecords = await Item.count();
+			Item.subscribe(req, models.map(function(obj){return obj.id}));
+			var promises = [];
+			for (x in models){promises.push(getAssociations(models[x]));}
+			var populatedModels = await Q.all(promises)
+			for (x in models){models[x] = populatedModels[x];}
+			var returnObj = {data:models, info:{count:numRecords}};
+			res.json(returnObj);
 		}
 		
 	},
 
-	create: function (req, res) {
+	create: async function (req, res) {
 
 		function createValidation(model){
 			for (x in model.associatedModels){
@@ -236,29 +210,10 @@ module.exports = {
 			});
 		};
 
-		function mintTokens(model){
-			var protocolTokens = getProtocolTokens(model);
-		};
-
-		//CHANGE TO VERBS?
-		//GET FROM CONNECTION? --> IT"S IN DATA MODEL
-		function getProtocolTokens(model){
-			var protocolTokens = [
-				'CRE8', 
-				'CRE8+ITEM',
-				'CRE8+ITEM+'+model.id,
-			];
-			
-			//FOR X IN 
-			var hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
-			var prefix = 'CRE8+ITEM';
-			var string = prefix+'+'+hash;
-			protocolTokens.push(string);
-			return protocolTokens;
-		};
-
 		var model = {
+
 			model: 'ITEM',
+			type: 'ITEM',
 
 			title: req.param('title'),
 			content: req.param('content'),
@@ -289,23 +244,19 @@ module.exports = {
 
 		console.log('CREATE ITEM', model);
 
-		Item.create(model)
-		.exec(function(err, itemModel) {
-			if (err) {return console.log(err);}
-			else {
-				User.find({id:model.user}).then(function(userModels){
-					itemModel.associatedModels = req.param('associatedModels') || [];
-					itemModel.user = userModels[0];
-					Item.subscribe(req, [itemModel]);
-					Item.publish([itemModel.id], {verb: 'create', data: itemModel});
-					eventApp.create(itemModel);
-					createNotification(itemModel);
-					createValidation(itemModel);
-					mintTokens(itemModel);
-					res.json(itemModel);
-				});
-			}
-		});
+		var model = await Item.create(model);
+		var userModels = await User.find({id:model.user});
+		itemModel.associatedModels = req.param('associatedModels') || [];
+		itemModel.user = userModels[0];
+
+		Item.subscribe(req, [itemModel]);
+		Item.publish([itemModel.id], {verb: 'create', data: itemModel});
+		createValidation(itemModel);
+
+		eventApp.create(itemModel);
+		itemApp.tokens.create(itemModel);
+
+		res.json(itemModel);		
 
 	},
 	

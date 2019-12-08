@@ -1,28 +1,6 @@
 //CRE8.SEARCH
 const Q = require('q');
 
-//const core = require('CORE');
-//TODO:: DOCUMENT AND MAP
-//core.parseQuery....
-
-function getTo(model){
-	var deferred = Q.defer();
-	User.find({id:model.to}).then(function(userModels){
-		if (userModels.length == 0){Project.find({id:model.to}).then(function(projectModels){deferred.resolve(projectModels[0])})}
-		else{deferred.resolve(userModels[0])}
-	})
-	return deferred.promise;
-};
-
-function getFrom(model){
-	var deferred = Q.defer();
-	User.find({id:model.from}).then(function(userModels){
-		if (userModels.length == 0){Project.find({id:model.from}).then(function(projectModels){deferred.resolve(projectModels[0])})}
-		else{deferred.resolve(userModels[0])}
-	});
-	return deferred.promise;
-};
-
 function getAssociations(model){
 	var deferred = Q.defer();
 	Association.getDatastore().manager.collection('association')
@@ -99,58 +77,6 @@ var query = [{
     "chain": "logic ['AND','OR']"
 }];
 
-function parseQuery(queryModel){
-	var mongoQuery = {
-		filter:{
-			$or:[],
-			$and:[]
-		},
-		params:{
-			limit:1,
-			skip:0,
-			sort:{'createdAt':-1}
-		}
-	};
-	var mongoQuery = {
-		$or:[],
-		$and:[]
-	};
-	for (x in queryModel){
-		if (queryModel[x].chain){
-			var topBool = null;
-			if (queryModel[x].chain == 'AND'){topBool = '$and';}
-			if (queryModel[x].chain == 'OR'){topBool = '$or';}
-		}
-		if (queryModel[x].filter){
-			for (y in queryModel[x].filter){
-				var queryObj = {};
-				queryObj[queryModel[x].filter[y].modelParam] = queryModel[x].filter[y].query;
-				if (!queryModel[x].filter[y].chain){mongoQuery[topBool].push(queryObj);}
-				if (queryModel[x].filter[y].chain){
-					if (queryModel[x].filter[y].chain == 'AND'){
-						if (topBool){
-							var index = mongoQuery[topBool].map(function(obj){return Object.keys(obj)[0]}).indexOf('$and');
-							if (index ==-1){mongoQuery[topBool].push({$and:[queryObj]});}
-							else{mongoQuery[topBool][index]['$and'].push(queryObj);}
-						}
-					}
-					if (queryModel[x].filter[y].chain == 'OR'){
-						if (topBool){
-							var index = mongoQuery[topBool].map(function(obj){return Object.keys(obj)[0]}).indexOf('$or');
-							if (index ==-1){mongoQuery[topBool].push({$or:[queryObj]});}
-							else{mongoQuery[topBool][index]['$or'].push(queryObj);}
-						}
-					}
-				}
-			}
-		}
-	}
-	if (mongoQuery.$or.length == 0){ delete mongoQuery.$or}
-	if (mongoQuery.$and.length == 0){ delete mongoQuery.$and}
-	return mongoQuery
-};
-
-
 //TODO.. ALL MODELS ARE APP DEFINED
 	//data models are contined within apps 
 	//simplify to data 
@@ -161,11 +87,18 @@ function parseQuery(queryModel){
 				//APP DEFINES (DATA MODEL)
 				//data.find({app:'PROJECT', model:'PROJECT'})
 
+//TODO: QUERY BUILD ... / DISCOVER
+//GET ACTIVITY BASED ON FOLLOWERS
+//GET ACTIVITY BASED ON PROJECTS
+//GET ACTIVITY BASED ON [CUSTOM]
+//ACTIVITY QUERY AS ONE LOOKUP --> REFACTOR
 
 module.exports = {
 
 	//CAN HANDLE ALL API CALLS..
-
+	//IF APP/ MODEL PARAM.. 
+		//ELSE ALL APPS YOU HAVE CONNECTIED TO PEER / YOUR TRUTH 
+			//CAN SPECIFIC TRUTH PARAMS
 	get: function (req, res) {
 
 		if (req.query){
@@ -174,7 +107,7 @@ module.exports = {
 
 			//PARSE QUERY
 			var query = JSON.parse(req.query);
-			var documentQuery = parseQuery(query);
+			var documentQuery = mongoApp.parseQuery(query);
 
 			//DATA - && EVENT MERGE
 
@@ -186,6 +119,7 @@ module.exports = {
 					//ON EVENT ... IS THIS VALID?
 										//FROM WHO'S CONTEXT - IN THE EVENT YOU NEED TO PASS YOUR POINT IN HISTORY (LAST (RELATIVE) VALID ROOT)
 												//MESH '''DOT''' PRODUCT
+
 						//YEAH? GIMMIE SOME REPUTATION
 							//FROM ALL THE FUNCTIONS I RAN.
 								//CAN BE VALIDATED --- FOLLOWS CONNECTION - ASSOCIATION MODEL
@@ -218,38 +152,17 @@ module.exports = {
 				//with context
 					//if traversal is good add to subjective truth
 						//with events from validation
-
 						//always ingesting and validating my personal truth
 							//uncle?
-
 
 		}
 
 
 	},
 
-	search: function (req, res) {
+	search: async function (req, res) {
 
-		if (!req.query.query){
-
-			function getSome(model){	
-				var deferred = Q.defer();
-				if (model.dataModel = 'PROJECT'){
-					Project.getDatastore().manager.collection('project')
-					.find(model.query).limit(model.limit).skip(model.skip)
-					.toArray(function (err, models) {
-						if (models){
-							models = models.map(function(obj){obj.id = obj._id; obj.model='PROJECT'; return obj;});
-							deferred.resolve(models)
-						}
-						else{deferred.resolve([])}
-					});
-					return deferred.promise;
-				}
-			};
-		}
-
-		else{
+		if (req.query.query){
 
 			var searchQuery = req.query.query;
 			var tag = req.query.tag;
@@ -257,141 +170,54 @@ module.exports = {
 			var skip = req.query.skip;
 			var sort = req.query.sort;
 
-			if (req.query.model = 'CONTENT'){}
-			if (req.query.model = 'ITEM'){}
-			if (req.query.model = 'MEMBER'){}
-			if (req.query.model = 'ORDER'){}
-
+			//APP DEFINED --> STRING CALL
+		
 			//TAKE A BREAK
 			if (req.query.model == 'PROJECT'){
-
 				var query = JSON.parse(JSON.stringify(req.query.query));
-				//console.log(query);
-
-				query.map(function(obj){
-					obj = JSON.parse(JSON.stringify(obj))
-				});
-
-				//console.log(query);
-
-				Project.find({tags:{contains: tag}})
-				.limit(limit)
-				.skip(skip)
-				.sort(sort)
-				.then(function(models) {
-					var projectModels = models.map(function(obj){
-				        obj.model = 'PROJECT';
-				        return obj;
-				    });
-				    //console.log(projectModels)
-					Project.subscribe(req, projectModels);
-					res.json(projectModels);
-				});
-
+				query.map(function(obj){obj = JSON.parse(JSON.stringify(obj))});
+				var projectModels = await Project.find({tags:{contains: tag}}).limit(limit).skip(skip).sort(sort);
+				projectModels = models.map(function(obj){obj.model = 'PROJECT';return obj;});
+				Project.subscribe(req, projectModels);
+				res.json(projectModels);
 			}
 
-			if (req.query.model == 'TASK'){}
-			if (req.query.model == 'TOKEN'){}
-			if (req.query.model == 'TRANSACTION'){}
-			if (req.query.model == 'TIME'){}
-
-			//YIKES
-			//OLD, COMBO
-			//PROJECT | CONTENT | TASK | USER
+			//TODO: EVENTS . . .
 			else{
-				Project.find()
-				.where({
-					or: [
-						{title: {contains: searchQuery}},
-						{urlTitle: {contains: searchQuery}},
-					]
-				})
-				.then(function(models) {
-					var projectModels = models.map(function(obj){
-				        obj.model = 'PROJECT';
-				        return obj;
-				    });
-					Project.subscribe(req, models);
 
-					//TODO UNIFY CONTENT MODEL
-					Content.find()
-					.where({
-						or: [
-							{title: {contains: searchQuery}},
-							{content: {contains: searchQuery}},
-							{user: {contains: searchQuery}}
-						]
-					})
-					.populate('user')
-					.then(function(models) {
-						var contentModels = models.map(function(obj){
-					        obj.model = 'CONTENT';
-					        return obj;
-					    });
-						var combinedModels = [].concat.apply([], [projectModels, contentModels]);
-		    			combinedModels = combinedModels.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
-						Content.subscribe(req, models);
+				var projectModels = await Project.find().where({or: [{title: {contains: searchQuery}}, {urlTitle: {contains: searchQuery}}]})
+				projectModels = projectModels.map(function(obj){obj.model = 'PROJECT'; return obj;});
+				Project.subscribe(req, projectModels);
 
-						//TODO UNIFY CONTENT MODEL
-						Task.find()
-						.where({
-							or: [
-								{content: {contains: searchQuery}},
-								{title: {contains: searchQuery}}
-							]
-						})
-						.populate('user')
-						.then(function(models) {
-							var taskModels = models.map(function(obj){
-						        obj.model = 'TASK';
-						        return obj;
-						    });
-						    var superCombinedModels = [].concat.apply([], [taskModels, combinedModels]);
-		    				superCombinedModels = superCombinedModels.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
-							Task.subscribe(req, models);
-							User.find()
-							.where({
-								or: [
-									{username: {contains: searchQuery}},
-								]
-							})
-							.then(function(models) {
-								var userModels = models.map(function(obj){
-							        obj.model = 'MEMBER';
-							        return obj;
-							    });
-							    var superSuperCombinedModels = [].concat.apply([], [userModels, superCombinedModels]);
-		    					superSuperCombinedModels = superSuperCombinedModels.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
-								User.subscribe(req, models);
+				var contentModels = await Content.find().where({or: [{title: {contains: searchQuery}}, {content: {contains: searchQuery}}, {user: {contains: searchQuery}}]}).populate('user')
+				contentModels = contentModels.map(function(obj){obj.model = 'CONTENT';return obj;});
+				Content.subscribe(req, contentModels);
 
-								//LOL WOT --> HEHEHEHEHEH
-								Item.find()
-								.where({
-									or: [
-										{content: {contains: searchQuery}},
-										{title: {contains: searchQuery}},
-										{user: {contains: searchQuery}}
-									]
-								})
-								.then(function(models) {
-									var itemModels = models.map(function(obj){
-								        obj.model = 'ITEM';
-								        return obj;
-								    });
-								    var superSuperSuperCombinedModels = [].concat.apply([], [itemModels, superSuperCombinedModels]);
-		    						superSuperSuperCombinedModels = superSuperSuperCombinedModels.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
-									Item.subscribe(req, models);
-									res.json(superSuperSuperCombinedModels);
-								});
-							});
-						});
-					});
-				});
+				var taskModels = await Task.find().where({or: [{content: {contains: searchQuery}}, {title: {contains: searchQuery}}]}).populate('user')
+				taskModels = taskModels.map(function(obj){obj.model = 'TASK';return obj;});
+				Task.subscribe(req, taskModels);
+
+				var userModels = await User.find().where({or: [{username: {contains: searchQuery}}]});
+				userModels = userModels.map(function(obj){obj.model = 'MEMBER';return obj;});
+				User.subscribe(req, userModels);
+
+				var itemModels = await Item.find().where({or: [{content: {contains: searchQuery}}, {title: {contains: searchQuery}}, {user: {contains: searchQuery}}]})
+				itemModels = itemModels.map(function(obj){obj.model = 'ITEM';return obj;});
+				Item.subscribe(req, itemModels);
+
+				var combinedModels = [].concat.apply([], [projectModels, contentModels, taskModels, userModels, itemModels]);
+    			combinedModels = combinedModels.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
+
+				res.json(combinedModels);
+
 			}
 		}
 	},
 
-	getFeed: function (req, res) {
+	//TODO: BASED ON APPS. . .
+	getFeed: async function (req, res) {
+
+	    console.log('FEED QUERY START');
 
 		var searchQuery = JSON.parse(req.query.query);
 		console.log(searchQuery);
@@ -409,155 +235,34 @@ module.exports = {
 			if (searchQuery[x].model =='VALIDATION'){promises.push(Validation.find().limit(10).skip(0).sort('createdAt DESC').then(function(models){Validation.subscribe(req, models.map((obj)=>obj.id));return {validation:models}}))}
 		}
 		
-		Q.all(promises).then((populatedModels)=>{
-
-			console.log('POPULATED !', populatedModels.length);
-
-			populatedModels = populatedModels.map(function(obj){
-				var returnObj = {};
-				if (obj.action){returnObj = obj.action.map(function(anObj){anObj.model = 'ACTION'; return anObj;}); }
-				if (obj.app){returnObj = obj.app.map(function(anObj){anObj.model = 'APP'; return anObj;}); }
-				if (obj.content){
-					returnObj = obj.content.map(function(anObj){
-						anObj.model = 'CONTENT';
-						return anObj;
-					}); 
-				}
-				if (obj.item){
-					returnObj = obj.item.map(function(anObj){
-						anObj.model = 'ITEM';
-						return anObj;
-					}); 
-				}
-				if (obj.member){
-					returnObj = obj.member.map(function(anObj){
-						anObj.model = 'MEMBER';
-						return anObj;
-					}); 
-				}
-				if (obj.project){returnObj = obj.project.map(function(anObj){anObj.model = 'PROJECT'; return anObj;}); }
-				if (obj.task){
-					returnObj = obj.task.map(function(anObj){
-						anObj.model = 'TASK';
-						return anObj;
-					}); 
-				}
-				if (obj.time){
-					returnObj = obj.time.map(function(anObj){
-						anObj.model = 'TIME';
-						return anObj;	
-					}); 
-				}
-				if (obj.transaction){
-					returnObj = obj.transaction.map(function(anObj){
-						anObj.model = 'TRANSACTION';
-						return anObj;
-					}); 
-				}
-				if (obj.validation){returnObj = obj.validation.map(function(anObj){anObj.model = 'VALIDATION'; return anObj;}); }
-				return returnObj;
-			});
-
-		    var activity = [].concat.apply([], populatedModels);
-		    activity = activity.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
-		    activity = activity.slice(0,100);
-
-		    console.log('length!', activity.length);
-
-		    //USER PROMISES
-		    var userPromises = [];
-		    for (x in activity){userPromises.push(User.find({id:activity[x].user}))}
-    		Q.all(userPromises).then((populatedUserModels)=>{
-    			for (x in activity){activity[x].user = populatedUserModels[x][0]}
-				res.json(activity);
-    		});
+		var populatedModels = await Q.all(promises);
+		populatedModels = populatedModels.map(function(obj){
+			var returnObj = {};
+			if (obj.action){returnObj = obj.action.map(function(anObj){anObj.model = 'ACTION'; return anObj;});}
+			if (obj.app){returnObj = obj.app.map(function(anObj){anObj.model = 'APP'; return anObj;});}
+			if (obj.content){returnObj = obj.content.map(function(anObj){anObj.model = 'CONTENT';return anObj;});}
+			if (obj.item){returnObj = obj.item.map(function(anObj){anObj.model = 'ITEM';return anObj;});}
+			if (obj.member){returnObj = obj.member.map(function(anObj){anObj.model = 'MEMBER';return anObj;});}
+			if (obj.project){returnObj = obj.project.map(function(anObj){anObj.model = 'PROJECT'; return anObj;});}
+			if (obj.task){returnObj = obj.task.map(function(anObj){anObj.model = 'TASK';return anObj;});}
+			if (obj.time){returnObj = obj.time.map(function(anObj){anObj.model = 'TIME';return anObj;});}
+			if (obj.transaction){returnObj = obj.transaction.map(function(anObj){anObj.model = 'TRANSACTION';return anObj;});}
+			if (obj.validation){returnObj = obj.validation.map(function(anObj){anObj.model = 'VALIDATION'; return anObj;});}
+			return returnObj;
 		});
 
+	    var activity = [].concat.apply([], populatedModels);
+	    activity = activity.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
+	    activity = activity.slice(0,100);
 
-	},
+	    var userPromises = [];
+	    for (x in activity){userPromises.push(User.find({id:activity[x].user}))}
+		var populatedUserModels = await Q.all(userPromises)
+		for (x in activity){activity[x].user = populatedUserModels[x][0]}
 
-	getDiscover: function (req, res) {
+	    console.log('FEED QUERY DONE', activity.length);
 
-	},
-
-	//TODO: QUERY BUILD ...
-	//GET ACTIVITY BASED ON FOLLOWERS
-	//GET ACTIVITY BASED ON PROJECTS
-	//GET ACTIVITY BASED ON [CUSTOM]
-	//ACTIVITY QUERY AS ONE LOOKUP --> REFACTOR
-
-	//GET COMPLEX FILTER
-	workingSearch: function(req, res){
-
-		db.collection.aggregate([
-			{ 
-				"$limit": 1 
-			},
-			{ 
-				"$facet": {
-					"c1": [
-						{ 
-							"$lookup": {
-								"from": Users.collection.name,
-								"pipeline": [
-									{ 
-										"$match": { 
-											"first_name": "your_search_data" 
-										} 
-									}
-								],
-								"as": "collection1"
-							}
-						}
-					],
-					"c2": [
-						{ 
-							"$lookup": {
-								"from": State.collection.name,
-								"pipeline": [
-									{ 
-										"$match": { 
-											"name": "your_search_data" 
-										} 
-									}
-								],
-								"as": "collection2"
-							}
-						}
-					],
-					"c3": [
-						{
-							 "$lookup": {
-								"from": State.collection.name,
-								"pipeline": [
-									{ 
-										"$match": { 
-											"name": "your_search_data" 
-										}
-									 }
-								],
-								"as": "collection3"
-							}
-						}
-					]
-				}
-			},
-			{ 
-				"$project": {
-					"data": {
-						"$concatArrays": [ "$c1", "$c2", "$c3" ]
-					}
-				}
-			},
-			{
-				"$unwind": "$data" 
-			},
-			{ 
-				"$replaceRoot": { 
-					"newRoot": "$data" 
-				}
-			}
-		]);
+		res.json(activity);
 
 	},
 

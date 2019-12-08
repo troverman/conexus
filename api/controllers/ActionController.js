@@ -51,9 +51,7 @@ module.exports = {
 
 				//console.log(models)
 				var promises = [];
-				for (x in models){
-					promises.push(getItem(models[x]));
-				}
+				for (x in models){promises.push(getItem(models[x]));}
 
 				Q.all(promises).then((populatedModels)=>{
 					var sum = 0;
@@ -110,3 +108,15 @@ module.exports = {
 	},
 
 };
+
+//CRE8.ACTION
+//module.exports = {
+//	get: async function(req, res) {
+//		var model = await actionApp.get(req); 
+//		res.json(model);
+//	},
+//	create: async function (req, res) {
+//		var newModel = await actionApp.create(req);
+//		res.json(newModel);
+//	}
+//};

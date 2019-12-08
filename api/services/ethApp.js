@@ -1,7 +1,7 @@
 //ETH APP
-const web3 = require('web3');
-const Web3 = require('web3');
-const web3 = new Web3();
+//const web3 = require('web3');
+//const Web3 = require('web3');
+//const web3 = new Web3();
 //PRIVIDER WILL BE LOCAL NODE.. 
     //PRIVIDER CONNECTS TO ( CHAIN ID )
     //var network = web3.version.network
@@ -11,12 +11,12 @@ const web3 = new Web3();
 module.exports = {
 
 	import:{
-        web3: require('web3'),
+        //web3: require('web3'),
 	},
 
     //TAKE A BREAK HERE :p
     //APP-MEMBER CONNECTION
-    parameters:{
+    attributes:{
 
         //specific type that is hashed
         address:{
@@ -74,8 +74,6 @@ module.exports = {
         }
 
     },
-
-
 
     models:[
         //ETH,

@@ -111,26 +111,6 @@ module.exports = {
 
 	create: function (req, res) {
 
-		function createEvent(model){
-			var eventModel = {
-				verb:'create',
-				model:model,
-				//hash:{model:id},
-				//{
-					///id:model.id,
-					//type:model.model
-				//},
-				creator:model.user,
-				data:{
-					attention:{},
-					reactions:{},
-					validation:{},//hmm validation vs attention from pow view
-					model:model
-				},
-			};
-			Event.create(eventModel);
-		};
-
 		//TODO: UPDATE && REWRITE
 		function createValidation(model){
 			//UNIFY STRUCT
@@ -214,13 +194,6 @@ module.exports = {
 			});
 		};
 
-		function createNotification(model){
-			//REQUEST TO VALIDATE (ASSOCITION TRAVERSE)
-			//TO MEMBERS OF PROJECT
-			//TO FOLLOWERS OF MEMBER..
-			//TO NOTIFICATION PERMS
-		};
-
 		function createTokens(model){
 			var tokens = getTokens(model);
 			for (x in tokens){
@@ -301,7 +274,8 @@ module.exports = {
 					time.user = userModels[0];
 					Time.publish([time.id], {verb: 'create', data: time});
 
-					createEvent(time);
+					eventApp.create(time);
+
 					createNotification(time);
 					createValidation(time);
 					createTokens(time);
@@ -313,3 +287,15 @@ module.exports = {
 		});
 	}
 };
+
+//CRE8.TIME
+//module.exports = {
+//	get: async function(req, res) {
+//		var model = await actionApp.get(req); 
+//		res.json(model);
+//	},
+//	update: async function (req, res) {
+//		var newModel = await actionApp.create(req);
+//		res.json(newModel);
+//	}
+//};
