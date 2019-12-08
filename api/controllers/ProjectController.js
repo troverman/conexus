@@ -202,19 +202,6 @@ module.exports = {
 	},
 
 	create: function (req, res) {
-	
-		function createEvent(model, verb){
-			var eventModel = {
-				model:{id:model.id,type:model.model},
-				verb: verb,
-			};
-			Event.create(eventModel).then(function(model){
-				console.log('CREATE EVENT', model);
-				Event.publish([model.id], {verb: 'create', data: model});
-			});
-		};
-
-		function createNotification(model){};
 
 		//LET'S GO
 		//TODO: PARAMETERS
@@ -287,7 +274,7 @@ module.exports = {
 					Validation.create(newValidation).then(function(newValidationModel){
 						console.log('CREATE VALIDATION', newValidationModel);
 						createAssociation(newValidationModel);
-						createEvent(newValidationModel, 'create');
+						eventApp.create(newValidationModel);
 					});
 
 				}
@@ -332,7 +319,7 @@ module.exports = {
 						var newAssociationModel = newValidationModel;
 						Association.create(newAssociationModel).then(function(association){
 							console.log('CREATED ASSOCIATION', association);
-							createEvent(newValidationModel, 'create');
+							eventApp.create(newValidationModel);
 							Association.publish([association.id], {verb: 'create', data: association});
 						});
 					}
@@ -409,7 +396,7 @@ module.exports = {
 							Project.subscribe(req, [project.id]);
 							Project.publish([projectModel[0].id], {verb: 'create', data: projectModel[0]});
 
-							createEvent(project, 'create');
+							eventApp.create(project);
 							createNotification(project);
 							createValidation(project);
 

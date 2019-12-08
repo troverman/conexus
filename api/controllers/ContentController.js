@@ -2,16 +2,6 @@
 const Q = require('q');
 const crypto = require('crypto');
 
-function createEvent(model, verb){
-	var eventModel = {
-		model:{id:model.id,type:model.model},
-		verb: verb,
-	};
-	Event.create(eventModel).then(function(model){
-		console.log('CREATE EVENT', model);
-		Event.publish([model.id], {verb: 'create', data: model});
-	});
-};
 
 module.exports = {
 	
@@ -103,7 +93,11 @@ module.exports = {
         			//APP-PROTOCOL-CONNECTION LOGIC WRT MACHINE REP && RATE LIMITS ETC
         		//THIS IS MACHINENE ATTENTION VS 'ATTENTION TIMER' DUP
         		//THERE IS AN ARTECTICTURE DESIGN PATTERN THAT DOES THIS
-        		createEvent(models[0], 'view');
+        		//GET EVENT . . . 
+				//eventApp.create(itemModel);
+
+				//WOULD LIKE TO MOVE FORWARD WITH PACKET ROUTING MACHINE ATT &&
+
 				Content.subscribe(req, [models[0].id]);
 				getAssociations(models[0]).then(function(models){res.json(models);});
 
@@ -198,17 +192,10 @@ module.exports = {
 		}
 	},
 
-	create: function (req, res) {
+	create: async function (req, res) {
 
-		function createNotification(model){
-			//<-- ASSOCIATIONS -->
-			//SEND NOTIFICATIONS TO FOLLOWERS
-			//SEND NOTIFICATIONS TO PROJECT MEMBERS
-			//SEND NOTIFICATION TO MEMBER
-		};
-
-		//TODO: CONNECTION!
-		function createValidation(model){
+		//TODO: REDUCE!
+		async function createValidation(model){
 			//validation set
 			for (x in model.associatedModels){
 				var newValidation = {
@@ -249,7 +236,7 @@ module.exports = {
 				newValidation.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(newValidation)).digest('hex');
 				Validation.create(newValidation).then(function(newValidationModel){
 					console.log('CREATE VALIDATION', newValidationModel);
-					createEvent(newValidationModel, 'create');
+					//eventApp.create(newValidationModel);
 					createAssociation(newValidationModel)
 				});
 				//});
@@ -300,7 +287,19 @@ module.exports = {
 		//TODO: FACTOR
 		function getProtocolTokens(model){
 			
-			//change model to app
+			//for you to see the progress 
+			//change model to app / type (APP = [  = protocol ] | think token and market ~ WHAT IS THE MOST PRIMITIVE TYPE A BIT BOI)
+				//8 BYTE WORD
+												//patterns of bools (0,1 ~~> QUANTUM GIVES SMOOTH) ?? OR OR third stat which is an and 
+															//GRADIENT IS TRUTH
+																	//2^3 , 0,1,0+1
+												//SOOO. . . IT'S A STRING
+
+			//[yes] --> NATURAL RECURSION 
+			//off rails kinda
+			//CAN CONNECTION BE MOST PRIMITIVE TYPE OR STRING --> CONVERT OR BONRAY (I MEAN WERE DEALING WITH LAYERS OF ABSTRACTION) 
+
+
 			var protocolTokens = [
 				'CRE8', 
 				'CRE8+'+model.model, 
@@ -370,60 +369,63 @@ module.exports = {
 		};
 
 
+		//language of connections to recurse to bits 
+			//the highleve abstract to opcodes to binary seems a chore | gotta be better 
+
+		//var Content = appApp.find(); . . . 
+			//--> EventApp.find({type:'APP'}); 
+					//--> appApp.find({type:'EVENT'})
+						// --> ; -->; [];  
+							//. . . 'STRING' 
+								//CONJECTURE: A STRING IS THE MOST PRIMITIVE TYPE OF ___DATA___ || OR SERIES OF NUMBERS ( NUMBERS ARE A STRING ) ;
+									//VIBRATION . . . STATE CHANGE - MOVEMENT IS (PATTERNS)
+								//~~ (BINARY?) () WE REDUCE TO THE PHYSICAL COMPONENTS   
+									//. . . BITS  COMPLETE THE CIRCLE 
+
+
+		//THE BLOAT OF N ABSTRACTION LAYERS FEELS.. MESSY
+			//THINK ABOUT YOUR AVERAGE NETWORKING PROTOCOL FLOW DIAGRAM 
+
+		//i need to learn chinese  
+
+		//var User = appApp.find(appApp.id); // something something 
+		var userModels = await User.find({id:model.user});
+
 		var model = {
+
 			model: 'CONTENT',
+			type: 'CONTENT', //appApp.id --> :)
 
 			title: req.param('title'),
 			type: req.param('type'),
 			content: req.param('content'),
 
-			user: req.param('user'),
-			creator: req.param('user'),	
+			user: userModels[0].id,
+			creator: userModels[0],	
 					
 			data:{
 				apps:{
 					reactions:{plus:0, minus:0},
 					attention:{general:0},
-					//tokens:{},
-						//manifold:{},
-					//balance:{},
 				}
 			}
 
 		};
-
 		model.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
 
 		console.log('CREATE CONTENT', model);
 
-		Content.create(model)
-		.exec(function(err, model) {
-			if (err) {return console.log(err);}
-			else {
+		var newContent = await Content.create(model);
+		
+		newContent.associatedModels = req.param('associatedModels');
 
-				//TODO: POPULATE USER
-				User.find({id:model.user}).then(function(userModels){
+		Content.subscribe(req, [newContent.id]);
+		Content.publish(model.id, {verb: 'create', data: model});
+		eventApp.create(newContent);
+		createValidation(newContent);
+		mintTokens(newContent);
+		res.json(newContent);
 
-					model.user = userModels[0];
-					model.associatedModels = req.param('associatedModels');
-
-					Content.subscribe(req, [model.id]);
-					Content.publish(model.id, {verb: 'create', data: model});
-					
-					createEvent(model, 'create');
-					createNotification(model);
-					createValidation(model);
-					mintTokens(model);
-					res.json(model);
-
-				});
-			}
-		});
 	},
-
-	//IT'S A NEW 'CREATE' THAT OVERLAPS. 
-	update: function(req, res){
-		//UPDATE HISTORY IN MODEL
-	}
 
 };

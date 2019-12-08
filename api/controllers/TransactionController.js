@@ -7,16 +7,6 @@ const Q = require('q');
 		--> //ASSOCIATION with to, from 
 
 //PROBLEM -- QUERY BY 'populated' ASSOCIATED MODELS OF data.model
-function createEvent(model, verb){
-	var eventModel = {
-		data: model,
-		verb: verb,
-	};
-	Event.create(eventModel).then(function(model){
-		console.log('CREATE EVENT', model);
-		Event.publish([model.id], {verb: 'create', data: model});
-	});
-};
 
 function getTo(model){
 	var deferred = Q.defer();
@@ -573,7 +563,7 @@ module.exports = {
 								logic:{transferrable:true, mint:'CREATE TIME'}
 							};
 							Token.create(newTokenModel).then(function(model){
-								createEvent(newTokenModel, 'create');
+								eventApp.create(newTokenModel);
 								console.log('TOKEN CREATED', model.string);
 							});
 							//TO, FROM
@@ -721,7 +711,7 @@ module.exports = {
 						transactionModel.to = populatedModels[0];
 						transactionModel.from = populatedModels[1];
 						Transaction.publish([transactionModel.id], {verb: 'update', data: transactionModel});
-						createEvent(transactionModel, 'create');
+						eventApp.create(transactionModel);
 						createNotification(transactionModel);
 						createValidation(transactionModel);
 						mintTokens(transactionModel);

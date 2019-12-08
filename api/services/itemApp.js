@@ -8,26 +8,6 @@
 module.exports = {
 
 
-	//IE THIS IS THE WHOLE FILE
-	connections:[{
-
-
-
-		type:'connection', 
-		id:'self',
-		connections:[{
-			type:'item',
-			id:'self',
-			connections:[{		
-
-			}]
-		}],
-
-
-
-	}],
-
-
 	connections:[{
 		type:'connection', 
 		id:'self',
@@ -35,9 +15,7 @@ module.exports = {
 			type:'item',
 			id:'self',
 			connections:[{	
-
-			params:{}	
-				
+				params:{}	
 			}]
 		}],
 	}],
@@ -46,9 +24,8 @@ module.exports = {
 	import: { 
 		request: require('request'),
 		Q: require('q'),
+		//event: require('event'),
 	},
-
-
 
 
 	//DATA MODELS ARE CONNECTIONS
@@ -110,7 +87,6 @@ module.exports = {
 	//FLATTEN? AND STANDARIZE & MADE MODULAR . . . 
 	//DEFINE LANGUAGE AND PARAMETERS FOR VIEW PARSING --> IMPORT THE PARSERS
 	views:{
-
 		item:{
 			route:'/item/:id',
 			controller:function(){},
@@ -121,14 +97,11 @@ module.exports = {
 			controller:function(){},
 			templates:[{}],
 		},
-
 		items:{
 			route:'/items',
 			controller:function(){},
 			templates:[{}],
 		},
-
-
 	},
 
 

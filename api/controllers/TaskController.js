@@ -191,22 +191,6 @@ module.exports = {
 
 	create: function (req, res) {
 
-		function createEvent(model, verb){
-			var eventModel = {
-				model:{
-					id:model.id,//hash
-					type:model.model//app
-				},
-				verb: verb, //or type
-				//data:{}
-			};
-			Event.create(eventModel).then(function(model){
-				console.log('CREATE EVENT', model);
-				Event.publish([model.id], {verb: 'create', data: model});
-			});
-		};
-
-
 		function createNotification(model){
 
 		};
@@ -249,7 +233,7 @@ module.exports = {
 				for (y in model.associatedModels[x].context){newValidation.context[model.associatedModels[x].context[y].text] = model.associatedModels[x].context[y].score;}
 				Validation.create(newValidation).then(function(newValidationModel){
 					console.log('CREATE VALIDATION', newValidationModel);
-					createEvent(newValidationModel, 'create');
+					eventApp.create(newValidationModel);
 					newValidationModel.model = 'ASSOCIATION';
 					createAssociation(newValidationModel);
 				});

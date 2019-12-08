@@ -3,12 +3,15 @@ const Q = require('q');
 
 module.exports = {
 
-	get: function(req, res) {
+	get: async function(req, res) {
 
 		var limit = parseInt(req.query.limit) || 1;
 		var skip = parseInt(req.query.skip) || 0;
 		var sort = req.query.sort || 'createdAt DESC';	
 
+		//var event = await eventApp.find(req.query);
+		//res.json(event);
+		
 		console.log('GET EVENT', req.query)	
 
 		//TODO: AUDIT 

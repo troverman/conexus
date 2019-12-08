@@ -7,6 +7,7 @@ module.exports = {
         
         //DEPRECIATE
         model: {type: 'string', defaultsTo: 'VALIDATION'},
+        type: {type: 'string', defaultsTo: 'VALIDATION'},
 
         associatedModels: {type: 'json'},
 

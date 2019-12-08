@@ -349,7 +349,7 @@ module.exports = {
 					model.creator = userModel[0];
 					//console.log('CREATE ATTENTION', model)
 					Attention.publish([model.id], {verb:'create', data: model});
-					//createEvent(model);
+					//eventApp.create(model);
 					//createNotification(model);
 					//createValidation(model);
 					mintTokens(model);

@@ -83,17 +83,6 @@ module.exports = {
 
 	create: function (req, res) {
 
-		function createEvent(model){
-			var eventModel = {
-				type:'create',
-				model:{id:model.id,type:model.model},
-				data:{},
-			};
-			Event.create(eventModel);
-		};
-
-		function createNotification(model){};
-
 		function createValidation(model){
 			for (x in model.associatedModels){
 				var newValidation = {
@@ -199,9 +188,9 @@ module.exports = {
 			else {
 
 				App.publish([model.id], {verb: 'create', data: model});
-				createEvent(model);
 				
-				createNotification(model);	
+				eventApp.create(model);
+
 				createValidation(model);
 				res.json(model);
 

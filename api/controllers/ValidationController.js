@@ -280,14 +280,6 @@ module.exports = {
 			});
 		};
 
-		function createEvent(model){
-			var eventModel = {
-				verb:'create',
-				model:{id:model.id, type:'VALIDATION'}
-			};
-			Event.create(eventModel);
-		};
-
 		function createNotification(user, model){
 			//NOTIFICATIONS APP-MEMBER ASSOCIATION
 				//FIND PRIORITY MAPPINGS
@@ -378,7 +370,7 @@ module.exports = {
 
 					createAssociation(validation);
 					//createNotification(validation);
-					createEvent(validation);
+					eventApp.create(validation);
 					createTokens(validation);
 					res.json(validation);
 

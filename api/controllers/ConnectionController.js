@@ -48,26 +48,18 @@ module.exports = {
 		
 	},
 
-	create: function (req, res) {
+	create: async function (req, res) {
 
-		function createEvent(model, verb){
-			var eventModel = {
-				model:{id:model.id,type:model.model},
-				verb: verb,
-			};
-			Event.create(eventModel).then(function(model){
-				console.log('CREATE EVENT', model);
-				Event.publish([model.id], {verb: 'create', data: model});
-			});
-		};
 
-		function createNotification(model){};
+		//CONNETION -- ASSOCIATION -- VALIDATION 
 
-		//TODO: CONNECTION!
-		function createValidation(model){
+
+		//NO
+		async function createValidation(model){
+
 			//validation set
 			for (x in model.associatedModels){
-				var newValidation = {
+				var newValidationModel = {
 					content:model.id + ' VALIDATION',
 					context: {},
 					reputation: {},					
@@ -75,37 +67,42 @@ module.exports = {
 					creator: model.user.id,
 					data:{apps:{reactions: {plus:0,minus:0}, attention:{general:0}}}
 				};
+
 				//Connection.find({}).then(function(connectionModel){
 				//newValidation.connection = connectionModel[0];
-				newValidation.connection = {
+				newValidationModel.connection = {
 					parameters:{
 						context:{},
 					},
 				};
 				var associatedModelObj = {};
+
+				//REDUCE --> SELF ID ?? MM 
 				if (model.associatedModels[x].id.toLowerCase() == 'self'){associatedModelObj = {type:model.model, id:model.id}}
-				else{associatedModelObj = {
-					type:model.associatedModels[x].type,
-					id:model.associatedModels[x].id};
-				}
-				newValidation.associatedModels = [
+				else{associatedModelObj = {type:model.associatedModels[x].type, id:model.associatedModels[x].id};}
+
+				newValidationModel.associatedModels = [
 					{type:model.model, id:model.id},
 					associatedModelObj
 				];
+
 				//LIST -> OBJ
 				for (y in model.associatedModels[x].context){
-					newValidation.context[model.associatedModels[x].context[y].text] = model.associatedModels[x].context[y].score;
+					newValidationModel.context[model.associatedModels[x].context[y].text] = model.associatedModels[x].context[y].score;
 				}
-				newValidation.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(newValidation)).digest('hex');
-				Validation.create(newValidation).then(function(newValidationModel){
-					console.log('CREATE VALIDATION', newValidationModel);
-					createEvent(newValidationModel, 'create');
-					createAssociation(newValidationModel);
-				});
-				//});
+				newValidationModel.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(newValidationModel)).digest('hex');
+				
+				var newValidation = await Validation.create(newValidation)
+				console.log('CREATE VALIDATION', newValidationModel);
+				eventApp.create(newValidation);
+
+				createAssociation(newValidationModel);
+
 			}
 		};
 
+		//NO
+		//MESSY MESSY
 		function createAssociation(newValidationModel){
 			var newAssociationModel = {}; 
 			Validation.getDatastore().manager.collection('validation')
@@ -129,42 +126,29 @@ module.exports = {
 			});
 		};
 
-		function mintTokens(model){
-			var protocolTokens = getProtocolTokens(model);
-		};
-
-		function getProtocolTokens(model){
-			var protocolTokens = ['CRE8', 'CRE8+CONNECTION'];
-			return protocolTokens;
-		};
-
 		var model = {
 			model: 'CONNECTION',
+			type: 'CONNECTION', //DUPLICATE TO REDUCE ~
 			creator: req.param('creator'),
-
 			title:req.param('title'),
 			description:req.param('description'),
 			information: req.param('information'), //parameters?
 			associatedModels: req.param('associatedModels'),//id, type..
 			data:{apps:{reactions:{plus:0,minus:0},attention:{general:0}}}
-
 		};
 		model.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
 
-		console.log('CREATE CONNECTION', model);
+		//SKINNY CONTROLLERS --> TO REDUCE 
+		//var newConnection = await connectionApp.create(model);
+		//console.log('CREATE CONNECTION', newConnection, model);
+		//res.json(newConection);
 		
-		Connection.create(model)
-		.exec(function(err, model) {
-			if (err) {return console.log(err);}
-			else {
-				Connection.publish([model.id], {verb: 'create', data: model});
-				createEvent(model, 'create');
-				createNotification(model);
-				createValidation(model);
-				mintTokens(model);
-				res.json(model);
-			}
-		});
+		var newConnection = await Connection.create(model);
+		Connection.publish([newConnection.id], {verb: 'create', data: newConnection});
+		//(NOW MOMENT COMMENT - REDUCE DATA MODELS TO APPS) 
+		eventApp.create(newConnection);
+		createValidation(newConnection);
+		res.json(newConnection);
 		
 	},
 

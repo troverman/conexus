@@ -1371,11 +1371,15 @@ angular.module( 'conexus.home', [
                     if (index == -1){obj.isFollowing = false;}
                     return obj;
                 });
+                //LOL OKAY..
                 $scope.projects.map(function(obj){
                     var index = $scope.memberProjects.map(function(obj1){
                         for (x in obj1.associatedModels){
                             if (obj1.associatedModels[x].type == 'PROJECT'){
-                                return obj1.associatedModels[x].data.id
+                                console.log(obj1);
+                                if (obj1.associatedModels[x].data){
+                                    return obj1.associatedModels[x].data.id
+                                }
                             }
                         }
                     }).indexOf(obj.id);

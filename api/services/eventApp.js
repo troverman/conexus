@@ -1,37 +1,47 @@
 //CRE8.EVENT.ALPHA
-
-//recursive..
-//init(req, res, params);
-//params are 
-
 module.exports = {
 
+	//APP-APP CONNECTION 
 	import: { 
 		request: require('request'),
 		Q: require('q'),
+		//socket:require('socket')
 	},
 
-	//DATA MODELS ARE CONNECTIONS
-
-	//TEST
-	//REDUCE INTO SELF CONECTION W CONTEXT --> INTERNAL FUNCTION MAPPING 
-	language: 'Javascript',
-	compiler:'V8',
-
-	connections:[
+    //STATEMENT AS ARRAY
+    //TODO 
+	types:[
 		{
-			id:'self', 
+			type:'EVENT', 
+			//id: --> REDUCTION DESIRED ~~ HASH ID 
+			attributes:{
+	        	type: {type: 'string'},
+		        data: {type: 'json'},		   
+
+		        //PLACE OF STUDY
+		        	//CONSENSUS PLUGIN
+		        truthForestHashSet:{type:'json'}    
+
+		    }
+		}
+	],
+
+    //CONNECTIONS ARE THE LANGUAGE 
+    //-- THIS IS WIP FOR FUN
+    connections:[
+		{
+			//id:'self', 
 			type:'connection', 	
 			connections:[{
-				id:'self',
-				type:'event',
-				params:{
+				//id:'self',
+				type:'EVENT',
+				attributes:{
 					//DATA MODEL 
 					// EVENT IS AN OBJECT WITH CONSENSUS INFO
 					id:'', //HASH OF THE DATA OBJECT
 
 					//COULD BE FOR PLUGIN CONSENSUS APP . . . 
-					//THE RESPECTIVE FORSET HASHES
+					//THE RESPECTIVE FOSET HASHES
 						//MULTI MERKEL ROOTS
 						//VARIENT CONSENSUS
 
@@ -39,8 +49,7 @@ module.exports = {
 						//CONSENSUS MECHENISM IS WRITTEN IN CREATE
 						//PARSE THE HASHES AND CONNECTION HASHES  . . .
 							//RES{	
-									//[]..score
-
+								//[]..score
 							//}	
 
 					//MULTIDIMESNIONAL CONSENSUS
@@ -58,29 +67,50 @@ module.exports = {
 		}
 	],
 
-	get: function(req, res, params){
+	//NOTE: TEXT NEEDS TO BE BIGGER FOR THE STREAM PPL
+
+	//REDUCE INTO SELF CONECTION W CONTEXT
+	language: 'Javascript',
+	compiler:'V8',
+
+	get: async function(model){
+
+		//model.input, model.output, query . . 
+
+		//BETTER GET . . . WE ARE ABSTRACTING THOUGH MONOGO. . . 
+		//provide context hash
+		//truth variance 
+		return await Event.find({id:model.id});
 
 	},
 
-	create: function(req, res, params){
-
+	//HEllO, Thanks for reading 
+	create: function(model){
+		//model.input, model.output
+		//SLOWLY PHASE OUT STATIC DEFINED MODELS --> EVENT HEADER 
 		var eventModel = {
-			model:{
-				//UNIFY
-				id:model.id,
-				type:model.model
-			},
-			verb: verb,
+			//model:{
+				id:model.hash, // THIS IS AN UPDGRADE : RE THE PRESENT MOMENT DUPLICATION OF HASH AND IDS 
+				type:model.type || model.model, //LEGACY :|
+			//},
+
+			//WE CAN REDUCE THIS TO MACHIENE VALIDATION (EVENT-(EVENT-EVENT..) ASSOCIATION) :
+			//BETTER NEAME IS ? 
+			truthForestHashSet:[],
+			//TYPE DATA CHECKER? 
 			data: model,
+
 		};
-		//JUST SOME DATA.. STRUCTURE IT IN A WAY THE APPS ARE LOOKING FOR.. IE AS A DATA MODEL . . . .
-		//EVENT IS AN ALIAS FOR ALL CREATES . . .
+
+		//EVENT IS DEFINED IN model/event . . . unify 
+		//LEGACY BOOTSTRAPPING
+			//TRIE ATTEMPT ~ REDUCE TO BINARY THX ~
 		Event.create(eventModel).then(function(model){
 			console.log('CREATE EVENT', model);
+
+			//REDUCE / SOCKET BROADCAST 
 			Event.publish([model.id], {verb: 'create', data: model});
 		});
-
 	},
-
 
 };

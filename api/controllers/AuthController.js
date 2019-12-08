@@ -63,6 +63,8 @@ module.exports = {
                     //});
 
                     console.log('currently logged in user is: ' + req.user.username);
+                    //ALLOW FOR UNTYPED? --> MAKE APPS --> SESSION APP 
+                    //eventApp.create(session);
 
                     res.json(user);
 

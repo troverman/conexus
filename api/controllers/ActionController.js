@@ -1,4 +1,4 @@
-//CRE8.ACTION
+//CRE8.__ITEM__ACTION
 const Q = require('q');
 const crypto = require('crypto');
 
@@ -81,16 +81,6 @@ module.exports = {
 	},
 
 	create: function (req, res) {
-
-		//HEHEHE; WHATCHA THINKIN BOUT? ;)
-		function createEvent(model){
-			var eventModel = {
-				type:'create',
-				model:{id:model.id,type:model.model},
-				data:{},
-			};
-			Event.create(eventModel);
-		};
 		function mintTokens(model){
 			var protocolTokens = getProtocolTokens(model);
 		};

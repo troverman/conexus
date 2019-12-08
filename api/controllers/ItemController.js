@@ -10,7 +10,14 @@ const Q = require('q');
 
 module.exports = {
 
-	get: function(req, res) {
+	//. . . heh 
+	get: async function(req, res) {
+
+		//REDUCE TO FOR RC_A9
+		//var item = itemApp.get(req); 
+			//REDUCE MORE NEXT ITER FOR SINGLE CONTROLLER DEFINED
+			//[req.model].get(req);
+		//res.json(item);
 
 		function getAssociations(model){
 			var deferred = Q.defer();
@@ -76,6 +83,9 @@ module.exports = {
 		if(req.query.id){
 
 			//LOL WOW
+			//EITHER HASH OR ID...
+			//REDUCE ~? ALBEIT IS THERE STRENGTH IN A MULTI-IDENTIFER STRUCT? ~ PLURLALITY IS A STRENGTH (?)
+
 			var id = req.query.id;
 			var query = {};
 			if (mongodb.ObjectID.isValid(id)){query = { "_id": { $eq: mongodb.ObjectID(id) } }}
@@ -150,17 +160,6 @@ module.exports = {
 	},
 
 	create: function (req, res) {
-
-		function createEvent(model, verb){
-			var eventModel = {
-				model:{id:model.id,type:model.model},
-				verb: verb,
-			};
-			Event.create(eventModel).then(function(model){
-				console.log('CREATE EVENT', model);
-				Event.publish([model.id], {verb: 'create', data: model});
-			});
-		};
 
 		function createValidation(model){
 			for (x in model.associatedModels){
@@ -237,9 +236,6 @@ module.exports = {
 			});
 		};
 
-		function createNotification(model){
-		};
-
 		function mintTokens(model){
 			var protocolTokens = getProtocolTokens(model);
 		};
@@ -268,7 +264,6 @@ module.exports = {
 			content: req.param('content'),
 			location: req.param('location'),
 
-			//associatedModels: req.param('associatedModels'),
 			context: req.param('context'),
 
 			info: req.param('info'),
@@ -303,7 +298,7 @@ module.exports = {
 					itemModel.user = userModels[0];
 					Item.subscribe(req, [itemModel]);
 					Item.publish([itemModel.id], {verb: 'create', data: itemModel});
-					createEvent(itemModel, 'create');
+					eventApp.create(itemModel);
 					createNotification(itemModel);
 					createValidation(itemModel);
 					mintTokens(itemModel);
@@ -313,7 +308,5 @@ module.exports = {
 		});
 
 	},
-
-	update: function (req, res) {},
 	
 };

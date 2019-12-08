@@ -5,6 +5,14 @@ module.exports = {
         //DEPRECIATE
         model: {type: 'string', defaultsTo: 'CONNECTION'},
 
+
+
+        //THERE IS NOT FRICTION BETWEEN DISCRETE AND ABSTRACT STRUCUTRES
+        type: {type: 'string', defaultsTo: 'CONNECTION'},
+        //ID --> HASH
+
+
+
         //2nd order parameters
 		title: {type: 'string'},
 		description: {type: 'string'},
