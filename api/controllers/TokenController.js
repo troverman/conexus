@@ -1,14 +1,7 @@
 //CRE8.TOKEN
-
 module.exports = {
 
-	//TEST | WIP | PLAYGROUND
-	structure: function(req, res) {},
-	language: function(req, res) {},
-	congruence: function(req, res) {},
-	manifold: function(req, res) {},
-
-	get: function(req, res) {
+	get: async function(req, res) {
 
 		var limit = parseInt(req.query.limit) || 1;
 		var skip = parseInt(req.query.skip) || 0;
@@ -18,35 +11,18 @@ module.exports = {
 
 		//ERR
 		if (req.query.string){
-			Token.find({string:req.query.string})
-			.limit(limit)
-			.skip(skip)
-			.sort(sort)
-			.then(function(models) {
-				//Token.subscribe(req, [models[0].id]);
-				res.json(models);
-			});
+			var models = await Token.find({string:req.query.string}).limit(limit).skip(skip).sort(sort)
+			res.json(models);
 		}
 
 		else if (req.query.query){
-			console.log(req.query)
-			Token.find()
-			.where({string: {contains: req.query.query}})
-			.limit(limit)
-			.skip(skip)
-			.sort(sort)
-			.then(function(models) {
-				Token.subscribe(req, [models[0].id]);
-				res.json(models);
-			});
+			var models = await Token.find().where({string: {contains: req.query.query}}).limit(limit).skip(skip).sort(sort)
+			Token.subscribe(req, [models[0].id]);
+			res.json(models);
 		}
 
 		else{
-			Token.getDatastore().manager.collection('token')
-			.find({})
-			.limit(limit)
-			.skip(skip)
-			.sort({'information.markets':-1, "information.inCirculation": -1, "createdAt": -1})
+			Token.getDatastore().manager.collection('token').find({}).limit(limit).skip(skip).sort({'information.markets':-1, "information.inCirculation": -1, "createdAt": -1})
 			.toArray(function (err, models) {
 				models = models.map(function(obj){ obj.id = obj._id; return obj;});
 				Token.count().then(function(numRecords){
@@ -63,15 +39,10 @@ module.exports = {
 
 };
 
-
 //CRE8.TOKEN
 //module.exports = {
 //	get: async function(req, res) {
-//		var model = await actionApp.get(req); 
+//		var model = await tokenApp.get(req); 
 //		res.json(model);
 //	},
-//	update: async function (req, res) {
-//		var newModel = await actionApp.create(req);
-//		res.json(newModel);
-//	}
 //};

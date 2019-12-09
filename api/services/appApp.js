@@ -4,13 +4,26 @@
 //WORK ON TYPE COMPOSITION
 module.exports = {
 
+	//IMPORTS ARE APP-APP CONNECTIONS
 	import:{
 		Q: require('q'),
 		crypto: require('crypto')
 	},
 
+	connections:[
+		{
+			type: 'APP', 
+			//id: --> REDUCTION DESIRED ~~ HASH ID 
+			attributes:{
+		    }
+		}
+	],
+
+	//appApp.connections.app.find();
+	//self.connections.app.find(); --> 
+
 	//TODO
-	get: async function(res){
+	get: async function(req){
 		var deferred = appApp.import.Q.defer();
 		var limit = parseInt(req.query.limit) || 1;
 		var skip = parseInt(req.query.skip) || 0;
@@ -18,10 +31,16 @@ module.exports = {
 		var id = req.query.id;
 		console.log('GET APP', req.query);
 		if(req.query.id){
+
+			
 			var apps = await App.find({id:id}).limit(limit).skip(skip).sort(sort);
-			App.subscribe(req, [models[0].id]);
+			//-->IMPORT TRIE . . . :P
+
+
+			App.subscribe(req, [apps[0].id]);
 			//TODO: MANY-MANY RELATIONSHIP; SEE NOTIFICATIONS . . . 
 			var models = await associationApp.get(apps[0]);
+			console.log(models);
 			deferred.resolve(models);
 		}
 		else{
@@ -32,7 +51,7 @@ module.exports = {
 		return deferred.promise;
 	},
 
-	create: async function(res){
+	create: async function(req){
 		var deferred = appApp.import.Q.defer();
 		var model = {
 			model: 'APP',

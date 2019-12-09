@@ -2,32 +2,9 @@
 const Q = require('q');
 const crypto = require('crypto');
 
-//GOOGLEAPP
-function googleGeoCodeService(model){
-	var deferred = Q.defer();
-	//TODO: SECURITY! HIDE THIS.. SECRET INFORMATION.. NEED ENCRYPTION.
-	var googleMapsClient = require('@google/maps').createClient({
-		key: 'AIzaSyDcTGxD4H3lnx84u8EPcbh7PodbsEyzbg4'
-	});
-	googleMapsClient.geocode({address: model.location}, function(err, response) {
-		location = null;
-		if (!err) {
-			location = {
-				address:response.json.results[0].formatted_address,
-				lat:parseFloat(response.json.results[0].geometry.location.lat),
-				lng:parseFloat(response.json.results[0].geometry.location.lng),
-				coordinates: [parseFloat(response.json.results[0].geometry.location.lng), parseFloat(response.json.results[0].geometry.location.lat)],
-			};
-			deferred.resolve(location);
-		}
-		else{deferred.resolve(location);}
-	});
-	return deferred.promise;
-};
-
 module.exports = {
 
-	get: function(req, res) {
+	get: async function(req, res) {
 
 		function getAssociations(model){
 			var deferred = Q.defer();
@@ -91,19 +68,14 @@ module.exports = {
 		console.log('GET TASK', req.query);
 
 		if(req.query.id){
-			Task.find({id:id}).then(function(models) {
-				Task.subscribe(req, [models[0].id]);
-				getAssociations(models[0]).then(function(models){res.json(models);});
-			});
+			var models = await Task.find({id:id})
+			Task.subscribe(req, [models[0].id]);
+			getAssociations(models[0]).then(function(models){res.json(models);});
 		}
 
 		//lol
 		else if (req.query.project){
-			Task.getDatastore().manager.collection('task')
-			.find({"associatedModels.address":{$in :[project]}})
-			.limit(limit)
-			.skip(skip)
-			.sort({'createdAt':-1})
+			Task.getDatastore().manager.collection('task').find({"associatedModels.address":{$in :[project]}}).limit(limit).skip(skip).sort({'createdAt':-1})
 			.toArray(function (err, models) {
 				models = models.map(function(obj){ obj.id = obj._id; return obj;});
 				var promises = [];
@@ -119,23 +91,15 @@ module.exports = {
 
 		//DEPERCIATE
 		else if (req.query.tag){
-			Task.find({tags:{contains: tag}})
-			.limit(limit)
-			.skip(skip)
-			.sort(sort)
-			.populate('user')
-			.then(function(models) {
-				Task.count().then(function(numRecords){
-					Task.subscribe(req, models.map(function(obj){return obj.id}));
-					var promises = [];
-					for (x in models){promises.push(getAssociations(models[x]));}
-					Q.all(promises).then((populatedModels)=>{
-						for (x in models){models[x] = populatedModels[x];}
-						var returnObj = {data:models, info:{count:numRecords}};
-						res.json(returnObj);
-					});
-				});
-			});
+			var models = await Task.find({tags:{contains: tag}}).limit(limit).skip(skip).sort(sort).populate('user')
+			var numRecords = await Task.count()
+			Task.subscribe(req, models.map(function(obj){return obj.id}));
+			var promises = [];
+			for (x in models){promises.push(getAssociations(models[x]));}
+			var populatedModels = await Q.all(promises)
+			for (x in models){models[x] = populatedModels[x];}
+			var returnObj = {data:models, info:{count:numRecords}};
+			res.json(returnObj);
 		}
 
  		//STUDY THIS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -170,31 +134,19 @@ module.exports = {
 		}
 
 		else{
-			Task.find({})
-			.limit(limit)
-			.skip(skip)
-			.sort(sort)
-			.populate('user')
-			.then(function(models) {
-				Task.count().then(function(numRecords){
-					Task.subscribe(req, models.map(function(obj){return obj.id}));
-					var promises = [];
-					for (x in models){promises.push(getAssociations(models[x]));}
-					Q.all(promises).then((populatedModels)=>{
-						for (x in models){models[x] = populatedModels[x];}
-						var returnObj = {data:models, info:{count:numRecords}};
-						res.json(returnObj);
-					});
-				});
-			});
+			var models = await Task.find({}).limit(limit).skip(skip).sort(sort).populate('user')
+			var numRecords = await Task.count()
+			Task.subscribe(req, models.map(function(obj){return obj.id}));
+			var promises = [];
+			for (x in models){promises.push(getAssociations(models[x]));}
+			var populatedModels = await Q.all(promises)
+			for (x in models){models[x] = populatedModels[x];}
+			var returnObj = {data:models, info:{count:numRecords}};
+			res.json(returnObj);
 		}
 	},
 
-	create: function (req, res) {
-
-		function createNotification(model){
-
-		};
+	create: async function (req, res) {
 
 		function createValidation(model){
 			for (x in model.associatedModels){
@@ -279,49 +231,6 @@ module.exports = {
 			});
 		};
 
-		function mintTokens(model){
-			var taskProtocolTokens = getProtocolTokens(model);
-			for (x in taskProtocolTokens){
-				var tokenString = taskProtocolTokens[x];
-				(function(tokenString) {
-					Token.find({string:tokenString}).then(function(tokenModels){
-						if (tokenModels.length == 0){
-							var newTokenModel = {
-								string:tokenString,
-								protocols:['CRE8','TASK'], 
-								information:{inCirculation:model.amount, markets:0},
-								logic:{transferrable:true, mint:'CREATE TASK'}
-							};
-							Token.create(newTokenModel).then(function(model){console.log('TOKEN CREATED', model.string);});
-							model.user.balance[tokenString] = parseFloat(model.amount);
-							User.update({id:model.user.id}, {balance:model.user.balance}).then(function(user){});
-						}
-						else{
-							tokenModels[0].information.inCirculation = parseInt(tokenModels[0].information.inCirculation) + parseFloat(model.amount); 
-							Token.update({id:tokenModels[0].id}, {information:tokenModels[0].information}).then(function(model){console.log('TOKEN UPDATED', model)});
-							if (model.user.balance[tokenString]){model.user.balance[tokenString] = parseInt(model.user.balance[tokenString]) + parseFloat(model.amount);}
-							else{model.user.balance[tokenString] = parseFloat(model.amount);}
-							User.update({id:model.user.id}, {balance:model.user.balance}).then(function(user){});
-						}
-					});
-
-				})(tokenString);
-			}
-		};
-
-		//TODO ASSOIATION..
-		//EVENT CENTRIC FACTORING
-		function getProtocolTokens(model){
-			var protocolTokens = [
-				'CRE8', 
-				'CRE8+TASK', 
-				'CRE8+TASK+'+model.id
-				//context
-			];
-			
-			return protocolTokens;
-		};
-
 		var model = {
 			model: 'TASK',
 
@@ -339,42 +248,35 @@ module.exports = {
 
 		};
 		model.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
+
 		console.log('CREATE TASK', model);
-		Task.create(model)
-		.exec(function(err, task) {
-			if (err) {return console.log(err);}
-			else {
+		var model = await Task.create(model);
+		
+		//TODO: BETTER SETUP
+		//TODO: BETTER 'EXTERNAL' UTILITY
+		var userModels = await User.find({id:task.user});
 
-				//TODO: BETTER SETUP
-				//TODO: BETTER 'EXTERNAL' UTILITY
-				User.find({id:task.user}).then(function(userModels){
+		if(task._id){project.id = project._id.toString()}
+		model.associatedModels = req.param('associatedModels');
+		model.user = userModels[0];
 
-					if(task._id){project.id = project._id.toString()}
-					model.associatedModels = req.param('associatedModels');
-					model.user = userModels[0];
+		var location = await googleApp.geoCode(task);
+		task.location = location;
 
-					googleGeoCodeService(task).then(function(location){
-						
-						task.location = location;
-						
-						Task.update({id:task.id}, {location:location}).then(function(taskModel){
-							console.log('UPDATE PROJECT LOCATION -- GEO CODE');
-										
-							Task.subscribe(req, [task.id]);
-							Task.publish([model.id], {verb: 'create', data: taskModel});
+		var taskModel = await Task.update({id:task.id}, {location:location});
+		console.log('UPDATE PROJECT LOCATION -- GEO CODE');
 
-							createEvent(task, 'create');
-							createNotification(task);
-							createValidation(task);
-							mintTokens(task);
-							res.json(task);
+		Task.subscribe(req, [task.id]);
+		Task.publish([model.id], {verb: 'create', data: taskModel});
 
-						});
-					});
-				});
+		eventApp.create(task);
+		taskApp.tokens.create(task);
 
-			}
-		});
+		//for x in
+		createValidation(task);
+
+		res.json(task);
+ 	
 	},
 
 };

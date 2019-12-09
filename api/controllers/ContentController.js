@@ -280,94 +280,6 @@ module.exports = {
 			});
 		};
 
-		function mintTokens(model){
-			var protocolTokens = getProtocolTokens(model);
-		};
-
-		//TODO: FACTOR
-		function getProtocolTokens(model){
-			
-			//for you to see the progress 
-			//change model to app / type (APP = [  = protocol ] | think token and market ~ WHAT IS THE MOST PRIMITIVE TYPE A BIT BOI)
-				//8 BYTE WORD
-												//patterns of bools (0,1 ~~> QUANTUM GIVES SMOOTH) ?? OR OR third stat which is an and 
-															//GRADIENT IS TRUTH
-																	//2^3 , 0,1,0+1
-												//SOOO. . . IT'S A STRING
-
-			//[yes] --> NATURAL RECURSION 
-			//off rails kinda
-			//CAN CONNECTION BE MOST PRIMITIVE TYPE OR STRING --> CONVERT OR BONRAY (I MEAN WERE DEALING WITH LAYERS OF ABSTRACTION) 
-
-
-			var protocolTokens = [
-				'CRE8', 
-				'CRE8+'+model.model, 
-				'CRE8+'+model.model+'+'+model.id,
-			];
-
-			//GET APP PROTOCOL HERE-->
-			//THIS ABOUT ABSTRACT STRUCTURE / BUILDER FOR TOKENS
-			//HARDCODE NOW
-			if (model.model == 'ACTION'){}
-			if (model.model == 'APP'){}
-			if (model.model == 'ASSOCIATION'){
-
-				//TODO
-				var string ='CRE8+ASSOCIATION+'
-				console.log(model);
-				//LINK THE ASSOCIATIONS
-
-				//DO AS .map().join
-				//TODO: ' , ' grammer
-				for (x in model.associatedModels){
-					//TODO: STANDARDIZE DATA IN ASSOCIATEDMODELS
-					string = string + '+' + model.associatedModels[x].type + '+' + model.associatedModels[x].id;
-					model.associatedModels[x].type
-				}
-				//protocolTokens.push(string);
-
-			}
-			if (model.model == 'ATTENTION'){} 
-			if (model.model == 'CONTENT'){}
-			if (model.model == 'ITEM'){}
-			if (model.model == 'PROJECT'){}
-			if (model.model == 'REACTION'){} 
-			if (model.model == 'TASK'){}
-			if (model.model == 'TIME'){}
-			if (model.model == 'TRANSACTION'){}
-			if (model.model == 'VALIDATION'){}
-
-			//TYPES OF STRING SERILIZATION
-
-			//DATA MODEL OBJ TO STRING
-			for (x in Object.keys(model)){
-				var dataType = Object.keys(model)[x].toUpperCase();
-				var data = model[Object.keys(model)[x]];
-				var prefix = 'CRE8+'+model.model;
-				var string = prefix+'+'+dataType+'+'+data;
-				protocolTokens.push(string);
-			};
-
-			//SHA256 HASH DIGEST OF DATA SIGNED WITH CRE8
-			for (x in Object.keys(model)){
-				var data = model[Object.keys(model)[x]];
-				var hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(data)).digest('hex');
-				var prefix = 'CRE8+'+model.model;
-				var string = prefix+'+'+hash;
-				protocolTokens.push(string);
-			};
-
-			//SHA256 HASH DIGEST OF AGGREGATE DATA SIGNED WITH CRE8
-			var hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
-			var prefix = 'CRE8+'+model.model;
-			var string = prefix+'+'+hash;
-			protocolTokens.push(string);
-
-			return protocolTokens;
-
-		};
-
 
 		//language of connections to recurse to bits 
 			//the highleve abstract to opcodes to binary seems a chore | gotta be better 
@@ -421,9 +333,11 @@ module.exports = {
 
 		Content.subscribe(req, [newContent.id]);
 		Content.publish(model.id, {verb: 'create', data: model});
+
 		eventApp.create(newContent);
+		contentApp.token.create(newContent);
+
 		createValidation(newContent);
-		mintTokens(newContent);
 		res.json(newContent);
 
 	},

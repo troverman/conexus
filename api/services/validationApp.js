@@ -271,6 +271,8 @@ module.exports = {
 			context: req.param('context'),
 			parameters: req.param('parameters'),
 
+			//content
+
 			associatedModels: req.param('associatedModels'),
 
 			//THINK: COUNTS 
@@ -293,6 +295,28 @@ module.exports = {
 		};
 
 		model.hash = validationApp.import.crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
+
+
+
+
+		//THINK
+		var associatedModelObj = {};
+		if (model.associatedModels[x].id.toLowerCase() == 'self'){associatedModelObj = {type:model.model, id:model.id}}
+		else{associatedModelObj = {
+			type:model.associatedModels[x].type,
+			id:model.associatedModels[x].id};
+		}
+		newValidation.associatedModels = [
+			{type:model.model, id:model.id},
+			associatedModelObj
+		];
+
+		//LIST -> OBJ
+		for (y in model.associatedModels[x].context){newValidation.context[model.associatedModels[x].context[y].text] = model.associatedModels[x].context[y].score;}
+
+
+
+
 		console.log('CREATE VALIDATION', model);
 		var newValidation = await Validation.create(model);	
 		newValidation.user = userModels[0];
@@ -302,6 +326,8 @@ module.exports = {
 		//NotificationApp.create[model.model.toLowerCase()](validation);
 		NotificationApp.create.validation(validation);
 		eventApp.create(validation);
+		associationApp.create(validation);
+
 		deferred.resolve(newValidation);
 		return deferred.promise;
 	},
@@ -345,10 +371,10 @@ module.exports = {
 		},
 
 		create:async function (model){
-			var transactionProtocolTokens = validationApp.tokens.get(model);
-			for (x in transactionProtocolTokens){
+			var tokens = validationApp.tokens.get(model);
+			for (x in tokens){
 
-				var tokenString = transactionProtocolTokens[x]; 
+				var tokenString = tokens[x]; 
 				var tokenModels = await Token.find({string:tokenString});
 
 				if (tokenModels.length == 0){

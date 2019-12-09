@@ -24,6 +24,7 @@ module.exports = {
 	import: { 
 		request: require('request'),
 		Q: require('q'),
+		//React: require('react'),
 		//event: require('event'),
 			//IMPORT DATABASE CONNECTION 
 	},
@@ -114,6 +115,7 @@ module.exports = {
 
 	//FLATTEN? AND STANDARIZE & MADE MODULAR . . . 
 	//DEFINE LANGUAGE AND PARAMETERS FOR VIEW PARSING --> IMPORT THE PARSERS
+	//SEPERATE APP TO RETURN HTML
 	views:{
 		item:{
 			route:'/item/:id',
@@ -127,10 +129,25 @@ module.exports = {
 		},
 		items:{
 			route:'/items',
-			controller:function(){},
+			controller:function(){
+
+				//export default class Component extends React.Component {
+				//    function = () => {
+				//    };
+				//    render() {
+				//    	//OR DOWNLOADED
+				//        return (
+				//            '<html></html>'
+				//        );
+				//    }
+				//}
+
+			},
 			templates:[{}],
 		},
 	},
+
+
 
 
 };

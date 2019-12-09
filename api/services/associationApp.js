@@ -2,6 +2,8 @@
 module.exports = {
 
 	import:{
+		//WORK ON REQUIRE KEY WORD.. 
+			//DOWNLOAD AND BUILD BASED ON TYPE
 		Q: require('q'),
 		crypto: require('crypto')
 	},
@@ -33,7 +35,7 @@ module.exports = {
 				}
 
 				(async () => {
-					var populatedModels = await Q.all(promises);
+					var populatedModels = await associationApp.import.Q.all(promises);
 					for (x in model.associationModels){
 						for (y in associationModels[x].associatedModels){
 							var index = parseInt(x+y);
@@ -50,7 +52,47 @@ module.exports = {
 		return deferred.promise;
 	},
 
-	create: async function(res){},
+
+	//DO BETTER --> BASED ON CONNECTION! 
+	create: async function(newValidationModel){
+
+		var newAssociationModel = {}; 
+		Validation.getDatastore().manager.collection('validation')
+		.find({
+			$and : [
+				{"associatedModels.id": {$in :[newValidationModel.associatedModels[0].id]}}, 
+				{"associatedModels.id": {$in :[newValidationModel.associatedModels[1].id]}}
+			]
+		})
+		.limit(1000)
+		.skip(0)
+		.sort({'createdAt':-1})
+		.toArray(function (err, validationModels) {
+			Association.getDatastore().manager.collection('association')
+			.find({
+				$and : [
+					{"associatedModels.id": {$in :[validationModels[0].associatedModels[0].id]}},
+					{"associatedModels.id": {$in :[validationModels[0].associatedModels[1].id]}},
+				]
+			})
+			.limit(1000)
+			.skip(0)
+			.sort({'createdAt':-1})
+			.toArray(function (err, associationModels) {
+				if (associationModels.length == 0){
+					var newAssociationModel = newValidationModel;
+					Association.create(newAssociationModel).then(function(association){
+						console.log('CREATED ASSOCIATION', association);
+						Association.publish([association.id], {verb: 'create', data: association});
+					});
+				}
+				else{
+					console.log('ASSOCIATION EXISTS -- COMPUTE');
+				}
+			});
+		});
+
+	},
 
 	tokens:{},
 	
