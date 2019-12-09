@@ -67,6 +67,12 @@ module.exports = {
 
 		},
 
+		reaction: async function(model){
+			var model = await Notification.create(notificationModel);
+			console.log('CREATE NOTIFICATION', model);
+			Notification.publish([model.id], {verb: 'create', data: model});
+		},
+
 	},
 
 };
