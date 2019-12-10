@@ -63,5 +63,8 @@ module.exports = {
 		return deferred.promise;
 	},
 
+	nearByLocations: function(model){
+	},
+
 
 };

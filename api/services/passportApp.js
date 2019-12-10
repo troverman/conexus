@@ -1,9 +1,11 @@
-//CRE8.PASSPORTSERVICE
+//CRE8.PASSPORTAPP
+
+//TODO: EVERYTHING
 
 const path = require('path');
 const url = require('url');
 const passport = require('passport');
-passport.protocols = require('./protocols');
+passport.protocols = require('./passportApps');
 
 passport.connect = function (req, query, profile, next) {
 

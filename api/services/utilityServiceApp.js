@@ -5,6 +5,7 @@ const request = require('request');
 
 module.exports = {
 
+	//TODO: GEONAMES APP 
 	getGeoNamesByParent: function(geoNameParentId, parentId, username, nestLevel){
 		//voetr1, voetr2, voetr3, voetr4, voetr5, troverman
 		if (!nestLevel){var nestLevel=0}
@@ -54,7 +55,8 @@ module.exports = {
 			}
 		});
 	},
-
+	
+	//TODO: GEONAMES APP 
 	getNamesWorld: function(){
 		var model = {
 			url: 'http://api.geonames.org/countryInfoJSON?formatted=true&lang=en&username=troverman',
@@ -76,6 +78,7 @@ module.exports = {
 
 	//POPULATION ++ CRYSTAL IS ++ 
 	//DO MULTI VALIDATION
+	//TODO: GEONAMES APP 
 	getGeoNames: function(model){
 		var requestModel = {json: true};
 
@@ -185,31 +188,7 @@ module.exports = {
 		});
 	},
 
-	googleGeoCodeService: function(model){
-		var deferred = Q.defer();
-		var googleMapsClient = require('@google/maps').createClient({
-			key: 'AIzaSyDcTGxD4H3lnx84u8EPcbh7PodbsEyzbg4'
-		});
-		googleMapsClient.geocode({address: model.location}, function(err, response) {
-			location = null;
-			if (!err) {
-				location = {
-					address:response.json.results[0].formatted_address,
-					lat:parseFloat(response.json.results[0].geometry.location.lat),
-					lng:parseFloat(response.json.results[0].geometry.location.lng),
-					coordinates: [parseFloat(response.json.results[0].geometry.location.lng), parseFloat(response.json.results[0].geometry.location.lat)],
-				};
-				deferred.resolve(location);
-			}
-			else{deferred.resolve(location);}
-		});
-		return deferred.promise;
-	},
-
-	googleNearbyService: function(model){
-	},
-
-	tagsToAssociation: function(dataModel, limit){
+	tagsToAssociation: async function(dataModel, limit){
 		var promise = ''
 		if (dataModel = 'CONTENT'){promise = Content.find({}).limit(limit).skip(0).sort('createdAt DESC')}
 		if (dataModel = 'ITEM'){promise = Item.find({}).limit(limit).skip(0).sort('createdAt DESC')}
@@ -217,48 +196,111 @@ module.exports = {
 		if (dataModel = 'TASK'){promise = Task.find({}).limit(limit).skip(0).sort('createdAt DESC')}
 		if (dataModel = 'TIME'){promise = Task.find({}).limit(limit).skip(0).sort('createdAt DESC')}
 		if (dataModel = 'TRANSACTION'){promise = Transaction.find({}).limit(limit).skip(0).sort('createdAt DESC')}
-		promise.then(function(models){
-			for (x in models){
-				var validationModel = {
-					//dont need to double store this for self.. 
-					associatedModels:[
-						{type:dataModel, id:models[x].id},
-						{type:dataModel, id:models[x].id},
-					],
-					context:{general:100},
-					validation:{general:100},
-					parameters:{type:'SELF', connection:'CRE8COREPROJECTSELF'},
-					type:'HUMAN',
-					creator:models[x].user,
-					user:models[x].user,
-					content:'SELF IMPLICIT ASSOCIATION',
-					data:{apps:{reactions:{plus:0,minus:0},attention:{general:0}}}
-				};
-				if (models[x].tags){
-					var context = models[x].tags.split(',');
-					for (y in context){
-						//should be 0 - 1 
-						validationModel.context[context[y]] = 100
-						validationModel.validation[context[y]] = 100 
-					}
+		var models = await promise;
+		for (x in models){
+			var validationModel = {
+				//dont need to double store this for self.. 
+				associatedModels:[
+					{type:dataModel, id:models[x].id},
+					{type:dataModel, id:models[x].id},
+				],
+				context:{general:100},
+				validation:{general:100},
+				parameters:{type:'SELF', connection:'CRE8COREPROJECTSELF'},
+				type:'HUMAN',
+				creator:models[x].user,
+				user:models[x].user,
+				content:'SELF IMPLICIT ASSOCIATION',
+				data:{apps:{reactions:{plus:0,minus:0},attention:{general:0}}}
+			};
+			if (models[x].tags){
+				var context = models[x].tags.split(',');
+				for (y in context){
+					//should be 0 - 1 
+					validationModel.context[context[y]] = 100
+					validationModel.validation[context[y]] = 100 
 				}
-				console.log(validationModel)
 			}
-		});
+			console.log(validationModel)
+		}
 	},
 
-	purge: function(model){
-		console.log(model)
-		Project.find({title:{contains:model}}).then(function(models){
-			console.log(models)
-			if (models.length > 0){
-				var idArray = models.map(function(obj){return obj.id});
-				console.log(idArray)
-				//Project.destroy(idArray, function(err, model) {
-				//	console.log(model);
-				//});
-			}
-		});
+	//TODO: GENERALIZE
+	//LEGACY
+	//FOLLOWERS TO ASSOCIATION
+	followersToAssociation: async function(){
+		var followerModels = await Follower.find({}).limit(1000).skip(0).sort('createdAt DESC');
+		for (x in followerModels){
+
+			//FINALIZE 'CONTEXT + PARAMETERS'
+			//SOURCE AND TARGET (PEER VALIDATION) IN CONNECTION IS BY MANIFOLD REPUTATION MULTIPLIERS 
+				//IN PROTOCOL... IN CONNECTION 'CODE' (OHHHHHH WOW), DEFIN THAT ONLY MEMBER AND ASSIGN THEM SELVES AS SOURCE 
+					//.. SOMTHIN. LOL :) 
+
+			//SCOPE
+			//GET CONNECTION
+			//REUCTION FUNCTION DEFINED
+
+			//DEFAULT FOLLOWER CONNECTION
+			var connectionModel = await Connection.find();
+
+			var validationModel = {
+				creator:followerModels[x].follower,
+				associatedModels:[
+					{
+						type:'MEMBER', 
+						id:followerModels[x].follower, 
+						context:{
+							label:'source'
+						}
+					},
+					{
+						type:'MEMBER', 
+						id:followerModels[x].followed, 
+						context:{
+							label:'target'
+						}
+					}
+				],
+				connection:connectionModel[0]
+			};
+
+			//CREATE VALIDATION
+			//var validationModels = await Validation.create(validationModel).then(function(validationModels){
+
+			//REDUCTION FUNCTION (CONNECTION DEFINED)
+			//EASYHERE
+				//CONNECITION AGNOSTIC?
+					//IE COMPUTED NOT STORED?
+						//YEE... WE CAN COMPUTE 
+						//I WANNA SEE THE ASSOCIATION WITH ANOTHER CONNECTION --> EASY FRONT END FLOW? 
+								//YA RECOMPUTE ALGS ARE EASY
+
+
+			//CREATE ASSOCIATION
+			//Association.create(validationModel);
+
+		}
+	},
+
+	updateTransactionContext: async function(){
+		var transactionModels = await Transaction.find({}).limit(10000);
+		for (x in transactionModels){
+			if(!transactionModels[x].context){transactionModels[x].context = transactionModels[x].tags}
+			console.log(transactionModels[x].context)
+			var transactionModel = await Transaction.update({id:transactionModels[x].id}, {context:transactionModels[x].context})
+		}
+	},
+
+	purge: async function(model){
+		var models = await Project.find({title:{contains:model}});
+		if (models.length > 0){
+			var idArray = models.map(function(obj){return obj.id});
+			console.log(idArray)
+			//Project.destroy(idArray, function(err, model) {
+			//	console.log(model);
+			//});
+		}
 	}
 
 };

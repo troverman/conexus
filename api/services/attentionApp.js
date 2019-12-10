@@ -1,9 +1,9 @@
 //CRE8.ATTENTION.ALPHA
 module.exports = {
-
 	tokens:{
 		create:function(){
-			var protocolTokens = getProtocolTokens(model);
+			//this, self .. 
+			var tokens = attentionApp.tokens.get(model);
 			updateAssociatedModels(model, protocolTokens);
 		},
 

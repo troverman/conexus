@@ -1,6 +1,4 @@
-
 module.exports.bootstrap = function(cb) {
-	sails.services.passport.loadStrategies();
-	intervalService.intervalService();
+	initApp.init();
 	cb();
 };

@@ -361,6 +361,19 @@ module.exports = {
 		});
 	},
 
+	fitBitInterval: async function(){
+		var userModels = await User.find().populate('passports')
+		for (x in userModels){
+			var fitbitPassport = userModels[x].passports.filter(function(obj){return obj.provider=='fitbit'});
+			if (fitbitPassport){
+				var provider = 'fitbit';
+                var options = {scope:['activity','heartrate','location','profile', 'sleep']};
+                var auth = await passport.authenticate(provider, options)({},{});
+                fitbitApp.getData(userModels[x]);
+			}
+		}
+	},
+
 	//TODO: APP SPECIFIC MANIS
 	//TODO: STRUCTURE TOKEN MINTING
 	//TODO:FORMALIZE A TOKEN PROTOCOL

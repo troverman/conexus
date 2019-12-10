@@ -6,20 +6,19 @@
 
 module.exports = {
 
-    logout: function (req, res) {
+    logout: async function (req, res) {
         req.user.loggedIn = false;
-        User.update({id: req.user.id}, {loggedIn: false}).then(function(userModel) {
-            User.publish([userModel[0].id], {verb: 'create', data: userModel[0].id});
-        });
+        var userModel = await User.update({id: req.user.id}, {loggedIn: false});
+        User.publish([userModel[0].id], {verb: 'create', data: userModel[0].id});
         console.log(req.user.username + ': logged out');
         req.logout();
         res.redirect('/');
     },
 
-    provider: function (req, res) {passport.endpoint(req, res);},
+    provider: function (req, res) {passportApp.endpoint(req, res);},
 
     callback: function (req, res) {
-        passport.callback(req, res, function (err, user) {
+        passportApp.callback(req, res, function (err, user) {
             if(user){if (user._id){user.id = user._id;}}
             req.login(user, function (err) {
                 if (err) {res.redirect('/login');}
@@ -34,10 +33,10 @@ module.exports = {
                     });
 
                     //if user is mining
-                    Peer.find({}).then(function(){});
+                    //Peer.find({});
 
                     //FIND ALL ASSOCIATIONS FOR USER
-                    Association.find({}).then(function(){});
+                    //Association.find({});
 
                     //POST SESSION IN VIEW
                     //DECENTRALIZE SESSION MANAGEMENT...
@@ -57,7 +56,7 @@ module.exports = {
                     //var provider = 'fitbit';
                     //var options = {scope:['activity','heartrate','location','profile', 'sleep']};
                     //HMM -- BAD
-                    //passport.authenticate(provider, options)(req, res, req.next).then(function(){
+                    //passportApp.authenticate(provider, options)(req, res, req.next).then(function(){
                         fitbitApp.getData(user);
                         //mmm
                         //master interval 
@@ -74,4 +73,5 @@ module.exports = {
             });
         });
     }
+
 };

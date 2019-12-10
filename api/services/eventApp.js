@@ -90,7 +90,8 @@ module.exports = {
 		//SLOWLY PHASE OUT STATIC DEFINED MODELS --> EVENT HEADER 
 		var eventModel = {
 			//model:{
-				id:model.hash, // THIS IS AN UPDGRADE : RE THE PRESENT MOMENT DUPLICATION OF HASH AND IDS 
+				//ERR: MONOO DOEST LIKE THE SHA-256 ID
+				hashId:model.hash, // THIS IS AN UPDGRADE : RE THE PRESENT MOMENT DUPLICATION OF HASH AND IDS 
 				type:model.type || model.model, //LEGACY :|
 			//},
 

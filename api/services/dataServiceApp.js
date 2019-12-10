@@ -1,18 +1,19 @@
 //CRE8.DATASERVICE
+//TODO: CONTAINIZER INTO MORE APPS 
 
-//const tf = require('@tensorflow/tfjs');
-//require('@tensorflow/tfjs-node');
+const tf = require('@tensorflow/tfjs');
+require('@tensorflow/tfjs-node');
 const Q = require('q');
 const async = require('async');
 const _ = require('lodash');
 
 //POWER SET
 function getAllSubsets(theArray) {
-  return theArray.reduce(function (subsets, value) {
-    return subsets.concat(subsets.map(function (set) {
-      return [value].concat(set);
-    }));
-  }, [[]]);
+	return theArray.reduce(function (subsets, value) {
+		return subsets.concat(subsets.map(function (set) {
+			return [value].concat(set);
+		}));
+	}, [[]]);
 };
 
 function intersect(a, b) {return a.filter(Set.prototype.has, new Set(b));};
@@ -102,7 +103,7 @@ module.exports = {
 		//we want two functions.. important to compute the tree then reduce. 
 
 		//FACTOR TO DO FROM ASSICATION?
-		function buildVaidationTree(validationModels, parent, level){
+		async function buildVaidationTree(validationModels, parent, level){
 			//ONE TOO MANY STEPS.. 
 			level++
 			promises.push([]);
@@ -117,32 +118,30 @@ module.exports = {
 				validationModels.children = [];
 				validationTree.push(validationModels[x]);
 
-				Q.all(promises[level])
-				.then(function(validationModelData){
+				var validationModelData = await Q.all(promises[level]);
+				for (y in validationModelData){
 
-					for (y in validationModelData){
-
-						if (validationModelData[y].length != 0){
-							//level++
-							//need some resolve
-							for (z in validationModelData[y]){
-								//validationTree.push()
-								//{object.children}
-								buildVaidationTree(validationModelData[z].id, validationModels[x], level).then(function(validationTree){
-									deferred.resolve(validationTree);
-								});
-							}
-						}
-						else{
-							//u a leafff
-							//NEED TO KEEP ALL DATA IN TREE / OBJECT
-							//validationTree[parent][level] = {}
-							//SOME OBJ HERE.
-							//WERE DONE WITH DATA COLLECTIONS.. DO THE CONNECTION MATH ON LEVEL - 1
-							deferred.resolve(validationTree);
+					if (validationModelData[y].length != 0){
+						//level++
+						//need some resolve
+						for (z in validationModelData[y]){
+							//validationTree.push()
+							//{object.children}
+							buildVaidationTree(validationModelData[z].id, validationModels[x], level).then(function(validationTree){
+								deferred.resolve(validationTree);
+							});
 						}
 					}
-				});
+					else{
+						//u a leafff
+						//NEED TO KEEP ALL DATA IN TREE / OBJECT
+						//validationTree[parent][level] = {}
+						//SOME OBJ HERE.
+						//WERE DONE WITH DATA COLLECTIONS.. DO THE CONNECTION MATH ON LEVEL - 1
+						deferred.resolve(validationTree);
+					}
+				}
+				
 			}
 		};
 
@@ -1591,7 +1590,7 @@ module.exports = {
 		return maximumBinaryRelationship;
 	},
 
-	//TODO
+	//TODO: ORGANIZE LOL!
 	traverse: function(){
 
 		//const identity = tf.eye(10000,10000).print();
@@ -1626,10 +1625,6 @@ module.exports = {
 				}));
 			}, [[]]);
 	    };
-
-	    function diff (a, b) {
-		    return a.filter(function(i) {return b.indexOf(i) < 0;});
-		};
 
 		function searchObject(object, matchCallback, currentPath, result, searched) {
 	        currentPath = currentPath || '';
@@ -1835,7 +1830,6 @@ module.exports = {
 		};
 
 		function traverse(model, path){
-
 			Order.find({identiferSet:model})
 			.then(function(models){
 				//LOG TRAVERSE PATH
@@ -2007,7 +2001,7 @@ module.exports = {
 			//TASK --> PROJ LINKAGES
 
 		//WERKIN
-		function modification(){
+		async function modification(){
 
 			//Project.find().limit(10000).then(function(models){
 			//	for (x in models){
@@ -2043,20 +2037,38 @@ module.exports = {
 			//RETROACTIVE VALIDATIONS TO CREATE ASSOCIATIONS.. IMPLICIT VALIDATION
 			//STRUCTURE VALIDATIONS AND ASSOICATEDMODELS :')
 			//TAGS ARE ASSOCIATIED. 
-			Time.find().limit(10000).then(function(models){
-				for (x in models){
+			var models = await Time.find().limit(10000);
+			for (x in models){
 
-					//CONTENT, MEMBER, TASK, TIME, (PROJECT..) // STORE COMPOUND..? 
-					//console.log('TYPE', models[x].type); // RETORACTIVE, TIME, STREAM, DATA API
-					//console.log('associatedModels', models[x].associatedModels);
-					//console.log('PROJECT', models[x].project);
-					//console.log('TASK', dmodels[x].task);
-					//console.log('STREAM', models[x].stream);
+				//CONTENT, MEMBER, TASK, TIME, (PROJECT..) // STORE COMPOUND..? 
+				//console.log('TYPE', models[x].type); // RETORACTIVE, TIME, STREAM, DATA API
+				//console.log('associatedModels', models[x].associatedModels);
+				//console.log('PROJECT', models[x].project);
+				//console.log('TASK', dmodels[x].task);
+				//console.log('STREAM', models[x].stream);
 
-					//models[x].associatedModels = [];
-					/*
-					if (models[x].project){
-						models[x].associatedModels.push({
+				//models[x].associatedModels = [];
+				/*
+				if (models[x].project){
+					models[x].associatedModels.push({
+						type:'PROJECT', 
+						address:models[x].project, 
+						validation:{
+						}, 
+						//VALIDATION NEST VS POPULATION
+						associatedModels:[],
+						assoiatedValidations:[],
+					});
+				}
+				
+				if (models[x].task){
+					models[x].associatedModels.push({
+						type:'TASK', 
+						address:models[x].task, 
+						validation:{
+						}, 
+						//VALIDATION NEST VS POPULATION
+						associatedModels:[{
 							type:'PROJECT', 
 							address:models[x].project, 
 							validation:{
@@ -2064,57 +2076,38 @@ module.exports = {
 							//VALIDATION NEST VS POPULATION
 							associatedModels:[],
 							assoiatedValidations:[],
-						});
-					}
-					
-					if (models[x].task){
-						models[x].associatedModels.push({
-							type:'TASK', 
-							address:models[x].task, 
-							validation:{
-							}, 
-							//VALIDATION NEST VS POPULATION
-							associatedModels:[{
-								type:'PROJECT', 
-								address:models[x].project, 
-								validation:{
-								}, 
-								//VALIDATION NEST VS POPULATION
-								associatedModels:[],
-								assoiatedValidations:[],
-							}],
-							assoiatedValidations:[],
-						});
-					}
-					if (models[x].stream){
-						models[x].associatedModels.push({
-							type:'STREAM', 
-							address:models[x].stream, 
-							validation:{
-							}, 
-							//VALIDATION NEST VS POPULATION
-							associatedModels:[],
-							assoiatedValidations:[],
-						});
-					}
-					if (models[x].startTime){
-						models[x].type = 'RETROACTIVE';
-					}
-					else{
-						models[x].type = 'TIMER';
-					}
-					//REMOVE NULL AND VERIFICATION SCORE
-					//Object.keys(models[x]).forEach((key) => (models[x][key] == null) && delete models[x][key]);
-					*/
-
-					if (!models[x].associatedModels){
-						models[x].associatedModels = [{type:'TASK', address:models[x].task}];
-						//Time.update({id:models[x].id}, {associatedModels:models[x].associatedModels}).then(function(){
-						//	console.log('update')
-						//});
-					}
+						}],
+						assoiatedValidations:[],
+					});
 				}
-			});
+				if (models[x].stream){
+					models[x].associatedModels.push({
+						type:'STREAM', 
+						address:models[x].stream, 
+						validation:{
+						}, 
+						//VALIDATION NEST VS POPULATION
+						associatedModels:[],
+						assoiatedValidations:[],
+					});
+				}
+				if (models[x].startTime){
+					models[x].type = 'RETROACTIVE';
+				}
+				else{
+					models[x].type = 'TIMER';
+				}
+				//REMOVE NULL AND VERIFICATION SCORE
+				//Object.keys(models[x]).forEach((key) => (models[x][key] == null) && delete models[x][key]);
+				*/
+
+				if (!models[x].associatedModels){
+					models[x].associatedModels = [{type:'TASK', address:models[x].task}];
+					//Time.update({id:models[x].id}, {associatedModels:models[x].associatedModels}).then(function(){
+					//	console.log('update')
+					//});
+				}
+			}
 			
 			//Validation.find().limit(10000).then(function(postModels){
 			//	for (x in postModels){
@@ -2130,90 +2123,83 @@ module.exports = {
 			//});
 
 			//CREATE RETRO VALIDS
-			Time.find().limit(10000).then(function(models){
+			var models = await Time.find().limit(10000)
+			for (x in models){
+				var model = models[x];
 
-				async.eachSeries(models, function (model, nextIteration){ 
+				console.log(model.task, model.project, model.stream);
 
-					console.log(model.task, model.project, model.stream);
+				var validationModels = [];
 
-					var validationModels = [];
-
-					var validationModel = {
-						reputation:{},
-						context:{
-							general:100
-						},
-						user:model.user,
-						creator:model.user,
-						parameters:{
-							charter:'GENERAL'
-						},
-						type:'HUMAN'
-					};
-					
-					if (model.tags){
-						var context = model.tags.split(',');
+				var validationModel = {
+					reputation:{},
+					context:{
+						general:100
+					},
+					user:model.user,
+					creator:model.user,
+					parameters:{
+						charter:'GENERAL'
+					},
+					type:'HUMAN'
+				};
+				
+				if (model.tags){
+					var context = model.tags.split(',');
+					for (x in context){
+						validationModel.context[context[x]] = 100;
+					}
+					if (model.user){
 						for (x in context){
-							validationModel.context[context[x]] = 100;
-						}
-						if (model.user){
-							for (x in context){
-								validationModel.reputation[context[x]] = 0;
-							}
+							validationModel.reputation[context[x]] = 0;
 						}
 					}
-					
-					if (model.task){
-						validationModel.associatedModels = [
-							{type:'TIME', address:model.id},
-							{type:'TASK', address:model.task}
-						];
-						validationModels.push(validationModel);
-					}
-					if (model.project){
-						validationModel.associatedModels = [
-							{type:'TIME', address:model.id},
-							{type:'PROJECT', address:model.project}
-						];
-						validationModels.push(validationModel);
-					}
-
-					console.log(validationModels);
-
-					process.nextTick(nextIteration);
-					//Validation.create().then(function(){
-						//UPDATE TIME TO COMPUTED VALIDATION
-						//VALIDATION.FIND()
-					//});
-
-
-				});	
-
-			});
-
-			Content.find().limit(700).skip(0).then(function(postModels){
-				for (x in postModels){
-					if (postModels[x].work){postModels[x].time = postModels[x].work }
-					if (postModels[x].post){postModels[x].contentModel = postModels[x].post }
-					if (!postModels[x].associatedModels){
-						postModels[x].associatedModels = [];
-						if (postModels[x].item){postModels[x].associatedModels.push({type:'ITEM', address:postModels[x].item})}
-						if (postModels[x].order){postModels[x].associatedModels.push({type:'ORDER', address:postModels[x].order})}
-						if (postModels[x].profile){postModels[x].associatedModels.push({type:'PROFILE', address:postModels[x].profile})}
-						if (postModels[x].project){postModels[x].associatedModels.push({type:'PROJECT', address:postModels[x].project})}
-						if (postModels[x].task){postModels[x].associatedModels.push({type:'TASK', address:postModels[x].task})}
-						if (postModels[x].time){postModels[x].associatedModels.push({type:'TIME', address:postModels[x].time})}
-						if (postModels[x].transaction){postModels[x].associatedModels.push({type:'TRANSACTION', address:postModels[x].transaction})}
-						if (postModels[x].contentModel){postModels[x].associatedModels.push({type:'CONTENT', address:postModels[x].contentModel})}
-					}
-					//Object.keys(postModels[x]).forEach((key) => (postModels[x][key] == null) && delete postModels[x][key]);
-					//console.log(x, postModels[x]);
-			//		Content.update({id:postModels[x].id}, {time:postModels[x].time, contentModel:postModels[x].contentModel}).then(function(model){
-			//			console.log('update')
-			//		});
 				}
-			});
+				
+				if (model.task){
+					validationModel.associatedModels = [
+						{type:'TIME', address:model.id},
+						{type:'TASK', address:model.task}
+					];
+					validationModels.push(validationModel);
+				}
+				if (model.project){
+					validationModel.associatedModels = [
+						{type:'TIME', address:model.id},
+						{type:'PROJECT', address:model.project}
+					];
+					validationModels.push(validationModel);
+				}
 
+				console.log(validationModels);
+
+				//var newValidation = await Validation.create();
+				//UPDATE TIME TO COMPUTED VALIDATION
+				//VALIDATION.FIND()
+				
+			}
+			
+
+			var postModels = await Content.find().limit(700).skip(0);
+			for (x in postModels){
+				if (postModels[x].work){postModels[x].time = postModels[x].work }
+				if (postModels[x].post){postModels[x].contentModel = postModels[x].post }
+				if (!postModels[x].associatedModels){
+					postModels[x].associatedModels = [];
+					if (postModels[x].item){postModels[x].associatedModels.push({type:'ITEM', address:postModels[x].item})}
+					if (postModels[x].order){postModels[x].associatedModels.push({type:'ORDER', address:postModels[x].order})}
+					if (postModels[x].profile){postModels[x].associatedModels.push({type:'PROFILE', address:postModels[x].profile})}
+					if (postModels[x].project){postModels[x].associatedModels.push({type:'PROJECT', address:postModels[x].project})}
+					if (postModels[x].task){postModels[x].associatedModels.push({type:'TASK', address:postModels[x].task})}
+					if (postModels[x].time){postModels[x].associatedModels.push({type:'TIME', address:postModels[x].time})}
+					if (postModels[x].transaction){postModels[x].associatedModels.push({type:'TRANSACTION', address:postModels[x].transaction})}
+					if (postModels[x].contentModel){postModels[x].associatedModels.push({type:'CONTENT', address:postModels[x].contentModel})}
+				}
+				//Object.keys(postModels[x]).forEach((key) => (postModels[x][key] == null) && delete postModels[x][key]);
+				//console.log(x, postModels[x]);
+				//var updatedContent = await Content.update({id:postModels[x].id}, {time:postModels[x].time, contentModel:postModels[x].contentModel});
+			}
+		
 			/*
 			Project.find().limit(5000).skip(0).then(function(projectModels){
 				for (x in projectModels){
@@ -2284,7 +2270,7 @@ module.exports = {
 	},
 
 	//MAX 5 COMB ASSETS
-	tensorBuild: function(){
+	tensorBuild: async function(){
 
 		const marketTensor = [];
 
@@ -2292,155 +2278,147 @@ module.exports = {
 		//MULTIEXCHANGE.. ? KEEP IT SIMPLE RN 
 
 		//(A_m-->[A_m-n]--x7-->[A_m-n])
+		//var orderModels = await Order.find({identiferSet:'A'}).limit(100);
 
-		Order.find({identiferSet:'A'}).limit(100).then((orderModels)=>{
-			for (x in orderModels){
-				//console.log(orderModels[x]);
-
-			}
-		});
-
-		Token.find().limit(10).then((tokenModels)=>{
+		var tokenModels = await Token.find().limit(10)
 			
-			//SORT BY ACTIVITY..?
-			//NEED COMB LOGIC.. 
-			//SOMEHOW LINK 5 ASSETS SO THERE IS A LATTICE IN THE CONNECTIONS OF COMP ASSETS IE A,B,C,D,E 
+		//SORT BY ACTIVITY..?
+		//NEED COMB LOGIC.. 
+		//SOMEHOW LINK 5 ASSETS SO THERE IS A LATTICE IN THE CONNECTIONS OF COMP ASSETS IE A,B,C,D,E 
 
-			var tokenSet = tokenModels.map((obj)=>{return obj.string}).slice(0,4);
-			//var tokenSet = ['a','b','c','d','e','f'];
-			var maximumBinaryRelationship = dataService.getData(tokenSet, true);
+		var tokenSet = tokenModels.map((obj)=>{return obj.string}).slice(0,4);
+		//var tokenSet = ['a','b','c','d','e','f'];
+		var maximumBinaryRelationship = dataService.getData(tokenSet, true);
 
-			for (x in maximumBinaryRelationship){
+		for (x in maximumBinaryRelationship){
+			var tensorIndex = marketTensor.map((obj)=>{return obj.name}).indexOf(maximumBinaryRelationship[x][0].join(','));
+			if (tensorIndex == -1){
+				marketTensor.push({name:maximumBinaryRelationship[x][0].join(','), data:[]});
 				var tensorIndex = marketTensor.map((obj)=>{return obj.name}).indexOf(maximumBinaryRelationship[x][0].join(','));
-				if (tensorIndex == -1){
-					marketTensor.push({name:maximumBinaryRelationship[x][0].join(','), data:[]});
-					var tensorIndex = marketTensor.map((obj)=>{return obj.name}).indexOf(maximumBinaryRelationship[x][0].join(','));
-					marketTensor[tensorIndex].data.push({
-						name:maximumBinaryRelationship[x][1].join(','), 
-						bids:new Array(2).fill(null).map(()=>new Array(maximumBinaryRelationship[x][0].length).fill(null)), 
-						asks:new Array(2).fill(null).map(()=>new Array(maximumBinaryRelationship[x][1].length).fill(null))
-					})
+				marketTensor[tensorIndex].data.push({
+					name:maximumBinaryRelationship[x][1].join(','), 
+					bids:new Array(2).fill(null).map(()=>new Array(maximumBinaryRelationship[x][0].length).fill(null)), 
+					asks:new Array(2).fill(null).map(()=>new Array(maximumBinaryRelationship[x][1].length).fill(null))
+				})
+			}
+			else{
+				marketTensor[tensorIndex].data.push({
+					name:maximumBinaryRelationship[x][1].join(','), 
+					bids:new Array(2).fill(null).map(()=>new Array(maximumBinaryRelationship[x][0].length).fill(null)), 
+					asks:new Array(2).fill(null).map(()=>new Array(maximumBinaryRelationship[x][1].length).fill(null))
+				})
+			}
+
+		}
+		//console.log(marketTensor);
+		console.dir(marketTensor, { depth: null });
+
+		//powerset x powerset
+
+		//for (x in tokenModels){
+		//	marketTensor.push({name:tokenModels[x].string, data:[]})
+		//	for (y in tokenModels){
+		//		//marketTensor[x].data.push({name:tokenModels[y].string, data:[]});
+		//		marketTensor[x].data.push({name:tokenModels[y].string, bids:[], asks:[]})
+		//	}
+		//}
+
+		//TENSOR
+		//ASSETS x ASSETS
+		//2, BIDS, ASKS
+		//ORDERBOOK DIM -> 5
+		//ORDERBOOK DEPTH --> 100? 
+		//WHAT ABOUT INDIV ORDERS
+		//EASY MARKET..
+		//a,b,c,d
+		var tensor = [];
+		for (x in ['a','b','c','d']){
+			for (y in ['a','b','c','d']){
+				if ( x == y ) {
+					tensor.push([[[1,1],[1,1],[1,1]],[[1,1],[1,1],[1,1]]])
 				}
 				else{
-					marketTensor[tensorIndex].data.push({
-						name:maximumBinaryRelationship[x][1].join(','), 
-						bids:new Array(2).fill(null).map(()=>new Array(maximumBinaryRelationship[x][0].length).fill(null)), 
-						asks:new Array(2).fill(null).map(()=>new Array(maximumBinaryRelationship[x][1].length).fill(null))
-					})
-				}
-
-			}
-			//console.log(marketTensor);
-			console.dir(marketTensor, { depth: null });
-
-			//powerset x powerset
-
-			//for (x in tokenModels){
-			//	marketTensor.push({name:tokenModels[x].string, data:[]})
-			//	for (y in tokenModels){
-			//		//marketTensor[x].data.push({name:tokenModels[y].string, data:[]});
-			//		marketTensor[x].data.push({name:tokenModels[y].string, bids:[], asks:[]})
-			//	}
-			//}
-
-			//TENSOR
-			//ASSETS x ASSETS
-			//2, BIDS, ASKS
-			//ORDERBOOK DIM -> 5
-			//ORDERBOOK DEPTH --> 100? 
-			//WHAT ABOUT INDIV ORDERS
-			//EASY MARKET..
-			//a,b,c,d
-			var tensor = [];
-			for (x in ['a','b','c','d']){
-				for (y in ['a','b','c','d']){
-					if ( x == y ) {
-						tensor.push([[[1,1],[1,1],[1,1]],[[1,1],[1,1],[1,1]]])
-					}
-					else{
-						tensor.push(
-							[[[100,1],[200,2],[300,3]],
-							[[100,1],[200,0.5],[300,0.1]]]
-						);
-					}
+					tensor.push(
+						[[[100,1],[200,2],[300,3]],
+						[[100,1],[200,0.5],[300,0.1]]]
+					);
 				}
 			}
-			//const simpleMarket = tf.tensor(tensor);
-			//console.log(simpleMarket)
-			//simpleMarket.print();
+		}
+		//const simpleMarket = tf.tensor(tensor);
+		//console.log(simpleMarket)
+		//simpleMarket.print();
 
-			//MM TENSOR.. EASY PLZ
-			//[a,b,c,d]
-			//DIM 4 BOOK
-			//IT's THICK
+		//MM TENSOR.. EASY PLZ
+		//[a,b,c,d]
+		//DIM 4 BOOK
+		//IT's THICK
 
-			//USE REFLECTIONS? --> THERE ARE A SET OF THESE 'MIN MESH(s)' --> RERHAPS LIEING WITHIN E7+1 -- albeit this is a complete guess
-			//HARD PART -- CREATE A MESH OF PLUR ASSETS WITH A FIELD OF RANK 5 TENSORS SUCH THAT TRAVERSAL ORDER IS MINIMIZED ACROSS THE 'RING?' / market
-			//..OK .. WITHIN THE SUPER SET GEOMETRY. . NODE CONNTECTIONS | BRAID
-			//this is getting hyper complex. break lel.. let's go back to create.capital . . --> perform operations with one exchange.. tensor
+		//USE REFLECTIONS? --> THERE ARE A SET OF THESE 'MIN MESH(s)' --> RERHAPS LIEING WITHIN E7+1 -- albeit this is a complete guess
+		//HARD PART -- CREATE A MESH OF PLUR ASSETS WITH A FIELD OF RANK 5 TENSORS SUCH THAT TRAVERSAL ORDER IS MINIMIZED ACROSS THE 'RING?' / market
+		//..OK .. WITHIN THE SUPER SET GEOMETRY. . NODE CONNTECTIONS | BRAID
+		//this is getting hyper complex. break lel.. let's go back to create.capital . . --> perform operations with one exchange.. tensor
 
-			var tokenSet = tokenModels.map((obj)=>{return obj.string}).slice(0,4);
-			var maximumBinaryRelationship = dataService.getData(tokenSet, false);
-			//console.log(maximumBinaryRelationship);
+		var tokenSet = tokenModels.map((obj)=>{return obj.string}).slice(0,4);
+		var maximumBinaryRelationship = dataService.getData(tokenSet, false);
+		//console.log(maximumBinaryRelationship);
 
 
-			var relationShipTensor = [];
-			//OBtensor
+		var relationShipTensor = [];
+		//OBtensor
 
-			//SHAPE [ assets, 2, 5, 5, 2, n ],
-			//TRAIN NN TO.. -->REDUCE.
+		//SHAPE [ assets, 2, 5, 5, 2, n ],
+		//TRAIN NN TO.. -->REDUCE.
 
-			for (x in maximumBinaryRelationship){
-				var bids = [[[0,0],[0,0],[0,0],[0,0]],[[0,0],[0,0],[0,0],[0,0]],[[0,0],[0,0],[0,0],[0,0]],[[0,0],[0,0],[0,0],[0,0]]];
-				var asks = [[[0,0],[0,0],[0,0],[0,0]],[[0,0],[0,0],[0,0],[0,0]],[[0,0],[0,0],[0,0],[0,0]],[[0,0],[0,0],[0,0],[0,0]]];
-				//var bids = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];
-				//var asks = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];
-				//var bids = [0,0,0,0];
-				//var asks = [0,0,0,0];
+		for (x in maximumBinaryRelationship){
+			var bids = [[[0,0],[0,0],[0,0],[0,0]],[[0,0],[0,0],[0,0],[0,0]],[[0,0],[0,0],[0,0],[0,0]],[[0,0],[0,0],[0,0],[0,0]]];
+			var asks = [[[0,0],[0,0],[0,0],[0,0]],[[0,0],[0,0],[0,0],[0,0]],[[0,0],[0,0],[0,0],[0,0]],[[0,0],[0,0],[0,0],[0,0]]];
+			//var bids = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];
+			//var asks = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];
+			//var bids = [0,0,0,0];
+			//var asks = [0,0,0,0];
 
-				//ONE MORE DIM IN -- MM OB
-				//THIS mm.. just so we can understand the struct
-				//[amount,price]1,[amount,price]2,...[]n --> if asset in quasi. else 0
+			//ONE MORE DIM IN -- MM OB
+			//THIS mm.. just so we can understand the struct
+			//[amount,price]1,[amount,price]2,...[]n --> if asset in quasi. else 0
 
-				for (y in maximumBinaryRelationship[x][0]){
-					if (maximumBinaryRelationship[x][0] == 'A'){bids[0][0]=[1,1]}//[[[1,1],[1,2],[1,1],[2,1]],[[1,1],[1,2],[1,1],[2,1]]]}
-					if (maximumBinaryRelationship[x][0] == 'B'){bids[1][1]=[1,1]}//[[[0,1],[2,1],[1,2],[2,1]],[[0,1],[2,1],[1,2],[2,1]]]}
-					if (maximumBinaryRelationship[x][0] == 'C'){bids[2][2]=[1,1]}//[[[0,1],[2,1],[1,2],[2,1]],[[0,1],[2,1],[1,2],[2,1]]]}
-					if (maximumBinaryRelationship[x][0] == 'D'){bids[3][3]=[1,1]}//[[[0,1],[2,1],[1,2],[2,1]],[[0,1],[2,1],[1,2],[2,1]]]}
-				}
-
-				for (y in maximumBinaryRelationship[x][1]){
-					if (maximumBinaryRelationship[x][1] == 'A'){asks[0][0]=[1,1]}//[[[0,1],[2,1],[1,2],[2,1]],[[0,1],[2,1],[1,2],[2,1]]]}
-					if (maximumBinaryRelationship[x][1] == 'B'){asks[1][1]=[1,1]}//[[[0,1],[2,1],[1,2],[2,1]],[[0,1],[2,1],[1,2],[2,1]]]}
-					if (maximumBinaryRelationship[x][1] == 'C'){asks[2][2]=[1,1]}//[[[0,1],[2,1],[1,2],[2,1]],[[0,1],[2,1],[1,2],[2,1]]]}
-					if (maximumBinaryRelationship[x][1] == 'D'){asks[3][3]=[1,1]}//[[[0,1],[2,1],[1,2],[2,1]],[[0,1],[2,1],[1,2],[2,1]]]}
-				}
-
-				relationShipTensor.push([bids,asks]);
-
+			for (y in maximumBinaryRelationship[x][0]){
+				if (maximumBinaryRelationship[x][0] == 'A'){bids[0][0]=[1,1]}//[[[1,1],[1,2],[1,1],[2,1]],[[1,1],[1,2],[1,1],[2,1]]]}
+				if (maximumBinaryRelationship[x][0] == 'B'){bids[1][1]=[1,1]}//[[[0,1],[2,1],[1,2],[2,1]],[[0,1],[2,1],[1,2],[2,1]]]}
+				if (maximumBinaryRelationship[x][0] == 'C'){bids[2][2]=[1,1]}//[[[0,1],[2,1],[1,2],[2,1]],[[0,1],[2,1],[1,2],[2,1]]]}
+				if (maximumBinaryRelationship[x][0] == 'D'){bids[3][3]=[1,1]}//[[[0,1],[2,1],[1,2],[2,1]],[[0,1],[2,1],[1,2],[2,1]]]}
 			}
-			//console.log(relationShipTensor)
-			const multiMarketRelationship = tf.tensor(relationShipTensor);
-			//console.log(multiMarketRelationship)
-			//multiMarketRelationship.print();
 
-			//const lattice =  tf.ones([8,8,8,8,8,8,8,8]);
-			//console.log(lattice)
-			//lattice.print();
-			//const lattice =  tf.ones([4,4,4,4]);
-			//console.log(lattice)
-			//lattice.print();
+			for (y in maximumBinaryRelationship[x][1]){
+				if (maximumBinaryRelationship[x][1] == 'A'){asks[0][0]=[1,1]}//[[[0,1],[2,1],[1,2],[2,1]],[[0,1],[2,1],[1,2],[2,1]]]}
+				if (maximumBinaryRelationship[x][1] == 'B'){asks[1][1]=[1,1]}//[[[0,1],[2,1],[1,2],[2,1]],[[0,1],[2,1],[1,2],[2,1]]]}
+				if (maximumBinaryRelationship[x][1] == 'C'){asks[2][2]=[1,1]}//[[[0,1],[2,1],[1,2],[2,1]],[[0,1],[2,1],[1,2],[2,1]]]}
+				if (maximumBinaryRelationship[x][1] == 'D'){asks[3][3]=[1,1]}//[[[0,1],[2,1],[1,2],[2,1]],[[0,1],[2,1],[1,2],[2,1]]]}
+			}
 
-			//GET ORDER BOOKS..
-			//BUILD 1st ORDER 1st 
-			//STRUCTURE AS RECURSIVE.
+			relationShipTensor.push([bids,asks]);
 
-		})
+		}
+		//console.log(relationShipTensor)
+		const multiMarketRelationship = tf.tensor(relationShipTensor);
+		//console.log(multiMarketRelationship)
+		//multiMarketRelationship.print();
+
+		//const lattice =  tf.ones([8,8,8,8,8,8,8,8]);
+		//console.log(lattice)
+		//lattice.print();
+		//const lattice =  tf.ones([4,4,4,4]);
+		//console.log(lattice)
+		//lattice.print();
+
+		//GET ORDER BOOKS..
+		//BUILD 1st ORDER 1st 
+		//STRUCTURE AS RECURSIVE.
 	},
 
 	//TO BE REPLACED BY LATTICE OPERATIONS
 	//POWERSET LATTICE? 
-	legacyTraverse:function(inputAssets, outputAssets, outputValues){
+	legacyTraverse: async function(inputAssets, outputAssets, outputValues){
 
 		//var inputVectorValues = []; //UNKNOWN
 		var inputVectorAssets = inputAssets; //CAN BE UNKNOWN | OR NOT
@@ -2459,15 +2437,14 @@ module.exports = {
 		//MAP THE BOOK TO THE LATTICE?
 		//FIND SET OF PATHS FROM [N]->[M] | SOME DECOMPOSIIOTN OF DFINED SELF SIMIALR? 
 
-		Order.find({identiferSet:inputVectorAssetString})
-		.then(function(models){
-			//console.log(models)
-			//for (x in models){
-			//	if (models[x].identiferSet1.contains(outputAssets)){
-			//		console.log('sup')
-			//	}
-			//}
-		});
+		var models = await Order.find({identiferSet:inputVectorAssetString});
+		//console.log(models)
+		//for (x in models){
+		//	if (models[x].identiferSet1.contains(outputAssets)){
+		//		console.log('sup')
+		//	}
+		//}
+
 	},
 
 };

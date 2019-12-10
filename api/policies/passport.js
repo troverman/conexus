@@ -1,12 +1,13 @@
-/**
- * Passport Middleware
- *
- */
+
+//TODO: REDUCE THIS 
+//TODO: SESSION APP
+//TODO: PASSPORT-SESSION CONNECTION
+
 module.exports = function (req, res, next) {
   // Initialize Passport
-  passport.initialize()(req, res, function () {
+  passportApp.initialize()(req, res, function () {
 	// Use the built-in sessions
-	passport.session()(req, res, function () {
+	passportApp.session()(req, res, function () {
 		// Make the user available throughout the frontend
 		res.locals.user = req.user;
 		next();
