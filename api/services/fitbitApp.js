@@ -361,7 +361,7 @@ module.exports = {
 		});
 	},
 
-	fitBitInterval: async function(){
+	interval: async function(){
 		var userModels = await User.find().populate('passports')
 		for (x in userModels){
 			var fitbitPassport = userModels[x].passports.filter(function(obj){return obj.provider=='fitbit'});
