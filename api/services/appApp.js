@@ -12,12 +12,24 @@ module.exports = {
 
 	connections:[
 		{
+			//APP ID ?
 			type: 'APP', 
 			//id: --> REDUCTION DESIRED ~~ HASH ID 
 			attributes:{
 		    }
 		}
 	],
+
+	//THIS FILE
+	//THE PEER IS SELF
+	//self.connections.connections;
+
+	//self.connections.connections.association;
+	//self.connections.connections.association.validation;
+
+	//self.connections.connections.validation.association = {find:function(model){}};
+
+	//self.connections.connections.association['TOKEN STAKED'];
 
 	//appApp.connections.app.find();
 	//self.connections.app.find(); --> 

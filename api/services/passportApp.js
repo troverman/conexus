@@ -77,6 +77,7 @@ passport.endpoint = function (req, res) {
     this.authenticate(provider, options)(req, res, req.next);
 };
 
+//TODO: LOOK AT 'THIS' :)
 passport.callback = function (req, res, next) {
     var provider = req.param('provider', 'local')
     var action   = req.param('action');

@@ -1,3 +1,4 @@
+//TODO: INIT
 process.chdir(__dirname);
 var sails = require('sails');
 var rc = require('rc');
