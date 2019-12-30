@@ -23,18 +23,20 @@ module.exports = {
 		//TODO: PEER BUILD
 		//TODO: APP-APP CONNECTION
 
-		intervalServiceApp.interval(universalTokenApp.interval, 8640000);
-		intervalServiceApp.interval(privacyTokenApp.interval, 8640000);
-		intervalServiceApp.interval(fitbitApp.interval, 8640000);
+		//intervalServiceApp.interval(universalTokenApp.interval, 8640000);
+		//intervalServiceApp.interval(privacyTokenApp.interval, 8640000);
+		//intervalServiceApp.interval(fitbitApp.interval, 8640000);
 
 		//LEGACY IN AN INTERVAL.. BUILD EVERY EVENT . . 
-		intervalServiceApp.interval(reputationApp.build, 8640000);
+		//intervalServiceApp.interval(reputationApp.build, 8640000);
+		
+		//LEGACY IN AN INTERVAL.. BUILD EVERY EVENT . . 
+		//intervalServiceApp.interval(populationApp.tokenStringSpace, 8640000);
 
 		//DATA SERVICE
-		//dataService.getData();
-		//dataService.traverse();
-		//dataService.tensorBuild();
-		intervalServiceApp.interval(populationApp.tokenStringSpace, 8640000);
+		//dataServiceApp.getData();
+		//dataServiceApp.traverse();
+		//dataServiceApp.tensorBuild();
 
 		//DATA MODIFICATION UTILS
 		//utilityServiceApp.tagsToAssociation('PROJECT', 2);

@@ -18,6 +18,7 @@ module.exports = {
 
 };
 
+//GRUNT / GULP APP? 
 //toomuch
 //async function buildClientFrontend(model){
 	//await Association // MEMBER-APP

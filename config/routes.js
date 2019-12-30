@@ -104,8 +104,8 @@ module.exports.routes = {
   'get /api/association': 'AssociationController.get',
 
   /* Block routes */
-  'get /api/block': 'BlockController.get',
-  'post /api/block': 'BlockController.create',
+  //'get /api/block': 'BlockController.get',
+  //'post /api/block': 'BlockController.create',
 
   /* Connection routes */
   'get /api/connection': 'ConnectionController.get',
@@ -136,7 +136,7 @@ module.exports.routes = {
   'post /api/order': 'OrderController.create',
 
   /* Reaction routes */
-  'get /api/reaction': 'ReactionController.get',
+  //'get /api/reaction': 'ReactionController.get',
   'post /api/reaction': 'ReactionController.create',
 
   /* Peer routes */

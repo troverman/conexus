@@ -1,5 +1,15 @@
 //TODO: INIT
 process.chdir(__dirname);
-var sails = require('sails');
+
+//TODO: FROM SAILS TO ROCKETS ; something something
+var peer = require('sails');
 var rc = require('rc');
-sails.lift(rc('sails'));
+
+peer.lift(rc('sails'));
+
+//require init
+
+//peer.lift({
+//hooks:{foo: false}, // if you want to disable some of them
+//  paths: { views: 'mydir/views' }, // relative to appDir
+//}, function(err, server) {});

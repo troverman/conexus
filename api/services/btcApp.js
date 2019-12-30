@@ -1,5 +1,130 @@
 module.exports = {
 
+	connections:[
+
+		//DEFINE SELF CONNECTION
+		{
+			type:'connection', 
+			id:'self',
+			connections:[{
+				type:'btcApp',
+				id:'self',
+				connections:[{		
+
+					create:{
+
+						wallet:function(model){
+							//EXPOSE FUNCTIONS ..
+							var CoinKey = require('coinkey');
+					  		var wallet = new CoinKey.createRandom();
+							return wallet;
+						},
+
+						association:function(model){
+
+							var newWallet = btcConnection.create.wallet(model);
+
+							//META IS ASSOCIATION
+							var newAssociationModel = {
+								associatedModels:[
+									{type:'MEMBER', id:model.id},
+									//{type:'APP ;)', id:},
+								]
+							};
+							Association.create(newAssociationModel);
+
+							var newAssociationModel = {
+								associatedModels:[
+									{type:'MEMBER', id:model.id},
+									//{type:'BTCWALLET ;)', id:},
+								],
+								parameters:{
+									address:newWallet.publicAddress,
+									//ONLY SOTRED ON CLIENT: --> FLAG IN CONNECTION
+									privateKey:newWallet.privateKey.toString('hex'),
+									networkId:'mainnet'
+								}
+							};
+							Association.create(newAssociationModel);
+
+
+							//PASSPORTS CAN CONTROL ACCOUNT!
+							//CONTEXT OF CONTROL.. 
+							//PASSPORT ASSOCIATION
+							var newPassport = {
+								type:'ETH',
+								associatedModels:[
+									{type:'MEMBER', id:model.id},
+								]
+							};
+							Passport.create(newPassport);
+
+						},
+
+						//think
+						tokens:{
+
+							create:function(model){
+
+							},
+
+						},
+
+					},
+
+					//SUBAPP? YEP.. DEFINE MODELS AND DISCRETE -- DATA AS PROGRAMMING :)
+					btcWallet:{
+
+						//LOGIC ENCODING TO STRING SPACE
+						send:function(){
+
+						},
+
+						recieve:function(){
+							
+							//WHEN WALLET ID RECIEVES TRANSACTION FIRE EVENT
+
+							//add to create string wallet balance
+							//can now 
+							btcApp
+							.connections[0]
+							.connections[0]
+							.connections[0]
+							.create.tokens.create();
+
+						},
+
+
+
+
+					},
+
+					//NEED GLOBAL CHECKERS FOR THIS >> 
+					peer:{
+
+						//btc peer --> IMPLEMENT NETWORKING PROTO.. 
+						//lISTENING TO network
+						//when 
+
+
+					},
+
+					update:{
+
+						association:function(model){},
+
+					},
+
+
+				}]
+			}],
+		},
+
+		//DEFINE CORE CONNECTIONS .. 
+		//ASSOCIATION ETC
+
+	],
+
 	models:[
 
 		//BTC,

@@ -2,6 +2,10 @@
 
 module.exports = {
 
+	import: { 
+		Q: require('q'),		
+	},
+
 	populateMerch: async function(){
 
 		function uuidv4() {return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);return v.toString(16);});};
@@ -28,11 +32,11 @@ module.exports = {
 				title:'I AM VALUABLE ' + i,
 
 				identifiers:{
-					NTAG216:null,
-					guid:guid(),
-					uuidv4:uuidv4(),
-					objectId:objectId(),
-					keccak:createKeccakHash('keccak256').update('Valuable Token ' + i).digest('hex'),
+					NTAG216: null,
+					guid: guid(),
+					uuidv4: uuidv4(),
+					objectId: objectId(),
+					keccak: createKeccakHash('keccak256').update('Valuable Token ' + i).digest('hex'),
 					sha256: crypto.createHmac('sha256', 'CRE8').update('Valuable Token ' + i).digest('hex'),
 					base58: bs58.encode(Buffer.concat([Buffer.from('12', 'hex'),  Buffer.from(crypto.createHash('sha256').update('Valuable Token ' + i).digest().byteLength.toString(16), 'hex'), crypto.createHash('sha256').update('Valuable Token ' + i).digest()])).toString(),
 				},
@@ -153,12 +157,13 @@ module.exports = {
 	//GeneratorApp ... repeat
 
 	//REDUCE TO NOT STATIC
+	//REDUCE INTO APP.TOKENS
 	tokenStringSpace: async function(){
 
 		//TODO: ASSOCIATION WALK VS PARENT
 		//TODO: THINK RECURSIVE AWAIT
 		function projectAssociations(id, path){
-			var deferred = Q.defer();
+			var deferred = populationApp.import.Q.defer();
 			Project.find({id:id}).then(function(models){
 				if (models.length == 1){
 					path = path.toUpperCase().replace(/ /g,'_') + '+' + models[0].title.toUpperCase().replace(/ /g,'_');
@@ -175,18 +180,18 @@ module.exports = {
 		console.log('GENERATE STRING SPACE!');
 		//REDUCE TO CONNECTIONS --> THEY BUILD THE PEER GLOBAL OBJ
 		var promises = [
-			Association.find().limit(100000).skip(0).sort('createdAt DESC'),
-			Action.find().limit(100000).skip(0).sort('createdAt DESC'),
-			Content.find().limit(100000).skip(0).sort('createdAt DESC'),
-			Connection.find().limit(100000).skip(0).sort('createdAt DESC'),
-			Item.find().limit(100000).skip(0).sort('createdAt DESC'),
-			Project.find().limit(100000).skip(0).sort('createdAt DESC'),
-			Reaction.find().limit(100000).skip(0).sort('createdAt DESC'),
-			Task.find().limit(100000).skip(0).sort('createdAt DESC').populate('project'),
-			Time.find().limit(100000).skip(0).sort('createdAt DESC').populate('task'),
-			Transaction.find().limit(100000).skip(0).sort('createdAt DESC'),
-			User.find().limit(100000).skip(0).sort('createdAt DESC'),
-			Validation.find().limit(100000).skip(0).sort('createdAt DESC')
+			Association.find().limit(100000),
+			Action.find().limit(100000),
+			Content.find().limit(100000),
+			Connection.find().limit(100000),
+			Item.find().limit(100000),
+			Project.find().limit(100000),
+			Reaction.find().limit(100000),
+			Task.find().limit(100000),
+			Time.find().limit(100000),
+			Transaction.find().limit(100000),
+			User.find().limit(100000),
+			Validation.find().limit(100000)
 		];
 		var type = [
 			'ASSOCIATION',
@@ -202,13 +207,12 @@ module.exports = {
 			'USER',
 			'VALIDATION',
 		];
-		var data = await Q.all(promises)
-		
-		console.log('LOAD!');
+		var data = await populationApp.import.Q.all(promises);
 		var tokenSet = [];
+
 		for (x in data){
 			for (y in data[x]){
-				console.log(x,y, type[x])
+				console.log(x, y, type[x])
 
 				if (type[x] == 'CONTENT'){
 
@@ -316,7 +320,7 @@ module.exports = {
 
 				if (type[x] == 'ITEM'){
 
-					var createItemBaseModel = {
+					var itemBaseModel = {
 						string: 'CRE8+ITEM',
 						information:{
 							inCirculation:data[x].length,
@@ -349,7 +353,6 @@ module.exports = {
 					};
 
 					tokenSet.push(itemBaseModel);
-					tokenSet.push(createItemBaseModel);
 					tokenSet.push(humanReadableItemNFTModel);
 
 				}
@@ -459,50 +462,40 @@ module.exports = {
 					tokenSet.push(projectTitleModel);
 					tokenSet.push(projectPrelimModel);
 
-					//STRING SPACE SHOULD BE HUMAN READABLE --> ??? OR ID?
-					//console.log(data[x][y].title)
-					//DEPRECIATED?
-					//console.log('PARENT', data[x][y].parent);
-					//console.log(data[x][y].associatedModels);
-					//STRUCURE INTO PROMISE TO RETURN
+					//STRING SPACE SHOULD BE HUMAN READABLE
+					//MORE OR LESS CONNECTION WALK && ASSOCIATION WALK FACTORIZATION
 					if (data[x][y].parent){
-						projectAssociations(data[x][y].parent, data[x][y].title).then(function(projectModel){
-							
-							//console.log(projectModel);
-							//based on charter
-							var projectAssociationModel = {
-								string: 'PROJECT+'+projectModel.toUpperCase(),
-								information:{
-									inCirculation:0,
-									markets: 0,
-								},
-								protocols:[
-									'BASE',
-									'ASSOCIATION'
-								],
-								logic:{
-									transferrable:true, 
-									mint:'ONCREATEPROJECT'
-								}
-							};
 
-							//DO BETTER
-							Token.find({string:projectAssociationModel.string}).then(function(aTokenModel){
-								if (aTokenModel.length == 0){
-									Token.create(projectAssociationModel).then(function(){
-										console.log(projectAssociationModel)
-									});
-								}
-								else{
-									Token.update({id:aTokenModel[0].id}, projectAssociationModel).then(function(){
-										console.log('UPDATE', projectAssociationModel)
-									});
-								}
-							});
+						var projectModel = await projectAssociations(data[x][y].parent, data[x][y].title);
+						
+						//based on charter
+						var projectAssociationModel = {
+							string: 'PROJECT+'+projectModel.toUpperCase(),
+							information:{
+								inCirculation:0,
+								markets: 0,
+							},
+							protocols:[
+								'BASE',
+								'ASSOCIATION'
+							],
+							logic:{
+								transferrable:true, 
+								mint:'ONCREATEPROJECT'
+							}
+						};
 
-						});
+						var aTokenModel = await Token.find({string:projectAssociationModel.string});
+						if (aTokenModel.length == 0){
+							var newToken = await Token.create(projectAssociationModel);
+							console.log(newToken);	
+						}
+						else{
+							var updatedToken = await Token.update({id:aTokenModel[0].id}, projectAssociationModel);
+							console.log('UPDATE', projectAssociationModel);
+						}
+						
 					}
-
 
 				}
 
@@ -511,21 +504,7 @@ module.exports = {
 				//TODO: RECIEVER? 
 				if (type[x] == 'REACTION'){
 
-					var reactionCreateModel = {
-						string: 'REACTION',
-						information:{
-							inCirculation:data[x].length,
-							markets: 0,
-						},
-						protocols:[
-							'CRE8',
-							'REACTION'
-						],
-						logic:{
-							transferrable:true, 
-							mint:'createReaction'
-						}
-					};
+					
 
 					var reactionCreateModel = {
 						string: 'CRE8+REACTION',
@@ -628,7 +607,7 @@ module.exports = {
 						}
 					};
 
-					tokenSet.push(reactionBaseModel);
+					tokenSet.push(reactionCreateModel);
 					tokenSet.push(reactionReceiveModel);
 					tokenSet.push(reactionRevieveModel);
 					tokenSet.push(reactionTypeBaseModel);

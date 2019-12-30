@@ -7,7 +7,8 @@
     "CRE8",
     "javascript",
     "Peer",
-    "Client"
+    "Client",
+    "Node"
   ],
   "dependencies": {
     "@google/maps": "^0.5.5",
@@ -31,8 +32,12 @@
     "grunt-sails-linker": "^1.0.4",
     "grunt-sync": "^0.8.1",
     "include-all": "^4.0.3",
+    "ipfs": "^0.40.0",
+    "ipfs-http-client": "^40.1.0",
     "keccak": "^2.0.0",
     "lodash": "^4.17.15",
+    "mongoose": "^5.8.3",
+    "orbit-db": "^0.23.0",
     "passport": "0.2.1",
     "passport-facebook": "^1.0.3",
     "passport-fitbit-oauth2": "^1.0.2",
@@ -45,14 +50,13 @@
     "q": "^1.5.1",
     "rc": "^1.2.8",
     "request": "^2.88.0",
+    "request-promise": "^4.2.5",
     "sails": "^1.2.3",
     "sails-disk": "^1.1.2",
-    "sails-generate-auth": "~0.2.0",
     "sails-hook-grunt": "^4.0.1",
     "sails-hook-orm": "^2.1.1",
     "sails-hook-sockets": "^2.0.0",
     "sails-mongo": "^1.0.1",
-    "skipper-s3": "^0.6.0",
     "validator": "~3.28.0"
   },
   "scripts": {
@@ -64,6 +68,6 @@
     "type": "git",
     "url": "git://github.com/troverman/conexus.git"
   },
-  "author": "NOVO",
+  "author": "Trevor Overman | NOVO | CRE8",
   "license": "MIT"
 }

@@ -1,3 +1,4 @@
+
 //CRE8.EVENT.ALPHA
 module.exports = {
 
@@ -52,6 +53,7 @@ module.exports = {
 								//[]..score
 							//}	
 
+					//truth
 					//MULTIDIMESNIONAL CONSENSUS
 					connectionHashes:[],
 

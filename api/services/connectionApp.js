@@ -32,12 +32,32 @@ module.exports = {
 	get:{},
 
 	//OKAY DATA-TOKEN CONNECTION . . .
+	//STATIC SELF CONNECTION CONSTRUCTOR --> THIS IS SUPER IN COMPOSITION 
 	tokens:{
 
 		model:{
+			create:[
+				{name:'CRE8+CREATE+CONNECTION'}, 
+				{name:'CRE8+CREATE+CONNECTION+{id}'},
+
+				//COMBINATORIAL
+				//REDUCE / BE INTENTIONAL AS IT IS LARGE .. LARGER THE BETTER ; 
+
+				//IMPROVEMENT PROPOSAL: ALLOWN N SIZE COMBINAORIAL TOKENIZATION OF DATA ATTRIBUTES :: POWERSET ATTRIBUTES
+				//{name:'CRE8+CONNECTION+{context}'},
+
+			],
+			get:[
+				{name:'CRE8+GET+CONNECTION'},
+				{name:'CRE8+GET+CONNECTION+{id}'}
+			],
 		},
 
-		mintTokens:function(model){},
+		create:function(model){
+
+
+		},
+		
 	},
    
 };

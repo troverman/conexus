@@ -1,11 +1,17 @@
 //CRE8.PASSPORTAPP
-
 //TODO: EVERYTHING
 
 const path = require('path');
 const url = require('url');
+
 const passport = require('passport');
+//authenticate 
+//..
+
 passport.protocols = require('./passportApps');
+
+//REQUIRE AS APPMANAGER
+//REQUIRE ALLOWS SELF
 
 passport.connect = function (req, query, profile, next) {
 

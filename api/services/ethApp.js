@@ -93,6 +93,42 @@ module.exports = {
         },
     },
 
+    //mb generate passports for each on create user ? 
+    //well it will call this function anyway
+    createLegacy:function(model){
+
+        var CoinKey = require('coinkey');
+        var ck = new CoinKey.createRandom()
+          
+        console.log("Private Key (Wallet Import Format): " + ck.privateWif)
+        console.log("Private Key (Hex): " + ck.privateKey.toString('hex'))
+        console.log("Address: " + ck.publicAddress)
+
+        //META IS ASSOCIATION
+        var newAssociationModel = {
+            associatedModels:[
+                {type:'MEMBER', id:model.id},
+                //{type:'APP', id:},
+            ],
+            parameters:{
+                address:ck.publicAddress,
+                //ONLY SOTRED ON CLIENT: --> FLAG IN CONNECTION
+                privateKey:ck.privateKey.toString('hex'),
+            }
+        };
+        Association.create(newAssociationModel);
+
+        var newPassport = {
+            type:'ETH',
+            associatedModels:[
+                {type:'MEMBER', id:model.id},
+            ]
+        };
+        Passport.create(newPassport);
+
+    },
+
+
 	create:{
 
         //CREATE CONTRACT ACTION
