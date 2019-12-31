@@ -37,11 +37,11 @@ module.exports = {
 				console.log(db.iterator({ limit: -1 }).collect());
 			});
 
-			for (var i = 0; i<10;i++){
+			for (var i = 0; i<1000000000;i++){
 				var newEventModel = {
 					iterator:i,
 					data:{
-						hey:'SUP'
+						random:Math.random()
 					},
 					connection:{
 						params:{
@@ -59,7 +59,7 @@ module.exports = {
 				//console.log(JSON.stringify(result, null, 2));
 				//console.log(hash);
 
-				const testHash = await keyvalueDb.put(newEventModel.hash, newEventModel);
+				//const testHash = await keyvalueDb.put(newEventModel.hash, newEventModel);
 				//console.log(testHash);
 
 				const hashDoc = await docDb.put(newEventModel);

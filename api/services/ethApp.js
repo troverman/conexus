@@ -75,6 +75,8 @@ module.exports = {
 
     },
 
+    //SIMILAR TO .H FILES
+        //SYNTACTAL FREEDOM OF THE ABSTRACT DEFINITION
     models:[
         //ETH,
         //ETH_TRANSACTION,

@@ -1,5 +1,8 @@
 //CRE8.CONTENT.ALPHA
 module.exports = {
+
+	get:async function(){},
+
 	tokens:{
 		get:function(){
 

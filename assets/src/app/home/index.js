@@ -1,4 +1,12 @@
-angular.module( 'conexus.home', [
+//TODO: CREATE NON STATIC PEER BUILD 
+    //ALL DATA
+    //COMPOSTABLE FUNCTION API -- IS DYNAMIC PEER BUILD IS COMPILER
+        //LAYERS 
+            // INIT(GET DATA (INIT-CORE BUILD)) --> RETURNS DYNAMIC FUNCTIONS TO BE RUN BY COMPOSTABLE FUNCTION API [CRE*] --> WASM
+                //\\(ABSRACT THESE)\\//
+                //release is a get('BUILDHASH') 
+
+angular.module('conexus.home', [
 ])
 
 .config(['$stateProvider', function config( $stateProvider ) {
@@ -569,6 +577,14 @@ angular.module( 'conexus.home', [
         {
             pack:'Health',
             type:'onedimension slider', 
+            question:'Is breating valuable?', 
+            assetString:'CRE8+TIME+BREATH', //FOR INSPIRO :) --> NEED TO HIGHLIGHT THIS 'SHARE AND SPEAK'
+            response:0, 
+            answer:['no','yes']
+        },
+        {
+            pack:'Health',
+            type:'onedimension slider', 
             question:'Is exercise valuable?', 
             assetString:'CRE8+TIME+EXERCISE', 
             response:0, 
@@ -616,6 +632,16 @@ angular.module( 'conexus.home', [
             answer:['no','yes']
         },
 
+        //NEED HIGHER DIMENSIONAL INPUT ~~ COMPARISON CROSSES? IE SET CROSS SET -- MORE COMPLEX ASSOCIATIONS ~ NEED STOCASTIC EXAMPLES 
+            //REDUCTION TO TOKEN 
+        {
+            pack:'Religion',
+            type:'onedimension slider', 
+            question:'Do you believe in self?', 
+            assetString:'CRE8+TIME+SELF', 
+            response:0, 
+            answer:['no','yes']
+        },
         {
             pack:'Religion',
             type:'onedimension slider', 
@@ -738,6 +764,7 @@ angular.module( 'conexus.home', [
         },
         {
             pack:'Human',
+            //TODO: MORE TYPES -- 
             type:'onedimension slider', 
             question:'Is food valuable?', 
             assetString:'CRE8+TIME+FOOD', 
@@ -765,7 +792,7 @@ angular.module( 'conexus.home', [
             pack:'Human',
             type:'onedimension slider', 
             question:'Is community valuable?', 
-            assetString:'CRE8+TIME+SHELTER', 
+            assetString:'CRE8+TIME+COMMUNITY', 
             response:0, 
             answer:['no','yes']
         },

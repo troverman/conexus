@@ -57,7 +57,7 @@ module.exports = {
                     //var options = {scope:['activity','heartrate','location','profile', 'sleep']};
                     //HMM -- BAD
                     //passportApp.authenticate(provider, options)(req, res, req.next).then(function(){
-                        fitbitApp.getData(user);
+                        //fitbitApp.getData(user);
                         //mmm
                         //master interval 
                         //setInterval(fitbitApp.getData.bind(null, user), 8640000);

@@ -1,3 +1,4 @@
+
 //CRE8.VALIDATION
 module.exports = {
 	get: async function(req, res) {

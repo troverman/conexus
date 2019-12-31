@@ -34,6 +34,16 @@ module.exports = {
 	//appApp.connections.app.find();
 	//self.connections.app.find(); --> 
 
+	//GOOD FOR NOW 
+		//SOON CORE APP
+        //INIT(GET DATA (INIT-CORE BUILD)) --> RETURNS DYNAMIC FUNCTIONS TO BE RUN BY COMPOSTABLE FUNCTION API [CRE*] --> WASM
+        //for (x in apps){}
+        //CREATE OBJECT
+        //INIT JSON OBJ // THE ENVIRONMENT WE ARE IN 
+        //RUN INIT FXN 
+
+
+
 	//TODO
 	get: async function(req){
 		var deferred = appApp.import.Q.defer();

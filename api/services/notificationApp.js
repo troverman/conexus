@@ -5,7 +5,36 @@ module.exports = {
 	//TRAVERSE APP-APP CONNECTIONS TO BUILD
 		//DEFINE IN 'NOTIFICATION' ON RESPECTIVE APP IE 'VALIDATION'
 
+	get:async function(req){
+
+		var limit = req.query.limit || 1;
+		var skip = req.query.skip || 0;
+		var sort = req.query.sort || 'createdAt DESC';
+		
+		console.log('GET NOTIFICATION', req.query);
+		
+		if (req.query.user){
+			if (req.query.isRead){
+				Notification.subscribe(req, models.map(function(obj){return obj.id}));
+				return Notification.find({user:req.query.user, isRead:req.query.isRead}).limit(limit).skip(skip).sort(sort);
+			}
+			else{
+				Notification.subscribe(req, models.map(function(obj){return obj.id}));
+				return Notification.find({user:req.query.user}).limit(limit).skip(skip).sort(sort);
+			}
+		}
+
+		else{
+			Notification.subscribe(req, models.map(function(obj){return obj.id}));
+			return Notification.find({}).limit(limit).skip(skip).sort(sort);
+		}
+
+	},
+
 	create: {
+
+		//TODO: && ASSSOICATION PARAMS
+		//REDUCE TO MODEL PARAM AND SINGLE FXN
 
 		validation: async function(user, model){
 
@@ -74,5 +103,11 @@ module.exports = {
 		},
 
 	},
+
+	update: function(req){
+		var id = req.param('id');
+		var model = {isRead: req.param('isRead')};
+		return Notification.update({id: id}, model);
+	}
 
 };

@@ -1,7 +1,18 @@
 //CRE8.ATTENTION
 const crypto = require('crypto');
 const Q = require('q');
-
+/*
+module.exports = {
+	get: async function(req, res) {
+		var model = await taskApp.get(req); 
+		res.json(model);
+	},
+	create: async function (req, res) {
+		var newModel = await taskApp.create(req);
+		res.json(newModel);
+	}
+};
+*/
 module.exports = {
 	
 	get: async function(req, res) {

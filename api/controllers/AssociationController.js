@@ -3,6 +3,19 @@ const Q = require('q');
 
 module.exports = {
 
+/*
+module.exports = {
+	get: async function(req, res) {
+		var model = await taskApp.get(req); 
+		res.json(model);
+	},
+	create: async function (req, res) {
+		var newModel = await taskApp.create(req);
+		res.json(newModel);
+	}
+};
+*/
+
 	get: function(req, res) {
 
 		//TODO: RECURSIVE 
@@ -82,39 +95,33 @@ module.exports = {
 		console.log('GET ASSOCIATION', req.query);
 
 		if(req.query.id){
-			Association.find({id:id})
-			.limit(limit)
-			.skip(skip)
-			.sort(sort)
-			.then(function(models) {
-				if (models[0]){
-					//TODO: DEPRECIATE THIS STYLE
-					var promises = [];
-					for (x in models[0].associatedModels){
-						if (models[0].associatedModels[x].type == 'ACTION'){promises.push(Action.find({id:models[0].associatedModels[x].id}).then(function(models){return models[0];}))}
-						if (models[0].associatedModels[x].type == 'APP'){promises.push(App.find({id:models[0].associatedModels[x].id}).then(function(models){return models[0];}))}
-						if (models[0].associatedModels[x].type == 'ATTENTION'){promises.push(Attention.find({id:models[0].associatedModels[x].id}).then(function(models){return models[0];}))}
-						if (models[0].associatedModels[x].type == 'CONNECTION'){promises.push(Connection.find({id:models[0].associatedModels[x].id}).then(function(models){return models[0];}))}
-						if (models[0].associatedModels[x].type == 'CONTENT'){promises.push(Content.find({id:models[0].associatedModels[x].id}).then(function(models){return models[0];}))}
-						if (models[0].associatedModels[x].type == 'ITEM'){promises.push(Item.find({id:models[0].associatedModels[x].id}).then(function(models){return models[0];}))}
-						if (models[0].associatedModels[x].type == 'MEMBER'){promises.push(User.find({id:models[0].associatedModels[x].id}).then(function(models){return models[0];}))}
-						if (models[0].associatedModels[x].type == 'PROJECT'){promises.push(Project.find({id:models[0].associatedModels[x].id}).then(function(models){return models[0];}))}
-						if (models[0].associatedModels[x].type == 'TASK'){promises.push(Task.find({id:models[0].associatedModels[x].id}).then(function(models){return models[0];}))}
-						if (models[0].associatedModels[x].type == 'TIME'){promises.push(Time.find({id:models[0].associatedModels[x].id}).then(function(models){return models[0];}))}
-						if (models[0].associatedModels[x].type == 'TRANSACTION'){promises.push(Transaction.find({id:models[0].associatedModels[x].id}).then(function(models){return models[0];}))}
-						if (models[0].associatedModels[x].type == 'VALIDATION'){promises.push(Validation.find({id:models[0].associatedModels[x].id}).then(function(models){return models[0];}))}
-					}
-					Q.all(promises).then((populatedModels)=>{
-						for (x in models[0].associatedModels){
-							console.log(models[0].associatedModels[x])
-							models[0].associatedModels[x].data = populatedModels[x];
-						}
-						Association.subscribe(req, [models[0].id]);
-						res.json(models[0]);
-					});
+			var models = await Association.find({id:id}).limit(limit).skip(skip).sort(sort)
+			if (models[0]){
+				//TODO: DEPRECIATE THIS STYLE
+				var promises = [];
+				for (x in models[0].associatedModels){
+					if (models[0].associatedModels[x].type == 'ACTION'){promises.push(Action.find({id:models[0].associatedModels[x].id}).then(function(models){return models[0];}))}
+					if (models[0].associatedModels[x].type == 'APP'){promises.push(App.find({id:models[0].associatedModels[x].id}).then(function(models){return models[0];}))}
+					if (models[0].associatedModels[x].type == 'ATTENTION'){promises.push(Attention.find({id:models[0].associatedModels[x].id}).then(function(models){return models[0];}))}
+					if (models[0].associatedModels[x].type == 'CONNECTION'){promises.push(Connection.find({id:models[0].associatedModels[x].id}).then(function(models){return models[0];}))}
+					if (models[0].associatedModels[x].type == 'CONTENT'){promises.push(Content.find({id:models[0].associatedModels[x].id}).then(function(models){return models[0];}))}
+					if (models[0].associatedModels[x].type == 'ITEM'){promises.push(Item.find({id:models[0].associatedModels[x].id}).then(function(models){return models[0];}))}
+					if (models[0].associatedModels[x].type == 'MEMBER'){promises.push(User.find({id:models[0].associatedModels[x].id}).then(function(models){return models[0];}))}
+					if (models[0].associatedModels[x].type == 'PROJECT'){promises.push(Project.find({id:models[0].associatedModels[x].id}).then(function(models){return models[0];}))}
+					if (models[0].associatedModels[x].type == 'TASK'){promises.push(Task.find({id:models[0].associatedModels[x].id}).then(function(models){return models[0];}))}
+					if (models[0].associatedModels[x].type == 'TIME'){promises.push(Time.find({id:models[0].associatedModels[x].id}).then(function(models){return models[0];}))}
+					if (models[0].associatedModels[x].type == 'TRANSACTION'){promises.push(Transaction.find({id:models[0].associatedModels[x].id}).then(function(models){return models[0];}))}
+					if (models[0].associatedModels[x].type == 'VALIDATION'){promises.push(Validation.find({id:models[0].associatedModels[x].id}).then(function(models){return models[0];}))}
 				}
-				else{res.json(models);}
-			});
+				var populatedModels = await Q.all(promises);
+				for (x in models[0].associatedModels){
+					console.log(models[0].associatedModels[x])
+					models[0].associatedModels[x].data = populatedModels[x];
+				}
+				Association.subscribe(req, [models[0].id]);
+				res.json(models[0]);	
+			}
+			else{res.json(models);}
 		}
 
 		else if(req.query.filter){
@@ -123,13 +130,10 @@ module.exports = {
 			console.log(querySet)
 			//JSON.stringify({type:'CONTENT', id:member.id}),
 
-
 			//following
 			//filter:[]
 			//connection:{title:'Follow'}
 			//connectionParameter:{parameter:parameterValue}
-
-
 			//comment
 			//filter:[]
 
@@ -138,11 +142,7 @@ module.exports = {
 
 			//TODO: CONNECTION FILTERS
 				//FOLLOWING & FOLLOWERS! : )
-			Association.getDatastore().manager.collection('association')
-			.find(query)
-			.limit(1000)
-			.skip(0)
-			.sort({'createdAt':-1})
+			Association.getDatastore().manager.collection('association').find(query).limit(1000).skip(0).sort({'createdAt':-1})
 			.toArray(function (err, associationModels) {
 				associationModels = associationModels.map(function(obj){obj.id = obj._id; return obj;});
 				var promises = [];

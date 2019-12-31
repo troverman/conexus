@@ -4,7 +4,8 @@
 
 module.exports.routes = {
 
-  /* View routes */
+  //DYNAMIC DEFINED BY PEER :)
+
   'get /': 'HomeController.index',
   'get /about': 'HomeController.index',
   'get /account': 'HomeController.index',
@@ -78,15 +79,27 @@ module.exports.routes = {
   'get /transparency': 'HomeController.index',
   'get /validation/:id': 'HomeController.index',
 
-  /* Auth routes */
-  'get /logout': 'AuthController.logout',
 
+  //TODO: AUTH APP
+  'get /logout': 'AuthController.logout',
   'post /auth/local': 'AuthController.callback',
   'post /auth/local/:action': 'AuthController.callback',
-
   'get /auth/:provider': 'AuthController.provider',
   'get /auth/:provider/callback': 'AuthController.callback',
   'get /auth/:provider/:action': 'AuthController.callback',
+
+
+
+  //NEW WILL BE
+  //ROUTES IN APP // 
+  //get /api/ 
+
+  //REDUCE :~~)
+  //CALL QUERY PARSE APP TO PASS TO APP d(0.0)b
+
+
+
+
 
   /* Action routes */
   'get /api/action': 'ActionController.get',

@@ -1,3 +1,5 @@
+
+
 //DEPRECIATE
 //APPRECIATE ASSOCIATION GRAPH
 	//ORDERS ARE A VALIDATION
@@ -429,8 +431,6 @@ module.exports = {
 			}
 		});
 	},
-
-	update: function (req, res) {},
 
 };
 

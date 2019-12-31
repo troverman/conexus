@@ -2,6 +2,8 @@
 //CRE8.EVENT.ALPHA
 module.exports = {
 
+	//meta
+
 	//APP-APP CONNECTION 
 	import: { 
 		request: require('request'),
@@ -21,7 +23,7 @@ module.exports = {
 
 		        //PLACE OF STUDY
 		        	//CONSENSUS PLUGIN
-		        truthForestHashSet:{type:'json'}    
+		        truthForestHashSet:{type:'json'}  
 
 		    }
 		}
@@ -75,19 +77,57 @@ module.exports = {
 	language: 'Javascript',
 	compiler:'V8',
 
-	get: async function(model){
+	get: async function(req){
 
 		//model.input, model.output, query . . 
 
 		//BETTER GET . . . WE ARE ABSTRACTING THOUGH MONOGO. . . 
 		//provide context hash
 		//truth variance 
-		return await Event.find({id:model.id});
+
+		var limit = parseInt(req.query.limit) || 1;
+		var skip = parseInt(req.query.skip) || 0;
+		var sort = req.query.sort || 'createdAt DESC';	
+
+		//var event = await eventApp.find(req.query);
+		//res.json(event);
+		
+		console.log('GET EVENT', req.query)	
+
+		//TODO: AUDIT 
+		if(req.query.id){
+			return Event.find({id:req.query.id}).limit(limit).skip(skip).sort(sort);
+
+    		//UPDATE TO APP DEFINED DATA MODEL
+    		//REPLACE TYPE WITH APP ID
+    		//var promises = [];
+    		//for (x in models){
+			//	if (models[x].model.type=='ACTION'){promises.push(Action.find({id:models[x].model.id}).then(function(models){return models[0]}))}
+			//	if (models[x].model.type=='APP'){promises.push(App.find({id:models[x].model.id}).then(function(models){return models[0]}))}
+			//	if (models[x].model.type=='ATTENTION'){promises.push(Attention.find({id:models[x].model.id}).then(function(models){return models[0]}))}
+			//	if (models[x].model.type=='CONTENT'){promises.push(Content.find({id:models[x].model.id}).then(function(models){return models[0]}))}
+			//	if (models[x].model.type=='ITEM'){promises.push(Item.find({id:models[x].model.id}).then(function(models){return models[0]}))}
+			//	if (models[x].model.type=='MEMBER'){promises.push(User.find({id:models[x].model.id}).then(function(models){return models[0]}))}
+			//	if (models[x].model.type=='PROJECT'){promises.push(Project.find({id:models[x].model.id}).then(function(models){return models[0]}))}
+			//	if (models[x].model.type=='TASK'){promises.push(Task.find({id:models[x].model.id}).then(function(models){return models[0]}))}
+			//	if (models[x].model.type=='TIME'){promises.push(Time.find({id:models[x].model.id}).then(function(models){return models[0]}))}
+			//	if (models[x].model.type=='TRANSACTION'){promises.push(Transaction.find({id:models[x].model.id}).then(function(models){return models[0]}))}
+			//	if (models[x].model.type=='VALIDATION'){promises.push(Validation.find({id:models[x].model.id}).then(function(models){return models[0]}))}
+			//}
+			//var populatedModels = await Q.all(promises);
+			//for (x in models){models[x].model.data = populatedModels[x];}
+			//Event.subscribe(req, models.map(function(obj){return obj.id}));
+			//console.log(models)
+		}
+
+		else{
+			return Event.find().limit(limit).skip(skip).sort(sort);	
+		}
 
 	},
 
 	//HEllO, Thanks for reading 
-	create: function(model){
+	create: async function(model){
 		//model.input, model.output
 		//SLOWLY PHASE OUT STATIC DEFINED MODELS --> EVENT HEADER 
 		var eventModel = {
@@ -104,16 +144,22 @@ module.exports = {
 			data: model,
 
 		};
-
 		//EVENT IS DEFINED IN model/event . . . unify 
 		//LEGACY BOOTSTRAPPING
 			//TRIE ATTEMPT ~ REDUCE TO BINARY THX ~
-		Event.create(eventModel).then(function(model){
-			console.log('CREATE EVENT', model);
-
-			//REDUCE / SOCKET BROADCAST 
-			Event.publish([model.id], {verb: 'create', data: model});
-		});
+		var newEvent = await Event.create(eventModel)
+		console.log('CREATE EVENT', model);
+		//REDUCE / SOCKET BROADCAST 
+		Event.publish([newEvent.id], {verb: 'create', data: newEvent});
 	},
+
+
+
+
+	views:{
+
+		//CARD TEMPLATE --> MULTI TYPES . . .
+
+	}
 
 };
