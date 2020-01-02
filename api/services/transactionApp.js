@@ -60,6 +60,22 @@ function getAssociations(model){
 
 module.exports = {
 
+	attributes: {
+        model: {type: 'string', defaultsTo: 'TRANSACTION'},
+        amountSet: {type: 'json'},
+        to: {type: 'string'},
+        from: {type: 'string'},
+        //[linked items], to, from, self,creator, [tokens]
+        associatedModels: {type: 'json'},
+        content: {type: 'string', allowNull: true},
+        context: {type: 'string'},
+
+        user: {model: 'user'},
+        creator: {type: 'string'},
+
+        data: {type: 'json'},
+    },
+
 	//TODO: EVOLVE PAST IMPORT.. PRACTICE
 	import:{
 		Q: require('q'),

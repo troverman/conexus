@@ -11,6 +11,11 @@ module.exports = {
 	//CONSENSUS PLUGIN
     //truthForestHashSet:{type:'json'}  
 
+    //ASSOIATION TREE HASH ~ CONTEXT HASH [EVENTS]
+
+    //COMBINATORIAL OBJECTS OF TRUST IN PEER NETWORKS .. THE MULTI DATABASES / TRUSTS
+
+
 
 	
 };

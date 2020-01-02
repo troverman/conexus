@@ -15,17 +15,17 @@ module.exports = {
 		
 		if (req.query.user){
 			if (req.query.isRead){
-				Notification.subscribe(req, models.map(function(obj){return obj.id}));
+				//Notification.subscribe(req, models.map(function(obj){return obj.id}));
 				return Notification.find({user:req.query.user, isRead:req.query.isRead}).limit(limit).skip(skip).sort(sort);
 			}
 			else{
-				Notification.subscribe(req, models.map(function(obj){return obj.id}));
+				//Notification.subscribe(req, models.map(function(obj){return obj.id}));
 				return Notification.find({user:req.query.user}).limit(limit).skip(skip).sort(sort);
 			}
 		}
 
 		else{
-			Notification.subscribe(req, models.map(function(obj){return obj.id}));
+			//Notification.subscribe(req, models.map(function(obj){return obj.id}));
 			return Notification.find({}).limit(limit).skip(skip).sort(sort);
 		}
 

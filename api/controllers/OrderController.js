@@ -1,16 +1,3 @@
-
-
-//DEPRECIATE
-//APPRECIATE ASSOCIATION GRAPH
-	//ORDERS ARE A VALIDATION
-		//GIVEN LOGIC BY A CONNECTION
-
-//CRE8.ORDER
-
-
-const Q = require('q');
-const crypto = require('crypto');
-
 module.exports = {
 
 	get: function(req, res) {

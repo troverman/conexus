@@ -11,6 +11,12 @@ module.exports = {
 		//socket:require('socket')
 	},
 
+	attributes: {
+        type: {type: 'string'},
+        data: {type: 'json'},
+        model: {type: 'json'},        
+    },
+
     //STATEMENT AS ARRAY
     //TODO 
 	types:[

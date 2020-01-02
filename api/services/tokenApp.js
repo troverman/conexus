@@ -10,6 +10,21 @@ module.exports = {
 	congruence: function(req, res) {},
 	manifold: function(req, res) {},
 
+	attributes: {
+		//DEPRECIATE
+		model: {type: 'string', defaultsTo: 'TOKEN'},
+
+		string: {type: 'string'},
+		//MANIFOLD LOGIC; ALGEBRAS; etc
+		protocols:{type:'json'},
+		//TRANSFERRABLE ETC
+		logic:{type:'json'},
+		//VOLUME, DESCRIPTION
+		information:{type:'json'},
+		//BETA!!!
+		//connections:{type:'string'},
+    },
+
 	get: async function(req){
 		var limit = parseInt(req.query.limit) || 1;
 		var skip = parseInt(req.query.skip) || 0;

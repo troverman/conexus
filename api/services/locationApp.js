@@ -11,6 +11,21 @@ module.exports = {
 		Q: require('q'),
 	},
 
+	attributes: {
+        
+    	//DEPRECIATE
+        model: {type: 'string', defaultsTo: 'LOCATION'},
+        
+        lat:{type: 'string'},
+        lng:{type: 'string'},
+        creator:{type: 'string'},
+        
+        data:{type: 'json'},
+        dataHash:{type: 'string'},
+        hash:{type: 'string'}
+
+    },
+
 	//DATA MODELS ARE CONNECTIONS
 
 	//TEST

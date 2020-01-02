@@ -7,10 +7,7 @@
 module.exports = {
 
     logout: async function (req, res) {
-        req.user.loggedIn = false;
         var userModel = await User.update({id: req.user.id}, {loggedIn: false});
-        User.publish([userModel[0].id], {verb: 'create', data: userModel[0].id});
-        console.log(req.user.username + ': logged out');
         req.logout();
         res.redirect('/');
     },

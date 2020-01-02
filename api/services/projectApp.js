@@ -5,7 +5,53 @@ const Q = require('q');
 
 module.exports = {
 
+	attributes: {
+        
+        //DEPRECIATE
+        model: {type: 'string', defaultsTo: 'PROJECT'},
+
+        title: {type: 'string'},
+        description: {type: 'string', allowNull:true},
+        avatarUrl: {type: 'string', defaultsTo: '/images/loading.gif'},
+        urlTitle: {type: 'string'},
+        context: {type: 'string'},
+        location: {type: 'json'},
+
+        associatedModels: {type: 'json'},
+
+        user: {model: 'user'},
+        creator: {type: 'string'},
+
+        info: {type: 'json'},
+        information: {type: 'json'},
+
+        data: {type: 'json'},
+        dataHash: {type: 'string'},
+        hash: {type: 'string'},
+       
+        //COUNTS
+        //TODO: APPS - DATA ?? REACTIONS.. ..association mapping?
+        //associations:content:1
+        contentCount: {type: 'number',defaultsTo: 0},
+        itemCount: {type: 'number',defaultsTo: 0},
+        memberCount: {type: 'number',defaultsTo: 0},
+        taskCount: {type: 'number',defaultsTo: 0},
+        timeCount: {type: 'number',defaultsTo: 0},
+        liveCount: {type: 'number',defaultsTo: 0},
+
+
+    },
+    afterCreate: function (model, next) {
+        var colorArray = ['2ab996', '24242e', 'ff6a6a', 'ddbea8'];
+        var colorInt = Math.floor(Math.random() * (colorArray.length));
+        var avatarUrl = 'https://ui-avatars.com/api/?size=256&name='+model.title+'&color=fff&background='+colorArray[colorInt];
+        model.avatarUrl = avatarUrl;
+        Project.update({id: model.id}, model).then(function(model){return next(null, model);});
+    },
+
 	get: async function(req) {
+
+		var deferred = Q.defer();
 
 		//DO COMPLEX (COMB IT) FILTER WITH 
 		function getAssociations(model){
@@ -50,7 +96,6 @@ module.exports = {
 								model.associationModels[x].associatedModels[y].data = populatedModels[index];
 							}
 						}
-						deferred.resolve(model);
 					});
 				}
 				else{deferred.resolve(model);}
@@ -76,6 +121,12 @@ module.exports = {
 				if (mongodb.ObjectID.isValid(req.query.urlTitle)){query.$or.push({"_id":{$eq:mongodb.ObjectID(req.query.urlTitle)}});}
 				else{query.$or.push({"urlTitle":req.query.urlTitle});}
 			}
+			//TODO: PROMISIFY
+			//TODO: REMOVE MONGO . .
+
+			//const {promisify} = require('util');
+			//promisify(fs.readFile)
+
 			Project.getDatastore().manager.collection('project').find(query).limit(limit).skip(skip).sort({'createdAt':-1}).toArray(function (err, models) {
 				if (models.length > 0){
 					var projectModel = models[0];
@@ -112,26 +163,24 @@ module.exports = {
 						$minDistance: 0,
 			       	}
 			     }
-			})
-			.limit(limit)
-			.skip(skip)
-			.toArray(function (err, models) {
+			}).limit(limit).skip(skip).toArray(function (err, models) {
 				if (models){models = models.map(function(obj){obj.id = obj._id.toString(); return obj;});}
 				//TODO: RETRUN PORMISE
-				return models;
+				deferred.resolve(models);
 			});
 		}
 
 		//QUERY
 		//TODO: APPRECIATE QUERY LANGUAGE
 		else if(req.query.query){
-			return Project.find({
+			var models = await Project.find({
 				or: [
 					{title: {contains: query}},
 					{urlTitle: {contains: query}},
 					{description: {contains: query}},
 				]
 			}).limit(limit).skip(skip).sort(sort);
+			deferred.resolve(models);
 		}
 
 		//TAG
@@ -141,24 +190,25 @@ module.exports = {
 			Project.subscribe(req, models);
 			var returnObj = {data:models, info:{count:numRecords}};
 			//TODO: RETURN PROMISE
-			return returnObj;
+			deferred.resolve(returnObj);
 		}
 
 		else{
-			Project.find({}).limit(limit).skip(skip).sort(sort).populate('user')
-			.then(function(models) {
-				Project.count().then(function(numRecords){
-					Project.subscribe(req, models.map(function(obj){return obj.id}));
-					var promises = [];
-					for (x in models){promises.push(getAssociations(models[x]));}
-					Q.all(promises).then((populatedModels)=>{
-						for (x in models){models[x] = populatedModels[x];}
-						var returnObj = {data:models, info:{count:numRecords}};
-						res.json(returnObj);
-					});
-				});
-			});
+			var models = await Project.find({}).limit(limit).skip(skip).sort(sort).populate('user');
+			var numRecords = await Project.count();
+			Project.subscribe(req, models.map(function(obj){return obj.id}));
+			var promises = [];
+			for (x in models){promises.push(getAssociations(models[x]));}
+			var populatedModels = await Q.all(promises);
+			for (x in models){models[x] = populatedModels[x];}
+			var returnObj = {data:models, info:{count:numRecords}};
+			deferred.resolve(returnObj);
 		}
+
+		return deferred.promise;
+
+		//return new Promise((resolve, reject) => {resolve(returnObj)}
+
 	},
 
 	create: async function (req) {

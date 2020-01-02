@@ -9,9 +9,15 @@ module.exports = {
 				//renderAbout --> REACT?
 			},
 			templates:[{
-				type:'HTML',
-				data:'index.tpl.html'
-					//JSX
+				type:'HTML', //(EJS, JSX, .. ? )
+				//require 
+				data:'index.tpl.html',
+
+				//REQUIRE ESKE 
+				//CAN DO IN
+
+				data: '<div></div>',
+				//JSX
 			}],
 		},
 	},
