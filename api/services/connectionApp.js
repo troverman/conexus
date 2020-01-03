@@ -54,9 +54,6 @@ module.exports = {
 
     },
 
-	//OKAY.. a think connections plz 
-
-	//hm... 
 	create:async function(req){
 
 		//NO
@@ -101,34 +98,10 @@ module.exports = {
 				console.log('CREATE VALIDATION', newValidationModel);
 				eventApp.create(newValidation);
 
-				createAssociation(newValidationModel);
+				//MAY BE DYNAMICALLY DEFINED IE CONNECTION CUSTOM VALIDATION TYPE . . 
+				associationApp.create(newValidationModel);
 
 			}
-		};
-
-		//NO
-		//MESSY MESSY
-		function createAssociation(newValidationModel){
-			var newAssociationModel = {}; 
-			Validation.getDatastore().manager.collection('validation')
-			.find({$and : [{"associatedModels.id": {$in :[newValidationModel.associatedModels[0].id]}}, {"associatedModels.id": {$in :[newValidationModel.associatedModels[1].id]}},]})
-			.limit(1000).skip(0).sort({'createdAt':-1})
-			.toArray(function (err, validationModels) {
-				Association.getDatastore().manager.collection('association')
-				.find({$and : [{"associatedModels.id": {$in :[validationModels[0].associatedModels[0].id]}},{"associatedModels.id": {$in :[validationModels[0].associatedModels[1].id]}},]})
-				.limit(1000).skip(0).sort({'createdAt':-1})
-				.toArray(function (err, associationModels) {
-					if (associationModels.length == 0){
-						var newAssociationModel = newValidationModel;
-						Association.create(newAssociationModel).then(function(association){
-							console.log('CREATED ASSOCIATION', association);
-							Association.publish(association.id, {verb: 'create', data: association});
-							createEvent(association, 'create');
-						});
-					}
-					else{createEvent(association, 'update');}
-				});
-			});
 		};
 
 		var model = {

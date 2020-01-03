@@ -33,7 +33,11 @@ var attentionApp = {
 
     },
 
-	get: async function(req, res) {
+	get: async function(req) {
+
+		//MACHIENE ATTENTION OBJ..
+		//event.create
+
 		var limit = parseInt(req.query.limit) || 1;
 		var skip = parseInt(req.query.skip) || 0;
 		var sort = req.query.sort;
@@ -57,7 +61,7 @@ var attentionApp = {
 	//MACHINE ATTENTION BY VALIDATION OF SPECIFIC DATA.. 
 	//REVIEW THE DATA IN THE BLOCK ...
 	//GIVES IT MACHENE ATTENTION.. IE THE MERKLE PROOF (POW)
-	create: async function (req, res) {
+	create: async function (req) {
 
 		async function updateAssociatedModels(model){
 			var protocolTokens = attentionApp.tokens.get(model);
@@ -341,10 +345,14 @@ var attentionApp = {
 		//console.log('CREATE ATTENTION', model)
 		Attention.publish([newAttention.id], {verb:'create', data: newAttention});
 		eventApp.create(newAttention);
+
 		//createNotification(model);
 		//createValidation(model);
+
 		attentionApp.tokens.create(newAttention);
+
 		updateAssociatedModels(newAttention);
+
 		//TODO: STANDARDIZE USER STATE
 		var updatedUser = await User.update({id:userModel[0].id}, {status:newAttention.string});
 		return Attention.find({hash:model.hash});		

@@ -1,5 +1,5 @@
-2020/01/02-13:56:10.730 1b18 Recovering log #329
-2020/01/02-13:56:10.732 1b18 Level-0 table #331: started
-2020/01/02-13:56:10.739 1b18 Level-0 table #331: 360522 bytes OK
-2020/01/02-13:56:10.745 1b18 Delete type=0 #329
-2020/01/02-13:56:10.746 1b18 Delete type=3 #327
+2020/01/02-22:28:16.924 4bcc Recovering log #389
+2020/01/02-22:28:16.924 4bcc Level-0 table #392: started
+2020/01/02-22:28:16.930 4bcc Level-0 table #392: 419 bytes OK
+2020/01/02-22:28:16.945 4bcc Delete type=0 #389
+2020/01/02-22:28:16.946 4bcc Delete type=3 #387

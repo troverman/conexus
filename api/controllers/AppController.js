@@ -1,4 +1,5 @@
 //CRE8.APP
+//REDUCT AND FACTOR 
 module.exports = {
 	get: async function(req, res) {
 		var model = await appApp.get(req); 

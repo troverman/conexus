@@ -1,5 +1,7 @@
 //TODO: AUTH APP
 //TODO: SECURITY APP
+//TODO: SESSION APP . . .
+//TODO: IDENTIFY AND CREDS APP LOCAL AND NONLOCAL
 
 module.exports = function(req, res, next) {
 

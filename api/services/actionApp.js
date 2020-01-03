@@ -40,10 +40,10 @@ module.exports = {
 
 		console.log('GET ACTION', req.query);
 
-		if(req.query.id){return await Action.find({id:id}).limit(limit).skip(skip).sort(sort);}
+		if(req.query.id){return Action.find({id:id}).limit(limit).skip(skip).sort(sort);}
 		//TODO: ASSOCIATION
 		//TODO: ITEM ASSOCIATION
-		else{return await Action.find({}).limit(20).skip(skip).sort(sort);}
+		else{return Action.find({}).limit(20).skip(skip).sort(sort);}
 
 	},
 
@@ -59,7 +59,7 @@ module.exports = {
 		model.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
 		//Action.publishCreate(model);
 		//Action.publish([model.id], {verb: 'create', data: model});
-		return await Action.create(model)
+		return Action.create(model)
 	},
 
 	

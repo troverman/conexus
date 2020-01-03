@@ -29,6 +29,8 @@ module.exports = {
 
 		        //PLACE OF STUDY
 		        	//CONSENSUS PLUGIN
+		        	//VALIDATION MESH WHICH PROVIDES EVENT HISTORY AND CONTEXT 
+		        		//TRUTH TREES s
 		        truthForestHashSet:{type:'json'}  
 
 		    }

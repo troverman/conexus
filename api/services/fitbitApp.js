@@ -22,8 +22,14 @@ module.exports = {
 	],
 
 	//TODO
-	dataModel:[
-		//type fitbit_step
+	dataModels:[
+		{
+			type:'fitbit_step', 
+			attributes: {
+				 date:{type: 'string'}, 
+				 value:{type: 'integer'},
+			}
+		},
 		//type fitbit_sleep
 		//type fitbit_heart
 		//type fitbit_floor
@@ -181,16 +187,16 @@ module.exports = {
 		
 			//TODO: FIX
 			var activity = await fitbitApp.get.steps(model);
-				var tokens = fitbitApp.tokens.get({type:'fitbit_distance', data:activity})
-				//TODO: STRUCUTRE BETTER
-				for (x in tokens){
-					tokens[x].protocols = ['FITBIT','FITBIT-DISTANCE'];
-					tokens[x].logic = {transferrable:true, mint:'FITBIT DISTANCE'};
-					tokens[x].associatedModels = [{type:'MEMBER', id:userIdTemp}];
-					tokens[x].information = {inCirculation:0, market:0};
-				}
-				//TODO: UPDATE
-				//fitbitApp.tokens.create(tokens);
+			var tokens = fitbitApp.tokens.get({type:'fitbit_distance', data:activity})
+			//TODO: STRUCUTRE BETTER
+			for (x in tokens){
+				tokens[x].protocols = ['FITBIT','FITBIT-DISTANCE'];
+				tokens[x].logic = {transferrable:true, mint:'FITBIT DISTANCE'};
+				tokens[x].associatedModels = [{type:'MEMBER', id:userIdTemp}];
+				tokens[x].information = {inCirculation:0, market:0};
+			}
+			//TODO: UPDATE
+			//fitbitApp.tokens.create(tokens);
 
 			var activity = await fitbitApp.get.steps(model);
 			var tokens = fitbitApp.tokens.get({type:'fitbit_floor', data:activity})

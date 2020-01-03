@@ -13,3 +13,5 @@ peer.lift(rc('sails'));
 //hooks:{foo: false}, // if you want to disable some of them
 //  paths: { views: 'mydir/views' }, // relative to appDir
 //}, function(err, server) {});
+
+

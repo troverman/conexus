@@ -382,6 +382,8 @@ module.exports = {
 
 		reactionApp.tokens.create(reaction);
 
+		//ASSOCIATED APP DATA.. COUNTS 
+		//TODO:: AS ASSOCIATIONS . .
 		updateAssociatedModels(reaction);
 
 		console.log('CREATE REACTION', reaction);

@@ -49,60 +49,24 @@ module.exports = {
         Project.update({id: model.id}, model).then(function(model){return next(null, model);});
     },
 
+    init:function(model){
+
+    	//var self = {
+	    //	connnections:{
+	    //		self:{
+	    //			connections:{
+	    //				self:{attributes:{}}
+	    //			}
+	    //		},
+	    //		project:{},
+	    //	}
+	    //};
+
+    },
+
 	get: async function(req) {
 
 		var deferred = Q.defer();
-
-		//DO COMPLEX (COMB IT) FILTER WITH 
-		function getAssociations(model){
-			var deferred = Q.defer();
-			Association.getDatastore().manager.collection('association')
-			.find({$and : [{"associatedModels.id": {$in:[model.id]}}]}).limit(1000).skip(0).sort({'createdAt':-1})
-			.toArray(function (err, associationModels) {
-				if (associationModels.length > 0){
-					associationModels.map(function(obj){obj.id=obj._id; return obj});
-					model.associationModels = associationModels;
-					model.context = {};
-					var promises = [];
-					for (x in model.associationModels){
-						for (y in associationModels[x].associatedModels){
-							if (associationModels[x].associatedModels[y].type=='ACTION'){promises.push(Action.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
-							if (associationModels[x].associatedModels[y].type=='APP'){promises.push(App.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
-							if (associationModels[x].associatedModels[y].type=='ATTENTION'){promises.push(Attention.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
-							if (associationModels[x].associatedModels[y].type=='CONNECTION'){promises.push(Connection.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
-							if (associationModels[x].associatedModels[y].type=='CONTENT'){promises.push(Content.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
-							if (associationModels[x].associatedModels[y].type=='ITEM'){promises.push(Item.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
-							if (associationModels[x].associatedModels[y].type=='MEMBER'){promises.push(User.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
-							if (associationModels[x].associatedModels[y].type=='PROJECT'){promises.push(Project.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
-							if (associationModels[x].associatedModels[y].type=='TASK'){promises.push(Task.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
-							if (associationModels[x].associatedModels[y].type=='TIME'){promises.push(Time.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
-							if (associationModels[x].associatedModels[y].type=='TRANSACTION'){promises.push(Transaction.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
-							if (associationModels[x].associatedModels[y].type=='VALIDATION'){promises.push(Validation.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
-						}
-						//DEFINED BY CONNECTION
-						if (model.associationModels[x].context){
-							for (y in Object.keys(model.associationModels[x].context)){
-								var context = Object.keys(model.associationModels[x].context)[y].toString();
-								if(!model.context[context.toString()]){model.context[context.toString()] = model.associationModels[x].context[context.toString()];}
-								else{model.context[context.toString()] = model.context[context.toString()] + model.associationModels[x].context[context.toString()];}
-							}
-						}
-					}
-					Q.all(promises).then((populatedModels)=>{
-						var index = -1 
-						for (x in model.associationModels){
-							for (y in associationModels[x].associatedModels){
-								index++;
-								model.associationModels[x].associatedModels[y].data = populatedModels[index];
-							}
-						}
-					});
-				}
-				else{deferred.resolve(model);}
-			});
-			return deferred.promise;
-		};
-
 		var limit = parseInt(req.query.limit) || 10;
 		var skip = parseInt(req.query.skip) || 0;
 		var sort = req.query.sort || 'createdAt DESC';
@@ -114,38 +78,17 @@ module.exports = {
 
 		console.log('GET PROJECT', req.query);
 
+		//CREATE PEER SELF DATABASE . . .
+
 		//DEDUPLICATE
 		if (req.query.id || req.query.urlTitle){
-			var query = {$or:[]};
-			if (req.query.urlTitle){
-				if (mongodb.ObjectID.isValid(req.query.urlTitle)){query.$or.push({"_id":{$eq:mongodb.ObjectID(req.query.urlTitle)}});}
-				else{query.$or.push({"urlTitle":req.query.urlTitle});}
-			}
-			//TODO: PROMISIFY
-			//TODO: REMOVE MONGO . .
-
-			//const {promisify} = require('util');
-			//promisify(fs.readFile)
-
-			Project.getDatastore().manager.collection('project').find(query).limit(limit).skip(skip).sort({'createdAt':-1}).toArray(function (err, models) {
-				if (models.length > 0){
-					var projectModel = models[0];
-					projectModel.id = projectModel._id.toString();
-					Project.subscribe(req, [models[0].id]);
-					//DEPRECIATE
-					if (models[0].parent){
-						//ASYNC
-						Project.find({id:models[0].parent}).then(function(parentModel){
-							models[0].parent = parentModel[0];
-							return getAssociations(models[0]);
-						});
-					}
-					else{return getAssociations(models[0]);}
-				}
-				else{return new Promise();}
-			});
+			var query = {};
+			if (req.query.id){query.id = req.query.id}
+			if (req.query.urlTitle){query.urlTitle = req.query.urlTitle}
+			var models = await Project.find(query);
+			return associationApp.get(models[0]);
 		}
-
+			
 		//SEARCHING FILTERING....
 		//LOCATION
 		else if(req.query.location){
@@ -198,7 +141,7 @@ module.exports = {
 			var numRecords = await Project.count();
 			Project.subscribe(req, models.map(function(obj){return obj.id}));
 			var promises = [];
-			for (x in models){promises.push(getAssociations(models[x]));}
+			for (x in models){promises.push(associationApp.get(models[x]));}
 			var populatedModels = await Q.all(promises);
 			for (x in models){models[x] = populatedModels[x];}
 			var returnObj = {data:models, info:{count:numRecords}};
@@ -252,49 +195,10 @@ module.exports = {
 					for (y in model.associatedModels[x].context){newValidation.context[model.associatedModels[x].context[y].text] = model.associatedModels[x].context[y].score;}
 					var newValidationModel = await Validation.create(newValidation);
 					console.log('CREATE VALIDATION', newValidationModel);
-					createAssociation(newValidationModel);
+					associationApp.create(newValidationModel);
 					eventApp.create(newValidationModel);
 				}
 			}
-		};
-
-		function createAssociation(newValidationModel){
-			var newAssociationModel = {};
-			Validation.getDatastore().manager.collection('validation')
-			.find({
-				$and : [
-					{"associatedModels.id": {$in :[newValidationModel.associatedModels[0].id]}}, 
-					{"associatedModels.id": {$in :[newValidationModel.associatedModels[1].id]}},
-				]
-			})
-			.limit(1000)
-			.skip(0)
-			.sort({'createdAt':-1})
-			.toArray(function (err, validationModels) {
-				Association.getDatastore().manager.collection('association')
-				.find({
-					$and : [
-						{"associatedModels.id": {$in :[validationModels[0].associatedModels[0].id]}},
-						{"associatedModels.id": {$in :[validationModels[0].associatedModels[1].id]}},
-					]
-				})
-				.limit(1000)
-				.skip(0)
-				.sort({'createdAt':-1})
-				.toArray(function (err, associationModels) {
-					if (associationModels.length == 0){
-						var newAssociationModel = newValidationModel;
-						Association.create(newAssociationModel).then(function(association){
-							console.log('CREATED ASSOCIATION', association);
-							eventApp.create(newValidationModel);
-							Association.publish([association.id], {verb: 'create', data: association});
-						});
-					}
-					else{
-						console.log('ASSOCIATION EXISTS -- COMPUTE')
-					}
-				});
-			});
 		};
 
 		var model = {
