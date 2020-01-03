@@ -24,6 +24,8 @@ module.exports = {
 
 		//GET PRIVACY TOKEN ASSOCIATED MEMBERS
 		var tokenSum = 0;
+		//USERS WHO ARE ASSOCIATED WITH APP IN PEER BUILD
+			//EVERY APP HAS THE RECURSIVE DEPENDENCIES IE CONSENSUS . . . FLL STACK / SCALE
 		var userModels = await User.find();
 
 		for (x in userModels){

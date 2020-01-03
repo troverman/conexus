@@ -110,7 +110,7 @@ module.exports = {
 		var newApp = await App.create(model);
 		App.publish([model.id], {verb: 'create', data: model});
 		eventApp.create(newApp);
-		validationApp.create(newApp);
+		validationApp.createLegacy(newApp);
 		deferred.resolve(newApp);
 		return deferred.promise;
 	},

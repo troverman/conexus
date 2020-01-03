@@ -6,7 +6,6 @@ module.exports = {
 	//IMPORT META MODEL
 	//EACH FUNCTION MODEL... A PROTOCOL? 
 			//IE MODEL IS MACHIENE ATTENTION ETC 
-
 	attributes: {
         model: {type: 'string', defaultsTo: 'CONTENT'},
         title: {type: 'string', allowNull: true},
@@ -15,27 +14,23 @@ module.exports = {
         context: {type: 'string'},
         type: {type: 'string', defaultsTo: 'POST'},
         location: {type: 'json'},
-
         //CREATOR
         //ITEM vs CONTENT
         user: {model: 'user', required: true},
         creator: {type: 'string'},
-        owner: {model: 'user'},
-        
+        owner: {model: 'user'}, 
         data: {type: 'json'},
     },
 
 	
+	//TODO: MULTI CONTEXT WRT DATA STORE
 	get: async function(req, res) {
-
 		var deferred = Q.defer();
 		var limit = parseInt(req.query.limit) || 1;
 		var skip = parseInt(req.query.skip) || 0;
 		var sort = req.query.sort || 'createdAt DESC';
 		var id = req.query.id;
-
 		console.log('GET CONTENT', req.query);
-
 		if(req.query.id){
 			var models = await Content.find({id:id}).limit(limit).skip(skip).sort(sort).populate('user')
     		//ATTENTION???
@@ -99,54 +94,7 @@ module.exports = {
 	},
 
 	create: async function (req, res) {
-		//TODO: REDUCE!
-		async function createValidation(model){
-			//validation set
-			for (x in model.associatedModels){
-				var newValidation = {
-					content:model.id + ' VALIDATION',
-					context: {},
-					reputation: {},					
-					//UNIFY AND ALLOW FOR PROJECT TO CREATE
-					user: model.user.id,
-					creator: model.user.id,
-					data:{apps:{reactions: {plus:0,minus:0}, attention:{general:0}}}
-				};
-				//DEFAULT CONNECTION???? 
-				//SCOPE VARIABLES
-				//FOR COMMENTS (PARENT CHILD.. )
-				//CONTENT-CONTENT COMMENT (1st in order is parent)
-				//MODEL-CONTENT COMMENT
-				//Connection.find({}).then(function(connectionModel){
-				//newValidation.connection = connectionModel[0];
-				newValidation.connection = {
-					parameters:{
-						context:{},
-					},
-				};
-				var associatedModelObj = {};
-				if (model.associatedModels[x].id.toLowerCase() == 'self'){associatedModelObj = {type:model.model, id:model.id}}
-				else{associatedModelObj = {
-					type:model.associatedModels[x].type,
-					id:model.associatedModels[x].id};
-				}
-				newValidation.associatedModels = [
-					{type:model.model, id:model.id},
-					associatedModelObj
-				];
-				//LIST -> OBJ
-				for (y in model.associatedModels[x].context){
-					newValidation.context[model.associatedModels[x].context[y].text] = model.associatedModels[x].context[y].score;
-				}
-				newValidation.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(newValidation)).digest('hex');
-				Validation.create(newValidation).then(function(newValidationModel){
-					console.log('CREATE VALIDATION', newValidationModel);
-					eventApp.create(newValidationModel);
-					associationApp.create(newValidationModel)
-				});
-			}
-		};
-	
+		
 		//language of connections to recurse to bits 
 			//the highleve abstract to opcodes to binary seems a chore | gotta be better 
 
@@ -160,10 +108,8 @@ module.exports = {
 								//~~ (BINARY?) () WE REDUCE TO THE PHYSICAL COMPONENTS   
 									//. . . BITS  COMPLETE THE CIRCLE 
 
-
 		//THE BLOAT OF N ABSTRACTION LAYERS FEELS.. MESSY
 			//THINK ABOUT YOUR AVERAGE NETWORKING PROTOCOL FLOW DIAGRAM 
-
 		//i need to learn chinese  
 
 		//var User = appApp.find(appApp.id); // something something 
@@ -191,7 +137,8 @@ module.exports = {
 		Content.publish(model.id, {verb: 'create', data: model});
 		eventApp.create(newContent);
 		contentApp.token.create(newContent);
-		createValidation(newContent);
+		//SHOULD BE REVERED TOP DOWN BY CONNECTION (ABSTRACT & DISCRETE VALIDATION TYPES)
+		validationApp.createLegacy(newContent);
 		return Content.find({hash:model.hash});
 	},
 

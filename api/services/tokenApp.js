@@ -14,7 +14,6 @@ module.exports = {
 	attributes: {
 		//DEPRECIATE
 		model: {type: 'string', defaultsTo: 'TOKEN'},
-
 		string: {type: 'string'},
 		//MANIFOLD LOGIC; ALGEBRAS; etc
 		protocols:{type:'json'},

@@ -16,10 +16,8 @@ module.exports = {
         associatedModels: {type: 'json'},
         content: {type: 'string', allowNull: true},
         context: {type: 'string'},
-
         user: {model: 'user'},
         creator: {type: 'string'},
-
         data: {type: 'json'},
     },
 
@@ -52,110 +50,6 @@ module.exports = {
 		return deferred.promise;
 	},
 
-	create: async function(req){
-		//IMPLICIT VALIDATIONS REPLACE 'user'? what about 'creator'
-		//DEPRECAITE TO.. FROM????? --> VALIDATION / ASSOCIATION IS MAIN DATA MODEL ...
-		//MEMBER->TRANSACTION
-		//TRANSACTION->PROJECT
-		//TRANSACTION<->TRANSACTION ?
-		//APP-APP INTEROP . . . /// USE VALIDATIONAPP.CREATE  . .. 
-		//TODO: REDUCE . . .
-			//THIS ABOUT STATIC VERSIONS OF VALIDATION TYPES (AS CONNECTIONS WITH SUM RULES)
-		async function createValidation(model){
-			console.log('ASSOCIATED MODELS');
-			console.log(model.associatedModels);
-			//CREATE VALIDATION (IE SELF VALIDATION .. CONTEXT OF TRANSACTION)
-			//SOME CHARTER WHERE THE CREATOR IS WEIGHTED
-			//SOME CHARTER WHERE THE FROM AND TO IS WEIGHTED
-			//IE BUY AN ITEM.. CONTEXTUALIZED VALIDATION
-			for (x in model.associatedModels){
-				var newValidation = {
-					content:model.id + ' VALIDATION',
-					//THIS IS DEFINED BY CONNECTION!!!
-					//ATTRIBUTES
-					context: {},
-					reputation: {},		
-					//UNIFY
-					user: model.user.id,
-					creator: model.user.id,
-					data:{apps:{reactions: {plus:0,minus:0}, attention:{general:0}}}
-				};
-				newValidation.connection = {
-					id:1,
-					type:'HUMAN',
-					title:'STANDARD MULTI, AGNOSTIC MODELS',
-					parameters:{
-						mapping:['context','reputation'],
-						logic:'context[%context]*reputation[%context]'
-					},
-				};
-				var associatedModelObj = {};
-				if (model.associatedModels[x].id.toLowerCase() == 'self'){associatedModelObj = {type:model.model, id:model.id}}
-				else{
-					associatedModelObj = {type:model.associatedModels[x].type, id:model.associatedModels[x].id};
-				}
-				newValidation.associatedModels = [
-					{type:model.model, id:model.id},
-					associatedModelObj
-				];
-				//LIST -> OBJ
-				for (y in model.associatedModels[x].context){
-					newValidation.context[model.associatedModels[x].context[y].text] = model.associatedModels[x].context[y].score;
-				}
-				newValidation.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(newValidation)).digest('hex');
-				var newValidationModel = await Validation.create(newValidation);
-				console.log('CREATE VALIDATION', newValidationModel);
-				associationApp.create(newValidationModel);
-				//GENERALIZED ASSOCIATION
-				//Transaction.update({id:model.id},{context:{}}).then((newTransactionModel)=>{
-				//	console.log('UPDATE CONTEXT??', newTransactionModel)
-				//});
-			}
-		};
-		var model = {
-			model: 'TRANSACTION',
-			amountSet: req.param('amountSet'),
-			to: req.param('to'),
-			from: req.param('from'),
-			//HM -- ASSOCIATED?
-			content: req.param('content'),
-			//to,from,self,creator
-			//NOT STORED IN MAIN MODEL... 
-			//associatedModels: req.param('associatedModels'),
-			context: req.param('context'),
-			user: req.param('user'),
-			creator: req.param('user'),
-			data:{apps:{reactions:{plus:0,minus:0},attention:{general:0}}}
-		};
-		model.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
-		console.log('CREATE TRANSACTION', model);
-		var transactionModel = await Transaction.create(model);
-		//ITEM ACTIONS.. 			
-		//IF GENERATOR
-		//CONTENT OWNERSHIP? --> CONTENT AND ITEM 
-		//.. ATTENTION(ASSET) TOKEN RIGHTS.. 
-		for (x in Object.keys(transactionModel.amountSet)){
-			var itemModels = await Item.find({id:Object.keys(transactionModel.amountSet)[x]});
-			if (itemModels.length!=0){
-				var updatedItem = await Item.update({id:itemModels[0].id}, {user:transactionModel.to, owner:transactionModel.to})
-				console.log('UPDATED: ITEM OWNERSHIP TRANSFERRED', updatedItem);
-			}
-		}
-		//HMM
-		transactionModel.associatedModels = req.param('associatedModels');
-		var promises = [transactionApp.getTo(transactionModel), transactionApp.getFrom(transactionModel)];
-		var populatedModels = await Q.all(promises);
-		var userModels = await User.find({id:model.user});
-		transactionModel.user = userModels[0];
-		transactionModel.to = populatedModels[0];
-		transactionModel.from = populatedModels[1];
-		Transaction.publish([transactionModel.id], {verb: 'update', data: transactionModel});
-		createValidation(transactionModel);
-		transactionApp.tokens.create(transactionModel);
-		eventApp.create(transactionModel);
-		notificationApp.create.transaction(transactionModel);
-		return Transaction.find({hash:model.hash});
-	},
 	get: async function(req){
 		var deferred = transactionApp.import.Q.defer();		
 		var limit = parseInt(req.query.limit) || 1;
@@ -254,6 +148,52 @@ module.exports = {
 			deferred.resolve(models);
 		}
 		return deferred.promise;
+	},
+
+	create: async function(req){
+		var model = {
+			model: 'TRANSACTION',
+			amountSet: req.param('amountSet'),
+			to: req.param('to'),
+			from: req.param('from'),
+			//HM -- ASSOCIATED?
+			content: req.param('content'),
+			//to,from,self,creator
+			//NOT STORED IN MAIN MODEL... 
+			//associatedModels: req.param('associatedModels'),
+			context: req.param('context'),
+			user: req.param('user'),
+			creator: req.param('user'),
+			data:{apps:{reactions:{plus:0,minus:0},attention:{general:0}}}
+		};
+		model.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
+		console.log('CREATE TRANSACTION', model);
+		var transactionModel = await Transaction.create(model);
+		//ITEM ACTIONS.. 			
+		//IF GENERATOR
+		//CONTENT OWNERSHIP? --> CONTENT AND ITEM 
+		//.. ATTENTION(ASSET) TOKEN RIGHTS.. 
+		for (x in Object.keys(transactionModel.amountSet)){
+			var itemModels = await Item.find({id:Object.keys(transactionModel.amountSet)[x]});
+			if (itemModels.length!=0){
+				var updatedItem = await Item.update({id:itemModels[0].id}, {user:transactionModel.to, owner:transactionModel.to})
+				console.log('UPDATED: ITEM OWNERSHIP TRANSFERRED', updatedItem);
+			}
+		}
+		//HMM
+		transactionModel.associatedModels = req.param('associatedModels');
+		var promises = [transactionApp.getTo(transactionModel), transactionApp.getFrom(transactionModel)];
+		var populatedModels = await Q.all(promises);
+		var userModels = await User.find({id:model.user});
+		transactionModel.user = userModels[0];
+		transactionModel.to = populatedModels[0];
+		transactionModel.from = populatedModels[1];
+		Transaction.publish([transactionModel.id], {verb: 'update', data: transactionModel});
+		validationApp.createLegacy(transactionModel);
+		transactionApp.tokens.create(transactionModel);
+		eventApp.create(transactionModel);
+		notificationApp.create.transaction(transactionModel);
+		return Transaction.find({hash:model.hash});
 	},
 
 	//OVERLOAD TOKEN.APP

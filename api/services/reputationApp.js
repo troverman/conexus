@@ -1,6 +1,8 @@
 //CRE8.REPUTATION.ALPHA
 module.exports = {
 
+	//MAIN DATA --> APP MAPPING . . . HMM
+
 	//NO MATTER WHAT APPS HAVE CONNECTION APP IMPORT ~ LANGUAGE (TOO EARLY NOW_)
 	//ONE MORE FACTOR AFTER THIS AND LANGUAGE WILL EMERGE
 
@@ -10,7 +12,6 @@ module.exports = {
 
 	//types = {string:'{type:'string'}', reputation:type:'json'}
 
-
 	//IMPORTS
 	//MEMBER APP
 	//ATTENTION APP
@@ -19,8 +20,6 @@ module.exports = {
 	//TASK APP
 	//PROJECT APP
 	//... APP - APP CONNECTION
-
-
 
 	create:function(){},
 	get:function(){},
@@ -54,8 +53,5 @@ module.exports = {
 			var updatedUser = await User.update({id:userModels[x].id}, {balance:balance});
 		}
 	},
-	
-
-
-	
+		
 };

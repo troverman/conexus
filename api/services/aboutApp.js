@@ -2,6 +2,12 @@
 //LET'S DO A DESIGN PATTERN
 module.exports = {
 
+	//STATIC WEBSITE APP .. BOILERPLATE . . .
+	//:P
+	///TEMPLATING ...
+	//BOWER, GRUNT, AND OTHER ASSET MANAGEMENT
+		//--> ASM 
+
 	views:{
 		about:{
 			route:'/',

@@ -155,71 +155,19 @@ module.exports = {
 	},
 
 	create: async function (req) {
-
-		async function createValidation(model){
-
-			for (x in model.associatedModels){
-				var newValidation = {
-					content:model.id + ' VALIDATION',
-					user: model.user.id,
-					creator: model.user.id,
-					parameters:{},
-					context:{},
-					data:{apps:{reactions: {plus:0,minus:0},attention:{general:0}}},
-				};
-
-				//NO HARDCODE!
-				newValidation.connection = {
-					id: null,
-					title:'DEFAULT',
-					parameters:{
-						mapping:[
-							'context',
-							'reputation',
-							'computed'
-						],
-						logic:'context[%context]*reputation[%context]'
-					},
-				};
-
-				//CONNECTION DEFINED MAPPINGS
-				for (y in newValidation.connection.parameters.mapping){newValidation.parameters[newValidation.connection.parameters.mapping[y]] = {};}
-				var associatedModelObj = {};
-				if (model.associatedModels[x].id){
-					if (model.associatedModels[x].id.toLowerCase() == 'self'){associatedModelObj = {type:model.model, id:model.id}}
-					else{associatedModelObj = {type:model.associatedModels[x].type, id:model.associatedModels[x].id};}
-					newValidation.associatedModels = [
-						{type:model.model, id:model.id},
-						associatedModelObj
-					];
-					for (y in model.associatedModels[x].context){newValidation.context[model.associatedModels[x].context[y].text] = model.associatedModels[x].context[y].score;}
-					var newValidationModel = await Validation.create(newValidation);
-					console.log('CREATE VALIDATION', newValidationModel);
-					associationApp.create(newValidationModel);
-					eventApp.create(newValidationModel);
-				}
-			}
-		};
-
 		var model = {
 			model: 'PROJECT',
-			
 			title: req.param('title'),
-
 			//context: req.param('context'),
 			location: req.param('location'),
 			description: req.param('description'),
-			
 			creator: req.param('user'),
 			user: req.param('user'),
-
 			parent: req.param('parent'),
 			urlTitle: req.param('title').replace(/\s/g, '-').toLowerCase().replace('#','').replace('/',''),
-
 			data:{apps:{reactions:{plus:0,minus:0},attention:{general:0}}}
 		};
 		model.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
-
 		console.log('CREATE PROJECT', model);
 
 		//TODO: READ
@@ -247,8 +195,8 @@ module.exports = {
 		Project.publish([projectModel[0].id], {verb: 'create', data: projectModel[0]});
 
 		eventApp.create(project);
-		createNotification(project);
-		createValidation(project);
+		notificationApp.create.project(project);
+		validationApp.create(project);
 
 		//TODO: DEFINE CONNECTION PERMISSIONS
 		//createCharter()

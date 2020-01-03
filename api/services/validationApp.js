@@ -91,7 +91,7 @@ module.exports = {
 		//BETTER GET . . . WE ARE ABSTRACTING THOUGH MONOGO. . . 
 		//provide context hash
 		//truth variance 
-		return await Event.find({id:model.id});
+		return Event.find({id:model.id});
 	},
 
 	get: async function(req){
@@ -356,6 +356,97 @@ module.exports = {
 		deferred.resolve(newValidation);
 		return deferred.promise;
 	},
+
+
+	//IMPLICIT VALIDATIONS REPLACE 'user'? what about 'creator'
+	//DEPRECAITE TO.. FROM????? --> VALIDATION / ASSOCIATION IS MAIN DATA MODEL ...
+	//MEMBER->TRANSACTION
+	//TRANSACTION->PROJECT
+	//TRANSACTION<->TRANSACTION ?
+	//APP-APP INTEROP . . . /// USE VALIDATIONAPP.CREATE  . .. 
+	//TODO: REDUCE . . .
+		//THIS ABOUT STATIC VERSIONS OF VALIDATION TYPES (AS CONNECTIONS WITH SUM RULES)
+
+	createLegacy: async function(model){
+
+		//CREATE VALIDATION (IE SELF VALIDATION .. CONTEXT OF TRANSACTION)
+		//SOME CHARTER WHERE THE CREATOR IS WEIGHTED
+		//SOME CHARTER WHERE THE FROM AND TO IS WEIGHTED
+		//IE BUY AN ITEM.. CONTEXTUALIZED VALIDATION
+
+		for (x in model.associatedModels){
+			var newValidation = {
+				model:'VALIDATION',
+				content:model.id + ' VALIDATION',
+				user: model.user.id,
+				creator: model.user.id,
+				//ATTRIBUTES
+				parameters:{},
+				context: {},
+				reputation: {},	
+				data:{apps:{reactions: {plus:0,minus:0},attention:{general:0}}}
+			};
+
+
+			//DEFAULT CONNECTION???? 
+			//SCOPE VARIABLES
+			//FOR COMMENTS (PARENT CHILD.. )
+			//CONTENT-CONTENT COMMENT (1st in order is parent)
+			//MODEL-CONTENT COMMENT
+			//Connection.find({}).then(function(connectionModel){
+			//newValidation.connection = connectionModel[0];
+			
+
+			newValidation.connection = {
+				id:1,
+				type:'HUMAN',
+				title:'STANDARD MULTI, AGNOSTIC MODELS',
+				parameters:{
+					mapping:['context','reputation','computed'],
+					attributes:{
+						context:'string->int',//{string:int} //lang lang interpol
+						reputation:'string->int',
+						computed:'string:->int'
+					},
+					logic:'computed[%context] = context[%context]*reputation[%context]'
+				},
+			};
+
+			//NO HARDCODE!
+			newValidation.connection = {
+				id: null,
+				title:'DEFAULT',
+				parameters:{
+					mapping:[
+						'context',
+						'reputation',
+						'computed'
+					],
+					logic:'context[%context]*reputation[%context]'
+				},
+			};
+			//CONNECTION DEFINED MAPPINGS
+			for (y in newValidation.connection.parameters.mapping){
+				newValidation[newValidation.connection.parameters.mapping[y]] = {};
+			}
+			var associatedModelObj = {};
+			if (model.associatedModels[x].id.toLowerCase() == 'self'){associatedModelObj = {type:model.model, id:model.id}}
+			else{associatedModelObj = {type:model.associatedModels[x].type, id:model.associatedModels[x].id};}
+			newValidation.associatedModels = [
+				{type:model.model, id:model.id},
+				associatedModelObj
+			];
+			for (y in model.associatedModels[x].context){newValidation.context[model.associatedModels[x].context[y].text] = model.associatedModels[x].context[y].score;}
+			newValidation.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(newValidation)).digest('hex');
+			var newValidationModel = await Validation.create(newValidation);
+			console.log('CREATE VALIDATION', newValidationModel);
+			eventApp.create(newValidationModel);
+			newValidationModel.model = 'ASSOCIATION';
+			associationApp.create(newValidationModel);
+		}
+	},
+
+
 
 	tokens:{
 

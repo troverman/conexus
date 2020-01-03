@@ -10,10 +10,8 @@ module.exports = {
 	//peer is a combinatorial obj
 
 	attributes: {
-        
         //DEPRECIATE
         model: {type: 'string', defaultsTo: 'PEER'},
-
 		info: {type: 'json'},
 		information: {type: 'json'},
 		reputation: {type: 'json'}, // MOSTSLY BLOCK IDNETIFERS.. AND IMMUTABLE TOTAL MACHIENE ATTENTION -- ? YES
@@ -29,7 +27,6 @@ module.exports = {
 		return Peer.find(req);
 	},
 	create:async function(req){
-
 		var model = {
 			info: req.param('info'),
 			information: req.param('information'),
@@ -41,9 +38,5 @@ module.exports = {
 		};
 		return Peer.create(model);
 	},
-	build:function(){
-
-	},
-
-
+	build:function(){},
 };

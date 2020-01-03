@@ -11,37 +11,27 @@ const Q = require('q');
 module.exports = {
 
 	attributes: {
-        
         //DEPRECIATE
         model: {type: 'string', defaultsTo: 'ITEM'},
-        
         title: {type: 'string'},
         associatedModels: {type: 'json'}, 
         context: {type: 'string'},
         content: {type: 'string'},
-
         info: {type: 'json'},
         information: {type: 'json'},
         location: {type: 'json'},
         status: {type: 'string'},
         isGenerator:{type:'boolean', allowNull: true},
+        //COMPONENTS ARE BIG!
         compontentItems: {type: 'json'},
-        
         verbs:{type:'string'},
         actions:{type:'string'},
-
         owner: {type: 'string', allowNull: true},
         creator: {type: 'string'},
         user: {model: 'user'},
-
         data: {type: 'json'},
         dataHash: {type: 'string', allowNull: true},
         hash: {type: 'string', allowNull: true}, //id
-
-        //createdAt
-        //updatedAt
-        //id
-
     },
 
 
@@ -169,106 +159,20 @@ module.exports = {
 	},
 
 	create: async function (req) {
-
-		//TODO
-		function createValidation(model){
-			for (x in model.associatedModels){
-				var newValidation = {
-					model:'VALIDATION',
-					content:model.id + ' VALIDATION',
-					user: model.user.id,
-					creator: model.user.id,
-					data:{apps:{reactions: {plus:0,minus:0},attention:{general:0}}}
-				};
-				newValidation.connection = {
-					id:1,
-					type:'HUMAN',
-					title:'STANDARD MULTI, AGNOSTIC MODELS',
-					parameters:{
-						mapping:['context','reputation','computed'],
-						logic:'context[%context]*reputation[%context]'
-					},
-				};
-				//CONNECTION DEFINED MAPPINGS
-				for (y in newValidation.connection.parameters.mapping){
-					newValidation[newValidation.connection.parameters.mapping[y]] = {};
-				}
-				var associatedModelObj = {};
-				if (model.associatedModels[x].id.toLowerCase() == 'self'){associatedModelObj = {type:model.model, id:model.id}}
-				else{associatedModelObj = {type:model.associatedModels[x].type, id:model.associatedModels[x].id};}
-				newValidation.associatedModels = [
-					{type:model.model, id:model.id},
-					associatedModelObj
-				];
-				for (y in model.associatedModels[x].context){newValidation.context[model.associatedModels[x].context[y].text] = model.associatedModels[x].context[y].score;}				
-				newValidation.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(newValidation)).digest('hex');
-				Validation.create(newValidation).then(function(newValidationModel){
-					console.log('CREATE VALIDATION', newValidationModel);
-					createEvent(newValidationModel, 'create');
-					newValidationModel.model = 'ASSOCIATION';
-					createAssociation(newValidationModel);
-				});
-			}
-		};
-
-		//TODO
-		function createAssociation(newValidationModel){
-			var newAssociationModel = {};
-			Validation.getDatastore().manager.collection('validation').find({
-				$and : [
-					{"associatedModels.id": {$in :[newValidationModel.associatedModels[0].id]}}, 
-					{"associatedModels.id": {$in :[newValidationModel.associatedModels[1].id]}},
-				]
-			})
-			.limit(1000)
-			.skip(0)
-			.sort({'createdAt':-1})
-			.toArray(function (err, validationModels) {
-				Association.getDatastore().manager.collection('association').find({
-					$and : [
-						{"associatedModels.id": {$in :[validationModels[0].associatedModels[0].id]}},
-						{"associatedModels.id": {$in :[validationModels[0].associatedModels[1].id]}},
-					]
-				})
-				.limit(1000)
-				.skip(0)
-				.sort({'createdAt':-1})
-				.toArray(function (err, associationModels) {
-					if (associationModels.length == 0){
-						var newAssociationModel = newValidationModel;
-						Association.create(newAssociationModel).then(function(association){
-							console.log('CREATE ASSOCIATION', association);
-							Association.publish([association.id], {verb: 'create', data: association});
-							createEvent(association, 'create');
-						});
-					}
-					else{createEvent(association, 'update');}
-				});
-			});
-		};
-
 		var model = {
-
 			model: 'ITEM',
 			type: 'ITEM',
-
 			title: req.param('title'),
 			content: req.param('content'),
 			location: req.param('location'),
-
 			context: req.param('context'),
-
 			info: req.param('info'),
 			information: req.param('info'),
-
 			user: req.param('user'),
 			creator: req.param('user'),
 			owner: req.param('owner'),
-
 			data: req.param('data'),
-
 		};
-
 		if (!model.data){model.data = {};}
 		model.data.apps = {
 			actions:[],
@@ -276,25 +180,18 @@ module.exports = {
 			attention:{general:0},
 			json:{},
 		};
-
 		model.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
-
 		console.log('CREATE ITEM', model);
-
 		var model = await Item.create(model);
 		var userModels = await User.find({id:model.user});
 		itemModel.associatedModels = req.param('associatedModels') || [];
 		itemModel.user = userModels[0];
-
 		Item.subscribe(req, [itemModel]);
 		Item.publish([itemModel.id], {verb: 'create', data: itemModel});
-		createValidation(itemModel);
-
+		validationApp.createLegacy(task);
 		eventApp.create(itemModel);
 		itemApp.tokens.create(itemModel);
-
 		return Item.find({hash:model.hash});
-
 	},
 
 	//EACH PROTOCOL / APP ADDS TO THE VALUE LANGUAGE.. 

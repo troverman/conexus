@@ -171,7 +171,7 @@ module.exports = {
 			var query = mongoQuery;
 
 			//TODO: CONNECTION FILTERS
-				//FOLLOWING & FOLLOWERS! : )
+			//TODO: RECURSIVE . . .
 			Association.getDatastore().manager.collection('association').find(query).limit(1000).skip(0).sort({'createdAt':-1})
 			.toArray(function (err, associationModels) {
 				associationModels = associationModels.map(function(obj){obj.id = obj._id; return obj;});
@@ -212,10 +212,11 @@ module.exports = {
 					return associationModels;
 				});
 			});
+
+
 		}
 
 	},
-
 
 	//DO BETTER --> BASED ON CONNECTION! 
 	create: async function(newValidationModel){

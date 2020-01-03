@@ -5,7 +5,7 @@ module.exports = {
 	//TRAVERSE APP-APP CONNECTIONS TO BUILD
 		//DEFINE IN 'NOTIFICATION' ON RESPECTIVE APP IE 'VALIDATION'
 
-	get:async function(req){
+	get: async function(req){
 
 		var limit = req.query.limit || 1;
 		var skip = req.query.skip || 0;
@@ -31,6 +31,10 @@ module.exports = {
 
 	},
 
+	//THIS IS REVERSE.. 
+	//DEFINE 
+	//notification:create: in EXTERNAL APP FOR OVERRIDE FXN 
+	//THIS SHOULD BE REDUCED
 	create: {
 
 		//TODO: && ASSSOICATION PARAMS
@@ -61,7 +65,6 @@ module.exports = {
 			//	console.log('CREATE NOTIFICATION', notification);
 			//	Notification.publish([notification[0].id], {verb: 'create', data: associationModels[0].id});
 			//});
-
 		},
 
 		transaction: async function (model){
@@ -101,6 +104,8 @@ module.exports = {
 			console.log('CREATE NOTIFICATION', model);
 			Notification.publish([model.id], {verb: 'create', data: model});
 		},
+
+		project:async function(model){},
 
 	},
 

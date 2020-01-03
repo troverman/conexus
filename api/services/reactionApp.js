@@ -20,10 +20,7 @@ module.exports = {
         data: {type: 'json'},  
     },
 
-
-
 	create: async function (req) {
-
 		//TODO: REFACTOR
 		//TOOD: BALANCES AND TOKENS UNITY
 		//FOR ALL APPS THAT IMPORT REACTIONS; inclue helpercode
@@ -360,7 +357,6 @@ module.exports = {
 				}
 			}
 		};
-
 		var model = {
 			model: 'REACTION',
 			amount: req.param('amount'),
@@ -368,29 +364,19 @@ module.exports = {
 			user: req.param('user'),
 			data:{apps:{reactions:{plus:0,minus:0},attention:{general:0}}}
 		};
-
 		model.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
-
 		var model = await Reaction.create(model);
-
 		var userModel = await User.find({id:model.user});
-			
 		reaction.associatedModels = req.param('associatedModels');
 		reaction.user = userModel[0];
-		
 		Reaction.publish([reaction.id], {verb:'create', data: reaction});
-
 		reactionApp.tokens.create(reaction);
-
 		//ASSOCIATED APP DATA.. COUNTS 
 		//TODO:: AS ASSOCIATIONS . .
 		updateAssociatedModels(reaction);
-
 		console.log('CREATE REACTION', reaction);
-		
 		//TODO: PROMISIFY
-		return reaction
-
+		return Reaction.find({hash:model.hash});
 	},
 
 

@@ -80,7 +80,7 @@ module.exports = {
 		Time.publish([time.id], {verb: 'create', data: time});
 		eventApp.create(time);
 		timeApp.tokens.create(time);
-		for (x in time.associatedModels){validationApp.create(time.associatedModels[x])}
+		for (x in time.associatedModels){validationApp.createLegacy(time.associatedModels[x])}
 		deferred.resolve(models);
 		return deferred.promise;
 	},

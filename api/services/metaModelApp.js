@@ -5,6 +5,7 @@ module.exports = {
 		truthSet:{type:'string'},
 		createdAt:{type:'string'},
 		updatedAt:{type:'string'},
-		id:{type:'string'}
+		id:{type:'string'},
+        data: {type: 'json'}, // CAN BE DATA MAPPING APP ETC
     },
 };

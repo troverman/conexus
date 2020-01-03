@@ -11,33 +11,6 @@ const Q = require('q');
 
 //CRE8.get --> UNIVERSAL .. get app ... get self connection.connection 
 
-//RATING: SILVER
-var query = [{
-    "filter": [
-        {
-            "model": "Association, Task, Project",
-            "modelParam": "association, id, location, query, tag, ...",
-            "query": "query",
-            "association": {
-                "population": "boolean",
-                "depth": "integer"
-            },
-            "params": {
-                "limit": "integer",
-                "skip": "integer",
-                "sort": "modelParam sortParam"
-            },
-            "chain": "logic ['AND','OR']"
-        }
-    ],
-    "params": {
-        "limit": "integer",
-        "skip": "integer",
-        "sort": "modelParam sortParam"
-    },
-    "chain": "logic ['AND','OR']"
-}];
-
 //TODO.. ALL MODELS ARE APP DEFINED
 	//data models are contined within apps 
 	//simplify to data 
@@ -55,6 +28,34 @@ var query = [{
 //ACTIVITY QUERY AS ONE LOOKUP --> REFACTOR
 
 module.exports = {
+
+	//API MAIN ROUTER AND QUERY LANGUAGE APP.. IE QUERY PARSER APP(S) -> TRANSATIONS bASED ON ORM
+	query: [{
+	    "filter": [
+	        {
+	            "model": "Association, Task, Project",
+	            "modelParam": "association, id, location, query, tag, ...",
+	            "query": "query",
+	            "association": {
+	                "population": "boolean",
+	                "depth": "integer"
+	            },
+	            "params": {
+	                "limit": "integer",
+	                "skip": "integer",
+	                "sort": "modelParam sortParam"
+	            },
+	            "chain": "logic ['AND','OR']"
+	        }
+	    ],
+	    "params": {
+	        "limit": "integer",
+	        "skip": "integer",
+	        "sort": "modelParam sortParam"
+	    },
+	    "chain": "logic ['AND','OR']"
+	}],
+
 
 	get: function (req, res) {
 		if (req.query){

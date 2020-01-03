@@ -7,7 +7,6 @@ module.exports = {
 	attributes: {
         //DEPRECIATE
         model: {type: 'string', defaultsTo: 'TASK'},
-
         title: {type: 'string'},
         content: {type: 'string', allowNull: true},
         associatedModels: {type: 'json'},
@@ -15,11 +14,9 @@ module.exports = {
         location: {type: 'json'},
         user: {model: 'user'},
         creator: {type: 'string'},
-
         //COUNT.. DATA.. CONNECTED APPS..
         information: {type: 'json'},
         data: {type: 'json'},
-        
     },
 
 	get: async function(req) {
@@ -101,52 +98,6 @@ module.exports = {
 	},
 
 	create:async function(req){
-
-		function createValidation(model){
-			for (x in model.associatedModels){
-				var newValidation = {
-					model:'VALIDATION',
-					content:model.id + ' VALIDATION',
-					user: model.user.id,
-					creator: model.user.id,
-					data:{apps:{reactions: {plus:0,minus:0},attention:{general:0}}}
-				};
-				newValidation.connection = {
-					id:1,
-					type:'HUMAN',
-					title:'STANDARD MULTI, AGNOSTIC MODELS',
-					parameters:{
-						mapping:['context','reputation','computed'],
-						attributes:{
-							context:'string->int',//{string:int} //lang lang interpol
-							reputation:'string->int',
-							computed:'string:->int'
-						},
-						logic:'computed[%context] = context[%context]*reputation[%context]'
-					},
-				};
-        		newValidation.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(newValidation)).digest('hex');
-				//CONNECTION DEFINED MAPPINGS
-				for (y in newValidation.connection.parameters.mapping){
-					newValidation[newValidation.connection.parameters.mapping[y]] = {};
-				}
-				var associatedModelObj = {};
-				if (model.associatedModels[x].id.toLowerCase() == 'self'){associatedModelObj = {type:model.model, id:model.id}}
-				else{associatedModelObj = {type:model.associatedModels[x].type, id:model.associatedModels[x].id};}
-				newValidation.associatedModels = [
-					{type:model.model, id:model.id},
-					associatedModelObj
-				];
-				for (y in model.associatedModels[x].context){newValidation.context[model.associatedModels[x].context[y].text] = model.associatedModels[x].context[y].score;}
-				Validation.create(newValidation).then(function(newValidationModel){
-					console.log('CREATE VALIDATION', newValidationModel);
-					eventApp.create(newValidationModel);
-					newValidationModel.model = 'ASSOCIATION';
-					associationApp.create(newValidationModel);
-				});
-			}
-		};
-
 		var model = {
 			model: 'TASK',
 			title: req.param('title'),
@@ -176,8 +127,8 @@ module.exports = {
 		Task.publish([model.id], {verb: 'create', data: taskModel});
 		eventApp.create(task);
 		taskApp.tokens.create(task);
-		//for x in
-		createValidation(task);
+		//for( x in []){}
+		validationApp.createLegacy(task);
 		return Task.find({hash:model.hash});
 	},
 
