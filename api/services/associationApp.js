@@ -45,6 +45,8 @@ module.exports = {
 				var promises = [];
 				for (x in model.associationModels){
 					for (y in associationModels[x].associatedModels){
+						//TODO: VARIABILITY IN MODELS 
+						//DYNAMIC 
 						if (associationModels[x].associatedModels[y].type=='ACTION'){promises.push(Action.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
 						if (associationModels[x].associatedModels[y].type=='APP'){promises.push(App.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
 						if (associationModels[x].associatedModels[y].type=='ATTENTION'){promises.push(Attention.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
@@ -157,7 +159,8 @@ module.exports = {
 		else if(req.query.filter){
 
 			var querySet = JSON.parse(req.query.filter);
-			console.log(querySet)
+			console.log(querySet);
+			
 			//JSON.stringify({type:'CONTENT', id:member.id}),
 
 			//following

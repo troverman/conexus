@@ -3,7 +3,9 @@ module.exports = {
 
 	import:{
 		Q: require('q'),
-		crypto: require('crypto')
+		crypto: require('crypto'),
+		ipfs: require('ipfs'),
+		orbitdb: require('orbit-db'),
 	},
 
 	connections:[],
@@ -83,6 +85,27 @@ module.exports = {
 		for (x in time.associatedModels){validationApp.createLegacy(time.associatedModels[x])}
 		deferred.resolve(models);
 		return deferred.promise;
+	},
+
+	//TEST
+	init: async function(req){
+
+		//HIGHER ORDER INIT FUNCTIONS --> IE EXPOSED GLOBALS 
+		//IE DEFINE Time . . . 
+		//TODO: WEBSOCKET LISTENERS
+
+		const ipfsOptions = {
+			EXPERIMENTAL: {
+				pubsub: true
+			}
+		};
+		const ipfs = new orbitdbApp.import.ipfs(ipfsOptions);
+		ipfs.on('error', (e) => console.error(e))
+		ipfs.on('ready', async () => {
+			const orbitdb = await orbitdbApp.import.orbitdb.createInstance(ipfs);
+			const CRE8_TIME = await orbitdb.docs('CRE8.TIME');
+		});
+
 	},
 
 	tokens:{

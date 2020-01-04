@@ -10,7 +10,6 @@ module.exports = {
 	//peer is a combinatorial obj
 
 	attributes: {
-        //DEPRECIATE
         model: {type: 'string', defaultsTo: 'PEER'},
 		info: {type: 'json'},
 		information: {type: 'json'},

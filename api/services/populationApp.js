@@ -151,6 +151,120 @@ module.exports = {
 		//googleApp.getLocations(model);
 	},
 
+	populateCombinatorialMarkets: async function(){
+
+
+
+		//WORKSHOP
+		//CONNECT FROM VALUE MAP FORMAT
+		//TO POSSIBLE COMBINATORIAL MARKETS 
+
+
+
+
+
+
+
+
+
+		//IS EXPONTIENTAL WRT SIZE N
+			//SO DO FROM DISCRETE ORDERS TO DISCRETIZE . . .
+
+
+		var associations = await Association.find({connection:'MARKET ORDER'});
+		//SORT BY DIMENSION
+			//CREATE COMPUTED ASSOCIATION IN POSSIBLE EMBEDDED SPACE FOR TRAVERSAL
+		//for (x in associations){
+
+		//}
+
+		//GET TREE . . .
+		//HMM DISCRETE POSSIBILITIES 
+		//MARKET ENGINE IS ITERATIVE 
+
+		//ON CREATE ASSOCIATION TYPE WITH CONNECTION MARKET ORDER
+		//	SO IN CONNECTION LOGIC 
+
+			//NEED TO THINK ABOUT CONENCTIONS 
+
+
+		//TEXT
+		var tokens = await Token.find().limit(8);
+	   // var powerSet = utilityServiceApp.getAllSubsets(tokens.map(obj=>obj.string));
+	   // powerSet.shift();
+		//console.log(powerSet);
+
+		//ABSTRACTLY GOES TP INFINITY FAST . . 
+		//NEED BASED ON CREATE VALIDATION TO DO THE POWERSET DECOMPOSE POSIBILITY
+		//CREATE COMPLEX ASSOCIATIONS
+			//HELPER FXNS DISCOVER COMB OBJS
+
+			//SHOULD WRITE THIS OUT ON PAPER
+			// THE LATTICE 
+
+				//Set of Objects Size M in Market size N of Dim D
+				//(IN DOCS) 
+
+				//GET AS DISCRETE VIA ITERATIVE ALG
+					//ORDER DOESNT MATTER IN SETS
+					//UNIQUE NON ORDERED SETS OF SIZE N DRAWING FROM POOL M
+
+					//POPULATE THE OBJS 
+
+					//A, B, C
+					//AB, AC, BC,
+					//ABC
+
+					//LOOK AT ORDER VIEW FOR LIQUIDITY POTIENTAL 
+						//'POOLS'
+						//LOL PERMUTATIONS
+
+		//WE HAVE FINITE ASSOCIATIONS
+
+		function kSubsetPermutations(set, k, partial) {
+		    if (!partial) partial = [];                 // set default value on first call
+		    for (var element in set) {
+		        if (k > 1) {
+		            var set_copy = set.slice();         // slice() creates copy of array
+		            set_copy.splice(element, 1);        // splice() removes element from array
+		            kSubsetPermutations(set_copy, k - 1, partial.concat([set[element]]));
+		        } 
+		        else{
+		       		partial.concat(set[element]);
+		        	return partial;
+		        }
+		    }
+		    //console.log(partial);
+		    //return partial;
+		};
+		//var sets = kSubsetPermutations([1,2,3,4,5], 3);
+
+		function subset(arra, arra_size){
+			var result_set = [];
+			var result = '';
+			for(var x = 0; x < Math.pow(2, arra.length); x++){
+				result = [];
+				i = arra.length - 1; 
+				do{
+					if( (x & (1 << i)) !== 0){
+						result.push(arra[i]);
+					}
+				}  
+				while(i--);
+				if( result.length == arra_size){
+					console.log(result);
+					result_set.push(result);
+				}
+			}
+			return result_set; 
+		};
+
+		console.log(subset(tokens.map(obj=>obj.string), 4) );
+
+	},
+
+
+
 	//populateProjects
 	//populateItems
 

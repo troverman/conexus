@@ -3,7 +3,6 @@
 module.exports = {
 
 	interval: function(callback, delay) {
-	    var self = this;
 	    var counter = 0;
 	    var start = new Date().getTime();
 	    function delayed(){

@@ -33,6 +33,8 @@ module.exports = {
 		//THIS IS DYNAMIC LIST
 		//for (x in functionSet){}
 
+		populationApp.populateCombinatorialMarkets();
+
 
 
 

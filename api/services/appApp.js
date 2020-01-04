@@ -11,22 +11,16 @@ module.exports = {
 	},
 
 	attributes: {
-
-        //DEPRECIATE
-        //HMM
         //SELF-2nd order connection is defined in app (protocol) data attributes
         model: {type: 'string', defaultsTo: 'APP'},
-
 		title: {type: 'string'},
 		description: {type: 'json'},
 		information: {type: 'json'},
         data: {type: 'json'},
         protocols: {type: 'json'},
-
         //CODE AS STRING EXAMPLE.. TRY IT WITH NOTIFICATION APP. DONT GET TOO CRAZY
         associatedModels: {type: 'json'},
         creator: {model: 'user'},
-
     },
 
 	connections:[
@@ -72,12 +66,8 @@ module.exports = {
 		var id = req.query.id;
 		console.log('GET APP', req.query);
 		if(req.query.id){
-
-			
 			var apps = await App.find({id:id}).limit(limit).skip(skip).sort(sort);
 			//-->IMPORT TRIE . . . :P
-
-
 			App.subscribe(req, [apps[0].id]);
 			//TODO: MANY-MANY RELATIONSHIP; SEE NOTIFICATIONS . . . 
 			var models = await associationApp.get(apps[0]);

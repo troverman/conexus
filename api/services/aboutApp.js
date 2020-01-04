@@ -2,6 +2,7 @@
 //LET'S DO A DESIGN PATTERN
 module.exports = {
 
+	//ASM RENDER
 	//STATIC WEBSITE APP .. BOILERPLATE . . .
 	//:P
 	///TEMPLATING ...

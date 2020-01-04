@@ -11,6 +11,7 @@ module.exports = {
 
 	},
 
+	//HIGHER ORDER INIT FUNCTIONS --> IE EXPOSED GLOBALS 
 	init: function(){
 
 		const ipfsOptions = {
@@ -37,18 +38,11 @@ module.exports = {
 				console.log(db.iterator({ limit: -1 }).collect());
 			});
 
-			for (var i = 0; i<1000000000;i++){
-				var newEventModel = {
-					iterator:i,
-					data:{
-						random:Math.random()
-					},
-					connection:{
-						params:{
-							type:'MY MAN' + i
-						}
-					},
-				};
+			//EMITTER
+			//EMIT DATA
+
+			
+			async function createEvent(newEventModel){
 				newEventModel.hash = orbitdbApp.import.crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(newEventModel)).digest('hex');
 				newEventModel._id = orbitdbApp.import.crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(newEventModel)).digest('hex');
 
@@ -65,10 +59,10 @@ module.exports = {
 				const hashDoc = await docDb.put(newEventModel);
 				console.log(hashDoc);
 
-			}
 
-			const result = await docDb.get('');
-			console.log(result)
+				const results = await docDb.get('');
+				console.log(results);
+			}
 
 		});
 	}
