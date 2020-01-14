@@ -1,0 +1,200 @@
+{
+  "_args": [
+    [
+      "libp2p-webrtc-star@0.16.1",
+      "C:\\Users\\Owner\\apps\\conexus\\node_modules\\ipfs"
+    ]
+  ],
+  "_from": "libp2p-webrtc-star@0.16.1",
+  "_id": "libp2p-webrtc-star@0.16.1",
+  "_inBundle": false,
+  "_integrity": "sha512-TLQ/Qhfx367kETt2pz2ejzVMB01PQjkBqxP+p+PD84N+JuFg3HVQw8jwXdiXexg/gKNMH+WwqVeWiKv/mVrCNA==",
+  "_location": "/ipfs/libp2p-webrtc-star",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "libp2p-webrtc-star@0.16.1",
+    "name": "libp2p-webrtc-star",
+    "escapedName": "libp2p-webrtc-star",
+    "rawSpec": "0.16.1",
+    "saveSpec": null,
+    "fetchSpec": "0.16.1"
+  },
+  "_requiredBy": [
+    "/ipfs",
+    "/ipfs/ipfs"
+  ],
+  "_resolved": "https://registry.npmjs.org/libp2p-webrtc-star/-/libp2p-webrtc-star-0.16.1.tgz",
+  "_spec": "0.16.1",
+  "_where": "C:\\Users\\Owner\\apps\\conexus\\node_modules\\ipfs",
+  "bin": {
+    "webrtc-star": "src/sig-server/bin.js",
+    "star-sig": "src/sig-server/bin.js",
+    "star-signal": "src/sig-server/bin.js"
+  },
+  "bugs": {
+    "url": "https://github.com/libp2p/js-libp2p-webrtc-star/issues"
+  },
+  "contributors": [
+    {
+      "name": "David Dias",
+      "email": "daviddias.p@gmail.com"
+    },
+    {
+      "name": "Diogo Silva",
+      "email": "fsdiogo@gmail.com"
+    },
+    {
+      "name": "Dmitriy Ryajov",
+      "email": "dryajov@gmail.com"
+    },
+    {
+      "name": "Flarp",
+      "email": "flurpdadurp@gmail.com"
+    },
+    {
+      "name": "Friedel Ziegelmayer",
+      "email": "dignifiedquire@gmail.com"
+    },
+    {
+      "name": "Hugo Dias",
+      "email": "mail@hugodias.me"
+    },
+    {
+      "name": "Jacob Heun",
+      "email": "jacobheun@gmail.com"
+    },
+    {
+      "name": "Juan Benet",
+      "email": "juan@benet.ai"
+    },
+    {
+      "name": "Maciej Krüger",
+      "email": "mkg20001@gmail.com"
+    },
+    {
+      "name": "Michael Fakhry",
+      "email": "fakhrimichael@live.com"
+    },
+    {
+      "name": "Pedro Teixeira",
+      "email": "i@pgte.me"
+    },
+    {
+      "name": "Richard Littauer",
+      "email": "richard.littauer@gmail.com"
+    },
+    {
+      "name": "SeungWon",
+      "email": "ksw3894@gmail.com"
+    },
+    {
+      "name": "Steverman",
+      "email": "Steverman@users.noreply.github.com"
+    },
+    {
+      "name": "Vasco Santos",
+      "email": "vasco.santos@moxy.studio"
+    },
+    {
+      "name": "Vasco Santos",
+      "email": "vasco.santos@ua.pt"
+    },
+    {
+      "name": "Yahya",
+      "email": "ya7yaz@gmail.com"
+    },
+    {
+      "name": "dmitriy ryajov",
+      "email": "dryajov@dmitriys-MBP.HomeNET"
+    },
+    {
+      "name": "greenkeeper[bot]",
+      "email": "greenkeeper[bot]@users.noreply.github.com"
+    },
+    {
+      "name": "greenkeeperio-bot",
+      "email": "support@greenkeeper.io"
+    },
+    {
+      "name": "interfect",
+      "email": "interfect@gmail.com"
+    },
+    {
+      "name": "kumavis",
+      "email": "kumavis@users.noreply.github.com"
+    },
+    {
+      "name": "ᴠɪᴄᴛᴏʀ ʙᴊᴇʟᴋʜᴏʟᴍ",
+      "email": "victorbjelkholm@gmail.com"
+    }
+  ],
+  "dependencies": {
+    "@hapi/hapi": "^18.3.1",
+    "@hapi/inert": "^5.2.0",
+    "async": "^2.6.2",
+    "class-is": "^1.1.0",
+    "debug": "^4.1.1",
+    "epimetheus": "^1.0.92",
+    "interface-connection": "~0.3.3",
+    "mafmt": "^6.0.7",
+    "minimist": "^1.2.0",
+    "multiaddr": "^6.0.6",
+    "once": "^1.4.0",
+    "peer-id": "~0.12.2",
+    "peer-info": "~0.15.1",
+    "pull-stream": "^3.6.9",
+    "simple-peer": "^9.3.0",
+    "socket.io": "^2.1.1",
+    "socket.io-client": "^2.1.1",
+    "stream-to-pull-stream": "^1.7.3",
+    "webrtcsupport": "github:ipfs/webrtcsupport"
+  },
+  "description": "libp2p WebRTC transport that includes a discovery mechanism provided by the signalling-star",
+  "devDependencies": {
+    "aegir": "^18.2.1",
+    "chai": "^4.2.0",
+    "dirty-chai": "^2.0.1",
+    "electron-webrtc": "~0.3.0",
+    "prom-client": "^11.2.1",
+    "wrtc": "~0.3.7"
+  },
+  "engines": {
+    "node": ">=6.0.0",
+    "npm": ">=3.0.0"
+  },
+  "homepage": "https://github.com/libp2p/js-libp2p-webrtc-star#readme",
+  "keywords": [
+    "IPFS",
+    "libp2p"
+  ],
+  "leadMaintainer": "Vasco Santos <vasco.santos@moxy.studio>",
+  "license": "MIT",
+  "main": "src/index.js",
+  "name": "libp2p-webrtc-star",
+  "pre-push": [
+    "lint",
+    "test"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/libp2p/js-libp2p-webrtc-star.git"
+  },
+  "scripts": {
+    "build": "aegir build",
+    "coverage": "aegir coverage",
+    "coverage-publish": "aegir coverage --provider coveralls",
+    "lint": "aegir lint",
+    "release": "aegir release -t node -t browser",
+    "release-major": "aegir release --type major -t node -t browser",
+    "release-minor": "aegir release --type minor -t node -t browser",
+    "star-signal": "node src/sig-server/bin.js",
+    "test": "aegir test -t node -t browser",
+    "test:browser": "aegir test -t browser",
+    "test:dns": "WEBRTC_STAR_REMOTE_SIGNAL_DNS=1 aegir test -t browser",
+    "test:ip": "WEBRTC_STAR_REMOTE_SIGNAL_IP=1 aegir test -t browser",
+    "test:node": "aegir test -t node"
+  },
+  "version": "0.16.1"
+}

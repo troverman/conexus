@@ -13,6 +13,8 @@ angular.module( 'conexus.nav', [
     //TODO: ROOTSCOPE ITEM
     //FUNCTION IN CREATE TOGGLE MAIN NAV
 
+    //THIS SHOULD BE ITERATIVE AND INITALIZED BY PEER BUILD 
+
     //INITALIZE LOCAL VARIABLES
     $scope.associationsAreExpanded = false;
     $scope.attentionChart = {};
@@ -143,7 +145,7 @@ angular.module( 'conexus.nav', [
         else{$mdSidenav('login').toggle();}
     };
 
-     $rootScope.connectionToggle = function(item){
+    $rootScope.connectionToggle = function(item){
         $scope.closeAllNav();
         if($rootScope.currentUser){
             $scope.item = item;
@@ -161,9 +163,6 @@ angular.module( 'conexus.nav', [
             //    });
                 //GET EXTENDED CHAIN CONNECTION LOGIC FROM ITEM ~ 
             //}
-
-            
-
             $mdSidenav('connection').toggle();
         }
         else{$mdSidenav('login').toggle();}
