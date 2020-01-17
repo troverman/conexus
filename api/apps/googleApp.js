@@ -20,7 +20,6 @@ module.exports = {
 	//TEST
 	//REDUCE INTO SELF CONECTION W CONTEXT --> INTERNAL FUNCTION MAPPING 
 	language: 'Javascript',
-	compiler:'V8',
 
 	connections:[
 		{
@@ -33,11 +32,9 @@ module.exports = {
 	],
 
 	get: function(req, res, params){
-
 	},
 
 	create: function(req, res, params){	
-
 	},
 
 	geoCode: function(model){
