@@ -112,19 +112,18 @@ module.exports = {
 		};
 		model.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
 		console.log('CREATE TASK', model);
-		var model = await Task.create(model);
+		var task = await Task.create(model);
 		//TODO: BETTER SETUP
 		//TODO: BETTER 'EXTERNAL' UTILITY
 		var userModels = await User.find({id:task.user});
-		if(task._id){project.id = project._id.toString()}
-		model.associatedModels = req.param('associatedModels');
+		task.associatedModels = req.param('associatedModels');
 		model.user = userModels[0];
 		var location = await googleApp.geoCode(task);
 		task.location = location;
 		var taskModel = await Task.update({id:task.id}, {location:location});
-		console.log('UPDATE PROJECT LOCATION -- GEO CODE');
+		console.log('UPDATE TASK LOCATION -- GEO CODE');
 		Task.subscribe(req, [task.id]);
-		Task.publish([model.id], {verb: 'create', data: taskModel});
+		Task.publish([task.id], {verb: 'create', data: taskModel});
 		eventApp.create(task);
 		taskApp.tokens.create(task);
 		//for( x in []){}

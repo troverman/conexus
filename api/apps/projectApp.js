@@ -175,9 +175,9 @@ module.exports = {
 			//INSIDE OUT HERE
 			//ONLY 'CREATE' IS VALIDATE?
 
-		var model = await Project.create(model)
+		var project = await Project.create(model)
 		
-		var userModels = await User.find({id:model.user.toString()});
+		var userModels = await User.find({id:project.user.toString()});
 
 		if(project._id){project.id = project._id.toString()}
 		project.associatedModels = req.param('associatedModels');

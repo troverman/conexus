@@ -2,7 +2,7 @@
  * grunt/pipeline.js
  *
  */
-
+console.log('PIPELINE???')
 var cssFilesToInject = [
   'bower_components/nvd3/build/nv.d3.css',
   'bower_components/bootstrap/dist/css/bootstrap.min.css',

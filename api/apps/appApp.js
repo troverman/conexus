@@ -14,7 +14,7 @@ module.exports = {
 	//RECURSIVE DEPENDENCIES 
 	//BUILDER REDUCES THE TREE . . .
 	//PUT ALL APPS IN THE [MONGO] DB FOR FUN 
-	//META MODEL  , , , ,
+	//META MODEL , , , ,
 	attributes: {
         model: {type: 'string', defaultsTo: 'APP'},
 		title: {type: 'string'},
@@ -25,6 +25,13 @@ module.exports = {
         associatedModels: {type: 'json'},
         creator: {model: 'user'},
     },
+
+    //DATA :)
+    //COMPOSTABILITY ... 
+    //db: await orbitdb.docs('CRE8.APP'),
+    //init: async function(){
+    //	await AppApp.db.load();
+    //},
 
 	connections:[
 		{
@@ -62,6 +69,7 @@ module.exports = {
 
 	//TODO
 	get: async function(req){
+		//const records = AppApp.db.get('');
 		var deferred = appApp.import.Q.defer();
 		var limit = parseInt(req.query.limit) || 1;
 		var skip = parseInt(req.query.skip) || 0;
@@ -86,6 +94,7 @@ module.exports = {
 	},
 
 	create: async function(req){
+
 		var model = {
 			model: 'APP',
 			title: req.param('title'),
@@ -99,17 +108,21 @@ module.exports = {
 		};
 		model.hash = appApp.import.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
 		console.log('CREATE APP', model);
+		
 		var newApp = await App.create(model);
+		await AppApp.db.put({_id:Math.random() ,string:Math.random()});
+
 		App.publish([model.id], {verb: 'create', data: model});
 		eventApp.create(newApp);
 		validationApp.createLegacy(newApp);
-		deferred.resolve(newApp);
-		return App.find({hash:model.hash})
+		return App.find({hash:model.hash});
+
 	},
+
 
 	tokens:{
 
-		get:function(model){
+		get: function(model){
 			var tokens = [
 				'CRE8', 
 				'CRE8+APP', 

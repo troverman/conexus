@@ -238,8 +238,8 @@ module.exports = {
 		};
 
 		//REDUCE
-		newValidationModel.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(newValidationModel)).digest('hex');
-		newValidationModel.id = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(newValidationModel)).digest('hex');
+		newValidationModel.hash = validationApp.import.crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(newValidationModel)).digest('hex');
+		//newValidationModel.id = validationApp.import.crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(newValidationModel)).digest('hex');
 
 		//REDUCE 
 		var newValidation = await Validation.create(newValidationModel);

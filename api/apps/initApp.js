@@ -21,7 +21,7 @@ module.exports = {
 		//GLOBALS!!
 
 		//PEER COMPILE . . . 
-		await orbitdbApp.init();
+		await dataApp.init();
 
 		//UHM
 		passportApp.loadStrategies();
@@ -31,7 +31,7 @@ module.exports = {
 
 		//THIS IS DYNAMIC LIST
 		//for (x in functionSet){}
-		populationApp.populateCombinatorialMarkets();
+		//populationApp.populateCombinatorialMarkets();
 
 	},
 };

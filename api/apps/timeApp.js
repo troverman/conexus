@@ -72,7 +72,7 @@ module.exports = {
 			creator: req.param('user'),
 			data:{apps:{reactions:{plus:0,minus:0},attention:{general:0}}}
 		};
-		model.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
+		model.hash = timeApp.import.crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
 		console.log('CREATE TIME', model);
 		//TODO: SECURITY - PERMISSIONS - AUTH
 		var userModels = await User.find({id:model.user});
@@ -83,7 +83,7 @@ module.exports = {
 		eventApp.create(time);
 		timeApp.tokens.create(time);
 		for (x in time.associatedModels){validationApp.createLegacy(time.associatedModels[x])}
-		deferred.resolve(models);
+		deferred.resolve(time);
 		return deferred.promise;
 	},
 

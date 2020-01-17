@@ -1,4 +1,4 @@
 //TODO: INIT
 process.chdir(__dirname);
-var peer = require('./core');
+var peer = require('./api/core');
 peer.lift();

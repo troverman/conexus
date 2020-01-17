@@ -41,7 +41,7 @@ module.exports = {
 	},
 
 	geoCode: function(model){
-		var deferred = Q.defer();
+		var deferred = googleApp.import.Q.defer();
 		//TODO: SECURITY 
 		//MEMBER-APP CONNECTION
 		var googleMapsClient = require('@google/maps').createClient({

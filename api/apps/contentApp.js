@@ -22,6 +22,12 @@ module.exports = {
         data: {type: 'json'},
     },
 
+    //HASH OF ATTRIBUTES ???
+    //db: await orbitdb.docs('CRE8.CONTENT'),
+    //init: async function(){
+    //	await ContentApp.db.load();
+    //},
+
 	
 	//TODO: MULTI CONTEXT WRT DATA STORE
 	get: async function(req, res) {
@@ -72,7 +78,7 @@ module.exports = {
 		else if(req.query.user){
 			var user = req.query.user;
 			var models = await Content.find({user:user}).limit(limit).skip(skip).sort(sort).populate('user');
-			Content.subscribe(req,  models.map(function(obj){return obj.id}));
+			Content.subscribe(req, models.map(function(obj){return obj.id}));
 			var promises = [];
 			for (x in models){promises.push(associationApp.get(models[x]));}
 			var populatedModels = await Q.all(promises);
@@ -113,7 +119,8 @@ module.exports = {
 		//i need to learn chinese  
 
 		//var User = appApp.find(appApp.id); // something something 
-		var userModels = await User.find({id:model.user});
+
+		var userModels = await User.find({id:req.param('user')});
 		var model = {
 			model: 'CONTENT',
 			type: 'CONTENT', //appApp.id --> :)
@@ -121,7 +128,7 @@ module.exports = {
 			type: req.param('type'),
 			content: req.param('content'),
 			user: userModels[0].id,
-			creator: userModels[0],		
+			creator: userModels[0].id,		
 			data:{
 				apps:{
 					reactions:{plus:0, minus:0},
@@ -136,14 +143,14 @@ module.exports = {
 		Content.subscribe(req, [newContent.id]);
 		Content.publish(model.id, {verb: 'create', data: model});
 		eventApp.create(newContent);
-		contentApp.token.create(newContent);
+		contentApp.tokens.create(newContent);
 		//SHOULD BE REVERED TOP DOWN BY CONNECTION (ABSTRACT & DISCRETE VALIDATION TYPES)
 		validationApp.createLegacy(newContent);
 		return Content.find({hash:model.hash});
 	},
 
 	tokens:{
-		get:function(){
+		get:function(model){
 
 			//TODO: FACTOR			
 			//for you to see the progress 

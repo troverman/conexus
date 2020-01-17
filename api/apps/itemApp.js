@@ -34,6 +34,15 @@ module.exports = {
         hash: {type: 'string', allowNull: true}, //id
     },
 
+    //HASH OF ATTRIBUTES ???
+    //DB TYPES ??
+    //HASH TABLE EASIER .. ? 
+    //LOG Db? 
+    //I LIKE THE INIT FXN
+    //db: await orbitdb.docs('CRE8.ITEM'),
+    //init: async function(){
+    //	await ContentApp.db.load();
+    //},
 
 	connections:[{
 		type:'connection', 
@@ -182,13 +191,13 @@ module.exports = {
 		};
 		model.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
 		console.log('CREATE ITEM', model);
-		var model = await Item.create(model);
+		var itemModel = await Item.create(model);
 		var userModels = await User.find({id:model.user});
 		itemModel.associatedModels = req.param('associatedModels') || [];
 		itemModel.user = userModels[0];
 		Item.subscribe(req, [itemModel]);
 		Item.publish([itemModel.id], {verb: 'create', data: itemModel});
-		validationApp.createLegacy(task);
+		validationApp.createLegacy(itemModel);
 		eventApp.create(itemModel);
 		itemApp.tokens.create(itemModel);
 		return Item.find({hash:model.hash});

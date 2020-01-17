@@ -359,7 +359,7 @@ var attentionApp = {
 	},
 
 	tokens:{
-		create:function(){
+		create:function(model){
 			//this, self .. 
 			var tokens = attentionApp.tokens.get(model);
 			//updateAssociatedModels(model, protocolTokens);

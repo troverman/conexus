@@ -51,8 +51,6 @@
     "rc": "^1.2.8",
     "request": "^2.88.0",
     "request-promise": "^4.2.5",
-    "sails": "^1.2.3",
-    "sails-disk": "^1.1.2",
     "sails-hook-grunt": "^4.0.1",
     "sails-hook-orm": "^2.1.1",
     "sails-hook-sockets": "^2.0.0",
