@@ -60,8 +60,7 @@
   },
   "scripts": {
     "start": "node app.js",
-    "debug": "node debug app.js",
-    "postinstall":"npm dedupe"
+    "debug": "node debug app.js"
   },
   "main": "app.js",
   "repository": {
