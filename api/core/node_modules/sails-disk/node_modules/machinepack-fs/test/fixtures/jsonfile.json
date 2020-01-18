@@ -1,0 +1,9 @@
+{
+    "foo": "bar",
+    "abc": 123,
+    "bool": true,
+    "dict": {
+        "key": "val"
+    },
+    "array": [1, 2, 3]
+}
