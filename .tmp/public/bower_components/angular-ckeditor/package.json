@@ -1,0 +1,40 @@
+{
+  "name": "angular-ckeditor",
+  "version": "1.0.3",
+  "description": "CKEditor directive for Angular.",
+  "main": "angular-ckeditor.js",
+  "scripts": {
+    "install": "bower install",
+    "test": "./node_modules/karma/bin/karma start --single-run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/lemonde/angular-ckeditor.git"
+  },
+  "keywords": [
+    "angular",
+    "directive",
+    "ckeditor"
+  ],
+  "author": "Team Le8 <projet-cms-tech@lemonde.fr>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lemonde/angular-ckeditor/issues"
+  },
+  "homepage": "https://github.com/lemonde/angular-ckeditor",
+  "devDependencies": {
+    "bower": "~1.7.2",
+    "chai": "~3.4.1",
+    "chai-jquery": "~2.0.0",
+    "grunt": "~0.4.4",
+    "grunt-contrib-uglify": "~0.11.0",
+    "karma": "~0.13.18",
+    "karma-chrome-launcher": "~0.2.2",
+    "karma-firefox-launcher": "~0.1.7",
+    "karma-mocha": "~0.2.1",
+    "mocha": "~2.3.4",
+    "sinon": "~1.17.2",
+    "sinon-chai": "~2.8",
+    "underscore.string": "~3.2.2"
+  }
+}

@@ -1,7 +1,4 @@
-
 //SELF CONFIG
-
-
 module.exports = {
 
 	blueprints :{},

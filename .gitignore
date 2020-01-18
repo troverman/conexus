@@ -49,7 +49,6 @@ Temporary Items
 # more
 
 node_modules/*
-.tmp/
 .idea/
 .DS_Store
 .csr

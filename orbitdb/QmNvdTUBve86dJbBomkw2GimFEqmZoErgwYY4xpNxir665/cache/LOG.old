@@ -1,5 +1,5 @@
-2020/01/18-15:48:28.952 afc Recovering log #80
-2020/01/18-15:48:28.952 afc Level-0 table #83: started
-2020/01/18-15:48:28.961 afc Level-0 table #83: 359 bytes OK
-2020/01/18-15:48:28.969 afc Delete type=0 #80
-2020/01/18-15:48:28.969 afc Delete type=3 #78
+2020/01/18-17:30:45.742 9a8 Recovering log #119
+2020/01/18-17:30:45.742 9a8 Level-0 table #122: started
+2020/01/18-17:30:45.755 9a8 Level-0 table #122: 359 bytes OK
+2020/01/18-17:30:45.763 9a8 Delete type=0 #119
+2020/01/18-17:30:45.764 9a8 Delete type=3 #117
