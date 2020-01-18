@@ -89,7 +89,6 @@ module.exports = {
 
 	},
 
-
 	getController: async function(req) {
 
 		function parseQuery(queryModel){

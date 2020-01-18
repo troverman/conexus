@@ -14,13 +14,10 @@ module.exports = {
 		request: require('request'),
 		Q: require('q'),
 	},
-
 	//DATA MODELS ARE CONNECTIONS
-
 	//TEST
 	//REDUCE INTO SELF CONECTION W CONTEXT --> INTERNAL FUNCTION MAPPING 
 	language: 'Javascript',
-
 	connections:[
 		{
 			type:'connection', 
@@ -61,7 +58,7 @@ module.exports = {
 	},
 
 	nearByLocations: function(model){
-	},
+	}
 
 
 };
