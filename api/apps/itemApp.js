@@ -60,6 +60,12 @@ module.exports = {
 	import: { 
 		request: require('request'),
 		Q: require('q'),
+		
+		//TODO: MODULARIZE
+		//contentApp: require('./contentApp'),
+		//reactionApp: require('./reactionApp'),
+		//attentionApp: require('./attentionApp'), --> DATA LAYER IN (APP) SHARED ATTRIBUTES
+
 		//React: require('react'),
 		//event: require('event'),
 			//IMPORT DATABASE CONNECTION 
