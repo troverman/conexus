@@ -12,7 +12,7 @@
   ],
   "dependencies": {
     "@google/maps": "^0.5.5",
-    "@tensorflow/tfjs-node": "^0.1.21",
+    "@tensorflow/tfjs-node": "^1.5.0",
     "async": "^2.6.3",
     "balanced-match": "^1.0.0",
     "bcryptjs": "~2.1.0",
