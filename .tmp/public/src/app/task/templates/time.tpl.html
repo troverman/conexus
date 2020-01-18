@@ -1,0 +1,2 @@
+<div class="card" ng-if="taskTime == 0"><button class="btn btn-default log-btn" ng-click="timeToggle(task)">Create Time</button></div>
+<div ng-repeat="item in time" ng-click="cardDetailToggle(item)"><div ng-include="'templates/cards/timeCard.tpl.html'"></div></div>

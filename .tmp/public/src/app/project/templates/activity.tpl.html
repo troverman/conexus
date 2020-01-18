@@ -1,0 +1,26 @@
+<div class="row">
+    <div ng-if="activity.length == 0">
+        <div class="card"><button class="btn btn-default log-btn" ng-click="cre8Toggle(project)">CRE8</button></div>
+        <div class="card"><div style="padding:16px;"><span style="color:gray">There's nothing here..</span></div></div>
+    </div>
+    <div ng-if="activity.length > 0" class="col-sm-12" style="padding-left:0px;padding-right:0px;">
+        <ul style="padding:0px;" class="member-tabs mobileFix">
+            <li class="mobileFix" style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fa fa-filter"></i> Filter</a></li>
+            <li style="float:right;font-size:14px"><a href="#" ng-click="sortToggle()">Sort By Recent <i class="fa fa-angle-down"></i></a></li>
+            <div style="clear:both"></div>
+        </ul>
+        <div class="card mobileFix"><tags-input class="" style="border:0px;flex-grow:2;" placeholder="Search" ng-model="searchQuery"></tags-input></div>
+        <div class="card"><button class="btn btn-default log-btn" ng-click="cre8Toggle(project)">CRE8</button></div>
+        <div ng-repeat="item in activity">
+
+            <!--<div ng-include="'templates/cards/contentCard.tpl.html'"></div>-->
+            <!--TODO:RESTRUCT EVENT-->
+
+            <div ng-if="item.model=='CONTENT'" ng-click="cardDetailToggle(item)"><div ng-include="'templates/cards/contentCard.tpl.html'"></div></div>
+            <div ng-if="item.model=='TASK'" ng-click="cardDetailToggle(item)"><div ng-include="'templates/cards/taskCard.tpl.html'"></div></div>
+            <div ng-if="item.model=='TIME'" ng-click="cardDetailToggle(item)"><div ng-include="'templates/cards/timeCard.tpl.html'"></div></div>
+            <div ng-if="item.model=='TRANSACTION'" ng-click="cardDetailToggle(item)"><div ng-include="'templates/cards/transactionCard.tpl.html'"></div></div>
+        </div>      
+    </div>
+</div>
+<div class="spacing-10"></div>

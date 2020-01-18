@@ -1,0 +1,48 @@
+<a href="member/{{validation.user.username}}" ui-sref="member.activity({path:validation.user.username})">
+    <img class="card-avatar" ng-src="{{validation.user.avatarUrl}}"/>
+    <b>{{validation.user.username}}</b>
+</a>
+
+<div class="spacing-5"></div>
+
+<p>Association</p>
+
+<p>Connection</p>
+
+{{validation.connection}}
+
+{{validation}}
+
+<div class="spacing-5"></div>
+
+<p style="font-size:10px;color:gray;margin-left:5px" am-time-ago="validation.createdAt"></p>
+
+<div class="spacing-5"></div>
+
+<div ng-if="validation.content">
+    <span ng-bind-html="renderContent(validation.content)"></span>
+    <div class="spacing-10"></div>
+</div>
+
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Context</th>
+            <th>Validation Score</th>
+            <th>Connection Score (Reputation) </th>
+            <th>Connection (Reputation) Weighted Score <a ng-click="informationToggle('REPUTATIONWEIGHTEDVALIDATIONSCORE')"><i class="fa fa-question-circle"></i></a></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="validation in validationList track by $index">
+            <td>{{validation[0]}}</td>
+            <td>{{validation[1]}}</td>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="spacing-10"></div>
+
+<highchart config="validationColumn"></highchart>

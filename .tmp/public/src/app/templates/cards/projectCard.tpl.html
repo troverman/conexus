@@ -1,0 +1,23 @@
+<div class="card" ng-click="cardDetailToggle(item)">
+    <div style="padding:16px;">
+        <div class="row">
+            <div class="col-sm-1 col-xs-2">
+                <a ng-click="$event.stopPropagation();" href="project/{{item.urlTitle}}" ui-sref="project.activity({path:item.urlTitle})">
+                    <img style="width:50px;height:50px;max-width:1000%;border-radius:100%" ng-src="{{item.avatarUrl}}" err-src="/images/avatar.png">
+                </a>
+            </div>
+            <div class="col-sm-11 col-xs-10">
+                <p style="float:right;text-align:right">
+                    <a style="color:gray;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><i class="fas fa-chevron-down"></i></a>
+                    <!--
+                    <span style="color:gray" ng-if="item.location">{{item.location.address}} <i class="fa fa-map-marker"></i></span>
+                    -->
+                </p>
+                <h3><a ng-click="$event.stopPropagation();" href="project/{{item.urlTitle}}" ui-sref="project.activity({path:item.urlTitle})">{{item.title}}</a></h3>
+                <div style="overflow:auto">
+                    <span style="display:inline" ng-bind-html="renderContent(item.description)"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

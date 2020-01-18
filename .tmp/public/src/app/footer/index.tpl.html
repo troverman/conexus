@@ -1,0 +1,75 @@
+<div style="padding-left:0px;padding-right:0px;" class="footer" ng-controller="FooterCtrl">
+	<div class="container">
+		<div class="footer-links" style="padding:3px;float:none">
+
+			<!--
+			<div style="float:right"><a href="/" ui-sref="home"><img src="images/hyper.gif"></a></div>
+			<a style="font-weight:bold;font-size:15px;color:white;font-family:Helvetica Neue,Helvetica,Arial,sans-serif" href="/" ui-sref="home">CRE8.XYZ</a>
+			<br>
+			<a href="/about" ui-sref="about">About</a>
+			<a href="/discover" ui-sref="discover">Discover</a>
+			<a href="/market" ui-sref="markets">Market</a>
+			<a href="/projects" ui-sref="projects">Projects</a>
+			<a href="/tasks" ui-sref="tasks">Tasks</a>
+			<a href="/transparency" ui-sref="transparency">Transparency</a>
+			-->
+
+			<div style="text-align:center">
+				<a href="/"><img src="images/hypercube.gif"></a>
+				<div class="spacing-5"></div>
+				<a style="font-weight:bold;font-size:15px;color:white;font-family:Helvetica Neue,Helvetica,Arial,sans-serif" href="/" ui-sref="home">CRE8.XYZ</a>
+				<div class="spacing-5"></div>
+				<a href="/about" ui-sref="about">About</a>
+				<a href="/apps" ui-sref="apps">Apps</a>
+				<a href="/developers" ui-sref="developers">Developers</a>
+				<a href="/transparency" ui-sref="transparency">Peer Network</a>
+				<div class="spacing-5"></div>
+				<a href="/discover" ui-sref="discover">Discover</a>
+				<a href="/market" ui-sref="markets">Market</a>
+				<a href="/items" ui-sref="items">Items</a>
+				<a href="/members" ui-sref="members">Members</a>
+				<a href="/projects" ui-sref="projects">Projects</a>
+				<a href="/tasks" ui-sref="tasks">Tasks</a>
+				<div class="spacing-5"></div>
+				<a ng-if="!currentUser"  href="/login" ui-sref="login">Login</a>
+				<a ng-if="!currentUser"  href="/register" ui-sref="register">Register</a>
+
+				<a ng-if="currentUser" href="/notifications" ui-sref="notifications">Notifications</a>
+				<a ng-if="currentUser" href="/account" ui-sref="account">Settings</a>
+				<a ng-if="currentUser" href="/logout">Logout</a>
+
+			</div>
+			<!--
+			<div>
+				<div style="float:right"><a href="/" ui-sref="home"><img style="height:100px" src="images/hyper.gif"></a></div>
+				<a style="font-weight:bold;font-size:15px;color:white;font-family:Helvetica Neue,Helvetica,Arial,sans-serif" href="/" ui-sref="home">CRE8.XYZ</a>
+				<br>
+
+				<a href="/about" ui-sref="about">About</a>
+				<br>
+
+				<a href="/discover" ui-sref="discover">Discover</a>
+				<br>
+				
+				<a href="/market" ui-sref="markets">Market</a>
+				<a href="/marketplace" ui-sref="marketPlace">Marketplace</a>
+				<a href="/members" ui-sref="members">Members</a>
+				<a href="/projects" ui-sref="projects">Projects</a>
+				<a href="/tasks" ui-sref="tasks">Tasks</a>
+				<br>
+
+				<a href="/transparency" ui-sref="transparency">Peer Network</a>
+			</div>
+			-->
+
+
+		</div>
+
+		<!--
+		<div class="sub-footer">
+			Terms Privacy Social etc
+		</div>
+		-->
+
+	</div>	
+</div>

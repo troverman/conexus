@@ -1,9 +1,8 @@
 //CRE8.APP.ALPHA
-
 //SET OF TYPES / PROTOCOLS 
 //WORK ON TYPE COMPOSITION
+//var Self = {
 module.exports = {
-
 	//IMPORTS ARE APP-APP CONNECTIONS
 	import:{
 		Q: require('q'),
@@ -65,8 +64,6 @@ module.exports = {
         //INIT JSON OBJ // THE ENVIRONMENT WE ARE IN 
         //RUN INIT FXN 
 
-
-
 	//TODO
 	get: async function(req){
 		//const records = AppApp.db.get('');
@@ -118,10 +115,7 @@ module.exports = {
 		return App.find({hash:model.hash});
 
 	},
-
-
 	tokens:{
-
 		get: function(model){
 			var tokens = [
 				'CRE8', 
@@ -130,12 +124,10 @@ module.exports = {
 			];
 			return tokens;
 		},
-
 		create:async function (model){
-			var tokens = appApp.tokens.get(model);
-			
+			var tokens = Self.tokens.get(model);	
 		},
-
 	},
 	
 };
+//modlue.exports = Self;

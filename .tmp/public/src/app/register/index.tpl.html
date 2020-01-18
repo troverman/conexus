@@ -1,0 +1,299 @@
+<div style="background:url('https://source.unsplash.com/1600x900/?explore,discover')" class="imageContainerSmall">
+    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+        <div style="margin-top: auto;margin-bottom: auto;">
+            <div class="container">
+                <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;">Join Our Community!</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--
+<div class="container" ng-if="showMap">
+    <div class="row">
+        <div ng-show="pageNumber == 0">
+            <div class="card">
+                <div style="background:url('https://source.unsplash.com/1600x900/?creative,geometry,technology,rockets')" class="imageContainerSmall">
+                    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                        <div style="margin-top: auto;margin-bottom: auto;padding:15px;">
+                            <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;font-size:35px">Create Your Value Map</h1>
+                            <p style="color:white;">Participate in creating a mechanism of value.</p>
+                        </div>
+                    </div>
+                </div>
+                <div style="padding:16px;">
+                    <p style="font-style:italic;color:gray;margin:0px">The more complete and intentional your dimensional vote the better.</p>
+                    <highchart config="chartMapTotal"></highchart>
+                    <button type="submit" style="width:100%" ng-click="changePage('FORWARD')" class="btn btn-default log-btn">Continue <i class="fa fa-arrow-right"></i></button>
+                </div>
+            </div>
+        </div>
+        <div ng-show="pageNumber == 1">
+            <div class="card">
+                <div style="background:url('https://source.unsplash.com/1600x900/?love,art,geometry')" class="imageContainerSmall">
+                    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                        <div style="margin-top: auto;margin-bottom: auto;padding:15px;">
+                            <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;font-size:35px">Your Personal Value</h1>
+                            <p style="color:white;">What do you believe is valuable?</p>
+                        </div>
+                    </div>
+                </div>
+                <div style="padding:16px;">
+                    <p style="color:gray;font-size:12px;font-style:italic">Select what you believe is worthwile.</p>
+                    <p style="color:gray;font-size:12px;font-style:italic">The more detailed your dimensional vote the stronger the effect.</p>
+                    <div class="row">
+                        <div class="col-xs-4"><img src="https://source.unsplash.com/900x900/?value,finance,vote"></div>
+                        <div class="col-xs-4"><img src="https://source.unsplash.com/900x900/?humananity,city,community"></div>
+                        <div class="col-xs-4"><img src="https://source.unsplash.com/900x900/?code,love,joy"></div>
+                    </div>
+                </div>
+            </div>
+            <ul style="padding:0px;" class="member-tabs">
+                <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fa fa-filter"></i> Filter</a></li>
+                <li style="float:left;font-size:14px">
+                    <a href="#" ng-click="filterToggle('MANIFOLD')"><i class="fas fa-infinity"></i> Manifold</a>
+                    <span style="font-size:9px;color:gray;maring:0px">+ONMINT+SPONSOR+(address)</span>
+                </li>
+                <li style="float:right;font-size:14px"><a href="#" ng-click="filterToggle('VALUEMAP')"><i class="fa fa-eye"></i> UNIVERSALTOKEN</a></li>
+                <div style="clear:both"></div>
+            </ul>
+            <div class="card">
+                <tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search | Filter" ng-model="searchQueryArray"></tags-input>
+            </div>
+            <div class="card">
+                <div style="padding:16px;">
+                    <div class="row">
+                        <div class="col-sm-3 col-xs-12" style="max-height:50vh;overflow:auto">
+                            <div style="font-size:14px;font-weight:bold" ng-repeat="item in sortedTagArray track by $index">
+                                <button ng-click="createPosition(item.element)" class="btn btn-default log-btn">{{item.element}}</button>
+                            </div>
+                        </div>
+                        <div class="col-sm-9 col-xs-12">
+                            <div layout="">
+                                <div flex="35" layout="" layout-align="center center"><span class="md-body-1" style="color:gray">Token String <a ng-click="informationToggle('VALUEMAP')" href="#"><i class="fa fa-question-circle"></i></a></span></div>
+                                <div flex="65" layout="" layout-align="center center"><span class="md-body-1" style="color:gray">Token String / Base Token String <a ng-click="informationToggle('VALUEMAP')" href="#"><i class="fa fa-question-circle"></i></a></span></div>
+                            </div>
+                            <div class="spacing-10"></div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div ng-repeat="item in newOrder">
+                                    
+                                        <div layout="">
+                                            <md-slider step="0.1" flex="" md-discrete="" ng-model="item[0].amount" step="1" min="0" max="100" aria-label="Amount"></md-slider>
+                                        </div>
+                                        
+                                        <div layout="">
+                                            <div flex="10" layout="" layout-align="center center">86400</div>
+                                            <div flex="25" layout="" layout-align="center center">
+                                                <a>{{item[1].identifier.split('+')[2]}}</a>
+                                                <p style="font-size:7px;color:gray">+ONMINT+SPONSOR+(address)</p>
+                                            </div>
+
+                                            <div flex="5" layout="" layout-align="center center"><a href="#" ng-click="informationToggle('MANIFOLD LOGIC')"><i class="fa fa-exchange"></i>*</a></div>
+
+                                            <div flex="30" layout="" layout-align="center center">{{1/newOrder.length*item[0].amount/100}}</div>
+                                            <div flex="30" layout="" layout-align="center center"><a>Universal Token</a></div>
+                                            <div flex="5" layout="" layout-align="center center"><a href="#" ng-click="removePosition(item)"><i class="fas fa-remove"></i></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 col-xs-12">
+                                    <highchart config="chartMapTotal"></highchart>
+                                </div>
+                                <div class="col-sm-6 col-xs-12">
+                                    <highchart config="pieTotal"></highchart>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <button type="submit" style="width:100%" ng-click="changePage('FORWARD')" class="btn btn-default log-btn">Continue <i class="fa fa-arrow-right"></i></button>
+            </div>
+        </div>
+        <div ng-show="false">
+            <div class="card">
+                <div style="background:url('https://source.unsplash.com/1600x900/?rest,exercise,work,play')" class="imageContainerSmall">
+                    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                        <div style="margin-top: auto;margin-bottom: auto;padding:15px;">
+                            <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;font-size:35px">A Valuable Day</h1>
+                            <p style="color:white;">How would an ideal day look to you?</p>
+                        </div>
+                    </div>
+                </div>
+                <div style="padding:16px;">
+                    <p style="color:gray;font-size:12px;font-style:italic">A day well spent. Striving for universal adaptation and reflectivity, your dimensional vote can be encompassing of all aspects of the human experience.</p>
+                    <img style="max-height:200px" src="https://images.unsplash.com/photo-1531502774286-5e4e8e94879f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60">
+                    <img style="max-height:200px" src="https://images.unsplash.com/photo-1468322638156-074863f9362e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60">
+                    <img style="max-height:200px" src="https://images.unsplash.com/photo-1504246979673-176ed6740840?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60">
+                </div>
+            </div>
+            <div class="card">
+                <tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search | Filter" ng-model="dailyTimeValue"></tags-input>
+            </div>
+            <div class="card">
+                <div style="padding:16px;">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div ng-show="false">
+                                <p style="font-style:italic;color:gray;margin:0px;font-size:12px">Thinking about an archetypal idealized day - a discrete universe of time. Tell us how a human would thirve. All Intentional Time is a Tokenized Event.</p>
+                            </div>
+                            <div ng-repeat="item in dailyTimeValue">
+                                <div layout="">
+                                    <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{item.text}}</span></div>
+                                    <md-slider step="0.1" flex="" md-discrete="" ng-model="item.percentage" step="1" min="0" max="100" aria-label="{{tag.text}}"></md-slider>
+                                    <div flex="10" layout="" layout-align="center center"><span class="md-body-1">{{item.percentage.toFixed(3) || 0}}%</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <highchart config="chartMapTime"></highchart>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <button type="submit" style="width:100%" ng-click="changePage('FORWARD')" class="btn btn-default log-btn">Continue <i class="fa fa-arrow-right"></i></button>
+            </div>
+        </div>
+        <div ng-show="pageNumber == 2">
+            <div class="card">
+                <div style="background:url('https://source.unsplash.com/1600x900/?information,genetics,dna,human,personal,passport,identity')" class="imageContainerSmall">
+                    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                        <div style="margin-top: auto;margin-bottom: auto;padding:15px;">
+                            <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;font-size:35px">Personal Information & Settings</h1>
+                            <p style="color:white;">What would you like us all to know about you?</p>
+                        </div>
+                    </div>
+                </div>
+                <div style="padding:16px;">
+                    <p style="color:gray;font-size:12px;font-style:italic">We Promote Consentual Sharing. Give as much information as you would like.</p>
+                    <p style="color:gray;font-style:italic">All information given to the CRE8 NETWORK comes from a place of mutual consent. <b>I agree.</b> <md-switch style="float:right;height:auto;margin:0px" ng-model="consentAgreement" aria-label="Consent Agreement"></md-switch></p>
+                    <div class="row">
+                        <div class="col-xs-4"><img src="https://source.unsplash.com/900x900/?personal"></div>
+                        <div class="col-xs-4"><img src="https://source.unsplash.com/900x900/?human"></div>
+                        <div class="col-xs-4"><img src="https://source.unsplash.com/900x900/?joy"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div style="padding:16px;">
+                    <div style="padding:0px" class="col-xs-4"><h5>First Name</h5><input type="text" ng-disabled="!consentAgreement" ng-model="newMember.firstName" placeholder="First Name" class="form-control"></div>
+                    <div style="padding:0px" class="col-xs-4"><h5>Last Name</h5><input type="text" ng-disabled="!consentAgreement" ng-model="newMember.lastName" placeholder="Last Name" class="form-control"></div>
+                    <div style="padding:0px" class="col-xs-4"><h5>Date Of Birth</h5><input type="date" ng-disabled="!consentAgreement" ng-model="newMember.dateOfBirth" placeholder="Date of Birth" class="form-control"></div>
+                    <div style="padding:0px" class="col-xs-4"><h5>Username</h5><input type="text" ng-disabled="!consentAgreement" ng-model="newMember.username" placeholder="Email" class="form-control"></div>
+                    <div style="padding:0px" class="col-xs-4"><h5>Email</h5><input type="text" ng-disabled="!consentAgreement" ng-model="newMember.email" placeholder="Email" class="form-control"></div>
+                    <div style="padding:0px" class="col-xs-4"><h5>Phone Number</h5><input type="text" ng-disabled="!consentAgreement" ng-model="newMember.phoneNumber" placeholder="Phone Number" class="form-control"></div>
+                    <div style="padding:0px" class="col-xs-12"><h5>Description</h5><text-angular ng-disabled="!consentAgreement" ng-model="newMember.description" ta-toolbar="[['p','h1','bold','italics','quote','ol','ul','insertLink','insertImage','html']]"></text-angular></div>
+                    <div style="clear:both"></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="col-md-2 col-sm-2 col-xs-3"  style="padding:0px"><button type="submit" style="width:100%" ng-click="changePage('BACK')" class="btn btn-default log-btn"><i class="fa fa-arrow-left"></i> Back</button></div>
+                <div class="col-md-10 col-sm-10 col-xs-9" style="padding:0px"><button type="submit" style="width:100%" ng-click="changePage('FORWARD')" class="btn btn-default log-btn">Continue <i class="fa fa-arrow-right"></i></button></div>
+            </div>
+        </div>
+        <div ng-show="pageNumber == 3">
+            <div class="card">
+                <div style="background:url('https://source.unsplash.com/1600x900/?egalitarian,sharing,love,creative,world,community,awesome')" class="imageContainerSmall">
+                    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                        <div style="margin-top: auto;margin-bottom: auto;padding:15px;">
+                            <h1 style="text-align:left;font-size:50px;color:rgba(255,255,255,0.9);font-weight:400;font-size:35px">Let's Go!</h1>
+                            <p style="color:white;">It's time to create a more egalitarian world.</p>
+                        </div>
+                    </div>
+                </div>
+                <div style="padding:16px;">   
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-6" style="padding-right:5px;padding-left:10px">
+                            <div class="member-card">
+                                <div class="member-card-image" style="background-image: url('https://source.unsplash.com/1600x900/?sharing,love,creative,world,community')">
+                                    <a href="#"><img ng-src="{{newMember.avatarUrl}}" err-src="/images/avatar.png"></a>
+                                </div>
+                                <div style="clear:both"></div>
+                                <div class="member-card-info" style="height:auto;padding-left:0%">
+                                    <h4 ng-click="$event.stopPropagation()"><a href="#">{{newMember.username}}</a></h4>
+                                    <p style="color:gray"><i style="color:#30b257" class="fa fa-circle"></i> Creating Account</p>     
+                                    <h4 ng-show="newMember.firstName">{{newMember.firstName}} {{newMember.lastName}}</h4>
+                                    <h5 ng-show="newMember.dateOfBirth">{{newMember.dateOfBirth}}</h5>
+                                    <h5 ng-show="newMember.email"><i class="fas fa-envelope"></i> {{newMember.email}}</h5>
+                                    <h5 ng-show="newMember.phoneNumber"><i class="fas fa-phone"></i> {{newMember.phoneNumber}}</h5>
+                                </div>
+                                <div ng-show="false" class="member-card-social">
+                                    <a ng-show="false" href="{{currentUser.socialAccounts.facebook.profileUrl}}" target="_blank"><i class="fa fa-facebook facebook-icon"></i></a>
+                                    <a ng-show="false" href="{{currentUser.socialAccounts.facebook.profileUrl}}" target="_blank"><i class="fa fa-instagram"></i></a>
+                                    <a ng-show="false" href="{{currentUser.socialAccounts.twitter.profileUrl}}" target="_blank"><i class="fa fa-twitter twitter-icon"></i></a>
+                                    <a ng-show="false" href="{{currentUser.socialAccounts.google.profileUrl}}" target="_blank"><i class="fa fa-google google-icon"></i></a>
+                                </div>
+                            </div>
+                            <div class="spacing-15"></div>
+                            <p style="color:gray;font-size:12px;font-style:italic">Is this correct?</p>
+                            <a ng-click="changePage(2)" class="btn btn-default log-btn"><b>Edit Information</b></a>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <h3>Value Map</h3>
+                            <highchart config="chartMapTotal"></highchart>
+                            <div class="" ng-repeat="order in newOrderNEW">
+                                <span style="color:gray" ng-repeat="(asset, value) in order.setAlpha">{{value}} <a href="#">{{asset}}</a>, </span> | 
+                                <span style="color:gray" ng-repeat="(asset, value) in order.setBeta">{{value}} <a href="#">{{asset}}</a>, </span>
+                            </div>
+                            <div class="spacing-15"></div>
+                            <p style="color:gray;font-size:12px;font-style:italic">Do you want to keep working on your value map?</p>
+                            <a ng-click="changePage(1)" class="btn btn-default log-btn"><b>Keep Creating</b></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="container">
+    <div class="spacing-25"></div>
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="login-form">
+                <form role="form">
+                    <input class="form-control" name="email" ng-model="newMember.email" placeholder="Email" title="email" type="email"> 
+                    <input class="form-control" name="username" ng-model="newMember.username" placeholder="Username" title="username" type="text" autocomplete="username"> 
+                    <input class="form-control" name="password" ng-model="newMember.password" placeholder="Password" title="password" type="password" autocomplete="new-password"> 
+                    <button class="btn btn-default log-btn" ng-click="registerUser()">Sign up</button>    
+                    <div class="spacing-10"></div>
+                    <div class="social-log">
+                        <a href="/login" ui-sref="login"><h5 style="color: gray;font-style: italic;"><b>Already A Member?</b></h5></a>
+                    </div>
+                </form>
+            </div>
+            <div class="selfClear"></div>
+        </div>
+    </div>
+</div>
+-->
+
+<div class="spacing-25"></div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="">
+                <form role="form">
+                    <div class="form-group"><input class="form-control" name="email" ng-model="newMember.email" placeholder="Email" title="email" type="email"><i class="fa fa-envelope" autocomplete="email"></i></div>
+                    <div class="form-group"><input class="form-control" name="username" ng-model="newMember.username" placeholder="Username" title="username" type="text" autocomplete="username"><i class="fa fa-user"></i></div>
+                    <div class="form-group"><input class="form-control" name="password" ng-model="newMember.password" placeholder="Password" title="password" type="password" autocomplete="new-password"><i class="fa fa-lock"></i></div>
+                    <button class="btn btn-default log-btn" ng-click="registerUser()">Sign up</button>    
+                    <br><br>
+                    <div class="social-log">
+                        <a href="/login" ui-sref="login"><h5 style="color: gray;font-style: italic;"><b>Already A Member?</b></h5></a>
+                    </div>
+                </form>
+                <div class="selfClear"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="spacing-25"></div>

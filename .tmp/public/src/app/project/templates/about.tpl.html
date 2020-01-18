@@ -1,0 +1,85 @@
+<div class="row">
+
+	<div class="card">
+        <!--SELF VALIDATION-->
+        <button class="btn btn-default log-btn" ng-click="validationToggle(project)">+ Motion to Edit</button>
+    </div>
+    
+	<div class="card">
+
+        <div style="background:url('https://source.unsplash.com/1600x900/?business,service,civic,create,art,movies,action');min-height:100px" class="imageContainerSmall">
+            <div style="background:rgba(0,0,0,0.75);height:100px" class="imageContainerSmallDiv">  
+                <div style="text-align:right;padding:15px;position:absolute;right:0">
+                    <a style="color:white;"><i class="fas fa-info"></i> </a>
+                </div> 
+                <div style="margin-top: auto;margin-bottom: auto;padding:15px;text-align:left">
+                    <h1 style="font-size:25px;color:rgba(255,255,255,0.9);font-weight:400;font-size:35px">Information</h1>
+                </div>
+            </div>
+        </div>
+        
+		<div style="padding:16px;">
+
+            <!--SELF ASSOCIATION-->
+            <!--{{project.associationModels}}-->
+
+            <div style="text-align:center">
+                <h4>Avatar</h4>
+                <img style="height:50px;width:50px" src="{{project.avatarUrl}}">
+                <div class="spacing-5"></div>
+                <p>{{project.avatarUrl}}</p>
+            </div>
+
+            <div class="spacing-10"></div>
+            <h4>Title</h4>
+            <p>{{project.title}}</p>
+            <div class="spacing-10"></div>
+
+            <h4>Description</h4>
+            <p><span style="display:inline" ng-bind-html="renderContent(project.description)"></span></p>
+            <div class="spacing-10"></div>
+
+            <h4>Id</h4>
+            <p ng-click="transactionToggle(project)"><a><img style="height:50px;text-align:left" src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl={{project.id}}"> {{project.id}}</a></p>
+            <div class="spacing-10"></div>
+
+            <div ng-if="project.location">
+                <h4>Location</h4>
+                <p ng-if='project.location.lat'><b>Latitude</b>: {{project.location.lat}}, <b>Longitude</b>: {{project.location.lng}}</p>
+                <p ng-if='project.location.address'><b>Address</b>: {{project.location.address}}</p>
+                <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options">
+                    <ui-gmap-marker ng-repeat="marker in markers" coords="marker.coords" options="marker.options" idkey="marker.id">
+                        <ui-gmap-window options="windowOptions" closeClick="closeClick()">
+                            <div style="font-size: 15px;"><a href="project/{{marker.url}}" ui-sref="project.activity({path:marker.url})">{{marker.content}}</a></div>
+                        </ui-gmap-window>
+                    </ui-gmap-marker>
+                </ui-gmap-google-map>
+                <div class="spacing-10"></div>
+            </div>
+
+            <h4>Asset Manifolds</h4>
+            <p>
+                <a href="market/PROJECT+{{project.urlTitle.toUpperCase()}}" ui-sref="market({id:project.urlTitle.toUpperCase()})">PROJECT+{{project.urlTitle.toUpperCase()}}+</a>, 
+                <a href="market/PROJECT+{{project.urlTitle.toUpperCase()}}+TASK">PROJECT+{{project.urlTitle.toUpperCase()}}+TASK</a>, 
+                <a href="PROJECT+{{market/project.urlTitle.toUpperCase()}}+TIME">PROJECT+{{project.urlTitle.toUpperCase()}}+TIME</a>
+            </p>
+            <div class="spacing-10"></div>
+
+            <!--
+            <h4>Apps</h4>
+            <div class="spacing-10"></div>
+            -->
+
+            <h4>Associations</h4>
+            <p>
+                <b>Members</b>: <a>{{project.data.apps.associations.members || 0}}</a>, 
+                <b>Tasks</b>: <a>{{project.data.apps.associations.time || 0}}</a>, 
+                <b>Time</b>: <a>{{project.data.apps.associations.members ||0 }}</a>
+            </p>
+            <div class="spacing-10"></div>
+
+
+        </div>
+    </div>
+
+</div>

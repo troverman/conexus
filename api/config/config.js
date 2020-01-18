@@ -1,19 +1,18 @@
 //SELF CONFIG
 module.exports = {
-
-	blueprints :{},
-
+	
 	bootstrap: function(cb) {
 		initApp.init();
 		cb();
 	},
 
 	//TODO: REMOVE
+	//TODO: APP SPECIFIC 
 	datastores: {
-	  'default': {
-	    adapter: 'sails-mongo',
-	    url: 'mongodb://heroku_vt7lbmkd:757kfop5h6loqicvfph68q41le@ds219648-a0.mlab.com:19648,ds219648-a1.mlab.com:19648/heroku_vt7lbmkd?replicaSet=rs-ds219648'
-	  }
+		'default': {
+		adapter: 'sails-mongo',
+			url: 'mongodb://heroku_vt7lbmkd:757kfop5h6loqicvfph68q41le@ds219648-a0.mlab.com:19648,ds219648-a1.mlab.com:19648/heroku_vt7lbmkd?replicaSet=rs-ds219648'
+		}
 	},
 
 	globals: {
@@ -49,72 +48,68 @@ module.exports = {
 	//APPCECIFIC INHERITANCE 
 	//META MODEL APP . . .
 	models: {
-	  fetchRecordsOnUpdate: true,
-	  fetchRecordsOnCreate: true,
-	  fetchRecordsOnCreateEach: true,
-	  migrate: 'safe',
-	  datastore: 'default',
-	  attributes: {
-	    createdAt: { type: 'ref', columnType: 'datetime', autoCreatedAt: true, },
-	    updatedAt: { type: 'ref', columnType: 'datetime', autoUpdatedAt: true, },
-	    id: { type: 'string', columnName: '_id' }
-	  },
-	  dataEncryptionKeys: {default: 'V7TZVUpF5WLGg2c2eRVaSx0p3/4Ef11ZujTaY4EVdpY='},
+		fetchRecordsOnUpdate: true,
+		fetchRecordsOnCreate: true,
+		fetchRecordsOnCreateEach: true,
+		migrate: 'safe',
+		datastore: 'default',
+		attributes: {
+			createdAt: { type: 'ref', columnType: 'datetime', autoCreatedAt: true, },
+			updatedAt: { type: 'ref', columnType: 'datetime', autoUpdatedAt: true, },
+			id: { type: 'string', columnName: '_id' }
+		},
+		dataEncryptionKeys: {default: 'V7TZVUpF5WLGg2c2eRVaSx0p3/4Ef11ZujTaY4EVdpY='},
 	},
 
 	passport: {
 	  local: {
-	    strategy: require('passport-local').Strategy
+	  	strategy: require('passport-local').Strategy
 	  },
 
-	  //bearer: {
-	  //  strategy: require('passport-http-bearer').Strategy
-	  //},
+	    //bearer: {
+		   //strategy: require('passport-http-bearer').Strategy
+	    //},
 
-	  twitter: {
-	    name: 'Twitter',
-	    protocol: 'oauth',
-	    strategy: require('passport-twitter').Strategy,
-	    options: {
-	      consumerKey: 'gRpa4CidX3vihKWZ3L1O1matV',
-	      consumerSecret: 'M7RskQyUx9Uzbc5C4O7ATQ00s3mC8JssPcP57H3EiVKcSFKSKp'
-	    }
-	  },
-
-	  facebook: {
-	    name: 'Facebook',
-	    protocol: 'oauth2',
-	    strategy: require('passport-facebook').Strategy,
-	    options: {
-	      clientID: '1660847900851145',
-	      clientSecret: '6eecbdb480a617f3e9b4c7e0c3f89665',
-	      scope: ['email']
-	    }
-	  },
-
-	  google: {
-	    name: 'Google',
-	    protocol: 'oauth2',
-	    strategy: require('passport-google-oauth').OAuth2Strategy,
-	    options: {
-	      clientID: '956713988528-86j1pkii5m9o8c1vfmb8qcbq2eot784d.apps.googleusercontent.com',
-	      clientSecret: 'TiuwOilqlUC4dtxOXbyhdqu2',
-	      scope: ['email']
-	    }
-	  },
-
-	  fitbit: {
-	    name: 'Fitbit',
-	    protocol: 'oauth2',
-	    strategy: require('passport-fitbit-oauth2').FitbitOAuth2Strategy,
-	    options: {
-	      clientID: '229VSS',
-	      clientSecret: 'ad0ea5803c56be0754e186b356abc90b',
-	      callbackURL: 'https://www.cre8.xyz/auth/fitbit/callback',
-	      scope: ['activity','heartrate','location','profile', 'sleep']
-	    }
-	  },
-
+		twitter: {
+			name: 'Twitter',
+			protocol: 'oauth',
+			strategy: require('passport-twitter').Strategy,
+			options: {
+				consumerKey: 'gRpa4CidX3vihKWZ3L1O1matV',
+				consumerSecret: 'M7RskQyUx9Uzbc5C4O7ATQ00s3mC8JssPcP57H3EiVKcSFKSKp'
+			}
+		},
+		facebook: {
+			name: 'Facebook',
+			protocol: 'oauth2',
+			strategy: require('passport-facebook').Strategy,
+			options: {
+				clientID: '1660847900851145',
+				clientSecret: '6eecbdb480a617f3e9b4c7e0c3f89665',
+				scope: ['email']
+			}
+		},
+		google: {
+			name: 'Google',
+			protocol: 'oauth2',
+			strategy: require('passport-google-oauth').OAuth2Strategy,
+			options: {
+				clientID: '956713988528-86j1pkii5m9o8c1vfmb8qcbq2eot784d.apps.googleusercontent.com',
+				clientSecret: 'TiuwOilqlUC4dtxOXbyhdqu2',
+				scope: ['email']
+			}
+		},
+		fitbit: {
+			name: 'Fitbit',
+			protocol: 'oauth2',
+			strategy: require('passport-fitbit-oauth2').FitbitOAuth2Strategy,
+			options: {
+				clientID: '229VSS',
+				clientSecret: 'ad0ea5803c56be0754e186b356abc90b',
+				callbackURL: 'https://www.cre8.xyz/auth/fitbit/callback',
+				scope: ['activity','heartrate','location','profile', 'sleep']
+			}
+		},
 	},
 
 	policies:{

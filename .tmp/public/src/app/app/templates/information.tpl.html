@@ -1,0 +1,28 @@
+<h5>Context</h5>
+<p><a ng-repeat="tag in app.tags.split(',') track by $index" ng-click="$event.stopPropagation();">{{tag}} </a></p>
+
+<div class="spacing-10"></div>
+
+<div><span style="display:inline" ng-bind-html="renderContent(app.description)"></span></div>
+
+<div class="spacing-10"></div>
+
+<div ng-if="currentUser" ng-click="$event.stopPropagation();">
+
+	<!--TODO: APP MEMBER CONNECTION-->
+    <p><b>Enable</b></p>
+    <md-switch ng-click="associateApp(app)" ng-model="app.isAssociated" aria-label="isAssociated"></md-switch>
+	
+
+    {{memberConnections}}
+
+    <div ng-repeat="connection in memberConnections">
+    	{{connection}}
+    </div>
+
+    <!--BASED ON APP-MEMBER CONNECTION-->
+
+
+
+
+</div>
