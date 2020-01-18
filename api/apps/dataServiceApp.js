@@ -1,8 +1,8 @@
 //CRE8.DATASERVICE
 //TODO: CONTAINIZER INTO MORE APPS 
 
-const tf = require('@tensorflow/tfjs');
-require('@tensorflow/tfjs-node');
+//const tf = require('@tensorflow/tfjs');
+//require('@tensorflow/tfjs-node');
 const Q = require('q');
 
 
@@ -1350,7 +1350,7 @@ module.exports = {
 
 		}
 		//console.log(relationShipTensor)
-		const multiMarketRelationship = tf.tensor(relationShipTensor);
+		//const multiMarketRelationship = tf.tensor(relationShipTensor);
 		//console.log(multiMarketRelationship)
 		//multiMarketRelationship.print();
 
