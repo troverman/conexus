@@ -1,14 +1,19 @@
-
 //CRE8.ITEM.ALPHA
 const crypto = require('crypto');
 const mongodb = require('mongodb');
 const Q = require('q');
 
-//recursive..
-//init(req, res, params);
-//params are 
-
 module.exports = {
+
+	//HASH OF ATTRIBUTES ???
+    //DB TYPES ??
+    //HASH TABLE EASIER .. ? 
+    //LOG Db? 
+    //I LIKE THE INIT FXN
+    //db: await orbitdb.docs('CRE8.ITEM'),
+    init: async function(){
+    //	await ContentApp.db.load();
+    },
 
 	attributes: {
         //DEPRECIATE
@@ -34,16 +39,6 @@ module.exports = {
         hash: {type: 'string', allowNull: true}, //id
     },
 
-    //HASH OF ATTRIBUTES ???
-    //DB TYPES ??
-    //HASH TABLE EASIER .. ? 
-    //LOG Db? 
-    //I LIKE THE INIT FXN
-    //db: await orbitdb.docs('CRE8.ITEM'),
-    //init: async function(){
-    //	await ContentApp.db.load();
-    //},
-
 	connections:[{
 		type:'connection', 
 		id:'self',
@@ -55,8 +50,13 @@ module.exports = {
 			}]
 		}],
 	}],
-
-
+	connections:[{
+		type:'connection', 
+		id:'self', 
+		params:{
+			//DATA MODEL.
+		}	
+	}],
 	import: { 
 		request: require('request'),
 		Q: require('q'),
@@ -71,15 +71,29 @@ module.exports = {
 			//IMPORT DATABASE CONNECTION 
 	},
 
-
 	//DATA MODELS ARE CONNECTIONS
 
 	//TEST
 	//REDUCE INTO SELF CONECTION W CONTEXT --> INTERNAL FUNCTION MAPPING 
+	
 	language: 'Javascript',
-	compiler:'V8',
-
 	attentionParams:{},
+	//TODO: STACK TRACK FOR TOKENIZATION.. 
+	//SOME META LOGGER.. 
+	//const StackTrace = require('stacktrace-js');
+	//StackTrace.get()
+	//.then(function(stack){
+		//console.log(stack.map(function(obj){return obj.functionName}));
+	//})
+	//.catch(function(err){});
+	//hmm --> GOOD BUT DO IN EACH AS STATIC
+	//var origCall = Function.prototype.call;
+	//Function.prototype.call = function (thisArg) {
+	    //console.log("calling a function", thisArg);
+	    //var args = Array.prototype.slice.call(arguments, 1);
+	    //origCall.apply(thisArg, arguments[arguments.length-1]);
+	//};
+	//console.trace();
 
 	//test
 	//LANGUAGES ARE COMPILER PARAMETERS
@@ -96,20 +110,11 @@ module.exports = {
 	meta:{
 		separator:[','],
 		operator:['+','-','*',''],
-		
 	},
 
-	
-	connections:[
-		{
-			type:'connection', 
-			id:'self', 
-			params:{
-				//DATA MODEL.
-			}	
-		}
-	],
-
+	//recursive..
+	//init(req, res, params);
+	//params are 
 	get: function(req, res, params){
 
 		//params ^^same as above ; recursive :)
@@ -268,28 +273,4 @@ module.exports = {
 		},
 	},
 
-
-
-
 };
-
-
-
-//TODO: STACK TRACK FOR TOKENIZATION.. 
-//SOME META LOGGER.. 
-//const StackTrace = require('stacktrace-js');
-//StackTrace.get()
-//.then(function(stack){
-	//console.log(stack.map(function(obj){return obj.functionName}));
-//})
-//.catch(function(err){});
-//hmm --> GOOD BUT DO IN EACH AS STATIC
-//var origCall = Function.prototype.call;
-//Function.prototype.call = function (thisArg) {
-    //console.log("calling a function", thisArg);
-    //var args = Array.prototype.slice.call(arguments, 1);
-    //origCall.apply(thisArg, arguments[arguments.length-1]);
-//};
-//console.trace();
-
-
