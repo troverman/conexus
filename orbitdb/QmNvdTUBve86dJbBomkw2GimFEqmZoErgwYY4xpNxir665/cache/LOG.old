@@ -1,5 +1,5 @@
-2020/01/18-12:48:35.679 1dd0 Recovering log #67
-2020/01/18-12:48:35.684 1dd0 Level-0 table #70: started
-2020/01/18-12:48:35.696 1dd0 Level-0 table #70: 359 bytes OK
-2020/01/18-12:48:35.705 1dd0 Delete type=0 #67
-2020/01/18-12:48:35.705 1dd0 Delete type=3 #65
+2020/01/18-15:48:28.952 afc Recovering log #80
+2020/01/18-15:48:28.952 afc Level-0 table #83: started
+2020/01/18-15:48:28.961 afc Level-0 table #83: 359 bytes OK
+2020/01/18-15:48:28.969 afc Delete type=0 #80
+2020/01/18-15:48:28.969 afc Delete type=3 #78
