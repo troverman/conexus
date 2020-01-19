@@ -1,0 +1,46 @@
+
+<div style="display:inline">
+    <a ng-click="$event.stopPropagation()" style="display:inline;font-weight:600;margin-left:5px" href="member/{{notification.data.apps.member.username}}" ui-sref="member.activity({path:notification.data.apps.member.username})">
+        <img class="card-avatar" ng-src="{{notification.data.apps.member.avatarUrl}}" err-src="/images/avatar.png">
+        {{notification.data.apps.member.username}}
+    </a>
+    <div style="display:inline;padding-left:5px;padding-right:5px;">
+        <i class="fa fa-arrow-right"></i>
+    </div>
+    <a ng-click="$event.stopPropagation()" style="display:inline;font-weight:600;margin-left:5px" href="project/{{notification.data.apps.project.urlTitle}}" ui-sref="project.activity({path:notification.data.apps.project.urlTitle})">
+        <img class="card-avatar" ng-src="{{notification.data.apps.project.avatarUrl}}" err-src="/images/avatar.png">
+        {{notification.data.apps.project.title}}
+    </a>
+</div>
+<div class="spacing-10"></div>
+<p><span style="color:gray">{{notification.content}}</span></p>
+<!--
+<div ng-click="$event.stopPropagation();">
+    <div class="spacing-5"></div>
+    <div style="text-align:center">
+        <a ng-click="expandConnection(association)"><b>{{association.connection[0].text || 'Default Connection'}}</b></a>
+    </div>
+    <div ng-repeat="(key, value) in notification.newValidation.validation">
+        <div layout="">
+            <div flex="10" layout="" layout-align="center center">
+                <p><b>{{key}}</b></p>
+                <div class="spacing-5"></div>
+            </div>
+            <md-slider step="0.1" flex="" md-discrete="" ng-model="notification.newValidation.context[key]" step="1" min="-100" max="100" aria-label="{{key}}"></md-slider>
+            <div flex="10" layout="" layout-align="center center">
+                <p class="md-body-1">{{notification.newValidation.context[key]}}</p>
+            </div>
+        </div>
+        <div style="text-align:center"><p style="font-size:9px">{{reputation[key] || 0}} | {{reputation[key]*notification.newValidation.validation[key]}}</p></div>
+    </div>
+</div>
+<div ng-click="$event.stopPropagation();">
+    <div class="spacing-10"></div>
+    <text-angular style="height:100px" ng-model="newValidation.content" ta-toolbar="''"></text-angular>
+</div>
+<div class="spacing-10"></div>
+<div ng-click="$event.stopPropagation();">
+    <button ng-click="createValidation(notification.newValidation)" type="submit" style="width:100%" class="btn btn-default log-btn">create</button>
+</div>
+-->
+<p style="display:inline;font-size:10px;color:gray;margin-left:5px;margin-top:0px" am-time-ago="notification.createdAt"></p>

@@ -1,0 +1,98 @@
+<div class="row">
+
+	<!--NG IF-->
+	<!--
+	<div class="col-sm-3 mobileFix" style="padding-left:0px;padding-right:0px;">
+		<div class="card">
+			<div style="background:url('https://source.unsplash.com/1600x900/?details,notes,explore,wonder,market,asset');height:50px;min-height:50px" class="imageContainerSmall">
+			    <div style="background:rgba(0,0,0,0.75);height:50px" class="imageContainerSmallDiv">  
+			        <div style="margin-top: auto;margin-bottom: auto;">
+			        	<div style="padding:15px">
+				            <h1 style="text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;">Base Markets</h1>
+				        </div>
+			        </div>
+			    </div>
+			</div>
+			<div style="padding:16px;">
+	            <div ng-repeat="market in baseMarkets">
+	                <a href="#" ng-click="filterToggle('POSITIONS')"><b>{{market.text}}</b></a>
+	            </div>
+			</div>
+		</div>
+		<div class="card">
+			<div style="background:url('https://source.unsplash.com/1600x900/?details,notes,explore,wonder,market,asset');height:50px;min-height:50px" class="imageContainerSmall">
+			    <div style="background:rgba(0,0,0,0.75);height:50px" class="imageContainerSmallDiv">  
+			        <div style="margin-top: auto;margin-bottom: auto;">
+			        	<div style="padding:15px">
+				            <h1 style="text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;">Markets</h1>
+				        </div>
+			        </div>
+			    </div>
+			</div>
+			<div style="padding:16px;">
+	            <div ng-repeat="market in markets">
+	                <a href="#" ng-click="filterToggle('POSITIONS')"><b>{{market.text}}</b></a>
+	            </div>
+			</div>
+		</div>
+
+		<div class="card">
+			<div style="background:url('https://source.unsplash.com/1600x900/?details,notes,explore,wonder,market,asset');height:50px;min-height:50px" class="imageContainerSmall">
+			    <div style="background:rgba(0,0,0,0.75);height:50px" class="imageContainerSmallDiv">  
+			        <div style="margin-top: auto;margin-bottom: auto;">
+			        	<div style="padding:15px">
+				            <h1 style="text-align:left;font-size:20px;color:rgba(255,255,255,0.9);font-weight:400;">Type</h1>
+				        </div>
+			        </div>
+			    </div>
+			</div>
+			<div style="padding:16px;">
+	            <div ng-repeat="type in types">
+	                <a href="#" ng-click="filterToggle('POSITIONS')"><b>{{type.text}}</b></a>
+	            </div>
+			</div>
+		</div>
+	</div>
+	-->
+
+	<div class="col-sm-12" style="padding-left:0px;padding-right:0px;">
+		<div class="mobileFix">
+			<ul style="padding:0px;" class="member-tabs">
+	            <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('POSITIONS')"><i class="fa fa-filter"></i> Filter</a></li>
+	            <li style="float:left;font-size:14px">
+	                <a href="#" ng-click="filterToggle('VALUEMAP')">
+	                    <i class="fas fa-coins"></i> Base Token <span style="font-size:10px;color:gray">{{baseToken.text}}</span>
+	                </a>
+	            </li>
+	            <li style="float:left;font-size:14px">
+	                <a href="#" ng-click="filterToggle('VALUEMAP')"><i class="fas fa-infinity"></i> Manifold <span style="font-size:10px;color:gray">{{baseManifold.text}}</span></a>
+	            </li>
+	            <li style="float:left;font-size:14px">
+	                <a href="#" ng-click="filterToggle('VALUEMAP')"><i class="fas fa-dna"></i> Type <span style="font-size:10px;color:gray">{{orderType.text}}</span></a>
+	            </li>
+	           	<div style="clear:both"></div>
+	        </ul>
+			<div class="card">
+	           <tags-input class="" style="border:0px;flex-grow:2;" min-length="1" placeholder="Search" ng-model="searchQuery"></tags-input>
+			</div>
+		</div>
+		<div class="card">
+		 	<div style="background:url('https://source.unsplash.com/1600x900/?code,finance')" class="imageContainerSmall">
+                <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                    <div style="margin-top: auto;margin-bottom: auto;padding:15px;">
+                        <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;font-size:35px">Value Map</h1>
+                        <h5 style="color:white;">{{member.id}}</h5>
+                    </div>
+                </div>
+            </div>
+			<div style="padding:16px;">				
+				<div class="spacing-10"></div>
+				<highchart config="chart"></highchart>
+				<div class="spacing-10"></div>
+			</div>
+		</div>	
+	    <div ng-repeat="item in orders track by $index">
+			<div ng-include="'templates/cards/orderCard.tpl.html'"></div>
+		</div>
+	</div>
+</div>	

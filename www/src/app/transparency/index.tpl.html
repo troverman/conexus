@@ -1,0 +1,90 @@
+<div style="background:url('https://source.unsplash.com/1600x900/?network')" class="imageContainerSmall">
+    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+        <div style="margin-top: auto;margin-bottom: auto;">
+        	<div class="container">
+	            <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">THE CRE8 NETWORK</h1>
+	        </div>
+        </div>
+    </div>
+</div>
+<div class="spacing-10"></div>
+<div class="container">
+	<div class="row">
+        <ul style="padding:0px;" class="member-tabs">
+            <li style="font-size:14px"><a ng-click="selectTab('NETWORK')" href="#">Peer Network</a></li>
+            <li style="font-size:14px"><a ng-click="selectTab('STATS')" href="#">Stats</a></li>
+            <div style="clear:both"></div>
+        </ul>
+	</div>
+	<div class="row" ng-if="selectedTab == 'NETWORK'">
+		<div class="card">
+			<div style="background:url('https://source.unsplash.com/1600x900/?network')" class="imageContainerSmall">
+			    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+			        <div style="margin-top: auto;margin-bottom: auto;">
+			        	<div class="container">
+				            <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">Peer Network</h1>
+				            <h5 style="color:white">{{peers.length}} Live Peers</h5>
+				        </div>
+			        </div>
+			    </div>
+			</div>
+			<ui-gmap-google-map center="map.center" zoom="map.zoom" options="options">
+			    <ui-gmap-marker ng-repeat="marker in markers" coords="marker.coords" options="marker.options" idkey="marker.id">
+			        <ui-gmap-window options="windowOptions" closeClick="closeClick()">
+			            <div><div style="font-size: 15px;"><a href="#">{{marker.content}}</a></div></div>
+			        </ui-gmap-window>
+			    </ui-gmap-marker>
+			</ui-gmap-google-map>
+			<div style="padding:16px;">
+				<div class="col-md-12">
+					<table class="table table-striped table-hover">
+		                <thead>
+		                    <tr>
+		                    	<th>Peer</th>
+								<th>Location</th>
+								<th>Device</th>
+								<th>Version</th>
+								<th>Reputation (general)</th>
+							</tr>
+		                </thead>
+		                <tbody>
+		                    <tr ng-repeat="peer in peers">
+		                        <td><a href="member/{{peer.creator.username}}" ui-sref="member.activity({path:peer.creator.username})">{{peer.title}}: {{peer.creator.username}}</a></td>
+								<td><b>lat:</b> {{peer.info.location.lat}}, <b>lng:</b> {{peer.info.location.lng}}</td>
+								<td>{{peer.info.device.title}}, {{peer.info.device.processor}} <!--PROCESSORREP MULTI.. --></td>
+								<td><a href="project/cre8-rust-peer-client" ui-sref="project.activity({path:'cre8-rust-peer-client'})">{{peer.versionHash}}</td>
+								<td>{{peer.reputation.general}}</td>
+		                    </tr>
+		                </tbody>
+		            </table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row" ng-if="selectedTab == 'STATS'">
+		<div class="card">
+			<div style="background:url('https://source.unsplash.com/1600x900/?network')" class="imageContainerSmall">
+			    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+			        <div style="margin-top: auto;margin-bottom: auto;">
+			        	<div class="container">
+				            <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">Stats</h1>
+				            <h5 style="color:white">
+						        {{chart.series[0].data[chart.series[0].data.length-1][1]}} Peers, 
+								{{chart.series[0].data[chart.series[0].data.length-1][1]}} Projects, 
+								{{chart.series[1].data[chart.series[1].data.length-1][1]}} Members, 
+								{{chart.series[3].data[chart.series[3].data.length-1][1]}} Transactions Velocity, 
+								{{chart.series[4].data[chart.series[4].data.length-1][1]}} Assets
+							</h5>
+				        </div>
+			        </div>
+			    </div>
+			</div>
+
+			<div style="padding:16px;">
+				<div class="col-md-12">
+					<highchart config="chart"></highchart>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

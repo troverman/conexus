@@ -1,0 +1,91 @@
+<div class="container">
+    <div class="row">
+        <div class="card" ng-click="cardDetailToggle(transaction);">
+            <div style="background:url('https://source.unsplash.com/1600x900/?{{transaction.context}}')" class="imageContainerSmall">
+                <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+                    <div style="text-align:right;padding:15px;position:absolute;right:0">
+                        <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(transaction)"><i class="fas fa-chevron-down"></i></a>
+                    </div> 
+                    <div style="margin-top: auto;margin-bottom: auto;text-align:center">
+                        <div class="container">
+                            <h1 style=";font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">Transaction</h1>
+                            <h5 style="color:white">{{transaction.id}}</h5>
+                            <h5 style="color:white"><span am-time-ago="transaction.createdAt"></span> • {{transaction.createdAt}}</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="background-color:white">
+                <div class="member-tab-container container" style="padding-left:0px">
+                    <div style="text-align:center">
+                        <ul style="padding:0px;" class="member-tabs">
+                            <li ng-if="false"><a ng-click="$event.stopPropagation();selectTab('ACTIVITY')">Activity</a></li>
+                            <li><a ng-click="$event.stopPropagation();selectTab('INFORMATION')">Information</a></li>
+                            <li><a ng-click="$event.stopPropagation();selectTab('ASSOCIATIONS')">Associations</a></li>
+                            <li><a ng-click="$event.stopPropagation();selectTab('STATS')">Stats</a></li>
+                            <li><a ng-click="$event.stopPropagation();shareToggle(transaction)">Share</a></li>
+                            <li><a ng-click="$event.stopPropagation();selectTab('TOKENS')">Tokens</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <hr style="margin:0px;">
+
+            <div style="padding:16px" ng-if="selectedTab =='INFORMATION'">
+        
+                <div style="display:inline">
+                    <span ng-if="transaction.from.username">
+                        <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="member/{{transaction.from.username}}" ui-sref="member.activity({path:transaction.from.username})">
+                            <img class="card-avatar" ng-src="{{transaction.from.avatarUrl}}" src="{{transaction.from.avatarUrl}}" err-src="/images/avatar.png">
+                            {{transaction.from.username}}
+                        </a>
+                    </span>
+                    <span ng-if="transaction.from.title">
+                        <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="project/{{transaction.from.urlTitle}}" ui-sref="project.activity({path:transaction.from.urlTitle})">
+                            <img class="card-avatar" ng-src="{{transaction.from.avatarUrl}}" src="{{transaction.from.avatarUrl}}" err-src="/images/avatar.png">
+                            {{transaction.from.title}}
+                        </a>
+                    </span>
+                </div>
+                <div style="display:inline;padding-left:5px;padding-right:5px;">
+                    <i class="fa fa-arrow-right"></i>
+                </div>
+                <div style="display:inline">
+                    <span ng-if="transaction.to.username">
+                        <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="member/{{transaction.to.username}}" ui-sref="member.activity({path:transaction.to.username})">
+                            <img class="card-avatar" ng-src="{{transaction.to.avatarUrl}}" src="{{transaction.to.avatarUrl}}" err-src="/images/avatar.png">
+                            {{transaction.to.username}}
+                        </a>
+                    </span>
+                    <span ng-if="transaction.to.title">
+                        <a ng-click="$event.stopPropagation()"  style="display:inline;font-weight:600;margin-left:5px" href="project/{{transaction.to.urlTitle}}" ui-sref="project.activity({path:transaction.to.urlTitle})">
+                            <img class="card-avatar" ng-src="{{transaction.to.avatarUrl}}" src="{{transaction.to.avatarUrl}}" err-src="/images/avatar.png">
+                            {{transaction.to.title}}
+                        </a>
+                    </span>
+                </div>
+
+                <div class="spacing-5"></div>
+                            
+                <span ng-repeat="(key, value) in transaction.amountSet"><p style="font-weight:800">{{value}} <a ng-click="$event.stopPropagation();" href="market/{{key}}" ui-sref="market({id:key})">{{key}}</a></p></span>
+
+                <p><a ng-repeat="context in transaction.context.split(',')">{{context.trim()}} </a></p>
+                <p>{{transaction.content}}</p>
+
+            </div>
+
+            <div class="card-footer">
+                <a ng-click="$event.stopPropagation();renderAttentionToggle(transaction);" style="color:grey"><i class="fas fa-eye"></i>  {{transaction.data.apps.attention.general || 0}}</a>
+                <a ng-click="$event.stopPropagation();createReaction(transaction, 'plus')"><i class="fas fa-angle-up"></i> {{transaction.data.apps.reactions.plus}} like </a> 
+                <a ng-click="$event.stopPropagation();createReaction(transaction, 'minus')" ><i class="fas fa-angle-down"></i> {{transaction.data.apps.reactions.minus}} dislike </a>
+                <a ng-click="$event.stopPropagation();contentToggle(transaction);" style="padding:5px;color:grey"><i class="far fa-comment"></i> comment </a>
+                <a ng-click="$event.stopPropagation();validationToggle(transaction)" style="padding:5px;color:grey" ><i class="fa fa-check"></i> validate </a>
+            </div>
+            
+        </div>
+        <div ng-if="selectedTab =='ASSOCIATIONS'" ng-include="'transaction/templates/associations.tpl.html'"></div>
+        <div ng-if="selectedTab =='CONTENT'" ng-include="'transaction/templates/content.tpl.html'"></div>
+        <div ng-if="selectedTab =='STATS'" ng-include="'transaction/templates/stats.tpl.html'"></div>
+        <div ng-if="selectedTab =='TOKENS'" ng-include="'transaction/templates/tokens.tpl.html'"></div>
+    </div>
+</div>

@@ -1,0 +1,37 @@
+<div style="background:url('https://source.unsplash.com/1600x900/?,geometry')" class="imageContainerSmall">
+    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+        <div style="margin-top: auto;margin-bottom: auto;">
+            <div class="container">
+                <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">{{token.string}}</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+
+	<div class="spacing-10"></div>
+
+	<div style="row">
+        <ul style="padding:0px;margin-top:0px;margin-bottom:0px;" class="member-tabs">
+            <li class="active"><a href="#">Activity</a></li>
+            <li><a href="#">Trade Postions</a></li>
+            <li><a href="#">onMint Actions</a></li>
+            <li><a href="#">Information</a></li>
+            <li><a href="#">Content</a></li>
+        </ul>
+    </div>
+
+    <div class="row">
+	    <div class="card">
+			<div style="padding:16px">
+	    		<p>String: {{token.string}}</p>
+				<p>Information: In Circulation: {{token.information.inCirculation}}</p>
+	    		<p>Protocols: {{token.protocols}}</p>
+	    		<p>Logic: Transferrable: {{token.logic.transferrable}} Mint: {{token.logic.mint}}</p>
+    		</div>
+    	</div>
+    </div>
+
+</div>
+<div class="spacing-50"></div>
