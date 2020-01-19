@@ -1,4 +1,0 @@
-<p><span style="color:gray">{{notification.content}}</span></p>
-    <span ng-click="$event.stopPropagation();" ng-repeat="(key, value) in notification.info.transaction.amountSet"><p style="font-weight:800">{{value}} <a ng-click="$event.stopPropagation()"  href="market/{{key}}" ui-sref="market({id:key})">{{key}}</a></p></span>
-</div>
-<p style="display:inline;font-size:10px;color:gray;margin-left:5px;margin-top:0px" am-time-ago="notification.createdAt"></p>

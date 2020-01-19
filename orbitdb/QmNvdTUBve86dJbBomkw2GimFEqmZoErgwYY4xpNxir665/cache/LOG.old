@@ -1,5 +1,5 @@
-2020/01/18-18:37:19.221 3ac Recovering log #188
-2020/01/18-18:37:19.221 3ac Level-0 table #190: started
-2020/01/18-18:37:19.229 3ac Level-0 table #190: 359 bytes OK
-2020/01/18-18:37:19.235 3ac Delete type=0 #188
-2020/01/18-18:37:19.235 3ac Delete type=3 #186
+2020/01/18-18:38:55.639 3e04 Recovering log #191
+2020/01/18-18:38:55.640 3e04 Level-0 table #193: started
+2020/01/18-18:38:55.650 3e04 Level-0 table #193: 359 bytes OK
+2020/01/18-18:38:55.658 3e04 Delete type=0 #191
+2020/01/18-18:38:55.659 3e04 Delete type=3 #189
