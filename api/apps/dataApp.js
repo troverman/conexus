@@ -37,6 +37,17 @@ const App = {
 	//~~ REDO SAILS INIT LOAD .. 
 	//. routes in each file exxx...
 
+	//GENERATORS / INIT GENERATORS HAVE LISTER CONNECTION :)
+		//STARTING A LISTNER AS ACTIVITY (HMMMM :))
+		//RUNNING AND BUILDING CODE DYNAMICALLY ...
+		//ATTACH A MODULE :)))))))))))) --> STORED AS STRING 
+			//ATTACH AN APP WITH FUNCTION .. 
+			//LINK ACTIVITY MODEL TO MODEULE MODEL 
+
+
+			//VALIDATION THRU REPLICATIOn
+
+			//ALSO TRANSMITTING DATA TO NON SELF ENTITIES // SELF.CONNECTIONS.PEERS....
 	init: function(){
 		const ipfsOptions = {EXPERIMENTAL: {pubsub: true}};
 		const ipfs = new App.import.ipfs(ipfsOptions);

@@ -58,7 +58,7 @@
     "validator": "~3.28.0"
   },
   "scripts": {
-    "start": "node app.js",
+    "start": "NODE_OPTIONS=--max-old-space-size=4096 node app.js",
     "debug": "node debug app.js"
   },
   "main": "app.js",
