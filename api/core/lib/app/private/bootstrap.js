@@ -1,10 +1,4 @@
-/**
- * Module dependencies
- */
-
 var STRIP_COMMENTS_RX = /(\/\/.*$)|(\/\*[\s\S]*?\*\/)|(\s*=[^,\)]*(('(?:\\'|[^'\r\n])*')|("(?:\\"|[^"\r\n])*"))|(\s*=[^,\)]*))/mg;
-
-
 
 /**
  * runBootstrap()

@@ -1,0 +1,54 @@
+<div style="background:url('https://source.unsplash.com/1600x900/?settings')" class="imageContainerSmall">
+    <div style="background:rgba(0,0,0,0.75)" class="imageContainerSmallDiv">  
+        <div style="margin-top: auto;margin-bottom: auto;padding:15px;text-align:center">
+            <h1 style="font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">Welcome to CRE8!</h1>
+            <h5 style="color:white">Let's get started.</h5>
+        </div>
+    </div>
+</div>
+
+<div class="spacing-10"></div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <div style="max-width:600px;margin:0 auto;" class="member-card" ng-click="subNavToggle(currentUser)">
+                <!--
+                <div style="text-align:right;padding:15px;position:absolute;right:0">
+                    <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><i class="fas fa-chevron-down"></i></a>
+                </div>
+                -->
+                <div class="member-card-image" style="background-image: url('{{currentUser.coverUrl}}')">
+                    <a href="#"><img ng-src="{{currentUser.avatarUrl}}" err-src="/images/avatar.png"></a>
+                </div>
+                <div style="clear:both"></div>
+                <div class="member-card-info" style="height:auto;padding-left:0%">
+                    <h4 ng-click="$event.stopPropagation()"><a href="member/{{currentUser.username}}" ui-sref="member.activity({path:currentUser.username})">{{currentUser.username}}</a></h4>
+                    <p style="font-size:12px;" ng-click="$event.stopPropagation();memberQRToggle(currentUser);"><a style="color:gray"><i class="fas fa-qrcode"></i> {{currentUser.id}}</a></p>
+                    <p style="color:gray"><i style="color:#30b257" class="fa fa-circle"></i> Online<!--<br>{{currentUser.status}}--></p>
+                </div>
+            </div>
+
+            <div class="spacing-10"></div>
+
+            <div style="padding:16px;text-align:center">
+                <p style="color:gray;font-style:italic">All information shared with CRE8 comes from a place of <b>mutual consent</b>.<p>
+                <p style="font-size:11px"><a ng-click="informationToggle('Sharing Consent Agreement')" href="#"> <i class="fa fa-question-circle"></i> Learn More</a></p> 
+                <div layout="row" layout-align="center center" flex="100">
+                    <p><md-switch style="" ng-model="consentAgreement" aria-label="Consent Agreement"></md-switch></p>
+                </div>
+                <p><b>I agree.</b></p>
+            </div>
+
+            <div class="spacing-10"></div>
+
+        </div>
+
+        <div ng-if="consentAgreement" class="col-xs-12 animationIf">
+            <div ng-include="'tutorial/templates/memberInformation.tpl.html'"></div>
+            <!--<div ng-include="'tutorial/templates/memberApps.tpl.html'"></div>-->
+        </div>
+
+    </div>
+    <div style="max-width:600px;margin:5px auto;" ng-if="consentAgreement" ng-include="'tutorial/templates/controls.tpl.html'"></div>
+</div>

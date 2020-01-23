@@ -1,7 +1,3 @@
-/**
- * Module dependencies
- */
-
 var _ = require('@sailshq/lodash');
 var defaultsDeep = require('merge-defaults');// « TODO: Get rid of this
 var MockReq = require('./mock-req');// «FUTURE: consolidate that into this file
@@ -41,24 +37,18 @@ module.exports = function buildRequest (_req) {
 
   // If `_req` appears to be a stream (duck-typing), then don't try
   // and turn it into a mock stream again.
-  if (typeof _req === 'object' && _req.read) {
-    req = _req;
-  }
+  if (typeof _req === 'object' && _req.read) {req = _req;}
   else {
 
     // TODO: send a PR to mock-req with a fix for this
     if (_req.headers && typeof _req.headers === 'object') {
       // Strip undefined headers
       _.each(_req.headers, function (headerVal, headerKey) {
-        if (_.isUndefined(headerVal)){
-          delete _req.headers[headerKey];
-        }
+        if (_.isUndefined(headerVal)){delete _req.headers[headerKey];}
       });
       // Make sure all remaining headers are strings
       _req.headers = _.mapValues(_req.headers, function (headerVal /*, headerKey*/) {
-        if (typeof headerVal !== 'string') {
-          headerVal = ''+headerVal+'';
-        }
+        if (typeof headerVal !== 'string') {headerVal = ''+headerVal+'';}
         return headerVal;
       });
     }
@@ -87,9 +77,7 @@ module.exports = function buildRequest (_req) {
     if (req.method !== 'GET' && req.method !== 'HEAD' && req.method !== 'DELETE') {
 
       // Only write the body if there IS a body.
-      if (req.body) {
-        req.write(req.body);
-      }
+      if (req.body) {req.write(req.body);}
       req.end();
     }
   }
@@ -117,33 +105,20 @@ module.exports = function buildRequest (_req) {
     query: (_req && _req.query) || require('querystring').parse(parsedUrl.query) || {},
     body: (_req && _req.body) || {},
     param: function(paramName, defaultValue) {
-
       var key;
       var params = {};
-      for (key in (req.params || {}) ) {
-        params[key] = params[key] || req.params[key];
-      }
-      for (key in (req.query || {}) ) {
-        params[key] = params[key] || req.query[key];
-      }
-      for (key in (req.body || {}) ) {
-        params[key] = params[key] || req.body[key];
-      }
-
+      for (key in (req.params || {}) ) {params[key] = params[key] || req.params[key];}
+      for (key in (req.query || {}) ) {params[key] = params[key] || req.query[key];}
+      for (key in (req.body || {}) ) {params[key] = params[key] || req.body[key];}
       // Grab the value of the parameter from the appropriate place
       // and return it
-      if (typeof params[paramName] !== 'undefined') {
-        return params[paramName];
-      } else {
-        return defaultValue;
-      }
-
+      if (typeof params[paramName] !== 'undefined') {return params[paramName];} 
+      else {return defaultValue;}
     },
     wantsJSON: (_req && _req.wantsJSON === false) ? false : true,
     method: 'GET',
     originalUrl: _req.originalUrl || _req.url,
     path: _req.path || parsedUrl.pathname
   }, _req||{});
-
   return req;
 };

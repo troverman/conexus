@@ -1,7 +1,3 @@
-/**
- * Module dependencies.
- */
-
 var path = require('path');
 var _ = require('@sailshq/lodash');
 var DEFAULT_HOOKS = require('./default-hooks');
@@ -13,7 +9,6 @@ module.exports = function(sails) {
    */
 
   return new Configuration();
-
 
   function Configuration() {
 

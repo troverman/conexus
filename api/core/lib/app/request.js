@@ -1,7 +1,3 @@
-/**
- * Module dependencies.
- */
-
 var util = require('util');
 var _ = require('@sailshq/lodash');
 var Transform = require('stream').Transform;
@@ -34,7 +30,6 @@ module.exports = function request( /* address, body, cb */ ) {
   // even though these types of requests don't normally contain a body.
   // (this method just serializes them as if they were sent in the querystring)
   //
-
 
   // Normalize usage
   var address = arguments[0];

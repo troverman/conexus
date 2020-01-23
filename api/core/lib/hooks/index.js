@@ -1,23 +1,14 @@
-/**
- * Module dependencies.
- */
 
 var _ = require('@sailshq/lodash');
 var flaverr = require('flaverr');
 var async = require('async');
 var STRIP_COMMENTS_RX = /(\/\/.*$)|(\/\*[\s\S]*?\*\/)|(\s*=[^,\)]*(('(?:\\'|[^'\r\n])*')|("(?:\\"|[^"\r\n])*"))|(\s*=[^,\)]*))/mg;
 
-
-
 module.exports = function(sails) {
-
-
   /**
    * Expose hook constructor
-   *
    * @api private
    */
-
   return function Hook(definition) {
 
     // Flags to indicate whether or not this hook's `initialize` function is asynchronous (i.e. declared with `async`)
@@ -39,11 +30,8 @@ module.exports = function(sails) {
       throw flaverr({ name: 'userError', code: 'E_INVALID_HOOK_CONFIG' }, new Error('Error defining hook: `middleware` is a reserved property and cannot be used as a custom hook method.'));
     }
 
-
-
     /**
      * Load the hook asynchronously
-     *
      * @api private
      */
 
@@ -67,39 +55,26 @@ module.exports = function(sails) {
       }
 
       // Convenience config to bind routes before any of the static app routes
-      sails.on('router:before', function() {
-        routeCallbacks(self.routes.before);
-      });
-
+      sails.on('router:before', function() {routeCallbacks(self.routes.before);});
       // Convenience config to bind routes after the static app routes
-      sails.on('router:after', function() {
-        routeCallbacks(self.routes.after);
-      });
+      sails.on('router:after', function() {routeCallbacks(self.routes.after);});
 
       // Run loadModules method if moduleloader is loaded
       async.auto({
 
         modules: function(cb) {
-
-          if (sails.config.hooks.moduleloader) {
-
-            return self.loadModules(cb);
-
-          }
+          if (sails.config.hooks.moduleloader) {return self.loadModules(cb);}
           return cb();
         }
 
       }, function(err) {
         if (err) { return cb(err); }
-
-        // console.log(self.identity, self.initialize.toString());
         try {
           var seemsToExpectCallback = true;
           if (sails.config.implementationSniffingTactic === 'analogOrClassical') {
             seemsToExpectCallback = initSeemsToExpectParameters;
             // (TODO: also locate and update relevant error messages)
           }
-
           if (hasAsyncInit) {
             var promise;
             if (seemsToExpectCallback) {
@@ -108,9 +83,7 @@ module.exports = function(sails) {
               promise = self.initialize(function(unusedErr){
                 cb(new Error('Unexpected attempt to invoke callback.  Since this "initialize" function does not appear to expect a callback parameter, this stub callback was provided instead.  Please either explicitly list the callback parameter among the arguments or change this code to no longer use a callback.'));
               })
-              .then(function(){
-                cb();
-              });
+              .then(function(){cb();});
             }//ﬁ
             promise.catch(function(e) {
               cb(e);
@@ -129,71 +102,46 @@ module.exports = function(sails) {
           }
         } catch (e) { return cb(e); }
       });
-
     };
-
-
 
     /**
      * `defaults`
-     *
      * Default configuration for this hook.
-     *
      * Hooks may override this function, or use a dictionary instead.
-     *
      * @type {Function|Dictionary}
      *       @returns {Dictionary} [default configuration for this hook to be merged into sails.config]
      */
-    this.defaults = function() {
-      return {};
-    };
+    this.defaults = function() {return {};};
 
     /**
      * `configure`
-     *
      * If this hook provides this function, the provided implementation should
      * normalize and validate configuration related to this hook.  That config is
      * already in `sails.config` at the time this function is called.  Any modifications
      * should be made in place on `sails.config`
-     *
      * Hooks may override this function.
-     *
      * @type {Function}
      */
-    this.configure = function() {
-
-    };
+    this.configure = function() {};
 
     /**
      * `loadModules`
-     *
      * Load any modules as a dictionary and pass the loaded modules to the callback when finished.
-     *
      * Hooks may override this function (This runs before `initialize()`!)
-     *
      * @type {Function}
      * @async
      */
-    this.loadModules = function(cb) {
-      return cb();
-    };
+    this.loadModules = function(cb) {return cb();};
 
 
     /**
      * `initialize`
-     *
      * If provided, this implementation should prepare the hook, then trigger the callback.
-     *
      * Hooks may override this function.
-     *
      * @type {Function}
      * @async
      */
-    this.initialize = function(cb) {
-      return cb();
-    };
-
-
+    this.initialize = function(cb) {return cb();};
 
     // Ensure that the hook definition has valid properties
     _normalize(this);
@@ -216,38 +164,26 @@ module.exports = function(sails) {
       return parametersAsString.replace(/\s*/g,'').length !== 0;
     })(this.initialize);//†
 
-
     // Bind context of new methods from definition
     _.bindAll(this);
 
-
-
     /**
      * Ensure that a hook definition has the required properties.
-     *
      * @returns {Dictionary} [coerced hook definition]
      * @api private
      */
-
     function _normalize(def) {
-
       def = def || {};
-
       // Default hook config
       def.config = def.config || {};
-
       // list of environments to run in, if empty defaults to all
       def.config.envs = def.config.envs || [];
-
       def.middleware = def.middleware || {};
-
       // Default hook routes
       def.routes = def.routes || {};
       def.routes.before = def.routes.before || {};
       def.routes.after = def.routes.after || {};
-
       return def;
     }
   };
-
 };

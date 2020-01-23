@@ -1,15 +1,8 @@
-/**
- * Module dependencies
- */
-
 var util = require('util');
 var _ = require('@sailshq/lodash');
 var async = require('async');
 var defaultsDeep = require('merge-defaults');// « TODO: Get rid of this
 var __hooks = require('../../hooks');
-
-
-
 
 /**
  * @param  {SailsApp} sails
@@ -22,10 +15,6 @@ module.exports = function(sails) {
   // Keep an array of all the hook timeouts.
   // This way if a hook fails to load, we can clear all the timeouts at once.
   var hookTimeouts = [];
-  // NOTE: There's no particular reason this (^^) is outside of the function being returned below.
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  // FUTURE: pull it in below to avoid leading to any incorrect assumptions about race conditions, etc.)
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   /**
    * Resolve the hook definitions and then finish loading them
@@ -34,27 +23,6 @@ module.exports = function(sails) {
    */
   return function initializeHooks(hooks, cb) {
 
-
-    // ==============================================================================
-    // < inline function declarations >
-    //    ██╗    ██╗███╗   ██╗██╗     ██╗███╗   ██╗███████╗    ███████╗███╗   ██╗    ██████╗ ███████╗███████╗███████╗    ██╗
-    //   ██╔╝    ██║████╗  ██║██║     ██║████╗  ██║██╔════╝    ██╔════╝████╗  ██║    ██╔══██╗██╔════╝██╔════╝██╔════╝    ╚██╗
-    //  ██╔╝     ██║██╔██╗ ██║██║     ██║██╔██╗ ██║█████╗      █████╗  ██╔██╗ ██║    ██║  ██║█████╗  █████╗  ███████╗     ╚██╗
-    //  ╚██╗     ██║██║╚██╗██║██║     ██║██║╚██╗██║██╔══╝      ██╔══╝  ██║╚██╗██║    ██║  ██║██╔══╝  ██╔══╝  ╚════██║     ██╔╝
-    //   ╚██╗    ██║██║ ╚████║███████╗██║██║ ╚████║███████╗    ██║     ██║ ╚████║    ██████╔╝███████╗██║     ███████║    ██╔╝
-    //    ╚═╝    ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝╚═╝  ╚═══╝╚══════╝    ╚═╝     ╚═╝  ╚═══╝    ╚═════╝ ╚══════╝╚═╝     ╚══════╝    ╚═╝
-    //
-
-    // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    // FUTURE: extrapolate the following three inline function definitions
-    // into separate files.
-    // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-    /**
-     * FUTURE: extrapolate
-     * @param  {[type]} id [description]
-     * @return {[type]}    [description]
-     */
     function prepareHook(id) {
 
       var rawHookFn = hooks[id];
@@ -72,28 +40,8 @@ module.exports = function(sails) {
 
       }//>-
 
-
-      // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-      // COMPATIBILITY NOTE:
-      // There used to be a check here, to the effect of this:
-      // ```
-      // // Check if this hook has a dot in the name.
-      // // If so, something is wrong.
-      // var doesHookHaveDotInName = !!id.match(/\./);
-      // if (doesHookHaveDotInName) {
-      // var partBeforeDot = id.split('.')[0];
-      // hooks[partBeforeDot] = false;
-      // ```
-      //
-      // But it was removed in Sails v1, since it was no longer relevant.
-      // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-
       // Allow disabling of hooks by setting them to `false`.
-      if (rawHookFn === false) {
-        delete hooks[id];
-        return;
-      }
+      if (rawHookFn === false) {delete hooks[id];return;}
 
       // Check for invalid hook config
       if (hooks.userconfig && !hooks.moduleloader) {
@@ -132,40 +80,20 @@ module.exports = function(sails) {
     /**
      * Apply a hook's "defaults" property
      *
-     * FUTURE: extrapolate
-     *
-     * @param  {[type]} hook [description]
-     * @return {[type]}      [description]
      */
     function applyDefaults(hook) {
-
       // Get the hook defaults
-      var defaults = (_.isFunction(hook.defaults) ?
-                            hook.defaults(sails.config) :
-                            hook.defaults) || {};
-
+      var defaults = (_.isFunction(hook.defaults) ? hook.defaults(sails.config) : hook.defaults) || {};
       // Replace the special __configKey__ key with the actual config key
-      if (hook.defaults.__configKey__ && hook.configKey) {
-        hook.defaults[hook.configKey] = hook.defaults.__configKey__;
-        delete hook.defaults.__configKey__;
-      }
-
+      if (hook.defaults.__configKey__ && hook.configKey) {hook.defaults[hook.configKey] = hook.defaults.__configKey__; delete hook.defaults.__configKey__;}
       defaultsDeep(sails.config, defaults);
     }//ƒ
 
     /**
      * Load a hook (bind its routes, load any modules and initialize it)
      *
-     * FUTURE: extrapolate
-     *
-     * @param  {[type]}   id [description]
-     * @param  {Function} cb [description]
-     * @return {[type]}      [description]
      */
     function loadHook(id, cb) {
-      // TODO: refactor this^^^
-      //  (no need for an inline function declaration)
-
       // Validate `hookTimeout` setting, if present.
       if (!_.isUndefined(sails.config.hookTimeout)) {
         if (!_.isNumber(sails.config.hookTimeout) || sails.config.hookTimeout < 1 || Math.floor(sails.config.hookTimeout) !== sails.config.hookTimeout) {
@@ -179,15 +107,7 @@ module.exports = function(sails) {
 
       var hookTimeout;
       if (id !== 'userhooks') {
-        hookTimeout = setTimeout(function tooLong() {
-          // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-          // FUTURE: sniff hook id here to improve error msg, e.g.:
-          // ```
-          // ((id === 'grunt') ? 'It looks like Grunt is still compiling your assets.' : '...')
-          // ```
-          // ^^But note that this would require a bit more work: currently, the id here isn't
-          // necessarily the hook that timed out.  (It could be a dependent hook.)
-          // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        hookTimeout = setTimeout(function tooLong() {    
           var err = new Error(
             'Sails is taking too long to load.\n'+
             '\n'+
@@ -217,18 +137,13 @@ module.exports = function(sails) {
           return cb(new Error('Consistency violation: Hmm... it looks like something is wrong with Node\'s `process` global.  Check it out:\n'+util.inspect(process)));
         }
 
-        if (id !== 'userhooks') {
-          clearTimeout(hookTimeout);
-        }
+        if (id !== 'userhooks') {clearTimeout(hookTimeout);}
         if (err) {
           // Clear all hook timeouts so that the process doesn't hang because
           // something is waiting for this failed hook to load.
           _.each(hookTimeouts, function(hookTimeout) {clearTimeout(hookTimeout);});
-          if (id !== 'userhooks') {
-            sails.log.error('A hook (`' + id + '`) failed to load!');
-          }
+          if (id !== 'userhooks') {sails.log.error('A hook (`' + id + '`) failed to load!');}
           sails.emit('hook:' + id + ':error');
-
           // Defer a tick to allow other stuff to happen
           process.nextTick(function(){ cb(err); });
           return;
@@ -240,28 +155,14 @@ module.exports = function(sails) {
         // Defer a tick to allow other stuff to happen
         process.nextTick(function(){ cb(); });
       });
-    }//ƒ
+    }
 
-    //    ██╗    ██╗    ██╗███╗   ██╗██╗     ██╗███╗   ██╗███████╗    ███████╗███╗   ██╗    ██████╗ ███████╗███████╗███████╗    ██╗
-    //   ██╔╝   ██╔╝    ██║████╗  ██║██║     ██║████╗  ██║██╔════╝    ██╔════╝████╗  ██║    ██╔══██╗██╔════╝██╔════╝██╔════╝    ╚██╗
-    //  ██╔╝   ██╔╝     ██║██╔██╗ ██║██║     ██║██╔██╗ ██║█████╗      █████╗  ██╔██╗ ██║    ██║  ██║█████╗  █████╗  ███████╗     ╚██╗
-    //  ╚██╗  ██╔╝      ██║██║╚██╗██║██║     ██║██║╚██╗██║██╔══╝      ██╔══╝  ██║╚██╗██║    ██║  ██║██╔══╝  ██╔══╝  ╚════██║     ██╔╝
-    //   ╚██╗██╔╝       ██║██║ ╚████║███████╗██║██║ ╚████║███████╗    ██║     ██║ ╚████║    ██████╔╝███████╗██║     ███████║    ██╔╝
-    //    ╚═╝╚═╝        ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝╚═╝  ╚═══╝╚══════╝    ╚═╝     ╚═╝  ╚═══╝    ╚═════╝ ╚══════╝╚═╝     ╚══════╝    ╚═╝
-    //
-    // </ inline function declarations (see note above) >
-    // ==============================================================================
-
-
-    // Now do a few things, one after another.
     async.series(
       {
 
         // First load the moduleloader (if any)
         moduleloader: function(cb) {
-          if (!hooks.moduleloader) {
-            return cb();
-          }
+          if (!hooks.moduleloader) {return cb();}
           prepareHook('moduleloader');
           applyDefaults(hooks['moduleloader']);
           hooks['moduleloader'].configure();
@@ -270,9 +171,7 @@ module.exports = function(sails) {
 
         // Next load the user config (if any)
         userconfig: function(cb) {
-          if (!hooks.userconfig) {
-            return cb();
-          }
+          if (!hooks.userconfig) {return cb();}
           prepareHook('userconfig');
           applyDefaults(hooks['userconfig']);
           hooks['userconfig'].configure();
@@ -282,9 +181,7 @@ module.exports = function(sails) {
         // Next get the user hooks (if any), which will be
         // added to the list of hooks to load
         userhooks: function(cb) {
-          if (!hooks.userhooks) {
-            return cb();
-          }
+          if (!hooks.userhooks) {return cb();}
           prepareHook('userhooks');
           applyDefaults(hooks['userhooks']);
           hooks['userhooks'].configure();
@@ -292,15 +189,6 @@ module.exports = function(sails) {
         },
 
         validate: function(cb) {
-          if (hooks.controllers) {
-            sails.log.debug('=================================================================================');
-            sails.log.debug('Ignoring `controllers` hook:');
-            sails.log.debug('As of Sails v1, `controllers` can no longer be disabled/enabled as hooks.');
-            sails.log.debug('Instead, Sails core now understands controller actions as first-class citizens.');
-            sails.log.debug('See the Sails v1.0 upgrade guide: http://sailsjs.com/upgrading');
-            sails.log.debug('=================================================================================');
-            delete hooks.controllers;
-          }
           return cb();
         },
 
@@ -327,11 +215,8 @@ module.exports = function(sails) {
         configure: function(cb) {
           async.each(_.without(_.keys(hooks), 'userconfig', 'moduleloader', 'userhooks'), function (id, cb) {
             var hook = hooks[id];
-            try {
-              hook.configure();
-            } catch (err) {
-              return process.nextTick(function(){ cb(err); });
-            }
+            try {hook.configure();} 
+            catch (err) {return process.nextTick(function(){ cb(err); });}
             // Defer to next tick to allow other stuff to happen
             process.nextTick(cb);
           }, cb);
@@ -350,6 +235,6 @@ module.exports = function(sails) {
         if (err) { return cb(err); }
         return cb();
       }
-    );//</async.series>
+    );
   };
 };

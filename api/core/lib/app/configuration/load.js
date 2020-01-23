@@ -1,7 +1,3 @@
-/**
- * Module dependencies.
- */
-
 var path = require('path');
 var fs = require('fs');
 var _ = require('@sailshq/lodash');
@@ -14,10 +10,6 @@ module.exports = function(sails) {
 
   /**
    * Expose Configuration loader
-   *
-   * Load command-line overrides
-   *
-   * FUTURE: consider merging this into the `app` directory
    *
    * For reference, config priority is:
    * --> implicit defaults
@@ -80,31 +72,19 @@ module.exports = function(sails) {
             // `--alter` command-line shortcut
             // `--drop` command-line shortcut
             models: (function(){
-              if (overrides.safe) {
-                return { migrate: 'safe' };
-              }
-              else if (overrides.drop) {
-                return { migrate: 'drop' };
-              }
-              else if (overrides.alter) {
-                return { migrate: 'alter' };
-              }
-              else {
-                return undefined;
-              }
+              if (overrides.safe) {return { migrate: 'safe' };}
+              else if (overrides.drop) {return { migrate: 'drop' };}
+              else if (overrides.alter) {return { migrate: 'alter' };}
+              else {return undefined;}
             })(),
 
             // `--redis` command-line shortcut
             session: (function(){
-              if (overrides.redis) {
-                return { adapter: '@sailshq/connect-redis' };
-              }
+              if (overrides.redis) {return { adapter: '@sailshq/connect-redis' };}
               return undefined;
             })(),
             sockets: (function(){
-              if (overrides.redis) {
-                return { adapter: '@sailshq/socket.io-redis' };
-              }
+              if (overrides.redis) {return { adapter: '@sailshq/socket.io-redis' };}
               return undefined;
             })(),
 
@@ -124,8 +104,7 @@ module.exports = function(sails) {
               } else {
                 return undefined;
               }
-            })()//†
-
+            })()
           });
 
         } catch (e) { return cb(e); }
@@ -133,8 +112,6 @@ module.exports = function(sails) {
         // Pass on overrides object
         return cb(undefined, overrides);
       },
-
-
 
       /**
        * Immediately instantiate the default logger in case a log-worthy event occurs

@@ -1,9 +1,5 @@
-/**
- * Draw an ASCII image of a ship
- */
 module.exports = function _drawShip(message, log) {
   log = log || console.log;
-
   // There are 20 characters before the ship's mast on the 2nd line,
   // starting from the 'v' (inclusive)
   var mesageLen = message.length;
@@ -11,12 +7,11 @@ module.exports = function _drawShip(message, log) {
   for (var i = 0; i < numSpaces; i++) {
     message += ' ';
   }
-
   return function() {
     log('');
     log('               .-..-.');
     log('');
-    log('   ' + 'Sails   ' + '           ' + '<' + '|' + '    .-..-.');
+    log('   ' + 'CRE8   ' + '           ' + '<' + '|' + '    .-..-.');
     log('   ' + message + ' |\\');
     log('                      /|.\\');
     log('                     / || \\');

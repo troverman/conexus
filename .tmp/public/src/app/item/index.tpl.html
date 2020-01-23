@@ -1,0 +1,85 @@
+<style>.ngCytoscape{height: 200px;width:100%;}</style>
+<div class="container" style="padding:0px">
+    <div class="card" ng-click="cardDetailToggle(item)">
+        <div class="imageContainerSmall" style="background:url('https://source.unsplash.com/1600x900/?{{item.tags}}');">
+            <div style="background:rgba(0,0,0,0.75);" class="imageContainerSmallDiv">
+                <div style="text-align:right;padding:15px;position:absolute;right:0">
+                    <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><i class="fas fa-chevron-down"></i></a>
+                </div>
+                <div style="margin-top: auto;margin-bottom: auto;text-align:center">
+                    <div style="padding:15px">
+                        <h1>{{item.title}}</h1>
+                        <h5 style="color:white">{{item.id}}</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-show="markers.length>0">
+            <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options">
+                <ui-gmap-marker ng-repeat="marker in markers" coords="marker.coords" options="marker.options" idkey="marker.id">
+                    <ui-gmap-window options="windowOptions" closeClick="closeClick()">
+                        <div>
+                            <div style="font-size: 15px;">
+                                <a ng-click="$event.stopPropagation();" href="item/{{market.id}}">{{marker.content}}</a>
+                            </div>
+                        </div>
+                    </ui-gmap-window>
+                </ui-gmap-marker>
+            </ui-gmap-google-map>
+        </div>
+        <div style="background-color:white">
+            <div class="member-tab-container container" style="padding-left:0px">
+                <div style="text-align:center">
+                    <ul style="padding:0px;" class="member-tabs">
+                        <li><a ng-click="$event.stopPropagation();selectTab('INFORMATION')">Information</a></li>
+                        <li><a ng-click="$event.stopPropagation();selectTab('ACTIVITY')">Activity</a></li>
+                        <li><a ng-click="$event.stopPropagation();selectTab('ACTIONS')">Actions</a></li>
+                        <li><a ng-click="$event.stopPropagation();selectTab('ASSOCIATIONS')">Associations</a></li>
+                        <li><a ng-click="$event.stopPropagation();selectTab('CONTENT')">Content</a></li>
+                        <li><a ng-click="$event.stopPropagation();selectTab('COMPONENTS')">Components</a></li>
+                        <li><a ng-click="$event.stopPropagation();selectTab('HISTORY')" >History</a></li>
+                        <li><a ng-click="$event.stopPropagation();selectTab('MARKET')">Liquidiy</a></li>
+                        <li><a ng-click="$event.stopPropagation();selectTab('STATS')">Stats</a></li>
+                        <li><a ng-click="$event.stopPropagation();selectTab('TOKENS')">Tokens</a></li>
+                        <li><a ng-click="$event.stopPropagation();orderToggle(null, item);" class="btn btn-default">Purchase</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <hr style="margin:0px;">
+        <div style="padding:16px;" ng-if="selectedTab =='INFORMATION'">
+            <div>
+                <img class="card-avatar" ng-src="{{item.user.avatarUrl}}" src="{{item.user.avatarUrl}}" err-src="/images/avatar.png">
+                <a ng-click="$event.stopPropagation();" style="display:inline" href="member/{{item.user.username}}" ui-sref="member.activity({path:item.user.username})"><span style="font-weight:800">{{item.user.username}}</span></a>
+            </div>
+            <div class="spacing-5"></div>
+            <p><a ng-repeat="tag in item.tags.split(',')" ng-click="$event.stopPropagation();filterContent(tag)">{{tag.trim()}} </a></p>
+            <div class="spacing-5"></div>
+            <div ng-click="$event.stopPropagation();"><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></div>
+            <div class="spacing-5"></div>       
+        </div>
+        <div class="card-footer">
+            <a ng-click="$event.stopPropagation();renderAttentionToggle(item)" style="color:grey"><i class="fas fa-eye"></i> {{item.data.apps.attention.general || 0}}</a>
+            <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fas fa-angle-up"></i> {{item.data.apps.reactions.plus || 0}} like </a> 
+            <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fas fa-angle-down"></i> {{item.data.apps.reactions.minus || 0}} dislike </a>
+            <a ng-click="$event.stopPropagation();reactionToggle(content)" style="padding:5px;color:grey"><i class="fas fa-plus"></i> reaction </a>
+            <a ng-click="$event.stopPropagation();contentToggle(item)"><i class="far fa-comment"></i> comment </a>
+            <a ng-click="$event.stopPropagation();validationToggle(item)" style="padding:5px;color:grey" ><i class="fa fa-check"></i> validate </a>
+            <a ng-click="$event.stopPropagation();actionToggle(item)" style="padding:5px;color:grey"><i class="fas fa-atom"></i> action </a>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+	<div class="row">
+        <div ng-if="selectedTab =='ACTIONS'" ng-include="'item/templates/actions.tpl.html'"></div>
+        <div ng-if="selectedTab =='ASSOCIATIONS'" ng-include="'item/templates/associations.tpl.html'"></div>
+        <div ng-if="selectedTab =='CONTENT'" ng-include="'item/templates/content.tpl.html'"></div>
+        <div ng-if="selectedTab =='HISTORY'" ng-include="'item/templates/history.tpl.html'"></div>
+        <div ng-if="selectedTab =='COMPONENTS'" ng-include="'item/templates/components.tpl.html'"></div>
+        <div ng-if="selectedTab =='MARKET'" ng-include="'item/templates/market.tpl.html'"></div>
+        <div ng-if="selectedTab =='STATS'" ng-include="'item/templates/stats.tpl.html'"></div>
+        <div ng-if="selectedTab =='TOKENS'" ng-include="'item/templates/tokens.tpl.html'"></div>
+    </div>
+</div>
+<div class="spacing-25"></div>

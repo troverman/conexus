@@ -1,0 +1,20 @@
+<p>
+    <a ng-click="$event.stopPropagation()" style="display:inline;font-weight:600;margin-left:5px" href="member/{{notification.data.apps.user.username}}" ui-sref="member.activity({path:notification.data.apps.user.username})">
+        <img class="card-avatar" ng-src="{{notification.data.apps.user.avatarUrl}}" err-src="/images/avatar.png">
+        {{notification.data.apps.user.username}}
+    </a>
+</p>
+<p><span style="color:gray">{{notification.content}}</span></p>
+<!--<div ng-repeat="(object, key) in notification.data.apps">-->
+<div ng-if="notification.data.apps.content">
+	<p><a ng-click="$event.stopPropagation();" href="content/{{notification.data.apps.content.id}}" ui-sref="content({id:notification.data.apps.content.id})">{{notification.data.apps.content.title}}</a></p>
+	<p><a ng-click="$event.stopPropagation();" href="content/{{notification.data.apps.content.id}}" ui-sref="content({id:notification.data.apps.content.id})">{{notification.data.apps.content.id}}</a></p>
+</div>
+<div ng-if="notification.data.apps.task">
+	<p><a ng-click="$event.stopPropagation();" href="task/{{notification.data.apps.task.id}}" ui-sref="task({id:notification.data.apps.task.id})">{{notification.data.apps.task.title}}</a></p>
+	<p><a ng-click="$event.stopPropagation();" href="task/{{notification.data.apps.task.id}}" ui-sref="task({id:notification.data.apps.task.id})">{{notification.data.apps.task.id}}</a></p>
+</div>
+<div ng-if="notification.data.apps.transaction">
+	<p><a ng-click="$event.stopPropagation();" href="transaction/{{notification.data.apps.transaction.id}}" ui-sref="transaction({id:notification.data.apps.transaction.id})">{{notification.data.apps.transaction.id}}</a></p>
+</div>
+<p style="display:inline;font-size:10px;color:gray;margin-left:5px;margin-top:0px" am-time-ago="notification.createdAt"></p>

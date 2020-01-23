@@ -2,6 +2,7 @@
 module.exports = {
 	
 	bootstrap: function(cb) {
+		console.log(initApp.initApp)
 		initApp.init();
 		cb();
 	},
@@ -10,7 +11,7 @@ module.exports = {
 	//TODO: APP SPECIFIC 
 	datastores: {
 		'default': {
-		adapter: 'sails-mongo',
+			adapter: 'sails-mongo',
 			url: 'mongodb://heroku_vt7lbmkd:757kfop5h6loqicvfph68q41le@ds219648-a0.mlab.com:19648,ds219648-a1.mlab.com:19648/heroku_vt7lbmkd?replicaSet=rs-ds219648'
 		}
 	},
@@ -203,18 +204,12 @@ module.exports = {
 	  'get /auth/:provider/callback': 'AuthController.callback',
 	  'get /auth/:provider/:action': 'AuthController.callback',
 
-
-
 	  //NEW WILL BE
 	  //ROUTES IN APP // 
 	  //get /api/ 
 
 	  //REDUCE :~~)
 	  //CALL QUERY PARSE APP TO PASS TO APP d(0.0)b
-
-
-
-
 
 	  /* Action routes */
 	  'get /api/action': 'ActionController.get',

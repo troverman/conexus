@@ -1,0 +1,113 @@
+<div class="card">
+	<div style="padding:16px;">
+		<ul style="padding:0px;" class="member-tabs">
+		    <li ng-click="$event.stopPropagation();selectTabProtocol('PROTOCOLS-UI')"><a>UI Extensions</a></li>
+		    <li ng-click="$event.stopPropagation();selectTabProtocol('PROTOCOLS-PROTOCOLS')"><a>Protocols</a></li>
+		</ul>
+
+        <div ng-if="selectedTabProtocol == 'PROTOCOLS-UI'">
+
+            <h4>Building an experience</h4>
+            <h4>Templates & Components</h4>
+            <h4>JSX</h4>
+            <h4>Nav</h4>
+            <h4>Footer</h4>
+
+<div hljs hljs-language="javascript">
+//IMPORTS | PROTOCOLS
+export default class COMPONENT extends React.Component {
+    function = () => {
+        //DO SOMETHING
+    };
+    render() {
+        return (
+            //HTML HERE
+        );
+    }
+}
+</div>
+
+        </div>
+        <div ng-if="selectedTabProtocol =='PROTOCOLS-PROTOCOLS'">
+
+            <h5>App Imports</h5>
+
+            var importedProtocol = require('APP:ID');
+
+            {{protocols}}
+
+            <div hljs hljs-language="javascript" hljs-source="app.protocols"></div>
+
+        </div>
+
+<div hljs hljs-language="javascript">
+
+Immutable JSON Connection
+
+{
+    //CORE DATA
+    string:"New Protocol",
+
+    //DEFINE DATA MODEL
+    dataModels: [
+        {
+            title: 'Protocol',
+            attributes:{
+                title: {type:'string'},
+                permissions: {type:'json'},
+                logic: {type:'json'},
+            }
+        }
+    ],
+
+    //DEFINE ASSOCIATIONS / IMPORTS
+    associations:[
+        {id:1, title:'STRUCTURE', type:'APP'},
+        {id:2, title:'LANGUAGE', type:'APP'},
+        {id:3, title:'CONGRUENCE', type:'APP'},
+        {id:4, title:'MANIFOLD', type:'APP'},
+    ],
+
+    //STRUCTURE FUNCTIONS
+    get: function(req, res) {},
+    create: function (req, res) {
+        var newProtocol = req.body;
+        if(logic){
+            Protocol.create(newProtocol).then((newProtocol)=>{});
+        }
+    },
+    self:function(req, res) {},
+
+    //ASSOCIATED DATA EXPORT
+    export:function(req, res) {},
+
+    //ASSOCIATED APP(S) OVERRIDE
+    data:{app:{reaction:{plus:function(req,res){}}}},
+
+    //CUSTOM FUNCTIONS
+    custom: function (req, res) {console.log('can code plz?')},
+    onCall:function(){},
+    onMyAction:function(){},
+
+    @decorators
+    @isProjectMember
+    identityFunction:function(){}
+
+    //FRONTEND; JSX;
+    views:{
+        //APP DEFINED ROUTES. 
+        //-- COMPILES TO APP INBROWER & NATIVLY IN APP
+        //CORE CONTAINS THE BUILDER
+        //EXAMPLE - Explose templates from import
+        templates:{
+            nav:{},
+            sidebar:{},
+            feed:{},
+        }
+    }
+}
+
+</div>
+
+	</div>
+</div>

@@ -1,0 +1,25 @@
+<div class="spacing-5"></div>
+<div class="row">
+	<div class="col-lg-4 col-sm-6" ng-repeat="item in projects">
+		<div class="member-card" ng-click="cardDetailToggle(item.project)">
+			<div style="text-align:right;padding:15px;position:absolute;right:0;margin-right:10px">
+		        <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)">
+		            <i class="fas fa-chevron-down"></i>
+		        </a>
+		    </div> 
+			<div class="member-card-image" style="background-color:black">
+		        <a ng-click="$event.stopPropagation();" href="project/{{item.project.title}}" ui-sref="project.activity({path:item.project.urlTitle})"><img ng-src="{{item.project.avatarUrl}}" err-src="/images/avatar.png"></a>
+		    </div>
+		    <div class="member-card-info">
+		        <h4><a ng-click="$event.stopPropagation();" href="project/{{item.project.urlTitle}}" ui-sref="project.activity({path:item.project.urlTitle})">{{item.project.title}}</a></h4>
+		       	<p style="color:gray"><a ng-click="$event.stopPropagation();" href="connection/{{item.connection.id}}" ui-sref="connection({id:item.connection.id})">{{item.connection.title}}</p>
+		        <p style="color:gray">{{item.project.title}}: {{item.context}}</p>
+
+		    </div>
+		    <div class="card-footer">
+                <a ng-click="$event.stopPropagation();" href="association/{{item.id}}" ui-sref="association({id:item.id})" style="padding:0px" class="pull-right"><i class="fas fa-link grey"></i></a>
+                <div style="clear:both"></div>
+		    </div>
+		</div>
+	</div>
+</div>

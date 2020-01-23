@@ -1,9 +1,4 @@
-/**
- * Module dependencies
- */
-
 var _ = require('@sailshq/lodash');
-
 
 /**
  * Detect HTTP verb in an expression like:
@@ -18,11 +13,8 @@ module.exports = function (haystack) {
   verbSpecified = verbSpecified.toLowerCase();
 
   // If a verb was specified, eliminate the verb from the original string
-  if (verbSpecified) {
-    haystack = haystack.replace(verbExpr,'').trim();
-  } else {
-    haystack = haystack.trim();
-  }
+  if (verbSpecified) {haystack = haystack.replace(verbExpr,'').trim();}
+  else {haystack = haystack.trim();}
 
   return {
     verb: verbSpecified,

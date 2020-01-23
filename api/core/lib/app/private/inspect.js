@@ -1,12 +1,5 @@
-/**
- * Module dependencies
- */
-
 var util = require('util');
 var _ = require('@sailshq/lodash');
-
-
-
 /**
  * Sails.prototype.inspect()
  *
@@ -15,10 +8,8 @@ var _ = require('@sailshq/lodash');
  *
  * @return {String}
  */
-
 module.exports = function inspect () {
   var sails = this;
-
   return util.format('\n'+
   '  |>   %s', this.toString()) + '\n' +
   '\\___/  For help, see: http://sailsjs.com/documentation/concepts/'+
@@ -28,15 +19,6 @@ module.exports = function inspect () {
   util.format('%d Models:\n', _(sails.models).toArray().value().length) +
   _(sails.models).toArray().filter(function (it) {return !it.junctionTable;}).pluck('globalId').value() +
   '\n\n' +
-  // util.format('%d Actions:\n', Object.keys(sails.getActions()).length)+
-  // _(sails.getActions()).keys().map(function (it) {return _.camelCase(it.replace(/^.*(\/[^\/]+)$/, '$1'));}).value() +
-  // '\n\n' +
-  // util.format('%d Controllers:\n', _(sails.controllers).toArray().value().length)+
-  // _(sails.controllers).toArray().pluck('globalId').map(function (it) {return it+'Controller';}).value() +
-  // '\n\n' +
-  // 'Routes:\n'+
-  // _(sails.routes).toArray().filter(function (it) {return !it.junctionTable;}).pluck('globalId').map(function (it) {return it+'Controller';}).value() +
-  // '\n\n' +
   util.format('%d Hooks:\n', _(sails.hooks).toArray().value().length)+
   _(sails.hooks).toArray().pluck('identity').value() +
   '\n' +

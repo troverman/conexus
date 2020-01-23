@@ -1,0 +1,22 @@
+<div class="row">
+
+	<div class="card">
+        <button class="btn btn-default log-btn" ng-click="contentToggle()">+ Motion to Edit</button>
+    </div>
+
+	<div class="card">
+		<div style="padding:16px;">
+
+            <h1>Settings</h1>
+
+            <h3>{{project.title}}</h3>
+            <p><span style="display:inline" ng-bind-html="renderContent(project.description)"></span></p>
+			<p>Protocols</p>
+
+			<p>Manifolds</p>
+            <p>Token Manifolds: {{project.title}}+</p>
+
+        </div>
+    </div>
+    
+</div>

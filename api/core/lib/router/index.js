@@ -560,13 +560,6 @@ function bodyParser (req, res, next) {
 
 
 
-/**
- * [parseCookies description]
- * @param  {[type]}   req  [description]
- * @param  {[type]}   res  [description]
- * @param  {Function} next [description]
- * @return {[type]}        [description]
- */
 function parseCookies (req, res, next){
 
   // req._sails.log.verbose('Parsing cookie:',req.headers.cookie);

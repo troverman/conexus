@@ -1,0 +1,29 @@
+<div class="card" ng-click="cardDetailToggle(item)">
+    <div style="background:url('https://source.unsplash.com/1600x900/?{{item.info.title}}');min-height:auto" class="imageContainerSmall">
+        <div style="background:rgba(0,0,0,0.75);height:auto" class="imageContainerSmallDiv">  
+            <div style="text-align:right;padding:15px;position:absolute;right:0">
+                <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(item)"><i class="fas fa-chevron-down"></i></a>
+            </div> 
+            <div style="margin-top: auto;margin-bottom: auto;">
+                <div style="padding:15px;">
+                    <h1 style="text-align:left;font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">
+                        <a ng-click="$event.stopPropagation();" style="color:white" href="connection/{{item.id}}" ui-sref="connection({id:item.id})">{{item.title}}</a>
+                    </h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="padding:16px;">
+        <div ng-bind-html="renderContent(item.description)"></div>
+        <span style="color:gray" am-time-ago="item.createdAt"></span>
+    </div>
+    <div class="card-footer">
+        <a ng-click="$event.stopPropagation();renderAttentionToggle(item)" style="color:grey"><i class="fas fa-eye"></i> {{item.data.apps.attention.general || 0}}</a>
+        <a ng-click="$event.stopPropagation();createReaction(item, 'plus')"><i class="fas fa-angle-up"></i> {{item.data.apps.reactions.plus || 0}} like </a> 
+        <a ng-click="$event.stopPropagation();createReaction(item, 'minus')" ><i class="fas fa-angle-down"></i> {{item.data.apps.reactions.minus || 0 }} dislike </a>
+        <a ng-click="$event.stopPropagation();contentToggle(item)"><i class="far fa-comment"></i> comment </a>
+        <a ng-click="$event.stopPropagation();validationToggle(item, model)"><i class="fa fa-check"></i> validate </a>
+        <a ng-click="$event.stopPropagation()" style="padding:0px" class="pull-right" href="connection/{{item.id}}" ui-sref="connection({id:item.id})"><i class="fas fa-link grey"></i></a>
+        <a ng-if="item.associationId" ng-click="$event.stopPropagation();" style="padding:0px;padding-right:5px" class="pull-right" href="association/{{item.associationId}}" ui-sref="association({id:item.associationId})"><i class="fas fa-bezier-curve grey"></i></a>
+    </div>
+</div>

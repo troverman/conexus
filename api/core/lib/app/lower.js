@@ -1,7 +1,3 @@
-/**
- * Module dependencies.
- */
-
 var _ = require('@sailshq/lodash');
 var async = require('async');
 

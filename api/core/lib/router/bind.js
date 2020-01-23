@@ -1,7 +1,3 @@
-/**
- * Module dependencies.
- */
-
 var util = require('util');
 var _ = require('@sailshq/lodash');
 var flaverr = require('flaverr');
@@ -31,7 +27,6 @@ module.exports = bind;
 
 function bind( /* path, target, verb, options */ ) {
   var sails = this.sails;
-
   var args = sanitize.apply(this, Array.prototype.slice.call(arguments));
   var path = args.path;
   var target = args.target;
@@ -45,25 +40,15 @@ function bind( /* path, target, verb, options */ ) {
   }
 
   // Bind a list of multiple functions in order
-  if (_.isArray(target)) {
-    bindArray.apply(this, [path, target, verb, options]);
-  }
+  if (_.isArray(target)) {bindArray.apply(this, [path, target, verb, options]);}
 
   // Handle string redirects
   // (to either public-facing URLs or internal routes)
-  else if (_.isString(target) && target.match(/^(https?:|\/)/)) {
-    bindRedirect.apply(this, [path, target, verb, options]);
-  }
-
+  else if (_.isString(target) && target.match(/^(https?:|\/)/)) {bindRedirect.apply(this, [path, target, verb, options]);}
   // Otherwise if the target is a string, it must be an action.
-  else if (_.isString(target) || (_.isPlainObject(target) && (target.controller || target.action))) {
-    bindAction.apply(this, [path, target, verb, options]);
-  }
-
+  else if (_.isString(target) || (_.isPlainObject(target) && (target.controller || target.action))) {bindAction.apply(this, [path, target, verb, options]);}
   // Bind a middleware function directly
-  else if (_.isFunction(target)) {
-    bindFunction.apply(this, [path, target, verb, options]);
-  }
+  else if (_.isFunction(target)) {bindFunction.apply(this, [path, target, verb, options]);}
 
   // If target is an object with a `target`, pull out the rest
   // of the keys as route options and then bind the target.
@@ -280,8 +265,6 @@ function bindArray(path, target, verb, options) {
   }
 }
 
-
-
 /**
  * Attach middleware function to route.
  *
@@ -431,9 +414,7 @@ function bindFunction(path, fn, verb, options) {
 
     // Remove anything that's not a regex
     regexes = _.compact(regexes.map(function(regex) {
-      if (regex instanceof RegExp) {
-        return regex;
-      }
+      if (regex instanceof RegExp) {return regex;}
       sails.log.warn('Invalid regex "' + regex + '" supplied to skipRegexesWrapper; ignoring.');
       return undefined;
     }));
@@ -464,12 +445,9 @@ function bindFunction(path, fn, verb, options) {
   // If verb is not specified, default to CRUD methods.
   // You can still explicitly route to "all /path" if you want ALLLLlllll the things.
   var targetVerb = verb || ['get', 'put', 'post', 'delete', 'patch'];
-
   // Ensure targetVerb is an array of lowercased verbs.
   if (!Array.isArray(targetVerb)) {targetVerb = [targetVerb.toLowerCase()];}
-  else {
-    targetVerb = _.map(targetVerb, function(verb) { return verb.toLowerCase(); });
-  }
+  else {targetVerb = _.map(targetVerb, function(verb) { return verb.toLowerCase(); });}
 
   // Function to actually bind
   var targetFn;
@@ -500,26 +478,18 @@ function bindFunction(path, fn, verb, options) {
     }
   }
   // Otherwise just make it an empty array
-  else {
-    options.skipRegex = [];
-  }
+  else {options.skipRegex = [];}
 
   // For GET routes ending in pattern vars, default `skipAssets` to true.
-  if (_.isString(path) && path.match(/\:[^\/]+\/?$/) && _.isUndefined(options.skipAssets) && _.contains(targetVerb, 'get')) {
-    options.skipAssets = true;
-  }
+  if (_.isString(path) && path.match(/\:[^\/]+\/?$/) && _.isUndefined(options.skipAssets) && _.contains(targetVerb, 'get')) {options.skipAssets = true;}
 
   // If "skipAssets" option is true, add the skipAssets regex
   // to the options.skipRegex array
-  if (options.skipAssets) {
-    options.skipRegex.push(sails.LOOKS_LIKE_ASSET_RX);
-  }
+  if (options.skipAssets) {options.skipRegex.push(sails.LOOKS_LIKE_ASSET_RX);}
 
   // If we have anything in the options.skipRegex array, wrap
   // the target function again.
-  if (options.skipRegex.length) {
-    targetFn = skipRegexesWrapper(options.skipRegex, targetFn);
-  }
+  if (options.skipRegex.length) {targetFn = skipRegexesWrapper(options.skipRegex, targetFn);}
 
   // Loop through the verbs we want to bind
   targetVerb.forEach(function(verb) {

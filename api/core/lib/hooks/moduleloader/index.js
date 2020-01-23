@@ -1,8 +1,5 @@
 module.exports = function(sails) {
 
-  /**
-   * Module dependencies
-   */
   var path = require('path');
   var fs = require('fs');
   var async = require('async');
@@ -11,19 +8,19 @@ module.exports = function(sails) {
   var mergeDictionaries = require('merge-dictionaries');
   var COMMON_JS_FILE_EXTENSIONS = require('common-js-file-extensions');
 
-
-  /**
-   * Module constants
-   */
-
   var BASIC_SUPPORTED_FILE_EXTENSIONS = COMMON_JS_FILE_EXTENSIONS.code;
   var SUPPORTED_FILE_EXTENSIONS_FOR_CONFIG = COMMON_JS_FILE_EXTENSIONS.config.concat(BASIC_SUPPORTED_FILE_EXTENSIONS);
+  
   /**
    * Module loader
-   *
    * Load code files from a Sails app into memory; modules like controllers,
    * models, services, config, etc.
    */
+
+   //TODO: NAME SPACING
+   
+   //has to de dynamic and load from db --> init function wrappers have a static verioning 'find or create' methods to bootstrap 
+
   return {
     defaults: function (config) {
       var localConfig = {
@@ -146,7 +143,6 @@ module.exports = function(sails) {
      * @param {Function} cb
      */
     loadAdapters: function (cb) {
-
       // Load things like `api/adapters/FooAdapter.js`
       includeAll.optional({
         dirname: sails.config.paths.adapters,
@@ -155,50 +151,32 @@ module.exports = function(sails) {
         flatten: true,
         depth: 1
       }, function(err, classicStyleAdapters) {
-        if (err) {
-          return cb(err);
-        }
-
+        if (err) {return cb(err);}
         // Load things like `api/adapters/foo/index.js`
         fs.readdir(sails.config.paths.adapters, function(err, contents) {
           if (err) {
-            if (err.code === 'ENOENT') {
-              return cb(undefined, classicStyleAdapters);
-            }
+            if (err.code === 'ENOENT') {return cb(undefined, classicStyleAdapters);}
             return cb(err);
           }
-
           var folderStyleAdapters = {};
           try {
             _.each(contents, function(filename) {
-
               var absPath = path.join(sails.config.paths.adapters, filename);
-
               // Exclude things that aren't directories, and directories that start with dots.
-              if (_.startsWith(filename, '.')) {
-                return;
-              }
+              if (_.startsWith(filename, '.')) {return;}
               var stats = fs.statSync(absPath);
-              if (!stats.isDirectory()) {
-                return;
-              }
-
+              if (!stats.isDirectory()) {return;}
               // But otherwise, if we see a directory in here, try to require it.
               // (this follows the rules of the package.json file if there is one--
               //  or otherwise uses index.js by convention)
               var adapterDef = require(absPath);
-
               // Use the name of the folder as the identity.
               folderStyleAdapters[filename] = adapterDef;
-
             }); //</_.each()>
-          } catch (e) {
-            return cb(e);
-          }
-
+          } 
+          catch (e) {return cb(e);}
           // Finally, send back the merged-together set of adapters.
           return cb(undefined, _.extend(classicStyleAdapters, folderStyleAdapters));
-
         }); //</fs.readdir>
       }); //</includeall.optional>
     },
@@ -210,6 +188,7 @@ module.exports = function(sails) {
      * @param {Function} cb
      */
     loadModels: function (cb) {
+      console.log('LOADING MODELS')
       // Get the main model files
       includeAll.optional({
         dirname   : sails.config.paths.models,
@@ -218,7 +197,6 @@ module.exports = function(sails) {
         flatten: true
       }, function(err, models) {
         if (err) { return cb(err); }
-
         // ---------------------------------------------------------
         // Get any supplemental files (BACKWARDS-COMPAT.)
         includeAll.optional({
@@ -228,11 +206,9 @@ module.exports = function(sails) {
           flatten: true
         }, bindToSails(function(err, supplements) {
           if (err) { return cb(err); }
-
           if (_.keys(supplements).length > 0) {
             sails.log.debug('The use of `.attributes.json` files is deprecated, and support will be removed in a future release of Sails.');
           }
-
           return cb(undefined, _.merge(models, supplements));
         }));
         // ---------------------------------------------------------
@@ -249,8 +225,8 @@ module.exports = function(sails) {
       includeAll.optional({
         dirname     : sails.config.paths.services,
         filter      : /^(.+)\.(?:(?!md|txt).)+$/,
-        depth     : 1,
-        caseSensitive : true
+        caseSensitive : true,
+        flatten: true
       }, bindToSails(cb));
     },
 
@@ -297,17 +273,11 @@ module.exports = function(sails) {
      * @param {Function} cb
      */
     loadUserHooks: function (cb) {
-
       var defaultInstalledHooks = _.filter(_.values(require('../../app/configuration/default-hooks')), function(val) {return val !== true;});
-
       // Get the current app's package.json file (defaulting to an empty dictionary)
       var appPackageJson;
-      try {
-        appPackageJson = require(path.resolve(sails.config.appPath, 'package.json'));
-      } catch (unusedErr) {
-        appPackageJson = {};
-      }
-
+      try {appPackageJson = require(path.resolve(sails.config.appPath, 'package.json'));} 
+      catch (unusedErr) {appPackageJson = {};}
       async.auto({
         // Load user hooks from the "api/hooks" folder
         hooksFolder: function(cb) {
@@ -335,7 +305,6 @@ module.exports = function(sails) {
             dontLoad: true
           }, function(err, modules) {
             if (err) { return cb(err); }
-
             // Now that we have a map of where the package.json files are, flatten that
             // map and load the files carefully.  Map might look something like:
             // { angular2:
@@ -361,9 +330,7 @@ module.exports = function(sails) {
                     // Attempt to load the package.json file
                     var packageJson = require(filePath);
                     // If the module isn't declared as a Sails hook, ignore it.
-                    if (!packageJson.sails || !packageJson.sails.isHook) {
-                      return;
-                    }
+                    if (!packageJson.sails || !packageJson.sails.isHook) {return;}
                     // If the module isn't saved in this app's package.json, ignore it.
                     if (!_.get(appPackageJson, 'dependencies.' + packageJson.name) && !_.get(appPackageJson, 'devDependencies.' + packageJson.name) && !_.get(appPackageJson, 'optionalDependencies.' + packageJson.name)) {
                       sails.log.debug('Ignoring hook `' + packageJson.name + '` because it isn\'t saved as any kind of dependency in your package.json file.');
@@ -374,13 +341,12 @@ module.exports = function(sails) {
                     }
 
                     // If it's one of our default hooks, ignore it so that it can be safely overridden.
-                    if (_.contains(defaultInstalledHooks, packageJson.name)) {
-                      return;
-                    }
+                    if (_.contains(defaultInstalledHooks, packageJson.name)) {return;}
                     // Save a reference to this installed hook, which we'll use to require
                     // the full module below.
                     installedHooks[currentPath] = packageJson;
-                  } catch(e) {
+                  } 
+                  catch(e) {
                     sails.log.verbose('While searching for installable hooks, found invalid package.json file at `'+filePath+'`.  Details:',e.stack);
                     return;
                   }
@@ -391,21 +357,17 @@ module.exports = function(sails) {
                   var nextPath;
                   if (currentPath) { nextPath = path.join(currentPath,identity); }
                   else { nextPath = identity; }
-
                   _flatten(modules[identity], installedHooks, nextPath, level + 1 );
                 }
               });//</forEach() :: key in `modules`>
-
               // Return the dictionary of installed hooks we found.
               return installedHooks;
             })(modules);//</ invoked self-calling recursive function :: _flatten()>
-
             return cb(undefined, modules);
           });//</includeAll.optional() :: loading package.json files from the node_modules folder to check for hooks>
         }
       }, function(err, results) {
         if (err) {return cb(err);}
-
         // Marshall the hooks by checking that they are valid.  The ones from the
         // api/hooks folder are assumed to be okay, as long as they aren't explicitly turned off.
         var hooks = _.reduce(results.hooksFolder, function(memo, module, identity) {
@@ -414,21 +376,14 @@ module.exports = function(sails) {
           }
           return memo;
         }, {});
-
         try {
-
           // Loop through the package.json files of the hooks we found in the node_modules folder.
           _.extend(hooks, _.reduce(results.nodeModulesFolder, function(memo, modulePackageJson, identity) {
-
             // Any special config for this hook will be under the `sails` key in the package.json file.
             var hookConfig = modulePackageJson.sails;
-
             // Determine the name the hook should be added as
             var hookName;
-
-            if (!_.isEmpty(hookConfig.hookName)) {
-              hookName = hookConfig.hookName;
-            }
+            if (!_.isEmpty(hookConfig.hookName)) {hookName = hookConfig.hookName;}
             // If an identity was specified in sails.config.installedHooks, use that
             else if (sails.config.installedHooks && sails.config.installedHooks[identity] && sails.config.installedHooks[identity].name) {
               hookName = sails.config.installedHooks[identity].name;
@@ -438,16 +393,9 @@ module.exports = function(sails) {
               // Strip off any NPM namespacing and/or sails-hook- prefix
               hookName = identity.replace(/^(@.+?[\/\\])?(sails-hook-)?/, '');
             }
-
-            if (sails.config.hooks[hookName] === false || sails.config.hooks[hookName] === 'false') {
-              return memo;
-            }
-
+            if (sails.config.hooks[hookName] === false || sails.config.hooks[hookName] === 'false') {return memo;}
             // Allow overriding core hooks
-            if (sails.hooks[hookName]) {
-              sails.log.verbose('Found hook: `'+hookName+'` in `node_modules/`.  Overriding core hook w/ the same identity...');
-            }
-
+            if (sails.hooks[hookName]) {sails.log.verbose('Found hook: `'+hookName+'` in `node_modules/`.  Overriding core hook w/ the same identity...');}
             // If we have a hook in api/hooks with this name, throw an error
             if (hooks[hookName]) {
               var err = (function (){
@@ -461,21 +409,15 @@ module.exports = function(sails) {
               sails.log.warn(err);
               return memo;
             }
-
             // Load the hook code
             var hook = require(path.resolve(sails.config.appPath, 'node_modules', identity));
-
             // Set its config key (defaults to the hook name)
             hook.configKey = (sails.config.installedHooks && sails.config.installedHooks[identity] && sails.config.installedHooks[identity].configKey) || hookName;
-
             // Add this to the list of hooks to load
             memo[hookName] = hook;
-
             return memo;
           }, {}));//</_.reduce() + _.extend()>
-
           return bindToSails(cb)(null, hooks);
-
         } catch (e) { return cb(e); }
       });//</after async.auto>
     },//<loadUserHooks>
@@ -507,15 +449,11 @@ module.exports = function(sails) {
         useGlobalIdForKeyName: true
       }, bindToSails(cb));
     },
-
     optional: includeAll.optional,
     required: includeAll.required,
     aggregate: includeAll.aggregate,
     exists: includeAll.exists
-
   };
-
-
 
   /**
    * Private helper function used above.
@@ -537,5 +475,4 @@ module.exports = function(sails) {
       return cb(undefined, modules);
     };
   }//</bindToSails definition (private helper function)>
-
 };

@@ -1,7 +1,3 @@
-/**
- * Module dependencies.
- */
-
 var path = require('path');
 var _ = require('@sailshq/lodash');
 var includeAll = require('include-all');
@@ -23,6 +19,10 @@ module.exports = function loadActionModules (sails, cb) {
   // Keep track of actions loaded from disk, so we can detect conflicts.
   var actionsLoadedFromDisk = {};
 
+
+
+
+  //STUDY
   // Load all files under the controllers folder.
   includeAll.optional({
     dirname: sails.config.paths.controllers,

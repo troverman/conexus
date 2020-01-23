@@ -1,5 +1,5 @@
-2020/01/19-12:51:32.468 3cdc Recovering log #197
-2020/01/19-12:51:32.468 3cdc Level-0 table #200: started
-2020/01/19-12:51:32.476 3cdc Level-0 table #200: 359 bytes OK
-2020/01/19-12:51:32.483 3cdc Delete type=0 #197
-2020/01/19-12:51:32.483 3cdc Delete type=3 #195
+2020/01/23-15:24:08.211 4070 Recovering log #262
+2020/01/23-15:24:08.211 4070 Level-0 table #265: started
+2020/01/23-15:24:08.215 4070 Level-0 table #265: 11460 bytes OK
+2020/01/23-15:24:08.225 4070 Delete type=0 #262
+2020/01/23-15:24:08.225 4070 Delete type=3 #260

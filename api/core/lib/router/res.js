@@ -1,14 +1,9 @@
-/**
- * Module dependencies
- */
-
 var util = require('util');
 var http = require('http');
 var Transform = require('stream').Transform;
 var _ = require('@sailshq/lodash');
 var flaverr = require('flaverr');
-var MockRes = require('./mock-res');// «FUTURE: consolidate that into this file
-
+var MockRes = require('./mock-res')
 
 /**
  * Ensure that response object has a minimum set of reasonable defaults

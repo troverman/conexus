@@ -1,23 +1,6 @@
-/**
- * Module dependencies.
- */
-
 var util = require('util');
 var _ = require('@sailshq/lodash');
 var flaverr = require('flaverr');
-
-
-/**
- * exposeGlobals()
- *
- * Expose certain global variables
- * (if config says so)
- *
- * @throws E_BAD_GLOBAL_CONFIG
- *
- * @this {SailsApp}
- * @api private
- */
 
 module.exports = function exposeGlobals() {
   var sails = this;

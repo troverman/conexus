@@ -1,0 +1,71 @@
+<div class="container" style="padding:0px">
+    <div class="card" ng-click="cardDetailToggle(task)">
+        <div class="imageContainerSmall" style="background:url('https://source.unsplash.com/1600x900/?{{task.context}}');">
+            <div style="background:rgba(0,0,0,0.75);text-align:center" class="imageContainerSmallDiv">
+                <div style="text-align:right;padding:15px;position:absolute;right:0">
+                    <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(task)">
+                        <i class="fas fa-chevron-down"></i>
+                    </a>
+                </div>
+                <div style="margin-top: auto;margin-bottom: auto;">
+                    <div style="padding:15px">
+                        <h1>{{task.title}}</h1>
+                        <h5 style="color:white">{{task.id}}</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-show="markers.length>0">
+            <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options">
+                <ui-gmap-marker ng-repeat="marker in markers" coords="marker.coords" options="marker.options" idkey="marker.id">
+                    <ui-gmap-window options="windowOptions" closeClick="closeClick()">
+                        <div>
+                            <div style="font-size: 15px;"><a ng-click="$event.stopPropagation();" href="task/{{task.id}}">{{marker.content}}</a></div>
+                        </div>
+                    </ui-gmap-window>
+                </ui-gmap-marker>
+            </ui-gmap-google-map>
+        </div>
+        <div style="background-color:white">
+            <div class="member-tab-container container" style="padding-left:0px">
+                <div style="text-align:center">
+                    <ul style="padding:0px;" class="member-tabs">
+                        <li ng-if="false"><a ng-click="$event.stopPropagation();selectTab('TIME')">Activity</a></li>
+                        <li><a ng-click="$event.stopPropagation();selectTab('INFORMATION')">Information</a></li>
+                        <li><a ng-click="$event.stopPropagation();selectTab('ASSOCIATIONS')">Associations</a></li>
+                        <li><a ng-click="$event.stopPropagation();selectTab('TIME')">Time</a></li>
+                        <li><a ng-click="$event.stopPropagation();selectTab('CONTENT')">Content</a></li>
+                        <li><a ng-click="$event.stopPropagation();selectTab('STATS')">Stats</a></li>
+                        <li><a ng-click="$event.stopPropagation();selectTab('TOKENS')">Tokens</a></li>
+                        <li ng-if="false"><a ng-click="$event.stopPropagation();selectTab('HISTORY')">History</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <hr style="margin:0px;">
+        <div style="padding:16px;">
+            <p><a ng-repeat="context in task.context" ng-click="$event.stopPropagation();filterContent(context)">{{context}} </a></p>
+            <div class="spacing-5"></div>
+            <div ng-click="$event.stopPropagation();"><span style="display:inline" ng-bind-html="renderContent(item.content)"></span></div>
+            <div class="spacing-5"></div> 
+        </div>
+        <div class="card-footer">
+            <a ng-click="$event.stopPropagation();renderAttentionToggle(task)" style="color:grey"><i class="fas fa-eye"></i>  {{task.data.apps.attention.general || 0}}</a>
+            <a ng-click="$event.stopPropagation();createReaction(task, 'plus')"><i class="fas fa-angle-up"></i> {{task.data.apps.reactions.plus || 0}} like </a> 
+            <a ng-click="$event.stopPropagation();createReaction(task, 'minus')" ><i class="fas fa-angle-down"></i> {{task.data.apps.reactions.minus || 0}} dislike </a>
+            <a ng-click="$event.stopPropagation();contentToggle(task)"><i class="far fa-comment"></i> comment </a>
+            <a ng-click="$event.stopPropagation();validationToggle(task)"><i class="fas fa-check"></i> validate </a>
+            <!--<a ng-click="$event.stopPropagation();shareToggle(task)" style=";padding:0px;padding-right:5px" class="pull-right" ><i class="fas fa-share"></i></a>-->
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div ng-if="selectedTab =='TIME'" ng-include="'task/templates/time.tpl.html'"></div>
+        <div ng-if="selectedTab =='ASSOCIATIONS'" ng-include="'task/templates/associations.tpl.html'"></div>
+        <div ng-if="selectedTab =='CONTENT'" ng-include="'task/templates/content.tpl.html'"></div>
+        <div ng-if="selectedTab =='STATS'" ng-include="'task/templates/stats.tpl.html'"></div>
+        <div ng-if="selectedTab =='TOKENS'" ng-include="'task/templates/tokens.tpl.html'"></div>
+    </div>
+</div>
+<div class="spacing-10"></div>

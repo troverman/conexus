@@ -54,30 +54,16 @@ module.exports = function lift(configOverride, done) {
   };
 
   async.series([
-
-    function (next) {
-      sails.load(configOverride, next);
-    },
-
-    function (next){
-      sails.initialize(next);
-    },
-
+    function (next) {sails.load(configOverride, next);},
+    function (next){sails.initialize(next);},
   ], function whenSailsIsReady(err) {
     if (err) {
       sails.lower(function (additionalErrLoweringSails){
-
-        if (additionalErrLoweringSails) {
-          sails.log.error('When trying to lower the app as a result of a failed lift, encountered an error:', additionalErrLoweringSails);
-        }//>-
-
+        if (additionalErrLoweringSails) {sails.log.error('When trying to lower the app as a result of a failed lift, encountered an error:', additionalErrLoweringSails);}//>-
         return done(err);
-
-      });//</sails.lower>
+      });
       return;
-
-    }//-•
-
+    }
 
     // If `config.noShip` is set, skip the startup message.
     // Otherwise, gather app meta-info and log startup message (the boat).

@@ -1,9 +1,4 @@
-/**
- * Module dependencies
- */
-
 var _ = require('@sailshq/lodash');
-
 
 /**
  * SailsApp.prototype.toJSON()
@@ -16,13 +11,7 @@ var _ = require('@sailshq/lodash');
 
 module.exports = function toJSON() {
 
-  // `this` refers to our Sails app instance.
-  //
-  // > Here we set up a local variable, `sails`.  This is for familiarity,
-  // > so that we don't accidentally write code in this file that relies on
-  // > access to the Sails global.
   var sails = this;
-
 
   // Build JSON serializable dictionary that summarizes the Sails app instance.
   var sailsAppSummary;
@@ -79,12 +68,8 @@ module.exports = function toJSON() {
 
     }, {});//</_.reduce :: sailsAppSummary>
 
-
   } catch (e) {
     throw new Error('Consistency violation: Unexpected error when attempting to build a JSON-serializable version of the Sails app instance.  Details: '+e.stack);
   }
-
-  // Return our JSON serializable summary of this Sails app instance.
   return sailsAppSummary;
-
 };

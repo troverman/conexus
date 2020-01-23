@@ -1,13 +1,8 @@
-/**
- * Module dependencies
- */
-
 var util = require('util');
 var assert = require('assert');
 var _ = require('@sailshq/lodash');
 var flaverr = require('flaverr');
 var machineAsAction = require('machine-as-action');
-
 
 /**
  * helpRegisterAction()

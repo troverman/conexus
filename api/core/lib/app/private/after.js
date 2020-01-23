@@ -1,16 +1,5 @@
-/**
- * Module dependencies
- */
-
 var _ = require('@sailshq/lodash');
 var async = require('async');
-
-
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-// FUTURE
-// Pull _most of this_ into a separate module, since it's not specific
-// to Sails, and has come up in a few different places.
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
 /**
@@ -27,7 +16,6 @@ var async = require('async');
 
 module.exports = function mixinAfter(emitter) {
 
-
   /**
    * { emitter.warmEvents }
    *
@@ -35,8 +23,6 @@ module.exports = function mixinAfter(emitter) {
    * (Required to support `emitter.after()`)
    */
   emitter.warmEvents = {};
-
-
   var _originalEmit = emitter.emit;
   /**
    * emitter.emit()
@@ -81,17 +67,11 @@ module.exports = function mixinAfter(emitter) {
       dependencies.push(function handlerFn(cb) {
 
         // If the event has already fired, then just execute our callback.
-        if (emitter.warmEvents[event]) {
-          return cb();
-        }
+        if (emitter.warmEvents[event]) {return cb();}
         // But otherwise, bind a one-time-use handler that listens for the
         // first time this event is fired, and then executes our callback
         // once it does.
-        else {
-          emitter.once(event, function (){
-            return cb();
-          });
-        }
+        else {emitter.once(event, function (){return cb();});}
 
       });//</declared and pushed on handler function>
 

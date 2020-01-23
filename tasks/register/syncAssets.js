@@ -3,6 +3,5 @@ module.exports = function (grunt) {
 		'html2js:dev',
 		'less:dev',
 		'sync:dev',
-		'coffee:dev'
 	]);
 };
