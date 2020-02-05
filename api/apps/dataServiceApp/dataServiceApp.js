@@ -1,10 +1,8 @@
 //CRE8.DATASERVICE
-//TODO: CONTAINIZER INTO MORE APPS 
 
 //const tf = require('@tensorflow/tfjs');
 //require('@tensorflow/tfjs-node');
 const Q = require('q');
-
 
 //associationBuild
 //buildAssociatedModels
@@ -13,43 +11,47 @@ const Q = require('q');
 //buildConnections
 //buildStringSpace
 //initOrders
-//getData
+//createNetwork
 //traverse
 //tensorBuild
 //legacyTraverse
 
+//TODO: CONTAINIZER INTO MORE APPS 
+
+//TODO:: REPLACE ORDER WITH VALIDATION <-> ASSOCIATION <-> CONNECTION
 module.exports = {
 
-	//NEED TO POULATE TO TEST..
-	//MAP OUT THE RECURSIVE TREE
-
-	//FOR DEVELOPERS
-	//ASSOCIATION IS A REDUCCTION OF SET OF VALIDATION
-	//LEVEL1: VALIDATION, VALIDATION, VALIDATION.
-	//			   |           |           |
-	//LEVEL2:	 V-V-V       V-V-V       V-V-V
-	//			 | | |       | | |       | | |
-	//LEVEL3:    v3v3v3      v3v3v3      v3v3v3
-	//...
-	//LELVE_L:	
-	//Compute Association Level L (based on connection rules.. v-v & v-v-n &or defined type)
-
-	//DEFAULT AVERAGE WEIGHTED REP
-	//[A_L] = [Sum(V_DxRep_D)]/N
-	//..V_L-A_(L-1) = (CHARTER RULE..)
-		//=V_LxA_(L-1)
-		//do a real example.. 
-
-	//LEVEL_L:  
-	//A-V
-	//BE CREATIVE!!
-			//=  charter.. connection.. fxn
-	//.. A_(AV) = (CreatorWeight + PeerWeight) / 2 
-		//AVERAGE OF NESTED VALIDATION
-	//charter expose formulas..? 
-	//.. A_(AV) = CreatorScore(CreatorWeight) + PeerScore(PeerWeight); CreatorWeight + PeerWeight = 1
-
 	associationBuild: function(model){
+
+		//NEED TO POULATE TO TEST..
+		//MAP OUT THE RECURSIVE TREE
+
+		//FOR DEVELOPERS
+		//ASSOCIATION IS A REDUCCTION OF SET OF VALIDATION
+		//LEVEL1: VALIDATION, VALIDATION, VALIDATION.
+		//			   |           |           |
+		//LEVEL2:	 V-V-V       V-V-V       V-V-V
+		//			 | | |       | | |       | | |
+		//LEVEL3:    v3v3v3      v3v3v3      v3v3v3
+		//...
+		//LELVE_L:	
+		//Compute Association Level L (based on connection rules.. v-v & v-v-n &or defined type)
+
+		//DEFAULT AVERAGE WEIGHTED REP
+		//[A_L] = [Sum(V_DxRep_D)]/N
+		//..V_L-A_(L-1) = (CHARTER RULE..)
+			//=V_LxA_(L-1)
+			//do a real example.. 
+
+		//LEVEL_L:  
+		//A-V
+		//BE CREATIVE!!
+				//=  charter.. connection.. fxn
+		//.. A_(AV) = (CreatorWeight + PeerWeight) / 2 
+			//AVERAGE OF NESTED VALIDATION
+		//charter expose formulas..? 
+		//.. A_(AV) = CreatorScore(CreatorWeight) + PeerScore(PeerWeight); CreatorWeight + PeerWeight = 1
+
 
 		//RETURNS TREE OBJ
 		//THEN REDUCETREE OBJ
@@ -238,7 +240,6 @@ module.exports = {
 
 			});
 		});
-
 	},
 
 	//(MODEL []) ASSOCIATED MODELS [] --> {}COMPUTED GRAPH STRUCTURE 
@@ -247,7 +248,6 @@ module.exports = {
 		//BUILD ASSOCIATION OBJECT --> TRAVERSAL OF associatedModels
 										//TRAVERSAL --> LONG TAIL
 		//RETURN JSON OBJECT
-
 	},
 
 	//NEED TO POPULATE SOME TO TEST :) 
@@ -359,28 +359,21 @@ module.exports = {
 			var amount1 = 30*((1/10000)*10000*amount+Math.abs(Math.sin(i)+(i*Math.random())/200));
 			var price = amount1/amount;
 			newOrderArray.push({
-				user:'5923b9cc5aac131100cab1c1', //creator | CRE8
+				user:'5923b9cc5aac131100cab1c1',
 				amountSet:amount,
 				amountSet1:amount1,
 				identiferSet:'CRE8',
 				identiferSet1:'ETH',
 				price:price,
 			});
-			//console.log(price)
 		};
-		
-		//console.log(newOrderArray);
-		//Order.create(newOrderArray).then(function(){
-		//	console.log('DONE', newOrderArray.length)
-		//});
-
 		var newOrderArray1 = [];
 		for (var i = 0; i<10000; i++){
 			var amount = 30*Math.floor(Math.random()*160)+1;
 			var amount1 = 1/30*((10000)*amount/10000 + (10000)*1/10000*Math.abs(Math.sin(i)*1/30*i*Math.random()));
 			var price = amount1/amount;
 			newOrderArray1.push({
-				user:'5923b9cc5aac131100cab1c1', //creator
+				user:'5923b9cc5aac131100cab1c1',
 				amountSet:amount,
 				amountSet1:amount1,
 				identiferSet:'ETH',
@@ -390,74 +383,19 @@ module.exports = {
 			//console.log(amount/10000 + 1/10000*Math.abs(Math.sin(i)*1/100*i*Math.random()));
 			//console.log(price)
 			//0.001,0.0011,..0.1,1
-		} 
-
-		//console.log(newOrderArray1);
-		//Order.create(newOrderArray1).then(function(){
-		//	console.log('DONE', newOrderArray1.length)
-		//});
-
-		/*Order.find().limit(10000).skip(0).sort('createdAt DESC').then(function(models){
-			if (models.length > 0){
-	    		var idArray = models.map(function(obj) {return obj.id});
-				Order.destroy(idArray, function(err, model) {
-					console.log(model);
-				});
-    		}
-		});*/
-
-		/*User.find().then(function(models){
-			for (x in models){
-		       	(function(models, x){
-					var url = "https://api.unsplash.com/photos/random?page=1&client_id=b996e9314d68deae5fe37098f096cd6b3b035f5c63989805aa23d4bd8c7358a2&secret=2ddbfdd90eaf2bcfc6f3cec5ec58c677b35cb470dc63d39e0e0372755b59c434%27";
-			        request(url, function (error, response, body) {
-			            var body = JSON.parse(body);
-			            if (body.urls){models[x].coverUrl = body.urls.small;}
-			            User.update({id: models[x].id}, models[x])
-			            .then(function(model){
-			            });
-			        });
-		    	})(models, x)
-		    }
-		});*/
-
-		/*User.find().then(function(models){
-			for (x in models){
-				if(!models[x].coverUrl){
-					var url = "https://api.unsplash.com/photos/random?page=1&client_id=b996e9314d68deae5fe37098f096cd6b3b035f5c63989805aa23d4bd8c7358a2&secret=2ddbfdd90eaf2bcfc6f3cec5ec58c677b35cb470dc63d39e0e0372755b59c434%27";
-			       	(function(models, x){
-				        request(url, function (error, response, body) {
-				        	console.log(body)
-				            models[x].coverUrl = body.urls.full;
-				            User.update({id: models[x].id}, models[x])
-				            .then(function(model){
-				            	console.log(model);
-				            });
-				        });
-			    	})(models, x);
-				}
-			}
-		});*/	
+		}
 	},
 
 	//MAXIMUM BINARY NON-REFLECTIVE
-	getData: function(network, reflective){
+	createNetwork: function(network, reflective){
 		
-		//POPULATE A NEW NETWORK
-		//TO CREATE A WELL CONNECTED NETWORK
-		//SAMPLE SPACE | A-H Tokens
-		//A-H + [SAMPLE SPACE]
 		var newNetwork = network || "ABCD".split("");
 		var positionSet = [];
 	    var powerSet = utilityServiceApp.getAllSubsets(newNetwork);
 	    powerSet.shift();
 
 		//CREATE RELATIONSHIPS
-	    for(x in powerSet){
-			for(y in powerSet){
-				positionSet.push([powerSet[x], powerSet[y]]);
-			}
-		}
+	    for(x in powerSet){for(y in powerSet){positionSet.push([powerSet[x], powerSet[y]]);}}
 
 		//RELATIONSHIPS CANCEL
 		//TODO: OPTIMIZE
@@ -470,14 +408,11 @@ module.exports = {
 				optimize.push([set1,set2]);
 			}
 		}
-
-		//var mirror = optimize.map(function(obj){
-		//	return [obj[1],obj[0]];
-		//});
+		//var mirror = optimize.map(function(obj){return [obj[1],obj[0]];});
 		//REMOVE DUPLICATES
 		var optim = Array.from(new Set(optimize.map(JSON.stringify)), JSON.parse);
-		//var mirrorOptim = Array.from(new Set(mirror.map(JSON.stringify)), JSON.parse);
 
+		//var mirrorOptim = Array.from(new Set(mirror.map(JSON.stringify)), JSON.parse);
 		//REMOVE MIRROR DUPLICATES
 		//var optim1 = [];
 		//var optim2 = [];
@@ -487,90 +422,21 @@ module.exports = {
 		//		optim2.push(part);
 		//	}
 		//});
-
 	   	//STORED AS A MATRIX; algabraic lattice. 
+
 	   	//var maximumBinaryRelationship = utilityServiceApp.removeMirrorDuplicates(optim);
 	   	var maximumBinaryRelationship = [];
 	   	if (reflective){maximumBinaryRelationship = optim;}
 	   	if (!reflective){maximumBinaryRelationship = utilityServiceApp.removeMirrorDuplicates(optim);}
-	   	
-		var newOrderArray = [];
-		for (x in maximumBinaryRelationship){
-			newOrderArray.push({
-				user:'5923b9cc5aac131100cab1c1',
-				identiferSet: maximumBinaryRelationship[x][0],
-				identiferSet1: maximumBinaryRelationship[x][1],
-			});
-		}
-
-		//--> INTEGER VALUE FOR 1 -> 1 Comparison
-		var superArray = [];
-		for (x in newOrderArray){
-			//for (var i=0; i<10;i++){
-				var model = newOrderArray[x];
-				model.amountSet = [];
-				model.amountSet1 = [];
-				var amount = 0;
-				for (z in model.identiferSet){
-					amount = utilityServiceApp.generate(10);
-					model.amountSet.push(amount/model.identiferSet.length);
-				}
-				for (z in model.identiferSet1){
-					amount = utilityServiceApp.generate(10);
-					model.amountSet1.push(amount/model.identiferSet1.length);
-				}
-				superArray.push(model);
-			//}
-		}
-
-		//FLATTEN TO STRING
-		for (x in superArray){
-			superArray[x].identiferSet = superArray[x].identiferSet.join(',');
-			superArray[x].identiferSet1 = superArray[x].identiferSet1.join(',');
-			superArray[x].amountSet = superArray[x].amountSet.join(',');
-			superArray[x].amountSet1 = superArray[x].amountSet1.join(',');
-		}
-
-		//6050
-		//CREATE
-		//Order.create(superArray).then(function(){
-		//	console.log('DONE', superArray.length)
-		//});
-
-		//DELETE
-		/*
-		Order.find().limit(6050).skip(0).sort('createdAt DESC').then(function(models){
-			if (models.length > 0){
-	    		var idArray = models.map(function(obj) {return obj.id});
-				Order.destroy(idArray, function(err, model) {
-					console.log(model);
-				});
-    		}
-		});
-		*/
 		
-		//BTC | ETH | ETC
-		/*
-		var newOrderArray1 = [];
-		for (var i = 0; i<10000; i++){
-			var amount = 30*Math.floor(Math.random()*160)+1;
-			var amount1 = 1/30*((10000)*amount/10000 + (10000)*1/10000*Math.abs(Math.sin(i)*1/30*i*Math.random()));
-			var price = amount1/amount;
-			newOrderArray1.push({
-				user:'5923b9cc5aac131100cab1c1', //creator
-				amountSet:amount,
-				amountSet1:amount1,
-				identiferSet:'ETH',
-				identiferSet1:'CRE8',
-				price:price,
-			});
-		}
-		*/
-
-		//CREATE
-		//Order.create(newOrderArray1).then(function(){
-		//	console.log('DONE', newOrderArray1.length)
-		//});
+		//var newOrderArray = [];
+		//for (x in maximumBinaryRelationship){
+		//	newOrderArray.push({
+		//		user:'5923b9cc5aac131100cab1c1',
+		//		identiferSet: maximumBinaryRelationship[x][0],
+		//		identiferSet1: maximumBinaryRelationship[x][1],
+		//	});
+		//}
 
 		return maximumBinaryRelationship;
 	},
@@ -595,7 +461,7 @@ module.exports = {
 
 		//TEST | CONSEQUENCE IS MM HAS IMBEUD INTELLIGENCE? ML IS THE TRAVERE?
 		//COMBINITORIAL TENSORS? | REDUCE | TOTAL MARKET
-		//var dataModel = dataService.getData(); //[even more, get orders and orderbook from here]
+		//var dataModel = dataService.createNetwork(); //[even more, get orders and orderbook from here]
 		//const valueMatrix = tf.input({shape: [dataModel.length, 8]}); //NOT REALLY TRUE
 
 		//POSITION IS A TENSOR? --> CREATE MARKET BY MULT? YES!
@@ -670,37 +536,36 @@ module.exports = {
 			});
 		};
 
-		function tensorTesting(identiferSet){
-			Order.find({identiferSet:identiferSet}).then(function(orderModels){
-				var dimObj = {identiferSet:identiferSet, amountSet:1, rank:identiferSet.split(',').length, data:[]};
-				var matrix = [];
-				for (x in orderModels){
-					//if (orderModels[x].identiferSet1.split(',').length==1){
-						matrix.push([]);
-						//for(var i=0; i<dimObj.rank;i++){
-						for(var i=0; i<8;i++){
-							matrix[x].push([]);
-							if (orderModels[x].amountSet1.split(',')[i]){
-								matrix[x][i].push(orderModels[x].amountSet1.split(',')[i]);
-							}
-							else{matrix[x][i].push(0);}
-							//dimObj.data.push({
-							//	identiferSet:orderModels[x].identiferSet1, 
-							//	amountSet:orderModels[x].amountSet1
-							//});
+		async function tensorTesting(identiferSet){
+			var orderModels = await Order.find({identiferSet:identiferSet});
+			var dimObj = {identiferSet:identiferSet, amountSet:1, rank:identiferSet.split(',').length, data:[]};
+			var matrix = [];
+			for (x in orderModels){
+				//if (orderModels[x].identiferSet1.split(',').length==1){
+					matrix.push([]);
+					//for(var i=0; i<dimObj.rank;i++){
+					for(var i=0; i<8;i++){
+						matrix[x].push([]);
+						if (orderModels[x].amountSet1.split(',')[i]){
+							matrix[x][i].push(orderModels[x].amountSet1.split(',')[i]);
 						}
-					//}
-				}
-				console.log(matrix);
-				//console.log(dimObj);
-				//const valueMatrixTensor = tf.tensor(matrix);
-				//valueMatrixTensor.print();
-				//const input1 = tf.input({shape: [2, 2]});
-				//const input2 = tf.input({shape: [2, 2]});
-				//const input3 = tf.input({shape: [2, 2]});
-				//const multiplyLayer = tf.layers.multiply();
-				//const product = multiplyLayer.apply([input1, input2, input3]);
-			});
+						else{matrix[x][i].push(0);}
+						//dimObj.data.push({
+						//	identiferSet:orderModels[x].identiferSet1, 
+						//	amountSet:orderModels[x].amountSet1
+						//});
+					}
+				//}
+			}
+			console.log(matrix);
+			//console.log(dimObj);
+			//const valueMatrixTensor = tf.tensor(matrix);
+			//valueMatrixTensor.print();
+			//const input1 = tf.input({shape: [2, 2]});
+			//const input2 = tf.input({shape: [2, 2]});
+			//const input3 = tf.input({shape: [2, 2]});
+			//const multiplyLayer = tf.layers.multiply();
+			//const product = multiplyLayer.apply([input1, input2, input3]);
 		};
 
 		//recursive train
@@ -710,155 +575,125 @@ module.exports = {
 
 
 		//TODO: WITH powersetDecompose
-		//:)
-		function train(identiferSet, num, iterator){
-
+		//:) --> THIS IS THE FURTHEST RN | CONCURRENT
+		async function train(identiferSet, num, iterator){
 			num++
 			//RENAME TO APLPHA AND BETA IDSETS
-			Order.find({identiferSet:identiferSet}).then(function(orderModels){
-
-				//how deep?
-				//HOW MANY IT"S MAX EIGHT// there has the be a reduction..?? longest circuit is eight
-				//SET, COMBOS OF ASSETS, SET OF UNIQUE ASSETS
-				//const valueMatrix = tf.input({shape: [dataModel.length, dataModel.length, 8]});
-				//const valueMatrix = tf.input({shape: [dataModel.length, dataModel.length. orderBookdepth, market.depth]});
-				//ENCODING INFORMATION IN HIGHER DIMENSIONS :')
-				//HIGH DIMENSIONAL RELATIONS [] = []
-
-				//ONE VALUE MATRIX PER identiferSet
-				//const valueMatrix = tf.input({shape: [orderModels.length, 8]});
-
-				var dimObj = {name:identiferSet, data:[]};
-
-				//THINK ABOUT THE POSITION OF COMBIITORIAL MARKETS IN THE TENS NET
-				//UP CONVERT EVERYTHING TO EIGHT DIMENSIONS 
+			var orderModels = await Order.find({identiferSet:identiferSet});
+			//how deep?
+			//HOW MANY IT"S MAX EIGHT// there has the be a reduction..?? longest circuit is eight
+			//SET, COMBOS OF ASSETS, SET OF UNIQUE ASSETS
+			//const valueMatrix = tf.input({shape: [dataModel.length, dataModel.length, 8]});
+			//const valueMatrix = tf.input({shape: [dataModel.length, dataModel.length. orderBookdepth, market.depth]});
+			//ENCODING INFORMATION IN HIGHER DIMENSIONS :')
+			//HIGH DIMENSIONAL RELATIONS [] = []
+			//ONE VALUE MATRIX PER identiferSet
+			//const valueMatrix = tf.input({shape: [orderModels.length, 8]});
+			var dimObj = {name:identiferSet, data:[]};
+			//THINK ABOUT THE POSITION OF COMBIITORIAL MARKETS IN THE TENS NET
+			//UP CONVERT EVERYTHING TO EIGHT DIMENSIONS 
+			for (x in orderModels){
+				if (orderModels[x].identiferSet1.split(',').length > 1){
+					var obj = {name:orderModels[x].identiferSet1, data: []};
+					//TODO
+					//THIS IS THE PLACE! 
+					//POWERSET --> IS ACTUAL. I WOULD LIKE TO INITIALIZE AN IDENTITY SET OR PROBABILITY SPACE
+					//WE ARE LOOKING AT THE MANIFEST ORDER | VALUE MAP --> WHICH ITSELF IS A GRADIENT 
+					for(y in orderModels[x].identiferSet1.split(',')){
+						obj.data.push({name:orderModels[x].identiferSet1[y], data:orderModels[x].amountSet1.split(',')[y]});
+					}
+					dimObj.data.push(obj);
+				}
+				else{
+					dimObj.data.push({name:orderModels[x].identiferSet1, data:orderModels[x].amountSet1});
+				}
+			}
+			//ex: a->b; b->c; c->d; d->e .. 
+			//	  |		|	  |	 	|
+			if (num < iterator){
+				console.log(num);
 				for (x in orderModels){
-
-					if (orderModels[x].identiferSet1.split(',').length > 1){
-						var obj = {
-							name:orderModels[x].identiferSet1,
-							data: [],
-						};
-
-						//TODO
-
-						//THIS IS THE PLACE! 
-
-						//POWERSET --> IS ACTUAL. I WOULD LIKE TO INITIALIZE AN IDENTITY SET OR PROBABILITY SPACE
-						//WE ARE LOOKING AT THE MANIFEST ORDER | VALUE MAP --> WHICH ITSELF IS A GRADIENT 
-						for(y in orderModels[x].identiferSet1.split(',')){
-							obj.data.push({name:orderModels[x].identiferSet1[y], data:orderModels[x].amountSet1.split(',')[y]});
-						}
-						dimObj.data.push(obj);
-					}
-					else{
-						dimObj.data.push({name:orderModels[x].identiferSet1, data:orderModels[x].amountSet1});
-					}
-
+					//train(orderModels[x].identiferSet1, num, iterator);
 				}
-
-				//ex: a->b; b->c; c->d; d->e .. 
-				//	  |		|	  |	 	|
-
-				if (num < iterator){
-					console.log(num);
-					for (x in orderModels){
-						//train(orderModels[x].identiferSet1, num, iterator);
-					}
-				}
-
-				console.log(dimObj);
-				uniqueMarkets.push(dimObj);
-				//uniqueMarkets.map(function(obj){return obj.name}).indexOf(models[x].identiferSet1);
-				//console.log(uniqueMarkets);
-
-				//NOW BUILD PATHS TO CREATE TENSOR WEIGHTS
-				//console.log(valueMatrix);
-				//CONVERSION IS A TENSOR OPERATION LOL
-
-			});
+			}
+			console.log(dimObj);
+			uniqueMarkets.push(dimObj);
+			//uniqueMarkets.map(function(obj){return obj.name}).indexOf(models[x].identiferSet1);
+			//console.log(uniqueMarkets);
+			//NOW BUILD PATHS TO CREATE TENSOR WEIGHTS
+			//console.log(valueMatrix);
+			//CONVERSION IS A TENSOR OPERATION LOL
 		};
 
-		function traverse(model, path){
-			Order.find({identiferSet:model})
-			.then(function(models){
-				//LOG TRAVERSE PATH
-				//BAD
-				path = [];
-				for (x in models){
+		async function traverse(model, path){
+			var models = await Order.find({identiferSet:model})
+			//LOG TRAVERSE PATH
+			//BAD
+			path = [];
+			for (x in models){
+				console.log(models[x].identiferSet1);
+				//branch completion | do it symmetrically 
+				if (uniqueMarkets.map(function(obj){return obj.identiferSet1}).indexOf(models[x].identiferSet1)==-1){
+					uniqueMarkets.push({identiferSet1: models[x].identiferSet1, amountSet:models[x].amountSet, amountSet1:models[x].amountSet1});
 					console.log(models[x].identiferSet1);
-					//branch completion | do it symmetrically 
-					if (uniqueMarkets.map(function(obj){return obj.identiferSet1}).indexOf(models[x].identiferSet1)==-1){
-						uniqueMarkets.push({identiferSet1: models[x].identiferSet1, amountSet:models[x].amountSet, amountSet1:models[x].amountSet1});
-						console.log(models[x].identiferSet1);
-						path.push(models[x].identiferSet1,' --> ');
-						console.log(path)
-						traverse(models[x].identiferSet1, path);
-					}
-					else{path = [];}
+					path.push(models[x].identiferSet1,' --> ');
+					console.log(path)
+					traverse(models[x].identiferSet1, path);
 				}
+				else{path = [];}
+			}
 
-				//ONCE DONE..
-				console.log(uniqueMarkets.length);
+			//ONCE DONE..
+			console.log(uniqueMarkets.length);
 
-				//BAD
-				if (uniqueMarkets.length == 254){
-					//SIMPLIFY FROM ORDER BOOK.. | ONE ORDER SAMPLE RN
-					for (x in uniqueMarkets){
-						//set of best relations
-						//soon to be set of set (ie by price --> scalar limit to  matrix)
-						//? SET TO SET PRICE EQUIV IS FXNAL
+			//BAD
+			if (uniqueMarkets.length == 254){
+				//SIMPLIFY FROM ORDER BOOK.. | ONE ORDER SAMPLE RN
+				for (x in uniqueMarkets){
+					//set of best relations
+					//soon to be set of set (ie by price --> scalar limit to  matrix)
+					//? SET TO SET PRICE EQUIV IS FXNAL
 
-						//REMEBER THE ORDER IS THE SUM.. TO QUANTIZE 
-						var amountSet = uniqueMarkets[x].amountSet.split(',');
-						var amountSet1 = uniqueMarkets[x].amountSet1.split(',');
-						var marketObj = {};
-						for (y in uniqueMarkets[x].identiferSet1.split(',')){
-							//amountSet1/amountSet
-							marketObj[uniqueMarkets[x].identiferSet1.split(',')[y]] = amountSet1[y]
-						}
-						//console.log(marketObj)
-						marketSetObj.push(marketObj)
+					//REMEBER THE ORDER IS THE SUM.. TO QUANTIZE 
+					var amountSet = uniqueMarkets[x].amountSet.split(',');
+					var amountSet1 = uniqueMarkets[x].amountSet1.split(',');
+					var marketObj = {};
+					for (y in uniqueMarkets[x].identiferSet1.split(',')){
+						//amountSet1/amountSet
+						marketObj[uniqueMarkets[x].identiferSet1.split(',')[y]] = amountSet1[y]
 					}
+					//console.log(marketObj)
+					marketSetObj.push(marketObj)
 				}
-
-			});
+			}
 		};
 
-		function path(start, finish){
-		};
+		function path(start, finish){};
 
 		//VECTOR
 		function valueMatrix(amount, identiferSet){
-
-			Order.find({identiferSet:identiferSet}).then(function(orderModels){
-				var dimObj = {identiferSet:identiferSet, amountSet:amount, rank:identiferSet.split(',').length, data:[]};
-				var matrix = amount;
-				for (x in orderModels){
-					if (orderModels[x].identiferSet1.split(',').length==1){
-						//var data = [];
-						for(var i=0; i<dimObj.rank;i++){
-							dimObj.data.push({
-							//data.push({
-								identiferSet:orderModels[x].identiferSet.split(',')[i], 
-								identiferSet1:orderModels[x].identiferSet1, 
-								amountSet:orderModels[x].amountSet.split(',')[i],
-								amountSet1:orderModels[x].amountSet1,
-								rate:orderModels[x].amountSet.split(',')[i]/orderModels[x].amountSet1,
-							});
-						}
-						//dimObj.data.push(data);
+			var orderModels = await Order.find({identiferSet:identiferSet});
+			var dimObj = {identiferSet:identiferSet, amountSet:amount, rank:identiferSet.split(',').length, data:[]};
+			var matrix = amount;
+			for (x in orderModels){
+				if (orderModels[x].identiferSet1.split(',').length==1){
+					for(var i=0; i<dimObj.rank;i++){
+						dimObj.data.push({
+							identiferSet:orderModels[x].identiferSet.split(',')[i], 
+							identiferSet1:orderModels[x].identiferSet1, 
+							amountSet:orderModels[x].amountSet.split(',')[i],
+							amountSet1:orderModels[x].amountSet1,
+							rate:orderModels[x].amountSet.split(',')[i]/orderModels[x].amountSet1,
+						});
 					}
 				}
-				console.log(dimObj);
-
-				//TODO: ENCODE ORDER BOOK GRADIENT | AMOUNT --> THE VECTOR IS FUNCTIONAL --> DISCRITIZED FXN
-				//matrix = matrix.concat(dimObj.data.map(function(obj){return obj.rate}));
-				//console.log(matrix);
-				//const valueMatrixTensor = tf.tensor(matrix);
-				//valueMatrixTensor.print();
-
-			});
+			}
+			console.log(dimObj);
+			//TODO: ENCODE ORDER BOOK GRADIENT | AMOUNT --> THE VECTOR IS FUNCTIONAL --> DISCRITIZED FXN
+			//matrix = matrix.concat(dimObj.data.map(function(obj){return obj.rate}));
+			//console.log(matrix);
+			//const valueMatrixTensor = tf.tensor(matrix);
+			//valueMatrixTensor.print();
 		};
 
 		//TENSOR CONNECTIONS --> SHIFT IN DIMENSIONALITY --> NOT GOING TO DO CONVERSIONS --> USED FOR RESHAPING (IE TENSOR PRODUCT)
@@ -869,65 +704,26 @@ module.exports = {
 		//minimial no self similar
 		function valueTensor(identiferSet, dimObj, recursion, depth, index){
 			recursion++;
-			Order.find({identiferSet:identiferSet}).then(function(orderModels){
-				
-				var foundObj = utilityServiceApp.searchObject(totalDimObj, function (value) {return value != null && value != undefined && value.name == identiferSet;});
-				if (foundObj.length != 0){
-
-					//ONLY KEEP THE LONGEST CHAIN?
-					//dimObj = foundObj[0].value;
-					//dimObj = {name:identiferSet, rank:orderModels.length, data:[]};
-
-					//console.log(foundObj);
-					//if notcircular
-					//self similarity is 0;inf;1
-					console.log(foundObj);
-
-					if (dimObj.length != 0){
-						for (x in foundObj){
-							if (x > 0){
-								utilityServiceApp.updateObject(totalDimObj, dimObj, foundObj[x].path);
-							}
+			var orderModels = await Order.find({identiferSet:identiferSet});
+			var foundObj = utilityServiceApp.searchObject(totalDimObj, function (value) {return value != null && value != undefined && value.name == identiferSet;});
+			if (foundObj.length != 0){
+				//ONLY KEEP THE LONGEST CHAIN?
+				//dimObj = foundObj[0].value;
+				//dimObj = {name:identiferSet, rank:orderModels.length, data:[]};
+				//console.log(foundObj);
+				//if notcircular
+				//self similarity is 0;inf;1
+				console.log(foundObj);
+				if (dimObj.length != 0){
+					for (x in foundObj){
+						if (x > 0){
+							utilityServiceApp.updateObject(totalDimObj, dimObj, foundObj[x].path);
 						}
 					}
 				}
-
-				else{
-					//console.log('rank',orderModels.length)
-					dimObj = {name:identiferSet, rank:orderModels.length, data:[]};
-
-					for (x in orderModels){
-						if (dimObj.data){
-							//PUSH ORDER BOOK
-							dimObj.data.push({
-								name: orderModels[x].identiferSet1,
-								data: [],
-							});
-						}
-
-						//else{console.log(dimObj.data)}
-
-						for (i in orderModels[x].identiferSet1.split(',')){
-							dimObj.data[x].data.push({
-								identiferSet1:orderModels[x].identiferSet1, 
-								amountSet1:orderModels[x].amountSet1,
-							});
-						}
-
-						if (recursion < depth){
-							valueTensor(orderModels[x].identiferSet1, totalDimObj, recursion, depth, x);
-						}
-					}
-				}
-				totalDimObj.push(dimObj);
-				console.log(totalDimObj)
-				//console.log(dimObj, totalDimObj);
-			});
-		};
-
-		function valueTensorTotal(identiferSet, dimObj, recursion, depth, index){
-			recursion++;
-			Order.find({identiferSet:identiferSet}).then(function(orderModels){
+			}
+			else{
+				//console.log('rank',orderModels.length)
 				dimObj = {name:identiferSet, rank:orderModels.length, data:[]};
 				for (x in orderModels){
 					if (dimObj.data){
@@ -937,12 +733,39 @@ module.exports = {
 							data: [],
 						});
 					}
+					//else{console.log(dimObj.data)}
+					for (i in orderModels[x].identiferSet1.split(',')){
+						dimObj.data[x].data.push({
+							identiferSet1:orderModels[x].identiferSet1, 
+							amountSet1:orderModels[x].amountSet1,
+						});
+					}
+					if (recursion < depth){
+						valueTensor(orderModels[x].identiferSet1, totalDimObj, recursion, depth, x);
+					}
 				}
-				console.log(dimObj);
-			});
+			}
+			totalDimObj.push(dimObj);
+			console.log(totalDimObj)
+			//console.log(dimObj, totalDimObj);
 		};
 
-		
+		async function valueTensorTotal(identiferSet, dimObj, recursion, depth, index){
+			recursion++;
+			var orderModels = await Order.find({identiferSet:identiferSet});
+			dimObj = {name:identiferSet, rank:orderModels.length, data:[]};
+			for (x in orderModels){
+				if (dimObj.data){
+					//PUSH ORDER BOOK
+					dimObj.data.push({
+						name: orderModels[x].identiferSet1,
+						data: [],
+					});
+				}
+			}
+			console.log(dimObj);
+		};
+
 		//UNIFICATION OF INFORMATION AND VALUE -- IMBUED TOKENIZED INFORMATION -- CHECK THIS UNIVERSAL MAPPING 
 		//STRING DATA ENCODING.. HOPEFULLY HUMAN READABLE --> PROMULAGATING EFFECTS OF EXCHANGE 
 		//VALIDATIONS...
@@ -950,9 +773,8 @@ module.exports = {
 			//TIME --> TASK
 			//TASK --> PROJ LINKAGES
 
-		//WERKIN
-		async function modification(){
 
+		async function modification(){
 			//Project.find().limit(10000).then(function(models){
 			//	for (x in models){
 			//		projectAssociations(models[x].parent, models[x].title).then(function(projectModel){
@@ -960,7 +782,6 @@ module.exports = {
 			//		});
 			//	}
 			//});
-
 			/*
 			Transaction.find().limit(10000).then(function(models){
 				for (x in models){
@@ -983,20 +804,17 @@ module.exports = {
 				}
 			});
 			*/
-
 			//RETROACTIVE VALIDATIONS TO CREATE ASSOCIATIONS.. IMPLICIT VALIDATION
 			//STRUCTURE VALIDATIONS AND ASSOICATEDMODELS :')
 			//TAGS ARE ASSOCIATIED. 
 			var models = await Time.find().limit(10000);
 			for (x in models){
-
 				//CONTENT, MEMBER, TASK, TIME, (PROJECT..) // STORE COMPOUND..? 
 				//console.log('TYPE', models[x].type); // RETORACTIVE, TIME, STREAM, DATA API
 				//console.log('associatedModels', models[x].associatedModels);
 				//console.log('PROJECT', models[x].project);
 				//console.log('TASK', dmodels[x].task);
 				//console.log('STREAM', models[x].stream);
-
 				//models[x].associatedModels = [];
 				/*
 				if (models[x].project){
@@ -1010,7 +828,6 @@ module.exports = {
 						assoiatedValidations:[],
 					});
 				}
-				
 				if (models[x].task){
 					models[x].associatedModels.push({
 						type:'TASK', 
@@ -1050,7 +867,6 @@ module.exports = {
 				//REMOVE NULL AND VERIFICATION SCORE
 				//Object.keys(models[x]).forEach((key) => (models[x][key] == null) && delete models[x][key]);
 				*/
-
 				if (!models[x].associatedModels){
 					models[x].associatedModels = [{type:'TASK', address:models[x].task}];
 					//Time.update({id:models[x].id}, {associatedModels:models[x].associatedModels}).then(function(){
@@ -1058,7 +874,6 @@ module.exports = {
 					//});
 				}
 			}
-			
 			//Validation.find().limit(10000).then(function(postModels){
 			//	for (x in postModels){
 			//		var reactions = {plus:0,minus:0};
@@ -1071,41 +886,25 @@ module.exports = {
 			//		});
 			//	}
 			//});
-
 			//CREATE RETRO VALIDS
 			var models = await Time.find().limit(10000)
 			for (x in models){
 				var model = models[x];
-
 				console.log(model.task, model.project, model.stream);
-
 				var validationModels = [];
-
 				var validationModel = {
 					reputation:{},
-					context:{
-						general:100
-					},
+					context:{general:100},
 					user:model.user,
 					creator:model.user,
-					parameters:{
-						charter:'GENERAL'
-					},
+					parameters:{charter:'GENERAL'},
 					type:'HUMAN'
 				};
-				
 				if (model.tags){
 					var context = model.tags.split(',');
-					for (x in context){
-						validationModel.context[context[x]] = 100;
-					}
-					if (model.user){
-						for (x in context){
-							validationModel.reputation[context[x]] = 0;
-						}
-					}
+					for (x in context){validationModel.context[context[x]] = 100;}
+					if (model.user){for (x in context){validationModel.reputation[context[x]] = 0;}}
 				}
-				
 				if (model.task){
 					validationModel.associatedModels = [
 						{type:'TIME', address:model.id},
@@ -1120,16 +919,8 @@ module.exports = {
 					];
 					validationModels.push(validationModel);
 				}
-
-				console.log(validationModels);
-
-				//var newValidation = await Validation.create();
-				//UPDATE TIME TO COMPUTED VALIDATION
-				//VALIDATION.FIND()
-				
+				console.log(validationModels);				
 			}
-			
-
 			var postModels = await Content.find().limit(700).skip(0);
 			for (x in postModels){
 				if (postModels[x].work){postModels[x].time = postModels[x].work }
@@ -1149,7 +940,6 @@ module.exports = {
 				//console.log(x, postModels[x]);
 				//var updatedContent = await Content.update({id:postModels[x].id}, {time:postModels[x].time, contentModel:postModels[x].contentModel});
 			}
-		
 			/*
 			Project.find().limit(5000).skip(0).then(function(projectModels){
 				for (x in projectModels){
@@ -1182,7 +972,6 @@ module.exports = {
 				}
 			});
 			*/
-
 			//Task.find().limit(10000).skip(0).then(function(taskModels){
 				//for (x in taskModels){
 					//THIS IS A COMPUTED VALUE..  LOL 
@@ -1196,11 +985,8 @@ module.exports = {
 					//});
 				//}
 			//});
-
 		};
-
 		//modification();
-		
 		//train('A', 0, 8);
 		//train('A', 0, 3);
 		//VALUE MATRIX | 2ND ORDER
@@ -1215,31 +1001,20 @@ module.exports = {
 		//identityWalk('A', 0, 3);
 		//path('A','C,D');
 		//traverse('A');
-		//dataService.getData();
+		//dataService.createNetwork();
 		//dataService.legacyTraverse(['C'],['A','B'],[1,2]);
 	},
 
 	//MAX 5 COMB ASSETS
 	tensorBuild: async function(){
-
-		const marketTensor = [];
-
-		//DUDE THIS IS GONNA BE MASSIVE..
-		//MULTIEXCHANGE.. ? KEEP IT SIMPLE RN 
-
 		//(A_m-->[A_m-n]--x7-->[A_m-n])
 		//var orderModels = await Order.find({identiferSet:'A'}).limit(100);
-
-		var tokenModels = await Token.find().limit(10)
-			
+		var tokenModels = await Token.find().limit(10);
 		//SORT BY ACTIVITY..?
 		//NEED COMB LOGIC.. 
 		//SOMEHOW LINK 5 ASSETS SO THERE IS A LATTICE IN THE CONNECTIONS OF COMP ASSETS IE A,B,C,D,E 
-
 		var tokenSet = tokenModels.map((obj)=>{return obj.string}).slice(0,4);
-		//var tokenSet = ['a','b','c','d','e','f'];
-		var maximumBinaryRelationship = dataService.getData(tokenSet, true);
-
+		var maximumBinaryRelationship = dataService.createNetwork(tokenSet, true);
 		for (x in maximumBinaryRelationship){
 			var tensorIndex = marketTensor.map((obj)=>{return obj.name}).indexOf(maximumBinaryRelationship[x][0].join(','));
 			if (tensorIndex == -1){
@@ -1247,8 +1022,8 @@ module.exports = {
 				var tensorIndex = marketTensor.map((obj)=>{return obj.name}).indexOf(maximumBinaryRelationship[x][0].join(','));
 				marketTensor[tensorIndex].data.push({
 					name:maximumBinaryRelationship[x][1].join(','), 
-					bids:new Array(2).fill(null).map(()=>new Array(maximumBinaryRelationship[x][0].length).fill(null)), 
-					asks:new Array(2).fill(null).map(()=>new Array(maximumBinaryRelationship[x][1].length).fill(null))
+					bids: new Array(2).fill(null).map(()=>new Array(maximumBinaryRelationship[x][0].length).fill(null)), 
+					asks: new Array(2).fill(null).map(()=>new Array(maximumBinaryRelationship[x][1].length).fill(null))
 				})
 			}
 			else{
@@ -1262,9 +1037,7 @@ module.exports = {
 		}
 		//console.log(marketTensor);
 		console.dir(marketTensor, { depth: null });
-
 		//powerset x powerset
-
 		//for (x in tokenModels){
 		//	marketTensor.push({name:tokenModels[x].string, data:[]})
 		//	for (y in tokenModels){
@@ -1272,7 +1045,6 @@ module.exports = {
 		//		marketTensor[x].data.push({name:tokenModels[y].string, bids:[], asks:[]})
 		//	}
 		//}
-
 		//TENSOR
 		//ASSETS x ASSETS
 		//2, BIDS, ASKS
@@ -1298,28 +1070,21 @@ module.exports = {
 		//const simpleMarket = tf.tensor(tensor);
 		//console.log(simpleMarket)
 		//simpleMarket.print();
-
 		//MM TENSOR.. EASY PLZ
 		//[a,b,c,d]
 		//DIM 4 BOOK
 		//IT's THICK
-
 		//USE REFLECTIONS? --> THERE ARE A SET OF THESE 'MIN MESH(s)' --> RERHAPS LIEING WITHIN E7+1 -- albeit this is a complete guess
 		//HARD PART -- CREATE A MESH OF PLUR ASSETS WITH A FIELD OF RANK 5 TENSORS SUCH THAT TRAVERSAL ORDER IS MINIMIZED ACROSS THE 'RING?' / market
 		//..OK .. WITHIN THE SUPER SET GEOMETRY. . NODE CONNTECTIONS | BRAID
 		//this is getting hyper complex. break lel.. let's go back to create.capital . . --> perform operations with one exchange.. tensor
-
 		var tokenSet = tokenModels.map((obj)=>{return obj.string}).slice(0,4);
-		var maximumBinaryRelationship = dataService.getData(tokenSet, false);
+		var maximumBinaryRelationship = dataService.createNetwork(tokenSet, false);
 		//console.log(maximumBinaryRelationship);
-
-
 		var relationShipTensor = [];
 		//OBtensor
-
 		//SHAPE [ assets, 2, 5, 5, 2, n ],
 		//TRAIN NN TO.. -->REDUCE.
-
 		for (x in maximumBinaryRelationship){
 			var bids = [[[0,0],[0,0],[0,0],[0,0]],[[0,0],[0,0],[0,0],[0,0]],[[0,0],[0,0],[0,0],[0,0]],[[0,0],[0,0],[0,0],[0,0]]];
 			var asks = [[[0,0],[0,0],[0,0],[0,0]],[[0,0],[0,0],[0,0],[0,0]],[[0,0],[0,0],[0,0],[0,0]],[[0,0],[0,0],[0,0],[0,0]]];
@@ -1327,58 +1092,48 @@ module.exports = {
 			//var asks = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];
 			//var bids = [0,0,0,0];
 			//var asks = [0,0,0,0];
-
 			//ONE MORE DIM IN -- MM OB
 			//THIS mm.. just so we can understand the struct
 			//[amount,price]1,[amount,price]2,...[]n --> if asset in quasi. else 0
-
 			for (y in maximumBinaryRelationship[x][0]){
 				if (maximumBinaryRelationship[x][0] == 'A'){bids[0][0]=[1,1]}//[[[1,1],[1,2],[1,1],[2,1]],[[1,1],[1,2],[1,1],[2,1]]]}
 				if (maximumBinaryRelationship[x][0] == 'B'){bids[1][1]=[1,1]}//[[[0,1],[2,1],[1,2],[2,1]],[[0,1],[2,1],[1,2],[2,1]]]}
 				if (maximumBinaryRelationship[x][0] == 'C'){bids[2][2]=[1,1]}//[[[0,1],[2,1],[1,2],[2,1]],[[0,1],[2,1],[1,2],[2,1]]]}
 				if (maximumBinaryRelationship[x][0] == 'D'){bids[3][3]=[1,1]}//[[[0,1],[2,1],[1,2],[2,1]],[[0,1],[2,1],[1,2],[2,1]]]}
 			}
-
 			for (y in maximumBinaryRelationship[x][1]){
 				if (maximumBinaryRelationship[x][1] == 'A'){asks[0][0]=[1,1]}//[[[0,1],[2,1],[1,2],[2,1]],[[0,1],[2,1],[1,2],[2,1]]]}
 				if (maximumBinaryRelationship[x][1] == 'B'){asks[1][1]=[1,1]}//[[[0,1],[2,1],[1,2],[2,1]],[[0,1],[2,1],[1,2],[2,1]]]}
 				if (maximumBinaryRelationship[x][1] == 'C'){asks[2][2]=[1,1]}//[[[0,1],[2,1],[1,2],[2,1]],[[0,1],[2,1],[1,2],[2,1]]]}
 				if (maximumBinaryRelationship[x][1] == 'D'){asks[3][3]=[1,1]}//[[[0,1],[2,1],[1,2],[2,1]],[[0,1],[2,1],[1,2],[2,1]]]}
 			}
-
 			relationShipTensor.push([bids,asks]);
-
 		}
 		//console.log(relationShipTensor)
 		//const multiMarketRelationship = tf.tensor(relationShipTensor);
 		//console.log(multiMarketRelationship)
 		//multiMarketRelationship.print();
-
 		//const lattice =  tf.ones([8,8,8,8,8,8,8,8]);
 		//console.log(lattice)
 		//lattice.print();
 		//const lattice =  tf.ones([4,4,4,4]);
 		//console.log(lattice)
 		//lattice.print();
-
 		//GET ORDER BOOKS..
 		//BUILD 1st ORDER 1st 
 		//STRUCTURE AS RECURSIVE.
 	},
-
+	
 	//TO BE REPLACED BY LATTICE OPERATIONS
 	//POWERSET LATTICE? 
 	legacyTraverse: async function(inputAssets, outputAssets, outputValues){
-
 		//var inputVectorValues = []; //UNKNOWN
 		var inputVectorAssets = inputAssets; //CAN BE UNKNOWN | OR NOT
 		var inputVectorAssetString = inputVectorAssets.join('');
-
 		//OUTPUT IS A SET | && || OPERATIONS
 		var outputVectorValues = outputValues;
 		var outputVectorAssets = outputAssets;
 		var outputVectorAssetString = outputVectorAssets.join('');
-
 		//MARKET RELATION --> PATH {}
 		//TRANSFORM TO SELF SIMILAR ALGEBRA ~ Each asset is a crystal
 		//GIVEN THE CRYSTALINE RELATIONSHIP BEWTWEEN A-H
@@ -1386,7 +1141,6 @@ module.exports = {
 		//SET OF PATHS ARE SET OF ORDERS 
 		//MAP THE BOOK TO THE LATTICE?
 		//FIND SET OF PATHS FROM [N]->[M] | SOME DECOMPOSIIOTN OF DFINED SELF SIMIALR? 
-
 		var models = await Order.find({identiferSet:inputVectorAssetString});
 		//console.log(models)
 		//for (x in models){
@@ -1394,7 +1148,5 @@ module.exports = {
 		//		console.log('sup')
 		//	}
 		//}
-
-	},
-
+	}
 };

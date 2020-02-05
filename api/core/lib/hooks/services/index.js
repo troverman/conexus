@@ -1,17 +1,9 @@
-/**
- * Module dependencies
- */
-
 var _ = require('@sailshq/lodash');
-
-
-
 /**
  * @param  {SailsApp} sails
  * @return {Function}
  */
 module.exports = function (sails) {
-
   /**
    * `services`
    *
@@ -20,20 +12,13 @@ module.exports = function (sails) {
    * @param  {SailsApp} sails
    * @return {Dictionary}
    */
+   //STUDY HOOK LOADER
   return {
-
     /**
      * Implicit defaults which will be merged into sails.config before this hook is loaded...
      * @type {Dictionary}
      */
-    defaults: {
-      globals: {
-        services: true
-      }
-    },
-
-
-
+    defaults: {globals: {services: true}},
     /**
      * Before any hooks have begun loading...
      * (called automatically by Sails core)
@@ -49,20 +34,14 @@ module.exports = function (sails) {
       // guaranteed to exist.
       sails.services = {};
     },
-
-
-
     /**
      * Before THIS hook has begun loading...
      * (called automatically by Sails core)
      */
     loadModules: function(cb) {
-
       // In future versions of Sails, the empty registry of services can be initialized here:
       // sails.services = {};
-
       sails.log.silly('Loading app services...');
-
       // Load service modules using the module loader
       // (by default, this loads services from files in `api/services/*`)
       sails.modules.loadServices(function(err, modules) {
@@ -71,10 +50,8 @@ module.exports = function (sails) {
           sails.log.error(err);
           return cb(err);
         }
-
         // Expose services on `sails.services` to provide access even when globals are disabled.
         _.extend(sails.services, modules);
-
         // Expose globals (if enabled)
         if (sails.config.globals.services) {
           _.each(sails.services, function(service, identity) {
@@ -82,7 +59,6 @@ module.exports = function (sails) {
             global[globalId] = service;
           });
         }
-
         // Relevant modules have finished loading.
         return cb();
       });

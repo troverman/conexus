@@ -1,7 +1,6 @@
 var _ = require('@sailshq/lodash');
 /**
  * Sails.prototype.getActions()
- *
  * Return a shallow clone of the loaded actions dictionary.
  */
 module.exports = function getActions() {

@@ -1,26 +1,20 @@
 //FITBIT APP
-
 module.exports = {
-
 	//APP APP CONNECTION
 	//require core
 	//require ...
 	//require time
-
 	//require oauth
 	//require passport ...
-
 	import: {
 		request: require('request'),
 		Q: require('q'),
 		rp: require('request-promise') 
 	},
-
 	//TODO:
 	connections:[
 		//MEMBER-APP --> DATA
 	],
-
 	//TODO
 	dataModels:[
 		{
@@ -35,11 +29,9 @@ module.exports = {
 		//type fitbit_floor
 		//type fitbit_distance
 	],
-
 	//TEST
 	language: 'Javascript',
-	compiler:'V8',
-
+	runtime:'V8',
 	//callback or promise?
 	//TODO: CALL BACK / QUERY INTREPRETATION, req, res paramaterization
 	//TODO: ERR HANDLING
@@ -118,7 +110,6 @@ module.exports = {
 		},
 		calories: function(model){},
 	},
-
 	//TODO: CUSTOM DATA MODELS VIA APPLICATIONS
 	//TODO: fitbit time vs time
 	//TODO: EVENT
@@ -140,31 +131,22 @@ module.exports = {
 
 	//TODO: UPDATE
 	getData: async function(req){
-
 		console.log('FITBIT APP!')
-
 		//TODO: DEPRECIATE.. 
 		//TODO: PASS USER OBJ THRU FXNs
 		const userIdTemp = req.id;
-
 		//TODO: LOAD USER APPS
 		//TODO: DEPRECIATE POPULATE
-
 		var model = await User.find({id:req.id}).populate('passports')
 		//TODO: refreshAuthTokens;
-
 		//TODO: DEPRECIATE PASSPORT, APPRECIATE APP-MEMBER CONNECTION
 		//TODO: ENCRYPT ACCESS TOKEN STORAGE -- STORE KEYS IN LOCAL PEER
 		var fitbitPassport = model[0].passports.filter(function(obj){return obj.provider=='fitbit'});
-
 		if (fitbitPassport.length > 0){
-
 			console.log(model[0].username, fitbitPassport[0].identifier, fitbitPassport[0].tokens.accessToken);
-
 			model.userId = fitbitPassport[0].identifier;
 			model.accessToken = fitbitPassport[0].tokens.accessToken;
 			model.timeQuery = '1d'; //'1y'; //1m
-		
 			//TODO: MOVE FROM STATIC CODE TO STRUCT TOKEN GETTER
 			//TODO: CREATE TOKENS
 			//TODO: CREATE DATA MODEL
@@ -172,9 +154,7 @@ module.exports = {
 			//UPDATING PASSPORT TOKENS REQUIRES USER INPUT . . .TODO: 
 			//TODO: UPDATE AUTH TOKENS 
 			var activity = await fitbitApp.get.steps(model);
-
 			//IF GOOD TOKENS
-
 			var tokens = fitbitApp.tokens.get({type:'fitbit_step', data:activity});
 			//TODO: STRUCUTRE BETTER
 			for (x in tokens){
@@ -184,7 +164,6 @@ module.exports = {
 				tokens[x].associatedModels = [{type:'MEMBER', id:userIdTemp}];
 			}
 			fitbitApp.tokens.create(tokens);
-		
 			//TODO: FIX
 			var activity = await fitbitApp.get.steps(model);
 			var tokens = fitbitApp.tokens.get({type:'fitbit_distance', data:activity})
@@ -197,7 +176,6 @@ module.exports = {
 			}
 			//TODO: UPDATE
 			//fitbitApp.tokens.create(tokens);
-
 			var activity = await fitbitApp.get.steps(model);
 			var tokens = fitbitApp.tokens.get({type:'fitbit_floor', data:activity})
 			//TODO: STRUCUTRE BETTER
@@ -209,16 +187,12 @@ module.exports = {
 			}
 			//TODO: UPDATE
 			//fitbitApp.tokens.create(tokens);
-			
-
 			//SCALING ON HEARTRATE
 			/*
 			var activity = await fitbitApp.get.steps(model);
-
 			//TODO: MOVE TO TOKEN FXN
 			var tokens = [];
 			for (x in activity){
-
 				tokens.push({
 					tokenString:'FITBIT+HEART+REST+'+activity[x].value.restingHeartRate, 
 					amount: parseFloat(1)
@@ -227,15 +201,11 @@ module.exports = {
 					tokenString:'FITBIT+HEART+DATE+'+activity[x].dateTime+'+RESTING_HEART_RATE+'+activity[x].value.restingHeartRate, 
 					amount: parseFloat(1)
 				});
-
 				for (y in activity[x].value.heartRateZones){
-
 					//activity[x].value.heartRateZones[y].max,
 					//activity[x].value.heartRateZones[y].min,
-
 					if (activity[x].value.heartRateZones[y].minutes == null){activity[x].value.heartRateZones[y].minutes=0}
 					if (activity[x].value.heartRateZones[y].caloriesOut == null){activity[x].value.heartRateZones[y].caloriesOut=0}
-
 					tokens.push({
 						tokenString:'FITBIT+HEART+'+activity[x].value.heartRateZones[y].name.toUpperCase().replace(/ /g, '_'),
 						amount: parseFloat(activity[x].value.heartRateZones[y].minutes*60)
@@ -244,20 +214,16 @@ module.exports = {
 						tokenString:'FITBIT+HEART+DATE+'+activity[x].dateTime+'+'+activity[x].value.heartRateZones[y].name.toUpperCase().replace(/ /g, '_'),
 						amount: parseFloat(activity[x].value.heartRateZones[y].minutes*60)
 					});
-
 					tokens.push({
 						tokenString:'FITBIT+CALORIES+BURN+'+activity[x].value.heartRateZones[y].name.toUpperCase().replace(/ /g, '_'),
 						amount: parseFloat(activity[x].value.heartRateZones[y].caloriesOut)
 					});
-
 					tokens.push({
 						tokenString:'FITBIT+CALORIES+BURN',
 						amount: parseFloat(activity[x].value.heartRateZones[y].caloriesOut)
 					});
-
 				}
 			}
-
 			//TODO: STRUCUTRE BETTER
 			for (x in tokens){
 				tokens[x].protocols = ['FITBIT','FITBIT-HEART'];
@@ -265,22 +231,17 @@ module.exports = {
 				tokens[x].associatedModels = [{type:'MEMBER', id:userIdTemp}];
 				tokens[x].information = {inCirculation:0, market:0};
 			}
-			
 			//TODO: UPDATE
 			fitbitApp.tokens.create(tokens);
-
 			*/
-
 			//TODD: BETTER WITH TOKEN MAXIMALIZATION.
 			//TODO: DATA HASH, DATA OBJ FLATTEN
 			//TODO: NOMALIZE DATE
 			/*
 			var activity = await fitbitApp.get.steps(model);
-
 			//TODO: MOVE TO TOKEN FXN
 			var tokens = [];
 			for (x in activity){
-	
 				//TODO: PLURALISM CRE8 TIME IMPORT
 				//activity[x].duration,
 				//activity[x].startTime,
@@ -293,7 +254,6 @@ module.exports = {
 				//	tokenString:'CRE8+TIME+FITBIT+SLEEP+'+activity[x].dateOfSleep, 
 				//	amount: activity[x].duration
 				//});
-
 				tokens.push({
 					tokenString:'FITBIT+SLEEP', 
 					amount: parseFloat(activity[x].duration/1000)
@@ -302,7 +262,6 @@ module.exports = {
 					tokenString:'FITBIT+SLEEP+'+activity[x].dateOfSleep, 
 					amount: parseFloat(activity[x].duration/1000)
 				});
-
 				tokens.push({
 					tokenString:'FITBIT+SLEEP+EFFICIENCY', 
 					amount: parseFloat(activity[x].efficiency)
@@ -311,7 +270,6 @@ module.exports = {
 					tokenString:'FITBIT+SLEEP+EFFICIENCY+DATE+'+activity[x].dateOfSleep, 
 					amount: parseFloat(activity[x].efficiency)
 				});
-
 				tokens.push({
 					tokenString:'FITBIT+SLEEP+TIME_IN_BED', 
 					amount: parseFloat(activity[x].timeInBed*60)
@@ -320,7 +278,6 @@ module.exports = {
 					tokenString:'FITBIT+SLEEP+TIME_IN_BED+DATE+'+activity[x].dateOfSleep, 
 					amount: parseFloat(activity[x].timeInBed*60)
 				});
-
 				tokens.push({
 					tokenString:'FITBIT+SLEEP+ASLEEP', 
 					amount: parseFloat(activity[x].minutesAsleep*60)
@@ -329,7 +286,6 @@ module.exports = {
 					tokenString:'FITBIT+SLEEP+ASLEEP+DATE+'+activity[x].dateOfSleep, 
 					amount: parseFloat(activity[x].minutesAsleep*60)
 				});
-
 				tokens.push({
 					tokenString:'FITBIT+SLEEP+AWAKE', 
 					amount: parseFloat(activity[x].minutesAwake*60)
@@ -338,25 +294,19 @@ module.exports = {
 					tokenString:'FITBIT+SLEEP+AWAKE+DATE+'+activity[x].dateOfSleep, 
 					amount: parseFloat(activity[x].minutesAwake*60)
 				});
-
 				//GRANULAR
 				for (y in activity[x].levels.data){
-						
 					//activity[x].levels.data[y].dateTime;
-
 					tokens.push({
 						tokenString:'FITBIT+SLEEP+LEVEL+'+activity[x].levels.data[y].level.toUpperCase(), 
 						amount: parseFloat(activity[x].levels.data[y].seconds)
 					});
-
 					tokens.push({
 						tokenString:'FITBIT+SLEEP+LEVEL+'+activity[x].levels.data[y].level.toUpperCase()+'+DATE+'+activity[x].dateOfSleep,//+activity[x].levels.data[y].dateTime, 
 						amount: parseFloat(activity[x].levels.data[y].seconds)
 					});
-
 				}
 			}
-
 			//TODO: STRUCUTRE BETTER
 			for (x in tokens){
 				tokens[x].protocols = ['FITBIT','FITBIT-SLEEP'];
@@ -364,13 +314,10 @@ module.exports = {
 				tokens[x].associatedModels = [{type:'MEMBER', id:userIdTemp}];
 				tokens[x].information = {inCirculation:0, market:0};
 			}
-
 			//TODO: UPDATE
 			fitbitApp.tokens.create(tokens);
 			*/
-
 		}
-		
 	},
 
 	interval: async function(){
@@ -394,7 +341,6 @@ module.exports = {
 	//TODO: DISCRETE VS MODEL
 	//TODO: DATA MODEL ...
 	tokens:{
-
 		//TODO: CONST TOKEN STRUCT
 		model:{
 			//const tokenModel = {
@@ -403,7 +349,6 @@ module.exports = {
 			//	}
 			//}
 		},
-
 		//TODO: UPDATE
 		//TODO: TOKEN STRUCT
 		//THERE IS A RACE CONDITION FOR SEPERATE FXNS 
@@ -436,10 +381,8 @@ module.exports = {
 		},
 
 		get:function(model){
-
 			//TODO: TOKEN JSON STRUCT
 			var tokens = [];
-
 			if (model.type == 'fitbit_step'){
 				for (x in model.data){
 					tokens.push({
@@ -476,15 +419,11 @@ module.exports = {
 					});
 				}
 			}
-
 			if (model.type == 'fitbit_elevation'){}
 			if (model.type == 'fitbit_heart'){}
 			if (model.type == 'fitbit_sleep'){}
-
 			return tokens;
-
-		},
-
+		}
 	},
 
 	//TODO: DEFINE PASSPORT
@@ -504,7 +443,6 @@ module.exports = {
 			}
 		};
 	},
-
 	//TODO: REFRESH TOKENS; IMPORT OAUTH2
 	//TODO: ON CREATE CONNECTION.. 
 	//TODO: FUNCTION TO CONNECT FITBIT -- GIVE LIFE TIME TOKENS
@@ -512,15 +450,11 @@ module.exports = {
 	connect: function(req){
 		//INTI WITH 1 yr
 	},
-
 	//TODO: OAUTH2
 	//DOFOR EVERY CALL.. 
 	refreshAuthTokens: function(req){
-
 		//TODO: WITHOUT PASSPORT.. ? 
 		//console.log(provider, options);
     	//this.authenticate(provider, options)(req, res, req.next);
-
 	},
-
 };

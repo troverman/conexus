@@ -5,29 +5,22 @@ var CaptainsLog = require('captains-log');
 var loadSails = require('./load');
 var mixinAfter = require('./private/after');
 var __Router = require('../router');
-
 /**
  * Construct a Peer instance.
  */
 function Sails() {
-
   // Inherit methods from EventEmitter
   events.EventEmitter.call(this);
-
   this.setMaxListeners(0);
   this.childProcesses = [];
   this.log = CaptainsLog();
   this._actions = {};
   this._actionMiddleware = {};
-
   // Build a Router instance (which will attach itself to the sails object)
   __Router(this);
-
   this.load = loadSails(this);
-
   // Mixin support for `Sails.prototype.after()`
   mixinAfter(this);
-
   // Bind `this` context for all `Sails.prototype.*` methods
   this.load = _.bind(this.load, this);
   this.request = _.bind(this.request, this);
@@ -51,13 +44,10 @@ function Sails() {
   this.registerActionMiddleware = _.bind(this.registerActionMiddleware, this);
   this.reloadActions = _.bind(this.reloadActions, this);
 }
-
 // Extend from EventEmitter to allow hooks to listen to stuff
 util.inherits(Sails, events.EventEmitter);
-
 // Public methods
 ////////////////////////////////////////////////////////
-
 Sails.prototype.lift = require('./lift');
 Sails.prototype.lower = require('./lower');
 Sails.prototype.getRouteFor = require('./get-route-for');
@@ -66,46 +56,25 @@ Sails.prototype.reloadActions = require('./reload-actions');
 Sails.prototype.getActions = require('./get-actions');
 Sails.prototype.registerAction = require('./register-action');
 Sails.prototype.registerActionMiddleware = require('./register-action-middleware');
-
 // Public properties
 ////////////////////////////////////////////////////////
 // Regular expression to match request paths that look like assets.
 Sails.prototype.LOOKS_LIKE_ASSET_RX = /^[^?]*\/[^?\/]+\.[^?\/]+(\?.*)?$/;
-
 // Experimental methods
 ////////////////////////////////////////////////////////
 Sails.prototype.request = require('./request');
-
 // Expose Express-esque synonyms for low-level usage of router
-Sails.prototype.all = function(path, action) {
-  this.router.bind(path, action);
-  return this;
-};
-Sails.prototype.get = function(path, action) {
-  this.router.bind(path, action, 'get');
-  return this;
-};
-Sails.prototype.post = function(path, action) {
-  this.router.bind(path, action, 'post');
-  return this;
-};
-Sails.prototype.put = function(path, action) {
-  this.router.bind(path, action, 'put');
-  return this;
-};
-Sails.prototype.del = Sails.prototype['delete'] = function(path, action) {
-  this.router.bind(path, action, 'delete');
-  return this;
-};
-
+Sails.prototype.all = function(path, action) {this.router.bind(path, action); return this;};
+Sails.prototype.get = function(path, action) {this.router.bind(path, action, 'get'); return this;};
+Sails.prototype.post = function(path, action) {this.router.bind(path, action, 'post'); return this;};
+Sails.prototype.put = function(path, action) {this.router.bind(path, action, 'put'); return this;};
+Sails.prototype.del = Sails.prototype['delete'] = function(path, action) {this.router.bind(path, action, 'delete'); return this;};
 /**
  * .getRc()
  * Get a dictionary of config from env vars, CLI opts, and `.sailsrc` file(s).
  * @returns {Dictionary}
  */
-
 Sails.prototype.getRc = require('./configuration/rc');
-
 // Private methods:
 ////////////////////////////////////////////////////////
 Sails.prototype.initialize = require('./private/initialize');
@@ -113,13 +82,13 @@ Sails.prototype.exposeGlobals = require('./private/exposeGlobals');
 Sails.prototype.runBootstrap = require('./private/bootstrap');
 Sails.prototype.isLocalSailsValid = require('./private/isLocalSailsValid');
 Sails.prototype.isSailsAppSync = require('./private/isSailsAppSync');
-
 // Presentation methods:
 ////////////////////////////////////////////////////////
 Sails.prototype.inspect = require('./private/inspect');
 Sails.prototype.toString = require('./private/toString');
 Sails.prototype.toJSON = require('./private/toJSON');
-
 // Expose Sails constructor:
 ////////////////////////////////////////////////////////
+
+
 module.exports = Sails;

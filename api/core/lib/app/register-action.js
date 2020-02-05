@@ -1,10 +1,4 @@
-/**
- * Module dependencies
- */
-
 var helpRegisterAction = require('./private/controller/help-register-action');
-
-
 /**
  * Sails.prototype.registerAction()
  *
@@ -31,10 +25,7 @@ var helpRegisterAction = require('./private/controller/help-register-action');
  * @api public
  */
 module.exports = function registerAction(action, identity, force) {
-
   var sails = this;
-
   // Call the private `helpRegisterAction` method, without `force` argument.
   helpRegisterAction(sails, action, identity, force);
-
 };

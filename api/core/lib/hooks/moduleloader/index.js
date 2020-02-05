@@ -18,8 +18,10 @@ module.exports = function(sails) {
    */
 
    //TODO: NAME SPACING
-   
+
    //has to de dynamic and load from db --> init function wrappers have a static verioning 'find or create' methods to bootstrap 
+
+   //TODO: ROUTE BINDING IN APPS ..
 
   return {
     defaults: function (config) {

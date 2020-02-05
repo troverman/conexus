@@ -1,5 +1,4 @@
 var STRIP_COMMENTS_RX = /(\/\/.*$)|(\/\*[\s\S]*?\*\/)|(\s*=[^,\)]*(('(?:\\'|[^'\r\n])*')|("(?:\\"|[^"\r\n])*"))|(\s*=[^,\)]*))/mg;
-
 /**
  * runBootstrap()
  *
@@ -11,9 +10,7 @@ var STRIP_COMMENTS_RX = /(\/\/.*$)|(\/\*[\s\S]*?\*\/)|(\s*=[^,\)]*(('(?:\\'|[^'\
  *
  * @api private
  */
-
 module.exports = function runBootstrap(done) {
-
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   // > FUTURE: Add tests that verify that the bootstrap function may
   // > be disabled or set explicitly w/o running, depending on user
@@ -23,17 +20,11 @@ module.exports = function runBootstrap(done) {
   // > and thus was a problem that came up when shuffling things around
   // > w/ hook loading.)
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
   var sails = this;
-
   // Run bootstrap script if specified
   // Otherwise, do nothing and continue
-  if (!sails.config.bootstrap) {
-    return done();
-  }
-
+  if (!sails.config.bootstrap) {return done();}
   sails.log.verbose('Running the setup logic in `sails.config.bootstrap(done)`...');
-
   // If bootstrap takes too long, display warning message
   // (just in case user forgot to call THEIR bootstrap's `done` callback, if
   // they're using that approach)
@@ -45,7 +36,6 @@ module.exports = function runBootstrap(done) {
     'maybe double-check to be sure that callback is getting called.\n'+
     ' [?] Read more: https://sailsjs.com/config/bootstrap');
   }, timeoutMs);
-
   var ranBootstrapFn = false;
   (function(proceed){
     try {
@@ -61,15 +51,11 @@ module.exports = function runBootstrap(done) {
       }
       if (sails.config.bootstrap.constructor.name === 'AsyncFunction') {
         var promise;
-        if (seemsToExpectCallback) {
-          promise = sails.config.bootstrap(proceed);
-        } else {
+        if (seemsToExpectCallback) {promise = sails.config.bootstrap(proceed);} 
+        else {
           promise = sails.config.bootstrap(function(unusedErr){
-            proceed(new Error('Unexpected attempt to invoke callback.  Since this "bootstrap" function does not appear to expect a callback parameter, this stub callback was provided instead.  Please either explicitly list the callback parameter among the arguments or change this code to no longer use a callback.'));
-          })
-          .then(function(){
-            proceed();
-          });
+          proceed(new Error('Unexpected attempt to invoke callback.  Since this "bootstrap" function does not appear to expect a callback parameter, this stub callback was provided instead.  Please either explicitly list the callback parameter among the arguments or change this code to no longer use a callback.'));})
+          .then(function(){proceed();});
         }//ﬁ
         promise.catch(function(e) {
           proceed(e);
@@ -78,29 +64,24 @@ module.exports = function runBootstrap(done) {
         });
       }
       else {
-        if (seemsToExpectCallback) {
-          sails.config.bootstrap(proceed);
-        } else {
+        if (seemsToExpectCallback) {sails.config.bootstrap(proceed);} 
+        else {
           sails.config.bootstrap(function(unusedErr){
             proceed(new Error('Unexpected attempt to invoke callback.  Since this "bootstrap" function does not appear to expect a callback parameter, this stub callback was provided instead.  Please either explicitly list the callback parameter among the arguments or change this code to no longer use a callback.'));
           });
           return proceed();
         }
       }
-    } catch (e) { return proceed(e); }
+    } 
+    catch (e) { return proceed(e); }
   })(function (err){
     if (ranBootstrapFn) {
-      if (err) {
-        sails.log.error('The bootstrap function encountered an error *AFTER* it already ran once!  Details:',err);
-      }
-      else {
-        sails.log.error('The bootstrap function (`sails.config.bootstrap`) signaled that it is finished, but it already ran once!  (*If* it is using a callback, check that the callback is not being called more than once.)');
-      }
+      if (err) {sails.log.error('The bootstrap function encountered an error *AFTER* it already ran once!  Details:',err);}
+      else {sails.log.error('The bootstrap function (`sails.config.bootstrap`) signaled that it is finished, but it already ran once!  (*If* it is using a callback, check that the callback is not being called more than once.)');}
       return;
     }//-•
     ranBootstrapFn = true;
     clearTimeout(timer);
-
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     // Note that async+await+bluebird+Node 8 errors are not necessarily "true" Error instances,
     // as per _.isError() anyway (see https://github.com/node-machine/machine/commits/6b9d9590794e33307df1f7ba91e328dd236446a9).
@@ -109,9 +90,6 @@ module.exports = function runBootstrap(done) {
     // original Error lives.)
     // FUTURE: try that out
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
     return done(err);
-
   });//</ self-calling function >
-
 };

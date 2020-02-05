@@ -1,11 +1,5 @@
-/**
- * Module dependencies
- */
-
 var _ = require('@sailshq/lodash');
 var flaverr = require('flaverr');
-
-
 /**
  * Sails.prototype.registerActionMiddleware()
  *
@@ -28,33 +22,20 @@ var flaverr = require('flaverr');
  *
  * @api public
  */
-
 module.exports = function registerActionMiddleware(middleware, actionsGlobKey) {
-
   var sails = this;
-
   // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
   // FUTURE: explore how we might extend machine-as-action or implement
   // something entirely new (e.g. `machine-as-middleware`) that is kinda
   // like machine-as-action, but where the success response calls `next`)
   // This would be so that  machine defs can be registered as middleware?
   // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-
-  if (!_.isArray(middleware)) {
-    middleware = [middleware];
-  }
-
-  if (!_.all(middleware, _.isFunction)) {
-    throw flaverr({ name: 'userError', code: 'E_NON_FN_POLICY' }, new Error('Attempted to register action middleware(s) (aka policies) for `' + actionsGlobKey + '` but one or more provided action middlewares (policies) was not a function.'));
-  }
-
+  if (!_.isArray(middleware)) {middleware = [middleware];}
+  if (!_.all(middleware, _.isFunction)) {throw flaverr({ name: 'userError', code: 'E_NON_FN_POLICY' }, new Error('Attempted to register action middleware(s) (aka policies) for `' + actionsGlobKey + '` but one or more provided action middlewares (policies) was not a function.'));}
   // Get or create the array for this glob key.
   var existingActionMiddlewareRegisteredForGlobKey = sails._actionMiddleware[actionsGlobKey] || [];
-
   // Add these middlewares to the array.
   existingActionMiddlewareRegisteredForGlobKey = existingActionMiddlewareRegisteredForGlobKey.concat(middleware);
-
   // Assign the array back to our `_actionMiddleware` dictionary.
   sails._actionMiddleware[actionsGlobKey] = existingActionMiddlewareRegisteredForGlobKey;
-
 };

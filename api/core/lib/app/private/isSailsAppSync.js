@@ -1,10 +1,8 @@
 var fs = require('fs');
 var path = require('path');
-
 /**
  * Check if the specified appPath contains something that looks like a Sails app.
  */
-
 module.exports = function isSailsAppSync(appPath) {
   // Has no package.json file
   if (!fs.existsSync(path.join(appPath, 'package.json'))) {return false;}

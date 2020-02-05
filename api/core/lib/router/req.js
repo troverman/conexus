@@ -2,7 +2,6 @@ var _ = require('@sailshq/lodash');
 var defaultsDeep = require('merge-defaults');// « TODO: Get rid of this
 var MockReq = require('./mock-req');// «FUTURE: consolidate that into this file
 var parseurl = require('parseurl');
-
 /**
  * Factory which builds generic Sails request object (i.e. `req`).
  *
@@ -18,28 +17,22 @@ var parseurl = require('parseurl');
  * @return {Request} simulated HTTP request object
  * @idempotent
  */
-
 module.exports = function buildRequest (_req) {
-
   // Make sure _req is not undefined
   _req = _req||{};
-
   // Start our request object, which will be built by inheriting/transforming
   // properties of _req and adding some spice of our own
   var req;
-
   // Attempt to parse the URL in _req, so that we can get the querystring
   // and path.  (But if it fails for any reason, ignore the error and fall back
   // to an empty dictionary.)
   var parsedUrl;
   try {parsedUrl = parseurl(_req) || {};}
   catch (unusedErr) {parsedUrl = {};}
-
   // If `_req` appears to be a stream (duck-typing), then don't try
   // and turn it into a mock stream again.
   if (typeof _req === 'object' && _req.read) {req = _req;}
   else {
-
     // TODO: send a PR to mock-req with a fix for this
     if (_req.headers && typeof _req.headers === 'object') {
       // Strip undefined headers
@@ -52,14 +45,12 @@ module.exports = function buildRequest (_req) {
         return headerVal;
       });
     }
-
     // Create a mock IncomingMessage stream.
     req = new MockReq({
       method: _req && (_.isString(_req.method) ? _req.method.toUpperCase() : 'GET'),
       headers: _req && _req.headers || {},
       url: _req && _req.url
     });
-
     // Add .get() and .header() methods to match express 3
     req.get = req.header = function (name) {
       switch (name = name.toLowerCase()) {
@@ -70,21 +61,17 @@ module.exports = function buildRequest (_req) {
           return this.headers[name];
       }
     };
-
     // Now pump client request body to the mock IncomingMessage stream (req)
     // Req stream ends automatically if this is a GET or HEAD or DELETE request
     // (since there is no request body in that case) so no need to do it again.
     if (req.method !== 'GET' && req.method !== 'HEAD' && req.method !== 'DELETE') {
-
       // Only write the body if there IS a body.
       if (req.body) {req.write(req.body);}
       req.end();
     }
   }
-
   // Track request start time
   req._startTime = new Date();
-
   ////////////////////////////////////////////////////////////////////////////////
   // Note that other core methods _could_ be added here for use w/ the virtual
   // router.  But as per convo w/ dougwilson, the same _cannot_ be done for HTTP
@@ -98,7 +85,6 @@ module.exports = function buildRequest (_req) {
   // already built-in to the mock request, and which are _not_ already taken care of
   // by hooks, AND which don't rely on `res` (because it hasn't been built yet).
   ////////////////////////////////////////////////////////////////////////////////
-
   // Provide defaults for other request state and methods
   req = defaultsDeep(req, {
     params: [],

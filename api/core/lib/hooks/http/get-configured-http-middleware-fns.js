@@ -1,14 +1,7 @@
-/**
- * Module dependencies
- */
-
 var Path = require('path');
 var util = require('util');
 var flaverr = require('flaverr');
 var _ = require('@sailshq/lodash');
-
-
-
 /**
  * getBuiltInHttpMiddleware()
  *
@@ -24,7 +17,6 @@ var _ = require('@sailshq/lodash');
  *             @param {Function} next
  */
 module.exports = function getBuiltInHttpMiddleware (expressRouterMiddleware, sails) {
-
   // Note that the environment of a Sails app is officially determined by
   // `sails.config.environment`. Normally, that is identical to what you'll
   // find inside `process.env.NODE_ENV`.
@@ -44,9 +36,6 @@ module.exports = function getBuiltInHttpMiddleware (expressRouterMiddleware, sai
   // will in production (since NODE_ENV is set).
   //
   var IS_NODE_ENV_PRODUCTION = (process.env.NODE_ENV === 'production');
-
-
-
   return _.defaults(sails.config.http.middleware || {}, {
 
     // Configure flat file server to serve static files
@@ -55,10 +44,8 @@ module.exports = function getBuiltInHttpMiddleware (expressRouterMiddleware, sai
       var flatFileMiddleware = require('serve-static')(sails.config.paths['public'], {
         maxAge: sails.config.http.cache
       });
-
       return flatFileMiddleware;
     })(),
-
     // If a Connect session store is configured, hook it up to Express
     session: (function() {
       // Silently do nothing if there's no session hook.
@@ -73,21 +60,14 @@ module.exports = function getBuiltInHttpMiddleware (expressRouterMiddleware, sai
         sails.log.error('Cannot load default HTTP session middleware without `sails.config.session` configured.  Skipping...');
         return;
       }
-
       var configuredSessionMiddleware = sails._privateSessionMiddleware;
-
       return function session(req, res, next){
-
         // --•
         // Run the session middleware.
         configuredSessionMiddleware(req,res,function (err) {
-          if (!err) {
-            return next();
-          }
-
+          if (!err) {return next();}
           var errMsg = 'Error occurred in session middleware :: ' + util.inspect((err&&err.stack)?err.stack:err, false, null);
           sails.log.error(errMsg);
-
           // If headers have already been sent (e.g. because of timing issues in application-level code),
           // then don't attempt to send another response.
           // (but still log a warning)
@@ -95,16 +75,12 @@ module.exports = function getBuiltInHttpMiddleware (expressRouterMiddleware, sai
             sails.log.warn('The session middleware encountered an error and triggered its callback, but response headers have already been sent.  Rather than attempting to send another response, failing silently...');
             return;
           }
-
           // --•
           // Otherwise, we can go ahead and send a response.
           return res.status(400).send(errMsg);
         });
       };
-
     })(),
-
-
     // Build configured favicon mwr function.
     favicon: (function (){
       var toServeFavicon = require('serve-favicon');
@@ -112,17 +88,10 @@ module.exports = function getBuiltInHttpMiddleware (expressRouterMiddleware, sai
       var serveFaviconMwr = toServeFavicon(pathToDefaultFavicon);
       return serveFaviconMwr;
     })(),
-
-
     cookieParser: (function() {
-
       var cookieParser = sails.config.http.middleware.cookieParser;
-      if (!cookieParser) {
-        cookieParser = require('cookie-parser');
-      }
-
+      if (!cookieParser) {cookieParser = require('cookie-parser');}
       var sessionSecret = sails.config.session && sails.config.session.secret;
-
       // If available, Sails uses the configured session secret for signing cookies.
       if (sessionSecret) {
         // Ensure secret is a string.  This check happens in the session hook as well,
@@ -138,32 +107,21 @@ module.exports = function getBuiltInHttpMiddleware (expressRouterMiddleware, sai
       // then we do not enable signed cookies by providing a cookie secret.
       // (note that of course signed cookies can still be enabled in a Sails app:
       // see conceptual docs on disabling the session hook for info)
-      else {
-        return cookieParser();
-      }
+      else {return cookieParser();}
     })(),
-
     compress: IS_NODE_ENV_PRODUCTION && require('compression')(),
-
-
     // Configures the middleware function used for parsing the HTTP request body, if enabled.
     bodyParser: (function() {
-
       var opts = {};
       var fn;
-
       opts.onBodyParserError = function (err, req, res, next) {// eslint-disable-line no-unused-vars
         // Note that we _need_ all four arguments in order for this function
         // to have special meaning as an error handler (i.e. to Express)
-
         var bodyParserFailureErrorMsg = 'Unable to parse HTTP body- error occurred :: ' + util.inspect((err&&err.stack)?err.stack:err, false, null);
         sails.log.error(bodyParserFailureErrorMsg);
-        if (IS_NODE_ENV_PRODUCTION) {
-          return res.status(400).send();
-        }
+        if (IS_NODE_ENV_PRODUCTION) {return res.status(400).send();}
         return res.status(400).send(bodyParserFailureErrorMsg);
       };
-
       // Handle original bodyParser config:
       ////////////////////////////////////////////////////////
       // If a body parser was configured, use it
@@ -175,19 +133,14 @@ module.exports = function getBuiltInHttpMiddleware (expressRouterMiddleware, sai
         // `express.bodyParser` conf
         return undefined;
       }
-
       // Default to built-in bodyParser:
       fn = require('skipper');
       return fn(opts);
-
     })(),
-
-
     // Add powered-by Sails header
     poweredBy: function xPoweredBy(req, res, next) {
       res.header('X-Powered-By', 'Sails <sailsjs.com>');
       next();
     }
-
   });
 };

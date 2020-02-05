@@ -16,42 +16,26 @@ var MockRes = require('./mock-res')
 module.exports = function _buildResponse (req, _res) {
   _res = _res||{};
   req = req||{};
-
   var res;
-
   // If `_res` appears to be a stream (duck-typing), then don't try
   // and turn it into a mock stream again.
-  if (typeof _res === 'object' && _res.end) {
-    res = _res;
-  }
-  else {
-    res = new MockRes();
-    delete res.statusCode;
-  }
-
-
+  if (typeof _res === 'object' && _res.end) {res = _res;}
+  else {res = new MockRes(); delete res.statusCode;}
   // Ensure res.headers and res.locals exist.
   res = _.extend(res, {locals: {}, headers: {}, _headers: {}});
   res = _.extend(res, _res);
-
   // Now that we're sure `res` is a Transform stream, we'll handle the two different
   // approaches which a user of the virtual request interpreter might have taken:
-
   // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
   // (1) Providing a callback function (`_clientCallback`)
   //
   // If a `_clientCallback` function was provided, also pipe `res` into a
   // fake clientRes stream where the response `body` will be buffered.
   if (res._clientCallback) {
-
     // If `res._clientRes` WAS NOT provided, then create one
-    if (!res._clientRes) {
-      res._clientRes = new MockClientResponse();
-    }
-
+    if (!res._clientRes) {res._clientRes = new MockClientResponse();}
     // Session is saved automatically since the virtual request interpreter is
     // using `express-session` directly as of https://github.com/balderdashy/sails/commit/58e93f5a5f2e667e3fbeddf5b4b356f813e3555e.
-
     // The stream should trigger the callback when it finishes or errors.
     res._clientRes.on('finish', function() {
       return res._clientCallback(res._clientRes);
@@ -65,27 +49,21 @@ module.exports = function _buildResponse (req, _res) {
 
   }
   // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-
   // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
   // (2) Providing a Writable stream (`_clientRes`)
   //
   // If a `_clientRes` response Transform stream was provided, pipe `res` directly to it.
-  if (res._clientRes) {
-    res.pipe(res._clientRes);
-  }
+  if (res._clientRes) {res.pipe(res._clientRes);}
   //
   // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
-
   // Track whether headers have been written
   // (TODO: pull all this into mock-res via a PR)
-
   // res.writeHead() is wrapped in closure by the `on-header` module,
   // but it still needs the underlying impl
   res.writeHead = function ( /* statusCode, [reasonPhrase], headers */) {
     // console.log('\n\n• res.writeHead(%s)', Array.prototype.slice.call(arguments));
     var statusCode = +arguments[0];
-
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     // FUTURE: Actually use the "reasonPhrase", if one was provided.
     // ```
@@ -97,31 +75,20 @@ module.exports = function _buildResponse (req, _res) {
     // })();
     // ```
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
     var newHeaders = (function (){
-      if (arguments[2] && _.isObject(arguments[2])) {
-        return arguments[2];
-      }
+      if (arguments[2] && _.isObject(arguments[2])) {return arguments[2];}
       return arguments[1];
     })();
-
-    if (!statusCode) {
-      throw new Error('`statusCode` must be passed to res.writeHead().');
-    }
+    if (!statusCode) {throw new Error('`statusCode` must be passed to res.writeHead().');}
     // Set status code
     res.statusCode = statusCode;
-
     // Ensure `._headers` have been merged into `.headers`
     _.extend(res.headers, res._headers);
-
     if (newHeaders) {
-      if (!_.isObject(newHeaders)) {
-        throw new Error('`headers` must be passed to res.writeHead() as an object. Got: '+util.inspect(newHeaders, false, null));
-      }
+      if (!_.isObject(newHeaders)) {throw new Error('`headers` must be passed to res.writeHead() as an object. Got: '+util.inspect(newHeaders, false, null));}
       // Set new headers
       _.extend(res.headers, newHeaders);
     }
-
     // Set status code and headers on the `_clientRes` stream so they are accessible
     // to the provider of that stream.
     // (this has to happen in `send()` because the code/headers might have just changed)
@@ -130,9 +97,7 @@ module.exports = function _buildResponse (req, _res) {
       res._clientRes.headers = res.headers;
       res._clientRes.statusCode = res.statusCode;
     }
-
   };
-
 
   // Wrap res.write() and res.end() to get them to call writeHead()
   var prevWrite = res.write;
@@ -148,7 +113,6 @@ module.exports = function _buildResponse (req, _res) {
     // console.log('res.end():: called writeHead with headers=',_.extend(res._headers,res.headers));
     prevEnd.apply(res, Array.prototype.slice.call(arguments));
   };
-
 
   // we get `setHeader` from mock-res
   // see http://nodejs.org/api/http.html#http_response_setheader_name_value
@@ -172,17 +136,13 @@ module.exports = function _buildResponse (req, _res) {
   // res.sendStatus()
   // (send a text representation of a status code)
   res.sendStatus = res.sendStatus || function _sendStatusShim (statusCode) {
-
     // Get the status codes from the HTTP module
     var statusCodes = http.STATUS_CODES;
-
     // If this is a known code, use its name (e.g. "FORBIDDEN" or "OK").
     // Otherwise, just turn the number into a string.
     var body = statusCodes[statusCode] || String(statusCode);
-
     // Set the response status code.
     res.statusCode = statusCode;
-
     // Send the response.
     return res.send(body);
   };
@@ -192,12 +152,9 @@ module.exports = function _buildResponse (req, _res) {
     if (!_.isUndefined(noLongerSupported)) {
       throw new Error('The 2-ary usage of `res.send()` is no longer supported in Express 4/Sails v1.  Please use `res.status(statusCode).send(body)` instead.');
     }
-
     // Don't allow users to respond/redirect more than once per request
     // FUTURE: prbly move this check to our `res.writeHead()` impl
-    try {
-      onlyAllowOneResponse(res);
-    }
+    try {onlyAllowOneResponse(res);}
     catch (e) {
       if (req._sails && req._sails.log && req._sails.log.error) {
         req._sails.log.error(e);
@@ -206,19 +163,14 @@ module.exports = function _buildResponse (req, _res) {
       console.error(e);
       return;
     }
-
     // Ensure charset is set
     res.charset = res.charset || 'utf-8';
-
     // Ensure headers are set
     _.extend(res.headers, res._headers);
-
     // Ensure statusCode is set
     res.statusCode = res.statusCode || 200;
-
     // if a `_clientCallback` was specified, we'll skip the streaming stuff for res.send().
     if (res._clientCallback) {
-
       // Hard-code `res.body` rather than writing to the stream.
       // (but don't include body if it is empty)
       if (!_.isUndefined(data)) {
@@ -226,33 +178,24 @@ module.exports = function _buildResponse (req, _res) {
         // Then expose on res._clientRes.body
         res._clientRes.body = res.body;
       }
-
       // End the `res` stream (which will in turn end the `res._clientRes` stream)
       res.end();
       return;
     }
-
     //
     // Otherwise, the hook using the interpreter must have provided us with a `res._clientRes` stream,
     // so we'll need to serialize everything to work w/ that stream.
     //
-
     // console.log('\n---\nwriting to clientRes stream...');
     // console.log('res.headers =>',res.headers);
     // console.log('res._headers =>',res._headers);
-
     // Write body to `res` stream
     if (!_.isUndefined(data)) {
-
       try {
-
         var toWrite;
-
         // If the data is already a string, don't stringify it.
         // (This allows for sending plain text, XML, etc.)
-        if (_.isString(data)) {
-          toWrite = data;
-        }
+        if (_.isString(data)) {toWrite = data;}
         else {
           try {
             toWrite = JSON.stringify(data);
@@ -270,37 +213,28 @@ module.exports = function _buildResponse (req, _res) {
           //   toWrite = e.message;
           // }
         }//>-
-
         res.write(toWrite);
-
-      } catch (e) {
-        if (req._sails && req._sails.log && req._sails.log.error) {
-          req._sails.log.error(e);
-        }
-        else {
-          console.error(e);
-        }
+      }
+      catch (e) {
+        if (req._sails && req._sails.log && req._sails.log.error) {req._sails.log.error(e);}
+        else {console.error(e);}
         res.statusCode = 500;
       }
     }//</if data was defined>
-
     // End the `res` stream.
     res.end();
   };
-
   // res.json()
   res.json = res.json || function _jsonShim (data, noLongerSupported) {
     if (!_.isUndefined(noLongerSupported)) {
       throw new Error('The 2-ary usage of `res.json()` is no longer supported in Express 4/Sails v1.  Please use `res.status(statusCode).json(body)` instead.');
     }
-
     // If data is a string, JSON stringify it.
     // (Otherwise, we can just rely on `send` to do that for us.)
     if (_.isString(data)) {
       data = JSON.stringify(data);
       res.set('content-type', 'application/json');
     }
-
     return res.status(res.statusCode || 200).send(data);
   };
 
@@ -310,17 +244,10 @@ module.exports = function _buildResponse (req, _res) {
       cb = locals;
       locals = {};
     }
-
     try {
-      if (!req._sails) {
-        throw new Error('Cannot call res.render() - `req._sails` was not attached');
-      }
-      if (!req._sails.renderView) {
-        throw new Error('Cannot call res.render() - `req._sails.renderView` was not attached (perhaps `views` hook is not enabled?)');
-      }
-
+      if (!req._sails) {throw new Error('Cannot call res.render() - `req._sails` was not attached');}
+      if (!req._sails.renderView) {throw new Error('Cannot call res.render() - `req._sails.renderView` was not attached (perhaps `views` hook is not enabled?)');}
       res.set('content-type', 'text/html');
-
       // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       // TODO:
       // Instead of this shim, turn `sails.renderView` into something like
@@ -339,20 +266,13 @@ module.exports = function _buildResponse (req, _res) {
       // }
       // ```
       // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-    } catch (e) {
+    } 
+    catch (e) {
       if (cb) { return cb(e); }
-
       // NOTE: We don't try to use res.serverError() here because we might
       // _already_ be in the midst of a res.serverError() call.
-
-      if (req._sails && req._sails.log && req._sails.log.error) {
-        req._sails.log.error('res.render() failed: ', e);
-      }
-      else {
-        console.error('res.render() failed: ', e);
-      }
-
+      if (req._sails && req._sails.log && req._sails.log.error) {req._sails.log.error('res.render() failed: ', e);}
+      else {console.error('res.render() failed: ', e);}
       if (process.env.NODE_ENV === 'production') { return res.status(e.statusCode||500).send(e.message); }
       else { return res.status(e.statusCode||500).send(); }
     }
@@ -364,18 +284,12 @@ module.exports = function _buildResponse (req, _res) {
     if (!_.isUndefined(noLongerSupported)) {
       throw new Error('The 2-ary usage of `res.redirect()` is no longer supported in Express 4/Sails v1.  Please use `res.status(statusCode).redirect(address)` instead.');
     }
-
     // For familiarity, set content-type header:
     res.set('content-type', 'text/html');
-
     // Set location header
     res.set('Location', address);
-
     return res.status(res.statusCode||302).send('Redirecting to '+encodeURI(address));
   };
-
-
-
   /**
    * res.set( headerName, value )
    *
@@ -387,25 +301,15 @@ module.exports = function _buildResponse (req, _res) {
     res.headers[headerName] = value;
     return this;
   };
-
   /**
    * res.get( headerName )
    *
    * @param  {[type]} headerName [description]
    * @return {[type]}            [description]
    */
-  res.get = function (headerName) {
-    return res.headers && res.headers[headerName];
-  };
-
-
-
+  res.get = function (headerName) {return res.headers && res.headers[headerName];};
   return res;
-
-
 };
-
-
 /**
  * NOTE: ALL RESPONSES (INCLUDING REDIRECTS) ARE PREVENTED ONCE THE RESPONSE HAS BEEN SENT!!
  * Even though this is not strictly required with sockets, since res.redirect()
@@ -414,18 +318,12 @@ module.exports = function _buildResponse (req, _res) {
  * @api private
  */
 function onlyAllowOneResponse (res) {
-  if (res._virtualResponseStarted) {
-    throw new Error('Cannot write to response more than once');
-  }
+  if (res._virtualResponseStarted) {throw new Error('Cannot write to response more than once');}
   res._virtualResponseStarted = true;
 }
-
-
 // The constructor for clientRes stream
 // (just a normal transform stream)
-function MockClientResponse() {
-  Transform.call(this);
-}
+function MockClientResponse() {Transform.call(this);}
 util.inherits(MockClientResponse, Transform);
 MockClientResponse.prototype._transform = function(chunk, encoding, next) {
   this.push(chunk);

@@ -3,30 +3,23 @@ var _ = require('@sailshq/lodash');
 var async = require('async');
 var defaultsDeep = require('merge-defaults');// « TODO: Get rid of this
 var __hooks = require('../../hooks');
-
 /**
  * @param  {SailsApp} sails
  * @returns {Function}
  */
 module.exports = function(sails) {
-
   var Hook = __hooks(sails);
-
   // Keep an array of all the hook timeouts.
   // This way if a hook fails to load, we can clear all the timeouts at once.
   var hookTimeouts = [];
-
   /**
    * Resolve the hook definitions and then finish loading them
    *
    * @api private
    */
   return function initializeHooks(hooks, cb) {
-
     function prepareHook(id) {
-
       var rawHookFn = hooks[id];
-
       // Backwards compatibility:
       if (rawHookFn === 'false') {
 
@@ -37,46 +30,31 @@ module.exports = function(sails) {
         sails.log.debug('(Note that this backwards-compatibility check will be removed in a future');
         sails.log.debug('release of Sails, so be sure to update this app ASAP.)');
         rawHookFn = false;
-
       }//>-
-
       // Allow disabling of hooks by setting them to `false`.
       if (rawHookFn === false) {delete hooks[id];return;}
-
       // Check for invalid hook config
-      if (hooks.userconfig && !hooks.moduleloader) {
-        return cb('Invalid configuration:: Cannot use the `userconfig` hook w/o the `moduleloader` hook enabled!');
-      }
-
+      if (hooks.userconfig && !hooks.moduleloader) {return cb('Invalid configuration:: Cannot use the `userconfig` hook w/o the `moduleloader` hook enabled!');}
       // Handle folder-defined modules (default to index.js)
       // Since a hook definition must be a function
-      if (_.isObject(rawHookFn) && !_.isArray(rawHookFn) && !_.isFunction(rawHookFn)) {
-        rawHookFn = rawHookFn.index;
-      }
-
+      if (_.isObject(rawHookFn) && !_.isArray(rawHookFn) && !_.isFunction(rawHookFn)) {rawHookFn = rawHookFn.index;}
       if (!_.isFunction(rawHookFn)) {
         sails.log.error('Malformed hook! (' + id + ')');
         sails.log.error('Hooks should be a function with one argument (`sails`)');
         sails.log.error('But instead, got:', rawHookFn);
         process.exit(1);
       }
-
       // Instantiate the hook
       var def = rawHookFn(sails);
-
       // Mix in an `identity` property to hook definition
       def.identity = id.toLowerCase();
-
       // If a config key was defined for this hook when it was loaded,
       // (probably because a user is overridding the default config key)
       // set it on the hook definition
       def.configKey = rawHookFn.configKey || def.identity;
-
       // New up an actual Hook instance
       hooks[id] = new Hook(def);
     }//ƒ
-
-
     /**
      * Apply a hook's "defaults" property
      *
@@ -88,7 +66,6 @@ module.exports = function(sails) {
       if (hook.defaults.__configKey__ && hook.configKey) {hook.defaults[hook.configKey] = hook.defaults.__configKey__; delete hook.defaults.__configKey__;}
       defaultsDeep(sails.config, defaults);
     }//ƒ
-
     /**
      * Load a hook (bind its routes, load any modules and initialize it)
      *
@@ -100,11 +77,9 @@ module.exports = function(sails) {
           return cb(new Error('Invalid `hookTimeout` config!  If set, this should be a positive whole number, but instead got `'+sails.config.hookTimeout+'`.  Please change this setting, then try lifting again.'));
         }
       }
-
       var timestampBeforeLoad = Date.now();
       var DEFAULT_HOOK_TIMEOUT = 40000;
       var timeoutInterval = (sails.config[hooks[id].configKey || id] && sails.config[hooks[id].configKey || id]._hookTimeout) || sails.config.hookTimeout || DEFAULT_HOOK_TIMEOUT;
-
       var hookTimeout;
       if (id !== 'userhooks') {
         hookTimeout = setTimeout(function tooLong() {    
@@ -130,13 +105,11 @@ module.exports = function(sails) {
         hookTimeouts.push(hookTimeout);
       }
       hooks[id].load(function(err) {
-
         // Sanity check: (see https://trello.com/c/1jCljHHP for an example of a
         // potential bug this catches)
         if (!process.nextTick) {
           return cb(new Error('Consistency violation: Hmm... it looks like something is wrong with Node\'s `process` global.  Check it out:\n'+util.inspect(process)));
         }
-
         if (id !== 'userhooks') {clearTimeout(hookTimeout);}
         if (err) {
           // Clear all hook timeouts so that the process doesn't hang because
@@ -148,18 +121,14 @@ module.exports = function(sails) {
           process.nextTick(function(){ cb(err); });
           return;
         }
-
         sails.log.verbose(id, 'hook loaded successfully. ('+(Date.now() - timestampBeforeLoad)+'ms)');
         sails.emit('hook:' + id + ':loaded');
-
         // Defer a tick to allow other stuff to happen
         process.nextTick(function(){ cb(); });
       });
     }
-
     async.series(
       {
-
         // First load the moduleloader (if any)
         moduleloader: function(cb) {
           if (!hooks.moduleloader) {return cb();}
@@ -168,7 +137,6 @@ module.exports = function(sails) {
           hooks['moduleloader'].configure();
           loadHook('moduleloader', cb);
         },
-
         // Next load the user config (if any)
         userconfig: function(cb) {
           if (!hooks.userconfig) {return cb();}
@@ -177,7 +145,6 @@ module.exports = function(sails) {
           hooks['userconfig'].configure();
           loadHook('userconfig', cb);
         },
-
         // Next get the user hooks (if any), which will be
         // added to the list of hooks to load
         userhooks: function(cb) {
@@ -187,11 +154,9 @@ module.exports = function(sails) {
           hooks['userhooks'].configure();
           loadHook('userhooks', cb);
         },
-
         validate: function(cb) {
           return cb();
         },
-
         // Prepare all other hooks
         prepare: function(cb) {
           async.each(_.without(_.keys(hooks), 'userconfig', 'moduleloader', 'userhooks'), function (id, cb) {
@@ -200,7 +165,6 @@ module.exports = function(sails) {
             process.nextTick(cb);
           }, cb);
         },
-
         // Apply the default config for all other hooks
         defaults: function(cb) {
           async.each(_.without(_.keys(hooks), 'userconfig', 'moduleloader', 'userhooks'), function (id, cb) {
@@ -210,7 +174,6 @@ module.exports = function(sails) {
             process.nextTick(cb);
           }, cb);
         },
-
         // Run configuration method for all other hooks
         configure: function(cb) {
           async.each(_.without(_.keys(hooks), 'userconfig', 'moduleloader', 'userhooks'), function (id, cb) {
@@ -221,7 +184,6 @@ module.exports = function(sails) {
             process.nextTick(cb);
           }, cb);
         },
-
         // Load all other hooks
         load: function(cb) {
           async.each(_.without(_.keys(hooks), 'userconfig', 'moduleloader', 'userhooks'), function (id, cb) {
@@ -230,7 +192,6 @@ module.exports = function(sails) {
           }, cb);
         }
       },
-
       function afterwards(err) {
         if (err) { return cb(err); }
         return cb();

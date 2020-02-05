@@ -1,4 +1,3 @@
-
 //THE META-CIRCULAR CONNECTOR 
 const self = {
 	//connections:{
@@ -16,6 +15,17 @@ module.exports = {
 
 	//SETS OF MAPPINGS AS OBJECTS
 	//THIS IS WHERE IT ALL STARTS
+
+	//RE STRUCT
+	init:{
+		//title
+		//hash:..
+		init: async function(){
+
+		},
+	},
+
+
 	init: async function(){
 
 
@@ -23,6 +33,13 @@ module.exports = {
 		
 		//PEER COMPILE . . . 
 		await dataApp.init();
+
+
+		//MACHIENE ATTENTION ...
+		//const escomplex = require('escomplex');
+		//const result = escomplex.analyse('');
+		//console.log(result);
+		//STATE PROCESSOR GETS THE REWARD ... THE ATTENTION SHARED 
 
 		//UHM
 		passportApp.loadStrategies();

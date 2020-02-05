@@ -1,7 +1,5 @@
 var _ = require('@sailshq/lodash');
 var async = require('async');
-
-
 /**
  * Mix-in an `after` function to an EventEmitter.
  *
@@ -13,9 +11,7 @@ var async = require('async');
  *
  * @param  {EventEmitter} emitter The Sails application instance
  */
-
 module.exports = function mixinAfter(emitter) {
-
   /**
    * { emitter.warmEvents }
    *
@@ -41,8 +37,6 @@ module.exports = function mixinAfter(emitter) {
     emitter.warmEvents[eventName] = true;
     return _originalEmit.apply(emitter, args);
   };
-
-
   /**
    * `emitter.after()`
    *
@@ -51,35 +45,23 @@ module.exports = function mixinAfter(emitter) {
    * @param  {String|Array} events   [name of the event(s)]
    * @param  {Function}     fn       [event handler function]
    */
-
   emitter.after = function(events, fn) {
-
     // Support a single event or an array of events
-    if (!_.isArray(events)) {
-      events = [events];
-    }
-
+    if (!_.isArray(events)) {events = [events];}
     // Convert named event dependencies into an array
     // of async-compatible functions.
     var dependencies = _.reduce(events, function (dependencies, event) {
-
       // Push on the handler function.
       dependencies.push(function handlerFn(cb) {
-
         // If the event has already fired, then just execute our callback.
         if (emitter.warmEvents[event]) {return cb();}
         // But otherwise, bind a one-time-use handler that listens for the
         // first time this event is fired, and then executes our callback
         // once it does.
         else {emitter.once(event, function (){return cb();});}
-
       });//</declared and pushed on handler function>
-
       return dependencies;
-
     }, []);//</_.reduce() :: iterate over each event in order to build `dependencies` (an array of handler functions)>
-
-
     // When all events have fired, call `fn`
     // (all arguments passed to `emit()` calls are discarded)
     async.parallel(dependencies, function(err) {
@@ -87,10 +69,7 @@ module.exports = function mixinAfter(emitter) {
         console.error('Consistency violation: Received `err`, but this should be impossible!  Here is the error: '+err.stack);
         console.error('^^^If you are seeing this message, then please report this error at http://sailsjs.com/bugs.  (Continuing anyway...)');
       }//>-
-
       return fn();
     });
-
   };
-
 };

@@ -1,7 +1,3 @@
-/**
- * Module dependencies
- */
-
 var path = require('path');
 var _ = require('@sailshq/lodash');
 var flaverr = require('flaverr');

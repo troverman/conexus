@@ -1,7 +1,6 @@
 var _ = require('@sailshq/lodash');
 var async = require('async');
 var loadActionModules = require('./private/controller/load-action-modules');
-
 /**
  * Sails.prototype.reloadActions()
  * Reload actions for any hook that has a `registerActions` method.

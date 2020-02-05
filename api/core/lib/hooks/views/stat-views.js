@@ -13,14 +13,9 @@
 
 module.exports = function statViews (sails, hook, cb) {
   sails.modules.statViews(function (err, detectedViews) {
-    if (err) {
-      return cb(err);
-    }
-
+    if (err) {return cb(err);}
     // Save existence tree in `sails.views` for consumption later
     sails.views = detectedViews || {};
-
     return cb(null, detectedViews);
   });
-
 };

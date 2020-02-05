@@ -1,5 +1,4 @@
 var _ = require('@sailshq/lodash');
-
 /**
  * SailsApp.prototype.toJSON()
  *
@@ -8,23 +7,16 @@ var _ = require('@sailshq/lodash');
  * @this {SailsApp}
  * @returns {JSON} [a JSON-compatible summary of this Sails app]
  */
-
 module.exports = function toJSON() {
-
   var sails = this;
-
   // Build JSON serializable dictionary that summarizes the Sails app instance.
   var sailsAppSummary;
   try {
-
     sailsAppSummary = _.reduce(sails, function (_jsonSerializable, val, key) {
-
       // Allow `config` to go straight through as-is.
       // > (non JSON-serializable things will have to be handled later --
       // > we don't want to introduce the slowness of an rttc.dehydrate() here)
-      if (key === 'config') {
-        _jsonSerializable[key] = val;
-      }
+      if (key === 'config') {_jsonSerializable[key] = val;}
       //‡
       // Turn `hooks` into an array of hook identities.
       else if (key === 'hooks') {
@@ -37,10 +29,8 @@ module.exports = function toJSON() {
       // Turn `models` into an array of "model summary" dictionaries.
       else if (key === 'models') {
         _jsonSerializable[key] = _.reduce(val, function (memo, Model) {
-
           // Skip virtual models (i.e. junctions)
           if (Model.junctionTable) { return memo; }
-
           // But otherwise, push on a stripped down version of the model.
           // > (again, any nested, non-JSON-serializable things will have to be handled
           // > later -- we don't want to introduce the slowness of an rttc.dehydrate() here)
@@ -53,9 +43,7 @@ module.exports = function toJSON() {
             primaryKey: Model.primaryKey,
             attributes: Model.attributes,
           });
-
           return memo;
-
         }, []);
       }
       //‡
@@ -63,12 +51,10 @@ module.exports = function toJSON() {
       else {
         // (So, we'll just ignore it, omitting it from this JSON-serializable value we're building.)
       }//>-
-
       return _jsonSerializable;
-
     }, {});//</_.reduce :: sailsAppSummary>
-
-  } catch (e) {
+  } 
+  catch (e) {
     throw new Error('Consistency violation: Unexpected error when attempting to build a JSON-serializable version of the Sails app instance.  Details: '+e.stack);
   }
   return sailsAppSummary;
