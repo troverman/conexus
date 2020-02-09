@@ -1,22 +1,20 @@
 //CRE8.ATTENTION.ALPHA
 
-//TODO: META MODEL//
-	//data app import? 
 //hash
 //truth
 //coordinates:
-
 //title:
 //description:
 //connections ~
 //machieneAttention . . . 
 
-//infunction descripe as self.title = / /  /
+//infunction descripe as self.title = ///
 	//self.attention = {type, context}
+
 const crypto = require('crypto');
 const Q = require('q');
 
-var attentionApp = {
+var App = {
 
 	attributes: {
 
@@ -64,7 +62,7 @@ var attentionApp = {
 	create: async function (req) {
 
 		async function updateAssociatedModels(model){
-			var protocolTokens = attentionApp.tokens.get(model);
+			var protocolTokens = App.tokens.get(model);
 			for (x in model.associatedModels){		
 				if (model.app == 'HUMAN'){
 					if (model.associatedModels[x].type == 'ACTION'){
@@ -349,7 +347,7 @@ var attentionApp = {
 		//createNotification(model);
 		//createValidation(model);
 
-		attentionApp.tokens.create(newAttention);
+		App.tokens.create(newAttention);
 
 		updateAssociatedModels(newAttention);
 
@@ -361,7 +359,7 @@ var attentionApp = {
 	tokens:{
 		create:function(model){
 			//this, self .. 
-			var tokens = attentionApp.tokens.get(model);
+			var tokens = App.tokens.get(model);
 			//updateAssociatedModels(model, protocolTokens);
 		},
 
@@ -381,5 +379,6 @@ var attentionApp = {
 			return protocolTokens;
 		}
 	}
+
 };
-module.exports = attentionApp;
+module.exports = App;

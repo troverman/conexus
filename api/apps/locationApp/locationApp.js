@@ -1,38 +1,27 @@
 //CRE8.LOCATION.ALPHA
-
-module.exports = {
-
+var App = {
 	//IMPORT GOOGLE APP! ( AND OTHER PROVIDERS (FOR HISTORICAL) -- ALLOW PERMISSIONS FOR LOCATION VIA NATIVE CALLS)
 		//BUILD IN CONTINGENCY CHECKS AS PLUGIN 
 			//PREVENT SPOOFING
-
 	import: { 
 		request: require('request'),
 		Q: require('q'),
 	},
-
 	attributes: {
-        
     	//DEPRECIATE
         model: {type: 'string', defaultsTo: 'LOCATION'},
-        
         lat:{type: 'string'},
         lng:{type: 'string'},
         creator:{type: 'string'},
-        
         data:{type: 'json'},
         dataHash:{type: 'string'},
         hash:{type: 'string'}
-
     },
-
 	//DATA MODELS ARE CONNECTIONS
-
 	//TEST
 	//REDUCE INTO SELF CONECTION W CONTEXT --> INTERNAL FUNCTION MAPPING 
 	language: 'Javascript',
-	compiler:'V8',
-
+	runtime:'V8',
 	connections:[
 		{
 			type:'connection', 
@@ -42,27 +31,17 @@ module.exports = {
 			}	
 		}
 	],
-
-	get: function(req, res, params){
-
-	},
-
+	get: function(req, res, params){},
 	create: function(req, res, params){
-
-		var locationModel = {
-		
-		};
+		var locationModel = {};
 		//JUST SOME DATA.. STRUCTURE IT IN A WAY THE APPS ARE LOOKING FOR.. IE AS A DATA MODEL . . . .
 		//EVENT IS AN ALIAS FOR ALL CREATES . . .
 		Event.create(eventModel).then(function(model){
 			console.log('CREATE EVENT', model);
 			Event.publish([model.id], {verb: 'create', data: model});
 		});
-
 	},
-
 	get: async function(req) {},
-
 	create: async function (req) {
 		var model = {
 			lat: req.param('lat'),
@@ -81,11 +60,9 @@ module.exports = {
 		locationApp.tokens.create(location);
 		return Location.find({hash:model.hash});
 	},
-
 	tokens:{
 		get:function(model){
 			var protocolTokens = ['CRE8', 'CRE8+LOCATION'];
-
 			//DATA TO STRING INTREPRETER
 			for (x in Object.keys(model)){
 				var dataType = Object.keys(model)[x].toUpperCase();
@@ -94,7 +71,6 @@ module.exports = {
 				var string = prefix+'+'+dataType+'+'+data;
 				protocolTokens.push(string);
 			}
-
 			//var protocolTokenModels = [];
 			//for (x in protocolTokens){
 			//	var tokenModel = {
@@ -102,9 +78,7 @@ module.exports = {
 			//	};
 			//	protocolTokenModels.push()
 			//}
-
 			return protocolTokens;
-
 		},
 		create:async function(model){
 			var tokens = locationApp.tokens.get(model);
@@ -134,6 +108,5 @@ module.exports = {
 			}
 		},
 	}
-
-
 };
+module.exports = App;

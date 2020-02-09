@@ -198,9 +198,6 @@ module.exports = {
 		}
 	},
 
-
-
-
 	//UTILITY APP
 	//TODO: DEFINE LANGUAGE PRIMITIVES IE SET, ARRAY,  . . . AS CONNECTION / APP
 
@@ -271,18 +268,5 @@ module.exports = {
         stack.shift();
         while(stack.length>1){object = object[stack.shift()];}
         object[stack.shift()] = newValue;
-    },
-
-
-
-
-
-
-
-
-
-
-
-
-
+    }
 };

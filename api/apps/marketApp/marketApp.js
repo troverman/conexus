@@ -8,9 +8,4 @@
 	//token3
 //}
 //AN ENTIER COMPUTER THOUGH NAND GATES
-module.exports = {
-
-	
-
-
-};
+module.exports = {};

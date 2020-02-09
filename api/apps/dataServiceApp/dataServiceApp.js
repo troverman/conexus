@@ -671,7 +671,7 @@ module.exports = {
 		function path(start, finish){};
 
 		//VECTOR
-		function valueMatrix(amount, identiferSet){
+		async function valueMatrix(amount, identiferSet){
 			var orderModels = await Order.find({identiferSet:identiferSet});
 			var dimObj = {identiferSet:identiferSet, amountSet:amount, rank:identiferSet.split(',').length, data:[]};
 			var matrix = amount;
@@ -702,7 +702,7 @@ module.exports = {
 		const totalDimObj = [];
 		//OKAY MB DONT DO THE CIRCLE .. DO THE CIRCUT WALK.. 
 		//minimial no self similar
-		function valueTensor(identiferSet, dimObj, recursion, depth, index){
+		async function valueTensor(identiferSet, dimObj, recursion, depth, index){
 			recursion++;
 			var orderModels = await Order.find({identiferSet:identiferSet});
 			var foundObj = utilityServiceApp.searchObject(totalDimObj, function (value) {return value != null && value != undefined && value.name == identiferSet;});

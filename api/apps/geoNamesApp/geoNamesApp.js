@@ -91,30 +91,22 @@ module.exports = {
 			var dataSeries = body.geonames
 			console.log(dataSeries.length)
 			async.eachSeries(dataSeries, function (data, next){
-
 				if (data.name.includes('historical')){process.nextTick(next);}
 				else{
-
 					var projectModel = {
-
 						title:data.name,
 						urlTitle:data.name.replace(/\s/g, '-').toLowerCase().replace('#','').replace('/',''),
-
 						//A COMPUTED VALUE.. .. IMPLICIT MOTION TO .. ? META VALIDATION PROJ_a - PROJ_a
 						tags:'park,community,nc,northcarolina,outdoor,fun,'+data.name,
-
 						description:data.toponymName,
 						location:{address:'', lat:parseFloat(data.lat), lng:parseFloat(data.lng), coordinates:[parseFloat(data.lng), parseFloat(data.lat)]},
 						creator:'CRE8',
-
 						//DEPRECIATE
 						user:'57ab77fa804f7c11002a78db',
 						parent:'5cb6387e2da4371500e46bf2'
-
 					};
 
 					//console.log(projectModel)
-
 					//CHRUCH 5cbcd778b8a6cb15001da060
 					//PARKS 5cb6387e2da4371500e46bf2
 					//SCHOOL 5cbcdb00b8a6cb15001da063
@@ -140,21 +132,16 @@ module.exports = {
 						else{
 
 							//MULTIASSOCIATION TEST
-
 							//CHURCH 5cbcd809b8a6cb15001da062
-
 							//PARK 5cb7751fb965794d37dbaf2f, 5cc359b75b2c881500738619 
 								// HANGOUT MAY BE DEPRECIATED FOR LOCATION TOKENIZATION 
 									//--> SMART VALIDATION
-
 							//SCHOOL 5cbcdb5db8a6cb15001da065
 							//LIBRARY 5cc354565b2c881500738618
-
 							//Project.update({id:selectedProjectModel[0].id},{tags:'newyork,church,community,nyc,community,worship,faith'}).then(function(){
 							//	console.log('updated project');
 							//	process.nextTick(next);
 							//});
-
 							Task.find({id:'5cc359b75b2c881500738619'}).then(function(taskModel){
 								if (taskModel[0].associatedModels.map(function(obj){return obj.address}).indexOf(selectedProjectModel[0].id) == -1){
 									taskModel[0].associatedModels.push({type:'PROJECT', address:selectedProjectModel[0].id});
@@ -165,7 +152,6 @@ module.exports = {
 								}
 								else{process.nextTick(next);}
 							});
-
 							//TASK FIND
 								//IMPLICIT VALIDATION
 								//MULTIASSOCIATION
@@ -175,9 +161,7 @@ module.exports = {
 								//CLEAN UP X PARK
 								//IMPLICIT VALIDATION
 								//MULTIASSOCIATION
-
 						}
-
 					});
 				}
 			});

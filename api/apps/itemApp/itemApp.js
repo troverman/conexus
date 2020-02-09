@@ -2,9 +2,7 @@
 const crypto = require('crypto');
 const mongodb = require('mongodb');
 const Q = require('q');
-
-module.exports = {
-
+var App = {
 	//HASH OF ATTRIBUTES ???
     //DB TYPES ??
     //HASH TABLE EASIER .. ? 
@@ -14,7 +12,6 @@ module.exports = {
     init: async function(){
     //	await ContentApp.db.load();
     },
-
 	attributes: {
         //DEPRECIATE
         model: {type: 'string', defaultsTo: 'ITEM'},
@@ -38,7 +35,6 @@ module.exports = {
         dataHash: {type: 'string', allowNull: true},
         hash: {type: 'string', allowNull: true}, //id
     },
-
 	connections:[{
 		type:'connection', 
 		id:'self',
@@ -60,68 +56,51 @@ module.exports = {
 	import: { 
 		request: require('request'),
 		Q: require('q'),
-		
 		//TODO: MODULARIZE
 		//contentApp: require('./contentApp'),
 		//reactionApp: require('./reactionApp'),
 		//attentionApp: require('./attentionApp'), --> DATA LAYER IN (APP) SHARED ATTRIBUTES
-
 		//React: require('react'),
 		//event: require('event'),
 			//IMPORT DATABASE CONNECTION 
 	},
-
 	//DATA MODELS ARE CONNECTIONS
-
 	//TEST
 	//REDUCE INTO SELF CONECTION W CONTEXT --> INTERNAL FUNCTION MAPPING 
-	
 	language: 'Javascript',
 	attentionParams:{},
-	//TODO: STACK TRACK FOR TOKENIZATION.. 
-	//SOME META LOGGER.. 
-	//const StackTrace = require('stacktrace-js');
-	//StackTrace.get()
-	//.then(function(stack){
-		//console.log(stack.map(function(obj){return obj.functionName}));
-	//})
-	//.catch(function(err){});
-	//hmm --> GOOD BUT DO IN EACH AS STATIC
-	//var origCall = Function.prototype.call;
-	//Function.prototype.call = function (thisArg) {
-	    //console.log("calling a function", thisArg);
-	    //var args = Array.prototype.slice.call(arguments, 1);
-	    //origCall.apply(thisArg, arguments[arguments.length-1]);
-	//};
-	//console.trace();
 
-	//test
+	//TODO: .. HASH: NEEDS TO BE UNIQUE .. 
+	routes:{
+		//get/api/{HASH}
+		'get /api/item': 'ItemController.get',
+		'post /api/item': 'ItemController.create',
+
+		//BUILD AND RENDER VIEWS .. 
+		'get /items': 'HomeController.index',
+		'get /item/:id': 'HomeController.index',
+
+	},
+
 	//LANGUAGES ARE COMPILER PARAMETERS
-	conpilerParams:{
+	compilerParams:{
 		identifier:['x', 'color', 'UP'],
 		keyword:['if', 'while', 'return'],
 		separator:['}', '('],
 		operator:['+','<','='],
 		literal: true,
 	},
-
 	//value language
 	//~~ CONGRUENCE MEANS CONTEXT FREE GRAMMER
 	meta:{
 		separator:[','],
 		operator:['+','-','*',''],
 	},
-
 	//recursive..
 	//init(req, res, params);
 	//params are 
-	get: function(req, res, params){
+	get: function(req, res, params){/*params ^^same as above ; recursive :)*/},
 
-		//params ^^same as above ; recursive :)
-
-	},
-
-	//. . . heh 
 	get: async function(req) {
 		var deferred = Q.defer();
 		//[req.model].get(req);
@@ -135,18 +114,16 @@ module.exports = {
 			//REDUCE ~? ALBEIT IS THERE STRENGTH IN A MULTI-IDENTIFER STRUCT? ~ PLURLALITY IS A STRENGTH (?)
 			var id = req.query.id;
 			var query = {};
-
 			//NO
 			if (mongodb.ObjectID.isValid(id)){query = { "id": id }}
 			else{query = { dataHash: id}}
-
 			var models = await Item.find(query).limit(limit).skip(skip).sort(sort);
 			console.log('leal');
 			if (models.length > 0){
 				var itemModel = models[0];
-				itemModel.id = itemModel._id.toString();
-				var userModel = await User.find({id:itemModel.user.toString()});
-				itemModel.user = userModel[0];
+				//itemModel.id = itemModel._id.toString();
+				//var userModel = await User.find({id:itemModel.user.toString()});
+				//itemModel.user = userModel[0];
 				Item.subscribe(req, [itemModel.id]);
 				return associationApp.get(itemModel);
 			}
@@ -177,7 +154,6 @@ module.exports = {
 		}
 		return deferred.promise;
 	},
-
 	create: async function (req) {
 		var model = {
 			model: 'ITEM',
@@ -210,10 +186,9 @@ module.exports = {
 		Item.publish([itemModel.id], {verb: 'create', data: itemModel});
 		validationApp.createLegacy(itemModel);
 		eventApp.create(itemModel);
-		itemApp.tokens.create(itemModel);
+		App.tokens.create(itemModel);
 		return Item.find({hash:model.hash});
 	},
-
 	//EACH PROTOCOL / APP ADDS TO THE VALUE LANGUAGE.. 
 	//3rd layer of compilation . . 
 	tokens:{
@@ -233,12 +208,11 @@ module.exports = {
 			return protocolTokens;
 		},
 		create:function(model){
-			var protocolTokens = itemApp.tokens.get(model);
+			var protocolTokens = App.tokens.get(model);
 			//
 		},
 		//functional bridge between data events and tokenization
 	},
-
 	//FLATTEN? AND STANDARIZE & MADE MODULAR . . . 
 	//DEFINE LANGUAGE AND PARAMETERS FOR VIEW PARSING --> IMPORT THE PARSERS
 	//SEPERATE APP TO RETURN HTML
@@ -256,7 +230,6 @@ module.exports = {
 		items:{
 			route:'/items',
 			controller:function(){
-
 				//export default class Component extends React.Component {
 				//    function = () => {
 				//    };
@@ -267,10 +240,9 @@ module.exports = {
 				//        );
 				//    }
 				//}
-
 			},
 			templates:[{}],
 		},
 	},
-
 };
+module.exports = App;

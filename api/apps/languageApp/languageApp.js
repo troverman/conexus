@@ -1,9 +1,8 @@
 //CRE8.TOKENLANGUAGE.ALPHA
 //IMPORT MANIFOLD 
-module.exports = {
-
+var App = {
 	//import:{
 	//	manifoldApp:manifoldApp
 	//}
-	
 };
+module.exports = App;

@@ -4,4 +4,8 @@ module.exports = {
 		var model = await eventApp.get(req); 
 		res.json(model);
 	},
+	create: async function(req, res) {
+		var model = await eventApp.create(req); 
+		res.json(model);
+	},
 };

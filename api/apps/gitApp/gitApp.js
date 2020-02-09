@@ -1,6 +1,3 @@
 //GIT REPO APP
-
-module.exports = {
-
-
-};
+var App = {};
+module.exports = App;

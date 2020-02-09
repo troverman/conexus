@@ -178,6 +178,7 @@ module.exports = {
 		'get /transaction/:id': 'HomeController.index',
 		'get /transparency': 'HomeController.index',
 		'get /validation/:id': 'HomeController.index',
+		
 		//TODO: AUTH APP
 		'get /logout': 'AuthController.logout',
 		'post /auth/local': 'AuthController.callback',
@@ -185,78 +186,49 @@ module.exports = {
 		'get /auth/:provider': 'AuthController.provider',
 		'get /auth/:provider/callback': 'AuthController.callback',
 		'get /auth/:provider/:action': 'AuthController.callback',
-		//NEW WILL BE
-		//ROUTES IN APP // 
-		//get /api/ 
-		//REDUCE :~~)
-		//CALL QUERY PARSE APP TO PASS TO APP d(0.0)b
-		/* Action routes */
 		'get /api/action': 'ActionController.get',
 		'post /api/action': 'ActionController.create',
-		/* App routes */
 		'get /api/app': 'AppController.get',
 		'post /api/app': 'AppController.create',
-		/* Attention routes */
 		'get /api/attention': 'AttentionController.get',
 		'post /api/attention': 'AttentionController.create',
-		/* Association routes */
 		'get /api/association': 'AssociationController.get',
-		/* Block routes */
 		//'get /api/block': 'BlockController.get',
 		//'post /api/block': 'BlockController.create',
-		/* Connection routes */
 		'get /api/connection': 'ConnectionController.get',
 		'post /api/connection': 'ConnectionController.create',
-		/* Content routes */
 		'get /api/content': 'ContentController.get',
 		'post /api/content': 'ContentController.create',
 		'post /api/content/:id': 'ContentController.update',
-		/* Event routes */
 		'get /api/event': 'EventController.get',
-		/* Item routes */
+		'post /api/event': 'EventController.create',
 		'get /api/item': 'ItemController.get',
 		'post /api/item': 'ItemController.create',
-		/* Location routes */
 		'get /api/location': 'LocationController.get',
 		'post /api/location': 'LocationController.create',
-		/* Notification routes */
 		'get /api/notification': 'NotificationController.get',
 		'post /api/notification/:id': 'NotificationController.update',
-		/* Order routes */
 		'get /api/order': 'OrderController.get',
 		'post /api/order': 'OrderController.create',
-		/* Reaction routes */
-		//'get /api/reaction': 'ReactionController.get',
 		'post /api/reaction': 'ReactionController.create',
-		/* Peer routes */
 		'get /api/peer': 'PeerController.get',
 		'post /api/peer': 'PeerController.create',
-		/* Project routes */
 		'get /api/project': 'ProjectController.get',
 		'post /api/project': 'ProjectController.create',
-		/* Search routes */
 		'get /api/search': 'SearchController.search',
 		'get /api/search/feed': 'SearchController.getFeed',
-		/* Task routes */
 		'get /api/task': 'TaskController.get',
 		'post /api/task': 'TaskController.create',
-		/* Time routes */
 		'get /api/time': 'TimeController.get',
 		'post /api/time': 'TimeController.create',
-		/* Token routes */
 		'get /api/token': 'TokenController.get',
-		/* Transaction routes */
 		'get /api/transaction': 'TransactionController.get',
 		'post /api/transaction': 'TransactionController.create',
-		/* User (MEMBER) routes */
 		'get /api/user': 'UserController.get',
 		'post /api/user': 'UserController.create',
 		'post /api/user/:id': 'UserController.update',
-		/* Validation routes */
 		'get /api/validation': 'ValidationController.get',
 		'post /api/validation': 'ValidationController.create',
-		/* Wildcard routes */
-		//'get /*' : 'HomeController.index'
 	},
 	security:{cors:{allRoutes: true, allowOrigins: '*'}},
 	session:{

@@ -105,7 +105,7 @@ module.exports = {
 				models[x].from = populatedModels[sum];sum++;
 			}
 			var promisesAssociations = [];
-			for (x in models){promisesAssociations.push(getAssociations(models[x]));}
+			for (x in models){promisesAssociations.push(associationApp.get(models[x]));}
 			var populatedModels = await Q.all(promisesAssociations);
 			for (x in models){models[x] = populatedModels[x];}
 			deferred.resolve(models);
@@ -126,7 +126,7 @@ module.exports = {
 				models[x].from = populatedModels[sum];sum++;
 			}
 			var promisesAssociations = [];
-			for (x in models){promisesAssociations.push(getAssociations(models[x]));}
+			for (x in models){promisesAssociations.push(associationApp.get(models[x]));}
 			var poulatedModels = await Q.all(promisesAssociations);
 			for (x in models){models[x] = populatedModels[x];}
 			deferred.resolve(models);
@@ -142,7 +142,7 @@ module.exports = {
 			//TODO: QUALITY DATA ASSOCIATION TRAVERSALS FOR QUERIES
 			//TODO: ASSOCIATION APP | GET
 			var promisesAssociations = [];
-			for (x in models){promisesAssociations.push(getAssociations(models[x]));}
+			for (x in models){promisesAssociations.push(associationApp.get(models[x]));}
 			var populatedAssociations = await Q.all(promisesAssociations);
 			for (x in models){models[x] = populatedAssociations[x];}
 			deferred.resolve(models);
@@ -297,16 +297,11 @@ module.exports = {
 				//UPDATE TRANSACTION MODEL..
 				//ATTENTION + REACTION + PROTOCOL + ASSOCIATION + ALL TOKENS IN CONTEXT
 
-				//data.apps.tokens = {
-				//}
+				//data.apps.tokens = {}
 
 			}
-
-
-		},
+		}
 	}
-
-	
 };
 
 //be back soon

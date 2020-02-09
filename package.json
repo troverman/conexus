@@ -51,6 +51,9 @@
     "sails-hook-orm": "^2.1.1",
     "sails-hook-sockets": "^2.0.0",
     "sails-mongo": "^1.0.1",
+    "stack-generator": "^2.0.5",
+    "stack-trace": "0.0.10",
+    "stacktrace-js": "^2.0.2",
     "validator": "~3.28.0"
   },
   "scripts": {

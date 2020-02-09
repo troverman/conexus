@@ -1,15 +1,9 @@
-
 //CRE8.GOOGLE.ALPHA
-
-module.exports = {
-
+var App = {
 	//PASSPORT APP
-
 	//DATA APP
 		//DEFINE GOOGLE DATA . . .
-
 	//OAUTH
-
 	import: { 
 		request: require('request'),
 		Q: require('q'),
@@ -27,20 +21,15 @@ module.exports = {
 			}	
 		}
 	],
-
 	get: function(req, res, params){
 	},
-
 	create: function(req, res, params){	
 	},
-
 	geoCode: function(model){
 		var deferred = googleApp.import.Q.defer();
 		//TODO: SECURITY 
 		//MEMBER-APP CONNECTION
-		var googleMapsClient = require('@google/maps').createClient({
-			key: 'AIzaSyDcTGxD4H3lnx84u8EPcbh7PodbsEyzbg4'
-		});
+		var googleMapsClient = require('@google/maps').createClient({key: 'AIzaSyDcTGxD4H3lnx84u8EPcbh7PodbsEyzbg4'});
 		googleMapsClient.geocode({address: model.location}, function(err, response) {
 			location = null;
 			if (!err) {
@@ -56,9 +45,6 @@ module.exports = {
 		});
 		return deferred.promise;
 	},
-
-	nearByLocations: function(model){
-	}
-
-
+	nearByLocations: function(model){}
 };
+module.exports = App;
