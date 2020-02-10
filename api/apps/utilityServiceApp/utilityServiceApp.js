@@ -1,10 +1,10 @@
 //CRE8.UTILSERVICE
-const async = require('async');
-const Q = require('q');
-const request = require('request');
 var App = {
+	import:{
+		Q: require('q'),
+	},
 	bulkEditFunction: async function(){
-		var Q = require('q');
+		var Q = App.import.Q;
 		var promises = [
 			////Action.find().limit(100).skip(0).sort('createdAt DESC'),
 			////App.find().limit(100).skip(0).sort('createdAt DESC'),
@@ -167,15 +167,11 @@ var App = {
 	//UTIL
 	removeDuplicateTokens: async function(){
 		var tokenModels = await Token.find().limit(1000000);
-		const lookup = tokenModels.reduce((a, e) => {
-		  a[e.string] = e.string in a ? ++a[e.string] : 0;
-		  return a;
-		}, {});
+		const lookup = tokenModels.reduce((a, e) => {a[e.string] = e.string in a ? ++a[e.string] : 0; return a;}, {});
 		tokenModels = tokenModels.filter(e => lookup[e.string]);
 		console.log(tokenModels);
 		for (x in tokenModels){Token.destroy(tokenModels[x].id, function(err) {console.log('delete token')});}
 	},
-
 	updateTransactionContext: async function(){
 		var transactionModels = await Transaction.find({}).limit(10000);
 		for (x in transactionModels){
@@ -184,7 +180,6 @@ var App = {
 			var transactionModel = await Transaction.update({id:transactionModels[x].id}, {context:transactionModels[x].context})
 		}
 	},
-
 	purge: async function(model){
 		var models = await Project.find({title:{contains:model}});
 		if (models.length > 0){
@@ -227,9 +222,7 @@ var App = {
 	removeMirrorDuplicates: function(array){
 		var array1 = [];
 		var array2 = [];
-		var mirrorArray = array.map(function(obj){
-			return [obj[1],obj[0]];
-		});
+		var mirrorArray = array.map(function(obj){return [obj[1],obj[0]];});
 		for (x in array){
 			array1.push(array[x]);
 			if (!dataServiceApp.utility.isInArray(array1, mirrorArray[x])){

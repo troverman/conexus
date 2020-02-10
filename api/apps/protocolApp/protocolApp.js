@@ -38,8 +38,6 @@ var App = {
 		//APP DEFINED ROUTES. ETC
 			//COMPILES TO APP IN BROWER , NATIVLY
 		//CORE CONTAINS THE BUILDER
-	templates:{
-
-	}	
+	templates:{}	
 };
 module.exports = App;

@@ -1,18 +1,12 @@
 //CRE8.PROEJCT.ALPHA
-const crypto = require('crypto');
-const mongodb = require('mongodb');
-const Q = require('q');
 var App = {
 	import:{
 		crypto: require('crypto'),
-		mongodb: require('mongodb'),
 		Q: require('q')
 	},
-	attributes: {
-        
+	attributes: {  
         //DEPRECIATE
         model: {type: 'string', defaultsTo: 'PROJECT'},
-
         title: {type: 'string'},
         description: {type: 'string', allowNull:true},
         avatarUrl: {type: 'string', defaultsTo: '/images/loading.gif'},
@@ -41,19 +35,16 @@ var App = {
         taskCount: {type: 'number',defaultsTo: 0},
         timeCount: {type: 'number',defaultsTo: 0},
         liveCount: {type: 'number',defaultsTo: 0},
-
-
     },
-    afterCreate: function (model, next) {
+    afterCreate: async function (model, next) {
         var colorArray = ['2ab996', '24242e', 'ff6a6a', 'ddbea8'];
         var colorInt = Math.floor(Math.random() * (colorArray.length));
         var avatarUrl = 'https://ui-avatars.com/api/?size=256&name='+model.title+'&color=fff&background='+colorArray[colorInt];
         model.avatarUrl = avatarUrl;
-        Project.update({id: model.id}, model).then(function(model){return next(null, model);});
+        await Project.update({id: model.id}, model)
+        return next(null, model);
     },
-
     init:function(model){
-
     	//var self = {
 	    //	connnections:{
 	    //		self:{
@@ -64,12 +55,11 @@ var App = {
 	    //		project:{},
 	    //	}
 	    //};
-
     },
 
 	get: async function(req) {
 
-		var deferred = Q.defer();
+		var deferred = App.import.Q.defer();
 		var limit = parseInt(req.query.limit) || 10;
 		var skip = parseInt(req.query.skip) || 0;
 		var sort = req.query.sort || 'createdAt DESC';
@@ -145,7 +135,7 @@ var App = {
 			Project.subscribe(req, models.map(function(obj){return obj.id}));
 			var promises = [];
 			for (x in models){promises.push(associationApp.get(models[x]));}
-			var populatedModels = await Q.all(promises);
+			var populatedModels = await App.import.Q.all(promises);
 			for (x in models){models[x] = populatedModels[x];}
 			var returnObj = {data:models, info:{count:numRecords}};
 			deferred.resolve(returnObj);
@@ -239,17 +229,13 @@ var App = {
         	information:{},
 			data:{apps:{reactions: {plus:0,minus:0},attention:{general:0}}}
         };
-		newValidation.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(newValidation)).digest('hex');
-
+		newValidation.hash = App.import.crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(newValidation)).digest('hex');
         var newValidationModel = await Validation.create(newValidation);
 		console.log('CREATE VALIDATION', newValidationModel);
 		createAssociation(newValidationModel);
-
-		projectApp.tokens.create(project);
-
+		App.tokens.create(project);
 		//TODO: RETURN PROMISE
 		return project;
-	
 	},
 	
 	tokens:{

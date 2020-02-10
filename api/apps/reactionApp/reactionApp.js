@@ -1,5 +1,4 @@
 //CRE8.REACTION.ALPHA
-const crypto = require('crypto');
 var App = {
 	import:{
 		crypto: require('crypto')
@@ -26,7 +25,7 @@ var App = {
 		//TOOD: BALANCES AND TOKENS UNITY
 		//FOR ALL APPS THAT IMPORT REACTIONS; inclue helpercode
 		async function updateAssociatedModels(model){
-			var tokens = reactionApp.tokens.get(model);
+			var tokens = App.tokens.get(model);
 			for (x in model.associatedModels){
 				if (model.associatedModels[x].type == 'APP'){
 					var newModel = await App.find({id:model.associatedModels[x].id});
@@ -365,13 +364,13 @@ var App = {
 			user: req.param('user'),
 			data:{apps:{reactions:{plus:0,minus:0},attention:{general:0}}}
 		};
-		model.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
+		model.hash = App.import.crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
 		var model = await Reaction.create(model);
 		var userModel = await User.find({id:model.user});
 		reaction.associatedModels = req.param('associatedModels');
 		reaction.user = userModel[0];
 		Reaction.publish([reaction.id], {verb:'create', data: reaction});
-		reactionApp.tokens.create(reaction);
+		App.tokens.create(reaction);
 		//ASSOCIATED APP DATA.. COUNTS 
 		//TODO:: AS ASSOCIATIONS . .
 		updateAssociatedModels(reaction);
@@ -379,13 +378,7 @@ var App = {
 		//TODO: PROMISIFY
 		return Reaction.find({hash:model.hash});
 	},
-
-
-
-
-
 	tokens:{
-
 		get: function(model){
 
 			//json struct for token distribution
@@ -455,7 +448,7 @@ var App = {
 			];
 
 			//HASH
-			var hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
+			var hash = App.import.crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
 			var prefix = 'CRE8+REACTION';
 			var hashString = prefix+'+'+hash;
 			tokens.push({
@@ -468,7 +461,7 @@ var App = {
 			//GOOP
 			for (x in Object.keys(model)){
 				var data = model[Object.keys(model)[x]];
-				var hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(data)).digest('hex');
+				var hash = App.import.crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(data)).digest('hex');
 				var prefix = 'CRE8+REACTION';
 				var flatObjString = prefix+'+'+hash;
 				tokens.push({
@@ -523,7 +516,6 @@ var App = {
 			User.update({id:model.user.id}, {balance:model.user.balance}).then(function(userModel){});
 			updateAssociatedModels(model, tokens);
 		}
-
 	}	
 };
 module.exports = App;

@@ -390,7 +390,7 @@ var App = {
 		//TODO: ASSOCIATION WALK VS PARENT
 		//TODO: THINK RECURSIVE AWAIT
 		function projectAssociations(id, path){
-			var deferred = populationApp.import.Q.defer();
+			var deferred = App.import.Q.defer();
 			Project.find({id:id}).then(function(models){
 				if (models.length == 1){
 					path = path.toUpperCase().replace(/ /g,'_') + '+' + models[0].title.toUpperCase().replace(/ /g,'_');
@@ -434,7 +434,7 @@ var App = {
 			'USER',
 			'VALIDATION',
 		];
-		var data = await populationApp.import.Q.all(promises);
+		var data = await App.import.Q.all(promises);
 		var tokenSet = [];
 
 		for (x in data){

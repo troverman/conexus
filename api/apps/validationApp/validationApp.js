@@ -1,8 +1,6 @@
 //CRE8.VALIDATION.ALPHA
 var App = {
-
 	attributes: {
-        
         //DEPRECIATE
         model: {type: 'string', defaultsTo: 'VALIDATION'},
         type: {type: 'string', defaultsTo: 'VALIDATION'},
@@ -23,9 +21,7 @@ var App = {
         creator: {type: 'string'},
 
         data: {type: 'json'},
-
     },
-
 	types:[
 		{
 			type:'VALIDATION', 
@@ -35,7 +31,6 @@ var App = {
 		    }
 		}
 	],
-
     //CONNECTIONS ARE THE LANGUAGE 
     //-- THIS IS WIP FOR FUN
     connections:[
@@ -76,27 +71,22 @@ var App = {
 			}],
 		}
 	],
-
 	//REDUCE INTO SELF CONECTION W CONTEXT
 	language: 'Javascript',
 	compiler:'V8',
-
 	import:{
 		Q: require('q'),
 		crypto: require('crypto')
 	},
-
-	get: async function(model){
-
+	getNew: async function(model){
 		//BETTER GET . . . WE ARE ABSTRACTING THOUGH MONOGO. . . 
 		//provide context hash
 		//truth variance 
 		return Event.find({id:model.id});
 	},
-
 	get: async function(req){
 
-		var deferred = validationApp.import.Q.defer();
+		var deferred = App.import.Q.defer();
 
 		var limit = parseInt(req.query.limit) || 1;
 		var skip = parseInt(req.query.skip) || 0;
@@ -109,69 +99,58 @@ var App = {
 		console.log('GET VALIDATION', req.query)
 
 		if(req.query.id){
-
-			Validation.find({id:id}).limit(limit).skip(skip).sort(sort).populate('user')
-			.then(function(models) {
-
-				var promises = [];
-				for (x in models[0].associatedModels){
-					if (models[0].associatedModels[x].type == 'ACTION'){promises.push(Action.find({id:models[0].associatedModels[x].id}).then(function(actionModels){return {action:actionModels[0]}}))}
-					if (models[0].associatedModels[x].type.includes("APP")){promises.push(App.find({id:models[0].associatedModels[x].id}).then(function(appModels){return {app:appModels[0]}}))}
-					if (models[0].associatedModels[x].type == 'CONNTECTION'){promises.push(Content.find({id:models[0].associatedModels[x].id}).then(function(connectionModels){return {connection:connectionModels[0]}}))}
-					if (models[0].associatedModels[x].type == 'CONTENT'){promises.push(Content.find({id:models[0].associatedModels[x].id}).then(function(contentModels){return {content:contentModels[0]}}))}
-					if (models[0].associatedModels[x].type == 'ITEM'){promises.push(Item.find({id:models[0].associatedModels[x].id}).then(function(itemModels){return {item:itemModels[0]}}))}
-					if (models[0].associatedModels[x].type == 'MEMBER'){promises.push(User.find({id:models[0].associatedModels[x].id}).then(function(memberModels){return {member:memberModels[0]}}))}
-					if (models[0].associatedModels[x].type == 'PROJECT'){promises.push(Project.find({id:models[0].associatedModels[x].id}).then(function(projectModels){return {project:projectModels[0]}}))}
-					if (models[0].associatedModels[x].type == 'TASK'){promises.push(Task.find({id:models[0].associatedModels[x].id}).then(function(taskModels){return {task:taskModels[0]}}))}
-					if (models[0].associatedModels[x].type == 'TIME'){promises.push(Time.find({id:models[0].associatedModels[x].id}).then(function(taskModels){return {time:timeModels[0]}}))}
-					if (models[0].associatedModels[x].type == 'TRANSACTION'){promises.push(Transaction.find({id:models[0].associatedModels[x].id}).then(function(transactionModels){return {transaction:transactionModels[0]}}))}
-					if (models[0].associatedModels[x].type == 'VALIDATION'){promises.push(Validation.find({id:models[0].associatedModels[x].id}).then(function(validationModels){return {validation:validationModels[0]}}))}
+			var models = await Validation.find({id:id}).limit(limit).skip(skip).sort(sort).populate('user')
+			var promises = [];
+			for (x in models[0].associatedModels){
+				if (models[0].associatedModels[x].type == 'ACTION'){promises.push(Action.find({id:models[0].associatedModels[x].id}).then(function(actionModels){return {action:actionModels[0]}}))}
+				if (models[0].associatedModels[x].type.includes("APP")){promises.push(App.find({id:models[0].associatedModels[x].id}).then(function(appModels){return {app:appModels[0]}}))}
+				if (models[0].associatedModels[x].type == 'CONNTECTION'){promises.push(Content.find({id:models[0].associatedModels[x].id}).then(function(connectionModels){return {connection:connectionModels[0]}}))}
+				if (models[0].associatedModels[x].type == 'CONTENT'){promises.push(Content.find({id:models[0].associatedModels[x].id}).then(function(contentModels){return {content:contentModels[0]}}))}
+				if (models[0].associatedModels[x].type == 'ITEM'){promises.push(Item.find({id:models[0].associatedModels[x].id}).then(function(itemModels){return {item:itemModels[0]}}))}
+				if (models[0].associatedModels[x].type == 'MEMBER'){promises.push(User.find({id:models[0].associatedModels[x].id}).then(function(memberModels){return {member:memberModels[0]}}))}
+				if (models[0].associatedModels[x].type == 'PROJECT'){promises.push(Project.find({id:models[0].associatedModels[x].id}).then(function(projectModels){return {project:projectModels[0]}}))}
+				if (models[0].associatedModels[x].type == 'TASK'){promises.push(Task.find({id:models[0].associatedModels[x].id}).then(function(taskModels){return {task:taskModels[0]}}))}
+				if (models[0].associatedModels[x].type == 'TIME'){promises.push(Time.find({id:models[0].associatedModels[x].id}).then(function(taskModels){return {time:timeModels[0]}}))}
+				if (models[0].associatedModels[x].type == 'TRANSACTION'){promises.push(Transaction.find({id:models[0].associatedModels[x].id}).then(function(transactionModels){return {transaction:transactionModels[0]}}))}
+				if (models[0].associatedModels[x].type == 'VALIDATION'){promises.push(Validation.find({id:models[0].associatedModels[x].id}).then(function(validationModels){return {validation:validationModels[0]}}))}
+			}
+			var populatedModels = await App.import.Q.all(promises);
+			for (x in models[0].associatedModels){
+				if (models[0].associatedModels[x].type.includes("APP")){
+					var app = populatedModels.filter(function(obj){return obj.app})
+					models[0].associatedModels[x].info = app[0];
 				}
-
-				Q.all(promises).then((populatedModels)=>{
-
-					for (x in models[0].associatedModels){
-
-						if (models[0].associatedModels[x].type.includes("APP")){
-							var app = populatedModels.filter(function(obj){return obj.app})
-							models[0].associatedModels[x].info = app[0];
-						}
-						if (models[0].associatedModels[x].type == 'CONNTECTION'){
-							var connection = populatedModels.filter(function(obj){return obj.content})
-							models[0].associatedModels[x].info = connection[0];
-						}
-						if (models[0].associatedModels[x].type == 'CONTENT'){
-							var content = populatedModels.filter(function(obj){return obj.content})
-							models[0].associatedModels[x].info = content[0];
-						}
-						if (models[0].associatedModels[x].type == 'ITEM'){
-							var item = populatedModels.filter(function(obj){return obj.item})
-							models[0].associatedModels[x].info = item[0];
-						}
-						if (models[0].associatedModels[x].type == 'MEMBER'){
-							var member = populatedModels.filter(function(obj){return obj.member})
-							models[0].associatedModels[x].info = member[0];
-						}
-						if (models[0].associatedModels[x].type == 'PROJECT'){
-							var project = populatedModels.filter(function(obj){return obj.project})
-							models[0].associatedModels[x].info = project[0];
-						}
-						if (models[0].associatedModels[x].type == 'TASK'){
-							var task = populatedModels.filter(function(obj){return obj.task});
-							models[0].associatedModels[x].info = task[0];
-						}
-						if (models[0].associatedModels[x].type == 'TIME'){
-							var time = populatedModels.filter(function(obj){return obj.time});
-							models[0].associatedModels[x].info = time[0];
-						}
-
-					}
-
-					Validation.subscribe(req, [models[0].id]);
-					deferred.resolve(models);
-
-				});
-			});
+				if (models[0].associatedModels[x].type == 'CONNTECTION'){
+					var connection = populatedModels.filter(function(obj){return obj.content})
+					models[0].associatedModels[x].info = connection[0];
+				}
+				if (models[0].associatedModels[x].type == 'CONTENT'){
+					var content = populatedModels.filter(function(obj){return obj.content})
+					models[0].associatedModels[x].info = content[0];
+				}
+				if (models[0].associatedModels[x].type == 'ITEM'){
+					var item = populatedModels.filter(function(obj){return obj.item})
+					models[0].associatedModels[x].info = item[0];
+				}
+				if (models[0].associatedModels[x].type == 'MEMBER'){
+					var member = populatedModels.filter(function(obj){return obj.member})
+					models[0].associatedModels[x].info = member[0];
+				}
+				if (models[0].associatedModels[x].type == 'PROJECT'){
+					var project = populatedModels.filter(function(obj){return obj.project})
+					models[0].associatedModels[x].info = project[0];
+				}
+				if (models[0].associatedModels[x].type == 'TASK'){
+					var task = populatedModels.filter(function(obj){return obj.task});
+					models[0].associatedModels[x].info = task[0];
+				}
+				if (models[0].associatedModels[x].type == 'TIME'){
+					var time = populatedModels.filter(function(obj){return obj.time});
+					models[0].associatedModels[x].info = time[0];
+				}
+			}
+			Validation.subscribe(req, [models[0].id]);
+			deferred.resolve(models);
 		}
 
 		else if (req.query.association){
@@ -222,36 +201,27 @@ var App = {
 		}
 		return deferred.promise;
 	},
-	
-
 	//WORK HERE
-	//NEXT
-	//HEllO FRIEND , Thanks for reading 
-	create: async function(model){
-		
+	createNew: async function(model){
 		var connection = await Connection.find({connection:model.connection});
 
 		//BLOOP
 		//DO THE MATH (IS LIVE TOO MUCH TO ASK FOR?)
-		var newValidationModel = {
-							
-		};
+		var newValidationModel = {};
 
 		//REDUCE
-		newValidationModel.hash = validationApp.import.crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(newValidationModel)).digest('hex');
-		//newValidationModel.id = validationApp.import.crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(newValidationModel)).digest('hex');
+		newValidationModel.hash = App.import.crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(newValidationModel)).digest('hex');
+		//newValidationModel.id = App.import.crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(newValidationModel)).digest('hex');
 
 		//REDUCE 
 		var newValidation = await Validation.create(newValidationModel);
 		var newEvent = await eventApp.create(newValidation);
 
 		//TOKENS CREATE --> REDUCE TO ON EVENT CREATE 
-			//??
 	},
-
 	create: async function(req){
 
-		var deferred = validationApp.import.Q.defer();
+		var deferred = App.import.Q.defer();
 
 		//var connection = await Connection.find({});
 		var userModels = await User.find({id:model.user});
@@ -319,10 +289,7 @@ var App = {
 
 		};
 
-		model.hash = validationApp.import.crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
-
-
-
+		model.hash = App.import.crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
 
 		//THINK
 		var associatedModelObj = {};
@@ -339,15 +306,12 @@ var App = {
 		//LIST -> OBJ
 		for (y in model.associatedModels[x].context){newValidation.context[model.associatedModels[x].context[y].text] = model.associatedModels[x].context[y].score;}
 
-
-
-
 		console.log('CREATE VALIDATION', model);
 		var newValidation = await Validation.create(model);	
 		newValidation.user = userModels[0];
 		Validation.subscribe(req, [validation.id]);
 		Validation.publish([validation.id], {verb: 'create', data: validation.id});
-		validationApp.tokens.create(validation);
+		App.tokens.create(validation);
 		//NotificationApp.create[model.model.toLowerCase()](validation);
 		NotificationApp.create.validation(validation);
 		eventApp.create(validation);
@@ -357,13 +321,12 @@ var App = {
 		return deferred.promise;
 	},
 
-
 	//IMPLICIT VALIDATIONS REPLACE 'user'? what about 'creator'
 	//DEPRECAITE TO.. FROM????? --> VALIDATION / ASSOCIATION IS MAIN DATA MODEL ...
 	//MEMBER->TRANSACTION
 	//TRANSACTION->PROJECT
 	//TRANSACTION<->TRANSACTION ?
-	//APP-APP INTEROP . . . /// USE VALIDATIONAPP.CREATE  . .. 
+	//APP-APP INTEROP . . . /// USE App.CREATE  . .. 
 	//TODO: REDUCE . . .
 		//THIS ABOUT STATIC VERSIONS OF VALIDATION TYPES (AS CONNECTIONS WITH SUM RULES)
 
@@ -387,7 +350,6 @@ var App = {
 				data:{apps:{reactions: {plus:0,minus:0},attention:{general:0}}}
 			};
 
-
 			//DEFAULT CONNECTION???? 
 			//SCOPE VARIABLES
 			//FOR COMMENTS (PARENT CHILD.. )
@@ -396,7 +358,6 @@ var App = {
 			//Connection.find({}).then(function(connectionModel){
 			//newValidation.connection = connectionModel[0];
 			
-
 			newValidation.connection = {
 				id:1,
 				type:'HUMAN',
@@ -445,9 +406,6 @@ var App = {
 			associationApp.create(newValidationModel);
 		}
 	},
-
-
-
 	tokens:{
 
 		//CONNECTION..
@@ -487,7 +445,7 @@ var App = {
 		},
 
 		create:async function (model){
-			var tokens = validationApp.tokens.get(model);
+			var tokens = App.tokens.get(model);
 			for (x in tokens){
 
 				var tokenString = tokens[x]; 
@@ -529,7 +487,6 @@ var App = {
 				}
 			}
 		},
-
-	},
+	}
 };
 module.exports = App;

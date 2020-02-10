@@ -1,6 +1,5 @@
 //CRE8.PEER.ALPHA
 var App = {
-
 	//config options and sets
 	//ipfs.create
 	//app that exists as connections to types of peers 
@@ -8,7 +7,6 @@ var App = {
 		//ids are hashes / dynamic 
 			//ipfs vs HASH
 	//peer is a combinatorial obj
-
 	attributes: {
         model: {type: 'string', defaultsTo: 'PEER'},
 		info: {type: 'json'},
@@ -21,7 +19,6 @@ var App = {
         versionHash: {type: 'string'},
         creator: {model: 'user'},
     },
-
 	get:function(req){
 		return Peer.find(req);
 	},

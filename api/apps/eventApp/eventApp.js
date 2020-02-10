@@ -2,8 +2,6 @@
 var App = {	
 	//APP-APP CONNECTION 
 	import: { 
-		request: require('request'),
-		Q: require('q'),
 		//socket:require('socket')
 	},
 	attributes: {

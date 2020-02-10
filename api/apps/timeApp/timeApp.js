@@ -1,19 +1,16 @@
 //CRE8.TIME.ALPHA
 var App = {
-
 	import:{
 		Q: require('q'),
 		crypto: require('crypto'),
 		ipfs: require('ipfs'),
 		orbitdb: require('orbit-db'),
 	},
-
 	connections:[],
 	language: 'Javascript',
 	compiler:'V8',
 
 	//type CRE8_TIME
-
 	//.h files eqilivant 
 	dataModel:[],
 	attributes: {
@@ -33,7 +30,7 @@ var App = {
     },
 
 	get: async function(req) {
-		var deferred = timeApp.import.Q.defer();
+		var deferred = App.import.Q.defer();
 		var limit = parseInt(req.query.limit) || 1;
 		var skip = parseInt(req.query.skip) || 0;
 		var sort = req.query.sort || 'createdAt DESC';
@@ -58,7 +55,7 @@ var App = {
 	},
 
 	create: async function(req){
-		var deferred = timeApp.import.Q.defer();
+		var deferred = App.import.Q.defer();
 		var model = {
 			model: 'TIME',
 			amount: req.param('amount'),
@@ -72,7 +69,7 @@ var App = {
 			creator: req.param('user'),
 			data:{apps:{reactions:{plus:0,minus:0},attention:{general:0}}}
 		};
-		model.hash = timeApp.import.crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
+		model.hash = App.import.crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
 		console.log('CREATE TIME', model);
 		//TODO: SECURITY - PERMISSIONS - AUTH
 		var userModels = await User.find({id:model.user});
@@ -81,7 +78,7 @@ var App = {
 		time.user = userModels[0];
 		Time.publish([time.id], {verb: 'create', data: time});
 		eventApp.create(time);
-		timeApp.tokens.create(time);
+		App.tokens.create(time);
 		for (x in time.associatedModels){validationApp.createLegacy(time.associatedModels[x])}
 		deferred.resolve(time);
 		return deferred.promise;

@@ -1,6 +1,4 @@
 //CRE8.TASK.ALPHA
-const Q = require('q');
-const crypto = require('crypto');
 var App = {
 	import: {
 		Q: require:('q'),
@@ -22,7 +20,7 @@ var App = {
     },
 
 	get: async function(req) {
-		var deferred = Q.defer();
+		var deferred = App.import.Q.defer();
 		var limit = parseInt(req.query.limit) || 1;
 		var skip = parseInt(req.query.skip) || 0 ;
 		var sort = req.query.sort || 'createdAt DESC';
@@ -37,24 +35,21 @@ var App = {
 			Task.subscribe(req, [models[0].id]);
 			return associationApp.get(models[0]);
 		}
-		//
 		//TODO: UPDATE CODE STYLE 
 		//TODO: REDUCE
 		else if (req.query.project){
 			Task.getDatastore().manager.collection('task').find({"associatedModels.address":{$in :[project]}}).limit(limit).skip(skip).sort({'createdAt':-1})
-			.toArray(function (err, models) {
+			.toArray(async function (err, models) {
 				models = models.map(function(obj){ obj.id = obj._id; return obj;});
 				var promises = [];
 				for (x in models){
 					promises.push(User.find({id:models[x].user.toString()}).then(function(userModels){return {user:userModels[0]}}));
 				}
-				Q.all(promises).then((populatedModels)=>{
-					for (x in models){models[x].user = populatedModels[x].user;}
-					deferred.resolve(models);
-				});
+				var populatedModels = await Q.all(promises);
+				for (x in models){models[x].user = populatedModels[x].user;}
+				deferred.resolve(models);
 			});
 		}
-
  		//STUDY THIS!!!
  		//QUERY FOR MEMBER-MEMBER
  		//QUERY FOR CONNECTION DESCRIPTION
@@ -69,7 +64,7 @@ var App = {
 			};
 			var promises = [];
 			Association.getDatastore().manager.collection('association').find(andQuery).limit(limit).skip(skip).sort({'createdAt':-1})
-			.toArray(function (err, associationModels) {
+			.toArray(async function (err, associationModels) {
 				associationModels = associationModels.map(function(obj){obj.id = obj._id;return obj;});
 				for(x in associationModels){
 					for (y in associationModels[x].associatedModels){
@@ -78,19 +73,17 @@ var App = {
 						}
 					}
 				}
-				Q.all(promises).then((populatedModels)=>{
-					deferred.resolve(populatedModels)
-				});
+				var populatedModels = await App.import.Q.all(promises);
+				deferred.resolve(populatedModels)
 			});
 		}
-
 		else{
 			var models = await Task.find({}).limit(limit).skip(skip).sort(sort).populate('user')
 			var numRecords = await Task.count()
 			Task.subscribe(req, models.map(function(obj){return obj.id}));
 			var promises = [];
 			for (x in models){promises.push(associationApp.get(models[x]));}
-			var populatedModels = await Q.all(promises)
+			var populatedModels = await App.import.Q.all(promises)
 			for (x in models){models[x] = populatedModels[x];}
 			var returnObj = {data:models, info:{count:numRecords}};
 			//TODO: RETURN PROMISE
@@ -98,7 +91,6 @@ var App = {
 		}
 		return deferred.promise;
 	},
-
 	create:async function(req){
 		var model = {
 			model: 'TASK',
@@ -112,7 +104,7 @@ var App = {
 			data:{apps:{reactions:{plus:0,minus:0},attention:{general:0}}}
 
 		};
-		model.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
+		model.hash = App.import.crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
 		console.log('CREATE TASK', model);
 		var task = await Task.create(model);
 		//TODO: BETTER SETUP
@@ -127,12 +119,11 @@ var App = {
 		Task.subscribe(req, [task.id]);
 		Task.publish([task.id], {verb: 'create', data: taskModel});
 		eventApp.create(task);
-		taskApp.tokens.create(task);
+		App.tokens.create(task);
 		//for( x in []){}
 		validationApp.createLegacy(task);
 		return Task.find({hash:model.hash});
 	},
-
 	tokens:{
 		get: function(model){
 			var protocolTokens = [
@@ -182,7 +173,6 @@ var App = {
 
 				}
 			}
-
 		}
 	}
 };

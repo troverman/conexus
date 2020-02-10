@@ -1,15 +1,16 @@
 //CRE8.GEONAMES.ALPHA
 var App = {
+	import:{
+		request: require('request'),
+		async: require('async')
+	},
 	//TODO: GEONAMES APP 
 	getGeoNamesByParent: function(geoNameParentId, parentId, username, nestLevel){
 		//voetr1, voetr2, voetr3, voetr4, voetr5, troverman
 		if (!nestLevel){var nestLevel=0}
 		nestLevel++;
-		var model = {
-			url:'http://api.geonames.org/childrenJSON?geonameId='+geoNameParentId+'&username='+username+'&maxRows=1000000',
-			json: true,
-		};
-		request(model, function (error, response, body) {
+		var model = {url:'http://api.geonames.org/childrenJSON?geonameId='+geoNameParentId+'&username='+username+'&maxRows=1000000', json: true};
+		App.import.request(model, function (error, response, body) {
 			if (body && body.geonames && body.geonames.length > 0){
 				var nameData = body.geonames;
 				async.eachSeries(nameData, function (projectData, nextProject){
@@ -53,20 +54,16 @@ var App = {
 	
 	//TODO: GEONAMES APP 
 	getNamesWorld: function(){
-		var model = {
-			url: 'http://api.geonames.org/countryInfoJSON?formatted=true&lang=en&username=troverman',
-			json: true,
-		};
-		request(model, function (error, response, body) {
+		var model = {url: 'http://api.geonames.org/countryInfoJSON?formatted=true&lang=en&username=troverman', json: true};
+		App.import.request(model, async function (error, response, body) {
 			var countryData = body.geonames;
 			async.eachSeries(countryData, function (projectData, nextProject){
 				var title = projectData.countryName;
 				var urlTitle = title.replace(/ /g,"-").toLowerCase();
-				Project.find({urlTitle:urlTitle}).then(function(projectModel){
-					if (projectModel.length === 0){utilService.getGeoNamesByParent(projectData.geonameId, projectModel[0].id, 'voetr5', 0);}
-					else{utilService.getGeoNamesByParent(projectData.geonameId, '', 'troverman', 0)}
-					process.nextTick(nextProject);
-				});
+				var projectModel = await Project.find({urlTitle:urlTitle});
+				if (projectModel.length === 0){utilService.getGeoNamesByParent(projectData.geonameId, projectModel[0].id, 'voetr5', 0);}
+				else{utilService.getGeoNamesByParent(projectData.geonameId, '', 'troverman', 0)}
+				process.nextTick(nextProject);
 			});
 		});
 	},
@@ -76,20 +73,14 @@ var App = {
 	//TODO: GEONAMES APP 
 	getGeoNames: function(model){
 		var requestModel = {json: true};
-
 		//ByLatLng, feature code.. PRK
-		if (model.type == 'latlng'){
-			requestModel.url='http://api.geonames.org/findNearbyJSON?ormatted=true&lat='+model.lat+'&lng='+model.lng+'&featureCode='+model.featureCode+'&radius='+model.radius+'&maxRows=10000&username=troverman'
-		}
+		if (model.type == 'latlng'){requestModel.url='http://api.geonames.org/findNearbyJSON?ormatted=true&lat='+model.lat+'&lng='+model.lng+'&featureCode='+model.featureCode+'&radius='+model.radius+'&maxRows=10000&username=troverman'}
 		//BY PARTENT
-		if (model.type == 'parent'){
-			requestModel.url='http://api.geonames.org/childrenJSON?geonameId='+model.parentId+'&username='+model.username+'&maxRows=1000000'
-		}
-
-		request(requestModel, function (error, response, body) {
+		if (model.type == 'parent'){requestModel.url='http://api.geonames.org/childrenJSON?geonameId='+model.parentId+'&username='+model.username+'&maxRows=1000000'}
+		App.import.request(requestModel, function (error, response, body) {
 			var dataSeries = body.geonames
 			console.log(dataSeries.length)
-			async.eachSeries(dataSeries, function (data, next){
+			App.import.async.eachSeries(dataSeries, async function (data, next){
 				if (data.name.includes('historical')){process.nextTick(next);}
 				else{
 					var projectModel = {
@@ -111,61 +102,54 @@ var App = {
 					//SCHOOL 5cbcdb00b8a6cb15001da063
 					//LIBRARY 5cc353cf5b2c881500738616
 
-					Project.find({urlTitle:projectModel.urlTitle}).then(function(selectedProjectModel){
-						if (selectedProjectModel.length == 0){
-							Project.create(projectModel).then(function(newProjectModel){
-								console.log('PROJECT CREATED!');
-								Task.find({id:'5cc359b75b2c881500738619'}).then(function(taskModel){
-									if (taskModel[0].associatedModels.map(function(obj){return obj.address}).indexOf(newProjectModel.id) == -1){
-										taskModel[0].associatedModels.push({type:'PROJECT', address:newProjectModel.id});
-										console.log(taskModel[0].associatedModels);
-										Task.update({id:'5cc359b75b2c881500738619'},{associatedModels:taskModel[0].associatedModels}).then(function(){
-											process.nextTick(next);
-										});
-									}
-									else{process.nextTick(next);}
-								});
-							});
+					var selectedProjectModel = await Project.find({urlTitle:projectModel.urlTitle});
+					if (selectedProjectModel.length == 0){
+						var newProjectModel = await Project.create(projectModel);
+						console.log('PROJECT CREATED!');
+						var taskModel = await Task.find({id:'5cc359b75b2c881500738619'});
+						if (taskModel[0].associatedModels.map(function(obj){return obj.address}).indexOf(newProjectModel.id) == -1){
+							taskModel[0].associatedModels.push({type:'PROJECT', address:newProjectModel.id});
+							console.log(taskModel[0].associatedModels);
+							await Task.update({id:'5cc359b75b2c881500738619'},{associatedModels:taskModel[0].associatedModels});
+							process.nextTick(next);
 						}
+						else{process.nextTick(next);}
+					}
+					else{
 
-						else{
-
-							//MULTIASSOCIATION TEST
-							//CHURCH 5cbcd809b8a6cb15001da062
-							//PARK 5cb7751fb965794d37dbaf2f, 5cc359b75b2c881500738619 
-								// HANGOUT MAY BE DEPRECIATED FOR LOCATION TOKENIZATION 
-									//--> SMART VALIDATION
-							//SCHOOL 5cbcdb5db8a6cb15001da065
-							//LIBRARY 5cc354565b2c881500738618
-							//Project.update({id:selectedProjectModel[0].id},{tags:'newyork,church,community,nyc,community,worship,faith'}).then(function(){
-							//	console.log('updated project');
-							//	process.nextTick(next);
-							//});
-							Task.find({id:'5cc359b75b2c881500738619'}).then(function(taskModel){
-								if (taskModel[0].associatedModels.map(function(obj){return obj.address}).indexOf(selectedProjectModel[0].id) == -1){
-									taskModel[0].associatedModels.push({type:'PROJECT', address:selectedProjectModel[0].id});
-									console.log(taskModel[0].associatedModels);
-									Task.update({id:'5cc359b75b2c881500738619'},{associatedModels:taskModel[0].associatedModels}).then(function(){
-										process.nextTick(next);
-									});
-								}
-								else{process.nextTick(next);}
-							});
-							//TASK FIND
-								//IMPLICIT VALIDATION
-								//MULTIASSOCIATION
-
-							//TASK CREATE
-								//CHILL AT X PARK
-								//CLEAN UP X PARK
-								//IMPLICIT VALIDATION
-								//MULTIASSOCIATION
+						//MULTIASSOCIATION TEST
+						//CHURCH 5cbcd809b8a6cb15001da062
+						//PARK 5cb7751fb965794d37dbaf2f, 5cc359b75b2c881500738619 
+							// HANGOUT MAY BE DEPRECIATED FOR LOCATION TOKENIZATION 
+								//--> SMART VALIDATION
+						//SCHOOL 5cbcdb5db8a6cb15001da065
+						//LIBRARY 5cc354565b2c881500738618
+						//Project.update({id:selectedProjectModel[0].id},{tags:'newyork,church,community,nyc,community,worship,faith'}).then(function(){
+						//	console.log('updated project');
+						//	process.nextTick(next);
+						//});
+						var taskModel = await Task.find({id:'5cc359b75b2c881500738619'});
+						if (taskModel[0].associatedModels.map(function(obj){return obj.address}).indexOf(selectedProjectModel[0].id) == -1){
+							taskModel[0].associatedModels.push({type:'PROJECT', address:selectedProjectModel[0].id});
+							console.log(taskModel[0].associatedModels);
+							await Task.update({id:'5cc359b75b2c881500738619'},{associatedModels:taskModel[0].associatedModels});
+							process.nextTick(next);
 						}
-					});
+						else{process.nextTick(next);}
+						
+						//TASK FIND
+							//IMPLICIT VALIDATION
+							//MULTIASSOCIATION
+
+						//TASK CREATE
+							//CHILL AT X PARK
+							//CLEAN UP X PARK
+							//IMPLICIT VALIDATION
+							//MULTIASSOCIATION
+					}
 				}
 			});
 		});
-	},
-	
+	}
 };
 module.exports = App;

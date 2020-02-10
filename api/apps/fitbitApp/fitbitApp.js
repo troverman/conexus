@@ -51,62 +51,62 @@ var App = {
 		//	tokens:function(model){},
 		//},
 		steps: function(model){	
-			var deferred = fitbitApp.import.Q.defer();		
+			var deferred = App.import.Q.defer();		
 			var requestModel = {
 				url: 'https://api.fitbit.com/1.2/user/' + model.userId + '/activities/steps/date/today/'+model.timeQuery+'.json',
 				json: true,
 				headers: {'Authorization': ' Bearer ' + model.accessToken}
 			};
-			fitbitApp.import.request(requestModel, function (error, response, body) {console.log(error, body, ); deferred.resolve(body['activities-steps']);});
+			App.import.request(requestModel, function (error, response, body) {console.log(error, body, ); deferred.resolve(body['activities-steps']);});
 			return deferred.promise;
-			//return fitbitApp.import.rp(requestModel)['activities-steps'];
+			//return App.import.rp(requestModel)['activities-steps'];
 		},
 		heart: function(model){
-			var deferred = fitbitApp.import.Q.defer();		
+			var deferred = App.import.Q.defer();		
 			var requestModel= {
 				json: true,
 				url: 'https://api.fitbit.com/1.2/user/' + model.userId + '/activities/heart/date/today/'+model.timeQuery+'.json',
 				headers: {'Authorization': ' Bearer ' + model.accessToken}
 			};
-			fitbitApp.import.request(requestModel, function (error, response, body) {deferred.resolve(body['activities-heart']);});
+			App.import.request(requestModel, function (error, response, body) {deferred.resolve(body['activities-heart']);});
 			return deferred.promise;
-			//return fitbitApp.import.rp(requestModel)['activities-heart'];
+			//return App.import.rp(requestModel)['activities-heart'];
 		},
 		floors: function(model){
-			var deferred = fitbitApp.import.Q.defer();		
+			var deferred = App.import.Q.defer();		
 			var requestModel= {
 				json: true,
 				url: 'https://api.fitbit.com/1.2/user/' + model.userId + '/activities/floors/date/today/'+model.timeQuery+'.json',
 				headers: {'Authorization': ' Bearer ' + model.accessToken}
 			};
-			fitbitApp.import.request(requestModel, function (error, response, body) {deferred.resolve(body['activities-floors']);});
+			App.import.request(requestModel, function (error, response, body) {deferred.resolve(body['activities-floors']);});
 			return deferred.promise;
-			//return fitbitApp.import.rp(requestModel)['activities-floors'];
+			//return App.import.rp(requestModel)['activities-floors'];
 		},
 		elevation: function(model){},
 		distance: function(model){
-			var deferred = fitbitApp.import.Q.defer();		
+			var deferred = App.import.Q.defer();		
 			var requestModel= {
 				json: true,
 				url: 'https://api.fitbit.com/1.2/user/' + model.userId + '/activities/distance/date/today/'+model.timeQuery+'.json',
 				headers: {'Authorization': ' Bearer ' + model.accessToken}
 			};
-			fitbitApp.import.request(requestModel, function (error, response, body) {deferred.resolve(body['activities-distance']);});
+			App.import.request(requestModel, function (error, response, body) {deferred.resolve(body['activities-distance']);});
 			return deferred.promise;
-			//return fitbitApp.import.rp(requestModel)['activities-distance'];
+			//return App.import.rp(requestModel)['activities-distance'];
 		},
 		//TODO: UNIFY DISTANCE PARAM W DIFF ENDPOINT SPECS
 		sleep: function(model){
-			var deferred = fitbitApp.import.Q.defer();		
+			var deferred = App.import.Q.defer();		
 			var today = new Date().toISOString().slice(0,10);
 			var requestModel= {
 				json: true,
 				url: 'https://api.fitbit.com/1.2/user/' + model.userId + '/sleep/date/' + today + '.json',
 				headers: {'Authorization': ' Bearer ' + model.accessToken}
 			};
-			fitbitApp.import.request(requestModel, function (error, response, body) {deferred.resolve(body['sleep']);});
+			App.import.request(requestModel, function (error, response, body) {deferred.resolve(body['sleep']);});
 			return deferred.promise;
-			//return fitbitApp.import.rp(requestModel)['sleep'];
+			//return App.import.rp(requestModel)['sleep'];
 		},
 		calories: function(model){},
 	},
@@ -153,9 +153,9 @@ var App = {
 			//TODO: RACE CONDITION.. 
 			//UPDATING PASSPORT TOKENS REQUIRES USER INPUT . . .TODO: 
 			//TODO: UPDATE AUTH TOKENS 
-			var activity = await fitbitApp.get.steps(model);
+			var activity = await App.get.steps(model);
 			//IF GOOD TOKENS
-			var tokens = fitbitApp.tokens.get({type:'fitbit_step', data:activity});
+			var tokens = App.tokens.get({type:'fitbit_step', data:activity});
 			//TODO: STRUCUTRE BETTER
 			for (x in tokens){
 				tokens[x].protocols = ['FITBIT','FITBIT-STEPS'];
@@ -163,10 +163,10 @@ var App = {
 				tokens[x].information = {inCirculation:0, market:0};
 				tokens[x].associatedModels = [{type:'MEMBER', id:userIdTemp}];
 			}
-			fitbitApp.tokens.create(tokens);
+			App.tokens.create(tokens);
 			//TODO: FIX
-			var activity = await fitbitApp.get.steps(model);
-			var tokens = fitbitApp.tokens.get({type:'fitbit_distance', data:activity})
+			var activity = await App.get.steps(model);
+			var tokens = App.tokens.get({type:'fitbit_distance', data:activity})
 			//TODO: STRUCUTRE BETTER
 			for (x in tokens){
 				tokens[x].protocols = ['FITBIT','FITBIT-DISTANCE'];
@@ -175,9 +175,9 @@ var App = {
 				tokens[x].information = {inCirculation:0, market:0};
 			}
 			//TODO: UPDATE
-			//fitbitApp.tokens.create(tokens);
-			var activity = await fitbitApp.get.steps(model);
-			var tokens = fitbitApp.tokens.get({type:'fitbit_floor', data:activity})
+			//App.tokens.create(tokens);
+			var activity = await App.get.steps(model);
+			var tokens = App.tokens.get({type:'fitbit_floor', data:activity})
 			//TODO: STRUCUTRE BETTER
 			for (x in tokens){
 				tokens[x].protocols = ['FITBIT','FITBIT-FLOORS'];
@@ -186,10 +186,10 @@ var App = {
 				tokens[x].information = {inCirculation:0, market:0};
 			}
 			//TODO: UPDATE
-			//fitbitApp.tokens.create(tokens);
+			//App.tokens.create(tokens);
 			//SCALING ON HEARTRATE
 			/*
-			var activity = await fitbitApp.get.steps(model);
+			var activity = await App.get.steps(model);
 			//TODO: MOVE TO TOKEN FXN
 			var tokens = [];
 			for (x in activity){
@@ -232,13 +232,13 @@ var App = {
 				tokens[x].information = {inCirculation:0, market:0};
 			}
 			//TODO: UPDATE
-			fitbitApp.tokens.create(tokens);
+			App.tokens.create(tokens);
 			*/
 			//TODD: BETTER WITH TOKEN MAXIMALIZATION.
 			//TODO: DATA HASH, DATA OBJ FLATTEN
 			//TODO: NOMALIZE DATE
 			/*
-			var activity = await fitbitApp.get.steps(model);
+			var activity = await App.get.steps(model);
 			//TODO: MOVE TO TOKEN FXN
 			var tokens = [];
 			for (x in activity){
@@ -315,7 +315,7 @@ var App = {
 				tokens[x].information = {inCirculation:0, market:0};
 			}
 			//TODO: UPDATE
-			fitbitApp.tokens.create(tokens);
+			App.tokens.create(tokens);
 			*/
 		}
 	},
@@ -329,7 +329,7 @@ var App = {
                 var options = {scope:['activity','heartrate','location','profile', 'sleep']};
                 var auth = await passportApp.authenticate(provider, options)({}, {}, function(){})//(req, res, req.next);
                 console.log(auth)
-                fitbitApp.getData(userModels[x]);
+                App.getData(userModels[x]);
 			}
 		}
 	},

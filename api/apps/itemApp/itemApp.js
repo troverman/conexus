@@ -1,7 +1,4 @@
 //CRE8.ITEM.ALPHA
-const crypto = require('crypto');
-const mongodb = require('mongodb');
-const Q = require('q');
 var App = {
 	//HASH OF ATTRIBUTES ???
     //DB TYPES ??
@@ -54,7 +51,8 @@ var App = {
 		}	
 	}],
 	import: { 
-		request: require('request'),
+		crypto: require('crypto'),
+		mongodb: require('mongodb'),
 		Q: require('q'),
 		//TODO: MODULARIZE
 		//contentApp: require('./contentApp'),
@@ -101,7 +99,7 @@ var App = {
 	//params are 
 	//get: function(req, res, params){/*params ^^same as above ; recursive :)*/},
 	get: async function(req) {
-		var deferred = Q.defer();
+		var deferred = App.import.Q.defer();
 		//[req.model].get(req);
 		var limit = parseInt(req.query.limit) || 1;
 		var skip = parseInt(req.query.skip) || 0;
@@ -114,7 +112,7 @@ var App = {
 			var id = req.query.id;
 			var query = {};
 			//NO
-			if (mongodb.ObjectID.isValid(id)){query = { "id": id }}
+			if (App.import.mongodb.ObjectID.isValid(id)){query = { "id": id }}
 			else{query = { dataHash: id}}
 			var models = await Item.find(query).limit(limit).skip(skip).sort(sort);
 			console.log('leal');
@@ -175,7 +173,7 @@ var App = {
 			attention:{general:0},
 			json:{},
 		};
-		model.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
+		model.hash = App.import.crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
 		console.log('CREATE ITEM', model);
 		var itemModel = await Item.create(model);
 		var userModels = await User.find({id:model.user});

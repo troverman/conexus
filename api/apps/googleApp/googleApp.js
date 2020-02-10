@@ -26,7 +26,7 @@ var App = {
 	create: function(req, res, params){	
 	},
 	geoCode: function(model){
-		var deferred = googleApp.import.Q.defer();
+		var deferred = App.import.Q.defer();
 		//TODO: SECURITY 
 		//MEMBER-APP CONNECTION
 		var googleMapsClient = require('@google/maps').createClient({key: 'AIzaSyDcTGxD4H3lnx84u8EPcbh7PodbsEyzbg4'});

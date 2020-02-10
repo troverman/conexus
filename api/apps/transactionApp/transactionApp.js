@@ -1,15 +1,11 @@
 //CRE8.TRANSACTION.ALPHA
-//TODO: THE BIG REDUCE :P
-//TODO: APP-APP DESCRETE CONNECTIONS
-const crypto = require('crypto');
-const Q = require('q');
 var App = {
 	attributes: {
         model: {type: 'string', defaultsTo: 'TRANSACTION'},
         amountSet: {type: 'json'},
         to: {type: 'string'},
         from: {type: 'string'},
-        //[linked items], to, from, self,creator, [tokens]
+        //[linked items], to, from, self, creator, [tokens]
         associatedModels: {type: 'json'},
         content: {type: 'string', allowNull: true},
         context: {type: 'string'},
@@ -19,36 +15,35 @@ var App = {
     },
 
 	//TODO: EVOLVE PAST IMPORT.. PRACTICE
+	//TODO: THE BIG REDUCE :P
+	//TODO: APP-APP DESCRETE CONNECTIONS
 	import:{
+		crypto: require('crypto'),
 		Q: require('q'),
 	},
 
 	//FACTORME
-
 	//TODO: DEPRECIATE -- to ; from
 		//APPRECIATE
 		//ASSOCIATION with to, from 
-
 	getTo: function(model){
-		var deferred = transactionApp.import.Q.defer();
+		var deferred = App.import.Q.defer();
 		User.find({id:model.to}).then(function(userModels){
 			if (userModels.length == 0){Project.find({id:model.to}).then(function(projectModels){deferred.resolve(projectModels[0])})}
 			else{deferred.resolve(userModels[0])}
 		})
 		return deferred.promise;
 	},
-
 	getFrom:function(model){
-		var deferred = transactionApp.import.Q.defer();
+		var deferred = App.import.Q.defer();
 		User.find({id:model.from}).then(function(userModels){
 			if (userModels.length == 0){Project.find({id:model.from}).then(function(projectModels){deferred.resolve(projectModels[0])})}
 			else{deferred.resolve(userModels[0])}
 		});
 		return deferred.promise;
 	},
-
 	get: async function(req){
-		var deferred = transactionApp.import.Q.defer();		
+		var deferred = App.import.Q.defer();		
 		var limit = parseInt(req.query.limit) || 1;
 		var skip = parseInt(req.query.skip) || 0;
 		var sort = req.query.sort || 'createdAt DESC';
@@ -69,10 +64,10 @@ var App = {
 			var models = await Transaction.find({id:id}).limit(limit).skip(skip).sort(sort)
 			var promises = [];
 			for (x in models){
-				promises.push(transactionApp.getTo(models[x]));
-				promises.push(transactionApp.getFrom(models[x]));
+				promises.push(App.getTo(models[x]));
+				promises.push(App.getFrom(models[x]));
 			}
-			var populatedModels = await Q.all(promises);
+			var populatedModels = await App.import.Q.all(promises);
 			var sum = 0;
 			for (x in models){
 				models[x].to = populatedModels[sum];sum++
@@ -92,10 +87,10 @@ var App = {
 			var models = await Transaction.find({user:user}).limit(limit).skip(skip).sort(sort)
 			var promises = [];
 			for (x in models){
-				promises.push(transactionApp.getTo(models[x]));
-				promises.push(transactionApp.getFrom(models[x]));
+				promises.push(App.getTo(models[x]));
+				promises.push(App.getFrom(models[x]));
 			}
-			var populatedModels = await Q.all(promises);
+			var populatedModels = await App.import.Q.all(promises);
 			var sum = 0;
 			for (x in models){
 				models[x].to = populatedModels[sum];sum++
@@ -103,7 +98,7 @@ var App = {
 			}
 			var promisesAssociations = [];
 			for (x in models){promisesAssociations.push(associationApp.get(models[x]));}
-			var populatedModels = await Q.all(promisesAssociations);
+			var populatedModels = await App.import.Q.all(promisesAssociations);
 			for (x in models){models[x] = populatedModels[x];}
 			deferred.resolve(models);
 		}
@@ -113,10 +108,10 @@ var App = {
 			var models = await Transaction.find(query).limit(limit).skip(skip).sort(sort);
 			var promises = [];
 			for (x in models){
-				promises.push(transactionApp.getTo(models[x]));
-				promises.push(transactionApp.getFrom(models[x]));
+				promises.push(App.getTo(models[x]));
+				promises.push(App.getFrom(models[x]));
 			}
-			var populatedModels = await Q.all(promises);
+			var populatedModels = await App.import.Q.all(promises);
 			var sum = 0;
 			for (x in models){
 				models[x].to = populatedModels[sum];sum++
@@ -124,15 +119,15 @@ var App = {
 			}
 			var promisesAssociations = [];
 			for (x in models){promisesAssociations.push(associationApp.get(models[x]));}
-			var poulatedModels = await Q.all(promisesAssociations);
+			var poulatedModels = await App.import.Q.all(promisesAssociations);
 			for (x in models){models[x] = populatedModels[x];}
 			deferred.resolve(models);
 		}
 		else{
 			var models = await Transaction.find({}).limit(limit).skip(skip).sort(sort);
 			var promises = [];
-			for (x in models){promises.push(transactionApp.getTo(models[x]));promises.push(transactionApp.getFrom(models[x]));}
-			var populatedModels = await Q.all(promises);
+			for (x in models){promises.push(App.getTo(models[x]));promises.push(App.getFrom(models[x]));}
+			var populatedModels = await App.import.Q.all(promises);
 			var sum = 0;
 			for (x in models){models[x].to = populatedModels[sum];sum++;models[x].from = populatedModels[sum];sum++;}
 			//TODO: REMOVE
@@ -140,7 +135,7 @@ var App = {
 			//TODO: ASSOCIATION APP | GET
 			var promisesAssociations = [];
 			for (x in models){promisesAssociations.push(associationApp.get(models[x]));}
-			var populatedAssociations = await Q.all(promisesAssociations);
+			var populatedAssociations = await App.import.Q.all(promisesAssociations);
 			for (x in models){models[x] = populatedAssociations[x];}
 			deferred.resolve(models);
 		}
@@ -163,7 +158,7 @@ var App = {
 			creator: req.param('user'),
 			data:{apps:{reactions:{plus:0,minus:0},attention:{general:0}}}
 		};
-		model.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
+		model.hash = App.import.crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
 		console.log('CREATE TRANSACTION', model);
 		var transactionModel = await Transaction.create(model);
 		//ITEM ACTIONS.. 			
@@ -179,15 +174,15 @@ var App = {
 		}
 		//HMM
 		transactionModel.associatedModels = req.param('associatedModels');
-		var promises = [transactionApp.getTo(transactionModel), transactionApp.getFrom(transactionModel)];
-		var populatedModels = await Q.all(promises);
+		var promises = [App.getTo(transactionModel), App.getFrom(transactionModel)];
+		var populatedModels = await App.import.Q.all(promises);
 		var userModels = await User.find({id:model.user});
 		transactionModel.user = userModels[0];
 		transactionModel.to = populatedModels[0];
 		transactionModel.from = populatedModels[1];
 		Transaction.publish([transactionModel.id], {verb: 'update', data: transactionModel});
 		validationApp.createLegacy(transactionModel);
-		transactionApp.tokens.create(transactionModel);
+		App.tokens.create(transactionModel);
 		eventApp.create(transactionModel);
 		notificationApp.create.transaction(transactionModel);
 		return Transaction.find({hash:model.hash});
@@ -196,14 +191,11 @@ var App = {
 	//OVERLOAD TOKEN.APP
 	//UNIFY DATA.APPS AND MULTI=APPCONNECTIONS . . .
 	tokens:{
-
 		get:function(model){
-
 			//TODO: STANDARDIZE VERBS
 			//TODO: MULTI PARTIES GET TOKENS.. TO; FROM
 			//CRE8+SEND
 			//CRE8+RECIEVE
-
 			var protocolTokens = [
 
 				//goes to both?
@@ -256,11 +248,9 @@ var App = {
 			//[id,tok]
 
 			return protocolTokens;
-
 		},
-		
 		create: async function(model){
-			var transactionProtocolTokens = transactionApp.tokens.get(model);
+			var transactionProtocolTokens = App.tokens.get(model);
 			for (x in transactionProtocolTokens){
 				var tokenString = transactionProtocolTokens[x]; 
 				var tokenModels = await Token.find({string:tokenString});

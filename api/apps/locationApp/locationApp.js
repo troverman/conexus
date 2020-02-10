@@ -4,8 +4,7 @@ var App = {
 		//BUILD IN CONTINGENCY CHECKS AS PLUGIN 
 			//PREVENT SPOOFING
 	import: { 
-		request: require('request'),
-		Q: require('q'),
+		request: require('request')
 	},
 	attributes: {
     	//DEPRECIATE
@@ -32,14 +31,13 @@ var App = {
 		}
 	],
 	get: function(req, res, params){},
-	create: function(req, res, params){
+	create: async function(req, res, params){
 		var locationModel = {};
 		//JUST SOME DATA.. STRUCTURE IT IN A WAY THE APPS ARE LOOKING FOR.. IE AS A DATA MODEL . . . .
 		//EVENT IS AN ALIAS FOR ALL CREATES . . .
-		Event.create(eventModel).then(function(model){
-			console.log('CREATE EVENT', model);
-			Event.publish([model.id], {verb: 'create', data: model});
-		});
+		var model = await Event.create(eventModel);
+		console.log('CREATE EVENT', model);
+		Event.publish([model.id], {verb: 'create', data: model});
 	},
 	get: async function(req) {},
 	create: async function (req) {
@@ -53,15 +51,15 @@ var App = {
 			reactions:{plus:0,minus:0},
 			attention:{general:0}
 		};
-		model.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
+		model.hash = App.import.crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
 		var model = await Location.create(model);
 		Location.publish([location.id], {verb: 'create', data: location});
 		//TODO: DIAGRAM MINT FLOW
-		locationApp.tokens.create(location);
+		App.tokens.create(location);
 		return Location.find({hash:model.hash});
 	},
 	tokens:{
-		get:function(model){
+		get: function(model){
 			var protocolTokens = ['CRE8', 'CRE8+LOCATION'];
 			//DATA TO STRING INTREPRETER
 			for (x in Object.keys(model)){
@@ -80,8 +78,8 @@ var App = {
 			//}
 			return protocolTokens;
 		},
-		create:async function(model){
-			var tokens = locationApp.tokens.get(model);
+		create: async function(model){
+			var tokens = App.tokens.get(model);
 			for (x in tokens){
 				var tokenString = tokens[x];
 				var tokenModels = await Token.find({string:tokenString});

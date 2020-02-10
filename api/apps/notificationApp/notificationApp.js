@@ -23,14 +23,11 @@ var App = {
 	//THIS IS REVERSE.. 
 	//DEFINE 
 	//notification:create: in EXTERNAL APP FOR OVERRIDE FXN 
-	//THIS SHOULD BE REDUCED
+	//THIS SHOULD BE REDUCED && DEFINED IN APP SPECIFIC IMPORT 
 	create: {
-
 		//TODO: && ASSSOICATION PARAMS
 		//REDUCE TO MODEL PARAM AND SINGLE FXN
-
 		validation: async function(user, model){
-
 			//NOTIFICATIONS APP-MEMBER ASSOCIATION
 				//FIND PRIORITY MAPPINGS
 					//TYPE IS IN MODEL 
@@ -55,9 +52,7 @@ var App = {
 			//	Notification.publish([notification[0].id], {verb: 'create', data: associationModels[0].id});
 			//});
 		},
-
 		transaction: async function (model){
-
 			//IF MODEL.TO == PROJECT
 				//SEND NOTIFICATIONS TO APPROPIATTE USER GROUP 
 					//NOTIFICATION (APP) - PROJECT CONNECTION --> USER PERMS
@@ -73,29 +68,21 @@ var App = {
 				},
 				priority:77,//defined by user
 			};
-
 			var newNotification = await Notification.create(notificationModel)
 			Notification.publish([newNotification.id], {verb: 'update', data: newNotification});
-
 		},
-
 		time: async function(model){
-
 			//REQUEST TO VALIDATE (ASSOCITION TRAVERSE)
 			//TO MEMBERS OF PROJECT
 			//TO FOLLOWERS OF MEMBER..
 			//TO NOTIFICATION PERMS
-
 		},
-
 		reaction: async function(model){
 			var model = await Notification.create(notificationModel);
 			console.log('CREATE NOTIFICATION', model);
 			Notification.publish([model.id], {verb: 'create', data: model});
 		},
-
 		project:async function(model){},
-
 	},
 
 	update: function(req){

@@ -1,9 +1,12 @@
 //CRE8.TOKEN.ALPHA
-const Q = require('q');
 
 //MULTI-MULTI
 //SEE NOTIFCATION, ASSOCIATION .. ETC
 var App = {
+
+	import:{
+		Q: require('q')
+	},
 	//TEST | WIP | PLAYGROUND
 	structure: function(req, res) {},
 	language: function(req, res) {},
@@ -25,7 +28,7 @@ var App = {
     },
 
 	get: async function(req){
-		var deferred = Q.defer();
+		var deferred = App.import.Q.defer();
 		var limit = parseInt(req.query.limit) || 1;
 		var skip = parseInt(req.query.skip) || 0;
 		var sort = req.query.sort;
