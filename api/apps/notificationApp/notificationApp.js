@@ -1,18 +1,13 @@
 //CRE8.EVENT.ALPHA
-module.exports = {
-
+var App = {
 	//THIS IS DYNAMIC
 	//TRAVERSE APP-APP CONNECTIONS TO BUILD
 		//DEFINE IN 'NOTIFICATION' ON RESPECTIVE APP IE 'VALIDATION'
-
 	get: async function(req){
-
 		var limit = req.query.limit || 1;
 		var skip = req.query.skip || 0;
 		var sort = req.query.sort || 'createdAt DESC';
-		
-		console.log('GET NOTIFICATION', req.query);
-		
+		console.log('GET NOTIFICATION', req.query);	
 		if (req.query.user){
 			if (req.query.isRead){
 				//Notification.subscribe(req, models.map(function(obj){return obj.id}));
@@ -23,14 +18,8 @@ module.exports = {
 				return Notification.find({user:req.query.user}).limit(limit).skip(skip).sort(sort);
 			}
 		}
-
-		else{
-			//Notification.subscribe(req, models.map(function(obj){return obj.id}));
-			return Notification.find({}).limit(limit).skip(skip).sort(sort);
-		}
-
+		else{return Notification.find({}).limit(limit).skip(skip).sort(sort);}
 	},
-
 	//THIS IS REVERSE.. 
 	//DEFINE 
 	//notification:create: in EXTERNAL APP FOR OVERRIDE FXN 
@@ -114,5 +103,5 @@ module.exports = {
 		var model = {isRead: req.param('isRead')};
 		return Notification.update({id: id}, model);
 	}
-
 };
+module.exports = App;

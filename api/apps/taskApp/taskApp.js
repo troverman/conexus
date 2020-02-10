@@ -1,9 +1,11 @@
 //CRE8.TASK.ALPHA
 const Q = require('q');
 const crypto = require('crypto');
-
-module.exports = {
-
+var App = {
+	import: {
+		Q: require:('q'),
+		crypto:require:('crypto');
+	},
 	attributes: {
         //DEPRECIATE
         model: {type: 'string', defaultsTo: 'TASK'},
@@ -184,3 +186,4 @@ module.exports = {
 		}
 	}
 };
+module.exports = App;

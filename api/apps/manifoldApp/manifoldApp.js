@@ -1,3 +1,4 @@
 //CRE8.MANIFOLD.ALPHA
 //LANGUGAGE INPUT TO CONNECT INTO TOKENS
-module.exports = {};
+var App = {};
+module.exports = App;

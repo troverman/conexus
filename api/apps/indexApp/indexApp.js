@@ -1,5 +1,5 @@
 //CRE8.INDEX.ALPHA
-module.exports = {
+var App = {
 	//INITILIZATION AND BUILDING IS A THOUGHT
 	//THIS IS A TEST
 	//DOWNLOAD ALL APPS INTO SEPERATE DIRECTORIES
@@ -24,3 +24,4 @@ module.exports = {
 	//  console.log(example.addTwo(8, 5));
 	//})();
 };
+module.exports = App;

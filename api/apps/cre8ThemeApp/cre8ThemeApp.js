@@ -1,12 +1,22 @@
 //CRE8.CRE8THEME.ALPHA
 //INIT FRONT END THEME
-module.exports = {
-
+//GRUNT / GULP APP? 
+//async function buildClientFrontend(model){
+	//await Association // MEMBER-APP
+	//memberViewApp[x].views[y].controller()
+		//memberViewApp[x].views[y].templates[z].data
+	//aboutApp.views.about.controller();
+	//views.about.controller();
+	//views.about.controller();
+	//views.about.controller();
+	//views.about.controller();
+//}
+//views.about.controller();
+var App = {
 	//CORE MODULES
 	//CARDS
 	//NAV BAR
 	//SIDEBAR
-
 	views:{
 		about:{
 			route:'/',
@@ -19,20 +29,6 @@ module.exports = {
 					//JSX
 			}],
 		},
-	},
-
+	}
 };
-
-//GRUNT / GULP APP? 
-//toomuch
-//async function buildClientFrontend(model){
-	//await Association // MEMBER-APP
-	//memberViewApp[x].views[y].controller()
-		//memberViewApp[x].views[y].templates[z].data
-	//aboutApp.views.about.controller();
-	//views.about.controller();
-	//views.about.controller();
-	//views.about.controller();
-	//views.about.controller();
-//}
-//views.about.controller();
+module.exports = App;

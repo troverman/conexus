@@ -1,5 +1,5 @@
 //CRE8.TIME.ALPHA
-module.exports = {
+var App = {
 
 	import:{
 		Q: require('q'),
@@ -187,6 +187,6 @@ module.exports = {
 
 	views:{
 
-	},
-	
+	},	
 };
+module.exports = App;

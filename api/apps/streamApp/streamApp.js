@@ -1,10 +1,4 @@
-
 //CRE8.STREAM.ALPHA
 //HELPER MODULE THAT RECIEVES STREAMING DATA 
-
-module.exports = {
-
-	
-
-
-};
+var App = {};
+module.exports = App;

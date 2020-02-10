@@ -1,6 +1,5 @@
 //CRE8.GEONAMES.ALPHA
-module.exports = {
-
+var App = {
 	//TODO: GEONAMES APP 
 	getGeoNamesByParent: function(geoNameParentId, parentId, username, nestLevel){
 		//voetr1, voetr2, voetr3, voetr4, voetr5, troverman
@@ -169,3 +168,4 @@ module.exports = {
 	},
 	
 };
+module.exports = App;

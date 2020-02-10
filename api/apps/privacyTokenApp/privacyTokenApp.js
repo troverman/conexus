@@ -1,8 +1,5 @@
 //CRE8.PRIVACYTOKEN.ALPHA
-
-module.exports = {
-
-	
+var App = {
 	interval: async function(){
 
 		async function getTimeAmount(model){
@@ -46,8 +43,6 @@ module.exports = {
 		tokenModels[0].information.inCirculation = parseInt(tokenModels[0].information.inCirculation) + parseInt(tokenSum);
 		var tokenModel = await Token.update({id:tokenModels[0].id}, tokenModels[0]);
 		console.log('UPDATED', tokenModel);	
-
-	},
-
-	
+	}
 };
+module.exports = App;

@@ -1,35 +1,27 @@
 //CRE8.ASSOCIATION.ALPHA
-module.exports = {
-
+var App = {
 	import:{
 		//WORK ON REQUIRE KEY WORD.. 
 			//DOWNLOAD AND BUILD BASED ON TYPE
 		Q: require('q'),
 		crypto: require('crypto')
 	},
-
 	attributes: {
-
         //DEPRECIATE
         model: {type: 'string', defaultsTo: 'ASSOCIATION'},
-
     	//DEFINE (HIGHER ORDER) LOGIC
     	connection:{type: 'json'},
-
 		//[{type:'MODEL', id:1, {parameter}},{...},...]
 		associatedModels: {type: 'json'},
-
 		//{'dimension':score, ..., }
 		context: {type: 'json'},
             //PARAMETERS
             //{attributes:attribute, ...}
             //parameters: {type: 'json'},
-
     },
-
 	//TODO
 	get: async function(model){
-		var deferred = associationApp.import.Q.defer();
+		var deferred = App.import.Q.defer();
 
 		//REDUCE 
 		Association.getDatastore().manager.collection('association')
@@ -72,7 +64,7 @@ module.exports = {
 
 				}
 				(async () => {
-					var populatedModels = await associationApp.import.Q.all(promises);
+					var populatedModels = await App.import.Q.all(promises);
 					var index = -1 
 					for (x in model.associationModels){
 						for (y in associationModels[x].associatedModels){
@@ -86,11 +78,8 @@ module.exports = {
 			else{deferred.resolve(model);}
 		});
 		return deferred.promise;
-
 	},
-
 	getController: async function(req) {
-
 		function parseQuery(queryModel){
 			var query = {$and:[]}
 			if (queryModel.id){
@@ -217,9 +206,7 @@ module.exports = {
 
 
 		}
-
 	},
-
 	//DO BETTER --> BASED ON CONNECTION! 
 	create: async function(newValidationModel){
 
@@ -250,9 +237,7 @@ module.exports = {
 				else{eventApp.create(association, 'update');}
 			});
 		});
-
 	},
-
 	tokens:{},
-	
 };
+module.exports = App

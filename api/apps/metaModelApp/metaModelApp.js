@@ -1,5 +1,5 @@
 //CRE8.META-MODEL.ALPHA
-module.exports = {
+var App = {
 	//ALL CORE MODELS IMPORT META MODEL
 	attributes: {
 		truthSet:{type:'string'},
@@ -9,3 +9,4 @@ module.exports = {
         data: {type: 'json'}, // CAN BE DATA MAPPING APP ETC
     },
 };
+module.exports = App;

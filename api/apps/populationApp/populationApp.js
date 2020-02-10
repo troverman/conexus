@@ -1,11 +1,8 @@
 //CRE8.POPULATION.ALPHA
-
-module.exports = {
-
+var App = {
 	import: { 
 		Q: require('q'),		
 	},
-
 	populateMerch: async function(){
 
 		function uuidv4() {return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);return v.toString(16);});};
@@ -1325,6 +1322,6 @@ module.exports = {
 				console.log('UPDATE', updatedToken)
 			}
 		}	
-	},
-
+	}
 };
+module.exports = App;

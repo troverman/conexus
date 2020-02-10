@@ -1,10 +1,7 @@
 //CRE8.CREDIT.ALPHA
 //IMPORT MANIFOLD && TOKENLANGUAGE TO
 //DEFINE +CREDIT
-
-module.exports = {
-
+var App = {
 	import:{},
-	
-
 };
+module.exports = App;

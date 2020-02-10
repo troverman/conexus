@@ -3,8 +3,7 @@ const Q = require('q');
 
 //MULTI-MULTI
 //SEE NOTIFCATION, ASSOCIATION .. ETC
-module.exports = {
-
+var App = {
 	//TEST | WIP | PLAYGROUND
 	structure: function(req, res) {},
 	language: function(req, res) {},
@@ -51,3 +50,4 @@ module.exports = {
 		return deferred.promise;
 	}	
 };
+module.exports = App;

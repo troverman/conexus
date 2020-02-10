@@ -1,5 +1,5 @@
 //CRE8.REPUTATION.ALPHA
-module.exports = {
+var App = {
 
 	//MAIN DATA --> APP MAPPING . . . HMM
 	//NO MATTER WHAT APPS HAVE CONNECTION APP IMPORT ~ LANGUAGE (TOO EARLY NOW_)
@@ -67,6 +67,6 @@ module.exports = {
 			if (balance['cre8']!=0){balance['cre8'] = 8};		
 			var updatedUser = await User.update({id:userModels[x].id}, {balance:balance});
 		}
-	},
-		
+	},	
 };
+module.exports = App;

@@ -1,19 +1,13 @@
 //CRE8.PASSPORTAPP
 //TODO: EVERYTHING
-
 const path = require('path');
 const url = require('url');
-
-const passport = require('passport');
+const App = require('passport');
 //authenticate 
-//..
-
-passport.protocols = require('./passportApps');
-
+App.protocols = require('./passportApps');
 //REQUIRE AS APPMANAGER
 //REQUIRE ALLOWS SELF
-
-passport.connect = function (req, query, profile, next) {
+App.connect = function (req, query, profile, next) {
 
     console.log('CONNECT', query, profile);
 
@@ -72,8 +66,7 @@ passport.connect = function (req, query, profile, next) {
         }
     });
 };
-
-passport.endpoint = function (req, res) {
+App.endpoint = function (req, res) {
     var strategies = sails.config.passport
     var provider   = req.param('provider')
     var options    = {};
@@ -82,9 +75,8 @@ passport.endpoint = function (req, res) {
     //console.log(provider, options);
     this.authenticate(provider, options)(req, res, req.next);
 };
-
 //TODO: LOOK AT 'THIS' :)
-passport.callback = function (req, res, next) {
+App.callback = function (req, res, next) {
     var provider = req.param('provider', 'local')
     var action   = req.param('action');
     if (provider === 'local' && action !== undefined) {
@@ -98,8 +90,7 @@ passport.callback = function (req, res, next) {
         else {this.authenticate(provider, next)(req, res, req.next);}
     }
 };
-
-passport.loadStrategies = function () {
+App.loadStrategies = function () {
     var self       = this
     var strategies = sails.config.passport;
 
@@ -137,8 +128,7 @@ passport.loadStrategies = function () {
         }
     });
 };
-
-passport.disconnect = function (req, res, next) {
+App.disconnect = function (req, res, next) {
     var user = req.user;
     var provider = req.param('provider');
     Passport.findOne({provider: provider, user: user.id}, function (err, passport) {
@@ -149,8 +139,6 @@ passport.disconnect = function (req, res, next) {
         });
     });
 };
-
-passport.serializeUser(function (user, next) {next(null, user.id);});
-passport.deserializeUser(function (id, next) {User.findOne(id, next);});
-
-module.exports = passport;
+App.serializeUser(function (user, next) {next(null, user.id);});
+App.deserializeUser(function (id, next) {User.findOne(id, next);});
+module.exports = App;

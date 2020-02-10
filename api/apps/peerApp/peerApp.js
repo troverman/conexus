@@ -1,5 +1,5 @@
 //CRE8.PEER.ALPHA
-module.exports = {
+var App = {
 
 	//config options and sets
 	//ipfs.create
@@ -39,3 +39,4 @@ module.exports = {
 	},
 	build:function(){},
 };
+module.exports = App;

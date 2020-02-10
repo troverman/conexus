@@ -1,5 +1,4 @@
 //CRE8.ATTENTION.ALPHA
-
 //hash
 //truth
 //coordinates:
@@ -7,30 +6,23 @@
 //description:
 //connections ~
 //machieneAttention . . . 
-
 //infunction descripe as self.title = ///
 	//self.attention = {type, context}
-
-const crypto = require('crypto');
-const Q = require('q');
-
 var App = {
-
+	import:{
+		crypto: require('crypto'),
+		Q: require('q')
+	},
 	attributes: {
-
     	//DEPRECIATE
         model: {type: 'string', defaultsTo: 'ATTENTION'},
-
 		//associated App.. PEER MINING APP INPUT.. 
 		app: {type: 'string'}, //HUMAN, MACHIENE, type: {type: 'string'},
-		
 		string: {type: 'string'},
         data: {type: 'json'},
         associatedModels: {type: 'json'},
         creator: {model: 'user'},
-
     },
-
 	get: async function(req) {
 
 		//MACHIENE ATTENTION OBJ..
@@ -336,7 +328,7 @@ var App = {
 			creator: req.param('creator'),
 			data:{apps:{reactions:{plus:0,minus:0},attention:{general:0}}}
 		};
-		model.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
+		model.hash = App.import.crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
 		var newAttention = await Attention.create(model);
 		var userModel = await User.find({id:newAttention.creator})
 		model.creator = userModel[0];
@@ -379,6 +371,5 @@ var App = {
 			return protocolTokens;
 		}
 	}
-
 };
 module.exports = App;

@@ -1,4 +1,3 @@
 //CRE8.SEARCH.ALPHA
-module.exports = {
-
-};
+var App = {};
+module.exports = App;

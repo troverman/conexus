@@ -2,9 +2,12 @@
 const crypto = require('crypto');
 const mongodb = require('mongodb');
 const Q = require('q');
-
-module.exports = {
-
+var App = {
+	import:{
+		crypto: require('crypto'),
+		mongodb: require('mongodb'),
+		Q: require('q')
+	},
 	attributes: {
         
         //DEPRECIATE
@@ -267,3 +270,4 @@ module.exports = {
 		},
 	}
 };
+module.exports = App;

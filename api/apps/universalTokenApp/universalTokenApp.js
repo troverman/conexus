@@ -1,8 +1,5 @@
 //CRE8.UNIVERSALTOKEN.ALPHA
-
-module.exports = {
-
-
+var App = {
 	//DAILY RUN
 	//DOCUMENT NICELY.
 	//MAKE APP LIKE
@@ -18,7 +15,6 @@ module.exports = {
 		if (!tokenModels[0].information.inCirculation){tokenModels[0].information.inCirculation = 0;}
 		tokenModels[0].information.inCirculation = parseInt(tokenModels[0].information.inCirculation) + parseInt(userModels.length);
 		var updatedToken = await Token.update({id:tokenModels[0].id}, tokenModels[0]);
-	},
-
-	
+	}
 };
+module.exports = App;

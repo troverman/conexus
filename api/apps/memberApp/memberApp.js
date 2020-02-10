@@ -3,8 +3,11 @@
 //SESSIONAPP, PEERAPP
 const Q = require('q');
 const mongodb = require('mongodb');
-module.exports = {
-
+var App = {
+	import:{
+		Q:require('q'),
+		mongodb:require('mongodb'),
+	},
 	attributes: {
         model: {type: 'string', defaultsTo: 'MEMBER'},
 
@@ -146,3 +149,4 @@ module.exports = {
 	},
 	create:async function(){},
 };
+module.exports = App;

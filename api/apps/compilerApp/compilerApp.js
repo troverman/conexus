@@ -1,9 +1,16 @@
 //CRE8.COMPILER.ALPHA
+var App = {
 
-module.exports = {
-
+	//TOKEN SET 
+	//TREE VS SET --> TREE IS NICE 
+	//SO
+	//{
+		//token1
+		//token2
+		//token3
+	//}
+	//AN ENTIER COMPUTER THOUGH NAND GATES
 	//meta circular evaluator
-
 	//eval loop
 		//point to language
 			//point to target 
@@ -12,15 +19,12 @@ module.exports = {
 				//lisp is a data struct and code
 					//soo (a, b, eval ())
 
-
 	//TRAVERSE THE STRUCTURE OF CONNECTIONS 
 	traverse:function(connections, depth){
 		for (x in connections){
 			if (connections[x].connections){depth++;traverse(connections[x].connections, depth);}
 			else{
-
 				//init(connections[x]);
-
 			}
 		}
 	},
@@ -28,19 +32,14 @@ module.exports = {
 	//NEW APPS FOR EACH GRAMMER
 	//grammer is a self connection with parameters of 
 	//nsymbol types --> 
-	grammer:{
-
-	},
-	
+	grammer:{},
 	connections:[{
 		type:'connection', 
 		id:'self',
-
 		params:{
 			language: 'CRE8',
 			compiler:'language1',
 		},
-
 		connections:[{
 			type:'language1',
 			id:'self',
@@ -72,6 +71,5 @@ module.exports = {
 			}]
 		}],
 	}],
-
-
 };
+module.exports = App;

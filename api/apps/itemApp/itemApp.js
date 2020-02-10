@@ -99,8 +99,7 @@ var App = {
 	//recursive..
 	//init(req, res, params);
 	//params are 
-	get: function(req, res, params){/*params ^^same as above ; recursive :)*/},
-
+	//get: function(req, res, params){/*params ^^same as above ; recursive :)*/},
 	get: async function(req) {
 		var deferred = Q.defer();
 		//[req.model].get(req);
@@ -111,7 +110,7 @@ var App = {
 		if(req.query.id){
 			//LOL WOW
 			//EITHER HASH OR ID...
-			//REDUCE ~? ALBEIT IS THERE STRENGTH IN A MULTI-IDENTIFER STRUCT? ~ PLURLALITY IS A STRENGTH (?)
+			//REDUCE ~? ALBEIT IS THERE STRENGTH IN A MULTI-IDENTIFER STRUCT ~ PLURLALITY IS A STRENGTH
 			var id = req.query.id;
 			var query = {};
 			//NO
@@ -243,6 +242,6 @@ var App = {
 			},
 			templates:[{}],
 		},
-	},
+	}
 };
 module.exports = App;

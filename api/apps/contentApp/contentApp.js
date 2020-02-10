@@ -1,8 +1,9 @@
 //CRE8.CONTENT.ALPHA
-const Q = require('q');
-const crypto = require('crypto');
-module.exports = {
-
+var App = {
+	import:{
+		Q: require('q'),
+		crypto: require('crypto')
+	},
 	//IMPORT META MODEL
 	//EACH FUNCTION MODEL... A PROTOCOL? 
 			//IE MODEL IS MACHIENE ATTENTION ETC 
@@ -28,10 +29,9 @@ module.exports = {
     //	await ContentApp.db.load();
     //},
 
-	
 	//TODO: MULTI CONTEXT WRT DATA STORE
 	get: async function(req, res) {
-		var deferred = Q.defer();
+		var deferred = App.import.Q.defer();
 		var limit = parseInt(req.query.limit) || 1;
 		var skip = parseInt(req.query.skip) || 0;
 		var sort = req.query.sort || 'createdAt DESC';
@@ -98,12 +98,9 @@ module.exports = {
 		}
 		return deferred.promise;
 	},
-
 	create: async function (req, res) {
-		
 		//language of connections to recurse to bits 
 			//the highleve abstract to opcodes to binary seems a chore | gotta be better 
-
 		//var Content = appApp.find(); . . . 
 			//--> EventApp.find({type:'APP'}); 
 					//--> appApp.find({type:'EVENT'})
@@ -117,9 +114,7 @@ module.exports = {
 		//THE BLOAT OF N ABSTRACTION LAYERS FEELS.. MESSY
 			//THINK ABOUT YOUR AVERAGE NETWORKING PROTOCOL FLOW DIAGRAM 
 		//i need to learn chinese  
-
 		//var User = appApp.find(appApp.id); // something something 
-
 		var userModels = await User.find({id:req.param('user')});
 		var model = {
 			model: 'CONTENT',
@@ -136,22 +131,20 @@ module.exports = {
 				}
 			}
 		};
-		model.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
+		model.hash = App.import.crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
 		console.log('CREATE CONTENT', model);
 		var newContent = await Content.create(model);
 		newContent.associatedModels = req.param('associatedModels');
 		Content.subscribe(req, [newContent.id]);
 		Content.publish(model.id, {verb: 'create', data: model});
 		eventApp.create(newContent);
-		contentApp.tokens.create(newContent);
+		App.tokens.create(newContent);
 		//SHOULD BE REVERED TOP DOWN BY CONNECTION (ABSTRACT & DISCRETE VALIDATION TYPES)
 		validationApp.createLegacy(newContent);
 		return Content.find({hash:model.hash});
 	},
-
 	tokens:{
 		get:function(model){
-
 			//TODO: FACTOR			
 			//for you to see the progress 
 			//change model to app / type (APP = [  = protocol ] | think token and market ~ WHAT IS THE MOST PRIMITIVE TYPE A BIT BOI)
@@ -164,7 +157,6 @@ module.exports = {
 			//[yes] --> NATURAL RECURSION 
 			//off rails kinda
 			//CAN CONNECTION BE MOST PRIMITIVE TYPE OR STRING --> CONVERT OR BONRAY (I MEAN WERE DEALING WITH LAYERS OF ABSTRACTION) 
-
 			var protocolTokens = [
 				'CRE8', 
 				'CRE8+'+model.model, 
@@ -212,10 +204,8 @@ module.exports = {
 		},
 	},
 
-
 	//SUPERSET --> BUILD IE GRUNT :) 
 	views:{
-
 		'content':{
 			controller:function(init){
 				var init = angular;
@@ -285,6 +275,6 @@ module.exports = {
 				template:''
 			}
 		}
-
 	}
 };
+module.exports = App;

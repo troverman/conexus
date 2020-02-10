@@ -1,5 +1,5 @@
 //CRE8.VALIDATION.ALPHA
-module.exports = {
+var App = {
 
 	attributes: {
         
@@ -531,5 +531,5 @@ module.exports = {
 		},
 
 	},
-
 };
+module.exports = App;

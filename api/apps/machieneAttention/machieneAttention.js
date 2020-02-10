@@ -1,13 +1,10 @@
 var App = {
-
 	//LETS NOT REPEAT OURSELVES TOO MUCH
 	//MACHIENE ATTENTION AND BUDGETING 
 	//MANIFEST THOUGH ACTIVTY PROCESSING IE INSTA, TWIT, && ART AUTOMATION
-
 	import:{
 		StackTrace: require('stack-trace'),
 	},
-
 	//meta-logger
 	//FXN WRAPPER / LOGGER 
 	init: function(){
@@ -63,7 +60,5 @@ var App = {
 		//CALL BUDGET
 
 	},
-
-
 };
 module.exports = App;

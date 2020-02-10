@@ -1,12 +1,9 @@
 //CRE8.TRANSACTION.ALPHA
 //TODO: THE BIG REDUCE :P
-
 //TODO: APP-APP DESCRETE CONNECTIONS
 const crypto = require('crypto');
 const Q = require('q');
-//reduce to data(apps) and events
-module.exports = {
-
+var App = {
 	attributes: {
         model: {type: 'string', defaultsTo: 'TRANSACTION'},
         amountSet: {type: 'json'},
@@ -303,5 +300,4 @@ module.exports = {
 		}
 	}
 };
-
-//be back soon
+module.exports = App;

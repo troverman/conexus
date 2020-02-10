@@ -1,5 +1,5 @@
 //CRE8.EVENT.ALPHA
-module.exports = {
+var App = {	
 	//APP-APP CONNECTION 
 	import: { 
 		request: require('request'),
@@ -109,3 +109,4 @@ module.exports = {
 		//CARD TEMPLATE --> MULTI TYPES . . .
 	}
 };
+module.exports = App;

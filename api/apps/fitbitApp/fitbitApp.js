@@ -1,5 +1,5 @@
 //FITBIT APP
-module.exports = {
+var App = {
 	//APP APP CONNECTION
 	//require core
 	//require ...
@@ -457,4 +457,5 @@ module.exports = {
 		//console.log(provider, options);
     	//this.authenticate(provider, options)(req, res, req.next);
 	},
-};
+}
+module.exports = App;

@@ -1,15 +1,13 @@
 //ETH APP
-//const web3 = require('web3');
-//const Web3 = require('web3');
-//const web3 = new Web3();
-//PRIVIDER WILL BE LOCAL NODE.. 
-    //PRIVIDER CONNECTS TO ( CHAIN ID )
-    //var network = web3.version.network
-    //https://ropsten.infura.io is a hosted provider . . . will do peers in create who can relay with machiene attention 
-//web3.setProvider(new Web3.providers.WebsocketProvider('ws://localhost:8546'));
-
-module.exports = {
-
+var App = {
+    //const web3 = require('web3');
+    //const Web3 = require('web3');
+    //const web3 = new Web3();
+    //PRIVIDER WILL BE LOCAL NODE.. 
+        //PRIVIDER CONNECTS TO ( CHAIN ID )
+        //var network = web3.version.network
+        //https://ropsten.infura.io is a hosted provider . . . will do peers in create who can relay with machiene attention 
+    //web3.setProvider(new Web3.providers.WebsocketProvider('ws://localhost:8546'));
 	import:{
         //web3: require('web3'),
 	},
@@ -136,19 +134,16 @@ module.exports = {
         //CREATE CONTRACT ACTION
         //TYPES HERE IE ERC 20 TOKEN EVENTS .. ETC ... 
         action:function(model){
-
             var contract = new web3.eth.Contract(model.abi);
             contract.options.address = model.contractAddress;
             contract.methods.createVote(model.parameters).send({from: model.callAddress, gas: model.gas}, function(error, result){
                 console.log(result);
             });
-
         },
 
         //CREATE CONTRACT
         contract:function(model){
             var newContract = new web3.eth.Contract(model.abi, model.address, {from: model.callAddress, gasPrice: model.gasPrice});
-           
         },
 
         //CREATE TRANSACTION
@@ -221,5 +216,5 @@ module.exports = {
         },
 
     },
-
 };
+module.exports = App;

@@ -15,7 +15,8 @@ var App = {
 	init:{
 		//title
 		//hash:..
-		init: async function(){},
+		//fn or init
+		fn: async function(){},
 	},
 	init: async function(){
 

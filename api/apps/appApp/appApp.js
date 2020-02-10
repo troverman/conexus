@@ -2,14 +2,12 @@
 //SET OF TYPES / PROTOCOLS 
 //WORK ON TYPE COMPOSITION
 //var Self = {
-module.exports = {
+var App = {
 	//IMPORTS ARE APP-APP CONNECTIONS
 	import:{
 		Q: require('q'),
 		crypto: require('crypto')
 	},
-
-
 	//RECURSIVE DEPENDENCIES 
 	//BUILDER REDUCES THE TREE . . .
 	//PUT ALL APPS IN THE [MONGO] DB FOR FUN 
@@ -24,14 +22,12 @@ module.exports = {
         associatedModels: {type: 'json'},
         creator: {model: 'user'},
     },
-
     //DATA :)
     //COMPOSTABILITY ... 
     //db: await orbitdb.docs('CRE8.APP'),
     //init: async function(){
-    //	await AppApp.db.load();
+    //	await App.db.load();
     //},
-
 	connections:[
 		{
 			//APP ID ?
@@ -45,15 +41,12 @@ module.exports = {
 	//THIS FILE
 	//THE PEER IS SELF
 	//self.connections.connections;
-
 	//self.connections.connections.association;
 	//self.connections.connections.association.validation;
-
 	//self.connections.connections.validation.association = {find:function(model){}};
-
 	//self.connections.connections.association['TOKEN STAKED'];
 
-	//appApp.connections.app.find();
+	//App.connections.app.find();
 	//self.connections.app.find(); --> 
 
 	//GOOD FOR NOW 
@@ -66,8 +59,8 @@ module.exports = {
 
 	//TODO
 	get: async function(req){
-		//const records = AppApp.db.get('');
-		var deferred = appApp.import.Q.defer();
+		//const records = App.db.get('');
+		var deferred = App.import.Q.defer();
 		var limit = parseInt(req.query.limit) || 1;
 		var skip = parseInt(req.query.skip) || 0;
 		var sort = req.query.sort;
@@ -89,7 +82,6 @@ module.exports = {
 		}
 		return deferred.promise;
 	},
-
 	create: async function(req){
 
 		var model = {
@@ -103,17 +95,16 @@ module.exports = {
 			creator: req.param('creator'),
 			data:{apps:{reactions: {plus:0,minus:0}, attention:{general:0}}}
 		};
-		model.hash = appApp.import.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
+		model.hash = App.import.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
 		console.log('CREATE APP', model);
 		
 		var newApp = await App.create(model);
-		await AppApp.db.put({_id:Math.random() ,string:Math.random()});
+		await App.db.put({_id:Math.random() ,string:Math.random()});
 
 		App.publish([model.id], {verb: 'create', data: model});
 		eventApp.create(newApp);
 		validationApp.createLegacy(newApp);
 		return App.find({hash:model.hash});
-
 	},
 	tokens:{
 		get: function(model){
@@ -127,7 +118,6 @@ module.exports = {
 		create:async function (model){
 			var tokens = Self.tokens.get(model);	
 		},
-	},
-	
+	},	
 };
-//modlue.exports = Self;
+modlue.exports = App;

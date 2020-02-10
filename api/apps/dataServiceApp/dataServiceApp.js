@@ -1,26 +1,23 @@
 //CRE8.DATASERVICE
-
-//const tf = require('@tensorflow/tfjs');
-//require('@tensorflow/tfjs-node');
-const Q = require('q');
-
-//associationBuild
-//buildAssociatedModels
-//buildAssociationNetwork
-//buildAssociations
-//buildConnections
-//buildStringSpace
-//initOrders
-//createNetwork
-//traverse
-//tensorBuild
-//legacyTraverse
-
 //TODO: CONTAINIZER INTO MORE APPS 
-
 //TODO:: REPLACE ORDER WITH VALIDATION <-> ASSOCIATION <-> CONNECTION
-module.exports = {
-
+var App = {
+	//const tf = require('@tensorflow/tfjs');
+	//require('@tensorflow/tfjs-node');
+	import:{
+		Q: require('q')
+	},
+	//associationBuild
+	//buildAssociatedModels
+	//buildAssociationNetwork
+	//buildAssociations
+	//buildConnections
+	//buildStringSpace
+	//initOrders
+	//createNetwork
+	//traverse
+	//tensorBuild
+	//legacyTraverse
 	associationBuild: function(model){
 
 		//NEED TO POULATE TO TEST..
@@ -56,7 +53,7 @@ module.exports = {
 		//RETURNS TREE OBJ
 		//THEN REDUCETREE OBJ
 
-		var deferred = Q.defer();
+		var deferred = App.import.Q.defer();
 		var promises = [[]];
 		var validationTree = {};
 		//we want two functions.. important to compute the tree then reduce. 
@@ -77,7 +74,7 @@ module.exports = {
 				validationModels.children = [];
 				validationTree.push(validationModels[x]);
 
-				var validationModelData = await Q.all(promises[level]);
+				var validationModelData = await App.import.Q.all(promises[level]);
 				for (y in validationModelData){
 
 					if (validationModelData[y].length != 0){
@@ -185,7 +182,6 @@ module.exports = {
 		});
 		return deferred.promise;
 	},
-
 	buildAssociatedModels:function(model){
 
 		Validation.native(function(err, validation) {
@@ -241,15 +237,12 @@ module.exports = {
 			});
 		});
 	},
-
 	//(MODEL []) ASSOCIATED MODELS [] --> {}COMPUTED GRAPH STRUCTURE 
 	buildAssociationNetwork:function(model){
-
 		//BUILD ASSOCIATION OBJECT --> TRAVERSAL OF associatedModels
 										//TRAVERSAL --> LONG TAIL
 		//RETURN JSON OBJECT
 	},
-
 	//NEED TO POPULATE SOME TO TEST :) 
 	buildAssociations: function(model, level){
 
@@ -328,7 +321,6 @@ module.exports = {
 			});
 		});
 	},
-
 	buildConnections: function(){
 		//APPS AND APP CONNECTIONS
 			//ABSTRACT CORE MODELS TO THE CENTRAL APP MODEL
@@ -351,7 +343,6 @@ module.exports = {
 		}
 		//POPULATE CONNECTIONS
 	},
-
 	initOrders: function(req){
 		var newOrderArray = [];
 		for (var i = 0; i<10000; i++){
@@ -385,7 +376,6 @@ module.exports = {
 			//0.001,0.0011,..0.1,1
 		}
 	},
-
 	//MAXIMUM BINARY NON-REFLECTIVE
 	createNetwork: function(network, reflective){
 		
@@ -440,7 +430,6 @@ module.exports = {
 
 		return maximumBinaryRelationship;
 	},
-
 	//TODO: ORGANIZE LOL!
 	traverse: function(){
 
@@ -1004,7 +993,6 @@ module.exports = {
 		//dataService.createNetwork();
 		//dataService.legacyTraverse(['C'],['A','B'],[1,2]);
 	},
-
 	//MAX 5 COMB ASSETS
 	tensorBuild: async function(){
 		//(A_m-->[A_m-n]--x7-->[A_m-n])
@@ -1122,8 +1110,7 @@ module.exports = {
 		//GET ORDER BOOKS..
 		//BUILD 1st ORDER 1st 
 		//STRUCTURE AS RECURSIVE.
-	},
-	
+	},	
 	//TO BE REPLACED BY LATTICE OPERATIONS
 	//POWERSET LATTICE? 
 	legacyTraverse: async function(inputAssets, outputAssets, outputValues){
@@ -1150,3 +1137,4 @@ module.exports = {
 		//}
 	}
 };
+module.exports = App;

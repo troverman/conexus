@@ -1,20 +1,15 @@
 //CRE8.SEARCH.ALPHA
 const Q = require('q');
-
 //API APP
 //HTTPS APP . . . 
-
 //CAN HANDLE ALL API CALLS..
 	//IF APP/ MODEL PARAM.. 
 		//ELSE ALL APPS YOU HAVE CONNECTIED TO PEER / YOUR TRUTH 
 			//CAN SPECIFIC TRUTH PARAMS
-
 //CRE8.get --> UNIVERSAL .. get app ... get self connection.connection 
-
 //TODO.. ALL MODELS ARE APP DEFINED
 	//data models are contined within apps 
 	//simplify to data 
-
 	//APP {protocol, data}
 		//APP, DATA
 			//APP (set {protocol, data} - bundle)
@@ -26,9 +21,7 @@ const Q = require('q');
 //GET ACTIVITY BASED ON PROJECTS
 //GET ACTIVITY BASED ON [CUSTOM]
 //ACTIVITY QUERY AS ONE LOOKUP --> REFACTOR
-
-module.exports = {
-
+var App = {
 	//API MAIN ROUTER AND QUERY LANGUAGE APP.. IE QUERY PARSER APP(S) -> TRANSATIONS bASED ON ORM
 	query: [{
 	    "filter": [
@@ -175,5 +168,5 @@ module.exports = {
 	    console.log('FEED QUERY DONE', activity.length);
 		return activity;
 	},
-
 };
+module.exports = App;

@@ -1,21 +1,18 @@
 //CRE8.CONNECTION.ALPHA
 //EXERCISE: WRITE IN CONNECTION RECURSIVE JSON
-const crypto = require('crypto');
-const Q = require('q');
-
-module.exports = {
-
+var App = {
+	import:{
+		crypto: require('crypto')
+	},
 	//AGAIN TYPE COMPOSITION IS A ROMANTIC FORMALISM WRT LANG GRAMMER 
 	//CONNECTION STRUCUTRES ARE ELUSIVE
 	types:[
 		{
 			type:'CONNECTION', 
 			attributes:{
-
 		        //2nd order parameters
 				//title: {type: 'string'},
 				//description: {type: 'string'},
-
 		        context: {type: 'json'},
 		        attributes: {type: 'json'},
 			    context: {type: 'json'},
@@ -25,18 +22,12 @@ module.exports = {
 		    }
 		}
 	],
-
-	 attributes: {
-
+	attributes: {
         //DEPRECIATE
         model: {type: 'string', defaultsTo: 'CONNECTION'},
-
-
-
         //THERE IS NOT FRICTION BETWEEN DISCRETE AND ABSTRACT STRUCUTRES
         type: {type: 'string', defaultsTo: 'CONNECTION'},
         //ID --> HASH
-
         //2nd order parameters
 		title: {type: 'string'},
 		description: {type: 'string'},
@@ -44,18 +35,13 @@ module.exports = {
         creator:{type: 'string'},
     	type:{type: 'string'},
         associatedModels:{type: 'json'},
-
         data: {type: 'json'},
-
         //TODO: DEFINE
         //CUSOM CONNECTION DATA MODEL..
         attributes:{type:'json'},
         parameters:{type:'json'}
-
     },
-
 	create:async function(req){
-
 		var model = {
 			model: 'CONNECTION',
 			type: 'CONNECTION', //DUPLICATE TO REDUCE ~
@@ -66,24 +52,18 @@ module.exports = {
 			associatedModels: req.param('associatedModels'),//id, type..
 			data:{apps:{reactions:{plus:0,minus:0},attention:{general:0}}}
 		};
-		model.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
-
+		model.hash = App.import.crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
 		//SKINNY CONTROLLERS --> TO REDUCE 
-		//var newConnection = await connectionApp.create(model);
+		//var newConnection = await App.create(model);
 		//console.log('CREATE CONNECTION', newConnection, model);
 		//res.json(newConection);
-		
 		var newConnection = await Connection.create(model);
 		Connection.publish([newConnection.id], {verb: 'create', data: newConnection});
-		
 		//(NOW MOMENT COMMENT - REDUCE DATA MODELS TO APPS) 
 		eventApp.create(newConnection);
 		validationApp.create(newConnection);
-
 		return Connection.find({hash:model.hash});
-
 	},
-
 	get: async function(req){
 		var limit = parseInt(req.query.limit) || 100;
 		var skip = parseInt(req.query.skip) || 0;
@@ -96,7 +76,6 @@ module.exports = {
 		else{response = Connection.find({}).limit(limit).skip(skip).sort(sort);}
 		return response;
 	},
-
 	//OKAY DATA-TOKEN CONNECTION . . .
 	//STATIC SELF CONNECTION CONSTRUCTOR --> THIS IS SUPER IN COMPOSITION 
 	tokens:{
@@ -122,8 +101,7 @@ module.exports = {
 		create:function(model){
 
 
-		},
-		
-	},
-   
+		},	
+	}
 };
+module.exports = App;

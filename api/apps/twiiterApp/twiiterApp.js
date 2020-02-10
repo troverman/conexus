@@ -1,7 +1,7 @@
 //TWIITER APP
 //require core
 //require ...
-
-module.exports = {
+var App = {
 	connections:[],
 };
+module.exports = App;

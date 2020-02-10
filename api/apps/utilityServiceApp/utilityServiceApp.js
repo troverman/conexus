@@ -2,9 +2,7 @@
 const async = require('async');
 const Q = require('q');
 const request = require('request');
-
-module.exports = {
-
+var App = {
 	bulkEditFunction: async function(){
 		var Q = require('q');
 		var promises = [
@@ -270,3 +268,4 @@ module.exports = {
         object[stack.shift()] = newValue;
     }
 };
+module.exports = App;

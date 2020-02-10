@@ -1,8 +1,9 @@
 //CRE8.REACTION.ALPHA
 const crypto = require('crypto');
-
-module.exports = {
-
+var App = {
+	import:{
+		crypto: require('crypto')
+	},
 	connections:[],
 	//type CRE8_REACTION
 	dataModel:[],
@@ -523,8 +524,6 @@ module.exports = {
 			updateAssociatedModels(model, tokens);
 		}
 
-	}
-
-
-	
+	}	
 };
+module.exports = App;

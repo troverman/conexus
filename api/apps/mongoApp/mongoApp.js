@@ -1,6 +1,4 @@
-
-module.exports = {
-
+var App = {
 	parseQuery:function(queryModel){
 
 		//THINK
@@ -54,5 +52,5 @@ module.exports = {
 		return mongoQuery
 
 	}
-
 };
+module.exports = App;

@@ -1,7 +1,6 @@
 //CRE8.PROTOCOL.ALPHA
 //REDUCE? 
-module.exports = {
-
+var App = {
 	//DEFINE DATA MODEL(S)
 	attributes: [
 		{
@@ -13,7 +12,6 @@ module.exports = {
 		    }
 		}
     ],
-
     attributes: {
 		//DEPRECIATE
         model: {type: 'string', defaultsTo: 'PROTOCOL'},
@@ -21,8 +19,6 @@ module.exports = {
 		permissions:{type:'json'},
 		logic:{type:'json'},
     },
-
-   
 	//DEFINE ASSOCIATIONS / IMPORTS
 	associations:[
 	//node_modules..
@@ -30,24 +26,20 @@ module.exports = {
 		//import queryLanguage 
 			//and queryParse
 	],
-
 	//CUSTOM FUNCTIONS
 	get: function(req, res) {
 		//queryLanguage.queryParse();
 	},
-
 	create: function (req, res) {
 		var newProtocol = req.body;
 		Protocol.create(newProtocol);
 	},
-
 	//FRONTEND; JSX; TO BUILD THE ENGINE.. 
 		//APP DEFINED ROUTES. ETC
 			//COMPILES TO APP IN BROWER , NATIVLY
 		//CORE CONTAINS THE BUILDER
 	templates:{
 
-	}
-
-	
+	}	
 };
+module.exports = App;

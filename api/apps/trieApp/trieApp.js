@@ -1,8 +1,5 @@
 //CRE8.TRIE.ALPHA
-
-
-//REUDCE
-module.exports = {
+var App = {
 
 	//COMPOSITION OF ~~
 	types:[
@@ -15,7 +12,6 @@ module.exports = {
 		    }
 		}
 	],
-
 
 	//CONSTRUCT PARENT CHILD IN MULTI
 
@@ -38,5 +34,5 @@ module.exports = {
 	//NEED A REMIX LIKE EDITOR .. 
 	//NON SIDEBAR STATIC CREATE
 	//DATA IN PATRICIA TREE . . .
-   
 };
+module.exports = App;
