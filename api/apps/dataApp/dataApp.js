@@ -138,10 +138,16 @@ const App = {
 			}
 
 		});
-	}
+	},
+
+
+
+	//FOR TWITTER ETC APP INTEROP .....
+	//GO FOR IT
+
+
 };
 
 //TODO: THINK APP VS DATA APP.. THIS IS A CREATIVE WITH DYNAMIC INITS
 App.hash = App.import.crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(App)).digest('hex');
-console.dir(App);
 module.exports = App;

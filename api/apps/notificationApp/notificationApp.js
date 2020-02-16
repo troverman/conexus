@@ -7,7 +7,7 @@ var App = {
 		var limit = req.query.limit || 1;
 		var skip = req.query.skip || 0;
 		var sort = req.query.sort || 'createdAt DESC';
-		console.log('GET NOTIFICATION', req.query);	
+		console.log('notificationApp.get', 'CALL:', utilityServiceApp.guid(), req.query);
 		if (req.query.user){
 			if (req.query.isRead){
 				//Notification.subscribe(req, models.map(function(obj){return obj.id}));
@@ -41,10 +41,7 @@ var App = {
 				priority: 100,
 				isRead: false,
 				data:{
-					apps:{
-						member:model.user.id, 
-						project:model.project.id
-					},
+					apps:{member:model.user.id, project:model.project.id},
 				}
 			};
 			//Notification.create(notificationModel).then(function(notification){
@@ -61,11 +58,7 @@ var App = {
 				type: 'TRANSACTION',
 				title: 'New Transaction',
 				content:model.from+' sent you '+model.amountSet,
-				data:{
-					apps:{
-						transaction: model
-					}
-				},
+				data:{apps:{transaction: model}},
 				priority:77,//defined by user
 			};
 			var newNotification = await Notification.create(notificationModel)
@@ -80,11 +73,11 @@ var App = {
 		reaction: async function(model){
 			var model = await Notification.create(notificationModel);
 			console.log('CREATE NOTIFICATION', model);
+			console.log('notificationApp.create', 'CALL:', utilityServiceApp.guid(), model);
 			Notification.publish([model.id], {verb: 'create', data: model});
 		},
 		project:async function(model){},
 	},
-
 	update: function(req){
 		var id = req.param('id');
 		var model = {isRead: req.param('isRead')};

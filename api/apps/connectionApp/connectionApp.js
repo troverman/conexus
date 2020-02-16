@@ -41,6 +41,18 @@ var App = {
         attributes:{type:'json'},
         parameters:{type:'json'}
     },
+    get: async function(req){
+		var limit = parseInt(req.query.limit) || 100;
+		var skip = parseInt(req.query.skip) || 0;
+		var sort = req.query.sort;
+		var id = req.query.id;
+		console.log('attentionApp.get', 'CALL:', utilityServiceApp.guid(), req.query);
+		var response = {};
+		if(req.query.id){response = Connection.find({id:id}).limit(limit).skip(skip).sort(sort);}
+		else if(req.query.creator){response = Connection.find({creator:creator}).limit(limit).skip(skip).sort(sort);}
+		else{response = Connection.find({}).limit(limit).skip(skip).sort(sort);}
+		return response;
+	},
 	create:async function(req){
 		var model = {
 			model: 'CONNECTION',
@@ -56,7 +68,7 @@ var App = {
 		//SKINNY CONTROLLERS --> TO REDUCE 
 		//var newConnection = await App.create(model);
 		//console.log('CREATE CONNECTION', newConnection, model);
-		//res.json(newConection);
+		console.log('connectionApp.create', 'CALL:', utilityServiceApp.guid(), model);
 		var newConnection = await Connection.create(model);
 		Connection.publish([newConnection.id], {verb: 'create', data: newConnection});
 		//(NOW MOMENT COMMENT - REDUCE DATA MODELS TO APPS) 
@@ -64,44 +76,24 @@ var App = {
 		validationApp.create(newConnection);
 		return Connection.find({hash:model.hash});
 	},
-	get: async function(req){
-		var limit = parseInt(req.query.limit) || 100;
-		var skip = parseInt(req.query.skip) || 0;
-		var sort = req.query.sort;
-		var id = req.query.id;
-		console.log('GET CONNECTION', req.query);
-		var response = {};
-		if(req.query.id){response = Connection.find({id:id}).limit(limit).skip(skip).sort(sort);}
-		else if(req.query.creator){response = Connection.find({creator:creator}).limit(limit).skip(skip).sort(sort);}
-		else{response = Connection.find({}).limit(limit).skip(skip).sort(sort);}
-		return response;
-	},
 	//OKAY DATA-TOKEN CONNECTION . . .
 	//STATIC SELF CONNECTION CONSTRUCTOR --> THIS IS SUPER IN COMPOSITION 
 	tokens:{
-
 		model:{
 			create:[
 				{name:'CRE8+CREATE+CONNECTION'}, 
 				{name:'CRE8+CREATE+CONNECTION+{id}'},
-
 				//COMBINATORIAL
 				//REDUCE / BE INTENTIONAL AS IT IS LARGE .. LARGER THE BETTER ; 
-
 				//IMPROVEMENT PROPOSAL: ALLOWN N SIZE COMBINAORIAL TOKENIZATION OF DATA ATTRIBUTES :: POWERSET ATTRIBUTES
 				//{name:'CRE8+CONNECTION+{context}'},
-
 			],
 			get:[
 				{name:'CRE8+GET+CONNECTION'},
 				{name:'CRE8+GET+CONNECTION+{id}'}
 			],
 		},
-
-		create:function(model){
-
-
-		},	
+		create:function(model){},	
 	}
 };
 module.exports = App;

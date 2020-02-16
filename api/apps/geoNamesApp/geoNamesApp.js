@@ -57,7 +57,7 @@ var App = {
 		var model = {url: 'http://api.geonames.org/countryInfoJSON?formatted=true&lang=en&username=troverman', json: true};
 		App.import.request(model, async function (error, response, body) {
 			var countryData = body.geonames;
-			async.eachSeries(countryData, function (projectData, nextProject){
+			async.eachSeries(countryData, async function (projectData, nextProject){
 				var title = projectData.countryName;
 				var urlTitle = title.replace(/ /g,"-").toLowerCase();
 				var projectModel = await Project.find({urlTitle:urlTitle});

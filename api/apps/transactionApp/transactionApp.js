@@ -159,7 +159,7 @@ var App = {
 			data:{apps:{reactions:{plus:0,minus:0},attention:{general:0}}}
 		};
 		model.hash = App.import.crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
-		console.log('CREATE TRANSACTION', model);
+		console.log('transactionApp.create', 'CALL:', utilityServiceApp.guid(), model);
 		var transactionModel = await Transaction.create(model);
 		//ITEM ACTIONS.. 			
 		//IF GENERATOR

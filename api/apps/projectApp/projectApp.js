@@ -69,7 +69,7 @@ var App = {
 		var query = req.query.query;
 		var tag = req.query.tag;
 
-		console.log('GET PROJECT', req.query);
+		console.log('projectApp.get', 'CALL:', utilityServiceApp.guid(), req.query);
 
 		//CREATE PEER SELF DATABASE . . .
 
@@ -91,32 +91,23 @@ var App = {
 			.find({
 				"location.coordinates": {
 					$near:{
-						$geometry: {
-			          		type: "Point" ,
-			          		coordinates: location,
-			       		},
+						$geometry: {type: "Point" , coordinates: location},
 						$maxDistance: distance,
 						$minDistance: 0,
 			       	}
 			     }
 			}).limit(limit).skip(skip).toArray(function (err, models) {
 				if (models){models = models.map(function(obj){obj.id = obj._id.toString(); return obj;});}
-				//TODO: RETRUN PORMISE
 				deferred.resolve(models);
 			});
+			return deferred.promise;
 		}
 
 		//QUERY
 		//TODO: APPRECIATE QUERY LANGUAGE
 		else if(req.query.query){
-			var models = await Project.find({
-				or: [
-					{title: {contains: query}},
-					{urlTitle: {contains: query}},
-					{description: {contains: query}},
-				]
-			}).limit(limit).skip(skip).sort(sort);
-			deferred.resolve(models);
+			var models = await Project.find({or: [{title: {contains: query}}, {urlTitle: {contains: query}}, {description: {contains: query}}]}).limit(limit).skip(skip).sort(sort);
+			return models;
 		}
 
 		//TAG
@@ -126,7 +117,7 @@ var App = {
 			Project.subscribe(req, models);
 			var returnObj = {data:models, info:{count:numRecords}};
 			//TODO: RETURN PROMISE
-			deferred.resolve(returnObj);
+			return returnObj;
 		}
 
 		else{
@@ -138,13 +129,8 @@ var App = {
 			var populatedModels = await App.import.Q.all(promises);
 			for (x in models){models[x] = populatedModels[x];}
 			var returnObj = {data:models, info:{count:numRecords}};
-			deferred.resolve(returnObj);
+			return returnObj
 		}
-
-		return deferred.promise;
-
-		//return new Promise((resolve, reject) => {resolve(returnObj)}
-
 	},
 
 	create: async function (req) {
@@ -161,7 +147,7 @@ var App = {
 			data:{apps:{reactions:{plus:0,minus:0},attention:{general:0}}}
 		};
 		model.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
-		console.log('CREATE PROJECT', model);
+		console.log('projectApp.create', 'CALL:', utilityServiceApp.guid(), model);
 
 		//TODO: READ
 		//CREATEING SELF DEFINED VALIDATIONS OF SOME TYPE CREATES THE MDOEL
@@ -232,9 +218,14 @@ var App = {
 		newValidation.hash = App.import.crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(newValidation)).digest('hex');
         var newValidationModel = await Validation.create(newValidation);
 		console.log('CREATE VALIDATION', newValidationModel);
-		createAssociation(newValidationModel);
+		associationApp.create(newValidationModel);
 		App.tokens.create(project);
-		//TODO: RETURN PROMISE
+
+
+
+
+
+
 		return project;
 	},
 	

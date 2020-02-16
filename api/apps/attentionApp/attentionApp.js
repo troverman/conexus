@@ -332,17 +332,11 @@ var App = {
 		var newAttention = await Attention.create(model);
 		var userModel = await User.find({id:newAttention.creator})
 		model.creator = userModel[0];
-		//console.log('CREATE ATTENTION', model)
+		console.log('attentionApp.create', 'CALL:', utilityServiceApp.guid(), model.creator);
 		Attention.publish([newAttention.id], {verb:'create', data: newAttention});
 		eventApp.create(newAttention);
-
-		//createNotification(model);
-		//createValidation(model);
-
 		App.tokens.create(newAttention);
-
 		updateAssociatedModels(newAttention);
-
 		//TODO: STANDARDIZE USER STATE
 		var updatedUser = await User.update({id:userModel[0].id}, {status:newAttention.string});
 		return Attention.find({hash:model.hash});		
@@ -350,11 +344,9 @@ var App = {
 
 	tokens:{
 		create:function(model){
-			//this, self .. 
 			var tokens = App.tokens.get(model);
 			//updateAssociatedModels(model, protocolTokens);
 		},
-
 		get: function(model){
 			var protocolTokens = [
 				'CRE8', 

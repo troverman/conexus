@@ -19,16 +19,14 @@ var App = {
     },
 	'routes':{},
 	get: async function(req){
-		//PARSE QUERY
-			//QUERY PARSE APP <:P
+		//TODO: PARSE QUERY | QUERY PARSE APP <:P
 		var limit = parseInt(req.query.limit) || 1;
 		var skip = parseInt(req.query.skip) || 0;
 		var sort = req.query.sort;
 		var id = req.query.id;
-		console.log('GET ACTION', req.query);
+		console.log('actionApp.create', 'CALL:', utilityServiceApp.guid(), req.query);
 		if(req.query.id){return Action.find({id:id}).limit(limit).skip(skip).sort(sort);}
-		//TODO: ASSOCIATION
-		//TODO: ITEM ASSOCIATION
+		//TODO: ASSOCIATION | ITEM ASSOCIATION
 		else{return Action.find({}).limit(20).skip(skip).sort(sort);}
 	},
 	create:async function(req){
@@ -41,9 +39,8 @@ var App = {
 			data:{apps:{reactions:{plus:0,minus:0},attention:{general:0}}}
 		};
 		model.hash = App.import.crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
-		//Action.publishCreate(model);
-		//Action.publish([model.id], {verb: 'create', data: model});
-		return Action.create(model)
+		console.log('actionApp.create', 'CALL:', utilityServiceApp.guid(), model);
+		return Action.create(model);
 	}	
 };
 module.exports = App;

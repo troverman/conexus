@@ -83,24 +83,15 @@ var App = {
 		function parseQuery(queryModel){
 			var query = {$and:[]}
 			if (queryModel.id){
-				query.$and.push({
-					"associatedModels.id": {
-						$in :[queryModel.id]
-					}
-				});
+				query.$and.push({"associatedModels.id": {$in :[queryModel.id]}});
 			}
-				//remove type
+			//remove type
 			if (queryModel.type){
-				query.$and.push({
-					"associatedModels.type": {
-						$in :[queryModel.type]
-					}
-				});
+				query.$and.push({"associatedModels.type": {$in :[queryModel.type]}});
 			}
-				//parameter
+			//parameter
 			if (queryModel.connection){}
 			if (queryModel.attributes){}
-
 			console.log(queryModel, query);
 			return query; 
 		};
@@ -109,8 +100,7 @@ var App = {
 		var skip = parseInt(req.query.skip) || 0;
 		var sort = req.query.sort || 'createdAt DESC';
 		var id = req.query.id;
-		console.log('GET ASSOCIATION', req.query);
-
+		console.log('associationApp.getController', 'CALL:', utilityServiceApp.guid(), query);
 		if(req.query.id){
 			var models = await Association.find({id:id}).limit(limit).skip(skip).sort(sort)
 			if (models[0]){
@@ -139,15 +129,13 @@ var App = {
 				//TODO: RETURN PROMISE
 				return models[0];	
 			}
-			else{
-				return {};
-			}
+			else{return {};}
 		}
 
 		else if(req.query.filter){
 
 			var querySet = JSON.parse(req.query.filter);
-			console.log(querySet);
+			//console.log(querySet);
 			
 			//JSON.stringify({type:'CONTENT', id:member.id}),
 
@@ -164,7 +152,7 @@ var App = {
 			//TODO: CONNECTION FILTERS
 			//TODO: RECURSIVE . . .
 			Association.getDatastore().manager.collection('association').find(query).limit(1000).skip(0).sort({'createdAt':-1})
-			.toArray(function (err, associationModels) {
+			.toArray(async function (err, associationModels) {
 				associationModels = associationModels.map(function(obj){obj.id = obj._id; return obj;});
 				var promises = [];
 				for (x in associationModels){
@@ -183,28 +171,23 @@ var App = {
 						if (associationModels[x].associatedModels[y].type=='VALIDATION'){promises.push(Validation.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
 					}
 				}
-				Q.all(promises).then((populatedModels)=>{
-					var index = -1 
-					for (x in associationModels){
-						for (y in associationModels[x].associatedModels){index++;associationModels[x].associatedModels[y].data = populatedModels[index];}
-					}
-					//model.context = {};
-					//for (x in model.associationModels){}
-
-					//OKK..
-					//POPULATE USER FOR ASSOCIATAED MODEL DATA &&&&&&&& LINK IN USER / RECURSUVE POPULATION ETC
-					//for (x in associationModels)
-					//	for (y in associationModels[x].associatedModels){
-					//		User.find()
-					//	}
-					//}
-
-					//TODO: RETURN PROMISE
-					return associationModels;
-				});
+				var populatedModels = await Q.all(promises);
+				var index = -1 
+				for (x in associationModels){
+					for (y in associationModels[x].associatedModels){index++;associationModels[x].associatedModels[y].data = populatedModels[index];}
+				}
+				//model.context = {};
+				//for (x in model.associationModels){}
+				//OKK..
+				//POPULATE USER FOR ASSOCIATAED MODEL DATA &&&&&&&& LINK IN USER / RECURSUVE POPULATION ETC
+				//for (x in associationModels)
+				//	for (y in associationModels[x].associatedModels){
+				//		User.find()
+				//	}
+				//}
+				//TODO: RETURN PROMISE
+				return associationModels;
 			});
-
-
 		}
 	},
 	//DO BETTER --> BASED ON CONNECTION! 
@@ -225,14 +208,13 @@ var App = {
 				]
 			})
 			.limit(1000).skip(0).sort({'createdAt':-1})
-			.toArray(function (err, associationModels) {
+			.toArray(async function (err, associationModels) {
 				if (associationModels.length == 0){
 					var newAssociationModel = newValidationModel;
-					Association.create(newAssociationModel).then(function(association){
-						console.log('CREATED ASSOCIATION', association);
-						Association.publish(association.id, {verb: 'create', data: association});
-						eventApp.create(association, 'create');
-					});
+					var association = await Association.create(newAssociationModel);
+					console.log('associationApp.create', 'CALL:', utilityServiceApp.guid(), association);
+					Association.publish(association.id, {verb: 'create', data: association});
+					eventApp.create(association, 'create');	
 				}
 				else{eventApp.create(association, 'update');}
 			});

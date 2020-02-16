@@ -57,25 +57,20 @@ module.exports = {
 
     //TODO
     afterCreate: function(model, next){
-
         var colorArray = ['2ab996', '24242e', 'ff6a6a', 'ddbea8'];
         var colorInt = Math.floor(Math.random() * (colorArray.length + 1));
         var avatarUrl = 'https://ui-avatars.com/api/?size=256&name='+model.username+'&color=fff&background='+colorArray[colorInt];
         model.avatarUrl = avatarUrl;
-
         var url = "https://api.unsplash.com/photos/random?page=1&client_id=b996e9314d68deae5fe37098f096cd6b3b035f5c63989805aa23d4bd8c7358a2&secret=2ddbfdd90eaf2bcfc6f3cec5ec58c677b35cb470dc63d39e0e0372755b59c434%27";
-        request(url, function (error, response, body) {
+        request(url, async function (error, response, body) {
             var body = JSON.parse(body);
             if (body.urls){model.coverUrl = body.urls.small;}
             //TODO           
             model.apps = {cre8:{recordAttention:true,tutorial:true}};
-            User.update({id: model.id}, model)
-            .then(function(model){
-                //emailService.sendTemplate('welcome', model.email, 'Welcome To CREATE!', {username: model.username});
-                return next(null, model);
-            });
-        });
-        
-    },
-    
+            var model = await User.update({id: model.id}, model);
+            //TODO:
+            //emailService.sendTemplate('welcome', model.email, 'Welcome To CREATE!', {username: model.username});
+            return next(null, model);
+        });   
+    }
 };

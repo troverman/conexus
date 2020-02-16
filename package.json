@@ -15,6 +15,8 @@
     "async": "^2.6.3",
     "balanced-match": "^1.0.0",
     "bcryptjs": "~2.1.0",
+    "bitcoinjs-lib": "^5.1.7",
+    "bitcore-explorers": "^1.0.1",
     "bs58": "^4.0.1",
     "complexity-report": "^2.0.0-alpha",
     "duplexer": "^0.1.1",

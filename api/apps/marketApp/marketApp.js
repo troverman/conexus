@@ -1,3 +1,20 @@
 //CRE8.MARKET.ALPHA
-var App = {};
+var App = {
+
+	//MARKET IS A COMBINITORIAL TOKEN WITH CERTAIN PROPERTIES --> < DEFINIG A CONNECTION WHICH SPECIFICES STRING INTEGER MAPPINGS AS [type:eskrow] POSITIONS AS THE DATA MODEL >
+	//LAYER ABSTRACTOR TO USER[data] CONNECTION AND ASSOCIATION TO WITH DATA
+
+	//DIF APP
+	//TOOD: possible associations < dreamer --> generator >
+	//WE'RE SAVING COMBINATORIAL OBJECTS AS DATA AND INDEXING WITH ITS HASH ON
+	//USE THESE OBJECTS TO SOLVE 
+	//Set(A) =  PowerSet(A + B) =  SetB()
+
+
+	//
+	//connections.associations.
+	//population app -- > populate all possible combiniations --> SOME VALUE HERE M.ATTENTION <<THE PPL ASK WHY THO>>
+
+
+};
 module.exports = App;

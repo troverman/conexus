@@ -1,8 +1,8 @@
 //CRE8.TASK.ALPHA
 var App = {
 	import: {
-		Q: require:('q'),
-		crypto:require:('crypto');
+		Q: require('q'),
+		crypto: require('crypto')
 	},
 	attributes: {
         //DEPRECIATE
@@ -29,7 +29,7 @@ var App = {
 		var tag = req.query.tag;
 		var id = req.query.id;
 		var user = req.query.user;
-		console.log('GET TASK', req.query);
+		console.log('taskApp.get', 'CALL:', utilityServiceApp.guid(), req.query);
 		if(req.query.id){
 			var models = await Task.find({id:id});
 			Task.subscribe(req, [models[0].id]);
@@ -105,7 +105,7 @@ var App = {
 
 		};
 		model.hash = App.import.crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
-		console.log('CREATE TASK', model);
+		console.log('taskApp.create', 'CALL:', utilityServiceApp.guid(), model);
 		var task = await Task.create(model);
 		//TODO: BETTER SETUP
 		//TODO: BETTER 'EXTERNAL' UTILITY
@@ -143,34 +143,26 @@ var App = {
 					var newTokenModel = {
 						string:tokenString,
 						protocols:['CRE8','TRANSACTION'], 
-						information:{
-							inCirculation:model.amount, 
-							markets:0
-						},
-						logic:{
-							transferrable:true, 
-							mint:'CREATE TIME'
-						}
+						information:{inCirculation:model.amount, markets:0},
+						logic:{transferrable:true, mint:'CREATE TIME'}
 					};
 					var newToken = await Token.create(newTokenModel);
-					console.log('TOKEN CREATED', newToken.string);
+					console.log('taskApp.tokens.create', 'CALL:', utilityServiceApp.guid(), newToken.string);
 
 					model.user.balance[tokenString] = parseFloat(model.amount);
 					var updatedUser = await User.update({id:model.user.id}, {balance:model.user.balance});
-					console.log('UPDATED USER', updatedUser);
+					console.log('taskApp.tokens.create', 'UPDATE USER:', utilityServiceApp.guid());
 				}
 				else{
-
 					tokenModels[0].information.inCirculation = parseInt(tokenModels[0].information.inCirculation) + parseFloat(model.amount); 
 					var updatedToken = await Token.update({id:tokenModels[0].id}, {information:tokenModels[0].information});
-					console.log('TOKEN UPDATED', updatedToken);
+					console.log('taskApp.tokens.create', 'CALL:', utilityServiceApp.guid(), updatedToken);
 
 					if (model.user.balance[tokenString]){model.user.balance[tokenString] = parseInt(model.user.balance[tokenString]) + parseFloat(model.amount);}
 					else{model.user.balance[tokenString] = parseFloat(model.amount);}
 
 					var updatedUser = await User.update({id:model.user.id}, {balance:model.user.balance});
-					console.log('UPDATED USER', updatedUser);
-
+					console.log('taskApp.tokens.create', 'UPDATE USER:', utilityServiceApp.guid());
 				}
 			}
 		}

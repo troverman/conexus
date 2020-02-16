@@ -42,7 +42,9 @@ var App = {
 				var trace = App.import.StackTrace.get();
 				//console.log(trace[0].getFileName());
 				//trace.map(function(obj){console.log(obj.getFileName())});
-				//console.log('Function called:', this.name);
+				//EVENT TO BRODCASE TO PEERS WHO WHICH TO LISTEN AND SELF
+					//LISTEING TO PEERS WHICH I SHARE TRUTH WITH BASED ON MY-M.D-CONSENSUS CONSENSUSAPP ||> TRUTHFOREST IS A CONSENSUS || 
+				console.log('Function called:', this.name);
 				if (!runTimeFunctionMapping[this.name]){runTimeFunctionMapping[this.name]=1;}
 				else{runTimeFunctionMapping[this.name]++;}
 			}

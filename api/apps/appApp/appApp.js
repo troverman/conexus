@@ -65,7 +65,7 @@ var App = {
 		var skip = parseInt(req.query.skip) || 0;
 		var sort = req.query.sort;
 		var id = req.query.id;
-		console.log('GET APP', req.query);
+		console.log('appApp.get', 'CALL:', utilityServiceApp.guid(), req.query);
 		if(req.query.id){
 			var apps = await App.find({id:id}).limit(limit).skip(skip).sort(sort);
 			//-->IMPORT TRIE . . . :P
@@ -83,7 +83,7 @@ var App = {
 		return deferred.promise;
 	},
 	create: async function(req){
-
+		
 		var model = {
 			model: 'APP',
 			title: req.param('title'),
@@ -96,7 +96,7 @@ var App = {
 			data:{apps:{reactions: {plus:0,minus:0}, attention:{general:0}}}
 		};
 		model.hash = App.import.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
-		console.log('CREATE APP', model);
+		console.log('appApp.create', 'CALL:', utilityServiceApp.guid(), model);
 		
 		var newApp = await App.create(model);
 		await App.db.put({_id:Math.random() ,string:Math.random()});
@@ -105,6 +105,7 @@ var App = {
 		eventApp.create(newApp);
 		validationApp.createLegacy(newApp);
 		return App.find({hash:model.hash});
+
 	},
 	tokens:{
 		get: function(model){
@@ -120,4 +121,4 @@ var App = {
 		},
 	},	
 };
-modlue.exports = App;
+module.exports = App;

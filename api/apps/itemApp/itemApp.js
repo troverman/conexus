@@ -1,4 +1,4 @@
-//CRE8.ITEM.ALPHA
+//CRE8.connections.apps.Item().ALPHA
 var App = {
 	//HASH OF ATTRIBUTES ???
     //DB TYPES ??
@@ -50,17 +50,25 @@ var App = {
 			//DATA MODEL.
 		}	
 	}],
-	import: { 
-		crypto: require('crypto'),
-		mongodb: require('mongodb'),
-		Q: require('q'),
-		//TODO: MODULARIZE
-		//contentApp: require('./contentApp'),
-		//reactionApp: require('./reactionApp'),
-		//attentionApp: require('./attentionApp'), --> DATA LAYER IN (APP) SHARED ATTRIBUTES
-		//React: require('react'),
-		//event: require('event'),
-			//IMPORT DATABASE CONNECTION 
+	//connections.apps --> dyanmic 
+	//static --> todo write static parser / init convert to dynamic connection JSON representation
+	connections: {
+		apps: {
+			//TODO: CREATE DECENTRALIZED REQUIRE :O)))))!
+			//IE REPLACE WITH AppManager.get(#HASH)
+			crypto: function(){return appManagerApp.get('crypto')},
+			mongodb: function(){return appManagerApp.get('mongodb')},
+			Q: function(){return appManagerApp.get('q')},
+			//Item: function(){return Item.init('');},
+
+			//TODO: MODULARIZE
+			//contentApp: require('./contentApp'),
+			//reactionApp: require('./reactionApp'),
+			//attentionApp: require('./attentionApp'), --> DATA LAYER IN (APP) SHARED ATTRIBUTES
+			//React: require('react'),
+			//event: require('event'),
+				//IMPORT DATABASE CONNECTION 
+		}
 	},
 	//DATA MODELS ARE CONNECTIONS
 	//TEST
@@ -69,6 +77,7 @@ var App = {
 	attentionParams:{},
 
 	//TODO: .. HASH: NEEDS TO BE UNIQUE .. 
+	//connections.self.routes
 	routes:{
 		//get/api/{HASH}
 		'get /api/item': 'ItemController.get',
@@ -77,7 +86,6 @@ var App = {
 		//BUILD AND RENDER VIEWS .. 
 		'get /items': 'HomeController.index',
 		'get /item/:id': 'HomeController.index',
-
 	},
 
 	//LANGUAGES ARE COMPILER PARAMETERS
@@ -90,66 +98,60 @@ var App = {
 	},
 	//value language
 	//~~ CONGRUENCE MEANS CONTEXT FREE GRAMMER
-	meta:{
-		separator:[','],
-		operator:['+','-','*',''],
-	},
+	meta:{separator:[','], operator:['+','-','*','']},
+
 	//recursive..
 	//init(req, res, params);
-	//params are 
 	//get: function(req, res, params){/*params ^^same as above ; recursive :)*/},
 	get: async function(req) {
-		var deferred = App.import.Q.defer();
 		//[req.model].get(req);
 		var limit = parseInt(req.query.limit) || 1;
 		var skip = parseInt(req.query.skip) || 0;
 		var sort = req.query.sort || 'createdAt DESC';
-		console.log('GET ITEM', req.query);
+		console.log('itemApp.get', 'CALL:', utilityServiceApp.guid(), req.query);
+		var returnObj = {};
 		if(req.query.id){
-			//LOL WOW
-			//EITHER HASH OR ID...
-			//REDUCE ~? ALBEIT IS THERE STRENGTH IN A MULTI-IDENTIFER STRUCT ~ PLURLALITY IS A STRENGTH
+			//THERE STRENGTH IN A MULTI-IDENTIFER STRUCT ~ PLURLALITY IS A STRENGTH
 			var id = req.query.id;
 			var query = {};
 			//NO
-			if (App.import.mongodb.ObjectID.isValid(id)){query = { "id": id }}
+			if (App.connections.apps.mongodb().ObjectID.isValid(id)){query = { "id": id }}
 			else{query = { dataHash: id}}
-			var models = await Item.find(query).limit(limit).skip(skip).sort(sort);
-			console.log('leal');
+			var models = await connections.apps.Item().find(query).limit(limit).skip(skip).sort(sort);
 			if (models.length > 0){
 				var itemModel = models[0];
 				//itemModel.id = itemModel._id.toString();
 				//var userModel = await User.find({id:itemModel.user.toString()});
 				//itemModel.user = userModel[0];
-				Item.subscribe(req, [itemModel.id]);
-				return associationApp.get(itemModel);
+				connections.apps.Item().subscribe(req, [itemModel.id]);
+				var models = await associationApp.get(itemModel);
+				returnObj = models;
 			}
 		}
 		else if (req.query.tag){
 			var tag = req.query.tag;
-			var models = await Item.find({tags:{contains: tag}}).limit(limit).skip(skip).sort(sort).populate('user')
-			var numRecords = await Item.count({tags:{contains: tag}});
-			Item.subscribe(req, models);
+			var models = await connections.apps.Item().find({tags:{contains: tag}}).limit(limit).skip(skip).sort(sort).populate('user');
+			var numRecords = await connections.apps.Item().count({tags:{contains: tag}});
+			connections.apps.Item().subscribe(req, models);
 			var returnObj = {data:models, info:{count:numRecords}};
-			deferred.resolve(models);
+			return returnObj;
 		}
 		else if (req.query.user){
 			var user = req.query.user;
-			return Item.find({user:user}).limit(limit).skip(skip).sort(sort).populate('user') 
+			var models = await connections.apps.Item().find({user:user}).limit(limit).skip(skip).sort(sort).populate('user');
+			returnObj = models;
 		}
 		else{
-			var models = await Item.find({}).limit(limit).skip(skip).sort(sort).populate('user');
-			var numRecords = await Item.count();
-			Item.subscribe(req, models.map(function(obj){return obj.id}));
+			var models = await connections.apps.Item().find({}).limit(limit).skip(skip).sort(sort).populate('user');
+			var numRecords = await connections.apps.Item().count();
+			connections.apps.Item().subscribe(req, models.map(function(obj){return obj.id}));
 			var promises = [];
 			for (x in models){promises.push(associationApp.get(models[x]));}
-			var populatedModels = await Q.all(promises)
+			var populatedModels = await App.connections.apps.Q().all(promises)
 			for (x in models){models[x] = populatedModels[x];}
 			var returnObj = {data:models, info:{count:numRecords}};
-			//TODO: PROMISIFY
-			deferred.resolve(returnObj);
 		}
-		return deferred.promise;
+		return returnObj;
 	},
 	create: async function (req) {
 		var model = {
@@ -173,18 +175,18 @@ var App = {
 			attention:{general:0},
 			json:{},
 		};
-		model.hash = App.import.crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
+		model.hash = App.connections.apps.crypto().createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
 		console.log('CREATE ITEM', model);
-		var itemModel = await Item.create(model);
+		var itemModel = await connections.apps.Item().create(model);
 		var userModels = await User.find({id:model.user});
 		itemModel.associatedModels = req.param('associatedModels') || [];
 		itemModel.user = userModels[0];
-		Item.subscribe(req, [itemModel]);
-		Item.publish([itemModel.id], {verb: 'create', data: itemModel});
+		connections.apps.Item().subscribe(req, [itemModel]);
+		connections.apps.Item().publish([itemModel.id], {verb: 'create', data: itemModel});
 		validationApp.createLegacy(itemModel);
 		eventApp.create(itemModel);
 		App.tokens.create(itemModel);
-		return Item.find({hash:model.hash});
+		return connections.apps.Item().find({hash:model.hash});
 	},
 	//EACH PROTOCOL / APP ADDS TO THE VALUE LANGUAGE.. 
 	//3rd layer of compilation . . 

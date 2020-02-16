@@ -96,7 +96,7 @@ var App = {
 		var time = req.query.time;
 		var id = req.query.id;
 
-		console.log('GET VALIDATION', req.query)
+		console.log('validationApp.get', 'CALL:', utilityServiceApp.guid(), req.query);
 
 		if(req.query.id){
 			var models = await Validation.find({id:id}).limit(limit).skip(skip).sort(sort).populate('user')
@@ -305,8 +305,7 @@ var App = {
 
 		//LIST -> OBJ
 		for (y in model.associatedModels[x].context){newValidation.context[model.associatedModels[x].context[y].text] = model.associatedModels[x].context[y].score;}
-
-		console.log('CREATE VALIDATION', model);
+		console.log('validationApp.create', 'CALL:', utilityServiceApp.guid(), model);
 		var newValidation = await Validation.create(model);	
 		newValidation.user = userModels[0];
 		Validation.subscribe(req, [validation.id]);
@@ -316,9 +315,7 @@ var App = {
 		NotificationApp.create.validation(validation);
 		eventApp.create(validation);
 		associationApp.create(validation);
-
-		deferred.resolve(newValidation);
-		return deferred.promise;
+		return newValidation;
 	},
 
 	//IMPLICIT VALIDATIONS REPLACE 'user'? what about 'creator'

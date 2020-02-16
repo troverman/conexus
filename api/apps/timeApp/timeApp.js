@@ -37,21 +37,14 @@ var App = {
 		var task = req.query.task;
 		var user = req.query.user;
 		var id = req.query.id;
-		console.log('GET TIME', req.query)
+		console.log('timeApp.get', 'CALL:', utilityServiceApp.guid(), req.query);
 		if (req.query.id){
 			var models = await Time.find({id:id}).limit(limit).skip(skip).sort(sort).populate('user');
 			Time.subscribe(req, [models[0].id]);
 			return associationApp.get(models[0]);
 		}
-		else if(req.query.user){
-			var models = await Time.find({user:user}).limit(limit).skip(skip).sort(sort).populate('user');
-			deferred.resolve(models);
-		}
-
-		else{
-			var models = await Time.find({}).limit(limit).skip(skip).sort(sort).populate('user');
-			deferred.resolve(models);
-		}
+		else if(req.query.user){return Time.find({user:user}).limit(limit).skip(skip).sort(sort).populate('user');}
+		else{return Time.find({}).limit(limit).skip(skip).sort(sort).populate('user');}
 	},
 
 	create: async function(req){
@@ -70,7 +63,7 @@ var App = {
 			data:{apps:{reactions:{plus:0,minus:0},attention:{general:0}}}
 		};
 		model.hash = App.import.crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
-		console.log('CREATE TIME', model);
+		console.log('timeApp.create', 'CALL:', utilityServiceApp.guid(), model);
 		//TODO: SECURITY - PERMISSIONS - AUTH
 		var userModels = await User.find({id:model.user});
 		var time = await Time.create(model);
@@ -80,8 +73,7 @@ var App = {
 		eventApp.create(time);
 		App.tokens.create(time);
 		for (x in time.associatedModels){validationApp.createLegacy(time.associatedModels[x])}
-		deferred.resolve(time);
-		return deferred.promise;
+		return time;
 	},
 
 	//TEST
@@ -91,15 +83,10 @@ var App = {
 		//IE DEFINE Time . . . 
 		//TODO: WEBSOCKET LISTENERS
 
-		//sais.db
 		//peer.db...
 		//GLOBAL NAMESPACE DEFINITIONS :O
 
-		const ipfsOptions = {
-			EXPERIMENTAL: {
-				pubsub: true
-			}
-		};
+		const ipfsOptions = {EXPERIMENTAL: {pubsub: true}};
 		const ipfs = new orbitdbApp.import.ipfs(ipfsOptions);
 		ipfs.on('error', (e) => console.error(e))
 		ipfs.on('ready', async () => {
@@ -107,12 +94,10 @@ var App = {
 			const CRE8_TIME = await orbitdb.docs('CRE8.TIME');
 			//sails.db.CRE8_TIME = CRE8_TIME;
 		});
-
 		//GET DATABASE..
 		//MODE TO DYNAMIC RENDERING OF CODE FROM DATABASE / /
 		//IE APPS 	
 		//REIMAGINE VALUEMAP APP 
-
 	},
 
 	tokens:{

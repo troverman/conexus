@@ -55,7 +55,7 @@ var App = {
         var avatarUrl = 'https://ui-avatars.com/api/?size=256&name='+model.username+'&color=fff&background='+colorArray[colorInt];
         model.avatarUrl = avatarUrl;
         var url = "https://api.unsplash.com/photos/random?page=1&client_id=b996e9314d68deae5fe37098f096cd6b3b035f5c63989805aa23d4bd8c7358a2&secret=2ddbfdd90eaf2bcfc6f3cec5ec58c677b35cb470dc63d39e0e0372755b59c434%27";
-        App.import.request(url, function (error, response, body) {
+        App.import.request(url, async function (error, response, body) {
             var body = JSON.parse(body);
             if (body.urls){model.coverUrl = body.urls.small;}
             //TODO           
@@ -82,32 +82,28 @@ var App = {
 			if (req.query.id){
 				if (App.import.mongodb.ObjectID.isValid(req.query.id)){query.$or.push({"_id":{$eq:App.import.mongodb.ObjectID(req.query.id)}});}
 			}
-			User.getDatastore().manager.collection('user').find(query).limit(limit).skip(skip).sort({'createdAt':-1}).toArray(function (err, models) {
+			User.getDatastore().manager.collection('user').find(query).limit(limit).skip(skip).sort({'createdAt':-1}).toArray(async function (err, models) {
 				if (models.length > 0){
 					var userModel = models[0];
 					userModel.id = userModel._id.toString();
 					User.subscribe(req, [models[0].id]);
-					associationApp.get(models[0]).then(function(models){
-						deferred.resolve(models);
-					});
+					var models = await associationApp.get(models[0]);
+					return models;
+					
 				}
-				else{return deferred.resolve({})}
+				else{return {};}
 			});
 		}
 		else if (req.query.query){
-			return User.find()
-			.where({
-				or: [{firstName: {contains: req.query.query}}, {lastName: {contains: req.query.query}}, {username: {contains: req.query.query}},]
-			});
+			return User.find().where({or: [{firstName: {contains: req.query.query}}, {lastName: {contains: req.query.query}}, {username: {contains: req.query.query}},]});
 		}
 		else{
 			var models = await User.find({}).limit(limit).skip(skip).sort(sort);
 			var numRecords = await User.count();
 			User.subscribe(req, models);
 			var returnObj = {data:models, info:{count:numRecords}};
-			deferred.resolve(returnObj)
+			return returnObj;
 		}
-		return deferred.promise;
 	},
 	update: async function(req){
 		//TODO: SECURITY
@@ -124,7 +120,7 @@ var App = {
 			apps: req.param('apps')
 		};
 		if (req.param('description')){model.description = req.param('description')}
-		console.log('UPDATE USER', id, model);
+		console.log('memberApp.update', 'CALL:', utilityServiceApp.guid(), model);
 		var model = await User.update({id: id}, model);
 		User.publish([model.id], {verb: 'update', data: model});
 		return model;

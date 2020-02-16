@@ -67,18 +67,22 @@ var App = {
 	language: 'Javascript',
 	runtime:'V8',
 	get: async function(req){
+
+		//TODO:
 		//model.input, model.output, query . . 
 		//provide context hash
 		//truth variance 
+
 		var limit = parseInt(req.query.limit) || 1;
 		var skip = parseInt(req.query.skip) || 0;
 		var sort = req.query.sort || 'createdAt DESC';	
-		//var event = await eventApp.find(req.query);
-		//res.json(event);
-		console.log('GET EVENT', req.query)	
+
+		console.log('eventApp.get', 'CALL:', utilityServiceApp.guid(), req.query);
+
 		//TODO: AUDIT 
 		if(req.query.id){return Event.find({id:req.query.id}).limit(limit).skip(skip).sort(sort);}
 		else{return Event.find().limit(limit).skip(skip).sort(sort);}
+
 	},
 	create: async function(model){
 		//model.input, model.output
@@ -99,7 +103,7 @@ var App = {
 		//LEGACY BOOTSTRAPPING
 			//TRIE ATTEMPT ~ REDUCE TO BINARY THX ~
 		var newEvent = await Event.create(eventModel)
-		console.log('CREATE EVENT', model);
+		console.log('eventApp.create', 'CALL:', utilityServiceApp.guid(), model);
 		//REDUCE / SOCKET BROADCAST 
 		Event.publish([newEvent.id], {verb: 'create', data: newEvent});
 	},

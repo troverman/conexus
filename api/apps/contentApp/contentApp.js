@@ -4,9 +4,6 @@ var App = {
 		Q: require('q'),
 		crypto: require('crypto')
 	},
-	//IMPORT META MODEL
-	//EACH FUNCTION MODEL... A PROTOCOL? 
-			//IE MODEL IS MACHIENE ATTENTION ETC 
 	attributes: {
         model: {type: 'string', defaultsTo: 'CONTENT'},
         title: {type: 'string', allowNull: true},
@@ -36,7 +33,7 @@ var App = {
 		var skip = parseInt(req.query.skip) || 0;
 		var sort = req.query.sort || 'createdAt DESC';
 		var id = req.query.id;
-		console.log('GET CONTENT', req.query);
+		console.log('contentApp.get', 'CALL:', utilityServiceApp.guid(), req.query);
 		if(req.query.id){
 			var models = await Content.find({id:id}).limit(limit).skip(skip).sort(sort).populate('user')
     		//ATTENTION???
@@ -73,7 +70,7 @@ var App = {
 			for (x in models){promises.push(associationApp.get(models[x]));}
 			var populatedModels = await Q.all(promises);
 			for (x in models){models[x] = populatedModels[x];}
-			deferred.resolve(models);
+			return models;
 		}
 		else if(req.query.user){
 			var user = req.query.user;
@@ -83,7 +80,7 @@ var App = {
 			for (x in models){promises.push(associationApp.get(models[x]));}
 			var populatedModels = await Q.all(promises);
 			for (x in models){models[x] = populatedModels[x];}
-			deferred.resolve(models);
+			return models;
 		}
 		else{
 			var models = await Content.find({}).limit(limit).skip(skip).sort(sort).populate('user');
@@ -94,9 +91,8 @@ var App = {
 			var populatedModels = await Q.all(promises);
 			for (x in models){models[x] = populatedModels[x];}
 			var returnObj = {data:models, info:{count:numRecords}};
-			deferred.resolve(returnObj)
+			return returnObj;
 		}
-		return deferred.promise;
 	},
 	create: async function (req, res) {
 		//language of connections to recurse to bits 
@@ -124,15 +120,10 @@ var App = {
 			content: req.param('content'),
 			user: userModels[0].id,
 			creator: userModels[0].id,		
-			data:{
-				apps:{
-					reactions:{plus:0, minus:0},
-					attention:{general:0},
-				}
-			}
+			data:{apps:{reactions:{plus:0, minus:0}, attention:{general:0}}}
 		};
 		model.hash = App.import.crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
-		console.log('CREATE CONTENT', model);
+		console.log('contentApp.create', 'CALL:', utilityServiceApp.guid(), model);
 		var newContent = await Content.create(model);
 		newContent.associatedModels = req.param('associatedModels');
 		Content.subscribe(req, [newContent.id]);
@@ -214,18 +205,11 @@ var App = {
 				    $stateProvider.state( 'content', {
 				        url: '/content/:id',
 				        views: {
-				            "main": {
-				                controller: 'ContentController',
-				                templateUrl: 'content/index.tpl.html'
-				            }
+				            "main": {controller: 'ContentController',templateUrl: 'content/index.tpl.html'}
 				        },
 				        resolve: {
-				            content: ['$stateParams', 'ContentModel', function($stateParams, ContentModel){
-				                return ContentModel.get({id:$stateParams.id, limit:1, skip:0, sort:'createdAt DESC'});
-				            }],
-				            contentList:['content', 'ContentModel', function(content, ContentModel) {
-				                return ContentModel.get({contentModel:content.id, limit:100, skip:0, sort:'createdAt DESC'});
-				            }],
+				            content: ['$stateParams', 'ContentModel', function($stateParams, ContentModel){return ContentModel.get({id:$stateParams.id, limit:1, skip:0, sort:'createdAt DESC'});}],
+				            contentList: ['content', 'ContentModel', function(content, ContentModel) {return ContentModel.get({contentModel:content.id, limit:100, skip:0, sort:'createdAt DESC'});}],
 				        }
 				    });
 				}])

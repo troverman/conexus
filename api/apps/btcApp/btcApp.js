@@ -1,6 +1,5 @@
 var App = {
 	connections:[
-
 		//DEFINE SELF CONNECTION
 		{
 			type:'connection', 
@@ -118,7 +117,6 @@ var App = {
 				}]
 			}],
 		},
-
 		//DEFINE CORE CONNECTIONS .. 
 		//ASSOCIATION ETC
 	],
@@ -127,7 +125,7 @@ var App = {
 		//BTC_TRANSACTION,
 	],
 	import:{
-		bcoin: require('bcoin'),
+		//bcoin: require('bcoin'),
 		bitcoin: require('bitcoinjs-lib'),
 		Insight: require('bitcore-explorers').Insight,
 		//app:require('app')
@@ -137,8 +135,7 @@ var App = {
 	//DEFINED IN 'APP' App
 	//GENERALLY STANDARD.. 
 	app:{
-		//LESS OBJ MORE TYPING OF MODEL? 
-		//
+		//LESS OBJ MORE TYPING OF MODEL
 		get:{
 			connection:function(model){},
 			association:function(model){},
@@ -168,7 +165,7 @@ var App = {
 		//WITH APP 
 		//WITH ANOHTER MARKET
 		//CONNECTION AS PARAMETER.. 
-		association:function(model){
+		association:async function(model){
 
 			var newWallet = btcApp.create.wallet(model);
 
@@ -179,7 +176,7 @@ var App = {
 					//{type:'APP ;)', id:},
 				]
 			};
-			Association.create(newAssociationModel);
+			await Association.create(newAssociationModel);
 
 			var newAssociationModel = {
 				associatedModels:[
@@ -193,19 +190,18 @@ var App = {
 					networkId:'mainnet'
 				}
 			};
-			Association.create(newAssociationModel);
-
+			await Association.create(newAssociationModel);
 
 			//PASSPORTS CAN CONTROL ACCOUNT!
 			//CONTEXT OF CONTROL.. 
 			//PASSPORT ASSOCIATION
 			var newPassport = {
-				type:'ETH',
+				type:'BTC',
 				associatedModels:[
 					{type:'MEMBER', id:model.id},
 				]
 			};
-			Passport.create(newPassport);
+			await Passport.create(newPassport);
 
 		},
 	},
@@ -270,18 +266,18 @@ var App = {
 	//YOU CAN MINE BTC IN BROWER.. IF WANT
 	peer:{
 		init: async function(){
-			var bcoin = App.import.bcoin;
-			var node = new bcoin.SPVNode({
+			//var bcoin = App.import.bcoin;
+			//var node = new bcoin.SPVNode({
 			//var node = new bcoin.fullnode({
-				network: 'testnet',
-				db: 'memory'
-			});
+			//	network: 'testnet',
+			//	db: 'memory'
+			//});
 
-			await node.open();
-			await node.connect();
-			node.on('connect', function(entry, block) {console.log('%s (%d) added to chain.', entry.rhash(), entry.height);});
-			node.on('tx', function(tx) {console.log('%s added to mempool.', tx.txid());});
-			node.startSync();
+			//await node.open();
+			//await node.connect();
+			//node.on('connect', function(entry, block) {console.log('%s (%d) added to chain.', entry.rhash(), entry.height);});
+			//node.on('tx', function(tx) {console.log('%s added to mempool.', tx.txid());});
+			//node.startSync();
 		}
 	},
 	tokens:{
