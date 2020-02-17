@@ -20,6 +20,9 @@ var App = {
 	},
 	init: async function(){
 
+		//CREATE MY PEER SECRET SET NEVER SHARED . . .
+		//secretsApp.init();
+
 		//machieneAttention.init();
 
 		//GLOBALS!!
