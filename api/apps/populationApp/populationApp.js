@@ -1,7 +1,14 @@
 //CRE8.POPULATION.ALPHA
+
+//CREATE PROJECT | TWITTER CONNECTION
+//PROPULATE TASKS
+
+//CAN DATA FROM PEER OR GENERATE OWN TRUTH TREE
+
 var App = {
 	import: { 
-		Q: require('q'),		
+		Q: require('q'),
+		async: require('async')		
 	},
 	populateMerch: async function(){
 
@@ -104,6 +111,7 @@ var App = {
 
 	populateData: async function(){
 
+		//TODO: GOOGLE PLACES
 		//DATA POPULATION
 		//COFFEE DB
 		//VENUE DB
@@ -126,12 +134,14 @@ var App = {
 		//INDIA - utilService.getGeoNamesByParent(1269750, '', 'voetr3', -1);
 		//CHINA - utilService.getGeoNamesByParent(1814991, '', 'voetr4', -1);
 		//UK - utilService.getGeoNamesByParent(2635167, '', 'voetr5', -1);
+
 		//35.9606, -83.9207 // knox
 		//35.996948, -78.899017 // durham
 		//40.730610, -73.935242 // nyc; bushwick
 		//37.773972, -122.431297 // BAY AREA
 		//37.5483, -121.9886 //FREEMONT
 		//35.7578° N, 81.8888° //LAKE JAMES STATE PARK
+
 		var geoModel = {
 			username:'troverman',
 			lat:'35.7578',
@@ -141,26 +151,127 @@ var App = {
 			radius:'35',
 			parentId:'4482348'
 		};
-		//geoNamesApp.getGeoNames(geoModel);
-		//geoNamesApp.getNamesWorld();
-
 		//TODO: GOOGLE MAPS & PLACES DB
-		//googleApp.getLocations(model);
+		//var dataModels = await googleApp.getLocations(model);
+		//var dataModels = await geoNamesApp.getNamesWorld();
+		var dataModels = await geoNamesApp.getGeoNames(geoModel);
+		App.import.async.eachSeries(dataModels, async function (data, next){
+			if (data.name.includes('historical')){process.nextTick(next);}
+			else{
+				var projectModel = {
+					title:data.name,
+					urlTitle:data.name.replace(/\s/g, '-').toLowerCase().replace('#','').replace('/',''),
+					description:data.toponymName,
+					location:{address:'', lat:parseFloat(data.lat), lng:parseFloat(data.lng), coordinates:[parseFloat(data.lng), parseFloat(data.lat)]},
+					creator:'CRE8',
+				};
+
+				//WRAP THIS CREATION IN TYPE VALIDATION PROPS 
+
+				/*
+				var associationModel = {
+					//or connection
+					type:'projectCreator',
+					'projectCreator':{
+						associations:{
+							{type:'MEMBER', 'MEMBER':{hash:1}},
+							{type:'PROJECT', 'PROJECT':{hash:1}},
+						},
+						//validation:
+						//reduction
+					}
+				};*/
+
+				var associationModel = {
+					//or connection
+					type:'projectSelf',
+					'projectSelf':{
+						'projectSelf':{
+							//TODO: GENERATE
+							context: {'park':100}
+							//tags:'park,community,nc,northcarolina,outdoor,fun,'+data.name,
+						},
+						associations:[
+							{type:'PROJECT', 'PROJECT':{hash:1}},
+							{type:'PROJECT', 'PROJECT':{hash:1}},
+						]
+					}
+				};
+
+				var associationModel = {
+					//or connection
+					type:'projectProject',
+					'projectProject':{
+						'projectProject':{
+							//TODO: GENERATE
+							context: {'general':100}
+						},
+						associations:[
+							{type:'PROJECT', 'PROJECT':{hash:1}},
+							{type:'PROJECT', 'PROJECT':{hash:1}},
+						]
+					}
+				};
+
+				//console.log(projectModel)
+				//CHRUCH 5cbcd778b8a6cb15001da060
+				//PARKS 5cb6387e2da4371500e46bf2
+				//SCHOOL 5cbcdb00b8a6cb15001da063
+				//LIBRARY 5cc353cf5b2c881500738616
+
+				var selectedProjectModel = await Project.find({urlTitle:projectModel.urlTitle});
+				if (selectedProjectModel.length == 0){
+					var newProjectModel = await Project.create(projectModel);
+					console.log('PROJECT CREATED!');
+					var taskModel = await Task.find({id:'5cc359b75b2c881500738619'});
+					if (taskModel[0].associatedModels.map(function(obj){return obj.address}).indexOf(newProjectModel.id) == -1){
+						taskModel[0].associatedModels.push({type:'PROJECT', address:newProjectModel.id});
+						console.log(taskModel[0].associatedModels);
+						await Task.update({id:'5cc359b75b2c881500738619'},{associatedModels:taskModel[0].associatedModels});
+						process.nextTick(next);
+					}
+					else{process.nextTick(next);}
+				}
+				else{
+
+					//MULTIASSOCIATION TEST
+					//Project.update({id:selectedProjectModel[0].id},{tags:'newyork,church,community,nyc,community,worship,faith'}).then(function(){
+					//	console.log('updated project');
+					//	process.nextTick(next);
+					//});
+
+					var taskModel = await Task.find({id:'5cc359b75b2c881500738619'});
+					if (taskModel[0].associatedModels.map(function(obj){return obj.address}).indexOf(selectedProjectModel[0].id) == -1){
+						taskModel[0].associatedModels.push({type:'PROJECT', address:selectedProjectModel[0].id});
+						console.log(taskModel[0].associatedModels);
+						await Task.update({id:'5cc359b75b2c881500738619'},{associatedModels:taskModel[0].associatedModels});
+						process.nextTick(next);
+					}
+					else{process.nextTick(next);}
+					
+					//TASK FIND
+						//IMPLICIT VALIDATION
+						//MULTIASSOCIATION
+
+					//TASK CREATE
+						//CHILL AT X PARK
+						//CLEAN UP X PARK
+						//IMPLICIT VALIDATION
+						//MULTIASSOCIATION
+				}
+			}
+		});
 	},
 
 	populateCombinatorialMarkets: async function(){
 
-
 		//CONTAINS THE RELATIONSHIPS ETC --> THINK 
 		const engine = {
 			fuilfil: function(model){
-
 			},
 		}
 
-
 		//iterate neighbors from a-> to find conenctions similarities 
-
 
 		//WORKSHOP
 		//CONNECT FROM VALUE MAP FORMAT
@@ -172,8 +283,8 @@ var App = {
 		//MARKET CONNECTIONS NEED TO HAVE THE COMPUTED LOGIC
 		//COMPOSE ORDERS ... BEST AS MORE LINKED
 
-
 		//MACHING ENGINE 
+		//THE DYNAMIC DATA : )
 		var associations = [
 			{
 				associatedModels:[
@@ -373,10 +484,7 @@ var App = {
 		};
 
 		console.log(subset(tokens.map(obj=>obj.string), 4) );
-
 	},
-
-
 
 	//populateProjects
 	//populateItems

@@ -7,7 +7,7 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "        <svg class=\"svg-defs\" viewBox=\"0 0 1920 1080\" viewPort=\"0 0 1920 1080\" preserveAspectRatio=\"xMidYMid slice\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
     "            <symbol id=\"intro-desktop-text\">\n" +
     "                <text style=\"font-size:108px;font-family:Helvetica Neue,Helvetica,Arial,sans-serif;font-weight:bold\" text-anchor=\"middle\" x=\"960\" y=\"488\" dy=\".35em\" class=\"medium-text\">CRE8.XYZ</text> \n" +
-    "                <text style=\"font-size:28px;font-weight:bold;font-family:Titillium Web,Helvetica,Arial,sans-serif\" text-anchor=\"middle\" x=\"960\" y=\"570\" dy=\".35em\" class=\"medium-text\">CREATING VALUE\n" +
+    "                <text style=\"font-size:28px;font-weight:bold;font-family:Titillium Web,Helvetica,Arial,sans-serif\" text-anchor=\"middle\" x=\"960\" y=\"570\" dy=\".35em\" class=\"medium-text\">WE CREATE VALUE\n" +
     "            </symbol>  \n" +
     "            <div class=\"intro-shade\"></div>  \n" +
     "        </svg> \n" +
@@ -162,27 +162,19 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "		<div class=\"spacing-50\"></div>\n" +
     "		<div class=\"row\">\n" +
     "			<div class=\"col-md-6\">\n" +
-    "				<div style=\"background:url('https://source.unsplash.com/1600x900/?collaborative,goverment,governance,congress,senate,coordination')\" class=\"imageContainerSmall\">\n" +
-    "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                            <div style=\"padding:15px\">\n" +
-    "                                <h2 class=\"imageContainerSmallDivH1\" style=\"font-size:30px\">WE CRE8</h2>\n" +
-    "                				<h4 style=\"color:#a8a8a8;font-style:italic;\">A mechanism of value from consensus upon the relation of shared value</h4>\n" +
-    "                            </div>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "				<div class=\"spacing-5\"></div>\n" +
-    "				<h5 style=\"font-family:'Titillium Web',sans-serif;font-weight:600\">Interoperable Governance Mechanisms</h5>\n" +
     "\n" +
+    "				<div class=\"spacing-5\"></div>\n" +
+    "				<h3 style=\"font-family:'Titillium Web',sans-serif;font-weight:600\">Interoperable Governance Mechanisms</h3>\n" +
     "				<p>Projects, Governance Rules & Charters, Reputation, Logic Mappings, Ownership, Application Interoperability</p>\n" +
     "				<p>Attention Tokenization, Transferrable Content Rights</p>\n" +
+    "				<div class=\"spacing-5\"></div>\n" +
     "\n" +
-    "				<h5 style=\"font-family:'Titillium Web',sans-serif;font-weight:600\">Group Coordination</h5>\n" +
-    "				<h5 style=\"font-family:'Titillium Web',sans-serif;font-weight:600\">Human Validated Proof of Work</h5>\n" +
+    "				<h3 style=\"font-family:'Titillium Web',sans-serif;font-weight:600\">Group Coordination</h3>\n" +
+    "				<h4 style=\"font-family:'Titillium Web',sans-serif;font-weight:600\">Human Validated Proof of Work</h4>\n" +
     "				<p>Multi Dimensional Voting and a Logic mapping in a connection defined by a charter.</p>\n" +
     "				<p>Validations, Associations, and Connections</p>\n" +
     "				<h5 style=\"font-family:'Titillium Web',sans-serif;font-weight:600\">Token Market Traversal</h5>\n" +
+    "				\n" +
     "			</div>\n" +
     "            <div class=\"col-md-6 mobileHide\" style=\"text-align:center\">\n" +
     "                <img style=\"height:200px;\" src=\"images/latticespin.gif\">\n" +
@@ -190,56 +182,52 @@ angular.module("about/index.tpl.html", []).run(["$templateCache", function($temp
     "			</div>\n" +
     "		</div>\n" +
     "		<div class=\"spacing-50\"></div>\n" +
-    "		<div class=\"row\">\n" +
-    "			<div class=\"col-md-6\">\n" +
-    "				<div style=\"background:url('https://source.unsplash.com/1600x900/?collaborative,goverment,governance,congress,peers,computer,code,iphone,android,robot,cell,natural')\" class=\"imageContainerSmall\">\n" +
-    "                    <div style=\"background:rgba(0,0,0,0.75)\" class=\"imageContainerSmallDiv\">  \n" +
-    "                        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
-    "                            <div style=\"padding:15px\">\n" +
-    "                                <h2 class=\"imageContainerSmallDivH1\" style=\"font-size:30px\">The Peer Network</h2>\n" +
-    "                                <h4 style=\"font-style:italic;color:gray;margin:0px\">Our Decentralized Infrastructure</h4>\n" +
-    "                            </div>\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "				<div class=\"spacing-5\"></div>\n" +
-    "				<h5 style=\"color:#a8a8a8;font-style:italic;\"><a href=\"/transparency\" ui-sref=\"transparency\"><b>Transparency in action</b></a></h5>\n" +
-    "				<p>Custom Peer Compilation</p>\n" +
-    "				<p>Context Specific Machine Attention</p>\n" +
-    "				<p>Application Ecosystem</p>\n" +
-    "				<style type=\"text/css\">.angular-google-map-container{height:350px;}</style>\n" +
-    "                <ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\">\n" +
-    "                    <ui-gmap-marker ng-repeat=\"marker in markers\" coords=\"marker.coords\" options=\"marker.options\" idkey=\"marker.id\">\n" +
-    "                        <ui-gmap-window options=\"windowOptions\" closeClick=\"closeClick()\">\n" +
-    "                            <div>\n" +
-    "                                <div style=\"font-size: 15px;\"><a href=\"#\">{{marker.content}}</a></div>\n" +
-    "                            </div>\n" +
-    "                        </ui-gmap-window>\n" +
-    "                    </ui-gmap-marker>\n" +
-    "                </ui-gmap-google-map>\n" +
-    "				\n" +
-    "			</div>\n" +
-    "		</div>\n" +
-    "		<div class=\"spacing-50\"></div>\n" +
     "	</div>\n" +
     "</div>\n" +
-    "\n" +
     "<div style=\"color:white;background-color:black;\">\n" +
-    "	<div style=\"background:url('https://source.unsplash.com/1600x900/?code,goverment,governance,information,data,database')\" class=\"imageContainerSmall\">\n" +
+    "\n" +
+    "	<div style=\"background:url('https://source.unsplash.com/1600x900/?https://source.unsplash.com/1600x900/?collaborative,goverment,governance,congress,peers,computer,code,iphone,android,robot,cell,natural')\" class=\"imageContainerSmall\">\n" +
     "	    <div style=\"background:rgba(0,0,0,0.75);height:auto\" class=\"imageContainerSmallDiv\">  \n" +
     "	        <div style=\"margin-top: auto;margin-bottom: auto;\">\n" +
     "			    <div class=\"container\">\n" +
     "					<div class=\"spacing-50\"></div>\n" +
     "					<div class=\"row\">\n" +
-    "						<div class=\"col-md-12\">\n" +
-    "							<h2>Information is Income</h2>\n" +
-    "							<h4 style=\"font-style:italic;color:gray;margin:0px\">Turn shared information into value</h4>\n" +
+    "						<div class=\"col-md-8\">\n" +
+    "							<h2 class=\"imageContainerSmallDivH1\" style=\"font-size:30px\">The Peer Network</h2>\n" +
+    "                            <h4 style=\"font-style:italic;color:gray;margin:0px\">Our Decentralized Infrastructure</h4>\n" +
+    "						</div>\n" +
+    "						<div class=\"col-md-4\">\n" +
     "						</div>\n" +
     "					</div>\n" +
     "					<div class=\"spacing-50\"></div>\n" +
     "				</div>\n" +
     "	        </div>\n" +
     "	    </div>\n" +
+    "	</div>\n" +
+    "</div>\n" +
+    "\n" +
+    "<div style=\"\">\n" +
+    "    <div class=\"container\">\n" +
+    "		<div class=\"spacing-50\"></div>\n" +
+    "		<div class=\"row\">\n" +
+    "			<div class=\"col-md-6\">\n" +
+    "				<div class=\"spacing-5\"></div>\n" +
+    "				<h5 style=\"color:#a8a8a8;font-style:italic;\"><a href=\"/transparency\" ui-sref=\"transparency\"><b>Transparency in action</b></a></h5>\n" +
+    "				<p>Custom Peer Compilation</p>\n" +
+    "				<p>Context Specific Machine Attention</p>\n" +
+    "			</div>\n" +
+    "			<div class=\"col-md-6\">\n" +
+    "				<style type=\"text/css\">.angular-google-map-container{height:350px;}</style>\n" +
+    "                <ui-gmap-google-map center=\"map.center\" zoom=\"map.zoom\" options=\"options\">\n" +
+    "                    <ui-gmap-marker ng-repeat=\"marker in markers\" coords=\"marker.coords\" options=\"marker.options\" idkey=\"marker.id\">\n" +
+    "                        <ui-gmap-window options=\"windowOptions\" closeClick=\"closeClick()\">\n" +
+    "                            <div><div style=\"font-size: 15px;\"><a href=\"#\">{{marker.content}}</a></div></div>\n" +
+    "                        </ui-gmap-window>\n" +
+    "                    </ui-gmap-marker>\n" +
+    "                </ui-gmap-google-map>	\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "		<div class=\"spacing-50\"></div>\n" +
     "	</div>\n" +
     "</div>\n" +
     "\n" +
@@ -5535,7 +5523,6 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "    </div>\n" +
     "    <div class=\"intro-mobile\"></div>\n" +
     "</div>\n" +
-    "\n" +
     "<div style=\"background-color:white\">\n" +
     "    <div class=\"spacing-50\"></div>\n" +
     "    <div class=\"container\">\n" +
@@ -5549,12 +5536,14 @@ angular.module("home/templates/intro.tpl.html", []).run(["$templateCache", funct
     "                -->\n" +
     "                <!--<h3>WE ARE ALL VALUABLE</h3>-->\n" +
     "\n" +
-    "                <h3 style=\"font-family:'Titillium Web',sans-serif;font-weight:600\">WE ARE VALUABLE</h3>\n" +
+    "                <!--<h3 style=\"font-family:'Titillium Web',sans-serif;font-weight:600\">WE ARE VALUABLE</h3>-->\n" +
+    "                <h3 style=\"font-family:'Titillium Web',sans-serif;font-weight:600\">WE CREATE VALUE</h3>\n" +
     "\n" +
     "                <!--<h3 style=\"font-family:'Titillium Web',sans-serif;font-weight:600\">INFORMATION IS VALUABLE</h3>-->\n" +
     "\n" +
     "                <div class=\"spacing-5\"></div>\n" +
-    "                <p style=\"font-style:italic;margin:0px;color:gray\">Sharing creates value, from imagination and intention to work and organization.</p>\n" +
+    "                <!--<p style=\"font-style:italic;margin:0px;color:gray\">Sharing creates value, from imagination and intention to time and project organization.</p>-->\n" +
+    "                <p style=\"font-style:italic;margin:0px;color:gray\">Sharing creates value, from imagination and intention to time and organization.</p>\n" +
     "                <p style=\"font-style:italic;margin:0px;color:gray\">Sharing reflects abundance. With inclusivity maximalism, you get what you give.</p>\n" +
     "                <p style=\"font-style:italic;margin:0px;color:gray\">Information is valuable. Sharing information creates value & multidimensional income.</p>\n" +
     "                <div class=\"spacing-15\"></div>\n" +

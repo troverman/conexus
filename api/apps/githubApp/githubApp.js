@@ -5,11 +5,12 @@ var App = {
 	import:{},
     models:[
         //GITHUB,
-        //GITHUB_REPO,
+        //GITHUB_ACCOUNT,
         //GITHUB_COMMIT,
-        //GITHUB_ORGANIZATION
+        //GITHUB_ORGANIZATION,
+        //GITHUB_REPO
     ],
-    get:{
+   get:{
         //GET /repos/:owner/:repo/commits
         //GET /repos/:owner/:repo/commits/:ref
         //STATS.. 
@@ -20,13 +21,33 @@ var App = {
         //stars
         //GET /repos/:owner/:repo/stargazers
         //get all files
-            //store sha as token points for total app git intregration  
-    },
+            //store sha as token points for total app git intregration
+
+		commit:function(model){},  
+        repo:function(model){}, 
+        organization:function(model){}, 
+
+	},
 	create:{
         commit:function(model){},  
         repo:function(model){}, 
         organization:function(model){}, 
+        star: function(){},
+        follow: function(){}
 	},
+	passport:{
+
+	},
+	//CRAWL
+	//EARN MACHIENE ATTEION FOR RELAYING MESSAGES -- OTHERS CAN SYNC IN TO SELF VALIDATION BY POPULATNG AS WELL --> EXTERNAL TRUTH SOURCE 
+	populate:{
+		all:function(model){},
+		commits:function(model){},  
+        repos:function(model){}, 
+        organizations:function(model){},
+        members:function(model){},
+	},
+	//actionSet
     tokens:{
         model:{
             github:{

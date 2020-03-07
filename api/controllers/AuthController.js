@@ -11,9 +11,7 @@ module.exports = {
         req.logout();
         res.redirect('/');
     },
-
     provider: function (req, res) {passportApp.endpoint(req, res);},
-
     callback: function (req, res) {
         passportApp.callback(req, res, function (err, user) {
             if(user){if (user._id){user.id = user._id;}}
@@ -70,5 +68,5 @@ module.exports = {
             });
         });
     }
-
+    
 };

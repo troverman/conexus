@@ -20,7 +20,7 @@ var App = {
         creator: {model: 'user'},
     },
 	get:function(req){
-		return Peer.find(req);
+		return Peer.find({});
 	},
 	create:async function(req){
 		var model = {

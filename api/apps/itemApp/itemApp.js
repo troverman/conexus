@@ -116,7 +116,8 @@ var App = {
 			var query = {};
 			//NO
 			if (App.connections.apps.mongodb().ObjectID.isValid(id)){query = { "id": id }}
-			else{query = { dataHash: id}}
+			//else{query = { dataHash: id}} //MAP LEGACY TOKENS TO HASH :)
+			else{query = { hash: id}}
 			var models = await connections.apps.Item().find(query).limit(limit).skip(skip).sort(sort);
 			if (models.length > 0){
 				var itemModel = models[0];
@@ -194,11 +195,7 @@ var App = {
 		//CHANGE TO VERBS?
 		//GET FROM CONNECTION? --> IT"S IN DATA MODEL
 		get:function(model){
-			var protocolTokens = [
-				'CRE8', 
-				'CRE8+ITEM',
-				'CRE8+ITEM+'+model.id,
-			];
+			var protocolTokens = ['CRE8', 'CRE8+ITEM', 'CRE8+ITEM+'+model.id];
 			//FOR X IN 
 			var hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
 			var prefix = 'CRE8+ITEM';

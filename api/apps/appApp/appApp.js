@@ -38,6 +38,11 @@ var App = {
 		}
 	],
 
+	find:function(model){
+		console.log(sails.models.app._adapter)
+		return sails.models.app;
+	},
+
 	//THIS FILE
 	//THE PEER IS SELF
 	//self.connections.connections;
@@ -72,15 +77,12 @@ var App = {
 			App.subscribe(req, [apps[0].id]);
 			//TODO: MANY-MANY RELATIONSHIP; SEE NOTIFICATIONS . . . 
 			var models = await associationApp.get(apps[0]);
-			console.log(models);
-			deferred.resolve(models);
 		}
 		else{
-			var apps = await App.find({}).limit(100).skip(skip).sort(sort);
+			var models = await App.find({}).limit(100).skip(skip).sort(sort);
 			App.subscribe(req, apps.map(function(obj){return obj.id}));
-			deferred.resolve(apps);
 		}
-		return deferred.promise;
+		return models;
 	},
 	create: async function(req){
 		
