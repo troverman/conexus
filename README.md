@@ -108,3 +108,88 @@ var query = [{
     chain:'logic [\'AND\',\'OR\']'
 }]
 ```
+
+#### Meta Model and function compostion in General Application Design
+> Function Meta Model
+```javascript
+var metaModel = {
+    input:{},
+    output:{
+        [outputType]:{}
+    }
+}
+```
+
+> Function Composition
+> The Functional Graph Combinatorial
+```javascript
+var combinatorialFunctionSet = [
+    {
+        type:'FIRST+FUNCTION+NAME+SPACE',
+        parameters:{
+            input:{someInputParameter:'Function Parameter String'},
+            output:{someDynamicObjectOutput:true}
+        }
+    },
+    {
+        type:'SENOND+FUNCTION+NAME+SPACE',
+        parameters:{
+            input:{someStaticStringInput:'icomposeyou', someDynamicObjectInput:true},
+            output:{forwardProgress:true},
+        }
+    },
+    {
+        type: function dynamicInlineTyping(model){
+            if typeof(model.input.type == 'function'){model.output = eval(model.type);}
+            else{
+                //PROCESS BY .. SOME APP
+            }
+            return model.output;
+        },
+        parameters:{
+            input:{
+                type: function creativeInlineChainingForYourPotiental(model){
+                    const metaData = {
+                        title: 'functionTitle',
+                        description: 'This is a description of the inline dynmaic type // conneciton',
+                        context:{
+                            keys: 'and values,',
+                            'strings_map_to_integers_as_context_weight':100,
+                        }
+                    }
+                    if (model.input.forwardProgress){
+                        model.nestedCoCreation = 'ready to create?'
+                    }
+                    return 'breathe :: this is for stamina and life :: drink water, it is you :: ' + nestedCoCreation;
+                },
+                forwardProgress: true,
+                nestedCoCreation: 'dynamicMovement'
+            },
+            output:true,
+        }
+    }
+];
+
+//obj of n keys ? 
+var compostionModel = {
+    input: combinatorialFunctionSet,
+    output: combinatorialFunctionSet[combinatorialFunctionSet.lenth - 1].parameters.output //last output type in composition::
+};
+
+function sequentialCompositionProcessor(model){
+    var initializedComposition, someOutput = null;
+    for (x in model.input){
+        //language execution envir is abstact --> || FOR DYNAMIC NEED TO PROPERY WRAP META VARIABLES AS IN LANG :: REDUCE TO LANGE INTEROP IN THE STRING EVENTUALLY IE PEER + PYTHON + .. + FXN TYPE
+
+        //UNSING APPLICATION FOR THIS PROCESS :: ACTIVITY APP IN PROD HAS LANG IMPORTS
+        if(x >= 1){
+            if (!initializedComposition){someOutput = activityApp['PROCESS'](model.input[x-1]);}
+            if (initializedComposition){someOutput = activityApp['PROCESS'](initializedComposition);}
+            initializedComposition = activityApp['PROCESS'](someOutput);
+        }
+    }
+    return model.output;
+};
+
+sequentialCompositionProcessor(compostionModel);
+```
