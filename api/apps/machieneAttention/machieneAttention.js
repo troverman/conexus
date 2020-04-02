@@ -2,9 +2,7 @@ var App = {
 	//LETS NOT REPEAT OURSELVES TOO MUCH
 	//MACHIENE ATTENTION AND BUDGETING 
 	//MANIFEST THOUGH ACTIVTY PROCESSING IE INSTA, TWIT, && ART AUTOMATION
-	import:{
-		StackTrace: require('stack-trace'),
-	},
+	import:{StackTrace: require('stack-trace')},
 	//meta-logger
 	//FXN WRAPPER / LOGGER 
 	init: function(){
@@ -30,7 +28,6 @@ var App = {
 			//NETWORKED CALLS CAN AVE BUDGETING .. 
 				//ADDS APPROPIATE CONTEXT CHAIN | GRAPH | NETWORK TO FXN CALL
 
-		//NEVER TOO MUCH 
 		//OKAY WE WILL ITERATE .. 
 		let runTimeFunctionMapping = {};
 		var oldCall = Function.prototype.call;

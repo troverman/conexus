@@ -22,7 +22,7 @@ var App = {
 	get:function(req){
 		return Peer.find({});
 	},
-	create:async function(req){
+	create: async function(req){
 		var model = {
 			info: req.param('info'),
 			information: req.param('information'),
@@ -34,6 +34,10 @@ var App = {
 		};
 		return Peer.create(model);
 	},
-	build:function(){},
+	build:function(){
+
+		//??LOL??
+
+	},
 };
 module.exports = App;

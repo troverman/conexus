@@ -15,7 +15,7 @@ module.exports = {
     callback: function (req, res) {
         passportApp.callback(req, res, function (err, user) {
             if(user){if (user._id){user.id = user._id;}}
-            req.login(user, function (err) {
+            req.login(user, async function (err) {
                 if (err) {res.redirect('/login');}
                 else {
 
@@ -23,9 +23,8 @@ module.exports = {
                     user.loggedIn = true;
                     req.session.User = user;
 
-                    User.update({id: user.id}, {loggedIn: true}).then(function(userModel) {
-                        User.publish([userModel[0].id], {verb: 'updated', data: userModel[0]});
-                    });
+                    var userModel = await User.update({id: user.id}, {loggedIn: true});
+                    User.publish([userModel[0].id], {verb: 'updated', data: userModel[0]});
 
                     //if user is mining
                     //Peer.find({});
@@ -53,7 +52,6 @@ module.exports = {
                     //HMM -- BAD
                     //passportApp.authenticate(provider, options)(req, res, req.next).then(function(){
                         //fitbitApp.getData(user);
-                        //mmm
                         //master interval 
                         //setInterval(fitbitApp.getData.bind(null, user), 8640000);
                     //});
@@ -63,10 +61,8 @@ module.exports = {
                     //eventApp.create(session);
 
                     res.json(user);
-
                 }
             });
         });
-    }
-    
+    }  
 };

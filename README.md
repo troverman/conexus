@@ -109,7 +109,7 @@ var query = [{
 }]
 ```
 
-#### Meta Model and function compostion in General Application Design
+#### Meta Model and Function Compostion in General Application Design
 > Function Meta Model
 ```javascript
 var metaModel = {
@@ -121,6 +121,7 @@ var metaModel = {
 ```
 
 > Function Composition
+
 > The Functional Graph Combinatorial
 ```javascript
 var combinatorialFunctionSet = [
@@ -143,6 +144,7 @@ var combinatorialFunctionSet = [
             if typeof(model.input.type == 'function'){model.output = eval(model.type);}
             else{
                 //PROCESS BY .. SOME APP
+                //activityApp
             }
             return model.output;
         },
@@ -153,10 +155,10 @@ var combinatorialFunctionSet = [
                         title: 'functionTitle',
                         description: 'This is a description of the inline dynmaic type // conneciton',
                         context:{
-                            keys: 'and values,',
+                            keys: 'and values',
                             'strings_map_to_integers_as_context_weight':100,
                         }
-                    }
+                    };
                     if (model.input.forwardProgress){
                         model.nestedCoCreation = 'ready to create?'
                     }
@@ -176,20 +178,20 @@ var compostionModel = {
     output: combinatorialFunctionSet[combinatorialFunctionSet.lenth - 1].parameters.output //last output type in composition::
 };
 
-function sequentialCompositionProcessor(model){
+async function sequentialCompositionProcessor(model){
     var initializedComposition, someOutput = null;
     for (x in model.input){
         //language execution envir is abstact --> || FOR DYNAMIC NEED TO PROPERY WRAP META VARIABLES AS IN LANG :: REDUCE TO LANGE INTEROP IN THE STRING EVENTUALLY IE PEER + PYTHON + .. + FXN TYPE
 
         //UNSING APPLICATION FOR THIS PROCESS :: ACTIVITY APP IN PROD HAS LANG IMPORTS
         if(x >= 1){
-            if (!initializedComposition){someOutput = activityApp['PROCESS'](model.input[x-1]);}
-            if (initializedComposition){someOutput = activityApp['PROCESS'](initializedComposition);}
+            if (!initializedComposition){someOutput = await activityApp['PROCESS'](model.input[x-1]);}
+            if (initializedComposition){someOutput = await activityApp['PROCESS'](initializedComposition);}
             initializedComposition = activityApp['PROCESS'](someOutput);
         }
     }
     return model.output;
 };
 
-sequentialCompositionProcessor(compostionModel);
+var myCombinatorialValue = sequentialCompositionProcessor(compostionModel);
 ```

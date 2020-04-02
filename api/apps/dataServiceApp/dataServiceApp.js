@@ -7,6 +7,7 @@ var App = {
 	import:{
 		Q: require('q')
 	},
+	
 	//associationBuild
 	//buildAssociatedModels
 	//buildAssociationNetwork
@@ -18,12 +19,12 @@ var App = {
 	//traverse
 	//tensorBuild
 	//legacyTraverse
+
 	associationBuild: function(model){
 
 		//NEED TO POULATE TO TEST..
 		//MAP OUT THE RECURSIVE TREE
 
-		//FOR DEVELOPERS
 		//ASSOCIATION IS A REDUCCTION OF SET OF VALIDATION
 		//LEVEL1: VALIDATION, VALIDATION, VALIDATION.
 		//			   |           |           |
