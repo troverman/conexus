@@ -1,4 +1,27 @@
 var App = {
+
+
+
+	//META HERE IS TO GET THE IDEENTIY OF THE AUTHORS :: GIVEM SOME M>ATTETNION DERIVITATIVE WHEN THE CODE IS RUN : ) 
+	//NPM LINK APP LINK IN :: OTHER MODULE (APP) REGISTRY CRAWLER APP :: 
+	'CONNECTION+BITCOINJS-LIB': global['appApp']['GET']({type:'require', string:'bitcoinjs-lib'}),
+	'CONNECTION+BITCORE-EXPLORERS': global['appApp']['GET']({type:'require', string:'bitcore-explorers'}),
+	//AND ASSOCIATION
+
+	//MESTA INFO? 
+	//ASSOCIATION..
+	//'CONNECTION+SELF'
+		//--> 'ASSOOCIATION+MEMBER': {params:'creator', associatedModelHash:1234}
+
+	//TYPING AND DESCRETE.
+	'CONNECTION+SELF+PARAMETER+CREATOR': {type:'string'} ,
+	'CONNECTION+SELF+PARAMETER+DESCRIPTION': {type:'string'},
+	'ASSOCIATION+SELF+PARAMETER+CREATOR':  'Trevor Overman',
+	'ASSOCIATION+SELF+PARAMETER+DESCIPTION':  'BTC APPLICATION FOR INTERP ++ BTC LIQIDITY, PEER, PLUGIN, ETC ',
+
+	//THINK: SHORT HAND FOR THE CONNECTION+SELF AS META MODEL --> DATA ; META .. 
+
+
 	connections:[
 		//DEFINE SELF CONNECTION
 		{
@@ -124,14 +147,7 @@ var App = {
 		//BTC,
 		//BTC_TRANSACTION,
 	],
-	import:{
-		//bcoin: require('bcoin'),
-		bitcoin: require('bitcoinjs-lib'),
-		Insight: require('bitcore-explorers').Insight,
-		//app:require('app')
-		//association:require('association'),
-		//transaction:require('transaction'),
-	},
+
 	//DEFINED IN 'APP' App
 	//GENERALLY STANDARD.. 
 	app:{
@@ -213,7 +229,7 @@ var App = {
 	//LOGIC ENCODING TO STRING SPACE
 	send: async function(model){
 		//TODO: MAKE APPS! . . 
-		const bitcoin = App.import.bitcoin;
+		const bitcoin = App['CONNECTION+BITCOINJS-LIB'];
 		const keyPair = [model.address, model.privateKey];
 		//IF BTC IN WALLET
 		var btcWalletBalance = btcApp.get.balance(model);
@@ -227,7 +243,7 @@ var App = {
 		//3RD PARTY PROVIER.. SHOULD BE IN NODE GROUP. . 
 		//TEMP: COINPAY PROVIDER . . .
 		//TODO: PEEP APP AND MACHIENE ATTENTION >>> . . .
-	 	const Insight = App.import.Insight;
+	 	const Insight = App['CONNECTION+BITCORE-EXPLORERS']
 		const insight = new Insight();
 		insight.broadcast(btcTransaction, function(err, returnedTxId) {
 			if (!err) {

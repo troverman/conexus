@@ -10,8 +10,8 @@
                 </div>
                 <div style="margin-top: auto;margin-bottom: auto;text-align:center">
                     <div style="padding:15px">
-                        <h1 style="font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">{{protocol.title || 'PROTOCOL TEST'}}</h1>
-                        <h5 style="color:white">{{protocol.id}}</h5>
+                        <h1 style="font-size:35px;color:rgba(255,255,255,0.9);font-weight:400;">{{protocol.string || 'PROTOCOL TEST'}}</h1>
+                        <h5 style="color:white">{{protocol.id}} {{protocol.hash}}</h5>
                     </div>
                 </div>
             </div>
@@ -30,12 +30,16 @@
         <div style="padding:16px;">
             <div ng-if="selectedTab =='INFORMATION'" ng-include="'protocol/templates/information.tpl.html'"></div>
             <div ng-if="selectedTab =='ASSOCIATIONS'" ng-include="'protocol/templates/associations.tpl.html'"></div>
+
+            <div hljs hljs-language="javascript"  hljs-source="protocol.data"></div>
+
+
         </div>
         <div class="card-footer">
-            <a ng-click="$event.stopPropagation();" style="color:grey"><i class="fas fa-eye"></i>  {{app.data.apps.attention.general || 0}}</a>
-            <a ng-click="$event.stopPropagation();createReaction(app, 'plus')"><i class="fa fa-angle-up"></i> {{app.data.apps.reactions.plus || 0}} like </a> 
-            <a ng-click="$event.stopPropagation();createReaction(app, 'minus')" ><i class="fa fa-angle-down"></i> {{app.data.apps.reactions.minus || 0}} dislike </a>
-            <a ng-click="$event.stopPropagation();contentToggle(app)"><i class="fa fa-comment-o"></i> comment </a>
+            <a ng-click="$event.stopPropagation();" style="color:grey"><i class="fas fa-eye"></i>  {{protocol.data.apps.attention.general || 0}}</a>
+            <a ng-click="$event.stopPropagation();createReaction(protocol, 'plus')"><i class="fa fa-angle-up"></i> {{protocol.data.apps.reactions.plus || 0}} like </a> 
+            <a ng-click="$event.stopPropagation();createReaction(protocol, 'minus')" ><i class="fa fa-angle-down"></i> {{protocol.data.apps.reactions.minus || 0}} dislike </a>
+            <a ng-click="$event.stopPropagation();contentToggle(protocol)"><i class="fa fa-comment-o"></i> comment </a>
         </div>
     </div>
 </div>

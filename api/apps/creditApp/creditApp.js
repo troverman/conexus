@@ -2,11 +2,16 @@
 //IMPORT MANIFOLD && TOKENLANGUAGE TO
 //DEFINE +CREDIT
 var App = {
-	connections:{
-		apps:{
-			q: function(){return appManagerApp.get('q')},
-		}
-	},
+
+	//THINK STRING KEY WORDS IN LANGUAGE :: IE APP :: IE HASH + APP WOULD BE + HASH 
+
+
+	//:: IE DEFINE HASH WORDS IN STRING LANGUAGE .. :)))))
+
+
+	'CONNECTION+Q': global['appApp']['GET']({type:'require', string:'q'}),
+
+	//'ASSOCIATION+SELF+CREATOR': 'TREVOR OVERMAN',
 
 	//THE LOGIC OF LOAN []STRING] TOKEN MANIFOLDS
 	create:function(model){

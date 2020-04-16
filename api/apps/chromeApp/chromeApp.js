@@ -17,10 +17,6 @@ var App = {
 		},
 	},
 
-	import:{
-
-	},
-
 	connections: {
 		apps: {
 			//interveralServiceApp: interveralServiceApp,

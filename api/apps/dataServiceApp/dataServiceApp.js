@@ -4,9 +4,8 @@
 var App = {
 	//const tf = require('@tensorflow/tfjs');
 	//require('@tensorflow/tfjs-node');
-	import:{
-		Q: require('q')
-	},
+
+	'CONNECTION+Q': global['appApp']['GET']({type:'require', string:'q'}),
 	
 	//associationBuild
 	//buildAssociatedModels
@@ -54,7 +53,7 @@ var App = {
 		//RETURNS TREE OBJ
 		//THEN REDUCETREE OBJ
 
-		var deferred = App.import.Q.defer();
+		var deferred = App['CONNECTION+Q'].defer();
 		var promises = [[]];
 		var validationTree = {};
 		//we want two functions.. important to compute the tree then reduce. 
@@ -75,7 +74,7 @@ var App = {
 				validationModels.children = [];
 				validationTree.push(validationModels[x]);
 
-				var validationModelData = await App.import.Q.all(promises[level]);
+				var validationModelData = await App['CONNECTION+Q'].all(promises[level]);
 				for (y in validationModelData){
 
 					if (validationModelData[y].length != 0){

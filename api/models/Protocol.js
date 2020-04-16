@@ -1,12 +1,10 @@
 //CRE8.PROTOCOL
 module.exports = {
 	attributes: {
-		
-		//DEPRECIATE
-        model: {type: 'string', defaultsTo: 'PROTOCOL'},
-
-		title: {type: 'string'},
-		permissions:{type:'json'},
-		logic:{type:'json'},
+		string: {type: 'string'},
+		description: {type: 'string'},
+		//meta
+		parameters:{type:'json'},
+		data:{type:'json'},
     },
 };

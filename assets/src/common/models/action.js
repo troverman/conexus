@@ -1,4 +1,4 @@
-angular.module('models.action', ['services', 'sails.io',])
+angular.module('models.action', ['services', 'sails.io'])
 
 .service('ActionModel', ['$sailsSocket', 'utils', function($sailsSocket, utils) {
 
@@ -6,6 +6,10 @@ angular.module('models.action', ['services', 'sails.io',])
         var url = utils.prepareUrl('action'); 
         var query = {
             params:{
+
+                app:'actionApp',
+                protocol: 'get', //'HTTP+GET', SOCKET+GET
+
                 limit:model.limit,
                 skip:model.skip,
                 sort:model.sort,
@@ -13,13 +17,16 @@ angular.module('models.action', ['services', 'sails.io',])
                 type:model.type,
                 item:model.item,
                 user:model.user,
+                
             }
         };
         return $sailsSocket.get(url, query).then(success, error);
     };
 
     this.create = function(newModel) {
-        var url = utils.prepareUrl('action');
+        var url = utils.prepareUrl('');
+        newModel.app = 'actionApp';
+        newModel.protocol = 'get';
         return $sailsSocket.post(url, newModel).then(success, error);
     };
 

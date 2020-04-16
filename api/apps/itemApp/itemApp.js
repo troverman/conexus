@@ -1,15 +1,7 @@
 //CRE8.connections.apps.Item().ALPHA
 var App = {
-	//HASH OF ATTRIBUTES ???
-    //DB TYPES ??
-    //HASH TABLE EASIER .. ? 
-    //LOG Db? 
-    //I LIKE THE INIT FXN
-    //db: await orbitdb.docs('CRE8.ITEM'),
-    init: async function(){
-    //	await ContentApp.db.load();
-    },
-	attributes: {
+
+	'CONNECTION+SELF+ATTRIBUTES': {
         //DEPRECIATE
         model: {type: 'string', defaultsTo: 'ITEM'},
         title: {type: 'string'},
@@ -32,78 +24,45 @@ var App = {
         dataHash: {type: 'string', allowNull: true},
         hash: {type: 'string', allowNull: true}, //id
     },
-	connections:[{
-		type:'connection', 
-		id:'self',
-		connections:[{
-			type:'item',
-			id:'self',
-			connections:[{	
-				params:{}	
-			}]
-		}],
-	}],
-	connections:[{
-		type:'connection', 
-		id:'self', 
-		params:{
-			//DATA MODEL.
-		}	
-	}],
-	//connections.apps --> dyanmic 
-	//static --> todo write static parser / init convert to dynamic connection JSON representation
-	connections: {
-		apps: {
-			//TODO: CREATE DECENTRALIZED REQUIRE :O)))))!
-			//IE REPLACE WITH AppManager.get(#HASH)
-			crypto: function(){return appManagerApp.get('crypto')},
-			mongodb: function(){return appManagerApp.get('mongodb')},
-			Q: function(){return appManagerApp.get('q')},
-			//Item: function(){return Item.init('');},
 
-			//TODO: MODULARIZE
-			//contentApp: require('./contentApp'),
-			//reactionApp: require('./reactionApp'),
-			//attentionApp: require('./attentionApp'), --> DATA LAYER IN (APP) SHARED ATTRIBUTES
-			//React: require('react'),
-			//event: require('event'),
-				//IMPORT DATABASE CONNECTION 
-		}
-	},
-	//DATA MODELS ARE CONNECTIONS
-	//TEST
-	//REDUCE INTO SELF CONECTION W CONTEXT --> INTERNAL FUNCTION MAPPING 
-	language: 'Javascript',
-	attentionParams:{},
+	'CONNECTION+CRYPTO': function(){return appApp['GET+REQUIRE']('crypto')},
+	'CONNECTION+MONGODB': function(){return appApp['GET+REQUIRE']('mongodb')},
+	'CONNECTION+Q': function(){return appApp['GET+REQUIRE']('q')},
+	//'CONNECTION+CONTENTAPP': function(){return appApp['GET']('./contentApp')},
+	//'CONNECTION+REACTIONAPP': function(){return appApp['GET']('./reactionApp')},
+	//'CONNECTION+ATTENTIONAPP': function(){return appApp['GET']('./attentionApp')},
 
-	//TODO: .. HASH: NEEDS TO BE UNIQUE .. 
-	//connections.self.routes
-	routes:{
-		//get/api/{HASH}
-		'get /api/item': 'ItemController.get',
-		'post /api/item': 'ItemController.create',
-
-		//BUILD AND RENDER VIEWS .. 
-		'get /items': 'HomeController.index',
-		'get /item/:id': 'HomeController.index',
-	},
-
-	//LANGUAGES ARE COMPILER PARAMETERS
-	compilerParams:{
+	'CONNECTION+SELF+LANGUAGE': 'Javascript',
+	//lol
+	'CONNECTION+SELF+ATTENTIONPARAMS':{},
+	'CONNECTION+SELF+COMPILERPARAMS':{
 		identifier:['x', 'color', 'UP'],
 		keyword:['if', 'while', 'return'],
 		separator:['}', '('],
 		operator:['+','<','='],
 		literal: true,
 	},
-	//value language
-	//~~ CONGRUENCE MEANS CONTEXT FREE GRAMMER
-	meta:{separator:[','], operator:['+','-','*','']},
+	'CONNECTION+SELF+META':{separator:[','], operator:['+','-','*','']},
 
-	//recursive..
-	//init(req, res, params);
-	//get: function(req, res, params){/*params ^^same as above ; recursive :)*/},
-	get: async function(req) {
+	//TODO: GET DYNAMIC INIT VIA PEER LOAD :: USE App+SELF+HASH ;; uhh,, init fxn 
+	//connections.self.routes
+	//'CONNECTION+SELF+ROUTES':{
+		//get/api/{HASH}
+		//'get /api/item': 'ItemController.get',
+		//'post /api/item': 'ItemController.create',
+		//BUILD AND RENDER VIEWS .. 
+		//'get /items': 'HomeController.index',
+		//'get /item/:id': 'HomeController.index',
+	//},
+
+    //'DB':  async function(){
+    //	var dbString = 'CRE8.ITEM';
+    //	await orbitdb.docs(dbString)
+    //},
+    //'INIT': async function(){
+    //	await App['DB'].load();
+    //},
+	'GET': async function(req) {
 		//[req.model].get(req);
 		var limit = parseInt(req.query.limit) || 1;
 		var skip = parseInt(req.query.skip) || 0;
@@ -154,7 +113,7 @@ var App = {
 		}
 		return returnObj;
 	},
-	create: async function (req) {
+	'CREATE': async function (req) {
 		var model = {
 			model: 'ITEM',
 			type: 'ITEM',
@@ -189,27 +148,18 @@ var App = {
 		App.tokens.create(itemModel);
 		return connections.apps.Item().find({hash:model.hash});
 	},
-	//EACH PROTOCOL / APP ADDS TO THE VALUE LANGUAGE.. 
-	//3rd layer of compilation . . 
-	tokens:{
-		//CHANGE TO VERBS?
-		//GET FROM CONNECTION? --> IT"S IN DATA MODEL
-		get:function(model){
-			var protocolTokens = ['CRE8', 'CRE8+ITEM', 'CRE8+ITEM+'+model.id];
-			//FOR X IN 
-			var hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
-			var prefix = 'CRE8+ITEM';
-			var string = prefix+'+'+hash;
-			protocolTokens.push(string);
-			return protocolTokens;
-		},
-		create:function(model){
-			var protocolTokens = App.tokens.get(model);
-			//
-		},
-		//functional bridge between data events and tokenization
+
+	'TOKENS+GET': function(model){
+		var protocolTokens = ['CRE8', 'CRE8+ITEM', 'CRE8+ITEM+'+model.id];
+		var hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
+		var prefix = 'CRE8+ITEM';
+		var string = prefix+'+'+hash;
+		protocolTokens.push(string);
+		return protocolTokens;
 	},
-	//FLATTEN? AND STANDARIZE & MADE MODULAR . . . 
+	'TOKENS+CREATE':function(model){
+		var protocolTokens = App['TOKENS+GET'](model);
+	},
 	//DEFINE LANGUAGE AND PARAMETERS FOR VIEW PARSING --> IMPORT THE PARSERS
 	//SEPERATE APP TO RETURN HTML
 	views:{

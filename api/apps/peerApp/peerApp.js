@@ -34,6 +34,8 @@ var App = {
 		};
 		return Peer.create(model);
 	},
+
+	//PEERBUILD APP >> CREATE SUPER STRUCTURE AND (PROTOCOL TYPES
 	build:function(){
 
 		//??LOL??

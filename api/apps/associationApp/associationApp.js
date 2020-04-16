@@ -1,12 +1,14 @@
 //CRE8.ASSOCIATION.ALPHA
 var App = {
-	import:{
-		//WORK ON REQUIRE KEY WORD.. 
-			//DOWNLOAD AND BUILD BASED ON TYPE
-		Q: require('q'),
-		crypto: require('crypto')
-	},
-	attributes: {
+
+	//BIG THINK
+	//bugz bunny
+	'CONNECTION+Q': function(){return global['appApp']['GET+REQUIRE']('q')},
+	'CONNECTION+CRYPTO': function(){return global['appApp']['GET+REQUIRE']('crypto')},
+
+	//WORK ON REQUIRE KEY WORD.. 
+	//DOWNLOAD AND BUILD BASED ON TYPE
+	'CONNECTION+SELF+ATTRIBUTES': {
         //DEPRECIATE
         model: {type: 'string', defaultsTo: 'ASSOCIATION'},
     	//DEFINE (HIGHER ORDER) LOGIC
@@ -21,7 +23,7 @@ var App = {
     },
 	//TODO
 	get: async function(model){
-		var deferred = App.import.Q.defer();
+		var deferred = App['CONNECTION+Q']().defer();
 
 		//REDUCE 
 		Association.getDatastore().manager.collection('association')
@@ -64,7 +66,7 @@ var App = {
 
 				}
 				(async () => {
-					var populatedModels = await App.import.Q.all(promises);
+					var populatedModels = await App['CONNECTION+Q']().all(promises);
 					var index = -1 
 					for (x in model.associationModels){
 						for (y in associationModels[x].associatedModels){
@@ -82,13 +84,9 @@ var App = {
 	getController: async function(req) {
 		function parseQuery(queryModel){
 			var query = {$and:[]}
-			if (queryModel.id){
-				query.$and.push({"associatedModels.id": {$in :[queryModel.id]}});
-			}
+			if (queryModel.id){query.$and.push({"associatedModels.id": {$in :[queryModel.id]}});}
 			//remove type
-			if (queryModel.type){
-				query.$and.push({"associatedModels.type": {$in :[queryModel.type]}});
-			}
+			if (queryModel.type){query.$and.push({"associatedModels.type": {$in :[queryModel.type]}});}
 			//parameter
 			if (queryModel.connection){}
 			if (queryModel.attributes){}

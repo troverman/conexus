@@ -1,10 +1,10 @@
 //CRE8.DATA
-//IMPORT IN NODE
-//import * as name from "module-name";
-//DYNAMIC IMPORTS .. 
-//let module = await import('/modules/my-module.js');
 const App = {
 
+	//MY OWN DATABASE (WHATS MY ENVIR :: ) -> NATIVE STORAGE : CHROME LOCAL 
+	//TRUTH BUILDING:: BUILD MY VERSION OF YOUR VERSION AND SHARE <TRAVERSAL TRUTH 'PEERHASH:ME'+'PEERHASH:PEER' --> BUILD RECURSIVE TRUTH ETC : TO BUILD TRUTH SCORE IN CONTEXT ..: )>
+
+	//DATA AND TRUTH !! 
 	//META MODEL / META DATA!
 	//meta:{
 		//FUNCTION TILE
@@ -12,30 +12,24 @@ const App = {
 		//M.ATTENTION
 	//},
 	//MODULAR DECENTRALIZED DOCUMENT DATABASE 
-		//--> ALPHA 
 	//database:null,
-	//globals:{
-	//},
-	//export:{
-	//},
-	import:{
-		ipfs: require('ipfs'),
-		orbitdb: require('orbit-db'),
-		crypto: require('crypto'),
-		vm: require('vm'),
-	},
+
+	'CONNECTION+IPFS': global['appApp']['GET']({type:'require', string:'ipfs'}),
+	'CONNECTION+ORBIT-DB':  require('orbit-db'),//global['appApp']['GET']({type:'require', string:'orbit-db'}),
+	'CONNECTION+CRYPTO': global['appApp']['GET']({type:'require', string:'crypto'}),
+	'CONNECTION+VM': global['appApp']['GET']({type:'require', string:'vm'}),
+
+	//IMPORT IN NODE
+	//ES6 SYNTAX 
+	//import * as name from "module-name";
+	//DYNAMIC IMPORTS .. 
+	//let module = await import('/modules/my-module.js');
+
+	//import {protocolA, protocolB} from "app"
+	//App['CONNECTION+APP+PROTOCOLA'] = protocolA; --> HEADER HALF SELF DEFINED >> :: SYNTAX :: JS COMPILER IS OKAY 
 
 	//HIGHER ORDER INIT FUNCTIONS --> IE EXPOSED GLOBALS 
 	//EXPOSE iPFS AND DATA BASES
-	//INIT APP WIL EXPOSE APPS RENDERED AND RUN THE INIT FUNCTIONS TO SPIN UP LISTENERS AND WEBSOCKETS ETC
-	//THE BOOT PROCESS 
-	//SHARING THE ENTIRE PEER AS BLOB 
-	//TODO: THINK ABOUT CONENSUS 
-
-	//THIS IS BIG INIT 
-	//BREAKEM UP 
-	//~~ REDO SAILS INIT LOAD .. 
-	//. routes in each file exxx...
 
 	//GENERATORS / INIT GENERATORS HAVE LISTER CONNECTION :)
 		//STARTING A LISTNER AS ACTIVITY (HMMMM :))
@@ -43,50 +37,43 @@ const App = {
 		//ATTACH A MODULE :)))))))))))) --> STORED AS STRING 
 			//ATTACH AN APP WITH FUNCTION .. 
 			//LINK ACTIVITY MODEL TO MODEULE MODEL 
-
-
 			//VALIDATION THRU REPLICATIOn
+			//ALSO TRANSMITTING DATA TO NON SELF ENTITIES // SELF.CONNECTIONS.PEERS...
+	'INIT': async function INIT(){
 
-			//ALSO TRANSMITTING DATA TO NON SELF ENTITIES // SELF.CONNECTIONS.PEERS....
-	init: function(){
+		//TODO: NETWORKING APP: PEER CONFIGURE 
 		const ipfsOptions = {EXPERIMENTAL: {pubsub: true}};
-		const ipfs = new App.import.ipfs(ipfsOptions);
+		const ipfs = new App['CONNECTION+IPFS'](ipfsOptions);
+
 		ipfs.on('error', (e) => console.error(e))
 		ipfs.on('ready', async () => {
-			const orbitdb = await App.import.orbitdb.createInstance(ipfs);
+
+			//LOL
+			const orbitdb = await App['CONNECTION+ORBIT-DB'].createInstance(ipfs);
+
 			//TODO: STORE.IDENTITY LINK TO USER .. THIS IS DB IDENTITY CONTEXT 
-			const docDb = await orbitdb.docs('CRE8.MEMBER');
-			//const logDb = await orbitdb.log('');
+			//DEFINED BY PEER HASH && DATAMODEL
+			var dbString = 'PEER::DATA'
+			const db = await orbitdb.docs(dbString);
 			console.log('loading...');
+	
+			const records = db.get('');
+			console.log(records);
+			const all = db.query((doc) => doc.username == 'troverman')
+			console.log(all);
 
-			//logDb.events.on('replicated', (address) => {
-			//	console.log(db.iterator({ limit: -1 }).collect());
-			//});
 
-			//var newRecords = await User.find();
-			//newRecords.map(obj=>obj._id=obj.id)
-			//for (x in newRecords){ /*await logDb.add(JSON.stringify(newRecords[x]));*/ await docDb.put(newRecords[x]);}
-			//const records = docDb.get('');
-			//console.log(records);
-			//const all = docDb.query((doc) => doc.username == 'troverman')
-			//console.log(all);
-
-			//const docDbAtt = await orbitdb.docs('CRE8.ATTENTION');
-			//await docDbAtt.load();
-			//var newRecords = await Attention.find();
-			//newRecords.map(obj=>obj._id=obj.id)
-			//for (x in newRecords){ console.log(newRecords[x].id); await docDbAtt.put(newRecords[x]);}
-			//const records = docDbAtt.get('');
-			//console.log(records);
-
+			//INTERESTING FOR LOADING WRAPPER:: MAKE SURE CODE IS DYNAMIC :: 
+			//PROCESS THRU DYNAMIC SELF INIT .. ON LOAD PROTOCOL :: 
 			//META CIRCULAR
 			//--> DOC SHOULD BE HAS OF OBJ..
 												//App.hash 
 			//--> EXPERIMENTAL (:)
 			const Protocols = await orbitdb.docs('CRE8.PROTOCOL', {indexBy: 'hash'});
 			await Protocols.load();
+
 			//hash = id
-			App.hash = App.import.crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(App)).digest('hex');
+			App.hash = App['CONNECTION+CRYPTO'].createHmac('sha256', 'CRE8').update(JSON.stringify(App)).digest('hex');
 			const dynamicSelf = Protocols.query((data) => data.hash == App.hash);
 			var self = '';
 			
@@ -105,7 +92,7 @@ const App = {
 			//console.log(JSON.parse(self.string));
 
 			//LOAD SELF IN VM 
-			//var result = App.import.vm.runInNewContext('var self =' + self.string + '; console.log(self);');
+			//var result = App['CONNECTION+VM'].runInNewContext('var self =' + self.string + '; console.log(self);');
 
 			//LOADS DATA APP / SELF DYNAMICALLY
 			//console.log(result);
@@ -123,12 +110,12 @@ const App = {
 			//IE HASH LOG FOR TRUTH FOREST
 			async function createEvent(newEventModel){
 
-				newEventModel.hash = App.import.crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(newEventModel)).digest('hex');
-				newEventModel._id = App.import.crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(newEventModel)).digest('hex');
+				newEventModel.hash = App['CONNECTION+CRYPTO'].createHmac('sha256', 'CRE8').update(JSON.stringify(newEventModel)).digest('hex');
+				newEventModel._id = App['CONNECTION+CRYPTO'].createHmac('sha256', 'CRE8').update(JSON.stringify(newEventModel)).digest('hex');
 
-				var newEventModelString = JSON.stringify(newEventModel);
-				const hash = await logDb.add(newEventModelString);
-				const result = logDb.iterator({ limit: -1 }).collect();
+				//var newEventModelString = JSON.stringify(newEventModel);
+				//const hash = await logDb.add(newEventModelString);
+				//const result = logDb.iterator({ limit: -1 }).collect();
 
 				const hashDoc = await docDb.put(newEventModel);
 				console.log(hashDoc);
@@ -139,15 +126,8 @@ const App = {
 
 		});
 	},
-
-
-
-	//FOR TWITTER ETC APP INTEROP .....
-	//GO FOR IT
-
-
 };
 
 //TODO: THINK APP VS DATA APP.. THIS IS A CREATIVE WITH DYNAMIC INITS
-App.hash = App.import.crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(App)).digest('hex');
+App.hash = App['CONNECTION+CRYPTO'].createHmac('sha256', 'CRE8').update(JSON.stringify(App)).digest('hex');
 module.exports = App;

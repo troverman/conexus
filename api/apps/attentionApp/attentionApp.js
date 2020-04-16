@@ -8,12 +8,10 @@
 //machieneAttention . . . 
 //infunction descripe as self.title = ///
 	//self.attention = {type, context}
+
 var App = {
-	import:{
-		crypto: require('crypto'),
-		Q: require('q')
-	},
-	attributes: {
+
+	'CONNECTION+SELF+ATTRIBUTES': {
     	//DEPRECIATE
         model: {type: 'string', defaultsTo: 'ATTENTION'},
 		//associated App.. PEER MINING APP INPUT.. 
@@ -23,7 +21,10 @@ var App = {
         associatedModels: {type: 'json'},
         creator: {model: 'user'},
     },
-	get: async function(req) {
+
+	'CONNECTION+CRYPTO': global['appApp']['GET']({type:'require', string:'crypto'}),
+	
+	'GET': async function(req) {
 
 		//MACHIENE ATTENTION OBJ..
 		//event.create
@@ -51,10 +52,10 @@ var App = {
 	//MACHINE ATTENTION BY VALIDATION OF SPECIFIC DATA.. 
 	//REVIEW THE DATA IN THE BLOCK ...
 	//GIVES IT MACHENE ATTENTION.. IE THE MERKLE PROOF (POW)
-	create: async function (req) {
+	'CREATE': async function (req) {
 
 		async function updateAssociatedModels(model){
-			var protocolTokens = App.tokens.get(model);
+			var protocolTokens = App['TOKENS+GET'](model);
 			for (x in model.associatedModels){		
 				if (model.app == 'HUMAN'){
 					if (model.associatedModels[x].type == 'ACTION'){
@@ -328,40 +329,38 @@ var App = {
 			creator: req.param('creator'),
 			data:{apps:{reactions:{plus:0,minus:0},attention:{general:0}}}
 		};
-		model.hash = App.import.crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
+		model.hash = App['CONNECTION+CRYPTO'].createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
 		var newAttention = await Attention.create(model);
 		var userModel = await User.find({id:newAttention.creator})
 		model.creator = userModel[0];
 		console.log('attentionApp.create', 'CALL:', utilityServiceApp.guid(), model.creator);
 		Attention.publish([newAttention.id], {verb:'create', data: newAttention});
 		eventApp.create(newAttention);
-		App.tokens.create(newAttention);
+		App['TOKENS+CREATE'](newAttention);
 		updateAssociatedModels(newAttention);
 		//TODO: STANDARDIZE USER STATE
 		var updatedUser = await User.update({id:userModel[0].id}, {status:newAttention.string});
 		return Attention.find({hash:model.hash});		
 	},
 
-	tokens:{
-		create:function(model){
-			var tokens = App.tokens.get(model);
-			//updateAssociatedModels(model, protocolTokens);
-		},
-		get: function(model){
-			var protocolTokens = [
-				'CRE8', 
-				'CRE8+ATTENTION', 
-				'CRE8+ATTENTION+'+model.id,
-				//careful creator
-				'CRE8+ATTENTION+'+model.creator.username.toUpperCase(),
-				'CRE8+ATTENTION+'+model.app,
-			];
-			var hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
-			var prefix = 'CRE8+ATTENTION';
-			var string = prefix+'+'+hash;
-			protocolTokens.push(string);
-			return protocolTokens;
-		}
+	'TOKENS+CREATE':function(model){
+		var tokens = App['TOKENS+GET'](model);
+		//updateAssociatedModels(model, protocolTokens);
+	},
+	'TOKENS+GET': function(){
+		var protocolTokens = [
+			'CRE8', 
+			'CRE8+ATTENTION', 
+			'CRE8+ATTENTION+'+model.id,
+			//careful creator
+			'CRE8+ATTENTION+'+model.creator.username.toUpperCase(),
+			'CRE8+ATTENTION+'+model.app,
+		];
+		var hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
+		var prefix = 'CRE8+ATTENTION';
+		var string = prefix+'+'+hash;
+		protocolTokens.push(string);
+		return protocolTokens;
 	}
 };
 module.exports = App;

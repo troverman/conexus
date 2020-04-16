@@ -1,6 +1,6 @@
 //CRE8.INTERVAL
 var App = {
-	interval: function(callback, delay) {
+	'INTERVAL': function(callback, delay) {
 	    var counter = 0;
 	    var start = new Date().getTime();
 	    function delayed(){
@@ -12,14 +12,14 @@ var App = {
 	    delayed();
 	    setTimeout(delayed, delay);
 	},
-	init: function(){
+	'INIT': function(){
 		//CORE IMPORTS ... () BASED ON BUILD
 		//TODO: APP SPECIFIC 'DAEMON'
 		//TODO: PEER BUILD
 		//TODO: APP-APP CONNECTION
-		//intervalServiceApp.interval(universalTokenApp.interval, 8640000);
-		//intervalServiceApp.interval(privacyTokenApp.interval, 8640000);
-		//intervalServiceApp.interval(fitbitApp.interval, 8640000);
+		//App['INTERVAL'](universalTokenApp.interval, 8640000);
+		//App['INTERVAL'](privacyTokenApp.interval, 8640000);
+		//App['INTERVAL'](fitbitApp.interval, 8640000);
 		//LEGACY IN AN INTERVAL.. BUILD EVERY EVENT . . 
 		//intervalServiceApp.interval(reputationApp.build, 8640000);
 		//LEGACY IN AN INTERVAL.. BUILD EVERY EVENT . . 

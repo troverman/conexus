@@ -2,7 +2,7 @@ var App = {
 	//LETS NOT REPEAT OURSELVES TOO MUCH
 	//MACHIENE ATTENTION AND BUDGETING 
 	//MANIFEST THOUGH ACTIVTY PROCESSING IE INSTA, TWIT, && ART AUTOMATION
-	import:{StackTrace: require('stack-trace')},
+	'CONNECTION+STACKTRACE': require('stack-trace'),
 	//meta-logger
 	//FXN WRAPPER / LOGGER 
 	init: function(){
@@ -36,7 +36,7 @@ var App = {
 			//POTIENTALLY REDUCE TO NAMED FUNCTION MAPPING (WILL CREATE ON PEER SELECTION) 
 			//|| WHAT VARIENTS OF MACHIENE ATTENTION IS RELEVANT ?
 			if (this.name){
-				var trace = App.import.StackTrace.get();
+				var trace = App['CONNECTION+STACKTRACE'].get();
 				//console.log(trace[0].getFileName());
 				//trace.map(function(obj){console.log(obj.getFileName())});
 				//EVENT TO BRODCASE TO PEERS WHO WHICH TO LISTEN AND SELF

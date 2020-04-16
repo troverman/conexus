@@ -178,7 +178,6 @@ angular.module('conexus.home', [])
 
 
 
-
     //\\//\\//\\//\\//
     //WATCHERS\\//\\//
     //\\//\\//\\//\\//
@@ -397,10 +396,51 @@ angular.module('conexus.home', [])
     
     //CORE APPS
     $scope.apps = [
+
+        //HMM
         {model:'APP', title:'Client Mining', description:'Run a CRE8 node that powers the network. Machine attention is tokenized.'},
         {model:'APP', title:'Attention Tokenization', description:'Required for Attention Tokenization'},
         {model:'APP', title:'Location Tokenization', description:'Required for Location Tokenization'},
+
+
+
+
+        //DYNAMICALLY GET APPS AND PROTOCOLS :) :: CORE CRE8 LANG --> TRANSPILE TO JS
+
+        //BUNDLE
+        {model:'APP', title:'Connection App', description:'Connection Appication'},
+
+
+
+        //THINK ABT THIS BUNDLE
+        {model:'APP', title:'Protocol App', description:'Protocol Application', data:'CODE HERE'}, //:::DYNAMIC APP-PROTOCOL ASSOCiATION and CONNECTION
+        {model:'APP', title:'Association App', description:'Protocol Application'},
+        {model:'APP', title:'Validation App', description:''}, //DEFINED IN CONNECTION :: THIS IS DYNAMIC (AND GLOBAL NAMESPACE ?)
+
+        //{model:'APP', title:'Data App', description:'Protocol Application'},
+        //{model:'APP', title:'Event App', description:'Protocol Application'},
+        //{model:'APP', title:'Activity App', description:'Protocol Application'},
+        //{model:'APP', title:'Attention App', description:'Protocol Application'},
+
+        {model:'APP', title:'App App', description:'Peer Application'},
+        {model:'APP', title:'Peer App', description:'Peer Application'},
+
+        {model:'APP', title:'Token App', description:'Token Application'},
+        {model:'APP', title:'Item App', description:'Item Application'},
+        {model:'APP', title:'Action App', description:'Item - Action Application(s)'},
+
+
+        {model:'APP', title:'Project App', description:''},
+        {model:'APP', title:'Task App', description:''},
+        {model:'APP', title:'Time App', description:''},
+
+        //VARIOUS FRONT END AND BACKEND :::: 
+
+        //NPM BUNDLES :: AS APPS FOR THE PEER:: EXAUSTIVE LIST PLZ :) ::
+            //DEPENDENCY GRAPH OF APPS :: REMAPPED TO CONNECTION : ASSOCIATION : (VALIDATION)
+
     ];
+
 
     //CORECORE
         //IE RUST STuFF
@@ -447,22 +487,21 @@ angular.module('conexus.home', [])
 
     ];
 
+    //CREATE ENTIRE DEPENDECY GRAPH :: INCLUDING :: BOOTSTRAP APP:: FONT AWESOME APP :: THE WORKS :: RESTRUCT BUILD PATH ,, 
+
     //$scope.apps = [].concat.apply([], [$scope.apps, $scope.coreApps, $scope.xyzApps])
 
     //confidence in the direction , knowing theres 100 miles to go - let's move
 
     //build .asm
     $scope.compilePeer= function(){
-        for (x in $scope.apps){
-            console.log($scope.apps[x].data)
-        }
-
+        for (x in $scope.apps){console.log($scope.apps[x].data)}
         //LOOP THRU SELECTED APPS
         //MY PEER VERSION IS THE HASH
-        //
-
     };
 
+
+    //TUTORIAL APP DATA :: PACKS 
     //TODO: PACKS
     $scope.selectPack = function(model){
         $scope.selectedPack = model;
@@ -846,7 +885,6 @@ angular.module('conexus.home', [])
     //TODO
     $scope.$watch('questions', function(newValue, oldValue){
         if (oldValue != newValue){
-
             //GET ELEMENT FROM NEW VALUE ARRAY? 
             console.log(newValue);
             for (x in newValue){
@@ -862,7 +900,6 @@ angular.module('conexus.home', [])
                     connection:{},
                 };
                 $scope.newOrder.push(newOrder);
-
             }
         }
     }, true);
@@ -1318,10 +1355,6 @@ angular.module('conexus.home', [])
             
             //TODO: WAY BETTER
             if ($rootScope.currentUser.associationModels){
-
-
-
-
 
                 //COULD GET EACH VS ALL IN ONE
                 $scope.followers = $rootScope.currentUser.associationModels.filter(function(obj) {

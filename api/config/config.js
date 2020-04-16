@@ -1,12 +1,10 @@
 //SELF CONFIG
 module.exports = {
-	bootstrap: function(cb) {
-		console.log(initApp.initApp)
-		initApp.init();
-		cb();
-	},
+	bootstrap: function(cb) {global['initApp']['INIT'](); cb();},
 	//TODO: REMOVE
 	//TODO: APP SPECIFIC 
+
+	//SECRETs ARE PEER-APP-PROTOCOL ASSOCIATIONS .. 
 	datastores: {
 		'default': {
 			adapter: 'sails-mongo',
@@ -23,22 +21,11 @@ module.exports = {
 	http: {
 		middleware: {
 			prerender: require('prerender-node').set('prerenderServiceUrl', 'https://tranquil-reef-73037.herokuapp.com/').set('prerenderToken', 'V8W4l4iLL7BRD4pB8stg'),
-			order: [
-				'cookieParser',
-				'session',
-				'bodyParser',
-				'prerender',
-				'compress',
-				'poweredBy',
-				'$custom',
-				'router',
-				'www',
-				'favicon',
-			],
+			order: ['cookieParser', 'session', 'bodyParser', 'prerender', 'compress', 'poweredBy', '$custom', 'router', 'www', 'favicon'],
 		}
 	},
 	i18n: {},
-	log: {},
+	log: {level:'silly'},
 	//REDUCE GLOBAL MODEL DEFINITIONS 
 	//APPCECIFIC INHERITANCE 
 	//META MODEL APP . . .
@@ -55,13 +42,11 @@ module.exports = {
 		},
 		dataEncryptionKeys: {default: 'V7TZVUpF5WLGg2c2eRVaSx0p3/4Ef11ZujTaY4EVdpY='},
 	},
+
+	//TODO: SECRETS AS ASSOCIATIONS :: ACCESSABLE BY __CONNECTION DEFINED__ 
 	passport: {
-		local: {
-			strategy: require('passport-local').Strategy
-		},
-	    //bearer: {
-		   //strategy: require('passport-http-bearer').Strategy
-	    //},
+		local: {strategy: require('passport-local').Strategy},
+	    //bearer: {strategy: require('passport-http-bearer').Strategy},
 		twitter: {
 			name: 'Twitter',
 			protocol: 'oauth',
@@ -104,6 +89,8 @@ module.exports = {
 		},
 	},
 	policies:{'*': true, '*': [ 'passport' ]},
+
+	//MAPPING OF SERVER ENDPOINT TO PROTOCOL :: 
 	routes:{
 		//DYNAMIC DEFINED BY PEER :)
 		'get /': 'HomeController.index',
@@ -178,7 +165,6 @@ module.exports = {
 		'get /transaction/:id': 'HomeController.index',
 		'get /transparency': 'HomeController.index',
 		'get /validation/:id': 'HomeController.index',
-		
 		//TODO: AUTH APP
 		'get /logout': 'AuthController.logout',
 		'post /auth/local': 'AuthController.callback',
@@ -186,6 +172,11 @@ module.exports = {
 		'get /auth/:provider': 'AuthController.provider',
 		'get /auth/:provider/callback': 'AuthController.callback',
 		'get /auth/:provider/:action': 'AuthController.callback',
+
+
+
+
+		
 		'get /api/action': 'ActionController.get',
 		'post /api/action': 'ActionController.create',
 		'get /api/app': 'AppController.get',
@@ -215,6 +206,8 @@ module.exports = {
 		'post /api/peer': 'PeerController.create',
 		'get /api/project': 'ProjectController.get',
 		'post /api/project': 'ProjectController.create',
+		'get /api/protocol': 'ProtocolController.get',
+		'post /api/protocol': 'ProtocolController.create',
 		'get /api/search': 'SearchController.search',
 		'get /api/search/feed': 'SearchController.getFeed',
 		'get /api/task': 'TaskController.get',
@@ -229,35 +222,22 @@ module.exports = {
 		'post /api/user/:id': 'UserController.update',
 		'get /api/validation': 'ValidationController.get',
 		'post /api/validation': 'ValidationController.create',
+		
+
+		//'get /api': 'GeneralController',
+		//'post /api': 'GeneralController',
+
+
 	},
 	security:{cors:{allRoutes: true, allowOrigins: '*'}},
 	session:{
 		secret: 'cb5b21a569493ca31834e3827c09b4ed',
-		// cookie: {
-		//   maxAge: 24 * 60 * 60 * 1000
-		// },
-		// adapter: 'redis',
-		// host: 'localhost',
-		// port: 6379,
-		// ttl: <redis session TTL in seconds>,
-		// db: 0,
-		// pass: <redis auth password>,
-		// prefix: 'sess:',
-		// adapter: 'mongo',
-		// host: 'localhost',
-		// port: 27017,
-		// db: 'sails',
-		// collection: 'sessions',
+		//cookie: {maxAge: 24 * 60 * 60 * 1000},
+		//adapter: 'redis',
 	},
 	//TODO:NETWORKING ..
 	//TODO: SHARE SOCKETS AMONST PEERS
 	sockets:{
-		// adapter: 'memory',
-		// adapter: 'redis',
-		// host: '127.0.0.1',
-		// port: 6379,
-		// db: 'sails',
-		// pass: '<redis auth password>'
 		beforeConnect: function(handshake, cb) {return cb(null, true);},
 		afterDisconnect: function(session, socket, cb) {return cb();},
 	},

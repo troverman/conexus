@@ -6,15 +6,21 @@ var App = {
 	//require time
 	//require oauth
 	//require passport ...
-	import: {
-		request: require('request'),
-		Q: require('q'),
-		rp: require('request-promise') 
-	},
-	//TODO:
-	connections:[
-		//MEMBER-APP --> DATA
-	],
+
+	//GOOD THOUGHTS ::
+
+	//NAMES SPACE OF 
+	//APP:{} --> IS A DYNAMIC STRING :: 
+	//{HASH:HASH} || MANIFOLD CONCEPT OF INHERITANCE IN NAMESPACES
+
+	//TEST
+	'CONNECTION+SELF+LANGUAGE': 'Javascript',
+	'CONNECTION+SELF+RUNTIME': 'NODE:V8',
+
+	'CONNECTION+REQUEST':  global['appApp']['GET']({type:'require', string:'request'}),
+	'CONNECTION+Q':  global['appApp']['GET']({type:'require', string:'q'}),
+	'CONNECTION+REQUEST-PROMISE': global['appApp']['GET']({type:'require', string:'request-promise'}),
+
 	//TODO
 	dataModels:[
 		{
@@ -29,10 +35,7 @@ var App = {
 		//type fitbit_floor
 		//type fitbit_distance
 	],
-	//TEST
-	language: 'Javascript',
-	runtime:'V8',
-	//callback or promise?
+
 	//TODO: CALL BACK / QUERY INTREPRETATION, req, res paramaterization
 	//TODO: ERR HANDLING
 	//activities/calories
@@ -45,75 +48,70 @@ var App = {
 	//activities/minutesFairlyActive
 	//activities/minutesVeryActive
 	//activities/activityCalories
-	get: {
-		//steps:{
-		//	data:function(model){},
-		//	tokens:function(model){},
-		//},
-		steps: function(model){	
-			var deferred = App.import.Q.defer();		
+	'GET+STEPS': function(model){	
+			var deferred = App['CONNECTION+Q'].defer();		
 			var requestModel = {
 				url: 'https://api.fitbit.com/1.2/user/' + model.userId + '/activities/steps/date/today/'+model.timeQuery+'.json',
 				json: true,
 				headers: {'Authorization': ' Bearer ' + model.accessToken}
 			};
-			App.import.request(requestModel, function (error, response, body) {console.log(error, body, ); deferred.resolve(body['activities-steps']);});
+			App['CONNECTION+REQUEST'](requestModel, function (error, response, body) {console.log(error, body, ); deferred.resolve(body['activities-steps']);});
 			return deferred.promise;
-			//return App.import.rp(requestModel)['activities-steps'];
-		},
-		heart: function(model){
-			var deferred = App.import.Q.defer();		
-			var requestModel= {
-				json: true,
-				url: 'https://api.fitbit.com/1.2/user/' + model.userId + '/activities/heart/date/today/'+model.timeQuery+'.json',
-				headers: {'Authorization': ' Bearer ' + model.accessToken}
-			};
-			App.import.request(requestModel, function (error, response, body) {deferred.resolve(body['activities-heart']);});
-			return deferred.promise;
-			//return App.import.rp(requestModel)['activities-heart'];
-		},
-		floors: function(model){
-			var deferred = App.import.Q.defer();		
-			var requestModel= {
-				json: true,
-				url: 'https://api.fitbit.com/1.2/user/' + model.userId + '/activities/floors/date/today/'+model.timeQuery+'.json',
-				headers: {'Authorization': ' Bearer ' + model.accessToken}
-			};
-			App.import.request(requestModel, function (error, response, body) {deferred.resolve(body['activities-floors']);});
-			return deferred.promise;
-			//return App.import.rp(requestModel)['activities-floors'];
-		},
-		elevation: function(model){},
-		distance: function(model){
-			var deferred = App.import.Q.defer();		
-			var requestModel= {
-				json: true,
-				url: 'https://api.fitbit.com/1.2/user/' + model.userId + '/activities/distance/date/today/'+model.timeQuery+'.json',
-				headers: {'Authorization': ' Bearer ' + model.accessToken}
-			};
-			App.import.request(requestModel, function (error, response, body) {deferred.resolve(body['activities-distance']);});
-			return deferred.promise;
-			//return App.import.rp(requestModel)['activities-distance'];
-		},
-		//TODO: UNIFY DISTANCE PARAM W DIFF ENDPOINT SPECS
-		sleep: function(model){
-			var deferred = App.import.Q.defer();		
-			var today = new Date().toISOString().slice(0,10);
-			var requestModel= {
-				json: true,
-				url: 'https://api.fitbit.com/1.2/user/' + model.userId + '/sleep/date/' + today + '.json',
-				headers: {'Authorization': ' Bearer ' + model.accessToken}
-			};
-			App.import.request(requestModel, function (error, response, body) {deferred.resolve(body['sleep']);});
-			return deferred.promise;
-			//return App.import.rp(requestModel)['sleep'];
-		},
-		calories: function(model){},
+			//return App['CONNECTION+REQUEST-PROMISE'](requestModel)['activities-steps'];
 	},
+	'GET+HEART': function(model){
+		var deferred = App['CONNECTION+Q'].defer();		
+		var requestModel= {
+			json: true,
+			url: 'https://api.fitbit.com/1.2/user/' + model.userId + '/activities/heart/date/today/'+model.timeQuery+'.json',
+			headers: {'Authorization': ' Bearer ' + model.accessToken}
+		};
+		App['CONNECTION+REQUEST'](requestModel, function (error, response, body) {deferred.resolve(body['activities-heart']);});
+		return deferred.promise;
+		//return App['CONNECTION+REQUEST-PROMISE'](requestModel)['activities-heart'];
+	},
+	'GET+FLOORS': function(model){
+		var deferred = App['CONNECTION+Q'].defer();		
+		var requestModel= {
+			json: true,
+			url: 'https://api.fitbit.com/1.2/user/' + model.userId + '/activities/floors/date/today/'+model.timeQuery+'.json',
+			headers: {'Authorization': ' Bearer ' + model.accessToken}
+		};
+		App['CONNECTION+REQUEST'](requestModel, function (error, response, body) {deferred.resolve(body['activities-floors']);});
+		return deferred.promise;
+		//return App['CONNECTION+REQUEST-PROMISE'](requestModel)['activities-floors'];
+	},
+	'GET+ELEVATION': function(model){},
+	'GET+DISTANCE': function(model){
+		var deferred = App['CONNECTION+Q'].defer();		
+		var requestModel= {
+			json: true,
+			url: 'https://api.fitbit.com/1.2/user/' + model.userId + '/activities/distance/date/today/'+model.timeQuery+'.json',
+			headers: {'Authorization': ' Bearer ' + model.accessToken}
+		};
+		App['CONNECTION+REQUEST'](requestModel, function (error, response, body) {deferred.resolve(body['activities-distance']);});
+		return deferred.promise;
+		//return App['CONNECTION+REQUEST-PROMISE'](requestModel)['activities-distance'];
+	},
+	//TODO: UNIFY DISTANCE PARAM W DIFF ENDPOINT SPECS
+	'GET+SLEEP': function(model){
+		var deferred = App['CONNECTION+Q'].defer();		
+		var today = new Date().toISOString().slice(0,10);
+		var requestModel= {
+			json: true,
+			url: 'https://api.fitbit.com/1.2/user/' + model.userId + '/sleep/date/' + today + '.json',
+			headers: {'Authorization': ' Bearer ' + model.accessToken}
+		};
+		App['CONNECTION+REQUEST'](requestModel, function (error, response, body) {deferred.resolve(body['sleep']);});
+		return deferred.promise;
+		//return App['CONNECTION+REQUEST-PROMISE'](requestModel)['sleep'];
+	},
+	'GET+CALORIES': function(model){},
+
 	//TODO: CUSTOM DATA MODELS VIA APPLICATIONS
 	//TODO: fitbit time vs time
 	//TODO: EVENT
-	create: {
+	'CREATE': {
 		//steps:{
 		//	data:function(model){},
 		//	tokens:function(model){},
@@ -130,7 +128,7 @@ var App = {
 	},
 
 	//TODO: UPDATE
-	getData: async function(req){
+	'GET+DATA': async function(req){
 		console.log('FITBIT APP!')
 		//TODO: DEPRECIATE.. 
 		//TODO: PASS USER OBJ THRU FXNs
@@ -153,9 +151,9 @@ var App = {
 			//TODO: RACE CONDITION.. 
 			//UPDATING PASSPORT TOKENS REQUIRES USER INPUT . . .TODO: 
 			//TODO: UPDATE AUTH TOKENS 
-			var activity = await App.get.steps(model);
+			var activity = await App['GET+STEPS'](model);
 			//IF GOOD TOKENS
-			var tokens = App.tokens.get({type:'fitbit_step', data:activity});
+			var tokens = App['TOKENS+GET']({type:'fitbit_step', data:activity});
 			//TODO: STRUCUTRE BETTER
 			for (x in tokens){
 				tokens[x].protocols = ['FITBIT','FITBIT-STEPS'];
@@ -163,10 +161,10 @@ var App = {
 				tokens[x].information = {inCirculation:0, market:0};
 				tokens[x].associatedModels = [{type:'MEMBER', id:userIdTemp}];
 			}
-			App.tokens.create(tokens);
+			App['TOKENS+CREATE'](tokens);
 			//TODO: FIX
-			var activity = await App.get.steps(model);
-			var tokens = App.tokens.get({type:'fitbit_distance', data:activity})
+			var activity = await App['GET+STEPS'](model);
+			var tokens = App['TOKENS+GET']({type:'fitbit_distance', data:activity})
 			//TODO: STRUCUTRE BETTER
 			for (x in tokens){
 				tokens[x].protocols = ['FITBIT','FITBIT-DISTANCE'];
@@ -175,9 +173,9 @@ var App = {
 				tokens[x].information = {inCirculation:0, market:0};
 			}
 			//TODO: UPDATE
-			//App.tokens.create(tokens);
-			var activity = await App.get.steps(model);
-			var tokens = App.tokens.get({type:'fitbit_floor', data:activity})
+			//App['TOKENS+CREATE](tokens);
+			var activity = await App['GET+STEPS'](model);
+			var tokens = App['TOKENS+GET']({type:'fitbit_floor', data:activity})
 			//TODO: STRUCUTRE BETTER
 			for (x in tokens){
 				tokens[x].protocols = ['FITBIT','FITBIT-FLOORS'];
@@ -186,10 +184,10 @@ var App = {
 				tokens[x].information = {inCirculation:0, market:0};
 			}
 			//TODO: UPDATE
-			//App.tokens.create(tokens);
+			//App['TOKENS+CREATE](tokens);
 			//SCALING ON HEARTRATE
 			/*
-			var activity = await App.get.steps(model);
+			var activity = await App['GET+STEPS'](model);
 			//TODO: MOVE TO TOKEN FXN
 			var tokens = [];
 			for (x in activity){
@@ -232,13 +230,13 @@ var App = {
 				tokens[x].information = {inCirculation:0, market:0};
 			}
 			//TODO: UPDATE
-			App.tokens.create(tokens);
+			App['TOKENS+CREATE](tokens);
 			*/
 			//TODD: BETTER WITH TOKEN MAXIMALIZATION.
 			//TODO: DATA HASH, DATA OBJ FLATTEN
 			//TODO: NOMALIZE DATE
 			/*
-			var activity = await App.get.steps(model);
+			var activity = await App['GET+STEPS'](model);
 			//TODO: MOVE TO TOKEN FXN
 			var tokens = [];
 			for (x in activity){
@@ -315,12 +313,12 @@ var App = {
 				tokens[x].information = {inCirculation:0, market:0};
 			}
 			//TODO: UPDATE
-			App.tokens.create(tokens);
+			App['TOKENS+CREATE](tokens);
 			*/
 		}
 	},
 
-	interval: async function(){
+	'INTERVAL': async function(){
 		var userModels = await User.find().populate('passports')
 		for (x in userModels){
 			var fitbitPassport = userModels[x].passports.filter(function(obj){return obj.provider=='fitbit'});
@@ -329,7 +327,7 @@ var App = {
                 var options = {scope:['activity','heartrate','location','profile', 'sleep']};
                 var auth = await passportApp.authenticate(provider, options)({}, {}, function(){})//(req, res, req.next);
                 console.log(auth)
-                App.getData(userModels[x]);
+                App['GET+DATA'](userModels[x]);
 			}
 		}
 	},
@@ -340,97 +338,95 @@ var App = {
 	//TODO: GRAMMER
 	//TODO: DISCRETE VS MODEL
 	//TODO: DATA MODEL ...
-	tokens:{
-		//TODO: CONST TOKEN STRUCT
-		model:{
-			//const tokenModel = {
-			//	fitbit:{
-			//		steps:{},
-			//	}
-			//}
-		},
-		//TODO: UPDATE
-		//TODO: TOKEN STRUCT
-		//THERE IS A RACE CONDITION FOR SEPERATE FXNS 
-		create: async function(models){
-			console.log(models)
-			var userModel = await User.find({id:models[0].associatedModels[0].id});
-			var user = userModel[0];
-			for (x in models){
-				delete models[x].associatedModels;
-				var tokenModels = await Token.find({string:models[x].tokenString});
-				if (tokenModels.length == 0){
-					var newTokne = await Token.create(models[x]);
-				}
-				else{
-					//IF USER HAS TOKENS DONT ADD.. (IE INTERVAL ALEADY CALLED)
-					if (!user.balance[models[x].tokenString]){
-						tokenModels[0].information.inCirculation = parseInt(tokenModels[0].information.inCirculation) + parseFloat(protocolTokens[x].amount); 
-						var updatedToken = await Token.update({id:tokenModels[0].id}, {information:tokenModels[0].information});
-						console.log('TOKENS IN CIRCULATION UPDATED:', model[0].string)
-					}
-				}
-			}
-			//TODO: UPDATE
-			for (x in models){
-				if (!user.balance[models[x].tokenString]){user.balance[models[x].tokenString] = 0}
-				user.balance[models[x].tokenString] = parseInt(user.balance[models[x].tokenString]) + parseFloat(models[x].amount);
-			}
-			var updatedUser = await User.update({id:user.id}, {balance:user.balance});
-			console.log('UPDATED TOKEN BALANCE', updatedUser)
-		},
+	//TODO: CONST TOKEN STRUCT
+	'TOKENS+MODEL':{
+		//const tokenModel = {
+		//	fitbit:{
+		//		steps:{},
+		//	}
+		//}
+	},
 
-		get:function(model){
-			//TODO: TOKEN JSON STRUCT
-			var tokens = [];
-			if (model.type == 'fitbit_step'){
-				for (x in model.data){
-					tokens.push({
-						tokenString:'FITBIT+STEPS', 
-						amount: parseFloat(model.data[x].value)
-					});
-					tokens.push({
-						tokenString:'FITBIT+STEPS+DATE+'+model.data[x].dateTime, 
-						amount: parseFloat(model.data[x].value)
-					});
+	//TODO: UPDATE
+	//TODO: TOKEN STRUCT
+	//THERE IS A RACE CONDITION FOR SEPERATE FXNS 
+	'TOKENS+CREATE': async function(models){
+		console.log(models)
+		var userModel = await User.find({id:models[0].associatedModels[0].id});
+		var user = userModel[0];
+		for (x in models){
+			delete models[x].associatedModels;
+			var tokenModels = await Token.find({string:models[x].tokenString});
+			if (tokenModels.length == 0){
+				var newTokne = await Token.create(models[x]);
+			}
+			else{
+				//IF USER HAS TOKENS DONT ADD.. (IE INTERVAL ALEADY CALLED)
+				if (!user.balance[models[x].tokenString]){
+					tokenModels[0].information.inCirculation = parseInt(tokenModels[0].information.inCirculation) + parseFloat(protocolTokens[x].amount); 
+					var updatedToken = await Token.update({id:tokenModels[0].id}, {information:tokenModels[0].information});
+					console.log('TOKENS IN CIRCULATION UPDATED:', model[0].string)
 				}
 			}
-			if (model.type == 'fitbit_distance'){
-				for (x in model.data){
-					tokens.push({
-						tokenString:'FITBIT+DISTANCE', 
-						amount: model.data[x].value
-					});
-					tokens.push({
-						tokenString:'FITBIT+DISTANCE+DATE+'+model.data[x].dateTime, 
-						amount: parseFloat(model.data[x].value)
-					});
-				}
-			}
-			if (model.type == 'fitbit_floor'){
-				for (x in model.data){
-					tokens.push({
-						tokenString:'FITBIT+FLOORS', 
-						amount: parseFloat(model.data[x].value)
-					});
-					tokens.push({
-						tokenString:'FITBIT+FLOORS+DATE+'+model.data[x].dateTime, 
-						amount: parseFloat(model.data[x].value)
-					});
-				}
-			}
-			if (model.type == 'fitbit_elevation'){}
-			if (model.type == 'fitbit_heart'){}
-			if (model.type == 'fitbit_sleep'){}
-			return tokens;
 		}
+		//TODO: UPDATE
+		for (x in models){
+			if (!user.balance[models[x].tokenString]){user.balance[models[x].tokenString] = 0}
+			user.balance[models[x].tokenString] = parseInt(user.balance[models[x].tokenString]) + parseFloat(models[x].amount);
+		}
+		var updatedUser = await User.update({id:user.id}, {balance:user.balance});
+		console.log('UPDATED TOKEN BALANCE', updatedUser)
+	},
+	'TOKENS+GET':function(model){
+		//TODO: TOKEN JSON STRUCT
+		var tokens = [];
+		if (model.type == 'fitbit_step'){
+			for (x in model.data){
+				tokens.push({
+					tokenString:'FITBIT+STEPS', 
+					amount: parseFloat(model.data[x].value)
+				});
+				tokens.push({
+					tokenString:'FITBIT+STEPS+DATE+'+model.data[x].dateTime, 
+					amount: parseFloat(model.data[x].value)
+				});
+			}
+		}
+		if (model.type == 'fitbit_distance'){
+			for (x in model.data){
+				tokens.push({
+					tokenString:'FITBIT+DISTANCE', 
+					amount: model.data[x].value
+				});
+				tokens.push({
+					tokenString:'FITBIT+DISTANCE+DATE+'+model.data[x].dateTime, 
+					amount: parseFloat(model.data[x].value)
+				});
+			}
+		}
+		if (model.type == 'fitbit_floor'){
+			for (x in model.data){
+				tokens.push({
+					tokenString:'FITBIT+FLOORS', 
+					amount: parseFloat(model.data[x].value)
+				});
+				tokens.push({
+					tokenString:'FITBIT+FLOORS+DATE+'+model.data[x].dateTime, 
+					amount: parseFloat(model.data[x].value)
+				});
+			}
+		}
+		if (model.type == 'fitbit_elevation'){}
+		if (model.type == 'fitbit_heart'){}
+		if (model.type == 'fitbit_sleep'){}
+		return tokens;
 	},
 
 	//TODO: DEFINE PASSPORT
 	//TODO: FITBIT PASSPORT APP (PROTOCOL)
 	//TODO: CORE 'SECRETS' -- AS SELF APP ENCRYPED STORE IE (APP-APP-(APP[SELF])) DATA
 	//TODO: APP-MEMBER CONNECTION .. 
-	passport: function(req){
+	'PASSPORT': function(req){
 		var passportConfig = {
 			name: 'Fitbit',
 			protocol: 'oauth2',
@@ -447,12 +443,12 @@ var App = {
 	//TODO: ON CREATE CONNECTION.. 
 	//TODO: FUNCTION TO CONNECT FITBIT -- GIVE LIFE TIME TOKENS
 	//INITIAL CONNECT
-	connect: function(req){
+	'CONNECTION': function(req){
 		//INTI WITH 1 yr
 	},
 	//TODO: OAUTH2
 	//DOFOR EVERY CALL.. 
-	refreshAuthTokens: function(req){
+	'REFRESHAUTHTOKENS': function(req){
 		//TODO: WITHOUT PASSPORT.. ? 
 		//console.log(provider, options);
     	//this.authenticate(provider, options)(req, res, req.next);

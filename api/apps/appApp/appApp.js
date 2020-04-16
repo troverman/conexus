@@ -1,8 +1,8 @@
 //CRE8.APP.ALPHA
-//SET OF TYPES / PROTOCOLS 
-//WORK ON TYPE COMPOSITION
-//var Self = {
 var App = {
+
+	//SET OF TYPES / PROTOCOLS 
+	//WORK ON TYPE COMPOSITION
 
 	//IMPORTS ARE APP-APP CONNECTIONS 
 		//CREATING THESE DYNAMICALLY IN THE BASE STRING STRING MAPPING :: IE THEY ARE IN A DB
@@ -12,28 +12,7 @@ var App = {
 
 	//RUN TIME BUILDER SOMETIME :: 
 
-	import:{
-		Q: require('q'),
-		crypto: require('crypto'),
-		orbitdb: require('orbitdb'), //SERIOUSLY REDUCE AND EXPAND THIS :: THIS NOT A SOLUTION HAHAHA || FUN FOR DYNAMIC TESTING I SUPPOSE AND FOR 'LEARNING'
-	},
-
-	//SHOULD BE DYNAMIC BUILT HASH .. 
-	'CONNECTION+APP:CRYPTO': require('crypto'),
-	'CONNECTION+APP:Q': require('crypto'),
-	'CONNECTION+APP:ORBITDB': require('orbitdb'),
-
-	//CONNECTION
-		//MODULELOADER(string)
-	'CONNECTION+APP:EVENTAPP': eventApp,
-	'CONNECTION+APP:VALIDATIONAPP': validationApp,	
-
-
-	//SELF>...
-	//META MODEL , , , ,
-	//redundant wrapper? completeness? 
-	'CONNECTION+APP:{SELF}': {attributes:{}},
-	attributes: {
+	'CONNECTION+SELF': {
         model: {type: 'string', defaultsTo: 'APP'},
 		title: {type: 'string'},
 		description: {type: 'json'},
@@ -44,27 +23,35 @@ var App = {
         creator: {model: 'user'},
     },
 
+	'GET+REQUIRE': function(model){return require(model)},
 
-    //TREE OBJ VS SET OF OBJ 
-    //APPS ARE SETS OF {SELF} DEF CONNECTIONS
-	connections:[
-		{
-			//APP ID ?
-			type: 'APP', 
-			//id: --> REDUCTION DESIRED ~~ HASH ID 
-			attributes:{
-		    }
-		}
-	],
+	//DATA PRIMITIVES >>> DB REQUIRE NETWORKING ..  .. ? DIRECT>
+	'GET+STRING':function(model){return model},
+	'GET+HASH':function(model){return model},
 
 
-    'DB': await orbitdb.docs('CRE8.APP'),
-    'INIT': async function(){await App.db.load();},
+	//SHOULD BE DYNAMIC BUILT HASH .. 
+	//REDUCE App manager to App App : probz 
+	'CONNECTION+APP:CRYPTO': function(){ return global['appApp']['GET+REQUIRE']('crypto')},
+	//STRUCT UP THE APP OBJ TOO >>
+	'CONNECTION+APP:Q': function(){ return global['appApp']['GET+REQUIRE']('q')},
+	'CONNECTION+APP:ORBITDB': function(){ return global['appApp']['GET+REQUIRE']('orbit-db')},
+	'CONNECTION+APP:NETWORKING': function(){ return global['appApp']['GET+REQUIRE']('orbit-db')},
+
+	//'CONNECTION+APP:EVENTAPP': App['GET+STRING']('EVENTAPP'),
+	//'CONNECTION+APP:VALIDATIONAPP': App['GET+STRING']('VALIDATIONAPP'),	
+
+
+	//IN DATABASE IDENTIFIER 
+    'DB':  async function(){return orbitdb.docs('CRE8.APP:{PEER_HASH}')},
+
+    'INIT': async function(){await App['DB'].load();},
 
 	'FIND':function(model){
 		console.log(sails.models.app._adapter)
-		return sails.models.app;
+		return sails.models.app.find(model);
 	},
+
 
 	//THIS FILE
 	//THE PEER IS SELF
@@ -86,46 +73,47 @@ var App = {
         //RUN INIT FXN 
 
 	//TODO
-	'GET': async function(req){
+	'GET': async function(input){
 
 		//const records = App.db.get('');
-		var deferred = App.import.Q.defer();
-		var limit = parseInt(req.query.limit) || 1;
-		var skip = parseInt(req.query.skip) || 0;
-		var sort = req.query.sort;
-		var id = req.query.id;
+		var deferred = App['CONNECTION+APP:Q']().defer();
+
+		var limit = parseInt(input.query.limit) || 1;
+		var skip = parseInt(input.query.skip) || 0;
+		var sort = input.query.sort;
+		var id = input.query.id;
 
 		//ACTIVITY PROCESSR || EVENT IN CONEX : P 
-		console.log('appApp.get', 'CALL:', utilityServiceApp.guid(), req.query);
+		console.log('appApp.get', 'CALL:', utilityServiceApp.guid(), input.query);
 
-		if(req.query.id){
-			var apps = await App.find({id:id}).limit(limit).skip(skip).sort(sort);
+		if(input.query.id){
+			var apps = await App['FIND']({id:id});//.limit(limit).skip(skip).sort(sort);
 			//-->IMPORT TRIE . . . :P
-			App.subscribe(req, [apps[0].id]);
+			//App.subscribe(req, [apps[0].id]);
 			//TODO: MANY-MANY RELATIONSHIP; SEE NOTIFICATIONS . . . 
 			var models = await associationApp.get(apps[0]);
 		}
 		else{
-			var models = await App.find({}).limit(100).skip(skip).sort(sort);
-			App.subscribe(req, apps.map(function(obj){return obj.id}));
+			var models = await App['FIND']({});//.limit(100).skip(skip).sort(sort);
+			//App.subscribe(req, apps.map(function(obj){return obj.id}));
 		}
 		return models;
 	},
 
-	'CREATE': async function(req){
+	'CREATE': async function(input){
 
 		var model = {
 			model: 'APP',
-			title: req.param('title'),
-			description: req.param('description'),
-			information: req.param('information'),
-			data: req.param('data'),
-			protocols: req.param('protocols'),
-			context: req.param('context'),
-			creator: req.param('creator'),
+			title: input.param('title'),
+			description: input.param('description'),
+			information: input.param('information'),
+			data: input.param('data'),
+			protocols: input.param('protocols'),
+			context: input.param('context'),
+			creator: input.param('creator'),
 			data:{apps:{reactions: {plus:0,minus:0}, attention:{general:0}}}
 		};
-		model.hash = App.import.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
+		model.hash = App['CONNECTION+CRYPTO']().createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
 		
 		//ACTIVITY PROCESSOR
 		console.log('appApp.create', 'CALL:', utilityServiceApp.guid(), model);
@@ -148,10 +136,9 @@ var App = {
 		//App['CONNECTION+APPS:VALIDATIONAPP+CREATE'](newApp); // TODO FLATTEN PROCESSING IN MODULE LOADER :)
 
 		//REDUCE
-		return App['FIND']({hash:model.hash});
+		return App['FIND'].find({hash:model.hash});
 
 	},
-
 
 	'TOKENS+GET': function(model){
 		var tokens = [

@@ -1,24 +1,12 @@
-//THE META-CIRCULAR CONNECTOR 
-const self = {
-	//connections:{
-		connections:{
-			connection:{
-				params:{},
-			}
-		}
-	//},
-};
 var App = {
-	//SETS OF MAPPINGS AS OBJECTS
-	//THIS IS WHERE IT ALL STARTS
-	//RE STRUCT
-	init:{
-		//title
-		//hash:..
-		//fn or init
-		fn: async function(){},
-	},
-	init: async function(){
+	//INIT APP WIL EXPOSE APPS RENDERED AND RUN THE INIT FUNCTIONS TO SPIN UP LISTENERS AND WEBSOCKETS ETC
+	//THE BOOT PROCESS 
+	//SHARING THE ENTIRE PEER AS BLOB 
+	//TODO: THINK ABOUT CONENSUS 
+	'CONNECTION+CRYPTO': function(){return global['appApp']['GET+REQUIRE']('crypto')},
+
+	'INIT': async function(){
+		console.log('INIT ')
 
 		//machieneAttention.init();
 
@@ -36,31 +24,48 @@ var App = {
 		//agreeing on super structures reduce varience
 			//construction: allowing for all truths creates and infinte dimensional data space
 			//: data is data : when relavant data-and-the-recursive-lookup is perceived it will be in conflict
-
 			//configuration : {
-
-
 			//}
-
-
-
-
-
 
 		//, and may be requested  by peers in a network
 
 		//GLOBALS!!
 		//PEER COMPILE . . . 
-		await dataApp.init();
+		//MODULE LOADER HERE .. 
+		await dataApp['INIT']();
 
 		//UHM
 		passportApp.loadStrategies();
 
 		//START INTERVALS
-		intervalServiceApp.init();
+		intervalServiceApp['INIT']();
 		//THIS IS DYNAMIC LIST
 		//for (x in functionSet){}
 		//populationApp.populateCombinatorialMarkets();
+
+		async function initDynamic(app, protocol){
+			var objectWrap = {};
+			var string = app+'+'+protocol;
+			var anApp = global[app]; 
+			var aProtocol = anApp[protocol];
+			objectWrap[string] = aProtocol;
+			console.log(anApp, aProtocol)
+			var serilizedString = JSON.stringify(aProtocol, function(key, val) {
+				if (val && typeof val === 'function' || val.constructor === RegExp) {return String(val)}
+				return val
+			}, 2);
+			var protocolModel = {
+				string:app+'+'+protocol,
+				description:'sample',
+				parameters:{},
+				data: serilizedString,
+			};
+			protocolModel.hash = App['CONNECTION+CRYPTO']().createHmac('sha256', 'CRE8').update(JSON.stringify(protocolModel)).digest('hex');
+			var newProtocol = await protocolApp['CREATE'](protocolModel);
+			console.log(newProtocol);
+		}
+		initDynamic('dataApp', 'INIT');
+
 	}
 };
 module.exports = App;

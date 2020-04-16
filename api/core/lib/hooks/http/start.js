@@ -38,10 +38,8 @@ module.exports = function (sails) {
             return next(err);
           });
         }
-
         // Start timer in case this takes suspiciously long...
         liftAbortTimer = setTimeout(failedToStart, liftTimeout);
-
         // If the server fails to start because of an error, or if it's just taking
         // too long, show some troubleshooting notes and bail out.
         function failedToStart(err) {

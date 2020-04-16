@@ -1,13 +1,17 @@
 //CRE8.ACTION.ALPHA
 var App = {
-	import:{
- 		crypto: require('crypto')
-	},
+
+	//GLOBALS STRUCTURE ..
+	//UHM .. HOW DOES IT LOAD ITSELF ..
+	//'CONNECTION+APPMANAGERAPP': global['appMangerApp'],
+
+	'CONNECTION+CRYPTO': global['appApp']['GET+REQUIRE']('crypto'),
 	//TODO: API OVERWRITE FOR ROUTING
 	//API APP
 		//ROUTING APP
 			//--> HTTP APP
-	attributes: {
+	//CONNECTION+DATAMODEL+SELF : {HASH || STRING} | ACTION
+	'CONNECTION+SELF+ATTRIBUTES': {
     	//TODO: DEFINE
     	//DEPRECIATE
     	model: {type: 'string', defaultsTo: 'ACTION'},
@@ -17,7 +21,10 @@ var App = {
         associatedModels: {type: 'json'},
         data: {type: 'json'},
     },
+
+    //ROUTES APP IMPORT :: GENERAL SERVER .. 
 	'routes':{},
+
 	get: async function(req){
 		//TODO: PARSE QUERY | QUERY PARSE APP <:P
 		var limit = parseInt(req.query.limit) || 1;

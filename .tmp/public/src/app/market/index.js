@@ -11,8 +11,7 @@ angular.module( 'conexus.market', [])
                     //BY MARKET ID -- > MARKET IS COMBINATORIAL (ASSET) --> COMBINATORIAL ITEMS AND THEIR ASSOCIATIONS; UNIT FOR COMBINATORIAL ITEM? 
                             //ITS AN ASSOCIATION LOL
                         //ITEM COMPOSITION
-                    filter:JSON.stringify({
-                        type:'MARKET', 
+                    filter:JSON.stringify({type:'MARKET', 
                         //id:$stateParams.id
                     }),
                     limit:100,
@@ -144,15 +143,11 @@ angular.module( 'conexus.market', [])
         if (!model){model = 'circle'}
         cytoData.getGraph().then(function(graph){
             $scope.graph = graph;
-            $scope.graph.layout({
-                name: model,
-            }).run();
+            $scope.graph.layout({name: model}).run();
         });
     };
 
-    $scope.replace = function(model){
-        return model.replace(/,/g, '').replace(/\+/g, '')
-    };
+    $scope.replace = function(model){return model.replace(/,/g, '').replace(/\+/g, '')};
 
     $scope.selectTab = function(model){
         $scope.selectedTab = model;

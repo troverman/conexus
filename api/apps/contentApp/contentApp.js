@@ -1,10 +1,10 @@
 //CRE8.CONTENT.ALPHA
 var App = {
-	import:{
-		Q: require('q'),
-		crypto: require('crypto')
-	},
-	attributes: {
+
+	'CONNECTION+Q': require('q'),
+	'CONNECTION+CRYPTO': require('crypto'),
+
+	'CONNECTION+SELF': {
         model: {type: 'string', defaultsTo: 'CONTENT'},
         title: {type: 'string', allowNull: true},
         content: {type: 'string'},
@@ -28,7 +28,7 @@ var App = {
 
 	//TODO: MULTI CONTEXT WRT DATA STORE
 	get: async function(req, res) {
-		var deferred = App.import.Q.defer();
+		var deferred = App['CONNECTION+Q'].defer();
 		var limit = parseInt(req.query.limit) || 1;
 		var skip = parseInt(req.query.skip) || 0;
 		var sort = req.query.sort || 'createdAt DESC';
@@ -122,7 +122,7 @@ var App = {
 			creator: userModels[0].id,		
 			data:{apps:{reactions:{plus:0, minus:0}, attention:{general:0}}}
 		};
-		model.hash = App.import.crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
+		model.hash = App['CONNECTION+CRYPTO'].createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
 		console.log('contentApp.create', 'CALL:', utilityServiceApp.guid(), model);
 		var newContent = await Content.create(model);
 		newContent.associatedModels = req.param('associatedModels');

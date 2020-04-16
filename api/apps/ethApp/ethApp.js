@@ -1,16 +1,18 @@
 //ETH APP
 var App = {
+  
+  
+	//'CONNECTION+WEB3': global['appApp']['GET']({type:'require', string:'web3'}),
     //const web3 = require('web3');
     //const Web3 = require('web3');
     //const web3 = new Web3();
+    //web3.setProvider(new Web3.providers.WebsocketProvider('ws://localhost:8546'));
+
     //PRIVIDER WILL BE LOCAL NODE.. 
         //PRIVIDER CONNECTS TO ( CHAIN ID )
         //var network = web3.version.network
         //https://ropsten.infura.io is a hosted provider . . . will do peers in create who can relay with machiene attention 
-    //web3.setProvider(new Web3.providers.WebsocketProvider('ws://localhost:8546'));
-	import:{
-        //web3: require('web3'),
-	},
+        
 
     //TAKE A BREAK HERE :p
     //APP-MEMBER CONNECTION
