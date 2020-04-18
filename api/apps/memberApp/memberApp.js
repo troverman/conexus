@@ -62,17 +62,16 @@ var App = {
 			if (input.query.id){
 				if (App['CONNECTION+MONGODB'].ObjectID.isValid(input.query.id)){query.$or.push({"_id":{$eq:App['CONNECTION+MONGODB'].ObjectID(input.query.id)}});}
 			}
+			console.log(input.query, query);
 			App['DB']().getDatastore().manager.collection('user').find(query).limit(limit).skip(skip).sort({'createdAt':-1}).toArray(async function (err, models) {
-				console.log(models)
 				if (models.length > 0){
 					var userModel = models[0];
 					userModel.id = userModel._id.toString();
-					App['DB']().subscribe(input, [models[0].id]);
-					var models = await associationApp['GET'](models[0]);
-					console.log(models, models[0])
-					return models;
+					//App['DB']().subscribe(input, [models[0].id]);
+					//var models = await associationApp['GET'](models[0]);
+					//userModel.associatedModels = models; // ... hm
 				}
-				deferred.resolve(models);
+				deferred.resolve(userModel);
 			});
 		}
 		else if (input.query.query){
@@ -84,27 +83,27 @@ var App = {
 		else{
 			var models = await App['DB']().find({}).limit(limit).skip(skip).sort(sort);
 			var numRecords = await App['DB']().count();
-			App['DB']().subscribe(req, models);
+			App['DB']().subscribe(input, models);
 			var returnObj = {data:models, info:{count:numRecords}};
 			deferred.resolve(returnObj);
 		}
 		return deferred.promise;
 	},
-	'UPDATE': async function(req){
+	'UPDATE': async function(input){
 		//TODO: SECURITY
-		var id = req.param('id');
+		var id = input.param('id');
 		var model = {
-			username:req.param('username'),
-			email:req.param('email'),
-			phoneNumber:req.param('phoneNumber'),
-			avatarUrl:req.param('avatarUrl'),
-			coverUrl:req.param('coverUrl'),
-			firstName:req.param('firstName'),
-			lastName:req.param('lastName'),
-			dateOfBirth: req.param('dateOfBirth'),
-			apps: req.param('apps')
+			username:input.param('username'),
+			email:input.param('email'),
+			phoneNumber:input.param('phoneNumber'),
+			avatarUrl:input.param('avatarUrl'),
+			coverUrl:input.param('coverUrl'),
+			firstName:input.param('firstName'),
+			lastName:input.param('lastName'),
+			dateOfBirth: input.param('dateOfBirth'),
+			apps: input.param('apps')
 		};
-		if (req.param('description')){model.description = req.param('description')}
+		if (input.param('description')){model.description = input.param('description')}
 		var model = await App['DB']().update({id: id}, model);
 		App['DB']().publish([model.id], {verb: 'update', data: model});
 		return model;
