@@ -1,35 +1,27 @@
 //CRE8.PROTOCOL.ALPHA
 //REDUCE? 
 var App = {
-	//DEFINE DATA MODEL(S)
-	attributes: [
-		{
-			title: 'Protocol',
-			dataModel:{
-				title: {type: 'string'},
-				permissions:{type:'json'},
-				logic:{type:'json'},
-		    }
-		}
-    ],
-    attributes: {
+    'CONNECTION+SELF+ATTRIBUTES' : {
 		//DEPRECIATE
         model: {type: 'string', defaultsTo: 'PROTOCOL'},
 		title: {type: 'string'},
 		permissions:{type:'json'},
 		logic:{type:'json'},
     },
-	//DEFINE ASSOCIATIONS / IMPORTS
-	associations:[
-	//node_modules..
-    //imports..
-		//import queryLanguage 
-			//and queryParse
-	],
+    //DEFINE DATA MODEL(S)
+	//attributes: [
+	//	{
+	//		title: 'Protocol',
+	//		dataModel:{
+	//			title: {type: 'string'},
+	//			permissions:{type:'json'},
+	//			logic:{type:'json'},
+	//	    }
+	//	}
+    //],
+	'DB': function(){return global['Protocol']},
 	//CUSTOM FUNCTIONS
-	'GET': function(req, res) {
-		//queryLanguage.queryParse();
-	},
+	//'GET': function(input, output) {queryLanguage.queryParse();},
 	'GET': async function(input){
 		var id = input.query.id;
 		var limit = parseInt(input.query.limit) || 1 ;
@@ -50,11 +42,10 @@ var App = {
 		if (protocol.length == 0 ){protocol = await Protocol.create(model);}
 		return protocol
 	},
-
 	//FRONTEND; JSX; TO BUILD THE ENGINE.. 
 		//APP DEFINED ROUTES. ETC
 			//COMPILES TO APP IN BROWER , NATIVLY
 		//CORE CONTAINS THE BUILDER
-	templates:{}	
+	'VIEWS':{}	
 };
 module.exports = App;

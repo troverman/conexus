@@ -1,12 +1,10 @@
 //CRE8.VALIDATION.ALPHA
 var App = {
-	attributes: {
+	'CONNECTION+SELF+ATTRIBUTES': {
         //DEPRECIATE
         model: {type: 'string', defaultsTo: 'VALIDATION'},
         type: {type: 'string', defaultsTo: 'VALIDATION'},
-
         associatedModels: {type: 'json'},
-
         //APPS - CONFIG - CONNECTION PARAMS
         //DEFINED BY CONNECTION
         content: {type: 'string'},
@@ -15,11 +13,9 @@ var App = {
         parameters: {type: 'json'},
         information: {type: 'json'},
         type: {type: 'string'},
-
         //CREATOR
         user: {model: 'user'},
         creator: {type: 'string'},
-
         data: {type: 'json'},
     },
 	types:[
@@ -78,13 +74,14 @@ var App = {
 		Q: require('q'),
 		crypto: require('crypto')
 	},
+	'DB': function(){return global['Validation']},
 	getNew: async function(model){
 		//BETTER GET . . . WE ARE ABSTRACTING THOUGH MONOGO. . . 
 		//provide context hash
 		//truth variance 
 		return Event.find({id:model.id});
 	},
-	get: async function(req){
+	'GET': async function(req){
 
 		var deferred = App.import.Q.defer();
 
@@ -96,8 +93,7 @@ var App = {
 		var time = req.query.time;
 		var id = req.query.id;
 
-		console.log('validationApp.get', 'CALL:', utilityServiceApp.guid(), req.query);
-
+		//YOU KNOW WHAT TO DO LOL 
 		if(req.query.id){
 			var models = await Validation.find({id:id}).limit(limit).skip(skip).sort(sort).populate('user')
 			var promises = [];
@@ -219,7 +215,7 @@ var App = {
 
 		//TOKENS CREATE --> REDUCE TO ON EVENT CREATE 
 	},
-	create: async function(req){
+	'CREATE': async function(req){
 
 		var deferred = App.import.Q.defer();
 
@@ -250,26 +246,17 @@ var App = {
 		//}
 
 		var model = {
-
 			//REDUCE
-			model: 'VALIDATION',
-			type: 'VALIDATION',
-
+			model: 'VALIDATION', type: 'VALIDATION',
 			connection: req.param('connection') || connection[0].id,
 			parameters: req.param('parameters'),
 			content: req.param('content'),
-
 			//APPRECIATE ASSOCIATION
 			user: req.param('user'),
 			creator: req.param('creator'),
-
 			context: req.param('context'),
 			parameters: req.param('parameters'),
-
-			//content
-
 			associatedModels: req.param('associatedModels'),
-
 			//THINK: COUNTS 
 			//data:{
 				//apps:{
@@ -284,9 +271,7 @@ var App = {
 				//	followers:100,
 				//}
 			//}
-
 			data:{apps:{reactions:{plus:0,minus:0},attention:{general:0}}}
-
 		};
 
 		model.hash = App.import.crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
@@ -310,7 +295,7 @@ var App = {
 		newValidation.user = userModels[0];
 		Validation.subscribe(req, [validation.id]);
 		Validation.publish([validation.id], {verb: 'create', data: validation.id});
-		App.tokens.create(validation);
+		App['TOKENS+CREATE'](validation);
 		//NotificationApp.create[model.model.toLowerCase()](validation);
 		NotificationApp.create.validation(validation);
 		eventApp.create(validation);
@@ -403,87 +388,74 @@ var App = {
 			associationApp.create(newValidationModel);
 		}
 	},
-	tokens:{
 
-		//CONNECTION..
-		//DISCRETE TOKEN DATA
-		//-->HASH, FLATTEN (ALL, AND)
-		//2ND ORDER SELF CONNECTION ATTRIBUTES = APP DEFINED CUSTOM DATA MODEL
-		//CONNETION TOKEN PARAMS...........!
-		//FUNCTIONAL
-		get:function(model){
-			var protocolTokens = [
-				'CRE8', 
-				'CRE8+VALIDATION', 
-				'CRE8+VALIDATION+'+model.id, 
-			];
+	//CONNECTION..
+	//DISCRETE TOKEN DATA
+	//-->HASH, FLATTEN (ALL, AND)
+	//2ND ORDER SELF CONNECTION ATTRIBUTES = APP DEFINED CUSTOM DATA MODEL
+	//CONNETION TOKEN PARAMS...........!
+	//FUNCTIONAL
+	'TOKENS+GET':function(model){
+		var protocolTokens = [
+			'CRE8', 
+			'CRE8+VALIDATION', 
+			'CRE8+VALIDATION+'+model.id, 
+		];
 
-			//DATA TO STRING INTREPRETER
-			for (x in Object.keys(model)){
-				var dataType = Object.keys(model)[x].toUpperCase();
-				//[Object object].. recursive. and large.. ie hashem
-				var data = model[Object.keys(model)[x]];
-				var prefix = 'CRE8+VALIDATION';
-				var string = prefix+'+'+dataType+'+'+data;
-				protocolTokens.push(string);
-			};
+		//DATA TO STRING INTREPRETER
+		for (x in Object.keys(model)){
+			var dataType = Object.keys(model)[x].toUpperCase();
+			//[Object object].. recursive. and large.. ie hashem
+			var data = model[Object.keys(model)[x]];
+			var prefix = 'CRE8+VALIDATION';
+			var string = prefix+'+'+dataType+'+'+data;
+			protocolTokens.push(string);
+		};
 
-			//HASH :P
-			//store real data in token model? 
-			for (x in Object.keys(model)){
-				var data = model[Object.keys(model)[x]];
-				var hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(data)).digest('hex');
-				var prefix = 'CRE8+VALIDATION';
-				var string = prefix+'+'+hash;
-				protocolTokens.push(string);
-			};
+		//HASH :P
+		//store real data in token model? 
+		for (x in Object.keys(model)){
+			var data = model[Object.keys(model)[x]];
+			var hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(data)).digest('hex');
+			var prefix = 'CRE8+VALIDATION';
+			var string = prefix+'+'+hash;
+			protocolTokens.push(string);
+		};
 
-			return protocolTokens;
-		},
+		return protocolTokens;
+	},
 
-		create:async function (model){
-			var tokens = App.tokens.get(model);
-			for (x in tokens){
-
-				var tokenString = tokens[x]; 
-				var tokenModels = await Token.find({string:tokenString});
-
-				if (tokenModels.length == 0){
-					var newTokenModel = {
-						string:tokenString,
-						protocols:['CRE8','TRANSACTION'], 
-						information:{
-							inCirculation:model.amount, 
-							markets:0
-						},
-						logic:{
-							transferrable:true, 
-							mint:'CREATE TIME'
-						}
-					};
-					var newToken = await Token.create(newTokenModel);
-					console.log('TOKEN CREATED', newToken.string);
-
-					model.user.balance[tokenString] = parseFloat(model.amount);
-					var updatedUser = await User.update({id:model.user.id}, {balance:model.user.balance});
-					console.log('UPDATED USER', updatedUser);
-
-				}
-				else{
-
-					tokenModels[0].information.inCirculation = parseInt(tokenModels[0].information.inCirculation) + parseFloat(model.amount); 
-					var updatedToken = await Token.update({id:tokenModels[0].id}, {information:tokenModels[0].information});
-					console.log('TOKEN UPDATED', updatedToken);
-
-					if (model.user.balance[tokenString]){model.user.balance[tokenString] = parseInt(model.user.balance[tokenString]) + parseFloat(model.amount);}
-					else{model.user.balance[tokenString] = parseFloat(model.amount);}
-
-					var updatedUser = await User.update({id:model.user.id}, {balance:model.user.balance});
-					console.log('UPDATED USER', updatedUser);
-
-				}
+	'TOKENS+CREATE': async function (model){
+		var tokens = App['TOKENS+GET'](model);
+		for (x in tokens){
+			var tokenString = tokens[x]; 
+			var tokenModels = await Token.find({string:tokenString});
+			if (tokenModels.length == 0){
+				var newTokenModel = {
+					string:tokenString,
+					protocols:['CRE8','TRANSACTION'], 
+					information:{inCirculation:model.amount, markets:0},
+					logic:{transferrable:true,  mint:'CREATE TIME'}
+				};
+				var newToken = await Token.create(newTokenModel);
+				console.log('TOKEN CREATED', newToken.string);
+				model.user.balance[tokenString] = parseFloat(model.amount);
+				var updatedUser = await User.update({id:model.user.id}, {balance:model.user.balance});
+				console.log('UPDATED USER', updatedUser);
 			}
-		},
-	}
+			else{
+				tokenModels[0].information.inCirculation = parseInt(tokenModels[0].information.inCirculation) + parseFloat(model.amount); 
+				var updatedToken = await Token.update({id:tokenModels[0].id}, {information:tokenModels[0].information});
+				console.log('TOKEN UPDATED', updatedToken);
+
+				if (model.user.balance[tokenString]){model.user.balance[tokenString] = parseInt(model.user.balance[tokenString]) + parseFloat(model.amount);}
+				else{model.user.balance[tokenString] = parseFloat(model.amount);}
+
+				var updatedUser = await User.update({id:model.user.id}, {balance:model.user.balance});
+				console.log('UPDATED USER', updatedUser);
+			}
+		}
+	},
+
 };
 module.exports = App;

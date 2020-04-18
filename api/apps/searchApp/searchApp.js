@@ -22,6 +22,7 @@ const Q = require('q');
 //GET ACTIVITY BASED ON [CUSTOM]
 //ACTIVITY QUERY AS ONE LOOKUP --> REFACTOR
 var App = {
+
 	//API MAIN ROUTER AND QUERY LANGUAGE APP.. IE QUERY PARSER APP(S) -> TRANSATIONS bASED ON ORM
 	query: [{
 	    "filter": [
@@ -49,8 +50,7 @@ var App = {
 	    "chain": "logic ['AND','OR']"
 	}],
 
-
-	get: function (req, res) {
+	'GET': function (req, res) {
 		if (req.query){
 			//<< SO MUCH ABSTRACTION >> 
 			//PARSE QUERY
@@ -92,41 +92,7 @@ var App = {
 							//uncle?
 		}
 	},
-
-	search: async function (req, res) {
-		if (req.query.query){
-			var searchQuery = req.query.query;
-			var tag = req.query.tag;
-			var limit = req.query.limit;
-			var skip = req.query.skip;
-			var sort = req.query.sort;		
-			if (req.query.model == 'PROJECT'){
-				var query = JSON.parse(JSON.stringify(req.query.query));
-				query.map(function(obj){obj = JSON.parse(JSON.stringify(obj))});
-				var projectModels = await Project.find({tags:{contains: tag}}).limit(limit).skip(skip).sort(sort);
-				projectModels = models.map(function(obj){obj.model = 'PROJECT';return obj;});
-				Project.subscribe(req, projectModels);
-				res.json(projectModels);
-			}
-			else{
-				var projectModels = await Project.find().where({or: [{title: {contains: searchQuery}}, {urlTitle: {contains: searchQuery}}]})
-				projectModels = projectModels.map(function(obj){obj.model = 'PROJECT'; return obj;});
-				var contentModels = await Content.find().where({or: [{title: {contains: searchQuery}}, {content: {contains: searchQuery}}, {user: {contains: searchQuery}}]}).populate('user')
-				contentModels = contentModels.map(function(obj){obj.model = 'CONTENT';return obj;});
-				var taskModels = await Task.find().where({or: [{content: {contains: searchQuery}}, {title: {contains: searchQuery}}]}).populate('user')
-				taskModels = taskModels.map(function(obj){obj.model = 'TASK';return obj;});
-				var userModels = await User.find().where({or: [{username: {contains: searchQuery}}]});
-				userModels = userModels.map(function(obj){obj.model = 'MEMBER';return obj;});
-				var itemModels = await Item.find().where({or: [{content: {contains: searchQuery}}, {title: {contains: searchQuery}}, {user: {contains: searchQuery}}]})
-				itemModels = itemModels.map(function(obj){obj.model = 'ITEM';return obj;});
-				var combinedModels = [].concat.apply([], [projectModels, contentModels, taskModels, userModels, itemModels]);
-    			combinedModels = combinedModels.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
-    			return combinedModels;
-			}
-		}
-	},
-
-	getFeed: async function (req) {
+	'GET+FEED': async function (req) {
 	    console.log('FEED QUERY START');
 		var searchQuery = JSON.parse(req.query.query);
 		console.log(searchQuery);
@@ -168,5 +134,38 @@ var App = {
 	    console.log('FEED QUERY DONE', activity.length);
 		return activity;
 	},
+	'SEARCH': async function (req, res) {
+		if (req.query.query){
+			var searchQuery = req.query.query;
+			var tag = req.query.tag;
+			var limit = req.query.limit;
+			var skip = req.query.skip;
+			var sort = req.query.sort;		
+			if (req.query.model == 'PROJECT'){
+				var query = JSON.parse(JSON.stringify(req.query.query));
+				query.map(function(obj){obj = JSON.parse(JSON.stringify(obj))});
+				var projectModels = await Project.find({tags:{contains: tag}}).limit(limit).skip(skip).sort(sort);
+				projectModels = models.map(function(obj){obj.model = 'PROJECT';return obj;});
+				Project.subscribe(req, projectModels);
+				res.json(projectModels);
+			}
+			else{
+				var projectModels = await Project.find().where({or: [{title: {contains: searchQuery}}, {urlTitle: {contains: searchQuery}}]})
+				projectModels = projectModels.map(function(obj){obj.model = 'PROJECT'; return obj;});
+				var contentModels = await Content.find().where({or: [{title: {contains: searchQuery}}, {content: {contains: searchQuery}}, {user: {contains: searchQuery}}]}).populate('user')
+				contentModels = contentModels.map(function(obj){obj.model = 'CONTENT';return obj;});
+				var taskModels = await Task.find().where({or: [{content: {contains: searchQuery}}, {title: {contains: searchQuery}}]}).populate('user')
+				taskModels = taskModels.map(function(obj){obj.model = 'TASK';return obj;});
+				var userModels = await User.find().where({or: [{username: {contains: searchQuery}}]});
+				userModels = userModels.map(function(obj){obj.model = 'MEMBER';return obj;});
+				var itemModels = await Item.find().where({or: [{content: {contains: searchQuery}}, {title: {contains: searchQuery}}, {user: {contains: searchQuery}}]})
+				itemModels = itemModels.map(function(obj){obj.model = 'ITEM';return obj;});
+				var combinedModels = [].concat.apply([], [projectModels, contentModels, taskModels, userModels, itemModels]);
+    			combinedModels = combinedModels.sort(function(a,b) {return (a.createdAt < b.createdAt) ? 1 : ((b.createdAt < a.createdAt) ? -1 : 0);} ); 
+    			return combinedModels;
+			}
+		}
+	},
+
 };
 module.exports = App;

@@ -1,6 +1,8 @@
 # CRE8
 ## [Developers](https://www.cre8.xyz/apps)
 
+> A set of Core Applications
+
 ## How to Contribute
 Check out the following open tasks to contribute generally.
 - [Open Tasks](https://www.cre8.xyz/tasks)

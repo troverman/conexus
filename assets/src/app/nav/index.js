@@ -4,15 +4,11 @@ angular.module( 'conexus.nav', [])
     //TODO: IN APP.JS
     //STATE CHANGE LOGIC
     //ERR: ERR SPAM FROM HERE
-    $rootScope.$on("$stateChangeStart", function() {
-        $timeout(function () {$scope.closeAllNav();});
-    });
-
+    $rootScope.$on("$stateChangeStart", function() {$timeout(function () {$scope.closeAllNav();}); });
+    
     //TODO: ROOTSCOPE ITEM
     //FUNCTION IN CREATE TOGGLE MAIN NAV
-
     //THIS SHOULD BE ITERATIVE AND INITALIZED BY PEER BUILD 
-
     //INITALIZE LOCAL VARIABLES
     $scope.associationsAreExpanded = false;
     $scope.attentionChart = {};
@@ -28,20 +24,9 @@ angular.module( 'conexus.nav', [])
     $scope.outputVector = [];
     $scope.reputationChart = {
         chart: {zoomType: 'x'},
-        series: [{
-            id: 'Reputation',
-            type: 'column',
-            name: 'Reputation',
-            data: []
-        }],
+        series: [{id: 'Reputation', type: 'column', name: 'Reputation', data: []}],
         title: {text: ''},
-        xAxis: {
-            crosshair: true,
-            gridLineWidth: 0.5,
-            gridLineColor: 'grey',
-            title: {text: null},
-            categories: [],
-        },
+        xAxis: {crosshair: true, gridLineWidth: 0.5, gridLineColor: 'grey', title: {text: null}, categories: [],},
         legend: {enabled: false},
         yAxis: {title: {text: null}},
         credits:{enabled:false},
@@ -51,20 +36,9 @@ angular.module( 'conexus.nav', [])
     $scope.selectedType = 'POST';
     $scope.tokenChart = {
         chart: {zoomType: 'x'},
-        series: [{
-            id: 'Attention',
-            type: 'column',
-            name: 'Attention',
-            data: []
-        }],
+        series: [{id: 'Attention', type: 'column', name: 'Attention', data: []}],
         title: {text: ''},
-        xAxis: {
-            crosshair: true,
-            gridLineWidth: 0.5,
-            gridLineColor: 'grey',
-            title: {text: null},
-            categories: [],
-        },
+        xAxis: {crosshair: true, gridLineWidth: 0.5, gridLineColor: 'grey', title: {text: null}, categories: [],},
         legend: {enabled: false},
         yAxis: {title: {text: null}},
         credits:{enabled:false},
@@ -81,7 +55,6 @@ angular.module( 'conexus.nav', [])
         $scope.newProject = {};
         $scope.newReaction = {};
         $scope.newTask = {};
-
         $rootScope.newTime = {};
 
         $scope.newTransaction = {};
@@ -89,19 +62,15 @@ angular.module( 'conexus.nav', [])
         $scope.newContent.associatedModels = [{text: $rootScope.currentUser.username, type:'PROFILE', id:$rootScope.currentUser.id}];
 
         //TODO: KINDA HACY
-        $rootScope.$watch('currentUser', function(){
-            $scope.newTransaction.from = [{text:$rootScope.currentUser.username, id:$rootScope.currentUser.id}];
-        }, true);
+        $rootScope.$watch('currentUser', function(){$scope.newTransaction.from = [{text:$rootScope.currentUser.username, id:$rootScope.currentUser.id}];}, true);
 
         //TODO:BETTER
+        //NOTIFICATION APP BLOCK :::
         NotificationModel.get({user:$rootScope.currentUser.id, isRead:false, limit:100, skip:0, sort:'createdAt DESC'}).then(function(notifications){
             $scope.notifications = notifications;
             $rootScope.notificationCount = $scope.notifications.length;
-            for (x in $scope.notifications){
-                $rootScope.pop($scope.notifications[x].title, $scope.notifications[x].content);
-            }
+            for (x in $scope.notifications){$rootScope.pop($scope.notifications[x].title, $scope.notifications[x].content);}
         });
-
         $sailsSocket.subscribe('notification', function (envelope) {
             console.log(envelope)
             if (envelope.verb == 'create'){
@@ -114,7 +83,6 @@ angular.module( 'conexus.nav', [])
                 }
             }
         });
-
     }
 
     $rootScope.actionToggle = function(item){
@@ -154,12 +122,11 @@ angular.module( 'conexus.nav', [])
                 creator:$rootScope.currentUser.id,
                 context:[{text:'self'}, {text:'general'}]
             };
-
             //if (item){
             //    $scope.newConnection.associatedModels.push({
             //       type:item.model, id:item.id, text:item.model + ' ' + item.title
             //    });
-                //GET EXTENDED CHAIN CONNECTION LOGIC FROM ITEM ~ 
+            //GET EXTENDED CHAIN CONNECTION LOGIC FROM ITEM ~ 
             //}
             $mdSidenav('connection').toggle();
         }
@@ -169,70 +136,45 @@ angular.module( 'conexus.nav', [])
     $rootScope.contentToggle = function(item){
         $scope.closeAllNav();
         if($rootScope.currentUser){
-
             $scope.selectType = function(type){$scope.newContent.type = type;};
             $scope.createDetailToggleVar = true;
             $scope.newContent = {
                 type:'POST',
-                associatedModels:[{
-                    type:'CONTENT',
-                    text:'self',
-                    id:'self',
-                    context:[
-                        {text:'self', score:100}
-                    ],
-                    connection:[{
-                        id:null,
-                        text:'Content Connection',
-                        //2nd order connection 
-                        parameters:{
-                            title:'',
-                            context:{},
-                        }
-                    }]
-                },{
-
-                    //LOOP AT HOW THIS IS CONVERTED AND PROCESSED ON ContentController vs RENDERING TOO
-                    type:'MEMBER',
-                    text:'MEMBER+'+$rootScope.currentUser.id,
-                    id:$rootScope.currentUser.id,
-                    connection:[{
-
-                        id:null,
-                        text:'Member Connection',
-                        parameters1:{
-                            associatedModels:[{
-                                attributes:{
-                                    label:{type:''},
-                                },
-                            }],
-                            model:[{
-                                context:{type:{}},
-                            }],
-                        },
-                        parameters2:[{
-                            attributes:{
-                                label:{type:''},
-                                context:{type:{}},
+                associatedModels:[
+                    {
+                        type:'CONTENT',
+                        text:'self',
+                        id:'self',
+                        context:[{text:'self', score:100}],
+                        connection:[{
+                            id:null,
+                            text:'Content Connection',
+                            //2nd order connection 
+                            parameters:{title:'', context:{}}
+                        }]
+                    },{
+                        //LOOP AT HOW THIS IS CONVERTED AND PROCESSED ON ContentController vs RENDERING TOO
+                        type:'MEMBER',
+                        text:'MEMBER+'+$rootScope.currentUser.id,
+                        id:$rootScope.currentUser.id,
+                        connection:[{
+                            id:null,
+                            text:'Member Connection',
+                            parameters1:{
+                                associatedModels:[{attributes:{label:{type:''}}}],
+                                model:[{context:{type:{}}}],
                             },
+                            parameters2:[{
+                                attributes:{label:{type:''}, context:{type:{}}},
+                            }],
                         }],
-
-                    }],
-
-                    //populate from connection
-                    parameters:{
-                        context:{},
-                        label:''
-                    },
-
-                    context:[
-                        {text:'self', score:100}
-                    ],
-
-                }],
+                        //populate from connection
+                        parameters:{context:{}, label:''},
+                        context:[{text:'self', score:100}],
+                    }
+                ],
                 user:$rootScope.currentUser.id,
             };
-
             //IMPLICIT IS REALATION TO ITEM
             //FACTOR TO HAVE SAME STRUCT
             if (item){
@@ -246,42 +188,24 @@ angular.module( 'conexus.nav', [])
                     connection:[{
                         id:null,
                         text:item.model+' Connection',
-                        parameters:[{
-                            type:'model',
-                            attributes:{
-                                context:{type:{}},
-                            },
-                        },
-                        {
-                            type:'associatedModel',
-                            attributes:{
-                                label:{type:''},
-                            },
-                        }],
+                        parameters:[
+                            {type:'model', attributes:{context:{type:{}}}},
+                            {type:'associatedModel', attributes:{label:{type:''}}}
+                        ],
                     }],
                     //populate from connection
-                    parameters:{
-                        context:{},
-                        label:''
-                    },
-                    context:[
-                        {text:'self', score:100}
-                    ],
+                    parameters:{context:{}, label:''},
+                    context:[{text:'self', score:100}],
                 });
             }
-
             $scope.$watch('newContent.context', function(newValue, oldValue){
                 if (newValue !== oldValue) {
                     console.log(newValue);
-                    for (x in $scope.newContent.associatedModels){
-                        $scope.newContent.associatedModels[x].context = newValue.map(function(obj){ obj.score = 100; return obj; });
-                    }
+                    for (x in $scope.newContent.associatedModels){$scope.newContent.associatedModels[x].context = newValue.map(function(obj){ obj.score = 100; return obj; });}
                     console.log($scope.newContent.associatedModels);
                 }
             }, true);
-
             console.log('CONTENT TOGGLE', $scope.newContent);
-
             $mdSidenav('content').toggle();
         }
         else{$mdSidenav('login').toggle();}
@@ -315,15 +239,8 @@ angular.module( 'conexus.nav', [])
 
 
     $scope.createDetailToggle = function(){$scope.createDetailToggleVar = !$scope.createDetailToggleVar;};
-
     $scope.expandAssets = function(){$scope.assetsAreExpanded = !$scope.assetsAreExpanded;};
-
-    $scope.expandAssociations = function(model){
-
-        $scope.associationsAreExpanded = !$scope.associationsAreExpanded;
-        
-    };
-
+    $scope.expandAssociations = function(model){$scope.associationsAreExpanded = !$scope.associationsAreExpanded;};
     $scope.expandAdvancedFilter = function(){$scope.filtersAreExpanded = !$scope.filtersAreExpanded;};
 
     //TODO
@@ -354,15 +271,9 @@ angular.module( 'conexus.nav', [])
 
         $scope.selectAssociation = function(item){
             if ($rootScope.searchQueryNav.associations.map(function(obj){return obj.text}).indexOf(item)==-1){
-                $rootScope.searchQueryNav.associations.push({
-                    text:item, 
-                    query:item, 
-                    type:'ASSOCIATION'
-                });
+                $rootScope.searchQueryNav.associations.push({text:item, query:item, type:'ASSOCIATION'});
                 //$scope.init();
-                $scope.item.associations = $scope.item.associations.filter(function(obj) { 
-                    return obj.element !== item
-                });
+                $scope.item.associations = $scope.item.associations.filter(function(obj) { return obj.element !== item});
             }
             console.log('SELECT ASSOCIATION', item, $rootScope.searchQueryNav, $rootScope.searchQuery);
         };
@@ -370,85 +281,44 @@ angular.module( 'conexus.nav', [])
         $scope.selectLocation = function(item){
             if ($rootScope.searchQueryNav.locations.map(function(obj){return obj.text}).indexOf(item)==-1){
                 item.distance = $scope.locationFilter.distance;
-                $rootScope.searchQueryNav.locations.push({
-                    text:'Location, '+$scope.locationFilter.distance+' | '+item.id, 
-                    query:item, 
-                    type:'LOCATION'
-                });
-                $scope.item.locations = $scope.item.locations.filter(function(obj) { 
-                    return obj.element !== item
-                });
+                $rootScope.searchQueryNav.locations.push({text:'Location, '+$scope.locationFilter.distance+' | '+item.id, query:item, type:'LOCATION'});
+                $scope.item.locations = $scope.item.locations.filter(function(obj) { return obj.element !== item});
             }
-
             console.log('SELECT LOCATION', item, $rootScope.searchQueryNav, $rootScope.searchQuery);
-
         };
 
         $scope.selectContext = function(item){
-
             var selectedLimit = 100;
             var selectedSkip = 0;
             var selectedSort = 'createdAt DESC';
-
             var query = {
-                filter:[
-                    {
-                        model:null,
-                        modelParam:'context',
-                        query: item,
-                        associaton:{
-                            populate:true,
-                            depth:2,
-                            search:true,
-                        },
-                        params:{
-                            limit:selectedLimit,
-                            skip:selectedSkip,
-                            sort:selectedSort,
-                            chain:null
-                        }
-                    }
-                ],
-                params:{
-                    limit:selectedLimit,
-                    skip:selectedSkip,
-                    sort:selectedSort
-                },
+                filter:[{
+                    model:null,
+                    modelParam:'context',
+                    query: item,
+                    associaton:{populate:true, depth:2, search:true,},
+                    params:{limit:selectedLimit, skip:selectedSkip, sort:selectedSort, chain:null}
+                }],
+                params:{limit:selectedLimit, skip:selectedSkip, sort:selectedSort},
                 chain:'AND'
             };
-
             $scope.updatedQuery.push(query);
-
             //DO A FILTER OF SEARCHQUERY OF TYPE CONTEXT
             if ($rootScope.searchQueryNav.context.map(function(obj){return obj.text}).indexOf(item)==-1){
-                $rootScope.searchQueryNav.context.push({
-                    text:item, 
-                    query:item, 
-                });
+                $rootScope.searchQueryNav.context.push({text:item, query:item});
                 //$scope.init();
                 $scope.item.context = $scope.item.context.filter(function(obj) { return obj.element !== item});
             }
-
             console.log('SELECT CONTEXT', item, $rootScope.searchQueryNav, $rootScope.searchQuery);
-
         };
 
         $scope.selectTypeFilter = function(item){
             if ($rootScope.searchQueryNav.type.map(function(obj){return obj.text}).indexOf(item)==-1){
-                $rootScope.searchQueryNav.type.push({
-                    text:item, 
-                    query:item, 
-                    type:'TYPE'
-                });
-                $scope.item.type = $scope.item.type.filter(function(obj) { 
-                    return obj.element !== item
-                });
+                $rootScope.searchQueryNav.type.push({text:item, query:item, type:'TYPE'});
+                $scope.item.type = $scope.item.type.filter(function(obj) { return obj.element !== item});
             }
-
             console.log('selectTypeFilter', item, $rootScope.searchQueryNav, $rootScope.searchQuery);
-
         };
-
         $mdSidenav('filter').toggle();
     };
 
@@ -474,11 +344,10 @@ angular.module( 'conexus.nav', [])
                         type:'ITEM',
                         text:'self',
                         id:'self',
-                        context:[
-                            {text:'self', score:100}
-                        ],
+                        context:[{text:'self', score:100}],
                         connection:[{text:'Item Connection'}]
-                    },{
+                    },
+                    {
                         type:'MEMBER',
                         text:'MEMBER+'+$rootScope.currentUser.id,
                         id:$rootScope.currentUser.id,
@@ -490,20 +359,16 @@ angular.module( 'conexus.nav', [])
                 ],
                 user:$rootScope.currentUser.id,
             };
-
             if (item){
                 $scope.item = item;
                 $scope.newItem.associatedModels.push({
                     type:item.model, 
                     id:item.id, 
                     text:item.model+'+'+item.id, 
-                    context:[
-                        {text:'self', score:100}
-                    ],
+                    context:[{text:'self', score:100}],
                     connection:[{text:item.model+' Connection'}]
                 });
             }
-
             $scope.$watch('newItem.context', function(newValue, oldValue){
                 if (newValue !== oldValue) {
                     for (x in $scope.newItem.associatedModels){
@@ -511,8 +376,6 @@ angular.module( 'conexus.nav', [])
                     }
                 }
             }, true);
-
-
             $mdSidenav('item').toggle();
         }
         else{$mdSidenav('login').toggle();}
@@ -525,9 +388,7 @@ angular.module( 'conexus.nav', [])
     };
 
     //TODO: RENDER REPUTATION TOGGLE..
-    $rootScope.memberToggle = function(item){
-
-    };
+    $rootScope.memberToggle = function(item){};
 
     $rootScope.memberQRToggle = function(item){
         $scope.closeAllNav();
@@ -535,44 +396,27 @@ angular.module( 'conexus.nav', [])
         $mdSidenav('memberQR').toggle();
     };
 
-
     $rootScope.orderToggle = function(identiferSetAlpha, identiferSetBeta){
-
         $scope.closeAllNav();
         if($rootScope.currentUser){
-            $scope.newOrder = {
-                //iden
-            };
-            
+            $scope.newOrder = {};
             //LOL TBD
-            if (identiferSetAlpha){
-                $scope.identiferSetAlpha = [{text:identiferSetAlpha.id}];
-            }
+            if (identiferSetAlpha){ $scope.identiferSetAlpha = [{text:identiferSetAlpha.id}];}
             if (identiferSetBeta){
                 $scope.identiferSetBeta = [{text:identiferSetBeta.id}];
                 $scope.newOrder.identiferSetBeta = [{text:identiferSetBeta.id}];
                 $scope.newOrder.setBeta = {};
                 $scope.newOrder.setBeta[identiferSetBeta.id] = 1
             }
-
             $mdSidenav('order').toggle();
         }
-
-
         else{$mdSidenav('login').toggle();}
     };
 
     $rootScope.orderSetToggle = function(orderSet){
-        
         $scope.closeAllNav();
-        if($rootScope.currentUser){
-
-            console.log('orderSetToggle', orderSet)
-
-        }
-
+        if($rootScope.currentUser){console.log('orderSetToggle', orderSet)}
         else{$mdSidenav('login').toggle();}
-
     };
 
     $rootScope.populateMap = function(models){
@@ -583,15 +427,13 @@ angular.module( 'conexus.nav', [])
                     id:models[x].id,
                     content:models[x].title,
                     url:models[x].urlTitle,
-                    coords:{
-                        latitude:models[x].location.lat,
-                        longitude:models[x].location.lng
-                    }
+                    coords:{latitude:models[x].location.lat, longitude:models[x].location.lng}
                 });
             }
         }
     };
 
+    //LOL
     $rootScope.projectToggle = function(item){
         $scope.closeAllNav();
         if($rootScope.currentUser){
@@ -663,7 +505,6 @@ angular.module( 'conexus.nav', [])
                         description:'Meta Project Connection Rules',
                         connection:[{text:'Project Connection'}]
                     },
-
 
                     {
                         type:'PROJECT',
@@ -754,20 +595,17 @@ angular.module( 'conexus.nav', [])
                 ],
                 user:$rootScope.currentUser.id,
             };
-            
+
             if (item){
                 $scope.item = item;
                 $scope.newProject.associatedModels.push({
                     type:item.model, 
                     id:item.id, 
                     text:item.model+'+'+item.id, 
-                    context:[
-                        {text:'self', score:100}
-                    ],
+                    context:[{text:'self', score:100}],
                     connection:[{text:item.model+' Connection'}]
                 });
             }
-
             $scope.$watch('newProject.context', function(newValue, oldValue){
                 if (newValue !== oldValue) {
                     for (x in $scope.newProject.associatedModels){
@@ -775,7 +613,6 @@ angular.module( 'conexus.nav', [])
                     }
                 }
             }, true);
-
             $mdSidenav('project').toggle();
         }
         else{$mdSidenav('login').toggle();}
@@ -797,38 +634,19 @@ angular.module( 'conexus.nav', [])
     //TODO
     $rootScope.renderToggle = function(item, type){
         $scope.closeAllNav();
-
         console.log('renderToggle', item);
-
         if (item.model == 'MARKET'){
             $scope.bidAskChart = {
-                chart: {
-                    zoomType: 'x',
-                    height:250,
-                },
+                chart: {zoomType: 'x', height:250},
                 legend:{enabled:true},
                 title: {text: null},
                 xAxis: {title: {text: null}},
                 yAxis: {title: {text: null}},
-                plotOptions: {
-                    column: {
-                        pointPadding: 0.2,
-                        borderWidth: 0
-                    }
-                },
-                series: [{
-                    type: 'area',
-                    id: 'asks',
-                    name: 'Asks',
-                    color: '#14b794',
-                    data: []
-                },{
-                    type: 'area',
-                    id:  'bids',
-                    name: 'Bids',
-                    color: '#a94442',
-                    data: []
-                }],
+                plotOptions: {column: { pointPadding: 0.2, borderWidth: 0}},
+                series: [
+                    {type: 'area', id: 'asks', name: 'Asks', color: '#14b794', data: []},
+                    {type: 'area', id:  'bids', name: 'Bids', color: '#a94442', data: []}
+                ],
                 credits:{enabled:false},
             };
             for(var i=-1000;i<1000;i++){
@@ -836,11 +654,8 @@ angular.module( 'conexus.nav', [])
                 if (i<0){$scope.bidAskChart.series[0].data.push([i+100000,i*i]);}
             }
         }
-
-
         $scope.item = item;
         $scope.content = item;
-      
         //GET CHILDREN && || TIME... ASSOCIATIONS.. NEED TO FINISH ASSOCIATED SO I DONT KEEP REWRITING.. 
         function populateChildren(contentList, depth, limit){
             contentList.forEach(function(content) {
@@ -899,9 +714,7 @@ angular.module( 'conexus.nav', [])
             console.log('renderGraph', $scope.directedGraphElements)
             $scope.graph = graph;
             $scope.graph.json($scope.directedGraphElements);
-            $scope.graph.layout({
-                name: model,
-            }).run();
+            $scope.graph.layout({name: model}).run();
         });
     };
 
@@ -910,20 +723,9 @@ angular.module( 'conexus.nav', [])
         $scope.item = item;
         $scope.attentionChart = {
             chart: {zoomType: 'x'},
-            series: [{
-                id: 'Attention',
-                type: 'column',
-                name: 'Attention',
-                data: []
-            }],
+            series: [{id: 'Attention', type: 'column', name: 'Attention', data: []}],
             title: {text: ''},
-            xAxis: {
-                crosshair: true,
-                gridLineWidth: 0.5,
-                gridLineColor: 'grey',
-                title: {text: null},
-                categories: [],
-            },
+            xAxis: {crosshair: true, gridLineWidth: 0.5, gridLineColor: 'grey', title: {text: null}, categories: []},
             legend: {enabled: false},
             yAxis: {title: {text: null}},
             credits:{enabled:false},
@@ -1015,201 +817,55 @@ angular.module( 'conexus.nav', [])
     };
 
     $rootScope.statsToggle = function(item){
-
         $scope.item = item;
-
         $scope.closeAllNav();
-
         $scope.chart = {
-            chart: {
-                zoomType: 'x',
-            },
+            chart: {zoomType: 'x'},
             series: [],
             title: {text: ''},
-            xAxis: {
-                type: 'datetime',
-                currentMin: 0,
-                currentMax: 20,
-                title: null,
-                crosshair: true,
-                gridLineWidth: 0.5,
-                gridLineColor: 'grey'
-            },
-            yAxis: [{
-                title: {text: null},
-            }],
+            xAxis: {type: 'datetime', currentMin: 0, currentMax: 20, title: null, crosshair: true, gridLineWidth: 0.5, gridLineColor: 'grey'},
+            yAxis: [{title: {text: null}}],
             credits:{enabled:false},
             plotOptions: {spline: {marker: {enabled: false}}, sma: {marker: {enabled: false}}}
         };
-
         $scope.chart.series = [];
 
         //TODO: MODEL BASED STATS
         if ($scope.item.model == 'CONTENT'){
-            $scope.chart.series.push({
-                id: 'attention',
-                type: 'spline',
-                name: 'Attention',
-                data: []
-            });
-            $scope.chart.series.push({
-                id: 'reaction',
-                type: 'spline',
-                name: 'Reaction',
-                data: []
-            });
-            $scope.chart.series.push({
-                type: 'sma',
-                id: 'sma1',
-                linkedTo: 'attention',
-                params: {period: 24},
-                showInLegend: true,
-            });   
+            $scope.chart.series.push({id: 'attention', type: 'spline', name: 'Attention', data: []});
+            $scope.chart.series.push({id: 'reaction',type: 'spline', name: 'Reaction', data: []});
+            $scope.chart.series.push({type: 'sma', id: 'sma1', linkedTo: 'attention', params: {period: 24}, showInLegend: true,});   
         }
-
         if ($scope.item.model == 'ITEM'){
-            $scope.chart.series.push({
-                id: 'attention',
-                type: 'spline',
-                name: 'Attention',
-                data: []
-            });
-            $scope.chart.series.push({
-                id: 'reaction',
-                type: 'spline',
-                name: 'Reaction',
-                data: []
-            });
-            $scope.chart.series.push({
-                type: 'sma',
-                id: 'sma1',
-                linkedTo: 'attention',
-                params: {period: 24},
-                showInLegend: true,
-            });   
+            $scope.chart.series.push({id: 'attention', type: 'spline', name: 'Attention', data: []});
+            $scope.chart.series.push({id: 'reaction', type: 'spline', name: 'Reaction', data: []});
+            $scope.chart.series.push({type: 'sma', id: 'sma1', linkedTo: 'attention', params: {period: 24}, showInLegend: true,});   
         }
-
         if ($scope.item.model == 'TASK'){
-            $scope.chart.series.push({
-                id: 'attention',
-                type: 'spline',
-                name: 'Attention',
-                data: []
-            });
-            $scope.chart.series.push({
-                id: 'reaction',
-                type: 'spline',
-                name: 'Reaction',
-                data: []
-            });
-            $scope.chart.series.push({
-                type: 'sma',
-                id: 'sma1',
-                linkedTo: 'attention',
-                params: {period: 24},
-                showInLegend: true,
-            });   
+            $scope.chart.series.push({id: 'attention', type: 'spline', name: 'Attention', data: []});
+            $scope.chart.series.push({id: 'reaction', type: 'spline', name: 'Reaction', data: []});
+            $scope.chart.series.push({type: 'sma', id: 'sma1', linkedTo: 'attention', params: {period: 24}, showInLegend: true,});   
         }
-
         if ($scope.item.model == 'TIME'){
-            $scope.chart.series.push({
-                id: 'attention',
-                type: 'spline',
-                name: 'Attention',
-                data: []
-            });
-            $scope.chart.series.push({
-                id: 'reaction',
-                type: 'spline',
-                name: 'Reaction',
-                data: []
-            });
-            $scope.chart.series.push({
-                type: 'sma',
-                id: 'sma1',
-                linkedTo: 'attention',
-                params: {period: 24},
-                showInLegend: true,
-            });   
+            $scope.chart.series.push({id: 'attention', type: 'spline',name: 'Attention', data: []});
+            $scope.chart.series.push({id: 'reaction', type: 'spline', name: 'Reaction', data: []});
+            $scope.chart.series.push({type: 'sma', id: 'sma1', linkedTo: 'attention', params: {period: 24}, showInLegend: true});   
         }
-
         if ($scope.item.model == 'TRANSACTION'){
-            $scope.chart.series.push({
-                id: 'attention',
-                type: 'spline',
-                name: 'Attention',
-                data: []
-            });
-            $scope.chart.series.push({
-                id: 'reaction',
-                type: 'spline',
-                name: 'Reaction',
-                data: []
-            });
-            $scope.chart.series.push({
-                type: 'sma',
-                id: 'sma1',
-                linkedTo: 'attention',
-                params: {period: 24},
-                showInLegend: true,
-            });   
+            $scope.chart.series.push({id: 'attention', type: 'spline', name: 'Attention', data: []});
+            $scope.chart.series.push({id: 'reaction', type: 'spline', name: 'Reaction', data: []});
+            $scope.chart.series.push({type: 'sma', id: 'sma1', linkedTo: 'attention', params: {period: 24}, showInLegend: true});   
         }
-
         if ($scope.item.model == 'PROJECT'){
-            $scope.chart.series.push({
-                id: 'content',
-                type: 'spline',
-                name: 'Content',
-                data: []
-            });
-            $scope.chart.series.push({
-                id: 'item',
-                type: 'spline',
-                name: 'Items',
-                data: []
-            });
-            $scope.chart.series.push({
-                id: 'action',
-                type: 'spline',
-                name: 'Actions',
-                data: []
-            });
-            $scope.chart.series.push({
-                id: 'motion',
-                type: 'spline',
-                name: 'Motions',
-                data: []
-            });
-            $scope.chart.series.push({
-                id: 'member',
-                type: 'spline',
-                name: 'Members',
-                data: []
-            });
-            $scope.chart.series.push({
-                id: 'task',
-                type: 'spline',
-                name: 'Tasks',
-                data: []
-            });
-            $scope.chart.series.push({
-                id: 'time',
-                type: 'spline',
-                name: 'Time',
-                data: []
-            });
-            $scope.chart.series.push({
-                id: 'transaction',
-                type: 'spline',
-                name: 'Transactions',
-                data: []
-            });
-            $scope.chart.series.push({
-                id: 'validation',
-                type: 'spline',
-                name: 'Validations',
-                data: []
-            });
+            $scope.chart.series.push({id: 'content', type: 'spline', name: 'Content', data: []});
+            $scope.chart.series.push({id: 'item', type: 'spline', name: 'Items', data: []});
+            $scope.chart.series.push({id: 'action', type: 'spline', name: 'Actions', data: []});
+            $scope.chart.series.push({id: 'motion', type: 'spline', name: 'Motions', data: []});
+            $scope.chart.series.push({id: 'member', type: 'spline',name: 'Members', data: []});
+            $scope.chart.series.push({id: 'task', type: 'spline', name: 'Tasks', data: []});
+            $scope.chart.series.push({id: 'time', type: 'spline', name: 'Time', data: []});
+            $scope.chart.series.push({id: 'transaction', type: 'spline', name: 'Transactions', data: []});
+            $scope.chart.series.push({id: 'validation', type: 'spline', name: 'Validations', data: []});
         }
 
         for(var i=0;i<100;i++){
@@ -1232,7 +888,6 @@ angular.module( 'conexus.nav', [])
                 }
             }
         }
-
         $mdSidenav('stats').toggle();
 
     };
@@ -1253,7 +908,6 @@ angular.module( 'conexus.nav', [])
 
     $rootScope.taskToggle = function(item){
         $scope.closeAllNav();
-
         if($rootScope.currentUser){
             $scope.createDetailToggleVar = true;
             $scope.newTask = {
@@ -1276,7 +930,6 @@ angular.module( 'conexus.nav', [])
                 }],
                 user:$rootScope.currentUser.id,
             };
-
             if (item){
                 $scope.item = item;
                 $scope.createDetailToggleVar = false;
@@ -1290,7 +943,6 @@ angular.module( 'conexus.nav', [])
                     connection:[{text:item.model+ ' Connection'}]
                 });
             }
-
             $scope.$watch('newTask.context', function(newValue, oldValue){
                 if (newValue !== oldValue) {
                     for (x in $scope.newTask.associatedModels){
@@ -1298,9 +950,7 @@ angular.module( 'conexus.nav', [])
                     }
                 }
             }, true);
-
             console.log('TASK TOGGLE', $scope.newTask);
-
             $mdSidenav('task').toggle();
         }
         else{$mdSidenav('login').toggle();}
@@ -1309,7 +959,6 @@ angular.module( 'conexus.nav', [])
     $rootScope.timeToggle = function(item){
         $scope.closeAllNav();
         if($rootScope.currentUser){
-
             $rootScope.newTime = {
                 associatedModels:[{
                     type:'TIME',
@@ -1319,7 +968,7 @@ angular.module( 'conexus.nav', [])
                         {text:'self', score:100}
                     ],
                     connection:[{text:'Self Connection'}]
-                },{
+                }, {
                     type:'MEMBER',
                     text:'MEMBER+'+$rootScope.currentUser.id,
                     id:$rootScope.currentUser.id,
@@ -1330,7 +979,6 @@ angular.module( 'conexus.nav', [])
                 }],
                 user:$rootScope.currentUser.id,
             };
-
             if (item){
                 $scope.item = item;
                 $scope.createDetailToggleVar = false;
@@ -1338,13 +986,10 @@ angular.module( 'conexus.nav', [])
                     type:item.model, 
                     id:item.id, 
                     text:item.model+'+'+item.id, 
-                    context:[
-                        {text:'self', score:100}
-                    ],
+                    context:[{text:'self', score:100}],
                     connection:[{text:item.model+' Connection'}]
                 });
             }
-
             if (!$rootScope.newTime.recordingTime){
                 $rootScope.newTime.startTime = new Date();
                 $rootScope.newTime.startTime.setMilliseconds(0);
@@ -1355,7 +1000,6 @@ angular.module( 'conexus.nav', [])
                 $scope.recordingTime = false;
                 $scope.streaming = false;
             }
-
             $scope.selectTypeTime = function(type){$rootScope.newTime.type = type};
             $scope.startStreaming = function() {$scope.streaming = true;};
             $scope.cancelStreaming = function() {$scope.streaming = false;};
@@ -1363,7 +1007,6 @@ angular.module( 'conexus.nav', [])
                 var html = '<iframe width="510" height="265" src="'+stream+'" frameborder="0" allowfullscreen></iframe>'
                 return $sce.trustAsHtml(html);
             };
-
             $scope.startTime = function() {
                 //CONTENT VS TIME VS ITEM VS 
                 if ($scope.streaming){
@@ -1386,7 +1029,6 @@ angular.module( 'conexus.nav', [])
                 //clearInterval($scope.interval);
                 $scope.uniDimensionalTimeInterval = $interval(function(){$scope.updateCount(1, 'task')},1000);
             };
-           
             //TODO: UNIFY WITH TIMER
             $scope.updateCount = function(amount, context) {
                 //TODO: CREATED AT
@@ -1400,7 +1042,6 @@ angular.module( 'conexus.nav', [])
                     amount:1
                 });
             };
-
             $rootScope.$watch('newTime.context', function(newValue, oldValue){
                 if (newValue !== oldValue) {
                     for (x in $rootScope.newTime.associatedModels){
@@ -1408,7 +1049,6 @@ angular.module( 'conexus.nav', [])
                     }
                 }
             }, true);
-
             $mdSidenav('time').toggle();
         }
         else{$mdSidenav('login').toggle();}
@@ -1441,15 +1081,12 @@ angular.module( 'conexus.nav', [])
                 }
             }
         }
-
         $mdSidenav('tokens').toggle();
     };
 
     $rootScope.transactionToggle = function(item, asset){
-
         $scope.newTransaction = {};
         $scope.closeAllNav();
-
         $scope.addAssetToTransaction = function(model){
             if($scope.newTransaction.identifierSet){$scope.newTransaction.identifierSet.push({text:model})}
             else{
@@ -1457,9 +1094,7 @@ angular.module( 'conexus.nav', [])
                 $scope.newTransaction.identifierSet.push({text:model})
             }
         };
-       
         if($rootScope.currentUser){
-
             //ASSOCIATE
             $scope.newTransaction = {
                 from:[{text:$rootScope.currentUser.username, id:$rootScope.currentUser.id}],
@@ -1467,31 +1102,24 @@ angular.module( 'conexus.nav', [])
                     type:'TRANSACTION',
                     text:'self',
                     id:'self',
-                    context:[
-                        {text:'self', score:100}
-                    ]
+                    context:[{text:'self', score:100}]
                 }],
                 user:$rootScope.currentUser.id,
             };
-
             if (item){
                 if(item.model=='PROJECT'){$scope.newTransaction.to = [{text:item.title, id:item.id}];}
                 else{$scope.newTransaction.to = [{text:item.username, id:item.id}];}
             }
-
             if (asset){
                 $scope.newTransaction.identifierSet = [];
                 $scope.newTransaction.identifierSet.push({text:asset});
                 $scope.newTransaction.amountSet = {};
                 $scope.newTransaction.amountSet[asset] = 1;
             }
-
             $scope.sortedBalances = [];
             for (var key in $rootScope.balance) {if(!isNaN($rootScope.balance[key])){$scope.sortedBalances.push([key, $rootScope.balance[key]]);}}
             $scope.sortedBalances.sort(function(a, b) {return b[1] - a[1];});
-
             console.log('CREATE TRANSACTION', item, $scope.newTransaction);
-
             $scope.$watch('newTransaction.context', function(newValue, oldValue){
                 if (newValue !== oldValue) {
                     for (x in $scope.newTransaction.associatedModels){
@@ -1502,14 +1130,12 @@ angular.module( 'conexus.nav', [])
                     }
                 }
             }, true);
-
             $mdSidenav('transaction').toggle();
         }
         else{$mdSidenav('login').toggle();}
     };
 
     $rootScope.validationToggle = function(item, item1){
-
         $scope.addToAssociatedModels = function(model){
             console.log(model)
             var associatedModels = {
@@ -1520,21 +1146,16 @@ angular.module( 'conexus.nav', [])
             associatedModels.text = (model.title || model.username || model.amount) + ' ( ' + (associatedModels.type || '') + ' ' + model.id + ' )'
             $scope.newValidation.associatedModels.push(associatedModels);
         };
-
         $scope.closeAllNav();
-
         if($rootScope.currentUser){
-
             $scope.newValidation = {
                 associatedModels:[],
                 //HMM
                 user: $rootScope.currentUser.id,
             };
             //connection-connection app defined 2nd order has a creator parameter
-
             //TODO: ITEM (MODEL) AS ARRAY
             if(item){
-
                 console.log(item);
                 $scope.item = item;
                 var associatedModels = {
@@ -1553,9 +1174,7 @@ angular.module( 'conexus.nav', [])
                 //for (x in $scope.item){
                 $scope.newValidation.associatedModels.push(associatedModels);
                 //}
-
             }
-
             if(item1){
                 $scope.newValidation.associatedModels.push({
                     text:$scope.item1.title + ' ( ' + $scope.item1.id + ' )',
@@ -1563,7 +1182,6 @@ angular.module( 'conexus.nav', [])
                     type:$scope.item.model,
                 });
             }
-
             if(!item1){
                 $scope.newValidation.associatedModels.push({
                     text:'CRE8'+ ' ( PROJECT 5923b9cc5aac131100cab1c1 )',
@@ -1571,8 +1189,6 @@ angular.module( 'conexus.nav', [])
                     type:'PROJECT',
                 });
             }
-
-
             //if(item.associatedModels){
             //    $scope.newValidation.associatedModels = [];
             //    for (x in item.associatedModels){
@@ -1587,17 +1203,12 @@ angular.module( 'conexus.nav', [])
             //        });
             //    }
             //}
-    
             $scope.$watch('newValidation.context', function(newValue, oldValue){
                 if (newValue !== oldValue) {
-                    for (x in $scope.newValidation.context){
-                        $scope.newValidation.associatedModels[0].context[$scope.newValidation.context[x].text] = 100;
-                    }
+                    for (x in $scope.newValidation.context){$scope.newValidation.associatedModels[0].context[$scope.newValidation.context[x].text] = 100;}
                 }
             }, true);
-
             console.log($scope.newValidation);
-
             $mdSidenav('validation').toggle();
         }
         else{$mdSidenav('login').toggle();}
@@ -1636,9 +1247,7 @@ angular.module( 'conexus.nav', [])
     $scope.createAction = function(item){
         if ($rootScope.currentUser){
             $mdSidenav('action').close();
-            ActionModel.create($scope.newAction).then(function(model) {
-                $rootScope.pop('New Action!', model.id +' '+ model.createdAt);
-            });
+            ActionModel.create($scope.newAction).then(function(model) {$rootScope.pop('New Action!', model.id +' '+ model.createdAt);});
         }
         else{$mdSidenav('login').toggle()}
     };
@@ -1646,9 +1255,7 @@ angular.module( 'conexus.nav', [])
    $scope.createApp = function(item){
         if ($rootScope.currentUser){
             $mdSidenav('app').close();
-            AppModel.create($scope.newApp).then(function(model) {
-                $rootScope.pop('New App!', model.id +' '+ model.createdAt);
-            });
+            AppModel.create($scope.newApp).then(function(model) {$rootScope.pop('New App!', model.id +' '+ model.createdAt);});
         }
         else{$mdSidenav('login').toggle()}
     };
@@ -1656,9 +1263,7 @@ angular.module( 'conexus.nav', [])
     $scope.createConnection = function(item) {
         if ($rootScope.currentUser){
             $mdSidenav('connection').close();
-            ConnectionModel.create($scope.newConnection).then(function(model) {
-               $rootScope.pop('New Connection!', model.id +' '+ model.createdAt);
-            });
+            ConnectionModel.create($scope.newConnection).then(function(model) {$rootScope.pop('New Connection!', model.id +' '+ model.createdAt);});
         }
         else{$mdSidenav('login').toggle()}
     }
@@ -1668,34 +1273,24 @@ angular.module( 'conexus.nav', [])
         if ($rootScope.currentUser){
             console.log('CREATE CONTENT', $scope.newContent);
             $mdSidenav('content').close();
-            ContentModel.create($scope.newContent).then(function(model) {
-                $rootScope.pop('New Content!', model.id +' '+ model.createdAt);
-            });
+            ContentModel.create($scope.newContent).then(function(model) {$rootScope.pop('New Content!', model.id +' '+ model.createdAt);});
         }
         else{$mdSidenav('login').toggle()}
     };
 
     $scope.createItem = function(content) {
         if ($rootScope.currentUser){
-            if ($scope.newItem.context){
-                $scope.newItem.context = $scope.newItem.context.map(function(obj){
-                    return obj.text;
-                }).join(",");
-            }
+            if ($scope.newItem.context){$scope.newItem.context = $scope.newItem.context.map(function(obj){return obj.text;}).join(",");}
             $mdSidenav('item').close();
-            ItemModel.create($scope.newItem).then(function(model) {
-                $rootScope.pop('New Item!', model.id +' '+ model.createdAt);
-            });
+            ItemModel.create($scope.newItem).then(function(model) {$rootScope.pop('New Item!', model.id +' '+ model.createdAt);});
         }
         else{$mdSidenav('login').toggle()}
     };
     
     $scope.createOrder = function(content) {
         if ($rootScope.currentUser){
-
             $scope.newOrder.user = $rootScope.currentUser.id;
             $scope.newOrder.type = $scope.selectedOrderType;
-
             //ill do both
             //PATCH
             $scope.newOrder.identiferSet = [];
@@ -1711,9 +1306,7 @@ angular.module( 'conexus.nav', [])
                 $scope.newOrder.identiferSet1.push(Object.keys($scope.newOrder.setBeta)[x]);
                 $scope.newOrder.amountSet1.push($scope.newOrder.setBeta[Object.keys($scope.newOrder.setBeta)[x]]);
             }
-            
             console.log('CREATE ORDER', $scope.newOrder);
-
             $mdSidenav('order').close();
             OrderModel.create($scope.newOrder).then(function(model) {
                 $rootScope.pop('New Order!', model.id +' '+ model.createdAt);
@@ -1773,11 +1366,7 @@ angular.module( 'conexus.nav', [])
     $scope.createTime = function(){
         if($rootScope.currentUser){
             $rootScope.newTime.createdAt = $scope.newTime.startTime;
-            if ($rootScope.newTime.context){
-                $rootScope.newTime.context = $scope.newTime.context.map(function(obj){
-                    return obj.text;
-                }).join(",");
-            }
+            if ($rootScope.newTime.context){$rootScope.newTime.context = $scope.newTime.context.map(function(obj){return obj.text;}).join(",");}
             if ($rootScope.taskTime){$rootScope.newTime.amount = $rootScope.taskTime}
             console.log('CREATE TIME', $rootScope.newTime);
             $mdSidenav('time').close();
@@ -1796,11 +1385,7 @@ angular.module( 'conexus.nav', [])
     $scope.createTransaction = function(){
         if ($rootScope.currentUser){
             $scope.newTransaction.user = $rootScope.currentUser.id;
-            if ($scope.newTransaction.context){
-                $scope.newTransaction.context = $scope.newTransaction.context.map(function(obj){
-                    return obj.text
-                }).join(",");
-            }
+            if ($scope.newTransaction.context){$scope.newTransaction.context = $scope.newTransaction.context.map(function(obj){return obj.text}).join(",");}
             //MULTI TRANSACTION BUG... 
             //COPY MODEL.. 
             var newTransaction = $scope.newTransaction;
@@ -1809,11 +1394,8 @@ angular.module( 'conexus.nav', [])
             console.log('CREATE TRANSACTION', $scope.newTransaction);
             $mdSidenav('transaction').close();
 
-
             //TEMP
             $rootScope.activityUpdate = $scope.newTransaction;
-
-
             TransactionModel.create(newTransaction).then(function(model){
                $rootScope.pop('New Transaction!', model.id +' '+ model.createdAt);
             });
@@ -1850,38 +1432,18 @@ angular.module( 'conexus.nav', [])
     //VIEW TIMER.. 
     $scope.timeChart = {
         chart: {zoomType: 'x'},
-        series: [{
-            id: 'time',
-            type: 'column',
-            name: 'time',
-            data: [],
-            animation: false
-        }],
+        series: [{id: 'time', type: 'column', name: 'time', data: [], animation: false}],
         title: {text: ''},
-        xAxis: {
-            crosshair: true,
-            gridLineWidth: 0.5,
-            gridLineColor: 'grey',
-            title: {text: null},
-            categories: [],
-        },
+        xAxis: {crosshair: true, gridLineWidth: 0.5, gridLineColor: 'grey', title: {text: null}, categories: [],},
         legend: {enabled: false},
         yAxis: {title: {text: null}},
         credits:{enabled:false},
     };
-
     //idle fxn
-
     //TODO: LOCATION
     $scope.timerFunction = function(time, context, model){
 
-        function amountInArray(array, value) {
-            return array.reduce(function(n, x){
-                if (x.context.string == value){n+=parseFloat(x.amount)}
-                return n;
-            },0);
-        };
-
+        function amountInArray(array, value) {return array.reduce(function(n, x){if (x.context.string == value){n+=parseFloat(x.amount)} return n;}, 0);};
         //timeQ['general'] , timeQ['task']
 
         //break into lists of context.. overtime.. and current. .. need graph
@@ -1895,7 +1457,6 @@ angular.module( 'conexus.nav', [])
 
         //HUMAN AND MACHINE ARE ONE .. HAVE TO BE ON TO RUN? 
             //SHOULDNT BE TURNED OFF AND SHOULD RUN IN CONCERT
-
 
         //TODO: BETTER STATE INFO
         //ERR: FORMATING AND UPDATING MODELS
@@ -1913,7 +1474,7 @@ angular.module( 'conexus.nav', [])
                 //THEY ENCODE THE BALANCE FOR LOWER D
 
         var location = '';
-        if ($rootScope.currentUser.location){location=$rootScope.currentUser.location;}
+       // if ($rootScope.currentUser.location){location=$rootScope.currentUser.location;}
 
         //THIS IS SUPER DRAFT 
         //make db call if more than 10 sec or change 
@@ -1927,17 +1488,11 @@ angular.module( 'conexus.nav', [])
             amount:1,
             location:location,
         });
-
-        var set = $rootScope.timeQ[context].filter(function(obj){
-            return obj.context.string == string;
-        });
-
+        var set = $rootScope.timeQ[context].filter(function(obj){return obj.context.string == string;});
         var associatedModels = null
 
         //ERR
-        if (string.split('+').length > 1){
-            associatedModels = [{type:string.split('+')[0], id:string.split('+')[1]}]
-        }
+        if (string.split('+').length > 1){associatedModels = [{type:string.split('+')[0], id:string.split('+')[1]}]}
 
         var attentionModel = {
             app: model,
@@ -1947,21 +1502,13 @@ angular.module( 'conexus.nav', [])
             associatedModels: associatedModels,
             creator: $rootScope.currentUser.id,
         };
-
         if (set.length >= 10){
             attentionModel.amount = set.length;
             $rootScope.timeQ[context] = [];
             AttentionModel.create(attentionModel);
         }
-
-        if (context == 'mining'){
-            if ($rootScope.timeQ[context].length >= 10){AttentionModel.create(attentionModel);}
-        }
-
-        if (context == 'attention'){
-            $rootScope.timeModel.amount = $rootScope.timeModel.amount + time;
-        }
-
+        if (context == 'mining'){if ($rootScope.timeQ[context].length >= 10){AttentionModel.create(attentionModel);}}
+        if (context == 'attention'){$rootScope.timeModel.amount = $rootScope.timeModel.amount + time;}
         var index = $scope.timeChart.xAxis.categories.indexOf(string);
         if (index == -1){
             $scope.timeChart.xAxis.categories.push(string);
@@ -2009,29 +1556,18 @@ angular.module( 'conexus.nav', [])
     //TODO! IMPORTANT
     $scope.loadAsset = function(query){
         var deferred = $q.defer();
-
         //SEND ITEMS? --> SEND CONTENT OWNERSHIP? DIFFERENCE.. HMM
         //CONTENT HAS RIGHTS TO VIEW TOKEN
         //PROTOCOL SPECIFIC IDENTIFER SEARCH
         //GET MY ITEMS TO SEND
         //SHOULD BE TOP ASSETS THAT YOU HAVE
- 
         $scope.balance = $rootScope.balance;
         console.log('LOAD ASSET', $rootScope.balance, $scope.balance);
-
         ItemModel.get({user:$rootScope.currentUser.id, limit:10, skip:0, sort:'createdAt DESC'}).then(function(itemModels){
             console.log('LOAD ASSET ITEMS', itemModels)
-            
             //TODO: ALLOW FOR TITLE.. ETC.. USE TOKEN DATA MODEL HERE.. 
-            itemModels.map(function(obj){
-                obj.type='ITEM';
-                obj.text=obj.id;
-                return obj;
-            });
-
-            for (x in Object.keys($rootScope.balance)){
-                itemModels.push({text:Object.keys($rootScope.balance)[x]});
-            }
+            itemModels.map(function(obj){obj.type='ITEM'; obj.text=obj.id;return obj; });
+            for (x in Object.keys($rootScope.balance)){itemModels.push({text:Object.keys($rootScope.balance)[x]});}
             //MAP BALANCE --> itemModels.push()
             deferred.resolve(itemModels);
         });
@@ -2045,11 +1581,7 @@ angular.module( 'conexus.nav', [])
         //SearchModel.search(query).then(function(searchModels){})
         ProjectModel.get({query:query, limit:10, skip:0, sort:'createdAt DESC'}).then(function(searchModels){
             if (searchModels.length > 0){
-                searchModels.map(function(obj){
-                    obj.type='PROJECT';
-                    obj.text = 'PROJECT+'+obj.id;
-                    return obj;
-                });
+                searchModels.map(function(obj){ obj.type='PROJECT'; obj.text = 'PROJECT+'+obj.id; return obj; });
             }
             deferred.resolve(searchModels);
         });
@@ -2061,11 +1593,7 @@ angular.module( 'conexus.nav', [])
         console.log('loadAssociationsTask', query);
         TaskModel.get({search:query, limit:10, skip:0, sort:'createdAt DESC'}).then(function(searchModels){
             if (searchModels.length > 0){
-                searchModels = searchModels.map(function(obj){
-                    obj.type='TASK';
-                    obj.text=obj.title;
-                    return obj;
-                });
+                searchModels = searchModels.map(function(obj){ obj.type='TASK'; obj.text=obj.title; return obj;});
             }
             deferred.resolve(searchModels);
         });
@@ -2075,11 +1603,7 @@ angular.module( 'conexus.nav', [])
     $scope.loadItems = function(query){
         var deferred = $q.defer();
         ItemModel.get({search:query, limit:10, skip:0, sort:'createdAt DESC'}).then(function(itemModels){
-            itemModels = itemModels.map(function(obj){
-                obj.type='ITEM';
-                obj.text=obj.title;
-                return obj;
-            });
+            itemModels = itemModels.map(function(obj){obj.type='ITEM'; obj.text=obj.title; return obj;});
             deferred.resolve(itemModels);
         });
         return deferred.promise;
@@ -2128,19 +1652,14 @@ angular.module( 'conexus.nav', [])
         if ($scope.outputVector.length > 0){
             //MarketModel.traverse($scope.inputVector, $scope.outputVector).then(function(){
             for(x in $scope.outputVector){
-                $scope.outputMatix.push({
-                    identifer: $scope.outputVector[x].text,
-                    value: 10*Math.random(),
-                });
+                $scope.outputMatix.push({identifer: $scope.outputVector[x].text, value: 10*Math.random(),});
             }
             //});
         }
     };
 
     //TODO
-    $scope.reply = function(item){
-        $scope.item.showReply = !$scope.item.showReply;
-    };
+    $scope.reply = function(item){$scope.item.showReply = !$scope.item.showReply;};
 
     //IMPROVE
     $scope.sideNavToggle = function(){

@@ -1,6 +1,6 @@
 //CRE8.NOTIFICATION
 module.exports = {
-	get: async function(req, res) {var model = await notificationApp.get(req); res.json(model);},
-	update: async function (req, res) {var newModel = await notificationApp.update(req); res.json(newModel);}
+	get: async function(input, output) {var model = await notificationApp['GET'](input); output.json(model);},
+	update: async function (input, output) {var newModel = await notificationApp['UPDATE'](input); output.json(newModel);}
 };
 

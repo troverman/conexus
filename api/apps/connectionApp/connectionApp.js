@@ -12,7 +12,7 @@ var App = {
 	    logic: {type:'json'}  
     },
 	'CONNECTION+CRYPTO': global['appApp']['GET']({type:'require', string:'crypto'}),
-
+	'DB': function(){return global['Connection']},
     'GET': async function(input){
 		var limit = parseInt(input.query.limit) || 100;
 		var skip = parseInt(input.query.skip) || 0;
@@ -21,7 +21,7 @@ var App = {
 		var response = {};
 		if(input.query.id){response = Connection.find({id:id}).limit(limit).skip(skip).sort(sort);}
 		else if(input.query.creator){response = Connection.find({creator:creator}).limit(limit).skip(skip).sort(sort);}
-		else{response = Connection.find({}).limit(limit).skip(skip).sort(sort);}
+		else{response = App['DB']().find({}).limit(limit).skip(skip).sort(sort);}
 		return response;
 	},
 	'CREATE': async function(input){
@@ -38,8 +38,8 @@ var App = {
 
 		//DATABASE :: MODEL :: CONNECTION :: TODO: APP CENTRIC MODEL INIT 
 		//DEFINE MODEL
-		var newConnection = await Connection.create(model);
-		Connection.publish([newConnection.id], {verb: 'create', data: newConnection});
+		var newConnection = await App['DB']().create(model);
+		App['DB']().publish([newConnection.id], {verb: 'create', data: newConnection});
 
 		//App['CONNECTION+EVENTAPP']['CREATE'](newConnection);
 		eventApp.create(newConnection);
@@ -47,19 +47,15 @@ var App = {
 		//App['CONNECTION+VALIDATIONAPP']['CREATE'](newConnection);
 		validationApp.create(newConnection);
 
-		return Connection.find({hash:model.hash});
+		return App['DB']().find({hash:model.hash});
 	},
-
 	'VIEWS': {
-
 		//SOME TYPING MB: IE JAVASCRIPT 
 		'App.js':'function SerializeMe(){}',
 		'CoolGuyId.js':'',
 		'HASH':'DYNAMICALLY SERVED FROM SELF OR PEER NET | AppApp::ProtocolApp::DataApp',
 	},
-
 	//SETS OF VIEWS COMPILES
-
 	//OKAY DATA-TOKEN CONNECTION . . .
 	//STATIC SELF CONNECTION CONSTRUCTOR --> THIS IS SUPER IN COMPOSITION 
 	//HMM 

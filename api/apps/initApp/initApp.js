@@ -6,8 +6,7 @@ var App = {
 	'CONNECTION+CRYPTO': function(){return global['appApp']['GET+REQUIRE']('crypto')},
 
 	'INIT': async function(){
-		console.log('INIT ')
-
+		
 		//machieneAttention.init();
 
 		//typically maximal personal self truths are attained
@@ -64,7 +63,7 @@ var App = {
 			var newProtocol = await protocolApp['CREATE'](protocolModel);
 			console.log(newProtocol);
 		}
-		initDynamic('dataApp', 'INIT');
+		//initDynamic('dataApp', 'INIT');
 
 	}
 };

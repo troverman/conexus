@@ -28,6 +28,7 @@ var App = {
 	//DATA PRIMITIVES >>> DB REQUIRE NETWORKING ..  .. ? DIRECT>
 	'GET+STRING':function(model){return model},
 	'GET+HASH':function(model){return model},
+	'GET+GLOBAL': function(model){return global(model)},
 
 
 	//SHOULD BE DYNAMIC BUILT HASH .. 
@@ -44,14 +45,10 @@ var App = {
 
 	//IN DATABASE IDENTIFIER 
     'DB':  async function(){return orbitdb.docs('CRE8.APP:{PEER_HASH}')},
-
+    //PATCH
+    'DB':  async function(){return global['App']},
     'INIT': async function(){await App['DB'].load();},
-
-	'FIND':function(model){
-		console.log(sails.models.app._adapter)
-		return sails.models.app.find(model);
-	},
-
+	//'FIND':function(model){return sails.models.app.find(model);},
 
 	//THIS FILE
 	//THE PEER IS SELF
@@ -87,14 +84,14 @@ var App = {
 		console.log('appApp.get', 'CALL:', utilityServiceApp.guid(), input.query);
 
 		if(input.query.id){
-			var apps = await App['FIND']({id:id});//.limit(limit).skip(skip).sort(sort);
+			var apps = await App['DB'].find({id:id});//.limit(limit).skip(skip).sort(sort);
 			//-->IMPORT TRIE . . . :P
 			//App.subscribe(req, [apps[0].id]);
 			//TODO: MANY-MANY RELATIONSHIP; SEE NOTIFICATIONS . . . 
 			var models = await associationApp.get(apps[0]);
 		}
 		else{
-			var models = await App['FIND']({});//.limit(100).skip(skip).sort(sort);
+			var models = await App['DB'].find({});//.limit(100).skip(skip).sort(sort);
 			//App.subscribe(req, apps.map(function(obj){return obj.id}));
 		}
 		return models;
@@ -122,6 +119,7 @@ var App = {
 
 		//FLAT :: MORE THAN ORBIT ...
 		//APP['DB+PUT'](dataModel);
+		//LOL
 		await App['DB'].put({_id:Math.random(), string:Math.random()});
 
 		//SOCKS
@@ -136,7 +134,7 @@ var App = {
 		//App['CONNECTION+APPS:VALIDATIONAPP+CREATE'](newApp); // TODO FLATTEN PROCESSING IN MODULE LOADER :)
 
 		//REDUCE
-		return App['FIND'].find({hash:model.hash});
+		return App['DB'].find({hash:model.hash});
 
 	},
 

@@ -1,12 +1,11 @@
 //CRE8.MEMBER.ALPHA
 //SESSIONAPP, PEERAPP
 var App = {
-	import:{
-		Q: require('q'),
-		mongodb: require('mongodb'),
-		request: require('request')
-	},
-	attributes: {
+	'CONNECTION+Q':require('q'), 
+	'CONNECTION+MONGODB':require('mongodb'), 
+	'CONNECTION+REQUEST':require('request'), 
+	//META MODEL IN APP INHERITANCE ?? IE DYNAMIC PROTOCOL SETS >>> DM VS APP DM
+	'CONNECTION+SELF+ATTRIBUTES': {
         model: {type: 'string', defaultsTo: 'MEMBER'},
         avatarUrl: {type: 'string', defaultsTo: 'images/avatar.png'},
         coverUrl: {type: 'string'},
@@ -26,19 +25,16 @@ var App = {
         isWorking: {type: 'boolean', defaultsTo: false},
         isLive: {type: 'boolean', defaultsTo: false},
         //DATA
-        //COUNTS.. APP
         followingCount: {type: 'number',defaultsTo: 0},
         followerCount: {type: 'number',defaultsTo: 0},
         notificationCount: {type: 'number',defaultsTo: 0},
         projectCount: {type: 'number',defaultsTo: 0},
         totalWork: {type: 'number',defaultsTo: 0},
         //MAPPINGS
-        //..APP
         //reputation: {type: 'json'},
         balance: {type: 'json'},
         //mappingOfTimeStampString -> LatLng
         //Location Token Manifold minting logic
-        //balance..
         //Location+lat+lng+datetime
         locationTime: {type: 'json'},
         //PASSPORT
@@ -47,65 +43,54 @@ var App = {
         data: {type: 'json'},
         apps: {type: 'json'},
     },
+	'DB': function(){return global['User']},
 
-    //TODO
-    afterCreate: async function(model, next){
-        var colorArray = ['2ab996', '24242e', 'ff6a6a', 'ddbea8'];
-        var colorInt = Math.floor(Math.random() * (colorArray.length + 1));
-        var avatarUrl = 'https://ui-avatars.com/api/?size=256&name='+model.username+'&color=fff&background='+colorArray[colorInt];
-        model.avatarUrl = avatarUrl;
-        var url = "https://api.unsplash.com/photos/random?page=1&client_id=b996e9314d68deae5fe37098f096cd6b3b035f5c63989805aa23d4bd8c7358a2&secret=2ddbfdd90eaf2bcfc6f3cec5ec58c677b35cb470dc63d39e0e0372755b59c434%27";
-        App.import.request(url, async function (error, response, body) {
-            var body = JSON.parse(body);
-            if (body.urls){model.coverUrl = body.urls.small;}
-            //TODO           
-            model.apps = {cre8:{recordAttention:true,tutorial:true}};
-            var model = await User.update({id: model.id}, model)
-            //emailService.sendTemplate('welcome', model.email, 'Welcome To CREATE!', {username: model.username});
-            return next(null, model);
-        });
-    },
-
-	get: async function(req) {
-		var deferred = App.import.Q.defer();
-		var limit = parseInt(req.query.limit) || 1;
-		var skip = parseInt(req.query.skip) || 0;
-		var sort = req.query.sort || 'createdAt DESC';
-		var id = req.query.id;
-		var username = req.query.username;
-		if (req.query.id || req.query.username){
+	//GET MEMBER IS LOL RN
+	'GET': async function(input) {
+		var deferred = App['CONNECTION+Q'].defer();
+		var limit = parseInt(input.query.limit) || 1;
+		var skip = parseInt(input.query.skip) || 0;
+		var sort = input.query.sort || 'createdAt DESC';
+		var id = input.query.id;
+		var username = input.query.username;
+		if (input.query.id || input.query.username){
 			var query = {$or:[]};
-			if (req.query.username){
-				if (App.import.mongodb.ObjectID.isValid(req.query.username)){query.$or.push({"_id":{$eq:App.import.mongodb.ObjectID(req.query.username)}});}
-				else{query.$or.push({"username":req.query.username});}
+			if (input.query.username){
+				if (App['CONNECTION+MONGODB'].ObjectID.isValid(input.query.username)){query.$or.push({"_id":{$eq:App['CONNECTION+MONGODB'].ObjectID(input.query.username)}});}
+				else{query.$or.push({"username":input.query.username});}
 			}
-			if (req.query.id){
-				if (App.import.mongodb.ObjectID.isValid(req.query.id)){query.$or.push({"_id":{$eq:App.import.mongodb.ObjectID(req.query.id)}});}
+			if (input.query.id){
+				if (App['CONNECTION+MONGODB'].ObjectID.isValid(input.query.id)){query.$or.push({"_id":{$eq:App['CONNECTION+MONGODB'].ObjectID(input.query.id)}});}
 			}
-			User.getDatastore().manager.collection('user').find(query).limit(limit).skip(skip).sort({'createdAt':-1}).toArray(async function (err, models) {
+			App['DB']().getDatastore().manager.collection('user').find(query).limit(limit).skip(skip).sort({'createdAt':-1}).toArray(async function (err, models) {
+				console.log(models)
 				if (models.length > 0){
 					var userModel = models[0];
 					userModel.id = userModel._id.toString();
-					User.subscribe(req, [models[0].id]);
-					var models = await associationApp.get(models[0]);
+					App['DB']().subscribe(input, [models[0].id]);
+					var models = await associationApp['GET'](models[0]);
+					console.log(models, models[0])
 					return models;
-					
 				}
-				else{return {};}
+				deferred.resolve(models);
 			});
 		}
-		else if (req.query.query){
-			return User.find().where({or: [{firstName: {contains: req.query.query}}, {lastName: {contains: req.query.query}}, {username: {contains: req.query.query}},]});
+		else if (input.query.query){
+			var models = await App['DB']().find().where({or: [{firstName: {contains: input.query.query}}, {lastName: {contains: input.query.query}}, {username: {contains: input.query.query}}]});
+			var numRecords = await App['DB']().where({or: [{firstName: {contains: input.query.query}}, {lastName: {contains: input.query.query}}, {username: {contains: input.query.query}}]}).count();
+			var returnObj = {data:models, info:{count:numRecords}};
+			deferred.resolve(returnObj);
 		}
 		else{
-			var models = await User.find({}).limit(limit).skip(skip).sort(sort);
-			var numRecords = await User.count();
-			User.subscribe(req, models);
+			var models = await App['DB']().find({}).limit(limit).skip(skip).sort(sort);
+			var numRecords = await App['DB']().count();
+			App['DB']().subscribe(req, models);
 			var returnObj = {data:models, info:{count:numRecords}};
-			return returnObj;
+			deferred.resolve(returnObj);
 		}
+		return deferred.promise;
 	},
-	update: async function(req){
+	'UPDATE': async function(req){
 		//TODO: SECURITY
 		var id = req.param('id');
 		var model = {
@@ -120,11 +105,27 @@ var App = {
 			apps: req.param('apps')
 		};
 		if (req.param('description')){model.description = req.param('description')}
-		console.log('memberApp.update', 'CALL:', utilityServiceApp.guid(), model);
-		var model = await User.update({id: id}, model);
-		User.publish([model.id], {verb: 'update', data: model});
+		var model = await App['DB']().update({id: id}, model);
+		App['DB']().publish([model.id], {verb: 'update', data: model});
 		return model;
 	},
-	create:async function(){},
+	'CREATE':async function(){},
+	//TODO:: LIFECYCLE CODE .. 
+    afterCreate: async function(model, next){
+        var colorArray = ['2ab996', '24242e', 'ff6a6a', 'ddbea8'];
+        var colorInt = Math.floor(Math.random() * (colorArray.length + 1));
+        var avatarUrl = 'https://ui-avatars.com/api/?size=256&name='+model.username+'&color=fff&background='+colorArray[colorInt];
+        model.avatarUrl = avatarUrl;
+        var url = "https://api.unsplash.com/photos/random?page=1&client_id=b996e9314d68deae5fe37098f096cd6b3b035f5c63989805aa23d4bd8c7358a2&secret=2ddbfdd90eaf2bcfc6f3cec5ec58c677b35cb470dc63d39e0e0372755b59c434%27";
+        App['CONNECTION+REQUEST'](url, async function (error, response, body) {
+            var body = JSON.parse(body);
+            if (body.urls){model.coverUrl = body.urls.small;}
+            //TODO           
+            model.apps = {cre8:{recordAttention:true,tutorial:true}};
+            var model = await App['DB']().update({id: model.id}, model)
+            //emailService.sendTemplate('welcome', model.email, 'Welcome To CREATE!', {username: model.username});
+            return next(null, model);
+        });
+    }
 };
 module.exports = App;

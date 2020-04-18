@@ -7,7 +7,7 @@ var App = {
 		//ids are hashes / dynamic 
 			//ipfs vs HASH
 	//peer is a combinatorial obj
-	attributes: {
+	'CONNECTION+SELF+ATTRIBUTES': {
         model: {type: 'string', defaultsTo: 'PEER'},
 		info: {type: 'json'},
 		information: {type: 'json'},
@@ -19,27 +19,24 @@ var App = {
         versionHash: {type: 'string'},
         creator: {model: 'user'},
     },
-	get:function(req){
-		return Peer.find({});
+	'DB': function(){return global['Peer']},
+
+	'GET':function(input){
+		return App['DB']().find({});
 	},
-	create: async function(req){
+	'CREATE': async function(input){
 		var model = {
-			info: req.param('info'),
-			information: req.param('information'),
+			info: input.param('info'),
+			information: input.param('information'),
 			versionHash: 'UNSTABLE PRE-ALPHA',
-			data: req.param('data'),
+			data: input.param('data'),
 			reputation: {},
 			validiatedBlocks: [],
-			creator: req.param('creator'),
+			creator: input.param('creator'),
 		};
-		return Peer.create(model);
+		return App['DB']().create(model);
 	},
-
 	//PEERBUILD APP >> CREATE SUPER STRUCTURE AND (PROTOCOL TYPES
-	build:function(){
-
-		//??LOL??
-
-	},
+	'BUILD':function(){},
 };
 module.exports = App;

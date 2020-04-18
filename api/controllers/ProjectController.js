@@ -1,5 +1,5 @@
 //CRE8.PROJECT
 module.exports = {
-	get: async function(req, res) {var model = await projectApp.get(req); res.json(model);},
-	create: async function (req, res) {var newModel = await projectApp.create(req); res.json(newModel);}
+	get: async function(input, output) {var model = await projectApp['GET'](input); output.json(model);},
+	create: async function (input, output) {var newModel = await projectApp['CREATE'](input); output.json(newModel);}
 };

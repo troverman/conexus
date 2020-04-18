@@ -23,6 +23,7 @@ var App = {
 
 	//DATABASE? .. ETC :: OR :: orbit db doc ::: contains identity ::: Peer libP2P Networking -:> Data 
 	//'CONNECTION+SELF+DATAMODEL': Event,
+	'DB': function(){return global['Event']},
 
 	'GET': async function(req){
 
@@ -35,11 +36,9 @@ var App = {
 		var skip = parseInt(req.query.skip) || 0;
 		var sort = req.query.sort || 'createdAt DESC';	
 
-		console.log('eventApp.get', 'CALL:', utilityServiceApp.guid(), req.query);
-
 		//TODO: AUDIT 
-		if(req.query.id){return Event.find({id:req.query.id}).limit(limit).skip(skip).sort(sort);}
-		else{return Event.find().limit(limit).skip(skip).sort(sort);}
+		if(req.query.id){return App['DB']().find({id:req.query.id}).limit(limit).skip(skip).sort(sort);}
+		else{return App['DB']().find().limit(limit).skip(skip).sort(sort);}
 	},
 	'CREATE': async function(model){
 		//model.input, model.output
@@ -59,11 +58,10 @@ var App = {
 		//EVENT IS DEFINED IN model/event . . . unify 
 		//LEGACY BOOTSTRAPPING
 			//TRIE ATTEMPT ~ REDUCE TO BINARY THX ~
-		var newEvent = await Event.create(eventModel);
+		var newEvent = await App['DB']()(eventModel);
 
 		//REDUCE / SOCKET BROADCAST 
-		Event.publish([newEvent.id], {verb: 'create', data: newEvent});
-
+		App['DB']().publish([newEvent.id], {verb: 'create', data: newEvent});
 	},
 };
 module.exports = App;

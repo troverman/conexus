@@ -1,4 +1,4 @@
-//CRE8.connections.apps.Item().ALPHA
+//CRE8.Item().ALPHA
 var App = {
 
 	'CONNECTION+SELF+ATTRIBUTES': {
@@ -32,20 +32,21 @@ var App = {
 	//'CONNECTION+REACTIONAPP': function(){return appApp['GET']('./reactionApp')},
 	//'CONNECTION+ATTENTIONAPP': function(){return appApp['GET']('./attentionApp')},
 
-	'CONNECTION+SELF+LANGUAGE': 'Javascript',
+	'ASSOCIATION+SELF+LANGUAGE': 'Javascript',
 	//lol
-	'CONNECTION+SELF+ATTENTIONPARAMS':{},
-	'CONNECTION+SELF+COMPILERPARAMS':{
+	'ASSOCIATION+SELF+ATTENTIONPARAMS':{},
+	'ASSOCIATION+SELF+COMPILERPARAMS':{
 		identifier:['x', 'color', 'UP'],
 		keyword:['if', 'while', 'return'],
 		separator:['}', '('],
 		operator:['+','<','='],
 		literal: true,
 	},
-	'CONNECTION+SELF+META':{separator:[','], operator:['+','-','*','']},
+	'ASSOCIATION+SELF+META':{separator:[','], operator:['+','-','*','']},
 
 	//TODO: GET DYNAMIC INIT VIA PEER LOAD :: USE App+SELF+HASH ;; uhh,, init fxn 
 	//connections.self.routes
+	
 	//'CONNECTION+SELF+ROUTES':{
 		//get/api/{HASH}
 		//'get /api/item': 'ItemController.get',
@@ -55,59 +56,64 @@ var App = {
 		//'get /item/:id': 'HomeController.index',
 	//},
 
-    //'DB':  async function(){
+    'DB':  async function(){
     //	var dbString = 'CRE8.ITEM';
     //	await orbitdb.docs(dbString)
-    //},
-    //'INIT': async function(){
+    },
+
+	'DB': function(){return global['Item']},
+	'DB+MONGO': function(){return global['Item']},
+
+    'INIT': async function(){
     //	await App['DB'].load();
-    //},
+    },
+	//[req.model].get(req);
+
 	'GET': async function(req) {
-		//[req.model].get(req);
 		var limit = parseInt(req.query.limit) || 1;
 		var skip = parseInt(req.query.skip) || 0;
 		var sort = req.query.sort || 'createdAt DESC';
-		console.log('itemApp.get', 'CALL:', utilityServiceApp.guid(), req.query);
+
 		var returnObj = {};
 		if(req.query.id){
 			//THERE STRENGTH IN A MULTI-IDENTIFER STRUCT ~ PLURLALITY IS A STRENGTH
 			var id = req.query.id;
 			var query = {};
 			//NO
-			if (App.connections.apps.mongodb().ObjectID.isValid(id)){query = { "id": id }}
+			if (App['CONNECTION+MONGODB']().ObjectID.isValid(id)){query = { "id": id }}
 			//else{query = { dataHash: id}} //MAP LEGACY TOKENS TO HASH :)
 			else{query = { hash: id}}
-			var models = await connections.apps.Item().find(query).limit(limit).skip(skip).sort(sort);
+			var models = await App['DB+MONGO']().find(query).limit(limit).skip(skip).sort(sort);
 			if (models.length > 0){
 				var itemModel = models[0];
 				//itemModel.id = itemModel._id.toString();
 				//var userModel = await User.find({id:itemModel.user.toString()});
 				//itemModel.user = userModel[0];
-				connections.apps.Item().subscribe(req, [itemModel.id]);
-				var models = await associationApp.get(itemModel);
+				App['DB+MONGO']().subscribe(req, [itemModel.id]);
+				var models = await associationApp['GET'](itemModel);
 				returnObj = models;
 			}
 		}
 		else if (req.query.tag){
 			var tag = req.query.tag;
-			var models = await connections.apps.Item().find({tags:{contains: tag}}).limit(limit).skip(skip).sort(sort).populate('user');
-			var numRecords = await connections.apps.Item().count({tags:{contains: tag}});
-			connections.apps.Item().subscribe(req, models);
+			var models = await App['DB+MONGO']().find({tags:{contains: tag}}).limit(limit).skip(skip).sort(sort).populate('user');
+			var numRecords = await App['DB+MONGO']().count({tags:{contains: tag}});
+			App['DB+MONGO']().subscribe(req, models);
 			var returnObj = {data:models, info:{count:numRecords}};
 			return returnObj;
 		}
 		else if (req.query.user){
 			var user = req.query.user;
-			var models = await connections.apps.Item().find({user:user}).limit(limit).skip(skip).sort(sort).populate('user');
+			var models = await App['DB+MONGO']().find({user:user}).limit(limit).skip(skip).sort(sort).populate('user');
 			returnObj = models;
 		}
 		else{
-			var models = await connections.apps.Item().find({}).limit(limit).skip(skip).sort(sort).populate('user');
-			var numRecords = await connections.apps.Item().count();
-			connections.apps.Item().subscribe(req, models.map(function(obj){return obj.id}));
+			var models = await App['DB+MONGO']().find({}).limit(limit).skip(skip).sort(sort).populate('user');
+			var numRecords = await App['DB+MONGO']().count();
+			App['DB+MONGO']().subscribe(req, models.map(function(obj){return obj.id}));
 			var promises = [];
-			for (x in models){promises.push(associationApp.get(models[x]));}
-			var populatedModels = await App.connections.apps.Q().all(promises)
+			for (x in models){promises.push(associationApp['GET'](models[x]));}
+			var populatedModels = await App['CONNECTION+Q']().all(promises)
 			for (x in models){models[x] = populatedModels[x];}
 			var returnObj = {data:models, info:{count:numRecords}};
 		}
@@ -135,18 +141,21 @@ var App = {
 			attention:{general:0},
 			json:{},
 		};
-		model.hash = App.connections.apps.crypto().createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
-		console.log('CREATE ITEM', model);
-		var itemModel = await connections.apps.Item().create(model);
+		model.hash = App['CONNECTION+CRYPTO'].createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
+		var itemModel = await App['DB+MONGO']().create(model);
+
 		var userModels = await User.find({id:model.user});
 		itemModel.associatedModels = req.param('associatedModels') || [];
 		itemModel.user = userModels[0];
-		connections.apps.Item().subscribe(req, [itemModel]);
-		connections.apps.Item().publish([itemModel.id], {verb: 'create', data: itemModel});
+		App['DB+MONGO']().subscribe(req, [itemModel]);
+		App['DB+MONGO']().publish([itemModel.id], {verb: 'create', data: itemModel});
+
 		validationApp.createLegacy(itemModel);
-		eventApp.create(itemModel);
-		App.tokens.create(itemModel);
-		return connections.apps.Item().find({hash:model.hash});
+		eventApp['CREATE'](itemModel);
+		App['TOKENS+CREATE'](itemModel);
+
+		return App['DB+MONGO']().find({hash:model.hash});
+
 	},
 
 	'TOKENS+GET': function(model){

@@ -20,22 +20,29 @@ var App = {
         data: {type: 'json'},
     },
 
+    //SHIM.. BUILD DATA FROM PROVIDERS :) :P 
+    //UTIL FXN 
+	//global['appApp']['GET+GLOBAL']();
+	//'GET+GLOBAL': function(model){return global[model]}
+	//'CONNECTION+SELF+MODEL': function(){return global['Content']},
+	
+	'DB': function(){return global['Content']},
+
     //HASH OF ATTRIBUTES ???
     //db: await orbitdb.docs('CRE8.CONTENT'),
-    //init: async function(){
+    'INIT': async function(){
     //	await ContentApp.db.load();
-    //},
+    },
 
 	//TODO: MULTI CONTEXT WRT DATA STORE
-	get: async function(req, res) {
+	'GET': async function(input) {
 		var deferred = App['CONNECTION+Q'].defer();
-		var limit = parseInt(req.query.limit) || 1;
-		var skip = parseInt(req.query.skip) || 0;
-		var sort = req.query.sort || 'createdAt DESC';
-		var id = req.query.id;
-		console.log('contentApp.get', 'CALL:', utilityServiceApp.guid(), req.query);
-		if(req.query.id){
-			var models = await Content.find({id:id}).limit(limit).skip(skip).sort(sort).populate('user')
+		var limit = parseInt(input.query.limit) || 1;
+		var skip = parseInt(input.query.skip) || 0;
+		var sort = input.query.sort || 'createdAt DESC';
+		var id = input.query.id;
+		if(input.query.id){
+			var models = await App['DB']().find({id:id}).limit(limit).skip(skip).sort(sort).populate('user')
     		//ATTENTION???
     		//PRIMITIVE MACHINE ATTENTION
     		//MACHINE REPPUTATION
@@ -43,58 +50,59 @@ var App = {
     		//THIS IS MACHINENE ATTENTION VS 'ATTENTION TIMER' DUP
     		//THERE IS AN ARTECTICTURE DESIGN PATTERN THAT DOES THIS
     		//GET EVENT . . . 
-			//eventApp.create(itemModel);
+			//eventApp['CREATE'](itemModel);
 			//WOULD LIKE TO MOVE FORWARD WITH PACKET ROUTING MACHINE ATT &&
-			Content.subscribe(req, [models[0].id]);
-			return associationApp.get(models[0]);
+			App['DB']().subscribe(input, [models[0].id]);
+			return associationApp['GET'](models[0]);
 		}
-		else if (req.query.contentModel){
-			var contentModel = req.query.contentModel;
-			return Content.find({contentModel:contentModel}).limit(limit).skip(skip).sort(sort).populate('user');
-			//Content.subscribe(req, models.map((obj)=>obj.id));
+		else if (input.query.contentModel){
+			var contentModel = input.query.contentModel;
+			return App['DB']().find({contentModel:contentModel}).limit(limit).skip(skip).sort(sort).populate('user');
+			//Content.subscribe(input, models.map((obj)=>obj.id));
 			//var promises = [];
 			//for (x in models){promises.push(getAssociations(models[x]));}
 			//Q.all(promises).then((populatedModels)=>{
 			//	for (x in models){models[x] = populatedModels[x];}
 			//s});
 		}
-		else if(req.query.project){
-			var project = req.query.project;
-			return Content.find({project:project}).limit(limit).skip(skip).sort(sort).populate('user');
+		else if(input.query.project){
+			var project = input.query.project;
+			return App['DB']().find({project:project}).limit(limit).skip(skip).sort(sort).populate('user');
 		}
-		else if (req.query.tag){
-			var tag = req.query.tag;
-			Content.find({tags:{contains: tag}}).limit(limit).skip(skip).sort(sort).populate('user');
-			Content.subscribe(req, models.map(function(obj){return obj.id}));
+		else if (input.query.tag){
+			var tag = input.query.tag;
+			App['DB']().find({tags:{contains: tag}}).limit(limit).skip(skip).sort(sort).populate('user');
+			App['DB']().subscribe(input, models.map(function(obj){return obj.id}));
 			var promises = [];
-			for (x in models){promises.push(associationApp.get(models[x]));}
+			for (x in models){promises.push(associationApp['GET'](models[x]));}
 			var populatedModels = await Q.all(promises);
 			for (x in models){models[x] = populatedModels[x];}
 			return models;
 		}
-		else if(req.query.user){
-			var user = req.query.user;
-			var models = await Content.find({user:user}).limit(limit).skip(skip).sort(sort).populate('user');
-			Content.subscribe(req, models.map(function(obj){return obj.id}));
+		else if(input.query.user){
+			var user = input.query.user;
+			var models = await App['DB']().find({user:user}).limit(limit).skip(skip).sort(sort).populate('user');
+			App['DB']().subscribe(input, models.map(function(obj){return obj.id}));
 			var promises = [];
-			for (x in models){promises.push(associationApp.get(models[x]));}
-			var populatedModels = await Q.all(promises);
+			for (x in models){promises.push(associationApp['GET'](models[x]));}
+			var populatedModels = await  App['CONNECTION+Q'].all(promises);
 			for (x in models){models[x] = populatedModels[x];}
 			return models;
 		}
 		else{
-			var models = await Content.find({}).limit(limit).skip(skip).sort(sort).populate('user');
-			var numRecords = Content.count();
-			Content.subscribe(req, models.map(function(obj){return obj.id}));
+			var models = await App['DB']().find({}).limit(limit).skip(skip).sort(sort).populate('user');
+			var numRecords = App['DB']().count();
+			App['DB']().subscribe(input, models.map(function(obj){return obj.id}));
 			var promises = [];
-			for (x in models){promises.push(associationApp.get(models[x]));}
-			var populatedModels = await Q.all(promises);
+			for (x in models){promises.push(associationApp['GET'](models[x]));}
+			var populatedModels = await App['CONNECTION+Q'].all(promises);
 			for (x in models){models[x] = populatedModels[x];}
 			var returnObj = {data:models, info:{count:numRecords}};
 			return returnObj;
 		}
 	},
-	create: async function (req, res) {
+	'CREATE': async function (input) {
+
 		//language of connections to recurse to bits 
 			//the highleve abstract to opcodes to binary seems a chore | gotta be better 
 		//var Content = appApp.find(); . . . 
@@ -111,91 +119,99 @@ var App = {
 			//THINK ABOUT YOUR AVERAGE NETWORKING PROTOCOL FLOW DIAGRAM 
 		//i need to learn chinese  
 		//var User = appApp.find(appApp.id); // something something 
-		var userModels = await User.find({id:req.param('user')});
+
+		//App['CONNECTION+USER']()['DB']()
+	
+
+		var userModels = await User.find({id:input.param('user')});
 		var model = {
-			model: 'CONTENT',
-			type: 'CONTENT', //appApp.id --> :)
-			title: req.param('title'),
-			type: req.param('type'),
-			content: req.param('content'),
+			model: 'CONTENT', type: 'CONTENT', //appApp.id --> :)
+			title: input.param('title'),
+			type: input.param('type'),
+			content: input.param('content'),
 			user: userModels[0].id,
 			creator: userModels[0].id,		
 			data:{apps:{reactions:{plus:0, minus:0}, attention:{general:0}}}
 		};
 		model.hash = App['CONNECTION+CRYPTO'].createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
-		console.log('contentApp.create', 'CALL:', utilityServiceApp.guid(), model);
-		var newContent = await Content.create(model);
-		newContent.associatedModels = req.param('associatedModels');
-		Content.subscribe(req, [newContent.id]);
-		Content.publish(model.id, {verb: 'create', data: model});
-		eventApp.create(newContent);
-		App.tokens.create(newContent);
+		var newContent = await App['DB']().create(model);
+		newContent.associatedModels = input.param('associatedModels');
+		App['DB']().subscribe(input, [newContent.id]);
+		App['DB']().publish(model.id, {verb: 'create', data: model});
+
+		eventApp['CREATE'](newContent);
+
+		App['TOKENS+CREATE'](newContent);
+
 		//SHOULD BE REVERED TOP DOWN BY CONNECTION (ABSTRACT & DISCRETE VALIDATION TYPES)
 		validationApp.createLegacy(newContent);
-		return Content.find({hash:model.hash});
-	},
-	tokens:{
-		get:function(model){
-			//TODO: FACTOR			
-			//for you to see the progress 
-			//change model to app / type (APP = [  = protocol ] | think token and market ~ WHAT IS THE MOST PRIMITIVE TYPE A BIT BOI)
-				//8 BYTE WORD
-												//patterns of bools (0,1 ~~> QUANTUM GIVES SMOOTH) ?? OR OR third stat which is an and 
-															//GRADIENT IS TRUTH
-																	//2^3 , 0,1,0+1
-												//SOOO. . . IT'S A STRING
 
-			//[yes] --> NATURAL RECURSION 
-			//off rails kinda
-			//CAN CONNECTION BE MOST PRIMITIVE TYPE OR STRING --> CONVERT OR BONRAY (I MEAN WERE DEALING WITH LAYERS OF ABSTRACTION) 
-			var protocolTokens = [
-				'CRE8', 
-				'CRE8+'+model.model, 
-				'CRE8+'+model.model+'+'+model.id,
-			];
-			if (model.model == 'ACTION'){}
-			if (model.model == 'APP'){}
-			if (model.model == 'ASSOCIATION'){
-				//TODO: TOKEN GRAMMER
-				//TODO: LINK ASSOCIATIONS
-				//TODO: ' , ' grammer
-				var string ='CRE8+ASSOCIATION+'
-				console.log(model);
-				for (x in model.associatedModels){
-					string = string + '+' + model.associatedModels[x].type + '+' + model.associatedModels[x].id;
-					model.associatedModels[x].type
-				}
-			}		
-			//TYPES OF STRING SERILIZATION
-			//DATA MODEL OBJ TO STRING
-			for (x in Object.keys(model)){
-				var dataType = Object.keys(model)[x].toUpperCase();
-				var data = model[Object.keys(model)[x]];
-				var prefix = 'CRE8+'+model.model;
-				var string = prefix+'+'+dataType+'+'+data;
-				protocolTokens.push(string);
-			};
-			//SHA256 HASH DIGEST OF DATA SIGNED WITH CRE8
-			for (x in Object.keys(model)){
-				var data = model[Object.keys(model)[x]];
-				var hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(data)).digest('hex');
-				var prefix = 'CRE8+'+model.model;
-				var string = prefix+'+'+hash;
-				protocolTokens.push(string);
-			};
-			//SHA256 HASH DIGEST OF AGGREGATE DATA SIGNED WITH CRE8
-			var hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
+		return App['DB']().find({hash:model.hash});
+
+	},
+
+	'TOKENS+GET': function(model){
+		//TODO: FACTOR			
+		//for you to see the progress 
+		//change model to app / type (APP = [  = protocol ] | think token and market ~ WHAT IS THE MOST PRIMITIVE TYPE A BIT BOI)
+			//8 BYTE WORD
+											//patterns of bools (0,1 ~~> QUANTUM GIVES SMOOTH) ?? OR OR third stat which is an and 
+														//GRADIENT IS TRUTH
+																//2^3 , 0,1,0+1
+											//SOOO. . . IT'S A STRING
+
+		//[yes] --> NATURAL RECURSION 
+		//off rails kinda
+		//CAN CONNECTION BE MOST PRIMITIVE TYPE OR STRING --> CONVERT OR BONRAY (I MEAN WERE DEALING WITH LAYERS OF ABSTRACTION) 
+		var protocolTokens = [
+			'CRE8', 
+			'CRE8+'+model.model, 
+			'CRE8+'+model.model+'+'+model.id,
+		];
+		if (model.model == 'ACTION'){}
+		if (model.model == 'APP'){}
+		if (model.model == 'ASSOCIATION'){
+			//TODO: TOKEN GRAMMER
+			//TODO: LINK ASSOCIATIONS
+			//TODO: ' , ' grammer
+			var string ='CRE8+ASSOCIATION+'
+			console.log(model);
+			for (x in model.associatedModels){
+				string = string + '+' + model.associatedModels[x].type + '+' + model.associatedModels[x].id;
+				model.associatedModels[x].type
+			}
+		}		
+		//TYPES OF STRING SERILIZATION
+		//DATA MODEL OBJ TO STRING
+		for (x in Object.keys(model)){
+			var dataType = Object.keys(model)[x].toUpperCase();
+			var data = model[Object.keys(model)[x]];
+			var prefix = 'CRE8+'+model.model;
+			var string = prefix+'+'+dataType+'+'+data;
+			protocolTokens.push(string);
+		};
+		//SHA256 HASH DIGEST OF DATA SIGNED WITH CRE8
+		for (x in Object.keys(model)){
+			var data = model[Object.keys(model)[x]];
+			var hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(data)).digest('hex');
 			var prefix = 'CRE8+'+model.model;
 			var string = prefix+'+'+hash;
 			protocolTokens.push(string);
-			return protocolTokens;
-		},
-		create:function(model){
-			var tokens = contentApp.tokens.get(model);
-		},
+		};
+		//SHA256 HASH DIGEST OF AGGREGATE DATA SIGNED WITH CRE8
+		var hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
+		var prefix = 'CRE8+'+model.model;
+		var string = prefix+'+'+hash;
+		protocolTokens.push(string);
+		return protocolTokens;
+	},
+	'TOKENS+CREATE':function(model){
+		var tokens = App['TOKENS+GET'](model);
 	},
 
 	//SUPERSET --> BUILD IE GRUNT :) 
+	//TODO: BUILDER CONFIG MAPPING ::: ::::
+	//THINK ABOUT SERVING 
 	views:{
 		'content':{
 			controller:function(init){
@@ -260,5 +276,6 @@ var App = {
 			}
 		}
 	}
+
 };
 module.exports = App;

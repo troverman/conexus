@@ -69,10 +69,7 @@ angular.module( 'conexus', [
     $urlRouterProvider.rule(function($injector, $location) {
         var path = $location.path();
         var hasTrailingSlash = path[path.length-1] === '/';
-        if(hasTrailingSlash) {
-            var newPath = path.substr(0, path.length - 1); 
-            return newPath; 
-        } 
+        if(hasTrailingSlash) {var newPath = path.substr(0, path.length - 1);  return newPath;} 
     });
     if (window.location.hash && window.location.hash == '#_=_') {window.location.hash = '';}
     $urlRouterProvider.otherwise(function ($injector, $location) {
@@ -80,51 +77,41 @@ angular.module( 'conexus', [
         else {window.location = $location.$$absUrl;}
     });
     $locationProvider.html5Mode(true);
-
     //SECURITY.. EXTERNALS.. (PAY FOR THIS RENDER OKAY WITH TOKENS )
-    uiGmapGoogleMapApiProvider.configure({
-        key: 'AIzaSyBmbow2vLk6EMs0RT6r8U-umNzlkCNLrVY',
-        v: '3.20',
-        libraries: 'weather,geometry,visualization'
-    });
-
+    uiGmapGoogleMapApiProvider.configure({key: 'AIzaSyBmbow2vLk6EMs0RT6r8U-umNzlkCNLrVY', v: '3.20', libraries: 'weather,geometry,visualization'});
 }])
 .run(function run(){moment.locale('en')})
 .controller( 'AppCtrl', ['$location', '$rootScope', '$scope', '$state', 'seoService', 'titleService', 'UserModel', function AppCtrl ( $location, $rootScope, $scope, $state, seoService, titleService, UserModel ) {
-
     //TODO: BETTER
     //BETTER THAN RENDERING IN VIEW.. LOL
     $rootScope.currentUser = window.currentUser;
     if ($rootScope.currentUser){
-        UserModel.get({id:$rootScope.currentUser.id}).then(function(member){
-            $rootScope.currentUser = member;
-            if($rootScope.currentUser.dateOfBirth){$rootScope.currentUser.dateOfBirth = new Date($rootScope.currentUser.dateOfBirth)}
-            $rootScope.balance = member.balance;
-            $rootScope.reputation = member.reputation;
 
+        //USER PROVIDER..
+            //LOCATION PROVIDER .. 
+            //USER AGENTS .. ETc
+        //BAD
+        //UserModel.get({id:$rootScope.currentUser.id}).then(function(member){
+            //$rootScope.currentUser = member;
+            //console.log(member);
+            //if($rootScope.currentUser.dateOfBirth){$rootScope.currentUser.dateOfBirth = new Date($rootScope.currentUser.dateOfBirth)}
+            //$rootScope.balance = member.balance;
+            //$rootScope.reputation = member.reputation;
             //TODO!
             //PACKAGE IN LOGIN FXN -- APP PERMS ETC
             //INIT THE LOGIN, THE DATA, THE USER
             //getLatLng()
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function (position) {
-                    lat = position.coords.latitude; 
-                    lng = position.coords.longitude;
-                    $rootScope.currentUser.location = {
-                        lat:position.coords.latitude,
-                        lng:position.coords.longitude
-                    };
-                });
-            }
+            //if (navigator.geolocation) {
+            //    navigator.geolocation.getCurrentPosition(function (position) {
+            //        lat = position.coords.latitude; 
+            //        lng = position.coords.longitude;
+            //        $rootScope.currentUser.location = {lat:position.coords.latitude, lng:position.coords.longitude};
+            //    });
+            //}
             //USER IS LOADED
-
-        });
+        //});
     }
-
-    $rootScope.$on('$stateChangeStart',function(){
-        $rootScope.stateIsLoading = true;
-    });
-
+    $rootScope.$on('$stateChangeStart',function(){$rootScope.stateIsLoading = true;});
     $rootScope.$on('$stateChangeSuccess',function(){
         $rootScope.stateIsLoading = false;
         window.scrollTo(0, 0);
@@ -136,17 +123,10 @@ angular.module( 'conexus', [
         }
         else{titleService.setTitle('CRE8.XYZ');}
     });
-
-    $rootScope.$watch(function(){
-        MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
-        return true;
-    });
-
+    $rootScope.$watch(function(){MathJax.Hub.Queue(["Typeset",MathJax.Hub]);return true;});
     $rootScope.goToState = function(state, params){$location.path($state.href(state, params));};
-
     $rootScope.associatedModels = [];
     $rootScope.consentAgreement = false;
-
     $rootScope.directedGraphStyle = [
         {
             "selector": "core",
@@ -296,9 +276,8 @@ angular.module( 'conexus', [
             }
         }
     ];
-    
     $rootScope.directedGraphLayout = {name: 'cola'};
-    
+
     //INITALIZE ROOT VARIABLES
     $rootScope.notificationCount = 0;
 
@@ -310,17 +289,8 @@ angular.module( 'conexus', [
     $rootScope.selectedLocations = [];
     
     //TODO:DEPRECIATE
-    $rootScope.searchQueryNav = {
-        assetsInput:[],
-        assetsOutput:[],
-        associations:[],
-        context:[],
-        model:[],
-        locations:[],
-        query:[],
-        tags:[],
-        type:[],
-    };
+    $rootScope.searchQueryNav = {assetsInput:[], assetsOutput:[], associations:[], context:[], model:[], locations:[], query:[], tags:[], type:[]};
     $rootScope.taskTime = 0;
+
 }])
 .directive('errSrc', function() {return {link: function(scope, element, attrs) {element.bind('error', function() {if (attrs.src != attrs.errSrc) {attrs.$set('src', attrs.errSrc);}});}}})

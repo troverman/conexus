@@ -66,7 +66,7 @@ const App = {
 			//INTERESTING FOR LOADING WRAPPER:: MAKE SURE CODE IS DYNAMIC :: 
 			//PROCESS THRU DYNAMIC SELF INIT .. ON LOAD PROTOCOL :: 
 			//META CIRCULAR
-			//--> DOC SHOULD BE HAS OF OBJ..
+			//--> DOC SHOULD BE HASH OF OBJ..
 												//App.hash 
 			//--> EXPERIMENTAL (:)
 			const Protocols = await orbitdb.docs('CRE8.PROTOCOL', {indexBy: 'hash'});

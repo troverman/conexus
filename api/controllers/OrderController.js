@@ -143,7 +143,6 @@ module.exports = {
 		}
 
 		//LOL WEIRD STRUCTURE 
-
 		//COULD STORE TO TOKEN MODEL.. SHOULD DO THIS.. 
 			//DB OF TOKENS? --> YEAH .. 
 				//PLURLISTIC TO MAPPING .. 
@@ -153,7 +152,6 @@ module.exports = {
 		//include higer dim positions in .. ?
 			//as in in market b | a = b,c (?)
 								//b = a,c (y)
-
 		else if(input.query.item || input.query.market){
 			var item = input.query.item || input.query.market
 			var itemSet = item.split(',');
@@ -162,7 +160,6 @@ module.exports = {
 			var queryBeta = {};
 			for (x in itemSet){queryAlpha[ "setAlpha."+itemSet[x]] = {$gt: 0};}
 			for (x in itemSet){queryBeta[ "setBeta."+itemSet[x]] = {$gt: 0};}
-
 			//COMPLEX LEL
 			var query = { 
 				$or: [
@@ -176,7 +173,7 @@ module.exports = {
 					]}
 				]
 			};
-			console.log(query)
+			console.log(query);
 			Order.getDatastore().manager.collection('order').find(query).limit(limit).skip(skip).sort({'createdAt':-1}).toArray(function (err, models) {
 				console.log(models)
 				if (models.length != 0){
@@ -196,10 +193,8 @@ module.exports = {
 		else{output.json([]);}	
 	},
 	create: async function (input, output) {
-
 		//DEPRECIATE TOKEN IN FAVOR OF ASSET
 		async function mintTokens(order){
-
 			for (x in Object.keys(order.setAlpha)){
 				var tokenModels = await Token.find({string:Object.keys(order.setAlpha)[x]});
 				if (tokenModels.length == 0){
@@ -218,7 +213,6 @@ module.exports = {
 					console.log('TOKEN UPDATED');
 				}	
 			}
-
 			for (x in Object.keys(order.setBeta)){
 				var tokenModels = await Token.find({string:Object.keys(order.setBeta)[x]});
 				if (tokenModels.length == 0){
@@ -241,45 +235,30 @@ module.exports = {
 
 		//ORDERS ASSOCIATION
 		function getProtocolTokens(model){
-			var protocolTokens = [
-				'CRE8', 
-				'CRE8+ORDER',
-				'CRE8+ORDER+'+model.id,
-			];
+			var protocolTokens = ['CRE8', 'CRE8+ORDER', 'CRE8+ORDER+'+model.id];
 			return protocolTokens;
 		};
-
 		//TODO
 		async function createAssociation(order){
-			
 			//DISCRETE MARKET ASSOCIATION (MARKET PAIR)
 			var connectionModel = await Connection.find({}).limit(1)
 			var associationModel = {
-
 				model: 'ASSOCIATION',
 				content: JSON.stringify(order.setAlpha)+'to '+ JSON.stringify(order.setBeta),
-
 				//CONNECTION DEFINED>>>>
 				//NEED MARKET DATA MODEL..
 				associatedModels: [
 					{type:'MARKET', id: JSON.stringify(order.setAlpha), context:{}},
 					{type:'MARKET', id: JSON.stringify(order.setBeta), context:{}}
 				],
-				contextSet:[
-					order.setAlpha,
-					order.setBeta
-				],
-
+				contextSet:[order.setAlpha, order.setBeta],
 				computedContextSet:[],
 				computedLiquidityPool:[],
-
 				//COMPUTED
 				context: {},
 				setAlpha:order.setAlpha,
 				setBeta:order.setBeta,
-
 				data:{apps:{reactions:{plus:0,minus:0},attention:{general:0}}}
-
 			};
 			associationModel.connection = {
 				title:'MARKET-MARKET ORDER CONNECTION BETA',
@@ -295,35 +274,27 @@ module.exports = {
 			//ELSE COMPUTE NEW ORDER BOOK!!! --> START IT UPPPPPPP
 				//VROOM
 		};
-
 		//TOKEN(ASSET) VS MARKET VS MARKETPAIR
 		//SINGLE - COMBINATORIAL - 
 		//ORDER 
 			//=> {}={}
 		//MARKET
 			//= SUM (SET)
-
 		//CAN DEFINE ORDER MODEL IN MARKET-MARKET CONNECTION LOGIC.. 
 		var model = {
 			model: 'ORDER',
-
 			setAlpha: input.param('setAlpha'),
 			setBeta: input.param('setBeta'),
 			orderSet:[input.param('setAlpha'), input.param('setBeta')],
-			
 			status: input.param('status'),
 			type: input.param('type'),
-
 			creator: input.param('user'),
 			user: input.param('user'),
-
 			data:{apps:{reactions:{plus:0,minus:0},attention:{general:0}}}
-
 		};
 		model.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
 		console.log('CREATE ORDER', model);
 		var newOrder = await Order.create(model);
-
 		Order.publish([order.id], {verb: 'create', data: order});
 		mintTokens(newOrder);
 		//createValidation..createAssociation..createMarket

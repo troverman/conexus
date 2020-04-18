@@ -3,16 +3,12 @@ angular.module( 'conexus.contentList', [])
 	$stateProvider.state( 'contentList', {
 		url: '/content',
 		views: {"main": {controller: 'ContentListCtrl',templateUrl: 'contentList/index.tpl.html'}},
-        resolve:{
-            contentList: ['ContentModel', function(ContentModel){return ContentModel.get({limit:20, skip:0, sort:'createdAt DESC'})}],
-        }
+        resolve:{contentList: ['ContentModel', function(ContentModel){return ContentModel.get({limit:20, skip:0, sort:'createdAt DESC'})}],}
 	});
 }])
 .controller( 'ContentListCtrl', ['$location', '$mdSidenav', '$rootScope', '$sailsSocket', '$sce', '$scope', 'contentList', 'ContentModel', 'ReactionModel', function ContentListController( $location, $mdSidenav, $rootScope, $sailsSocket, $sce, $scope, contentList, ContentModel, ReactionModel ) {
-
     $scope.contentCount = contentList.info.count;
     $scope.contentList = contentList.data;
-
     $scope.selectedTag = '';
     $scope.selectedType = 'POST';
     $scope.skip = 0;
@@ -59,19 +55,14 @@ angular.module( 'conexus.contentList', [])
         console.log($scope.sortedContext)
     };
     $scope.loadContext($scope.contentList);
-
-    $scope.loadLocations = function(list){
-
-    };
+    
+    $scope.loadLocations = function(list){};
 
     $scope.filterSet = {
         context:$scope.sortedContext, 
         associations:$scope.asociationList, 
         location:$scope.sortedLocationArray
     };
-
-
-
 
     //TODO: COMPLEX QUERIES..
     $scope.searchQuery = [];
@@ -98,7 +89,6 @@ angular.module( 'conexus.contentList', [])
             $scope.loadContext();
         });
     };
-    
 
     if ($location.search().tags){$scope.filterContent($location.search().tags);}
 
@@ -107,10 +97,7 @@ angular.module( 'conexus.contentList', [])
         if (envelope.verb == 'create'){$scope.contentList.unshift(envelope.data);}
         if (envelope.verb == 'update'){
             var index = $scope.contentList.map(function(obj){return obj.id}).indexOf(envelope.data.id);
-            if (index != -1){
-                $scope.contentList[index].data = envelope.data.data;
-            }
+            if (index != -1){$scope.contentList[index].data = envelope.data.data;}
         }
     });
-    
 }]);
