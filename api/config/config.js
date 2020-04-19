@@ -174,8 +174,6 @@ module.exports = {
 		'get /auth/:provider/:action': 'AuthController.callback',
 
 
-
-
 		
 		'get /api/action': 'ActionController.get',
 		'post /api/action': 'ActionController.create',
@@ -184,8 +182,6 @@ module.exports = {
 		'get /api/attention': 'AttentionController.get',
 		'post /api/attention': 'AttentionController.create',
 		'get /api/association': 'AssociationController.get',
-		//'get /api/block': 'BlockController.get',
-		//'post /api/block': 'BlockController.create',
 		'get /api/connection': 'ConnectionController.get',
 		'post /api/connection': 'ConnectionController.create',
 		'get /api/content': 'ContentController.get',
