@@ -227,27 +227,31 @@ angular.module( 'conexus.project', [])
 }])
 .controller( 'ProjectContentCtrl', ['$location', '$rootScope', '$scope', 'contentList', 'ContentModel', 'project', 'titleService', function ProjectController( $location, $rootScope, $scope, contentList, ContentModel, project, titleService ) {
     titleService.setTitle(project.title + ' | Content | CRE8.XYZ'); 
-    $scope.contentList = contentList.map(function(obj) {
-        for (x in obj.associatedModels){
-            if (obj.associatedModels[x].type == 'CONTENT'){
-                var returnObj = obj.associatedModels[x].data;
-                returnObj.associationId = obj._id
-                return returnObj;
+    if (contentList){
+        $scope.contentList = contentList.map(function(obj) {
+            for (x in obj.associatedModels){
+                if (obj.associatedModels[x].type == 'CONTENT'){
+                    var returnObj = obj.associatedModels[x].data;
+                    returnObj.associationId = obj._id
+                    return returnObj;
+                }
             }
-        }
-    });
+        });
+    }
 }])
 .controller( 'ProjectCharterCtrl', ['$sailsSocket', '$scope', 'connections', 'project', 'titleService', function ProjectController( $sailsSocket, $scope, connections, project, titleService ) {
     titleService.setTitle(project.title + ' | Charter | CRE8.XYZ');
-    $scope.connections = connections.map(function(obj) {
-        for (x in obj.associatedModels){
-            if (obj.associatedModels[x].type == 'CONNECTION'){
-                var returnObj = obj.associatedModels[x].data;
-                returnObj.associationId = obj._id
-                return returnObj;
+    if (connections){
+        $scope.connections = connections.map(function(obj) {
+            for (x in obj.associatedModels){
+                if (obj.associatedModels[x].type == 'CONNECTION'){
+                    var returnObj = obj.associatedModels[x].data;
+                    returnObj.associationId = obj._id
+                    return returnObj;
+                }
             }
-        }
-    });
+        });
+    }
     console.log( $scope.connections, connections )
 }])
 .controller( 'ProjectLedgerCtrl', ['$interval', '$location', '$rootScope', '$scope', 'project', 'titleService', 'TransactionModel', 'transactions', 'transactionsFrom', 'transactionsTo', function ProjectController( $interval, $location, $rootScope, $scope, project, titleService, TransactionModel, transactions, transactionsFrom, transactionsTo ) { 
@@ -280,7 +284,7 @@ angular.module( 'conexus.project', [])
         yAxis: {title: {text: null}},
         credits:{enabled:false},
     };
-    if ($scope.transactions.length == 0){
+    if ($scope.transactions.length == 0 || !$scope.transactions){
         var timeObject = new Date(); 
         var exampleSetExpense = [
             {to:{title:'Trevor Overman', id:project.id, avatarUrl:project.avatarUrl}, context:'PAYROLL,HUMAN', content:'PAY TREVOR', model:'TRANSACTION',},
@@ -527,29 +531,33 @@ angular.module( 'conexus.project', [])
 }])
 .controller( 'ProjectItemsCtrl', ['$location', '$sailsSocket', '$scope', 'items', 'project', 'titleService', function ProjectMarketplaceController( $location, $sailsSocket, $scope, items, project, titleService) {
     titleService.setTitle(project.title + ' | Items | CRE8.XYZ');
-    $scope.items = items.map(function(obj) {
-        for (x in obj.associatedModels){
-            if (obj.associatedModels[x].type == 'ITEM'){
-                var returnObj = obj.associatedModels[x].data;
-                returnObj.associationId = obj._id;
-                return returnObj;
+    if (items){
+        $scope.items = items.map(function(obj) {
+            for (x in obj.associatedModels){
+                if (obj.associatedModels[x].type == 'ITEM'){
+                    var returnObj = obj.associatedModels[x].data;
+                    returnObj.associationId = obj._id;
+                    return returnObj;
+                }
             }
-        }
-    });
+        });
+    }
 }])
 .controller( 'ProjectMembersCtrl', ['$location', '$sailsSocket', '$rootScope', '$scope', 'AssociationModel', 'members', 'project', 'titleService', function ProjectController( $location, $sailsSocket, $rootScope, $scope, AssociationModel, members, project, titleService ) {
     titleService.setTitle(project.title + ' | Members | CRE8.XYZ');
     //TODO: GET PROJECT-MEMBER CONNECTIONS
-    $scope.members = members.map(function(obj) {
-        for (x in obj.associatedModels){
-            if (obj.associatedModels[x].type == 'MEMBER'){
-                var returnObj = obj;
-                returnObj.user = obj.associatedModels[x].data;
-                returnObj.id = returnObj._id
-                return returnObj;
+    if (members){
+        $scope.members = members.map(function(obj) {
+            for (x in obj.associatedModels){
+                if (obj.associatedModels[x].type == 'MEMBER'){
+                    var returnObj = obj;
+                    returnObj.user = obj.associatedModels[x].data;
+                    returnObj.id = returnObj._id
+                    return returnObj;
+                }
             }
-        }
-    });
+        });
+    }
     $scope.project = project;
     $sailsSocket.subscribe('association', function (envelope) {console.log(envelope); if (envelope.verb == 'create'){$scope.members.unshift(envelope.data);}});  
 }])
@@ -625,19 +633,11 @@ angular.module( 'conexus.project', [])
     //   }
     //});
     //TODO: LOL
-    if ($scope.projects.length > 0){
+    if ($scope.projects){
         var locationProjects = $scope.projects.map(function(obj){if(obj.location){return obj}}).filter(Boolean);
         if (locationProjects.length > 0){
-            if($scope.project.location){
-                $rootScope.map = {
-                    center: {latitude: $scope.project.location.lat, longitude: $scope.project.location.lng }, zoom: 13
-                };
-            }
-            else{
-                $rootScope.map = {
-                    center: {latitude: locationProjects[0].location.lat, longitude: locationProjects[0].location.lng }, zoom: 13
-                };
-            }
+            if($scope.project.location){$rootScope.map = {center: {latitude: $scope.project.location.lat, longitude: $scope.project.location.lng }, zoom: 13};}
+            else{$rootScope.map = {center: {latitude: locationProjects[0].location.lat, longitude: locationProjects[0].location.lng }, zoom: 13};}
             $rootScope.options = {disableDefaultUI: true};
             for (x in locationProjects){
                 $rootScope.markers.push({
@@ -656,15 +656,17 @@ angular.module( 'conexus.project', [])
 .controller( 'ProjectTasksCtrl', ['$location', '$rootScope', '$sailsSocket', '$scope', 'project', 'TaskModel', 'tasks', 'titleService', function ProjectController( $location, $rootScope, $sailsSocket, $scope, project, TaskModel, tasks, titleService ) {
     titleService.setTitle(project.title + ' | Tasks | CRE8.XYZ');
     $scope.project = project;
-    $scope.tasks = tasks.map(function(obj) {
-        for (x in obj.associatedModels){
-            if (obj.associatedModels[x].type == 'TASK'){
-                var returnObj = obj.associatedModels[x].data;
-                returnObj.associationId = obj._id
-                return returnObj;
+    if (tasks){
+        $scope.tasks = tasks.map(function(obj) {
+            for (x in obj.associatedModels){
+                if (obj.associatedModels[x].type == 'TASK'){
+                    var returnObj = obj.associatedModels[x].data;
+                    returnObj.associationId = obj._id
+                    return returnObj;
+                }
             }
-        }
-    });
+        });
+    }
     $sailsSocket.subscribe('task', function (envelope) {if (envelope.verb == 'create'){$scope.tasks.unshift(envelope.data);}});
 }])
 .controller( 'ProjectTimeCtrl', ['$rootScope', '$sailsSocket', '$scope', 'project', 'time', 'titleService', function ProjectTimeController( $rootScope, $sailsSocket, $scope, project, time, titleService) {
@@ -681,13 +683,15 @@ angular.module( 'conexus.project', [])
         nowIndicator: true,
         allDaySlot: false,
     };
-    $scope.time = time.map(function(obj){
-        var endTime = new Date(obj.createdAt)
-        obj.startTime = new Date(endTime.setSeconds(endTime.getSeconds() - obj.amount));
-        obj.endTime = new Date(obj.createdAt);
-        if (obj.task){$scope.eventSources.push({title:obj.task.title,start:obj.startTime,end:obj.endTime,allDay:false,url:'time/'+obj.id});}
-        return obj
-    });
+    if (time){
+        $scope.time = time.map(function(obj){
+            var endTime = new Date(obj.createdAt)
+            obj.startTime = new Date(endTime.setSeconds(endTime.getSeconds() - obj.amount));
+            obj.endTime = new Date(obj.createdAt);
+            if (obj.task){$scope.eventSources.push({title:obj.task.title,start:obj.startTime,end:obj.endTime,allDay:false,url:'time/'+obj.id});}
+            return obj
+        });
+    }
 }])
 .controller( 'ProjectValidationsCtrl', ['$scope', 'project', 'titleService', function ProjectValidationsController( $scope, project, titleService ) {
     titleService.setTitle(project.title + ' | Validations | CRE8.XYZ');

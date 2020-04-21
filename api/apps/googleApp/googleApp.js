@@ -1,35 +1,26 @@
 //CRE8.GOOGLE.ALPHA
 var App = {
-	//PASSPORT APP
-	//DATA APP
+
+	//TODO::
+	//PASSPORT
+		//OAUTH
+	//DATA
 		//DEFINE GOOGLE DATA . . .
-	//OAUTH
-	import: { 
-		request: require('request'),
-		Q: require('q'),
-	},
-	//DATA MODELS ARE CONNECTIONS
-	//TEST
-	//REDUCE INTO SELF CONECTION W CONTEXT --> INTERNAL FUNCTION MAPPING 
-	language: 'Javascript',
-	connections:[
-		{
-			type:'connection', 
-			id:'self', 
-			params:{
-				//DATA MODEL.
-			}	
-		}
-	],
-	get: function(req, res, params){
-	},
-	create: function(req, res, params){	
-	},
-	geoCode: function(model){
-		var deferred = App.import.Q.defer();
-		//TODO: SECURITY 
-		//MEMBER-APP CONNECTION
-		var googleMapsClient = require('@google/maps').createClient({key: 'AIzaSyDcTGxD4H3lnx84u8EPcbh7PodbsEyzbg4'});
+	//'CONNECTION+SELF+DATAMODEL ...
+	//'CONNECTION+SELF+ATTRIBUTES'
+
+	'CONNECTION+Q': require('Q'),
+	'CONNECTION+GOOGLEMAPS': require('@google/maps'),
+
+	//TODO: SECURITY 
+	//MEMBER-APP CONNECTION .. :) 
+	'ASSOCIATION+SECRET+KEY': 'AIzaSyDcTGxD4H3lnx84u8EPcbh7PodbsEyzbg4'
+
+	'GET': function(req, res, params){},
+	'CREATE': function(req, res, params){},
+	'GEOCODE': function(model){
+		var deferred = App['CONNECTION+Q'].defer();
+		var googleMapsClient = App['CONNECTION+GOOGLEMAPS'].createClient({key: App['ASSOCIATION+SECRET+KEY']});
 		googleMapsClient.geocode({address: model.location}, function(err, response) {
 			location = null;
 			if (!err) {
@@ -45,6 +36,6 @@ var App = {
 		});
 		return deferred.promise;
 	},
-	nearByLocations: function(model){}
+	'NEARBY': function(model){}
 };
 module.exports = App;

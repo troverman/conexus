@@ -1,5 +1,5 @@
-2020/04/20-21:42:31.568 ecc Recovering log #353
-2020/04/20-21:42:31.568 ecc Level-0 table #356: started
-2020/04/20-21:42:31.573 ecc Level-0 table #356: 366 bytes OK
-2020/04/20-21:42:31.581 ecc Delete type=0 #353
-2020/04/20-21:42:31.581 ecc Delete type=3 #351
+2020/04/21-11:23:07.078 40b4 Recovering log #370
+2020/04/21-11:23:07.078 40b4 Level-0 table #372: started
+2020/04/21-11:23:07.081 40b4 Level-0 table #372: 366 bytes OK
+2020/04/21-11:23:07.088 40b4 Delete type=0 #370
+2020/04/21-11:23:07.088 40b4 Delete type=3 #368

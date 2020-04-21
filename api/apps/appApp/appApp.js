@@ -12,7 +12,7 @@ var App = {
 
 	//RUN TIME BUILDER SOMETIME :: 
 
-	'CONNECTION+SELF': {
+	'CONNECTION+SELF+ATTRIBUTES': {
         model: {type: 'string', defaultsTo: 'APP'},
 		title: {type: 'string'},
 		description: {type: 'json'},
@@ -30,7 +30,6 @@ var App = {
 	'GET+HASH':function(model){return model},
 	'GET+GLOBAL': function(model){return global(model)},
 
-
 	//SHOULD BE DYNAMIC BUILT HASH .. 
 	//REDUCE App manager to App App : probz 
 	'CONNECTION+APP:CRYPTO': function(){ return global['appApp']['GET+REQUIRE']('crypto')},
@@ -46,38 +45,15 @@ var App = {
 	//'CONNECTION+APP:EVENTAPP': App['GET+STRING']('EVENTAPP'),
 	//'CONNECTION+APP:VALIDATIONAPP': App['GET+STRING']('VALIDATIONAPP'),	
 
-
-	//IN DATABASE IDENTIFIER 
-    'DB':  async function(){return orbitdb.docs('CRE8.APP:{PEER_HASH}')},
-    //PATCH
     'DB':  async function(){return global['App']},
+    'DB+ORBIT':  async function(){return orbitdb.docs('CRE8.APP:{PEER_HASH}')},
+
     'INIT': async function(){await App['DB'].load();},
 	//'FIND':function(model){return sails.models.app.find(model);},
 
-	//THIS FILE
-	//THE PEER IS SELF
-	//self.connections.connections;
-	//self.connections.connections.association;
-	//self.connections.connections.association.validation;
-	//self.connections.connections.validation.association = {find:function(model){}};
-	//self.connections.connections.association['TOKEN STAKED'];
-
-	//App.connections.app.find();
-	//self.connections.app.find(); --> 
-
-	//GOOD FOR NOW 
-		//SOON CORE APP
-        //INIT(GET DATA (INIT-CORE BUILD)) --> RETURNS DYNAMIC FUNCTIONS TO BE RUN BY COMPOSTABLE FUNCTION API [CRE*] --> WASM
-        //for (x in apps){}
-        //CREATE OBJECT
-        //INIT JSON OBJ // THE ENVIRONMENT WE ARE IN 
-        //RUN INIT FXN 
-
 	//TODO
 	'GET': async function(input){
-
 		var deferred = App['CONNECTION+APP:Q']().defer();
-
 		var limit = parseInt(input.query.limit) || 1;
 		var skip = parseInt(input.query.skip) || 0;
 		var sort = input.query.sort;
@@ -102,7 +78,6 @@ var App = {
 	},
 
 	'CREATE': async function(input){
-
 		var model = {
 			model: 'APP',
 			title: input.param('title'),
@@ -139,20 +114,14 @@ var App = {
 
 		//REDUCE
 		return App['DB']().find({hash:model.hash});
-
 	},
 
 	'TOKENS+GET': function(model){
-		var tokens = [
-			'CRE8', 
-			'CRE8+APP', 
-			'CRE8+APP+'+model.title.toUpperCase(), 
-		];
+		var tokens = ['CRE8', 'CRE8+APP', 'CRE8+APP+'+model.title.toUpperCase()];
 		return tokens;
 	},
 	'TOKENS+CREATE':async function (model){
 		var tokens = App['TOKENS+GET'](model);	
 	}
-
 };
 module.exports = App;

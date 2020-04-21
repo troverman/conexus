@@ -2,6 +2,26 @@
 var App = {
 	'CONNECTION+CRYPTO': require('crypto'),
 	'CONNECTION+Q': require('q'),
+
+	//THINK ABOUT THIS ASSOCIATED DATA ::::!!!!!! :) :8 :* :o
+	//CONNECTION IMPORT ..
+	//App['CONNECTION+ASSOCIATION']['DB']
+	//App['DB']()
+
+	//DB TOKEN .. App['CONNECTION+TOKENAPP']()['DB']
+	//'CONNECTION+TOKEN': function(){return global['Token']},
+	'CONNECTION+TOKENAPP': function(){return global['tokenApp']},
+	//App['CONNECTION+MEMBERAPP']()['DB']()
+	'CONNECTION+ASSOCIATIONAPP': function(){return global['associationApp']},
+	'CONNECTION+GOOGLEAPP': function(){return global['googleApp']},
+	'CONNECTION+ASSOCIATIONAPP': function(){return global['associationApp']},
+
+
+
+
+
+
+
 	'CONNECTION+SELF+ATTRIBUTES': {
         model: {type: 'string', defaultsTo: 'TASK'},
         title: {type: 'string'},
@@ -17,6 +37,7 @@ var App = {
     //MULTIKEYS..MULTIDBS AND TYPE COLLECTIONS .. 
 	'DB': function(){return global['Task']},
 	'GET': async function(input) {
+
 		var deferred = App['CONNECTION+Q'].defer();
 		var limit = parseInt(input.query.limit) || 1;
 		var skip = parseInt(input.query.skip) || 0 ;
@@ -49,20 +70,10 @@ var App = {
  		//QUERY FOR CONNECTION DESCRIPTION
 		else if (input.query.user){
 			var member = input.query.user;
-			var andQuery = { 
-				$and: [
-					{"associatedModels.id":{$in :[member]}},
-					{"associatedModels.type":{$in :['MEMBER']}},
-					{"associatedModels.type":{$in :['TASK']}}
-				]
-			};
+			var andQuery = { $and: [{"associatedModels.id":{$in :[member]}}, {"associatedModels.type":{$in :['MEMBER']}}, {"associatedModels.type":{$in :['TASK']}}]};
 			var promises = [];
 
-			//THINK ABOUT THIS ASSOCIATED DATA ::::!!!!!! :) :8 :* :o
-			//CONNECTION IMPORT ..
-			//App['CONNECTION+ASSOCIATION']['DB']
-			//App['DB']()
-
+			////App['CONNECTION+ASSOCIATIONAPP']()['DB']()
 			Association.getDatastore().manager.collection('association').find(andQuery).limit(limit).skip(skip).sort({'createdAt':-1})
 			.toArray(async function (err, associationModels) {
 				associationModels = associationModels.map(function(obj){obj.id = obj._id;return obj;});
@@ -106,22 +117,22 @@ var App = {
 		model.hash = App['CONNECTION+CRYPTO'].createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
 		var newTask = await App['DB']().create(model);
 		
-		//TODO: BETTER SETUP
-		//TODO: BETTER 'EXTERNAL' UTILITY
-		var userModels = await User.find({id:newTask.user});
+		var userModels = await App['CONNECTION+MEMBERAPP']()['DB']().find({id:newTask.user})
+		//var userModels = await User.find({id:newTask.user});
 		newTask.associatedModels = input.param('associatedModels');
 		model.user = userModels[0];
-		var location = await googleApp.geoCode(newTask);
+		var location = await App['CONNECTION+GOOGLEAPP']()['GEOCODE'](newTask)
+		//var location = await googleApp['GEOCODE'](newTask);
 		newTask.location = location;
 		var taskModel = await App['DB']().update({id:newTask.id}, {location:location});
 		
 		App['DB']().subscribe(input, [newTask.id]);
 		App['DB']().publish([newTask.id], {verb: 'create', data: taskModel});
-		eventApp.create(newTask);
+		//eventApp.create(newTask);
 		App['TOKENS+CREATE'](newTask);
 		
 		//for( x in []){}
-		validationApp.createLegacy(newTask);
+		validationApp['CREATE+LEGACY'](newTask);
 		return App['DB']().find({hash:model.hash});
 	},
 	'TOKENS+GET': function(model){

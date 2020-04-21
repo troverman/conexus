@@ -49,6 +49,7 @@ angular.module( 'conexus.nav', [])
     if ($rootScope.currentUser){
 
         $scope.newAction = {};
+        $scope.newActivity = {};
         $scope.newContent = {};
         $scope.newItem = {};
         $scope.newOrder = {};
@@ -96,6 +97,16 @@ angular.module( 'conexus.nav', [])
                 $scope.newAction.associatedModels = [{text:item.title, id:item.id}];
             }
             $mdSidenav('action').toggle();
+        }
+        else{$mdSidenav('login').toggle();}
+    };
+
+    $rootScope.activityToggle = function(item){
+        $scope.closeAllNav();
+        $scope.newActivity = {};
+        if($rootScope.currentUser){
+            $scope.newAction.user = $rootScope.currentUser.id;
+            $mdSidenav('activity').toggle();
         }
         else{$mdSidenav('login').toggle();}
     };

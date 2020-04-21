@@ -31,7 +31,11 @@ var App = {
         liveCount: {type: 'number',defaultsTo: 0},
     },
     'DB': function(){return global['Project']},
-  
+
+    //OR GLOBAL REFRENCE..?
+    'CONNECTION+MEMBERAPP': function(){return global['memberApp']},
+    'CONNECTION+GOOGLEAPP': function(){return global['googleApp']}
+
     'INIT':function(model){
     	//var self = {
 	    //	connnections:{
@@ -132,13 +136,13 @@ var App = {
 
 		var project = await App['DB']().create(model)
 		
-		var userModels = await User.find({id:project.user.toString()});
+		var userModels = await App['CONNECTION+MEMBERAPP']()['DB']().find({id:project.user.toString()});
 
 		if(project._id){project.id = project._id.toString()}
 		project.associatedModels = req.param('associatedModels');
 		project.user = userModels[0];
 
-		var location = await googleApp.geoCode(project);
+		var location = await App['CONNECTION+GOOGLEAPP']()['GETCODE'](project);
 
 		project.location = location;
 

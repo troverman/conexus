@@ -229,7 +229,7 @@ module.exports = {
 
 
 	},
-	security:{cors:{allRoutes: true, allowOrigins: '*'}},
+	security:{cors:{allRoutes: true, allowOrigins: '*', allowCredentials: false}},
 	session:{
 		secret: 'cb5b21a569493ca31834e3827c09b4ed',
 		//cookie: {maxAge: 24 * 60 * 60 * 1000},

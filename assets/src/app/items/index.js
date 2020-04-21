@@ -59,11 +59,7 @@ angular.module( 'conexus.items', [])
         $scope.loadAssociations($scope.items);
         $scope.loadContext($scope.items);
         $scope.loadLocations($scope.items);
-        $scope.filterSet = {
-            context:$scope.sortedContext, 
-            associations:$scope.asociationList, 
-            location:$scope.sortedLocationArray
-        };
+        $scope.filterSet = {context:$scope.sortedContext, associations:$scope.asociationList, location:$scope.sortedLocationArray};
     };
     $scope.init();
 

@@ -11,39 +11,21 @@ angular.module( 'conexus.members', [])
     $scope.memberCount = members.info.count;  
     $scope.totalMap = {
         chart: {zoomType: 'x'},
-        series: [{
-            id: 'Reputation',
-            type: 'column',
-            name: 'Reputation',
-            data: []
-        }],
+        series: [{id: 'Reputation', type: 'column', name: 'Reputation', data: []}],
         title: {text: ''},
-        xAxis: {
-            crosshair: true,
-            gridLineWidth: 0.5,
-            gridLineColor: 'grey',
-            title: {text: null},
-            categories: [],
-        },
+        xAxis: {crosshair: true, gridLineWidth: 0.5, gridLineColor: 'grey', title: {text: null}, categories: []},
         legend: {enabled: false},
         yAxis: {title: {text: null}},
         credits:{enabled:false},
     };
     $scope.pieMap = {
         chart: {},
-        series: [{
-            id: 'Pie',
-            type: 'pie',
-            name: 'Pie',
-            colorByPoint: true,
-            data: [{name: 'Reputation',y: []}]
-        }], 
+        series: [{id: 'Pie', type: 'pie', name: 'Pie', colorByPoint: true, data: [{name: 'Reputation',y: []}]}], 
         title: {text: ''},
         xAxis: {title: {text: null}},
         yAxis: {title: {text: null}},
         credits:{enabled:false},
     };
-
     if ($rootScope.currentUser){
         if ($rootScope.currentUser.associationModels){
             $scope.followers = $rootScope.currentUser.associationModels.map(function(obj) {

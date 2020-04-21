@@ -340,7 +340,7 @@ angular.module( 'conexus.member', [])
 }])
 .controller( 'MemberItemsCtrl', ['$rootScope', '$sailsSocket', '$scope', '$stateParams', 'ItemModel', 'items', 'titleService', function MemberItemsController($rootScope, $sailsSocket, $scope, $stateParams, ItemModel, items, titleService) {
     titleService.setTitle($scope.member.username + ' | Items | CRE8.XYZ');
-    $scope.items = items.map(function(obj){obj.model = 'ITEM'; return obj;});
+    if (items){$scope.items = items.map(function(obj){obj.model = 'ITEM'; return obj;});}
     $rootScope.$watch('searchQuery' ,function(){
         $scope.searchQuery = [];
         for(x in Object.keys($rootScope.searchQuery)){

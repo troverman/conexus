@@ -37,20 +37,9 @@ angular.module( 'conexus.item', [])
 
     $scope.tokenChart = {
         chart: {zoomType: 'x'},
-        series: [{
-            id: 'Attention',
-            type: 'column',
-            name: 'Attention',
-            data: []
-        }],
+        series: [{id: 'Attention', type: 'column', name: 'Attention', data: []}],
         title: {text: ''},
-        xAxis: {
-            crosshair: true,
-            gridLineWidth: 0.5,
-            gridLineColor: 'grey',
-            title: {text: null},
-            categories: [],
-        },
+        xAxis: {crosshair: true, gridLineWidth: 0.5, gridLineColor: 'grey', title: {text: null}, categories: []},
         legend: {enabled: false},
         yAxis: {title: {text: null}},
         credits:{enabled:false},
@@ -72,45 +61,18 @@ angular.module( 'conexus.item', [])
 
     $scope.renderStats = function(){
         $scope.statsChart = {
-            chart: {
-                zoomType: 'x',
-            },
+            chart: {zoomType: 'x'},
             series: [],
             title: {text: ''},
-            xAxis: {
-                type: 'datetime',
-                currentMin: 0,
-                currentMax: 20,
-                title: null,
-                crosshair: true,
-                gridLineWidth: 0.5,
-                gridLineColor: 'grey'
-            },
-            yAxis: [{
-                title: {text: null},
-            }],
+            xAxis: {type: 'datetime', currentMin: 0, currentMax: 20, title: null, crosshair: true, gridLineWidth: 0.5, gridLineColor: 'grey'},
+            yAxis: [{title: {text: null}}],
             credits:{enabled:false},
             plotOptions: {spline: {marker: {enabled: false}}, sma: {marker: {enabled: false}}}
         };
         $scope.statsChart.series = [];
-        $scope.statsChart.series.push({
-            id: 'content',
-            type: 'spline',
-            name: 'Content',
-            data: []
-        });
-        $scope.statsChart.series.push({
-            id: 'time',
-            type: 'spline',
-            name: 'Time',
-            data: []
-        });
-        $scope.statsChart.series.push({
-            id: 'validation',
-            type: 'spline',
-            name: 'Validations',
-            data: []
-        });
+        $scope.statsChart.series.push({id: 'content', type: 'spline', name: 'Content', data: []});
+        $scope.statsChart.series.push({id: 'time', type: 'spline', name: 'Time', data: []});
+        $scope.statsChart.series.push({id: 'validation', type: 'spline', name: 'Validations', data: []});
         for(var i=0;i<100;i++){
             var date = new Date();
             date.setTime(date.getTime() - (60*60*1000*(1000-i)));
@@ -147,9 +109,7 @@ angular.module( 'conexus.item', [])
                 group:'nodes',
                 data:{id:Object.keys(obj.setAlpha)[y], name:Object.keys(obj.setAlpha)[y]}
             };
-            if (Object.keys(elementsObj).indexOf(Object.keys(obj.setAlpha)[y]) == -1){
-                elementsObj[Object.keys(obj.setAlpha)[y]] = modelNode;
-            }
+            if (Object.keys(elementsObj).indexOf(Object.keys(obj.setAlpha)[y]) == -1){elementsObj[Object.keys(obj.setAlpha)[y]] = modelNode;}
             for (z in Object.keys(obj.setBeta)){
                 var modelNode = {
                     group:'nodes',
@@ -159,12 +119,7 @@ angular.module( 'conexus.item', [])
                     elementsObj[Object.keys(obj.setBeta)[z]] = modelNode;
                     var modelEdge = {
                         group:'edges',
-                        data:{
-                            id:Object.keys(obj.setAlpha)[y]+'-'+Object.keys(obj.setBeta)[z], 
-                            source:Object.keys(obj.setAlpha)[y], 
-                            target:Object.keys(obj.setBeta)[z],
-                            label: obj.setBeta[Object.keys(obj.setBeta)[z]],
-                        },
+                        data:{id:Object.keys(obj.setAlpha)[y]+'-'+Object.keys(obj.setBeta)[z], source:Object.keys(obj.setAlpha)[y], target:Object.keys(obj.setBeta)[z], label: obj.setBeta[Object.keys(obj.setBeta)[z]]},
                         classes: 'edgeLabelStyle',
                     };
                     elementsObj[Object.keys(obj.setAlpha)[y]+'-'+Object.keys(obj.setBeta)[z]] = modelEdge;
@@ -178,11 +133,7 @@ angular.module( 'conexus.item', [])
     $scope.outputVector = [];
     //market vs discrete orders
     $scope.layout = {name: 'cola', coolingFactor: 0, animate: true};
-    $scope.options = {
-        pixelRatio: 'auto',
-        maxZoom:10,
-        minZoom:0.1,
-    };
+    $scope.options = {pixelRatio: 'auto', maxZoom:10, minZoom:0.1};
     $scope.selectedTab = 'INFORMATION';
     $scope.style = [
         {
@@ -297,90 +248,56 @@ angular.module( 'conexus.item', [])
     //TODO: SET POSITIONS AS COMBINATORIALS
     $scope.renderGraph = function(orders){
         $scope.elementsObj = {};
-
         for (x in orders){
-
             for (y in Object.keys(orders[x].setAlpha)){
-
                 var modelNode = {
                     group:'nodes',
                     data:{id:Object.keys(orders[x].setAlpha)[y], name:Object.keys(orders[x].setAlpha)[y]}
                 };
-
-                if (Object.keys($scope.elementsObj).indexOf(Object.keys(orders[x].setAlpha)[y]) == -1){
-                    $scope.elementsObj[Object.keys(orders[x].setAlpha)[y]] = modelNode;
-                }
-
+                if (Object.keys($scope.elementsObj).indexOf(Object.keys(orders[x].setAlpha)[y]) == -1){$scope.elementsObj[Object.keys(orders[x].setAlpha)[y]] = modelNode;}
                 for (z in Object.keys(orders[x].setBeta)){
-
                     var modelNode = {
                         group:'nodes',
                         data:{id:Object.keys(orders[x].setBeta)[z], name:Object.keys(orders[x].setBeta)[z]}
                     };
-
                     if (Object.keys($scope.elementsObj).indexOf(Object.keys(orders[x].setBeta)[z]) == -1){
-
                         $scope.elementsObj[Object.keys(orders[x].setBeta)[z]] = modelNode;
-
                         var modelEdge = {
                             group:'edges',
                             data:{id:Object.keys(orders[x].setAlpha)[y]+'-'+Object.keys(orders[x].setBeta)[z], source:Object.keys(orders[x].setAlpha)[y], target:Object.keys(orders[x].setBeta)[z]}
                         };
-
                         $scope.elementsObj[Object.keys(orders[x].setAlpha)[y]+'-'+Object.keys(orders[x].setBeta)[z]] = modelEdge;
-
                         console.log($scope.elementsObj)
-
                     }
-
                 }
-
             }
-
             for (y in Object.keys(orders[x].setBeta)){
-
                 var modelNode = {
                     group:'nodes',
                     data:{id:Object.keys(orders[x].setBeta)[y], name:Object.keys(orders[x].setBeta)[y]}
                 };
-
-                if (Object.keys($scope.elementsObj).indexOf(Object.keys(orders[x].setBeta)[y]) == -1){
-                    $scope.elementsObj[Object.keys(orders[x].setBeta)[y]] = modelNode;
-                }
-
+                if (Object.keys($scope.elementsObj).indexOf(Object.keys(orders[x].setBeta)[y]) == -1){$scope.elementsObj[Object.keys(orders[x].setBeta)[y]] = modelNode;}
                 for (z in Object.keys(orders[x].setAlpha)){
-
                     var modelNode = {
                         group:'nodes',
                         data:{id:Object.keys(orders[x].setAlpha)[z], name:Object.keys(orders[x].setAlpha)[z]}
                     };
-
                     //if (Object.keys($scope.elementsObj).indexOf(Object.keys(orders[x].setAlpha)[z]) == -1){
-
                         $scope.elementsObj[Object.keys(orders[x].setAlpha)[z]] = modelNode;
-
                         var modelEdge = {
                             group:'edges',
                             data:{id:Object.keys(orders[x].setBeta)[y]+'-'+Object.keys(orders[x].setAlpha)[z], source:Object.keys(orders[x].setBeta)[y], target:Object.keys(orders[x].setAlpha)[z]}
                         };
-
                         $scope.elementsObj[Object.keys(orders[x].setBeta)[y]+'-'+Object.keys(orders[x].setAlpha)[z]] = modelEdge;
-
                         console.log($scope.elementsObj)
-
                     //}
-
                 }
-
             }
-
         }
     };
     $scope.renderGraph($scope.orders);
 
     $scope.selectTab = function(model){$scope.selectedTab = model;};
-
-
 
     //TODO: OWNERSHIP HISTORY -- AS ACTION
     //AS TRANSACTION WITH ITEM ID
@@ -415,9 +332,7 @@ angular.module( 'conexus.item', [])
     //DEFINE THE FORMAL MATH 
     //MULTIDIMENSIONAL VALUE MATRIX THAT ALLOWS FOR SET EQUALITIES IN A TOKENIZED SPACE
     $scope.marketTraverse = function(input, output){
-        for (x in $scope.outputVector.split(',')){
-            $scope.marketOutput.push([Math.random(),$scope.outputVector.split(',')[x]])
-        } 
+        for (x in $scope.outputVector.split(',')){$scope.marketOutput.push([Math.random(),$scope.outputVector.split(',')[x]])} 
     };
 
     //SETS OF UNIQUE IDENTIFIERS
@@ -444,14 +359,8 @@ angular.module( 'conexus.item', [])
         });
     };
     //getOrderTraverse($scope.item.identiferSet);
-
     $sailsSocket.subscribe('item', function (envelope) {
         console.log(envelope)
-        if (envelope.verb == 'update'){
-            if ($scope.item.id == envelope.data.id){
-                $scope.item.data.apps = envelope.data.data.apps;
-            }
-        }
+        if (envelope.verb == 'update'){if ($scope.item.id == envelope.data.id){$scope.item.data.apps = envelope.data.data.apps;}}
     });
-
 }]);
