@@ -1,5 +1,7 @@
 //CRE8.BALANCE.ALPHA
+//REMAP USER.BALANCES
 var App = {
-	//REMAP USER.BALANCES
+
+
 };
 module.exports = App

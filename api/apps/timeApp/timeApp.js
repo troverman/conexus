@@ -28,7 +28,7 @@ var App = {
 	'DB': function(){return global['Time']},
 
 	//TEST
-	'INIT': async function(req){
+	'INIT': async function(input){
 
 		//HIGHER ORDER INIT FUNCTIONS --> IE EXPOSED GLOBALS 
 		//IE DEFINE Time . . . 
@@ -50,50 +50,58 @@ var App = {
 		//REIMAGINE VALUEMAP APP 
 	},
 
-	'GET': async function(req) {
-		var deferred = App.import.Q.defer();
-		var limit = parseInt(req.query.limit) || 1;
-		var skip = parseInt(req.query.skip) || 0;
-		var sort = req.query.sort || 'createdAt DESC';
-		var task = req.query.task;
-		var user = req.query.user;
-		var id = req.query.id;
-		console.log('timeApp.get', 'CALL:', utilityServiceApp.guid(), req.query);
-		if (req.query.id){
-			var models = await Time.find({id:id}).limit(limit).skip(skip).sort(sort).populate('user');
-			Time.subscribe(req, [models[0].id]);
-			return associationApp.get(models[0]);
+	'GET': async function(input) {
+		var deferred = App['CONNECTION+Q'].defer();
+		var limit = parseInt(input.query.limit) || 1;
+		var skip = parseInt(input.query.skip) || 0;
+		var sort = input.query.sort || 'createdAt DESC';
+		var task = input.query.task;
+		var user = input.query.user;
+		var id = input.query.id;
+		console.log('timeApp.get', 'CALL:', utilityServiceApp.guid(), input.query);
+		if (input.query.id){
+			var models = await App['DB']().find({id:id}).limit(limit).skip(skip).sort(sort).populate('user');
+			App['DB']().subscribe(input, [models[0].id]);
+			return associationApp['GET'](models[0]);
 		}
-		else if(req.query.user){return Time.find({user:user}).limit(limit).skip(skip).sort(sort).populate('user');}
-		else{return Time.find({}).limit(limit).skip(skip).sort(sort).populate('user');}
+		else if(input.query.user){return App['DB']().find({user:user}).limit(limit).skip(skip).sort(sort).populate('user');}
+		else{return App['DB']().find({}).limit(limit).skip(skip).sort(sort).populate('user');}
 	},
 
-	'CREATE': async function(req){
-		var deferred = App.import.Q.defer();
+	//TODO:
+	'CREATE': async function(input){
+		var deferred = App['CONNECTION+Q'].defer();
 		var model = {
 			model: 'TIME',
-			amount: req.param('amount'),
-			content: req.param('content'),
-			stream: req.param('stream'),
-			source: req.param('source'), 
-			startTime: req.param('startTime'),
-			context: req.param('context'),
+			amount: input.param('amount'),
+			content: input.param('content'),
+			stream: input.param('stream'),
+			source: input.param('source'), 
+			startTime: input.param('startTime'),
+			context: input.param('context'),
 			//UNIFY
-			user: req.param('user'),
-			creator: req.param('user'),
+			user: input.param('user'),
+			creator: input.param('user'),
 			data:{apps:{reactions:{plus:0,minus:0},attention:{general:0}}}
 		};
-		model.hash = App.import.crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
+		model.hash = App['CONNECTION+CRYPTO'].createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
 		//TODO: SECURITY - PERMISSIONS - AUTH
+
 		var userModels = await User.find({id:model.user});
-		var time = await Time.create(model);
-		time.associatedModels = req.param('associatedModels');
-		time.user = userModels[0];
-		Time.publish([time.id], {verb: 'create', data: time});
-		eventApp.create(time);
-		App.tokens.create(time);
-		for (x in time.associatedModels){validationApp.createLegacy(time.associatedModels[x])}
-		return time;
+
+		var newTime = await App['DB']().create(model);
+		newTime.associatedModels = input.param('associatedModels');
+		newTime.user = userModels[0];
+		App['DB']().publish([newTime.id], {verb: 'create', data: time});
+		
+		//...think about it
+		//await eventApp['CREATE'](time);
+		await App['TOKENS+CREATE'](newTime);
+
+		//HM..
+		for (x in newTime.associatedModels){await validationApp['CREATE+LEGACY'](newTime.associatedModels[x])}
+		return newTime;
+
 	},
 
 	//TODO

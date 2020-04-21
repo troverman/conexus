@@ -16,6 +16,7 @@ var App = {
 		else{return App['DB']().find({}).limit(limit).skip(skip).sort(sort);}
 	},
 
+	//REDUCE.. 
 	//TODO: && ASSSOICATION PARAMS
 	//REDUCE TO MODEL PARAM AND SINGLE FXN
 	'CREATE+VALIDATION': async function(user, model){

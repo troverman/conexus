@@ -1,7 +1,7 @@
 <div class="container" style="padding:0px">
     <div class="card" ng-click="cardDetailToggle(task)">
         <div class="imageContainerSmall" style="background:url('https://source.unsplash.com/1600x900/?{{task.context}}');">
-            <div style="background:rgba(0,0,0,0.75);text-align:center" class="imageContainerSmallDiv">
+            <div style="background:rgba(0,0,0,0.75);text-align:left" class="imageContainerSmallDiv">
                 <div style="text-align:right;padding:15px;position:absolute;right:0">
                     <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(task)">
                         <i class="fas fa-chevron-down"></i>
@@ -28,7 +28,7 @@
         </div>
         <div style="background-color:white">
             <div class="member-tab-container container" style="padding-left:0px">
-                <div style="text-align:center">
+                <div style="text-align:left">
                     <ul style="padding:0px;" class="member-tabs">
                         <li ng-if="false"><a ng-click="$event.stopPropagation();selectTab('TIME')">Activity</a></li>
                         <li><a ng-click="$event.stopPropagation();selectTab('INFORMATION')">Information</a></li>

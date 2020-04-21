@@ -55,7 +55,7 @@ var App = {
 		model.creator = userModel[0];
 
 		App['DB+MONGO']().publish([newAttention.id], {verb:'create', data: newAttention});
-		eventApp['CREATE'](newAttention);
+		//TODO: eventApp['CREATE'](newAttention);
 		App['TOKENS+CREATE'](newAttention);
 
 		App['UPDATE+ASSOCIATEDMODELS'](newAttention);

@@ -14,11 +14,9 @@ var App = {
         data: {type: 'json'},
     },
 
-	//TODO: EVOLVE PAST IMPORT.. PRACTICE
-	//TODO: THE BIG REDUCE :P
 	//TODO: APP-APP DESCRETE CONNECTIONS
 	'CONNECTION+CRYPTO':require('crypto'),
-	'CONNECTION+Q':require('q'),
+	'CONNECTION+Q': require('q'),
 
 	'DB': function(){return global['Transaction']},
 
@@ -111,7 +109,7 @@ var App = {
 			var models = await App['DB']().find({}).limit(limit).skip(skip).sort(sort);
 			var promises = [];
 			for (x in models){promises.push(App.getTo(models[x]));promises.push(App.getFrom(models[x]));}
-			var populatedModels = await App.import.Q.all(promises);
+			var populatedModels = await App['CONNECTION+Q'].all(promises);
 			var sum = 0;
 			for (x in models){models[x].to = populatedModels[sum];sum++;models[x].from = populatedModels[sum];sum++;}
 			//TODO: REMOVE
@@ -255,12 +253,8 @@ var App = {
 				var updatedUser = awaitUser.update({id:model.user.id}, {balance:model.user.balance});
 
 			}
-
 			//UPDATE TRANSACTION MODEL..
 			//ATTENTION + REACTION + PROTOCOL + ASSOCIATION + ALL TOKENS IN CONTEXT
-
-			//data.apps.tokens = {}
-
 		}
 	}
 

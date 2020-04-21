@@ -19,8 +19,8 @@ var App = {
 		var sort = input.query.sort;
 		var id = input.query.id;
 		var response = {};
-		if(input.query.id){response = Connection.find({id:id}).limit(limit).skip(skip).sort(sort);}
-		else if(input.query.creator){response = Connection.find({creator:creator}).limit(limit).skip(skip).sort(sort);}
+		if(input.query.id){response = App['DB']().find({id:id}).limit(limit).skip(skip).sort(sort);}
+		else if(input.query.creator){response = App['DB']().find({creator:creator}).limit(limit).skip(skip).sort(sort);}
 		else{response = App['DB']().find({}).limit(limit).skip(skip).sort(sort);}
 		return response;
 	},
@@ -42,10 +42,10 @@ var App = {
 		App['DB']().publish([newConnection.id], {verb: 'create', data: newConnection});
 
 		//App['CONNECTION+EVENTAPP']['CREATE'](newConnection);
-		eventApp.create(newConnection);
+		//eventApp.create(newConnection);
 
 		//App['CONNECTION+VALIDATIONAPP']['CREATE'](newConnection);
-		validationApp.create(newConnection);
+		validationApp['CREATE'](newConnection);
 
 		return App['DB']().find({hash:model.hash});
 	},

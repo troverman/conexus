@@ -24,6 +24,8 @@ angular.module( 'conexus', [
     'conexus.about',
     'conexus.account',
     'conexus.action',
+    'conexus.activity',
+    'conexus.activityList',
     'conexus.app',
     'conexus.apps',
     'conexus.association',

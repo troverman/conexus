@@ -20,7 +20,7 @@ var App = {
 					//soo (a, b, eval ())
 
 	//TRAVERSE THE STRUCTURE OF CONNECTIONS 
-	traverse:function(connections, depth){
+	traverse: function(connections, depth){
 		for (x in connections){
 			if (connections[x].connections){depth++;traverse(connections[x].connections, depth);}
 			else{
@@ -63,9 +63,6 @@ var App = {
 
 					//INIT CREATE BY PARSING CONNECTIONS
 						//CHECK PARAMS FOR LANGUAGE AND COMPILER . . .
-
-
- 
 
 				},
 			}]

@@ -23,7 +23,7 @@ var App = {
 	//BOWER, GRUNT, AND OTHER ASSET MANAGEMENT
 		//--> ASM 
 
-	views:{
+	'VIEWS':{
 		about:{
 			route:'/',
 			controller:function(){

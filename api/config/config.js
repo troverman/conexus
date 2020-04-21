@@ -97,6 +97,8 @@ module.exports = {
 		'get /about': 'HomeController.index',
 		'get /account': 'HomeController.index',
 		'get /action/:id': 'HomeController.index',
+		'get /activity': 'HomeController.index',
+		'get /activity/:id': 'HomeController.index',
 		'get /app/:id': 'HomeController.index',
 		'get /apps': 'HomeController.index',
 		'get /association/:id': 'HomeController.index',
@@ -177,6 +179,8 @@ module.exports = {
 		
 		'get /api/action': 'ActionController.get',
 		'post /api/action': 'ActionController.create',
+		'get /api/activity': 'ActivityController.get',
+		'post /api/activity': 'ActivityController.create',
 		'get /api/app': 'AppController.get',
 		'post /api/app': 'AppController.create',
 		'get /api/attention': 'AttentionController.get',

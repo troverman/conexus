@@ -21,7 +21,7 @@
                 <div style="text-align:right;padding:15px;position:absolute;right:0">
                     <a style="color:white;" ng-click="$event.stopPropagation();cardDetailToggle(content)"><i class="fas fa-chevron-down"></i></a>
                 </div>
-                <div style="margin-top: auto;margin-bottom: auto;text-align:center">
+                <div style="margin-top: auto;margin-bottom: auto;text-align:left">
                     <div style="padding:15px">
                         <h1 style="font-size:30px">
                             <span ng-if="content.title">{{content.title}}</span>
@@ -35,7 +35,7 @@
         </div>
         <div style="background-color:white">
             <div class="member-tab-container container" style="padding-left:0px">
-                <div style="text-align:center">
+                <div style="text-align:left">
                     <ul style="padding:0px;" class="member-tabs">
                         <li><a ng-click="$event.stopPropagation();selectTab('CONTENT')">Content</a></li>
                         <li><a ng-click="$event.stopPropagation();selectTab('ASSOCIATIONS');" >Associations</a></li>

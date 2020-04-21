@@ -43,25 +43,17 @@ var App = {
 	//CREATE string - > int mapping of token address CHROME+URL+PAGE.URL
 	//runtime:'chrome'
 	watchPages:function(chrome){
-
 		//CHROME RUNTIME .. 
-
 		const attentionWatcher = function(){
 			//init: 
-
 		};
 
 		//OPEN TABS
 		chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
 		    var url = tabs[0].url;
-
 		    //CHROME+URL+PAGE.URL
 		    //Token.create(); 
-
 		});
-
-
-	},
-
+	}
 };
 module.exports = App;

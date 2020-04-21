@@ -1,7 +1,5 @@
 var App = {
 
-
-
 	//META HERE IS TO GET THE IDEENTIY OF THE AUTHORS :: GIVEM SOME M>ATTETNION DERIVITATIVE WHEN THE CODE IS RUN : ) 
 	//NPM LINK APP LINK IN :: OTHER MODULE (APP) REGISTRY CRAWLER APP :: 
 	'CONNECTION+BITCOINJS-LIB': global['appApp']['GET']({type:'require', string:'bitcoinjs-lib'}),
@@ -21,7 +19,6 @@ var App = {
 
 	//THINK: SHORT HAND FOR THE CONNECTION+SELF AS META MODEL --> DATA ; META .. 
 
-
 	connections:[
 		//DEFINE SELF CONNECTION
 		{
@@ -31,7 +28,6 @@ var App = {
 				type:'btcApp',
 				id:'self',
 				connections:[{		
-
 					create:{
 
 						wallet:function(model){
@@ -92,15 +88,11 @@ var App = {
 						},
 
 					},
-
 					//SUBAPP? YEP.. DEFINE MODELS AND DISCRETE -- DATA AS PROGRAMMING :)
 					btcWallet:{
-
 						//LOGIC ENCODING TO STRING SPACE
 						send:function(){
-
 						},
-
 						recieve:function(){
 							
 							//WHEN WALLET ID RECIEVES TRANSACTION FIRE EVENT
@@ -112,31 +104,17 @@ var App = {
 							.connections[0]
 							.connections[0]
 							.create.tokens.create();
-
 						},
-
-
-
-
 					},
-
 					//NEED GLOBAL CHECKERS FOR THIS >> 
 					peer:{
-
 						//btc peer --> IMPLEMENT NETWORKING PROTO.. 
 						//lISTENING TO network
 						//when 
-
-
 					},
-
 					update:{
-
 						association:function(model){},
-
 					},
-
-
 				}]
 			}],
 		},

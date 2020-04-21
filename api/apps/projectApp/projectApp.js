@@ -149,9 +149,11 @@ var App = {
 		App['DB']().subscribe(req, [project.id]);
 		App['DB']().publish([projectModel[0].id], {verb: 'create', data: projectModel[0]});
 
-		eventApp.create(project);
-		notificationApp.create.project(project);
-		validationApp.create(project);
+		//eventApp['CREATE'](project);
+
+		//notificationApp['CREATE+PROJECT'](project);
+		
+		//validationApp['CREATE'](project);
 
 		//TODO: DEFINE CONNECTION PERMISSIONS
 		//createCharter()

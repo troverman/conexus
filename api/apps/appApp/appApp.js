@@ -39,6 +39,10 @@ var App = {
 	'CONNECTION+APP:ORBITDB': function(){ return global['appApp']['GET+REQUIRE']('orbit-db')},
 	'CONNECTION+APP:NETWORKING': function(){ return global['appApp']['GET+REQUIRE']('orbit-db')},
 
+	//HM
+	'CONNECTION+APP:ASSOCIATIONAPP': function(){return global['associationApp']},
+	'CONNECTION+APP:ASSOCIATIONAPP': function(){return global['associationApp']},
+
 	//'CONNECTION+APP:EVENTAPP': App['GET+STRING']('EVENTAPP'),
 	//'CONNECTION+APP:VALIDATIONAPP': App['GET+STRING']('VALIDATIONAPP'),	
 
@@ -72,7 +76,6 @@ var App = {
 	//TODO
 	'GET': async function(input){
 
-		//const records = App.db.get('');
 		var deferred = App['CONNECTION+APP:Q']().defer();
 
 		var limit = parseInt(input.query.limit) || 1;
@@ -84,14 +87,15 @@ var App = {
 		console.log('appApp.get', 'CALL:', utilityServiceApp.guid(), input.query);
 
 		if(input.query.id){
-			var apps = await App['DB'].find({id:id});//.limit(limit).skip(skip).sort(sort);
+			var apps = await App['DB']().find({id:id});//.limit(limit).skip(skip).sort(sort);
 			//-->IMPORT TRIE . . . :P
 			//App.subscribe(req, [apps[0].id]);
 			//TODO: MANY-MANY RELATIONSHIP; SEE NOTIFICATIONS . . . 
-			var models = await associationApp.get(apps[0]);
+			var models = await associationApp['GET'](apps[0]);
+			//var models = await App['CONNECTION+APP:ASSOCIATIONAPP']()['GET'](apps[0]);
 		}
 		else{
-			var models = await App['DB'].find({});//.limit(100).skip(skip).sort(sort);
+			var models = await App['DB']().find({});//.limit(100).skip(skip).sort(sort);
 			//App.subscribe(req, apps.map(function(obj){return obj.id}));
 		}
 		return models;
@@ -115,15 +119,15 @@ var App = {
 		//ACTIVITY PROCESSOR
 		console.log('appApp.create', 'CALL:', utilityServiceApp.guid(), model);
 
-		var newApp = await App.create(model);
+		var newApp = await App['DB']().create(model);
 
 		//FLAT :: MORE THAN ORBIT ...
 		//APP['DB+PUT'](dataModel);
 		//LOL
-		await App['DB'].put({_id:Math.random(), string:Math.random()});
+		await App['DB']().put({_id:Math.random(), string:Math.random()});
 
 		//SOCKS
-		App.publish([model.id], {verb: 'create', data: model});
+		App['DB']().publish([model.id], {verb: 'create', data: model});
 		
 		eventApp.create(newApp);
 		//App['CONNECTION+APPS:EVENTAPP'].create(newApp);
@@ -134,7 +138,7 @@ var App = {
 		//App['CONNECTION+APPS:VALIDATIONAPP+CREATE'](newApp); // TODO FLATTEN PROCESSING IN MODULE LOADER :)
 
 		//REDUCE
-		return App['DB'].find({hash:model.hash});
+		return App['DB']().find({hash:model.hash});
 
 	},
 

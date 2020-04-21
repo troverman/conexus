@@ -1,5 +1,5 @@
 <div class="card">
-    <div style="background:url('https://source.unsplash.com/1600x900/?{{item.tags}}');min-height:auto" class="imageContainerSmall">
+    <!--<div style="background:url('https://source.unsplash.com/1600x900/?{{item.tags}}');min-height:auto" class="imageContainerSmall">
         <div style="background:rgba(0,0,0,0.75);height:auto" class="imageContainerSmallDiv">  
             <div style="margin-top: auto;margin-bottom: auto;">
                 <div style="padding:15px">
@@ -7,17 +7,16 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>-->
+    <!--LOOP THROUGH APP ASSOCITED MODEL TYPES-->
+    <!--CAN EACH DISCRETE MODEL HAVE APP CONNECTION YEAH META: -->
+    <!--
     <div style="padding:16px;">
         <div class="row">
             <div class="col-sm-12">
                 <h4>Context</h4>
-                <div>
-                    <span ng-repeat="context in task.context">{{context}}, </span>
-                </div>
-                <!--LOOP THROUGH APP ASSOCITED MODEL TYPES-->
+                <div><span ng-repeat="context in task.context">{{context}}, </span></div>
                 <ul style="padding:0px;" class="member-tabs">
-                    <!--CAN EACH DISCRETE MODEL HAVE APP CONNECTION YEAH META: -->
                     <li ng-click="$event.stopPropagation();selectTab('APPS')"><a href="#">App</a></li>
                     <li ng-click="$event.stopPropagation();selectTab('ATTENTION')"><a href="#">Attention</a></li>
                     <li ng-click="$event.stopPropagation();selectTab('CONTENT')"><a href="#">Content</a></li>
@@ -30,6 +29,7 @@
             </div>
         </div>
     </div>
+    -->
 </div>
 <ul style="padding:0px;" class="member-tabs">
     <li style="float:left;font-size:14px"><a href="#" ng-click="filterToggle('DISCOVER', filterSet)"><i class="fa fa-filter"></i> Filter</a></li>

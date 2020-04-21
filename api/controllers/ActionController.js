@@ -1,5 +1,5 @@
 //CRE8.__ITEM__ACTION
 module.exports = {
-	get: async function(req, res) {var model = await actionApp.get(req); res.json(model);},
-	create: async function (req, res) {var newModel = await actionApp.create(req); res.json(newModel);},
+	get: async function(input, output) {var model = await actionApp['GET'](input); output.json(model);},
+	create: async function (input, output) {var newModel = await actionApp['CREATE'](input); output.json(newModel);},
 };

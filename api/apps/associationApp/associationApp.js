@@ -8,7 +8,6 @@ var App = {
 	//WORK ON REQUIRE KEY WORD.. 
 	//DOWNLOAD AND BUILD BASED ON TYPE
 	'CONNECTION+SELF+ATTRIBUTES': {
-        //DEPRECIATE
         model: {type: 'string', defaultsTo: 'ASSOCIATION'},
     	//DEFINE (HIGHER ORDER) LOGIC
     	connection:{type: 'json'},
@@ -21,16 +20,22 @@ var App = {
             //parameters: {type: 'json'},
     },
 
-    'DB': function(){return global['Association']},
+    'DB': function(){
+    	//TODO: PASS SELF+ATTRIBUTES TO CONSTRUCT MODEL DYNAMICALLY (DATA ++ MONGO+MONGOOSE :: META MODEL CONSTRUCTION :: REDUCE ORM CODE)
+    	//return dataApp['DATABASE+PROVIDER+MONGO']('Association')
+    	return global['Association']
+    },
 
-	//TODO
+    //TODO: MODEL AS PROTOCOL ... :: WHAT ARE THE MODEL PARAMETER TYPE || the 'type' of model :: can be abstract?? from registry of types :: lol db of json?
 	'GET': async function(model){
 		var deferred = App['CONNECTION+Q']().defer();
-
 		//REDUCE 
 		App['DB']().getDatastore().manager.collection('association')
 		.find({$and : [{"associatedModels.id": {$in:[model.id]}}]}).limit(1000).skip(0).sort({'createdAt':-1})
 		.toArray(async function (err, associationModels) {
+
+			console.log('DUDEEE', associationModels, model.id);
+
 			if (associationModels.length > 0){
 				associationModels.map(function(obj){obj.id=obj._id; return obj});
 				model.associationModels = associationModels;
@@ -40,8 +45,20 @@ var App = {
 				var promises = [];
 				for (x in model.associationModels){
 					for (y in associationModels[x].associatedModels){
+
 						//TODO: VARIABILITY IN MODELS 
-						//DYNAMIC 
+						//DYNAMIC // WILL DO TMRW :: AS A JUMP INTO ASSOCIATIONS :: STRATEGEY FOR PROGRESS
+						var dataModelString = associationModels[x].associatedModels[y].type.toLowerCase().charAt(0).toUpperCase() + associationModels[x].associatedModels[y].type.toLowerCase().slice(1);
+						console.log(dataModelString, associationModels[x].associatedModels[y].id);
+						
+						//MONKEI REDUCE ME
+						if (dataModelString = 'Member'){dataModelString='User'}
+						var abstractDataModel = global[dataModelString];
+
+						promises.push(abstractDataModel.find({id:associationModels[x].associatedModels[y].id}));
+						//console.log(dataModelString, associationModels[x].associatedModels[y].id);
+
+						/*
 						if (associationModels[x].associatedModels[y].type=='ACTION'){promises.push(Action.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
 						//if (associationModels[x].associatedModels[y].type=='APP'){promises.push(App.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
 						if (associationModels[x].associatedModels[y].type=='ATTENTION'){promises.push(Attention.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
@@ -54,6 +71,8 @@ var App = {
 						if (associationModels[x].associatedModels[y].type=='TIME'){promises.push(Time.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
 						if (associationModels[x].associatedModels[y].type=='TRANSACTION'){promises.push(Transaction.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
 						if (associationModels[x].associatedModels[y].type=='VALIDATION'){promises.push(Validation.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
+						*/
+
 					}
 
 					//DEFINED BY CONNECTION
@@ -65,14 +84,15 @@ var App = {
 						}
 					}
 				}
+
+				//PROMISE.ALL
 				var populatedModels = await App['CONNECTION+Q']().all(promises);
 				var index = -1 
 				for (x in model.associationModels){
-					for (y in associationModels[x].associatedModels){
-						index++;
-						model.associationModels[x].associatedModels[y].data = populatedModels[index];
-					}
+					for (y in associationModels[x].associatedModels){index++;model.associationModels[x].associatedModels[y].data = populatedModels[index];}
 				}
+
+				console.log(model.associatedModels);
 				deferred.resolve(model);
 			}
 			else{deferred.resolve(model);}
@@ -91,7 +111,6 @@ var App = {
 			console.log(queryModel, query);
 			return query; 
 		};
-
 		var limit = parseInt(req.query.limit) || 1;
 		var skip = parseInt(req.query.skip) || 0;
 		var sort = req.query.sort || 'createdAt DESC';
@@ -118,7 +137,7 @@ var App = {
 					if (models[0].associatedModels[x].type == 'TRANSACTION'){promises.push(Transaction.find({id:models[0].associatedModels[x].id}).then(function(models){return models[0];}))}
 					if (models[0].associatedModels[x].type == 'VALIDATION'){promises.push(Validation.find({id:models[0].associatedModels[x].id}).then(function(models){return models[0];}))}
 				}
-				var populatedModels = await Q.all(promises);
+				var populatedModels = await Promise.all(promises);
 				for (x in models[0].associatedModels){
 					console.log(models[0].associatedModels[x])
 					models[0].associatedModels[x].data = populatedModels[x];
@@ -129,7 +148,6 @@ var App = {
 			}
 			else{return {};}
 		}
-
 		else if(req.query.filter){
 
 			var querySet = JSON.parse(req.query.filter);
@@ -156,7 +174,15 @@ var App = {
 				for (x in associationModels){
 					for (y in associationModels[x].associatedModels){
 
+						//MONKEI REDUCE ME
+						var dataModelString = associationModels[x].associatedModels[y].type.toLowerCase().charAt(0).toUpperCase() + associationModels[x].associatedModels[y].type.toLowerCase().slice(1);
+
+						if (dataModelString = 'Member'){dataModelString='User'}
+						var abstractDataModel = global[dataModelString];
+						promises.push(abstractDataModel.find({id:associationModels[x].associatedModels[y].id}));
+
 						//YOU KNOW WHAT TO DO .. 
+						/*
 						if (associationModels[x].associatedModels[y].type=='ACTION'){promises.push(Action.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
 						if (associationModels[x].associatedModels[y].type=='APP'){promises.push(App.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
 						if (associationModels[x].associatedModels[y].type=='ATTENTION'){promises.push(Attention.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
@@ -169,7 +195,7 @@ var App = {
 						if (associationModels[x].associatedModels[y].type=='TIME'){promises.push(Time.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
 						if (associationModels[x].associatedModels[y].type=='TRANSACTION'){promises.push(Transaction.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
 						if (associationModels[x].associatedModels[y].type=='VALIDATION'){promises.push(Validation.find({id:associationModels[x].associatedModels[y].id}).then(function(models){return models[0]}))}
-					
+						*/
 
 					}
 				}
@@ -178,16 +204,6 @@ var App = {
 				for (x in associationModels){
 					for (y in associationModels[x].associatedModels){index++;associationModels[x].associatedModels[y].data = populatedModels[index];}
 				}
-				//model.context = {};
-				//for (x in model.associationModels){}
-				//OKK..
-				//POPULATE USER FOR ASSOCIATAED MODEL DATA &&&&&&&& LINK IN USER / RECURSUVE POPULATION ETC
-				//for (x in associationModels)
-				//	for (y in associationModels[x].associatedModels){
-				//		User.find()
-				//	}
-				//}
-				//TODO: RETURN PROMISE
 				return associationModels;
 			});
 		}

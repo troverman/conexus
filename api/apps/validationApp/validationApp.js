@@ -1,5 +1,6 @@
 //CRE8.VALIDATION.ALPHA
 var App = {
+
 	'CONNECTION+SELF+ATTRIBUTES': {
         //DEPRECIATE
         model: {type: 'string', defaultsTo: 'VALIDATION'},
@@ -18,72 +19,16 @@ var App = {
         creator: {type: 'string'},
         data: {type: 'json'},
     },
-	types:[
-		{
-			type:'VALIDATION', 
-			//id: --> REDUCTION DESIRED ~~ HASH ID 
-			attributes:{
-				//good quesion
-		    }
-		}
-	],
-    //CONNECTIONS ARE THE LANGUAGE 
-    //-- THIS IS WIP FOR FUN
-    connections:[
-		{
-			id:'self', 
-			type:'connection', 	
-			connections:[{
-				id:'self',
-				type:'event',
-				params:{
-					//DATA MODEL 
-					// EVENT IS AN OBJECT WITH CONSENSUS INFO
-					id:'', //HASH OF THE DATA OBJECT
+	
+	'ASSOCIATION+SELF+LANGUAGE': 'Javascript',
+	'ASSOCIATION+SELF+RUNTIME':'NODE::V8',
+	'CONNECTION+Q':require('q'),
+	'CONNECTION+CRYPTO':require('crypto'),
 
-					//COULD BE FOR PLUGIN CONSENSUS APP . . . 
-					//THE RESPECTIVE FOSET HASHES
-						//MULTI MERKEL ROOTS
-						//VARIENT CONSENSUS
-
-						//TODO: 
-						//CONSENSUS MECHENISM IS WRITTEN IN CREATE
-						//PARSE THE HASHES AND CONNECTION HASHES  . . .
-							//RES{	
-								//[]..score
-							//}	
-
-					//MULTIDIMESNIONAL CONSENSUS
-					connectionHashes:[],
-
-					//MAPPING OF ALL ATTENTION / VALIDATIONS & ACTIONS ON EVENT  . . . 
-					tokens:[],
-
-					//event data 
-					data:[],
-
-				},
-
-			}],
-		}
-	],
-	//REDUCE INTO SELF CONECTION W CONTEXT
-	language: 'Javascript',
-	compiler:'V8',
-	import:{
-		Q: require('q'),
-		crypto: require('crypto')
-	},
 	'DB': function(){return global['Validation']},
-	getNew: async function(model){
-		//BETTER GET . . . WE ARE ABSTRACTING THOUGH MONOGO. . . 
-		//provide context hash
-		//truth variance 
-		return Event.find({id:model.id});
-	},
 	'GET': async function(req){
 
-		var deferred = App.import.Q.defer();
+		var deferred = App['CONNECTION+Q'].defer();
 
 		var limit = parseInt(req.query.limit) || 1;
 		var skip = parseInt(req.query.skip) || 0;
@@ -95,9 +40,17 @@ var App = {
 
 		//YOU KNOW WHAT TO DO LOL 
 		if(req.query.id){
-			var models = await Validation.find({id:id}).limit(limit).skip(skip).sort(sort).populate('user')
+			var models = await App['DB']().find({id:id}).limit(limit).skip(skip).sort(sort).populate('user')
 			var promises = [];
 			for (x in models[0].associatedModels){
+
+				//MONKEI REDUCE 	
+				//var dataModelString = models[0].associatedModels[x].type.toLowerCase().charAt(0).toUpperCase() + models[0].associatedModels[x].type.toLowerCase().slice(1);
+				//if (dataModelString = 'Member'){dataModelString='User'}
+				//var abstractDataModel = global[dataModelString];
+				//promises.push(abstractDataModel.find({id:associationModels[x].associatedModels[y].id}));
+
+
 				if (models[0].associatedModels[x].type == 'ACTION'){promises.push(Action.find({id:models[0].associatedModels[x].id}).then(function(actionModels){return {action:actionModels[0]}}))}
 				if (models[0].associatedModels[x].type.includes("APP")){promises.push(App.find({id:models[0].associatedModels[x].id}).then(function(appModels){return {app:appModels[0]}}))}
 				if (models[0].associatedModels[x].type == 'CONNTECTION'){promises.push(Content.find({id:models[0].associatedModels[x].id}).then(function(connectionModels){return {connection:connectionModels[0]}}))}
@@ -106,11 +59,13 @@ var App = {
 				if (models[0].associatedModels[x].type == 'MEMBER'){promises.push(User.find({id:models[0].associatedModels[x].id}).then(function(memberModels){return {member:memberModels[0]}}))}
 				if (models[0].associatedModels[x].type == 'PROJECT'){promises.push(Project.find({id:models[0].associatedModels[x].id}).then(function(projectModels){return {project:projectModels[0]}}))}
 				if (models[0].associatedModels[x].type == 'TASK'){promises.push(Task.find({id:models[0].associatedModels[x].id}).then(function(taskModels){return {task:taskModels[0]}}))}
-				if (models[0].associatedModels[x].type == 'TIME'){promises.push(Time.find({id:models[0].associatedModels[x].id}).then(function(taskModels){return {time:timeModels[0]}}))}
+				if (models[0].associatedModels[x].type == 'TIME'){promises.push(Time.find({id:models[0].associatedModels[x].id}).then(function(timeModels){return {time:timeModels[0]}}))}
 				if (models[0].associatedModels[x].type == 'TRANSACTION'){promises.push(Transaction.find({id:models[0].associatedModels[x].id}).then(function(transactionModels){return {transaction:transactionModels[0]}}))}
 				if (models[0].associatedModels[x].type == 'VALIDATION'){promises.push(Validation.find({id:models[0].associatedModels[x].id}).then(function(validationModels){return {validation:validationModels[0]}}))}
+			
+
 			}
-			var populatedModels = await App.import.Q.all(promises);
+			var populatedModels = await Promise.all(promises);
 			for (x in models[0].associatedModels){
 				if (models[0].associatedModels[x].type.includes("APP")){
 					var app = populatedModels.filter(function(obj){return obj.app})
@@ -145,13 +100,13 @@ var App = {
 					models[0].associatedModels[x].info = time[0];
 				}
 			}
-			Validation.subscribe(req, [models[0].id]);
+			App['DB']().subscribe(req, [models[0].id]);
 			deferred.resolve(models);
 		}
 
 		else if (req.query.association){
 			var association = req.query.association;
-			Validation.getDatastore().manager.collection('validation')
+			App['DB']().getDatastore().manager.collection('validation')
 			.find({$or:[
 					{$and:[{"associatedModels.id": {$in :[association[0]]}}, {"associatedModels.id": {$in :[association[1]]}}]},
 					{$and:[{"associatedModels.id": {$in :[association[1]]}},{"associatedModels.id": {$in :[association[0]]}}]}
@@ -159,19 +114,19 @@ var App = {
 			}).limit(1000).skip(0).sort({'createdAt':-1})
 			.toArray(function (err, models) {
 				models = models.map(function(obj){obj.id = obj._id.toString(); return obj;});
-				Validation.subscribe(req, models.map(function(obj){return obj.id;}));
+				App['DB']().subscribe(req, models.map(function(obj){return obj.id;}));
 				deferred.resolve(models);
 			});
 		}
 
 		else if(req.query.user){
-			var models = await Validation.find({user:user}).limit(limit).skip(skip).sort(sort)
-			Validation.subscribe(req, models.map((obj)=>obj.id));
+			var models = await App['DB']().find({user:user}).limit(limit).skip(skip).sort(sort)
+			App['DB']().subscribe(req, models.map((obj)=>obj.id));
 			deferred.resolve(models);
 		}
 
 		else{
-			var models = await Validation.find({}).limit(10).skip(skip).sort(sort)
+			var models = await App['DB']().find({}).limit(10).skip(skip).sort(sort)
 			var promises = [];
 			for (x in models){
 				promises.push(User.find({id:models[x].user.toString()}).then(function(userModels){return {user:userModels[0]}}));
@@ -181,7 +136,7 @@ var App = {
 					if (models[x].associatedModels[y].type == 'TIME'){promises.push(Time.find({id:models[x].associatedModels[y].address}).then(function(timeModels){return {time:timeModels[0]}}))}
 				}
 			}
-			var populatedModels = await Q.all(promises);
+			var populatedModels = await Promise.all(promises);
 			var sum = 0;
 			for (x in models){
 				models[x].user = populatedModels[sum].user;
@@ -206,18 +161,18 @@ var App = {
 		var newValidationModel = {};
 
 		//REDUCE
-		newValidationModel.hash = App.import.crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(newValidationModel)).digest('hex');
+		newValidationModel.hash = App['CONNECTION+CRYPTO'].createHmac('sha256', 'CRE8').update(JSON.stringify(newValidationModel)).digest('hex');
 		//newValidationModel.id = App.import.crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(newValidationModel)).digest('hex');
 
 		//REDUCE 
-		var newValidation = await Validation.create(newValidationModel);
+		var newValidation = await App['DB']().create(newValidationModel);
 		var newEvent = await eventApp.create(newValidation);
 
 		//TOKENS CREATE --> REDUCE TO ON EVENT CREATE 
 	},
 	'CREATE': async function(req){
 
-		var deferred = App.import.Q.defer();
+		var deferred = App['CONNECTION+Q'].defer();
 
 		//var connection = await Connection.find({});
 		var userModels = await User.find({id:model.user});
@@ -273,8 +228,7 @@ var App = {
 			//}
 			data:{apps:{reactions:{plus:0,minus:0},attention:{general:0}}}
 		};
-
-		model.hash = App.import.crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
+		model.hash = App['CONNECITON+CRYPTO'].createHmac('sha256', 'CRE8').update(JSON.stringify(model)).digest('hex');
 
 		//THINK
 		var associatedModelObj = {};
@@ -290,16 +244,22 @@ var App = {
 
 		//LIST -> OBJ
 		for (y in model.associatedModels[x].context){newValidation.context[model.associatedModels[x].context[y].text] = model.associatedModels[x].context[y].score;}
+		
 		console.log('validationApp.create', 'CALL:', utilityServiceApp.guid(), model);
+		
 		var newValidation = await Validation.create(model);	
 		newValidation.user = userModels[0];
-		Validation.subscribe(req, [validation.id]);
-		Validation.publish([validation.id], {verb: 'create', data: validation.id});
-		App['TOKENS+CREATE'](validation);
-		//NotificationApp.create[model.model.toLowerCase()](validation);
-		NotificationApp.create.validation(validation);
-		eventApp.create(validation);
-		associationApp.create(validation);
+		App['DB']().subscribe(req, [newValidation.id]);
+		App['DB']().publish([newValidation.id], {verb: 'create', data: newValidation.id});
+		
+		App['TOKENS+CREATE'](newValidation);
+
+		NotificationApp['CREATE+VALIDATION'](newValidation);
+
+		eventApp['CREATE'](newValidation);
+
+		associationApp['CREATE'](newValidation);
+
 		return newValidation;
 	},
 
@@ -312,7 +272,7 @@ var App = {
 	//TODO: REDUCE . . .
 		//THIS ABOUT STATIC VERSIONS OF VALIDATION TYPES (AS CONNECTIONS WITH SUM RULES)
 
-	createLegacy: async function(model){
+	'CREATE+LEGACY': async function(model){
 
 		//CREATE VALIDATION (IE SELF VALIDATION .. CONTEXT OF TRANSACTION)
 		//SOME CHARTER WHERE THE CREATOR IS WEIGHTED
@@ -380,12 +340,12 @@ var App = {
 				associatedModelObj
 			];
 			for (y in model.associatedModels[x].context){newValidation.context[model.associatedModels[x].context[y].text] = model.associatedModels[x].context[y].score;}
-			newValidation.hash = crypto.createHmac('sha256', 'CRE8').update(JSON.stringify(newValidation)).digest('hex');
-			var newValidationModel = await Validation.create(newValidation);
+			newValidation.hash = App['CONNECTION+CRYPTO'].createHmac('sha256', 'CRE8').update(JSON.stringify(newValidation)).digest('hex');
+			var newValidationModel = await App['DB']().create(newValidation);
 			console.log('CREATE VALIDATION', newValidationModel);
-			eventApp.create(newValidationModel);
+			//eventApp.create(newValidationModel);
 			newValidationModel.model = 'ASSOCIATION';
-			associationApp.create(newValidationModel);
+			associationApp['CREATE'](newValidationModel);
 		}
 	},
 

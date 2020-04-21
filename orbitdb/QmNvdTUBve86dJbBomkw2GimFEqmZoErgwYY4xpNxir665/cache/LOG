@@ -1,5 +1,5 @@
-2020/04/18-19:04:40.162 178c Recovering log #266
-2020/04/18-19:04:40.162 178c Level-0 table #268: started
-2020/04/18-19:04:40.167 178c Level-0 table #268: 366 bytes OK
-2020/04/18-19:04:40.173 178c Delete type=0 #266
-2020/04/18-19:04:40.173 178c Delete type=3 #264
+2020/04/20-21:42:31.568 ecc Recovering log #353
+2020/04/20-21:42:31.568 ecc Level-0 table #356: started
+2020/04/20-21:42:31.573 ecc Level-0 table #356: 366 bytes OK
+2020/04/20-21:42:31.581 ecc Delete type=0 #353
+2020/04/20-21:42:31.581 ecc Delete type=3 #351
