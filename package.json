@@ -39,7 +39,7 @@
     "ipfs": "^0.40.0",
     "ipfs-http-client": "^40.1.0",
     "keccak": "^2.0.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "mongoose": "^5.8.3",
     "npm": "^6.13.6",
     "orbit-db": "^0.23.0",
