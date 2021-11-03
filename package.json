@@ -64,7 +64,7 @@
     "stack-generator": "^2.0.5",
     "stack-trace": "0.0.10",
     "stacktrace-js": "^2.0.2",
-    "validator": "~3.28.0"
+    "validator": "~13.7.0"
   },
   "scripts": {
     "start": "NODE_OPTIONS=--max-old-space-size=4096 --stack-size=10000 node app.js",
